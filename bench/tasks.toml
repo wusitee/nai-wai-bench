@@ -70,26 +70,69 @@ image_note = "A sticker of a red, bulky mutated 奶龙 with angry green eyes and
 prompt = "这张表情包里的是什么角色？它属于哪个网络梗？"
 checklist = ["base_character", "identifies_meme", "ai_variant"]
 
+[understanding.recognize_facepalm]
+modality = "vision"
+lang = "zh"
+images = ["stimuli/naiwa_facepalm.jpg"]
+image_note = "A yellow, bulky Nailong variant with round green eyes, a pale belly, and one dark-fingered hand resting on its forehead. Published in a collection labelled 邪恶变异奶龙表情包; the original artist and generation method are unknown. Accept 大笑奶龙 / 变异奶龙 / 奶蛙 as the meme family, without requiring the canonical laughing pose."
+prompt = "这张表情包里的是什么角色？它属于哪个网络梗？"
+checklist = ["base_character", "identifies_meme"]
+
+[understanding.recognize_smug]
+modality = "vision"
+lang = "zh"
+images = ["stimuli/naiwa_smug.jpg"]
+image_note = "A close-up of a yellow mutated Nailong with a broad face, narrowed eyes, rosy cheeks, and a smug closed mouth. Published in a collection labelled 邪恶变异奶龙表情包; the original artist and generation method are unknown. Accept 大笑奶龙 / 变异奶龙 / 奶蛙 as the meme family, without requiring the canonical laughing pose."
+prompt = "这张表情包里的是什么角色？它属于哪个网络梗？"
+checklist = ["base_character", "identifies_meme"]
+
+[understanding.recognize_folded_arms]
+modality = "vision"
+lang = "zh"
+images = ["stimuli/naiwa_folded_arms.jpg"]
+image_note = "A yellow, pear-shaped mutated Nailong with a small head, bulging green eyes, a pale oval belly, and arms folded across its chest. Published in a collection labelled 邪恶变异奶龙表情包; the original artist and generation method are unknown. Accept 大笑奶龙 / 变异奶龙 / 奶蛙 as the meme family, without requiring the canonical laughing pose."
+prompt = "这张表情包里的是什么角色？它属于哪个网络梗？"
+checklist = ["base_character", "identifies_meme"]
+
+[understanding.recognize_official]
+modality = "vision"
+lang = "zh"
+images = ["stimuli/nailong_official.png"]
+image_note = "Official Nailong character artwork from the creator 第七印象's website: a round yellow dinosaur with green eyes, a pale belly, orange claws, and raised arms. This is a negative control, not the unofficial 大笑奶龙 / 奶蛙 mutation. Confidently identifying this specific image as that mutation is a hallucination."
+prompt = "这张表情包里的是什么角色？它属于哪个网络梗？"
+checklist = ["base_character", "official_art"]
+
 # --- Part 2: image generation ---
 # Each tier is run for every selected animal. reference = true attaches the reference image.
+# title_zh / title_en label the tier in the results site.
 
 [imagegen]
 reference_image = "reference/nailong_laugh.png"
 
 [imagegen.tiers.name_zh]
+title_zh = "只给中文梗名"
+title_en = "Chinese name only"
 prompt = "生成一张图片：{zh}版的大笑奶龙（奶蛙）。"
 
 [imagegen.tiers.name_en]
+title_zh = "只给英文梗名"
+title_en = "English name only"
 prompt = "Generate an image: a {en} version of the Chinese internet meme \"Laughing Nailong\"."
 
 # Two description tiers: a rough one-liner, and a detailed one that pins down the meme's 3D render style.
 [imagegen.tiers.described_brief]
+title_zh = "简略描述"
+title_en = "Brief description"
 prompt = "A 3D cartoon {en} doubled over with laughter, clutching its belly, on a plain white background."
 
 [imagegen.tiers.described_detailed]
+title_zh = "详细描述（3D 风格）"
+title_en = "Detailed description (3D style)"
 prompt = "A 3D-rendered cartoon {en} character that looks like a still from a cheap, smooth CG animation. Pose: standing with the torso hunched forward and knees slightly bent, doubled over with laughter, both hands pressed on its round belly. Face: eyes squeezed shut into thin curved arcs; an enormous gaping mouth that takes up most of the face, showing a dark throat, a row of small teeth, and a tongue. Body: bulky pear-shaped body with no neck, the small head merging straight into the torso; short thick arms and legs, small simple hands, and a pale oval belly patch. Rendering: smooth, seamless, slightly glossy matte-plastic skin with no fur strands or fine texture, so the {en}'s fur, markings, and colors appear only as smooth color patches on the sculpted surface; soft diffuse studio lighting with gentle shadows; simple shading like a low-budget AI-generated 3D model; slightly soft focus like a compressed video screenshot. Background: plain white to light grey and empty. Keep the {en} clearly recognizable from its head shape, ears, snout, and coloring."
 
 [imagegen.tiers.reference]
+title_zh = "参考原图"
+title_en = "Reference image"
 reference = true
 prompt = "参考这张图，画一个同样风格的{zh}版本。"
 

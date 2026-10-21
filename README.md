@@ -41,6 +41,7 @@ uv run nwb imagegen --models chatgpt-image --animals default
 
 uv run nwb judge                                  # default judges from models.toml
 uv run nwb report                                 # writes runs/main/report.html
+uv run nwb site                                   # writes site/index.html
 ```
 
 Results go to `runs/<run>/` (`--run NAME`, default `main`). Commands resume interrupted runs and retry

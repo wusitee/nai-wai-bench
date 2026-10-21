@@ -22,6 +22,8 @@ Text and vision LLMs answer questions about the meme. Items are defined in `[und
 | `recognize_zh`, `recognize_en` | vision | Identifying the meme from the reference image |
 | `recognize_variant` | vision | Identifying the meme from a panda drawn in its style |
 | `recognize_naiwa`, `recognize_angry` | vision | Identifying the meme family from real stickers: the frog-like 奶蛙 (「惊鸿一瞥」) and a red angry variant (「切换愤怒模式」) |
+| `recognize_facepalm`, `recognize_smug`, `recognize_folded_arms` | vision | Recognizing three visually distinct circulating mutated-Nailong stickers |
+| `recognize_official` | vision | Distinguishing official Nailong artwork from the unofficial meme (negative control) |
 
 Every prompt is prefixed with an instruction to answer from the model's own knowledge, and the backends
 disable web search and other tools (see [backends.md](backends.md)). If an agent still calls a tool, the
@@ -95,6 +97,20 @@ its mean distance from the other judges on the same samples. A near-zero spread 
 discriminating; a large distance means it disagrees with the panel. Either is a reason to leave the judge
 out: `nwb report --judges` counts only the listed judges. Gemini 3.8 Flash (via Antigravity) is excluded from the default image judges for
 this reason: it rated every trait of every image `partial`, even when its own notes described a match.
+
+## Results site (`nwb site`)
+
+`uv run nwb site --run smoke` builds a bilingual Chinese/English site in `site/`, separate from the local report. It shows model labels, recorded access clients and model ids, C2PA provenance, image galleries by animal and tier with prompt-audit status, score summaries and the knowledge ratio, understanding scores and full answers, and judge health. Results are preliminary; missing judgments appear as dashes. With repetitions, galleries show the first repetition while summaries include every sample.
+
+`--out DIR` selects the output directory; `--judges NAME,...` restricts scoring to those judges; `--repo-url URL` adds a source link. The builder writes `index.html` and relative image assets without deleting existing output files. Images are resized to fit within 768 × 768 pixels using ImageMagick (`magick`) when available, and copied unchanged otherwise. Gallery thumbnails preserve the full image.
+
+C2PA names only `ChatGPT · gpt-image` for OpenAI and “Created by Google Generative AI” for Google; neither exposes a more specific image model version. These are vendor declarations, not verified signatures. `meta.client` identifies the relay client, not the underlying image generator.
+
+### Publishing
+
+`scripts/publish_site.sh [RUN]` (default `smoke`) builds into a fresh temporary directory, adds `.nojekyll`, and replaces the `gh-pages` branch on `origin` with only the generated site. It requires `uv`, Git, configured Git author identity, and push access, and leaves the checked-out branch unchanged. Generated runs and site files stay git-ignored on the source branch.
+
+Enable GitHub Pages once with `gh api -X POST repos/OWNER/REPO/pages -f 'source[branch]=gh-pages' -f 'source[path]=/'`; if Pages is already enabled, use `-X PUT` instead. Inspect `gh api repos/OWNER/REPO/pages/builds/latest` for build status and `gh api repos/OWNER/REPO/pages --jq .html_url` for the URL. **The Pages site is public even when the source repository is private.** Publish only results intended for public access.
 
 ## Run layout
 

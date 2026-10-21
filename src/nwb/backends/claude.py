@@ -8,11 +8,16 @@ import tempfile
 import time
 from pathlib import Path
 
-from nwb.backends import BackendError, Request, Response
+from nwb.backends import BackendError, Request, Response, cli_version
 from nwb.config import ModelSpec
 from nwb.util import media_type
 
 SYSTEM_PROMPT = "You are a helpful assistant."
+
+
+def _client() -> str | None:
+    version = cli_version("claude")  # e.g. "2.1.306 (Claude Code)"
+    return f"claude-code {version.split()[0]}" if version else None
 
 
 class ClaudeBackend:
@@ -57,7 +62,7 @@ class ClaudeBackend:
             detail = (result or {}).get("result") or proc.stderr.strip()[-800:]
             raise BackendError(f"claude exited {proc.returncode}: {detail}")
         return Response(text=result.get("result", ""), meta={
-            "backend": "claude", "model": self.spec.model,
+            "backend": "claude", "model": self.spec.model, "client": _client(),
             "seconds": round(time.monotonic() - started, 1),
             "tools_used": [], "cost_usd": result.get("total_cost_usd"), "usage": result.get("usage"),
         })

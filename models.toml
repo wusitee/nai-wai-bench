@@ -3,6 +3,7 @@
 # Add or override entries in models.local.toml (git-ignored); tables are merged per model.
 #
 # can: "text" answers text prompts, "vision" accepts image input, "image" generates images.
+# label: display name in the results site.
 # vendor: judges from the subject's own vendor are left out of the ensemble when others exist.
 # ${VAR} and ~ are expanded in command and env values; ${NWB_ROOT} is the repository root.
 # config: extra ACP session config options (id = value), e.g. a mode without tools.
@@ -16,6 +17,7 @@ image_judges = ["opus-5.5", "gpt-6.1-sol"]
 # --- OpenAI via Codex CLI (ChatGPT login) ---
 
 [models."gpt-6.1-sol"]
+label = "GPT-6.1-Sol"
 backend = "codex"
 vendor = "openai"
 model = "gpt-6.1-sol"
@@ -23,6 +25,7 @@ reasoning = "medium"
 can = ["text", "vision"]
 
 [models."gpt-6-astra"]
+label = "GPT-6-Astra"
 backend = "codex"
 vendor = "openai"
 model = "gpt-6-astra"
@@ -31,6 +34,7 @@ can = ["text", "vision"]
 
 # Codex's built-in image_gen tool; the chat model only relays the prompt verbatim.
 [models."chatgpt-image"]
+label = "ChatGPT gpt-image (Codex built-in image_gen)"
 backend = "codex"
 vendor = "openai"
 model = "gpt-6.1-sol"
@@ -40,12 +44,14 @@ can = ["image"]
 # --- Anthropic via Claude Code CLI ---
 
 [models."opus-5.5"]
+label = "Claude Opus 5.5"
 backend = "claude"
 vendor = "anthropic"
 model = "claude-opus-5-5"
 can = ["text", "vision"]
 
 [models."sonnet-5.5"]
+label = "Claude Sonnet 5.5"
 backend = "claude"
 vendor = "anthropic"
 model = "claude-sonnet-5-5"
@@ -54,6 +60,7 @@ can = ["text", "vision"]
 # --- ACP agents ---
 
 [models."deepseek-v4-pro"]
+label = "DeepSeek-V4-Pro"
 backend = "acp"
 vendor = "deepseek"
 command = ["dsh", "--profile", "acp", "--patch", "${NWB_ROOT}/config/dsh-no-tools.patch.yml"]
@@ -61,6 +68,8 @@ model = '["deepseek-official","deepseek-v4-pro"]'
 can = ["text"]
 
 [models."kimi-k3"]
+timeout = 300
+label = "Kimi K3"
 backend = "acp"
 vendor = "moonshot"
 command = ["kimi", "acp"]
@@ -72,6 +81,7 @@ can = ["text", "vision"]
 
 # Xiaomi MiMo Token Plan; the endpoint and key are read from this CC Switch provider at run time.
 [models."mimo-v2.6-pro"]
+label = "Xiaomi MiMo-V2.6-Pro"
 backend = "openai"
 vendor = "xiaomi"
 model = "mimo-v2.6-pro"
@@ -79,6 +89,7 @@ cc_switch = "Xiaomi MiMo Token Plan"
 can = ["text", "vision"]
 
 [models."mimo-v2.6-flash"]
+label = "Xiaomi MiMo-V2.6-Flash"
 backend = "openai"
 vendor = "xiaomi"
 model = "mimo-v2.6-flash"
@@ -88,6 +99,7 @@ can = ["text", "vision"]
 # Google Antigravity's ACP server. Set NWB_AGY_ACP to the agy_acp_server binary and
 # NWB_AGY_HOME to a Gemini home directory that holds an Antigravity login.
 [models."gemini-3.8-flash"]
+label = "Gemini 3.8 Flash (High)"
 backend = "acp"
 vendor = "google"
 command = ["${NWB_AGY_ACP}"]
@@ -97,6 +109,7 @@ can = ["text", "vision"]
 
 # Experimental: relies on Antigravity's built-in image tool; see docs/backends.md.
 [models."gemini-image"]
+label = "Google Gemini image generation (Antigravity generate_image)"
 backend = "acp"
 vendor = "google"
 command = ["${NWB_AGY_ACP}"]

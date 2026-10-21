@@ -10,7 +10,7 @@ import tempfile
 import time
 from pathlib import Path
 
-from nwb.backends import BackendError, Request, Response, audit_calls, image_instruction
+from nwb.backends import BackendError, Request, Response, audit_calls, cli_version, image_instruction
 from nwb.config import ModelSpec
 from nwb.util import IMAGE_SUFFIXES
 
@@ -60,7 +60,7 @@ class CodexBackend:
         items = [e["item"] for e in events if e.get("type") == "item.completed" and "item" in e]
         messages = [i.get("text", "") for i in items if i.get("type") == "agent_message"]
         meta = {
-            "backend": "codex", "model": self.spec.model, "thread_id": thread_id,
+            "backend": "codex", "model": self.spec.model, "client": cli_version("codex"), "thread_id": thread_id,
             "seconds": round(time.monotonic() - started, 1),
             "tools_used": [i.get("type") for i in items if i.get("type") not in ("agent_message", "reasoning")],
             "usage": next((e.get("usage") for e in events if e.get("type") == "turn.completed"), None),

@@ -14,6 +14,7 @@ from pathlib import Path
 
 from nwb.backends import Request, get_backend
 from nwb.config import Animal, Bench, ModelSpec, Tier, UnderstandingItem
+from nwb.provenance import c2pa_summary
 from nwb.util import IMAGE_SUFFIXES, read_json, write_json
 
 
@@ -120,7 +121,9 @@ def imagegen_jobs(bench: Bench, models: list[ModelSpec], tiers: list[Tier], anim
                         shutil.rmtree(stem, ignore_errors=True)  # drop images from earlier attempts
                         resp = backend.run(Request(prompt=prompt, images=images, image_out=stem))
                         files = sorted(p for p in resp.images if p.suffix.lower() in IMAGE_SUFFIXES)
-                        return {"images": [rel(p, run_dir) for p in files], "text": resp.text, "meta": resp.meta}
+                        c2pa = c2pa_summary(files[0]) if files else None
+                        return {"images": [rel(p, run_dir) for p in files], "text": resp.text,
+                                "meta": {**resp.meta, "c2pa": c2pa}}
                     jobs.append(Job(
                         out=stem.with_suffix(".json"),
                         label=f"{model.name} {tier.id} {animal.id} r{rep}",

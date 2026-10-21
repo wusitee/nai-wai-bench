@@ -20,6 +20,8 @@ nai-wai-bench 衡量 AI 模型对中文网络梗 大笑奶龙（Laughing Nailong
 | `recognize_zh`、`recognize_en` | 视觉 | 从原图认出这个梗 |
 | `recognize_variant` | 视觉 | 从一张按此风格画的熊猫图认出这个梗 |
 | `recognize_naiwa`、`recognize_angry` | 视觉 | 从真实表情包认出这个梗的家族：蛙状的奶蛙（「惊鸿一瞥」）和红色愤怒版（「切换愤怒模式」） |
+| `recognize_facepalm`、`recognize_smug`、`recognize_folded_arms` | vision | 从三张外观不同的流传表情包认出变异奶龙 |
+| `recognize_official` | vision | 区分官方奶龙形象与非官方梗图（阴性对照） |
 
 每个提示词前都会加上“仅凭自身知识回答”的指令，各后端也会关闭网络搜索和其他工具（见
 [backends.zh-CN.md](backends.zh-CN.md)）。如果 Agent 仍然调用了工具，该回答会被标记为 `contaminated`，
@@ -86,6 +88,20 @@ overall = style × identity / 2
 离散度接近 0 说明该评审没有区分能力；差距过大说明它与其他评审意见不一致。两者都说明应排除该评审：
 `nwb report --judges` 只统计列出的评审。Gemini 3.8 Flash（通过 Antigravity）因此被排除在默认图像评审
 之外：它给每张图的每项特征都打了 `partial`，即使它自己的说明写的是完全符合。
+
+## 结果网站（`nwb site`）
+
+`uv run nwb site --run smoke` 在 `site/` 中生成中英双语网站，与本地报告分开。网站展示模型名称、记录的调用客户端和模型 id、C2PA 来源信息、按动物和档位排列的图片及提示词核对状态、分数汇总和知识比率、理解得分与完整回答，以及评审健康度。结果为初步结果；没有评审得分的地方显示短横线。有重复采样时，图库展示第一次采样，汇总包含所有样本。
+
+`--out DIR` 指定输出目录；`--judges NAME,...` 仅使用列出的评审计分；`--repo-url URL` 添加源码链接。构建器写入 `index.html` 和使用相对路径的图片资源，不删除已有输出文件。若安装了 ImageMagick（`magick`），图片会等比例缩小至不超过 768 × 768 像素；否则原样复制。图库缩略图保留完整画面。
+
+C2PA 对 OpenAI 仅标注 `ChatGPT · gpt-image`，对 Google 仅标注“Created by Google Generative AI”；两者都没有公开更具体的图像模型版本。这些是厂商声明，不代表签名已经验证。`meta.client` 标识中转客户端，而非底层图像生成器。
+
+### 发布
+
+`scripts/publish_site.sh [RUN]`（默认 `smoke`）在新的临时目录中构建，添加 `.nojekyll`，并仅用生成的网站替换 `origin` 上的 `gh-pages` 分支。需要 `uv`、Git、已配置的 Git 作者身份和推送权限，不会改变当前检出的分支。生成的运行数据和网站文件在源码分支上仍被 git 忽略。
+
+首次启用 GitHub Pages：`gh api -X POST repos/OWNER/REPO/pages -f 'source[branch]=gh-pages' -f 'source[path]=/'`；若已启用则改用 `-X PUT`。用 `gh api repos/OWNER/REPO/pages/builds/latest` 检查构建状态，用 `gh api repos/OWNER/REPO/pages --jq .html_url` 获取网址。**即使源码仓库是私有的，Pages 网站仍然公开。** 只发布打算公开的结果。
 
 ## 结果目录结构
 

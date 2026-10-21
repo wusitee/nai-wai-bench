@@ -48,6 +48,8 @@ class Tier:
     id: str
     prompt: str
     reference: bool = False
+    title_zh: str = ""
+    title_en: str = ""
 
     def render(self, animal: Animal) -> str:
         return self.prompt.format(zh=animal.zh, en=animal.en)
@@ -131,7 +133,8 @@ def load_bench(root: Path) -> Bench:
             items.append(UnderstandingItem(id=item_id, prompt=spec["prompt"], **common))
 
     ig = tasks["imagegen"]
-    tiers = {k: Tier(k, v["prompt"], v.get("reference", False)) for k, v in ig["tiers"].items()}
+    tiers = {k: Tier(k, v["prompt"], v.get("reference", False), v.get("title_zh", k), v.get("title_en", k))
+             for k, v in ig["tiers"].items()}
     reference_image = bench_dir / ig["reference_image"]
     if not reference_image.is_file():
         raise FileNotFoundError(f"reference image not found: {reference_image}")
@@ -153,6 +156,10 @@ class ModelSpec:
     model: str
     can: frozenset[str]
     options: dict = field(default_factory=dict)
+
+    @property
+    def label(self) -> str:
+        return self.options.get("label", self.name)
 
 
 def load_models(root: Path) -> tuple[dict[str, ModelSpec], dict]:

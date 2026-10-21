@@ -31,6 +31,7 @@ class AcpConnection:
         self._pending: dict[int, list] = {}
         self._next_id = 0
         self._expired = False
+        self.agent_info: dict = {}
         self._lock = threading.Lock()
         self._proc = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=stderr,
                                       cwd=cwd, env=env, text=True, encoding="utf-8", bufsize=1)
@@ -159,6 +160,7 @@ class AcpBackend:
             text, tool_calls, inline = summarize(conn.updates)
             resp = Response(text=text, meta={
                 "backend": "acp", "model": self.spec.model, "stop_reason": result.get("stopReason"),
+                "client": " ".join(str(conn.agent_info[k]) for k in ("name", "version") if conn.agent_info.get(k)) or None,
                 "seconds": round(time.monotonic() - started, 1),
                 "tools_used": [c.get("title") or c.get("kind") or "tool" for c in tool_calls],
                 "tool_calls": [compact(c) for c in tool_calls], "permissions": conn.permissions,
@@ -180,6 +182,7 @@ class AcpBackend:
             "protocolVersion": PROTOCOL_VERSION,
             "clientCapabilities": {"fs": {"readTextFile": False, "writeTextFile": False}, "terminal": False},
         }, 120)
+        conn.agent_info = init.get("agentInfo") or {}
         if req.images and not init.get("agentCapabilities", {}).get("promptCapabilities", {}).get("image"):
             raise BackendError(f"model {self.spec.name}: agent does not accept image input")
         if auth := self.spec.options.get("auth"):

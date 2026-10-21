@@ -9,6 +9,8 @@
 每次 Agent 呼叫都在一個全新的空白暫存目錄中進行，因此 Agent 不會讀取本儲存庫的 `AGENTS.md`/`CLAUDE.md`
 或其他專案脈絡。
 
+每個樣本都會記錄 `meta.client`：CLI 名稱和版本、ACP `agentInfo` 中的名稱和版本，或 API 主機名稱。圖像樣本另會記錄 `meta.c2pa`，從 C2PA 內容憑證讀取廠商聲明的生成器和操作描述，不驗證簽章。沒有憑證時記錄為 `null`。
+
 ## 模型欄位
 
 | 欄位 | 含義 |
@@ -16,6 +18,7 @@
 | `backend` | `codex`、`claude`、`acp` 或 `openai` |
 | `vendor` | 用於避免評審為自家廠商的模型評分 |
 | `model` | 傳給後端的模型 id |
+| `label` | 結果網站中的顯示名稱（預設使用模型條目名稱） |
 | `can` | 可包含 `text`、`vision`（接受圖片輸入）、`image`（生成圖片） |
 | `reasoning` | 僅限 Codex：`model_reasoning_effort` |
 | `effort` | 僅限 Claude：`--effort` 等級 |
@@ -31,6 +34,8 @@
 使用 `codex login` 的 ChatGPT 登入執行 `codex exec --json`（遵循 `CODEX_HOME`）。評測程式會傳入
 `--ignore-user-config`、`--sandbox read-only` 和 `web_search="disabled"`，並關閉 `apps` 功能（其連接器
 自帶網絡搜尋）、瀏覽器操作和電腦操作。文字呼叫時還會關閉圖像生成。
+
+**隔離限制。** `--ignore-user-config` 無法阻止 Codex 載入全域指令（`$CODEX_HOME/AGENTS.md`）及已安裝的技能。全新的工作目錄能排除儲存庫脈絡，但無法完全清除 Codex 的脈絡。需要乾淨的評測環境時，請使用專用、已登入且不含個人指令和技能的 `CODEX_HOME`。早期試跑樣本使用了普通使用者目錄。
 
 **圖像生成**（`can = ["image"]`）使用 Codex 內建的 `image_gen` 工具。對話模型會被要求把基準提示詞原樣
 交給該工具；圖片從 `$CODEX_HOME/generated_images/<thread>/` 複製出來。之後評測程式讀取工作階段記錄
@@ -60,6 +65,8 @@ Agent 則用 `session/set_model`）設定 `model` 和 `config` 選項，然後�
   檔案、技能和子 Agent 外掛。該 ACP Agent 不接受圖片輸入。
 - **Kimi Code**（`kimi acp`）：`config = { mode = "plan" }` 讓工作階段以規劃模式啟動，不執行任何工具。
   視覺呼叫可能較慢，偶爾會卡住直到逾時；重新執行即可重試。
+
+初始化取得的 Agent 名稱和版本儲存在 `meta.client` 中；生成的圖片會被檢查，以記錄廠商聲明的 `meta.c2pa` 來源資訊，不驗證簽章。
 
 ### Antigravity（Gemini）
 

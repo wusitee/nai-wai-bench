@@ -9,6 +9,7 @@ import sqlite3
 import time
 import tomllib
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -94,6 +95,7 @@ class OpenAICompatBackend:
         except (KeyError, IndexError) as e:
             raise BackendError(f"unexpected response: {json.dumps(data)[:500]}") from e
         return Response(text=message.get("content") or "", meta={
-            "backend": "openai", "model": self.spec.model, "seconds": round(time.monotonic() - started, 1),
+            "backend": "openai", "model": self.spec.model, "client": urllib.parse.urlsplit(base).netloc,
+            "seconds": round(time.monotonic() - started, 1),
             "tools_used": [], "usage": data.get("usage"),
         })

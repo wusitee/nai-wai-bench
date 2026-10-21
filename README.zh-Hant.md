@@ -36,6 +36,7 @@ uv run nwb imagegen --models chatgpt-image --animals default
 
 uv run nwb judge                                  # 使用 models.toml 中的預設評審
 uv run nwb report                                 # 產生 runs/main/report.html
+uv run nwb site                                   # 寫入 site/index.html
 ```
 
 結果儲存在 `runs/<run>/`（`--run NAME`，預設 `main`）。中斷的執行會接續進行，失敗的樣本會自動重試。

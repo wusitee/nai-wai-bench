@@ -10,6 +10,8 @@ Models are configured in `models.toml`; put machine-specific paths or extra mode
 Every agent call starts in a fresh, empty temporary directory so agents never load this repository's
 `AGENTS.md`/`CLAUDE.md` or other project context.
 
+Every sample records `meta.client`: the CLI name and version, ACP `agentInfo` name and version, or API host. Image samples also record `meta.c2pa`, the vendor-declared generators and action descriptions read from C2PA content credentials without verifying signatures. Missing credentials are recorded as `null`.
+
 ## Model fields
 
 | Field | Meaning |
@@ -17,6 +19,7 @@ Every agent call starts in a fresh, empty temporary directory so agents never lo
 | `backend` | `codex`, `claude`, `acp`, or `openai` |
 | `vendor` | Used to keep judges from scoring their own vendor's models |
 | `model` | Model id passed to the backend |
+| `label` | Display name in the results site (defaults to the model entry name) |
 | `can` | Any of `text`, `vision` (accepts images), `image` (generates images) |
 | `reasoning` | Codex only: `model_reasoning_effort` |
 | `effort` | Claude only: `--effort` level |
@@ -33,6 +36,8 @@ Runs `codex exec --json` with the ChatGPT login from `codex login` (respects `CO
 passes `--ignore-user-config`, `--sandbox read-only`, and `web_search="disabled"`, and turns off the `apps`
 feature (whose connector has its own web search), browser use, and computer use. Image generation is
 disabled for text calls.
+
+**Isolation limitation.** `--ignore-user-config` does not prevent Codex from loading global instructions (`$CODEX_HOME/AGENTS.md`) and installed skills. A fresh working directory excludes repository context, but does not make Codex calls context-free. Use a dedicated, logged-in `CODEX_HOME` without personal instructions or skills for a clean benchmark. Earlier smoke samples used the normal user home.
 
 **Image generation** (`can = ["image"]`) uses Codex's built-in `image_gen` tool. The chat model is told to
 pass the benchmark prompt to the tool verbatim; images are copied from
@@ -67,6 +72,8 @@ agent itself where possible:
   web, shell, file, skill, and subagent plugins. The ACP agent does not accept images.
 - **Kimi Code** (`kimi acp`): `config = { mode = "plan" }` starts sessions in plan mode, which runs no tools.
   Vision calls can be slow and occasionally hang until the timeout; rerun to retry.
+
+The initialized agent name and version are saved in `meta.client`; generated images are inspected for vendor-declared `meta.c2pa` provenance without signature verification.
 
 ### Antigravity (Gemini)
 

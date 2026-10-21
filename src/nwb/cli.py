@@ -3,7 +3,7 @@ import os
 import sys
 from pathlib import Path
 
-from nwb import judge, report, scoring, tracks
+from nwb import judge, report, scoring, site, tracks
 from nwb.config import find_root, load_bench, load_models, select_models
 from nwb.util import write_json
 
@@ -86,6 +86,17 @@ def cmd_report(args, root, bench, models, defaults):
     return 0
 
 
+def cmd_site(args, root, bench, models, defaults):
+    if not args.run_dir.is_dir():
+        raise FileNotFoundError(f"run not found: {args.run_dir}")
+    judges = set(select_names(models, args.judges)) if args.judges else None
+    scores = scoring.aggregate(args.run_dir, bench.trait_weights, judges, expected=bench.expected_prompts())
+    out = Path(args.out) if args.out else root / "site"
+    index = site.build(bench, models, args.run_dir, scores, out, repo_url=args.repo_url)
+    print(f"wrote {index}")
+    return 0
+
+
 def select_names(models, spec: str) -> list[str]:
     names = [s.strip() for s in spec.split(",") if s.strip()]
     unknown = [n for n in names if n not in models]
@@ -130,11 +141,16 @@ def build_parser() -> argparse.ArgumentParser:
 
     sp = with_run(sub.add_parser("report", help="aggregate scores and write report.html"), jobs=False)
     sp.add_argument("--judges", help="comma-separated judges to count (default: every judge with results)")
+
+    sp = with_run(sub.add_parser("site", help="build a static results site (for GitHub Pages)"), jobs=False)
+    sp.add_argument("--out", help="output directory (default: site/)")
+    sp.add_argument("--judges", help="comma-separated judges to count (default: every judge with results)")
+    sp.add_argument("--repo-url", help="link to the source repository in the footer")
     return p
 
 
 COMMANDS = {"list": cmd_list, "understand": cmd_understand, "imagegen": cmd_imagegen,
-            "judge": cmd_judge, "report": cmd_report}
+            "judge": cmd_judge, "report": cmd_report, "site": cmd_site}
 
 
 def main(argv=None) -> int:

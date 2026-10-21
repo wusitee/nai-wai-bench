@@ -5,6 +5,8 @@ Every call runs in a fresh, empty temporary working directory so agents never pi
 repository's AGENTS.md / CLAUDE.md or any other project context.
 """
 
+import functools
+import subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -45,6 +47,16 @@ def get_backend(spec: ModelSpec):
         from nwb.backends.openai_compat import OpenAICompatBackend
         return OpenAICompatBackend(spec)
     raise ValueError(f"model {spec.name}: unknown backend {spec.backend!r}")
+
+
+@functools.cache
+def cli_version(command: str) -> str | None:
+    """`<command> --version` output (first line), recorded with each result as the client version."""
+    try:
+        out = subprocess.run([command, "--version"], capture_output=True, text=True, timeout=30).stdout
+    except (OSError, subprocess.TimeoutExpired):
+        return None
+    return out.strip().splitlines()[0] if out.strip() else None
 
 
 def audit_calls(sent: list[str | None], raw: list[str], prompt: str) -> dict:
