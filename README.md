@@ -15,8 +15,8 @@ It has two parts:
    write image prompts for it, and recognize it from images. Answers are checked against sourced facts, and
    confident hallucinations are penalized.
 2. **Image generation**: image models draw the meme as other animals (cat, giraffe, octopus, and more)
-   from four prompt tiers: the meme's name in Chinese, its name in English, a full visual description, and
-   the reference image. Comparing name-only results with described results shows whether a model actually
+   from five prompt tiers: the meme's name in Chinese, its name in English, a brief description, a detailed
+   description of its 3D look, and the reference image. Comparing name-only results with described results shows whether a model actually
    knows the meme or can only draw it when told what it looks like.
 
 Judges from several vendors score every sample; a model is never scored by its own vendor's judges when

@@ -74,6 +74,12 @@ class Bench:
                 return table[cid]
         raise KeyError(cid)
 
+    def expected_prompts(self) -> dict[str, str]:
+        """The current prompt of every sample the bench defines, keyed like scoring.sample_key."""
+        prompts = {f"understanding/{i.id}": i.prompt for i in self.items}
+        prompts |= {f"imagegen/{t.id}/{a.id}": t.render(a) for t in self.tiers.values() for a in self.animals.values()}
+        return prompts
+
     def select_animals(self, spec: str) -> list[Animal]:
         if spec == "default":
             return [a for a in self.animals.values() if a.default]

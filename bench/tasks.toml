@@ -54,6 +54,22 @@ image_note = "A panda redrawn in the 大笑奶龙 style (hunched, clutching bell
 prompt = "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。"
 checklist = ["identifies_meme", "laugh_pose", "base_character"]
 
+[understanding.recognize_naiwa]
+modality = "vision"
+lang = "zh"
+images = ["stimuli/naiwa_glance.png"]
+image_note = "A sticker of the frog-like 奶蛙 variant: a smooth yellow 3D head with bulging round eyes and green sclera, captioned 「惊鸿一瞥」. The expected answer identifies it as 奶蛙, the mutated 奶龙 meme family."
+prompt = "这张表情包里的是什么角色？它属于哪个网络梗？"
+checklist = ["base_character", "identifies_meme", "naiwa"]
+
+[understanding.recognize_angry]
+modality = "vision"
+lang = "zh"
+images = ["stimuli/angry_variant.png"]
+image_note = "A sticker of a red, bulky mutated 奶龙 with angry green eyes and a pale belly, captioned 「切换愤怒模式」. The expected answer identifies it as part of the 大笑奶龙 / 变异奶龙 / 奶蛙 meme family."
+prompt = "这张表情包里的是什么角色？它属于哪个网络梗？"
+checklist = ["base_character", "identifies_meme", "ai_variant"]
+
 # --- Part 2: image generation ---
 # Each tier is run for every selected animal. reference = true attaches the reference image.
 
@@ -66,8 +82,12 @@ prompt = "生成一张图片：{zh}版的大笑奶龙（奶蛙）。"
 [imagegen.tiers.name_en]
 prompt = "Generate an image: a {en} version of the Chinese internet meme \"Laughing Nailong\"."
 
-[imagegen.tiers.described]
-prompt = "A 3D-rendered chubby {en} character standing and hunched forward with knees slightly bent, laughing hysterically: eyes squeezed shut into thin curved lines, an enormous gaping mouth showing teeth and a dark throat, both hands clutching its round belly. Pear-shaped body with no neck, short thick limbs, a pale oval belly patch, glossy CG look with soft studio lighting, plain white background. Keep the {en}'s recognizable features and colors."
+# Two description tiers: a rough one-liner, and a detailed one that pins down the meme's 3D render style.
+[imagegen.tiers.described_brief]
+prompt = "A 3D cartoon {en} doubled over with laughter, clutching its belly, on a plain white background."
+
+[imagegen.tiers.described_detailed]
+prompt = "A 3D-rendered cartoon {en} character that looks like a still from a cheap, smooth CG animation. Pose: standing with the torso hunched forward and knees slightly bent, doubled over with laughter, both hands pressed on its round belly. Face: eyes squeezed shut into thin curved arcs; an enormous gaping mouth that takes up most of the face, showing a dark throat, a row of small teeth, and a tongue. Body: bulky pear-shaped body with no neck, the small head merging straight into the torso; short thick arms and legs, small simple hands, and a pale oval belly patch. Rendering: smooth, seamless, slightly glossy matte-plastic skin with no fur strands or fine texture, so the {en}'s fur, markings, and colors appear only as smooth color patches on the sculpted surface; soft diffuse studio lighting with gentle shadows; simple shading like a low-budget AI-generated 3D model; slightly soft focus like a compressed video screenshot. Background: plain white to light grey and empty. Keep the {en} clearly recognizable from its head shape, ears, snout, and coloring."
 
 [imagegen.tiers.reference]
 reference = true

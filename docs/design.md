@@ -21,6 +21,7 @@ Text and vision LLMs answer questions about the meme. Items are defined in `[und
 | `write_prompt.<animal>` | text | Writing a text-to-image prompt for an animal version (tests applying the knowledge) |
 | `recognize_zh`, `recognize_en` | vision | Identifying the meme from the reference image |
 | `recognize_variant` | vision | Identifying the meme from a panda drawn in its style |
+| `recognize_naiwa`, `recognize_angry` | vision | Identifying the meme family from real stickers: the frog-like 奶蛙 (「惊鸿一瞥」) and a red angry variant (「切换愤怒模式」) |
 
 Every prompt is prefixed with an instruction to answer from the model's own knowledge, and the backends
 disable web search and other tools (see [backends.md](backends.md)). If an agent still calls a tool, the
@@ -39,13 +40,14 @@ item score = 100 × Σ checklist scores / (2 × checklist size) − 10 × halluc
 ## Part 2: image generation (`nwb imagegen`)
 
 Image models draw the meme as other animals (`[animals.*]` in `bench/tasks.toml`). Each animal is rendered
-with four prompt tiers (`[imagegen.tiers.*]`):
+with five prompt tiers (`[imagegen.tiers.*]`):
 
 | Tier | Prompt gives | What it isolates |
 |---|---|---|
 | `name_zh` | Only the meme's name, in Chinese | Knowledge of the meme |
 | `name_en` | Only the meme's name, in English | Cross-lingual knowledge |
-| `described` | A full visual description, without the name | Rendering ability (upper bound) |
+| `described_brief` | A one-line description of the look, without the name | Drawing it from a rough idea |
+| `described_detailed` | A detailed description of the pose, body, and smooth 3D render style, without the name | Rendering ability (upper bound) |
 | `reference` | The reference image plus "draw a ⟨animal⟩ version" | Style transfer from an example |
 
 Animals tagged `anatomy_conflict` (giraffe, octopus, shark, penguin) stress the pose and body traits;
@@ -63,9 +65,10 @@ overall = style × identity / 2
 Trait weights favor what distinguishes the meme from any cute laughing animal: pose and belly clutch (2),
 mouth and vibe (1.5), then eyes, body, and render (1), and belly patch and background (0.5).
 
-**Knowledge ratio** = mean overall score of the two name tiers ÷ the `described` tier. A ratio near 1 means
-the model draws the meme from its name as well as from a description; a low ratio means it can draw the
-style but does not know the meme.
+**Knowledge ratio** = mean overall score of the two name tiers ÷ the `described_detailed` tier. A ratio near 1
+means the model draws the meme from its name as well as from a detailed description; a low ratio means it can
+draw the style but does not know the meme. Comparing `described_brief` with `described_detailed` shows how much
+spelling out the 3D render style helps.
 
 Image generators are agents (Codex, Antigravity) that receive the benchmark prompt and forward it to their
 image tool. The harness reads the prompt argument of each recorded image-tool call and checks that it equals
@@ -83,8 +86,9 @@ Image judges describe what they see for each trait, then rate it with a word (`a
 Each sample's score is the mean over judges, excluding judges from the subject's own vendor when at least one
 independent judge exists (self-judging was visibly lenient in testing). A failure mode counts when at least
 half of the judges flag it. Each judgment is tied to the version of the sample it scored and to the exact
-judge prompt: when a sample is regenerated or the rubric changes, `nwb judge` redoes the judgment and
-`nwb report` ignores the old one.
+judge prompt: `nwb judge` redoes it when either changes, and `nwb report` ignores judgments of a sample that
+has since been regenerated. The report also counts only samples made with the current prompts, so samples of
+removed or reworded items and tiers drop out until they are regenerated.
 
 The report's **judge health** table shows, per judge and track, the spread of its scores across samples and
 its mean distance from the other judges on the same samples. A near-zero spread means the judge is not

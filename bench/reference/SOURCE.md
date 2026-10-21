@@ -6,6 +6,10 @@
   [奶龙 § 大笑奶龙/奶蛙](https://zh.moegirl.org.cn/%E5%A5%B6%E9%BE%99#%E5%A4%A7%E7%AC%91%E5%A5%B6%E9%BE%99/%E5%A5%B6%E8%9B%99)
   (text under CC BY-NC-SA 3.0 CN), as of October 2026. Background notes and the frog-like 奶蛙 variant are
   cross-checked against Chinese Wikipedia, [奶龙](https://zh.wikipedia.org/wiki/%E5%A5%B6%E9%BE%99).
+- `../stimuli/naiwa_glance.png` (「惊鸿一瞥」) and `../stimuli/angry_variant.png` (「切换愤怒模式」): circulating
+  sticker variants of the meme family, provided by the project author; their original posters are unknown.
+- The 奶蛙 origin (an AI agent created on 星野 on 2024-10-02) and the frog-like look behind the name are
+  corroborated by Lost Media Wiki CN, [奶蛙](https://lostmedia.wikidot.com/naiwa-cx) (revision of 2026-10-08).
 - `../stimuli/laughing_panda.jpg`: a panda variant generated with Codex's built-in `image_gen` tool from the
   reference tier prompt (`参考这张图，画一个同样风格的熊猫版本`). It is used as a recognition stimulus.
 

@@ -52,6 +52,9 @@ def test_aggregate_prefers_independent_current_judges_and_skips_contaminated(tmp
     assert img["overall"] == 100 and img["not_verbatim"] == 1
     assert img["failure_modes"] == {"generic_cute": 1}  # flagged by half of the judges
     assert aggregate(run, WEIGHTS, judges={"self"})["understanding"]["gpt"]["overall"] == 100
+    # Only samples made with the bench's current prompt count: the image matches, the answers don't.
+    current = aggregate(run, WEIGHTS, expected={"imagegen/name_zh/cat": "p", "understanding/q": "changed"})
+    assert current["understanding"] == {} and current["imagegen"]["img"]["n"] == 1
     health = scores["judge_health"]
     assert health["self"]["understanding"]["deviation"] == 50  # self-vendor judge still evaluated
     assert health["j1"]["imagegen"] == {"n": 1, "spread": 0.0, "deviation": 0.0}

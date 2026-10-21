@@ -98,7 +98,7 @@ def _imagegen(bench: Bench, scores: dict) -> list[str]:
                    + "".join(f"<td>{fmt(s['tiers'].get(t, {}).get('overall'))}</td>" for t in tiers)
                    + f"<td>{fmt(s['knowledge_ratio'], 2)}</td><td>{modes or '–'}</td>"
                    f"<td>{s['not_verbatim']} / {s['n']}</td></tr>")
-    out.append("</table><p class=muted>Knowledge ratio = mean of the name-only tiers ÷ the described tier: "
+    out.append("</table><p class=muted>Knowledge ratio = mean of the name-only tiers ÷ the described_detailed tier: "
                "how much of the model's drawing ability it can reach from the meme's name alone.</p>")
 
     trait_names = list(bench.traits) + ["identity"]

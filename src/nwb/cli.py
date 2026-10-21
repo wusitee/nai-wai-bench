@@ -72,7 +72,7 @@ def cmd_judge(args, root, bench, models, defaults):
 
 def cmd_report(args, root, bench, models, defaults):
     judges = set(select_names(models, args.judges)) if args.judges else None
-    scores = scoring.aggregate(args.run_dir, bench.trait_weights, judges)
+    scores = scoring.aggregate(args.run_dir, bench.trait_weights, judges, expected=bench.expected_prompts())
     write_json(args.run_dir / "scores.json", scores)
     html_path = args.run_dir / "report.html"
     html_path.write_text(report.render(bench, args.run, scores), encoding="utf-8")

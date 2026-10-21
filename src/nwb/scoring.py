@@ -8,6 +8,7 @@ from nwb.util import read_json
 
 HALLUCINATION_PENALTY = 10
 NAME_TIERS = ("name_zh", "name_en")
+CEILING_TIER = "described_detailed"  # the knowledge ratio's denominator: the best-specified prompt
 
 
 def understanding_score(judgment: dict) -> float:
@@ -23,6 +24,20 @@ def image_scores(judgment: dict, weights: dict[str, float]) -> tuple[float, floa
     total = sum(weights.get(t, 1) for t in traits)
     style = 100 * sum(v * weights.get(t, 1) for t, v in traits.items()) / (2 * total)
     return style, style * judgment["identity"] / 2
+
+
+def sample_key(rec: dict) -> str:
+    if rec["track"] == "understanding":
+        return f"understanding/{rec['item']}"
+    return f"imagegen/{rec['tier']}/{rec['animal']}"
+
+
+def is_current(rec: dict, expected: dict[str, str] | None) -> bool:
+    """Whether a sample was made with the bench's current prompt (always true when `expected` is None)."""
+    if expected is None:
+        return True
+    key = sample_key(rec)
+    return key in expected and expected[key] == rec.get("prompt")
 
 
 def pick_judges(judgments: list[dict], subject_vendor: str) -> list[dict]:
@@ -61,12 +76,17 @@ def _samples(run_dir: Path, track: str, pattern: str, by_target: dict) -> list[t
     return out
 
 
-def aggregate(run_dir: Path, trait_weights: dict[str, float], judges: set[str] | None = None) -> dict:
+def aggregate(run_dir: Path, trait_weights: dict[str, float], judges: set[str] | None = None,
+              expected: dict[str, str] | None = None) -> dict:
+    """Score a run. `expected` (Bench.expected_prompts) restricts it to samples made with the current
+    prompts, leaving out removed items and tiers and samples whose prompt has since changed."""
     by_target = _load_judgments(run_dir, judges)
     judges = sorted({j["judge"] for js in by_target.values() for j in js})
 
     und, contaminated = [], defaultdict(int)
     for rec, js in _samples(run_dir, "understanding", "*/*.json", by_target):
+        if not is_current(rec, expected):
+            continue
         if rec.get("contaminated"):
             contaminated[rec["model"]] += 1
             continue
@@ -80,6 +100,8 @@ def aggregate(run_dir: Path, trait_weights: dict[str, float], judges: set[str] |
 
     img = []
     for rec, js in _samples(run_dir, "imagegen", "*/*/*.json", by_target):
+        if not is_current(rec, expected):
+            continue
         pairs = [image_scores(j, trait_weights) for j in js]
         modes = defaultdict(int)
         for j in js:
@@ -159,7 +181,7 @@ def _summarize_imagegen(samples: list[dict]) -> dict:
             tiers[s["tier"]].append(s)
         tier_overall = {t: mean(s["overall"] for s in v) for t, v in tiers.items()}
         name_score = mean(tier_overall.get(t) for t in NAME_TIERS)
-        described = tier_overall.get("described")
+        described = tier_overall.get(CEILING_TIER)
         modes = defaultdict(int)
         for s in ss:
             for m in s["failure_modes"]:

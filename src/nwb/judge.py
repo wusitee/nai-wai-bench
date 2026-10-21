@@ -6,6 +6,7 @@ from pathlib import Path
 
 from nwb.backends import Request, get_backend
 from nwb.config import Bench, ModelSpec, UnderstandingItem
+from nwb.scoring import is_current
 from nwb.tracks import Job, rel
 from nwb.util import extract_json, read_json
 
@@ -123,6 +124,7 @@ def _ask(backend, request: Request, parse) -> dict:
 
 def judge_jobs(bench: Bench, judges: list[ModelSpec], run_dir: Path, tracks: set[str]) -> list[Job]:
     items = {i.id: i for i in bench.items}
+    expected = bench.expected_prompts()  # samples made with an outdated prompt are regenerated, not judged
     jobs = []
     for judge in judges:
         backend = get_backend(judge)
@@ -130,7 +132,7 @@ def judge_jobs(bench: Bench, judges: list[ModelSpec], run_dir: Path, tracks: set
             for path in sorted((run_dir / "understanding").glob("*/*.json")):
                 rec = read_json(path)
                 item = items.get(rec.get("item"))
-                if "error" in rec or item is None or rec.get("contaminated"):
+                if "error" in rec or item is None or rec.get("contaminated") or not is_current(rec, expected):
                     continue
                 request = Request(prompt=understanding_prompt(bench, item, rec["answer"]))
                 jobs.append(_job(judge, path, run_dir, rec, request,
@@ -141,11 +143,9 @@ def judge_jobs(bench: Bench, judges: list[ModelSpec], run_dir: Path, tracks: set
                 continue
             for path in sorted((run_dir / "imagegen").glob("*/*/*.json")):
                 rec = read_json(path)
-                if "error" in rec or not rec.get("images"):
+                if "error" in rec or not rec.get("images") or not is_current(rec, expected):
                     continue
-                animal = bench.animals.get(rec["animal"])
-                if animal is None:
-                    continue
+                animal = bench.animals[rec["animal"]]
                 request = Request(prompt=imagegen_prompt(bench, rec["prompt"], animal.en),
                                   images=[bench.reference_image, run_dir / rec["images"][0]])
                 jobs.append(_job(judge, path, run_dir, rec, request,
