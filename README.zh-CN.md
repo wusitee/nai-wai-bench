@@ -2,7 +2,7 @@
 
 # nai-wai-bench
 
-[English](README.md) | 简体中文
+[English](README.md) | 简体中文 | [繁體中文](README.zh-Hant.md)
 
 一个测试 AI 模型对中文网络梗 **大笑奶龙**（又称 **奶蛙**）理解程度的基准：AI 生成的“变异”奶龙，弯腰捧腹、狂笑不止。
 

@@ -2,7 +2,7 @@
 
 # nai-wai-bench
 
-English | [简体中文](README.zh-CN.md)
+English | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-Hant.md)
 
 A benchmark of how well AI models know the Chinese internet meme **大笑奶龙** (Laughing Nailong, also
 called **奶蛙**): an AI-generated, "mutated" 奶龙 doubled over with laughter, clutching its belly.
