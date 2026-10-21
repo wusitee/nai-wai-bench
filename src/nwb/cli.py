@@ -71,7 +71,8 @@ def cmd_judge(args, root, bench, models, defaults):
 
 
 def cmd_report(args, root, bench, models, defaults):
-    scores = scoring.aggregate(args.run_dir, bench.trait_weights)
+    judges = set(select_names(models, args.judges)) if args.judges else None
+    scores = scoring.aggregate(args.run_dir, bench.trait_weights, judges)
     write_json(args.run_dir / "scores.json", scores)
     html_path = args.run_dir / "report.html"
     html_path.write_text(report.render(bench, args.run, scores), encoding="utf-8")
@@ -127,7 +128,8 @@ def build_parser() -> argparse.ArgumentParser:
                     "and [defaults].image_judges for imagegen)")
     sp.add_argument("--track", choices=["understanding", "imagegen", "all"], default="all")
 
-    with_run(sub.add_parser("report", help="aggregate scores and write report.html"), jobs=False)
+    sp = with_run(sub.add_parser("report", help="aggregate scores and write report.html"), jobs=False)
+    sp.add_argument("--judges", help="comma-separated judges to count (default: every judge with results)")
     return p
 
 

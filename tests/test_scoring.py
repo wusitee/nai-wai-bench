@@ -18,12 +18,13 @@ def test_image_scores_weight_traits_and_scale_by_identity():
     assert overall == pytest.approx(style / 2)
 
 
-def _judgment(run, judge, vendor, target, **fields):
+def _judgment(run, judge, vendor, target, current=True, **fields):
+    mtime = (run / target).stat().st_mtime if current else 0.0
     write_json(run / "judgments" / judge / target,
-               {"judge": judge, "judge_vendor": vendor, "target": target, **fields})
+               {"judge": judge, "judge_vendor": vendor, "target": target, "target_mtime": mtime, **fields})
 
 
-def test_aggregate_prefers_independent_judges_and_skips_contaminated(tmp_path):
+def test_aggregate_prefers_independent_current_judges_and_skips_contaminated(tmp_path):
     run = tmp_path
     base = {"track": "understanding", "vendor": "openai", "modality": "text", "lang": "zh", "rep": 1}
     write_json(run / "understanding/gpt/q__r1.json", {**base, "model": "gpt", "item": "q", "answer": "A"})
@@ -32,6 +33,8 @@ def test_aggregate_prefers_independent_judges_and_skips_contaminated(tmp_path):
     target = "understanding/gpt/q__r1.json"
     _judgment(run, "self", "openai", target, scores={"a": 2}, hallucinations=[], rationale="")
     _judgment(run, "other", "anthropic", target, scores={"a": 1}, hallucinations=[], rationale="")
+    # Made for an older version of the sample, so it must not count.
+    _judgment(run, "stale", "google", target, current=False, scores={"a": 0}, hallucinations=[], rationale="")
 
     write_json(run / "imagegen/img/name_zh/cat__r1.json",
                {"track": "imagegen", "model": "img", "vendor": "openai", "tier": "name_zh", "animal": "cat",
@@ -48,6 +51,7 @@ def test_aggregate_prefers_independent_judges_and_skips_contaminated(tmp_path):
     img = scores["imagegen"]["img"]
     assert img["overall"] == 100 and img["not_verbatim"] == 1
     assert img["failure_modes"] == {"generic_cute": 1}  # flagged by half of the judges
+    assert aggregate(run, WEIGHTS, judges={"self"})["understanding"]["gpt"]["overall"] == 100
     health = scores["judge_health"]
     assert health["self"]["understanding"]["deviation"] == 50  # self-vendor judge still evaluated
     assert health["j1"]["imagegen"] == {"n": 1, "spread": 0.0, "deviation": 0.0}

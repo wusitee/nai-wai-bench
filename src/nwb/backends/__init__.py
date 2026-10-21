@@ -5,7 +5,6 @@ Every call runs in a fresh, empty temporary working directory so agents never pi
 repository's AGENTS.md / CLAUDE.md or any other project context.
 """
 
-import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -48,13 +47,14 @@ def get_backend(spec: ModelSpec):
     raise ValueError(f"model {spec.name}: unknown backend {spec.backend!r}")
 
 
-def audit_calls(calls: list[str], prompt: str) -> dict:
-    """Report how many image tool calls were made and whether each received `prompt` unchanged."""
-    forms = {prompt, json.dumps(prompt, ensure_ascii=False)[1:-1], json.dumps(prompt)[1:-1]}
+def audit_calls(sent: list[str | None], raw: list[str], prompt: str) -> dict:
+    """Report how many image tool calls were made and whether each one's prompt argument (`sent`, None
+    when it could not be read) equals `prompt` exactly, ignoring surrounding whitespace."""
     return {
-        "image_gen_calls": len(calls),
-        "verbatim": bool(calls) and all(any(f in c for f in forms) for c in calls),
-        "calls": [c[:2000] for c in calls],
+        "image_gen_calls": len(sent),
+        "verbatim": bool(sent) and all(isinstance(s, str) and s.strip() == prompt.strip() for s in sent),
+        "sent": sent,
+        "calls": [c[:2000] for c in raw],
     }
 
 

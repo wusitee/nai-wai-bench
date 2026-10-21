@@ -1,5 +1,6 @@
 """LLM-as-judge prompts, reply validation, and judge job construction."""
 
+import hashlib
 import sys
 from pathlib import Path
 
@@ -79,7 +80,9 @@ def _score(value, labels: dict[str, int] | None = None) -> int:
 
 def parse_understanding(reply: str, checklist: tuple[str, ...]) -> dict:
     data = extract_json(reply)
-    scores = data.get("scores", {})
+    scores = data.get("scores")
+    if not isinstance(scores, dict):
+        raise ValueError("judge reply has no scores object")
     missing = [c for c in checklist if c not in scores]
     if missing:
         raise ValueError(f"judge reply lacks scores for {missing}")
@@ -92,11 +95,16 @@ def parse_understanding(reply: str, checklist: tuple[str, ...]) -> dict:
 
 def parse_imagegen(reply: str, bench: Bench) -> dict:
     data = extract_json(reply)
-    traits = data.get("traits", {})
+    traits = data.get("traits")
+    if not isinstance(traits, dict):
+        raise ValueError("judge reply has no traits object")
     missing = [t for t in bench.traits if t not in traits]
     if missing:
         raise ValueError(f"judge reply lacks traits {missing}")
-    modes = [m for m in (data.get("failure_modes") or []) if m in bench.failure_modes]
+    modes = data.get("failure_modes") or []
+    if not isinstance(modes, list):
+        raise ValueError("failure_modes must be a list")
+    modes = [m for m in modes if m in bench.failure_modes]
     return {"traits": {t: _score(traits[t], TRAIT_LABELS) for t in bench.traits},
             "identity": _score(data.get("identity"), IDENTITY_LABELS),
             "failure_modes": modes, "rationale": str(data.get("rationale", ""))}
@@ -147,14 +155,14 @@ def judge_jobs(bench: Bench, judges: list[ModelSpec], run_dir: Path, tracks: set
 
 def _job(judge: ModelSpec, target: Path, run_dir: Path, rec: dict, request: Request, parse, backend) -> Job:
     target_rel = rel(target, run_dir)
-    out = run_dir / "judgments" / judge.name / target_rel
-    mtime = target.stat().st_mtime
-    if out.is_file() and read_json(out).get("target_mtime") != mtime:
-        out.unlink()  # the sample was regenerated since it was judged
+    # target_mtime and judge_prompt tie the judgment to this version of the sample and of the rubric, so
+    # regenerating either makes nwb judge redo it and nwb report ignore the old one.
     return Job(
-        out=out,
+        out=run_dir / "judgments" / judge.name / target_rel,
         label=f"judge {judge.name} <- {target_rel}",
-        base={"judge": judge.name, "judge_vendor": judge.vendor, "target": target_rel, "target_mtime": mtime,
+        base={"judge": judge.name, "judge_vendor": judge.vendor, "target": target_rel,
+              "target_mtime": target.stat().st_mtime,
+              "judge_prompt": hashlib.sha256(request.prompt.encode()).hexdigest()[:16],
               "track": rec["track"], "model": rec["model"]},
         fn=lambda: _ask(backend, request, parse),
     )

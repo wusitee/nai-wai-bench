@@ -68,8 +68,8 @@ the model draws the meme from its name as well as from a description; a low rati
 style but does not know the meme.
 
 Image generators are agents (Codex, Antigravity) that receive the benchmark prompt and forward it to their
-image tool. The harness checks the recorded tool call to confirm the prompt arrived verbatim; the report
-counts samples where it did not.
+image tool. The harness reads the prompt argument of each recorded image-tool call and checks that it equals
+the benchmark prompt exactly; the report counts samples where it did not.
 
 ## Judges and aggregation (`nwb judge`, `nwb report`)
 
@@ -82,13 +82,14 @@ Image judges describe what they see for each trait, then rate it with a word (`a
 
 Each sample's score is the mean over judges, excluding judges from the subject's own vendor when at least one
 independent judge exists (self-judging was visibly lenient in testing). A failure mode counts when at least
-half of the judges flag it. If a sample is regenerated, its old judgments are discarded on the next
-`nwb judge`.
+half of the judges flag it. Each judgment is tied to the version of the sample it scored and to the exact
+judge prompt: when a sample is regenerated or the rubric changes, `nwb judge` redoes the judgment and
+`nwb report` ignores the old one.
 
 The report's **judge health** table shows, per judge and track, the spread of its scores across samples and
 its mean distance from the other judges on the same samples. A near-zero spread means the judge is not
-discriminating; a large distance means it disagrees with the panel. Either is a reason to rerun with a
-different `--judges` list. Gemini 3.8 Flash (via Antigravity) is excluded from the default image judges for
+discriminating; a large distance means it disagrees with the panel. Either is a reason to leave the judge
+out: `nwb report --judges` counts only the listed judges. Gemini 3.8 Flash (via Antigravity) is excluded from the default image judges for
 this reason: it rated every trait of every image `partial`, even when its own notes described a match.
 
 ## Run layout
@@ -102,8 +103,9 @@ runs/<run>/judgments/<judge>/<same path as the judged sample>
 runs/<run>/scores.json, runs/<run>/report.html
 ```
 
-Commands skip samples that already succeeded and retry ones that recorded an `error`, so an interrupted
-run resumes where it stopped; `--force` regenerates everything selected.
+Commands skip samples that already succeeded with the current prompt and redo ones that recorded an
+`error` or were made with a different prompt, so an interrupted run resumes where it stopped; `--force`
+regenerates everything selected.
 
 ## Extending
 

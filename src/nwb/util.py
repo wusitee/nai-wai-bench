@@ -15,7 +15,8 @@ def media_type(path: Path) -> str:
 def write_json(path: Path, obj) -> None:
     """Write JSON atomically so interrupted runs never leave half-written results."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    fd, tmp = tempfile.mkstemp(dir=path.parent, prefix=".tmp-", suffix=".json")
+    # The .part suffix keeps an interrupted write from matching the *.json result globs.
+    fd, tmp = tempfile.mkstemp(dir=path.parent, prefix=".tmp-", suffix=".part")
     with os.fdopen(fd, "w", encoding="utf-8") as f:
         json.dump(obj, f, ensure_ascii=False, indent=2)
     os.replace(tmp, path)
@@ -26,12 +27,9 @@ def read_json(path: Path):
         return json.load(f)
 
 
-_FENCE = re.compile(r"```(?:json)?\s*(\{.*?\})\s*```", re.S)
-
-
 def extract_json(text: str) -> dict:
-    """Return the JSON object in a model reply: the whole reply, the last fenced block, or the last
-    top-level object embedded in prose (judges reason first and end with their verdict)."""
+    """Return the JSON object in a model reply: the whole reply if it is one, otherwise the last
+    top-level object in it, fenced or not (judges reason first and end with their verdict)."""
     text = text.strip()
     try:
         obj = json.loads(text)
@@ -39,11 +37,6 @@ def extract_json(text: str) -> dict:
             return obj
     except json.JSONDecodeError:
         pass
-    for m in reversed(list(_FENCE.finditer(text))):
-        try:
-            return json.loads(m.group(1))
-        except json.JSONDecodeError:
-            continue
     decoder = json.JSONDecoder()
     last, i = None, 0
     while (i := text.find("{", i)) != -1:

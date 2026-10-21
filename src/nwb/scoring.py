@@ -36,11 +36,16 @@ def mean(values):
     return sum(values) / len(values) if values else None
 
 
-def _load_judgments(run_dir: Path) -> dict[str, list[dict]]:
+def _load_judgments(run_dir: Path, judges: set[str] | None) -> dict[str, list[dict]]:
+    """Successful judgments by target, keeping only those made for the target's current version and,
+    when `judges` is given, only those judges."""
     by_target = defaultdict(list)
     for path in sorted((run_dir / "judgments").rglob("*.json")):
         j = read_json(path)
-        if "error" not in j:
+        if "error" in j or (judges and j["judge"] not in judges):
+            continue
+        target = run_dir / j["target"]
+        if target.is_file() and j.get("target_mtime") == target.stat().st_mtime:
             by_target[j["target"]].append(j)
     return by_target
 
@@ -56,8 +61,8 @@ def _samples(run_dir: Path, track: str, pattern: str, by_target: dict) -> list[t
     return out
 
 
-def aggregate(run_dir: Path, trait_weights: dict[str, float]) -> dict:
-    by_target = _load_judgments(run_dir)
+def aggregate(run_dir: Path, trait_weights: dict[str, float], judges: set[str] | None = None) -> dict:
+    by_target = _load_judgments(run_dir, judges)
     judges = sorted({j["judge"] for js in by_target.values() for j in js})
 
     und, contaminated = [], defaultdict(int)

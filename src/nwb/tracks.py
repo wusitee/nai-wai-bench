@@ -32,17 +32,20 @@ class Job:
     fn: Callable[[], dict]
 
 
-def is_done(path: Path) -> bool:
-    if not path.is_file():
+def is_done(job: Job) -> bool:
+    """Done means a successful result produced by this exact job: same prompt, same judged sample, and
+    so on. Results from an older prompt or sample version are redone."""
+    if not job.out.is_file():
         return False
     try:
-        return "error" not in read_json(path)
+        record = read_json(job.out)
     except ValueError:
         return False
+    return "error" not in record and all(record.get(k) == v for k, v in job.base.items())
 
 
 def run_jobs(jobs: list[Job], workers: int, force: bool) -> tuple[int, int]:
-    todo = [j for j in jobs if force or not is_done(j.out)]
+    todo = [j for j in jobs if force or not is_done(j)]
     skipped = len(jobs) - len(todo)
     if skipped:
         print(f"{skipped} of {len(jobs)} already done; running {len(todo)}", file=sys.stderr)

@@ -38,6 +38,11 @@ def test_parse_understanding_accepts_fenced_json_and_validates_scores():
         parse_understanding('{"scores": {"a": 2}}', ("a", "b"))
     with pytest.raises(ValueError, match="0, 1, or 2"):
         parse_understanding('{"scores": {"a": 3, "b": 1}}', ("a", "b"))
+    with pytest.raises(ValueError, match="no scores"):
+        parse_understanding('{"scores": null}', ("a",))
+    # A fenced draft followed by the final bare verdict: the final one counts.
+    reply = '```json\n{"scores": {"a": 2}}\n```\nCorrection: {"scores": {"a": 0}, "hallucinations": []}'
+    assert parse_understanding(reply, ("a",))["scores"] == {"a": 0}
 
 
 def test_parse_imagegen_maps_labels_and_drops_unknown_failure_modes(bench):

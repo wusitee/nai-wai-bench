@@ -30,6 +30,7 @@ class AcpConnection:
         self.permissions: list[dict] = []
         self._pending: dict[int, list] = {}
         self._next_id = 0
+        self._expired = False
         self._lock = threading.Lock()
         self._proc = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=stderr,
                                       cwd=cwd, env=env, text=True, encoding="utf-8", bufsize=1)
@@ -46,39 +47,63 @@ class AcpConnection:
             self._next_id += 1
             rid = self._next_id
             slot = self._pending[rid] = [threading.Event(), None]
-        self._send({"jsonrpc": "2.0", "id": rid, "method": method, "params": params})
-        if not slot[0].wait(timeout):
-            raise BackendError(f"ACP {method} timed out after {timeout}s")
+        # The watchdog bounds the write as well as the wait: a large prompt (base64 images) blocks on a
+        # full pipe if the agent stops reading, and killing the agent unblocks it.
+        watchdog = threading.Timer(timeout, self._expire)
+        watchdog.start()
+        try:
+            try:
+                self._send({"jsonrpc": "2.0", "id": rid, "method": method, "params": params})
+            except OSError:
+                pass  # the agent exited or was killed; reported below
+            answered = slot[0].wait(timeout)
+        finally:
+            watchdog.cancel()
         msg = self._pending.pop(rid)[1]
         if msg is None:
+            if not answered or self._expired:
+                raise BackendError(f"ACP {method} timed out after {timeout}s")
             raise BackendError(f"ACP agent exited during {method}")
         if "error" in msg:
             raise BackendError(f"ACP {method} failed: {json.dumps(msg['error'], ensure_ascii=False)[:800]}")
         return msg.get("result") or {}
 
+    def _expire(self) -> None:
+        self._expired = True
+        self._proc.kill()
+
     def _read(self) -> None:
-        for line in self._proc.stdout:
-            try:
-                msg = json.loads(line)
-            except json.JSONDecodeError:
-                continue
-            if "method" not in msg:
-                slot = self._pending.get(msg.get("id"))
-                if slot:
-                    slot[1] = msg
-                    slot[0].set()
-            elif "id" in msg:
-                self._answer(msg)
-            elif msg["method"] == "session/update":
-                self.updates.append(msg.get("params", {}).get("update", {}))
-        for slot in list(self._pending.values()):
-            slot[0].set()
+        try:
+            for line in self._proc.stdout:
+                try:
+                    msg = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if "method" not in msg:
+                    slot = self._pending.get(msg.get("id"))
+                    if slot:
+                        slot[1] = msg
+                        slot[0].set()
+                elif "id" in msg:
+                    self._answer(msg)
+                elif msg["method"] == "session/update":
+                    self.updates.append(msg.get("params", {}).get("update", {}))
+        except (OSError, ValueError):
+            pass  # the agent was killed mid-read or its pipe closed
+        finally:
+            for slot in list(self._pending.values()):
+                slot[0].set()
 
     def _answer(self, msg: dict) -> None:
+        try:
+            self._send(self._reply(msg))
+        except OSError:
+            pass  # the agent is gone; the pending request reports it
+
+    def _reply(self, msg: dict) -> dict:
         if msg["method"] != "session/request_permission":
-            self._send({"jsonrpc": "2.0", "id": msg["id"],
-                        "error": {"code": -32601, "message": f"{msg['method']} is not supported"}})
-            return
+            return {"jsonrpc": "2.0", "id": msg["id"],
+                    "error": {"code": -32601, "message": f"{msg['method']} is not supported"}}
         params = msg.get("params", {})
         options = params.get("options", [])
         prefix = "allow" if self.allow_tools else "reject"
@@ -87,7 +112,7 @@ class AcpConnection:
         self.permissions.append({"tool": (params.get("toolCall") or {}).get("title"),
                                  "decision": choice.get("kind") if choice else "cancelled"})
         outcome = {"outcome": "selected", "optionId": choice["optionId"]} if choice else {"outcome": "cancelled"}
-        self._send({"jsonrpc": "2.0", "id": msg["id"], "result": {"outcome": outcome}})
+        return {"jsonrpc": "2.0", "id": msg["id"], "result": {"outcome": outcome}}
 
     def close(self) -> None:
         try:
@@ -141,9 +166,11 @@ class AcpBackend:
             if gen:
                 inputs = {hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in req.images}
                 resp.images = collect_images(inline, tool_calls, Path(cwd), req.image_out, exclude=inputs)
-                image_calls = [json.dumps(c.get("rawInput"), ensure_ascii=False) for c in tool_calls
-                               if "image" in f"{c.get('title', '')} {c.get('kind', '')}".lower()]
-                resp.meta["audit"] = audit_calls(image_calls, req.prompt)
+                image_calls = [c for c in tool_calls if "image" in f"{c.get('title', '')} {c.get('kind', '')}".lower()]
+                sent = [c["rawInput"].get("prompt") if isinstance(c.get("rawInput"), dict) else None
+                        for c in image_calls]
+                raw = [json.dumps(c.get("rawInput"), ensure_ascii=False) for c in image_calls]
+                resp.meta["audit"] = audit_calls(sent, raw, req.prompt)
                 if not resp.images:
                     raise BackendError(f"agent produced no image: {text[:300]}")
         return resp
@@ -247,7 +274,10 @@ def collect_images(inline: list[dict], tool_calls: list[dict], cwd: Path, out_di
         digest = hashlib.sha256(data).hexdigest()
         if digest not in seen:
             seen.add(digest)
-            dst = out_dir / name
+            dst, n = out_dir / name, 1
+            while dst.exists():  # distinct images can share a file name
+                dst = out_dir / f"{Path(name).stem}-{n}{Path(name).suffix}"
+                n += 1
             dst.write_bytes(data)
             saved.append(dst)
 

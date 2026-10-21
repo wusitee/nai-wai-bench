@@ -3,6 +3,7 @@ image_gen tool; the session rollout is checked to confirm the prompt was passed 
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import tempfile
@@ -14,6 +15,8 @@ from nwb.config import ModelSpec
 from nwb.util import IMAGE_SUFFIXES
 
 DISABLED_FEATURES = ("apps", "browser_use", "browser_use_external", "computer_use")
+# The prompt argument of a code-mode call such as `tools.image_gen__imagegen({prompt: "..."})`.
+_JS_PROMPT = re.compile(r"""(?<![\w$])["']?prompt["']?\s*:\s*("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)""", re.S)
 
 
 class CodexBackend:
@@ -102,7 +105,7 @@ def audit_rollout(rollout: Path | None, prompt: str) -> dict:
     """Report how many image_gen calls the agent made and whether `prompt` was passed verbatim."""
     if rollout is None:
         return {"rollout": None, "image_gen_calls": None, "verbatim": None}
-    calls = []
+    calls, sent = [], []
     with open(rollout, encoding="utf-8") as f:
         for line in f:
             try:
@@ -114,4 +117,28 @@ def audit_rollout(rollout: Path | None, prompt: str) -> dict:
             body = payload.get("input") or payload.get("arguments") or ""
             if "image_gen" in payload.get("name", "") or "image_gen" in body:
                 calls.append(body)
-    return {"rollout": str(rollout), **audit_calls(calls, prompt)}
+                sent.append(call_prompt(body))
+    return {"rollout": str(rollout), **audit_calls(sent, calls, prompt)}
+
+
+def call_prompt(body: str) -> str | None:
+    """The prompt argument of an image_gen call: from JSON arguments or a JavaScript string literal.
+    None when it cannot be read statically (e.g. a variable or an interpolated template)."""
+    try:
+        args = json.loads(body)
+        if isinstance(args, dict):
+            return args.get("prompt") if isinstance(args.get("prompt"), str) else None
+    except json.JSONDecodeError:
+        pass
+    m = _JS_PROMPT.search(body)
+    if not m:
+        return None
+    literal = m.group(1)
+    if literal[0] == '"':
+        try:
+            return json.loads(literal)
+        except json.JSONDecodeError:
+            return None
+    if literal[0] == "`" and "${" in literal:
+        return None
+    return re.sub(r"\\(.)", lambda e: {"n": "\n", "t": "\t"}.get(e.group(1), e.group(1)), literal[1:-1])

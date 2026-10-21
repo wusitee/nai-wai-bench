@@ -1,12 +1,17 @@
 import json
+import os
 import sqlite3
+import subprocess
 import sys
 import threading
+import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 
-from nwb.backends import Request
-from nwb.backends.acp import AcpBackend
+import pytest
+
+from nwb.backends import BackendError, Request
+from nwb.backends.acp import AcpBackend, AcpConnection
 from nwb.backends.codex import audit_rollout
 from nwb.backends.openai_compat import OpenAICompatBackend, cc_switch_credentials
 from nwb.config import ModelSpec
@@ -43,17 +48,31 @@ def _rollout(tmp_path: Path, *inputs: str) -> Path:
     return path
 
 
-def test_codex_audit_detects_verbatim_and_rewritten_prompts(tmp_path):
+def test_codex_audit_requires_the_exact_prompt(tmp_path):
     prompt = "参考这张图，画一个同样风格的猫版本"
-    call = f'const r = await tools.image_gen__imagegen({{prompt:{json.dumps(prompt)}}});'
+    call = f'const r = await tools.image_gen__imagegen({{prompt:{json.dumps(prompt)},num_last_images_to_include:1}});'
     audit = audit_rollout(_rollout(tmp_path, call), prompt)
     assert audit["image_gen_calls"] == 1 and audit["verbatim"] is True
 
-    rewritten = 'await tools.image_gen__imagegen({prompt:"A cute laughing cat, Pixar style"});'
-    audit = audit_rollout(_rollout(tmp_path, call, rewritten), prompt)
+    # Extra description appended to a name-only prompt must not pass as verbatim.
+    appended = f'await tools.image_gen__imagegen({{prompt:{json.dumps(prompt + "，黄色胖身体，捧腹大笑")}}});'
+    audit = audit_rollout(_rollout(tmp_path, call, appended), prompt)
     assert audit["image_gen_calls"] == 2 and audit["verbatim"] is False
 
     assert audit_rollout(None, prompt)["verbatim"] is None
+
+
+def test_acp_request_times_out_when_agent_stops_reading():
+    # The agent never reads stdin, so a large prompt blocks on the full pipe; the timeout must still fire.
+    conn = AcpConnection([sys.executable, "-c", "import time; time.sleep(30)"], dict(os.environ),
+                         os.getcwd(), allow_tools=False, stderr=subprocess.DEVNULL)
+    started = time.monotonic()
+    try:
+        with pytest.raises(BackendError, match="timed out"):
+            conn.request("session/prompt", {"data": "x" * 2_000_000}, timeout=1)
+    finally:
+        conn.close()
+    assert time.monotonic() - started < 10
 
 
 def test_openai_backend_sends_system_prompt_and_inline_images(tmp_path, monkeypatch):

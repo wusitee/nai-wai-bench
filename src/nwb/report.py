@@ -51,8 +51,8 @@ def _judge_health(scores: dict) -> list[str]:
                        f"<td{' class=bad' if low else ''}>{fmt(h['spread'], 1)}</td>"
                        f"<td{' class=bad' if far else ''}>{fmt(h['deviation'], 1)}</td></tr>")
     out.append(f"</table><p class=muted>Red: spread below {LOW_SPREAD} (the judge barely tells samples apart) or "
-               f"distance above {HIGH_DEVIATION} points (it disagrees with the panel). Consider dropping such "
-               "judges with <code>nwb judge --judges</code>.</p>")
+               f"distance above {HIGH_DEVIATION} points (it disagrees with the panel). To leave a judge out, "
+               "list the judges to keep with <code>nwb report --judges</code>.</p>")
     return out
 
 
