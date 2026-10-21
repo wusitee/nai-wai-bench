@@ -40,7 +40,7 @@ uv run nwb report                                 # 生成 runs/main/report.html
 
 结果保存在 `runs/<run>/`（`--run NAME`，默认 `main`）。中断的运行会接着跑，失败的样本会自动重试。
 
-## 文档（英文）
+## 文档
 
-- [基准设计](docs/design.md)：题目、档位、评分标准、计分方式和结果目录结构
-- [后端与模型](docs/backends.md)：各 Agent CLI 的调用与隔离方式，以及如何添加模型
+- [基准设计](docs/design.zh-CN.md)：题目、档位、评分标准、计分方式和结果目录结构
+- [后端与模型](docs/backends.zh-CN.md)：各 Agent CLI 的调用与隔离方式，以及如何添加模型

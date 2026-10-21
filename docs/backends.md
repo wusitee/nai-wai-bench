@@ -1,5 +1,7 @@
 # Backends and models
 
+English | [简体中文](backends.zh-CN.md) | [繁體中文](backends.zh-Hant.md)
+
 Most models run through agent CLIs that are already installed and logged in on your machine, so the
 benchmark uses existing subscriptions; the `openai` backend calls an OpenAI-compatible API with a key.
 Models are configured in `models.toml`; put machine-specific paths or extra models in `models.local.toml`

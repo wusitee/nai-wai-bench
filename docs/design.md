@@ -1,5 +1,7 @@
 # Benchmark design
 
+English | [简体中文](design.zh-CN.md) | [繁體中文](design.zh-Hant.md)
+
 nai-wai-bench measures how well AI models know the Chinese internet meme 大笑奶龙 (Laughing Nailong, also
 called 奶蛙): an AI-generated, "mutated" 奶龙 hunched over, clutching its belly, laughing with its eyes
 squeezed shut and its mouth agape. The canonical image is `bench/reference/nailong_laugh.png`; sources are
@@ -72,8 +74,8 @@ counts samples where it did not.
 ## Judges and aggregation (`nwb judge`, `nwb report`)
 
 Any configured model with `text` can judge part 1; judging part 2 needs `vision`. Default judges are listed
-under `[defaults].judges` (part 1) and `[defaults].image_judges` (part 2) in `models.toml`. Judges answer in JSON; replies that fail validation are retried
-once and then recorded as errors.
+under `[defaults].judges` (part 1) and `[defaults].image_judges` (part 2) in `models.toml`. Judges answer in
+JSON; replies that fail validation are retried once and then recorded as errors.
 
 Image judges describe what they see for each trait, then rate it with a word (`absent`, `partial`,
 `match`; identity `no`, `partly`, `clearly`) that maps to 0–2.
