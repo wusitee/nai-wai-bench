@@ -2,6 +2,8 @@
 
 # nai-wai-bench
 
+English | [简体中文](README.zh-CN.md)
+
 A benchmark of how well AI models know the Chinese internet meme **大笑奶龙** (Laughing Nailong, also
 called **奶蛙**): an AI-generated, "mutated" 奶龙 doubled over with laughter, clutching its belly.
 
@@ -17,8 +19,8 @@ It has two parts:
    the reference image. Comparing name-only results with described results shows whether a model actually
    knows the meme or can only draw it when told what it looks like.
 
-Vision judges from several vendors score every sample; a model is never scored by its own vendor's judges
-when an independent judge is available.
+Judges from several vendors score every sample; a model is never scored by its own vendor's judges when
+an independent judge is available.
 
 ## Getting started
 
