@@ -1,0 +1,135 @@
+# Benchmark tasks. Prompt placeholders: {zh} and {en} are the animal names from [animals].
+# Image paths are relative to the bench/ directory.
+
+# --- Part 1: understanding (text and vision LLMs) ---
+# modality: "text" needs a text-capable model, "vision" also sends the listed images.
+# checklist: ids from bench/rubric.toml. animals: expands the item once per animal.
+
+[understanding.knowledge_zh]
+modality = "text"
+lang = "zh"
+prompt = "「大笑奶龙」（也叫「奶蛙」）是什么？请介绍它的来源、外观以及相关的梗和二创。不确定的地方请直接说明，不要编造。"
+checklist = ["base_character", "ai_variant", "xingye_origin", "aliases", "naiwa", "laugh_pose", "junti_quan", "official_reply", "trait_variants", "rarity_titles"]
+
+[understanding.knowledge_en]
+modality = "text"
+lang = "en"
+prompt = "What is the Chinese internet meme \"大笑奶龙\" (Laughing Nailong, also called \"奶蛙\")? Explain its origin, what it looks like, and the related jokes and remixes. Say so plainly where you are unsure instead of guessing."
+checklist = ["base_character", "ai_variant", "xingye_origin", "aliases", "naiwa", "laugh_pose", "junti_quan", "official_reply", "trait_variants", "rarity_titles"]
+
+[understanding.describe]
+modality = "text"
+lang = "zh"
+prompt = "不看任何图片，仅凭你的记忆，详细描述最经典的那张「大笑奶龙」（奶蛙）图片的画面：姿势、表情、身体造型、配色、渲染风格和背景，让从没见过它的画师能照着画出来。不确定的地方请说明。"
+checklist = ["pose", "hands_on_belly", "eyes", "mouth", "body", "belly_patch", "render", "background", "vibe"]
+
+[understanding.write_prompt]
+modality = "text"
+lang = "en"
+animals = ["cat", "giraffe"]
+prompt = "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a {en} version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt."
+checklist = ["pose", "hands_on_belly", "eyes", "mouth", "body", "belly_patch", "render", "background", "vibe", "identity"]
+
+[understanding.recognize_zh]
+modality = "vision"
+lang = "zh"
+images = ["reference/nailong_laugh.png"]
+image_note = "The canonical 大笑奶龙 image: a yellow chubby creature hunched over, clutching its belly, laughing with eyes shut and mouth agape."
+prompt = "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？"
+checklist = ["base_character", "identifies_meme", "ai_variant", "aliases", "naiwa"]
+
+[understanding.recognize_en]
+modality = "vision"
+lang = "en"
+images = ["reference/nailong_laugh.png"]
+image_note = "The canonical 大笑奶龙 image: a yellow chubby creature hunched over, clutching its belly, laughing with eyes shut and mouth agape."
+prompt = "Who is this character, and which internet meme is this image from? Does the meme have other names?"
+checklist = ["base_character", "identifies_meme", "ai_variant", "aliases", "naiwa"]
+
+[understanding.recognize_variant]
+modality = "vision"
+lang = "zh"
+images = ["stimuli/laughing_panda.jpg"]
+image_note = "A panda redrawn in the 大笑奶龙 style (hunched, clutching belly, eyes shut, mouth agape, plain background). The expected answer is that it parodies the 大笑奶龙 / 奶蛙 meme."
+prompt = "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。"
+checklist = ["identifies_meme", "laugh_pose", "base_character"]
+
+# --- Part 2: image generation ---
+# Each tier is run for every selected animal. reference = true attaches the reference image.
+
+[imagegen]
+reference_image = "reference/nailong_laugh.png"
+
+[imagegen.tiers.name_zh]
+prompt = "生成一张图片：{zh}版的大笑奶龙（奶蛙）。"
+
+[imagegen.tiers.name_en]
+prompt = "Generate an image: a {en} version of the Chinese internet meme \"Laughing Nailong\" (大笑奶龙, also called 奶蛙)."
+
+[imagegen.tiers.described]
+prompt = "A 3D-rendered chubby {en} character standing and hunched forward with knees slightly bent, laughing hysterically: eyes squeezed shut into thin curved lines, an enormous gaping mouth showing teeth and a dark throat, both hands clutching its round belly. Pear-shaped body with no neck, short thick limbs, a pale oval belly patch, glossy CG look with soft studio lighting, plain white background. Keep the {en}'s recognizable features and colors."
+
+[imagegen.tiers.reference]
+reference = true
+prompt = "参考这张图，画一个同样风格的{zh}版本。"
+
+# --- Animals. default = true marks the quick-run subset. ---
+
+[animals.cat]
+zh = "猫"
+en = "cat"
+default = true
+
+[animals.shiba]
+zh = "柴犬"
+en = "Shiba Inu dog"
+default = true
+
+[animals.panda]
+zh = "熊猫"
+en = "giant panda"
+
+[animals.penguin]
+zh = "企鹅"
+en = "penguin"
+tags = ["anatomy_conflict"]
+
+[animals.pig]
+zh = "猪"
+en = "pig"
+
+[animals.rabbit]
+zh = "兔子"
+en = "rabbit"
+
+[animals.capybara]
+zh = "水豚"
+en = "capybara"
+default = true
+
+[animals.frog]
+zh = "青蛙"
+en = "frog"
+tags = ["naiwa_pun"]
+
+[animals.giraffe]
+zh = "长颈鹿"
+en = "giraffe"
+default = true
+tags = ["anatomy_conflict"]
+
+[animals.octopus]
+zh = "章鱼"
+en = "octopus"
+default = true
+tags = ["anatomy_conflict"]
+
+[animals.shark]
+zh = "鲨鱼"
+en = "shark"
+tags = ["anatomy_conflict"]
+
+[animals.elephant]
+zh = "大象"
+en = "elephant"
+default = true
