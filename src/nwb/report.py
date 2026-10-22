@@ -13,6 +13,7 @@ th:first-child,td:first-child{text-align:left}th{background:#f6f8fa}
 .gallery td{text-align:center;width:180px}.gallery img{width:170px;border-radius:6px;display:block;margin:auto}
 .muted{color:#656d76;font-size:12px}.bad{color:#cf222e}.ans{white-space:pre-wrap;text-align:left;font-size:13px}
 details{margin:.4rem 0}summary{cursor:pointer;font-weight:600}
+.scroll{overflow-x:auto}
 @media (prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}th{background:#161b22}
 th,td{border-color:#30363d}.muted{color:#8d96a0}}
 """
@@ -33,6 +34,35 @@ def leaderboard_table(rows: list[dict], label=lambda m: m) -> str:
     return "\n".join(out) + "</table>"
 
 
+def objective_tables(summary: dict, label=lambda m: m) -> str:
+    rows = {m: s for m, s in summary.items() if s.get("fields")}
+    if not any(s.get("family_classes") for s in rows.values()):
+        return ""
+    fields = list(dict.fromkeys(f for s in rows.values() for f in s["fields"]))
+    out = ["<h3>Answer-key diagnostics</h3><div class=scroll><table><tr><th>Model</th>"
+           "<th>Family macro</th><th>Family labels</th><th>Visual joint</th><th>All-field joint</th>"
+           + "".join(f"<th>{escape(f)} (items)</th>" for f in fields) + "</tr>"]
+    for model, s in rows.items():
+        out.append(f"<tr><td>{escape(label(model))}</td><td>{fmt(s['family_macro'], 1)}</td>"
+                   f"<td>{len(s['family_classes'])}</td><td>{fmt(s['visual_joint'], 1)}</td>"
+                   f"<td>{fmt(s['joint'], 1)}</td>"
+                   + "".join(f"<td>{fmt(s['fields'].get(f), 1)} ({s['field_items'].get(f, 0)})</td>"
+                             for f in fields) + "</tr>")
+    out.append("</table></div><p class=muted>Scores are 0–100; item means balance repetitions. "
+               "Family macro gives equal weight to observed expected family labels; check label and item coverage. "
+               "Visual joint requires every non-family field to be correct; all-field joint also requires family. "
+               "Field means give partial credit, while joint accuracies require complete answers.</p>")
+    categories = sorted({c for s in rows.values() for c in s.get("categories", {})})
+    if categories:
+        out.append("<div class=scroll><table><tr><th>Model</th>"
+                   + "".join(f"<th>{escape(c)}</th>" for c in categories) + "</tr>")
+        for model, s in rows.items():
+            out.append(f"<tr><td>{escape(label(model))}</td>"
+                       + "".join(f"<td>{fmt(s['categories'].get(c), 1)}</td>" for c in categories) + "</tr>")
+        out.append("</table></div>")
+    return "\n".join(out)
+
+
 RANKING_NOTE = ("Two independent, provisional rankings; no combined score. Only complete fixed panels with the "
                 "same attempted repetition ids scored in every cell receive ranks. Image generation requires verified verbatim "
                 "prompts. Missing, failed, unjudged, or ineligible cells leave a model unranked. Text/language "
@@ -42,10 +72,13 @@ RANKING_NOTE = ("Two independent, provisional rankings; no combined score. Only 
 def render(bench: Bench, run_name: str, scores: dict) -> str:
     out = [f"<!doctype html><meta charset=utf-8><title>奶蛙bench · nai-wai-bench · {escape(run_name)}</title>",
            f"<style>{CSS}</style><h1>奶蛙bench · nai-wai-bench · {escape(run_name)}</h1>",
-           f"<p class=muted>Judges: {escape(', '.join(scores['judges']) or 'none')}. "
-           "Scores are 0–100; each sample is averaged over judges from other vendors than the model "
+           f"<p class=muted>Suite: {escape(bench.suite)}. Judges: {escape(', '.join(scores['judges']) or 'none')}. "
+           "Scores are 0–100; LLM-graded samples are averaged over judges from other vendors than the model "
            "(all judges if none are independent).</p>"]
     boards = scores.get("leaderboards", {})
+    if bench.suite == "naihub-v1":
+        out.append("<p>naihub-v1 visual ranks use all-field joint accuracy: every keyed field must be correct "
+                   "for a sample to earn 100. Family macro and partial-credit field means are separate diagnostics.</p>")
     out += [f"<p class=muted>{RANKING_NOTE}</p>", "<h2>Image generation ranking</h2>",
             leaderboard_table(boards.get("imagegen", [])), "<h2>Visual understanding ranking</h2>",
             leaderboard_table(boards.get("visual_understanding", []))]
@@ -85,7 +118,7 @@ def _understanding(bench: Bench, scores: dict, states: bool = False) -> list[str
     items = bench.state_items if states else bench.items
     item_ids = [i.id for i in items if any(i.id in s["items"] for s in summary.values())]
     title = "Optional state extraction · answer-keyed" if states else "Understanding diagnostics"
-    out = [f"<h2>{title}</h2><table><tr><th>Model</th><th>Vision</th><th>Text</th>"
+    out = [f"<h2>{title}</h2><div class=scroll><table><tr><th>Model</th><th>Vision</th><th>Text</th>"
            "<th>Text ZH</th><th>Text EN</th><th>Grounding</th><th>No image</th><th>Visual gain</th>"
            "<th>Halluc./answer</th><th>Used tools</th>" + "".join(f"<th>{escape(i)}</th>" for i in item_ids) + "</tr>"]
     for model, s in sorted(summary.items()):
@@ -94,9 +127,11 @@ def _understanding(bench: Bench, scores: dict, states: bool = False) -> list[str
                    f"<td>{fmt(s.get('grounding'))}</td><td>{fmt(s.get('blind'))}</td><td>{fmt(s.get('visual_gain'))}</td>"
                    f"<td>{fmt(s['hallucinations_per_answer'], 1)}</td><td>{s['contaminated']}</td>"
                    + "".join(f"<td>{fmt(s['items'].get(i))}</td>" for i in item_ids) + "</tr>")
-    out.append("</table><p class=muted>Visual gain is the matched score difference with versus without the image, "
+    out.append("</table></div><p class=muted>Visual gain is the matched score difference with versus without the image, "
                "in percentage points. Grounding uses answer keys, not judges. Used tools: excluded answers where "
-               "the agent called a tool despite being told not to.</p><h3>Answers</h3>")
+               "the agent called a tool despite being told not to.</p>")
+    out.append(objective_tables(summary))
+    out.append("<h3>Answers</h3>")
     by_item = defaultdict(list)
     for s in scores["samples"]["understanding"]:
         if bool(s.get("state")) == states:

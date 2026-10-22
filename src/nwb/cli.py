@@ -4,8 +4,8 @@ import sys
 from pathlib import Path
 
 from nwb import judge, report, scoring, site, tracks
-from nwb.config import find_root, load_bench, load_models, select_models
-from nwb.util import write_json
+from nwb.config import SUITES, find_root, load_bench, load_models, select_models
+from nwb.util import read_json, write_json
 
 
 def _items(bench, spec: str | None):
@@ -36,6 +36,7 @@ def _tiers(bench, spec: str | None):
 
 
 def cmd_list(args, root, bench, models, defaults):
+    print(f"Suite: {bench.suite}")
     print("Models (backend, vendor, can):")
     for m in models.values():
         print(f"  {m.name:20} {m.backend:7} {m.vendor:10} {','.join(sorted(m.can))}")
@@ -127,17 +128,19 @@ def build_parser() -> argparse.ArgumentParser:
     sub = p.add_subparsers(dest="command", required=True)
 
     def with_run(sp, jobs=True):
+        sp.add_argument("--suite", choices=SUITES, default="core", help="evaluation suite (default: core)")
         sp.add_argument("--run", default="main", help="run name; results go to runs/<run>/ (default: main)")
         if jobs:
             sp.add_argument("--jobs", type=int, default=2, help="parallel calls (default: 2)")
             sp.add_argument("--force", action="store_true", help="redo samples that already succeeded")
         return sp
 
-    sub.add_parser("list", help="show models, items, tiers, and animals")
+    sp = sub.add_parser("list", help="show models, items, tiers, and animals")
+    sp.add_argument("--suite", choices=SUITES, default="core", help="evaluation suite (default: core)")
 
     sp = with_run(sub.add_parser("understand", help="part 1: ask models about the meme"))
     sp.add_argument("--models", required=True, help="comma-separated model names")
-    sp.add_argument("--items", help="'vision', 'text', 'states', or comma-separated ids/prefixes (default: core items)")
+    sp.add_argument("--items", help="'vision', 'text', 'states', or comma-separated ids/prefixes (default: suite's main items)")
     sp.add_argument("--reps", type=int, default=1, help="samples per item (default: 1)")
 
     sp = with_run(sub.add_parser("imagegen", help="part 2: generate meme-style animal images"))
@@ -170,10 +173,15 @@ def main(argv=None) -> int:
     try:
         root = find_root()
         os.environ.setdefault("NWB_ROOT", str(root))
-        bench = load_bench(root)
+        bench = load_bench(root, args.suite)
         models, defaults = load_models(root)
         if hasattr(args, "run"):
             args.run_dir = root / "runs" / args.run
+            for track, pattern in (("understanding", "*/*.json"), ("imagegen", "*/*/*.json")):
+                for path in (args.run_dir / track).glob(pattern):
+                    if read_json(path).get("suite", "core") != bench.suite:
+                        raise ValueError(f"run {args.run!r} contains another suite; choose a separate run "
+                                         "or pass its matching --suite")
         return COMMANDS[args.command](args, root, bench, models, defaults)
     except (ValueError, FileNotFoundError) as e:
         print(f"error: {e}", file=sys.stderr)

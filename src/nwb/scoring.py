@@ -19,14 +19,19 @@ def understanding_score(judgment: dict) -> float:
     return max(0.0, base - HALLUCINATION_PENALTY * len(judgment["hallucinations"]))
 
 
-def grounding_score(answer: str, key: dict[str, str]) -> float:
-    """Equal credit per correct visual field; malformed replies and abstentions get no credit."""
+def grounding_fields(answer: str, key: dict[str, str]) -> dict[str, float]:
+    """Score observable fields independently; malformed replies and abstentions get no credit."""
     try:
         reply = extract_json(answer)
     except ValueError:
-        return 0.0
-    return 100 * sum(isinstance(reply.get(k), str) and reply[k].strip().lower() == v
-                     for k, v in key.items()) / len(key)
+        reply = {}
+    return {k: 100.0 if isinstance(reply.get(k), str) and reply[k].strip().lower() == v else 0.0
+            for k, v in key.items()}
+
+
+def grounding_score(answer: str, key: dict[str, str]) -> float:
+    """Equal credit per correct visual field."""
+    return mean(grounding_fields(answer, key).values())
 
 
 def image_scores(judgment: dict, weights: dict[str, float]) -> tuple[float, float]:
@@ -99,7 +104,7 @@ def aggregate(run_dir: Path, trait_weights: dict[str, float], judges: set[str] |
 
     und, contaminated, state_contaminated = [], defaultdict(int), defaultdict(int)
     for rec, js in _samples(run_dir, "understanding", "*/*.json", by_target):
-        if not is_current(rec, expected):
+        if not is_current(rec, expected) or (bench and rec.get("suite", "core") != bench.suite):
             continue
         item = items.get(rec["item"])
         if rec.get("contaminated"):
@@ -112,10 +117,14 @@ def aggregate(run_dir: Path, trait_weights: dict[str, float], judges: set[str] |
         js = pick_judges(js, rec["vendor"])
         per_judge = {j["judge"]: understanding_score(j) for j in js}
         objective = bool(item and item.answers)
+        fields = grounding_fields(rec["answer"], item.answers) if objective else {}
         und.append({
             **{k: rec[k] for k in ("model", "item", "modality", "lang", "rep", "target", "answer")},
-            "score": grounding_score(rec["answer"], item.answers) if objective else mean(per_judge.values()),
+            "score": mean(fields.values()) if objective else mean(per_judge.values()),
+            "joint": (100.0 if all(v == 100 for v in fields.values()) else 0.0) if objective else None,
             "per_judge": {} if objective else per_judge, "objective": objective,
+            "fields": fields, "family": item.answers.get("family", "") if objective else "",
+            "category": item.category if item else "",
             "control_for": item.control_for if item else "",
             "state": item.state if item else rec.get("state", ""),
             "hallucinations": [] if objective else [h for j in js for h in j["hallucinations"]],
@@ -124,7 +133,7 @@ def aggregate(run_dir: Path, trait_weights: dict[str, float], judges: set[str] |
 
     img = []
     for rec, js in _samples(run_dir, "imagegen", "*/*/*.json", by_target):
-        if not is_current(rec, expected):
+        if not is_current(rec, expected) or (bench and rec.get("suite", "core") != bench.suite):
             continue
         tier = bench.all_tiers.get(rec["tier"]) if bench else None
         state = tier.state if tier else rec.get("state", "")
@@ -151,7 +160,8 @@ def aggregate(run_dir: Path, trait_weights: dict[str, float], judges: set[str] |
             "rationales": {j["judge"]: j["rationale"] for j in js},
         })
 
-    scores = {"judges": judges, "judge_health": judge_health(by_target, trait_weights),
+    scores = {"suite": bench.suite if bench else "core", "judges": judges,
+              "judge_health": judge_health(by_target, trait_weights),
               "understanding": _summarize_understanding([s for s in und if not s["state"]], contaminated),
               "state_understanding": _summarize_understanding([s for s in und if s["state"]], state_contaminated),
               "imagegen": _summarize_imagegen(img), "samples": {"understanding": und, "imagegen": img}}
@@ -195,6 +205,7 @@ def _summarize_understanding(samples: list[dict], contaminated: dict[str, int]) 
             items[(s["item"], s["modality"])].append(s["score"])
         item_means = {item: mean(v) for (item, _), v in items.items()}
         summary[model] = {
+            **_objective_diagnostics(ss),
             # Text is a diagnostic and never changes the visual-understanding order.
             "overall": mean(mean(v) for (_, mod), v in items.items() if mod == "vision"),
             "text": mean(mean(v) for (_, mod), v in items.items() if mod == "text"),
@@ -217,6 +228,32 @@ def _summarize_understanding(samples: list[dict], contaminated: dict[str, int]) 
             "contaminated": contaminated.get(model, 0),
         }
     return summary
+
+
+def _objective_diagnostics(samples: list[dict]) -> dict:
+    """Balance repetitions within each item before reporting fields, categories, and family classes."""
+    by_item = defaultdict(list)
+    for s in samples:
+        if s.get("fields"):
+            by_item[s["item"]].append(s)
+    cells = [{"fields": {f: mean(s["fields"][f] for s in reps) for f in reps[0]["fields"]},
+              "score": mean(s["score"] for s in reps), "family": reps[0]["family"],
+              "joint": mean(s["joint"] for s in reps),
+              "visual_joint": mean(100.0 if all(v == 100 for f, v in s["fields"].items() if f != "family")
+                                   else 0.0 for s in reps),
+              "category": reps[0]["category"]} for reps in by_item.values()]
+    fields = dict.fromkeys(f for cell in cells for f in cell["fields"])
+    families = {label: mean(c["fields"]["family"] for c in cells if c["family"] == label)
+                for label in sorted({c["family"] for c in cells if c["family"]})}
+    return {
+        "fields": {f: mean(c["fields"].get(f) for c in cells) for f in fields},
+        "field_items": {f: sum(f in c["fields"] for c in cells) for f in fields},
+        "family_classes": families, "family_macro": mean(families.values()),
+        "joint": mean(c["joint"] for c in cells),
+        "visual_joint": mean(c["visual_joint"] for c in cells),
+        "categories": {category: mean(c["score"] for c in cells if c["category"] == category)
+                       for category in sorted({c["category"] for c in cells if c["category"]})},
+    }
 
 
 def _summarize_imagegen(samples: list[dict]) -> dict:
@@ -266,7 +303,7 @@ def leaderboards(bench: Bench, scores: dict, run_dir: Path) -> dict:
     expected = bench.expected_prompts()
     panels = {
         "visual_understanding": ("understanding", {(i.id,) for i in bench.items if i.modality == "vision"},
-                                 ("item",), "score"),
+                                 ("item",), "joint" if bench.suite == "naihub-v1" else "score"),
         "imagegen": ("imagegen", {(t, a.id) for t in bench.tiers for a in bench.select_animals("default")},
                      ("tier", "animal"), "overall"),
     }
@@ -280,7 +317,8 @@ def leaderboards(bench: Bench, scores: dict, run_dir: Path) -> dict:
             pattern = "*.json" if track == "understanding" else "*/*.json"
             for path in (run_dir / track / model).glob(pattern):
                 rec = read_json(path)
-                if tuple(rec[f] for f in fields) in required and is_current(rec, expected):
+                if (tuple(rec[f] for f in fields) in required and is_current(rec, expected)
+                        and rec.get("suite", "core") == bench.suite):
                     attempted_reps.add(rec["rep"])
             if not attempted_reps:
                 continue  # never attempted this panel, e.g. a text-only model on the visual panel

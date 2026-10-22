@@ -9,7 +9,7 @@ from html import escape as e
 from pathlib import Path
 
 from nwb.config import Bench, ModelSpec
-from nwb.report import fmt
+from nwb.report import fmt, objective_tables
 from nwb.util import read_json
 
 FAILURE_ZH = {"generic_cute": "泛泛的可爱风", "realistic_animal": "写实动物", "plain_nailong": "只是奶龙本体",
@@ -141,7 +141,7 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
     revision = _revision(bench.root)
     # Link the documentation of the exact commit the results were built from.
     blob = f"{repo_url}/blob/{revision.split()[0]}" if repo_url and revision else None
-    stamp = f"run <code>{e(run_dir.name)}</code> · {datetime.date.today().isoformat()}"
+    stamp = f"suite <code>{e(bench.suite)}</code> · run <code>{e(run_dir.name)}</code> · {datetime.date.today().isoformat()}"
     stamp += f" · revision <code>{e(revision)}</code>" if revision else ""
     html.append(
         f"<div class=hero><img src='images/{e(bench.reference_image.name)}' alt='大笑奶龙'><div>"
@@ -153,10 +153,11 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
         f"<span class=badge>第一版 · First draft</span> <span class=muted>{stamp}</span></div></div>")
     html.append(
         "<div class=note><b>第一版结果。</b>"
-        f"共 {len(img_samples)} 张图片、{len(und_samples)} 条回答。每格只跑 1 次，由多家厂商的 LLM 评审打分；"
+        f"共 {len(img_samples)} 个生成样本、{len(und_samples)} 条回答。自由回答与标准图像生成由 LLM 评审，结构化回答按答案键本地计分；"
         "几分的差距可能只是偶然，排名未做统计检验。只有完整跑完固定题组的模型才有名次。<br><span class=en>"
-        f"First-draft results: {len(img_samples)} images and {len(und_samples)} answers, one repetition per cell, "
-        "scored by a multi-vendor LLM judge panel. Gaps of a few points can be noise; ranks are not statistically "
+        f"First-draft results: {len(img_samples)} generation samples and {len(und_samples)} answers. "
+        "Free-form answers and standard generation use LLM judges; structured answers use local keys. "
+        "Gaps of a few points can be noise; ranks are not statistically "
         "tested. Only models that complete the fixed panel are ranked.</span></div>")
 
     core_tiers = [t for t in bench.tiers.values() if any(t.id == s["tier"] for s in img_samples)]
@@ -181,14 +182,18 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
                 f"{len(panel_animals)} animals × {len(bench.tiers)} prompt tiers; verified verbatim prompts only. "
                 "Provider refusals score 0.</span></p>" + _ranking(boards.get("imagegen", []), label))
     html.append("<h2 id=vision-ranking>视觉理解排名 <span class=en>Visual understanding ranking</span></h2>"
-                f"<p class=muted>固定题组：{len(vision_items)} 道看图题（{len(vision_items) - grounding} 道识别、"
+                f"<p class=muted>固定题组：{len(vision_items)} 道看图题（{len(vision_items) - grounding} 道自由回答识别、"
                 f"{grounding} 道按答案键计分的视觉核对）。文字知识与无图对照只作诊断。<br><span class=en>Fixed panel: "
-                f"{len(vision_items)} image-input tasks ({len(vision_items) - grounding} recognition, {grounding} "
+                f"{len(vision_items)} image-input tasks ({len(vision_items) - grounding} free-form recognition, {grounding} "
                 "answer-keyed grounding checks). Text knowledge and no-image controls are diagnostics.</span></p>"
                 + _ranking(boards.get("visual_understanding", []), label)
                 + "<p class=muted>两个排名相互独立，不合成总分。有缺失、失败、未评分或不合格格子的模型不参与排名。"
                 "<span class=en> Two independent rankings, no combined score. Missing, failed, unjudged, or "
                 "ineligible cells leave a model unranked.</span></p>")
+    if bench.suite == "naihub-v1":
+        html.append("<p class=muted>本题组按七个字段全部答对的比例排名；字段均分和类别宏平均另作诊断。"
+                    "<span class=en>naihub-v1 ranks all-field joint accuracy: all seven fields must be correct. "
+                    "Field means and family macro accuracy are separate diagnostics.</span></p>")
 
     # --- models ---
     roles = defaultdict(set)
@@ -265,9 +270,9 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
     # --- optional state transfer ---
     if state_samples:
         html.append("<h2 id=states>表情迁移（可选，不计分）<span class=en>Optional state transfer · unscored</span></h2>"
-                    "<p>把三张奶蛙表情包的表情和动作（愤怒、扶额、得意）迁移到别的动物身上。每种表情有两种条件："
+                    "<p>把奶蛙源图的可见表情和动作迁移到别的动物身上。每张源图有两种条件："
                     "只给固定的文字描述，或附上源图。这部分不由 LLM 评分，也不计入排名，请对照源图分别查看表情、动作、"
-                    "动物辨识度和渲染风格。<br><span class=en>Three 奶蛙 sticker states (angry, facepalm, smug) are "
+                    "动物辨识度和渲染风格。<br><span class=en>Visible expressions and gestures from 奶蛙 source images are "
                     "transferred to other animals, either from a fixed text description or from the attached source "
                     "image. These images receive no LLM grades and do not enter either ranking; compare expression, "
                     "gesture, animal identity, and render style with the source by eye.</span></p>")
@@ -302,10 +307,10 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
     # --- understanding ---
     if und_samples:
         html.append("<h2 id=understanding>理解诊断 <span class=en>Understanding diagnostics</span></h2>"
-                    "<p>不允许联网或使用工具。识别题和文字题对照有出处的事实，由评审团打分，每条言之凿凿的幻觉扣 10 分；"
+                    "<p>不允许联网或使用工具。自由回答的识别题和文字题对照有出处的事实，由评审团打分，每条言之凿凿的幻觉扣 10 分；"
                     "视觉核对题按答案键在本地计分。<br><span class=en>No web or tools. Recognition and text answers are "
                     "scored by the judge panel against sourced facts, with 10 points off per confident hallucination; "
-                    "grounding checks use local answer keys.</span></p>")
+                    "structured checks use local answer keys.</span></p>")
     for states in (False, True):
         selected = [s for s in und_samples if bool(s.get("state")) == states]
         if not selected:
@@ -313,9 +318,9 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
         usum = scores.get("state_understanding" if states else "understanding", {})
         if states:
             html.append("<h3>表情状态提取（可选，按答案键计分）<span class=en>Optional state extraction · answer-keyed"
-                        "</span></h3><p class=muted>同一提问分别在有图和无图时作答，答案键只含可直接看到的表情、眼睛、"
-                        "嘴巴和动作；不影响任何排名。<span class=en> The same question with and without the source image; "
-                        "the keys contain only visible expression, eyes, mouth, and gesture. Not part of either "
+                        "</span></h3><p class=muted>同一提问分别在有图和无图时作答，按所选题组的类别与可见特征答案键计分；"
+                        "不影响任何排名。<span class=en> The same question with and without the source image, "
+                        "scored against the selected suite's answer keys. Not part of either "
                         "ranking.</span></p><div class=scroll><table><tr><th>模型 Model</th><th>有图 With image</th>"
                         "<th>无图 No image</th><th>视觉增益 Visual gain</th><th>用了工具 Used tools</th></tr>")
             for m, s in sorted(usum.items()):
@@ -338,6 +343,7 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
                     "用了工具：违反要求调用了工具的回答，不计分。<span class=en> Visual gain is the matched with-image minus "
                     "no-image score, in percentage points. Used tools: answers that called a tool despite instructions; "
                     "they are excluded.</span></p>")
+        html.append(objective_tables(usum, label))
         by_item = defaultdict(list)
         for s in selected:
             by_item[s["item"]].append(s)

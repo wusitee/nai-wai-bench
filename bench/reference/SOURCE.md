@@ -39,3 +39,33 @@ The optional suite uses neutral attachment filenames so the filename does not re
 The labels `angry`, `facepalm`, and `smug` describe visible expressions or actions for this suite, not
 verified inner feelings or an official emotion taxonomy. These references and labels need human review
 before publishing calibrated state-recognition or transfer-accuracy claims.
+
+## Nai-hub v1 evaluation set
+
+The optional `naihub-v1` suite vendors 24 images under `bench/naihub-v1/images/`.
+[Its task file](../naihub-v1/tasks.toml) records source links, pinned repository revisions where
+available, preparation, and SHA-256 hashes for each fixture; see the
+[suite documentation](../../docs/naihub-eval-set.md) for coverage and annotation limits.
+
+- Ten community remixes come from [nai-hub](https://nai-hub.com/index.html#/naiwa), maintained in
+  [lin-alg/NaiLoong](https://github.com/lin-alg/NaiLoong). Its static manifest identifies each
+  image by a source repository, revision, and file path. The selected images are served from
+  [musemantic/NaiLoong](https://github.com/musemantic/NaiLoong), as recorded in the per-case URLs.
+  Those image bytes are retained unchanged.
+- Six come from [湖南奶蛙大学's sticker page](https://xn--6kr28k0gz4eq33b1t7a.com/stickers/):
+  a hood/mask variant, hands-at-head portrait, tears, thumb up, pointing, and a wide stance.
+  The page supplies collection labels and direct files, not verified original artists or publication dates.
+- Five reuse the canonical reference, the three state fixtures, and official Nailong artwork
+  documented above. The red state uses its existing caption-free crop; no additional edits were made.
+- Three unrelated-character controls are official Pokémon Pokédex artwork:
+  [Psyduck](https://www.pokemon.com/us/pokedex/psyduck)
+  ([image](https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/054.png)),
+  [Pikachu](https://www.pokemon.com/us/pokedex/pikachu)
+  ([image](https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/025.png)), and
+  [Bulbasaur](https://www.pokemon.com/us/pokedex/bulbasaur)
+  ([image](https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/001.png)).
+
+Sources were checked on 2026-10-22. No images were synthesized for this suite. Original authorship
+of the community remixes remains unknown; collection operators are not assumed to be the creators,
+and the collections are not claimed to be independent. Labels are provisional annotations of these
+specific images, not verified inner emotions or assertions about every image in a meme family.

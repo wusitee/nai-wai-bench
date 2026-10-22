@@ -57,6 +57,8 @@ failed samples.
 
 ## Documentation
 
+- [Nai-hub v1 evaluation set](docs/naihub-eval-set.md): optional 24-image expansion with local answer
+  keys, no-image controls, and eight transfer references (`--suite naihub-v1`)
 - [Benchmark design](docs/design.md): items, tiers, rubrics, scoring, results site, and run layout
 - [Evaluation methodology](docs/methodology.md): research basis, budget, controls, and limitations
 - [Optional state transfer](docs/design.md#optional-state-transfer): transfer angry, facepalm, and smug

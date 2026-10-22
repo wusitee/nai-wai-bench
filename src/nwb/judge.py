@@ -139,6 +139,7 @@ def judge_jobs(bench: Bench, judges: list[ModelSpec], run_dir: Path, tracks: set
                 rec = read_json(path)
                 item = items.get(rec.get("item"))
                 if ("error" in rec or item is None or item.answers or rec.get("contaminated")
+                        or rec.get("suite", "core") != bench.suite
                         or not is_current(rec, expected)):
                     continue
                 if item.modality == "vision" and "vision" not in judge.can:
@@ -152,7 +153,8 @@ def judge_jobs(bench: Bench, judges: list[ModelSpec], run_dir: Path, tracks: set
                 continue
             for path in sorted((run_dir / "imagegen").glob("*/*/*.json")):
                 rec = read_json(path)
-                if "error" in rec or not rec.get("images") or not is_current(rec, expected):
+                if ("error" in rec or not rec.get("images") or not is_current(rec, expected)
+                        or rec.get("suite", "core") != bench.suite):
                     continue
                 if bench.all_tiers[rec["tier"]].state:
                     continue  # The laughing rubric is invalid for state transfer; no LLM grading here.

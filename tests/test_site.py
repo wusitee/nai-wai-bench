@@ -23,9 +23,9 @@ def test_c2pa_summary_reads_declarations_and_ignores_missing_or_truncated_text(t
     assert c2pa_summary(image) is None
 
 
-@pytest.mark.parametrize("resize", [False, True])
-def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, monkeypatch, resize):
-    bench = load_bench(find_root())
+@pytest.mark.parametrize("resize, suite", [(False, "core"), (True, "core"), (False, "naihub-v1")])
+def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, monkeypatch, resize, suite):
+    bench = load_bench(find_root(), suite)
     models, _ = load_models(bench.root)
     model = models["chatgpt-image"]
     run = tmp_path / "run"
@@ -35,6 +35,7 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
     relative = image.relative_to(run).as_posix()
     record = {
         "track": "imagegen", "model": model.name, "vendor": model.vendor,
+        "suite": suite,
         "tier": "name_zh", "animal": "cat", "rep": 1, "prompt": bench.tiers["name_zh"].render(bench.animals["cat"]),
         "images": [relative], "meta": {"client": "codex-cli test", "model": "recorded-model",
         "c2pa": {"generators": ["ChatGPT gpt-image"], "actions": []}, "audit": {"verbatim": False}},
@@ -44,15 +45,17 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
     answer = '<unsafe> & ' + 'Full answer. ' * 40
     write_json(run / "understanding" / model.name / "answer__r1.json", {
         "track": "understanding", "model": model.name, "vendor": model.vendor, "item": item.id,
+        "suite": suite,
         "modality": item.modality, "lang": item.lang, "rep": 1, "prompt": item.prompt,
         "answer": answer,
     })
-    state_item = next(i for i in bench.state_items if i.id == "states.angry")
+    state_item = bench.state_items[0]
     write_json(run / "understanding" / model.name / "states.angry__r1.json", {
         "track": "understanding", "model": model.name, "vendor": model.vendor, "item": state_item.id,
+        "suite": suite,
         "modality": "vision", "lang": "en", "rep": 1, "prompt": state_item.prompt,
         "answer": json.dumps(state_item.answers)})
-    state_tier = bench.state_tiers["state_angry_reference"]
+    state_tier = next(t for t in bench.state_tiers.values() if t.reference)
     write_json(run / "imagegen" / model.name / state_tier.id / "cat__r1.json", {
         **record, "tier": state_tier.id, "prompt": state_tier.render(bench.animals["cat"])})
     scores = scoring.aggregate(run, bench.trait_weights, bench=bench)
@@ -78,12 +81,18 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
     assert unrelated.read_text() == "keep"
     assert "Image generation ranking" in html and "Visual understanding ranking" in html
     assert "incomplete" in html and "0/30" in html
-    assert "Optional state transfer · unscored" in html and "Source: angry" in html
+    assert "Optional state transfer · unscored" in html and f"Source: {state_item.state}" in html
     assert "Optional state extraction · answer-keyed" in html
+    if suite == "naihub-v1":
+        assert "all seven fields" in html and "Family macro" in html and "tears (items)" in html
+    else:
+        assert "Answer-key diagnostics" not in html
     local_report = report.render(bench, "test", scores)
     assert "Image generation ranking" in local_report and "Visual understanding ranking" in local_report
     assert "incomplete" in local_report and "&lt;unsafe&gt;" in local_report
     assert "Optional state extraction · answer-keyed" in local_report and "State outputs are unscored" in local_report
+    if suite == "core":
+        assert "Answer-key diagnostics" not in local_report
 
     class Assets(HTMLParser):
         def handle_starttag(self, tag, attrs):

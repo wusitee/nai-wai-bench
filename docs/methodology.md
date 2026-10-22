@@ -7,6 +7,11 @@ transfer. It is not a general intelligence or general image-quality benchmark. I
 rankings measure image generation and visual understanding independently. The implemented scoring and
 coverage rules are described in [design.md](design.md).
 
+The panels and budgets below describe the default `core` suite. The optional
+[naihub-v1 set](naihub-eval-set.md) uses 24 structured image questions and paired no-image controls,
+with local answer keys, all-field joint accuracy, per-field diagnostics, and separate family macro
+accuracy. Its labels remain provisional; it does not reproduce the core ranking protocol.
+
 ## Research basis
 
 These are adaptations of established evaluation principles, not reproductions of the cited benchmarks

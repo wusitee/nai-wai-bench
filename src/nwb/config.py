@@ -1,8 +1,11 @@
+import hashlib
+import json
 import tomllib
 from dataclasses import dataclass, field
 from pathlib import Path
 
 CAPABILITIES = {"text", "vision", "image"}
+SUITES = ("core", "naihub-v1")
 
 
 def find_root(start: Path | None = None) -> Path:
@@ -44,6 +47,7 @@ class UnderstandingItem:
     answers: dict[str, str] = field(default_factory=dict)
     control_for: str = ""
     state: str = ""
+    category: str = ""
 
 
 @dataclass(frozen=True)
@@ -77,6 +81,7 @@ class Bench:
     state_items: list[UnderstandingItem] = field(default_factory=list)
     state_tiers: dict[str, Tier] = field(default_factory=dict)
     state_animals: tuple[str, ...] = ()
+    suite: str = "core"
 
     @property
     def all_items(self) -> list[UnderstandingItem]:
@@ -106,10 +111,16 @@ class Bench:
         return [self.animals[_known(a, self.animals, "animal")] for a in _split(spec)]
 
 
-def load_bench(root: Path) -> Bench:
+def load_bench(root: Path, suite: str = "core") -> Bench:
+    if suite not in SUITES:
+        raise ValueError(f"unknown suite {suite!r}; choose from: {', '.join(SUITES)}")
     bench_dir = root / "bench"
     rubric = _load(bench_dir / "rubric.toml")
     tasks = _load(bench_dir / "tasks.toml")
+    if suite != "core":
+        extension = _load(bench_dir / suite / "tasks.toml")
+        for section in ("understanding", "grounding", "state_transfer"):
+            tasks[section] = extension.get(section, {})
 
     facts = {k: v["text"] for k, v in rubric.get("facts", {}).items()}
     traits = {k: v["text"] for k, v in rubric.get("traits", {}).items()}
@@ -150,12 +161,22 @@ def load_bench(root: Path) -> Bench:
 
     # Identical questions across images prevent the question from revealing the answer.
     grounding = tasks.get("grounding", {})
+    grounding_prompt = grounding.get("prompt", "")
+    labels = grounding.get("labels", {})
+    if labels:
+        grounding_prompt += "\nAllowed labels: " + json.dumps(labels, ensure_ascii=False)
     for name, spec in grounding.get("cases", {}).items():
         image = bench_dir / spec["image"]
         if not image.is_file():
             raise FileNotFoundError(f"grounding image not found: {image}")
+        if spec.get("sha256") and hashlib.sha256(image.read_bytes()).hexdigest() != spec["sha256"]:
+            raise ValueError(f"grounding image checksum mismatch: {image}")
+        if labels and (set(spec["answers"]) != set(labels) or any(
+                value not in labels[key] for key, value in spec["answers"].items())):
+            raise ValueError(f"grounding case {name}: answers must match the declared labels")
         item_id = f"grounding.{name}"
-        common = dict(lang="en", prompt=grounding["prompt"], checklist=(), answers=spec["answers"])
+        common = dict(lang="en", prompt=grounding_prompt, checklist=(), answers=spec["answers"],
+                      category=spec.get("category", ""))
         items.append(UnderstandingItem(id=item_id, modality="vision", images=(image,), **common))
         items.append(UnderstandingItem(id=f"{item_id}.blind", modality="text", control_for=item_id, **common))
 
@@ -192,6 +213,7 @@ def load_bench(root: Path) -> Bench:
         failure_modes=dict(rubric.get("failure_modes", {})),
         items=items, tiers=tiers, animals=animals, reference_image=reference_image,
         state_items=state_items, state_tiers=state_tiers, state_animals=state_animals,
+        suite=suite,
     )
 
 

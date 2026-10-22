@@ -11,6 +11,11 @@ There are two independent, provisional rankings: **image generation** and **visu
 There is no combined score across them. Text/language performance is diagnostic only. See
 [evaluation methodology](methodology.md) for the research basis, budget, and limits of the protocol.
 
+Unless stated otherwise, this document describes the default `core` suite. The optional
+[naihub-v1 evaluation set](naihub-eval-set.md) provides a separate 24-image, answer-keyed visual
+panel with broader pose/style coverage and eight transfer references. Select it with `--suite naihub-v1`
+and use a separate run; its joint-accuracy scores are not comparable with the core panel's scores.
+
 ## Ranking panels
 
 - **Image generation:** six default animals (cat, panda, frog, giraffe, octopus, elephant) × all five tiers,

@@ -100,6 +100,7 @@ def understanding_jobs(bench: Bench, models: list[ModelSpec], items: list[Unders
                     out=run_dir / "understanding" / model.name / f"{item.id}__r{rep}.json",
                     label=f"{model.name} {item.id} r{rep}",
                     base={"track": "understanding", "model": model.name, "vendor": model.vendor,
+                          **({"suite": bench.suite} if bench.suite != "core" else {}),
                           "item": item.id, "modality": item.modality, "lang": item.lang, "rep": rep,
                           "prompt": item.prompt, "images": [p.relative_to(bench.root).as_posix() for p in item.images]},
                     fn=fn,
@@ -133,6 +134,7 @@ def imagegen_jobs(bench: Bench, models: list[ModelSpec], tiers: list[Tier], anim
                         out=stem.with_suffix(".json"),
                         label=f"{model.name} {tier.id} {animal.id} r{rep}",
                         base={"track": "imagegen", "model": model.name, "vendor": model.vendor, "tier": tier.id,
+                              **({"suite": bench.suite} if bench.suite != "core" else {}),
                               "animal": animal.id, "rep": rep, "prompt": prompt, "reference": tier.reference,
                               **({"state": tier.state, "state_source": tier.reference_image.relative_to(bench.root).as_posix()}
                                  if tier.state else {})},

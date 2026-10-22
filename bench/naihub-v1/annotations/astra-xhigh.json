@@ -1,0 +1,940 @@
+{
+  "dataset_id": "naihub-v1",
+  "annotator": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh"
+  },
+  "protocol_sha256": "eb7e9834b7faffc1ef540d5892c32a54f18951d00add97199ab6fdb4e8ec4e88",
+  "annotations": [
+    {
+      "id": "naihub_v1_001",
+      "image": "naihub-v1/images/001.png",
+      "sha256": "21841f52ae2509f17528d51add8097d49a7edd55de8748058f18c9e2628079cc",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "one",
+        "posture": "upright",
+        "eyes": "closed",
+        "mouth": "open",
+        "gesture": "belly_clutch",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "Yellow cream-bellied Nailong-like body with gray humanlike hands and an exaggerated toothed mouth.",
+        "subjects": "One yellow figure fills the image.",
+        "posture": "The hips remain above two downward-extending thighs despite the forward-leaning torso.",
+        "eyes": "Both eyes are curved shut with no visible pupil aperture.",
+        "mouth": "A large dark mouth opening exposes teeth and tongue.",
+        "gesture": "Both hands press against the lower belly.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": []
+    },
+    {
+      "id": "naihub_v1_002",
+      "image": "naihub-v1/images/002.png",
+      "sha256": "88e984b3932396c2e781bdb08caa669ecc36bf396a9ec7cac220bf8a6a06fdef",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "one",
+        "posture": "out_of_frame",
+        "eyes": "narrowed",
+        "mouth": "closed",
+        "gesture": "behind_back",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "medium",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "medium",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "Red recoloring, green eyes, pale belly, and elongated rounded head resemble the altered Nailong meme design.",
+        "subjects": "One red figure is visible.",
+        "posture": "The crop ends at the belly and hides the hips and thighs.",
+        "eyes": "The green pupil apertures are reduced under slanting upper lids.",
+        "mouth": "The mouth is a continuous downturned line.",
+        "gesture": "The visible arm bends backward behind the torso, with no hanging front hand.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": [
+        {
+          "field": "family",
+          "alternatives": [
+            "official_nailong"
+          ],
+          "reason": "The smooth rendering retains a Nailong-like silhouette; the red recolor and altered facial proportions favor the mutated design."
+        },
+        {
+          "field": "gesture",
+          "alternatives": [
+            "out_of_frame"
+          ],
+          "reason": "The backward arm is visible, but its hand is concealed near the cropped lower edge."
+        }
+      ]
+    },
+    {
+      "id": "naihub_v1_003",
+      "image": "naihub-v1/images/003.jpg",
+      "sha256": "69459cdbbc9506b079f61cb0ca12b2143af1ac5973cf93ab69f7414ec79b6aab",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "one",
+        "posture": "out_of_frame",
+        "eyes": "open",
+        "mouth": "closed",
+        "gesture": "forehead",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "Domed yellow Nailong-like head, cream belly, green eyes, and gray humanlike fingers match the mutated design.",
+        "subjects": "One yellow figure is visible.",
+        "posture": "Only the head and upper torso are shown; hips and thighs are outside the crop.",
+        "eyes": "Both green eyes have clearly visible black pupils and broad openings.",
+        "mouth": "The smile is a closed curved line.",
+        "gesture": "One hand places its fingers on the front of the forehead above an eye.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": []
+    },
+    {
+      "id": "naihub_v1_004",
+      "image": "naihub-v1/images/004.jpg",
+      "sha256": "58e452d71e7aa2a9ffc67e0688a2c89289434cd9478af0e7bde7017ea34a52ef",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "one",
+        "posture": "out_of_frame",
+        "eyes": "narrowed",
+        "mouth": "closed",
+        "gesture": "out_of_frame",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "medium",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "The yellow Nailong-like head has greatly inflated cheeks and chin and altered facial proportions.",
+        "subjects": "One yellow figure is visible.",
+        "posture": "The close crop shows the head and shoulders but no hips or thighs.",
+        "eyes": "Dark pupil apertures remain visible as thin slits beneath lowered upper lids.",
+        "mouth": "A thin uninterrupted downturned mouth line is visible.",
+        "gesture": "Neither hand appears within the crop.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": [
+        {
+          "field": "eyes",
+          "alternatives": [
+            "closed"
+          ],
+          "reason": "The low-resolution dark eye slits could be read as shut lids, but small exposed apertures favor narrowed."
+        }
+      ]
+    },
+    {
+      "id": "naihub_v1_005",
+      "image": "naihub-v1/images/005.png",
+      "sha256": "0152bcde69a5280c9b5e4bad15525ff9e242701903aba8e0cba6b919b9ec85b1",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "one",
+        "posture": "crouched",
+        "eyes": "open",
+        "mouth": "closed",
+        "gesture": "chin_rest",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "Yellow rounded Nailong-like body, oversized green eyes, and gray fingers and toes match the mutated design.",
+        "subjects": "One yellow figure is visible.",
+        "posture": "Both knees are deeply bent with feet planted and the hips lowered beside the knees.",
+        "eyes": "Both round green eyes expose their black pupils.",
+        "mouth": "The smile is a single closed curve.",
+        "gesture": "Both palms cup and support the underside of the chin.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": []
+    },
+    {
+      "id": "naihub_v1_006",
+      "image": "naihub-v1/images/006.jpg",
+      "sha256": "2530d5f55f12dfc085c9b332712a1b0d67c5f395325303eb62a68e3bfdc5dfe3",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "one",
+        "posture": "prone",
+        "eyes": "open",
+        "mouth": "closed",
+        "gesture": "forearms_on_ground",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "medium",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "The yellow beanlike body and simple round green eyes resemble the mutated Nailong design.",
+        "subjects": "One yellow figure is visible.",
+        "posture": "The belly lies along the ground with the body extending horizontally behind the head.",
+        "eyes": "Both eyes show round black pupils inside green irises.",
+        "mouth": "A narrow curved smile has no clearly resolved interior cavity.",
+        "gesture": "Both forearms and hands rest on the ground beside the head.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": [
+        {
+          "field": "mouth",
+          "alternatives": [
+            "open"
+          ],
+          "reason": "The dark smile has slight thickness at its center, so a very small opening cannot be excluded at this resolution."
+        }
+      ]
+    },
+    {
+      "id": "naihub_v1_007",
+      "image": "naihub-v1/images/007.jpg",
+      "sha256": "99c22de4ec39cb4f1bb04200ce83cb93d967067b5016cc1c949748937900a225",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "one",
+        "posture": "out_of_frame",
+        "eyes": "open",
+        "mouth": "open",
+        "gesture": "phone_hold",
+        "tears": "present"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "medium"
+      },
+      "evidence": {
+        "family": "The broad yellow head, large green eyes, cream belly, and long humanlike fingers match the mutated Nailong design.",
+        "subjects": "One yellow figure lies among the bedding.",
+        "posture": "Bedding and the crop conceal the hips and thighs.",
+        "eyes": "Both green eyes have broad visible pupil apertures.",
+        "mouth": "The lips separate around a narrow dark opening.",
+        "gesture": "The hands hold a dark rectangular phone in front of the face.",
+        "tears": "Small bright liquid-like drops descend below the eye on the right side of the image."
+      },
+      "uncertainties": [
+        {
+          "field": "tears",
+          "alternatives": [
+            "absent"
+          ],
+          "reason": "The tiny bright marks under the eye resemble tear droplets but could be surface highlights in the dim rendering."
+        }
+      ]
+    },
+    {
+      "id": "naihub_v1_008",
+      "image": "naihub-v1/images/008.jpg",
+      "sha256": "95d1834b13bde3d52ed6eca7e0f662734a95a83d32d9df5e9107fc6bf70cc0e9",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "one",
+        "posture": "out_of_frame",
+        "eyes": "open",
+        "mouth": "covered",
+        "gesture": "folded_arms",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "medium",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "The hood exposes a smooth yellow face with simple oversized green eyes characteristic of the mutated Nailong design.",
+        "subjects": "One hooded yellow figure is visible.",
+        "posture": "The frame shows the upper body but no hips or thighs.",
+        "eyes": "Both green eyes and their black pupils are unobstructed.",
+        "mouth": "A black face mask covers the mouth.",
+        "gesture": "The two forearms cross across the chest.",
+        "tears": "No tear drops or streams appear on the visible face."
+      },
+      "uncertainties": [
+        {
+          "field": "family",
+          "alternatives": [
+            "official_nailong"
+          ],
+          "reason": "The hood, mask, and clothing hide most of the distinctive head and body proportions."
+        }
+      ]
+    },
+    {
+      "id": "naihub_v1_009",
+      "image": "naihub-v1/images/009.jpg",
+      "sha256": "751ae4ed65c63482676709d5a84dff6c6994cfe0fc9a19908f2778f717578160",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "five",
+        "posture": "upright",
+        "eyes": "closed",
+        "mouth": "open",
+        "gesture": "holding_hands",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "The painting repeats yellow cream-bellied Nailong-like figures with gray hands and exaggerated toothed mouths.",
+        "subjects": "Five yellow figures form a ring.",
+        "posture": "All five have visible hips above downward-extending legs, including figures with one bent or lifted leg.",
+        "eyes": "All visible eyes are closed curved strokes without pupil apertures.",
+        "mouth": "All five mouths have dark open cavities and visible teeth.",
+        "gesture": "Each figure joins hands with its two neighbors.",
+        "tears": "No tear drops or streams are visible on any figure."
+      },
+      "uncertainties": []
+    },
+    {
+      "id": "naihub_v1_010",
+      "image": "naihub-v1/images/010.jpg",
+      "sha256": "58236e31d955de7b258f8140ec1011fe2b2bbbf56508e267edacbea5295f7964",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "two",
+        "posture": "out_of_frame",
+        "eyes": "mixed",
+        "mouth": "open",
+        "gesture": "mixed",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "low",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "Both yellow cream-bellied figures have distorted broad cheeks, humanlike toothy grins, and gray fingers.",
+        "subjects": "Two yellow figures are behind adjacent desks.",
+        "posture": "The desks and crop hide both figures' hips and thighs.",
+        "eyes": "The left figure shows broader pupil apertures, while the right figure's eyes are compressed into slits.",
+        "mouth": "Both figures expose teeth within open grins.",
+        "gesture": "The left figure holds a hand under its chin; the right figure rests its hands on the desk.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": [
+        {
+          "field": "eyes",
+          "alternatives": [
+            "narrowed"
+          ],
+          "reason": "The image is small, and the left figure's broader apertures may still count as narrowed; the right figure is clearly squinting."
+        }
+      ]
+    },
+    {
+      "id": "naihub_v1_011",
+      "image": "naihub-v1/images/011.jpg",
+      "sha256": "5db2666d70ef1b51acfbc4aab3fd40a07c540d281a3c9b95623531037c37e0f3",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "four",
+        "posture": "out_of_frame",
+        "eyes": "open",
+        "mouth": "closed",
+        "gesture": "chin_rest",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "Four smooth yellow Nailong-like heads have oversized green eyes and gray humanlike hands.",
+        "subjects": "Four distinct heads and upper bodies are visible.",
+        "posture": "The crop contains heads and upper torsos without hips or thighs.",
+        "eyes": "Every figure has visible round green eyes and black pupils.",
+        "mouth": "All four mouths appear as thin closed lines.",
+        "gesture": "Each figure places a gray hand directly beneath its chin.",
+        "tears": "No tear drops or streams are visible on any figure."
+      },
+      "uncertainties": []
+    },
+    {
+      "id": "naihub_v1_012",
+      "image": "naihub-v1/images/012.jpg",
+      "sha256": "2e9a2c1cc8c1e6c191e7317db778ae9011e177da4272bf0b2690121484954f23",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "one",
+        "posture": "upright",
+        "eyes": "open",
+        "mouth": "closed",
+        "gesture": "hand_at_head",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "The elongated yellow Nailong-like body has a cream belly, round green eyes, and gray fingers and toes.",
+        "subjects": "One large yellow figure stands in front of the building.",
+        "posture": "Both short legs extend down from raised hips to planted feet.",
+        "eyes": "Both green eyes have fully visible black pupil apertures.",
+        "mouth": "The smile is a thin closed curve.",
+        "gesture": "One palm touches the side of the head beside the eye; the other hand rests at the waist.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": []
+    },
+    {
+      "id": "naihub_v1_013",
+      "image": "naihub-v1/images/013.jpg",
+      "sha256": "73d6c23ec83b64cacdf243259f419b2f936b62d9f3958573748d89fd3df56b25",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "one",
+        "posture": "upright",
+        "eyes": "open",
+        "mouth": "closed",
+        "gesture": "belly_clutch",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "The elongated yellow Nailong-like head and cream belly accompany green eyes and dark humanlike hands and feet.",
+        "subjects": "One yellow figure is visible.",
+        "posture": "Two legs extend downward from the hips to feet planted on the ground.",
+        "eyes": "Both visible green eyes expose black pupils.",
+        "mouth": "The mouth forms a thin horizontal closed line.",
+        "gesture": "Both hands are placed against the front of the belly.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": []
+    },
+    {
+      "id": "naihub_v1_014",
+      "image": "naihub-v1/images/014.jpg",
+      "sha256": "290ab0c3e004f088b1f8c230f586b6caa209128a8951cee1737b0f77ba7ae451",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "one",
+        "posture": "upright",
+        "eyes": "closed",
+        "mouth": "open",
+        "gesture": "phone_hold",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "medium",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "Beneath the hair, horns, and wings is a yellow cream-bellied Nailong-like figure with gray hands and an exaggerated toothed mouth.",
+        "subjects": "One costumed yellow figure is visible.",
+        "posture": "The hips and tops of two downward-extending thighs appear below the belly at the lower edge.",
+        "eyes": "Both eyes are closed curved lines without pupil apertures.",
+        "mouth": "A large dark mouth cavity exposes teeth and tongue.",
+        "gesture": "One hand grips a phone while the other rests on the belly.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": [
+        {
+          "field": "posture",
+          "alternatives": [
+            "out_of_frame"
+          ],
+          "reason": "Only short portions of the upper thighs are visible; the knees and feet are cropped."
+        }
+      ]
+    },
+    {
+      "id": "naihub_v1_015",
+      "image": "naihub-v1/images/015.jpg",
+      "sha256": "75aede70072672004c6c9c862772331f6ec63cc8234012fd43b855ad93e3b13f",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "one",
+        "posture": "upright",
+        "eyes": "open",
+        "mouth": "closed",
+        "gesture": "phone_hold",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "The long yellow head, round green eyes, cream belly, and gray humanlike fingers match the mutated Nailong design.",
+        "subjects": "One yellow figure appears in the image.",
+        "posture": "Both hips and upper thighs are visible, with the thighs extending downward below the belly.",
+        "eyes": "Both large green eyes show unobstructed black pupils.",
+        "mouth": "The smile is a thin closed curve with no distinct interior cavity.",
+        "gesture": "One hand holds a white phone in front of the torso.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": []
+    },
+    {
+      "id": "naihub_v1_016",
+      "image": "naihub-v1/images/016.jpg",
+      "sha256": "08812de6f79cc985e27a37d0da36f2812ad8e407da9cd26c77b49653bc86fd61",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "one",
+        "posture": "out_of_frame",
+        "eyes": "open",
+        "mouth": "open",
+        "gesture": "hands_on_head",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "The elongated yellow cream-bellied figure has round green eyes and gray humanlike hands characteristic of the mutated Nailong design.",
+        "subjects": "One yellow figure is visible.",
+        "posture": "The lower crop cuts through the torso before the hips and thighs can be established.",
+        "eyes": "Both green eyes have clearly visible round black pupils.",
+        "mouth": "An oval dark mouth opening and reddish tongue are visible.",
+        "gesture": "Both hands touch the top sides of the head.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": []
+    },
+    {
+      "id": "naihub_v1_017",
+      "image": "naihub-v1/images/017.jpg",
+      "sha256": "9db8b73e029557c9bbc1de6486a9665c7fccf828a39096a0326ba835287cb595",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "one",
+        "posture": "out_of_frame",
+        "eyes": "narrowed",
+        "mouth": "closed",
+        "gesture": "out_of_frame",
+        "tears": "present"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "The yellow rounded Nailong-like head has altered heavy eyelids and simplified facial proportions.",
+        "subjects": "One yellow figure is visible.",
+        "posture": "Only the head and upper torso are shown; hips and thighs are cropped.",
+        "eyes": "Heavy upper lids reduce both green eye apertures while leaving pupils visible.",
+        "mouth": "A continuous downturned mouth line has no visible cavity.",
+        "gesture": "Both hands lie outside the crop.",
+        "tears": "Two transparent streams run from the eyes to distinct drops on the cheeks."
+      },
+      "uncertainties": []
+    },
+    {
+      "id": "naihub_v1_018",
+      "image": "naihub-v1/images/018.jpg",
+      "sha256": "f0152cae43c92a437bd91f06f3948a09c59d49871a9abd675168a070de4b102e",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "one",
+        "posture": "out_of_frame",
+        "eyes": "open",
+        "mouth": "closed",
+        "gesture": "thumb_up",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "The elongated yellow cream-bellied figure has round green eyes and a dark humanlike hand matching the mutated Nailong design.",
+        "subjects": "One yellow figure is visible.",
+        "posture": "The crop ends within the torso and shows no hips or thighs.",
+        "eyes": "Both green eyes expose their black pupils.",
+        "mouth": "The mouth is a narrow closed horizontal line.",
+        "gesture": "The visible hand forms a fist with its thumb extended upward.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": []
+    },
+    {
+      "id": "naihub_v1_019",
+      "image": "naihub-v1/images/019.jpg",
+      "sha256": "b9cb75f86673338766dfcb5b9828a093f1c5d959ac6938cc62895db1e9d5dad3",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "one",
+        "posture": "out_of_frame",
+        "eyes": "open",
+        "mouth": "closed",
+        "gesture": "pointing",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "The smooth elongated yellow figure has green eyes, a cream belly, and gray fingers characteristic of the mutated Nailong design.",
+        "subjects": "One yellow figure is visible.",
+        "posture": "Only the head and torso appear; hips and thighs are outside the crop.",
+        "eyes": "Both visible green eyes have clear black pupil apertures.",
+        "mouth": "The mouth is a thin closed line.",
+        "gesture": "One index finger extends toward the upper right while the other fingers curl inward.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": []
+    },
+    {
+      "id": "naihub_v1_020",
+      "image": "naihub-v1/images/020.jpg",
+      "sha256": "414eb904ee10d921e00b0fe3a2062b29161143c93153627962681d6e01762ec1",
+      "answers": {
+        "family": "mutated_nailong",
+        "subjects": "one",
+        "posture": "crouched",
+        "eyes": "open",
+        "mouth": "closed",
+        "gesture": "fighting_pose",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "The yellow cream-bellied figure has a long rounded head, green eyes, and dark fingers and toes matching the mutated Nailong design.",
+        "subjects": "One yellow figure is visible.",
+        "posture": "Both knees bend widely outward and the hips are lowered close to knee level.",
+        "eyes": "Both green eyes show visible black pupils.",
+        "mouth": "The smile is a thin closed curve.",
+        "gesture": "The wide bent-knee stance combines an extended open palm with a fist held near the torso.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": []
+    },
+    {
+      "id": "naihub_v1_021",
+      "image": "naihub-v1/images/021.png",
+      "sha256": "acc6c84e4bfd5d507feca0228050e18a5734323a3cfd3a8b1d7f6c531ceca6c5",
+      "answers": {
+        "family": "official_nailong",
+        "subjects": "one",
+        "posture": "upright",
+        "eyes": "open",
+        "mouth": "open",
+        "gesture": "raised_arms",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "The rounded baby-dinosaur proportions, detailed green eyes, cream belly, pink paw pads, and small brown claws match official Nailong artwork.",
+        "subjects": "One yellow dinosaur figure is visible.",
+        "posture": "The hips are raised above two short downward-extending legs and planted feet.",
+        "eyes": "Both glossy green eyes have broad visible pupil apertures.",
+        "mouth": "A small dark oval opening is visible below the nose.",
+        "gesture": "Both arms are lifted outward beside the head without touching it.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": []
+    },
+    {
+      "id": "naihub_v1_022",
+      "image": "naihub-v1/images/022.png",
+      "sha256": "87110a75d9d9c67e0d82b912abcea3c25a96bc394e366812c65639ea1bacdf40",
+      "answers": {
+        "family": "other",
+        "subjects": "one",
+        "posture": "upright",
+        "eyes": "open",
+        "mouth": "closed",
+        "gesture": "hands_on_head",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "medium",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "The large pale duck bill, three dark head feathers, and webbed feet identify Psyduck rather than Nailong.",
+        "subjects": "One duck character is visible.",
+        "posture": "One foot extends below the body's hips while the other leg and foot lift to the side.",
+        "eyes": "Both wide white eyes contain visible tiny black pupils.",
+        "mouth": "The bill shows no separated jaws or visible mouth cavity.",
+        "gesture": "Both hands press against the sides of the head.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": [
+        {
+          "field": "posture",
+          "alternatives": [
+            "seated"
+          ],
+          "reason": "The round body obscures much of the short legs, and the splayed feet could also suggest a seated pose."
+        }
+      ]
+    },
+    {
+      "id": "naihub_v1_023",
+      "image": "naihub-v1/images/023.png",
+      "sha256": "759ceafdb4b8d637dfcfe673cf672bc3c472354a3b2e7e0835d9cdcacd8d195d",
+      "answers": {
+        "family": "other",
+        "subjects": "one",
+        "posture": "upright",
+        "eyes": "open",
+        "mouth": "open",
+        "gesture": "raised_arms",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "Black-tipped long ears, red cheek patches, and a lightning-bolt tail identify Pikachu.",
+        "subjects": "One yellow mouse character is visible.",
+        "posture": "The hips sit above two short legs extending downward beneath the body.",
+        "eyes": "Both dark eyes show open apertures with white highlights.",
+        "mouth": "A wide open mouth shows a pink interior and tongue.",
+        "gesture": "One arm extends sideways and the other is lifted away from the torso.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": []
+    },
+    {
+      "id": "naihub_v1_024",
+      "image": "naihub-v1/images/024.png",
+      "sha256": "7233d8d8b03b5fa91d835a3069d25769155db93c9ef91b6066e215ed3895e9d8",
+      "answers": {
+        "family": "other",
+        "subjects": "one",
+        "posture": "quadruped",
+        "eyes": "open",
+        "mouth": "open",
+        "gesture": "none",
+        "tears": "absent"
+      },
+      "confidence": {
+        "family": "high",
+        "subjects": "high",
+        "posture": "high",
+        "eyes": "high",
+        "mouth": "high",
+        "gesture": "high",
+        "tears": "high"
+      },
+      "evidence": {
+        "family": "The green spotted body, red eyes, and large plant bulb on the back identify Bulbasaur.",
+        "subjects": "One green creature is visible; the bulb belongs to its body.",
+        "posture": "The horizontal body is supported by four short legs with paws underneath.",
+        "eyes": "Both red eyes have broad visible openings.",
+        "mouth": "The open smile shows a pink interior and small white teeth.",
+        "gesture": "The visible front limbs rest beneath the body without a separate hand gesture.",
+        "tears": "No tear drops or streams are visible."
+      },
+      "uncertainties": []
+    }
+  ],
+  "protocol": {
+    "prompt": "Look only at the attached image. Return one JSON object with family, subjects, posture, eyes, mouth, tears, and gesture. Classify family as the unofficial mutated Nailong/Naiwa meme family, official Nailong artwork, or an unrelated character. Count the main characters, not background decorations. For multiple characters, use mixed for eyes, mouth, or gesture only when their visible states differ. Upright means a biped whose visible hips sit above downward-extending thighs; leaning or hunching the torso alone does not make it crouched. Feet and knees may be cropped if both hips and upper thighs visibly establish this arrangement. Crouched requires visibly bent knees and hips lowered toward knee level; prone means lying belly-down. Use out_of_frame for posture if the crop or occlusion hides the hips and thighs, including a torso-only crop even when its upper body is vertical. Narrowed eyes have visibly reduced eyelid openings; closed eyes have no visible pupil aperture. Use phone_hold whenever a phone is held, even if the other hand rests on the belly. Use hands_on_head for two hands at the head, forehead for a hand on the front of the forehead, and hand_at_head for another head touch. Use chin_rest for hands touching/supporting the chin, fighting_pose for the wide bent-knee open-palm-and-fist stance. Use behind_back when the visible arm gesture is behind the torso without a hanging front hand. Use raised_arms for one or both arms lifted or extended away from the torso when no more specific gesture applies. Use covered for eyes or mouth hidden by an object; use out_of_frame for hands outside the image. Use unknown for any field you cannot determine, including when no image is attached. For tears, report present only for visible tear drops or streams, otherwise absent. Do not infer an emotion, motion sequence, or hidden gesture.",
+    "labels": {
+      "family": [
+        "mutated_nailong",
+        "official_nailong",
+        "other"
+      ],
+      "subjects": [
+        "one",
+        "two",
+        "four",
+        "five"
+      ],
+      "posture": [
+        "upright",
+        "crouched",
+        "prone",
+        "seated",
+        "quadruped",
+        "out_of_frame"
+      ],
+      "eyes": [
+        "open",
+        "closed",
+        "narrowed",
+        "covered",
+        "mixed"
+      ],
+      "mouth": [
+        "open",
+        "closed",
+        "covered",
+        "mixed"
+      ],
+      "tears": [
+        "present",
+        "absent"
+      ],
+      "gesture": [
+        "belly_clutch",
+        "behind_back",
+        "forehead",
+        "chin_rest",
+        "forearms_on_ground",
+        "phone_hold",
+        "folded_arms",
+        "holding_hands",
+        "mixed",
+        "hand_at_head",
+        "hands_on_head",
+        "thumb_up",
+        "pointing",
+        "fighting_pose",
+        "raised_arms",
+        "none",
+        "out_of_frame"
+      ]
+    }
+  },
+  "method": {
+    "prior_answers_provided": false,
+    "access_isolated": false,
+    "inputs": "24 original images, neutral IDs, and the shared label protocol; no prior keys, titles, or source collection metadata",
+    "human_calibrated": false,
+    "confidence": "qualitative annotator judgments, not calibrated probabilities"
+  }
+}

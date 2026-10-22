@@ -1,0 +1,379 @@
+# Versioned, static-image expansion. Sources and preparation are recorded per case.
+# Images have neutral filenames and are byte-for-byte copies of their listed sources.
+[dataset]
+id = "naihub-v1"
+checked_at = "2026-10-22"
+annotation_status = "provisional; GPT-6-Astra xhigh image annotations, not human-calibrated"
+annotation_record = "naihub-v1/annotations/astra-xhigh.json"
+
+[grounding]
+prompt = "Look only at the attached image. Return one JSON object with family, subjects, posture, eyes, mouth, tears, and gesture. Classify family as the unofficial mutated Nailong/Naiwa meme family, official Nailong artwork, or an unrelated character. Count the main characters, not background decorations. For multiple characters, use mixed for eyes, mouth, or gesture only when their visible states differ. Upright means a biped whose visible hips sit above downward-extending thighs; leaning or hunching the torso alone does not make it crouched. Feet and knees may be cropped if both hips and upper thighs visibly establish this arrangement. Crouched requires visibly bent knees and hips lowered toward knee level; prone means lying belly-down. Use out_of_frame for posture if the crop or occlusion hides the hips and thighs, including a torso-only crop even when its upper body is vertical. Narrowed eyes have visibly reduced eyelid openings; closed eyes have no visible pupil aperture. Use phone_hold whenever a phone is held, even if the other hand rests on the belly. Use hands_on_head for two hands at the head, forehead for a hand on the front of the forehead, and hand_at_head for another head touch. Use chin_rest for hands touching/supporting the chin, fighting_pose for the wide bent-knee open-palm-and-fist stance. Use behind_back when the visible arm gesture is behind the torso without a hanging front hand. Use raised_arms for one or both arms lifted or extended away from the torso when no more specific gesture applies. Use covered for eyes or mouth hidden by an object; use out_of_frame for hands outside the image. Use unknown for any field you cannot determine, including when no image is attached. For tears, report present only for visible tear drops or streams, otherwise absent. Do not infer an emotion, motion sequence, or hidden gesture."
+
+[grounding.labels]
+family = ["mutated_nailong", "official_nailong", "other"]
+subjects = ["one", "two", "four", "five"]
+posture = ["upright", "crouched", "prone", "seated", "quadruped", "out_of_frame"]
+eyes = ["open", "closed", "narrowed", "covered", "mixed"]
+mouth = ["open", "closed", "covered", "mixed"]
+tears = ["present", "absent"]
+gesture = ["belly_clutch", "behind_back", "forehead", "chin_rest", "forearms_on_ground", "phone_hold", "folded_arms", "holding_hands", "mixed", "hand_at_head", "hands_on_head", "thumb_up", "pointing", "fighting_pose", "raised_arms", "none", "out_of_frame"]
+
+[grounding.cases.naihub_v1_001]
+category = "anchors"
+title = "Canonical laugh"
+image_note = "Hunched upright body; both hands on belly; closed arc eyes and gaping mouth."
+checked_at = "2026-10-22"
+source_url = "https://zh.moegirl.org.cn/File:%E5%A5%B6%E9%BE%99%E6%8D%A7%E8%85%B9%E5%A4%A7%E7%AC%91.png"
+copied_from = "bench/reference/nailong_laugh.png"
+preparation = "Unmodified copy of the existing fixture; prior crop provenance is in bench/reference/SOURCE.md."
+image = "naihub-v1/images/001.png"
+sha256 = "21841f52ae2509f17528d51add8097d49a7edd55de8748058f18c9e2628079cc"
+answers = { family = "mutated_nailong", subjects = "one", posture = "upright", eyes = "closed", mouth = "open", gesture = "belly_clutch", tears = "absent" }
+
+[grounding.cases.naihub_v1_002]
+category = "anchors"
+title = "Red behind-back pose"
+image_note = "Caption-free torso crop with slanted narrowed eyes, closed mouth, and a visible arm held behind the back."
+checked_at = "2026-10-22"
+source_document = "bench/reference/SOURCE.md#state-transfer-references"
+copied_from = "bench/states/01.png"
+preparation = "Unmodified copy of the existing fixture; prior crop provenance is in bench/reference/SOURCE.md."
+image = "naihub-v1/images/002.png"
+sha256 = "88e984b3932396c2e781bdb08caa669ecc36bf396a9ec7cac220bf8a6a06fdef"
+answers = { family = "mutated_nailong", subjects = "one", posture = "out_of_frame", eyes = "narrowed", mouth = "closed", gesture = "behind_back", tears = "absent" }
+
+[grounding.cases.naihub_v1_003]
+category = "anchors"
+title = "Hand on forehead"
+image_note = "Torso crop with one hand on forehead and another forearm across the body; eyes open and mouth closed."
+checked_at = "2026-10-22"
+source_url = "https://www.sina.cn/news/detail/5297308469036271.html"
+copied_from = "bench/states/02.jpg"
+preparation = "Unmodified copy of the existing fixture; prior crop provenance is in bench/reference/SOURCE.md."
+image = "naihub-v1/images/003.jpg"
+sha256 = "69459cdbbc9506b079f61cb0ca12b2143af1ac5973cf93ab69f7414ec79b6aab"
+answers = { family = "mutated_nailong", subjects = "one", posture = "out_of_frame", eyes = "open", mouth = "closed", gesture = "forehead", tears = "absent" }
+
+[grounding.cases.naihub_v1_004]
+category = "anchors"
+title = "Narrow-eyed portrait"
+image_note = "Close-up face with narrowed eyes, closed downturned mouth, and no visible hands or lower body."
+checked_at = "2026-10-22"
+source_url = "https://www.sina.cn/news/detail/5297308469036271.html"
+copied_from = "bench/states/03.jpg"
+preparation = "Unmodified copy of the existing fixture; prior crop provenance is in bench/reference/SOURCE.md."
+image = "naihub-v1/images/004.jpg"
+sha256 = "58e452d71e7aa2a9ffc67e0688a2c89289434cd9478af0e7bde7017ea34a52ef"
+answers = { family = "mutated_nailong", subjects = "one", posture = "out_of_frame", eyes = "narrowed", mouth = "closed", gesture = "out_of_frame", tears = "absent" }
+
+[grounding.cases.naihub_v1_005]
+category = "pose_action"
+title = "Squatting chin rest"
+image_note = "Bent knees and lowered hips; chin rests on both hands."
+checked_at = "2026-10-22"
+source_url = "https://nai-hub.com/index.html#/naiwa"
+image_url = "https://cdn.jsdelivr.net/gh/musemantic/NaiLoong@ab974a47c2a5e731a22ff9f5a7f23f60e62c3fd9/assets/memes/naiwa_0031.png"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+source_revision = "ab974a47c2a5e731a22ff9f5a7f23f60e62c3fd9"
+image = "naihub-v1/images/005.png"
+sha256 = "0152bcde69a5280c9b5e4bad15525ff9e242701903aba8e0cba6b919b9ec85b1"
+answers = { family = "mutated_nailong", subjects = "one", posture = "crouched", eyes = "open", mouth = "closed", gesture = "chin_rest", tears = "absent" }
+
+[grounding.cases.naihub_v1_006]
+category = "pose_action"
+title = "Prone tilted head"
+image_note = "Belly-down body, tilted head, and forearms resting on the ground."
+checked_at = "2026-10-22"
+source_url = "https://nai-hub.com/index.html#/naiwa"
+image_url = "https://cdn.jsdelivr.net/gh/musemantic/NaiLoong@76c07e04a8b217117b39a3b647751618c55bff0c/assets/memes/naiwa_0062.jpg"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+source_revision = "76c07e04a8b217117b39a3b647751618c55bff0c"
+image = "naihub-v1/images/006.jpg"
+sha256 = "2530d5f55f12dfc085c9b332712a1b0d67c5f395325303eb62a68e3bfdc5dfe3"
+answers = { family = "mutated_nailong", subjects = "one", posture = "prone", eyes = "open", mouth = "closed", gesture = "forearms_on_ground", tears = "absent" }
+
+[grounding.cases.naihub_v1_007]
+category = "context"
+title = "Phone under covers"
+image_note = "A partly covered character looks toward a phone in a dark room with a narrow mouth opening; small bright marks below an eye may be tears. The full body pose is hidden."
+checked_at = "2026-10-22"
+source_url = "https://nai-hub.com/index.html#/naiwa"
+image_url = "https://cdn.jsdelivr.net/gh/musemantic/NaiLoong@76c07e04a8b217117b39a3b647751618c55bff0c/assets/memes/naiwa_0063.jpg"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+source_revision = "76c07e04a8b217117b39a3b647751618c55bff0c"
+image = "naihub-v1/images/007.jpg"
+sha256 = "99c22de4ec39cb4f1bb04200ce83cb93d967067b5016cc1c949748937900a225"
+answers = { family = "mutated_nailong", subjects = "one", posture = "out_of_frame", eyes = "open", mouth = "open", gesture = "phone_hold", tears = "present" }
+
+[grounding.cases.naihub_v1_008]
+category = "appearance"
+title = "Hood and mask"
+image_note = "Black hood and mask cover much of the character; green eyes remain open, the mouth is covered, and arms are folded."
+checked_at = "2026-10-22"
+source_url = "https://xn--6kr28k0gz4eq33b1t7a.com/stickers/"
+image_url = "https://xn--6kr28k0gz4eq33b1t7a.com/wp-content/uploads/2026/10/sticker-15.jpg"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+image = "naihub-v1/images/008.jpg"
+sha256 = "95d1834b13bde3d52ed6eca7e0f662734a95a83d32d9df5e9107fc6bf70cc0e9"
+answers = { family = "mutated_nailong", subjects = "one", posture = "out_of_frame", eyes = "open", mouth = "covered", gesture = "folded_arms", tears = "absent" }
+
+[grounding.cases.naihub_v1_009]
+category = "context"
+title = "Painted ring of five"
+image_note = "Five painted characters holding hands, all with closed arc eyes and open laughing mouths."
+checked_at = "2026-10-22"
+source_url = "https://nai-hub.com/index.html#/naiwa"
+image_url = "https://cdn.jsdelivr.net/gh/musemantic/NaiLoong@ab974a47c2a5e731a22ff9f5a7f23f60e62c3fd9/assets/memes/naiwa_0037.jpg"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+source_revision = "ab974a47c2a5e731a22ff9f5a7f23f60e62c3fd9"
+image = "naihub-v1/images/009.jpg"
+sha256 = "751ae4ed65c63482676709d5a84dff6c6994cfe0fc9a19908f2778f717578160"
+answers = { family = "mutated_nailong", subjects = "five", posture = "upright", eyes = "closed", mouth = "open", gesture = "holding_hands", tears = "absent" }
+
+[grounding.cases.naihub_v1_010]
+category = "context"
+title = "Two at classroom desks"
+image_note = "Two torso crops behind desks with differing eye openings and toothy open grins; their hand gestures differ. No hips, legs, or seats are visible."
+checked_at = "2026-10-22"
+source_url = "https://nai-hub.com/index.html#/naiwa"
+image_url = "https://cdn.jsdelivr.net/gh/musemantic/NaiLoong@ab974a47c2a5e731a22ff9f5a7f23f60e62c3fd9/assets/memes/naiwa_0038.jpg"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+source_revision = "ab974a47c2a5e731a22ff9f5a7f23f60e62c3fd9"
+image = "naihub-v1/images/010.jpg"
+sha256 = "58236e31d955de7b258f8140ec1011fe2b2bbbf56508e267edacbea5295f7964"
+answers = { family = "mutated_nailong", subjects = "two", posture = "out_of_frame", eyes = "mixed", mouth = "open", gesture = "mixed", tears = "absent" }
+
+[grounding.cases.naihub_v1_011]
+category = "context"
+title = "Four chin-rest portraits"
+image_note = "Four overlapping close-up characters with hands at their chins; lower bodies are not visible."
+checked_at = "2026-10-22"
+source_url = "https://nai-hub.com/index.html#/naiwa"
+image_url = "https://cdn.jsdelivr.net/gh/musemantic/NaiLoong@76c07e04a8b217117b39a3b647751618c55bff0c/assets/memes/naiwa_0064.jpg"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+source_revision = "76c07e04a8b217117b39a3b647751618c55bff0c"
+image = "naihub-v1/images/011.jpg"
+sha256 = "5db2666d70ef1b51acfbc4aab3fd40a07c540d281a3c9b95623531037c37e0f3"
+answers = { family = "mutated_nailong", subjects = "four", posture = "out_of_frame", eyes = "open", mouth = "closed", gesture = "chin_rest", tears = "absent" }
+
+[grounding.cases.naihub_v1_012]
+category = "appearance"
+title = "Outdoor hand at head"
+image_note = "Full standing figure outdoors with one hand against the side of its head and the other at its hip."
+checked_at = "2026-10-22"
+source_url = "https://nai-hub.com/index.html#/naiwa"
+image_url = "https://cdn.jsdelivr.net/gh/musemantic/NaiLoong@76c07e04a8b217117b39a3b647751618c55bff0c/assets/memes/naiwa_0070.jpg"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+source_revision = "76c07e04a8b217117b39a3b647751618c55bff0c"
+image = "naihub-v1/images/012.jpg"
+sha256 = "2e9a2c1cc8c1e6c191e7317db778ae9011e177da4272bf0b2690121484954f23"
+answers = { family = "mutated_nailong", subjects = "one", posture = "upright", eyes = "open", mouth = "closed", gesture = "hand_at_head", tears = "absent" }
+
+[grounding.cases.naihub_v1_013]
+category = "appearance"
+title = "Belly touch without laughter"
+image_note = "An upright side-facing character holds its belly with open eyes and a closed mouth."
+checked_at = "2026-10-22"
+source_url = "https://nai-hub.com/index.html#/naiwa"
+image_url = "https://cdn.jsdelivr.net/gh/musemantic/NaiLoong@7f4b87fbb04b7cb8494b626f51a0808754dcf38e/assets/memes/naiwa_0075.jpg"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+source_revision = "7f4b87fbb04b7cb8494b626f51a0808754dcf38e"
+image = "naihub-v1/images/013.jpg"
+sha256 = "73d6c23ec83b64cacdf243259f419b2f936b62d9f3958573748d89fd3df56b25"
+answers = { family = "mutated_nailong", subjects = "one", posture = "upright", eyes = "open", mouth = "closed", gesture = "belly_clutch", tears = "absent" }
+
+[grounding.cases.naihub_v1_014]
+category = "appearance"
+title = "Winged costume and phone"
+image_note = "A white-haired, horned, winged remix holds a phone while laughing; both hips and downward upper thighs are visible, with knees and feet cropped."
+checked_at = "2026-10-22"
+source_url = "https://nai-hub.com/index.html#/naiwa"
+image_url = "https://cdn.jsdelivr.net/gh/musemantic/NaiLoong@76c07e04a8b217117b39a3b647751618c55bff0c/assets/memes/naiwa_0051.jpg"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+source_revision = "76c07e04a8b217117b39a3b647751618c55bff0c"
+image = "naihub-v1/images/014.jpg"
+sha256 = "290ab0c3e004f088b1f8c230f586b6caa209128a8951cee1737b0f77ba7ae451"
+answers = { family = "mutated_nailong", subjects = "one", posture = "upright", eyes = "closed", mouth = "open", gesture = "phone_hold", tears = "absent" }
+
+[grounding.cases.naihub_v1_015]
+category = "context"
+title = "Mirror phone portrait"
+image_note = "An upright character holds a phone before a mirror; the source includes a camera-brand footer."
+checked_at = "2026-10-22"
+source_url = "https://nai-hub.com/index.html#/naiwa"
+image_url = "https://cdn.jsdelivr.net/gh/musemantic/NaiLoong@ab974a47c2a5e731a22ff9f5a7f23f60e62c3fd9/assets/memes/naiwa_0046.jpg"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+source_revision = "ab974a47c2a5e731a22ff9f5a7f23f60e62c3fd9"
+image = "naihub-v1/images/015.jpg"
+sha256 = "75aede70072672004c6c9c862772331f6ec63cc8234012fd43b855ad93e3b13f"
+answers = { family = "mutated_nailong", subjects = "one", posture = "upright", eyes = "open", mouth = "closed", gesture = "phone_hold", tears = "absent" }
+
+[grounding.cases.naihub_v1_016]
+category = "pose_action"
+title = "Hands at head"
+image_note = "Both hands touch the head; eyes open and mouth round and open; legs are outside the frame."
+checked_at = "2026-10-22"
+source_url = "https://xn--6kr28k0gz4eq33b1t7a.com/stickers/"
+image_url = "https://xn--6kr28k0gz4eq33b1t7a.com/wp-content/uploads/2026/10/sticker-12.jpg"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+image = "naihub-v1/images/016.jpg"
+sha256 = "08812de6f79cc985e27a37d0da36f2812ad8e407da9cd26c77b49653bc86fd61"
+answers = { family = "mutated_nailong", subjects = "one", posture = "out_of_frame", eyes = "open", mouth = "open", gesture = "hands_on_head", tears = "absent" }
+
+[grounding.cases.naihub_v1_017]
+category = "pose_action"
+title = "Visible tears"
+image_note = "A close-up face with visible tear streams, lowered upper eyelids, and closed downturned mouth; hands are outside frame."
+checked_at = "2026-10-22"
+source_url = "https://xn--6kr28k0gz4eq33b1t7a.com/stickers/"
+image_url = "https://xn--6kr28k0gz4eq33b1t7a.com/wp-content/uploads/2026/10/sticker-16.jpg"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+image = "naihub-v1/images/017.jpg"
+sha256 = "9db8b73e029557c9bbc1de6486a9665c7fccf828a39096a0326ba835287cb595"
+answers = { family = "mutated_nailong", subjects = "one", posture = "out_of_frame", eyes = "narrowed", mouth = "closed", gesture = "out_of_frame", tears = "present" }
+
+[grounding.cases.naihub_v1_018]
+category = "pose_action"
+title = "Thumb up"
+image_note = "A torso portrait with a raised thumb-up hand, open eyes, and closed mouth."
+checked_at = "2026-10-22"
+source_url = "https://xn--6kr28k0gz4eq33b1t7a.com/stickers/"
+image_url = "https://xn--6kr28k0gz4eq33b1t7a.com/wp-content/uploads/2026/10/sticker-09.jpg"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+image = "naihub-v1/images/018.jpg"
+sha256 = "f0152cae43c92a437bd91f06f3948a09c59d49871a9abd675168a070de4b102e"
+answers = { family = "mutated_nailong", subjects = "one", posture = "out_of_frame", eyes = "open", mouth = "closed", gesture = "thumb_up", tears = "absent" }
+
+[grounding.cases.naihub_v1_019]
+category = "pose_action"
+title = "Pointing sideways"
+image_note = "One arm points to the side while the other crosses the belly; hips and legs are outside the frame."
+checked_at = "2026-10-22"
+source_url = "https://xn--6kr28k0gz4eq33b1t7a.com/stickers/"
+image_url = "https://xn--6kr28k0gz4eq33b1t7a.com/wp-content/uploads/2026/10/sticker-22.jpg"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+image = "naihub-v1/images/019.jpg"
+sha256 = "b9cb75f86673338766dfcb5b9828a093f1c5d959ac6938cc62895db1e9d5dad3"
+answers = { family = "mutated_nailong", subjects = "one", posture = "out_of_frame", eyes = "open", mouth = "closed", gesture = "pointing", tears = "absent" }
+
+[grounding.cases.naihub_v1_020]
+category = "pose_action"
+title = "Wide open-palm stance"
+image_note = "Wide bent-knee stance with one raised open palm and the other hand held as a fist near the waist."
+checked_at = "2026-10-22"
+source_url = "https://xn--6kr28k0gz4eq33b1t7a.com/stickers/"
+image_url = "https://xn--6kr28k0gz4eq33b1t7a.com/wp-content/uploads/2026/10/sticker-19.jpg"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+image = "naihub-v1/images/020.jpg"
+sha256 = "414eb904ee10d921e00b0fe3a2062b29161143c93153627962681d6e01762ec1"
+answers = { family = "mutated_nailong", subjects = "one", posture = "crouched", eyes = "open", mouth = "closed", gesture = "fighting_pose", tears = "absent" }
+
+[grounding.cases.naihub_v1_021]
+category = "negative_control"
+title = "Official Nailong"
+image_note = "Official round yellow Nailong artwork with green eyes, open oval mouth, and raised arms."
+checked_at = "2026-10-22"
+source_url = "https://www.nailoong.com/ipStar/Nailong/"
+copied_from = "bench/stimuli/nailong_official.png"
+preparation = "Unmodified copy of the existing fixture; prior crop provenance is in bench/reference/SOURCE.md."
+image = "naihub-v1/images/021.png"
+sha256 = "acc6c84e4bfd5d507feca0228050e18a5734323a3cfd3a8b1d7f6c531ceca6c5"
+answers = { family = "official_nailong", subjects = "one", posture = "upright", eyes = "open", mouth = "open", gesture = "raised_arms", tears = "absent" }
+
+[grounding.cases.naihub_v1_022]
+category = "negative_control"
+title = "Psyduck"
+image_note = "Official Psyduck artwork: yellow duck-like body, hands against head, open eyes, and closed bill."
+checked_at = "2026-10-22"
+source_url = "https://www.pokemon.com/us/pokedex/psyduck"
+image_url = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/054.png"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+image = "naihub-v1/images/022.png"
+sha256 = "87110a75d9d9c67e0d82b912abcea3c25a96bc394e366812c65639ea1bacdf40"
+answers = { family = "other", subjects = "one", posture = "upright", eyes = "open", mouth = "closed", gesture = "hands_on_head", tears = "absent" }
+
+[grounding.cases.naihub_v1_023]
+category = "negative_control"
+title = "Pikachu"
+image_note = "Official Pikachu artwork: yellow body, long black-tipped ears, red cheeks, open mouth, and lifted arms."
+checked_at = "2026-10-22"
+source_url = "https://www.pokemon.com/us/pokedex/pikachu"
+image_url = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/025.png"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+image = "naihub-v1/images/023.png"
+sha256 = "759ceafdb4b8d637dfcfe673cf672bc3c472354a3b2e7e0835d9cdcacd8d195d"
+answers = { family = "other", subjects = "one", posture = "upright", eyes = "open", mouth = "open", gesture = "raised_arms", tears = "absent" }
+
+[grounding.cases.naihub_v1_024]
+category = "negative_control"
+title = "Bulbasaur"
+image_note = "Official Bulbasaur artwork: green quadruped with a back bulb, open eyes, and an open mouth."
+checked_at = "2026-10-22"
+source_url = "https://www.pokemon.com/us/pokedex/bulbasaur"
+image_url = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/001.png"
+preparation = "Unmodified source bytes; no synthesis, retouching, resizing, or crop."
+image = "naihub-v1/images/024.png"
+sha256 = "7233d8d8b03b5fa91d835a3069d25769155db93c9ef91b6066e215ed3895e9d8"
+answers = { family = "other", subjects = "one", posture = "quadruped", eyes = "open", mouth = "open", gesture = "none", tears = "absent" }
+
+[state_transfer]
+animals = ["cat", "frog"]
+extraction_prompt = "Look only at the attached image. Return one JSON object with family, subjects, posture, eyes, mouth, tears, and gesture. Classify family as the unofficial mutated Nailong/Naiwa meme family, official Nailong artwork, or an unrelated character. Count the main characters, not background decorations. For multiple characters, use mixed for eyes, mouth, or gesture only when their visible states differ. Upright means a biped whose visible hips sit above downward-extending thighs; leaning or hunching the torso alone does not make it crouched. Feet and knees may be cropped if both hips and upper thighs visibly establish this arrangement. Crouched requires visibly bent knees and hips lowered toward knee level; prone means lying belly-down. Use out_of_frame for posture if the crop or occlusion hides the hips and thighs, including a torso-only crop even when its upper body is vertical. Narrowed eyes have visibly reduced eyelid openings; closed eyes have no visible pupil aperture. Use phone_hold whenever a phone is held, even if the other hand rests on the belly. Use hands_on_head for two hands at the head, forehead for a hand on the front of the forehead, and hand_at_head for another head touch. Use chin_rest for hands touching/supporting the chin, fighting_pose for the wide bent-knee open-palm-and-fist stance. Use behind_back when the visible arm gesture is behind the torso without a hanging front hand. Use raised_arms for one or both arms lifted or extended away from the torso when no more specific gesture applies. Use covered for eyes or mouth hidden by an object; use out_of_frame for hands outside the image. Use unknown for any field you cannot determine, including when no image is attached. For tears, report present only for visible tear drops or streams, otherwise absent. Do not infer an emotion, motion sequence, or hidden gesture.\nAllowed labels: {\"family\": [\"mutated_nailong\", \"official_nailong\", \"other\"], \"subjects\": [\"one\", \"two\", \"four\", \"five\"], \"posture\": [\"upright\", \"crouched\", \"prone\", \"seated\", \"quadruped\", \"out_of_frame\"], \"eyes\": [\"open\", \"closed\", \"narrowed\", \"covered\", \"mixed\"], \"mouth\": [\"open\", \"closed\", \"covered\", \"mixed\"], \"tears\": [\"present\", \"absent\"], \"gesture\": [\"belly_clutch\", \"behind_back\", \"forehead\", \"chin_rest\", \"forearms_on_ground\", \"phone_hold\", \"folded_arms\", \"holding_hands\", \"mixed\", \"hand_at_head\", \"hands_on_head\", \"thumb_up\", \"pointing\", \"fighting_pose\", \"raised_arms\", \"none\", \"out_of_frame\"]}"
+described_prompt = "Generate a single clearly recognizable {en} character in a smooth, bulky 3D cartoon meme style with soft diffuse lighting and a plain light background. Transfer this expression and body language onto the animal: {description} Use the animal's natural colors and markings, rather than copying a yellow or red source body. Adapt any gesture to the animal's anatomy. No captions, lettering, or watermarks."
+reference_prompt = "Reimagine the character in the attached reference image as a clearly recognizable {en}. Transfer its visible expression, eye and mouth shape, gesture, posture, and smooth bulky 3D meme style to the animal. Adapt gestures to the animal's anatomy. Preserve the source framing; do not invent gestures outside the frame. Use the animal's natural colors and markings, rather than relying on the source body color to communicate the state. Plain light background. No captions, lettering, or watermarks."
+
+[state_transfer.cases.nh003]
+image = "naihub-v1/images/003.jpg"
+title_en = "Forehead"
+title_zh = "扶额"
+description = "One hand or paw rests on the forehead and the other forearm crosses the torso; eyes open and mouth closed. Preserve the torso-only crop."
+answers = { family = "mutated_nailong", subjects = "one", posture = "out_of_frame", eyes = "open", mouth = "closed", gesture = "forehead", tears = "absent" }
+
+[state_transfer.cases.nh005]
+image = "naihub-v1/images/005.png"
+title_en = "Squatting"
+title_zh = "蹲姿"
+description = "Squat low with visibly bent knees and lowered hips, supporting the chin with both hands or paws; eyes open and mouth closed."
+answers = { family = "mutated_nailong", subjects = "one", posture = "crouched", eyes = "open", mouth = "closed", gesture = "chin_rest", tears = "absent" }
+
+[state_transfer.cases.nh006]
+image = "naihub-v1/images/006.jpg"
+title_en = "Prone"
+title_zh = "趴卧"
+description = "Lie belly-down with forearms or front paws on the ground and the head tilted; eyes open and mouth closed."
+answers = { family = "mutated_nailong", subjects = "one", posture = "prone", eyes = "open", mouth = "closed", gesture = "forearms_on_ground", tears = "absent" }
+
+[state_transfer.cases.nh016]
+image = "naihub-v1/images/016.jpg"
+title_en = "Hands at head"
+title_zh = "抱头"
+description = "Both hands or paws touch the sides of the head; eyes open and mouth round and open. Preserve the cropped upper-body framing."
+answers = { family = "mutated_nailong", subjects = "one", posture = "out_of_frame", eyes = "open", mouth = "open", gesture = "hands_on_head", tears = "absent" }
+
+[state_transfer.cases.nh017]
+image = "naihub-v1/images/017.jpg"
+title_en = "Tears"
+title_zh = "流泪"
+description = "Visible tear streams on both cheeks, narrowed eyes with lowered upper eyelids, and a closed downturned mouth. Preserve the close-up framing without adding hands."
+answers = { family = "mutated_nailong", subjects = "one", posture = "out_of_frame", eyes = "narrowed", mouth = "closed", gesture = "out_of_frame", tears = "present" }
+
+[state_transfer.cases.nh018]
+image = "naihub-v1/images/018.jpg"
+title_en = "Thumb up"
+title_zh = "点赞"
+description = "One hand or paw makes a clearly readable thumb-up-like gesture; eyes open and mouth closed. Preserve the torso portrait framing."
+answers = { family = "mutated_nailong", subjects = "one", posture = "out_of_frame", eyes = "open", mouth = "closed", gesture = "thumb_up", tears = "absent" }
+
+[state_transfer.cases.nh019]
+image = "naihub-v1/images/019.jpg"
+title_en = "Pointing"
+title_zh = "指点"
+description = "One arm or forelimb points sideways with an extended digit and the other forearm crosses the belly; eyes open and mouth closed."
+answers = { family = "mutated_nailong", subjects = "one", posture = "out_of_frame", eyes = "open", mouth = "closed", gesture = "pointing", tears = "absent" }
+
+[state_transfer.cases.nh020]
+image = "naihub-v1/images/020.jpg"
+title_en = "Wide stance"
+title_zh = "功夫姿势"
+description = "A wide bent-knee stance with one raised open palm or paw and the other clenched near the waist; eyes open and mouth closed."
+answers = { family = "mutated_nailong", subjects = "one", posture = "crouched", eyes = "open", mouth = "closed", gesture = "fighting_pose", tears = "absent" }
