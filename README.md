@@ -10,7 +10,7 @@ called **奶蛙**): an AI-generated, "mutated" 奶龙 doubled over with laughter
 <img src="bench/reference/nailong_laugh.png" width="200" alt="The canonical 大笑奶龙 image">
 
 **Results:** [wusitee.github.io/nai-wai-bench](https://wusitee.github.io/nai-wai-bench/) (first draft:
-one repetition per cell, LLM judges).
+one repetition per cell, LLM judges); [Nai-hub v1 casebook](https://wusitee.github.io/nai-wai-bench/naihub-v1/).
 
 It publishes two independent rankings:
 

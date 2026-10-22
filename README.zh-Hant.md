@@ -9,7 +9,7 @@
 <img src="bench/reference/nailong_laugh.png" width="200" alt="大笑奶龍原圖">
 
 **結果：**[wusitee.github.io/nai-wai-bench](https://wusitee.github.io/nai-wai-bench/)（第一版：每格只跑一次，
-由 LLM 評審評分）。
+由 LLM 評審評分）；[奶蛙圖鑑 Nai-hub v1](https://wusitee.github.io/nai-wai-bench/naihub-v1/)。
 
 基準發佈兩個互相獨立的排名：
 
