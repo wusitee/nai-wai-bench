@@ -197,7 +197,8 @@ remaining sections appear when the run has data for them:
   every field is correct), each model's wrong fields with the label it gave, and raw replies including
   the no-image control. The naihub-v1 page leads with the casebook and a mosaic of its images.
 - **Image generation:** one gallery per animal with every core tier, score, failure modes, and prompt
-  audit (provider refusals appear as refused cells); diagnostic tier means and matched knowledge ratios.
+  audit (provider refusals appear as refused cells; a record's `meta.fill_note` labels images made through
+  another route, with the hover text naming it); diagnostic tier means and matched knowledge ratios.
 - **State transfer:** each source image beside its generated outputs, unscored.
 - **Understanding diagnostics:** summary columns that have values in the run; for suites with family
   labels, joint, visual-joint, family-macro, per-field, and per-category heatmaps; free-form answers;

@@ -213,8 +213,9 @@ def _heat(value: float | None, note: str = "") -> str:
 HEAT_NOTE = "颜色越深，分数越低。<span class=en> Darker cells mark lower scores.</span>"
 
 
-def _image_cell(s: dict | None, image: str | None, alt: str, scored: bool = True) -> str:
-    """A gallery cell: the image (or the provider's refusal), its score when scored, and its prompt audit."""
+def _image_cell(s: dict | None, image: str | None, alt: str, scored: bool = True, meta: dict | None = None) -> str:
+    """A gallery cell: the image (or the provider's refusal), its score when scored, its prompt audit, and
+    a label when the record notes another route than the model's usual client (meta.fill_note)."""
     if not s:
         return "<td>–</td>"
     audit = {True: "原样传递 · Verbatim", False: "提示词有改动 · Prompt changed", None: "未核实 · Unverified"}[s["verbatim"]]
@@ -223,6 +224,9 @@ def _image_cell(s: dict | None, image: str | None, alt: str, scored: bool = True
         return f"<td><div class=refused>服务商拒绝生成<br>Refused by provider</div>{score}<div class=muted>{audit}</div></td>"
     why = " | ".join(f"{j}: {r}" for j, r in s["rationales"].items())
     tags = "".join(f"<div class=tag>{e(FAILURE_ZH.get(f, f))}</div>" for f in s["failure_modes"])
+    if (meta or {}).get("fill_note"):
+        tags += (f"<div class=muted title='{e(meta['fill_note'], quote=True)} · {e(meta.get('model', ''), quote=True)}'>"
+                 f"补图 · via {e(meta.get('client', '?'))}</div>")
     return (f"<td title='{e(why, quote=True)}'><a href='{e(image)}'><img loading=lazy src='{e(image)}' alt='{e(alt)}'></a>"
             f"{score}{tags}<div class=muted>{audit}</div></td>")
 
@@ -516,7 +520,8 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
                 cells = []
                 for t in core_tiers:
                     s = by_cell.get((m, a, t.id))
-                    cells.append(_image_cell(s, s and generated(s), f"{label(m)} {t.id} {a}"))
+                    cells.append(_image_cell(s, s and generated(s), f"{label(m)} {t.id} {a}",
+                                             meta=s and meta_of[s["target"]]))
                 part.append(f"<tr><td><b>{e(label(m))}</b></td>{''.join(cells)}</tr>")
             part.append("</table></div>")
         part.append("<h3>诊断汇总 <span class=en>Diagnostics</span></h3><div class='scroll card-table'><table><tr><th>模型 Model</th>"
@@ -563,7 +568,8 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
                 cells = []
                 for a, _, t in columns:
                     s = by_cell.get((m, a, t.id))
-                    cells.append(_image_cell(s, s and generated(s), f"{label(m)} {t.id} {a}", scored=False))
+                    cells.append(_image_cell(s, s and generated(s), f"{label(m)} {t.id} {a}", scored=False,
+                                             meta=s and meta_of[s["target"]]))
                 rows.append(f"<tr><td><b>{e(label(m))}</b></td>{''.join(cells)}</tr>")
             prompts = "".join(f"<tr><td style='width:120px'><b>{CONDITION[c][0]}</b><br><span class=muted>"
                               f"{CONDITION[c][1]}</span></td><td class=ans>{e(t.render(cat))}</td></tr>"
