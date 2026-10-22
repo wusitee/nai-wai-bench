@@ -11,9 +11,13 @@ from nwb.util import write_json
 def _items(bench, spec: str | None):
     if not spec:
         return bench.items
+    if spec in ("vision", "text"):
+        return [i for i in bench.items if i.modality == spec]
+    if spec == "states":
+        return bench.state_items
     wanted = [s.strip() for s in spec.split(",") if s.strip()]
     # "write_prompt" selects every per-animal expansion such as write_prompt.cat.
-    items = [i for i in bench.items if any(i.id == w or i.id.startswith(w + ".") for w in wanted)]
+    items = [i for i in bench.all_items if any(i.id == w or i.id.startswith(w + ".") for w in wanted)]
     if not items:
         raise ValueError(f"no items match {spec!r}; see `nwb list`")
     return items
@@ -22,11 +26,13 @@ def _items(bench, spec: str | None):
 def _tiers(bench, spec: str | None):
     if not spec:
         return list(bench.tiers.values())
+    if spec == "states":
+        return list(bench.state_tiers.values())
     names = [s.strip() for s in spec.split(",") if s.strip()]
-    unknown = [n for n in names if n not in bench.tiers]
+    unknown = [n for n in names if n not in bench.all_tiers]
     if unknown:
-        raise ValueError(f"unknown tier(s) {unknown}; choose from: {', '.join(bench.tiers)}")
-    return [bench.tiers[n] for n in names]
+        raise ValueError(f"unknown tier(s) {unknown}; choose from: {', '.join(bench.all_tiers)}")
+    return [bench.all_tiers[n] for n in names]
 
 
 def cmd_list(args, root, bench, models, defaults):
@@ -35,9 +41,12 @@ def cmd_list(args, root, bench, models, defaults):
         print(f"  {m.name:20} {m.backend:7} {m.vendor:10} {','.join(sorted(m.can))}")
     print(f"Default judges: {', '.join(defaults.get('judges', []))}")
     print("Understanding items:")
-    for i in bench.items:
-        print(f"  {i.id:24} {i.modality:7} {i.lang}")
+    for i in bench.all_items:
+        extra = " (optional states)" if i.state else ""
+        print(f"  {i.id:24} {i.modality:7} {i.lang}{extra}")
     print(f"Image tiers: {', '.join(bench.tiers)}")
+    print(f"Optional state tiers (--tiers states): {', '.join(bench.state_tiers)}")
+    print(f"Default state-suite animals: {', '.join(bench.state_animals)}")
     print("Animals (* = default subset): " + ", ".join(
         f"{a.id}{'*' if a.default else ''}" for a in bench.animals.values()))
     return 0
@@ -51,8 +60,11 @@ def cmd_understand(args, root, bench, models, defaults):
 
 def cmd_imagegen(args, root, bench, models, defaults):
     selected = select_models(models, args.models, "image")
-    jobs = tracks.imagegen_jobs(bench, selected, _tiers(bench, args.tiers), bench.select_animals(args.animals),
-                                args.reps, args.run_dir)
+    tiers = _tiers(bench, args.tiers)
+    animals = bench.select_animals(args.animals)
+    if tiers and all(t.state for t in tiers) and args.animals == "default":
+        animals = [bench.animals[a] for a in bench.state_animals]
+    jobs = tracks.imagegen_jobs(bench, selected, tiers, animals, args.reps, args.run_dir)
     return _finish(*tracks.run_jobs(jobs, args.jobs, args.force))
 
 
@@ -65,23 +77,23 @@ def cmd_judge(args, root, bench, models, defaults):
         judges = [models[n] for n in select_names(models, names)]
         jobs += judge.judge_jobs(bench, judges, args.run_dir, {track})
     if not jobs:
-        print("nothing to judge; run `nwb understand` or `nwb imagegen` first", file=sys.stderr)
-        return 1
+        print("no judge calls needed; grounding checks are scored locally by `nwb report`", file=sys.stderr)
+        return 0
     return _finish(*tracks.run_jobs(jobs, args.jobs, args.force))
 
 
 def cmd_report(args, root, bench, models, defaults):
     judges = set(select_names(models, args.judges)) if args.judges else None
-    scores = scoring.aggregate(args.run_dir, bench.trait_weights, judges, expected=bench.expected_prompts())
+    scores = scoring.aggregate(args.run_dir, bench.trait_weights, judges, bench=bench)
     write_json(args.run_dir / "scores.json", scores)
     html_path = args.run_dir / "report.html"
     html_path.write_text(report.render(bench, args.run, scores), encoding="utf-8")
-    for model, s in sorted(scores["understanding"].items(), key=lambda kv: -(kv[1]["overall"] or 0)):
-        print(f"understanding  {model:20} overall {report.fmt(s['overall']):>3}  "
-              f"text {report.fmt(s['text']):>3}  vision {report.fmt(s['vision']):>3}")
-    for model, s in sorted(scores["imagegen"].items(), key=lambda kv: -(kv[1]["overall"] or 0)):
-        tiers = "  ".join(f"{t} {report.fmt(v['overall'])}" for t, v in s["tiers"].items())
-        print(f"imagegen       {model:20} overall {report.fmt(s['overall']):>3}  {tiers}")
+    for track, rows in scores["leaderboards"].items():
+        print(track)
+        for row in rows:
+            rank = row["rank"] if row["rank"] is not None else "–"
+            print(f"  {rank!s:>2}  {row['model']:20} {report.fmt(row['score']):>3}  "
+                  f"{row['completed']}/{row['required']} cells  {row['status']}")
     print(f"wrote {html_path}")
     return 0
 
@@ -90,7 +102,7 @@ def cmd_site(args, root, bench, models, defaults):
     if not args.run_dir.is_dir():
         raise FileNotFoundError(f"run not found: {args.run_dir}")
     judges = set(select_names(models, args.judges)) if args.judges else None
-    scores = scoring.aggregate(args.run_dir, bench.trait_weights, judges, expected=bench.expected_prompts())
+    scores = scoring.aggregate(args.run_dir, bench.trait_weights, judges, bench=bench)
     out = Path(args.out) if args.out else root / "site"
     index = site.build(bench, models, args.run_dir, scores, out, repo_url=args.repo_url)
     print(f"wrote {index}")
@@ -125,13 +137,13 @@ def build_parser() -> argparse.ArgumentParser:
 
     sp = with_run(sub.add_parser("understand", help="part 1: ask models about the meme"))
     sp.add_argument("--models", required=True, help="comma-separated model names")
-    sp.add_argument("--items", help="comma-separated item ids (default: all)")
+    sp.add_argument("--items", help="'vision', 'text', 'states', or comma-separated ids/prefixes (default: core items)")
     sp.add_argument("--reps", type=int, default=1, help="samples per item (default: 1)")
 
     sp = with_run(sub.add_parser("imagegen", help="part 2: generate meme-style animal images"))
     sp.add_argument("--models", required=True, help="comma-separated image model names")
-    sp.add_argument("--tiers", help="comma-separated tiers (default: all)")
-    sp.add_argument("--animals", default="default", help="'default', 'all', or comma-separated ids")
+    sp.add_argument("--tiers", help="'states' or comma-separated tiers (default: five core tiers)")
+    sp.add_argument("--animals", default="default", help="'default', 'all', or ids (states default: cat,frog)")
     sp.add_argument("--reps", type=int, default=1, help="images per prompt (default: 1)")
 
     sp = with_run(sub.add_parser("judge", help="score results with judge models"))

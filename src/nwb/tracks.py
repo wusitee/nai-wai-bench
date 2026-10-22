@@ -12,7 +12,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from pathlib import Path
 
-from nwb.backends import Request, get_backend
+from nwb.backends import BackendError, ProviderRefusal, Request, get_backend
 from nwb.config import Animal, Bench, ModelSpec, Tier, UnderstandingItem
 from nwb.provenance import c2pa_summary
 from nwb.util import IMAGE_SUFFIXES, read_json, write_json
@@ -91,6 +91,8 @@ def understanding_jobs(bench: Bench, models: list[ModelSpec], items: list[Unders
                 def fn(item=item, backend=backend):
                     prompt = f"{OWN_KNOWLEDGE[item.lang]}\n\n{item.prompt}"
                     resp = backend.run(Request(prompt=prompt, images=list(item.images)))
+                    if not resp.text.strip():  # e.g. an ACP agent that ends its turn after API errors
+                        raise BackendError("empty answer")
                     # Answers that looked things up measure retrieval, not knowledge; they are not scored.
                     return {"answer": resp.text, "contaminated": bool(resp.meta.get("tools_used")),
                             "meta": resp.meta}
@@ -117,9 +119,12 @@ def imagegen_jobs(bench: Bench, models: list[ModelSpec], tiers: list[Tier], anim
                     prompt = tier.render(animal)
 
                     def fn(prompt=prompt, tier=tier, stem=stem, backend=backend):
-                        images = [bench.reference_image] if tier.reference else []
+                        images = [tier.reference_image or bench.reference_image] if tier.reference else []
                         shutil.rmtree(stem, ignore_errors=True)  # drop images from earlier attempts
-                        resp = backend.run(Request(prompt=prompt, images=images, image_out=stem))
+                        try:
+                            resp = backend.run(Request(prompt=prompt, images=images, image_out=stem))
+                        except ProviderRefusal as e:  # a final, scored outcome; --force retries it
+                            return {"images": [], "refused": str(e), "meta": e.meta}
                         files = sorted(p for p in resp.images if p.suffix.lower() in IMAGE_SUFFIXES)
                         c2pa = c2pa_summary(files[0]) if files else None
                         return {"images": [rel(p, run_dir) for p in files], "text": resp.text,
@@ -128,7 +133,9 @@ def imagegen_jobs(bench: Bench, models: list[ModelSpec], tiers: list[Tier], anim
                         out=stem.with_suffix(".json"),
                         label=f"{model.name} {tier.id} {animal.id} r{rep}",
                         base={"track": "imagegen", "model": model.name, "vendor": model.vendor, "tier": tier.id,
-                              "animal": animal.id, "rep": rep, "prompt": prompt, "reference": tier.reference},
+                              "animal": animal.id, "rep": rep, "prompt": prompt, "reference": tier.reference,
+                              **({"state": tier.state, "state_source": tier.reference_image.relative_to(bench.root).as_posix()}
+                                 if tier.state else {})},
                         fn=fn,
                     ))
     return jobs

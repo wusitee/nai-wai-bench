@@ -26,7 +26,9 @@ def understanding_prompt(bench: Bench, item: UnderstandingItem, answer: str) -> 
     has_facts = any(c in bench.facts for c in item.checklist)
     misconceptions = "".join(f"- {m}\n" for m in bench.misconceptions) if has_facts else ""
     background = "".join(f"- {b}\n" for b in bench.background) if has_facts else ""
-    shown = f"\nThe model was shown an image: {item.image_note}\n" if item.image_note else ""
+    shown = (f"\nThe model was shown the attached image(s): {item.image_note}\n"
+             "Check visual claims against those images, not just the character's typical appearance.\n"
+             if item.modality == "vision" else "")
     ids = ", ".join(f'"{c}": 0|1|2' for c in item.checklist)
     return (
         "You are grading an AI model's answer about the Chinese internet meme 大笑奶龙 (奶蛙) "
@@ -62,6 +64,10 @@ def imagegen_prompt(bench: Bench, prompt: str, animal_en: str) -> str:
         f"The goal is a {animal_en} reimagined in the exact style of the reference meme.\n\n"
         "Rate the second image on each trait as absent, partial, or match (clearly matches the reference, "
         f"adapted to a {animal_en}):\n{traits}\n\n"
+        "Judge each trait independently from visible evidence, not a holistic preference. Do not infer "
+        "hidden details. Adapt anatomy to the target species (for example, tentacles can clutch the belly); "
+        "do not require human hands on an animal. Do not let a polished or cute render compensate for "
+        "a missing pose, expression, or animal identity.\n\n"
         f"Also rate identity as no, partly, or clearly: {identity}\n\n"
         f"Flag every failure mode that applies:\n{modes}\n\n"
         "First write one short line per trait and for identity: what the second image actually shows, then "
@@ -123,7 +129,7 @@ def _ask(backend, request: Request, parse) -> dict:
 
 
 def judge_jobs(bench: Bench, judges: list[ModelSpec], run_dir: Path, tracks: set[str]) -> list[Job]:
-    items = {i.id: i for i in bench.items}
+    items = {i.id: i for i in bench.all_items}
     expected = bench.expected_prompts()  # samples made with an outdated prompt are regenerated, not judged
     jobs = []
     for judge in judges:
@@ -132,9 +138,12 @@ def judge_jobs(bench: Bench, judges: list[ModelSpec], run_dir: Path, tracks: set
             for path in sorted((run_dir / "understanding").glob("*/*.json")):
                 rec = read_json(path)
                 item = items.get(rec.get("item"))
-                if "error" in rec or item is None or rec.get("contaminated") or not is_current(rec, expected):
+                if ("error" in rec or item is None or item.answers or rec.get("contaminated")
+                        or not is_current(rec, expected)):
                     continue
-                request = Request(prompt=understanding_prompt(bench, item, rec["answer"]))
+                if item.modality == "vision" and "vision" not in judge.can:
+                    continue
+                request = Request(prompt=understanding_prompt(bench, item, rec["answer"]), images=list(item.images))
                 jobs.append(_job(judge, path, run_dir, rec, request,
                                  lambda r, c=item.checklist: parse_understanding(r, c), backend))
         if "imagegen" in tracks:
@@ -145,6 +154,8 @@ def judge_jobs(bench: Bench, judges: list[ModelSpec], run_dir: Path, tracks: set
                 rec = read_json(path)
                 if "error" in rec or not rec.get("images") or not is_current(rec, expected):
                     continue
+                if bench.all_tiers[rec["tier"]].state:
+                    continue  # The laughing rubric is invalid for state transfer; no LLM grading here.
                 animal = bench.animals[rec["animal"]]
                 request = Request(prompt=imagegen_prompt(bench, rec["prompt"], animal.en),
                                   images=[bench.reference_image, run_dir / rec["images"][0]])
@@ -163,6 +174,7 @@ def _job(judge: ModelSpec, target: Path, run_dir: Path, rec: dict, request: Requ
         base={"judge": judge.name, "judge_vendor": judge.vendor, "target": target_rel,
               "target_mtime": target.stat().st_mtime,
               "judge_prompt": hashlib.sha256(request.prompt.encode()).hexdigest()[:16],
+              "judge_images": [str(p) for p in request.images],
               "track": rec["track"], "model": rec["model"]},
         fn=lambda: _ask(backend, request, parse),
     )

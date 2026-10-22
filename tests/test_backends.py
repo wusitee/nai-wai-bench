@@ -52,7 +52,14 @@ def test_codex_audit_requires_the_exact_prompt(tmp_path):
     prompt = "参考这张图，画一个同样风格的猫版本"
     call = f'const r = await tools.image_gen__imagegen({{prompt:{json.dumps(prompt)},num_last_images_to_include:1}});'
     audit = audit_rollout(_rollout(tmp_path, call), prompt)
-    assert audit["image_gen_calls"] == 1 and audit["verbatim"] is True
+    assert audit["image_gen_calls"] == 1 and audit["verbatim"] is True and audit["refused"] is False
+
+    # The provider's safety rejection arrives in the tool output and is a scored refusal, not a retry.
+    rollout = _rollout(tmp_path, call)
+    blocked = {"type": "custom_tool_call_output", "output": [{"type": "input_text", "text":
+               'image generation failed: http 400: {"error": {"code": "moderation_blocked"}}'}]}
+    rollout.write_text(rollout.read_text() + "\n" + json.dumps({"type": "response_item", "payload": blocked}))
+    assert audit_rollout(rollout, prompt)["refused"] is True
 
     # Extra description appended to a name-only prompt must not pass as verbatim.
     appended = f'await tools.image_gen__imagegen({{prompt:{json.dumps(prompt + "，黄色胖身体，捧腹大笑")}}});'

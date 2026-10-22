@@ -10,7 +10,8 @@ import tempfile
 import time
 from pathlib import Path
 
-from nwb.backends import BackendError, Request, Response, audit_calls, cli_version, image_instruction
+from nwb.backends import (BackendError, ProviderRefusal, Request, Response, audit_calls, cli_version,
+                          image_instruction)
 from nwb.config import ModelSpec
 from nwb.util import IMAGE_SUFFIXES
 
@@ -69,6 +70,8 @@ class CodexBackend:
         if gen:
             resp.images = self._collect_images(thread_id, req.image_out)
             meta["audit"] = audit_rollout(self._rollout(thread_id), req.prompt)
+            if not resp.images and meta["audit"].get("refused"):
+                raise ProviderRefusal(f"image provider refused (thread {thread_id}): moderation_blocked", meta)
             if not resp.images:
                 raise BackendError(f"codex produced no image (thread {thread_id}): {resp.text[:200]}")
         return resp
@@ -102,15 +105,19 @@ def parse_events(stdout: str) -> list[dict]:
 
 
 def audit_rollout(rollout: Path | None, prompt: str) -> dict:
-    """Report how many image_gen calls the agent made and whether `prompt` was passed verbatim."""
+    """Report how many image_gen calls the agent made, whether `prompt` was passed verbatim, and whether
+    the provider's safety system rejected a call."""
     if rollout is None:
         return {"rollout": None, "image_gen_calls": None, "verbatim": None}
-    calls, sent = [], []
+    calls, sent, refused = [], [], False
     with open(rollout, encoding="utf-8") as f:
         for line in f:
             try:
                 payload = json.loads(line).get("payload", {})
             except json.JSONDecodeError:
+                continue
+            if payload.get("type") in ("custom_tool_call_output", "function_call_output"):
+                refused = refused or "moderation_blocked" in json.dumps(payload.get("output"))
                 continue
             if payload.get("type") not in ("custom_tool_call", "function_call"):
                 continue
@@ -118,7 +125,7 @@ def audit_rollout(rollout: Path | None, prompt: str) -> dict:
             if "image_gen" in payload.get("name", "") or "image_gen" in body:
                 calls.append(body)
                 sent.append(call_prompt(body))
-    return {"rollout": str(rollout), **audit_calls(sent, calls, prompt)}
+    return {"rollout": str(rollout), **audit_calls(sent, calls, prompt), "refused": refused}
 
 
 def call_prompt(body: str) -> str | None:

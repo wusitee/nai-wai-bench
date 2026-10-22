@@ -25,3 +25,17 @@
   This is the official-art negative control and the source for the `official_art` fact.
 
 The images are included for non-commercial research use only.
+
+## State-transfer references
+
+The optional suite uses neutral attachment filenames so the filename does not reveal the expected label:
+
+- `../states/01.png`: the top 260 × 220 pixels of the supplied `../stimuli/angry_variant.png`, made with
+  `magick bench/stimuli/angry_variant.png -crop 260x220+0+0 +repage bench/states/01.png`.
+  This removes the 「切换愤怒模式」 caption and emoji. No character features were synthesized or retouched.
+- `../states/02.jpg`: an unchanged copy of `../stimuli/naiwa_facepalm.jpg` from the sourced collection above.
+- `../states/03.jpg`: an unchanged copy of `../stimuli/naiwa_smug.jpg` from the same collection.
+
+The labels `angry`, `facepalm`, and `smug` describe visible expressions or actions for this suite, not
+verified inner feelings or an official emotion taxonomy. These references and labels need human review
+before publishing calibrated state-recognition or transfer-accuracy claims.

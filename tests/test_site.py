@@ -1,9 +1,10 @@
 from html.parser import HTMLParser
+import json
 from pathlib import Path
 
 import pytest
 
-from nwb import scoring, site
+from nwb import report, scoring, site
 from nwb.config import find_root, load_bench, load_models
 from nwb.provenance import c2pa_summary
 from nwb.util import write_json
@@ -46,16 +47,28 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
         "modality": item.modality, "lang": item.lang, "rep": 1, "prompt": item.prompt,
         "answer": answer,
     })
-    scores = scoring.aggregate(run, bench.trait_weights, expected=bench.expected_prompts())
+    state_item = next(i for i in bench.state_items if i.id == "states.angry")
+    write_json(run / "understanding" / model.name / "states.angry__r1.json", {
+        "track": "understanding", "model": model.name, "vendor": model.vendor, "item": state_item.id,
+        "modality": "vision", "lang": "en", "rep": 1, "prompt": state_item.prompt,
+        "answer": json.dumps(state_item.answers)})
+    state_tier = bench.state_tiers["state_angry_reference"]
+    write_json(run / "imagegen" / model.name / state_tier.id / "cat__r1.json", {
+        **record, "tier": state_tier.id, "prompt": state_tier.render(bench.animals["cat"])})
+    scores = scoring.aggregate(run, bench.trait_weights, bench=bench)
     out = tmp_path / "site"
     out.mkdir()
     unrelated = out / "keep.txt"
     unrelated.write_text("keep")
     monkeypatch.setattr(site.shutil, "which", lambda _: "magick" if resize else None)
     if resize:
-        def convert(command, check):
-            assert command[:2] == ["magick", str(image)] and check
-            Path(command[-1]).write_bytes(image.read_bytes())
+        run_command = site.subprocess.run
+
+        def convert(command, **kwargs):
+            if command[0] != "magick":
+                return run_command(command, **kwargs)
+            assert kwargs == {"check": True}
+            Path(command[-1]).write_bytes(Path(command[1]).read_bytes())
         monkeypatch.setattr(site.subprocess, "run", convert)
     index = site.build(bench, models, run, scores, out, repo_url="https://example.com/repo")
     html = index.read_text()
@@ -63,6 +76,14 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
     assert "ChatGPT gpt-image" in html and "Prompt changed" in html
     assert answer.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;') in html
     assert unrelated.read_text() == "keep"
+    assert "Image generation ranking" in html and "Visual understanding ranking" in html
+    assert "incomplete" in html and "0/30" in html
+    assert "Optional state transfer · unscored" in html and "Source: angry" in html
+    assert "Optional state extraction · answer-keyed" in html
+    local_report = report.render(bench, "test", scores)
+    assert "Image generation ranking" in local_report and "Visual understanding ranking" in local_report
+    assert "incomplete" in local_report and "&lt;unsafe&gt;" in local_report
+    assert "Optional state extraction · answer-keyed" in local_report and "State outputs are unscored" in local_report
 
     class Assets(HTMLParser):
         def handle_starttag(self, tag, attrs):

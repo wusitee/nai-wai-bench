@@ -11,6 +11,8 @@
 
 每个样本都会记录 `meta.client`：CLI 名称和版本、ACP `agentInfo` 中的名称和版本，或 API 主机名。图像样本还会记录 `meta.c2pa`，从 C2PA 内容凭证中读取厂商声明的生成器和操作描述，不验证签名。没有凭证时记录为 `null`。
 
+理解题的回答为空时会记录为错误，并在下次运行时重试。部分 ACP Agent 在无法连上自己的 API 时，会不输出任何文字就结束回合。
+
 ## 模型字段
 
 | 字段 | 含义 |
@@ -42,6 +44,8 @@
 （`$CODEX_HOME/sessions/**/rollout-*-<thread>.jsonl`），在 `meta.audit` 中记录 `image_gen` 的调用次数，
 以及每次调用收到的提示词是否未被改动。`reference` 档位的提示词会用 `--image` 附上原图。
 
+如果图像工具的结果报告 `moderation_blocked`，说明服务商的安全系统拒绝了请求或生成结果。此时样本记录为 `refused`，不含图片，而不是记录为错误。拒绝生成属于模型的结果：不会自动重试（`--force` 会重新生成），且只要提示词核对为原样传递，它在排名题组中记 0 分。
+
 ## Claude（`backend = "claude"`）
 
 使用 Claude Code 登录运行 `claude -p`。工具、MCP 服务器和设置来源都会被禁用，编程 Agent 的系统提示词
@@ -64,7 +68,8 @@ Agent 则用 `session/set_model`）设置 `model` 和 `config` 选项，然后�
 - **DeepSeek Harness**（`dsh`）：通过 `--patch` 应用 `config/dsh-no-tools.patch.yml`，禁用网络、shell、
   文件、技能和子 Agent 插件。该 ACP Agent 不接受图片输入。
 - **Kimi Code**（`kimi acp`）：`config = { mode = "plan" }` 让会话以计划模式启动，不执行任何工具。视觉
-  调用可能较慢，偶尔会卡住直到超时；重新运行即可重试。
+  调用可能较慢，偶尔会卡住直到超时；重新运行即可重试。Agent 需要访问 `api.kimi.com`；该主机被屏蔽时，
+  它每个回合都不输出任何文字。
 
 初始化得到的 Agent 名称和版本保存在 `meta.client` 中；生成的图片会被检查，以记录厂商声明的 `meta.c2pa` 来源信息，不验证签名。
 

@@ -41,6 +41,9 @@ class UnderstandingItem:
     images: tuple[Path, ...] = ()
     image_note: str = ""
     animal: Animal | None = None
+    answers: dict[str, str] = field(default_factory=dict)
+    control_for: str = ""
+    state: str = ""
 
 
 @dataclass(frozen=True)
@@ -50,6 +53,8 @@ class Tier:
     reference: bool = False
     title_zh: str = ""
     title_en: str = ""
+    state: str = ""
+    reference_image: Path | None = None
 
     def render(self, animal: Animal) -> str:
         return self.prompt.format(zh=animal.zh, en=animal.en)
@@ -69,6 +74,17 @@ class Bench:
     tiers: dict[str, Tier]
     animals: dict[str, Animal]
     reference_image: Path
+    state_items: list[UnderstandingItem] = field(default_factory=list)
+    state_tiers: dict[str, Tier] = field(default_factory=dict)
+    state_animals: tuple[str, ...] = ()
+
+    @property
+    def all_items(self) -> list[UnderstandingItem]:
+        return self.items + self.state_items
+
+    @property
+    def all_tiers(self) -> dict[str, Tier]:
+        return self.tiers | self.state_tiers
 
     def criterion(self, cid: str) -> str:
         for table in (self.facts, self.traits, self.identity):
@@ -78,8 +94,8 @@ class Bench:
 
     def expected_prompts(self) -> dict[str, str]:
         """The current prompt of every sample the bench defines, keyed like scoring.sample_key."""
-        prompts = {f"understanding/{i.id}": i.prompt for i in self.items}
-        prompts |= {f"imagegen/{t.id}/{a.id}": t.render(a) for t in self.tiers.values() for a in self.animals.values()}
+        prompts = {f"understanding/{i.id}": i.prompt for i in self.all_items}
+        prompts |= {f"imagegen/{t.id}/{a.id}": t.render(a) for t in self.all_tiers.values() for a in self.animals.values()}
         return prompts
 
     def select_animals(self, spec: str) -> list[Animal]:
@@ -132,6 +148,17 @@ def load_bench(root: Path) -> Bench:
         else:
             items.append(UnderstandingItem(id=item_id, prompt=spec["prompt"], **common))
 
+    # Identical questions across images prevent the question from revealing the answer.
+    grounding = tasks.get("grounding", {})
+    for name, spec in grounding.get("cases", {}).items():
+        image = bench_dir / spec["image"]
+        if not image.is_file():
+            raise FileNotFoundError(f"grounding image not found: {image}")
+        item_id = f"grounding.{name}"
+        common = dict(lang="en", prompt=grounding["prompt"], checklist=(), answers=spec["answers"])
+        items.append(UnderstandingItem(id=item_id, modality="vision", images=(image,), **common))
+        items.append(UnderstandingItem(id=f"{item_id}.blind", modality="text", control_for=item_id, **common))
+
     ig = tasks["imagegen"]
     tiers = {k: Tier(k, v["prompt"], v.get("reference", False), v.get("title_zh", k), v.get("title_en", k))
              for k, v in ig["tiers"].items()}
@@ -139,12 +166,32 @@ def load_bench(root: Path) -> Bench:
     if not reference_image.is_file():
         raise FileNotFoundError(f"reference image not found: {reference_image}")
 
+    states = tasks.get("state_transfer", {})
+    state_items, state_tiers = [], {}
+    state_animals = tuple(_known(a, animals, "animal") for a in states.get("animals", ()))
+    for state, spec in states.get("cases", {}).items():
+        image = bench_dir / spec["image"]
+        if not image.is_file():
+            raise FileNotFoundError(f"state reference not found: {image}")
+        item_id = f"states.{state}"
+        common = dict(lang="en", prompt=states["extraction_prompt"], checklist=(),
+                      answers=spec["answers"], state=state)
+        state_items.append(UnderstandingItem(id=item_id, modality="vision", images=(image,), **common))
+        state_items.append(UnderstandingItem(id=f"{item_id}.blind", modality="text", control_for=item_id, **common))
+        for condition in ("described", "reference"):
+            tier_id = f"state_{state}_{condition}"
+            prompt = states[f"{condition}_prompt"].replace("{description}", spec["description"])
+            state_tiers[tier_id] = Tier(tier_id, prompt, reference=condition == "reference", state=state,
+                                       reference_image=image, title_en=f"{spec['title_en']} · {condition}",
+                                       title_zh=f"{spec['title_zh']} · {condition}")
+
     return Bench(
         root=root, facts=facts, traits=traits, trait_weights=trait_weights, identity=identity,
         misconceptions=list(rubric.get("misconceptions", {}).get("items", [])),
         background=list(rubric.get("background", {}).get("items", [])),
         failure_modes=dict(rubric.get("failure_modes", {})),
         items=items, tiers=tiers, animals=animals, reference_image=reference_image,
+        state_items=state_items, state_tiers=state_tiers, state_animals=state_animals,
     )
 
 

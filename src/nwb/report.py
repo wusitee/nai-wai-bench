@@ -22,14 +22,36 @@ def fmt(x, digits=0) -> str:
     return "–" if x is None else f"{x:.{digits}f}"
 
 
+def leaderboard_table(rows: list[dict], label=lambda m: m) -> str:
+    out = ["<table><tr><th>Rank</th><th>Model</th><th>Score</th><th>Scored cells</th>"
+           "<th>Repetitions/cell</th><th>Status</th></tr>"]
+    for row in rows:
+        rank = row["rank"] if row["rank"] is not None else "–"
+        out.append(f"<tr><td>{rank}</td><td>{escape(label(row['model']))}</td>"
+                   f"<td><b>{fmt(row['score'], 1)}</b></td><td>{row['completed']}/{row['required']}</td>"
+                   f"<td>{row['repetitions']}</td><td>{escape(row['status'])}</td></tr>")
+    return "\n".join(out) + "</table>"
+
+
+RANKING_NOTE = ("Two independent, provisional rankings; no combined score. Only complete fixed panels with the "
+                "same attempted repetition ids scored in every cell receive ranks. Image generation requires verified verbatim "
+                "prompts. Missing, failed, unjudged, or ineligible cells leave a model unranked. Text/language "
+                "answers and no-image controls are diagnostics. Small score gaps do not establish a reliable ordering.")
+
+
 def render(bench: Bench, run_name: str, scores: dict) -> str:
-    out = [f"<!doctype html><meta charset=utf-8><title>nai-wai-bench · {escape(run_name)}</title>",
-           f"<style>{CSS}</style><h1>nai-wai-bench · {escape(run_name)}</h1>",
+    out = [f"<!doctype html><meta charset=utf-8><title>奶蛙bench · nai-wai-bench · {escape(run_name)}</title>",
+           f"<style>{CSS}</style><h1>奶蛙bench · nai-wai-bench · {escape(run_name)}</h1>",
            f"<p class=muted>Judges: {escape(', '.join(scores['judges']) or 'none')}. "
            "Scores are 0–100; each sample is averaged over judges from other vendors than the model "
            "(all judges if none are independent).</p>"]
-    out += _understanding(bench, scores)
+    boards = scores.get("leaderboards", {})
+    out += [f"<p class=muted>{RANKING_NOTE}</p>", "<h2>Image generation ranking</h2>",
+            leaderboard_table(boards.get("imagegen", [])), "<h2>Visual understanding ranking</h2>",
+            leaderboard_table(boards.get("visual_understanding", []))]
     out += _imagegen(bench, scores)
+    out += _understanding(bench, scores)
+    out += _understanding(bench, scores, states=True)
     out += _judge_health(scores)
     return "\n".join(out)
 
@@ -56,24 +78,31 @@ def _judge_health(scores: dict) -> list[str]:
     return out
 
 
-def _understanding(bench: Bench, scores: dict) -> list[str]:
-    summary = scores["understanding"]
+def _understanding(bench: Bench, scores: dict, states: bool = False) -> list[str]:
+    summary = scores.get("state_understanding" if states else "understanding", {})
     if not summary:
         return []
-    item_ids = [i.id for i in bench.items if any(i.id in s["items"] for s in summary.values())]
-    out = ["<h2>Part 1 · Understanding</h2><table><tr><th>Model</th><th>Overall</th><th>Text</th>"
-           "<th>Vision</th><th>Halluc./answer</th><th>Used tools</th>" + "".join(f"<th>{escape(i)}</th>" for i in item_ids) + "</tr>"]
-    for model, s in sorted(summary.items(), key=lambda kv: -(kv[1]["overall"] or 0)):
-        out.append(f"<tr><td>{escape(model)}</td><td><b>{fmt(s['overall'])}</b></td><td>{fmt(s['text'])}</td>"
-                   f"<td>{fmt(s['vision'])}</td><td>{fmt(s['hallucinations_per_answer'], 1)}</td><td>{s['contaminated']}</td>"
+    items = bench.state_items if states else bench.items
+    item_ids = [i.id for i in items if any(i.id in s["items"] for s in summary.values())]
+    title = "Optional state extraction · answer-keyed" if states else "Understanding diagnostics"
+    out = [f"<h2>{title}</h2><table><tr><th>Model</th><th>Vision</th><th>Text</th>"
+           "<th>Text ZH</th><th>Text EN</th><th>Grounding</th><th>No image</th><th>Visual gain</th>"
+           "<th>Halluc./answer</th><th>Used tools</th>" + "".join(f"<th>{escape(i)}</th>" for i in item_ids) + "</tr>"]
+    for model, s in sorted(summary.items()):
+        out.append(f"<tr><td>{escape(model)}</td><td>{fmt(s['vision'])}</td><td>{fmt(s['text'])}</td>"
+                   f"<td>{fmt(s.get('languages', {}).get('zh'))}</td><td>{fmt(s.get('languages', {}).get('en'))}</td>"
+                   f"<td>{fmt(s.get('grounding'))}</td><td>{fmt(s.get('blind'))}</td><td>{fmt(s.get('visual_gain'))}</td>"
+                   f"<td>{fmt(s['hallucinations_per_answer'], 1)}</td><td>{s['contaminated']}</td>"
                    + "".join(f"<td>{fmt(s['items'].get(i))}</td>" for i in item_ids) + "</tr>")
-    out.append("</table><p class=muted>Used tools: answers where the agent called a tool (e.g. web search) "
-               "despite being told not to. They are excluded from scoring.</p><h3>Answers</h3>")
+    out.append("</table><p class=muted>Visual gain is the matched score difference with versus without the image, "
+               "in percentage points. Grounding uses answer keys, not judges. Used tools: excluded answers where "
+               "the agent called a tool despite being told not to.</p><h3>Answers</h3>")
     by_item = defaultdict(list)
     for s in scores["samples"]["understanding"]:
-        by_item[s["item"]].append(s)
-    prompts = {i.id: i.prompt for i in bench.items}
-    for item in item_ids:
+        if bool(s.get("state")) == states:
+            by_item[s["item"]].append(s)
+    prompts = {i.id: i.prompt for i in items}
+    for item in [i.id for i in items if i.id in by_item]:
         out.append(f"<details><summary>{escape(item)}</summary><p class=muted>{escape(prompts[item])}</p><table>")
         for s in sorted(by_item[item], key=lambda s: (s["model"], s["rep"])):
             halluc = "".join(f"<div class=bad>✗ {escape(h)}</div>" for h in s["hallucinations"])
@@ -86,24 +115,31 @@ def _understanding(bench: Bench, scores: dict) -> list[str]:
 
 def _imagegen(bench: Bench, scores: dict) -> list[str]:
     summary = scores["imagegen"]
-    if not summary:
+    if not scores["samples"]["imagegen"]:
         return []
-    tiers = [t for t in bench.tiers if any(t in s["tiers"] for s in summary.values())]
-    out = ["<h2>Part 2 · Image generation</h2><table><tr><th>Model</th><th>Overall</th>"
+    tiers = [t for t in bench.all_tiers if any(t == s["tier"] for s in scores["samples"]["imagegen"])]
+    out = ["<h2>Image generation diagnostics</h2><table><tr><th>Model</th><th>Available-cell mean</th>"
            + "".join(f"<th>{escape(t)}</th>" for t in tiers)
            + "<th>Knowledge ratio</th><th>Failure modes</th><th>Prompt not verbatim</th></tr>"]
-    for model, s in sorted(summary.items(), key=lambda kv: -(kv[1]["overall"] or 0)):
+    for model, s in sorted(summary.items()):
         modes = ", ".join(f"{escape(m)}×{n}" for m, n in sorted(s["failure_modes"].items(), key=lambda kv: -kv[1]))
         out.append(f"<tr><td>{escape(model)}</td><td><b>{fmt(s['overall'])}</b></td>"
                    + "".join(f"<td>{fmt(s['tiers'].get(t, {}).get('overall'))}</td>" for t in tiers)
                    + f"<td>{fmt(s['knowledge_ratio'], 2)}</td><td>{modes or '–'}</td>"
                    f"<td>{s['not_verbatim']} / {s['n']}</td></tr>")
-    out.append("</table><p class=muted>Knowledge ratio = mean of the name-only tiers ÷ the described_detailed tier: "
-               "how much of the model's drawing ability it can reach from the meme's name alone.</p>")
+    out.append("</table><p class=muted>Diagnostic means use available cells and may differ from the fixed ranking panel. "
+               "Knowledge ratio = mean of both name tiers ÷ described_detailed, using only animals present in all "
+               "three tiers. It measures sensitivity to prompt detail, not a calibrated probability of knowledge.</p>")
+    if not summary:
+        out = ["<h2>Image generation · unscored</h2>"]
+    if any(s.get("state") for s in scores["samples"]["imagegen"]):
+        out.append("<p>Optional state transfer: reference versus description, with animal identity and source expression "
+                   "held separately for human review. State outputs are unscored; the laughing rubric is not applied.</p>")
 
     trait_names = list(bench.traits) + ["identity"]
-    out.append("<h3>Trait coverage (0–2)</h3><table><tr><th>Model</th>"
-               + "".join(f"<th>{escape(t)}</th>" for t in trait_names) + "</tr>")
+    if summary:
+        out.append("<h3>Trait coverage (0–2)</h3><table><tr><th>Model</th>"
+                   + "".join(f"<th>{escape(t)}</th>" for t in trait_names) + "</tr>")
     by_model = defaultdict(list)
     for s in scores["samples"]["imagegen"]:
         by_model[s["model"]].append(s)
@@ -111,7 +147,8 @@ def _imagegen(bench: Bench, scores: dict) -> list[str]:
         out.append(f"<tr><td>{escape(model)}</td>"
                    + "".join(f"<td>{fmt(s['traits'].get(t), 1)}</td>" for t in bench.traits)
                    + f"<td>{fmt(s['identity'], 1)}</td></tr>")
-    out.append("</table>")
+    if summary:
+        out.append("</table>")
 
     for model, samples in by_model.items():
         cells = {(s["animal"], s["tier"]): s for s in sorted(samples, key=lambda s: -s["rep"])}

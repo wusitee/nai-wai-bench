@@ -1,7 +1,11 @@
+import json
+from types import SimpleNamespace
+
 import pytest
 
-from nwb.config import find_root, load_bench, load_models
-from nwb.judge import imagegen_prompt, parse_imagegen, parse_understanding, understanding_prompt
+from nwb.config import ModelSpec, find_root, load_bench, load_models
+from nwb.judge import imagegen_prompt, judge_jobs, parse_imagegen, parse_understanding, understanding_prompt
+from nwb.util import write_json
 
 
 @pytest.fixture(scope="module")
@@ -20,6 +24,11 @@ def test_bench_data_and_models_load(bench):
     assert {m.backend for m in models.values()} <= {"codex", "claude", "acp", "openai"}
     assert set(defaults["judges"]) | set(defaults["image_judges"]) <= set(models)
     assert all("vision" in models[j].can for j in defaults["image_judges"])
+    assert {a.id for a in bench.select_animals("default")} == {"cat", "panda", "frog", "giraffe", "octopus", "elephant"}
+    for item in [i for i in bench.items if i.control_for]:
+        shown = next(i for i in bench.items if i.id == item.control_for)
+        assert item.prompt == shown.prompt and item.answers == shown.answers
+        assert item.modality == "text" and not item.images and shown.images
 
 
 def test_judge_prompts_list_every_criterion(bench):
@@ -28,6 +37,29 @@ def test_judge_prompts_list_every_criterion(bench):
     assert all(f"[{c}]" in prompt for c in item.checklist) and "target animal: cat" in prompt
     prompt = imagegen_prompt(bench, "画一只猫", "cat")
     assert all(f"- {t}:" in prompt for t in bench.traits)
+
+
+def test_visual_judges_receive_stimuli_and_grounding_needs_no_judge(bench, tmp_path, monkeypatch):
+    requests = []
+    checklist = next(i.checklist for i in bench.items if i.id == "recognize_zh")
+
+    def respond(request):
+        requests.append(request)
+        return SimpleNamespace(text=json.dumps({"scores": {c: 2 for c in checklist}}), meta={})
+
+    backend = SimpleNamespace(run=respond)
+    monkeypatch.setattr("nwb.judge.get_backend", lambda model: backend)
+    for item in [i for i in bench.items if i.id in ("recognize_zh", "grounding.laugh", "grounding.laugh.blind")]:
+        write_json(tmp_path / "understanding/m" / f"{item.id}__r1.json", {
+            "track": "understanding", "model": "m", "item": item.id, "prompt": item.prompt, "answer": "A"})
+    judges = [ModelSpec("text", "stub", "v", "", frozenset({"text"})),
+              ModelSpec("vision", "stub", "v", "", frozenset({"text", "vision"}))]
+    jobs = judge_jobs(bench, judges, tmp_path, {"understanding"})
+    assert len(jobs) == 1 and jobs[0].base["judge"] == "vision"
+    assert jobs[0].base["judge_images"] == [str(bench.reference_image)]
+    # Inspect the request without making a model call.
+    jobs[0].fn()
+    assert requests[0].images == [bench.reference_image]
 
 
 def test_parse_understanding_accepts_fenced_json_and_validates_scores():

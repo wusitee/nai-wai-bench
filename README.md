@@ -1,6 +1,6 @@
 <img src="assets/icon.svg" width="64" height="64" alt="">
 
-# nai-wai-bench
+# nai-wai-bench · 奶蛙bench
 
 English | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-Hant.md)
 
@@ -9,15 +9,23 @@ called **奶蛙**): an AI-generated, "mutated" 奶龙 doubled over with laughter
 
 <img src="bench/reference/nailong_laugh.png" width="200" alt="The canonical 大笑奶龙 image">
 
-It has two parts:
+**Results:** [wusitee.github.io/nai-wai-bench](https://wusitee.github.io/nai-wai-bench/) (first draft:
+one repetition per cell, LLM judges).
 
-1. **Understanding**: text and vision LLMs explain the meme's origin and lore, describe its look from memory,
-   write image prompts for it, and recognize it from images. Answers are checked against sourced facts, and
-   confident hallucinations are penalized.
-2. **Image generation**: image models draw the meme as other animals (cat, giraffe, octopus, and more)
+It publishes two independent rankings:
+
+1. **Visual understanding**: recognize the meme and its variants, distinguish official artwork, and answer
+   image-grounded questions with fixed answer keys. Text-only lore, visual memory, and prompt writing in
+   Chinese and English are separate diagnostics; they do not affect visual rank.
+2. **Image generation**: image models draw the meme as other animals (cat, panda, frog, giraffe, octopus,
+   and elephant in the default panel)
    from five prompt tiers: the meme's name in Chinese, its name in English, a brief description, a detailed
-   description of its 3D look, and the reference image. Comparing name-only results with described results shows whether a model actually
-   knows the meme or can only draw it when told what it looks like.
+   description of its 3D look, and the reference image. Matched name-only and described results measure
+   sensitivity to prompt detail.
+
+Only complete fixed panels receive provisional ranks. Partial runs remain visible with coverage counts.
+Small score differences are not evidence of a reliable ordering. An optional, unscored suite also tests
+whether generators can transfer other 奶蛙 expressions (angry, facepalm, smug) to other animals.
 
 Judges from several vendors score every sample; a model is never scored by its own vendor's judges when
 an independent judge is available.
@@ -34,9 +42,9 @@ Antigravity, or an OpenAI-compatible API such as Xiaomi MiMo (key from an enviro
 uv sync
 uv run nwb list                                   # models, items, tiers, animals
 
-# Part 1: ask models about the meme, then judge the answers
+# Understanding: visual tasks plus text diagnostics and no-image controls
 uv run nwb understand --models opus-5.5,gpt-6.1-sol,deepseek-v4-pro,mimo-v2.6-pro
-# Part 2: draw the default animal subset with every tier
+# Image generation: six animals × five tiers = 30 images per model
 uv run nwb imagegen --models chatgpt-image --animals default
 
 uv run nwb judge                                  # default judges from models.toml
@@ -49,5 +57,11 @@ failed samples.
 
 ## Documentation
 
-- [Benchmark design](docs/design.md): items, tiers, rubrics, scoring, and run layout
+- [Benchmark design](docs/design.md): items, tiers, rubrics, scoring, results site, and run layout
+- [Evaluation methodology](docs/methodology.md): research basis, budget, controls, and limitations
+- [Optional state transfer](docs/design.md#optional-state-transfer): transfer angry, facepalm, and smug
+  expressions to cat/frog in 12 images per generator; separate state-extraction checks, without LLM grading
 - [Backends and models](docs/backends.md): how each agent CLI is driven and isolated, and how to add models
+- [Sources](bench/reference/SOURCE.md): where the reference image, stickers, and facts come from
+
+The reference image and stickers are included for non-commercial research use only.

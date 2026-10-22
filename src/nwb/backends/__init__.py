@@ -17,6 +17,15 @@ class BackendError(RuntimeError):
     pass
 
 
+class ProviderRefusal(BackendError):
+    """The provider's safety system rejected the request or its output. This is a model outcome, not an
+    infrastructure error: it is recorded and scored instead of retried."""
+
+    def __init__(self, message: str, meta: dict):
+        super().__init__(message)
+        self.meta = meta
+
+
 @dataclass
 class Request:
     prompt: str

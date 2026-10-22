@@ -30,6 +30,19 @@ animals = ["cat", "giraffe"]
 prompt = "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a {en} version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt."
 checklist = ["pose", "hands_on_belly", "eyes", "mouth", "body", "belly_patch", "render", "background", "vibe", "identity"]
 
+[understanding.describe_en]
+modality = "text"
+lang = "en"
+prompt = "Without looking at any images, describe the most iconic image of Laughing Nailong (大笑奶龙 / 奶蛙) from memory: its pose, expression, body shape, colors, rendering style, and background, in enough detail for an artist who has never seen it to draw it. Say where you are unsure."
+checklist = ["pose", "hands_on_belly", "eyes", "mouth", "body", "belly_patch", "render", "background", "vibe"]
+
+[understanding.write_prompt_zh]
+modality = "text"
+lang = "zh"
+animals = ["cat", "giraffe"]
+prompt = "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出{zh}版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。"
+checklist = ["pose", "hands_on_belly", "eyes", "mouth", "body", "belly_patch", "render", "background", "vibe", "identity"]
+
 [understanding.recognize_zh]
 modality = "vision"
 lang = "zh"
@@ -102,6 +115,54 @@ image_note = "Official Nailong character artwork from the creator 第七印象's
 prompt = "这张表情包里的是什么角色？它属于哪个网络梗？"
 checklist = ["base_character", "official_art"]
 
+# Answer-keyed visual checks and paired no-image controls. No judge calls are needed.
+[grounding]
+prompt = "Look only at the attached image. Return a JSON object with two keys: pose (one of belly_clutch, raised_hands, facepalm, folded_arms) and eyes (open or closed). Use unknown for a field you cannot determine. Do not infer the answer from a meme's name or typical appearance."
+
+[grounding.cases.laugh]
+image = "reference/nailong_laugh.png"
+answers = { pose = "belly_clutch", eyes = "closed" }
+
+[grounding.cases.official]
+image = "stimuli/nailong_official.png"
+answers = { pose = "raised_hands", eyes = "open" }
+
+[grounding.cases.facepalm]
+image = "stimuli/naiwa_facepalm.jpg"
+answers = { pose = "facepalm", eyes = "open" }
+
+[grounding.cases.folded]
+image = "stimuli/naiwa_folded_arms.jpg"
+answers = { pose = "folded_arms", eyes = "open" }
+
+# Optional cross-animal state transfer. Kept separate from the core laughing panel.
+[state_transfer]
+animals = ["cat", "frog"]
+extraction_prompt = "Look only at the attached character. Report its visible expression and gesture, not an imagined inner feeling. Return JSON with four keys: state (angry, facepalm, smug, laughing, or other), eyes (open, closed, or narrowed), mouth (open or closed), and gesture (behind_back, forehead, belly_clutch, folded_arms, or out_of_frame). Use unknown when a field cannot be determined. Do not assume the character must be laughing or invent gestures outside the frame."
+described_prompt = "Generate a single clearly recognizable {en} character in a smooth, bulky 3D cartoon meme style with soft diffuse lighting and a plain light background. Transfer this expression and body language onto the animal: {description} Use the animal's natural colors and markings, rather than copying a yellow or red source body. Adapt any gesture to the animal's anatomy. No captions, lettering, or watermarks."
+reference_prompt = "Reimagine the character in the attached reference image as a clearly recognizable {en}. Transfer its visible expression, eye and mouth shape, gesture, posture, and smooth bulky 3D meme style to the animal. Adapt gestures to the animal's anatomy. Preserve the source framing; do not invent gestures outside the frame. Use the animal's natural colors and markings, rather than relying on the source body color to communicate the state. Plain light background. No captions, lettering, or watermarks."
+
+[state_transfer.cases.angry]
+image = "states/01.png"
+title_en = "Angry"
+title_zh = "愤怒"
+description = "Angry expression: eyes open under sharply lowered brows, a downturned closed mouth, chest and round belly pushed forward, and a visible arm held behind the back."
+answers = { state = "angry", eyes = "open", mouth = "closed", gesture = "behind_back" }
+
+[state_transfer.cases.facepalm]
+image = "states/02.jpg"
+title_en = "Facepalm"
+title_zh = "扶额"
+description = "Facepalm pose: one hand or paw rests on the forehead, the other forearm lies across the body, eyes are open, and the mouth is a small closed curve."
+answers = { state = "facepalm", eyes = "open", mouth = "closed", gesture = "forehead" }
+
+[state_transfer.cases.smug]
+image = "states/03.jpg"
+title_en = "Smug"
+title_zh = "得意"
+description = "A smug-looking close-up portrait: chin slightly raised, eyes narrowed into half-lidded slits, rounded cheeks, and a closed downturned mouth. Hands are outside the frame; do not add a gesture."
+answers = { state = "smug", eyes = "narrowed", mouth = "closed", gesture = "out_of_frame" }
+
 # --- Part 2: image generation ---
 # Each tier is run for every selected animal. reference = true attaches the reference image.
 # title_zh / title_en label the tier in the results site.
@@ -146,11 +207,11 @@ default = true
 [animals.shiba]
 zh = "柴犬"
 en = "Shiba Inu dog"
-default = true
 
 [animals.panda]
 zh = "熊猫"
 en = "giant panda"
+default = true
 
 [animals.penguin]
 zh = "企鹅"
@@ -168,11 +229,11 @@ en = "rabbit"
 [animals.capybara]
 zh = "水豚"
 en = "capybara"
-default = true
 
 [animals.frog]
 zh = "青蛙"
 en = "frog"
+default = true
 tags = ["naiwa_pun"]
 
 [animals.giraffe]

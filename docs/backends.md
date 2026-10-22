@@ -12,6 +12,9 @@ Every agent call starts in a fresh, empty temporary directory so agents never lo
 
 Every sample records `meta.client`: the CLI name and version, ACP `agentInfo` name and version, or API host. Image samples also record `meta.c2pa`, the vendor-declared generators and action descriptions read from C2PA content credentials without verifying signatures. Missing credentials are recorded as `null`.
 
+An empty understanding answer is recorded as an error and retried on the next run. Some ACP agents end
+their turn without text when their API cannot be reached.
+
 ## Model fields
 
 | Field | Meaning |
@@ -46,6 +49,11 @@ pass the benchmark prompt to the tool verbatim; images are copied from
 were made and whether each received the prompt unchanged. Reference-tier prompts attach the reference image
 with `--image`.
 
+When the image tool's result reports `moderation_blocked`, the provider's safety system rejected the
+request or its output. The sample is then recorded with `refused` and no images instead of an error.
+A refusal is a model outcome: it is not retried automatically (`--force` regenerates it), and when its
+prompt audit is verbatim it scores 0 in the ranking panel.
+
 ## Claude (`backend = "claude"`)
 
 Runs `claude -p` with the Claude Code login. Tools, MCP servers, and settings sources are disabled, and the
@@ -71,7 +79,8 @@ agent itself where possible:
 - **DeepSeek Harness** (`dsh`): `config/dsh-no-tools.patch.yml` is applied with `--patch` and disables the
   web, shell, file, skill, and subagent plugins. The ACP agent does not accept images.
 - **Kimi Code** (`kimi acp`): `config = { mode = "plan" }` starts sessions in plan mode, which runs no tools.
-  Vision calls can be slow and occasionally hang until the timeout; rerun to retry.
+  Vision calls can be slow and occasionally hang until the timeout; rerun to retry. The agent needs access
+  to `api.kimi.com`; where that host is blocked it ends every turn without text.
 
 The initialized agent name and version are saved in `meta.client`; generated images are inspected for vendor-declared `meta.c2pa` provenance without signature verification.
 
