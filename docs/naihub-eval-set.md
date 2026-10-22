@@ -93,6 +93,10 @@ uv run nwb report --suite naihub-v1 --run naihub-v1
 uv run nwb site --suite naihub-v1 --run naihub-v1 --out site/naihub-v1
 ```
 
+The site page leads with a casebook of all 24 images, showing each model's wrong fields, and flags
+the answer-key annotator in the ranking. `scripts/publish_site.sh` publishes it under `naihub-v1/`
+beside the core results; see [Results site](design.md#results-site-nwb-site).
+
 Replace `VISION_MODEL` with a configured name. `--items vision` selects just the 24 image-input
 items; `--items grounding.naihub_v1_017` selects the tear case and its blind control. Text-only
 models can run controls but cannot fill the visual panel. The default `core` suite retains its

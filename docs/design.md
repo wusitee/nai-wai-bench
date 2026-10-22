@@ -188,25 +188,39 @@ this reason: it rated every trait of every image `partial`, even when its own no
 ## Results site (`nwb site`)
 
 `uv run nwb site --run v1` builds a bilingual Chinese/English site in `site/`, separate from the local
-report. Both start with independent generation and visual-understanding rankings, coverage, and repetition
-counts. The site then shows model access metadata and C2PA provenance; one gallery per animal with every
-core tier, score, failure modes, and prompt audit (provider refusals appear as refused cells); diagnostic
-tier means and matched knowledge ratios; the optional state-transfer gallery beside each source image,
-unscored; text/language, grounding, and state-extraction diagnostics with every answer; and judge health.
-Missing judgments appear as dashes. With repetitions, galleries show the first repetition while summaries
-include every sample.
+report. Each page covers one suite and run. It opens with the visual-understanding and image-generation
+rankings, with coverage and repetitions per cell; an image-generation panel without results is left out. The
+remaining sections appear when the run has data for them:
 
-The header records the run name, build date, and the repository commit (`git rev-parse --short HEAD`,
+- **Casebook:** one card per answer-keyed image item, grouped by the task file's `category`. Each card shows
+  the image, its answer key, a verdict strip (one segment per model, in visual-ranking order; green when
+  every field is correct), each model's wrong fields with the label it gave, and raw replies including
+  the no-image control. The naihub-v1 page leads with the casebook and a mosaic of its images.
+- **Image generation:** one gallery per animal with every core tier, score, failure modes, and prompt
+  audit (provider refusals appear as refused cells); diagnostic tier means and matched knowledge ratios.
+- **State transfer:** each source image beside its generated outputs, unscored.
+- **Understanding diagnostics:** summary columns that have values in the run; for suites with family
+  labels, joint, visual-joint, family-macro, per-field, and per-category heatmaps; free-form answers;
+  optional state extraction as its own casebook.
+- **Models** (access metadata, C2PA provenance, and the answer-key annotator when the suite names one)
+  and **judge health** when the run has judgments.
+
+Missing judgments appear as dashes. With repetitions, galleries and casebook cards show the first
+repetition while summaries include every sample. Heatmap cells darken as scores fall below 100. When a
+suite's `[dataset].annotation_record` names an annotator model, that model is flagged in the ranking: its
+score measures agreement with its own labels.
+
+The header records the suite, run name, build date, and the repository commit (`git rev-parse --short HEAD`,
 marked when `bench/` or `src/` have uncommitted changes). With `--repo-url`, the methodology and
 source links point to that commit.
 
-`--out DIR` selects the output directory; `--judges NAME,...` restricts scoring to those judges; `--repo-url URL` adds a source link. The builder writes `index.html` and relative image assets without deleting existing output files. Images are resized to fit within 768 × 768 pixels using ImageMagick (`magick`) when available, and copied unchanged otherwise. Gallery thumbnails preserve the full image.
+`--out DIR` selects the output directory; `--judges NAME,...` restricts scoring to those judges; `--repo-url URL` adds a source link; `--suite-tabs` adds tabs linking every suite's page, assuming the published layout below. The builder writes `index.html` and relative image assets without deleting existing output files. Images are resized to fit within 768 × 768 pixels using ImageMagick (`magick`) when available, and copied unchanged otherwise. Gallery thumbnails preserve the full image.
 
 C2PA names only `ChatGPT · gpt-image` for OpenAI and “Created by Google Generative AI” for Google; neither exposes a more specific image model version. These are vendor declarations, not verified signatures. `meta.client` identifies the relay client, not the underlying image generator.
 
 ### Publishing
 
-`scripts/publish_site.sh [RUN]` (default `v1`) builds into a fresh temporary directory, adds `.nojekyll`, and replaces the `gh-pages` branch on `origin` with only the generated site. It requires `uv`, Git, configured Git author identity, and push access, and leaves the checked-out branch unchanged. Generated runs and site files stay git-ignored on the source branch.
+`scripts/publish_site.sh [CORE_RUN [NAIHUB_RUN]]` (defaults `v1` and `naihub-v1`) builds the core suite into the root of a fresh temporary directory and naihub-v1 into `naihub-v1/`, both with suite tabs, adds `.nojekyll`, and replaces the `gh-pages` branch on `origin` with only the generated site. Both runs must exist. It requires `uv`, Git, configured Git author identity, and push access, and leaves the checked-out branch unchanged. Generated runs and site files stay git-ignored on the source branch.
 
 Enable GitHub Pages once with `gh api -X POST repos/OWNER/REPO/pages -f 'source[branch]=gh-pages' -f 'source[path]=/'`; if Pages is already enabled, use `-X PUT` instead. Inspect `gh api repos/OWNER/REPO/pages/builds/latest` for build status and `gh api repos/OWNER/REPO/pages --jq .html_url` for the URL. **The Pages site is public even when the source repository is private.** Publish only results intended for public access.
 

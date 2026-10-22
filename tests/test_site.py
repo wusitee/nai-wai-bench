@@ -73,7 +73,7 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
             assert kwargs == {"check": True}
             Path(command[-1]).write_bytes(Path(command[1]).read_bytes())
         monkeypatch.setattr(site.subprocess, "run", convert)
-    index = site.build(bench, models, run, scores, out, repo_url="https://example.com/repo")
+    index = site.build(bench, models, run, scores, out, repo_url="https://example.com/repo", suite_tabs=True)
     html = index.read_text()
     assert model.label in html and "codex-cli test" in html and "recorded-model" in html
     assert "ChatGPT gpt-image" in html and "Prompt changed" in html
@@ -84,9 +84,11 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
     assert "Optional state transfer · unscored" in html and f"Source: {state_item.state}" in html
     assert "Optional state extraction · answer-keyed" in html
     if suite == "naihub-v1":
-        assert "all seven fields" in html and "Family macro" in html and "tears (items)" in html
+        # Answer-keyed images appear as casebook cards; the annotator is flagged; tabs follow the published layout.
+        assert "all seven fields" in html and "Family macro" in html and f"id='case-{item.id.split('.')[1]}'" in html
+        assert "Key annotator" in html and "href='../'" in html
     else:
-        assert "Answer-key diagnostics" not in html
+        assert "Answer-key diagnostics" not in html and "href='naihub-v1/'" in html
     local_report = report.render(bench, "test", scores)
     assert "Image generation ranking" in local_report and "Visual understanding ranking" in local_report
     assert "incomplete" in local_report and "&lt;unsafe&gt;" in local_report

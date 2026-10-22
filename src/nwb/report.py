@@ -79,6 +79,9 @@ def render(bench: Bench, run_name: str, scores: dict) -> str:
     if bench.suite == "naihub-v1":
         out.append("<p>naihub-v1 visual ranks use all-field joint accuracy: every keyed field must be correct "
                    "for a sample to earn 100. Family macro and partial-credit field means are separate diagnostics.</p>")
+    if bench.annotator:
+        out.append(f"<p>Answer keys are provisional {escape(bench.annotator)} annotations; that model's score "
+                   "measures agreement with its own labels.</p>")
     out += [f"<p class=muted>{RANKING_NOTE}</p>", "<h2>Image generation ranking</h2>",
             leaderboard_table(boards.get("imagegen", [])), "<h2>Visual understanding ranking</h2>",
             leaderboard_table(boards.get("visual_understanding", []))]

@@ -48,6 +48,7 @@ class UnderstandingItem:
     control_for: str = ""
     state: str = ""
     category: str = ""
+    title: str = ""
 
 
 @dataclass(frozen=True)
@@ -82,6 +83,7 @@ class Bench:
     state_tiers: dict[str, Tier] = field(default_factory=dict)
     state_animals: tuple[str, ...] = ()
     suite: str = "core"
+    annotator: str = ""  # model whose annotations are the suite's answer keys, if any
 
     @property
     def all_items(self) -> list[UnderstandingItem]:
@@ -117,10 +119,15 @@ def load_bench(root: Path, suite: str = "core") -> Bench:
     bench_dir = root / "bench"
     rubric = _load(bench_dir / "rubric.toml")
     tasks = _load(bench_dir / "tasks.toml")
+    annotator = ""
     if suite != "core":
         extension = _load(bench_dir / suite / "tasks.toml")
         for section in ("understanding", "grounding", "state_transfer"):
             tasks[section] = extension.get(section, {})
+        record = extension.get("dataset", {}).get("annotation_record")
+        if record:
+            with open(bench_dir / record, encoding="utf-8") as f:
+                annotator = json.load(f).get("annotator", {}).get("model", "")
 
     facts = {k: v["text"] for k, v in rubric.get("facts", {}).items()}
     traits = {k: v["text"] for k, v in rubric.get("traits", {}).items()}
@@ -176,7 +183,8 @@ def load_bench(root: Path, suite: str = "core") -> Bench:
             raise ValueError(f"grounding case {name}: answers must match the declared labels")
         item_id = f"grounding.{name}"
         common = dict(lang="en", prompt=grounding_prompt, checklist=(), answers=spec["answers"],
-                      category=spec.get("category", ""))
+                      category=spec.get("category", ""), title=spec.get("title", ""),
+                      image_note=spec.get("image_note", ""))
         items.append(UnderstandingItem(id=item_id, modality="vision", images=(image,), **common))
         items.append(UnderstandingItem(id=f"{item_id}.blind", modality="text", control_for=item_id, **common))
 
@@ -196,7 +204,7 @@ def load_bench(root: Path, suite: str = "core") -> Bench:
             raise FileNotFoundError(f"state reference not found: {image}")
         item_id = f"states.{state}"
         common = dict(lang="en", prompt=states["extraction_prompt"], checklist=(),
-                      answers=spec["answers"], state=state)
+                      answers=spec["answers"], state=state, title=f"{spec['title_zh']} · {spec['title_en']}")
         state_items.append(UnderstandingItem(id=item_id, modality="vision", images=(image,), **common))
         state_items.append(UnderstandingItem(id=f"{item_id}.blind", modality="text", control_for=item_id, **common))
         for condition in ("described", "reference"):
@@ -213,7 +221,7 @@ def load_bench(root: Path, suite: str = "core") -> Bench:
         failure_modes=dict(rubric.get("failure_modes", {})),
         items=items, tiers=tiers, animals=animals, reference_image=reference_image,
         state_items=state_items, state_tiers=state_tiers, state_animals=state_animals,
-        suite=suite,
+        suite=suite, annotator=annotator,
     )
 
 

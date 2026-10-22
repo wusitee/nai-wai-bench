@@ -105,7 +105,8 @@ def cmd_site(args, root, bench, models, defaults):
     judges = set(select_names(models, args.judges)) if args.judges else None
     scores = scoring.aggregate(args.run_dir, bench.trait_weights, judges, bench=bench)
     out = Path(args.out) if args.out else root / "site"
-    index = site.build(bench, models, args.run_dir, scores, out, repo_url=args.repo_url)
+    index = site.build(bench, models, args.run_dir, scores, out, repo_url=args.repo_url,
+                       suite_tabs=args.suite_tabs)
     print(f"wrote {index}")
     return 0
 
@@ -161,6 +162,8 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--out", help="output directory (default: site/)")
     sp.add_argument("--judges", help="comma-separated judges to count (default: every judge with results)")
     sp.add_argument("--repo-url", help="link to the source repository in the footer")
+    sp.add_argument("--suite-tabs", action="store_true",
+                    help="link every suite's page, assuming core at the site root and others in <suite>/")
     return p
 
 
