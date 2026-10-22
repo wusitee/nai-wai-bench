@@ -3,6 +3,7 @@ from dataclasses import replace
 
 import pytest
 
+from nwb import report
 from nwb.config import find_root, load_bench
 from nwb.scoring import aggregate, grounding_score, image_scores, understanding_score
 from nwb.util import write_json
@@ -172,6 +173,7 @@ def test_generation_panel_requires_coverage_balanced_repeats_and_prompt_audit(tm
     assert rows["changed"]["completed"] == rows["unverified"]["completed"] == 0
     # A provider refusal of the verbatim prompt fills its cell with 0 instead of leaving the panel incomplete.
     assert rows["refused"]["rank"] == 2 and rows["refused"]["score"] == pytest.approx(100 * 29 / 30)
+    assert "refused by provider" in report.render(bench, "test", scores)
     _image_sample(tmp_path, bench, "full", "name_zh", "shiba", score=0)  # outside the fixed panel
     assert aggregate(tmp_path, bench.trait_weights, bench=bench)["leaderboards"]["imagegen"][0]["score"] == 100
     _image_sample(tmp_path, bench, "full", "name_zh", "cat", rep=2, score=0)

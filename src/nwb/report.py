@@ -162,6 +162,9 @@ def _imagegen(bench: Bench, scores: dict) -> list[str]:
                 if not s:
                     row.append("<td></td>")
                     continue
+                if not s["images"]:
+                    row.append(f"<td><span class=bad>refused by provider</span><br><b>{fmt(s['overall'])}</b></td>")
+                    continue
                 title = escape(" | ".join(f"{j}: {r}" for j, r in s["rationales"].items()), quote=True)
                 flags = f"<div class='muted bad'>{escape(', '.join(s['failure_modes']))}</div>" if s["failure_modes"] else ""
                 row.append(f"<td title=\"{title}\"><a href=\"{escape(s['images'][0])}\"><img loading=lazy "

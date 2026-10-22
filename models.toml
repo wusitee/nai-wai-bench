@@ -74,7 +74,7 @@ backend = "acp"
 vendor = "moonshot"
 command = ["kimi", "acp"]
 model = "kimi-code/k3"
-config = { mode = "plan" }  # plan mode: no tool execution
+config = { mode = "default" }  # tools need approval, which the harness rejects for answers
 can = ["text", "vision"]
 
 # --- OpenAI-compatible APIs ---

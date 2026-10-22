@@ -67,7 +67,8 @@ Agent 則用 `session/set_model`）設定 `model` 和 `config` 選項，然後�
 
 - **DeepSeek Harness**（`dsh`）：透過 `--patch` 套用 `config/dsh-no-tools.patch.yml`，停用網絡、shell、
   檔案、技能和子 Agent 外掛。該 ACP Agent 不接受圖片輸入。
-- **Kimi Code**（`kimi acp`）：`config = { mode = "plan" }` 讓工作階段以規劃模式啟動，不執行任何工具。
+- **Kimi Code**（`kimi acp`）：`config = { mode = "default" }` 讓每次工具呼叫都需要批准，而評測程式在理解題中
+  會拒絕批准。規劃模式不適用：K3 會先草擬計劃，再反覆嘗試退出規劃模式或向使用者提問，直到呼叫逾時。
   視覺呼叫可能較慢，偶爾會卡住直到逾時；重新執行即可重試。Agent 需要存取 `api.kimi.com`；該主機被封鎖時，
   它每個回合都不輸出任何文字。
 

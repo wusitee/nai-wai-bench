@@ -78,7 +78,9 @@ agent itself where possible:
 
 - **DeepSeek Harness** (`dsh`): `config/dsh-no-tools.patch.yml` is applied with `--patch` and disables the
   web, shell, file, skill, and subagent plugins. The ACP agent does not accept images.
-- **Kimi Code** (`kimi acp`): `config = { mode = "plan" }` starts sessions in plan mode, which runs no tools.
+- **Kimi Code** (`kimi acp`): `config = { mode = "default" }` makes every tool call ask for approval, which
+  the harness rejects for understanding prompts. Plan mode is unsuitable: K3 drafts a plan and repeatedly
+  tries to leave plan mode or ask the user a question, until the call times out.
   Vision calls can be slow and occasionally hang until the timeout; rerun to retry. The agent needs access
   to `api.kimi.com`; where that host is blocked it ends every turn without text.
 

@@ -67,8 +67,9 @@ Agent 则用 `session/set_model`）设置 `model` 和 `config` 选项，然后�
 
 - **DeepSeek Harness**（`dsh`）：通过 `--patch` 应用 `config/dsh-no-tools.patch.yml`，禁用网络、shell、
   文件、技能和子 Agent 插件。该 ACP Agent 不接受图片输入。
-- **Kimi Code**（`kimi acp`）：`config = { mode = "plan" }` 让会话以计划模式启动，不执行任何工具。视觉
-  调用可能较慢，偶尔会卡住直到超时；重新运行即可重试。Agent 需要访问 `api.kimi.com`；该主机被屏蔽时，
+- **Kimi Code**（`kimi acp`）：`config = { mode = "default" }` 让每次工具调用都需要批准，而评测程序在理解题中
+  会拒绝批准。计划模式不适用：K3 会先起草计划，再反复尝试退出计划模式或向用户提问，直到调用超时。
+  视觉调用可能较慢，偶尔会卡住直到超时；重新运行即可重试。Agent 需要访问 `api.kimi.com`；该主机被屏蔽时，
   它每个回合都不输出任何文字。
 
 初始化得到的 Agent 名称和版本保存在 `meta.client` 中；生成的图片会被检查，以记录厂商声明的 `meta.c2pa` 来源信息，不验证签名。
