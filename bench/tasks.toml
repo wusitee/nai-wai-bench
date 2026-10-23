@@ -1,0 +1,259 @@
+# Benchmark tasks. Prompt placeholders: {zh} and {en} are the animal names from [animals].
+# Image paths are relative to the bench/ directory.
+
+# --- Part 1: understanding (text and vision LLMs) ---
+# modality: "text" needs a text-capable model, "vision" also sends the listed images.
+# checklist: ids from bench/rubric.toml. animals: expands the item once per animal.
+
+[understanding.knowledge_zh]
+modality = "text"
+lang = "zh"
+prompt = "「大笑奶龙」（也叫「奶蛙」）是什么？请介绍它的来源、外观以及相关的梗和二创。不确定的地方请直接说明，不要编造。"
+checklist = ["base_character", "ai_variant", "xingye_origin", "aliases", "naiwa", "laugh_pose", "junti_quan", "official_reply", "trait_variants", "rarity_titles"]
+
+[understanding.knowledge_en]
+modality = "text"
+lang = "en"
+prompt = "What is the Chinese internet meme \"大笑奶龙\" (Laughing Nailong, also called \"奶蛙\")? Explain its origin, what it looks like, and the related jokes and remixes. Say so plainly where you are unsure instead of guessing."
+checklist = ["base_character", "ai_variant", "xingye_origin", "aliases", "naiwa", "laugh_pose", "junti_quan", "official_reply", "trait_variants", "rarity_titles"]
+
+[understanding.describe]
+modality = "text"
+lang = "zh"
+prompt = "不看任何图片，仅凭你的记忆，详细描述最经典的那张「大笑奶龙」（奶蛙）图片的画面：姿势、表情、身体造型、配色、渲染风格和背景，让从没见过它的画师能照着画出来。不确定的地方请说明。"
+checklist = ["pose", "hands_on_belly", "eyes", "mouth", "body", "belly_patch", "render", "background", "vibe"]
+
+[understanding.write_prompt]
+modality = "text"
+lang = "en"
+animals = ["cat", "giraffe"]
+prompt = "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a {en} version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt."
+checklist = ["pose", "hands_on_belly", "eyes", "mouth", "body", "belly_patch", "render", "background", "vibe", "identity"]
+
+[understanding.describe_en]
+modality = "text"
+lang = "en"
+prompt = "Without looking at any images, describe the most iconic image of Laughing Nailong (大笑奶龙 / 奶蛙) from memory: its pose, expression, body shape, colors, rendering style, and background, in enough detail for an artist who has never seen it to draw it. Say where you are unsure."
+checklist = ["pose", "hands_on_belly", "eyes", "mouth", "body", "belly_patch", "render", "background", "vibe"]
+
+[understanding.write_prompt_zh]
+modality = "text"
+lang = "zh"
+animals = ["cat", "giraffe"]
+prompt = "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出{zh}版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。"
+checklist = ["pose", "hands_on_belly", "eyes", "mouth", "body", "belly_patch", "render", "background", "vibe", "identity"]
+
+[understanding.recognize_zh]
+modality = "vision"
+lang = "zh"
+images = ["reference/nailong_laugh.png"]
+image_note = "The canonical 大笑奶龙 image: a yellow chubby creature hunched over, clutching its belly, laughing with eyes shut and mouth agape."
+prompt = "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？"
+checklist = ["base_character", "identifies_meme", "ai_variant", "aliases", "naiwa"]
+
+[understanding.recognize_en]
+modality = "vision"
+lang = "en"
+images = ["reference/nailong_laugh.png"]
+image_note = "The canonical 大笑奶龙 image: a yellow chubby creature hunched over, clutching its belly, laughing with eyes shut and mouth agape."
+prompt = "Who is this character, and which internet meme is this image from? Does the meme have other names?"
+checklist = ["base_character", "identifies_meme", "ai_variant", "aliases", "naiwa"]
+
+[understanding.recognize_variant]
+modality = "vision"
+lang = "zh"
+images = ["stimuli/laughing_panda.jpg"]
+image_note = "A panda redrawn in the 大笑奶龙 style (hunched, clutching belly, eyes shut, mouth agape, plain background). The expected answer is that it parodies the 大笑奶龙 / 奶蛙 meme."
+prompt = "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。"
+checklist = ["identifies_meme", "laugh_pose", "base_character"]
+
+[understanding.recognize_naiwa]
+modality = "vision"
+lang = "zh"
+images = ["stimuli/naiwa_glance.png"]
+image_note = "A sticker of the frog-like 奶蛙 variant: a smooth yellow 3D head with bulging round eyes and green sclera, captioned 「惊鸿一瞥」. The expected answer identifies it as 奶蛙, the mutated 奶龙 meme family."
+prompt = "这张表情包里的是什么角色？它属于哪个网络梗？"
+checklist = ["base_character", "identifies_meme", "naiwa"]
+
+[understanding.recognize_angry]
+modality = "vision"
+lang = "zh"
+images = ["stimuli/angry_variant.png"]
+image_note = "A sticker of a red, bulky mutated 奶龙 with angry green eyes and a pale belly, captioned 「切换愤怒模式」. The expected answer identifies it as part of the 大笑奶龙 / 变异奶龙 / 奶蛙 meme family."
+prompt = "这张表情包里的是什么角色？它属于哪个网络梗？"
+checklist = ["base_character", "identifies_meme", "ai_variant"]
+
+[understanding.recognize_facepalm]
+modality = "vision"
+lang = "zh"
+images = ["stimuli/naiwa_facepalm.jpg"]
+image_note = "A yellow, bulky Nailong variant with round green eyes, a pale belly, and one dark-fingered hand resting on its forehead. Published in a collection labelled 邪恶变异奶龙表情包; the original artist and generation method are unknown. Accept 大笑奶龙 / 变异奶龙 / 奶蛙 as the meme family, without requiring the canonical laughing pose."
+prompt = "这张表情包里的是什么角色？它属于哪个网络梗？"
+checklist = ["base_character", "identifies_meme"]
+
+[understanding.recognize_smug]
+modality = "vision"
+lang = "zh"
+images = ["stimuli/naiwa_smug.jpg"]
+image_note = "A close-up of a yellow mutated Nailong with a broad face, narrowed eyes, rosy cheeks, and a smug closed mouth. Published in a collection labelled 邪恶变异奶龙表情包; the original artist and generation method are unknown. Accept 大笑奶龙 / 变异奶龙 / 奶蛙 as the meme family, without requiring the canonical laughing pose."
+prompt = "这张表情包里的是什么角色？它属于哪个网络梗？"
+checklist = ["base_character", "identifies_meme"]
+
+[understanding.recognize_folded_arms]
+modality = "vision"
+lang = "zh"
+images = ["stimuli/naiwa_folded_arms.jpg"]
+image_note = "A yellow, pear-shaped mutated Nailong with a small head, bulging green eyes, a pale oval belly, and arms folded across its chest. Published in a collection labelled 邪恶变异奶龙表情包; the original artist and generation method are unknown. Accept 大笑奶龙 / 变异奶龙 / 奶蛙 as the meme family, without requiring the canonical laughing pose."
+prompt = "这张表情包里的是什么角色？它属于哪个网络梗？"
+checklist = ["base_character", "identifies_meme"]
+
+[understanding.recognize_official]
+modality = "vision"
+lang = "zh"
+images = ["stimuli/nailong_official.png"]
+image_note = "Official Nailong character artwork from the creator 第七印象's website: a round yellow dinosaur with green eyes, a pale belly, orange claws, and raised arms. This is a negative control, not the unofficial 大笑奶龙 / 奶蛙 mutation. Confidently identifying this specific image as that mutation is a hallucination."
+prompt = "这张表情包里的是什么角色？它属于哪个网络梗？"
+checklist = ["base_character", "official_art"]
+
+# Answer-keyed visual checks and paired no-image controls. No judge calls are needed.
+[grounding]
+prompt = "Look only at the attached image. Return a JSON object with two keys: pose (one of belly_clutch, raised_hands, facepalm, folded_arms) and eyes (open or closed). Use unknown for a field you cannot determine. Do not infer the answer from a meme's name or typical appearance."
+
+[grounding.cases.laugh]
+image = "reference/nailong_laugh.png"
+answers = { pose = "belly_clutch", eyes = "closed" }
+
+[grounding.cases.official]
+image = "stimuli/nailong_official.png"
+answers = { pose = "raised_hands", eyes = "open" }
+
+[grounding.cases.facepalm]
+image = "stimuli/naiwa_facepalm.jpg"
+answers = { pose = "facepalm", eyes = "open" }
+
+[grounding.cases.folded]
+image = "stimuli/naiwa_folded_arms.jpg"
+answers = { pose = "folded_arms", eyes = "open" }
+
+# Optional cross-animal state transfer. Kept separate from the core laughing panel.
+[state_transfer]
+animals = ["cat", "frog"]
+extraction_prompt = "Look only at the attached character. Report its visible expression and gesture, not an imagined inner feeling. Return JSON with four keys: state (angry, facepalm, smug, laughing, or other), eyes (open, closed, or narrowed), mouth (open or closed), and gesture (behind_back, forehead, belly_clutch, folded_arms, or out_of_frame). Use unknown when a field cannot be determined. Do not assume the character must be laughing or invent gestures outside the frame."
+described_prompt = "Generate a single clearly recognizable {en} character in a smooth, bulky 3D cartoon meme style with soft diffuse lighting and a plain light background. Transfer this expression and body language onto the animal: {description} Use the animal's natural colors and markings, rather than copying a yellow or red source body. Adapt any gesture to the animal's anatomy. No captions, lettering, or watermarks."
+reference_prompt = "Reimagine the character in the attached reference image as a clearly recognizable {en}. Transfer its visible expression, eye and mouth shape, gesture, posture, and smooth bulky 3D meme style to the animal. Adapt gestures to the animal's anatomy. Preserve the source framing; do not invent gestures outside the frame. Use the animal's natural colors and markings, rather than relying on the source body color to communicate the state. Plain light background. No captions, lettering, or watermarks."
+
+[state_transfer.cases.angry]
+image = "states/01.png"
+title_en = "Angry"
+title_zh = "愤怒"
+description = "Angry expression: eyes open under sharply lowered brows, a downturned closed mouth, chest and round belly pushed forward, and a visible arm held behind the back."
+answers = { state = "angry", eyes = "open", mouth = "closed", gesture = "behind_back" }
+
+[state_transfer.cases.facepalm]
+image = "states/02.jpg"
+title_en = "Facepalm"
+title_zh = "扶额"
+description = "Facepalm pose: one hand or paw rests on the forehead, the other forearm lies across the body, eyes are open, and the mouth is a small closed curve."
+answers = { state = "facepalm", eyes = "open", mouth = "closed", gesture = "forehead" }
+
+[state_transfer.cases.smug]
+image = "states/03.jpg"
+title_en = "Smug"
+title_zh = "得意"
+description = "A smug-looking close-up portrait: chin slightly raised, eyes narrowed into half-lidded slits, rounded cheeks, and a closed downturned mouth. Hands are outside the frame; do not add a gesture."
+answers = { state = "smug", eyes = "narrowed", mouth = "closed", gesture = "out_of_frame" }
+
+# --- Part 2: image generation ---
+# Each tier is run for every selected animal. reference = true attaches the reference image.
+# title_zh / title_en label the tier in the results site.
+
+[imagegen]
+reference_image = "reference/nailong_laugh.png"
+
+[imagegen.tiers.name_zh]
+title_zh = "只给中文梗名"
+title_en = "Chinese name only"
+prompt = "生成一张图片：{zh}版的大笑奶龙（奶蛙）。"
+
+[imagegen.tiers.name_en]
+title_zh = "只给英文梗名"
+title_en = "English name only"
+prompt = "Generate an image: a {en} version of the Chinese internet meme \"Laughing Nailong\"."
+
+# Two description tiers: a rough one-liner, and a detailed one that pins down the meme's 3D render style.
+[imagegen.tiers.described_brief]
+title_zh = "简略描述"
+title_en = "Brief description"
+prompt = "A 3D cartoon {en} doubled over with laughter, clutching its belly, on a plain white background."
+
+[imagegen.tiers.described_detailed]
+title_zh = "详细描述（3D 风格）"
+title_en = "Detailed description (3D style)"
+prompt = "A 3D-rendered cartoon {en} character that looks like a still from a cheap, smooth CG animation. Pose: standing with the torso hunched forward and knees slightly bent, doubled over with laughter, both hands pressed on its round belly. Face: eyes squeezed shut into thin curved arcs; an enormous gaping mouth that takes up most of the face, showing a dark throat, a row of small teeth, and a tongue. Body: bulky pear-shaped body with no neck, the small head merging straight into the torso; short thick arms and legs, small simple hands, and a pale oval belly patch. Rendering: smooth, seamless, slightly glossy matte-plastic skin with no fur strands or fine texture, so the {en}'s fur, markings, and colors appear only as smooth color patches on the sculpted surface; soft diffuse studio lighting with gentle shadows; simple shading like a low-budget AI-generated 3D model; slightly soft focus like a compressed video screenshot. Background: plain white to light grey and empty. Keep the {en} clearly recognizable from its head shape, ears, snout, and coloring."
+
+[imagegen.tiers.reference]
+title_zh = "参考原图"
+title_en = "Reference image"
+reference = true
+prompt = "参考这张图，画一个同样风格的{zh}版本。"
+
+# --- Animals. default = true marks the quick-run subset. ---
+
+[animals.cat]
+zh = "猫"
+en = "cat"
+default = true
+
+[animals.shiba]
+zh = "柴犬"
+en = "Shiba Inu dog"
+
+[animals.panda]
+zh = "熊猫"
+en = "giant panda"
+default = true
+
+[animals.penguin]
+zh = "企鹅"
+en = "penguin"
+tags = ["anatomy_conflict"]
+
+[animals.pig]
+zh = "猪"
+en = "pig"
+
+[animals.rabbit]
+zh = "兔子"
+en = "rabbit"
+
+[animals.capybara]
+zh = "水豚"
+en = "capybara"
+
+[animals.frog]
+zh = "青蛙"
+en = "frog"
+default = true
+tags = ["naiwa_pun"]
+
+[animals.giraffe]
+zh = "长颈鹿"
+en = "giraffe"
+default = true
+tags = ["anatomy_conflict"]
+
+[animals.octopus]
+zh = "章鱼"
+en = "octopus"
+default = true
+tags = ["anatomy_conflict"]
+
+[animals.shark]
+zh = "鲨鱼"
+en = "shark"
+tags = ["anatomy_conflict"]
+
+[animals.elephant]
+zh = "大象"
+en = "elephant"
+default = true

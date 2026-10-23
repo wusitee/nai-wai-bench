@@ -1,0 +1,23 @@
+[project]
+name = "nai-wai-bench"
+version = "0.1.0"
+description = "奶蛙bench: a benchmark of how well AI models understand and reproduce the 大笑奶龙 / 奶蛙 meme"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+nwb = "nwb.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["uv_build>=0.9,<0.20"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.uv.build-backend]
+module-name = "nwb"

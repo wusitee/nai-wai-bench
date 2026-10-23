@@ -1,0 +1,107 @@
+# Ground truth used by the judges. See bench/reference/SOURCE.md for sources.
+# Checklist ids are shared across [facts], [traits], and [identity] and must be unique.
+
+# Unscored context that helps judges spot false claims outside the checklist.
+[background]
+items = [
+  "奶龙 was created by 谢承恩 and designed by 深圳第七印象文化传媒有限公司; the animation launched in 2020.",
+  "Official setting: a 5-year-old alien dinosaur with a yellow body and green eyes; its companion is 小七.",
+  "After the official reply, fans treated it as confirmation and remixes grew; the official account at one point closed its comments.",
+]
+
+# --- Knowledge facts (understanding track) ---
+
+[facts.base_character]
+text = "奶龙 (Nailong) is a yellow, chubby cartoon dragon/dinosaur character from a Chinese children's animation."
+
+[facts.ai_variant]
+text = "大笑奶龙 is an AI-generated, unofficial, 'mutated' variant of 奶龙, not official artwork."
+
+[facts.xingye_origin]
+text = "It originated in October 2024, when a user published an AI agent named 「奶龙」 on the AI platform 「星野」 (Xingye); the agent's avatar was this AI-generated variant."
+
+[facts.aliases]
+text = "Besides 大笑奶龙 it is also called 「变异奶龙」 (mutated Nailong) and 「奶蛙」."
+
+[facts.naiwa]
+text = "「奶蛙」 names the mutated Nailong variant(s), especially a frog-like version (round bulging eyes, green sclera); it is still a mutated Nailong, not an unrelated frog character."
+
+[facts.laugh_pose]
+text = "The iconic 大笑奶龙 image shows it hunched forward, clutching its belly with both hands, eyes squeezed shut and mouth gaping, laughing hysterically (捧腹大笑). (The round green-eyed look belongs to the later frog-like 奶蛙 version.)"
+
+[facts.junti_quan]
+text = "Around late 2025 to early 2026 a remix used AI to replace 沧州 internet figure 季洪行 in his 军体拳 video with 大笑奶龙, paired with a 'thunderous laugh' (雷霆笑声): a male guest's laugh from streamer 王麻衣's livestream, processed by 《无畏契约》 commentator 八级哥 with the 老水牛 voice changer."
+
+[facts.official_reply]
+text = "Nailong's official account repeatedly replied 「请勿发布丑化、恶搞奶龙的非官方表情包。奶龙的可爱形象需要大家共同守护，建议分享正版素材……」, and that reply itself became a copypasta (定型文)."
+
+[facts.trait_variants]
+text = "A common genre uses AI to give 大笑奶龙 the traits of specific ACG characters or internet personalities."
+
+[facts.rarity_titles]
+text = "Such posts carry titles like 《恭喜你刷到了oo奶龙》 or 《地球还要被这样的萌物统治多久》, often claiming it is a rare Nailong (a tiny probability, or appearing once every N years); viewers reply 「我怎么这么倒霉」."
+
+[facts.identifies_meme]
+text = "Correctly identifies the shown image as belonging to the 大笑奶龙 / 变异奶龙 / 奶蛙 meme family (the image may be a variant), not just as a generic cartoon character."
+
+[facts.official_art]
+text = "Correctly distinguishes the shown official 奶龙 character artwork from the unofficial 大笑奶龙 / 奶蛙 mutation; it is not an example of that meme variant."
+
+[misconceptions]
+items = [
+  "大笑奶龙 is official artwork or a scene from the official Nailong animation.",
+  "奶蛙 is an unrelated frog character (e.g. Pepe the Frog) rather than a mutated Nailong.",
+  "The image in recognize_official is an unofficial 大笑奶龙 / 奶蛙 mutation; it is actually official character artwork from the creator's website.",
+]
+
+# --- Visual traits of the reference image (image-gen track; also describe/prompt items) ---
+# weight: contribution to the image style score. The pose, belly clutch, mouth, and vibe set the meme
+# apart from any cute laughing animal, so they weigh more than generic traits.
+
+[traits.pose]
+text = "Standing, torso hunched/bent forward with knees slightly bent, as if doubled over with laughter."
+weight = 2
+
+[traits.hands_on_belly]
+text = "Both hands or paws clutching or pressing on the belly (捧腹)."
+weight = 2
+
+[traits.eyes]
+text = "Eyes squeezed shut into thin curved arcs."
+weight = 1
+
+[traits.mouth]
+text = "Huge gaping mouth that dominates the face, dark interior, visible teeth and tongue: hysterical laughter."
+weight = 1.5
+
+[traits.body]
+text = "Bulky pear/bean-shaped body, no distinct neck (the head merges into the torso), short thick limbs."
+weight = 1
+
+[traits.belly_patch]
+text = "A pale oval belly patch contrasting with the main body color."
+weight = 0.5
+
+[traits.render]
+text = "Glossy 3D CG render with soft studio lighting, like the reference's slightly cheap AI-render look (not a 2D illustration, not photorealistic)."
+weight = 1
+
+[traits.background]
+text = "Plain white or light-grey background with no scene or props."
+weight = 0.5
+
+[traits.vibe]
+text = "Absurd, slightly unhinged meme energy (抽象), not merely cute or kawaii."
+weight = 1.5
+
+[identity.identity]
+text = "The target animal is clearly recognizable: its species-defining features and natural coloring or markings are carried onto the body. Score 1 if only token cues (e.g. ears pasted on a yellow Nailong) or ambiguous."
+
+# --- Image failure modes the judge may flag ---
+
+[failure_modes]
+generic_cute = "A cute or kawaii character that ignores the meme's pose/expression/vibe."
+realistic_animal = "A realistic or semi-realistic animal laughing, not the meme style."
+plain_nailong = "Essentially the original yellow Nailong; the target animal is missing or token."
+text_or_watermark = "Contains captions, text, or watermarks."
+multiple_subjects = "More than one character, or a busy scene."
