@@ -195,7 +195,8 @@ remaining sections appear when the run has data for them:
 - **Casebook:** one card per answer-keyed image item, grouped by the task file's `category`. Each card shows
   the image, its answer key, a verdict strip (one segment per model, in visual-ranking order; green when
   every field is correct), each model's wrong fields with the label it gave, and raw replies including
-  the no-image control. The naihub-v1 page leads with the casebook and a mosaic of its images.
+  the no-image control. Models that answered only the no-image control get no verdict, but their replies
+  are listed. The naihub-v1 page leads with the casebook and a mosaic of its images.
 - **Image generation:** one gallery per animal with every core tier, score, failure modes, and prompt
   audit (provider refusals appear as refused cells; a record's `meta.fill_note` labels images made through
   another route, with the hover text naming it); diagnostic tier means and matched knowledge ratios.

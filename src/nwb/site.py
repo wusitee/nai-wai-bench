@@ -356,6 +356,12 @@ def _case(item: UnderstandingItem, first: dict, rank: dict, label, asset) -> str
         raw.append(f"<b>{e(label(m))}</b><div class=raw>{e(s['answer'])}</div>"
                    + (f"<span class=muted>无图对照 No image</span><div class=raw>{e(blind['answer'])}</div>"
                       if blind else ""))
+    # Models that only answered the no-image control (text-only models, failed visual cells) get no verdict,
+    # but their replies still count toward the No image score, so show them.
+    for m in sorted({m for (i, m) in first if i == f"{item.id}.blind"} - set(models),
+                    key=lambda m: (rank.get(m, len(rank)), m)):
+        raw.append(f"<b>{e(label(m))}</b> <span class=muted>无图对照 No image</span>"
+                   f"<div class=raw>{e(first[(f'{item.id}.blind', m)]['answer'])}</div>")
     note = f"<p class=muted>{e(item.image_note)}</p>" if item.image_note else ""
     return (
         f"<article class=case id='case-{e(case)}'><a href='{e(image)}'><img loading=lazy src='{e(image)}' "

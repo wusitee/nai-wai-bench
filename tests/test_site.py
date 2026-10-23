@@ -49,6 +49,13 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
         "modality": item.modality, "lang": item.lang, "rep": 1, "prompt": item.prompt,
         "answer": answer,
     })
+    if suite == "naihub-v1":
+        # A text-only model answers only the no-image control; its reply must still be shown.
+        text_model = models["deepseek-v4-pro"]
+        write_json(run / "understanding" / text_model.name / "blind__r1.json", {
+            "track": "understanding", "model": text_model.name, "vendor": text_model.vendor,
+            "item": f"{item.id}.blind", "suite": suite, "modality": "text", "lang": item.lang, "rep": 1,
+            "prompt": item.prompt, "answer": json.dumps({**item.answers, "note": "blind-only reply"})})
     state_item = bench.state_items[0]
     write_json(run / "understanding" / model.name / "states.angry__r1.json", {
         "track": "understanding", "model": model.name, "vendor": model.vendor, "item": state_item.id,
@@ -86,7 +93,7 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
     if suite == "naihub-v1":
         # Answer-keyed images appear as casebook cards; the annotator is flagged; tabs follow the published layout.
         assert "all seven fields" in html and "Family macro" in html and f"id='case-{item.id.split('.')[1]}'" in html
-        assert "Key annotator" in html and "href='../'" in html
+        assert "Key annotator" in html and "href='../'" in html and "blind-only reply" in html
     else:
         assert "Answer-key diagnostics" not in html and "href='naihub-v1/'" in html
     local_report = report.render(bench, "test", scores)
