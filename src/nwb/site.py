@@ -400,7 +400,8 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
 
     boards = scores.get("leaderboards", {})
     vision_order = [r["model"] for r in boards.get("visual_understanding", [])]
-    sampled = {s["item"] for s in und_samples}
+    # An image item is shown when it or its no-image control has a sample.
+    sampled = {s.get("control_for") or s["item"] for s in und_samples}
     keyed = [i for i in bench.items if i.modality == "vision" and i.answers and i.id in sampled]
     state_keyed = [i for i in bench.state_items if i.modality == "vision" and i.id in sampled]
     core_tiers = [t for t in bench.tiers.values() if any(t.id == s["tier"] for s in img_samples)]
