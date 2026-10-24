@@ -67,6 +67,16 @@ command = ["dsh", "--profile", "acp", "--patch", "${NWB_ROOT}/config/dsh-no-tool
 model = '["deepseek-official","deepseek-v4-pro"]'
 can = ["text"]
 
+# deepseek-flash points to DeepSeek's newest Flash model; update the label when it moves past V4.1.
+[models."deepseek-v4.1-flash"]
+label = "DeepSeek-V4.1-Flash"
+backend = "acp"
+vendor = "deepseek"
+command = ["dsh", "--profile", "acp", "--patch", "${NWB_ROOT}/config/dsh-no-tools.patch.yml",
+           "--patch", "${NWB_ROOT}/config/dsh-flash-default.patch.yml"]
+model = '["deepseek-official","deepseek-flash"]'
+can = ["text", "vision"]
+
 [models."kimi-k3"]
 timeout = 300
 label = "Kimi K3"
@@ -75,6 +85,16 @@ vendor = "moonshot"
 command = ["kimi", "acp"]
 model = "kimi-code/k3"
 config = { mode = "default" }  # tools need approval, which the harness rejects for answers
+can = ["text", "vision"]
+
+[models."kimi-k3.1-pro"]
+timeout = 300
+label = "Kimi K3.1 Pro"
+backend = "acp"
+vendor = "moonshot"
+command = ["kimi", "acp"]
+model = "kimi-code/k3.1-pro"
+config = { mode = "default" }
 can = ["text", "vision"]
 
 # --- OpenAI-compatible APIs ---
