@@ -77,6 +77,16 @@ model = "kimi-code/k3"
 config = { mode = "default" }  # tools need approval, which the harness rejects for answers
 can = ["text", "vision"]
 
+[models."kimi-k3.1-pro"]
+timeout = 300
+label = "Kimi K3.1 Pro"
+backend = "acp"
+vendor = "moonshot"
+command = ["kimi", "acp"]
+model = "kimi-code/k3.1-pro"
+config = { mode = "default" }
+can = ["text", "vision"]
+
 # --- OpenAI-compatible APIs ---
 
 # Xiaomi MiMo Token Plan; the endpoint and key are read from this CC Switch provider at run time.
