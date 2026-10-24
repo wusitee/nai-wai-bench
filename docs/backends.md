@@ -77,10 +77,11 @@ understanding answers with any tool call are marked `contaminated` and not score
 agent itself where possible:
 
 - **DeepSeek Harness** (`dsh`): `config/dsh-no-tools.patch.yml` is applied with `--patch` and disables the
-  web, shell, file, working-directory, skill, and subagent plugins. New dsh releases can add tool plugins;
-  after upgrading, check the composed tree with `--dump-config` and extend the patch. The ACP agent accepts
-  images only when its default model takes image input, whatever model the session selects, so
-  `deepseek-v4.1-flash` also applies `config/dsh-flash-default.patch.yml`. DeepSeek-V4-Pro is text-only.
+  web, shell, file, working-directory, skill, subagent, todo, goal, and plan-mode plugins. New dsh releases
+  can add tool plugins; after upgrading, check the composed tree with `--dump-config` and extend the patch.
+  The ACP agent accepts images only when its default model takes image input, whatever model the session
+  selects, so `deepseek-v4.1-flash` also applies `config/dsh-flash-default.patch.yml`. DeepSeek-V4-Pro is
+  text-only.
 - **Kimi Code** (`kimi acp`): `config = { mode = "default" }` makes every tool call ask for approval, which
   the harness rejects for understanding prompts. Plan mode is unsuitable: K3 drafts a plan and repeatedly
   tries to leave plan mode or ask the user a question, until the call times out.

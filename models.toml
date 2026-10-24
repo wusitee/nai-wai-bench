@@ -67,9 +67,9 @@ command = ["dsh", "--profile", "acp", "--patch", "${NWB_ROOT}/config/dsh-no-tool
 model = '["deepseek-official","deepseek-v4-pro"]'
 can = ["text"]
 
-# The deepseek-flash API id follows DeepSeek's releases; the label names the release that was run.
+# deepseek-flash points to DeepSeek's newest Flash model; update the label when it moves past V4.1.
 [models."deepseek-v4.1-flash"]
-label = "DeepSeek-V4.1-Flash-1017"
+label = "DeepSeek-V4.1-Flash"
 backend = "acp"
 vendor = "deepseek"
 command = ["dsh", "--profile", "acp", "--patch", "${NWB_ROOT}/config/dsh-no-tools.patch.yml",
