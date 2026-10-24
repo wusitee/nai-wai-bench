@@ -66,7 +66,9 @@ Agent 则用 `session/set_model`）设置 `model` 和 `config` 选项，然后�
 理解类回答都会被标记为 `contaminated`，不参与计分。尽量在 Agent 内部直接禁用工具：
 
 - **DeepSeek Harness**（`dsh`）：通过 `--patch` 应用 `config/dsh-no-tools.patch.yml`，禁用网络、shell、
-  文件、技能和子 Agent 插件。该 ACP Agent 不接受图片输入。
+  文件、工作目录、技能和子 Agent 插件。dsh 新版本可能新增工具插件；升级后用 `--dump-config` 检查合成后的
+  配置树并补充该 patch。无论会话选择哪个模型，该 ACP Agent 只在默认模型支持图片输入时才接受图片，因此
+  `deepseek-v4.1-flash` 还会应用 `config/dsh-flash-default.patch.yml`。DeepSeek-V4-Pro 仅支持文本。
 - **Kimi Code**（`kimi acp`）：`config = { mode = "default" }` 让每次工具调用都需要批准，而评测程序在理解题中
   会拒绝批准。计划模式不适用：K3 会先起草计划，再反复尝试退出计划模式或向用户提问，直到调用超时。
   视觉调用可能较慢，偶尔会卡住直到超时；重新运行即可重试。Agent 需要访问 `api.kimi.com`；该主机被屏蔽时，

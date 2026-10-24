@@ -1,0 +1,6 @@
+# DeepSeek Harness patch overlay: make DeepSeek-V4.1-Flash the ACP default model. The ACP agent accepts
+# image prompts only when its default model takes image input, whichever model a session selects later.
+- id: acp
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

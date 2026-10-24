@@ -67,6 +67,16 @@ command = ["dsh", "--profile", "acp", "--patch", "${NWB_ROOT}/config/dsh-no-tool
 model = '["deepseek-official","deepseek-v4-pro"]'
 can = ["text"]
 
+# The deepseek-flash API id follows DeepSeek's releases; the label names the release that was run.
+[models."deepseek-v4.1-flash"]
+label = "DeepSeek-V4.1-Flash-1017"
+backend = "acp"
+vendor = "deepseek"
+command = ["dsh", "--profile", "acp", "--patch", "${NWB_ROOT}/config/dsh-no-tools.patch.yml",
+           "--patch", "${NWB_ROOT}/config/dsh-flash-default.patch.yml"]
+model = '["deepseek-official","deepseek-flash"]'
+can = ["text", "vision"]
+
 [models."kimi-k3"]
 timeout = 300
 label = "Kimi K3"
