@@ -1,0 +1,25 @@
+{
+  "suite": "naihub-v1",
+  "model_key": "gpt-6.1-terra-xhigh",
+  "model": "gpt-6.1-terra",
+  "reasoning": "xhigh",
+  "repetitions": 1,
+  "source_commit": "9ead3a147d05bb647a314c99f60c48ffea40f469",
+  "started_at": "2026-10-28T04:37:53.179415+00:00",
+  "finished_at": "2026-10-28T04:42:07.701378+00:00",
+  "clients": [
+    "codex-cli 0.164.0"
+  ],
+  "isolation": "dedicated auth-only CODEX_HOME; empty working directory for each call; tools disabled",
+  "session_model_and_effort_verified": 48,
+  "answers": 48,
+  "errors": 0,
+  "contaminated": 0,
+  "judges": [],
+  "judge_note": "Fixed provisional answer keys; no LLM judge.",
+  "usage": {
+    "input_tokens": 564958,
+    "cached_input_tokens": 412160,
+    "output_tokens": 3730
+  }
+}

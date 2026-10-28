@@ -1,0 +1,703 @@
+{
+  "suite": "core",
+  "judges": [
+    "opus-5.5"
+  ],
+  "judge_health": {
+    "opus-5.5": {
+      "understanding": {
+        "n": 17,
+        "spread": 22.913880564156674,
+        "deviation": null
+      }
+    }
+  },
+  "understanding": {
+    "gpt-6.1-terra-xhigh": {
+      "fields": {
+        "pose": 100.0,
+        "eyes": 100.0
+      },
+      "field_items": {
+        "pose": 4,
+        "eyes": 4
+      },
+      "family_classes": {},
+      "family_macro": null,
+      "joint": 100.0,
+      "visual_joint": 100.0,
+      "categories": {},
+      "overall": 43.97435897435897,
+      "text": 37.22222222222222,
+      "vision": 43.97435897435897,
+      "languages": {
+        "zh": 38.333333333333336,
+        "en": 36.111111111111114
+      },
+      "grounding": 100.0,
+      "blind": 0.0,
+      "visual_gain": 100.0,
+      "hallucinations_per_answer": 0.7058823529411765,
+      "items": {
+        "describe": 33.333333333333336,
+        "describe_en": 44.44444444444444,
+        "grounding.facepalm": 100.0,
+        "grounding.folded": 100.0,
+        "grounding.laugh": 100.0,
+        "grounding.official": 100.0,
+        "knowledge_en": 10.0,
+        "knowledge_zh": 10.0,
+        "recognize_angry": 0.0,
+        "recognize_en": 40.0,
+        "recognize_facepalm": 15.0,
+        "recognize_folded_arms": 0.0,
+        "recognize_naiwa": 0.0,
+        "recognize_official": 75.0,
+        "recognize_smug": 15.0,
+        "recognize_variant": 16.666666666666668,
+        "recognize_zh": 10.0,
+        "write_prompt.cat": 60.0,
+        "write_prompt.giraffe": 30.0,
+        "write_prompt_zh.cat": 55.0,
+        "write_prompt_zh.giraffe": 55.0
+      },
+      "per_judge": {
+        "opus-5.5": 27.61437908496732
+      },
+      "contaminated": 0
+    }
+  },
+  "state_understanding": {},
+  "imagegen": {},
+  "samples": {
+    "understanding": [
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "describe",
+        "modality": "text",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/describe__r1.json",
+        "answer": "我对「奶龙」这个黄色卡通形象有大致印象，但**不能确定你说的「大笑奶龙」（奶蛙）具体是哪一张图**。尤其是姿势、嘴的形状和背景，我无法凭记忆可靠地还原。下面可以作为画师理解角色和制作近似画面的参考，但不是对那张原图的精确描述。\n\n我印象中的奶龙是一个**黄色、圆胖、幼态的小恐龙形象**：头和身体都偏圆，身体像一个鼓鼓的梨形或蛋形，肚子突出；四肢短小，手臂和腿都比较粗圆，没有尖锐的关节。整体轮廓应当显得软、厚、有弹性，重心很低。\n\n脸部以大面积黄色为主，五官集中在正面，眼睛和嘴的对比很醒目。如果画「大笑」的版本，可以让嘴张大、嘴角向两边上扬，眼睛因笑而眯起，突出一种毫无顾忌的开心。不过，**我不确定原图的眼睛是否真的眯成弧线，也不确定是否露牙、露舌头或有腮红**；这些都不应当作原图的确定特征。\n\n配色上，以明亮的奶黄色或暖黄色为主；肚皮可能是更浅的颜色，但我不能确定那张图里是否明显可见。眼睛和口腔可以用深色形成对比。渲染方面，我记忆里的奶龙更接近**圆润的三维卡通玩偶**：表面光滑，明暗柔和，有一定体积感，不是写实的皮肤纹理。\n\n至于它是站着、坐着、仰头，还是举着手笑，以及背景是纯色、透明背景还是某个场景，**我没有可靠记忆**。如果画师要临时构图，可以先试正面、短腿站立、双臂略微张开，再把头部和张大的笑嘴作为视觉重点；这只是补全方案，不能保证与经典图片一致。",
+        "score": 33.333333333333336,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 33.333333333333336
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The answer covers the 3D render style, the pear-shaped body and short limbs, and hedged versions of the big mouth, squinting eyes and pale belly. It says it cannot recall the pose, hands or background, never mentions the headless/no-neck merge, and frames the mood as plain happiness rather than unhinged meme energy; its suggested arms-open pose is labelled as a fill-in, so it isn't counted as a hallucination."
+        }
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "describe_en",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/describe_en__r1.json",
+        "answer": "I can recall the general character, but I’m **not confident I can reconstruct the specific iconic laughing image** from memory.\n\nNailong is a plump, yellow, baby-dragon-like cartoon character. I picture a large rounded head flowing into a broad, pear-shaped body, with a prominent belly and very short arms and legs. The laughing expression is exaggerated: a wide-open mouth, eyes squeezed into happy curves, and a face dominated by the grin. The overall effect is silly and exuberant.\n\nFor an artist, I would suggest smooth, rounded forms and a polished, soft 3D-cartoon look, with bright yellow as the dominant color. I’m unsure of the mouth colors, any markings, and the precise finish of the original image.\n\nI also can’t reliably remember the exact pose or background. A relaxed, upright pose with the little arms held away from the body and a plain light background would convey the character, but those are suggestions for filling the gaps, not details I can vouch for in the original.",
+        "score": 44.44444444444444,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 44.44444444444444
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The answer correctly describes the arc-shaped closed eyes and the bulky pear-shaped, neckless body with short limbs, and it partly covers the mouth, the 3D look, the plain background and the silly vibe. It misses the hunched pose, hands on belly and pale belly patch, and its upright, arms-out pose is explicitly marked as a guess, so it is not counted as a hallucination."
+        }
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "grounding.facepalm.blind",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/grounding.facepalm.blind__r1.json",
+        "answer": "{\"pose\":\"unknown\",\"eyes\":\"unknown\"}",
+        "score": 0.0,
+        "joint": 0.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 0.0,
+          "eyes": 0.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "grounding.facepalm",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "grounding.facepalm",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/grounding.facepalm__r1.json",
+        "answer": "{\"pose\":\"facepalm\",\"eyes\":\"open\"}",
+        "score": 100.0,
+        "joint": 100.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 100.0,
+          "eyes": 100.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "grounding.folded.blind",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/grounding.folded.blind__r1.json",
+        "answer": "{\"pose\":\"unknown\",\"eyes\":\"unknown\"}",
+        "score": 0.0,
+        "joint": 0.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 0.0,
+          "eyes": 0.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "grounding.folded",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "grounding.folded",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/grounding.folded__r1.json",
+        "answer": "{\"pose\":\"folded_arms\",\"eyes\":\"open\"}",
+        "score": 100.0,
+        "joint": 100.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 100.0,
+          "eyes": 100.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "grounding.laugh.blind",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/grounding.laugh.blind__r1.json",
+        "answer": "{\"pose\":\"unknown\",\"eyes\":\"unknown\"}",
+        "score": 0.0,
+        "joint": 0.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 0.0,
+          "eyes": 0.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "grounding.laugh",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "grounding.laugh",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/grounding.laugh__r1.json",
+        "answer": "{\"pose\":\"belly_clutch\",\"eyes\":\"closed\"}",
+        "score": 100.0,
+        "joint": 100.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 100.0,
+          "eyes": 100.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "grounding.official.blind",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/grounding.official.blind__r1.json",
+        "answer": "{\"pose\":\"unknown\",\"eyes\":\"unknown\"}",
+        "score": 0.0,
+        "joint": 0.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 0.0,
+          "eyes": 0.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "grounding.official",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "grounding.official",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/grounding.official__r1.json",
+        "answer": "{\"pose\":\"raised_hands\",\"eyes\":\"open\"}",
+        "score": 100.0,
+        "joint": 100.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 100.0,
+          "eyes": 100.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "knowledge_en",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/knowledge_en__r1.json",
+        "answer": "“奶龙” is a plump yellow dinosaur character from the Chinese animated shorts *小七和奶龙*. Images and clips of the character have circulated widely as reaction memes.\n\nI’m not confident enough to identify the specific “大笑奶龙” image, explain how it came to be called “奶蛙,” or describe its particular jokes and remixes. There are many edited versions of 奶龙 online, and I don’t want to mistake a different meme for this one.",
+        "score": 10.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 10.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The answer correctly describes 奶龙 as a plump yellow dinosaur from a Chinese animation. It explicitly declines to cover the 大笑奶龙 variant, its origin, appearance, aliases and remixes, so it makes no false claims but misses the other items."
+        }
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "knowledge_zh",
+        "modality": "text",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/knowledge_zh__r1.json",
+        "answer": "我不能仅凭现有知识，可靠地确定「大笑奶龙」或「奶蛙」具体指哪一张图、哪段视频或哪种二创形象，因此也无法确认它最初由谁创作、从哪里传播开来。这个称呼可能有特定的网络语境，我不想把其他形象误认成它。\n\n我能确认的相关背景是：**奶龙**是国产动画中的黄色小恐龙形象，身体圆滚滚，手脚较短，常以贪吃、活泼的样子出现。它的夸张表情和动作也常被网友拿来制作表情包、配音和改编视频。\n\n不过，这些只是关于奶龙及其一般二创的介绍，**不能据此断定「大笑奶龙」的具体外观、笑声来源或专属梗**。另外，「奶蛙」也可能是对某些蛙类的俗称；它和你提到的网络形象是否有关，我无法确认。",
+        "score": 10.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 10.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The answer correctly describes 奶龙 as a chubby yellow cartoon dinosaur from a Chinese animation. It openly declines to identify 大笑奶龙 or 奶蛙, so it covers none of the meme-specific items, and its 'frog nickname' suggestion is marked as uncertain rather than asserted."
+        }
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "recognize_angry",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/recognize_angry__r1.json",
+        "answer": "图里看起来是一只变红、皱眉的卡通企鹅，配文属于 **“切换愤怒模式”或“红温”表情包梗**，用来夸张地表达生气。\n\n不过，仅凭这张图，我不能可靠地确认它的具体角色名或原始出处。",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Describes the character as a cartoon penguin (变红、皱眉的卡通企鹅); the image shows a red, bulky mutated 奶龙 with green eyes and a pale belly, not a penguin"
+        ],
+        "rationales": {
+          "opus-5.5": "The model never mentions 奶龙 or the 大笑奶龙/变异奶龙/奶蛙 meme family, and doesn't note that it is an AI-generated unofficial variant. It only reads the caption as a generic 'angry mode/红温' sticker and misdescribes the creature as a penguin."
+        }
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "recognize_en",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/recognize_en__r1.json",
+        "answer": "The character is **Nailong (奶龙)**, a yellow dragon from a Chinese animated series. The image is commonly shared as the **“Nailong laughing”** reaction meme, used to show uncontrollable laughter or to mock something.\n\nYou may also see it called **“laughing Nailong,” “laughing yellow dragon,”** or **“laughing yellow dinosaur.”** Nailong’s name is sometimes translated as **“Milk Dragon.”**",
+        "score": 40.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 40.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The answer correctly identifies Nailong as a yellow dragon from a Chinese animated series and names the image as the 'laughing Nailong' (大笑奶龙) meme. It never says the image is an AI-generated, unofficial mutated variant, and it omits the aliases 变异奶龙 and 奶蛙; the generic English names it lists are not wrong but earn no credit."
+        }
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "recognize_facepalm",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/recognize_facepalm__r1.json",
+        "answer": "这是 **奈瓦（Naiwa）**，属于“奈瓦扶额”表情包梗。这个动作常用来表达无语、尴尬或对某件事感到哭笑不得。",
+        "score": 15.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 15.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Names the character '奈瓦 (Naiwa)' and the meme '奈瓦扶额' with confidence. These appear to be made-up or garbled forms of 奶蛙/奶龙, and no '奈瓦扶额' meme is supported."
+        ],
+        "rationales": {
+          "opus-5.5": "The answer never mentions 奶龙 or describes it as a yellow cartoon dragon/dinosaur from a children's animation. '奈瓦/Naiwa' loosely echoes 奶蛙 but misnames it and never connects it to the 变异/大笑奶龙 meme family, so the meme identification earns partial credit at most."
+        }
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "recognize_folded_arms",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/recognize_folded_arms__r1.json",
+        "answer": "我无法仅凭这张图确定角色的名字，也不能有把握地判断它属于哪个网络梗。图中是一个双手抱胸、绿眼睛的黄色卡通形象。",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The model declined to name the character or the meme, so it covers neither 奶龙 nor the 大笑奶龙/变异奶龙/奶蛙 meme family. Its visual description (yellow figure, green eyes, arms crossed) matches the image and makes no false claims."
+        }
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "recognize_naiwa",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/recognize_naiwa__r1.json",
+        "answer": "图里是黄色小鸟 **奈娃（Naiwa）**，出自“惊鸿一瞥”表情包梗。它侧着头、瞪大眼睛的样子，常用来表示突然瞥见什么时的惊讶或好奇。",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Identifies the character as a yellow bird (黄色小鸟) rather than a mutated 奶龙",
+          "Invents a character name '奈娃 (Naiwa)' and presents it as a bird character, not as the 奶蛙 mutated-Nailong variant",
+          "Claims the character comes from a '惊鸿一瞥' meme, which is only the sticker's caption, not the 大笑奶龙/奶蛙 meme family"
+        ],
+        "rationales": {
+          "opus-5.5": "The answer never mentions 奶龙 or the 大笑奶龙/变异奶龙/奶蛙 meme family. It misreads the figure as a yellow bird named '奈娃' and treats the caption '惊鸿一瞥' as the meme's origin. The near-homophone name doesn't earn credit because it is attached to the wrong identity."
+        }
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "recognize_official",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/recognize_official__r1.json",
+        "answer": "这是**奶龙**，国产动画《奶龙》里的黄色小恐龙角色。\n\n它属于“**奶龙梗**”：网友常用奶龙的表情包、魔性配音和鬼畜视频来卖萌或整活，也衍生出了“奶龙怎么你了”等调侃。",
+        "score": 75.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 75.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The model correctly identifies the character as 奶龙, the yellow dinosaur from the Chinese animation, and avoids calling this official artwork the 大笑奶龙/奶蛙 mutation. However, it never explicitly separates the official art from that unofficial variant; it just gives a generic '奶龙梗'."
+        }
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "recognize_smug",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/recognize_smug__r1.json",
+        "answer": "这是一只被网友称为 **“奶蛙”** 的黄色小蛙，属于“奶蛙表情包”梗。它眯着眼、抿着嘴的样子常用来表达得意、傲娇或一脸不屑的情绪。",
+        "score": 15.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 15.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Describes the character as a yellow little frog (黄色小蛙), implying 奶蛙 is a frog character rather than a mutated version of 奶龙 (Nailong)."
+        ],
+        "rationales": {
+          "opus-5.5": "The answer correctly names the 奶蛙 meme, but it never connects it to 奶龙, the chubby yellow dragon from the Chinese children's animation. It also mischaracterizes the subject as a frog, so the meme identification gets only partial credit."
+        }
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "recognize_variant",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/recognize_variant__r1.json",
+        "answer": "这张图让我联想到中文网络上常见的**“笑死我了”或“笑得肚子疼”表情包**：熊猫闭着眼、张大嘴笑，双手还捂着肚子，把捧腹大笑的反应夸张地表现出来。\n\n不过，图里没有文字或其他足以辨认出处的标志，我无法仅凭画面确定它模仿的是某一张特定的表情包。",
+        "score": 16.666666666666668,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 16.666666666666668
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The model correctly describes the laughing pose in the image: eyes shut, mouth gaping, hands clutching the belly. It never links the pose to 大笑奶龙/奶蛙 or explains what 奶龙 is, and it hedges instead of naming the meme, so it makes no false claims."
+        }
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "recognize_zh",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/recognize_zh__r1.json",
+        "answer": "图里通常被称为**奶龙**，是国产动画《奶龙》里的黄色小恐龙角色。这张图把它夸张地捧腹大笑的样子做成了表情包，用来表达“笑死我了”或忍不住大笑。\n\n这个表情包也常被叫作“奶龙大笑”“奶龙爆笑”或“捧腹大笑奶龙”；这些名称更多是网友的描述，没有特别固定的官方别名。",
+        "score": 10.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 10.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Presents the image as the official 奶龙 character from the animation turned into a meme, rather than an AI-generated unofficial mutated variant.",
+          "Claims the meme has no fixed alias, which contradicts the established aliases 变异奶龙 and 奶蛙."
+        ],
+        "rationales": {
+          "opus-5.5": "The answer correctly names 奶龙 as a yellow dinosaur from a Chinese animation and links the image to a laughing meme. It misses that 大笑奶龙 is an AI-generated mutated variant and omits the aliases 变异奶龙/奶蛙, offering generic descriptive names instead."
+        }
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "write_prompt.cat",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/write_prompt.cat__r1.json",
+        "answer": "Create a square, close-up meme image of a chubby, bright yellow cartoon cat laughing uncontrollably. Its body is shaped like a plump baby dinosaur: a large round head flowing into a pear-shaped body, a pale cream belly, tiny arms and short legs. Give it small pointed cat ears, subtle whiskers and a little curled tail. Its eyes are squeezed shut into curved lines, and its enormous mouth is wide open in a joyful laugh, showing a dark pink interior, a pink tongue and a few small white teeth. Its cheeks are raised and its head tilts slightly back; one tiny paw rests on its belly. Use smooth, simple 3D animation with soft shading, clean contours and vivid colors. Center the character against a plain white background. No text, captions, logos or other objects.",
+        "score": 60.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 60.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Head tilting slightly back, which contradicts the hunched-forward, doubled-over laughing pose"
+        ],
+        "rationales": {
+          "opus-5.5": "The prompt covers the eyes, mouth, body shape, belly patch and plain background well. However, it omits the doubled-over pose, shows only one paw on the belly, gives a generic 3D style without the glossy studio-render look, and reads as cute rather than absurd. The cat is only a yellow Nailong with token ears, whiskers and tail, not natural cat coloring."
+        }
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "write_prompt.giraffe",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/write_prompt.giraffe__r1.json",
+        "answer": "Create a square digital sticker of a chubby baby giraffe laughing with its entire body. Give it a round, bright golden-yellow body, a short neck, small brown patches, two stubby horn nubs, tiny ears, a broad pale muzzle, and short arms and legs. It sits with its belly pushed forward and its little arms lifted at its sides. Its head tilts back; its eyes are squeezed shut into curved lines, its cheeks are raised, and its mouth is comically enormous and wide open, showing a dark mouth, a pink tongue, and a few small white teeth. Add tiny tears at the corners of its eyes to convey uncontrollable laughter. Use a simple, soft 3D cartoon style with smooth rounded forms, clean outlines, bright warm colors, and gentle shading. Center the character on a plain white background, with no text, props, or other characters.",
+        "score": 30.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 30.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Character sits with belly pushed forward and head tilted back (meme is standing, hunched forward)",
+          "Arms lifted at its sides (meme clutches its belly with both hands)"
+        ],
+        "rationales": {
+          "opus-5.5": "The prompt gets the shut arc eyes, huge dark open mouth and plain white background right, but it inverts the pose (sitting, leaning back, arms raised instead of standing hunched and clutching the belly) and omits the pale belly patch. The giraffe identity is only partial, with brown patches and horn nubs on a yellow short-necked body, and the cute sticker style with outlines only partly matches the glossy 3D render and absurd meme energy."
+        }
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "write_prompt_zh.cat",
+        "modality": "text",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/write_prompt_zh.cat__r1.json",
+        "answer": "一张搞笑表情包：纯白背景中央，一只圆滚滚的奶黄色小猫，像软乎乎的卡通玩偶，脑袋大、身体短胖，有两只小三角耳朵和短短的爪子。它仰着头放声大笑，眼睛眯成弯弯的月牙，嘴巴张得特别大，露出粉红色舌头和几颗小白牙，脸颊被笑容挤得鼓起来；两只前爪抱着肚子，整个身体笑得微微后仰。夸张、憨萌、毫无顾忌的笑容，奶油般光滑的质感，柔和明亮的光线，简洁的三维卡通造型，正面构图，角色占满画面。无文字、无水印。",
+        "score": 55.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 55.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "States the character is throwing its head back and leaning backward (仰着头…身体笑得微微后仰), but the meme's pose is hunched forward, doubled over with laughter."
+        ],
+        "rationales": {
+          "opus-5.5": "The answer covers the paws on the belly, the crescent eyes, the huge open mouth, the 3D render and the white background, but it reverses the pose to leaning back and omits the pale belly patch. The body is described as big-headed and chubby rather than a neckless bean shape, the tone leans cute rather than absurd, and the cat cues are mostly token (cream-yellow color and triangle ears, with no whiskers or markings)."
+        }
+      },
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "item": "write_prompt_zh.giraffe",
+        "modality": "text",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.1-terra-xhigh/write_prompt_zh.giraffe__r1.json",
+        "answer": "画一张正方形、白色背景的搞笑表情包：一只长颈鹿版的卡通奶龙，身体圆滚滚的，通体奶黄色，肚皮是浅奶油色，身上点缀柔和的橙棕色长颈鹿斑块；四肢短小，头顶有一对圆钝的小角，脖子又细又长。它仰着大脑袋，眼睛笑得眯成两道弯弯的细缝，嘴巴张得极大，露出深色口腔和粉红舌头，脸颊鼓起，呈现夸张、魔性、停不下来的大笑神情。整体造型软萌、憨态可掬，像低龄动画里的小恐龙与长颈鹿的结合体；简洁的三维卡通渲染，圆润光滑的质感，正面构图，角色占满画面。无文字、无水印。",
+        "score": 55.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 55.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The prompt covers the squinting arc eyes, the white background and recognizable giraffe traits (spots, ossicones, long neck). But it omits the hunched-over pose and the hands clutching the belly, and its head tilted back plus long thin neck contradict the neckless bulky body. It also leans toward soft, cute vibes rather than unhinged meme energy, and it doesn't mention teeth or glossy studio lighting."
+        }
+      }
+    ],
+    "imagegen": []
+  },
+  "leaderboards": {
+    "visual_understanding": [
+      {
+        "model": "gpt-6.1-terra-xhigh",
+        "rank": 1,
+        "score": 43.97435897435897,
+        "completed": 13,
+        "required": 13,
+        "repetitions": 1,
+        "status": "complete"
+      }
+    ],
+    "imagegen": []
+  }
+}
