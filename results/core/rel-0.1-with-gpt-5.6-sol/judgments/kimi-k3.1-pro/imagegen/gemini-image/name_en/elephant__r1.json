@@ -1,0 +1,89 @@
+{
+  "judge": "kimi-k3.1-pro",
+  "judge_vendor": "moonshot",
+  "target": "imagegen/gemini-image/name_en/elephant__r1.json",
+  "target_sha256": "3dba01127ef32e2268379a5f4a5c998af12d9a96e3cbdf6a3ecb96a0210008cf",
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "judge_prompt": "407fdd2a3851c5f0",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/gemini-image/name_en/elephant__r1/inline-0.jpg"
+  ],
+  "track": "imagegen",
+  "model": "gemini-image",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 0,
+    "render": 0,
+    "background": 0,
+    "vibe": 0
+  },
+  "identity": 2,
+  "failure_modes": [
+    "generic_cute",
+    "text_or_watermark"
+  ],
+  "rationale": "The elephant is recognizable and has a laughing expression, but the seated pose, single belly hand, 2D style, furnished background, and cute tone miss most of the reference meme. A Chinese caption is also present.",
+  "raw": "pose: Seated upright in an armchair with legs extended, not standing and doubled over — absent  \nhands_on_belly: One hand rests on the belly while the other is raised — partial  \neyes: Both eyes are squeezed shut into thin curved arcs — match  \nmouth: Large open mouth with a dark interior, visible teeth, and tongue — match  \nbody: Bulky rounded body, merged head and torso, and short thick limbs — match  \nbelly_patch: Belly is the same blue-gray as the body, with no contrasting pale oval — absent  \nrender: Flat 2D cartoon illustration rather than glossy 3D CG — absent  \nbackground: Furnished room with an armchair, shelves, window, and plant — absent  \nvibe: Cheerful and cute rather than absurd or unhinged — absent  \nidentity: Clearly a gray elephant with a trunk, large ears, and tusks — clearly  \n\n{\"traits\":{\"pose\":\"absent\",\"hands_on_belly\":\"partial\",\"eyes\":\"match\",\"mouth\":\"match\",\"body\":\"match\",\"belly_patch\":\"absent\",\"render\":\"absent\",\"background\":\"absent\",\"vibe\":\"absent\"},\"identity\":\"clearly\",\"failure_modes\":[\"generic_cute\",\"text_or_watermark\"],\"rationale\":\"The elephant is recognizable and has a laughing expression, but the seated pose, single belly hand, 2D style, furnished background, and cute tone miss most of the reference meme. A Chinese caption is also present.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 22.8,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 22816,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 673,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 23489 / 1048576 tokens (2%)\nSession total: 22816 input, 673 output",
+      "usage": {
+        "inputTokens": 22816,
+        "outputTokens": 673
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:54:45Z",
+    "finished_at": "2026-10-25T01:55:07Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

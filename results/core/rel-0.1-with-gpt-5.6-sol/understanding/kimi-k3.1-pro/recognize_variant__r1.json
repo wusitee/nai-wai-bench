@@ -1,0 +1,73 @@
+{
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "vendor": "moonshot",
+  "item": "recognize_variant",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。",
+  "images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "answer": "这张图更像中文网络上常见的**“捧腹大笑熊猫”**，也就是表达 **“笑死我了”“笑到肚子疼”“笑不活了”** 的那一类表情包。\n\n判断依据是：\n- 熊猫双手捂着肚子，对应“笑到肚子疼”；\n- 身体后仰、眼睛眯起、嘴巴大张，是夸张的爆笑姿态；\n- 整体是在把“捧腹大笑”这个动作具象化，而不只是普通微笑。\n\n不过，它没有明显的金馆长、张学友等人脸特征，所以**不属于经典的“熊猫头”换脸系列**；若没有原图出处，只能判断为这类“笑死我了／捧腹大笑”熊猫梗，难以进一步锁定某一个唯一表情包。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 16.0,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20829,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 514,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 21343 / 1048576 tokens (2%)\nSession total: 20829 input, 514 output",
+      "usage": {
+        "inputTokens": 20829,
+        "outputTokens": 514
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:46:38Z",
+    "finished_at": "2026-10-25T00:46:54Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

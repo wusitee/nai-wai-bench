@@ -1,0 +1,76 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/kimi-k3.1-pro/recognize_naiwa__r1.json",
+  "target_sha256": "eee5d563d93046b699a25033f54244f678ba135efb2416502214863a1be4ae74",
+  "settings_id": "c5b99b49261f87dd",
+  "input_names": "neutral",
+  "judge_prompt": "348ce8b1eaa691ee",
+  "judge_images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "scores": {
+    "base_character": 1,
+    "identifies_meme": 1,
+    "naiwa": 1
+  },
+  "hallucinations": [
+    "图中角色是 Dingo Pictures 动画《恐龙冒险》中的 Oro",
+    "该表情包属于“Yee”梗衍生内容"
+  ],
+  "rationale": "回答将变异奶龙误判为“Yee”梗的恐龙角色Oro，未准确涵盖参考要点。",
+  "raw": "```json\n{\n  \"scores\": {\n    \"base_character\": 1,\n    \"identifies_meme\": 1,\n    \"naiwa\": 1\n  },\n  \"hallucinations\": [\n    \"图中角色是 Dingo Pictures 动画《恐龙冒险》中的 Oro\",\n    \"该表情包属于“Yee”梗衍生内容\"\n  ],\n  \"rationale\": \"回答将变异奶龙误判为“Yee”梗的恐龙角色Oro，未准确涵盖参考要点。\"\n}\n```",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 23.5,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 16544,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:17:48Z",
+    "finished_at": "2026-10-25T02:18:12Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

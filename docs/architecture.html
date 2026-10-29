@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>nai-wai-bench architecture</title>
+<style>
+:root{font-family:var(--font-sans,system-ui,sans-serif);color:var(--foreground,CanvasText);color-scheme:light dark;--soft-text:var(--muted-foreground,GrayText);--edge:var(--border,GrayText)}
+*{box-sizing:border-box}body{margin:0}button{font:inherit;color:inherit}p{line-height:1.5;margin:0}
+.context{font-size:12px;color:var(--soft-text);margin-bottom:12px}.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 16px}
+.tab{padding:8px 13px;border:1px solid var(--edge);background:transparent;border-radius:var(--radius,8px);cursor:pointer;font-size:13px}
+.tab[aria-selected=true]{background:var(--secondary,Field);border-color:var(--primary,LinkText);font-weight:650}
+.panel[hidden]{display:none}.grid{display:grid;gap:10px}.three{grid-template-columns:repeat(3,minmax(0,1fr))}.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.node,.box{padding:16px;border:1px solid var(--edge);border-radius:var(--radius,8px);background:var(--card,Field);min-width:0}
+.node{text-align:left;cursor:pointer;width:100%;transition:border-color .15s}.node:hover,.node:focus-visible{border-color:var(--primary,LinkText);outline:2px solid var(--ring,LinkText);outline-offset:1px}
+.node.active{border-color:var(--primary,LinkText)}.tag{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--soft-text);margin-bottom:6px}
+.title{display:block;font-size:14px;font-weight:650;line-height:1.35;margin-bottom:7px}.desc{display:block;font-size:12px;line-height:1.5;color:var(--soft-text)}
+code{font:11px/1.5 var(--font-mono,monospace);overflow-wrap:anywhere}.path{display:block;margin-top:9px;color:var(--info,LinkText)}
+.arrow{text-align:center;color:var(--soft-text);font-size:11px;padding:9px 0}.arrow strong{color:var(--foreground,CanvasText);font-weight:500}
+.execution{border-left:3px solid var(--chart-1,LinkText)}.working{border-left:3px solid var(--chart-2,LinkText)}.grading{border-left:3px solid var(--chart-3,LinkText)}.saved{border-left:3px solid var(--success,LinkText)}
+.detail{margin-top:14px;padding:16px;border-radius:var(--radius,8px);background:var(--secondary,Field)}.detail strong{font-size:13px}.detail p{font-size:12px;color:var(--soft-text);margin-top:6px}.detail code{display:block;margin-top:6px}
+.small{font-size:12px;color:var(--soft-text)}.note{margin:12px 0 0;font-size:12px;color:var(--soft-text)}
+table{border-collapse:collapse;width:100%;font-size:12px}th,td{text-align:left;vertical-align:top;padding:11px 9px;border-bottom:1px solid var(--edge);line-height:1.5}th{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--soft-text)}
+.scroll{overflow-x:auto}.number{font-size:23px;line-height:1;font-weight:650;display:block;margin-bottom:8px;color:var(--chart-1,LinkText)}.gates{margin-top:14px}.gates ul{margin:8px 0 0;padding-left:17px}.gates li{font-size:12px;line-height:1.55;margin:4px 0}
+.step{display:flex;gap:11px;padding:12px 0;border-bottom:1px solid var(--edge)}.step b{font-size:12px;color:var(--soft-text)}.step p{font-size:12px;line-height:1.55}.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--soft-text);margin-top:12px}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;background:var(--chart-1,LinkText)}
+@media(max-width:520px){.three{grid-template-columns:1fr}.two{grid-template-columns:1fr}.node,.box{padding:13px}.title{font-size:14px}.context{line-height:1.5}.tabs{gap:5px}.tab{padding:8px 10px}}
+</style>
+<p class="context">nai-wai-bench · current implementation · Python CLI · file-based storage<br>Select a module to inspect its responsibility.</p>
+<nav class="tabs" role="tablist" aria-label="Architecture views">
+ <button class="tab" id="tab-flow" role="tab" aria-selected="true" aria-controls="flow">Execution</button>
+ <button class="tab" id="tab-scoring" role="tab" aria-selected="false" aria-controls="scoring" tabindex="-1">Panels &amp; scoring</button>
+ <button class="tab" id="tab-storage" role="tab" aria-selected="false" aria-controls="storage" tabindex="-1">Git &amp; releases</button>
+</nav>
+<section id="flow" class="panel" role="tabpanel" aria-labelledby="tab-flow">
+ <div class="grid three">
+  <button class="node" data-node="definitions"><span class="tag">Definitions</span><span class="title">Questions, keys &amp; images</span><span class="desc">Core and Nai-hub fixtures; shared rubric and generation tiers.</span><code class="path">bench/</code></button>
+  <button class="node" data-node="config"><span class="tag">Configuration</span><span class="title">Models &amp; collection settings</span><span class="desc">Capabilities, effort, backend commands and optional local overrides.</span><code class="path">models.toml · config.py</code></button>
+  <button class="node execution" data-node="cli"><span class="tag">Entry point</span><span class="title">nwb commands</span><span class="desc">Select suite, run, models, items, tiers, animals and repetitions.</span><code class="path">src/nwb/cli.py</code></button>
+ </div>
+ <div class="arrow">validated definitions + model settings <strong>↓</strong></div>
+ <div class="grid three">
+  <button class="node execution" data-node="tracks"><span class="tag">1 · Schedule</span><span class="title">Jobs &amp; resume</span><span class="desc">Thread pool; reuse matching successes; stop settings conflicts; retry errors; write atomic JSON.</span><code class="path">tracks.py</code></button>
+  <button class="node execution" data-node="backends"><span class="tag">2 · Execute →</span><span class="title">Four backend adapters</span><span class="desc">Codex CLI · Claude CLI · ACP agents · OpenAI-compatible HTTP.</span><code class="path">backends/</code></button>
+  <button class="node working" data-node="runs"><span class="tag">3 · Retain →</span><span class="title">Answers &amp; generated images</span><span class="desc">Settings identity, tool audit, usage, timing and collection provenance.</span><code class="path">runs/&lt;run&gt;/</code></button>
+ </div>
+ <div class="arrow">retained observations <strong>↓</strong> two grading paths</div>
+ <div class="grid two">
+  <button class="node grading" data-node="judge"><span class="tag">Free-form answers + image generation</span><span class="title">LLM judgments</span><span class="desc">Reference notes/images → same backend adapters → saved verdicts.</span><code class="path">judge.py → runs/&lt;run&gt;/judgments/</code></button>
+  <button class="node grading" data-node="local"><span class="tag">Structured visual answers</span><span class="title">Local answer-key grading</span><span class="desc">Core grounding, Nai-hub fields and optional state extraction use fixed labels.</span><code class="path">scoring.py · grounding_fields()</code></button>
+ </div>
+ <div class="arrow">raw answers + current verdicts <strong>↓</strong></div>
+ <button class="node grading active" data-node="aggregate"><span class="tag">4 · Aggregate locally</span><span class="title">Scores, eligibility &amp; diagnostics</span><span class="desc">Vendor-aware judges · prompt/content freshness · complete balanced panels · homogeneous settings · intervals and efficiency.</span><code class="path">scoring.py · aggregate()</code></button>
+ <div class="arrow">local outputs <strong>↓</strong></div>
+ <div class="grid three">
+  <button class="node saved" data-node="results"><span class="tag">Saved observations</span><span class="title">Portable Git snapshots</span><span class="desc">Readable JSON and generated images; per-file checksums; automatic saves after collection/judging/reporting.</span><code class="path">results.py → results/&lt;suite&gt;/&lt;run&gt;/</code></button>
+  <button class="node" data-node="views"><span class="tag">Inspection</span><span class="title">Reports &amp; result pages</span><span class="desc">Rankings, casebooks, galleries, judge health and resource diagnostics.</span><code class="path">report.py · site.py</code></button>
+  <button class="node" data-node="release"><span class="tag">Reproducible publication</span><span class="title">Pinned release build</span><span class="desc">Explicit run hashes + judges → both suite pages and raw ZIP bundles.</span><code class="path">release.py · bundle.py</code></button>
+ </div>
+ <aside class="detail" aria-live="polite"><strong id="detail-title">Scores, eligibility &amp; diagnostics</strong><code id="detail-path">src/nwb/scoring.py</code><p id="detail-text">Aggregation reads retained files without requesting model answers. Core ranks use 13 visual item scores; Nai-hub ranks use seven-field joint accuracy. Standard generation has a separate 30-cell rank. Text, blind controls and optional state tasks stay diagnostic.</p></aside>
+ <p class="note">External calls happen through the backend adapters. Report, snapshot, export and release processing are local.</p>
+</section>
+<section id="scoring" class="panel" role="tabpanel" aria-labelledby="tab-scoring" hidden>
+ <div class="grid three">
+  <div class="box"><span class="number">13</span><span class="title">Core visual items</span><span class="desc">9 LLM-judged recognition items + 4 locally keyed grounding checks. Eight text diagnostics and four blind controls sit outside the rank.</span></div>
+  <div class="box"><span class="number">24</span><span class="title">Nai-hub visual items</span><span class="desc">Seven fields per image, scored locally. All seven correct = 100; otherwise 0. Twenty-four matched blind controls are diagnostic.</span></div>
+  <div class="box"><span class="number">30</span><span class="title">Generation cells</span><span class="desc">Six default animals × five tiers. LLM judges rate weighted style and animal identity. Overall = style × identity / 2.</span></div>
+ </div>
+ <div class="box gates"><span class="title">A score becomes a rank only after eligibility checks</span><ul>
+  <li>Every required cell is scored with the same attempted repetition IDs.</li>
+  <li>Recorded settings agree across the panel; alternate-route fills remain diagnostic.</li>
+  <li>Subject and judge prompts are current; judgment target identity matches.</li>
+  <li>Tool-contaminated understanding answers are excluded.</li>
+  <li>Generation prompts have a verified verbatim audit. Verified provider refusals score zero.</li>
+ </ul></div>
+ <div class="grid two" style="margin-top:10px">
+  <div class="box"><span class="title">Judge selection</span><span class="desc">Other-vendor judgments take precedence. Available judges are used when none are independent. Reports disclose the contributing panel.</span></div>
+  <div class="box"><span class="title">Optional state transfer</span><span class="desc">Core: 3 sources, 6 extraction/control tasks, 12 default generation requests. Nai-hub: 8 sources, 16 extraction/control tasks, 32 requests. Generated transfers are unscored.</span></div>
+ </div>
+ <p class="note">The two rankings are independent. Recorded Codex legacy-v1 and isolated-v1 profiles are displayed per row; the current comparison mixes them, so model and collector effects are confounded. Nai-hub keys are provisional Astra annotations. Bootstrap intervals describe sensitivity to the selected source images/animals and fixed judges.</p>
+</section>
+<section id="storage" class="panel" role="tabpanel" aria-labelledby="tab-storage" hidden>
+ <div class="grid three">
+  <div class="box working"><span class="tag">Working cache · ignored</span><span class="title">runs/&lt;run&gt;/</span><span class="desc">Resumable answers, generated images, judgments, collection logs and local HTML reports.</span></div>
+  <div class="box saved"><span class="tag">Source Git history</span><span class="title">results/&lt;suite&gt;/&lt;run&gt;/</span><span class="desc">Sanitized portable data, scores, generated images and snapshot.json checksums.</span></div>
+  <div class="box"><span class="tag">Generated publication</span><span class="title">site/ or --out</span><span class="desc">Core page, Nai-hub subpage, assets, scores, downloadable bundles and release.json.</span></div>
+ </div>
+ <div class="step"><b>01</b><p><strong>Collection, judging or reporting completes.</strong><br>Invocations that execute jobs refresh the run's snapshot; no-op collection leaves it unchanged. Reports and explicit sync refresh derived scores. <code>--no-sync</code> keeps an experiment local. <code>nwb sync</code> saves an existing run explicitly.</p></div>
+ <div class="step"><b>02</b><p><strong>Normal Git commit and push includes results/.</strong><br>The CLI updates files. Git synchronization is an explicit repository operation. Unchanged image content reuses Git blobs; attributes preserve hashed bytes.</p></div>
+ <div class="step"><b>03</b><p><strong>A fresh checkout restores a missing working run.</strong><br>Checksums and suite membership are verified before copying saved files into <code>runs/</code>. Existing working runs take precedence.</p></div>
+ <div class="step"><b>04</b><p><strong>nwb release --manifest releases/0.1.0.toml</strong><br>The manifest selects each suite's run, normalized input digest and judges. The builder rejects changed inputs and stale judgments, then builds both pages and raw bundles offline.</p></div>
+ <div class="step"><b>05</b><p><strong>Explicit site publication</strong><br><code>scripts/publish_site.sh MANIFEST</code> rebuilds in a fresh directory and pushes generated output to <code>gh-pages</code>. Source merging and site publication are separate operations.</p></div>
+ <p class="note">Maintained runtime: src/nwb/. Frozen fixtures: bench/. Personal overrides: ignored models.local.toml. Media and experiments are separate consumers of saved results.</p>
+</section>
+<script>
+const details={
+ definitions:['Questions, keys & images','bench/tasks.toml · bench/rubric.toml · bench/naihub-v1/','The core task file supplies the common animals, five generation tiers and reference. Nai-hub replaces the understanding, grounding and state-transfer sections. Nai-hub image hashes and label dictionaries are validated when loading.'],
+ config:['Models & collection settings','src/nwb/config.py','The model registry is merged with optional models.local.toml overrides. Settings fingerprints include configured model, effort, backend command/config and referenced repository file hashes; labels, prices and credential values are excluded.'],
+ cli:['Command entry point','src/nwb/cli.py','Commands select the run and suite, restore a missing cache when saved results exist, reject mixed suites and route to collection, judging, reporting, sync, restore, export or the release builder.'],
+ tracks:['Jobs & resume','src/nwb/tracks.py','A Job carries its output path, identity and callable. A thread pool executes pending jobs. Results and errors are retained atomically with settings and UTC collection metadata. A matching successful job is skipped. A successful result with changed settings stops the batch before requests unless --force is explicit. Errors can retry; no-ops leave logs and snapshots unchanged.'],
+ backends:['Backend boundary','src/nwb/backends/{codex,claude,acp,openai_compat}.py','The adapters share Request and Response. Codex relays its built-in image generator; Antigravity image generation uses ACP. Claude and the HTTP adapter answer text/vision prompts. Attachments are staged with neutral names; tool attempts and image-prompt audits are retained.'],
+ runs:['Resumable working observations','runs/<run>/','Understanding uses one JSON file per item/model/repetition. Image generation stores a JSON record and image files per cell. Judgments mirror the target path under judgments/<judge>/. collection.jsonl records invocation provenance.'],
+ judge:['LLM judgments','src/nwb/judge.py','Free-form answers use checklist/reference notes. Vision judges receive the actual input or reference/generated pair. Replies are parsed and validated, with one retry for malformed verdicts. Judgments carry the target SHA-256 and current judge-prompt hash.'],
+ local:['Local key matching','src/nwb/scoring.py · grounding_fields()','Structured replies are parsed as JSON and compared with the declared labels. Core grounding awards equal partial credit by field; Nai-hub additionally computes all-field joint accuracy for its rank. Blind and optional state answers stay diagnostic.'],
+ aggregate:['Scores, eligibility & diagnostics','src/nwb/scoring.py','Aggregation reads retained files without requesting model answers. Core ranks use 13 visual item scores; Nai-hub ranks use seven-field joint accuracy. Standard generation has a separate 30-cell rank. Text, blind controls and optional state tasks stay diagnostic.'],
+ results:['Saved results & restoration','src/nwb/results.py · src/nwb/bundle.py','Snapshots and ZIP exports share normalized records. Home prefixes are sanitized and current judgment identities are rebound to exported bytes. Snapshot metadata stores per-file hashes and input identity. Restoration checks files and suite; release validation also checks the normalized input pin.'],
+ views:['Reports & result pages','src/nwb/report.py · src/nwb/site.py','The local report renders aggregated scores beside answers and image paths. The static site copies assets and adds rankings, casebooks, galleries, diagnostics and download links. Generated pages can be rebuilt from saved observations.'],
+ release:['Pinned release build','src/nwb/release.py · releases/*.toml','The builder restores missing selected runs, checks software version, suite membership, input digests, configured judges and freshness, then exports both suite pages and raw ZIP bundles. The publishing shell script is a separate explicit gh-pages push.']};
+document.querySelectorAll('[data-node]').forEach(node=>node.addEventListener('click',()=>{document.querySelectorAll('[data-node]').forEach(n=>n.classList.toggle('active',n===node));const d=details[node.dataset.node];document.getElementById('detail-title').textContent=d[0];document.getElementById('detail-path').textContent=d[1];document.getElementById('detail-text').textContent=d[2]}));
+const tabs=[...document.querySelectorAll('[role=tab]')];function select(tab){tabs.forEach(t=>{const active=t===tab;t.setAttribute('aria-selected',String(active));t.tabIndex=active?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!active})}
+tabs.forEach((tab,index)=>{tab.addEventListener('click',()=>select(tab));tab.addEventListener('keydown',e=>{let next;if(e.key==='ArrowRight')next=(index+1)%tabs.length;else if(e.key==='ArrowLeft')next=(index+tabs.length-1)%tabs.length;else if(e.key==='Home')next=0;else if(e.key==='End')next=tabs.length-1;else return;e.preventDefault();select(tabs[next]);tabs[next].focus()})});
+</script>
+</html>

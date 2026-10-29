@@ -1,0 +1,88 @@
+{
+  "judge": "deepseek-v4-pro",
+  "judge_vendor": "deepseek",
+  "target": "understanding/deepseek-v4-pro/knowledge_en__r1.json",
+  "target_sha256": "a937cf35b6083b0ea568352efb605d0ff2ec1bf585b4dce6030c8a6b426bf232",
+  "settings_id": "cefccff5b65c93e5",
+  "judge_prompt": "9b1f1380066be84d",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 1,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [
+    "Claims 大笑奶龙 is a specific official laughing expression/clip cut from official 奶龙 animations, rather than an AI-generated unofficial mutated variant.",
+    "States confidently that the specific 大笑 clip was cut from an official animation and spread on Douyin/Bilibili."
+  ],
+  "rationale": "The answer correctly describes the base 奶龙 character and one alias, but contradicts the AI-variant nature and omits the Xingye origin, mutated 奶蛙 details, and most associated remix/copypasta genres.",
+  "raw": "{\"scores\": {\"base_character\": 2, \"ai_variant\": 0, \"xingye_origin\": 0, \"aliases\": 1, \"naiwa\": 1, \"laugh_pose\": 1, \"junti_quan\": 0, \"official_reply\": 0, \"trait_variants\": 0, \"rarity_titles\": 0}, \"hallucinations\": [\"Claims 大笑奶龙 is a specific official laughing expression/clip cut from official 奶龙 animations, rather than an AI-generated unofficial mutated variant.\", \"States confidently that the specific 大笑 clip was cut from an official animation and spread on Douyin/Bilibili.\"], \"rationale\": \"The answer correctly describes the base 奶龙 character and one alias, but contradicts the AI-variant nature and omits the Xingye origin, mutated 奶蛙 details, and most associated remix/copypasta genres.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "stop_reason": "end_turn",
+    "client": "deepseek-harness-acp 0.0.1",
+    "seconds": 41.9,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+      "reasoning_effort": "high"
+    },
+    "resolved_model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 5073,
+        "size": 1000000
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:54:00Z",
+    "finished_at": "2026-10-25T01:54:42Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

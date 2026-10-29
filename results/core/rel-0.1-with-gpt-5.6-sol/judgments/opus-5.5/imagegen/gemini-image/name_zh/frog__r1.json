@@ -1,0 +1,119 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "imagegen/gemini-image/name_zh/frog__r1.json",
+  "target_sha256": "b8e00619f6b5149ec4a60f621498a8d81cb2cce3174e8cd33b80555dac0159c5",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "01abc67c5ae7ef4a",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/gemini-image/name_zh/frog__r1/inline-0.jpg"
+  ],
+  "track": "imagegen",
+  "model": "gemini-image",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 0,
+    "vibe": 0
+  },
+  "identity": 1,
+  "failure_modes": [
+    "generic_cute",
+    "multiple_subjects"
+  ],
+  "rationale": "A cute green dragon-like creature sits in a detailed pond scene with closed-eye laughter, but it lacks the standing doubled-over 捧腹 pose, the plain background, and the absurd meme energy. Its horns, scales, and tail also make the frog identity ambiguous.",
+  "raw": "**Pose:** The character sits upright on a log, with no standing, hunched, or doubled-over posture. **Absent.**\n\n**Hands on belly:** Both paws press on the upper chest, on the bandana, rather than clutching the belly. **Partial.**\n\n**Eyes:** Both eyes are squeezed shut into curved arcs. **Match.**\n\n**Mouth:** The mouth is wide open with a pink tongue and small teeth. It is large, but the interior is bright pink rather than dark, and it reads as a happy grin more than hysterical laughter. **Partial.**\n\n**Body:** The body is chubby and pear-shaped with short, thick limbs and only a slight neck. It is close, though seen sitting rather than standing. **Match.**\n\n**Belly patch:** A pale cream oval belly contrasts with the green body. **Match.**\n\n**Render:** It is a polished 3D figurine look, but placed in a photographic, depth-of-field nature scene rather than a glossy studio render. **Partial.**\n\n**Background:** The background is a busy pond scene with lily pads, cattails, moss, and bokeh. **Absent.**\n\n**Vibe:** The image is wholesome and kawaii, with a blush and polka-dot bandana, and none of the unhinged 抽象 meme energy. **Absent.**\n\n**Identity:** The character is green with a pond setting and webbed-ish toes, but its horns, spikes, scales, and tail make it read as a baby dragon or crocodile rather than a frog. **Partly.**\n\n{\"traits\": {\"pose\": \"absent\", \"hands_on_belly\": \"partial\", \"eyes\": \"match\", \"mouth\": \"partial\", \"body\": \"match\", \"belly_patch\": \"match\", \"render\": \"partial\", \"background\": \"absent\", \"vibe\": \"absent\"}, \"identity\": \"partly\", \"failure_modes\": [\"generic_cute\", \"multiple_subjects\"], \"rationale\": \"A cute green dragon-like creature sits in a detailed pond scene with closed-eye laughter, but it lacks the standing doubled-over 捧腹 pose, the plain background, and the absurd meme energy. Its horns, scales, and tail also make the frog identity ambiguous.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 12.8,
+    "tokens": {
+      "input": 3797,
+      "cached_input": 0,
+      "cache_write": 3795,
+      "output": 1033,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.051263600000000006,
+    "tools_used": [],
+    "cost_usd": 0.051263600000000006,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3795,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1033,
+      "output_tokens_details": {
+        "thinking_tokens": 309
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3795,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1033,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3795,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3795
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:07:40Z",
+    "finished_at": "2026-10-25T02:07:53Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

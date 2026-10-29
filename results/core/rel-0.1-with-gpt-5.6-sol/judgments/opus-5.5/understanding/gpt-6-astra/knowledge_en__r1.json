@@ -1,0 +1,112 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6-astra/knowledge_en__r1.json",
+  "target_sha256": "0fc5e34f485f99e2915e5650195b23da3bb09816dddf87797c12255455208c2c",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "f59e150eea018194",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 1,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer correctly describes 奶龙 as a plump yellow Chinese cartoon dinosaur and gives a vague, hedged picture of a frog-like laughing variant called 奶蛙, though it frames it as a frog resembling Nailong rather than an AI-mutated Nailong. It misses the AI origin, Xingye, 变异奶龙, the full belly-clutching pose, the 军体拳 remix, the official reply copypasta, trait variants and rarity titles, and its uncertain claims are properly hedged.",
+  "raw": "```json\n{\"scores\": {\"base_character\": 2, \"ai_variant\": 0, \"xingye_origin\": 0, \"aliases\": 1, \"naiwa\": 1, \"laugh_pose\": 1, \"junti_quan\": 0, \"official_reply\": 0, \"trait_variants\": 0, \"rarity_titles\": 0}, \"hallucinations\": [], \"rationale\": \"The answer correctly describes 奶龙 as a plump yellow Chinese cartoon dinosaur and gives a vague, hedged picture of a frog-like laughing variant called 奶蛙, though it frames it as a frog resembling Nailong rather than an AI-mutated Nailong. It misses the AI origin, Xingye, 变异奶龙, the full belly-clutching pose, the 军体拳 remix, the official reply copypasta, trait variants and rarity titles, and its uncertain claims are properly hedged.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 10.6,
+    "tokens": {
+      "input": 2721,
+      "cached_input": 0,
+      "cache_write": 2719,
+      "output": 815,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.038404299999999995,
+    "tools_used": [],
+    "cost_usd": 0.038404299999999995,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2719,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 815,
+      "output_tokens_details": {
+        "thinking_tokens": 514
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2719,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 815,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2719,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2719
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:58:03Z",
+    "finished_at": "2026-10-25T01:58:13Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

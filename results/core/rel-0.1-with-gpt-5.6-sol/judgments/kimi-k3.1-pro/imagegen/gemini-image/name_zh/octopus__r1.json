@@ -1,0 +1,89 @@
+{
+  "judge": "kimi-k3.1-pro",
+  "judge_vendor": "moonshot",
+  "target": "imagegen/gemini-image/name_zh/octopus__r1.json",
+  "target_sha256": "41f3ec52f249cdc5b678db964b27d566aa81a2986a9f0c8cbd1b91376e4ec061",
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "judge_prompt": "81ad4e5a11f783ed",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/gemini-image/name_zh/octopus__r1/inline-0.jpg"
+  ],
+  "track": "imagegen",
+  "model": "gemini-image",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 1,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 1,
+    "render": 2,
+    "background": 0,
+    "vibe": 0
+  },
+  "identity": 2,
+  "failure_modes": [
+    "generic_cute",
+    "multiple_subjects"
+  ],
+  "rationale": "The octopus identity and laughing mouth are clear, but the image is a polished, cute underwater scene rather than a belly-clutching, doubled-over reimagining of the meme.",
+  "raw": "pose: Upright and floating with tentacles spread; no forward-hunched, doubled-over stance — **absent**.\nhands_on_belly: No tentacles clutch or press the belly — **absent**.\neyes: One eye is open and the other is narrowed; both are not squeezed into curved arcs — **partial**.\nmouth: Huge open mouth with a dark interior, visible teeth, and tongue — **match**.\nbody: Rounded and neckless, but lacks the bulky pear-shaped torso and short thick limbs — **partial**.\nbelly_patch: A lighter cream underside is visible, but not a clearly defined contrasting oval patch — **partial**.\nrender: Glossy, softly lit 3D CG rendering — **match**.\nbackground: Detailed underwater scene with coral, fish, bubbles, and light rays — **absent**.\nvibe: Cheerful and cute rather than absurd or unhinged — **absent**.\nidentity: Clearly octopus-like through its curled, sucker-lined tentacles, despite added dragon-like horns and fins — **clearly**.\n\n{\"traits\":{\"pose\":\"absent\",\"hands_on_belly\":\"absent\",\"eyes\":\"partial\",\"mouth\":\"match\",\"body\":\"partial\",\"belly_patch\":\"partial\",\"render\":\"match\",\"background\":\"absent\",\"vibe\":\"absent\"},\"identity\":\"clearly\",\"failure_modes\":[\"generic_cute\",\"multiple_subjects\"],\"rationale\":\"The octopus identity and laughing mouth are clear, but the image is a polished, cute underwater scene rather than a belly-clutching, doubled-over reimagining of the meme.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 27.0,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 22814,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 732,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 23546 / 1048576 tokens (2%)\nSession total: 22814 input, 732 output",
+      "usage": {
+        "inputTokens": 22814,
+        "outputTokens": 732
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:56:31Z",
+    "finished_at": "2026-10-25T01:56:58Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

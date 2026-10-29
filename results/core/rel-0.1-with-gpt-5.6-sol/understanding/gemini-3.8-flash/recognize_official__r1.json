@@ -1,0 +1,68 @@
+{
+  "settings_id": "c5b99b49261f87dd",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "vendor": "google",
+  "item": "recognize_official",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "这张表情包中的角色是一只 **3D卡通幼态小恐龙（或小恶龙宝宝）**，它对应的核心网络梗是 **“恶龙咆哮”（或“超凶 / 嗷呜”）**。\n\n---\n\n### 1. 属于什么网络梗？\n* **“恶龙咆哮，嗷呜~”**：这个梗源于短视频平台（如抖音、TikTok等）上爆火的萌系配音/音效。博主或配音者用极度可爱、奶声奶气的幼童音模仿凶猛怪兽的威吓：“*恶龙咆哮！嗷呜——！*”\n* **“我超凶的”反差萌**：在表情包中，这只小恐龙高高举起两只短小的爪子，露出粉嫩的肉垫，张开圆圆的小嘴做出试图吓唬人的威吓动作；但因为长相极度圆润幼态、大眼无辜，不仅毫无威慑力，反而显得格外呆萌。\n* **常见用法**：在日常聊天中常被用作撒娇、假装生气、故意卖萌或表达“奶凶”的场景，常配文字如：*“我超凶的！”、“嗷呜一口吃掉你”、“恶龙咆哮”、“举双手投降”* 等。\n\n---\n\n### 2. 这个角色是谁？\n* **角色身份**：在网络上被通称为 **“黄色小恐龙”** 或 **“恶龙咆哮小恐龙”**。\n* **出处背景**：该形象最初是由 3D 动画创作者/数字艺术家建模设计的卡通恐龙资产，后来由于动作神态完美契合“恶龙咆哮”的音效，被大量制作为动态短视频、GIF 表情包并迅速走红，成为网络上代表“奶凶/卖萌”的标志性形象之一。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 55.1,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 17580,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:49:11Z",
+    "finished_at": "2026-10-25T00:50:06Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

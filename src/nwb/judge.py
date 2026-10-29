@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 
 from nwb.backends import Request, get_backend
-from nwb.config import Bench, ModelSpec, UnderstandingItem
+from nwb.config import Bench, ModelSpec, UnderstandingItem, find_root, model_settings
 from nwb.scoring import is_current
 from nwb.tracks import Job, rel
 from nwb.util import extract_json, read_json
@@ -168,15 +168,18 @@ def judge_jobs(bench: Bench, judges: list[ModelSpec], run_dir: Path, tracks: set
 
 def _job(judge: ModelSpec, target: Path, run_dir: Path, rec: dict, request: Request, parse, backend) -> Job:
     target_rel = rel(target, run_dir)
-    # target_mtime and judge_prompt tie the judgment to this version of the sample and of the rubric, so
+    settings, settings_id = model_settings(judge)
+    # target_sha256 and judge_prompt tie the judgment to this version of the sample and of the rubric, so
     # regenerating either makes nwb judge redo it and nwb report ignore the old one.
     return Job(
         out=run_dir / "judgments" / judge.name / target_rel,
         label=f"judge {judge.name} <- {target_rel}",
         base={"judge": judge.name, "judge_vendor": judge.vendor, "target": target_rel,
-              "target_mtime": target.stat().st_mtime,
+              "target_sha256": hashlib.sha256(target.read_bytes()).hexdigest(),
+              "settings_id": settings_id, **({"input_names": "neutral"} if request.images else {}),
               "judge_prompt": hashlib.sha256(request.prompt.encode()).hexdigest()[:16],
-              "judge_images": [str(p) for p in request.images],
+              "judge_images": [p.relative_to(run_dir).as_posix() if p.is_relative_to(run_dir)
+                               else p.relative_to(find_root()).as_posix() for p in request.images],
               "track": rec["track"], "model": rec["model"]},
-        fn=lambda: _ask(backend, request, parse),
+        fn=lambda: _ask(backend, request, parse), settings=settings, run_dir=run_dir,
     )

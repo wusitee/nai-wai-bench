@@ -14,12 +14,20 @@ def media_type(path: Path) -> str:
 
 def write_json(path: Path, obj) -> None:
     """Write JSON atomically so interrupted runs never leave half-written results."""
+    write_bytes(path, json.dumps(obj, ensure_ascii=False, indent=2).encode("utf-8"))
+
+
+def write_bytes(path: Path, data: bytes) -> None:
+    """Replace a result atomically; failed writes leave no temporary file behind."""
     path.parent.mkdir(parents=True, exist_ok=True)
     # The .part suffix keeps an interrupted write from matching the *.json result globs.
     fd, tmp = tempfile.mkstemp(dir=path.parent, prefix=".tmp-", suffix=".part")
-    with os.fdopen(fd, "w", encoding="utf-8") as f:
-        json.dump(obj, f, ensure_ascii=False, indent=2)
-    os.replace(tmp, path)
+    try:
+        with os.fdopen(fd, "wb") as f:
+            f.write(data)
+        os.replace(tmp, path)
+    finally:
+        Path(tmp).unlink(missing_ok=True)
 
 
 def read_json(path: Path):

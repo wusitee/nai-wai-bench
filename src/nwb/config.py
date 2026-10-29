@@ -1,8 +1,10 @@
 import hashlib
 import json
+import re
 import tomllib
 from dataclasses import dataclass, field
 from pathlib import Path
+from urllib.parse import urlsplit
 
 CAPABILITIES = {"text", "vision", "image"}
 SUITES = ("core", "naihub-v1")
@@ -23,6 +25,16 @@ def find_root(start: Path | None = None) -> Path:
 def _load(path: Path) -> dict:
     with open(path, "rb") as f:
         return tomllib.load(f)
+
+
+def validate_run_suite(run_dir: Path, suite: str) -> None:
+    from nwb.util import read_json
+
+    for track, pattern in (("understanding", "*/*.json"), ("imagegen", "*/*/*.json")):
+        for path in (run_dir / track).glob(pattern):
+            if read_json(path).get("suite", "core") != suite:
+                raise ValueError(f"run {run_dir.name!r} contains another suite; choose a separate run "
+                                 "or pass its matching --suite")
 
 
 @dataclass(frozen=True)
@@ -237,6 +249,67 @@ class ModelSpec:
     @property
     def label(self) -> str:
         return self.options.get("label", self.name)
+
+
+def model_settings(spec: ModelSpec, root: Path | None = None, *, generate: bool = False) -> tuple[dict, str]:
+    """Collection identity, independent of labels, prices, timeouts, and credential values."""
+    root = root or find_root()
+    opts = spec.options
+    effort = opts.get("effort", opts.get("reasoning", "default"))
+    source = "none" if effort in ("default", "unexposed") else {
+        "codex": "cli-flag", "claude": "cli-flag", "acp": "session-config",
+    }.get(spec.backend, "none")
+    if opts.get("effort_source") == "model-id":
+        source = "model-id"
+    command = opts.get("command", [])
+    if spec.backend in ("codex", "claude"):
+        from nwb.backends import get_backend
+        backend = get_backend(spec)
+        command = backend.command([], generate) if spec.backend == "codex" else backend.command()
+    command = [arg.replace(str(root.resolve()), "${NWB_ROOT}").replace(str(Path.home()), "~")
+               for arg in command]
+    # Keep the argv template. Hash referenced repository files without storing expanded machine paths.
+    files = {}
+    for arg in command:
+        candidate = Path(arg.replace("${NWB_ROOT}", str(root)))
+        if not candidate.is_absolute():
+            candidate = root / candidate
+        try:
+            relative = candidate.resolve().relative_to(root.resolve()).as_posix()
+        except ValueError:
+            continue
+        if candidate.is_file():
+            files[relative] = hashlib.sha256(candidate.read_bytes()).hexdigest()[:16]
+    config = dict(opts.get("config", {}))
+    if spec.backend == "acp" and source == "session-config" and opts.get("effort_option"):
+        config[opts["effort_option"]] = effort
+    settings = {"backend": spec.backend, "model": spec.model, "effort": effort,
+                "effort_source": source, "config": config, "command": command, "files": files}
+    # Environment values may contain keys or private paths; only their names are retained.
+    env_keys = set(opts.get("env", {}))
+    for arg in [*command, *opts.get("env", {}).values()]:
+        env_keys.update(re.findall(r"\$\{([A-Za-z_][A-Za-z0-9_]*)\}", arg))
+    if opts.get("api_key_env"):
+        env_keys.add(opts["api_key_env"])
+    if env_keys:
+        settings["env_keys"] = sorted(env_keys)
+    if opts.get("auth"):
+        settings["auth"] = opts["auth"]
+    if opts.get("usage_command"):
+        settings["usage_command"] = opts["usage_command"]
+    if spec.backend == "openai":
+        base = opts.get("base_url")
+        if not base and opts.get("cc_switch"):
+            from nwb.backends.openai_compat import cc_switch_credentials
+            try:
+                base, _ = cc_switch_credentials(opts["cc_switch"])
+            except RuntimeError:
+                pass  # Missing credentials are reported as a per-job backend error.
+        settings["endpoint"] = urlsplit(base).hostname if base else None
+        if opts.get("cc_switch"):
+            settings["cc_switch"] = opts["cc_switch"]
+    digest = hashlib.sha256(json.dumps(settings, sort_keys=True, separators=(",", ":")).encode()).hexdigest()[:16]
+    return settings, digest
 
 
 def load_models(root: Path) -> tuple[dict[str, ModelSpec], dict]:

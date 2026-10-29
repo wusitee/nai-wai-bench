@@ -1,0 +1,88 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/deepseek-v4.1-flash/recognize_variant__r1.json",
+  "target_sha256": "e2e4655040c9314d18b368a94c555c27bda70158101f74e9af229315b89f0ed6",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "d2f19bb1240d995e",
+  "judge_images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "identifies_meme": 0,
+    "laugh_pose": 1,
+    "base_character": 0
+  },
+  "hallucinations": [
+    "称图中角色“上身后仰”，实际是身体前倾、弯腰捧腹。",
+    "断言该图属于“熊猫头/熊猫人”的3D化变体，并称其没有对应的特定原图；实际是在模仿大笑奶龙／奶蛙梗。"
+  ],
+  "rationale": "回答未识别大笑奶龙／奶蛙，也未介绍奶龙是中国儿童动画中的黄色胖龙／恐龙角色。它正确描述了双手捂腹、闭眼和张嘴大笑的部分特征，但将前倾姿势说成后仰，因此姿态项仅得部分分。",
+  "raw": "{\"scores\":{\"identifies_meme\":0,\"laugh_pose\":1,\"base_character\":0},\"hallucinations\":[\"称图中角色“上身后仰”，实际是身体前倾、弯腰捧腹。\",\"断言该图属于“熊猫头/熊猫人”的3D化变体，并称其没有对应的特定原图；实际是在模仿大笑奶龙／奶蛙梗。\"],\"rationale\":\"回答未识别大笑奶龙／奶蛙，也未介绍奶龙是中国儿童动画中的黄色胖龙／恐龙角色。它正确描述了双手捂腹、闭眼和张嘴大笑的部分特征，但将前倾姿势说成后仰，因此姿态项仅得部分分。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719c-ae28-7832-9748-075bb74745a9",
+    "seconds": 12.9,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13037,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 271,
+      "reasoning_output_tokens": 93
+    },
+    "tokens": {
+      "input": 13037,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 271,
+      "reasoning": 93
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:50:55Z",
+    "finished_at": "2026-10-25T05:51:08Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

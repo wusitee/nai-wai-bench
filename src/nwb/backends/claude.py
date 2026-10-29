@@ -8,7 +8,7 @@ import tempfile
 import time
 from pathlib import Path
 
-from nwb.backends import BackendError, Request, Response, cli_version
+from nwb.backends import BackendError, Request, Response, cli_version, neutral_inputs, tokens
 from nwb.config import ModelSpec
 from nwb.util import media_type
 
@@ -31,10 +31,11 @@ class ClaudeBackend:
             "--strict-mcp-config", "--no-session-persistence", "--system-prompt", SYSTEM_PROMPT,
             "--input-format", "stream-json", "--output-format", "stream-json", "--verbose",
         ]
-        if effort := self.spec.options.get("effort"):
+        if (effort := self.spec.options.get("effort")) and effort != "default":
             cmd += ["--effort", effort]
         return cmd
 
+    @neutral_inputs
     def run(self, req: Request) -> Response:
         if req.image_out is not None:
             raise BackendError("the claude backend cannot generate images")
@@ -58,11 +59,14 @@ class ClaudeBackend:
                 event = json.loads(line)
                 if event.get("type") == "result":
                     result = event
-        if result is None or result.get("is_error"):
+        if proc.returncode != 0 or result is None or result.get("is_error"):
             detail = (result or {}).get("result") or proc.stderr.strip()[-800:]
             raise BackendError(f"claude exited {proc.returncode}: {detail}")
         return Response(text=result.get("result", ""), meta={
             "backend": "claude", "model": self.spec.model, "client": _client(),
             "seconds": round(time.monotonic() - started, 1),
+            "tokens": tokens("claude", result.get("usage")),
+            "resolved_model": next(iter(result.get("modelUsage") or {}), None),
+            "cost_usd_reported": result.get("total_cost_usd"),
             "tools_used": [], "cost_usd": result.get("total_cost_usd"), "usage": result.get("usage"),
         })

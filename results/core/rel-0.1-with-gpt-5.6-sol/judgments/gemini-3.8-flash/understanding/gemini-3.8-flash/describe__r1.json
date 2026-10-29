@@ -1,0 +1,82 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/gemini-3.8-flash/describe__r1.json",
+  "target_sha256": "013ecc3809b507a5076b316e1824d468ea8bb76047096c5a6f9c35481e0feb13",
+  "settings_id": "c5b99b49261f87dd",
+  "judge_prompt": "4c2982e282d0dcfc",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 0,
+    "vibe": 1
+  },
+  "hallucinations": [
+    "Claiming the pose is leaning/tilting backwards in an '仰天大笑' posture with hands hanging at the sides unable to meet, rather than doubled over hunched forward clutching its belly.",
+    "Claiming the mouth is toothless or lacks visible teeth ('完全无牙或仅露出极圆润平滑的肉感牙床边缘').",
+    "Claiming the body color is completely uniform with no markings or contrasting patches, missing the pale belly patch.",
+    "Claiming the original scene features an outdoor grass field under a bright blue sky from an animation show instead of a plain white/light-grey background.",
+    "Confusing the AI-generated meme creature with the official animated cartoon character 奶龙 (adding horns on the head and treating it as a children's 3D cartoon still)."
+  ],
+  "rationale": "The model confused the AI-generated '奶蛙' meme with the official 3D cartoon '奶龙', accurately capturing the body shape, eyes, and 3D CGI look, but failing on the hunched clutching-belly pose, teeth, contrasting belly patch, and plain background.",
+  "raw": "{\n  \"scores\": {\n    \"pose\": 0,\n    \"hands_on_belly\": 0,\n    \"eyes\": 2,\n    \"mouth\": 1,\n    \"body\": 2,\n    \"belly_patch\": 0,\n    \"render\": 2,\n    \"background\": 0,\n    \"vibe\": 1\n  },\n  \"hallucinations\": [\n    \"Claiming the pose is leaning/tilting backwards in an '仰天大笑' posture with hands hanging at the sides unable to meet, rather than doubled over hunched forward clutching its belly.\",\n    \"Claiming the mouth is toothless or lacks visible teeth ('完全无牙或仅露出极圆润平滑的肉感牙床边缘').\",\n    \"Claiming the body color is completely uniform with no markings or contrasting patches, missing the pale belly patch.\",\n    \"Claiming the original scene features an outdoor grass field under a bright blue sky from an animation show instead of a plain white/light-grey background.\",\n    \"Confusing the AI-generated meme creature with the official animated cartoon character 奶龙 (adding horns on the head and treating it as a children's 3D cartoon still).\"\n  ],\n  \"rationale\": \"The model confused the AI-generated '奶蛙' meme with the official 3D cartoon '奶龙', accurately capturing the body shape, eyes, and 3D CGI look, but failing on the hunched clutching-belly pose, teeth, contrasting belly patch, and plain background.\"\n}",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 47.0,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 19739,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:00:41Z",
+    "finished_at": "2026-10-25T02:01:28Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "凭我自己的知识回答，不保证完全准确：\n\n图中这个角色是一个通体红色、胖乎乎、带浅色肚皮、绿色眼睛的 3D 卡通形象。这类图常见于中文社交平台的\"切换愤怒模式\"表情包系列——套路是给一个原本圆润呆萌的角色配上凶狠的表情和\"切换愤怒模式😡\"之类的文字，用来调侃\"我要开始生气了/进入战斗状态\"，类似的还有\"切换战斗模式\"\"黑化\"等变体。\n\n关于角色的具体出处，我必须坦诚地说：我不能确定它到底是哪个有名字的官方角色。它有可能是某个国产动画或短视频贴纸里的红色团子形象，也可能是网友用 3D 模型制作的原创\"梗图角色\"，而这类表情包的传播往往与其原始出处脱节。我不想凭空编造一个名字给你。\n\n如果你想确认确切出处，建议以图搜图（如百度识图、Google Lens）或在表情包传播较集中的平台（抖音、小红书、微博）搜索\"切换愤怒模式\"关键词，通常能找到该系列的源头。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 37.4,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20085,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 1132,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 21217 / 1048576 tokens (2%)\nSession total: 20085 input, 1132 output",
+      "usage": {
+        "inputTokens": 20085,
+        "outputTokens": 1132
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:43:43Z",
+    "finished_at": "2026-10-25T00:44:21Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

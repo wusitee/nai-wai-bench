@@ -1,0 +1,70 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "states.smug.blind",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Look only at the attached character. Report its visible expression and gesture, not an imagined inner feeling. Return JSON with four keys: state (angry, facepalm, smug, laughing, or other), eyes (open, closed, or narrowed), mouth (open or closed), and gesture (behind_back, forehead, belly_clutch, folded_arms, or out_of_frame). Use unknown when a field cannot be determined. Do not assume the character must be laughing or invent gestures outside the frame.",
+  "images": [],
+  "answer": "No image is actually attached to this conversation, so I cannot observe any character. Per your instruction to use \"unknown\" when a field cannot be determined:\n\n```json\n{\n  \"state\": \"unknown\",\n  \"eyes\": \"unknown\",\n  \"mouth\": \"unknown\",\n  \"gesture\": \"unknown\"\n}\n```\n\nIf you attach the image, I'll report only what's visibly present.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 12.0,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20071,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 149,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20220 / 1048576 tokens (2%)\nSession total: 20071 input, 149 output",
+      "usage": {
+        "inputTokens": 20071,
+        "outputTokens": 149
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:48:34Z",
+    "finished_at": "2026-10-25T00:48:47Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

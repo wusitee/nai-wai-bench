@@ -1,0 +1,73 @@
+{
+  "settings_id": "cefccff5b65c93e5",
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "vendor": "deepseek",
+  "item": "describe_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Without looking at any images, describe the most iconic image of Laughing Nailong (大笑奶龙 / 奶蛙) from memory: its pose, expression, body shape, colors, rendering style, and background, in enough detail for an artist who has never seen it to draw it. Say where you are unsure.",
+  "images": [],
+  "answer": "From memory, the most iconic “大笑奶龙 / 奶蛙” image is a **3D-rendered, chubby cartoon creature**—usually the yellow dragon/dinosaur-like “奶龙,” though a green frog-like “奶蛙” variant may swap the main body color.\n\n**Body shape:**  \nIt has a soft, toy-like, pear-shaped silhouette: an oversized round head that blends into a smaller rounded body with almost no neck. The limbs are very small and stubby; arms are tiny and usually have no detailed fingers, and the legs are short and rounded. It may have a small tail. If it is the dragon version, it has two tiny horn nubs or antennae on top of its head and possibly small rounded wings on its back.\n\n**Pose and expression:**  \nThe iconic laughing pose shows the character from the front or a slight three-quarter angle, leaning back a little with its head tilted upward. Its mouth is open extremely wide in a huge belly laugh, dominating the lower face, showing the inside of the mouth and a tongue. The eyes are squeezed shut into happy curved crescents, sometimes with tiny tear-drops at the outer corners from laughing too hard. The cheeks look plump and pushed up by the smile, often with pink blush marks. The little arms are either raised up/out to the sides or held near the belly.\n\n**Colors:**  \nBright saturated yellow body, with a cream or pale white belly and muzzle area. The inside of the mouth is pink or dark red, the tongue is pink, and any visible teeth are small and white. Horns, wings, or small spikes are usually orange or a slightly darker warm color. Blush marks on the cheeks are soft pink.\n\n**Rendering style:**  \nIt looks like smooth, glossy 3D CGI or a clay/plastic toy render, with clean soft studio lighting and subtle highlights. There is no fur or realistic texture; the surface is smooth and shiny, like a vinyl figurine or modern 3D animated sticker.\n\n**Background:**  \nThe background is usually plain: white, transparent for a sticker, or a soft solid/gradient backdrop such as pale blue, pink, yellow, or a gentle radial studio background. The focus is entirely on the character.\n\n**Where I’m unsure:**  \nI’m not certain about the exact number of teeth, whether the wings are visible in this specific laughing image, the precise background color, or the exact hand/leg position. Also, if “奶蛙” refers to the green frog variant specifically, the body would be green with a pale belly, but the pose and laughing expression are essentially the same.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "stop_reason": "end_turn",
+    "client": "deepseek-harness-acp 0.0.1",
+    "seconds": 52.4,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+      "reasoning_effort": "high"
+    },
+    "resolved_model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 4699,
+        "size": 1000000
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:51:53Z",
+    "finished_at": "2026-10-25T00:52:45Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

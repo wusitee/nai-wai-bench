@@ -1,0 +1,116 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/kimi-k3/write_prompt.giraffe__r1.json",
+  "target_sha256": "9a0c68fcb1d7e36dcccdedc10382d10af28ab2ddedf62c1a3cc3e8616e592dc7",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "34ae84ea158384f0",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "kimi-k3",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 0,
+    "background": 2,
+    "vibe": 0,
+    "identity": 1
+  },
+  "hallucinations": [
+    "Depicts the meme as a flat cel-shaded 2D kawaii sticker illustration with thick outlines, contradicting its glossy 3D CG render look",
+    "Arms held up near the chest instead of clutching the belly",
+    "Huge oversized head distinct from the body, contradicting the head-merged-into-torso bean shape"
+  ],
+  "rationale": "The prompt gets the squeezed-shut eyes, the open laughing mouth and the white background. It misses the hunched pose, the hands on the belly, the pale belly patch, the 3D render and the absurd meme vibe, choosing a cute flat sticker style instead. The giraffe is only token cues (ossicones and a few spots) on a yellow body.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 1, \"body\": 1, \"belly_patch\": 0, \"render\": 0, \"background\": 2, \"vibe\": 0, \"identity\": 1}, \"hallucinations\": [\"Depicts the meme as a flat cel-shaded 2D kawaii sticker illustration with thick outlines, contradicting its glossy 3D CG render look\", \"Arms held up near the chest instead of clutching the belly\", \"Huge oversized head distinct from the body, contradicting the head-merged-into-torso bean shape\"], \"rationale\": \"The prompt gets the squeezed-shut eyes, the open laughing mouth and the white background. It misses the hunched pose, the hands on the belly, the pale belly patch, the 3D render and the absurd meme vibe, choosing a cute flat sticker style instead. The giraffe is only token cues (ossicones and a few spots) on a yellow body.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 10.9,
+    "tokens": {
+      "input": 1750,
+      "cached_input": 0,
+      "cache_write": 1748,
+      "output": 775,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.029738199999999996,
+    "tools_used": [],
+    "cost_usd": 0.029738199999999996,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1748,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 775,
+      "output_tokens_details": {
+        "thinking_tokens": 448
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1748,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 775,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1748,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1748
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:02:01Z",
+    "finished_at": "2026-10-25T02:02:12Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

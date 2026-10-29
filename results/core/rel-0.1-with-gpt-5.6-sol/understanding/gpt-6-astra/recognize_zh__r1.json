@@ -1,0 +1,80 @@
+{
+  "settings_id": "eed12e0ea2261aed",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "vendor": "openai",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "凭印象，图里是**奶龙（Nailong）的夸张大笑版本**，对应网络上的 **“Gigglesaurus”** 梗，常用来表达“笑疯了”或带嘲讽意味的大笑。\n\n它也被叫作 **Laughing Yellow Dragon（大笑黄龙）**、**Laughing Lizard（大笑蜥蜴）**，中文常称“奶龙大笑”或“奶龙捧腹大笑”。",
+  "contaminated": false,
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6-astra",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17086-3765-7440-8b65-3f69c79d6286",
+    "seconds": 51.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12611,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1018,
+      "reasoning_output_tokens": 905
+    },
+    "tokens": {
+      "input": 12611,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1018,
+      "reasoning": 905
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6-astra",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:46:46Z",
+    "finished_at": "2026-10-25T00:47:37Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "judge": "kimi-k3.1-pro",
+  "judge_vendor": "moonshot",
+  "target": "imagegen/gemini-image/name_en/panda__r1.json",
+  "target_sha256": "ecc76f32fd3c36709f17e4e8ed9a968bcabe7488d75031c6e3e3273f1c3adebc",
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "judge_prompt": "355cea5b344440f6",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/gemini-image/name_en/panda__r1/inline-0.jpg"
+  ],
+  "track": "imagegen",
+  "model": "gemini-image",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 0,
+    "background": 0,
+    "vibe": 0
+  },
+  "identity": 2,
+  "failure_modes": [
+    "generic_cute",
+    "text_or_watermark",
+    "multiple_subjects"
+  ],
+  "rationale": "The panda identity and laughing facial expression are clear, and its paws clutch its belly. However, the seated pose, 2D rendering, busy captioned scene, and cute tone depart substantially from the reference meme.",
+  "raw": "- pose: Sitting upright with legs extended, not standing or doubled forward — **absent**\n- hands_on_belly: Both paws press against the belly — **match**\n- eyes: Eyes squeezed shut into thin upward curves — **match**\n- mouth: Huge dark open mouth with visible teeth and tongue — **match**\n- body: Bulky rounded body, merged head and torso, and short thick limbs — **match**\n- belly_patch: Large contrasting white belly patch — **match**\n- render: Flat, polished 2D cartoon illustration rather than glossy 3D CG — **absent**\n- background: Detailed lantern-lit street with bamboo, buildings, and people — **absent**\n- vibe: Cheerful and cute rather than absurd or unhinged — **absent**\n- identity: Immediately recognizable as a giant panda, with characteristic black-and-white markings — **clearly**\n\n{\"traits\":{\"pose\":\"absent\",\"hands_on_belly\":\"match\",\"eyes\":\"match\",\"mouth\":\"match\",\"body\":\"match\",\"belly_patch\":\"match\",\"render\":\"absent\",\"background\":\"absent\",\"vibe\":\"absent\"},\"identity\":\"clearly\",\"failure_modes\":[\"generic_cute\",\"text_or_watermark\",\"multiple_subjects\"],\"rationale\":\"The panda identity and laughing facial expression are clear, and its paws clutch its belly. However, the seated pose, 2D rendering, busy captioned scene, and cute tone depart substantially from the reference meme.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 23.5,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 22822,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 673,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 23495 / 1048576 tokens (2%)\nSession total: 22822 input, 673 output",
+      "usage": {
+        "inputTokens": 22822,
+        "outputTokens": 673
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:55:35Z",
+    "finished_at": "2026-10-25T01:55:58Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

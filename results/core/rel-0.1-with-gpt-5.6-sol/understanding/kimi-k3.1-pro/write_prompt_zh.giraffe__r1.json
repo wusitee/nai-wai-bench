@@ -1,0 +1,70 @@
+{
+  "settings_id": "7c81ed50f365cb3c",
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "vendor": "moonshot",
+  "item": "write_prompt_zh.giraffe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出长颈鹿版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "一张可爱的“长颈鹿版大笑奶龙”表情包：圆滚滚的Q版黄色小长颈鹿，保留奶龙般胖乎乎、软绵绵的幼崽造型，短小的四肢、鼓鼓的浅色肚皮和憨厚的脸，同时具有清晰的长颈鹿特征——适度拉长但仍显笨拙的脖子、头顶两只短圆角、短小耳朵，以及身体上的浅棕色斑块。它正在毫无形象地放声大笑：脑袋向后仰，双眼笑成弯弯的月牙，嘴巴张得极大，露出口腔和小舌头，脸颊鼓起，两只小短手抱住肚子，身体笑得向后仰，呈现前仰后合、笑到停不下来的夸张神态。整体为粗线条、简洁明亮的二维卡通贴纸风格，圆润饱满，表情感染力极强，纯白背景，角色外沿有白色贴纸描边，居中完整构图；不要真实动物质感，不要复杂场景，不要文字、水印或其他角色。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 16.4,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20006,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 421,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20427 / 1048576 tokens (2%)\nSession total: 20006 input, 421 output",
+      "usage": {
+        "inputTokens": 20006,
+        "outputTokens": 421
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:45:55Z",
+    "finished_at": "2026-10-25T00:46:11Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

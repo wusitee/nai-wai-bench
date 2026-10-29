@@ -1,0 +1,80 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/sonnet-5.5/write_prompt.cat__r1.json",
+  "target_sha256": "dff0605ac28ea044510d4ca4a192583e66580d823f44c9edc1bf929b98c7d5e7",
+  "settings_id": "c5b99b49261f87dd",
+  "judge_prompt": "c5dae35e900ff85d",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 0,
+    "background": 2,
+    "vibe": 0,
+    "identity": 1
+  },
+  "hallucinations": [
+    "A flat 2D cartoon sticker illustration style (contradicts the required 3D CG render; notes explicitly state 'not a 2D illustration')",
+    "Sitting upright with head tilted slightly back (contradicts the standing, hunched/bent forward doubled-over posture)"
+  ],
+  "rationale": "The model accurately describes the eyes, body shape, belly patch, and plain white background, but specifies a flat 2D sticker rather than a 3D CG render and has the cat sitting upright rather than standing hunched over. It also defaults to a cute aesthetic rather than unhinged meme energy, uses only token cat features on a yellow body, and places only one paw on the belly.",
+  "raw": "```json\n{\n  \"scores\": {\n    \"pose\": 0,\n    \"hands_on_belly\": 1,\n    \"eyes\": 2,\n    \"mouth\": 1,\n    \"body\": 2,\n    \"belly_patch\": 2,\n    \"render\": 0,\n    \"background\": 2,\n    \"vibe\": 0,\n    \"identity\": 1\n  },\n  \"hallucinations\": [\n    \"A flat 2D cartoon sticker illustration style (contradicts the required 3D CG render; notes explicitly state 'not a 2D illustration')\",\n    \"Sitting upright with head tilted slightly back (contradicts the standing, hunched/bent forward doubled-over posture)\"\n  ],\n  \"rationale\": \"The model accurately describes the eyes, body shape, belly patch, and plain white background, but specifies a flat 2D sticker rather than a 3D CG render and has the cat sitting upright rather than standing hunched over. It also defaults to a cute aesthetic rather than unhinged meme energy, uses only token cat features on a yellow body, and places only one paw on the belly.\"\n}\n```",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 35.0,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 17164,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:22:53Z",
+    "finished_at": "2026-10-25T05:23:28Z",
+    "revision": "9f7aef8",
+    "nwb_version": "0.1.0"
+  }
+}

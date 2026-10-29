@@ -1,0 +1,73 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "recognize_en",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Who is this character, and which internet meme is this image from? Does the meme have other names?",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "I'll be honest with you: I can't confidently identify this character or a specific meme it's from.\n\nHere's what I can say from what I see: it's a round, chubby yellow creature with a white belly and dark (black/grey) hands, laughing with closed eyes while clutching its stomach — the classic \"laughing so hard your belly hurts\" pose. The style looks like a 3D render, possibly AI-generated or from a mobile game / children's animation, and images like this circulate as reaction memes for uncontrollable laughter.\n\nWhat I don't want to do is invent a confident answer — I could guess at various yellow cartoon or game characters, but I'd risk feeding you made-up meme lore, which would be worse than admitting uncertainty.\n\nIf you can tell me where you encountered it (a social platform, a video, a sticker pack), that context would help me narrow it down. Alternatively, a reverse image search (Google Lens, SauceNAO, or Yandex Images) is usually the fastest way to trace a meme image to its origin and its commonly used names.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 30.6,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20780,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 1155,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 21935 / 1048576 tokens (2%)\nSession total: 20780 input, 1155 output",
+      "usage": {
+        "inputTokens": 20780,
+        "outputTokens": 1155
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:43:13Z",
+    "finished_at": "2026-10-25T00:43:43Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

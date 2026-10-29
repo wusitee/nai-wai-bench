@@ -1,0 +1,70 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "A chubby, round-bodied cartoon orange-yellow cat in the style of a cute Chinese internet meme sticker: soft plump belly, short stubby limbs, small rounded ears, and a tiny tuft of hair-like fur on top of its head. The cat is laughing uncontrollably — eyes squeezed shut into two curved upward arcs, mouth stretched wide open in a huge joyful grin showing a pink tongue, head tilted slightly back, both front paws clutching its round belly. Its cheeks are pushed up with blush marks, and a few small motion lines and sweat-drop-like laugh marks radiate from its head to show hearty laughter. Flat, clean vector-style illustration with bold simple outlines and soft cel shading, bright cheerful color palette (warm yellow-orange body, lighter cream belly, pink inner ears and tongue). Solid light background, centered composition, high-energy comedic expression, sticker/emoji aesthetic, no text.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 15.3,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20005,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 281,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20286 / 1048576 tokens (2%)\nSession total: 20005 input, 281 output",
+      "usage": {
+        "inputTokens": 20005,
+        "outputTokens": 281
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:42:44Z",
+    "finished_at": "2026-10-25T00:42:59Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

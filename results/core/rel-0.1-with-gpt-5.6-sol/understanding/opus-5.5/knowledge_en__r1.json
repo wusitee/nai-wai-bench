@@ -1,0 +1,100 @@
+{
+  "settings_id": "1e77488ebc8a6fba",
+  "track": "understanding",
+  "model": "opus-5.5",
+  "vendor": "anthropic",
+  "item": "knowledge_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "What is the Chinese internet meme \"大笑奶龙\" (Laughing Nailong, also called \"奶蛙\")? Explain its origin, what it looks like, and the related jokes and remixes. Say so plainly where you are unsure instead of guessing.",
+  "images": [],
+  "answer": "# 奶龙 (Nailong) and \"大笑奶龙\"\n\nSome parts of this I know reasonably well, and others I'm unsure about. I've marked which is which.\n\n## What I'm fairly confident about\n\n**The character**\n- 奶龙 (Nailong, roughly \"milk dragon\") is a Chinese cartoon character. It is a chubby, round, yellow dragon with a lighter belly, big eyes, and a very simple, childlike design.\n- It started as children's content: picture books, short animations, and related merchandise.\n\n**How it became a meme**\n- Around 2024, Nailong images spread widely in Chinese group chats and social media as reaction stickers (表情包). Its exaggerated expressions made it easy to remix.\n- Typical uses include:\n  - Image edits and face swaps\n  - Absurd captions\n  - Short videos with distorted audio or music remixes\n- A recurring joke was a \"real vs. fake Nailong\" bit, along the lines of \"我才是奶龙\" (\"I'm the real Nailong\"). Look-alike or \"evil\" versions of the character would claim to be the real one.\n\n**The international spread (around late 2024 to early 2025)**\n- Nailong images were spammed into Western Discord servers and other online spaces.\n- Some communities treated this as raid or harassment behavior.\n- People reportedly built \"Nailong detector\" bots or filters to automatically remove the images.\n- Some argument followed about whether this was harmless absurdist humor or something more targeted. I don't have reliable detail on how that debate settled.\n\n## What I'm unsure about\n\n- **\"大笑奶龙\" (Laughing Nailong):** This most likely refers to the popular sticker of Nailong laughing with a huge open mouth, which is one of its signature expressions. I'm not sure it's a distinct named meme with its own origin story, rather than just a description of that image.\n- **\"奶蛙\" (Nai-wa, \"milk frog\"):** I don't recognize this as an established alternate name. It could be:\n  - a nickname comparing the character's face to a frog,\n  - a separate parody or knockoff, or\n  - a niche or regional usage I haven't seen.\n\n  I'd rather not invent an explanation for it.\n- **Creator and studio:** I don't reliably know the exact company, author, or launch year of the original Nailong IP.\n- **Specific remix lineages:** I don't know which particular songs, videos, or uploaders drove the trend, so I won't name any.\n\nTo confirm the details, searching Bilibili, Douyin, or a Chinese meme wiki such as 萌娘百科 (Moegirlpedia) for \"奶龙\" and \"奶蛙\" would likely give the origin and the specific variants.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 25.0,
+    "tokens": {
+      "input": 673,
+      "cached_input": 0,
+      "cache_write": 671,
+      "output": 1537,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0363534,
+    "tools_used": [],
+    "cost_usd": 0.0363534,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 671,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1537,
+      "output_tokens_details": {
+        "thinking_tokens": 646
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 671,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1537,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 671,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 671
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:41:46Z",
+    "finished_at": "2026-10-25T00:42:11Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

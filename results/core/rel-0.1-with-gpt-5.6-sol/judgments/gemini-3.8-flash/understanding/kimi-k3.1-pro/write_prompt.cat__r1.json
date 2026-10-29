@@ -1,0 +1,81 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/kimi-k3.1-pro/write_prompt.cat__r1.json",
+  "target_sha256": "cc0dc4326c7d37f8cdbc3f292209333b7cffb07775b4934f7ab8b112c7fc7495",
+  "settings_id": "c5b99b49261f87dd",
+  "judge_prompt": "7c84f46d2c3de705",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 2,
+    "vibe": 0,
+    "identity": 1
+  },
+  "hallucinations": [
+    "The cat leans backward slightly (contradicts being hunched/bent forward doubled over with laughter).",
+    "Toothless laugh (contradicts visible teeth in the reference).",
+    "Small tears of joy at the eye corners."
+  ],
+  "rationale": "The model correctly captures the clutching belly pose, squinting eyes, contrasting belly, and plain background, but contradicts the doubled-over posture and visible teeth while framing the meme as cute rather than unhinged. Furthermore, it only adds token cat features to a yellow Nailong body, earning a 1 for identity under the rubric.",
+  "raw": "```json\n{\n  \"scores\": {\n    \"pose\": 0,\n    \"hands_on_belly\": 2,\n    \"eyes\": 2,\n    \"mouth\": 1,\n    \"body\": 1,\n    \"belly_patch\": 2,\n    \"render\": 1,\n    \"background\": 2,\n    \"vibe\": 0,\n    \"identity\": 1\n  },\n  \"hallucinations\": [\n    \"The cat leans backward slightly (contradicts being hunched/bent forward doubled over with laughter).\",\n    \"Toothless laugh (contradicts visible teeth in the reference).\",\n    \"Small tears of joy at the eye corners.\"\n  ],\n  \"rationale\": \"The model correctly captures the clutching belly pose, squinting eyes, contrasting belly, and plain background, but contradicts the doubled-over posture and visible teeth while framing the meme as cute rather than unhinged. Furthermore, it only adds token cat features to a yellow Nailong body, earning a 1 for identity under the rubric.\"\n}\n```",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 18.7,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 15673,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:18:59Z",
+    "finished_at": "2026-10-25T02:19:18Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

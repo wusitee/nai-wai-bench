@@ -1,0 +1,87 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6.1-sol/recognize_en__r1.json",
+  "target_sha256": "43b3a25857d2be6d7b6af7002910a1e7b99b6026fa0d243b6bfbcc22fa2838d5",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "f990667b6a73b812",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer supplies generic English labels without identifying 奶龙 or the 大笑奶龙 meme family. It omits the unofficial AI-generated origin, the aliases 变异奶龙 and 奶蛙, and the explanation of 奶蛙.",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"ai_variant\":0,\"aliases\":0,\"naiwa\":0},\"hallucinations\":[],\"rationale\":\"The answer supplies generic English labels without identifying 奶龙 or the 大笑奶龙 meme family. It omits the unofficial AI-generated origin, the aliases 变异奶龙 and 奶蛙, and the explanation of 奶蛙.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a171a0-71a6-7d13-a36d-5f09e56d91d7",
+    "seconds": 16.6,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13388,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 321,
+      "reasoning_output_tokens": 226
+    },
+    "tokens": {
+      "input": 13388,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 321,
+      "reasoning": 226
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:55:02Z",
+    "finished_at": "2026-10-25T05:55:18Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/opus-5.5/write_prompt.giraffe__r1.json",
+  "target_sha256": "3ecc962980131d1fda3ca2200068696824b1fea16b276bfb6574d0490ffa0232",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "dd175de44bc6bcc5",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "opus-5.5",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 0,
+    "background": 2,
+    "vibe": 2,
+    "identity": 1
+  },
+  "hallucinations": [
+    "Describes the pose as head tilted back with tiny arms raised up in glee, contradicting the hunched-forward, hands-clutching-belly pose",
+    "Specifies a simple flat 2D cartoon look with thick dark outlines, contradicting the glossy 3D CG render style"
+  ],
+  "rationale": "The eyes, mouth, body shape, belly patch, plain background and unhinged meme vibe are well covered. The pose (raised arms, head back instead of doubled over clutching the belly) and the render style (flat 2D instead of glossy 3D CG) are wrong. The giraffe identity is only token: a buttery-yellow Nailong body with a few spots and ossicones.",
+  "raw": "```json\n{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 2, \"body\": 2, \"belly_patch\": 2, \"render\": 0, \"background\": 2, \"vibe\": 2, \"identity\": 1}, \"hallucinations\": [\"Describes the pose as head tilted back with tiny arms raised up in glee, contradicting the hunched-forward, hands-clutching-belly pose\", \"Specifies a simple flat 2D cartoon look with thick dark outlines, contradicting the glossy 3D CG render style\"], \"rationale\": \"The eyes, mouth, body shape, belly patch, plain background and unhinged meme vibe are well covered. The pose (raised arms, head back instead of doubled over clutching the belly) and the render style (flat 2D instead of glossy 3D CG) are wrong. The giraffe identity is only token: a buttery-yellow Nailong body with a few spots and ossicones.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 14.3,
+    "tokens": {
+      "input": 2042,
+      "cached_input": 0,
+      "cache_write": 2040,
+      "output": 1080,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0383575,
+    "tools_used": [],
+    "cost_usd": 0.0383575,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2040,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1080,
+      "output_tokens_details": {
+        "thinking_tokens": 756
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2040,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1080,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2040,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2040
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:04:42Z",
+    "finished_at": "2026-10-25T02:04:56Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

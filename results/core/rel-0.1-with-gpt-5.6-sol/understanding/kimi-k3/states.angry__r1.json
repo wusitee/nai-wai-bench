@@ -1,0 +1,80 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "states.angry",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Look only at the attached character. Report its visible expression and gesture, not an imagined inner feeling. Return JSON with four keys: state (angry, facepalm, smug, laughing, or other), eyes (open, closed, or narrowed), mouth (open or closed), and gesture (behind_back, forehead, belly_clutch, folded_arms, or out_of_frame). Use unknown when a field cannot be determined. Do not assume the character must be laughing or invent gestures outside the frame.",
+  "images": [
+    "bench/states/01.png"
+  ],
+  "answer": "{\"state\":\"angry\",\"eyes\":\"narrowed\",\"mouth\":\"closed\",\"gesture\":\"out_of_frame\"}",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 18.8,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20158,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 499,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20657 / 1048576 tokens (2%)\nSession total: 20158 input, 499 output",
+      "usage": {
+        "inputTokens": 20158,
+        "outputTokens": 499
+      }
+    },
+    "tokens_source": "usage-command",
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 20657,
+        "size": 1048576
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:48:16Z",
+    "finished_at": "2026-10-25T00:48:34Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

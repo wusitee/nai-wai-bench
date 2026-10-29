@@ -1,0 +1,100 @@
+{
+  "settings_id": "8bc2f526580c51a3",
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "vendor": "anthropic",
+  "item": "describe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "不看任何图片，仅凭你的记忆，详细描述最经典的那张「大笑奶龙」（奶蛙）图片的画面：姿势、表情、身体造型、配色、渲染风格和背景，让从没见过它的画师能照着画出来。不确定的地方请说明。",
+  "images": [],
+  "answer": "先说明一下：这个形象我只有模糊的印象，没法逐像素还原。下面我会把比较有把握的部分和不确定的部分分开写。另外，\"奶龙\"和\"奶蛙\"我不确定是不是同一个形象，这里按我记忆里的\"黄色胖乎乎的奶龙\"来描述。\n\n## 比较有把握的部分\n\n**整体风格**\n- 扁平的卡通贴纸/表情包风格，不是写实或 3D 质感。\n- 黑色或深褐色的粗描边，线条圆润、粗细比较均匀。\n- 上色是纯色块加很少的阴影，最多在肚子、脸颊处有一点浅色区分。\n- 整体造型很\"Q\"，头身比接近 1:1，几乎是一个圆滚滚的团子。\n\n**配色**\n- 主体是饱和的奶黄色或鸭黄色，不是柠檬黄，略偏暖。\n- 肚子或身体前侧是更浅的奶油黄或米白色。\n- 嘴巴内部是红色或粉红色，舌头偏粉红。\n- 眼白是白色，瞳孔是黑色小点。\n- 牙齿如果画了，是白色。\n\n**表情**\n- 大笑，嘴张得很大，嘴角几乎咧到脸颊两侧。\n- 眼睛因为笑而眯起或变形，带有一点癫狂、憨傻、得意的感觉。\n- 整体气质是\"傻乐\"，不是优雅的微笑。\n\n**身体造型**\n- 身体胖圆，像梨形或蛋形，头和身体几乎连成一体，脖子不明显。\n- 四肢短粗，手脚像小圆柱或小圆球。\n- 有一条短而粗的小尾巴。\n- 背部有几个圆钝的小背鳍或突起，符合\"龙/恐龙\"的设定，不尖锐。\n\n**背景**\n- 通常是纯白或透明底，作为贴纸素材使用。\n- 没有复杂场景，最多有极简的装饰，比如几条表示笑声的小线条。\n\n## 不太确定的部分\n\n- **具体姿势**：我印象里是正面站立或微微后仰，双手抬起或叉在身侧，笑得前仰后合。但我无法确定手是举起、拍肚子还是下垂。\n- **鼻子**：我记得脸上有比较突出的圆鼻头，但大小、颜色和是否有鼻孔我不确定。\n- **头顶**：是否有一撮呆毛或小角，我不确定。\n- **眼睛**：是两个小黑点、带眼白的圆眼，还是弯成笑眼的弧线，我记不准。\n- **细节**：脸颊是否有腮红、肚子上有没有纹理，我也记不准。\n\n## 给画师的建议\n\n1. 先画一个略扁的大圆作为头身一体的主体。\n2. 加上短粗四肢、小尾巴和背上的圆钝小突起。\n3. 脸部放在主体偏上的位置，画一个很大的张开的嘴，里面填红色并加粉色舌头。\n4. 眼睛小而靠近，表情要夸张。\n5. 用粗黑线勾边，平涂奶黄色，肚子用浅色，背景留白。\n\n如果你要做正式的临摹或商用，建议找原图核对，因为我对姿势和脸部细节的记忆不够可靠。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 22.6,
+    "tokens": {
+      "input": 697,
+      "cached_input": 0,
+      "cache_write": 695,
+      "output": 1981,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.022733600000000003,
+    "tools_used": [],
+    "cost_usd": 0.022733600000000003,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 695,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1981,
+      "output_tokens_details": {
+        "thinking_tokens": 821
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 695,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1981,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 695,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 695
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:43:38Z",
+    "finished_at": "2026-10-25T00:44:01Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

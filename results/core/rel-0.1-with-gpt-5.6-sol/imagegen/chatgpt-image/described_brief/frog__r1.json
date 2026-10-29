@@ -1,0 +1,94 @@
+{
+  "settings_id": "45fd827f1214ed0a",
+  "track": "imagegen",
+  "model": "chatgpt-image",
+  "vendor": "openai",
+  "tier": "described_brief",
+  "animal": "frog",
+  "rep": 1,
+  "prompt": "A 3D cartoon frog doubled over with laughter, clutching its belly, on a plain white background.",
+  "reference": false,
+  "images": [
+    "imagegen/chatgpt-image/described_brief/frog__r1/exec-6185fbe9-ca42-400b-8b72-a51a37b663ad.png"
+  ],
+  "text": "DONE",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17196-7b88-7571-867e-2b4b95debb65",
+    "seconds": 31.2,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 25956,
+      "cached_input_tokens": 21376,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 55,
+      "reasoning_output_tokens": 0
+    },
+    "tokens": {
+      "input": 25956,
+      "cached_input": 21376,
+      "cache_write": 0,
+      "output": 55,
+      "reasoning": 0
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null,
+    "audit": {
+      "rollout": "~/.codex/sessions/2026/10/25/rollout-2026-10-25T13-44-09-01a17196-7b88-7571-867e-2b4b95debb65.jsonl",
+      "image_gen_calls": 1,
+      "verbatim": true,
+      "sent": [
+        "A 3D cartoon frog doubled over with laughter, clutching its belly, on a plain white background."
+      ],
+      "calls": [
+        "const result = await tools.image_gen__imagegen({prompt:\"A 3D cartoon frog doubled over with laughter, clutching its belly, on a plain white background.\"}); generatedImage(result);\n"
+      ],
+      "refused": false
+    },
+    "c2pa": {
+      "generators": [
+        "ChatGPT gpt-image"
+      ],
+      "actions": []
+    }
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "low",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "-c",
+      "model_reasoning_effort=\"low\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:44:09Z",
+    "finished_at": "2026-10-25T05:44:40Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

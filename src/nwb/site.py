@@ -8,15 +8,15 @@ from collections import defaultdict
 from html import escape as e
 from pathlib import Path
 
+from nwb import CANARY, __version__
 from nwb.config import SUITES, Bench, ModelSpec, UnderstandingItem
-from nwb.report import fmt
+from nwb.report import (UNCERTAINTY_NOTE, collection_profiles_text, collection_text, efficiency_section, stale_text, fmt, judge_text,
+                        model_html, rank_range, score_text)
 from nwb.util import extract_json, read_json
 
 FAILURE_ZH = {"generic_cute": "泛泛的可爱风", "realistic_animal": "写实动物", "plain_nailong": "只是奶龙本体",
               "text_or_watermark": "带文字或水印", "multiple_subjects": "多主体或场景杂乱"}
 ACCESS = {"codex": "Codex CLI", "claude": "Claude Code", "acp": "ACP agent", "openai": "API"}
-STATUS = {"complete": "完整 complete", "incomplete": "不完整 incomplete",
-          "incomplete repetitions": "重复次数不齐 incomplete repetitions"}
 CONDITION = {"described": ("文字描述", "description"), "reference": ("参考图", "reference image")}
 IMAGE_WIDTH = 768
 
@@ -86,8 +86,18 @@ tr:last-child>td{border-bottom:0}.scroll{overflow-x:auto}.card-table{background:
 .rank{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--soft);font-weight:700;font-size:12.5px}
 .rank.first{background:var(--yellow);color:#1d1b16}
 .meter{display:flex;align-items:center;gap:8px;min-width:140px}.meter b{min-width:36px;text-align:right;font-variant-numeric:tabular-nums}
-.track{flex:1;height:10px;background:var(--soft);border-radius:0 4px 4px 0}
+.track{position:relative;flex:1;min-width:48px;height:10px;background:var(--soft);border-radius:0 4px 4px 0}
 .fill{display:block;height:100%;background:var(--bar);border-radius:0 4px 4px 0}
+.interval{position:absolute;top:4px;height:2px;background:var(--fg)}
+.interval:before,.interval:after{content:"";position:absolute;top:-3px;width:1px;height:8px;background:var(--fg)}
+.interval:before{left:0}.interval:after{right:0}
+.ranking{min-width:520px}.ranking td{padding:4px 6px;line-height:1.25}.ranking th:nth-child(4){white-space:nowrap}
+.ranking b .muted{font-size:12px;font-weight:400}.ranking .meter{flex-wrap:wrap;gap:3px 8px}
+.ranking .meter b{font-size:13px;white-space:nowrap}.row-meta{font-size:10.5px;line-height:1.25;margin-top:2px;color:var(--muted)}
+.status{display:inline-block;white-space:nowrap;font-size:10.5px;font-weight:400;color:var(--muted);background:var(--soft);border-radius:4px;padding:0 4px}
+.status.mixed{color:var(--bad-ink);background:color-mix(in srgb,var(--bad) 10%,var(--card))}
+.efficiency th{max-width:155px}.efficiency td.n{white-space:nowrap}.efficiency td:first-child{min-width:150px}
+.efficiency-chart{display:block;width:100%;height:auto;margin-top:18px}
 .flag{display:inline-block;font-size:11px;font-weight:600;border:1px solid var(--line);border-radius:6px;padding:0 6px;color:var(--ink2);margin-left:4px}
 .heat{text-align:right;font-variant-numeric:tabular-nums;box-shadow:inset 0 0 0 1px var(--card)}.heat.hi{color:var(--heat-ink)}
 .group{display:flex;align-items:baseline;gap:10px;margin:30px 0 10px}.group h3{margin:0}
@@ -182,21 +192,36 @@ def _suite_href(here: str, target: str) -> str:
     return (to_root + ("" if target == "core" else f"{target}/")) or "./"
 
 
-def _ranking(rows: list[dict], label, flags: dict[str, str]) -> str:
+def _ranking(rows: list[dict], label, flags: dict[str, str], judge_label, judged: bool = True) -> str:
     if not rows:
         return "<p class=muted>本次运行没有这一题组的结果。<span class=en> No results for this panel in this run.</span></p>"
-    out = ["<div class=scroll><table><tr><th>名次<br>Rank</th><th>模型 Model</th><th>得分 Score</th>"
-           "<th class=n>已计分<br>Scored</th></tr>"]
+    out = ["<div class=scroll><table class=ranking><tr><th>名次<br>Rank</th><th>模型 Model</th>"
+           "<th>得分 Score<br><span class=en>95% 区间 interval</span></th>"
+           "<th>名次范围<br>Rank range</th><th class=n>已计分<br>Scored</th></tr>"]
     for row in rows:
         rank = (f"<span class='rank{' first' if row['rank'] == 1 else ''}'>{row['rank']}</span>"
                 if row["rank"] is not None else "–")
+        interval = ""
+        if row.get("score_interval"):
+            lo, hi = row["score_interval"]
+            interval = f"<span class=interval style='left:{lo:.3f}%;width:{hi - lo:.3f}%'></span>"
         meter = (f"<div class=meter><span class=track><span class=fill style='width:{row['score']:.1f}%'></span>"
-                 f"</span><b>{fmt(row['score'], 1)}</b></div>" if row["score"] is not None else "–")
-        # Only unranked rows need their status spelled out.
-        status = ("" if row["status"] == "complete"
-                  else f"<br><span class=tag>{e(STATUS.get(row['status'], row['status']))}</span>")
-        out.append(f"<tr><td>{rank}</td><td><b>{e(label(row['model']))}</b>{flags.get(row['model'], '')}{status}</td>"
-                   f"<td>{meter}</td><td class=n>{row['completed']}/{row['required']} "
+                 f"{interval}</span><b>{score_text(row)}</b></div>" if row["score"] is not None else "–")
+        chips = []
+        if row["status"] != "complete":
+            title = "; ".join(row.get("conditions", []))
+            if row["status"] == "mixed conditions":
+                title += "; diagnostic score " + fmt(row.get("diagnostic_score"), 1)
+            chips.append(f"<span class='status{' mixed' if row['status'] == 'mixed conditions' else ''}' "
+                         f"title='{e(title, quote=True)}'>{e(row['status'])}</span>")
+        if row.get("settings_status") == "settings unrecorded":
+            chips.append("<span class=status>settings unrecorded</span>")
+        chips.extend(f"<span class=status>{e(p)}</span>" for p in row.get("collection_profiles", []))
+        meta = f"<div class=row-meta>{' '.join(chips)}</div>" if chips else ""
+        if judged:
+            meta += f"<div class=row-meta>评审 Judges: {e(judge_text(row, judge_label))}</div>"
+        out.append(f"<tr><td>{rank}</td><td><b>{model_html(label(row['model']))}</b>{flags.get(row['model'], '')}{meta}</td>"
+                   f"<td>{meter}</td><td>{rank_range(row)}</td><td class=n>{row['completed']}/{row['required']} "
                    f"<span class=muted title='每格重复 repetitions per cell'>×{row['repetitions']}</span></td></tr>")
     return "\n".join(out) + "</table></div>"
 
@@ -270,13 +295,14 @@ def _field_heatmap(usum: dict, label) -> str:
     order = sorted(rows, key=lambda m: (-(rows[m]["joint"] or 0), m))
     out = ["<h3>逐项诊断 <span class=en>Answer-key diagnostics</span></h3><div class='scroll card-table'><table>"
            "<tr><th>模型 Model</th><th class=n>全对<br>Joint</th><th class=n>视觉全对<br>Visual joint</th>"
-           "<th class=n>类别宏平均<br>Family macro</th>"
+           "<th class=n>类别宏平均<br>Family macro</th><th>Repetition consistency<br>(images)</th>"
            + "".join(f"<th class=n>{e(FIELD_ZH.get(f, f))}<br>{e(f)}</th>" for f in fields) + "</tr>"]
     for m in order:
         s = rows[m]
         classes = f" <small>({len(s['family_classes'])})</small>" if len(s["family_classes"]) < labels else ""
         out.append(f"<tr><td>{e(label(m))}</td>{_heat(s['joint'])}{_heat(s['visual_joint'])}"
                    f"{_heat(s['family_macro'], note=classes)}"
+                   f"<td>{fmt(s.get('repetition_consistency'), 1)} ({s.get('repetition_consistency_images', 0)})</td>"
                    + "".join(_heat(s["fields"].get(f), note=f" <small>({s['field_items'][f]})</small>"
                                    if s["field_items"].get(f, 0) < full else "") for f in fields) + "</tr>")
     out.append(f"</table></div><p class=muted>0–100，每张图权重相同。全对：七项全部正确；视觉全对：除类别外全部正确；"
@@ -373,7 +399,7 @@ def _case(item: UnderstandingItem, first: dict, rank: dict, label, asset) -> str
 
 
 def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dict, out: Path,
-          repo_url: str | None = None, suite_tabs: bool = False) -> Path:
+          repo_url: str | None = None, suite_tabs: bool = False, bundle_url: str | None = None) -> Path:
     (out / "images").mkdir(parents=True, exist_ok=True)
     text = SUITE_TEXT[bench.suite]
     copied: dict[Path, str] = {}
@@ -396,7 +422,7 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
     meta_of = {s["target"]: _record(run_dir, s["target"]).get("meta", {}) for s in img_samples + und_samples}
 
     def label(m: str) -> str:
-        return models[m].label if m in models else m
+        return scores.get("labels", {}).get(m, models[m].label if m in models else m)
 
     boards = scores.get("leaderboards", {})
     vision_order = [r["model"] for r in boards.get("visual_understanding", [])]
@@ -407,17 +433,17 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
     core_tiers = [t for t in bench.tiers.values() if any(t.id == s["tier"] for s in img_samples)]
     state_samples = [s for s in img_samples if s["state"]]
     sections = ["rankings"] + (["casebook", "gallery"] if text["casebook_first"] else ["gallery", "casebook"])
-    sections += ["states", "understanding", "models", "judges"]
+    sections += ["efficiency", "states", "understanding", "models", "judges"]
     present = {"rankings": True, "casebook": bool(keyed), "gallery": bool(core_tiers), "states": bool(state_samples),
-               "understanding": bool(und_samples), "models": True, "judges": bool(scores.get("judge_health"))}
+               "understanding": bool(und_samples), "efficiency": True, "models": True, "judges": bool(scores.get("judge_health"))}
     nav_text = {"rankings": "排名 Rankings", "casebook": "图鉴 Casebook", "gallery": "图像 Images",
                 "states": "姿势迁移 Transfer", "understanding": "理解 Understanding", "models": "模型 Models",
-                "judges": "评审 Judges"}
+                "judges": "评审 Judges", "efficiency": "效率 Efficiency"}
 
     revision = _revision(bench.root)
     # Link the documentation of the exact commit the results were built from.
     blob = f"{repo_url}/blob/{revision.split()[0]}" if repo_url and revision else None
-    html = [f"<!doctype html><html lang=zh><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'>"
+    html = [f"<!doctype html><!-- {CANARY} --><html lang=zh><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'>"
             f"<title>{e(text['title'][0])} · {e(text['title'][1])}</title><style>{CSS}</style>"]
     tabs = ("<div class=tabs>" + "".join(
         f"<a href='{_suite_href(bench.suite, s)}'{' aria-current=page' if s == bench.suite else ''}>"
@@ -425,37 +451,49 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
             if suite_tabs else "")
     links = "".join(f"<a href='#{s}'>{nav_text[s]}</a>" for s in sections if present[s])
     links += f"<a href='{e(blob, quote=True)}/docs/methodology.md'>方法 Methodology</a>" if blob else ""
+    if bundle_url:
+        links += f"<a href='{e(bundle_url, quote=True)}'>Download raw results</a>"
     home = _suite_href(bench.suite, "core") if suite_tabs else "#"
     html.append(f"<header class=top><div><a class=brand href='{home}'>奶蛙bench</a>{tabs}"
                 f"<nav class=sections>{links}</nav></div></header><main>")
 
     # --- hero ---
-    stamp = f"suite <code>{e(bench.suite)}</code> · run <code>{e(run_dir.name)}</code> · {datetime.date.today().isoformat()}"
+    stamp = e(collection_text(scores)) + " · " + f"run <code>{e(run_dir.name)}</code> · {datetime.date.today().isoformat()}"
     stamp += f" · revision <code>{e(revision)}</code>" if revision else ""
     mosaic = bool(keyed) and text["casebook_first"]
     portrait = "" if mosaic else f"<img src='{e(asset(bench.reference_image))}' alt='大笑奶龙'>"
     html.append(f"<div class='hero{' solo' if mosaic else ''}'>{portrait}<div>"
                 f"<h1>{e(text['title'][0])} <span class=en>{e(text['title'][1])}</span></h1>"
                 f"<p class=lede>{e(text['intro'][0])}<br><span class=en>{e(text['intro'][1])}</span></p>"
-                f"<span class=badge>第一版 · First draft</span> <span class=muted>{stamp}</span></div></div>")
+                f"<span class=badge>{e(__version__)} 首个版本 · First release</span> <span class=muted>{stamp}</span></div></div>")
     if mosaic:
         html.append("<div class=mosaic>" + "".join(
             f"<a href='#case-{e(i.id.split('.', 1)[1])}' title='{e(i.title)}'>"
             f"<img src='{e(asset(i.images[0]))}' alt='{e(i.title)}'></a>" for i in keyed) + "</div>")
-    annotated = (f"答案键由 {e(label(bench.annotator))} 标注，尚未经人工校准；它在本页的得分只反映与自身标注的一致程度。"
+    annotated = ("答案键由 GPT-6-Astra 标注、尚未经人工校验，所以 Astra 的得分只反映与自己标注的一致程度。"
                  if bench.annotator else "")
-    annotated_en = (f" Answer keys are provisional {e(label(bench.annotator))} annotations without human calibration; "
-                    "its own score measures agreement with its labels." if bench.annotator else "")
+    annotated_en = ("Answer keys are GPT-6-Astra annotations not yet checked by a person, so Astra's score measures "
+                    "agreement with its own labels. " if bench.annotator else "")
+    counts = (f"共 {len(img_samples)} 个生成样本、{len(und_samples)} 条回答。" if img_samples
+              else f"共 {len(und_samples)} 条回答。")
+    counts_en = (f"{len(img_samples)} generation samples and {len(und_samples)} answers. " if img_samples
+                 else f"{len(und_samples)} answers. ")
     html.append(
-        "<div class=note><b>第一版结果。</b>"
-        f"共 {len(img_samples)} 个生成样本、{len(und_samples)} 条回答。自由回答与标准图像生成由 LLM 评审，结构化回答按答案键本地计分；"
-        f"{annotated}几分的差距可能只是偶然，排名未做统计检验。只有完整跑完固定题组的模型才有名次。<br><span class=en>"
-        f"First-draft results: {len(img_samples)} generation samples and {len(und_samples)} answers. "
-        f"Free-form answers and standard generation use LLM judges; structured answers use local keys.{annotated_en} "
-        "Gaps of a few points can be noise; ranks are not statistically "
-        "tested. Only models that complete the fixed panel are ranked.</span></div>")
+        f"<div class=note>0.1.0 版结果：{counts}"
+        "自由回答与标准图像生成优先采用其他厂商的 LLM 评审；没有独立评审时使用现有评审。看图核对题按答案键本地计分。"
+        f"{annotated}方括号是 95% 自助法区间，名次范围表示重抽样时名次的波动；区间大幅重叠的模型不宜硬分高下。"
+        "只有在同一设置下完整跑完固定题组的模型才有名次。<br><span class=en>"
+        f"Release 0.1.0 results: {counts_en}"
+        "Free-form answers and standard generation prefer LLM judges from other vendors, falling back to available judges; "
+        f"answer-keyed checks are scored locally. {annotated_en}"
+        "Brackets show 95% bootstrap intervals, and the rank range shows how a rank moves under resampling; "
+        "models whose intervals largely overlap are not clearly ordered. "
+        "Only models that complete the fixed panel under one setting are ranked.</span></div>")
+    profiles = collection_profiles_text(scores)
+    if profiles:
+        html.append(f"<p class=note>{e(profiles)}</p>")
 
-    body = {}
+    body = {"efficiency": efficiency_section(scores, label)}
     # --- rankings ---
     panel_animals = bench.select_animals("default")
     vision_items = [i for i in bench.items if i.modality == "vision"]
@@ -464,18 +502,18 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
              if bench.annotator else {})
     joint = ("七项全部答对才得分。<span class=en> All seven fields must be correct for a sample to score.</span>"
              if bench.suite == "naihub-v1" else "")
+    judge_label = lambda m: models[m].label if m in models else m
     imagegen_rows = boards.get("imagegen", [])
     imagegen_panel = (
         "<div class=panel><h3>图像生成 <span class=en>Image generation ranking</span></h3>"
         f"<p class=muted>固定题组：{len(panel_animals)} 种动物 × {len(bench.tiers)} 档提示词；只计入核实为原样传递的提示词，"
         "服务商拒绝生成记 0 分。<br><span class=en>Fixed panel: "
         f"{len(panel_animals)} animals × {len(bench.tiers)} prompt tiers; verified verbatim prompts only. "
-        "Provider refusals score 0.</span></p>" + _ranking(imagegen_rows, label, {}) + "</div>"
+        "Provider refusals score 0.</span></p>" + _ranking(imagegen_rows, label, {}, judge_label) + "</div>"
         if imagegen_rows else "")
     scope = ("两个排名相互独立，不合成总分。<span class=en> Two independent rankings, no combined score.</span> "
-             if imagegen_rows else "本次运行没有标准图像生成题组的结果；下方的姿势迁移图不计分。"
-             "<span class=en> This run has no standard image-generation panel results; transfer images below "
-             "are unscored.</span> ")
+             if imagegen_rows else "本次运行没有标准图像生成题组的结果。"
+             "<span class=en> This run has no standard image-generation panel results.</span> ")
     body["rankings"] = (
         "<h2 id=rankings>排名 <span class=en>Rankings</span></h2><div class=panels><div class=panel>"
         "<h3>视觉理解 <span class=en>Visual understanding ranking</span></h3>"
@@ -483,10 +521,13 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
         f"{grounding} 道按答案键计分的视觉核对）。文字知识与无图对照只作诊断。{joint}<br><span class=en>Fixed panel: "
         f"{len(vision_items)} image-input tasks ({len(vision_items) - grounding} free-form recognition, {grounding} "
         "answer-keyed grounding checks). Text knowledge and no-image controls are diagnostics.</span></p>"
-        + _ranking(boards.get("visual_understanding", []), label, flags) + "</div>" + imagegen_panel
+        + _ranking(boards.get("visual_understanding", []), label, flags, judge_label, len(vision_items) > grounding) + "</div>" + imagegen_panel
         + f"</div><p class=muted>{scope}有缺失、失败、未评分或不合格格子的模型不参与排名；×N 为每格重复次数。"
         "<span class=en> Missing, failed, unjudged, or ineligible cells leave a model unranked; ×N is "
-        "repetitions per cell.</span></p>")
+        "repetitions per cell.</span></p>"
+        + f"<p class=muted>{UNCERTAINTY_NOTE}</p>"
+        + f"<p class=muted>{e(stale_text(scores))}Collection revisions: "
+          f"{e(', '.join(scores.get('collection', {}).get('revisions', [])) or 'unrecorded')}.</p>")
 
     # --- casebook ---
     if keyed:

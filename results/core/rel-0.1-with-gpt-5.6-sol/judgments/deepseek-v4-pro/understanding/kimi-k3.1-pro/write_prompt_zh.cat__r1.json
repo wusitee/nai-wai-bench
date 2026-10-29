@@ -1,0 +1,87 @@
+{
+  "judge": "deepseek-v4-pro",
+  "judge_vendor": "deepseek",
+  "target": "understanding/kimi-k3.1-pro/write_prompt_zh.cat__r1.json",
+  "target_sha256": "07f79ea4ba2c330e2eef80647c06b4da804f45f89a48304b84815afedca28b54",
+  "settings_id": "cefccff5b65c93e5",
+  "judge_prompt": "188370b646b1cfd0",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 0,
+    "background": 2,
+    "vibe": 2,
+    "identity": 1
+  },
+  "hallucinations": [
+    "The prompt specifies a 2D flat cartoon sticker style with dark-brown outlines, contradicting the required glossy 3D CG render with soft studio lighting."
+  ],
+  "rationale": "Core facial/body/backdrop cues are mostly captured, but the hunched pose and belly-clutching paws are absent/contradicted, the rendering is explicitly 2D, and the cat identity is only token cat features on a yellow dinosaur-like body.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 2, \"body\": 1, \"belly_patch\": 2, \"render\": 0, \"background\": 2, \"vibe\": 2, \"identity\": 1}, \"hallucinations\": [\"The prompt specifies a 2D flat cartoon sticker style with dark-brown outlines, contradicting the required glossy 3D CG render with soft studio lighting.\"], \"rationale\": \"Core facial/body/backdrop cues are mostly captured, but the hunched pose and belly-clutching paws are absent/contradicted, the rendering is explicitly 2D, and the cat identity is only token cat features on a yellow dinosaur-like body.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "stop_reason": "end_turn",
+    "client": "deepseek-harness-acp 0.0.1",
+    "seconds": 29.0,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+      "reasoning_effort": "high"
+    },
+    "resolved_model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 3481,
+        "size": 1000000
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:57:59Z",
+    "finished_at": "2026-10-25T01:58:28Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

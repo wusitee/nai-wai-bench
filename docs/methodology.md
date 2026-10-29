@@ -80,7 +80,8 @@ than many cat repetitions. Run counts below exclude failures and the judge's sin
 
 Two configured judges do not guarantee two independent judgments: when the subject shares a vendor
 with one, only the other contributes. Use the same configured pool across subjects and record it.
-To get two independent vendors for every subject may require three judge vendors. Judge health is a
+To get two independent vendors for every subject may require three judge vendors; the default image
+judges therefore come from three vendors (see `[defaults]` in `models.toml`). Judge health is a
 disagreement diagnostic, not proof of evaluator correctness or a reason to remove a judge merely
 because it changes the ordering. Choose judge exclusions using fixed calibration cases before comparing
 subject scores.
@@ -117,21 +118,60 @@ count; it does not launch model requests.
    in advance). Hide model/vendor labels during the human audit. Include deliberately wrong pose/identity
    examples when calibrating judges. Record disagreements; do not silently edit scores after seeing ranks.
    The harness exposes outputs for this review but does not automate or certify human calibration.
-4. Publish panel coverage, repetition counts, tier scores, prompt audits, judge selection, and text/no-image
-   diagnostics with ranks. The harness shows provisional observed ranks and does not calculate confidence
-   intervals or significance tests. If a consequential ordering needs support, spend remaining budget on
-   the same second repetition for all competing models across the complete panel, rather than cherry-picking
-   weak cells. For a subsequent statistical analysis, compare paired model differences and resample by
-   source image or animal, keeping translations, tiers, and repetitions within each cluster. Four or six
-   clusters still give weak uncertainty estimates; avoid strong population-level claims.
+4. Publish panel coverage, repetition counts, tier scores, prompt audits, contributing judges,
+   text/no-image diagnostics, paired cluster-bootstrap intervals, and rank ranges. If an ordering needs
+   more support, run the same additional full repetition for every competitor; do not select weak cells.
+   Intervals are small-panel sensitivity estimates, not significance tests or population claims.
 
-Sources are public, the corpus is tiny, some recognition stimuli are synthetic, and source filenames may
-be exposed by agent clients. No contamination-free holdout or blinded-input guarantee is claimed. Correct
+Sources are public, the corpus is tiny, and some recognition stimuli are synthetic. Images are staged
+under neutral names; historical runs may have exposed semantic filenames. No contamination-free holdout or blinded-input guarantee is claimed. Correct
 basic grounding does not establish knowledge of a meme's history; convincing lore does not establish that
 a model used its image input. A weighted trait score also retains subjective choices, especially the
 `vibe` trait. The knowledge ratio is a matched prompt-sensitivity diagnostic and may exceed one; it does
 not identify training exposure. Costs in tokens, images, and latency depend on the configured providers;
 the call counts above are a planning budget, not measured billing or new benchmark results.
+
+## Uncertainty and efficiency
+
+Reports publish 95% percentile intervals for each eligible panel score and rank range using 2,000
+cluster-bootstrap resamples with fixed seed 6643. The same cluster draw is shared across all ranked
+models. Naihub-v1 clusters are images; core understanding clusters are source images (the canonical
+recognize_zh, recognize_en and grounding.laugh cells stay together, as do other recognition/grounding
+pairs); generation clusters are animals with all five tiers. Repetitions are first averaged within each
+cell. A draw samples the original number of clusters with replacement and averages all cells in those
+clusters, preserving the original per-cell weighting. Exact equal scores share competition ranks;
+score percentiles interpolate between ordered draws. Rank-range endpoints use the nearest-rank
+(inverted-CDF) rule and are always integers.
+
+The intervals describe sensitivity to sampling these items/animals, conditional on the observed
+repetitions and fixed judges. They do not separately resample model responses or judges, measure label
+uncertainty, test statistical significance, or justify population claims. Few clusters give wide or
+unstable estimates; a degenerate interval does not establish certainty. Naihub-v1 repetition consistency
+is the share of images with at least two answers whose all-field-correct verdict agrees across all
+observed repetitions, including consistently incorrect verdicts.
+
+Rank eligibility also requires a single settings id and effort across ranked cells and repetitions,
+without alternate-route `meta.fill_note` records. Mixed conditions retain diagnostic scores but no rank;
+entirely legacy settings are flagged as unrecorded. Effective reasoning effort is high when exposed by
+the client and default/unexposed otherwise; labels show non-default recorded effort. Actual contributing
+judges and sample counts are disclosed per row, because vendor exclusion can produce different panels.
+
+The Efficiency table covers the fixed visual tasks: token coverage, reported-only mean input/output
+(including reasoning) and reasoning tokens, median end-to-end client seconds, and estimated list API
+cost per task and full panel. Missing fields are excluded from means and displayed as unavailable;
+full-panel cost requires complete task coverage and usage. Prices include their source and as-of date
+from `models.toml`. Input tokens include cached reads and cache writes: subtract those subsets from
+ordinary input, price each at its configured rate (falling back to the input rate), then add output cost,
+all per million tokens. Unknown cache subsets use the ordinary input rate. Subscription CLIs are not
+billed per token: estimates are not actual spend. Input includes each client's harness prompt, so input
+and cost describe running via that client. Output tokens are the more comparable efficiency signal.
+Client time includes session/tool overhead and is not model speed. Generation shows image counts and
+median client time only; relay tokens do not measure generator cost. `scores.json` stores retained
+whole-run subject totals and separate judge totals (cost to evaluate), including failed/stale attempts
+still present on disk; overwritten retries are not a complete trial history.
+
+See the [changelog](../CHANGELOG.md), [benchmark card](benchmark-card.md), and
+[results bundle documentation](design.md#results-bundles) for releases and reproducible re-scoring.
 
 ## Cross-animal state transfer
 
