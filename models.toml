@@ -107,6 +107,15 @@ env = { GEMINI_HOME = "${NWB_AGY_HOME}" }
 model = "gemini-3.8-flash-high"
 can = ["text", "vision"]
 
+[models."gemini-4-argon"]
+label = "Gemini 4 Argon (High)"
+backend = "acp"
+vendor = "google"
+command = ["${NWB_AGY_ACP}"]
+env = { GEMINI_HOME = "${NWB_AGY_HOME}" }
+model = "gemini-4-argon-high"
+can = ["text", "vision"]
+
 # Experimental: relies on Antigravity's built-in image tool; see docs/backends.md.
 [models."gemini-image"]
 label = "Google Gemini image generation (Antigravity generate_image)"
