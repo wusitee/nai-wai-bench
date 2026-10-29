@@ -1,0 +1,94 @@
+{
+  "settings_id": "45fd827f1214ed0a",
+  "track": "imagegen",
+  "model": "chatgpt-image",
+  "vendor": "openai",
+  "tier": "described_detailed",
+  "animal": "giraffe",
+  "rep": 1,
+  "prompt": "A 3D-rendered cartoon giraffe character that looks like a still from a cheap, smooth CG animation. Pose: standing with the torso hunched forward and knees slightly bent, doubled over with laughter, both hands pressed on its round belly. Face: eyes squeezed shut into thin curved arcs; an enormous gaping mouth that takes up most of the face, showing a dark throat, a row of small teeth, and a tongue. Body: bulky pear-shaped body with no neck, the small head merging straight into the torso; short thick arms and legs, small simple hands, and a pale oval belly patch. Rendering: smooth, seamless, slightly glossy matte-plastic skin with no fur strands or fine texture, so the giraffe's fur, markings, and colors appear only as smooth color patches on the sculpted surface; soft diffuse studio lighting with gentle shadows; simple shading like a low-budget AI-generated 3D model; slightly soft focus like a compressed video screenshot. Background: plain white to light grey and empty. Keep the giraffe clearly recognizable from its head shape, ears, snout, and coloring.",
+  "reference": false,
+  "images": [
+    "imagegen/chatgpt-image/described_detailed/giraffe__r1/exec-d942335b-0b61-4968-87aa-aec261dd7ae9.png"
+  ],
+  "text": "DONE",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17198-022c-7e70-80c1-f307c5694721",
+    "seconds": 41.0,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 38956,
+      "cached_input_tokens": 31232,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 374,
+      "reasoning_output_tokens": 26
+    },
+    "tokens": {
+      "input": 38956,
+      "cached_input": 31232,
+      "cache_write": 0,
+      "output": 374,
+      "reasoning": 26
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null,
+    "audit": {
+      "rollout": "~/.codex/sessions/2026/10/25/rollout-2026-10-25T13-45-49-01a17198-022c-7e70-80c1-f307c5694721.jsonl",
+      "image_gen_calls": 1,
+      "verbatim": true,
+      "sent": [
+        "A 3D-rendered cartoon giraffe character that looks like a still from a cheap, smooth CG animation. Pose: standing with the torso hunched forward and knees slightly bent, doubled over with laughter, both hands pressed on its round belly. Face: eyes squeezed shut into thin curved arcs; an enormous gaping mouth that takes up most of the face, showing a dark throat, a row of small teeth, and a tongue. Body: bulky pear-shaped body with no neck, the small head merging straight into the torso; short thick arms and legs, small simple hands, and a pale oval belly patch. Rendering: smooth, seamless, slightly glossy matte-plastic skin with no fur strands or fine texture, so the giraffe's fur, markings, and colors appear only as smooth color patches on the sculpted surface; soft diffuse studio lighting with gentle shadows; simple shading like a low-budget AI-generated 3D model; slightly soft focus like a compressed video screenshot. Background: plain white to light grey and empty. Keep the giraffe clearly recognizable from its head shape, ears, snout, and coloring."
+      ],
+      "calls": [
+        "// @exec: {\"yield_time_ms\": 120000}\nconst result = await tools.image_gen__imagegen({prompt:\"A 3D-rendered cartoon giraffe character that looks like a still from a cheap, smooth CG animation. Pose: standing with the torso hunched forward and knees slightly bent, doubled over with laughter, both hands pressed on its round belly. Face: eyes squeezed shut into thin curved arcs; an enormous gaping mouth that takes up most of the face, showing a dark throat, a row of small teeth, and a tongue. Body: bulky pear-shaped body with no neck, the small head merging straight into the torso; short thick arms and legs, small simple hands, and a pale oval belly patch. Rendering: smooth, seamless, slightly glossy matte-plastic skin with no fur strands or fine texture, so the giraffe's fur, markings, and colors appear only as smooth color patches on the sculpted surface; soft diffuse studio lighting with gentle shadows; simple shading like a low-budget AI-generated 3D model; slightly soft focus like a compressed video screenshot. Background: plain white to light grey and empty. Keep the giraffe clearly recognizable from its head shape, ears, snout, and coloring.\"});\ngeneratedImage(result);\n"
+      ],
+      "refused": false
+    },
+    "c2pa": {
+      "generators": [
+        "ChatGPT gpt-image"
+      ],
+      "actions": []
+    }
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "low",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "-c",
+      "model_reasoning_effort=\"low\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:45:49Z",
+    "finished_at": "2026-10-25T05:46:30Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

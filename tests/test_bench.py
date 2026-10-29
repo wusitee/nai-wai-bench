@@ -56,10 +56,24 @@ def test_visual_judges_receive_stimuli_and_grounding_needs_no_judge(bench, tmp_p
               ModelSpec("vision", "stub", "v", "", frozenset({"text", "vision"}))]
     jobs = judge_jobs(bench, judges, tmp_path, {"understanding"})
     assert len(jobs) == 1 and jobs[0].base["judge"] == "vision"
-    assert jobs[0].base["judge_images"] == [str(bench.reference_image)]
+    assert jobs[0].base["judge_images"] == [bench.reference_image.relative_to(bench.root).as_posix()]
+    assert jobs[0].base["input_names"] == "neutral"
+    assert "target_mtime" not in jobs[0].base and len(jobs[0].base["target_sha256"]) == 64
+    assert len(jobs[0].base["settings_id"]) == 16
     # Inspect the request without making a model call.
     jobs[0].fn()
     assert requests[0].images == [bench.reference_image]
+    # Content-only changes invalidate the target hash even if filesystem timestamps are preserved.
+    import os
+    from nwb.util import read_json
+    target = tmp_path / jobs[0].base["target"]
+    stat = target.stat()
+    write_json(target, {**read_json(target), "meta": {"client": "changed"}})
+    os.utime(target, ns=(stat.st_atime_ns, stat.st_mtime_ns))
+    changed = judge_jobs(bench, judges, tmp_path, {"understanding"})[0]
+    assert changed.base["target_sha256"] != jobs[0].base["target_sha256"]
+    assert changed.base["judge_prompt"] == jobs[0].base["judge_prompt"]
+
 
 
 def test_parse_understanding_accepts_fenced_json_and_validates_scores():

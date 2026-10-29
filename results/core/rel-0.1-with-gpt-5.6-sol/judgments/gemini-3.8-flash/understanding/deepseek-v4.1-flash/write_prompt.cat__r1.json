@@ -1,0 +1,81 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/deepseek-v4.1-flash/write_prompt.cat__r1.json",
+  "target_sha256": "33856d17bbe2cbcff05b8bfd5a6bc15c475bb2dadd7cbdef965baddab0817259",
+  "settings_id": "c5b99b49261f87dd",
+  "judge_prompt": "acf50f7082ffca63",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 0,
+    "background": 1,
+    "vibe": 0,
+    "identity": 1
+  },
+  "hallucinations": [
+    "Specified a 2D cartoon illustration with thick black outlines, flat colors, and cel shading instead of a glossy 3D CG render",
+    "Described the pose as having the head thrown back with one paw lifted instead of hunched forward doubled over with both paws on the belly",
+    "Described cute blush cheeks and an oversized head with a tiny body instead of the unhinged vibe and bulky pear/bean-shaped torso"
+  ],
+  "rationale": "The model accurately captures the squeezed crescent eyes and wide laughing mouth, but inverts the hunched-over posture, misses the contrasting belly patch, and specifies a cute 2D cartoon style instead of the characteristic 3D CG render.",
+  "raw": "```json\n{\n  \"scores\": {\n    \"pose\": 0,\n    \"hands_on_belly\": 1,\n    \"eyes\": 2,\n    \"mouth\": 2,\n    \"body\": 1,\n    \"belly_patch\": 0,\n    \"render\": 0,\n    \"background\": 1,\n    \"vibe\": 0,\n    \"identity\": 1\n  },\n  \"hallucinations\": [\n    \"Specified a 2D cartoon illustration with thick black outlines, flat colors, and cel shading instead of a glossy 3D CG render\",\n    \"Described the pose as having the head thrown back with one paw lifted instead of hunched forward doubled over with both paws on the belly\",\n    \"Described cute blush cheeks and an oversized head with a tiny body instead of the unhinged vibe and bulky pear/bean-shaped torso\"\n  ],\n  \"rationale\": \"The model accurately captures the squeezed crescent eyes and wide laughing mouth, but inverts the hunched-over posture, misses the contrasting belly patch, and specifies a cute 2D cartoon style instead of the characteristic 3D CG render.\"\n}\n```",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 37.1,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 17675,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:59:25Z",
+    "finished_at": "2026-10-25T02:00:02Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

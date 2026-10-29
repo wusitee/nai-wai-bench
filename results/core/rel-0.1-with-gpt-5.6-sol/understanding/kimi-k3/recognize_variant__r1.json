@@ -1,0 +1,73 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "recognize_variant",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。",
+  "images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "answer": "这张图最可能模仿的是中文网络上常见的**「捧腹大笑 / 笑到肚子疼」熊猫表情包**这一类梗。\n\n判断依据：\n\n1. **动作特征**：熊猫双手抱着圆滚滚的肚子、仰身张嘴大笑——这正是\"笑到肚子疼\"（捧腹大笑）表情包的标志性姿势。这类表情包在微信、QQ、斗图场景中常用来回复\"笑死我了\"\"哈哈哈哈\"的语境。\n\n2. **表情特征**：眼睛笑成弯月形紧闭、嘴巴大张露齿，是中文网络\"大笑\"表情的通用画法，与\"熊猫头\"系列表情包（以金馆长、张学友等笑脸配熊猫头）中那种夸张大笑的神态一脉相承，只不过这里是3D化的完整熊猫形象。\n\n3. **画风特征**：毛发蓬松、体积感强、拟人化站姿的3D卡通渲染风格，接近《功夫熊猫》阿宝（Po）的造型语言，而阿宝大笑、憨态可掬的形象本身也常被截成中文表情包使用。\n\n需要说明的是，这类\"胖熊猫抱肚大笑\"的图更像是对一类**通用梗（捧腹大笑梗）的AI/3D重绘**，而非严格对应某一个有明确出处的单一表情包；如果一定要归类，它属于\"熊猫笑到肚子疼\"这个表情包家族。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 20.9,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20829,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 617,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 21446 / 1048576 tokens (2%)\nSession total: 20829 input, 617 output",
+      "usage": {
+        "inputTokens": 20829,
+        "outputTokens": 617
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:43:16Z",
+    "finished_at": "2026-10-25T00:43:36Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

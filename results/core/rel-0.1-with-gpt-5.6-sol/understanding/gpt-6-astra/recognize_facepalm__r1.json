@@ -1,0 +1,80 @@
+{
+  "settings_id": "eed12e0ea2261aed",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "vendor": "openai",
+  "item": "recognize_facepalm",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "answer": "这是 **奶龙（Nailoong）**，国产动画《奶龙》里的黄色小龙。\n\n它属于网络上的 **“奶龙”表情包梗**，也和“我是奶龙”“你才是奶龙”等玩梗用语有关。这张扶着额头、略带微笑的图，通常用来表达疑惑、无语或“让我想想”；具体含义取决于配文。",
+  "contaminated": false,
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6-astra",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17086-fe6d-7993-a369-763a8388b455",
+    "seconds": 14.9,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 11608,
+      "cached_input_tokens": 3968,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 275,
+      "reasoning_output_tokens": 173
+    },
+    "tokens": {
+      "input": 11608,
+      "cached_input": 3968,
+      "cache_write": 0,
+      "output": 275,
+      "reasoning": 173
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6-astra",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:47:37Z",
+    "finished_at": "2026-10-25T00:47:52Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

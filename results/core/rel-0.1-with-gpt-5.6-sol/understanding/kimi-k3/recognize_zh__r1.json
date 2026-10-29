@@ -1,0 +1,73 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "图里这个角色是**奶龙（Nailong）**——国产3D动画《奶龙与小七》里的那只黄色小胖龙，标志性特征就是圆滚滚的身材、白肚皮和咧嘴大笑的表情。\n\n**相关的网络梗：** 它出自2024年前后在抖音、B站等平台爆火的“奶龙表情包”梗。大量低清晰度、动作夸张的奶龙图片和动图（尤其是这种捧腹大笑、笑到捂肚子的造型）被网友拿来当表情包使用，画风“又萌又抽象”，后来发展成一种“抽象文化”素材，常被配上阴阳怪气或无厘头的文字。\n\n**这个梗的常见别名/相关叫法：**\n- **小奶龙 / 黄色小胖龙** —— 对角色本身的昵称\n- **奶龙摇** —— 指它跳舞、摇摆的动图梗\n- **抽象奶龙** —— 指它被用于“抽象”搞怪语境的那一类二创\n\n需要说明的是，我只能凭已有知识回答：奶龙这个梗在2024年非常火，如果你看到的是更新的变体或衍生叫法，我可能不了解最新的发展。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 51.4,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20769,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 2381,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 23150 / 1048576 tokens (2%)\nSession total: 20769 input, 2381 output",
+      "usage": {
+        "inputTokens": 20769,
+        "outputTokens": 2381
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:42:59Z",
+    "finished_at": "2026-10-25T00:43:50Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

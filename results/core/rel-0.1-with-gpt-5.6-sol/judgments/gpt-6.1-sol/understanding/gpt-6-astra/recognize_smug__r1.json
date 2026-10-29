@@ -1,0 +1,84 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6-astra/recognize_smug__r1.json",
+  "target_sha256": "95eace54c452d454435db5977e90dc286610f701f10e00737a138a83a76d815b",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "26e8fbc73566ae8e",
+  "judge_images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "scores": {
+    "base_character": 2,
+    "identifies_meme": 1
+  },
+  "hallucinations": [],
+  "rationale": "正确认出角色是国产动画《奶龙》中的黄色小龙。仅泛称“奶龙梗／奶龙表情包”，未明确识别为大笑奶龙／变异奶龙／奶蛙梗家族，因此该项只给部分分。",
+  "raw": "{\"scores\":{\"base_character\":2,\"identifies_meme\":1},\"hallucinations\":[],\"rationale\":\"正确认出角色是国产动画《奶龙》中的黄色小龙。仅泛称“奶龙梗／奶龙表情包”，未明确识别为大笑奶龙／变异奶龙／奶蛙梗家族，因此该项只给部分分。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719f-7e38-7261-9f52-d800e61415e3",
+    "seconds": 9.5,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12885,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 174,
+      "reasoning_output_tokens": 83
+    },
+    "tokens": {
+      "input": 12885,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 174,
+      "reasoning": 83
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:54:00Z",
+    "finished_at": "2026-10-25T05:54:09Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

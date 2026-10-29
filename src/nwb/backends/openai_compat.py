@@ -13,7 +13,7 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-from nwb.backends import BackendError, Request, Response
+from nwb.backends import BackendError, Request, Response, neutral_inputs, tokens
 from nwb.config import ModelSpec
 from nwb.util import media_type
 
@@ -64,9 +64,12 @@ class OpenAICompatBackend:
             raise BackendError(f"model {self.spec.name}: set base_url and api_key_env, or cc_switch")
         return base.rstrip("/"), key
 
+    @neutral_inputs
     def run(self, req: Request) -> Response:
         if req.image_out is not None:
             raise BackendError("the openai backend cannot generate images")
+        if self.spec.options.get("effort", "default") != "default":
+            raise BackendError("openai backend has no supported graded effort control; use effort=default")
         base, key = self._endpoint()
         content = [{"type": "text", "text": req.prompt}]
         content += [{"type": "image_url", "image_url": {
@@ -95,7 +98,9 @@ class OpenAICompatBackend:
         except (KeyError, IndexError) as e:
             raise BackendError(f"unexpected response: {json.dumps(data)[:500]}") from e
         return Response(text=message.get("content") or "", meta={
-            "backend": "openai", "model": self.spec.model, "client": urllib.parse.urlsplit(base).netloc,
+            "backend": "openai", "model": self.spec.model, "client": urllib.parse.urlsplit(base).hostname,
             "seconds": round(time.monotonic() - started, 1),
             "tools_used": [], "usage": data.get("usage"),
+            "tokens": tokens("openai", data.get("usage")), "resolved_model": data.get("model"),
+            "cost_usd_reported": None,
         })

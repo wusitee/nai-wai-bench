@@ -1,0 +1,93 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/deepseek-v4-pro/write_prompt.cat__r1.json",
+  "target_sha256": "eb0c97641f142d45f5a479045452646e80694525a231e0e80ad02d62941325d5",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "380d52f284d2054a",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 1,
+    "background": 1,
+    "vibe": 0,
+    "identity": 1
+  },
+  "hallucinations": [
+    "Both front paws are raised upward instead of clutching the belly.",
+    "An oversized round head above a small body contradicts the bulky, neckless silhouette.",
+    "Adorable plush-toy styling contradicts the glossy, absurd, slightly unhinged reference aesthetic."
+  ],
+  "rationale": "The closed curved eyes are clearly covered, while the mouth, body shape, rendering, background, and cat identity receive partial coverage. The hunched laughter pose and belly patch are absent, the paws are incorrectly raised, and the cute yellow toy treatment lacks the required meme energy and convincing feline coloring or markings.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":0,\"eyes\":2,\"mouth\":1,\"body\":1,\"belly_patch\":0,\"render\":1,\"background\":1,\"vibe\":0,\"identity\":1},\"hallucinations\":[\"Both front paws are raised upward instead of clutching the belly.\",\"An oversized round head above a small body contradicts the bulky, neckless silhouette.\",\"Adorable plush-toy styling contradicts the glossy, absurd, slightly unhinged reference aesthetic.\"],\"rationale\":\"The closed curved eyes are clearly covered, while the mouth, body shape, rendering, background, and cat identity receive partial coverage. The hunched laughter pose and belly patch are absent, the paws are incorrectly raised, and the cute yellow toy treatment lacks the required meme energy and convincing feline coloring or markings.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719b-6a57-7081-a1d5-7efa7d0d2615",
+    "seconds": 18.7,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12053,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 402,
+      "reasoning_output_tokens": 227
+    },
+    "tokens": {
+      "input": 12053,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 402,
+      "reasoning": 227
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:49:32Z",
+    "finished_at": "2026-10-25T05:49:51Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

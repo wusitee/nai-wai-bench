@@ -1,0 +1,116 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/deepseek-v4.1-flash/write_prompt.cat__r1.json",
+  "target_sha256": "33856d17bbe2cbcff05b8bfd5a6bc15c475bb2dadd7cbdef965baddab0817259",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "acf50f7082ffca63",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 0,
+    "belly_patch": 0,
+    "render": 0,
+    "background": 2,
+    "vibe": 1,
+    "identity": 1
+  },
+  "hallucinations": [
+    "Pose described as head thrown back, contradicting the hunched-forward, doubled-over pose",
+    "Body described as oversized head with tiny body, contradicting the bulky pear/bean-shaped body with no distinct neck",
+    "Style specified as 2D cartoon with thick black outlines, flat colors and cel shading, contradicting the glossy 3D CG render"
+  ],
+  "rationale": "The eyes, mouth and plain background are captured well. The pose, body shape, render style and belly patch are wrong or missing, and only one paw is on the belly. The cat stays a pale-yellow Nailong with ears and whiskers added, and the blush gives a kawaii look rather than unhinged meme energy.",
+  "raw": "```json\n{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 2, \"mouth\": 2, \"body\": 0, \"belly_patch\": 0, \"render\": 0, \"background\": 2, \"vibe\": 1, \"identity\": 1}, \"hallucinations\": [\"Pose described as head thrown back, contradicting the hunched-forward, doubled-over pose\", \"Body described as oversized head with tiny body, contradicting the bulky pear/bean-shaped body with no distinct neck\", \"Style specified as 2D cartoon with thick black outlines, flat colors and cel shading, contradicting the glossy 3D CG render\"], \"rationale\": \"The eyes, mouth and plain background are captured well. The pose, body shape, render style and belly patch are wrong or missing, and only one paw is on the belly. The cat stays a pale-yellow Nailong with ears and whiskers added, and the blush gives a kawaii look rather than unhinged meme energy.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 12.7,
+    "tokens": {
+      "input": 1754,
+      "cached_input": 0,
+      "cache_write": 1752,
+      "output": 946,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0331903,
+    "tools_used": [],
+    "cost_usd": 0.0331903,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1752,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 946,
+      "output_tokens_details": {
+        "thinking_tokens": 618
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1752,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 946,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1752,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1752
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:55:54Z",
+    "finished_at": "2026-10-25T01:56:07Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

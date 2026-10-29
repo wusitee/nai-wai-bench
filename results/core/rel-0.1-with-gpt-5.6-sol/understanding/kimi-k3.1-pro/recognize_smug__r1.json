@@ -1,0 +1,73 @@
+{
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "vendor": "moonshot",
+  "item": "recognize_smug",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "answer": "图中是国产动画《奶龙》里的黄色小恐龙 **奶龙**。\n\n它属于网上流行的 **“奶龙表情包”／“奶龙梗”**。这张半眯眼、鼓着腮帮子的图通常用来表达无语、敷衍、摆烂，或者一种“我就这样，你能拿我怎么办”的态度，有时也带些阴阳怪气的意味。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 29.5,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20307,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 1063,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 21370 / 1048576 tokens (2%)\nSession total: 20307 input, 1063 output",
+      "usage": {
+        "inputTokens": 20307,
+        "outputTokens": 1063
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:47:13Z",
+    "finished_at": "2026-10-25T00:47:43Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,6 +1,7 @@
 """OpenAI models through `codex exec` (ChatGPT login). Image generation uses Codex's built-in
 image_gen tool; the session rollout is checked to confirm the prompt was passed verbatim."""
 
+import hashlib
 import json
 import os
 import re
@@ -11,7 +12,7 @@ import time
 from pathlib import Path
 
 from nwb.backends import (BackendError, ProviderRefusal, Request, Response, audit_calls, cli_version,
-                          image_instruction)
+                          image_instruction, neutral_inputs, tokens)
 from nwb.config import ModelSpec
 from nwb.util import IMAGE_SUFFIXES
 
@@ -34,13 +35,14 @@ class CodexBackend:
         # The apps connector carries its own web search; browser and computer use also reach the web.
         for feature in DISABLED_FEATURES + (() if generate else ("image_generation",)):
             cmd += ["--disable", feature]
-        if effort := self.spec.options.get("reasoning"):
+        if (effort := self.spec.options.get("effort", self.spec.options.get("reasoning"))) and effort != "default":
             cmd += ["-c", f'model_reasoning_effort="{effort}"']
         # --image takes multiple values, so it goes last and the prompt is sent on stdin.
         for img in images:
             cmd += ["--image", str(Path(img).resolve())]
         return cmd
 
+    @neutral_inputs
     def run(self, req: Request) -> Response:
         gen = req.image_out is not None
         prompt = image_instruction(req.prompt, bool(req.images), "image_gen") if gen else req.prompt
@@ -66,9 +68,10 @@ class CodexBackend:
             "tools_used": [i.get("type") for i in items if i.get("type") not in ("agent_message", "reasoning")],
             "usage": next((e.get("usage") for e in events if e.get("type") == "turn.completed"), None),
         }
+        meta.update(tokens=tokens("codex", meta["usage"]), resolved_model=None, cost_usd_reported=None)
         resp = Response(text=messages[-1] if messages else "", meta=meta)
         if gen:
-            resp.images = self._collect_images(thread_id, req.image_out)
+            resp.images = self._collect_images(thread_id, req.image_out, req.images)
             meta["audit"] = audit_rollout(self._rollout(thread_id), req.prompt)
             if not resp.images and meta["audit"].get("refused"):
                 raise ProviderRefusal(f"image provider refused (thread {thread_id}): moderation_blocked", meta)
@@ -76,13 +79,16 @@ class CodexBackend:
                 raise BackendError(f"codex produced no image (thread {thread_id}): {resp.text[:200]}")
         return resp
 
-    def _collect_images(self, thread_id: str, out_dir: Path) -> list[Path]:
+    def _collect_images(self, thread_id: str, out_dir: Path, inputs: list[Path]) -> list[Path]:
         src_dir = self.home / "generated_images" / thread_id
         if not src_dir.is_dir():
             return []
         out_dir.mkdir(parents=True, exist_ok=True)
         copied = []
+        excluded = {hashlib.sha256(p.read_bytes()).digest() for p in inputs}
         for src in sorted(p for p in src_dir.iterdir() if p.suffix.lower() in IMAGE_SUFFIXES):
+            if hashlib.sha256(src.read_bytes()).digest() in excluded:
+                continue
             dst = out_dir / src.name
             shutil.copy2(src, dst)
             copied.append(dst)

@@ -1,0 +1,100 @@
+{
+  "settings_id": "8bc2f526580c51a3",
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "vendor": "anthropic",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "A flat, hand-drawn 2D cartoon sticker of a very chubby, round, egg-shaped cat in a soft butter-yellow color, drawn in the style of a funny chat-app reaction emoji. The cat sits upright with a huge round belly in a lighter cream-yellow. It has a big round head merged into the body with almost no neck, small triangular cat ears, a few thin whiskers on each cheek, short stubby arms and legs, and a tiny stubby tail. Its face is mid-burst of uncontrollable laughter. The head tilts slightly back, and the mouth is stretched very wide open in a big upturned \"D\" shape, showing a pink tongue and a dark red mouth interior, with no or only tiny teeth. The eyes are small, simple, and squeezed into happy upturned arcs, with a couple of little tear drops flying off the face. The cheeks have light pink blush spots. One paw clutches the belly while the other waves or points forward, as if the cat is laughing so hard it can barely stand. Use thick, smooth, dark brown-black outlines, flat pastel colors, minimal shading, and a simple, slightly silly, naive look. The cat is centered, fills most of the frame, and sits on a plain pure white background, with no text, no watermark, and no extra objects. The image is high resolution, clean vector-like, and square.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 14.1,
+    "tokens": {
+      "input": 677,
+      "cached_input": 0,
+      "cache_write": 675,
+      "output": 1308,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.016027,
+    "tools_used": [],
+    "cost_usd": 0.016027,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 675,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1308,
+      "output_tokens_details": {
+        "thinking_tokens": 861
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 675,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1308,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 675,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 675
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:44:12Z",
+    "finished_at": "2026-10-25T00:44:27Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

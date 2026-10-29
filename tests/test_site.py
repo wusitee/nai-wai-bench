@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from nwb import report, scoring, site
+from nwb import CANARY, cli, report, scoring, site
 from nwb.config import find_root, load_bench, load_models
 from nwb.provenance import c2pa_summary
 from nwb.util import write_json
@@ -81,8 +81,13 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
             assert kwargs == {"check": True}
             Path(command[-1]).write_bytes(Path(command[1]).read_bytes())
         monkeypatch.setattr(site.subprocess, "run", convert)
-    index = site.build(bench, models, run, scores, out, repo_url="https://example.com/repo", suite_tabs=True)
+    index = site.build(bench, models, run, scores, out, repo_url="https://example.com/repo", suite_tabs=True, bundle_url="https://example.com/results.zip")
     html = index.read_text()
+    assert CANARY in html and "nai-wai-bench 0.1.0" in html
+    assert "https://example.com/results.zip" in html and "Download raw results" in html
+    assert "Efficiency" in html and "Stale judgments ignored" not in html  # shown only when some were ignored
+    assert "0.1.0 首个版本 · First release" in html and "Release 0.1.0 results:" in html
+    assert "models whose intervals largely overlap are not clearly ordered" in html
     assert model.label in html and "codex-cli test" in html and "recorded-model" in html
     assert "ChatGPT gpt-image" in html and "Prompt changed" in html
     assert answer.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;') in html
@@ -94,6 +99,9 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
     if suite == "naihub-v1":
         # Answer-keyed images appear as casebook cards; the annotator is flagged; tabs follow the published layout.
         assert "all seven fields" in html and "Family macro" in html and f"id='case-{item.id.split('.')[1]}'" in html
+        ranking = html.split("<table class=ranking>", 1)[1].split("</table>", 1)[0]
+        assert "评审 Judges:" not in ranking
+        assert "Answer keys are GPT-6-Astra annotations not yet checked by a person" in html
         assert "Key annotator" in html and "href='../'" in html and "blind-only reply" in html
         assert f"id='case-{unseen.id.split('.')[1]}'" in html
     else:
@@ -113,3 +121,75 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
     Assets().feed(html)
     suffix = ".jpg" if resize else ".png"
     assert (out / f"images/{model.name}/name_zh/cat__r1{suffix}").is_file()
+
+
+def test_export_is_deterministic_sanitized_and_rescorable(tmp_path, capsys):
+    import hashlib
+    import zipfile
+    from types import SimpleNamespace
+    from nwb.judge import understanding_prompt
+
+    bench = load_bench(find_root())
+    models, _ = load_models(bench.root)
+    run = tmp_path / "release-run"
+    item = next(i for i in bench.items if i.id == "recognize_zh")
+    target = "understanding/m/answer.json"
+    answer = "A " + str(Path.home() / "private")
+    write_json(run / target, {"track": "understanding", "model": "m", "vendor": "v", "item": item.id,
+                            "modality": "vision", "lang": "zh", "rep": 1, "prompt": item.prompt,
+                            "answer": answer, "meta": {"path": str(Path.home() / "private")}})
+    write_json(run / "judgments/j/answer.json", {
+        "judge": "j", "judge_vendor": "other", "target": target,
+        "target_mtime": (run / target).stat().st_mtime,
+        "judge_prompt": hashlib.sha256(understanding_prompt(bench, item, answer).encode()).hexdigest()[:16],
+        "judge_images": [str(p) for p in item.images], "scores": {c: 2 for c in item.checklist},
+        "hallucinations": [], "rationale": ""})
+    stale = json.loads((run / "judgments/j/answer.json").read_text())
+    write_json(run / "judgments/stale/answer.json", {**stale, "judge": "stale", "target_sha256": "old-content"})
+    write_json(run / "judgments/old_prompt/answer.json", {**stale, "judge": "old_prompt", "judge_prompt": "old-rubric"})
+    image = run / "imagegen/m/reference/image.png"
+    image.parent.mkdir(parents=True)
+    image.write_bytes(b"image bytes")
+    (run / "report.html").write_text("excluded")
+    (run / "secrets.log").write_text("excluded")
+    (run / "collection.jsonl").write_text(json.dumps({"path": str(Path.home() / "private")}) + "\n")
+    args = SimpleNamespace(run_dir=run, out=str(tmp_path / "bundles"))
+    assert cli.cmd_export(args, bench.root, bench, models, {}) == 0
+    archive = next((tmp_path / "bundles").glob("*.zip"))
+    original = archive.read_bytes()
+    assert cli.cmd_export(args, bench.root, bench, models, {}) == 0
+    assert archive.read_bytes() == original
+    with zipfile.ZipFile(archive) as bundle:
+        assert bundle.namelist() == sorted(bundle.namelist())
+        assert set(bundle.namelist()) == {target, "judgments/j/answer.json", "judgments/stale/answer.json",
+                                         "judgments/old_prompt/answer.json", "imagegen/m/reference/image.png",
+                                         "scores.json", "collection.jsonl", "BUNDLE-README.md"}
+        assert CANARY in bundle.read("BUNDLE-README.md").decode()
+        assert str(Path.home()) not in bundle.read(target).decode()
+        assert json.loads(bundle.read(target))["meta"]["path"] == "~/private"
+        assert json.loads(bundle.read("collection.jsonl"))["path"] == "~/private"
+        restored = tmp_path / "restored"
+        bundle.extractall(restored)
+    rescored = scoring.aggregate(restored, bench.trait_weights, bench=bench)
+    assert rescored["stale_judgments"] == {"total": 2, "reasons": {"target changed": 1, "judge prompt changed": 1}}
+    assert rescored["understanding"]["m"]["vision"] == 100
+    assert cli.build_parser().parse_args(["site", "--bundle-url", "https://example.com/b.zip"]).bundle_url
+    with pytest.raises(SystemExit) as stopped:
+        cli.main(["--version"])
+    assert stopped.value.code == 0 and "nwb 0.1.0" in capsys.readouterr().out
+
+
+def test_ranking_discloses_intervals_conditions_and_display_judges():
+    row = {"model": "m", "rank": 1, "score": 87.5, "score_interval": [70.8, 100], "rank_range": [1, 5],
+           "status": "complete", "settings_status": "settings unrecorded", "completed": 24, "required": 24,
+           "repetitions": 1, "judges": {"judge-id": 17}}
+    html = site._ranking([row], lambda m: "Model (high)", {}, lambda j: "Judge Label")
+    assert "87.5 [70.8–100.0]" in html and ">1–5</td>" in html
+    assert "class=interval style='left:70.800%;width:29.200%'" in html
+    assert "Model<span class=muted> (high)</span>" in html
+    assert "评审 Judges: Judge Label ×17" in html and "judge-id" not in html
+    assert "<span class=status>settings unrecorded</span>" in html
+    mixed = {**row, "rank": None, "score": None, "status": "mixed conditions", "diagnostic_score": 87.5,
+             "conditions": ["effort: high, low", "alternate route: <API>"]}
+    html = site._ranking([mixed], lambda m: m, {}, lambda j: j)
+    assert "class='status mixed'" in html and "title='effort: high, low; alternate route: &lt;API&gt;" in html

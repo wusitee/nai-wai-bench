@@ -80,6 +80,26 @@ only one example; tears-present has two, including an ambiguous case. Correcting
 image alone moves family macro accuracy by about 33.33 points. These slices cannot establish
 general performance on their classes.
 
+## Release reporting
+
+See the [changelog](../CHANGELOG.md) and [benchmark card](benchmark-card.md) for release and annotation
+status. Ranked rows must have homogeneous settings and effort with no alternate-route fills; all-legacy
+settings are marked unrecorded. Effective effort is high where exposed by the client, otherwise default,
+and non-default recorded effort appears in labels.
+
+Paired 95% score intervals and rank ranges use 2,000 fixed-seed image-cluster resamples shared across
+models, after averaging repetitions within each image. They describe sampling sensitivity of these
+images at observed repetitions and fixed keys, not significance or population performance. Few clusters
+make intervals unstable; they do not quantify key uncertainty. Repetition consistency reports the share
+of images with at least two answers whose all-field-correct verdict agrees across all repetitions.
+
+Efficiency shows reported token coverage/means, median client time, and list API cost estimates;
+subscription CLIs are not billed per token. Harness prompts affect input/cost, while output includes
+reasoning and is the more comparable signal. Time is end-to-end client time, not model speed. See
+[methodology](methodology.md#uncertainty-and-efficiency) for missing-data rules and price accounting.
+`nwb export --suite naihub-v1 --run RUN` creates a sanitized raw-results bundle for tagged re-scoring;
+`nwb site --bundle-url URL` links it from the results page.
+
 ## Running
 
 Use a fresh run and the same suite on every command. The CLI rejects samples from another

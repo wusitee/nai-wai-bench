@@ -1,0 +1,17 @@
+nwb_version = "0.1.0"
+repo_url = "https://github.com/wusitee/nai-wai-bench"
+
+# Collection source supplied with the original release results.
+[collection_source]
+revision = "07d52c9418172b2b7b01e6ed0abc2ca504c64a76"
+archive_sha256 = "fb2d8a524452a6d15b9090848ff3c5dc753975173dba45cdffae5384e0a35c07"
+
+[suites.core]
+run = "rel-0.1-with-gpt-5.6-sol"
+sha256 = "fe97af0a88871800e87962cf1bda0e7390c3ca169bcc0f7d51bf77b90a649c50"
+judges = ["opus-5.5", "gpt-6.1-sol", "gemini-3.8-flash", "deepseek-v4-pro", "kimi-k3.1-pro"]
+
+[suites.naihub-v1]
+run = "rel-0.1-naihub-with-gpt-5.6-sol"
+sha256 = "2929ec5de558da37ba27607a6a7ed49755f092a9bf1c322aa1065c90f988e75c"
+judges = []

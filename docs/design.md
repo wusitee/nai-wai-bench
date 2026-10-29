@@ -39,6 +39,42 @@ significance or general multimodal ability.
 The older `understanding.overall` field now aliases the available-item vision mean; it is not a mixed
 text/vision score. Diagnostic means use available items and may differ from the qualified ranking score.
 
+## Release metadata and eligibility
+
+See the [changelog](../CHANGELOG.md) and [benchmark card](benchmark-card.md). `nwb --version` reports the
+installed software version; suite ids identify datasets. Every ranked row must use one `settings_id`
+across its ranked cells and repetitions, with no `meta.fill_note` alternate-route records. Differing
+settings, efforts, or recorded/unrecorded mixtures have status `mixed conditions`, list the differences,
+and retain diagnostic scores without ranks. Entirely legacy rows remain eligible as `settings unrecorded`.
+Text/vision labels show effective `settings.effort`, except default/unexposed; image relay effort is not
+an image-model label. Policy is high where the client exposes control, otherwise its default.
+
+Reports and sites show the actual contributing judges and sample counts per model/panel, paired 95%
+score intervals and rank ranges, and naihub-v1 repetition consistency when at least two answers exist
+for an image. Consistency is the percentage of those images whose all-field-correct verdict is identical
+across their repetitions; it can be high even when answers are consistently wrong. See
+[methodology](methodology.md#uncertainty-and-efficiency) for clustering and scope.
+
+`scores.json` records `nwb_version`, suite, UTC collection date range, collection revision set (including
+`+dirty`), missingness, and telemetry. These collection fields differ from the site's build date/revision.
+Reporting checks `target_sha256`, or legacy `target_mtime` when no hash exists, and the saved
+`judge_prompt` against the current judge prompt constructors. Stale judgments are counted with reasons.
+Freshness checks make no model calls. Evidence paths are compared relative to `bench/` for portability.
+
+## Results bundles
+
+`uv run nwb export --run RUN --suite SUITE [--out DIR]` creates
+`nai-wai-bench-<version>-<suite>-<run>.zip` (default: the run directory). It contains understanding and
+image-generation JSON/images, judgments, `collection.jsonl` when present, freshly computed `scores.json`,
+and a canary-bearing `BUNDLE-README.md`. HTML and unrelated files are excluded. JSON string values replace
+the home-directory prefix with `~`. Export adjusts judgment content hashes to the sanitized sample bytes
+and converts legacy mtime identity without making stale judgments current. Ordering and ZIP metadata are
+deterministic. Extract into `runs/<run>/` in a checkout of the matching source version, then run the
+bundle README's report command.
+
+`nwb site --bundle-url URL` adds a raw-results download link. The manifest-driven
+[release build](releases.md) writes both suites and their downloadable bundles together.
+
 ## Part 1: understanding (`nwb understand`)
 
 Text and vision LLMs answer questions about the meme. Items are defined in `[understanding.*]` in
@@ -175,8 +211,7 @@ Image judges describe what they see for each trait, then rate it with a word (`a
 Each sample's score is the mean over judges, excluding judges from the subject's own vendor when at least one
 independent judge exists (self-judging was visibly lenient in testing). A failure mode counts when at least
 half of the judges flag it. Each judgment is tied to the version of the sample it scored and to the exact
-judge prompt: `nwb judge` redoes it when either changes, and `nwb report` ignores judgments of a sample that
-has since been regenerated. The report also counts only samples made with the current prompts, so samples of
+judge prompt: `nwb judge` redoes it when either changes, and `nwb report` ignores judgments when target content or the grading prompt has changed. The report also counts only samples made with the current prompts, so samples of
 removed or reworded items and tiers drop out until they are regenerated.
 
 The report's **judge health** table shows, per judge and track, the spread of its scores across samples and
@@ -187,7 +222,7 @@ this reason: it rated every trait of every image `partial`, even when its own no
 
 ## Results site (`nwb site`)
 
-`uv run nwb site --run v1` builds a bilingual Chinese/English site in `site/`, separate from the local
+`uv run nwb site --run RUN` builds a bilingual Chinese/English site in `site/`, separate from the local
 report. Each page covers one suite and run. It opens with the visual-understanding and image-generation
 rankings, with coverage and repetitions per cell; an image-generation panel without results is left out. The
 remaining sections appear when the run has data for them:
@@ -204,6 +239,8 @@ remaining sections appear when the run has data for them:
 - **Understanding diagnostics:** summary columns that have values in the run; for suites with family
   labels, joint, visual-joint, family-macro, per-field, and per-category heatmaps; free-form answers;
   optional state extraction as its own casebook.
+- **Efficiency:** visual-panel token coverage, reported token means, client time, list API cost estimates,
+  and a score-versus-output-tokens scatter; generation image counts and client time.
 - **Models** (access metadata, C2PA provenance, and the answer-key annotator when the suite names one)
   and **judge health** when the run has judgments.
 
@@ -212,7 +249,7 @@ repetition while summaries include every sample. Heatmap cells darken as scores 
 suite's `[dataset].annotation_record` names an annotator model, that model is flagged in the ranking: its
 score measures agreement with its own labels.
 
-The header records the suite, run name, build date, and the repository commit (`git rev-parse --short HEAD`,
+The header records the software version, suite, collection date range, run name, build date, and build repository commit (`git rev-parse --short HEAD`,
 marked when `bench/` or `src/` have uncommitted changes). With `--repo-url`, the methodology and
 source links point to that commit.
 
@@ -222,7 +259,13 @@ C2PA names only `ChatGPT · gpt-image` for OpenAI and “Created by Google Gener
 
 ### Publishing
 
-`scripts/publish_site.sh [CORE_RUN [NAIHUB_RUN]]` (defaults `v1` and `naihub-v1`) builds the core suite into the root of a fresh temporary directory and naihub-v1 into `naihub-v1/`, both with suite tabs, adds `.nojekyll`, and replaces the `gh-pages` branch on `origin` with only the generated site. Both runs must exist. It requires `uv`, Git, configured Git author identity, and push access, and leaves the checked-out branch unchanged. Generated runs and site files stay git-ignored on the source branch.
+`scripts/publish_site.sh RELEASE_MANIFEST.toml` uses `nwb release` to build the selected comparison
+into a fresh temporary directory, then replaces the `gh-pages` branch on `origin` with that generated
+site and its raw bundles. The manifest is required; there are no implicit run names. The core suite
+goes at the root and naihub-v1 at `naihub-v1/`, with suite tabs and `.nojekyll`. It requires `uv`, Git,
+configured Git author identity, and push access, and leaves the checked-out branch unchanged.
+See the [release workflow](releases.md) for input validation and local review before publishing.
+Working runs and site files stay git-ignored; portable copies under `results/` sync with the source branch.
 
 Enable GitHub Pages once with `gh api -X POST repos/OWNER/REPO/pages -f 'source[branch]=gh-pages' -f 'source[path]=/'`; if Pages is already enabled, use `-X PUT` instead. Inspect `gh api repos/OWNER/REPO/pages/builds/latest` for build status and `gh api repos/OWNER/REPO/pages --jq .html_url` for the URL. **The Pages site is public even when the source repository is private.** Publish only results intended for public access.
 
@@ -237,8 +280,13 @@ runs/<run>/judgments/<judge>/<same path as the judged sample>
 runs/<run>/scores.json, runs/<run>/report.html
 ```
 
-Commands skip samples that already succeeded with the current prompt and redo ones that recorded an
-`error` or were made with a different prompt, so an interrupted run resumes where it stopped. Provider
+Collection, judging, and reporting also refresh `results/<suite>/<run>/`, a portable, sanitized copy
+intended for Git. It includes raw answers, judgments, generated images, scores, and checksum metadata;
+working runs can be restored from it after cloning. `--no-sync` keeps an experimental run local.
+See [saving results](releases.md#saving-results-to-git) for manual sync and restoration.
+
+Commands skip samples that already succeeded with the current prompt, settings, and neutral-input contract,
+and redo ones with an `error` or changed collection conditions, so an interrupted run resumes where it stopped. Provider
 refusals are kept as results; `--force` regenerates everything selected.
 
 ## Extending

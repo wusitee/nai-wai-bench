@@ -1,0 +1,117 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/kimi-k3/write_prompt_zh.giraffe__r1.json",
+  "target_sha256": "3d0794441a66af59134ec0ca40a46f0a192646b893049e21bd1b7c43c10fcf69",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "245ae605acae6978",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "kimi-k3",
+  "scores": {
+    "pose": 1,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 0,
+    "background": 2,
+    "vibe": 0,
+    "identity": 2
+  },
+  "hallucinations": [
+    "Specifies a 'toothless grin', but the meme's mouth shows visible teeth",
+    "Specifies 'small stubby arms raised up in delight' instead of hands clutching the belly",
+    "Specifies flat pastel 2D sticker illustration with thick outlines instead of a glossy 3D CG render",
+    "Frames the character as cute kawaii/chibi rather than absurd, unhinged meme energy"
+  ],
+  "rationale": "The prompt makes the giraffe clearly recognizable and gets the shut crescent eyes, the huge open mouth and the white background. It misses the hands on the belly, the pale belly patch and the 3D render, and it pushes a kawaii 2D style. It only gestures at the doubled-over pose, and its long neck conflicts with the neckless bean body.",
+  "raw": "```json\n{\"scores\": {\"pose\": 1, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 1, \"body\": 1, \"belly_patch\": 0, \"render\": 0, \"background\": 2, \"vibe\": 0, \"identity\": 2}, \"hallucinations\": [\"Specifies a 'toothless grin', but the meme's mouth shows visible teeth\", \"Specifies 'small stubby arms raised up in delight' instead of hands clutching the belly\", \"Specifies flat pastel 2D sticker illustration with thick outlines instead of a glossy 3D CG render\", \"Frames the character as cute kawaii/chibi rather than absurd, unhinged meme energy\"], \"rationale\": \"The prompt makes the giraffe clearly recognizable and gets the shut crescent eyes, the huge open mouth and the white background. It misses the hands on the belly, the pale belly patch and the 3D render, and it pushes a kawaii 2D style. It only gestures at the doubled-over pose, and its long neck conflicts with the neckless bean body.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 10.9,
+    "tokens": {
+      "input": 1777,
+      "cached_input": 0,
+      "cache_write": 1775,
+      "output": 865,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.031759300000000004,
+    "tools_used": [],
+    "cost_usd": 0.031759300000000004,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1775,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 865,
+      "output_tokens_details": {
+        "thinking_tokens": 507
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1775,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 865,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1775,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1775
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:02:12Z",
+    "finished_at": "2026-10-25T02:02:23Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

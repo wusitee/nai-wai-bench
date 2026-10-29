@@ -1,0 +1,100 @@
+{
+  "settings_id": "8bc2f526580c51a3",
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "vendor": "anthropic",
+  "item": "describe_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Without looking at any images, describe the most iconic image of Laughing Nailong (大笑奶龙 / 奶蛙) from memory: its pose, expression, body shape, colors, rendering style, and background, in enough detail for an artist who has never seen it to draw it. Say where you are unsure.",
+  "images": [],
+  "answer": "# Laughing Nailong (大笑奶龙), described from memory\n\nI can't pull up the image, so some of this is reconstruction. I've marked the parts I'm unsure of.\n\n## Overall impression\nA chubby, soft, bright-yellow cartoon creature that looks like a cross between a baby dinosaur and a blob. It looks goofy and carefree, a bit dim-witted but cheerful. The whole figure reads as one rounded mass.\n\n## Body shape\n- **Proportions:** Very squat and egg-shaped. The head is huge and blends into the torso with almost no neck, so the silhouette is like a rounded pear or a gumdrop.\n- **Limbs:** Short, stubby arms and small, stumpy legs. The arms are tiny relative to the body.\n- **Tail:** A short, thick tail with a rounded tip at the back. In a frontal pose it may barely show.\n- **Head details:** A small tuft or curl of hair, or a small bump, on top. I'm fairly sure about a tuft, but not about the exact number of strands or whether there are also tiny horn or ear nubs.\n- **Belly:** A lighter cream or pale-yellow patch on the tummy. I'm moderately confident about this.\n\n## Face and expression\n- **Mouth:** The defining feature. It is a very wide open grin, big enough to take up much of the lower face. The inside is red or pink with a tongue, and there may be no teeth, or only a hint of them (I'm unsure).\n- **Eyes:** Small, simple black dots or ovals set fairly wide apart. They give a blank, naive look that contrasts with the huge laugh. In the laughing version they may be slightly squeezed or crescent-like, but I'm not certain.\n- **Cheeks:** Possibly faint blush marks, which I'm unsure about.\n- **Overall feel:** Loud, unselfconscious laughter.\n\n## Pose\n- Roughly frontal or a slight three-quarter view, standing or sitting upright.\n- The head may tip back or tilt slightly as if mid-laugh.\n- The arms are low or slightly raised. I don't remember clearly whether a hand touches the belly or cheek.\n\n## Colors\n- **Main body:** Saturated, warm yellow, like a banana or egg yolk.\n- **Belly and muzzle area:** Lighter cream or pale yellow.\n- **Mouth interior:** Deep red to pink, with a slightly lighter tongue.\n- **Eyes and outline:** Black or very dark brown.\n\n## Rendering style\n- Flat 2D digital cartoon with clean vector-like shapes.\n- Smooth, mostly uniform dark outlines. The line weight is moderate, not sketchy.\n- Little or no complex shading. At most there's a simple soft tone on the belly.\n- Cute, sticker-like look, which suits its use as a chat sticker and meme.\n\n## Background\n- Usually a plain white or transparent background, since it circulates as a sticker or emoji.\n- Some versions have a flat solid color, but I don't recall any detailed scenery.\n\n## Where I'm unsure\n1. **The \"most iconic\" image:** Nailong has many variants, and I can't be sure the laughing one is the single canonical image.\n2. **\"奶蛙\" in the name:** I don't know that label well. It may be a nickname or a separate variant, so I haven't added any frog-like traits.\n3. **Fine details:** The hair tuft shape, teeth, blush, tail visibility, and exact arm positions are all uncertain.\n4. **Proportions:** Treat the head-to-body ratio as approximate. Check a reference before finalizing the drawing.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 21.1,
+    "tokens": {
+      "input": 690,
+      "cached_input": 0,
+      "cache_write": 688,
+      "output": 1954,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.022525300000000005,
+    "tools_used": [],
+    "cost_usd": 0.022525300000000005,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 688,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1954,
+      "output_tokens_details": {
+        "thinking_tokens": 741
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 688,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1954,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 688,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 688
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:44:01Z",
+    "finished_at": "2026-10-25T00:44:22Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

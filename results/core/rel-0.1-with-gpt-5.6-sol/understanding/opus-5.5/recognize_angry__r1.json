@@ -1,0 +1,103 @@
+{
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "opus-5.5",
+  "vendor": "anthropic",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "这是一个**红色、圆胖的3D卡通形象**：浑身通红，绿色眼睛，皱眉怒视，双手叉腰。配文“切换愤怒模式😡”。\n\n**关于角色本身**：我无法确定它出自哪部动画、游戏或哪位创作者，所以不给它安一个可能错误的名字。\n\n**关于所属的梗**：它很可能属于中文网络上的**“红温”梗**。\n\n- **“红温”**原指金属加热后发红，网络上用来形容一个人被气到或急到**脸红、上头、破防**的状态。\n- 这个角色**全身通红**，表情又很愤怒，正好把“红温”画成了具体形象，所以常被当作“红温”“破防”“生气了”的反应图。\n- 配文“切换愤怒模式”进一步点明了用途：在聊天中表示“我生气了”或“我红温了”，通常带有调侃、搞笑的意味，而不是真的发火。\n\n如果你知道这张图的出处，可以告诉我，我可以帮你一起梳理它的背景。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 12.4,
+    "tokens": {
+      "input": 723,
+      "cached_input": 0,
+      "cache_write": 721,
+      "output": 696,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.019883099999999997,
+    "tools_used": [],
+    "cost_usd": 0.019883099999999997,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 721,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 696,
+      "output_tokens_details": {
+        "thinking_tokens": 329
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 721,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 696,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 721,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 721
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:42:55Z",
+    "finished_at": "2026-10-25T00:43:07Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

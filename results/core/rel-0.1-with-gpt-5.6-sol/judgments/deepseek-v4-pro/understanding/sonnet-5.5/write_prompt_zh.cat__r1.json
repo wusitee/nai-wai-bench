@@ -1,0 +1,40 @@
+{
+  "judge": "deepseek-v4-pro",
+  "judge_vendor": "deepseek",
+  "target": "understanding/sonnet-5.5/write_prompt_zh.cat__r1.json",
+  "target_sha256": "580f2996ff9cc819043fd7931e7f81be340122ac53ede8e9172bb23cbc7a50f5",
+  "settings_id": "cefccff5b65c93e5",
+  "judge_prompt": "d5f3b99d998a71a9",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "error": "BackendError: ACP session/prompt failed: {\"code\": -32603, \"message\": \"Internal error: turn failed: Insufficient Balance (request_id: b7d2e987-73b6-4173-a0e4-7b4bd517cf3c)\"}",
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:01:25Z",
+    "finished_at": "2026-10-25T02:01:31Z",
+    "revision": "9f7aef8",
+    "nwb_version": "0.1.0"
+  }
+}

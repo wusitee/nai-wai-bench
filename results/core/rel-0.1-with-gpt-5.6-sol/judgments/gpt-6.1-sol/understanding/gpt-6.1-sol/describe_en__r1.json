@@ -1,0 +1,88 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6.1-sol/describe_en__r1.json",
+  "target_sha256": "2da3d40158de0cf1e476bc18e07a16bb2305cfe59e3954e51844ecff526d0454",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "b5cba1911872d2ab",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 1,
+    "render": 2,
+    "background": 0,
+    "vibe": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer covers squeezed-shut eyes, the bulky neckless body with short limbs, and soft, highlighted 3D rendering. It only partially describes the mouth and lighter belly, while leaving the pose, hand placement, background, and absurd meme energy unresolved or absent.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":0,\"eyes\":2,\"mouth\":1,\"body\":2,\"belly_patch\":1,\"render\":2,\"background\":0,\"vibe\":0},\"hallucinations\":[],\"rationale\":\"The answer covers squeezed-shut eyes, the bulky neckless body with short limbs, and soft, highlighted 3D rendering. It only partially describes the mouth and lighter belly, while leaving the pose, hand placement, background, and absurd meme energy unresolved or absent.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a171a0-2879-70c1-aead-2332860f6ed5",
+    "seconds": 12.8,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12788,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 241,
+      "reasoning_output_tokens": 127
+    },
+    "tokens": {
+      "input": 12788,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 241,
+      "reasoning": 127
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:54:43Z",
+    "finished_at": "2026-10-25T05:54:56Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

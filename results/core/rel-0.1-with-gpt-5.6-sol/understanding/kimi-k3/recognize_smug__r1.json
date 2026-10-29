@@ -1,0 +1,73 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "recognize_smug",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "answer": "这张表情包里的角色是**奶龙**（英文名 Nailong），一只黄色的小胖龙，出自动画短片系列《奶龙》（也常译作《奶龙与小七》），是国内团队制作的 3D 动画 IP，主角就是这只说话奶声奶气、贪吃又自信的黄色小龙和它的人类伙伴小七。\n\n这张图属于网络上非常流行的**\"奶龙表情包\"梗**，具体是其中最经典的一类——**斜眼/瘪嘴的\"不屑脸\"**（常被叫作\"奶龙の蔑视\"\"歪嘴奶龙\"）。它通常用来表达一种看破一切、略带嫌弃或不置可否的态度，比如配合\"哦，是吗\"\"还得是你\"\"就你？\"之类的文字使用。\n\n奶龙相关的梗在 2024 年前后大规模出圈，除了这个不屑表情，还有\"我是奶龙\"等衍生的洗脑二创内容，使其成为国内短视频和聊天软件里最常见的表情包角色之一。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 12.1,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20306,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 473,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20779 / 1048576 tokens (2%)\nSession total: 20306 input, 473 output",
+      "usage": {
+        "inputTokens": 20306,
+        "outputTokens": 473
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:44:10Z",
+    "finished_at": "2026-10-25T00:44:22Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

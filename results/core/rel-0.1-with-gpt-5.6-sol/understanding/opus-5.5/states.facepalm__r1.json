@@ -1,0 +1,103 @@
+{
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "opus-5.5",
+  "vendor": "anthropic",
+  "item": "states.facepalm",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Look only at the attached character. Report its visible expression and gesture, not an imagined inner feeling. Return JSON with four keys: state (angry, facepalm, smug, laughing, or other), eyes (open, closed, or narrowed), mouth (open or closed), and gesture (behind_back, forehead, belly_clutch, folded_arms, or out_of_frame). Use unknown when a field cannot be determined. Do not assume the character must be laughing or invent gestures outside the frame.",
+  "images": [
+    "bench/states/02.jpg"
+  ],
+  "answer": "```json\n{\n  \"state\": \"other\",\n  \"eyes\": \"open\",\n  \"mouth\": \"closed\",\n  \"gesture\": \"forehead\"\n}\n```\n\nI chose `other` for the state because the character's fingertips rest lightly on its forehead without the palm covering its face, so it doesn't read as a true facepalm. Its closed mouth also has a slight smile.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 10.0,
+    "tokens": {
+      "input": 1057,
+      "cached_input": 0,
+      "cache_write": 1055,
+      "output": 558,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0198436,
+    "tools_used": [],
+    "cost_usd": 0.0198436,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1055,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 558,
+      "output_tokens_details": {
+        "thinking_tokens": 440
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1055,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 558,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1055,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1055
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:45:18Z",
+    "finished_at": "2026-10-25T00:45:28Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

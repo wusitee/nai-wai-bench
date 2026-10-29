@@ -1,0 +1,117 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gemini-3.8-flash/describe__r1.json",
+  "target_sha256": "013ecc3809b507a5076b316e1824d468ea8bb76047096c5a6f9c35481e0feb13",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "4c2982e282d0dcfc",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 0,
+    "vibe": 1
+  },
+  "hallucinations": [
+    "Head tilted back in a 仰天大笑 pose. The reference has the torso hunched forward with knees bent, doubled over with laughter.",
+    "Framed as a chest or head-and-shoulders close-up, which contradicts the standing, doubled-over full-body pose.",
+    "Mouth has no teeth (完全无牙). The reference shows visible teeth.",
+    "Skin is one uniform color with no markings. The reference has a pale oval belly patch that contrasts with the body color.",
+    "Original background described as a blurred green meadow and blue sky with clouds. The reference background is plain white or light grey with no scene."
+  ],
+  "rationale": "The answer gets the squeezed-shut arc eyes, the neckless pear-shaped body and the cheap glossy 3D render right. It gets the pose (head back instead of hunched forward), the teeth, the belly patch and the background wrong. Hands-on-belly appears only as a hedge, and the absurd meme energy is mentioned only weakly next to a 蠢萌 framing.",
+  "raw": "```json\n{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 2, \"mouth\": 1, \"body\": 2, \"belly_patch\": 0, \"render\": 2, \"background\": 0, \"vibe\": 1}, \"hallucinations\": [\"Head tilted back in a 仰天大笑 pose. The reference has the torso hunched forward with knees bent, doubled over with laughter.\", \"Framed as a chest or head-and-shoulders close-up, which contradicts the standing, doubled-over full-body pose.\", \"Mouth has no teeth (完全无牙). The reference shows visible teeth.\", \"Skin is one uniform color with no markings. The reference has a pale oval belly patch that contrasts with the body color.\", \"Original background described as a blurred green meadow and blue sky with clouds. The reference background is plain white or light grey with no scene.\"], \"rationale\": \"The answer gets the squeezed-shut arc eyes, the neckless pear-shaped body and the cheap glossy 3D render right. It gets the pose (head back instead of hunched forward), the teeth, the belly patch and the background wrong. Hands-on-belly appears only as a hedge, and the absurd meme energy is mentioned only weakly next to a 蠢萌 framing.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 14.3,
+    "tokens": {
+      "input": 3440,
+      "cached_input": 0,
+      "cache_write": 3438,
+      "output": 1090,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.049728800000000004,
+    "tools_used": [],
+    "cost_usd": 0.049728800000000004,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3438,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1090,
+      "output_tokens_details": {
+        "thinking_tokens": 663
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3438,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1090,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3438,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3438
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:56:17Z",
+    "finished_at": "2026-10-25T01:56:32Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

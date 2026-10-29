@@ -1,0 +1,80 @@
+{
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "vendor": "openai",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "图里是国产动画角色**奶龙**，这张图是它捂着肚子大笑的表情包。\n\n它和网上的 **“奶龙笑”** 梗有关，常被叫作“奶龙大笑”“奶龙捧腹笑”，也被一些网友称为 **“唐笑”或“唐氏笑”**；“唐龙”则是相关语境里对奶龙的戏称。",
+  "contaminated": false,
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17082-e7a6-71d3-9e34-aafae0c6b79d",
+    "seconds": 27.5,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12132,
+      "cached_input_tokens": 3968,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 600,
+      "reasoning_output_tokens": 497
+    },
+    "tokens": {
+      "input": 12132,
+      "cached_input": 3968,
+      "cache_write": 0,
+      "output": 600,
+      "reasoning": 497
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:43:09Z",
+    "finished_at": "2026-10-25T00:43:36Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "judge": "deepseek-v4-pro",
+  "judge_vendor": "deepseek",
+  "target": "understanding/deepseek-v4-pro/write_prompt.cat__r1.json",
+  "target_sha256": "eb0c97641f142d45f5a479045452646e80694525a231e0e80ad02d62941325d5",
+  "settings_id": "cefccff5b65c93e5",
+  "judge_prompt": "380d52f284d2054a",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 1,
+    "background": 1,
+    "vibe": 0,
+    "identity": 1
+  },
+  "hallucinations": [
+    "both front paws raised upward",
+    "head tilted slightly back"
+  ],
+  "rationale": "The prompt gets the squeezed-shut eyes but misses the doubled-over pose and belly-clutching paws, instead raising the paws and tilting the head back. It also lacks the belly patch and unhinged meme tone while giving only token cat cues on a yellow body.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 1, \"body\": 1, \"belly_patch\": 0, \"render\": 1, \"background\": 1, \"vibe\": 0, \"identity\": 1}, \"hallucinations\": [\"both front paws raised upward\", \"head tilted slightly back\"], \"rationale\": \"The prompt gets the squeezed-shut eyes but misses the doubled-over pose and belly-clutching paws, instead raising the paws and tilting the head back. It also lacks the belly patch and unhinged meme tone while giving only token cat cues on a yellow body.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "stop_reason": "end_turn",
+    "client": "deepseek-harness-acp 0.0.1",
+    "seconds": 34.8,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+      "reasoning_effort": "high"
+    },
+    "resolved_model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 4216,
+        "size": 1000000
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:54:42Z",
+    "finished_at": "2026-10-25T01:55:17Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

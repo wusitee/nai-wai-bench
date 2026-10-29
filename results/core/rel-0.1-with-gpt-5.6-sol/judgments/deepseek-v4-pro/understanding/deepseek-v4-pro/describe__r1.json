@@ -1,0 +1,87 @@
+{
+  "judge": "deepseek-v4-pro",
+  "judge_vendor": "deepseek",
+  "target": "understanding/deepseek-v4-pro/describe__r1.json",
+  "target_sha256": "78b1d4f8274028305f5960e199497b437860a8fc821aaa29b26659562a2edb49",
+  "settings_id": "cefccff5b65c93e5",
+  "judge_prompt": "e45c799ef9a692c5",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 1,
+    "vibe": 1
+  },
+  "hallucinations": [
+    "Confidently claims the classic image is a half-body/bust close-up with arms/legs mostly hidden, contradicting the full-body standing doubled-over pose with hands on belly.",
+    "Describes the mouth interior as deep pink/red rather than the dark interior in the reference."
+  ],
+  "rationale": "The model captures the 3D render, closed laughing eyes, huge open mouth with tongue, and pear-shaped no-neck body, but misses the full-body hunched pose, belly-clutching paws, belly patch, and only weakly conveys the unhinged meme vibe.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 1, \"body\": 2, \"belly_patch\": 0, \"render\": 2, \"background\": 1, \"vibe\": 1}, \"hallucinations\": [\"Confidently claims the classic image is a half-body/bust close-up with arms/legs mostly hidden, contradicting the full-body standing doubled-over pose with hands on belly.\", \"Describes the mouth interior as deep pink/red rather than the dark interior in the reference.\"], \"rationale\": \"The model captures the 3D render, closed laughing eyes, huge open mouth with tongue, and pear-shaped no-neck body, but misses the full-body hunched pose, belly-clutching paws, belly patch, and only weakly conveys the unhinged meme vibe.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "stop_reason": "end_turn",
+    "client": "deepseek-harness-acp 0.0.1",
+    "seconds": 39.5,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+      "reasoning_effort": "high"
+    },
+    "resolved_model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 4762,
+        "size": 1000000
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:54:00Z",
+    "finished_at": "2026-10-25T01:54:40Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

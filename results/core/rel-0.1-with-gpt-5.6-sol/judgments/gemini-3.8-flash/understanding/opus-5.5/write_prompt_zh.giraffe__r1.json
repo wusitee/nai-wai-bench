@@ -1,0 +1,80 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/opus-5.5/write_prompt_zh.giraffe__r1.json",
+  "target_sha256": "354f5698b33a0ed7537dd04a41bda6a3c50c8bb9de91cab52e55380107462ebb",
+  "settings_id": "c5b99b49261f87dd",
+  "judge_prompt": "ba85e0a850497931",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "opus-5.5",
+  "scores": {
+    "pose": 1,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 0,
+    "background": 2,
+    "vibe": 1,
+    "identity": 1
+  },
+  "hallucinations": [
+    "Described the visual style as a flat 2D children's animation style with cel shading, contradicting the reference meme's glossy 3D CG render.",
+    "Specified that the head is tilted back, contradicting the hunched/bent-forward doubled-over posture of the meme."
+  ],
+  "rationale": "The prompt captures key features like the clutching belly, eye arcs, and white background, but incorrectly specifies a flat 2D animation style instead of a 3D CG render, misses the contrasting pale belly patch and visible teeth, and only applies token giraffe traits to a yellow Nailong body.",
+  "raw": "```json\n{\n  \"scores\": {\n    \"pose\": 1,\n    \"hands_on_belly\": 2,\n    \"eyes\": 2,\n    \"mouth\": 1,\n    \"body\": 1,\n    \"belly_patch\": 0,\n    \"render\": 0,\n    \"background\": 2,\n    \"vibe\": 1,\n    \"identity\": 1\n  },\n  \"hallucinations\": [\n    \"Described the visual style as a flat 2D children's animation style with cel shading, contradicting the reference meme's glossy 3D CG render.\",\n    \"Specified that the head is tilted back, contradicting the hunched/bent-forward doubled-over posture of the meme.\"\n  ],\n  \"rationale\": \"The prompt captures key features like the clutching belly, eye arcs, and white background, but incorrectly specifies a flat 2D animation style instead of a 3D CG render, misses the contrasting pale belly patch and visible teeth, and only applies token giraffe traits to a yellow Nailong body.\"\n}\n```",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 29.9,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 17108,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:23:13Z",
+    "finished_at": "2026-10-25T02:23:43Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

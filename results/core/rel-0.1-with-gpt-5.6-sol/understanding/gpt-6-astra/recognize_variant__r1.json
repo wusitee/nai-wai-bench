@@ -1,0 +1,80 @@
+{
+  "settings_id": "eed12e0ea2261aed",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "vendor": "openai",
+  "item": "recognize_variant",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。",
+  "images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "answer": "这张图最像“**笑不活了／笑到肚子疼**”一类的熊猫捧腹大笑表情，但我无法仅凭这张图确认它模仿了哪个特定的中文网络梗。\n\n判断依据是：熊猫双眼笑得眯起、嘴巴大张，身体前倾，两只手捂着肚子，明显在表现“笑到停不下来”。\n\n它也与常见的“熊猫头”表情包有题材上的关联，不过经典熊猫头通常是黑白简笔身体配真人脸部表情；这张是完整的三维卡通形象，没有足以锁定某个原版表情包的独特线索。",
+  "contaminated": false,
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6-astra",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17086-5bcd-7d42-a136-11d0d269aac4",
+    "seconds": 16.6,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12075,
+      "cached_input_tokens": 4864,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 319,
+      "reasoning_output_tokens": 149
+    },
+    "tokens": {
+      "input": 12075,
+      "cached_input": 4864,
+      "cache_write": 0,
+      "output": 319,
+      "reasoning": 149
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6-astra",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:46:55Z",
+    "finished_at": "2026-10-25T00:47:12Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "imagegen/gemini-image/name_zh/elephant__r1.json",
+  "target_sha256": "c34e7413e9998ded358a3afb78518ca72672d6917692eeb5322bb7afb9db9578",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "b2a6cf21b4ab17b4",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/gemini-image/name_zh/elephant__r1/inline-0.jpg"
+  ],
+  "track": "imagegen",
+  "model": "gemini-image",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 1,
+    "render": 1,
+    "background": 0,
+    "vibe": 0
+  },
+  "identity": 1,
+  "failure_modes": [
+    "generic_cute",
+    "multiple_subjects"
+  ],
+  "rationale": "A cute green elephant-dragon sits calmly in a busy jungle with squirrels and birds. Apart from the closed-eye laugh, it misses the meme's hunched belly-clutching pose, gaping dark mouth, plain backdrop and unhinged vibe.",
+  "raw": "**Second image, trait by trait:**\n\n- **pose:** The character sits upright on a rock, with no hunching or doubled-over stance. → absent\n- **hands_on_belly:** The front paws are clasped together in front of the chest or upper belly, not clutching the belly. → partial\n- **eyes:** The eyes are squeezed shut into curved happy arcs. → match\n- **mouth:** The mouth is wide open with a pink interior and tongue, but it is not huge, dark or toothy, and it doesn't dominate the face. → partial\n- **body:** The body is chubby and rounded with short thick limbs, but the head is large and distinct rather than merging into a bean-shaped torso. → partial\n- **belly_patch:** The belly is only slightly lighter green, not a distinct pale oval. → partial\n- **render:** This is a polished, painterly Pixar-style illustration rather than a glossy, cheap-looking 3D CG render. → partial\n- **background:** A lush jungle with flowers, ferns, a rock and light rays, the opposite of a plain backdrop. → absent\n- **vibe:** Sweet, wholesome and kawaii, with no absurd or unhinged meme energy. → absent\n- **identity:** The trunk, big ears and tusks clearly read as an elephant, but the body is mint green and has dragon horns, wings and a tail rather than natural elephant coloring. → partly\n\n{\"traits\": {\"pose\": \"absent\", \"hands_on_belly\": \"partial\", \"eyes\": \"match\", \"mouth\": \"partial\", \"body\": \"partial\", \"belly_patch\": \"partial\", \"render\": \"partial\", \"background\": \"absent\", \"vibe\": \"absent\", \"identity_placeholder\": null}, \"identity\": \"partly\", \"failure_modes\": [\"generic_cute\", \"multiple_subjects\"], \"rationale\": \"A cute green elephant-dragon sits calmly in a busy jungle with squirrels and birds. Apart from the closed-eye laugh, it misses the meme's hunched belly-clutching pose, gaping dark mouth, plain backdrop and unhinged vibe.\"}\n\nCorrection: the JSON above contains a stray key by mistake. Here is the final version:\n\n{\"traits\": {\"pose\": \"absent\", \"hands_on_belly\": \"partial\", \"eyes\": \"match\", \"mouth\": \"partial\", \"body\": \"partial\", \"belly_patch\": \"partial\", \"render\": \"partial\", \"background\": \"absent\", \"vibe\": \"absent\"}, \"identity\": \"partly\", \"failure_modes\": [\"generic_cute\", \"multiple_subjects\"], \"rationale\": \"A cute green elephant-dragon sits calmly in a busy jungle with squirrels and birds. Apart from the closed-eye laugh, it misses the meme's hunched belly-clutching pose, gaping dark mouth, plain backdrop and unhinged vibe.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 16.8,
+    "tokens": {
+      "input": 3796,
+      "cached_input": 0,
+      "cache_write": 3794,
+      "output": 1513,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.06085460000000001,
+    "tools_used": [],
+    "cost_usd": 0.06085460000000001,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3794,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1513,
+      "output_tokens_details": {
+        "thinking_tokens": 575
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3794,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1513,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3794,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3794
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:07:40Z",
+    "finished_at": "2026-10-25T02:07:56Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

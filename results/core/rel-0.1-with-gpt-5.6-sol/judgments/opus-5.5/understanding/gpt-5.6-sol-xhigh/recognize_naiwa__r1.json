@@ -1,0 +1,126 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-5.6-sol-xhigh/recognize_naiwa__r1.json",
+  "target_sha256": "b0e3de8f975a17201b65760a2181caf6e5958faf0e55077e83f5690b357b9027",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "3cdc05cf81645d63",
+  "judge_images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-5.6-sol-xhigh",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "Confidently identifies the yellow 3D character as a 萨卡班甲鱼 (Sacabambaspis) remix belonging to the 萨卡班甲鱼/呆头鱼 meme. The image actually shows the frog-like mutated 奶龙 (奶蛙) variant, a smooth yellow head with bulging round eyes and green sclera."
+  ],
+  "rationale": "The model misidentified the character as Sacabambaspis and never mentions 奶龙, the 大笑奶龙/变异奶龙 meme family, or 奶蛙. It only correctly notes that 「惊鸿一瞥」 is a caption, not the character's name.",
+  "raw": "{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"naiwa\": 0}, \"hallucinations\": [\"Confidently identifies the yellow 3D character as a 萨卡班甲鱼 (Sacabambaspis) remix belonging to the 萨卡班甲鱼/呆头鱼 meme. The image actually shows the frog-like mutated 奶龙 (奶蛙) variant, a smooth yellow head with bulging round eyes and green sclera.\"], \"rationale\": \"The model misidentified the character as Sacabambaspis and never mentions 奶龙, the 大笑奶龙/变异奶龙 meme family, or 奶蛙. It only correctly notes that 「惊鸿一瞥」 is a caption, not the character's name.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.308",
+    "seconds": 6.7,
+    "tokens": {
+      "input": 1759,
+      "cached_input": 0,
+      "cache_write": 1757,
+      "output": 494,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0241844,
+    "tools_used": [],
+    "cost_usd": 0.0241844,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1757,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 494,
+      "output_tokens_details": {
+        "thinking_tokens": 231
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1757,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 494,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1757,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1757
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T02:47:30Z",
+    "finished_at": "2026-10-29T02:47:37Z",
+    "revision": "07d52c9+archive",
+    "nwb_version": "0.1.0",
+    "source_commit": "07d52c9418172b2b7b01e6ed0abc2ca504c64a76",
+    "source_archive_sha256": "fb2d8a524452a6d15b9090848ff3c5dc753975173dba45cdffae5384e0a35c07",
+    "collector_wrapper_sha256": "43804988d112d60f028efd345efd0e4a4a6b07a72cdf28bea2ce5ec45fa23ca3",
+    "tool_disable_features": [
+      "shell_tool",
+      "unified_exec",
+      "multi_agent",
+      "multi_agent_v2",
+      "plugins",
+      "skill_search",
+      "goals",
+      "sleep_tool",
+      "view_image",
+      "collaboration_modes",
+      "default_mode_request_user_input"
+    ]
+  }
+}

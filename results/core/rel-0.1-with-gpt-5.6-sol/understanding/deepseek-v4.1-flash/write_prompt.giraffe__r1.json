@@ -1,0 +1,76 @@
+{
+  "settings_id": "f54f604c4f61c57e",
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "vendor": "deepseek",
+  "item": "write_prompt.giraffe",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a giraffe version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A single square sticker-style illustration of a chibi cartoon giraffe mascot caught in an explosive, contagious belly laugh, drawn in flat 2D vector art with thick clean dark outlines, simple cel shading, and a plain white background. The giraffe has a very large rounded head, a short chubby body, a long soft curved neck, tiny stubby arms and legs, small rounded ossicones, big leaf-shaped ears, a tufted tail, warm yellow fur with soft orange-brown rounded spots, and a pale cream muzzle and belly. Its head is thrown back, mouth opened into an enormous joyful oval laugh showing a pink tongue and a few tiny teeth, eyes squeezed shut into thick upside-down U-shaped crescents, rosy cheeks, raised brows, tiny arms lifted toward its chest, one foot kicked up, and its body leaning back in a bouncy, weightless pose. Exaggerated, wholesome, goofy, adorable, high-energy expression, like a generic laughing cartoon mascot sticker. Centered composition, crisp edges, no text, no watermark, no realistic animal anatomy.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+    "stop_reason": "end_turn",
+    "client": "deepseek-harness-acp 0.0.1",
+    "seconds": 22.1,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+      "reasoning_effort": "high"
+    },
+    "resolved_model": "[\"deepseek-official\",\"deepseek-flash\"]",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 2443,
+        "size": 1000000
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-flash-default.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53",
+      "config/dsh-flash-default.patch.yml": "e681660b1857478d"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:42:38Z",
+    "finished_at": "2026-10-25T00:43:00Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

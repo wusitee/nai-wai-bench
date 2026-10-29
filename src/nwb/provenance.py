@@ -7,6 +7,12 @@ not verify the signature.
 """
 
 import re
+import functools
+import subprocess
+from datetime import datetime, timezone
+from importlib.metadata import version
+
+from nwb.config import find_root
 from pathlib import Path
 
 
@@ -50,3 +56,21 @@ def c2pa_summary(path: Path) -> dict | None:
         if text and text not in actions:
             actions.append(text)
     return {"generators": generators, "actions": actions}
+
+
+def utc_now() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+
+
+@functools.cache
+def collection_identity() -> dict:
+    """Freeze revision once per collector process, including collection-relevant local changes."""
+    root = find_root()
+    try:
+        revision = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cwd=root, text=True).strip()
+        dirty = subprocess.check_output(["git", "status", "--porcelain", "--", "bench/", "src/",
+                                         "config/", "models.toml"], cwd=root, text=True).strip()
+        revision += "+dirty" if dirty else ""
+    except (OSError, subprocess.CalledProcessError):
+        revision = "unknown"
+    return {"revision": revision, "nwb_version": version("nai-wai-bench")}

@@ -1,0 +1,89 @@
+{
+  "judge": "kimi-k3.1-pro",
+  "judge_vendor": "moonshot",
+  "target": "imagegen/gemini-image/name_en/cat__r1.json",
+  "target_sha256": "dbc85cc41c4120b5c15a449ee99cec5390287e7e91d629cf10c09096f09e14ed",
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "judge_prompt": "dfdcfdff7a40f767",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/gemini-image/name_en/cat__r1/inline-0.jpg"
+  ],
+  "track": "imagegen",
+  "model": "gemini-image",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 0,
+    "background": 0,
+    "vibe": 0
+  },
+  "identity": 2,
+  "failure_modes": [
+    "generic_cute",
+    "realistic_animal"
+  ],
+  "rationale": "The image is clearly a photorealistic orange tabby laughing with shut eyes, but its upright pose, raised paws, domestic setting, and cute realism miss most of the reference meme’s defining form and absurd energy.",
+  "raw": "pose: Upright on its hind legs with a straight torso; no forward hunch or bent-knee, doubled-over posture — absent.\nhands_on_belly: Both forepaws are lifted in front of the chest, not clutching or pressing the belly — absent.\neyes: Eyes are squeezed shut into thin, curved arcs — match.\nmouth: Open laughing mouth with a dark interior, teeth, and tongue, but not the huge face-dominating gape of the reference — partial.\nbody: Stocky cat body, but with a distinct head and neck and natural feline proportions rather than a merged pear/bean shape — partial.\nbelly_patch: No clearly defined pale oval belly patch; the belly is mostly ginger with lighter fur around the chest and paws — absent.\nrender: Photorealistic cat with detailed fur and natural room lighting, not glossy 3D CG — absent.\nbackground: A furnished living room with plants, shelving, a blanket, and a rug — absent.\nvibe: Reads as a cute laughing cat rather than an absurd, unhinged meme character — absent.\nidentity: Clearly an orange tabby cat, with feline anatomy, ears, whiskers, and natural markings throughout — clearly.\n\n{\"traits\":{\"pose\":\"absent\",\"hands_on_belly\":\"absent\",\"eyes\":\"match\",\"mouth\":\"partial\",\"body\":\"partial\",\"belly_patch\":\"absent\",\"render\":\"absent\",\"background\":\"absent\",\"vibe\":\"absent\"},\"identity\":\"clearly\",\"failure_modes\":[\"generic_cute\",\"realistic_animal\"],\"rationale\":\"The image is clearly a photorealistic orange tabby laughing with shut eyes, but its upright pose, raised paws, domestic setting, and cute realism miss most of the reference meme’s defining form and absurd energy.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 24.5,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 22815,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 708,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 23523 / 1048576 tokens (2%)\nSession total: 22815 input, 708 output",
+      "usage": {
+        "inputTokens": 22815,
+        "outputTokens": 708
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:54:29Z",
+    "finished_at": "2026-10-25T01:54:54Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

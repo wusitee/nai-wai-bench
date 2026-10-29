@@ -1,0 +1,65 @@
+{
+  "settings_id": "c5b99b49261f87dd",
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "vendor": "google",
+  "item": "write_prompt.giraffe",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a giraffe version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A cute, chubby cartoon giraffe with soft yellow fur and rounded light brown spots, throwing its head back in uncontrollable, hysterical belly laughter. The giraffe has its eyes squeezed tightly shut into happy upside-down crescents, laughing so hard it is wheezing, with an exaggeratedly wide, joyful open mouth showing a cute pink tongue and puffed-up cheeks. It has tiny rounded ossicones on its head, cute floppy ears, a hilariously plump potbelly, and short stubby limbs, holding its round belly in pure ecstatic glee. 3D animated movie style, smooth vinyl toy aesthetic, warm vibrant studio lighting, soft shadows, solid clean minimalist pastel background, highly expressive, funny, and adorable.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 21.7,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 14100,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:42:54Z",
+    "finished_at": "2026-10-25T00:43:15Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

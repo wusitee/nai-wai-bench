@@ -1,0 +1,91 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/deepseek-v4.1-flash/write_prompt_zh.cat__r1.json",
+  "target_sha256": "28f4042259be58cdc0b9ae44162bf75e610acb7bb4cd78d935e5a0fc45056410",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "ed6b337f63120c34",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 1,
+    "render": 2,
+    "background": 2,
+    "vibe": 2,
+    "identity": 1
+  },
+  "hallucinations": [
+    "将前倾、略屈膝的捧腹大笑姿势改成脑袋后仰、身体侧歪、后腿蹬地，并将一只前爪举起。"
+  ],
+  "rationale": "提示词明确覆盖闭眼弧线、巨大嘴巴与牙舌、3D棚拍质感、纯色背景和魔性氛围，但未明确深色口腔与椭圆肚皮斑块。姿势与双手捧腹要求不符，身体偏大头短身，猫的辨识主要依赖奶黄色奶龙身体上的耳朵、胡须和尾巴。",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":1,\"body\":1,\"belly_patch\":1,\"render\":2,\"background\":2,\"vibe\":2,\"identity\":1},\"hallucinations\":[\"将前倾、略屈膝的捧腹大笑姿势改成脑袋后仰、身体侧歪、后腿蹬地，并将一只前爪举起。\"],\"rationale\":\"提示词明确覆盖闭眼弧线、巨大嘴巴与牙舌、3D棚拍质感、纯色背景和魔性氛围，但未明确深色口腔与椭圆肚皮斑块。姿势与双手捧腹要求不符，身体偏大头短身，猫的辨识主要依赖奶黄色奶龙身体上的耳朵、胡须和尾巴。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719c-f36a-7682-9336-ddc9e527d20e",
+    "seconds": 23.2,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12294,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 535,
+      "reasoning_output_tokens": 330
+    },
+    "tokens": {
+      "input": 12294,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 535,
+      "reasoning": 330
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:51:13Z",
+    "finished_at": "2026-10-25T05:51:36Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

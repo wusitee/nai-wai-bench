@@ -1,0 +1,80 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/sonnet-5.5/write_prompt_zh.cat__r1.json",
+  "target_sha256": "580f2996ff9cc819043fd7931e7f81be340122ac53ede8e9172bb23cbc7a50f5",
+  "settings_id": "c5b99b49261f87dd",
+  "judge_prompt": "d5f3b99d998a71a9",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 0,
+    "background": 2,
+    "vibe": 0,
+    "identity": 1
+  },
+  "hallucinations": [
+    "Specifying a flat, hand-drawn 2D cartoon vector style, which directly contradicts the 3D CG render style of the reference meme",
+    "Describing the character as sitting upright with head tilted back, which contradicts the standing and hunched-forward laughing pose"
+  ],
+  "rationale": "The model accurately captures the body proportions, eyes, wide laughing mouth, pale belly patch, and plain background, but mistakenly prompts for a flat 2D cartoon rather than a 3D CG render, sits upright instead of hunched over, uses only one paw on the belly, and adopts a cute sticker aesthetic with token cat ears on a yellow body rather than capturing the unhinged meme vibe.",
+  "raw": "```json\n{\n  \"scores\": {\n    \"pose\": 0,\n    \"hands_on_belly\": 1,\n    \"eyes\": 2,\n    \"mouth\": 2,\n    \"body\": 2,\n    \"belly_patch\": 2,\n    \"render\": 0,\n    \"background\": 2,\n    \"vibe\": 0,\n    \"identity\": 1\n  },\n  \"hallucinations\": [\n    \"Specifying a flat, hand-drawn 2D cartoon vector style, which directly contradicts the 3D CG render style of the reference meme\",\n    \"Describing the character as sitting upright with head tilted back, which contradicts the standing and hunched-forward laughing pose\"\n  ],\n  \"rationale\": \"The model accurately captures the body proportions, eyes, wide laughing mouth, pale belly patch, and plain background, but mistakenly prompts for a flat 2D cartoon rather than a 3D CG render, sits upright instead of hunched over, uses only one paw on the belly, and adopts a cute sticker aesthetic with token cat ears on a yellow body rather than capturing the unhinged meme vibe.\"\n}\n```",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 50.2,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 19686,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:23:28Z",
+    "finished_at": "2026-10-25T05:24:18Z",
+    "revision": "9f7aef8",
+    "nwb_version": "0.1.0"
+  }
+}

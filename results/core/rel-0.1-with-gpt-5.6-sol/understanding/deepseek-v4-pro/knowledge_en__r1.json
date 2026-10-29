@@ -1,0 +1,73 @@
+{
+  "settings_id": "cefccff5b65c93e5",
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "vendor": "deepseek",
+  "item": "knowledge_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "What is the Chinese internet meme \"大笑奶龙\" (Laughing Nailong, also called \"奶蛙\")? Explain its origin, what it looks like, and the related jokes and remixes. Say so plainly where you are unsure instead of guessing.",
+  "images": [],
+  "answer": "“大笑奶龙” (Dàxiào Nǎilóng, “laughing milk dragon”) is a reaction meme based on the Chinese 3D cartoon character **奶龙** (Nǎilóng / “milk dragon”). It is not a separate official character; it is a specific laughing expression/clip of 奶龙 that became a meme.\n\n**What it looks like**  \n奶龙 is a chubby, bright yellow baby dragon/dinosaur-like cartoon character with a big round head, small arms, a pale belly, and small horn-like bits on its head. In the “大笑奶龙” meme image/GIF, it is usually shown with its eyes squeezed shut, mouth stretched open very wide, head tilted back, and body shaking as if laughing extremely hard. The expression is exaggerated and often has a plain background, making it easy to use as a reaction.\n\n**Origin**  \n奶龙 comes from a Chinese animated short-video IP. The character appears in official short animated clips, often alongside a human child called 小七, and is also widely used in WeChat stickers. The specific “大笑” clip was cut from one of these animations and spread on Douyin, Bilibili, and other Chinese platforms.\n\nI’m not certain of the exact studio/company, the exact original episode, or the exact first date the meme appeared. My understanding is that it became widely used around 2023–2024, but I can’t confirm the precise timeline.\n\n**Why it is also called “奶蛙”**  \n“奶蛙” means “milk frog.” The nickname seems to be a fan joke based on the way the laugh sounds: the laughing audio is high-pitched and croaky/raspy, and the wide-open mouth makes the character look somewhat frog-like. I am not fully sure whether the nickname came from the mouth shape, the laugh sound, or both; I believe it is fan-made rather than official.\n\n**Related jokes and remixes**  \n- It is used as a mocking reaction: when someone says something silly, arrogant, or unlucky, the laughing 奶龙 is inserted as the laugh track.  \n- The laugh audio is often looped, pitch-shifted, or turned into “鬼畜”/remix edits.  \n- Some edits dub the 奶龙 laugh over animals, especially frogs, playing on the “奶蛙” nickname.  \n- The laughing face is used in WeChat stickers and comment-section image replies.  \n- There are also voice-clone/cover-style remixes using 奶龙’s voice, though I’m less certain how much of that is specifically tied to this exact laugh meme.\n\nSo in short: it is a viral reaction meme of the yellow cartoon character 奶龙 laughing exaggeratedly, nicknamed “奶蛙” because the laugh sounds/looks frog-like. The exact origin details are fuzzy to me.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "stop_reason": "end_turn",
+    "client": "deepseek-harness-acp 0.0.1",
+    "seconds": 75.1,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+      "reasoning_effort": "high"
+    },
+    "resolved_model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 4406,
+        "size": 1000000
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:50:29Z",
+    "finished_at": "2026-10-25T00:51:44Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

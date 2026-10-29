@@ -1,0 +1,112 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.1-sol/write_prompt_zh.giraffe__r1.json",
+  "target_sha256": "67114b8dcb35d1b99c873df8b4f0139b346ab7f3a1bad862bfe5a900fcc13654",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "2222bdac9aaf01fe",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 2,
+    "vibe": 2,
+    "identity": 2
+  },
+  "hallucinations": [],
+  "rationale": "The prompt covers the arc eyes, huge open mouth, glossy 3D render, white background, unhinged laughter and clear giraffe markings. It has the head tilting back instead of the body doubling forward, paws curled at the chest rather than clutching the belly, no pale belly patch, and an elongated neck that contradicts the neckless bean-shaped body.",
+  "raw": "```json\n{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 2, \"body\": 1, \"belly_patch\": 0, \"render\": 2, \"background\": 2, \"vibe\": 2, \"identity\": 2}, \"hallucinations\": [], \"rationale\": \"The prompt covers the arc eyes, huge open mouth, glossy 3D render, white background, unhinged laughter and clear giraffe markings. It has the head tilting back instead of the body doubling forward, paws curled at the chest rather than clutching the belly, no pale belly patch, and an elongated neck that contradicts the neckless bean-shaped body.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 11.7,
+    "tokens": {
+      "input": 1923,
+      "cached_input": 0,
+      "cache_write": 1921,
+      "output": 813,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.032081099999999994,
+    "tools_used": [],
+    "cost_usd": 0.032081099999999994,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1921,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 813,
+      "output_tokens_details": {
+        "thinking_tokens": 588
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1921,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 813,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1921,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1921
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:00:36Z",
+    "finished_at": "2026-10-25T02:00:47Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

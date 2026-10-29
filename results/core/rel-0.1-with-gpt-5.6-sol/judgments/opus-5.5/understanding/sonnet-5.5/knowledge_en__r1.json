@@ -1,0 +1,112 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/sonnet-5.5/knowledge_en__r1.json",
+  "target_sha256": "1c5406566d6604f3d93a5e1c57782ed40b98e9527f483dd0702aa966df6c6378",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "467bb073e04af803",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 0,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer correctly describes 奶龙 as a yellow, chubby cartoon dinosaur from a domestic animation/IP and vaguely notes the open-mouthed laughing look. It misses the AI-generated/unofficial nature, the 星野 origin, other aliases, the 军体拳 remix, the official-reply copypasta and the rarity-title genre. Its guess about 奶蛙 and its claims about other memes are explicitly hedged, so none count as hallucinations.",
+  "raw": "{\"scores\": {\"base_character\": 2, \"ai_variant\": 0, \"xingye_origin\": 0, \"aliases\": 0, \"naiwa\": 1, \"laugh_pose\": 1, \"junti_quan\": 0, \"official_reply\": 0, \"trait_variants\": 0, \"rarity_titles\": 0}, \"hallucinations\": [], \"rationale\": \"The answer correctly describes 奶龙 as a yellow, chubby cartoon dinosaur from a domestic animation/IP and vaguely notes the open-mouthed laughing look. It misses the AI-generated/unofficial nature, the 星野 origin, other aliases, the 军体拳 remix, the official-reply copypasta and the rarity-title genre. Its guess about 奶蛙 and its claims about other memes are explicitly hedged, so none count as hallucinations.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 12.3,
+    "tokens": {
+      "input": 3087,
+      "cached_input": 0,
+      "cache_write": 3085,
+      "output": 979,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.044649,
+    "tools_used": [],
+    "cost_usd": 0.044649,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3085,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 979,
+      "output_tokens_details": {
+        "thinking_tokens": 698
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3085,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 979,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3085,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3085
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:05:16Z",
+    "finished_at": "2026-10-25T02:05:28Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

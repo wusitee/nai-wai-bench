@@ -1,0 +1,80 @@
+{
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "vendor": "openai",
+  "item": "recognize_smug",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "answer": "这是 **奶龙**，出自国产动画《奶龙》，是一只黄色的小恐龙。\n\n它属于网上的 **“奶龙梗／奶龙表情包”**。这张眯眼、抿嘴的表情通常用来表达憋笑、得意或“就这？”式的不屑；我不确定这张图是否有统一的专属梗名。",
+  "contaminated": false,
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17084-02f5-7382-8c45-72dc85c50487",
+    "seconds": 22.2,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 11687,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 595,
+      "reasoning_output_tokens": 501
+    },
+    "tokens": {
+      "input": 11687,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 595,
+      "reasoning": 501
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:44:21Z",
+    "finished_at": "2026-10-25T00:44:43Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

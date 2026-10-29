@@ -1,0 +1,77 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/opus-5.5/knowledge_zh__r1.json",
+  "target_sha256": "ccda9c173ad84bdf5745032861af86116a6065a7302af84f72fbde3268f6ef96",
+  "settings_id": "c5b99b49261f87dd",
+  "judge_prompt": "c1b56084ea2d48a0",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "opus-5.5",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 0,
+    "naiwa": 0,
+    "laugh_pose": 0,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [],
+  "rationale": "The model accurately described the base character Nailong, but properly declined to answer specifics about the mutated meme variants, explicitly framing all related thoughts as uncertain guesses rather than making confident false claims.",
+  "raw": "{\n  \"scores\": {\n    \"base_character\": 2,\n    \"ai_variant\": 0,\n    \"xingye_origin\": 0,\n    \"aliases\": 0,\n    \"naiwa\": 0,\n    \"laugh_pose\": 0,\n    \"junti_quan\": 0,\n    \"official_reply\": 0,\n    \"trait_variants\": 0,\n    \"rarity_titles\": 0\n  },\n  \"hallucinations\": [],\n  \"rationale\": \"The model accurately described the base character Nailong, but properly declined to answer specifics about the mutated meme variants, explicitly framing all related thoughts as uncertain guesses rather than making confident false claims.\"\n}",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 16.9,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 16370,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:20:30Z",
+    "finished_at": "2026-10-25T02:20:47Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

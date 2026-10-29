@@ -1,0 +1,80 @@
+{
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "vendor": "openai",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "我认不准它的正式角色名，也无法可靠地确定它属于哪个特定网络梗。\n\n图中是一只侧目看的 3D 小黄鸟，配上“惊鸿一瞥”，用夸张的眼神制造反差笑点。但这只能解释表情包的用法，不能据此确认角色出处；直接给它安上某个名字会是猜测。",
+  "contaminated": false,
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17083-544b-71c3-8c13-c9a1aff1ad04",
+    "seconds": 43.9,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 11476,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 999,
+      "reasoning_output_tokens": 904
+    },
+    "tokens": {
+      "input": 11476,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 999,
+      "reasoning": 904
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:43:36Z",
+    "finished_at": "2026-10-25T00:44:20Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

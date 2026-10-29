@@ -1,0 +1,115 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/sonnet-5.5/write_prompt_zh.giraffe__r1.json",
+  "target_sha256": "a152e9b6b66dbc5ba58c2348779e7de56dbecbca4ca9f0a039f14a68c4b25658",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "c4aacdc0b18c170a",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 1,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 0,
+    "background": 2,
+    "vibe": 0,
+    "identity": 1
+  },
+  "hallucinations": [
+    "Specifies a flat 2D cartoon sticker style with thick outlines and flat color fills, contradicting the reference's glossy 3D CG render",
+    "Head thrown back on a long S-curved neck, contradicting the reference's forward-hunched, doubled-over pose and neckless body"
+  ],
+  "rationale": "The prompt covers the huge laughing mouth, the pale belly patch and the white background, but gets the pose, render style and vibe wrong by making it a cute flat 2D sticker. Hands-on-belly and squinting eyes are only offered as alternatives, and the giraffe identity rests on the neck and ossicones while its markings are muted to sparse pale patches on Nailong-yellow.",
+  "raw": "```json\n{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 1, \"mouth\": 1, \"body\": 1, \"belly_patch\": 2, \"render\": 0, \"background\": 2, \"vibe\": 0, \"identity\": 1}, \"hallucinations\": [\"Specifies a flat 2D cartoon sticker style with thick outlines and flat color fills, contradicting the reference's glossy 3D CG render\", \"Head thrown back on a long S-curved neck, contradicting the reference's forward-hunched, doubled-over pose and neckless body\"], \"rationale\": \"The prompt covers the huge laughing mouth, the pale belly patch and the white background, but gets the pose, render style and vibe wrong by making it a cute flat 2D sticker. Hands-on-belly and squinting eyes are only offered as alternatives, and the giraffe identity rests on the neck and ossicones while its markings are muted to sparse pale patches on Nailong-yellow.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 14.2,
+    "tokens": {
+      "input": 2115,
+      "cached_input": 0,
+      "cache_write": 2113,
+      "output": 1083,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0388542,
+    "tools_used": [],
+    "cost_usd": 0.0388542,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2113,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1083,
+      "output_tokens_details": {
+        "thinking_tokens": 752
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2113,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1083,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2113,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2113
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:06:15Z",
+    "finished_at": "2026-10-25T02:06:29Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}
