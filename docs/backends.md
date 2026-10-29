@@ -37,14 +37,15 @@ Each subject/judge record stores sanitized `settings` and a 16-hex `settings_id`
 backend, configured model, effort/source, requested ACP config, command template, hashes of referenced
 repository files, and API hostname. Environment names may be recorded; their values and API keys are
 excluded. Labels, prices, and timeouts do not change identity. Changed settings or referenced patches
-invalidate cached samples; image jobs additionally require `input_names="neutral"`. ACP also records
+prevent reuse of cached samples; successful records require a new run or explicit `--force` before
+replacement. Image jobs additionally require `input_names="neutral"`. ACP also records
 all reported current session values as `meta.session_config`. `meta.resolved_model` holds the model the
 client reports, or `null` when unavailable. Judge freshness uses the target JSON's SHA-256, so replacing
 its bytes invalidates a judgment even when its modification time is preserved.
 
 Every written result, including errors, has `collected.started_at`, `finished_at` (UTC), `revision`, and
 `nwb_version`. Revision is captured once per process and gains `+dirty` when `bench/`, `src/`, `config/`,
-or `models.toml` differ from HEAD. Each collection invocation, including a no-op, appends its UTC time, argv,
+or `models.toml` differ from HEAD. A collection invocation that executes jobs appends its UTC time, argv,
 revision, version, and involved models' settings to `runs/<run>/collection.jsonl`.
 
 Raw `meta.usage` is retained. `meta.tokens` normalizes these counters:
@@ -88,6 +89,7 @@ readable; their missing telemetry stays unknown.
 | `reasoning` | Legacy Codex alias for `effort` |
 | `effort_option` | ACP option id for effort (e.g. `reasoning_effort` or `thinking`) |
 | `effort_source` | `model-id` when effort is encoded in the model id |
+| `tool_profile` | Codex only: versioned `legacy-v1` or `isolated-v1` text/vision command configuration |
 | `command`, `env` | ACP only: agent command and extra environment; `~`, `${VAR}`, and `${NWB_ROOT}` (repository root) are expanded |
 | `config` | ACP only: session config options to set, as `{ id = "value" }` |
 | `usage_command` | ACP only: opt-in advertised local command for session token totals (currently Kimi `/usage`) |
@@ -116,6 +118,26 @@ When the image tool's result reports `moderation_blocked`, the provider's safety
 request or its output. The sample is then recorded with `refused` and no images instead of an error.
 A refusal is a model outcome: it is not retried automatically (`--force` regenerates it), and when its
 prompt audit is verbatim it scores 0 in the ranking panel.
+
+### Codex tool profiles
+
+`tool_profile="legacy-v1"` preserves the original text/vision command: web search plus the `apps`,
+`browser_use`, `browser_use_external`, and `computer_use` features are disabled, along with image
+generation for understanding/judge calls. Shell, image-viewing, and agent features remain available;
+attempted tool use still contaminates an understanding answer.
+
+`tool_profile="isolated-v1"` adds these eleven disabled features for text/vision calls:
+`shell_tool`, `unified_exec`, `multi_agent`, `multi_agent_v2`, `plugins`, `skill_search`, `goals`,
+`sleep_tool`, `view_image`, `collaboration_modes`, and `default_mode_request_user_input`.
+The flags follow the effort argument and precede neutral image attachments, matching the retained
+isolated collection commands. Generation relays retain their image-tool configuration in either profile.
+
+The profile is reflected in the command fingerprint. The retained Sol/Astra baseline uses `legacy-v1`;
+Terra and GPT-5.6-Sol rows use `isolated-v1`. Reports identify these conditions per row and in collection
+metadata. These historical rows do not constitute a uniform collection protocol; see
+[the selected comparison](releases.md#selected-comparison). To collect a controlled comparison, select
+the same profile for its subject configurations and use a new run name. Individual legacy executable
+paths and current environment-variable command templates can also produce different settings IDs.
 
 ## Claude (`backend = "claude"`)
 

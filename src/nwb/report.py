@@ -46,6 +46,7 @@ def row_details(row: dict) -> str:
     if row.get("settings_status") == "settings unrecorded":
         details.append("settings unrecorded")
     details += row.get("conditions", [])
+    details += row.get("collection_profiles", [])
     if row["status"] == "mixed conditions":
         details.append("diagnostic score " + fmt(row.get("diagnostic_score"), 1))
     return "; ".join(details)
@@ -53,6 +54,20 @@ def row_details(row: dict) -> str:
 
 def judge_text(row: dict, label=lambda m: m) -> str:
     return " · ".join(f"{label(j)} ×{n}" for j, n in row.get("judges", {}).items()) or "none"
+
+
+def collection_profiles_text(scores: dict) -> str:
+    collection = scores.get("collection", {})
+    profiles = sorted({p for ps in collection.get("subject_profiles", {}).values() for p in ps})
+    judges = sorted({p for ps in collection.get("judge_profiles", {}).values() for p in ps})
+    text = "Recorded Codex subject profiles: " + ", ".join(profiles) + "." if profiles else ""
+    if len(profiles) > 1:
+        text += (" Collection conditions differ across rows: legacy-v1 did not explicitly disable shell, image-viewing "
+                 "and agent features; isolated-v1 disables them. These provisional comparisons may include effects "
+                 "of both model and collector. Compare matching profiles when interpreting score differences.")
+    if judges:
+        text += " Recorded Codex judge profiles: " + ", ".join(judges) + "."
+    return text.strip()
 
 
 def model_html(label: str) -> str:
@@ -257,6 +272,9 @@ def render(bench: Bench, run_name: str, scores: dict) -> str:
     out.append(f"<p class=muted>{escape(collection_text(scores))}. Collection revisions: "
                f"{escape(', '.join(scores.get('collection', {}).get('revisions', [])) or 'unrecorded')}. "
                f"{escape(stale_text(scores))}</p>")
+    profiles = collection_profiles_text(scores)
+    if profiles:
+        out.append(f"<p class=muted>{escape(profiles)}</p>")
     boards = scores.get("leaderboards", {})
     if bench.suite == "naihub-v1":
         out.append("<p>naihub-v1 visual ranks use all-field joint accuracy: every keyed field must be correct "

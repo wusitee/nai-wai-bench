@@ -99,8 +99,8 @@ def test_settings_identity_tracks_collection_changes_not_display_or_credentials(
     assert model_settings(api, tmp_path)[0]["endpoint"] == "api.example"
 
 
-@pytest.mark.parametrize("change", [{"model": "another-model"}, {"options": {"effort": "low"}}])
-def test_resume_rejects_changed_model_or_effort(tmp_path, change):
+@pytest.mark.parametrize("change", [{"model": "another-model"}, {"options": {"effort": "low"}}, {"prompt": "new question"}])
+def test_resume_preserves_successes_after_model_effort_or_prompt_changes(tmp_path, change):
     from dataclasses import replace
 
     bench = load_bench(find_root())
@@ -109,11 +109,24 @@ def test_resume_rejects_changed_model_or_effort(tmp_path, change):
     job = tracks.understanding_jobs(bench, [spec], [item], 1, tmp_path)[0]
     write_json(job.out, {**job.base, "answer": "saved answer"})
     assert is_done(job)
-    changed = tracks.understanding_jobs(bench, [replace(spec, **change)], [item], 1, tmp_path)[0]
+    if "prompt" in change:
+        changed = tracks.understanding_jobs(bench, [spec], [replace(item, **change)], 1, tmp_path)[0]
+    else:
+        changed = tracks.understanding_jobs(bench, [replace(spec, **change)], [item], 1, tmp_path)[0]
     assert not is_done(changed)
+    before = job.out.read_bytes()
+    called = []
+    changed.fn = lambda: called.append(True) or {"answer": "replacement"}
+    untouched = Job(tmp_path / "new.json", "new sample", {"model": "m"}, lambda: called.append(True))
+    with pytest.raises(ValueError, match="choose a new --run.*--force"):
+        tracks.run_jobs([untouched, changed], 2, False, run_dir=tmp_path)
+    assert called == [] and job.out.read_bytes() == before
+    assert not untouched.out.exists() and not (tmp_path / "collection.jsonl").exists()
+    assert tracks.run_jobs([changed], 1, True) == (1, 0)
+    assert is_done(changed) and called == [True]
 
 
-def test_collection_records_success_errors_settings_and_each_invocation(tmp_path):
+def test_collection_records_requests_and_keeps_no_ops_unchanged(tmp_path):
     import json
     from datetime import datetime
     from nwb.util import read_json
@@ -131,20 +144,22 @@ def test_collection_records_success_errors_settings_and_each_invocation(tmp_path
         collected = rec["collected"]
         assert collected["nwb_version"] == "0.1.0" and collected["revision"]
         assert datetime.fromisoformat(collected["finished_at"]) >= datetime.fromisoformat(collected["started_at"])
+    before = (tmp_path / "collection.jsonl").read_bytes()
     assert tracks.run_jobs(jobs[:1], 1, False) == (0, 0)
     assert tracks.run_jobs([], 1, False, run_dir=tmp_path) == (0, 0)
+    assert (tmp_path / "collection.jsonl").read_bytes() == before
     log = [json.loads(line) for line in (tmp_path / "collection.jsonl").read_text().splitlines()]
-    assert len(log) == 3 and log[0]["argv"] and log[0]["settings"]["m"]["effort"] == "high"
+    assert len(log) == 1 and log[0]["argv"] and log[0]["settings"]["m"]["effort"] == "high"
     assert is_done(jobs[0])
     jobs[0].base["settings_id"] = "changed"
     assert not is_done(jobs[0])
 
 
 @pytest.mark.parametrize("command", [cli.cmd_understand, cli.cmd_imagegen, cli.cmd_judge])
-def test_cli_logs_empty_collection_invocations(tmp_path, command):
+def test_cli_empty_collection_invocations_leave_no_log(tmp_path, command):
     bench = load_bench(find_root())
     model = ModelSpec("m", "acp", "v", "m", frozenset({"text", "vision", "image"}), {"command": ["unused"]})
     args = SimpleNamespace(models="m", items=None, tiers=None, animals="default", reps=0,
                            run_dir=tmp_path, jobs=1, force=False, track="all", judges="m")
     assert command(args, bench.root, bench, {"m": model}, {}) == 0
-    assert len((tmp_path / "collection.jsonl").read_text().splitlines()) == 1
+    assert not (tmp_path / "collection.jsonl").exists()

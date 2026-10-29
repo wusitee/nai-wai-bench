@@ -17,6 +17,22 @@ from nwb.config import ModelSpec
 from nwb.util import IMAGE_SUFFIXES
 
 DISABLED_FEATURES = ("apps", "browser_use", "browser_use_external", "computer_use")
+ISOLATED_FEATURES = ("shell_tool", "unified_exec", "multi_agent", "multi_agent_v2", "plugins",
+                     "skill_search", "goals", "sleep_tool", "view_image", "collaboration_modes",
+                     "default_mode_request_user_input")
+TOOL_PROFILES = {"legacy-v1": (), "isolated-v1": ISOLATED_FEATURES}
+
+
+def recorded_tool_profile(command: list[str]) -> str:
+    disabled = {command[i + 1] for i, arg in enumerate(command[:-1]) if arg == "--disable"}
+    baseline = set(DISABLED_FEATURES) | ({"image_generation"} if "image_generation" in disabled else set())
+    if disabled == baseline | set(ISOLATED_FEATURES):
+        return "isolated-v1"
+    if disabled == baseline:
+        return "legacy-v1"
+    return "custom"
+
+
 # The prompt argument of a code-mode call such as `tools.image_gen__imagegen({prompt: "..."})`.
 _JS_PROMPT = re.compile(r"""(?<![\w$])["']?prompt["']?\s*:\s*("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)""", re.S)
 
@@ -28,6 +44,9 @@ class CodexBackend:
         self.home = Path(os.environ.get("CODEX_HOME", "~/.codex")).expanduser()
 
     def command(self, images: list[Path], generate: bool) -> list[str]:
+        profile = self.spec.options.get("tool_profile", "legacy-v1")
+        if profile not in TOOL_PROFILES:
+            raise ValueError(f"unknown Codex tool_profile {profile!r}; choose from {', '.join(TOOL_PROFILES)}")
         cmd = [
             "codex", "exec", "--json", "--skip-git-repo-check", "--ignore-user-config",
             "--sandbox", "read-only", "-c", 'web_search="disabled"', "--model", self.spec.model,
@@ -37,6 +56,9 @@ class CodexBackend:
             cmd += ["--disable", feature]
         if (effort := self.spec.options.get("effort", self.spec.options.get("reasoning"))) and effort != "default":
             cmd += ["-c", f'model_reasoning_effort="{effort}"']
+        if not generate:
+            for feature in TOOL_PROFILES[profile]:
+                cmd += ["--disable", feature]
         # --image takes multiple values, so it goes last and the prompt is sent on stdin.
         for img in images:
             cmd += ["--image", str(Path(img).resolve())]

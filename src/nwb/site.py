@@ -10,7 +10,7 @@ from pathlib import Path
 
 from nwb import CANARY, __version__
 from nwb.config import SUITES, Bench, ModelSpec, UnderstandingItem
-from nwb.report import (UNCERTAINTY_NOTE, collection_text, efficiency_section, stale_text, fmt, judge_text,
+from nwb.report import (UNCERTAINTY_NOTE, collection_profiles_text, collection_text, efficiency_section, stale_text, fmt, judge_text,
                         model_html, rank_range, score_text)
 from nwb.util import extract_json, read_json
 
@@ -216,6 +216,7 @@ def _ranking(rows: list[dict], label, flags: dict[str, str], judge_label, judged
                          f"title='{e(title, quote=True)}'>{e(row['status'])}</span>")
         if row.get("settings_status") == "settings unrecorded":
             chips.append("<span class=status>settings unrecorded</span>")
+        chips.extend(f"<span class=status>{e(p)}</span>" for p in row.get("collection_profiles", []))
         meta = f"<div class=row-meta>{' '.join(chips)}</div>" if chips else ""
         if judged:
             meta += f"<div class=row-meta>评审 Judges: {e(judge_text(row, judge_label))}</div>"
@@ -488,6 +489,9 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
         "Brackets show 95% bootstrap intervals, and the rank range shows how a rank moves under resampling; "
         "models whose intervals largely overlap are not clearly ordered. "
         "Only models that complete the fixed panel under one setting are ranked.</span></div>")
+    profiles = collection_profiles_text(scores)
+    if profiles:
+        html.append(f"<p class=note>{e(profiles)}</p>")
 
     body = {"efficiency": efficiency_section(scores, label)}
     # --- rankings ---

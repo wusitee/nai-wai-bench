@@ -14,6 +14,22 @@ and the high/xhigh GPT-5.6-Sol configurations:
 | `core` | `rel-0.1-with-gpt-5.6-sol` | Only the recorded judge names listed in the manifest; vendor exclusion still applies per sample |
 | `naihub-v1` | `rel-0.1-naihub-with-gpt-5.6-sol` | Local answer-key scoring, without judges |
 
+This historical comparison mixes two recorded Codex collection profiles:
+
+| Subject rows | Profile |
+|---|---|
+| `gpt-6.1-sol`, `gpt-6-astra` | `legacy-v1` |
+| `gpt-6.1-terra-xhigh`, `gpt-5.6-sol`, `gpt-5.6-sol-xhigh` | `isolated-v1` |
+
+Both disable web/browser access. The isolated profile additionally disables shell execution, agents,
+plugins, skill search, goals, sleeping, image-viewing tools, and interactive mode features. The complete
+feature list and versioned `tool_profile` option are in [backend documentation](backends.md#codex-tool-profiles).
+The maintained backend recreates both recorded command configurations. Historical `gpt-6.1-sol`
+judgments also include both profiles; reports expose recorded subject and judge profiles and label
+each ranked row. These remain provisional observed rankings across different model and collector
+configurations. The collection-profile effect is confounded with the model: use matching profiles
+and judge conditions for controlled comparisons. The original observations and numeric scores are retained.
+
 The manifest records the software version, collection-source artifact identity, run names, normalized
 SHA-256 input digests, and explicit judge selections. Collection source identity describes the retained
 observations; it is separate from the revision building the current site. Models, efforts, and historical
@@ -39,8 +55,9 @@ their README gives the suite and re-scoring command.
 
 ## Saving results to Git
 
-`nwb understand`, `imagegen`, `judge`, and `report` refresh the saved snapshot after each completed
-invocation, including partial runs and recorded failures. Each snapshot contains the retained run,
+`nwb understand`, `imagegen`, and `judge` refresh the saved snapshot after invocations that execute
+jobs, including partial runs and recorded failures. `report` and explicit `sync` refresh derived
+results without model calls. No-op collection commands leave logs and snapshots unchanged. Each snapshot contains the retained run,
 not just its most recent model. An unchanged file is left untouched; obsolete generated files are
 removed only when they were listed in the previous snapshot. Generated HTML, unrelated logs, local
 configuration, and temporary files are excluded.
@@ -94,9 +111,13 @@ The publisher always builds into a fresh temporary directory.
 
 Choose a new run name for new collection conditions. Subject and judge records carry their settings
 fingerprints, model/effort metadata, and collection revision. Resume reuses a successful sample only
-when its recorded job identity still matches. Changes to model IDs, effort, command configuration, or
-referenced configuration files invalidate reuse. Panels mixing recorded settings retain diagnostic
-scores but cannot receive a rank.
+when its recorded job identity still matches. A successful subject result with changed prompts, inputs,
+or settings, or a successful judgment with a different settings identity, stops the entire requested
+batch before logging or model requests. Choose a new run for changed model
+IDs, effort, tool profiles, or command/configuration files. `--force` explicitly authorizes replacement
+of existing results. Legacy literal executable paths and current environment-variable templates can
+also produce different fingerprints; restoration and re-scoring are available without replaying calls.
+Panels mixing recorded settings within a model retain diagnostic scores but cannot receive a rank.
 
 Use the ordinary `nwb understand`, `imagegen`, `judge`, `report`, and `export` commands for individual
 runs. `report`, `site`, and `export` require an existing run. An archived comparison is not selected by

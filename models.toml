@@ -29,6 +29,7 @@ backend = "codex"
 vendor = "openai"
 model = "gpt-6.1-sol"
 effort = "high"
+tool_profile = "legacy-v1"
 price = { input = 2.0, cached_input = 0.10, cache_write = 2.50, output = 10.0, unit = "USD/1M tokens", source = "https://developers.openai.com/api/docs/pricing", as_of = "2026-10-25" }
 can = ["text", "vision"]
 
@@ -38,6 +39,7 @@ backend = "codex"
 vendor = "openai"
 model = "gpt-6-astra"
 effort = "high"
+tool_profile = "legacy-v1"
 price = { input = 10.0, cached_input = 1.0, cache_write = 12.50, output = 50.0, unit = "USD/1M tokens", source = "https://developers.openai.com/api/docs/pricing", as_of = "2026-10-25" }
 can = ["text", "vision"]
 
@@ -48,6 +50,7 @@ backend = "codex"
 vendor = "openai"
 model = "gpt-6.1-terra"
 effort = "xhigh"
+tool_profile = "isolated-v1"
 price = { input = 1.0, cached_input = 0.05, cache_write = 1.25, output = 5.0, unit = "USD/1M tokens", source = "https://developers.openai.com/api/docs/models/gpt-6.1-terra", as_of = "2026-10-29" }
 can = ["text", "vision"]
 
@@ -57,6 +60,7 @@ backend = "codex"
 vendor = "openai"
 model = "gpt-5.6-sol"
 effort = "high"
+tool_profile = "isolated-v1"
 price = { input = 4.0, cached_input = 0.4, cache_write = 5.0, output = 20.0, unit = "USD/1M tokens", source = "https://developers.openai.com/api/docs/models/gpt-5.6-sol", as_of = "2026-10-29" }
 can = ["text", "vision"]
 
@@ -66,6 +70,7 @@ backend = "codex"
 vendor = "openai"
 model = "gpt-5.6-sol"
 effort = "xhigh"
+tool_profile = "isolated-v1"
 price = { input = 4.0, cached_input = 0.4, cache_write = 5.0, output = 20.0, unit = "USD/1M tokens", source = "https://developers.openai.com/api/docs/models/gpt-5.6-sol", as_of = "2026-10-29" }
 can = ["text", "vision"]
 

@@ -189,7 +189,7 @@ def test_cli_automatically_saves_benchmark_results(inputs, monkeypatch, command)
     if command == "imagegen":
         args = ["imagegen", "--models", "chatgpt-image", "--tiers", "name_zh", "--animals", "cat"]
     elif command == "judge":
-        args = ["judge", "--judges", "opus-5.5", "--track", "understanding"]
+        args = ["judge", "--judges", "opus-5.5", "--track", "understanding", "--force"]
     elif command == "report":
         args = ["report", "--judges", "opus-5.5"]
     else:
@@ -236,3 +236,37 @@ def test_release_restores_selected_runs_from_repository_results(inputs, monkeypa
     release.build(root, manifest, root / "site")
     for suite, spec in suites.items():
         assert bundle.input_digest(root / "runs" / spec["run"], load_bench(root, suite)) == spec["sha256"]
+
+
+def test_no_op_judging_keeps_pinned_results_unchanged(inputs, monkeypatch):
+    root, _, suites, _ = inputs
+    bench = load_bench(root, "naihub-v1")
+    run = root / "runs/naihub-v1"
+    snapshot = results.sync(root, bench, run, judges=set())
+    before = {p: p.read_bytes() for p in snapshot.rglob("*") if p.is_file()}
+    monkeypatch.chdir(root)
+    assert cli.main(["judge", "--suite", "naihub-v1", "--run", "naihub-v1"]) == 0
+    assert not (run / "collection.jsonl").exists()
+    assert bundle.input_digest(run, bench) == suites["naihub-v1"]["sha256"]
+    assert all(p.read_bytes() == data for p, data in before.items())
+
+
+def test_resume_settings_conflict_preserves_cache_and_snapshot_before_requests(inputs, monkeypatch):
+    root, _, _, _ = inputs
+    run = root / "runs/core"
+    path = next((run / "understanding").rglob("*.json"))
+    write_json(path, {**read_json(path), "settings_id": "historical-settings"})
+    snapshot = results.sync(root, load_bench(root), run)
+    before = path.read_bytes()
+    saved = {p: p.read_bytes() for p in snapshot.rglob("*") if p.is_file()}
+    monkeypatch.chdir(root)
+
+    def no_request(*args):
+        pytest.fail("settings conflicts must stop the whole batch before model requests")
+
+    from types import SimpleNamespace
+    monkeypatch.setattr("nwb.tracks.get_backend", lambda _: SimpleNamespace(run=no_request))
+    assert cli.main(["understand", "--run", "core", "--models", "gpt-6.1-sol",
+                     "--items", "recognize_zh,grounding.laugh"]) == 2
+    assert path.read_bytes() == before and not (run / "collection.jsonl").exists()
+    assert all(p.read_bytes() == data for p, data in saved.items())

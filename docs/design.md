@@ -286,7 +286,9 @@ working runs can be restored from it after cloning. `--no-sync` keeps an experim
 See [saving results](releases.md#saving-results-to-git) for manual sync and restoration.
 
 Commands skip samples that already succeeded with the current prompt, settings, and neutral-input contract,
-and redo ones with an `error` or changed collection conditions, so an interrupted run resumes where it stopped. Provider
+and retry ones with an `error`, so an interrupted run resumes where it stopped. A successful record with
+different subject inputs or collection settings stops the batch before requests or writes; use a new run name or explicit
+`--force` to replace it. No-op collection commands leave collection logs and snapshots unchanged. Provider
 refusals are kept as results; `--force` regenerates everything selected.
 
 ## Extending

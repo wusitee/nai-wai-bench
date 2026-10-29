@@ -84,7 +84,8 @@ def cmd_judge(args, root, bench, models, defaults):
 
 def _collect(args, root, bench, jobs):
     outcome = tracks.run_jobs(jobs, args.jobs, args.force, run_dir=args.run_dir)
-    _sync_results(args, root, bench)
+    if any(outcome):
+        _sync_results(args, root, bench)
     return _finish(*outcome)
 
 

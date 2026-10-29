@@ -30,6 +30,14 @@ Effective reasoning effort is high where exposed, otherwise default/unexposed, a
 Judgments must match target content and the current grading prompt. Reports disclose actual contributing
 judges, collection dates/revisions, missing telemetry, and separate judge resource totals.
 
+The selected 0.1.0 comparison includes both `legacy-v1` and `isolated-v1` Codex collection profiles,
+as [documented in the release workflow](releases.md#selected-comparison). The original baseline left
+shell, image-viewing, and agent features available; the isolated collection disabled them. Historical
+Codex judge configurations also differ. Row labels and collection metadata expose these profiles.
+Within-row homogeneity does not make the whole comparison uniform: the observed ranks may include effects
+of both the model and its collector configuration. Use matching profiles and judge conditions for
+controlled model comparisons. Original observations and numeric scores are preserved.
+
 Paired cluster-bootstrap intervals resample source images or animals with observed within-cell repetition
 means and fixed judges. They are sensitivity estimates, not significance tests, population claims, or
 validation of keys/judges. Token prices are list API estimates; subscription CLI access is not billed

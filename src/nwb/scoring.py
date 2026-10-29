@@ -9,6 +9,7 @@ from statistics import median, pstdev
 
 from nwb import __version__
 from nwb.config import Bench, load_models
+from nwb.provenance import collection_profile
 from nwb.util import extract_json, read_json
 
 HALLUCINATION_PENALTY = 10
@@ -130,6 +131,15 @@ def _samples(run_dir: Path, track: str, pattern: str, by_target: dict) -> list[t
     return out
 
 
+def _profile_groups(records, identifier: str) -> dict[str, list[str]]:
+    groups = defaultdict(set)
+    for record in records:
+        profile = collection_profile(record)
+        if "error" not in record and profile:
+            groups[record[identifier]].add(profile)
+    return {name: sorted(profiles) for name, profiles in sorted(groups.items())}
+
+
 def aggregate(run_dir: Path, trait_weights: dict[str, float], judges: set[str] | None = None,
               expected: dict[str, str] | None = None, bench: Bench | None = None) -> dict:
     """Score a run. `expected` (Bench.expected_prompts) restricts it to samples made with the current
@@ -217,6 +227,8 @@ def aggregate(run_dir: Path, trait_weights: dict[str, float], judges: set[str] |
         "revisions": sorted({c["revision"] for c in collected if c.get("revision")}),
         "dirty": any(c.get("revision", "").endswith("+dirty") for c in collected),
         "recorded": len(collected), "tasks": len(records) + len(judgments),
+        "subject_profiles": _profile_groups((r for r in records if r.get("track") == "understanding"), "model"),
+        "judge_profiles": _profile_groups(judgments, "judge"),
     }
     models = load_models(bench.root)[0] if bench else {}
     scores["labels"] = {}
@@ -420,6 +432,7 @@ def leaderboards(bench: Bench, scores: dict, run_dir: Path) -> dict:
                          "diagnostic_score": value, "conditions": differences,
                          "settings_status": "settings unrecorded" if settings == {None} else "recorded",
                          "settings_ids": sorted(v for v in settings if v is not None),
+                         "collection_profiles": sorted({collection_profile(r) for r in records if collection_profile(r)}),
                          "judges": dict(sorted(Counter(j for cell in cells.values() for s in cell
                                                        for j in s["per_judge"]).items())),
                          "score_interval": None, "rank_range": None,

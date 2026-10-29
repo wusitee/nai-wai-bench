@@ -11306,6 +11306,7 @@
         "settings_ids": [
           "8bc2f526580c51a3"
         ],
+        "collection_profiles": [],
         "judges": {
           "gemini-3.8-flash": 9
         },
@@ -11339,6 +11340,7 @@
         "settings_ids": [
           "1e77488ebc8a6fba"
         ],
+        "collection_profiles": [],
         "judges": {
           "gemini-3.8-flash": 9
         },
@@ -11371,6 +11373,9 @@
         "settings_status": "recorded",
         "settings_ids": [
           "eed12e0ea2261aed"
+        ],
+        "collection_profiles": [
+          "Codex legacy-v1"
         ],
         "judges": {
           "gemini-3.8-flash": 9,
@@ -11406,6 +11411,7 @@
         "settings_ids": [
           "7c81ed50f365cb3c"
         ],
+        "collection_profiles": [],
         "judges": {
           "gemini-3.8-flash": 9,
           "opus-5.5": 9
@@ -11439,6 +11445,9 @@
         "settings_status": "recorded",
         "settings_ids": [
           "3dd3bd14bb05cc84"
+        ],
+        "collection_profiles": [
+          "Codex legacy-v1"
         ],
         "judges": {
           "gemini-3.8-flash": 9,
@@ -11474,6 +11483,7 @@
         "settings_ids": [
           "59732430074e0a9b"
         ],
+        "collection_profiles": [],
         "judges": {
           "gemini-3.8-flash": 9,
           "gpt-6.1-sol": 1,
@@ -11509,6 +11519,7 @@
         "settings_ids": [
           "f54f604c4f61c57e"
         ],
+        "collection_profiles": [],
         "judges": {
           "gemini-3.8-flash": 9,
           "gpt-6.1-sol": 9,
@@ -11544,6 +11555,9 @@
         "settings_ids": [
           "7e77354ec4e3ec87"
         ],
+        "collection_profiles": [
+          "Codex isolated-v1"
+        ],
         "judges": {
           "opus-5.5": 9
         },
@@ -11576,6 +11590,9 @@
         "settings_status": "recorded",
         "settings_ids": [
           "eb2665deffc22b79"
+        ],
+        "collection_profiles": [
+          "Codex isolated-v1"
         ],
         "judges": {
           "opus-5.5": 9
@@ -11610,6 +11627,7 @@
         "settings_ids": [
           "c5b99b49261f87dd"
         ],
+        "collection_profiles": [],
         "judges": {
           "gpt-6.1-sol": 9,
           "opus-5.5": 9
@@ -11643,6 +11661,9 @@
         "settings_status": "recorded",
         "settings_ids": [
           "99253163763a07d9"
+        ],
+        "collection_profiles": [
+          "Codex isolated-v1"
         ],
         "judges": {
           "opus-5.5": 9
@@ -11679,6 +11700,9 @@
         "settings_ids": [
           "45fd827f1214ed0a"
         ],
+        "collection_profiles": [
+          "Codex legacy-v1"
+        ],
         "judges": {},
         "score_interval": null,
         "rank_range": null,
@@ -11698,6 +11722,7 @@
         "settings_ids": [
           "c5b99b49261f87dd"
         ],
+        "collection_profiles": [],
         "judges": {
           "kimi-k3.1-pro": 15,
           "opus-5.5": 15
@@ -11724,7 +11749,30 @@
     ],
     "dirty": false,
     "recorded": 971,
-    "tasks": 971
+    "tasks": 971,
+    "subject_profiles": {
+      "gpt-5.6-sol": [
+        "Codex isolated-v1"
+      ],
+      "gpt-5.6-sol-xhigh": [
+        "Codex isolated-v1"
+      ],
+      "gpt-6-astra": [
+        "Codex legacy-v1"
+      ],
+      "gpt-6.1-sol": [
+        "Codex legacy-v1"
+      ],
+      "gpt-6.1-terra-xhigh": [
+        "Codex isolated-v1"
+      ]
+    },
+    "judge_profiles": {
+      "gpt-6.1-sol": [
+        "Codex isolated-v1",
+        "Codex legacy-v1"
+      ]
+    }
   },
   "labels": {
     "chatgpt-image": "ChatGPT gpt-image (Codex built-in image_gen)",

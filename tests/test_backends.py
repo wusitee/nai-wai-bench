@@ -12,12 +12,28 @@ import pytest
 
 from nwb.backends import BackendError, Request, tokens
 from nwb.backends.acp import AcpBackend, AcpConnection, acp_usage
-from nwb.backends.codex import CodexBackend, audit_rollout
+from nwb.backends.codex import CodexBackend, ISOLATED_FEATURES, audit_rollout, recorded_tool_profile
 from nwb.backends.claude import ClaudeBackend
 from nwb.backends.openai_compat import OpenAICompatBackend, cc_switch_credentials
-from nwb.config import ModelSpec
+from nwb.config import ModelSpec, model_settings
 
 FAKE_AGENT = Path(__file__).with_name("fake_acp_agent.py")
+
+
+def test_codex_versioned_tool_profiles_control_and_record_isolation(tmp_path):
+    from dataclasses import replace
+
+    spec = ModelSpec("m", "codex", "openai", "m", frozenset({"text", "vision"}), {"effort": "high"})
+    legacy, legacy_id = model_settings(spec, tmp_path)
+    isolated = replace(spec, options={**spec.options, "tool_profile": "isolated-v1"})
+    settings, isolated_id = model_settings(isolated, tmp_path)
+    assert recorded_tool_profile(legacy["command"]) == "legacy-v1"
+    assert recorded_tool_profile(settings["command"]) == "isolated-v1" and isolated_id != legacy_id
+    assert settings["command"] == legacy["command"] + [arg for feature in ISOLATED_FEATURES for arg in ("--disable", feature)]
+    assert recorded_tool_profile(settings["command"] + ["--disable", "another_feature"]) == "custom"
+    assert CodexBackend(isolated).command([], True) == CodexBackend(spec).command([], True)
+    with pytest.raises(ValueError, match="unknown Codex tool_profile"):
+        CodexBackend(replace(spec, options={"tool_profile": "unknown"})).command([], False)
 
 
 def acp_backend(**options) -> AcpBackend:

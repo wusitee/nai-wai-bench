@@ -78,6 +78,34 @@ def test_aggregate_prefers_independent_current_judges_and_skips_contaminated(tmp
     assert health["j1"]["imagegen"] == {"n": 1, "spread": 0.0, "deviation": 0.0}
 
 
+def test_historical_codex_profiles_are_disclosed_in_scores_and_reports(tmp_path):
+    from nwb import site
+    from nwb.config import load_models, model_settings
+
+    bench = load_bench(find_root())
+    item = next(i for i in bench.items if i.id == "recognize_zh")
+    bench = replace(bench, items=[item])
+    models, _ = load_models(bench.root)
+    for name in ("gpt-6.1-sol", "gpt-5.6-sol"):
+        settings, identity = model_settings(models[name], bench.root)
+        target = f"understanding/{name}/{item.id}__r1.json"
+        write_json(tmp_path / target, {"track": "understanding", "model": name, "vendor": "openai",
+                   "item": item.id, "modality": "vision", "lang": item.lang, "rep": 1, "prompt": item.prompt,
+                   "answer": "A", "settings": settings, "settings_id": identity})
+        _judgment(tmp_path, "j", "other", target, scores={c: 2 for c in item.checklist},
+                  hallucinations=[], rationale="", judge_images=[str(p) for p in item.images])
+    scores = aggregate(tmp_path, bench.trait_weights, bench=bench)
+    rows = scores["leaderboards"]["visual_understanding"]
+    assert all(row["score"] == 100 for row in rows)
+    assert {tuple(row["collection_profiles"]) for row in rows} == {
+        ("Codex legacy-v1",), ("Codex isolated-v1",)}
+    text = report.render(bench, "comparison", scores)
+    assert "Collection conditions differ across rows" in text and "effects of both model and collector" in text
+    assert "Codex legacy-v1" in text and "Codex isolated-v1" in text
+    ranking = site._ranking(rows, lambda name: name, {}, lambda name: name)
+    assert "Codex legacy-v1" in ranking and "Codex isolated-v1" in ranking
+
+
 def test_grounding_is_answer_keyed_and_blind_controls_do_not_change_visual_scores(tmp_path):
     bench = load_bench(find_root())
     key = {"pose": "facepalm", "eyes": "open"}

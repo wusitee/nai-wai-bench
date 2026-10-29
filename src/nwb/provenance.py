@@ -62,6 +62,18 @@ def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
 
 
+def collection_profile(record: dict) -> str:
+    """Describe recorded collector commands without inferring unrecorded provider behavior."""
+    settings = record.get("settings") or {}
+    command = settings.get("command") or []
+    if not command:
+        return ""
+    if settings.get("backend") == "codex":
+        from nwb.backends.codex import recorded_tool_profile
+        return "Codex " + recorded_tool_profile(command)
+    return ""
+
+
 @functools.cache
 def collection_identity() -> dict:
     """Freeze revision once per collector process, including collection-relevant local changes."""

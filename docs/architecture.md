@@ -39,6 +39,8 @@ flowchart TD
 and model registry, validates fixtures, and fingerprints collection settings. `tracks.py` creates jobs
 and runs them through a thread pool. Each result is written atomically; successful jobs are reused only
 when their recorded identity matches. Errors remain recorded for retry.
+The whole batch is checked before requests: a successful record with different settings requires a
+new run or explicit `--force`. A no-op writes no collection log and does not refresh snapshots.
 
 The backends share `Request` and `Response`. Codex and Claude drive their logged-in CLIs; ACP drives
 configured agents such as DeepSeek Harness, Kimi, and Antigravity; the OpenAI-compatible backend uses
@@ -68,6 +70,9 @@ diagnostics. The two rankings have no combined score.
 
 Reports also expose contributing judges, coverage, paired cluster-bootstrap intervals, repetition
 consistency, and usage/price diagnostics. The methodology describes their limits.
+Recorded Codex `legacy-v1` and `isolated-v1` collector profiles are shown per row and in collection
+metadata. The retained comparison mixes these profiles, so observed model differences are confounded
+with collector configuration; see [release conditions](releases.md#selected-comparison).
 
 ## Storage and publication
 

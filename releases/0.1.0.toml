@@ -6,6 +6,12 @@ repo_url = "https://github.com/wusitee/nai-wai-bench"
 revision = "07d52c9418172b2b7b01e6ed0abc2ca504c64a76"
 archive_sha256 = "fb2d8a524452a6d15b9090848ff3c5dc753975173dba45cdffae5384e0a35c07"
 
+[collection_conditions]
+comparison = "historical mixed Codex tool profiles; effects of model and collector are confounded"
+legacy_v1_subjects = ["gpt-6.1-sol", "gpt-6-astra"]
+isolated_v1_subjects = ["gpt-6.1-terra-xhigh", "gpt-5.6-sol", "gpt-5.6-sol-xhigh"]
+gpt_6_1_sol_judge_profiles = ["legacy-v1", "isolated-v1"]
+
 [suites.core]
 run = "rel-0.1-with-gpt-5.6-sol"
 sha256 = "fe97af0a88871800e87962cf1bda0e7390c3ca169bcc0f7d51bf77b90a649c50"

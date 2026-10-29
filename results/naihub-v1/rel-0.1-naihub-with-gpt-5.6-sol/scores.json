@@ -45216,6 +45216,9 @@
         "settings_ids": [
           "3dd3bd14bb05cc84"
         ],
+        "collection_profiles": [
+          "Codex legacy-v1"
+        ],
         "judges": {},
         "score_interval": [
           81.94444444444444,
@@ -45246,6 +45249,9 @@
         "settings_status": "recorded",
         "settings_ids": [
           "eed12e0ea2261aed"
+        ],
+        "collection_profiles": [
+          "Codex legacy-v1"
         ],
         "judges": {},
         "score_interval": [
@@ -45278,6 +45284,7 @@
         "settings_ids": [
           "c5b99b49261f87dd"
         ],
+        "collection_profiles": [],
         "judges": {},
         "score_interval": [
           73.61111111111111,
@@ -45308,6 +45315,9 @@
         "settings_status": "recorded",
         "settings_ids": [
           "7e77354ec4e3ec87"
+        ],
+        "collection_profiles": [
+          "Codex isolated-v1"
         ],
         "judges": {},
         "score_interval": [
@@ -45340,6 +45350,9 @@
         "settings_ids": [
           "eb2665deffc22b79"
         ],
+        "collection_profiles": [
+          "Codex isolated-v1"
+        ],
         "judges": {},
         "score_interval": [
           62.5,
@@ -45371,6 +45384,7 @@
         "settings_ids": [
           "f54f604c4f61c57e"
         ],
+        "collection_profiles": [],
         "judges": {},
         "score_interval": [
           58.333333333333336,
@@ -45401,6 +45415,9 @@
         "settings_status": "recorded",
         "settings_ids": [
           "99253163763a07d9"
+        ],
+        "collection_profiles": [
+          "Codex isolated-v1"
         ],
         "judges": {},
         "score_interval": [
@@ -45433,6 +45450,7 @@
         "settings_ids": [
           "7c81ed50f365cb3c"
         ],
+        "collection_profiles": [],
         "judges": {},
         "score_interval": [
           54.166666666666664,
@@ -45464,6 +45482,7 @@
         "settings_ids": [
           "1e77488ebc8a6fba"
         ],
+        "collection_profiles": [],
         "judges": {},
         "score_interval": [
           55.55555555555555,
@@ -45495,6 +45514,7 @@
         "settings_ids": [
           "8bc2f526580c51a3"
         ],
+        "collection_profiles": [],
         "judges": {},
         "score_interval": [
           55.55555555555555,
@@ -45526,6 +45546,7 @@
         "settings_ids": [
           "59732430074e0a9b"
         ],
+        "collection_profiles": [],
         "judges": {},
         "score_interval": [
           44.44444444444445,
@@ -45560,7 +45581,25 @@
     ],
     "dirty": false,
     "recorded": 1584,
-    "tasks": 1584
+    "tasks": 1584,
+    "subject_profiles": {
+      "gpt-5.6-sol": [
+        "Codex isolated-v1"
+      ],
+      "gpt-5.6-sol-xhigh": [
+        "Codex isolated-v1"
+      ],
+      "gpt-6-astra": [
+        "Codex legacy-v1"
+      ],
+      "gpt-6.1-sol": [
+        "Codex legacy-v1"
+      ],
+      "gpt-6.1-terra-xhigh": [
+        "Codex isolated-v1"
+      ]
+    },
+    "judge_profiles": {}
   },
   "labels": {
     "deepseek-v4.1-flash": "DeepSeek-V4.1-Flash (high)",

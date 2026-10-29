@@ -5,6 +5,10 @@ Software releases use semantic versions; suite ids version the evaluation panels
 
 ## Unreleased
 
+- Refuse settings-mismatched successful results before any request unless `--force` is explicit;
+  leave collection logs and snapshots unchanged on no-op collection commands.
+- Support the recorded `legacy-v1` and `isolated-v1` Codex tool profiles and disclose the retained
+  comparison's mixed subject/judge profiles in scores, row labels, and release documentation.
 - Save portable JSON/image snapshots to `results/` after collection, judging, and reporting; restore
   missing working runs from these checked-in results, with per-file checksum validation.
 - Reconcile the maintained collector, scorer, reports, and raw bundle exporter with the 0.1.0 results

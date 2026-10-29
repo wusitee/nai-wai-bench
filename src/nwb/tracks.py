@@ -49,20 +49,37 @@ def is_done(job: Job) -> bool:
 
 
 def run_jobs(jobs: list[Job], workers: int, force: bool, *, run_dir: Path | None = None) -> tuple[int, int]:
-    identity = collection_identity()
-    run_dirs = dict.fromkeys(j.run_dir for j in jobs if j.run_dir is not None)
-    if run_dir is not None:
-        run_dirs[run_dir] = None
-    for run_dir in run_dirs:
-        involved = {j.base.get("judge", j.base.get("model")): j.settings for j in jobs if j.run_dir == run_dir}
-        run_dir.mkdir(parents=True, exist_ok=True)
-        with (run_dir / "collection.jsonl").open("a", encoding="utf-8") as stream:
-            stream.write(json.dumps({"time": utc_now(), "argv": sys.argv, **identity,
-                                     "settings": involved}, ensure_ascii=False) + "\n")
+    # Preflight the whole batch before logging or starting any paid calls.
+    if not force:
+        for job in jobs:
+            if not job.out.is_file():
+                continue
+            try:
+                previous = read_json(job.out)
+            except ValueError:
+                continue
+            settings_changed = "settings_id" in job.base and previous.get("settings_id") != job.base["settings_id"]
+            subject_changed = ("judge" not in job.base and job.base.get("track") in ("understanding", "imagegen")
+                               and not is_done(job))
+            if "error" not in previous and (settings_changed or subject_changed):
+                raise ValueError(f"{job.label}: successful result has different collection inputs or settings; "
+                                 "choose a new --run name, or use --force to explicitly replace it")
     todo = [j for j in jobs if force or not is_done(j)]
     skipped = len(jobs) - len(todo)
     if skipped:
         print(f"{skipped} of {len(jobs)} already done; running {len(todo)}", file=sys.stderr)
+    if not todo:
+        return 0, 0
+    identity = collection_identity()
+    run_dirs = dict.fromkeys(j.run_dir for j in todo if j.run_dir is not None)
+    if run_dir is not None:
+        run_dirs[run_dir] = None
+    for run_dir in run_dirs:
+        involved = {j.base.get("judge", j.base.get("model")): j.settings for j in todo if j.run_dir == run_dir}
+        run_dir.mkdir(parents=True, exist_ok=True)
+        with (run_dir / "collection.jsonl").open("a", encoding="utf-8") as stream:
+            stream.write(json.dumps({"time": utc_now(), "argv": sys.argv, **identity,
+                                     "settings": involved}, ensure_ascii=False) + "\n")
     failed = 0
 
     def execute(job: Job) -> tuple[Job, dict, float]:
