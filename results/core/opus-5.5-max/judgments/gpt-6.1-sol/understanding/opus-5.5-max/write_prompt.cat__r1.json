@@ -1,0 +1,94 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/opus-5.5-max/write_prompt.cat__r1.json",
+  "target_sha256": "19fbb035506e73293ba283b9dfe108328b41ef11dafffb150ebdf723e8cd6836",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "860e47a9a84282b0",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 0,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 0,
+    "background": 2,
+    "vibe": 2,
+    "identity": 1
+  },
+  "hallucinations": [
+    "Open black dot eyes instead of eyes squeezed shut into curved arcs.",
+    "A head-back, belly-forward posture instead of a forward-hunched laughing pose.",
+    "An explicitly toothless mouth instead of visible teeth.",
+    "A flat, outlined 2D cartoon style instead of glossy 3D CG."
+  ],
+  "rationale": "The answer captures the bulky merged body, pale belly patch, plain background, and absurd laughter, but contradicts the required pose, eyes, and rendering. Paws merely resting on the tummy and a mouth explicitly lacking teeth earn partial credit; minimal cat features on a lemon-yellow blob provide only token identity cues.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":0,\"mouth\":1,\"body\":2,\"belly_patch\":2,\"render\":0,\"background\":2,\"vibe\":2,\"identity\":1},\"hallucinations\":[\"Open black dot eyes instead of eyes squeezed shut into curved arcs.\",\"A head-back, belly-forward posture instead of a forward-hunched laughing pose.\",\"An explicitly toothless mouth instead of visible teeth.\",\"A flat, outlined 2D cartoon style instead of glossy 3D CG.\"],\"rationale\":\"The answer captures the bulky merged body, pale belly patch, plain background, and absurd laughter, but contradicts the required pose, eyes, and rendering. Paws merely resting on the tummy and a mouth explicitly lacking teeth earn partial credit; minimal cat features on a lemon-yellow blob provide only token identity cues.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d88-acd3-76f1-bf9f-4a85289dbb4c",
+    "seconds": 22.1,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12325,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 406,
+      "reasoning_output_tokens": 224
+    },
+    "tokens": {
+      "input": 12325,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 406,
+      "reasoning": 224
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:58:26Z",
+    "finished_at": "2026-10-30T15:58:48Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

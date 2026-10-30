@@ -1,0 +1,86 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/opus-5.5-max/recognize_facepalm__r1.json",
+  "target_sha256": "ee2aa85142bd6a7c596fc250eb4233f569fdf49e15c53d8e74b47d067e589314",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "647fb1c965903c3c",
+  "judge_images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0
+  },
+  "hallucinations": [
+    "称角色“眼神上飘”，但图中瞳孔实际位于眼睛偏下方。"
+  ],
+  "rationale": "回答未识别出角色是奶龙，也未指出其属于大笑奶龙／变异奶龙／奶蛙梗家族；将其归为“思考／疑惑”反应图不能满足这两个评分项。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0},\"hallucinations\":[\"称角色“眼神上飘”，但图中瞳孔实际位于眼睛偏下方。\"],\"rationale\":\"回答未识别出角色是奶龙，也未指出其属于大笑奶龙／变异奶龙／奶蛙梗家族；将其归为“思考／疑惑”反应图不能满足这两个评分项。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d88-0b18-7833-a7a1-b67b9d98428b",
+    "seconds": 18.1,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13149,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 273,
+      "reasoning_output_tokens": 165
+    },
+    "tokens": {
+      "input": 13149,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 273,
+      "reasoning": 165
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:57:45Z",
+    "finished_at": "2026-10-30T15:58:03Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

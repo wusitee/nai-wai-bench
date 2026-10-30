@@ -1,0 +1,84 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/haiku-5.5-max/recognize_facepalm__r1.json",
+  "target_sha256": "3d545667e84b0cc5700d8c9706f9201cfb2cbe2d5dff8d56f3b6aa0759e61b8d",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "d4968c4f763ccae6",
+  "judge_images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer identifies neither 奶龙, the yellow chubby cartoon dragon/dinosaur, nor the 大笑奶龙 / 变异奶龙 / 奶蛙 meme family. It explicitly expresses uncertainty and makes no confidently false claims.",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0},\"hallucinations\":[],\"rationale\":\"The answer identifies neither 奶龙, the yellow chubby cartoon dragon/dinosaur, nor the 大笑奶龙 / 变异奶龙 / 奶蛙 meme family. It explicitly expresses uncertainty and makes no confidently false claims.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d86-5f4a-7c12-a7b6-2047e9a663a5",
+    "seconds": 9.0,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12605,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 113,
+      "reasoning_output_tokens": 35
+    },
+    "tokens": {
+      "input": 12605,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 113,
+      "reasoning": 35
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:55:55Z",
+    "finished_at": "2026-10-30T15:56:04Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

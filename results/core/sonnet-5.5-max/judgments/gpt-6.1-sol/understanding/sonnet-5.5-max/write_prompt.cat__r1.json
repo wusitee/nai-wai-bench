@@ -1,0 +1,94 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/sonnet-5.5-max/write_prompt.cat__r1.json",
+  "target_sha256": "855011af3a84abec622135b7ddd4bd44d0c2f33923d1bda6697495bdfdfd6657",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "edb487f2e4867550",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 0,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 0,
+    "background": 2,
+    "vibe": 1,
+    "identity": 1
+  },
+  "hallucinations": [
+    "The body leans backward with the head tipped back, contradicting the hunched-forward pose.",
+    "One paw is flung upward, contradicting both paws pressing the belly.",
+    "The eyes are open black ovals with highlights, contradicting squeezed-shut curved arcs.",
+    "The image uses flat 2D sticker styling, outlines, and minimal shading, contradicting the glossy 3D CG rendering."
+  ],
+  "rationale": "The prompt covers the enormous laughing mouth, bulky neckless body, pale belly patch, and plain background, but contradicts the required pose, eyes, and rendering while only partly matching the belly-clutching gesture and unhinged mood. Cat features are present, but the butter-yellow blob lacks clear natural feline coloring or markings.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":0,\"mouth\":2,\"body\":2,\"belly_patch\":2,\"render\":0,\"background\":2,\"vibe\":1,\"identity\":1},\"hallucinations\":[\"The body leans backward with the head tipped back, contradicting the hunched-forward pose.\",\"One paw is flung upward, contradicting both paws pressing the belly.\",\"The eyes are open black ovals with highlights, contradicting squeezed-shut curved arcs.\",\"The image uses flat 2D sticker styling, outlines, and minimal shading, contradicting the glossy 3D CG rendering.\"],\"rationale\":\"The prompt covers the enormous laughing mouth, bulky neckless body, pale belly patch, and plain background, but contradicts the required pose, eyes, and rendering while only partly matching the belly-clutching gesture and unhinged mood. Cat features are present, but the butter-yellow blob lacks clear natural feline coloring or markings.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d8a-0477-7ea2-b3ce-faab0c2eb129",
+    "seconds": 17.5,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12321,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 323,
+      "reasoning_output_tokens": 115
+    },
+    "tokens": {
+      "input": 12321,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 323,
+      "reasoning": 115
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:59:54Z",
+    "finished_at": "2026-10-30T16:00:12Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

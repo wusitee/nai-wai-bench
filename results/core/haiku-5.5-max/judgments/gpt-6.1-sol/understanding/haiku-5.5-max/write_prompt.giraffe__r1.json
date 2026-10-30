@@ -1,0 +1,93 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/haiku-5.5-max/write_prompt.giraffe__r1.json",
+  "target_sha256": "da4710383480380bd9248a603589d7331948010b68c918dc6a96609bcafd6434",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "43619b2e89c1b8dc",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 1,
+    "background": 1,
+    "vibe": 0,
+    "identity": 2
+  },
+  "hallucinations": [
+    "A distinct long neck contradicts the reference's neckless silhouette with the head merging into the torso.",
+    "The head-back, neck-arched laughing pose contradicts the reference's hunched-forward pose.",
+    "Only one hand presses the belly, whereas the reference has both hands clutching it."
+  ],
+  "rationale": "The prompt clearly supplies giraffe identity, squeezed-shut eyes, and a huge laughing mouth with teeth and tongue. It misses the defining hunched posture, two-handed belly clutch, pale belly patch, and unhinged energy; its body shape, rendering, and background only partly match.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":2,\"body\":1,\"belly_patch\":0,\"render\":1,\"background\":1,\"vibe\":0,\"identity\":2},\"hallucinations\":[\"A distinct long neck contradicts the reference's neckless silhouette with the head merging into the torso.\",\"The head-back, neck-arched laughing pose contradicts the reference's hunched-forward pose.\",\"Only one hand presses the belly, whereas the reference has both hands clutching it.\"],\"rationale\":\"The prompt clearly supplies giraffe identity, squeezed-shut eyes, and a huge laughing mouth with teeth and tongue. It misses the defining hunched posture, two-handed belly clutch, pale belly patch, and unhinged energy; its body shape, rendering, and background only partly match.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d86-cfe9-7451-a690-be50e43a1dfa",
+    "seconds": 22.9,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12763,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 500,
+      "reasoning_output_tokens": 322
+    },
+    "tokens": {
+      "input": 12763,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 500,
+      "reasoning": 322
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:56:24Z",
+    "finished_at": "2026-10-30T15:56:47Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

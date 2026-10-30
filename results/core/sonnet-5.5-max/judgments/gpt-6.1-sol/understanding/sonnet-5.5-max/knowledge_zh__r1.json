@@ -1,0 +1,89 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/sonnet-5.5-max/knowledge_zh__r1.json",
+  "target_sha256": "c7f9cfa86bfa4c1013d9a3b5011bf85beaccdefa7147526a300aae63828130d4",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "7234cfe2365a91f1",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "scores": {
+    "base_character": 1,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 0,
+    "naiwa": 0,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer partially describes the yellow, chubby dragon character and tentatively mentions an open-mouthed laughing image, but omits the animation context and most defining pose details. It does not establish the variant’s unofficial AI origin, aliases, history, or specific remix traditions; its explicitly marked guesses are not counted as hallucinations.",
+  "raw": "{\"scores\":{\"base_character\":1,\"ai_variant\":0,\"xingye_origin\":0,\"aliases\":0,\"naiwa\":0,\"laugh_pose\":1,\"junti_quan\":0,\"official_reply\":0,\"trait_variants\":0,\"rarity_titles\":0},\"hallucinations\":[],\"rationale\":\"The answer partially describes the yellow, chubby dragon character and tentatively mentions an open-mouthed laughing image, but omits the animation context and most defining pose details. It does not establish the variant’s unofficial AI origin, aliases, history, or specific remix traditions; its explicitly marked guesses are not counted as hallucinations.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d89-77e0-7040-95c8-826d5a6626db",
+    "seconds": 22.5,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13702,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 391,
+      "reasoning_output_tokens": 253
+    },
+    "tokens": {
+      "input": 13702,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 391,
+      "reasoning": 253
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:59:18Z",
+    "finished_at": "2026-10-30T15:59:41Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

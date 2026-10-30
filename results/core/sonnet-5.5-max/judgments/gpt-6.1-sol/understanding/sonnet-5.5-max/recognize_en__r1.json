@@ -1,0 +1,87 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/sonnet-5.5-max/recognize_en__r1.json",
+  "target_sha256": "bc4c6bac55997169f20dabe4de257f4601c225ee36f45d1b111fa4df397a55bb",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "0070dbdec19d0394",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer describes the image but does not identify 奶龙, the 大笑奶龙 meme family, its unofficial AI-generated origin, or its aliases and their meaning. Its suggested animation source is explicitly uncertain, so it does not count as a hallucination.",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"ai_variant\":0,\"aliases\":0,\"naiwa\":0},\"hallucinations\":[],\"rationale\":\"The answer describes the image but does not identify 奶龙, the 大笑奶龙 meme family, its unofficial AI-generated origin, or its aliases and their meaning. Its suggested animation source is explicitly uncertain, so it does not count as a hallucination.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d89-8a45-76d1-bf6d-4be7f63c3c4e",
+    "seconds": 10.6,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13611,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 130,
+      "reasoning_output_tokens": 34
+    },
+    "tokens": {
+      "input": 13611,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 130,
+      "reasoning": 34
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:59:23Z",
+    "finished_at": "2026-10-30T15:59:34Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

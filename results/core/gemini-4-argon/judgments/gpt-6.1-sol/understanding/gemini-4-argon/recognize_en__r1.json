@@ -1,0 +1,87 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gemini-4-argon/recognize_en__r1.json",
+  "target_sha256": "b4d572e1eedd7fe1823746113ad2f670eb7cd5c88480b90abe61b1e015d0fdf5",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "97f7cc927cd33364",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer explicitly declines identification and provides none of the required information about 奶龙, the meme family, its unofficial AI-generated origin, or its aliases. Its visual description matches the image and introduces no clear hallucinations.",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"ai_variant\":0,\"aliases\":0,\"naiwa\":0},\"hallucinations\":[],\"rationale\":\"The answer explicitly declines identification and provides none of the required information about 奶龙, the meme family, its unofficial AI-generated origin, or its aliases. Its visual description matches the image and introduces no clear hallucinations.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d84-9c38-7b12-8f1c-8d7fcda59fcc",
+    "seconds": 12.7,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13456,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 121,
+      "reasoning_output_tokens": 33
+    },
+    "tokens": {
+      "input": 13456,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 121,
+      "reasoning": 33
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:54:00Z",
+    "finished_at": "2026-10-30T15:54:12Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

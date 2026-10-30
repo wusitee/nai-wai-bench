@@ -1,0 +1,112 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.1-terra-max/knowledge_zh__r1.json",
+  "target_sha256": "28b62e519091d2f3629c0c6c6bea9d5261f08c9a8182dbfc148a7b424134eb57",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "5ac94cbf0738b243",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.1-terra-max",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 0,
+    "naiwa": 0,
+    "laugh_pose": 0,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [],
+  "rationale": "The model correctly describes 奶龙 as a yellow, chubby dragon from a Chinese animation, but says it cannot identify 大笑奶龙/奶蛙 and covers no other checklist item. It makes no false claims, so there are no hallucinations.",
+  "raw": "```json\n{\"scores\": {\"base_character\": 2, \"ai_variant\": 0, \"xingye_origin\": 0, \"aliases\": 0, \"naiwa\": 0, \"laugh_pose\": 0, \"junti_quan\": 0, \"official_reply\": 0, \"trait_variants\": 0, \"rarity_titles\": 0}, \"hallucinations\": [], \"rationale\": \"The model correctly describes 奶龙 as a yellow, chubby dragon from a Chinese animation, but says it cannot identify 大笑奶龙/奶蛙 and covers no other checklist item. It makes no false claims, so there are no hallucinations.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.312",
+    "seconds": 5.5,
+    "tokens": {
+      "input": 2300,
+      "cached_input": 0,
+      "cache_write": 2298,
+      "output": 357,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0258366,
+    "tools_used": [],
+    "cost_usd": 0.0258366,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2298,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 357,
+      "output_tokens_details": {
+        "thinking_tokens": 145
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2298,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 357,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2298,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2298
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:55:34Z",
+    "finished_at": "2026-10-30T15:55:39Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

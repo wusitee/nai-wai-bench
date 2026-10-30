@@ -1,0 +1,92 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gemini-4-argon/describe__r1.json",
+  "target_sha256": "cc79ac4a2c6d4138fbb5bd9c78e6764c787e376e3535b10a601a5ec844088d06",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "343630e5c0fadfd4",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "scores": {
+    "pose": 1,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 1,
+    "vibe": 1
+  },
+  "hallucinations": [
+    "将最经典姿势描述为身体后仰15°至30°、一手高举或后挥、单脚离地，与参考的站立前屈、膝盖微弯、双手捧腹姿势矛盾。",
+    "断言材质不是光滑反光的塑料，并将画面定位为高质量动画、磨砂硅胶质感，与参考的有光泽、略显廉价的3D CG效果矛盾。",
+    "称最常见背景为虚化的草地、天空或带家具的室内场景，与参考的纯白或浅灰无场景背景矛盾。"
+  ],
+  "rationale": "闭眼弧线、巨大笑嘴及口腔细节、无明显脖子的粗胖身体和浅色椭圆肚皮均描述充分。前倾、双手捧腹和白底仅作为备选出现，主要姿势与渲染描述偏离参考，整体气质也偏向软萌而非抽象癫狂。",
+  "raw": "{\"scores\":{\"pose\":1,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":2,\"body\":2,\"belly_patch\":2,\"render\":1,\"background\":1,\"vibe\":1},\"hallucinations\":[\"将最经典姿势描述为身体后仰15°至30°、一手高举或后挥、单脚离地，与参考的站立前屈、膝盖微弯、双手捧腹姿势矛盾。\",\"断言材质不是光滑反光的塑料，并将画面定位为高质量动画、磨砂硅胶质感，与参考的有光泽、略显廉价的3D CG效果矛盾。\",\"称最常见背景为虚化的草地、天空或带家具的室内场景，与参考的纯白或浅灰无场景背景矛盾。\"],\"rationale\":\"闭眼弧线、巨大笑嘴及口腔细节、无明显脖子的粗胖身体和浅色椭圆肚皮均描述充分。前倾、双手捧腹和白底仅作为备选出现，主要姿势与渲染描述偏离参考，整体气质也偏向软萌而非抽象癫狂。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d84-1d1f-7d82-befa-4748553c0543",
+    "seconds": 33.2,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 14963,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 679,
+      "reasoning_output_tokens": 392
+    },
+    "tokens": {
+      "input": 14963,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 679,
+      "reasoning": 392
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:53:27Z",
+    "finished_at": "2026-10-30T15:54:00Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

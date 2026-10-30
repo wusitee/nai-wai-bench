@@ -1,0 +1,88 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/haiku-5.5-max/describe__r1.json",
+  "target_sha256": "f3eb9ebec4d93c59eb4e9dc9fa4a14915ab69ac9d7c15d1f6bc32b2d77cef3bc",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "6741351287b2168e",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 1,
+    "render": 0,
+    "background": 2,
+    "vibe": 0
+  },
+  "hallucinations": [],
+  "rationale": "正确提到闭眼弧线和白色简单背景，但捧腹、巨口、身体比例及浅色腹斑仅部分覆盖；后仰姿势和平面卡通渲染与参考相反，也未体现抽象癫狂感。错误或可疑细节均明确标为不确定，因此不列为幻觉。",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":1,\"body\":1,\"belly_patch\":1,\"render\":0,\"background\":2,\"vibe\":0},\"hallucinations\":[],\"rationale\":\"正确提到闭眼弧线和白色简单背景，但捧腹、巨口、身体比例及浅色腹斑仅部分覆盖；后仰姿势和平面卡通渲染与参考相反，也未体现抽象癫狂感。错误或可疑细节均明确标为不确定，因此不列为幻觉。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d85-fd41-7333-946e-b430528106a8",
+    "seconds": 14.8,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12493,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 225,
+      "reasoning_output_tokens": 87
+    },
+    "tokens": {
+      "input": 12493,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 225,
+      "reasoning": 87
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:55:30Z",
+    "finished_at": "2026-10-30T15:55:45Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

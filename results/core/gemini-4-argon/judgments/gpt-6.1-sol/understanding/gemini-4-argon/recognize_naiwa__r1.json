@@ -1,0 +1,88 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gemini-4-argon/recognize_naiwa__r1.json",
+  "target_sha256": "1a59d45f6b8cd7f15e4642ba263e44e865dfb15f484fb563eaad1743b025469a",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "880f4a5bba885201",
+  "judge_images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "scores": {
+    "base_character": 1,
+    "identifies_meme": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "将图中角色断言为出自国外3D搞笑动画短片的黄色鸟类，实际它是奶龙的变异形象。",
+    "将该形象认定为“下头鸟”“审视鸟”或“高雅人士”小黄鸟，错误替代了其奶蛙身份。"
+  ],
+  "rationale": "回答虽提到奶龙，但随后将角色解释为其他来源的黄色鸟类，未正确说明奶龙的角色背景。它没有识别出图中的奶蛙，也未指出其属于大笑奶龙／变异奶龙梗家族。",
+  "raw": "{\"scores\":{\"base_character\":1,\"identifies_meme\":0,\"naiwa\":0},\"hallucinations\":[\"将图中角色断言为出自国外3D搞笑动画短片的黄色鸟类，实际它是奶龙的变异形象。\",\"将该形象认定为“下头鸟”“审视鸟”或“高雅人士”小黄鸟，错误替代了其奶蛙身份。\"],\"rationale\":\"回答虽提到奶龙，但随后将角色解释为其他来源的黄色鸟类，未正确说明奶龙的角色背景。它没有识别出图中的奶蛙，也未指出其属于大笑奶龙／变异奶龙梗家族。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d84-e00a-7081-bd89-e55ddafb24a3",
+    "seconds": 22.4,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12601,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 384,
+      "reasoning_output_tokens": 221
+    },
+    "tokens": {
+      "input": 12601,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 384,
+      "reasoning": 221
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:54:17Z",
+    "finished_at": "2026-10-30T15:54:40Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}
