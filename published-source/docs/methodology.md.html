@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{max-width:960px;margin:40px auto;padding:0 24px;font:17px/1.65 sans-serif}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:15px/1.7 monospace}</style><h1>docs/methodology.md</h1><p>Exact file from the provided 0.1.0 source archive (07d52c9418172b2b7b01e6ed0abc2ca504c64a76).</p><pre># Evaluation methodology
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{max-width:960px;margin:40px auto;padding:0 24px;font:17px/1.65 sans-serif}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:15px/1.7 monospace}</style><h1>docs/methodology.md</h1><p>Exact file used for this build (39ee90f with the Opus 5.5-only judge policy).</p><pre># Evaluation methodology
 
 English | [简体中文](methodology.zh-CN.md) | [繁體中文](methodology.zh-Hant.md)
 
@@ -71,17 +71,18 @@ than many cat repetitions. Run counts below exclude failures and the judge&#x27;
 | Work per subject model | Calls at one repetition |
 |---|---:|
 | Generation panel | 30 image-generation requests |
-| Generation judging with two configured judges | 60 vision-judge requests |
+| Generation judging with the default Opus judge | 30 vision-judge requests |
 | Visual understanding | 13 answer requests |
 | Text/language diagnostics | 8 answer requests |
 | No-image controls | 4 answer requests |
-| Judging all free-form understanding answers with two vision-capable judges | 34 judge requests |
+| Judging all free-form understanding answers with the default Opus judge | 17 judge requests |
 | Judging grounding answers and controls | 0 |
 
-Two configured judges do not guarantee two independent judgments: when the subject shares a vendor
-with one, only the other contributes. Use the same configured pool across subjects and record it.
-To get two independent vendors for every subject may require three judge vendors; the default image
-judges therefore come from three vendors (see `[defaults]` in `models.toml`). Judge health is a
+Claude Opus 5.5 is the sole default judge for both tracks, including Anthropic subjects. Use the same
+configured pool across subjects and record it. When multiple judges are explicitly selected, other-vendor
+judgments take precedence; same-vendor judgments contribute only when no independent judge is available.
+Report, site, export, and snapshot scoring use the configured pools unless `--judges` overrides them.
+Published comparisons retain their manifest&#x27;s pinned judge selection. Judge health is a
 disagreement diagnostic, not proof of evaluator correctness or a reason to remove a judge merely
 because it changes the ordering. Choose judge exclusions using fixed calibration cases before comparing
 subject scores.
@@ -94,7 +95,7 @@ uv run nwb report --run pilot
 # Full comparable panels; understand also collects text diagnostics and blind controls.
 uv run nwb understand --run comparison --models VISION_MODEL
 uv run nwb imagegen --run comparison --models IMAGE_MODEL --animals default
-uv run nwb judge --run comparison --judges VISION_JUDGE_A,VISION_JUDGE_B
+uv run nwb judge --run comparison
 uv run nwb report --run comparison
 uv run nwb site --run comparison
 ```
@@ -152,9 +153,11 @@ observed repetitions, including consistently incorrect verdicts.
 
 Rank eligibility also requires a single settings id and effort across ranked cells and repetitions,
 without alternate-route `meta.fill_note` records. Mixed conditions retain diagnostic scores but no rank;
-entirely legacy settings are flagged as unrecorded. Effective reasoning effort is high when exposed by
-the client and default/unexposed otherwise; labels show non-default recorded effort. Actual contributing
-judges and sample counts are disclosed per row, because vendor exclusion can produce different panels.
+entirely legacy settings are flagged as unrecorded. New collections use the highest supported
+single-model reasoning effort, or default/unexposed when no graded control exists; explicitly named
+comparison variants retain their stated effort. Historical runs keep their recorded settings, and labels
+show non-default recorded effort. Actual contributing judges and sample counts are disclosed per row,
+because vendor exclusion can produce different panels.
 
 The Efficiency table covers the fixed visual tasks: token coverage, reported-only mean input/output
 (including reasoning) and reasoning tokens, median end-to-end client seconds, and estimated list API
