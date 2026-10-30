@@ -1,0 +1,103 @@
+{
+  "settings_id": "d1420308a4561f99",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_en",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Who is this character, and which internet meme is this image from? Does the meme have other names?",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "From memory alone, I can't identify this one with confidence.\n\n**The character:** It's a 3D-rendered, bean-shaped yellow figure with a pale cream belly, squeezed-shut laughing eyes, a wide-open mouth full of teeth, and dark grey hands clutching its stomach as it doubles over. I don't recognize it as a named mascot or established character, so I can't give you an official name.\n\n**The meme:** The pose and expression fit a \"cracking up\" or \"laughing so hard it hurts\" reaction. Images like this have circulated as reaction memes, but I can't reliably recall this specific one's origin, and the image has no visible caption or watermark to trace it. It may be a still from a short 3D animation, which would fit the smooth rendering.\n\n**Other names:** I don't know of an established alternate title for this exact image. People often describe similar images as \"laughing blob,\" \"yellow blob laughing,\" or \"blob laughing hysterically,\" but those are descriptive labels, not official names.\n\nTo find the actual origin and any alternate names, try a reverse image search with Google Lens, TinEye, or SauceNAO. Know Your Meme is a good place to check the entry once you have a name to search for.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 33.9,
+    "tokens": {
+      "input": 1393,
+      "cached_input": 0,
+      "cache_write": 1391,
+      "output": 6167,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0033619,
+    "tools_used": [],
+    "cost_usd": 0.0033619,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1391,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 6167,
+      "output_tokens_details": {
+        "thinking_tokens": 5777
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1391,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 6167,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1391,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1391
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-haiku-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:17:25Z",
+    "finished_at": "2026-10-29T18:17:59Z",
+    "revision": "ba9f0aa",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "settings_id": "4e1f1b03b3c609b5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_variant",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。",
+  "images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "answer": "**判断：** 这张图最可能模仿的是\"熊猫头\"系列表情包里的\"捧腹大笑 / 笑死我了（xswl）/ 笑到肚子疼\"这一类反应图，只是换成了 3D 渲染的毛绒熊猫形象。\n\n**判断依据：**\n\n1. **形象与构图**：熊猫是中文互联网表情包里最常见的角色之一，\"熊猫头\"常用来表达各种夸张情绪。画面里只有一个角色，背景是纯白到浅灰的渐变，没有场景。这是典型的\"可以直接当贴纸、用来斗图\"的构图。\n2. **表情**：双眼眯成弯弧（闭眼大笑），嘴张到最大，露出牙齿和舌头。这是表情包里\"笑到失控\"的标准夸张画法。\n3. **肢体语言**：双手捂着肚子，身体前倾，膝盖微弯，对应\"笑到肚子疼、笑得直不起腰\"。这正是中文网络常说的\"哈哈哈哈哈\"\"笑死\"\"笑不活了\"\"笑到捧腹\"。\n4. **情绪一眼可读**：整个身体都在\"表演\"笑，不需要文字就能看懂，符合表情包的功能。\n\n**不确定之处：**\n\n- 图中没有文字，也不是经典 2D 熊猫头（那种是熊猫脸配真人式表情）。这只熊猫是毛绒质感的 3D 渲染，体型有点像《功夫熊猫》里的阿宝，但没有服饰等明确特征，所以我无法确认具体出处。\n- 因此我的结论主要基于表情和姿势表达的含义，不是对应到某一张确定的原图。\n- 如果你知道它来自哪个视频或帖子，或者原本配了什么文字，我可以帮你缩小范围。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 38.9,
+    "tokens": {
+      "input": 1444,
+      "cached_input": 0,
+      "cache_write": 1442,
+      "output": 4348,
+      "reasoning": null
+    },
+    "resolved_model": "claude-sonnet-5-5",
+    "cost_usd_reported": 0.049252000000000004,
+    "tools_used": [],
+    "cost_usd": 0.049252000000000004,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1442,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 4348,
+      "output_tokens_details": {
+        "thinking_tokens": 3718
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1442,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 4348,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1442,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1442
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:20:15Z",
+    "finished_at": "2026-10-29T18:20:54Z",
+    "revision": "90e0bea",
+    "nwb_version": "0.1.0"
+  }
+}

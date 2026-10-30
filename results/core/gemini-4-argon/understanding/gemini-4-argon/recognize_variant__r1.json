@@ -1,0 +1,70 @@
+{
+  "settings_id": "0a4d731222ad1478",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "vendor": "google",
+  "item": "recognize_variant",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。",
+  "images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "answer": "这张图模仿了中文互联网中经典的**“熊猫头捂肚大笑”（“哈哈哈哈哈哈” / “笑死我了”）表情包**。\n\n### 判断依据：\n\n1. **标志性的肢体动作（捧腹微倾）**\n   原版表情包中，黑白简笔画勾勒出的“熊猫人”身体略微前倾、挺着浑圆的肚子，双手五指张开按在肚子正前方，做出“笑到肚子疼/捧腹大笑”的姿势。这张 3D 熊猫图的站姿、身体朝向（微侧身前倾）以及双手捂在圆肚子上的位置，与原版表情包的构图几乎完全一致。\n\n2. **高度还原的五官神态（金馆长式狂笑）**\n   原版熊猫头表情包通常采用“金馆长”（崔成国）或暴走漫画的经典狂笑五官：双眼笑成两条弯缝，嘴巴夸张地大张、露出整齐的上排白牙与舌头。图中的 3D 熊猫同样紧闭双眼呈弯月状，仰头张大嘴巴露齿狂笑，神态与表情包如出一辙。\n\n3. **“概念还原”的创作手法**\n   传统的“熊猫头表情包”实际上是白色的简笔画人形顶着一个带黑眼圈的圆头，并非真正的熊猫。这张图通过 AI 或 3D 渲染的方式，将原本粗糙搞笑的二维“熊猫人”按相同的动作与构图，具象化还原成了一只真正毛茸茸、黑白配色的立体大熊猫。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 17.4,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-4-argon-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-4-argon-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 13008,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "${NWB_AGY_ACP}"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME",
+      "NWB_AGY_ACP",
+      "NWB_AGY_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:15:23Z",
+    "finished_at": "2026-10-29T18:15:40Z",
+    "revision": "673dc6b",
+    "nwb_version": "0.1.0"
+  }
+}

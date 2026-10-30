@@ -1,0 +1,103 @@
+{
+  "settings_id": "d1420308a4561f99",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "**直接说结论：** 我无法可靠地认出这只鸟的具体角色名字，也无法确定它属于哪个有名字的网络梗。我能确定的是图片内容、配文含义和常见用法。\n\n**画面内容**\n这是一只黄色、身体圆润的卡通小鸟（有点像小鸭子或小鸡），大眼睛带绿色眼圈，嘴巴很小，侧头斜眼看向画外，表情呆萌又带点惊讶。它看起来像网上常见的“黄色小鸟”类表情包素材，但我不能确定它出自哪部动画、游戏或品牌，所以不想随便给它起名字。\n\n**配文“惊鸿一瞥”**\n- **字面意思**：“惊鸿”指受惊飞起的大雁或天鹅，“一瞥”是匆匆看一眼。\n- **出处**：曹植《洛神赋》“翩若惊鸿，婉若游龙”，原本形容洛神体态轻盈、美得惊人，后来引申为匆匆一瞥就印象深刻。\n\n**网络上的用法**\n这张图属于“成语配动物表情”的玩法：\n- 画面里是一只鸟，正好呼应“惊鸿”（“鸿”本指大雁一类的大型飞禽）的意象。\n- 斜眼偷看的神态契合“一瞥”的意思。\n- 常用来调侃“偶然一瞥就被惊艳到”“匆匆看一眼就很在意”，或形容偷瞄、心动的瞬间，语气偏搞笑、自嘲。\n\n如果你知道这张图是在哪里看到的，或者有没有配套的其他表情，告诉我，我可以帮你分析它的语境。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 38.1,
+    "tokens": {
+      "input": 714,
+      "cached_input": 0,
+      "cache_write": 712,
+      "output": 7191,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0037381000000000003,
+    "tools_used": [],
+    "cost_usd": 0.0037381000000000003,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 712,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 7191,
+      "output_tokens_details": {
+        "thinking_tokens": 6600
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 712,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 7191,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 712,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 712
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-haiku-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:18:15Z",
+    "finished_at": "2026-10-29T18:18:53Z",
+    "revision": "ba9f0aa",
+    "nwb_version": "0.1.0"
+  }
+}

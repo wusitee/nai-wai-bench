@@ -1,0 +1,103 @@
+{
+  "settings_id": "4e1f1b03b3c609b5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_smug",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "answer": "我无法确定这个角色的名字和出处，也不想随便编一个名字误导你。\n\n**画面里能确认的内容：**\n- 这是一个黄色、圆滚滚的 3D 卡通生物，造型像青蛙或蟾蜍。\n- 它的眼皮半耷拉着，嘴巴抿成一条线，脸颊泛着腮红。\n- 整体神情偏\"得意\"\"傲娇\"\"淡定嫌弃\"，有点\"我懂，但我不说\"的味道。\n- 画质像视频截图，多半来自某段 3D 动画、游戏或短视频。\n\n**关于梗：**\n这类表情常被当作\"得意脸\"\"嫌弃脸\"\"淡定吃瓜\"的反应图使用。但具体属于哪个梗、梗叫什么名字、什么时候流行，我凭记忆对不上，就不乱下结论了。\n\n**如果想查清楚，可以试试：**\n1. 用 Google Lens、百度识图或 Yandex 反向搜图。\n2. 回到发图的原帖、评论区或表情包合集，看有没有标注名称。\n3. 把来源（平台、视频标题、配文）告诉我，我可以帮你一起分析。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 76.6,
+    "tokens": {
+      "input": 915,
+      "cached_input": 0,
+      "cache_write": 913,
+      "output": 8578,
+      "reasoning": null
+    },
+    "resolved_model": "claude-sonnet-5-5",
+    "cost_usd_reported": 0.08943600000000002,
+    "tools_used": [],
+    "cost_usd": 0.08943600000000002,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 913,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 8578,
+      "output_tokens_details": {
+        "thinking_tokens": 8170
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 913,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 8578,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 913,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 913
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:21:15Z",
+    "finished_at": "2026-10-29T18:22:31Z",
+    "revision": "90e0bea",
+    "nwb_version": "0.1.0"
+  }
+}

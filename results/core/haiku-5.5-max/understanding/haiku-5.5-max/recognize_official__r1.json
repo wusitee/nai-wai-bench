@@ -1,0 +1,103 @@
+{
+  "settings_id": "d1420308a4561f99",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_official",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "这个角色应该是**「奶龙」**（Nǎilóng，英文有时写作 Nailong）。\n\n判断依据：\n- 黄橙色的圆润身体，造型像一只小恐龙或小龙\n- 浅色的肚皮像奶油一样，名字里的「奶」大概由此而来\n- 四肢短小，爪子和脚掌带有棕色的爪垫\n- 圆眼睛、粉色腮红，张着小嘴、举起双手，是一副惊讶的样子\n\n它是近年在中文互联网走红的表情包形象，常用来表达惊讶、懵圈、无语或呆萌的情绪，网友也经常给它配上文字或做各种二创。\n\n我是凭记忆和图像特征判断的，对它的原始出处和走红经过不太确定。如果你知道的信息和我说的不一样，告诉我，我可以再帮你分析。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 35.9,
+    "tokens": {
+      "input": 938,
+      "cached_input": 0,
+      "cache_write": 936,
+      "output": 6904,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0036394,
+    "tools_used": [],
+    "cost_usd": 0.0036394,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 936,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 6904,
+      "output_tokens_details": {
+        "thinking_tokens": 6602
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 936,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 6904,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 936,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 936
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-haiku-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:19:52Z",
+    "finished_at": "2026-10-29T18:20:27Z",
+    "revision": "ba9f0aa",
+    "nwb_version": "0.1.0"
+  }
+}

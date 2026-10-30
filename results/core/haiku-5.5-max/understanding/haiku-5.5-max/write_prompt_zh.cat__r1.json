@@ -1,0 +1,100 @@
+{
+  "settings_id": "d1420308a4561f99",
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "vendor": "anthropic",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "A chubby, round cartoon cat drawn as the cat version of Laughing Nailong (大笑奶龙), a plump, pale butter-yellow character with a soft, pudgy, bean-shaped body, a slightly lighter cream belly, stubby arms and legs, and a short tail. Keep that squishy proportion and milky yellow coat, and give it cat features: pointed triangular ears, long whiskers, a small pink nose, and a cat tail. Its face shows an exaggerated, uproarious laugh: eyes squeezed shut into happy upward crescent arcs, a huge wide-open mouth with a pink tongue, rosy cheeks, and a few tiny tears of joy at the corners of the eyes. Pose: leaning back slightly, paws clutching its round belly while laughing. Flat 2D vector sticker style, bold clean outlines, soft cel shading, plain pastel background, square composition, single character centered, cute and funny meme aesthetic, no text, no watermark.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 52.7,
+    "tokens": {
+      "input": 666,
+      "cached_input": 0,
+      "cache_write": 664,
+      "output": 10881,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0055734999999999995,
+    "tools_used": [],
+    "cost_usd": 0.0055734999999999995,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 664,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 10881,
+      "output_tokens_details": {
+        "thinking_tokens": 10549
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 664,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 10881,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 664,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 664
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-haiku-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:16:27Z",
+    "finished_at": "2026-10-29T18:17:20Z",
+    "revision": "ba9f0aa",
+    "nwb_version": "0.1.0"
+  }
+}

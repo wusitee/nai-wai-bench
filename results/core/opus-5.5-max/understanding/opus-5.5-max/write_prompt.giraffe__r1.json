@@ -1,0 +1,100 @@
+{
+  "settings_id": "8bdf006b7d3fc51c",
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "vendor": "anthropic",
+  "item": "write_prompt.giraffe",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a giraffe version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A chubby, cute cartoon giraffe laughing hysterically, drawn in a simple, rounded 2D kawaii cartoon style. It stands upright on two short stumpy legs like a toddler. It has a soft pear-shaped body, a big round belly, a slightly elongated but very plump neck, and a large round head almost as big as its body with a short rounded muzzle, so the whole silhouette stays squishy and blob-like. Its fur is a bright, warm egg-yolk yellow with irregular rounded caramel-brown giraffe patches. The belly and muzzle are pale cream with no spots. It has two stubby ossicone horns with round dark-brown knobs, small leaf-shaped ears sticking out sideways, tiny stubby arms and little dark-brown hooves. The expression is the whole point: a loud, obnoxious, over-the-top laugh. The mouth gapes open in a huge half-moon shape, flat along the top and deeply curved below, stretching almost the full width of the head. It shows a dark red inside and a pink tongue, with no teeth. The mouth is so wide that the face looks goofy and almost frog-like, though it is clearly a giraffe. Two big glossy black oval eyes with white highlight dots sit high and wide apart near the top of the head. They are wide open with manic glee, and small tears of laughter fly from their corners. It leans back slightly with both tiny hands clutching its belly, as if laughing at someone's misfortune. Single character, full body, front view, centered, square format, plain white background. Clean dark-brown outlines, flat colors with simple soft shading and a small glossy shine on the head, with the slightly crude, low-fi feel of a reaction image passed around group chats. No text.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 176.5,
+    "tokens": {
+      "input": 639,
+      "cached_input": 0,
+      "cache_write": 637,
+      "output": 17147,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.34804399999999996,
+    "tools_used": [],
+    "cost_usd": 0.34804399999999996,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 637,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 17147,
+      "output_tokens_details": {
+        "thinking_tokens": 16573
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 637,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 17147,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 637,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 637
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:17:34Z",
+    "finished_at": "2026-10-29T18:20:30Z",
+    "revision": "42b42f8",
+    "nwb_version": "0.1.0"
+  }
+}

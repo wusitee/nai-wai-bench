@@ -1,0 +1,67 @@
+{
+  "settings_id": "0a4d731222ad1478",
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "vendor": "google",
+  "item": "write_prompt.cat",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a cat version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A 3D-rendered cartoon illustration of an extremely chubby, pear-shaped, bright buttery-yellow tabby cat with a huge, round, protruding cream-colored belly, short stubby legs, and tiny paws, sitting upright on the ground and leaning backward in an exaggerated, uncontrollable belly laugh. Its head is thrown back with an oversized, wide-open mouth taking up most of its face, showing a pink tongue and a single tiny white fang at the top corner, while its eyes are squeezed tightly shut into happy, curved crescents with a tear of joy squeezing out. One chubby front paw is clutching its round belly as if it hurts from laughing, and the other front paw is raised in the air, pointing forward at the viewer in a mocking, hilarious gesture. The cat has small, rounded, slightly flattened ears, smooth vinyl-toy-like fur texture, soft studio lighting, and a clean, simple pastel background, rendered in a cute, glossy Pixar-style 3D animation aesthetic with exaggerated, goofy facial expressions.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 12.4,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-4-argon-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-4-argon-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 11528,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "${NWB_AGY_ACP}"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME",
+      "NWB_AGY_ACP",
+      "NWB_AGY_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:14:14Z",
+    "finished_at": "2026-10-29T18:14:26Z",
+    "revision": "673dc6b",
+    "nwb_version": "0.1.0"
+  }
+}

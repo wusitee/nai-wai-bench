@@ -1,0 +1,67 @@
+{
+  "settings_id": "0a4d731222ad1478",
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "vendor": "google",
+  "item": "write_prompt_zh.giraffe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出长颈鹿版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "A 3D animated character meme illustration of a chubby, stubby-proportioned cartoon baby giraffe bursts into an exaggerated, hysterically mocking belly laugh. \n\n**Character Design:**\nThe character has the round, pear-shaped, squishy body of a plump yellow cartoon dinosaur/dragon, with a big round protruding belly, very short stubby arms and legs, and no neck—instead, its large round head sits directly on its chubby shoulders, topped with two cute, tiny brown-tipped ossicones (giraffe horns) and small droopy giraffe ears. Its smooth, rubbery bright yellow skin is patterned with soft orange-brown giraffe patches across its back, stubby tail, and the top of its head, while its big round belly and lower face remain creamy pale yellow.\n\n**Facial Expression (The Core Meme Pose):**\nThe giraffe's head is tilted slightly back with a wide, prominent double chin pressed against its chest. Its mouth is stretched open impossibly wide in an uproarious, goofy, contagious laugh, revealing a row of blocky white upper teeth and a large pink tongue curled inside. Its eyes are squeezed tightly shut into downward-curving crescent arcs with thick creases at the corners from laughing so hard, and its tiny nostrils are flared on a broad, rounded snout.\n\n**Pose & Composition:**\nClose-up, slightly low-angle front-three-quarter portrait shot framing the character from the belly up. One stubby foreleg is raised to slap its own round belly in amusement, while the other points vaguely forward as if laughing at the viewer. \n\n**Style & Lighting:**\n3D CGI kids' animation render style (reminiscent of modern high-gloss 3D cartoon shorts), smooth subsurface scattering on the matte-rubbery skin, bright warm studio lighting with soft rim light, expressive exaggerated facial deformation, vibrant colors, set against a simple, slightly blurred warm indoor background. High meme energy, comical, cheeky, and infectious schadenfreude.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 14.5,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-4-argon-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-4-argon-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 11738,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "${NWB_AGY_ACP}"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME",
+      "NWB_AGY_ACP",
+      "NWB_AGY_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:14:53Z",
+    "finished_at": "2026-10-29T18:15:07Z",
+    "revision": "673dc6b",
+    "nwb_version": "0.1.0"
+  }
+}

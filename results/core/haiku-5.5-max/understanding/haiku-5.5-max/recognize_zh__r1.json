@@ -1,0 +1,103 @@
+{
+  "settings_id": "d1420308a4561f99",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "我没能认出这个角色，也无法确定它对应的具体网络梗，所以下面的内容主要基于画面本身。\n\n**1. 角色外形**\n- 黄色、表面光滑的 3D 渲染小人，身体圆润像豆子，肚子处有一块偏白的色块。\n- 双眼眯成细线，张大嘴大笑，露出上排牙齿。\n- 灰色的双手按着肚子，动作是\"笑到肚子疼\"。\n\n我不知道它的正式名字，也不确定它是不是某个有名字的原创角色。\n\n**2. 相关网络梗**\n从画面看，它属于\"大笑捂肚子\"类的反应图（表情包），常用来表示\"笑死我了\"\"太好笑了\"。但这类图很多，我不能确定它对应哪一个具体的梗。它也可能是我的知识截止后才流行的新梗。\n\n**3. 别名**\n我不知道它有哪些公认的别名。如果我随便给一个名字，很可能是编的，所以不给。\n\n**4. 如何找到准确答案**\n- 告诉我图片的来源，比如平台、帖子标题或配文，以及它是否来自某个视频、动画或游戏，我可以帮你分析。\n- 用 Google Lens、百度识图或 TinEye 搜索，通常能很快找到出处和名称。\n- 在贴吧、小红书、B站或 Reddit 上搜索\"黄色 3D 小人 笑到捂肚子\"或\"yellow 3D blob laughing meme\"。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 55.3,
+    "tokens": {
+      "input": 1405,
+      "cached_input": 0,
+      "cache_write": 1403,
+      "output": 10887,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0057243,
+    "tools_used": [],
+    "cost_usd": 0.0057243,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1403,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 10887,
+      "output_tokens_details": {
+        "thinking_tokens": 10373
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1403,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 10887,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1403,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1403
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-haiku-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:17:20Z",
+    "finished_at": "2026-10-29T18:18:15Z",
+    "revision": "ba9f0aa",
+    "nwb_version": "0.1.0"
+  }
+}

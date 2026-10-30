@@ -1,0 +1,103 @@
+{
+  "settings_id": "d1420308a4561f99",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "**角色：** 画面中是一个3D渲染的红色圆胖小人，身体像水滴或蛋形，几乎没有脖子，绿色眼睛，眉头紧皱，嘴角下撇，手臂贴在身体两侧，表情很生气。我无法确定它的正式名字或原始出处，不想凭印象随便给一个名字。\n\n**梗：** 底部文字是\"切换愤怒模式😡\"。\"切换XX模式\"是中文网络上常见的句式，通常用来调侃某人从平和突然变得暴怒，或表达\"被惹毛了\"的情绪。这张图是带文字的反应图，适合用在忍无可忍的场景里。\n\n至于它具体属于哪个固定的网络梗或系列，我没有可靠的把握。如果你想查清出处，可以用以图搜图工具（如百度识图、搜狗识图、Google Lens）搜这张图，或在B站、抖音、小红书搜\"切换愤怒模式\"，看看哪些内容在用它。如果你知道它的来源或名字，告诉我，我可以帮你解释背后的梗。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 27.6,
+    "tokens": {
+      "input": 715,
+      "cached_input": 0,
+      "cache_write": 713,
+      "output": 5052,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0026688000000000003,
+    "tools_used": [],
+    "cost_usd": 0.0026688000000000003,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 713,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 5052,
+      "output_tokens_details": {
+        "thinking_tokens": 4675
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 713,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 5052,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 713,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 713
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-haiku-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:18:39Z",
+    "finished_at": "2026-10-29T18:19:07Z",
+    "revision": "ba9f0aa",
+    "nwb_version": "0.1.0"
+  }
+}

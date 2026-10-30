@@ -1,0 +1,103 @@
+{
+  "settings_id": "4e1f1b03b3c609b5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "**角色：** 我没法确定它具体是哪部作品里的哪个角色，也不想随口编一个名字。画面上是一只黄色、表面光滑的3D卡通小鸟（或类似鸟的生物），绿色大眼睛配黑瞳孔，嘴巴小小的，侧着眼睛斜瞟，神情呆萌又有点受惊。\n\n**梗的含义：**\n- **\"惊鸿一瞥\"** 是成语，典出曹植《洛神赋》里的\"翩若惊鸿\"，形容匆匆一眼看到美好的人或事物，常指惊艳的人。\n- **笑点**是我的推测，大概有两层：\n  1. \"鸿\"本是大雁、天鹅一类的鸟，图里正好是一只受惊的鸟在偷瞄，字面上形成双关。\n  2. 画面里侧目偷看的动作和成语的\"瞥\"对应，文雅的成语配上呆萌的脸，反差很有喜感。\n- **常见用法：** 偶遇好看的人或东西，忍不住偷瞄一眼，或者形容看到了出乎意料的东西。\n\n**确认出处：** 可以用以图搜图（百度识图、Google Lens 等），或者在 B站、小红书、微博搜\"黄色 绿眼睛 表情包\"。如果你记得在哪里看到的，也可以告诉我，我帮你缩小范围。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 36.4,
+    "tokens": {
+      "input": 693,
+      "cached_input": 0,
+      "cache_write": 691,
+      "output": 3863,
+      "reasoning": null
+    },
+    "resolved_model": "claude-sonnet-5-5",
+    "cost_usd_reported": 0.041398,
+    "tools_used": [],
+    "cost_usd": 0.041398,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 691,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 3863,
+      "output_tokens_details": {
+        "thinking_tokens": 3380
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 691,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 3863,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 691,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 691
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:20:36Z",
+    "finished_at": "2026-10-29T18:21:13Z",
+    "revision": "90e0bea",
+    "nwb_version": "0.1.0"
+  }
+}

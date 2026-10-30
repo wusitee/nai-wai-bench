@@ -1,0 +1,103 @@
+{
+  "settings_id": "4e1f1b03b3c609b5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_facepalm",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "answer": "我无法确定这个角色的名字和出处，也不想随便编一个误导你。\n\n**画面上能看到的：**\n- 一个 3D 渲染的黄色圆润\"团子\"状生物，肚子是米色的\n- 绿色的大眼睛配黑色瞳孔，嘴角是一个小小的、有点无奈的微笑\n- 一只深灰褐色的手按在额头上，另一只手臂撑着身体\n\n**常见用法：**\n从姿势看，这是\"扶额 / 思考 / 无语 / 头疼\"一类的反应图，常用来表达：\n- \"等等，让我想想……\"\n- \"这也行？我没搞懂\"\n- \"有点无语，但又不好发作\"\n\n至于它属于哪个具体的梗或哪部作品，我没有把握。这种圆滚滚的 3D 吉祥物风格角色很多，我不想硬猜。\n\n**可以这样查：**\n1. 用以图搜图（Google Lens、百度识图、TinEye 等）搜这张图\n2. 告诉我你是在哪里看到的（某个视频、群聊、平台或评论区），我可以结合上下文帮你分析它的含义和用法",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 38.2,
+    "tokens": {
+      "input": 898,
+      "cached_input": 0,
+      "cache_write": 896,
+      "output": 4231,
+      "reasoning": null
+    },
+    "resolved_model": "claude-sonnet-5-5",
+    "cost_usd_reported": 0.045897999999999994,
+    "tools_used": [],
+    "cost_usd": 0.045897999999999994,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 896,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 4231,
+      "output_tokens_details": {
+        "thinking_tokens": 3835
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 896,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 4231,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 896,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 896
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:21:13Z",
+    "finished_at": "2026-10-29T18:21:51Z",
+    "revision": "90e0bea",
+    "nwb_version": "0.1.0"
+  }
+}
