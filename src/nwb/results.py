@@ -121,6 +121,10 @@ def merge(root: Path, suite: str, run_dir: Path, sources: list[Path]) -> Path:
                 json.loads(line)
             log += lines
     try:
+        run_dir.mkdir(parents=True)  # claim the target, so cleanup never removes another merge's run
+    except FileExistsError:
+        raise ValueError(f"working run already exists: {run_dir}; merge into a fresh run") from None
+    try:
         for name, data in selected.items():
             write_bytes(run_dir / name, data)
         if log:
