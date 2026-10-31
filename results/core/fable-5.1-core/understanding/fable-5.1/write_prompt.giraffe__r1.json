@@ -1,0 +1,100 @@
+{
+  "settings_id": "548ef2024561e924",
+  "track": "understanding",
+  "model": "fable-5.1",
+  "vendor": "anthropic",
+  "item": "write_prompt.giraffe",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a giraffe version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A simple, flat 2D cartoon sticker illustration of a chubby, squishy giraffe drawn in an extremely cute and slightly silly Chinese-mascot style. The giraffe has a smooth, rounded, blob-like body shaped almost like a plump pear or a big yellow dumpling, with a tiny round belly, stubby short legs with no visible toes, and little nub-like arms. Its skin is bright pastel egg-yolk yellow, with a few soft, rounded light-brown patches scattered on its back and neck to show it is a giraffe. The neck is long but thick and soft-looking, bending slightly as the head tilts back. On top of the head are two small rounded horn-nubs and two tiny floppy ears, plus a small tuft of darker yellow-orange hair.\n\nThe giraffe is laughing hysterically: its eyes are squeezed shut into two thin, upward-curving black arcs like upside-down \"U\" shapes, its mouth is enormous and wide open, almost taking up the entire lower half of the face, forming a big rounded \"D\" shape with a glossy pink interior, a small pink tongue, and a row of small simple white teeth along the top edge. Its two round cheeks are flushed with soft pink blush circles. A few tiny teardrops of laughter fly out from the corners of its eyes, and one stubby arm is raised slightly as if slapping its belly or pointing. The overall expression should look smug, goofy, and uncontrollably amused, like it just heard the funniest joke ever.\n\nArt style: clean thick dark outlines, flat bright colors with minimal soft shading, very round shapes, no realistic textures, no fur detail. Plain solid pale-white or light cream background, centered composition, sticker or emoticon style, high resolution, no text, no watermark.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 20.4,
+    "tokens": {
+      "input": 710,
+      "cached_input": 0,
+      "cache_write": 708,
+      "output": 908,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 0.059579999999999994,
+    "tools_used": [],
+    "cost_usd": 0.059579999999999994,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 708,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 908,
+      "output_tokens_details": {
+        "thinking_tokens": 315
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 708,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 908,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 708,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 708
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T03:47:54Z",
+    "finished_at": "2026-10-31T03:48:14Z",
+    "revision": "592016c",
+    "nwb_version": "0.1.0"
+  }
+}

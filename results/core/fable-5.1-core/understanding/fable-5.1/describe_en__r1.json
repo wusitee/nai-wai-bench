@@ -1,0 +1,100 @@
+{
+  "settings_id": "548ef2024561e924",
+  "track": "understanding",
+  "model": "fable-5.1",
+  "vendor": "anthropic",
+  "item": "describe_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Without looking at any images, describe the most iconic image of Laughing Nailong (大笑奶龙 / 奶蛙) from memory: its pose, expression, body shape, colors, rendering style, and background, in enough detail for an artist who has never seen it to draw it. Say where you are unsure.",
+  "images": [],
+  "answer": "Here's my best recollection, with uncertainty flagged throughout. I know this character mostly from how it spread as a Chinese internet meme, so treat the specifics as a sketch guide rather than a precise reproduction.\n\n**Who/what it is**\nNailong (奶龙, \"Milk Dragon\") is a small yellow mascot from a Chinese children's 3D animated series. Despite being called a dragon, it reads visually as a chubby, round, Pikachu‑adjacent blob — which is why netizens nicknamed it 奶蛙 (\"Milk Frog\"): its wide, flat mouth and squat body look frog‑like. The \"Laughing Nailong\" image is a reaction‑image freeze‑frame of it cracking up.\n\n**Body shape**\n- Very round, almost a single egg/bean silhouette: the head and torso merge with little or no neck. Think a plump pear or a dumpling with the head being the larger upper half.\n- Short, stubby, nub‑like arms with no distinct fingers (or at most mitten‑like hands).\n- Tiny stumpy legs/feet barely sticking out from the bottom of the body.\n- A short, thick little tail, rounded at the tip (I'm fairly confident it has a tail, less sure how visible it is in this specific image).\n- On the head: two small, soft, rounded bumps that stand in for \"dragon horns\" — more like little nubs or cowlicks than pointed horns. I'm moderately confident on the number (two) but unsure of exact shape.\n\n**Colors**\n- Main body: a pale, warm butter/cream yellow — lighter and milkier than Pikachu's saturated yellow (hence \"milk\").\n- Belly/front may be an even lighter cream patch; I'm not certain this is distinct in the meme image.\n- Cheeks: often rendered with a soft pink/peach blush.\n- Inside of mouth: deep pink/red, prominent because the mouth is wide open.\n- Eyes: dark/black, but in the laughing image they're shut, so you see dark arc lines rather than open eyes.\n\n**The laughing pose and expression (the iconic part)**\n- Eyes squeezed shut into upward‑curving arcs (the classic \"^ ^\" laughing‑eyes shape), possibly with a small crease or tear line — I'm unsure about tears.\n- Mouth stretched extremely wide in an open laugh, taking up a large portion of the lower face. The mouth is wide and flat/horizontal rather than a tall \"O\" — this is what gives the frog look. You see the pink interior and, I believe, a hint of a small tongue; I'm unsure whether teeth are visible (I lean toward no teeth or just a tiny row).\n- Eyebrows (if drawn at all) are lifted high, and the whole face is scrunched in gleeful hysteria.\n- Head tilted back or slightly to one side, body leaning as if doubled over or rocked by laughter.\n- Arms: either held up/out to the sides in a flailing way, or one stubby arm pressed to the belly/side, \"laughing so hard it hurts.\" I recall the flailing/raised version more strongly but I'm not certain which is the canonical frame.\n- Overall vibe: smug, almost mocking laughter — the image is used in the sense of \"哈哈哈哈哈 you're an idiot,\" not gentle giggling.\n\n**Rendering style**\n- The source is 3D CGI with a soft, toy‑like, slightly plasticky look: smooth shading, gentle subsurface‑scattering‑style highlights, no hard outlines. Low detail, very \"children's TV.\"\n- The meme version is often a cropped screenshot, so it may be low resolution or slightly compressed; many circulated versions are also redrawn in flat 2D by fans, or cut out onto a white/transparent background as a sticker (表情包). If you want the \"iconic\" feel, the sticker‑style cutout with a plain white background is probably the most recognizable form.\n\n**Background**\n- In the sticker version: plain white or transparent.\n- In the original screenshot: likely a simple, brightly colored, low‑detail cartoon environment (pastel sky blue or a bright flat indoor color). I don't recall anything specific in the background and wouldn't rely on it — the face carries the image.\n\n**Summary for the artist**\nDraw a chubby, neckless, cream‑yellow bean with two soft nubs on top of the head, pink cheeks, stubby arms and feet, and a short tail. Give it tightly shut arc‑shaped eyes and an enormous, wide, horizontal open mouth showing a pink interior, head thrown back, body rocked sideways, arms up or clutching its side. Render it smooth and glossy like a soft vinyl toy, on a plain white background.\n\n**Where I'm least sure:** the exact arm position in the canonical frame, whether tears or teeth appear, the exact shape/number of head nubs, and whether a lighter belly patch is visible. The core — round pale‑yellow body, squinted arc eyes, huge frog‑like laughing mouth — I'm fairly confident about.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 44.5,
+    "tokens": {
+      "input": 726,
+      "cached_input": 0,
+      "cache_write": 724,
+      "output": 2303,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 0.12965000000000002,
+    "tools_used": [],
+    "cost_usd": 0.12965000000000002,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 724,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 2303,
+      "output_tokens_details": {
+        "thinking_tokens": 618
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 724,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 2303,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 724,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 724
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T03:48:14Z",
+    "finished_at": "2026-10-31T03:48:59Z",
+    "revision": "592016c",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "settings_id": "548ef2024561e924",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.1",
+  "vendor": "anthropic",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "这张图我没有百分之百的把握，仅凭记忆来判断：\n\n**最可能的身份：黄逗菌**\n\n- 这是一个黄色、光滑、蛋/菌状的 3D 卡通角色，大大的圆眼睛、淡定微笑，整体形象和国产动画短片系列《黄逗菌》里的主角非常吻合。黄逗菌是一个\"逗比菌类\"形象，出自成都一家动画工作室，之后被大量截图做成表情包流传。\n- 这张\"双手抱胸、嘴角微微上扬\"的截图，是黄逗菌表情包里很常见的一张，通常用来表达\"**哦？我就静静看着你**\"\"**你说你的，我不信**\"\"**行吧，随便你**\"这类**淡定围观 / 不屑一顾 / 等着看你翻车**的情绪，有时也被配上\"我是不会说话的\"之类文字。\n\n**所属梗 / 流行方式：**\n它不算单一的某个\"梗事件\"，而是属于\"动画角色截图 → 微信/QQ 表情包\"这一类的网络流行文化。黄逗菌凭借软萌又带点\"贱贱的\"淡定表情，和\"熊猫头\"\"蘑菇头\"一样成为了表情包常客，常用于斗图或群聊里的调侃互动。\n\n如果这个判断不对，另一个可能是它来自某个短视频平台上的其他 3D 黄色小怪兽角色，但从造型（黄色圆身体 + 绿边大眼 + 淡定抱胸）来看，我更倾向于是黄逗菌。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 38.4,
+    "tokens": {
+      "input": 984,
+      "cached_input": 0,
+      "cache_write": 982,
+      "output": 1944,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 0.11686,
+    "tools_used": [],
+    "cost_usd": 0.11686,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 982,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1944,
+      "output_tokens_details": {
+        "thinking_tokens": 1401
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 982,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1944,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 982,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 982
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T03:50:39Z",
+    "finished_at": "2026-10-31T03:51:17Z",
+    "revision": "592016c",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "settings_id": "548ef2024561e924",
+  "track": "understanding",
+  "model": "fable-5.1",
+  "vendor": "anthropic",
+  "item": "write_prompt.cat",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a cat version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A single chubby cartoon cat character laughing hysterically, drawn in a simple, flat, kid's-TV-cartoon style with thick clean outlines and bright solid colors. The cat has an extremely round, blob-shaped body and head that merge into one smooth egg-like silhouette, very short stubby arms and legs with no visible paws, tiny pointed ears, and a short tail. Its fur is a glossy, saturated bright yellow (like a banana or egg yolk) with a lighter cream-colored belly and muzzle, and small faint pink blush circles on its cheeks. Its face is dominated by a huge wide-open laughing mouth stretched almost ear to ear, showing a flat row of small white upper teeth and a round pink tongue, with the dark red interior of the mouth visible. Its eyes are squeezed completely shut into two thick upward-curving arcs, like upside-down U shapes, with a single small teardrop of laughter flying off one eye. Its head is tilted back and its body leans slightly backward from the force of the laugh, one stubby arm raised near its face as if pointing or wiping a tear, the other arm against its round belly. The expression should read as unrestrained, almost mocking, belly-laughing delight. Plain solid light-colored background (pale white or very light grey), no scenery, no text, no watermark, centered composition, square format, soft even lighting, smooth vector-like shading with minimal gradients, cute and slightly dopey, sticker-like meme reaction image.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 24.6,
+    "tokens": {
+      "input": 708,
+      "cached_input": 0,
+      "cache_write": 706,
+      "output": 763,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 0.05229,
+    "tools_used": [],
+    "cost_usd": 0.05229,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 706,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 763,
+      "output_tokens_details": {
+        "thinking_tokens": 268
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 706,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 763,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 706,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 706
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T03:47:29Z",
+    "finished_at": "2026-10-31T03:47:54Z",
+    "revision": "592016c",
+    "nwb_version": "0.1.0"
+  }
+}
