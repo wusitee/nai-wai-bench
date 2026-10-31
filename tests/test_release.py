@@ -225,6 +225,30 @@ def test_restore_validates_saved_results_before_creating_working_files(inputs, d
     assert not run.exists()
 
 
+def test_merge_combines_runs_keeping_judgments_current_and_refuses_disagreement(inputs, monkeypatch):
+    root, _, _, _ = inputs
+    monkeypatch.setattr(cli, "find_root", lambda: root)
+    bench = load_bench(root, "core")
+    base = root / "runs" / "core"
+    (base / "collection.jsonl").write_text('{"argv": ["base"]}\n')
+    added = root / "runs" / "added"
+    record = read_json(next((base / "understanding" / "gpt-6.1-sol").glob("*.json")))
+    write_json(added / "understanding" / "opus-5.5" / f"{record['item']}__r1.json", {**record, "model": "opus-5.5"})
+    (added / "collection.jsonl").write_text('{"argv": ["added"]}\n')
+
+    assert cli.main(["merge", "--run", "merged", "--from", "core,added", "--no-sync"]) == 0
+    merged = root / "runs" / "merged"
+    scores = scoring.aggregate(merged, bench.trait_weights, bench=bench)
+    assert set(scores["understanding"]) == {"gpt-6.1-sol", "opus-5.5"}
+    assert scores["understanding"]["gpt-6.1-sol"]["vision"] == 50
+    assert scores["stale_judgments"]["total"] == 0
+    assert (merged / "collection.jsonl").read_text() == '{"argv": ["base"]}\n{"argv": ["added"]}\n'
+
+    write_json(added / "understanding" / "gpt-6.1-sol" / f"{record['item']}__r1.json", {**record, "answer": "changed"})
+    assert cli.main(["merge", "--run", "conflict", "--from", "core,added", "--no-sync"]) == 2
+    assert not (root / "runs" / "conflict").exists()
+
+
 def test_release_restores_selected_runs_from_repository_results(inputs, monkeypatch):
     root, manifest, suites, _ = inputs
     for suite, spec in suites.items():

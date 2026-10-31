@@ -1,6 +1,7 @@
 """Git-ready portable result snapshots, separate from resumable working runs."""
 
 import hashlib
+import shutil
 from pathlib import Path, PurePosixPath
 
 from nwb import __version__, bundle
@@ -74,4 +75,38 @@ def restore(root: Path, suite: str, run_dir: Path) -> Path:
     validate_run_suite(snapshot, suite)
     for name, data in files.items():
         write_bytes(_file(run_dir, name), data)
+    return run_dir
+
+
+def merge(root: Path, suite: str, run_dir: Path, sources: list[Path]) -> Path:
+    """Combine working runs into a fresh run; a file present in several sources must be identical."""
+    if run_dir.exists():
+        raise ValueError(f"working run already exists: {run_dir}; merge into a fresh run")
+    if not sources:
+        raise ValueError("merge needs at least one source run")
+    selected, log = {}, []
+    for source in sources:
+        snapshot = directory(root, suite, source)
+        if not source.exists() and (snapshot / METADATA).is_file():
+            restore(root, suite, source)
+        if not source.is_dir():
+            raise FileNotFoundError(f"run not found: {source}")
+        validate_run_suite(source, suite)
+        for path in sorted(p for track in ("understanding", "imagegen", "judgments")
+                           for p in (source / track).rglob("*")):
+            if not path.is_file() or path.suffix.lower() not in bundle.RESULT_IMAGE_SUFFIXES | {".json"}:
+                continue
+            name = path.relative_to(source)
+            other = selected.setdefault(name, path)
+            if other.read_bytes() != path.read_bytes():
+                raise ValueError(f"runs {other.parts[-len(name.parts) - 1]!r} and {source.name!r} "
+                                 f"disagree on {name.as_posix()}")
+        if (source / "collection.jsonl").is_file():
+            log.append((source / "collection.jsonl").read_bytes())
+    # Copying keeps modification times, which legacy judgments use to identify their targets.
+    for name, path in selected.items():
+        (run_dir / name).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(path, run_dir / name)
+    if log:
+        write_bytes(run_dir / "collection.jsonl", b"".join(log))
     return run_dir
