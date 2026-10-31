@@ -12,7 +12,7 @@ Every agent call starts in a fresh, empty temporary directory so agents never lo
 executable found on `PATH` at call time (on Windows, the npm `.cmd` shim) and their output is read as
 UTF-8; the recorded command template keeps the bare command name. `cmd.exe` parses a `.cmd` shim's
 command line again, so a call is refused when an argument, such as the shim path or an attachment path
-under `TEMP`, contains `% & | < > ^`; use a plain `TEMP` path or a native executable instead.
+under `TEMP`, contains `% ! & | < > ^`; use a plain `TEMP` path or a native executable instead.
 
 Every attachment is copied at call time into a separate fresh temporary directory as `image-1.<ext>`,
 `image-2.<ext>`, and so on, preserving order. This covers subject stimuli, generation references, and

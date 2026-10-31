@@ -112,9 +112,9 @@ def run_cli(command: list[str], **kwargs) -> subprocess.CompletedProcess:
     and cmd.exe parses that command line again, so arguments it would reinterpret are refused."""
     command = [shutil.which(command[0]) or command[0], *command[1:]]
     if Path(command[0]).suffix.lower() in {".bat", ".cmd"}:
-        if unsafe := next((arg for arg in command if set(arg) & set("%&|<>^")), None):
+        if unsafe := next((arg for arg in command if set(arg) & set("%!&|<>^")), None):
             raise BackendError(f"cannot pass {unsafe!r} safely through {Path(command[0]).name}; use paths "
-                               "without % & | < > ^ (e.g. set TEMP) or a native executable")
+                               "without % ! & | < > ^ (e.g. set TEMP) or a native executable")
     # Errors from a shim can use the console code page; decoding must not hide the exit status.
     return subprocess.run(command, capture_output=True, encoding="utf-8", errors="replace", **kwargs)
 
