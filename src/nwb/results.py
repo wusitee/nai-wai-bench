@@ -1,6 +1,7 @@
 """Git-ready portable result snapshots, separate from resumable working runs."""
 
 import hashlib
+import json
 import shutil
 from pathlib import Path, PurePosixPath
 
@@ -78,13 +79,30 @@ def restore(root: Path, suite: str, run_dir: Path) -> Path:
     return run_dir
 
 
+def _merge_files(source: Path) -> dict[str, bytes]:
+    """Read a run's result files, converting legacy mtime judgment identity to content identity."""
+    files = {path.relative_to(source).as_posix(): path.read_bytes()
+             for track in ("understanding", "imagegen", "judgments") for path in sorted((source / track).rglob("*"))
+             if path.is_file() and path.suffix.lower() in bundle.RESULT_IMAGE_SUFFIXES | {".json"}}
+    for name, data in files.items():
+        judgment = json.loads(data) if name.startswith("judgments/") and name.endswith(".json") else {}
+        if "target_mtime" in judgment and "target_sha256" not in judgment:
+            # Merged copies get new mtimes; check freshness against this source and keep stale verdicts stale.
+            target = source / judgment["target"]
+            current = target.is_file() and target.stat().st_mtime == judgment.pop("target_mtime")
+            judgment["target_sha256"] = (hashlib.sha256(target.read_bytes()).hexdigest() if current
+                                         else "stale-before-merge")
+            files[name] = json.dumps(judgment, ensure_ascii=False, indent=2).encode()
+    return files
+
+
 def merge(root: Path, suite: str, run_dir: Path, sources: list[Path]) -> Path:
     """Combine working runs into a fresh run; a file present in several sources must be identical."""
     if run_dir.exists():
         raise ValueError(f"working run already exists: {run_dir}; merge into a fresh run")
     if not sources:
         raise ValueError("merge needs at least one source run")
-    selected, log = {}, []
+    selected, origin, log = {}, {}, []
     for source in sources:
         snapshot = directory(root, suite, source)
         if not source.exists() and (snapshot / METADATA).is_file():
@@ -92,21 +110,22 @@ def merge(root: Path, suite: str, run_dir: Path, sources: list[Path]) -> Path:
         if not source.is_dir():
             raise FileNotFoundError(f"run not found: {source}")
         validate_run_suite(source, suite)
-        for path in sorted(p for track in ("understanding", "imagegen", "judgments")
-                           for p in (source / track).rglob("*")):
-            if not path.is_file() or path.suffix.lower() not in bundle.RESULT_IMAGE_SUFFIXES | {".json"}:
-                continue
-            name = path.relative_to(source)
-            other = selected.setdefault(name, path)
-            if other.read_bytes() != path.read_bytes():
-                raise ValueError(f"runs {other.parts[-len(name.parts) - 1]!r} and {source.name!r} "
-                                 f"disagree on {name.as_posix()}")
+        for name, data in _merge_files(source).items():
+            if selected.setdefault(name, data) != data:
+                raise ValueError(f"runs {origin[name]!r} and {source.name!r} disagree on {name}")
+            origin.setdefault(name, source.name)
         if (source / "collection.jsonl").is_file():
-            log.append((source / "collection.jsonl").read_bytes())
-    # Copying keeps modification times, which legacy judgments use to identify their targets.
-    for name, path in selected.items():
-        (run_dir / name).parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(path, run_dir / name)
-    if log:
-        write_bytes(run_dir / "collection.jsonl", b"".join(log))
+            text = (source / "collection.jsonl").read_text(encoding="utf-8")
+            lines = [line for line in text.splitlines() if line.strip()]
+            for line in lines:
+                json.loads(line)
+            log += lines
+    try:
+        for name, data in selected.items():
+            write_bytes(run_dir / name, data)
+        if log:
+            write_bytes(run_dir / "collection.jsonl", "".join(f"{line}\n" for line in log).encode())
+    except BaseException:
+        shutil.rmtree(run_dir, ignore_errors=True)
+        raise
     return run_dir
