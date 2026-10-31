@@ -12,7 +12,7 @@ import time
 from pathlib import Path
 
 from nwb.backends import (BackendError, ProviderRefusal, Request, Response, audit_calls, cli_version,
-                          executable, image_instruction, neutral_inputs, tokens)
+                          image_instruction, neutral_inputs, run_cli, tokens)
 from nwb.config import ModelSpec
 from nwb.util import IMAGE_SUFFIXES
 
@@ -69,12 +69,9 @@ class CodexBackend:
         gen = req.image_out is not None
         prompt = image_instruction(req.prompt, bool(req.images), "image_gen") if gen else req.prompt
         started = time.monotonic()
-        command = self.command(req.images, gen)
-        command[0] = executable(command[0])
         with tempfile.TemporaryDirectory(prefix="nwb-codex-") as cwd:
             try:
-                proc = subprocess.run(command, input=prompt, capture_output=True,
-                                      encoding="utf-8", cwd=cwd, timeout=self.timeout)
+                proc = run_cli(self.command(req.images, gen), input=prompt, cwd=cwd, timeout=self.timeout)
             except subprocess.TimeoutExpired as e:
                 raise BackendError(f"codex timed out after {self.timeout}s") from e
         events = parse_events(proc.stdout)

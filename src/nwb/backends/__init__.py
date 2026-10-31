@@ -106,19 +106,25 @@ def get_backend(spec: ModelSpec):
     raise ValueError(f"model {spec.name}: unknown backend {spec.backend!r}")
 
 
-def executable(name: str) -> str:
-    """The CLI's path on PATH. Windows starts npm-installed CLIs only through their `.cmd` shim's full
-    path; recorded command templates keep the bare name."""
-    return shutil.which(name) or name
+def run_cli(command: list[str], **kwargs) -> subprocess.CompletedProcess:
+    """Run a CLI through its executable on PATH and read its output as UTF-8; recorded command templates
+    keep the bare name. Windows starts npm-installed CLIs only through the full path of their `.cmd` shim,
+    and cmd.exe parses that command line again, so arguments it would reinterpret are refused."""
+    command = [shutil.which(command[0]) or command[0], *command[1:]]
+    if Path(command[0]).suffix.lower() in {".bat", ".cmd"}:
+        if unsafe := next((arg for arg in command if set(arg) & set("%&|<>^")), None):
+            raise BackendError(f"cannot pass {unsafe!r} safely through {Path(command[0]).name}; use paths "
+                               "without % & | < > ^ (e.g. set TEMP) or a native executable")
+    # Errors from a shim can use the console code page; decoding must not hide the exit status.
+    return subprocess.run(command, capture_output=True, encoding="utf-8", errors="replace", **kwargs)
 
 
 @functools.cache
 def cli_version(command: str) -> str | None:
     """`<command> --version` output (first line), recorded with each result as the client version."""
     try:
-        out = subprocess.run([executable(command), "--version"], capture_output=True, encoding="utf-8",
-                             timeout=30).stdout
-    except (OSError, subprocess.TimeoutExpired):
+        out = run_cli([command, "--version"], timeout=30).stdout
+    except (OSError, subprocess.TimeoutExpired, BackendError):
         return None
     return out.strip().splitlines()[0] if out.strip() else None
 
