@@ -1,0 +1,70 @@
+{
+  "settings_id": "7c81ed50f365cb3c",
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "vendor": "moonshot",
+  "item": "write_prompt.giraffe",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a giraffe version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A cute 2D cartoon sticker of a chubby baby giraffe laughing uncontrollably, inspired by a playful children’s mascot: rounded golden-yellow body covered in soft orange-brown patches, long but slightly stubby neck, large round head, tiny ossicones, small ears, cream-colored muzzle and belly. It sits squat on the floor with its little legs spread, clutching its belly with both front hooves, head tilted back in hysterical laughter. Its eyes are squeezed into joyful crescents with tears flying out, and its mouth is opened extremely wide in a huge goofy grin, showing a pink tongue and a dark open mouth. Exaggerated silly expression, plump squishy shapes, bold clean dark outlines, flat bright colors, minimal shading, centered full-body pose, plain white background, cheerful viral reaction-sticker aesthetic, no words, no watermark.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 12.4,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20021,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 408,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20429 / 1048576 tokens (2%)\nSession total: 20021 input, 408 output",
+      "usage": {
+        "inputTokens": 20021,
+        "outputTokens": 408
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:45:40Z",
+    "finished_at": "2026-10-25T00:45:52Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

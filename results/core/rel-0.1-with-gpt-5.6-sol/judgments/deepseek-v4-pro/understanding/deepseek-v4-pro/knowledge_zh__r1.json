@@ -1,0 +1,87 @@
+{
+  "judge": "deepseek-v4-pro",
+  "judge_vendor": "deepseek",
+  "target": "understanding/deepseek-v4-pro/knowledge_zh__r1.json",
+  "target_sha256": "f3836a9f89f035a9f0c460b1b9b022284b37fa12b741e6a28f66f5e5a0c7cf1a",
+  "settings_id": "cefccff5b65c93e5",
+  "judge_prompt": "9c9dcb75500ee249",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 1,
+    "xingye_origin": 0,
+    "aliases": 1,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [
+    "Confidently describes 奶蛙/绿色青蛙配色 as a fan P图 made by recoloring 大笑奶龙, contradicting the notes that 奶蛙 is an AI-generated mutated Nailong variant with frog-like round bulging eyes/green sclera."
+  ],
+  "rationale": "The answer captures the base character and the unofficial 奶蛙 nickname only partially, while missing the AI/Xingye origin and most specific memes, and it misattributes the frog-like version to fan recoloring/mouth shape.",
+  "raw": "{\"scores\": {\"base_character\": 2, \"ai_variant\": 1, \"xingye_origin\": 0, \"aliases\": 1, \"naiwa\": 1, \"laugh_pose\": 1, \"junti_quan\": 0, \"official_reply\": 0, \"trait_variants\": 0, \"rarity_titles\": 0}, \"hallucinations\": [\"Confidently describes 奶蛙/绿色青蛙配色 as a fan P图 made by recoloring 大笑奶龙, contradicting the notes that 奶蛙 is an AI-generated mutated Nailong variant with frog-like round bulging eyes/green sclera.\"], \"rationale\": \"The answer captures the base character and the unofficial 奶蛙 nickname only partially, while missing the AI/Xingye origin and most specific memes, and it misattributes the frog-like version to fan recoloring/mouth shape.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "stop_reason": "end_turn",
+    "client": "deepseek-harness-acp 0.0.1",
+    "seconds": 68.2,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+      "reasoning_effort": "high"
+    },
+    "resolved_model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 8242,
+        "size": 1000000
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:54:40Z",
+    "finished_at": "2026-10-25T01:55:48Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

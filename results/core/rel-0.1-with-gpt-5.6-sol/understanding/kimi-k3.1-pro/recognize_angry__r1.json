@@ -1,0 +1,73 @@
+{
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "vendor": "moonshot",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "这是**奶龙**的二创形象：把原本黄色的奶龙改成了红色，常被叫作 **“红温奶龙”**或“愤怒奶龙”，并非官方设定的独立角色。\n\n它属于中文互联网的**奶龙抽象表情包梗**，同时结合了**“红温”**这个梗——“红温”指人被气到脸红、破防、情绪上头。图里的“切换愤怒模式😡”就是玩笑式地表示：被惹恼了，准备发火。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 18.8,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20081,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 563,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20644 / 1048576 tokens (2%)\nSession total: 20081 input, 563 output",
+      "usage": {
+        "inputTokens": 20081,
+        "outputTokens": 563
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:46:54Z",
+    "finished_at": "2026-10-25T00:47:13Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

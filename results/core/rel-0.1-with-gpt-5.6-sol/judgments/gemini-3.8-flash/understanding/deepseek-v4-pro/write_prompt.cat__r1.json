@@ -1,0 +1,79 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/deepseek-v4-pro/write_prompt.cat__r1.json",
+  "target_sha256": "eb0c97641f142d45f5a479045452646e80694525a231e0e80ad02d62941325d5",
+  "settings_id": "c5b99b49261f87dd",
+  "judge_prompt": "380d52f284d2054a",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 1,
+    "background": 1,
+    "vibe": 0,
+    "identity": 1
+  },
+  "hallucinations": [
+    "Head tilted back with paws raised upward contradicts the hunched-over posture with paws clutching the belly."
+  ],
+  "rationale": "The model accurately captures the squeezed shut curved eyes, but inverts the iconic posture by tilting the head back and raising the paws upward instead of hunching over clutching the belly. It also leans into an adorable plush aesthetic rather than the unhinged meme energy, and applies only token cat features to a yellow body.",
+  "raw": "```json\n{\n  \"scores\": {\n    \"pose\": 0,\n    \"hands_on_belly\": 0,\n    \"eyes\": 2,\n    \"mouth\": 1,\n    \"body\": 1,\n    \"belly_patch\": 0,\n    \"render\": 1,\n    \"background\": 1,\n    \"vibe\": 0,\n    \"identity\": 1\n  },\n  \"hallucinations\": [\n    \"Head tilted back with paws raised upward contradicts the hunched-over posture with paws clutching the belly.\"\n  ],\n  \"rationale\": \"The model accurately captures the squeezed shut curved eyes, but inverts the iconic posture by tilting the head back and raising the paws upward instead of hunching over clutching the belly. It also leans into an adorable plush aesthetic rather than the unhinged meme energy, and applies only token cat features to a yellow body.\"\n}\n```",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 25.5,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 16446,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:55:04Z",
+    "finished_at": "2026-10-25T01:55:30Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

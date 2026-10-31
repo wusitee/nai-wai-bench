@@ -6,7 +6,9 @@ repository's AGENTS.md / CLAUDE.md or any other project context.
 """
 
 import functools
+import shutil
 import subprocess
+import tempfile
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -40,6 +42,52 @@ class Response:
     text: str = ""
     images: list[Path] = field(default_factory=list)
     meta: dict = field(default_factory=dict)
+
+
+def neutral_inputs(run):
+    """Stage every attachment at call time, including judges' generated-image inputs."""
+    @functools.wraps(run)
+    def staged(self, req: Request) -> Response:
+        with tempfile.TemporaryDirectory(prefix="nwb-input-") as directory:
+            images = []
+            for i, source in enumerate(req.images, 1):
+                target = Path(directory) / f"image-{i}{source.suffix.lower()}"
+                shutil.copyfile(source, target)
+                images.append(target)
+            return run(self, Request(req.prompt, images, req.image_out))
+    return staged
+
+
+def tokens(backend: str, usage: dict | None) -> dict:
+    """Normalize client telemetry; absent counters remain unknown, including partial usage."""
+    u = usage or {}
+    result = dict.fromkeys(("input", "cached_input", "cache_write", "output", "reasoning"))
+    if backend == "codex":
+        # Output already includes reasoning; total_tokens may be absent.
+        result.update(input=u.get("input_tokens"), cached_input=u.get("cached_input_tokens"),
+                      cache_write=u.get("cache_write_input_tokens"), output=u.get("output_tokens"),
+                      reasoning=u.get("reasoning_output_tokens"))
+    elif backend == "claude":
+        counters = [u.get(k) for k in ("input_tokens", "cache_creation_input_tokens", "cache_read_input_tokens")]
+        result.update(input=sum(counters) if all(v is not None for v in counters) else None,
+                      cached_input=u.get("cache_read_input_tokens"), cache_write=u.get("cache_creation_input_tokens"),
+                      output=u.get("output_tokens"), reasoning=u.get("reasoning_tokens"))
+    elif backend == "openai":
+        result.update(input=u.get("prompt_tokens"),
+                      cached_input=(u.get("prompt_tokens_details") or {}).get("cached_tokens"),
+                      output=u.get("completion_tokens"),
+                      reasoning=(u.get("completion_tokens_details") or {}).get("reasoning_tokens"))
+    elif backend == "acp":
+        result.update(input=u.get("inputTokens"), cached_input=u.get("cachedReadTokens"),
+                      cache_write=u.get("cachedWriteTokens"), output=u.get("outputTokens"),
+                      reasoning=u.get("thoughtTokens"))
+        # Some ACP adapters report uncached input. Add cache categories only when the
+        # reported total demonstrates that they are additional, rather than subsets.
+        if all(result[k] is not None for k in ("input", "output")):
+            cache = (result["cached_input"] or 0) + (result["cache_write"] or 0)
+            if u.get("totalTokens") == result["input"] + result["output"] + cache:
+                result["input"] += cache
+    return result
 
 
 def get_backend(spec: ModelSpec):

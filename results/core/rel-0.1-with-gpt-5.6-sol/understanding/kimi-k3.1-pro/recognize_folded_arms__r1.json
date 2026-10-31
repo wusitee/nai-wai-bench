@@ -1,0 +1,73 @@
+{
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "vendor": "moonshot",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "这张表情包里的是**奶龙**——国产动画《奶龙》系列（《奶龙与小七之大战暴暴龙》等）里的黄色小恐龙主角，特征是圆滚滚的黄色身体、浅色大肚皮和一脸天真又欠揍的表情。图中这个抱臂微笑的姿势，常被用来表达迷之自信、得意或“我就看着你不说话”的态度。\n\n它属于2024年前后在抖音、B站等平台爆火的**“奶龙”梗**：网友把奶龙的图片、二创视频和“我是奶龙，我才是奶龙”之类的歌曲大量传播，逐渐演变成一种抽象文化式的玩梗，常出现在评论区刷屏、整活视频和表情包里，带有调侃“低幼又上头”的意味。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 18.9,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20307,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 573,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20880 / 1048576 tokens (2%)\nSession total: 20307 input, 573 output",
+      "usage": {
+        "inputTokens": 20307,
+        "outputTokens": 573
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:47:23Z",
+    "finished_at": "2026-10-25T00:47:42Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

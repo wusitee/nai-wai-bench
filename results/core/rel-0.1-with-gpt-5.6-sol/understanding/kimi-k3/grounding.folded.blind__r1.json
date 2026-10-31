@@ -1,0 +1,70 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "grounding.folded.blind",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Look only at the attached image. Return a JSON object with two keys: pose (one of belly_clutch, raised_hands, facepalm, folded_arms) and eyes (open or closed). Use unknown for a field you cannot determine. Do not infer the answer from a meme's name or typical appearance.",
+  "images": [],
+  "answer": "```json\n{\"pose\": \"unknown\", \"eyes\": \"unknown\"}\n```\n\nI don't see any attached image in this conversation — no image content or file reference reached me. Per your instruction to use `unknown` for anything I cannot determine, both fields are set to `unknown`. If you re-attach the image, I can answer from it directly.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 8.2,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20031,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 177,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20208 / 1048576 tokens (2%)\nSession total: 20031 input, 177 output",
+      "usage": {
+        "inputTokens": 20031,
+        "outputTokens": 177
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:44:47Z",
+    "finished_at": "2026-10-25T00:44:55Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

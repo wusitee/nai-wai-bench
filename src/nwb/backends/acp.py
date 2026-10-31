@@ -14,7 +14,7 @@ import threading
 import time
 from pathlib import Path
 
-from nwb.backends import BackendError, Request, Response, audit_calls, image_instruction
+from nwb.backends import BackendError, Request, Response, audit_calls, image_instruction, neutral_inputs, tokens
 from nwb.config import ModelSpec
 from nwb.util import IMAGE_SUFFIXES, expand, media_type
 
@@ -142,6 +142,7 @@ class AcpBackend:
             raise BackendError(f"model {self.spec.name}: command not found: {command[0]}")
         return command, {**os.environ, **extra}
 
+    @neutral_inputs
     def run(self, req: Request) -> Response:
         gen = req.image_out is not None
         command, env = self._command_and_env()
@@ -165,6 +166,20 @@ class AcpBackend:
                 "tools_used": [c.get("title") or c.get("kind") or "tool" for c in tool_calls],
                 "tool_calls": [compact(c) for c in tool_calls], "permissions": conn.permissions,
             })
+            usage = acp_usage(result, conn.updates)
+            resp.meta.update(usage=usage, tokens=tokens("acp", usage),
+                             session_config=result.get("_nwb_session_config", {}),
+                             resolved_model=result.get("_nwb_resolved_model"), cost_usd_reported=None)
+            if telemetry := result.get("_nwb_usage_command"):
+                resp.meta["usage_command"] = telemetry
+                if telemetry.get("usage"):
+                    resp.meta["tokens"] = tokens("acp", {**telemetry["usage"], **(usage or {})})
+                    resp.meta["tokens_source"] = "usage-command"
+            occupancy = [u for u in conn.updates if u.get("sessionUpdate") == "usage_update"]
+            if occupancy:
+                resp.meta["usage_updates"] = occupancy
+            if result.get("_meta"):
+                resp.meta["usage_meta"] = result["_meta"]
             if gen:
                 inputs = {hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in req.images}
                 resp.images = collect_images(inline, tool_calls, Path(cwd), req.image_out, exclude=inputs)
@@ -189,7 +204,13 @@ class AcpBackend:
             conn.request("authenticate", {"methodId": auth}, 300)
         session = conn.request("session/new", {"cwd": cwd, "mcpServers": []}, 120)
         sid = session["sessionId"]
-        self._configure(conn, sid, session)
+        session_config, resolved_model = self._configure(conn, sid, session)
+        usage_command = self.spec.options.get("usage_command")
+        if usage_command:
+            commands = [c for u in conn.updates if u.get("sessionUpdate") == "available_commands_update"
+                        for c in u.get("availableCommands", [])]
+            if not any("/" + c["name"] == usage_command for c in commands):
+                raise BackendError(f"usage command {usage_command!r} is not advertised by the agent")
 
         prompt = req.prompt
         if gen:
@@ -198,13 +219,56 @@ class AcpBackend:
         blocks = [{"type": "image", "mimeType": media_type(Path(p)),
                    "data": base64.b64encode(Path(p).read_bytes()).decode()} for p in req.images]
         blocks.append({"type": "text", "text": prompt})
-        return conn.request("session/prompt", {"sessionId": sid, "prompt": blocks}, self.timeout)
+        result = conn.request("session/prompt", {"sessionId": sid, "prompt": blocks}, self.timeout)
+        for update in conn.updates:
+            if update.get("sessionUpdate") == "config_option_update":
+                for option in update.get("configOptions", []):
+                    session_config[option["id"]] = option.get("currentValue")
+                    if option.get("category") == "model" or option["id"] == "model":
+                        resolved_model = option.get("currentValue")
+            elif update.get("sessionUpdate") == "current_model_update":
+                resolved_model = update.get("currentModelId")
+        if usage_command:
+            offset = len(conn.updates)
+            telemetry = {"command": usage_command}
+            try:
+                conn.request("session/prompt", {"sessionId": sid, "prompt": [
+                    {"type": "text", "text": usage_command}]}, self.timeout)
+                telemetry["text"] = summarize(conn.updates[offset:])[0]
+                match = re.search(r"(?:^|\n)Session total: (\d+) input, (\d+) output(?:\n|$)", telemetry["text"])
+                if match:
+                    telemetry["usage"] = {"inputTokens": int(match[1]), "outputTokens": int(match[2])}
+                else:
+                    telemetry["error"] = "unrecognized session token totals"
+            except BackendError as exc:
+                telemetry["error"] = str(exc)
+            finally:
+                # A diagnostic command must never become part of the answer or tool audit.
+                del conn.updates[offset:]
+            result = {**result, "_nwb_usage_command": telemetry}
+        return {**result, "_nwb_session_config": session_config, "_nwb_resolved_model": resolved_model}
 
-    def _configure(self, conn: AcpConnection, sid: str, session: dict) -> None:
+    def _configure(self, conn: AcpConnection, sid: str, session: dict) -> tuple[dict, str | None]:
         wanted = dict(self.spec.options.get("config", {}))
+        effort = self.spec.options.get("effort", "default")
+        source = self.spec.options.get("effort_source")
+        if source == "model-id":
+            if not self.spec.model.endswith(f"-{effort}"):
+                raise BackendError(f"effort={effort!r} does not match model id {self.spec.model!r}")
+        elif effort not in ("default", "unexposed"):
+            option = self.spec.options.get("effort_option")
+            if not option:
+                option = next((o["id"] for o in session.get("configOptions", [])
+                               if o.get("category") == "thought_level"), None)
+            if not option:
+                raise BackendError(f"agent exposes no effort option for effort={effort!r}")
+            if option in wanted and wanted[option] != effort:
+                raise BackendError(f"conflicting effort and config.{option}")
+            wanted[option] = effort
         if self.spec.model:
             wanted = {"model": self.spec.model, **wanted}
         options = session.get("configOptions") or []
+        resolved_model = (session.get("models") or {}).get("currentModelId")
         for cid, value in wanted.items():
             opt = next((o for o in options if o.get("id") == cid), None)
             if opt is None and cid == "model":
@@ -214,14 +278,44 @@ class AcpBackend:
                     available = [m.get("modelId") for m in session["models"].get("availableModels", [])]
                     if value not in available:
                         raise BackendError(f"model {value!r} not offered; available: {available}")
-                    conn.request("session/set_model", {"sessionId": sid, "modelId": value}, 60)
+                    reply = conn.request("session/set_model", {"sessionId": sid, "modelId": value}, 60)
+                    resolved_model = (reply.get("models") or {}).get("currentModelId")
                     continue
                 raise BackendError(f"agent has no config option {cid!r}")
             values = option_values(opt.get("options", []))
             if value not in values:
                 raise BackendError(f"{cid}={value!r} not offered; available: {values}")
             if opt.get("currentValue") != value:
-                conn.request("session/set_config_option", {"sessionId": sid, "configId": opt["id"], "value": value}, 60)
+                offset = len(conn.updates)
+                reply = conn.request("session/set_config_option", {
+                    "sessionId": sid, "configId": opt["id"], "value": value}, 60)
+                reported = reply.get("configOptions")
+                for update in conn.updates[offset:]:
+                    if update.get("sessionUpdate") == "config_option_update":
+                        reported = update.get("configOptions") or reported
+                if reported is not None:
+                    options = reported
+                confirmed = next((o for o in options if o.get("id") == opt["id"]), {})
+                if confirmed.get("currentValue") != value:
+                    raise BackendError(f"agent did not confirm {cid}={value!r}")
+        current = {o["id"]: o.get("currentValue") for o in options}
+        model_option = next((o for o in options if o.get("category") == "model" or o["id"] == "model"), None)
+        if model_option:
+            resolved_model = model_option.get("currentValue")
+        return current, resolved_model
+
+
+def acp_usage(result: dict, updates: list[dict]) -> dict | None:
+    """Keep billable counters separate from usage_update.used/size context occupancy."""
+    usage = {}
+    for source in [*updates, result]:
+        raw = source.get("usage") or (source.get("_meta") or {}).get("usage")
+        if isinstance(raw, dict):
+            usage.update(raw)
+        for counters in (source, source.get("_meta") or {}):
+            usage.update({k: counters[k] for k in ("totalTokens", "inputTokens", "outputTokens", "thoughtTokens",
+                                                  "cachedReadTokens", "cachedWriteTokens") if k in counters})
+    return usage or None
 
 
 def option_values(options: list) -> list:

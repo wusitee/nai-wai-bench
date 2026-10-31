@@ -1,0 +1,86 @@
+{
+  "judge": "kimi-k3.1-pro",
+  "judge_vendor": "moonshot",
+  "target": "imagegen/gemini-image/described_detailed/cat__r1.json",
+  "target_sha256": "6b825c83201857b825b8f03d4072c55b4f924b69c6d406b3f1183e7cb3e5e59d",
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "judge_prompt": "278f8140f61f0bad",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/gemini-image/described_detailed/cat__r1/inline-0.jpg"
+  ],
+  "track": "imagegen",
+  "model": "gemini-image",
+  "traits": {
+    "pose": 2,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 2,
+    "vibe": 2
+  },
+  "identity": 2,
+  "failure_modes": [],
+  "rationale": "The generated cat closely adapts the reference’s laughing pose, huge mouth, belly-clutching paws, bean-like body, and smooth 3D meme aesthetic. Its feline facial features and coloring remain clearly recognizable.",
+  "raw": "pose: Standing with a forward-hunched torso and bent knees, convincingly doubled over laughing — match  \nhands_on_belly: Both paws press against the round belly — match  \neyes: Both eyes are squeezed shut into thin curved arcs — match  \nmouth: Enormous face-dominating mouth with a dark interior, visible teeth, and tongue — match  \nbody: Bulky pear-shaped body, no distinct neck, and short thick limbs — match  \nbelly_patch: Large pale belly patch contrasts with the orange-brown body — match  \nrender: Smooth, slightly glossy 3D CG with soft lighting and a cheap animated-still quality — match  \nbackground: Empty white-to-light-grey studio background — match  \nvibe: Exaggerated, hysterical laughter gives it absurd meme energy rather than mere cuteness — match  \nidentity: Cat-like ears, muzzle, pink nose, and natural orange-brown-and-white markings are integrated throughout — clearly  \n\n{\"traits\": {\"pose\": \"match\", \"hands_on_belly\": \"match\", \"eyes\": \"match\", \"mouth\": \"match\", \"body\": \"match\", \"belly_patch\": \"match\", \"render\": \"match\", \"background\": \"match\", \"vibe\": \"match\"}, \"identity\": \"clearly\", \"failure_modes\": [], \"rationale\": \"The generated cat closely adapts the reference’s laughing pose, huge mouth, belly-clutching paws, bean-like body, and smooth 3D meme aesthetic. Its feline facial features and coloring remain clearly recognizable.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 18.5,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 23020,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 550,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 23570 / 1048576 tokens (2%)\nSession total: 23020 input, 550 output",
+      "usage": {
+        "inputTokens": 23020,
+        "outputTokens": 550
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:54:26Z",
+    "finished_at": "2026-10-25T01:54:45Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

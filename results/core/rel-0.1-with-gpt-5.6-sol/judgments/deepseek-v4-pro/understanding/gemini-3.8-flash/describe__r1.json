@@ -1,0 +1,40 @@
+{
+  "judge": "deepseek-v4-pro",
+  "judge_vendor": "deepseek",
+  "target": "understanding/gemini-3.8-flash/describe__r1.json",
+  "target_sha256": "013ecc3809b507a5076b316e1824d468ea8bb76047096c5a6f9c35481e0feb13",
+  "settings_id": "cefccff5b65c93e5",
+  "judge_prompt": "4c2982e282d0dcfc",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "error": "BackendError: ACP session/prompt failed: {\"code\": -32603, \"message\": \"Internal error: turn failed: Insufficient Balance (request_id: 8ddfe12f-b0f5-4590-aa9a-9bb3f8e0b8ce)\"}",
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:59:31Z",
+    "finished_at": "2026-10-25T01:59:38Z",
+    "revision": "9f7aef8",
+    "nwb_version": "0.1.0"
+  }
+}

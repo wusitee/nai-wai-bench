@@ -1,0 +1,108 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/opus-5.5/recognize_angry__r1.json",
+  "target_sha256": "9a57dd95d7ede9ba6884ce4b59abf977da6e79e0686a63661d803dded74d0950",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "27147189c49eb7cd",
+  "judge_images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "track": "understanding",
+  "model": "opus-5.5",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0
+  },
+  "hallucinations": [],
+  "rationale": "The model described the visuals accurately (red body, green angry eyes, the caption) but said it could not identify the character. It never mentioned 奶龙 or the 大笑奶龙/变异奶龙/奶蛙 family; instead it guessed, with hedging, that the image belongs to the 红温 meme, so no checklist item was covered and nothing was confidently fabricated.",
+  "raw": "{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"ai_variant\": 0}, \"hallucinations\": [], \"rationale\": \"The model described the visuals accurately (red body, green angry eyes, the caption) but said it could not identify the character. It never mentioned 奶龙 or the 大笑奶龙/变异奶龙/奶蛙 family; instead it guessed, with hedging, that the image belongs to the 红温 meme, so no checklist item was covered and nothing was confidently fabricated.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 7.1,
+    "tokens": {
+      "input": 1992,
+      "cached_input": 0,
+      "cache_write": 1990,
+      "output": 441,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0250075,
+    "tools_used": [],
+    "cost_usd": 0.0250075,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1990,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 441,
+      "output_tokens_details": {
+        "thinking_tokens": 265
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1990,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 441,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1990,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1990
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:04:06Z",
+    "finished_at": "2026-10-25T02:04:13Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

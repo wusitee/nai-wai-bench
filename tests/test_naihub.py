@@ -82,6 +82,13 @@ def test_naihub_joint_and_macro_scores_expose_constant_label_baseline(tmp_path, 
     rows = {r["model"]: r for r in scores["leaderboards"]["visual_understanding"]}
     assert rows["oracle"]["score"] == 100
     assert rows["constant"]["score"] == 0
+    again = scoring.aggregate(tmp_path, bench.trait_weights, bench=bench)["leaderboards"]
+    assert again == scores["leaderboards"]
+    for row in rows.values():
+        assert len(row["score_interval"]) == len(row["rank_range"]) == 2
+        assert 0 <= row["score_interval"][0] <= row["score_interval"][1] <= 100
+        assert 1 <= row["rank_range"][0] <= row["rank_range"][1] <= 2
+        assert row["bootstrap"]["resamples"] >= 2000 and row["bootstrap"]["clusters"] == 24
     assert "wrong_suite" not in rows and "wrong_suite" not in scores["understanding"]
     constant = scores["understanding"]["constant"]
     assert constant["vision"] == pytest.approx(100 * 108 / 168)
@@ -100,6 +107,8 @@ def test_naihub_joint_and_macro_scores_expose_constant_label_baseline(tmp_path, 
         **jobs[0].base, "model": "oracle", "rep": 2,
         "answer": json.dumps({f: "unknown" for f in modal})})
     repeated = scoring.aggregate(tmp_path, bench.trait_weights, bench=bench)
+    assert repeated["understanding"]["oracle"]["repetition_consistency"] == 0
+    assert repeated["understanding"]["oracle"]["repetition_consistency_images"] == 1
     assert repeated["understanding"]["oracle"]["joint"] == pytest.approx(100 * 23.5 / 24)
     assert repeated["understanding"]["oracle"]["visual_joint"] == pytest.approx(100 * 23.5 / 24)
     rows = repeated["leaderboards"]["visual_understanding"]

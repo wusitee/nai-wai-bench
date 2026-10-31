@@ -1,0 +1,70 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "knowledge_zh",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "「大笑奶龙」（也叫「奶蛙」）是什么？请介绍它的来源、外观以及相关的梗和二创。不确定的地方请直接说明，不要编造。",
+  "images": [],
+  "answer": "以下基于我训练数据中的知识回答，可信度有高有低，我会分别标注。我的信息截止到训练时间为止，最新的梗发展可能不在其中。\n\n## 基本背景（较为确定）\n\n**奶龙（Nailong）** 是一个国产动画IP，主角是一只圆滚滚的黄色小龙，短手短脚、有小翅膀，设定上与\"奶/牛奶\"有关，形象软萌。它主要通过抖音等平台的短视频动画走红，目标受众原本是低龄儿童，风格偏低幼、搞笑。\n\n大约在2023–2024年间，奶龙的表情包在中文互联网（尤其是年轻网民和\"抽象\"文化圈）大规模流行，逐渐脱离了儿童向IP的定位，成为一种网络梗素材。\n\n## 「大笑奶龙」（较为确定）\n\n这是奶龙表情包中最出圈的一类：奶龙张着大嘴、眯眼大笑的夸张表情。它的流行点和用法大致是：\n\n- **阴阳怪气/嘲讽**：这个大笑表情常被用来表达幸灾乐祸、嘲笑、看热闹不嫌事大的情绪，类似于\"笑死\"的图像版。\n- **\"抽象\"文化素材**：奶龙整体被抽象圈收编，大笑奶龙是其中使用频率最高的形象之一，常见于群聊刷屏、评论区。\n- **反感与争议**：因为被大量无差别刷屏，奶龙表情包（尤其是这张大笑脸）也招来了不少反感，出现了\"看到奶龙就烦\"之类的 backlash，甚至有用\"唐龙\"等带攻击性的称呼（这一点本身也有争议，因为涉及对疾病的不当挪用）。\n\n## 「奶蛙」（不确定，如实说明）\n\n我对\"奶蛙\"这个叫法**没有可靠的把握**。我印象中它指的是那张扭曲大笑脸的奶龙表情因为嘴型/脸型被拉长压扁后看起来像一只蛙，因而被戏称为\"奶蛙\"——但我不能确认这是主流用法，它也可能是某个特定社群（如某个贴吧、B站圈子）里的叫法，或者指某个把奶龙画成青蛙形态的二创形象。这部分请以实际社群用法为准。\n\n## 相关二创（较为确定方向，细节不完全确定）\n\n- **表情包改图**：大量的换字、P图、与其他梗角色的缝合图。\n- **鬼畜/二创视频**：B站上有不少以奶龙动画片段为素材的鬼畜和整活视频。\n- **AI生成内容**：2024年前后用AI生成奶龙跳舞、唱歌、出演各种场景的短视频一度很流行。\n- **跨圈联动梗**：奶龙形象被P进游戏、影视截图等场景，作为\"抽象发言\"的配图。\n\n## 不确定/无法回答的部分\n\n- 奶龙确切的出品公司、首播时间、主创信息我说不准，为避免编造就不写了。\n- \"大笑奶龙\"这个具体叫法最早出自哪个平台、哪个时间点，我无法确认。\n- 如上所述，\"奶蛙\"的准确定义和来源我不确定。\n\n如果你想确认细节（尤其是\"奶蛙\"的具体含义），建议直接在B站或梗百科类站点查证，我可以之后帮你搜索。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 44.9,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 19997,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 1372,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 21369 / 1048576 tokens (2%)\nSession total: 19997 input, 1372 output",
+      "usage": {
+        "inputTokens": 19997,
+        "outputTokens": 1372
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:41:46Z",
+    "finished_at": "2026-10-25T00:42:31Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

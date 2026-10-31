@@ -1,10 +1,15 @@
 """Turn judgments into per-sample scores and per-model summaries (all scores are 0-100)."""
 
-from collections import defaultdict
+from collections import Counter, defaultdict
+import hashlib
+import math
+import random
 from pathlib import Path
-from statistics import pstdev
+from statistics import median, pstdev
 
-from nwb.config import Bench
+from nwb import __version__
+from nwb.config import Bench, load_models
+from nwb.provenance import collection_profile
 from nwb.util import extract_json, read_json
 
 HALLUCINATION_PENALTY = 10
@@ -67,18 +72,52 @@ def mean(values):
     return sum(values) / len(values) if values else None
 
 
-def _load_judgments(run_dir: Path, judges: set[str] | None) -> dict[str, list[dict]]:
-    """Successful judgments by target, keeping only those made for the target's current version and,
-    when `judges` is given, only those judges."""
+def judgment_prompt(bench: Bench, rec: dict) -> str | None:
+    """The grading text constructed by nwb judge, without instantiating a backend."""
+    from nwb.judge import imagegen_prompt, understanding_prompt
+
+    if rec["track"] == "understanding":
+        item = next((i for i in bench.all_items if i.id == rec.get("item")), None)
+        return understanding_prompt(bench, item, rec.get("answer", "")) if item else None
+    if rec.get("animal") in bench.animals:
+        return imagegen_prompt(bench, rec["prompt"], bench.animals[rec["animal"]].en)
+    return None
+
+
+def _load_judgments(run_dir: Path, judges: set[str] | None, bench: Bench | None = None,
+                    stale: dict | None = None) -> dict[str, list[dict]]:
+    """Check sample identity and the current judge request, without constructing a backend."""
     by_target = defaultdict(list)
     for path in sorted((run_dir / "judgments").rglob("*.json")):
         j = read_json(path)
-        if "error" in j or (judges and j["judge"] not in judges):
+        if "error" in j or (judges is not None and j["judge"] not in judges):
             continue
         target = run_dir / j["target"]
-        if target.is_file() and j.get("target_mtime") == target.stat().st_mtime:
-            by_target[j["target"]].append(j)
+        reason = None
+        if not target.is_file():
+            reason = "target missing"
+        elif (hashlib.sha256(target.read_bytes()).hexdigest() != j["target_sha256"]
+              if "target_sha256" in j else j.get("target_mtime") != target.stat().st_mtime):
+            reason = "target changed"
+        elif bench:
+            rec = read_json(target)
+            if rec.get("suite", "core") != bench.suite:
+                continue
+            prompt = judgment_prompt(bench, rec)
+            if prompt is None or j.get("judge_prompt") != hashlib.sha256(prompt.encode()).hexdigest()[:16]:
+                reason = "judge prompt changed"
+        if reason:
+            if stale is not None:
+                stale[reason] = stale.get(reason, 0) + 1
+            continue
+        by_target[j["target"]].append(j)
     return by_target
+
+
+def _evidence_path(path: str) -> str:
+    """Benchmark-relative evidence paths survive relocation and home-prefix sanitization."""
+    parts = Path(path).parts
+    return Path(*parts[parts.index("bench"):]).as_posix() if "bench" in parts else path
 
 
 def _samples(run_dir: Path, track: str, pattern: str, by_target: dict) -> list[tuple[dict, list[dict]]]:
@@ -92,13 +131,23 @@ def _samples(run_dir: Path, track: str, pattern: str, by_target: dict) -> list[t
     return out
 
 
+def _profile_groups(records, identifier: str) -> dict[str, list[str]]:
+    groups = defaultdict(set)
+    for record in records:
+        profile = collection_profile(record)
+        if "error" not in record and profile:
+            groups[record[identifier]].add(profile)
+    return {name: sorted(profiles) for name, profiles in sorted(groups.items())}
+
+
 def aggregate(run_dir: Path, trait_weights: dict[str, float], judges: set[str] | None = None,
               expected: dict[str, str] | None = None, bench: Bench | None = None) -> dict:
     """Score a run. `expected` (Bench.expected_prompts) restricts it to samples made with the current
     prompts, leaving out removed items and tiers and samples whose prompt has since changed."""
     if bench is not None:
         expected = bench.expected_prompts()
-    by_target = _load_judgments(run_dir, judges)
+    stale = {}
+    by_target = _load_judgments(run_dir, judges, bench, stale)
     judges = sorted({j["judge"] for js in by_target.values() for j in js})
     items = {i.id: i for i in bench.all_items} if bench else {}
 
@@ -113,7 +162,8 @@ def aggregate(run_dir: Path, trait_weights: dict[str, float], judges: set[str] |
             continue
         if item and item.modality == "vision":
             # Legacy judgments made from a text description alone are not visual evidence.
-            js = [j for j in js if j.get("judge_images") == [str(p) for p in item.images]]
+            js = [j for j in js if [_evidence_path(p) for p in j.get("judge_images", [])]
+                  == [_evidence_path(str(p)) for p in item.images]]
         js = pick_judges(js, rec["vendor"])
         per_judge = {j["judge"]: understanding_score(j) for j in js}
         objective = bool(item and item.answers)
@@ -160,12 +210,42 @@ def aggregate(run_dir: Path, trait_weights: dict[str, float], judges: set[str] |
             "rationales": {j["judge"]: j["rationale"] for j in js},
         })
 
-    scores = {"suite": bench.suite if bench else "core", "judges": judges,
+    scores = {"nwb_version": __version__, "stale_judgments": {"total": sum(stale.values()), "reasons": stale},
+              "suite": bench.suite if bench else "core", "judges": judges,
               "judge_health": judge_health(by_target, trait_weights),
               "understanding": _summarize_understanding([s for s in und if not s["state"]], contaminated),
               "state_understanding": _summarize_understanding([s for s in und if s["state"]], state_contaminated),
               "imagegen": _summarize_imagegen(img), "samples": {"understanding": und, "imagegen": img}}
     scores["leaderboards"] = leaderboards(bench, scores, run_dir) if bench else {}
+    records = [read_json(p) for track, pattern in (("understanding", "*/*.json"), ("imagegen", "*/*/*.json"))
+               for p in sorted((run_dir / track).glob(pattern))]
+    judgments = [read_json(p) for p in sorted((run_dir / "judgments").rglob("*.json"))]
+    collected = [r["collected"] for r in records + judgments if r.get("collected")]
+    scores["collection"] = {
+        "started_at": min((c["started_at"] for c in collected if c.get("started_at")), default=None),
+        "finished_at": max((c["finished_at"] for c in collected if c.get("finished_at")), default=None),
+        "revisions": sorted({c["revision"] for c in collected if c.get("revision")}),
+        "dirty": any(c.get("revision", "").endswith("+dirty") for c in collected),
+        "recorded": len(collected), "tasks": len(records) + len(judgments),
+        "subject_profiles": _profile_groups((r for r in records if r.get("track") == "understanding"), "model"),
+        "judge_profiles": _profile_groups(judgments, "judge"),
+    }
+    models = load_models(bench.root)[0] if bench else {}
+    scores["labels"] = {}
+    for model in sorted({r["model"] for r in records if "model" in r}):
+        label = models[model].label if model in models else model
+        efforts = {r.get("settings", {}).get("effort") for r in records
+                   if r.get("model") == model and r.get("track") == "understanding"}
+        efforts.discard(None)
+        if len(efforts) == 1 and next(iter(efforts)) not in ("default", "unexposed"):
+            suffix = f" ({next(iter(efforts))})"
+            if not label.endswith(suffix):
+                label += suffix
+        scores["labels"][model] = label
+    for rows in scores["leaderboards"].values():
+        for row in rows:
+            row["label"] = scores["labels"].get(row["model"], row["model"])
+    scores["efficiency"] = efficiency(records, judgments, bench, models)
     return scores
 
 
@@ -251,6 +331,9 @@ def _objective_diagnostics(samples: list[dict]) -> dict:
         "family_classes": families, "family_macro": mean(families.values()),
         "joint": mean(c["joint"] for c in cells),
         "visual_joint": mean(c["visual_joint"] for c in cells),
+        "repetition_consistency": mean(100.0 if len({s["joint"] for s in reps}) == 1 else 0.0
+                                       for reps in by_item.values() if len(reps) >= 2),
+        "repetition_consistency_images": sum(len(reps) >= 2 for reps in by_item.values()),
         "categories": {category: mean(c["score"] for c in cells if c["category"] == category)
                        for category in sorted({c["category"] for c in cells if c["category"]})},
     }
@@ -314,12 +397,14 @@ def leaderboards(bench: Bench, scores: dict, run_dir: Path) -> dict:
         rows = []
         for model in sorted(models):
             attempted_reps = set()
+            records = []
             pattern = "*.json" if track == "understanding" else "*/*.json"
             for path in (run_dir / track / model).glob(pattern):
                 rec = read_json(path)
                 if (tuple(rec[f] for f in fields) in required and is_current(rec, expected)
                         and rec.get("suite", "core") == bench.suite):
                     attempted_reps.add(rec["rep"])
+                    records.append(rec)
             if not attempted_reps:
                 continue  # never attempted this panel, e.g. a text-only model on the visual panel
             cells = defaultdict(list)
@@ -331,11 +416,30 @@ def leaderboards(bench: Bench, scores: dict, run_dir: Path) -> dict:
             rep_sets = [{s["rep"] for s in cell} for cell in cells.values()]
             complete = bool(required) and set(cells) == required
             balanced = complete and all(rs == attempted_reps for rs in rep_sets)
+            settings = {r.get("settings_id") for r in records}
+            efforts = {r.get("settings", {}).get("effort") for r in records}
+            differences = []
+            if len(settings) > 1:
+                differences.append("settings_id: " + ", ".join(sorted(str(v) for v in settings)))
+            if len(efforts) > 1:
+                differences.append("effort: " + ", ".join(sorted(str(v) for v in efforts)))
+            fills = sorted({str(r["meta"]["fill_note"]) for r in records if "fill_note" in r.get("meta", {})})
+            if fills:
+                differences.append("alternate route: " + "; ".join(fills))
+            value = mean(mean(s[metric] for s in v) for v in cells.values())
             rows.append({"model": model, "rank": None,
-                         "score": mean(mean(s[metric] for s in v) for v in cells.values()) if balanced else None,
+                         "score": value if balanced and not differences else None,
+                         "diagnostic_score": value, "conditions": differences,
+                         "settings_status": "settings unrecorded" if settings == {None} else "recorded",
+                         "settings_ids": sorted(v for v in settings if v is not None),
+                         "collection_profiles": sorted({collection_profile(r) for r in records if collection_profile(r)}),
+                         "judges": dict(sorted(Counter(j for cell in cells.values() for s in cell
+                                                       for j in s["per_judge"]).items())),
+                         "score_interval": None, "rank_range": None,
                          "completed": len(cells), "required": len(required),
                          "repetitions": min(map(len, rep_sets), default=0) if complete else 0,
-                         "status": "complete" if balanced else "incomplete repetitions" if complete else "incomplete"})
+                         "status": "mixed conditions" if differences else "complete" if balanced else
+                                   "incomplete repetitions" if complete else "incomplete"})
         rows.sort(key=lambda r: (r["score"] is None, -(r["score"] or 0), r["model"]))
         previous, rank = None, 0
         for index, row in enumerate(rows, 1):
@@ -344,5 +448,112 @@ def leaderboards(bench: Bench, scores: dict, run_dir: Path) -> dict:
                     rank = index
                 row["rank"] = rank
                 previous = row["score"]
+        _bootstrap(rows, samples, required, fields, metric, bench, track)
         boards[name] = rows
     return boards
+
+
+BOOTSTRAP_RESAMPLES = 2000
+BOOTSTRAP_SEED = 6643
+
+
+def _percentile(values: list[float], q: float) -> float:
+    values = sorted(values)
+    index = (len(values) - 1) * q
+    low = int(index)
+    return values[low] + (values[min(low + 1, len(values) - 1)] - values[low]) * (index - low)
+
+
+def _bootstrap(rows, samples, required, fields, metric, bench, track):
+    """Paired source/animal cluster draws; keep all cells and their observed repetition means."""
+    ranked = [r for r in rows if r["score"] is not None]
+    if not ranked:
+        return
+    items = {i.id: i for i in bench.items}
+    clusters = defaultdict(list)
+    for cell in sorted(required):
+        cluster = cell[1] if track == "imagegen" else tuple(str(p.resolve()) for p in items[cell[0]].images)
+        clusters[cluster].append(cell)
+    groups = list(clusters.values())
+    cell_scores = {}
+    for row in ranked:
+        cell_scores[row["model"]] = {
+            cell: mean(s[metric] for s in samples if s["model"] == row["model"]
+                       and tuple(s[f] for f in fields) == cell
+                       and (track != "imagegen" or s["verbatim"] is True)) for cell in sorted(required)}
+    draws, ranks = defaultdict(list), defaultdict(list)
+    rng = random.Random(BOOTSTRAP_SEED)
+    for _ in range(BOOTSTRAP_RESAMPLES):
+        cells = [cell for group in rng.choices(groups, k=len(groups)) for cell in group]
+        values = {m: mean(cs[c] for c in cells) for m, cs in cell_scores.items()}
+        for model, value in values.items():
+            draws[model].append(value)
+            ranks[model].append(1 + sum(v > value for v in values.values()))
+    for row in ranked:
+        model = row["model"]
+        row["score_interval"] = [_percentile(draws[model], q) for q in (.025, .975)]
+        ordered_ranks = sorted(ranks[model])
+        row["rank_range"] = [ordered_ranks[math.ceil(len(ordered_ranks) * q) - 1] for q in (.025, .975)]
+        row["bootstrap"] = {"resamples": BOOTSTRAP_RESAMPLES, "seed": BOOTSTRAP_SEED,
+                            "clusters": len(groups), "cluster": "animal" if track == "imagegen" else "source image"}
+
+
+def _token_cost(tokens: dict, price: dict) -> float | None:
+    if tokens.get("input") is None or tokens.get("output") is None or not all(k in price for k in ("input", "output")):
+        return None
+    cached, write = tokens.get("cached_input") or 0, tokens.get("cache_write") or 0
+    return ((tokens["input"] - cached - write) * price["input"]
+            + cached * price.get("cached_input", price["input"])
+            + write * price.get("cache_write", price["input"])
+            + tokens["output"] * price["output"]) / 1_000_000
+
+
+def _resources(records: list[dict], price: dict) -> dict:
+    tokens = [r.get("meta", {}).get("tokens") or {} for r in records]
+    costs = [_token_cost(t, price) for t in tokens]
+    seconds = [r["meta"]["seconds"] for r in records if r.get("meta", {}).get("seconds") is not None]
+    totals = {k: sum(t[k] for t in tokens if t.get(k) is not None)
+              if any(t.get(k) is not None for t in tokens) else None
+              for k in ("input", "output", "reasoning", "cached_input", "cache_write")}
+    return {"tasks": len(records), "token_tasks": sum(any(v is not None for v in t.values()) for t in tokens),
+            "token_totals": totals,
+            "token_counts": {k: sum(t.get(k) is not None for t in tokens) for k in totals},
+            "mean_input_tokens": mean(t.get("input") for t in tokens),
+            "mean_output_tokens": mean(t.get("output") for t in tokens),
+            "mean_reasoning_tokens": mean(t.get("reasoning") for t in tokens),
+            "median_seconds": median(seconds) if seconds else None,
+            "cost_tasks": sum(c is not None for c in costs), "mean_cost_usd": mean(costs),
+            "estimated_cost_usd": sum(costs) if costs and all(c is not None for c in costs) else None,
+            "known_cost_usd": sum(c for c in costs if c is not None) if any(c is not None for c in costs) else None,
+            "reported_cost_usd": sum(r["meta"]["cost_usd_reported"] for r in records
+                                     if r.get("meta", {}).get("cost_usd_reported") is not None)
+                                 if any(r.get("meta", {}).get("cost_usd_reported") is not None for r in records) else None,
+            "price": price or None}
+
+
+def efficiency(records: list[dict], judgments: list[dict], bench, models) -> dict:
+    """Retained-task telemetry, including failed tasks; missing usage is never zero."""
+    panel = {i.id for i in bench.items if i.modality == "vision"} if bench else set()
+    expected = bench.expected_prompts() if bench else None
+    understanding, images, whole, judge_totals = {}, {}, {}, {}
+    for model in sorted({r["model"] for r in records if "model" in r}):
+        rr = [r for r in records if r.get("model") == model]
+        price = models[model].options.get("price", {}) if model in models else {}
+        text = [r for r in rr if r.get("track") == "understanding"]
+        visual = [r for r in text if r.get("item") in panel and is_current(r, expected)
+                  and r.get("suite", "core") == bench.suite] if bench else []
+        understanding[model] = _resources(visual, price)
+        reps = {r.get("rep", 1) for r in visual}
+        if {r["item"] for r in visual} != panel or any(
+                {r.get("rep", 1) for r in visual if r["item"] == item} != reps for item in panel):
+            understanding[model]["estimated_cost_usd"] = None
+        generated = [r for r in rr if r.get("track") == "imagegen"]
+        secs = [r["meta"]["seconds"] for r in generated if r.get("meta", {}).get("seconds") is not None]
+        images[model] = {"tasks": len(generated), "images": sum(len(r.get("images", [])) for r in generated),
+                         "median_seconds": median(secs) if secs else None}
+        whole[model] = {"understanding": _resources(text, price), "imagegen": images[model]}
+    for model in sorted({r["judge"] for r in judgments if "judge" in r}):
+        price = models[model].options.get("price", {}) if model in models else {}
+        judge_totals[model] = _resources([r for r in judgments if r.get("judge") == model], price)
+    return {"suite": bench.suite if bench else "core", "visual_understanding": understanding,
+            "imagegen": images, "whole_run": whole, "judges": judge_totals}

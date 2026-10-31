@@ -1,0 +1,88 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/deepseek-v4.1-flash/recognize_naiwa__r1.json",
+  "target_sha256": "a31ab0536bb5a407a55f6a11c24716fa917a16d2676983e3307ffbe8651560ba",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "53b0558d5f9d5420",
+  "judge_images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "将图中角色认定为手机游戏《Pou》中的 Pou，实际是变异奶龙「奶蛙」。",
+    "将该图归为「Pou/波波表情包」梗，实际属于大笑奶龙／变异奶龙／奶蛙梗家族。"
+  ],
+  "rationale": "回答错误识别了角色及其网络梗，未提及奶龙或奶蛙。图中的黄色头部、凸出的圆眼和绿色巩膜符合参考说明中的奶蛙变体。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"naiwa\":0},\"hallucinations\":[\"将图中角色认定为手机游戏《Pou》中的 Pou，实际是变异奶龙「奶蛙」。\",\"将该图归为「Pou/波波表情包」梗，实际属于大笑奶龙／变异奶龙／奶蛙梗家族。\"],\"rationale\":\"回答错误识别了角色及其网络梗，未提及奶龙或奶蛙。图中的黄色头部、凸出的圆眼和绿色巩膜符合参考说明中的奶蛙变体。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719c-8663-7aa1-a359-0ecab88ef58a",
+    "seconds": 10.2,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12188,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 199,
+      "reasoning_output_tokens": 52
+    },
+    "tokens": {
+      "input": 12188,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 199,
+      "reasoning": 52
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:50:45Z",
+    "finished_at": "2026-10-25T05:50:55Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

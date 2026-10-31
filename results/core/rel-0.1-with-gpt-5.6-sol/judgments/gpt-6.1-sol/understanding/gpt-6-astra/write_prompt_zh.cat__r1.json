@@ -1,0 +1,92 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6-astra/write_prompt_zh.cat__r1.json",
+  "target_sha256": "ab729bac7cb808349a05dfd5ac28b52c29df99d880cc7d21f248bce2c5b1de1d",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "9f852a167484d319",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 1,
+    "vibe": 2,
+    "identity": 1
+  },
+  "hallucinations": [
+    "将参考中的前屈站姿改成前仰后合、脑袋后仰的姿态。",
+    "将参考中的纯白或浅灰背景改成虚化的浅蓝绿色背景。"
+  ],
+  "rationale": "闭眼狂笑、巨大口腔及牙舌、无明显脖子的肥胖体型、廉价三维质感和魔性氛围均有明确体现，但未落实前屈屈膝站姿、双手捧腹和浅色椭圆肚皮。背景仅部分符合简洁要求，猫的身份主要依赖黄色奶龙体型上添加猫耳和胡须，属于符号化特征。",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":2,\"body\":2,\"belly_patch\":0,\"render\":2,\"background\":1,\"vibe\":2,\"identity\":1},\"hallucinations\":[\"将参考中的前屈站姿改成前仰后合、脑袋后仰的姿态。\",\"将参考中的纯白或浅灰背景改成虚化的浅蓝绿色背景。\"],\"rationale\":\"闭眼狂笑、巨大口腔及牙舌、无明显脖子的肥胖体型、廉价三维质感和魔性氛围均有明确体现，但未落实前屈屈膝站姿、双手捧腹和浅色椭圆肚皮。背景仅部分符合简洁要求，猫的身份主要依赖黄色奶龙体型上添加猫耳和胡须，属于符号化特征。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719f-de46-7c03-93ce-ba1a77034fe6",
+    "seconds": 30.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12267,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 608,
+      "reasoning_output_tokens": 396
+    },
+    "tokens": {
+      "input": 12267,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 608,
+      "reasoning": 396
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:54:24Z",
+    "finished_at": "2026-10-25T05:54:55Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

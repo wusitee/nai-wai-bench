@@ -1,0 +1,87 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6.1-sol/recognize_zh__r1.json",
+  "target_sha256": "899ea3a3aec6426eecb539c388f610053517a6776fa9e1c4eab07a9172779a18",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "8838a31383e64b71",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "scores": {
+    "base_character": 2,
+    "identifies_meme": 1,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [],
+  "rationale": "回答正确认出国产动画角色奶龙，并提到大笑表情包，但仅部分识别了“大笑奶龙”这一特定梗，未说明其为AI生成的非官方变异版本。未提及“变异奶龙”“奶蛙”及其关系；其他称呼不能仅因参考资料未收录就判为幻觉。",
+  "raw": "{\"scores\":{\"base_character\":2,\"identifies_meme\":1,\"ai_variant\":0,\"aliases\":0,\"naiwa\":0},\"hallucinations\":[],\"rationale\":\"回答正确认出国产动画角色奶龙，并提到大笑表情包，但仅部分识别了“大笑奶龙”这一特定梗，未说明其为AI生成的非官方变异版本。未提及“变异奶龙”“奶蛙”及其关系；其他称呼不能仅因参考资料未收录就判为幻觉。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a171a0-e3e4-75a3-9d93-e6190c350eb2",
+    "seconds": 18.8,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13419,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 364,
+      "reasoning_output_tokens": 239
+    },
+    "tokens": {
+      "input": 13419,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 364,
+      "reasoning": 239
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:55:31Z",
+    "finished_at": "2026-10-25T05:55:50Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

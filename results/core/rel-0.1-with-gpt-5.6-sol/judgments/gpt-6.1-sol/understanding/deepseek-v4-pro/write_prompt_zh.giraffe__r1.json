@@ -1,0 +1,92 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/deepseek-v4-pro/write_prompt_zh.giraffe__r1.json",
+  "target_sha256": "c5046d8292bd0327b44910cbd14f4f27568dbeec88d1a03a7cc80c19d6dfbe2f",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "2a66e2e4151f15ef",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 0,
+    "belly_patch": 0,
+    "render": 1,
+    "background": 2,
+    "vibe": 0,
+    "identity": 2
+  },
+  "hallucinations": [
+    "A fuzzy long neck and a separate oversized round head above a small body contradict the required neckless, merged head-and-torso silhouette.",
+    "The head tilted far back contradicts the specified doubled-over, forward-hunched laughter pose."
+  ],
+  "rationale": "The prompt clearly covers closed curved eyes, a huge laughing mouth with teeth and tongue, giraffe markings and ossicones, and a plain white background. It omits belly-clutching hands and the pale belly patch, contradicts the required pose and body structure, and emphasizes adorable styling rather than absurd meme energy; the 3D rendering instructions only partly specify the required finish.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":0,\"eyes\":2,\"mouth\":2,\"body\":0,\"belly_patch\":0,\"render\":1,\"background\":2,\"vibe\":0,\"identity\":2},\"hallucinations\":[\"A fuzzy long neck and a separate oversized round head above a small body contradict the required neckless, merged head-and-torso silhouette.\",\"The head tilted far back contradicts the specified doubled-over, forward-hunched laughter pose.\"],\"rationale\":\"The prompt clearly covers closed curved eyes, a huge laughing mouth with teeth and tongue, giraffe markings and ossicones, and a plain white background. It omits belly-clutching hands and the pale belly patch, contradicts the required pose and body structure, and emphasizes adorable styling rather than absurd meme energy; the 3D rendering instructions only partly specify the required finish.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719b-b34e-77f0-849a-edc7e96a7a04",
+    "seconds": 24.8,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12630,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 523,
+      "reasoning_output_tokens": 337
+    },
+    "tokens": {
+      "input": 12630,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 523,
+      "reasoning": 337
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:49:51Z",
+    "finished_at": "2026-10-25T05:50:16Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

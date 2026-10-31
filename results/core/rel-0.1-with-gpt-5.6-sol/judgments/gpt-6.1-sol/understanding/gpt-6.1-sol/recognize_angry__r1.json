@@ -1,0 +1,85 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6.1-sol/recognize_angry__r1.json",
+  "target_sha256": "80e441c15172dc7545b78b743b4702a404800b5b07bfd2fc6146c23b81c3e1ec",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "25c5a8a5c3fe0441",
+  "judge_images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0
+  },
+  "hallucinations": [],
+  "rationale": "回答未识别出奶龙，也未指出该图属于大笑奶龙／变异奶龙／奶蛙梗，更未说明其为AI生成的非官方变异形象。对“红温／切换愤怒模式”的描述符合图片表现；角色判断明确保留了不确定性，没有构成幻觉的断言。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"ai_variant\":0},\"hallucinations\":[],\"rationale\":\"回答未识别出奶龙，也未指出该图属于大笑奶龙／变异奶龙／奶蛙梗，更未说明其为AI生成的非官方变异形象。对“红温／切换愤怒模式”的描述符合图片表现；角色判断明确保留了不确定性，没有构成幻觉的断言。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a171a0-5a13-7110-a8bc-f0d9d53ec6a7",
+    "seconds": 9.0,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12692,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 147,
+      "reasoning_output_tokens": 34
+    },
+    "tokens": {
+      "input": 12692,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 147,
+      "reasoning": 34
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:54:56Z",
+    "finished_at": "2026-10-25T05:55:05Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

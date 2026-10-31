@@ -1,0 +1,68 @@
+{
+  "settings_id": "c5b99b49261f87dd",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "vendor": "google",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "这张表情包中的角色和对应的网络梗如下：\n\n### 1. 角色是谁？\n这个角色在中文网络上被普遍称为**“小绿”**（或“绿胖子”）。\n* **原本形象**：原版其实是一只**通体翠绿**、肚皮略浅的3D卡通无毛生物。\n* **图中的版本**：这是网友基于原版二创魔改的**“红温版小绿”**（全身调成了红色），因此配文是“切换愤怒模式”。\n\n---\n\n### 2. 它属于哪个网络梗？\n它主要属于**“老干部背手巡视”**（以及由此衍生的**“红温破防”**）梗：\n\n1. **“老干部视察 / 大爷遛弯”梗（原梗）**：\n   * 原版动画中，小绿腆着滚圆的将军肚，双手背在身后，迈着外八字悠哉游哉地踱步，眼神微垂，神态极其淡定威严。\n   * 这个体态和神韵精准契合了现实中**“挺着啤酒肚、背着手在单位视察的老干部”**或**“吃完晚饭在小区溜达的退休大爷”**形象，在抖音、B站等平台迅速走红，常被用来配魔性BGM调侃“打工人眼中的领导视察”、“退休后的我”等。\n\n2. **“红温小绿 / 愤怒模式”梗（衍生变体）**：\n   * 网友为了表达强烈的情绪反差，把平日里悠闲、傲娇的小绿P成了通体通红的模样，用来代指**“被气到红温”**、**“领导要开始发飙整顿”**或**“当场破防”**的情境。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 32.6,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 16453,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:46:10Z",
+    "finished_at": "2026-10-25T00:46:43Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

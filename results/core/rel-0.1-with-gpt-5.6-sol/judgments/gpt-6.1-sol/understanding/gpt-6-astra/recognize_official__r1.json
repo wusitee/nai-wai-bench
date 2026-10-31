@@ -1,0 +1,84 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6-astra/recognize_official__r1.json",
+  "target_sha256": "979c318854d8263f42e7bc7d3fca4826f49ac226069abe061941cf2a5f51d159",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "a1efede34913308b",
+  "judge_images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "scores": {
+    "base_character": 2,
+    "official_art": 0
+  },
+  "hallucinations": [],
+  "rationale": "回答正确识别了奶龙及其国产动画角色身份。它未说明图片是官方角色立绘，也未明确区分其与非官方“大笑奶龙／奶蛙”变体，但没有将图片误认成该变体。",
+  "raw": "{\"scores\":{\"base_character\":2,\"official_art\":0},\"hallucinations\":[],\"rationale\":\"回答正确识别了奶龙及其国产动画角色身份。它未说明图片是官方角色立绘，也未明确区分其与非官方“大笑奶龙／奶蛙”变体，但没有将图片误认成该变体。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719f-6c55-7b10-8b5a-276cf6466e74",
+    "seconds": 12.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12324,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 294,
+      "reasoning_output_tokens": 212
+    },
+    "tokens": {
+      "input": 12324,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 294,
+      "reasoning": 212
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:53:55Z",
+    "finished_at": "2026-10-25T05:54:07Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

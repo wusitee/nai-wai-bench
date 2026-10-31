@@ -1,0 +1,72 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/gpt-6-astra/recognize_facepalm__r1.json",
+  "target_sha256": "c91a2bfe0907c38965fd38f87325a10d0549dc99fee72060097e6d41a08b2c22",
+  "settings_id": "c5b99b49261f87dd",
+  "input_names": "neutral",
+  "judge_prompt": "bf1c0a8a4ee59648",
+  "judge_images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "scores": {
+    "base_character": 1,
+    "identifies_meme": 1
+  },
+  "hallucinations": [],
+  "rationale": "The model identifies the base character but only associates the image with generic Nailong memes rather than the specific mutant meme family.",
+  "raw": "{\"scores\": {\"base_character\": 1, \"identifies_meme\": 1}, \"hallucinations\": [], \"rationale\": \"The model identifies the base character but only associates the image with generic Nailong memes rather than the specific mutant meme family.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 22.0,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 16523,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:06:03Z",
+    "finished_at": "2026-10-25T02:06:25Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

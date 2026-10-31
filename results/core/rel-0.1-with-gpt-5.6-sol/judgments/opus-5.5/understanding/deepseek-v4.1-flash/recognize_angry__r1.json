@@ -1,0 +1,111 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/deepseek-v4.1-flash/recognize_angry__r1.json",
+  "target_sha256": "7710514cb483f3d0b7b95bc737c8deff9775793bc6b0e0ffc3d673be8bea2e70",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "5859f3308e562398",
+  "judge_images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0
+  },
+  "hallucinations": [
+    "Confidently identifies the character as a standalone '红温' meme creature called '红温兽' / '红温宝宝' rather than a mutated 奶龙",
+    "Claims the image is a netizen-created personification of the '红温' state, rather than part of the 大笑奶龙 / 变异奶龙 / 奶蛙 family"
+  ],
+  "rationale": "The model never mentions 奶龙 and misidentifies the sticker as a generic '红温' mascot, missing the 奶龙 mutation meme family. Its note that the character is unofficial is not tied to an AI-generated 奶龙 variant, so it earns no credit.",
+  "raw": "```json\n{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"ai_variant\": 0}, \"hallucinations\": [\"Confidently identifies the character as a standalone '红温' meme creature called '红温兽' / '红温宝宝' rather than a mutated 奶龙\", \"Claims the image is a netizen-created personification of the '红温' state, rather than part of the 大笑奶龙 / 变异奶龙 / 奶蛙 family\"], \"rationale\": \"The model never mentions 奶龙 and misidentifies the sticker as a generic '红温' mascot, missing the 奶龙 mutation meme family. Its note that the character is unofficial is not tied to an AI-generated 奶龙 variant, so it earns no credit.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 7.9,
+    "tokens": {
+      "input": 1787,
+      "cached_input": 0,
+      "cache_write": 1785,
+      "output": 490,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0243291,
+    "tools_used": [],
+    "cost_usd": 0.0243291,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1785,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 490,
+      "output_tokens_details": {
+        "thinking_tokens": 233
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1785,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 490,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1785,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1785
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:55:18Z",
+    "finished_at": "2026-10-25T01:55:25Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

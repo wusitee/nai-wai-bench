@@ -1,0 +1,79 @@
+{
+  "settings_id": "f54f604c4f61c57e",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "vendor": "deepseek",
+  "item": "recognize_variant",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。",
+  "images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "answer": "我判断它对应的是中文表情包里常见的**“捧腹大笑 / 笑到肚子疼”**，常配文**“笑死我了”“笑不活了”**；从形象谱系上说，也属于**“熊猫头/熊猫人”**这类熊猫表情包的 3D 化变体。\n\n判断依据：\n\n1. **动作**：双手捂在肚子上、上身后仰，是典型的“捧腹”姿势，直接对应“笑到肚子疼”。\n2. **表情**：眼睛眯成弯月、嘴巴张到最大、露齿吐舌，是夸张的爆笑表情。\n3. **熊猫形象**：熊猫是中文网络表情包的高频载体，“熊猫头”系列里本来就有大量大笑、狂笑变体；这张图像是把那种二维表情做成了 3D 写实版。\n4. 它没有对应某个特定人物或某一张原图，更像是在复刻“爆笑反应图”这一表情包语义。\n\n所以最贴切的说法是：**模仿“笑死我了/捧腹大笑”的熊猫表情包**。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+    "stop_reason": "end_turn",
+    "client": "deepseek-harness-acp 0.0.1",
+    "seconds": 34.0,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+      "reasoning_effort": "high"
+    },
+    "resolved_model": "[\"deepseek-official\",\"deepseek-flash\"]",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 4524,
+        "size": 1000000
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-flash-default.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53",
+      "config/dsh-flash-default.patch.yml": "e681660b1857478d"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:43:52Z",
+    "finished_at": "2026-10-25T00:44:26Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

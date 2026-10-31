@@ -1,0 +1,73 @@
+{
+  "settings_id": "cefccff5b65c93e5",
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "vendor": "deepseek",
+  "item": "write_prompt_zh.giraffe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出长颈鹿版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "3D-rendered cartoon meme sticker of a chubby baby giraffe with a very large, round head, a fuzzy long neck, and a small plump body. The giraffe is laughing uncontrollably: its head is tilted far back, its eyes are squeezed tightly shut into happy curved lines, and its mouth is wide open in a huge joyful laugh, showing a pink tongue and small upper teeth, with soft blush patches on its cheeks. It has two little fuzzy ossicones on top of its head, small rounded ears, smooth warm yellow fur with scattered brown giraffe patches, and a cute, exaggerated emoji expression. Soft even lighting, clean plain white background, centered full-body composition, adorable viral sticker style, no text.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "stop_reason": "end_turn",
+    "client": "deepseek-harness-acp 0.0.1",
+    "seconds": 30.1,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+      "reasoning_effort": "high"
+    },
+    "resolved_model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 1725,
+        "size": 1000000
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:52:18Z",
+    "finished_at": "2026-10-25T00:52:49Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -40,7 +40,7 @@ def test_optional_states_forward_the_correct_reference_without_core_cost_or_llm_
 
     backend = SimpleNamespace(run=generate)
     monkeypatch.setattr(tracks, "get_backend", lambda _: backend)
-    monkeypatch.setattr(tracks, "run_jobs", lambda selected, *args: (jobs.extend(selected) or len(selected), 0))
+    monkeypatch.setattr(tracks, "run_jobs", lambda selected, *args, **kwargs: (jobs.extend(selected) or len(selected), 0))
     model = ModelSpec("image", "stub", "subject", "", frozenset({"image"}))
     args = SimpleNamespace(models="image", tiers="states", animals="default", reps=1,
                            run_dir=tmp_path, jobs=1, force=False)
@@ -65,3 +65,101 @@ def test_optional_states_forward_the_correct_reference_without_core_cost_or_llm_
     html = report.render(bench, "states", scores)
     reference = next(t.id for t in bench.state_tiers.values() if t.reference)
     assert "State outputs are unscored" in html and reference in html and "test.png" in html
+
+
+def test_settings_identity_tracks_collection_changes_not_display_or_credentials(tmp_path):
+    from dataclasses import replace
+    from nwb.config import model_settings
+    patch = tmp_path / "config/agent.yml"
+    patch.parent.mkdir()
+    patch.write_text("tools: false")
+    spec = ModelSpec("a", "acp", "v", "m", frozenset({"text"}), {
+        "command": ["agent", "--patch", "${NWB_ROOT}/config/agent.yml"],
+        "effort": "high", "effort_option": "reasoning_effort", "env": {"TOKEN": "secret"}})
+    settings, original = model_settings(spec, tmp_path)
+    assert settings["config"] == {"reasoning_effort": "high"}
+    assert settings["env_keys"] == ["NWB_ROOT", "TOKEN"] and "secret" not in str(settings)
+    assert settings["command"][-1] == "${NWB_ROOT}/config/agent.yml"
+    assert "config/agent.yml" in settings["files"]
+    cosmetic = replace(spec, options={**spec.options, "price": {"input": 12}, "label": "A", "timeout": 1,
+                                     "env": {"TOKEN": "new-secret"}})
+    assert model_settings(cosmetic, tmp_path)[1] == original
+    for changes in ({"effort": "low"}, {"config": {"mode": "default"}}, {"command": ["other"]}):
+        assert model_settings(replace(spec, options={**spec.options, **changes}), tmp_path)[1] != original
+    absolute = replace(spec, options={**spec.options, "command": ["agent", "--patch", str(patch)]})
+    assert model_settings(absolute, tmp_path)[1] == original
+    relocated = tmp_path / "another-machine"
+    (relocated / "config").mkdir(parents=True)
+    (relocated / "config/agent.yml").write_bytes(patch.read_bytes())
+    assert model_settings(spec, relocated)[1] == original
+    assert model_settings(replace(spec, options={**spec.options, "usage_command": "/usage"}), tmp_path)[1] != original
+    patch.write_text("tools: true")
+    assert model_settings(spec, tmp_path)[1] != original
+    api = replace(spec, backend="openai", options={"base_url": "https://user:secret@api.example/v1"})
+    assert model_settings(api, tmp_path)[0]["endpoint"] == "api.example"
+
+
+@pytest.mark.parametrize("change", [{"model": "another-model"}, {"options": {"effort": "low"}}, {"prompt": "new question"}])
+def test_resume_preserves_successes_after_model_effort_or_prompt_changes(tmp_path, change):
+    from dataclasses import replace
+
+    bench = load_bench(find_root())
+    spec = ModelSpec("m", "codex", "v", "original-model", frozenset({"text"}), {"effort": "high"})
+    item = next(i for i in bench.items if i.modality == "text")
+    job = tracks.understanding_jobs(bench, [spec], [item], 1, tmp_path)[0]
+    write_json(job.out, {**job.base, "answer": "saved answer"})
+    assert is_done(job)
+    if "prompt" in change:
+        changed = tracks.understanding_jobs(bench, [spec], [replace(item, **change)], 1, tmp_path)[0]
+    else:
+        changed = tracks.understanding_jobs(bench, [replace(spec, **change)], [item], 1, tmp_path)[0]
+    assert not is_done(changed)
+    before = job.out.read_bytes()
+    called = []
+    changed.fn = lambda: called.append(True) or {"answer": "replacement"}
+    untouched = Job(tmp_path / "new.json", "new sample", {"model": "m"}, lambda: called.append(True))
+    with pytest.raises(ValueError, match="choose a new --run.*--force"):
+        tracks.run_jobs([untouched, changed], 2, False, run_dir=tmp_path)
+    assert called == [] and job.out.read_bytes() == before
+    assert not untouched.out.exists() and not (tmp_path / "collection.jsonl").exists()
+    assert tracks.run_jobs([changed], 1, True) == (1, 0)
+    assert is_done(changed) and called == [True]
+
+
+def test_collection_records_requests_and_keeps_no_ops_unchanged(tmp_path):
+    import json
+    from datetime import datetime
+    from nwb.util import read_json
+
+    def fail():
+        raise RuntimeError("failure")
+
+    jobs = [Job(tmp_path / f"{name}.json", name, {"model": "m", "settings_id": "0123456789abcdef"}, fn,
+                settings={"backend": "test", "effort": "high"}, run_dir=tmp_path)
+            for name, fn in [("ok", lambda: {"answer": "OK"}), ("error", fail)]]
+    assert tracks.run_jobs(jobs, 2, False) == (1, 1)
+    for job in jobs:
+        rec = read_json(job.out)
+        assert rec["settings"] == job.settings
+        collected = rec["collected"]
+        assert collected["nwb_version"] == "0.1.0" and collected["revision"]
+        assert datetime.fromisoformat(collected["finished_at"]) >= datetime.fromisoformat(collected["started_at"])
+    before = (tmp_path / "collection.jsonl").read_bytes()
+    assert tracks.run_jobs(jobs[:1], 1, False) == (0, 0)
+    assert tracks.run_jobs([], 1, False, run_dir=tmp_path) == (0, 0)
+    assert (tmp_path / "collection.jsonl").read_bytes() == before
+    log = [json.loads(line) for line in (tmp_path / "collection.jsonl").read_text().splitlines()]
+    assert len(log) == 1 and log[0]["argv"] and log[0]["settings"]["m"]["effort"] == "high"
+    assert is_done(jobs[0])
+    jobs[0].base["settings_id"] = "changed"
+    assert not is_done(jobs[0])
+
+
+@pytest.mark.parametrize("command", [cli.cmd_understand, cli.cmd_imagegen, cli.cmd_judge])
+def test_cli_empty_collection_invocations_leave_no_log(tmp_path, command):
+    bench = load_bench(find_root())
+    model = ModelSpec("m", "acp", "v", "m", frozenset({"text", "vision", "image"}), {"command": ["unused"]})
+    args = SimpleNamespace(models="m", items=None, tiers=None, animals="default", reps=0,
+                           run_dir=tmp_path, jobs=1, force=False, track="all", judges="m")
+    assert command(args, bench.root, bench, {"m": model}, {}) == 0
+    assert not (tmp_path / "collection.jsonl").exists()

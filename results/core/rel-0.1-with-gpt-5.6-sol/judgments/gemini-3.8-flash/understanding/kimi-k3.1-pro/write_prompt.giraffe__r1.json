@@ -1,0 +1,81 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/kimi-k3.1-pro/write_prompt.giraffe__r1.json",
+  "target_sha256": "a04b30f1c1aa2769e909e56e8c7de02f9ba37b597ea214e95fd6e44065551b04",
+  "settings_id": "c5b99b49261f87dd",
+  "judge_prompt": "2ccca1767260dd39",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 1,
+    "render": 0,
+    "background": 2,
+    "vibe": 0,
+    "identity": 2
+  },
+  "hallucinations": [
+    "Describing the visual style as a flat 2D cartoon sticker with outlines instead of a glossy 3D CG render",
+    "Describing the pose as sitting squat with head tilted back instead of standing hunched forward doubled over with laughter",
+    "Giving the character a long neck instead of having no distinct neck where the head merges into the torso"
+  ],
+  "rationale": "While the prompt correctly incorporates the hands clutching the belly, squeezed eyes, plain background, and recognizable giraffe traits, it completely misses the 3D CG render, the hunched standing pose, and the unhinged meme vibe by turning it into a cute 2D cartoon sticker.",
+  "raw": "```json\n{\n  \"scores\": {\n    \"pose\": 0,\n    \"hands_on_belly\": 2,\n    \"eyes\": 2,\n    \"mouth\": 1,\n    \"body\": 1,\n    \"belly_patch\": 1,\n    \"render\": 0,\n    \"background\": 2,\n    \"vibe\": 0,\n    \"identity\": 2\n  },\n  \"hallucinations\": [\n    \"Describing the visual style as a flat 2D cartoon sticker with outlines instead of a glossy 3D CG render\",\n    \"Describing the pose as sitting squat with head tilted back instead of standing hunched forward doubled over with laughter\",\n    \"Giving the character a long neck instead of having no distinct neck where the head merges into the torso\"\n  ],\n  \"rationale\": \"While the prompt correctly incorporates the hands clutching the belly, squeezed eyes, plain background, and recognizable giraffe traits, it completely misses the 3D CG render, the hunched standing pose, and the unhinged meme vibe by turning it into a cute 2D cartoon sticker.\"\n}\n```",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 27.5,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 17142,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:19:06Z",
+    "finished_at": "2026-10-25T02:19:34Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

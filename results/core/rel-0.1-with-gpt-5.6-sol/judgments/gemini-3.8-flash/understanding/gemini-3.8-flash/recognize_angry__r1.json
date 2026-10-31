@@ -1,0 +1,76 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/gemini-3.8-flash/recognize_angry__r1.json",
+  "target_sha256": "b72eb23e2d789c086c1ea2ebb534b6652500ad5da3197533149aea115aac67f6",
+  "settings_id": "c5b99b49261f87dd",
+  "input_names": "neutral",
+  "judge_prompt": "135ef1dd99734724",
+  "judge_images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "scores": {
+    "base_character": 1,
+    "identifies_meme": 1,
+    "ai_variant": 1
+  },
+  "hallucinations": [
+    "Claims the character is '小绿' (绿胖子) whose original form is a green 3D creature.",
+    "Associates the meme with '老干部背手巡视' / '大爷遛弯' rather than the 奶龙 meme family."
+  ],
+  "rationale": "The model misidentified the base character and the meme context as '小绿' and '老干部巡视'.",
+  "raw": "{\n  \"scores\": {\n    \"base_character\": 1,\n    \"identifies_meme\": 1,\n    \"ai_variant\": 1\n  },\n  \"hallucinations\": [\n    \"Claims the character is '小绿' (绿胖子) whose original form is a green 3D creature.\",\n    \"Associates the meme with '老干部背手巡视' / '大爷遛弯' rather than the 奶龙 meme family.\"\n  ],\n  \"rationale\": \"The model misidentified the base character and the meme context as '小绿' and '老干部巡视'.\"\n}",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 23.0,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 16752,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:02:00Z",
+    "finished_at": "2026-10-25T02:02:23Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

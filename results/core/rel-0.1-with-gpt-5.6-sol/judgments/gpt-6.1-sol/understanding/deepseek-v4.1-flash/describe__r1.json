@@ -1,0 +1,90 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/deepseek-v4.1-flash/describe__r1.json",
+  "target_sha256": "d48ad48379db79b2bb6b5b801d8ea45392362283b74a0651b1b49d4d381e06c1",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "d1890ec95152d978",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 2,
+    "vibe": 1
+  },
+  "hallucinations": [
+    "将姿势描述为坐在地上、双腿向前岔开成宽V字，上身和头向后仰；参考姿势是站立、膝盖微屈、躯干前倾。"
+  ],
+  "rationale": "闭眼、大嘴、浅色肚皮、柔光3D质感和白底均有覆盖，但核心姿势相反。捧腹动作被另一种手势的猜测削弱，大头小身体的比例描述也偏离厚重的一体化体型；狂笑有所体现，抽象、略显失控的气质表达不足。",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":2,\"body\":1,\"belly_patch\":2,\"render\":2,\"background\":2,\"vibe\":1},\"hallucinations\":[\"将姿势描述为坐在地上、双腿向前岔开成宽V字，上身和头向后仰；参考姿势是站立、膝盖微屈、躯干前倾。\"],\"rationale\":\"闭眼、大嘴、浅色肚皮、柔光3D质感和白底均有覆盖，但核心姿势相反。捧腹动作被另一种手势的猜测削弱，大头小身体的比例描述也偏离厚重的一体化体型；狂笑有所体现，抽象、略显失控的气质表达不足。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719b-d1e0-7e42-8868-c6d556190b76",
+    "seconds": 20.6,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13075,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 450,
+      "reasoning_output_tokens": 259
+    },
+    "tokens": {
+      "input": 13075,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 450,
+      "reasoning": 259
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:49:59Z",
+    "finished_at": "2026-10-25T05:50:20Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

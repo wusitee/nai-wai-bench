@@ -1,0 +1,76 @@
+{
+  "settings_id": "f54f604c4f61c57e",
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "vendor": "deepseek",
+  "item": "knowledge_zh",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "「大笑奶龙」（也叫「奶蛙」）是什么？请介绍它的来源、外观以及相关的梗和二创。不确定的地方请直接说明，不要编造。",
+  "images": [],
+  "answer": "我先把“能确定”和“不确定”分开说，避免把网友戏称当成官方设定。\n\n**结论**：  \n“**大笑奶龙**”通常不是官方角色名，而是网友对国产卡通 IP「奶龙」某个**大笑表情/表情包**的称呼；“**奶蛙**”则是部分网友对这个大笑形象的戏称。它本质上属于“奶龙”相关的表情包梗，而不是一个独立官方角色。\n\n**来源**  \n- 「奶龙」据我所知是一个国产卡通形象，主要以 3D 短动画、短视频和表情包的形式在社交平台传播。角色设定是黄色、圆胖的小龙，走可爱、呆萌路线。\n- “大笑奶龙”应该是从奶龙的动画/表情包素材中截取或二创出的一个**夸张大笑表情**，后来被大量当 reaction 图使用。\n- 具体是哪一集、哪一帧、由谁最早截取，我**不确定**，不能编造具体出处。\n\n**外观**  \n- 基础形象：黄色、圆头圆身、大头小身体、短手短脚，带龙角/尾巴等龙元素。\n- 大笑版：嘴巴张得很大、眼睛眯起或笑成缝，表情非常夸张，常配“哈哈哈哈”“乐”“难绷”等文字。\n- “奶蛙”这个叫法，一般理解是因为它大笑时**圆脸+大张嘴**的轮廓有点像青蛙，属于网友的联想式绰号；但“奶蛙”最早是谁叫的、是否特指某一张二创图，我**无法确认**。\n\n**相关的梗**  \n- 作为“笑”“看乐子”“嘲讽式大笑”“难绷”的表情包使用。\n- 在群聊、评论区、弹幕里代替文字表达情绪。\n- 因为表情夸张，容易被裁切、放大、加字、描边，进一步“抽象化”。\n- 和青蛙/Pepe 等蛙类 meme 在气质上有相似处，但有没有直接的融合二创，我不确定。\n\n**二创**  \n常见形式包括：表情包套图、头像/壁纸、手绘描改、动图、配音鬼畜、短视频剪辑，以及线下人偶/周边相关的拍照玩梗。具体某个二创的作者和起源，我无法逐一确认。\n\n所以简单说：**“大笑奶龙/奶蛙”是奶龙 IP 的一个民间表情包化称呼，核心是夸张大笑的奶龙形象；“奶蛙”是网友因外形联想产生的戏称，并非我所能确认的官方名称。**",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+    "stop_reason": "end_turn",
+    "client": "deepseek-harness-acp 0.0.1",
+    "seconds": 39.5,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+      "reasoning_effort": "high"
+    },
+    "resolved_model": "[\"deepseek-official\",\"deepseek-flash\"]",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 3470,
+        "size": 1000000
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-flash-default.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53",
+      "config/dsh-flash-default.patch.yml": "e681660b1857478d"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:41:46Z",
+    "finished_at": "2026-10-25T00:42:25Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}
