@@ -5,6 +5,12 @@ Software releases use semantic versions; suite ids version the evaluation panels
 
 ## Unreleased
 
+- Add Gemini 4 Argon and max-effort configurations of GPT-6.1-Sol, GPT-6-Astra, GPT-6.1 Terra,
+  GPT-6-Luna, and Claude Opus/Sonnet/Haiku 5.5, with saved core understanding runs judged by reduced
+  judge sets; the 0.1.0 release selection is unchanged.
+- Record the costliest `modelUsage` entry as a Claude result's `resolved_model`. Claude Code also lists
+  auxiliary models there, so earlier Claude records can name `claude-haiku-5-5` for answers and
+  judgments the requested model produced, as their reported costs show.
 - Refuse settings-mismatched successful results before any request unless `--force` is explicit;
   leave collection logs and snapshots unchanged on no-op collection commands.
 - Support the recorded `legacy-v1` and `isolated-v1` Codex tool profiles and disclose the retained

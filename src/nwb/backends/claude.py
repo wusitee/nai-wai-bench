@@ -62,11 +62,14 @@ class ClaudeBackend:
         if proc.returncode != 0 or result is None or result.get("is_error"):
             detail = (result or {}).get("result") or proc.stderr.strip()[-800:]
             raise BackendError(f"claude exited {proc.returncode}: {detail}")
+        # Claude Code also lists auxiliary models in modelUsage, sometimes first; the answer costs the most.
+        usage_by_model = result.get("modelUsage") or {}
         return Response(text=result.get("result", ""), meta={
             "backend": "claude", "model": self.spec.model, "client": _client(),
             "seconds": round(time.monotonic() - started, 1),
             "tokens": tokens("claude", result.get("usage")),
-            "resolved_model": next(iter(result.get("modelUsage") or {}), None),
+            "resolved_model": max(usage_by_model, key=lambda m: usage_by_model[m].get("costUSD") or 0,
+                                  default=None),
             "cost_usd_reported": result.get("total_cost_usd"),
             "tools_used": [], "cost_usd": result.get("total_cost_usd"), "usage": result.get("usage"),
         })

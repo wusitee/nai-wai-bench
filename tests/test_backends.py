@@ -226,8 +226,9 @@ def test_cli_stages_attachments_and_records_usage(tmp_path, monkeypatch, backend
             content = json.loads(kwargs["input"])["message"]["content"]
             assert set(content[0]["source"]) == {"type", "media_type", "data"}
             events = [{"type": "result", "result": "OK", "total_cost_usd": 0.25,
-                       "modelUsage": {"resolved": {}}, "usage": {"input_tokens": 10,
-                        "cache_read_input_tokens": 20, "cache_creation_input_tokens": 30, "output_tokens": 40}}]
+                       "modelUsage": {"aux": {"costUSD": 0.01}, "resolved": {"costUSD": 0.24}},
+                       "usage": {"input_tokens": 10, "cache_read_input_tokens": 20,
+                                 "cache_creation_input_tokens": 30, "output_tokens": 40}}]
         assert [p.name for p in paths] == ["image-1.png", "image-2.jpg"]
         assert [p.read_bytes() for p in paths] == [b"image", b"second"]
         return SimpleNamespace(stdout="\n".join(json.dumps(e) for e in events), stderr="", returncode=0)

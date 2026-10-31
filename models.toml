@@ -143,6 +143,7 @@ effort = "high"
 price = { input = 2.0, cached_input = 0.10, cache_write = 2.50, output = 10.0, unit = "USD/1M tokens", source = "https://platform.claude.com/docs/en/about-claude/pricing", as_of = "2026-10-25" }
 can = ["text", "vision"]
 
+# Max-effort comparison configurations; effort variants remain separate rows.
 [models."opus-5.5-max"]
 timeout = 2400  # max effort can think for ~20 minutes on one vision item
 label = "Claude Opus 5.5"
