@@ -119,6 +119,20 @@ of existing results. Legacy literal executable paths and current environment-var
 also produce different fingerprints; restoration and re-scoring are available without replaying calls.
 Panels mixing recorded settings within a model retain diagnostic scores but cannot receive a rank.
 
+A release selects one run per suite, so rows collected in separate runs must be combined first. Judge
+new rows in their own runs, because resuming a retained run stops on a judgment recorded under different
+settings. Then merge without model calls:
+
+```sh
+uv run nwb merge --suite core --run NEW_RUN --from RETAINED_RUN,ADDED_RUN
+```
+
+The target must be a fresh run. Sources stay unchanged, missing ones are restored from their saved
+results, collection logs are concatenated in source order, and a file that differs between sources
+stops the merge without creating the target. Legacy judgments that identify their sample by
+modification time are converted to content hashes checked against their own source, so stale
+judgments stay stale. Pin the merged run in a new manifest after reviewing it.
+
 Use the ordinary `nwb understand`, `imagegen`, `judge`, `report`, and `export` commands for individual
 runs. `report`, `site`, and `export` require an existing run. An archived comparison is not selected by
 searching for the newest directory: update or add an explicit manifest after reviewing its input runs.

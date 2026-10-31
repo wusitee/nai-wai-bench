@@ -5,6 +5,7 @@ Software releases use semantic versions; suite ids version the evaluation panels
 
 ## Unreleased
 
+- Add `nwb merge` to combine separately collected runs into a fresh run for a release manifest.
 - Refuse settings-mismatched successful results before any request unless `--force` is explicit;
   leave collection logs and snapshots unchanged on no-op collection commands.
 - Support the recorded `legacy-v1` and `isolated-v1` Codex tool profiles and disclose the retained
