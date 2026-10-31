@@ -1,5 +1,6 @@
 import hashlib
 import json
+import os
 import shutil
 import subprocess
 import zipfile
@@ -223,6 +224,40 @@ def test_restore_validates_saved_results_before_creating_working_files(inputs, d
     with pytest.raises(ValueError, match="checksum mismatch|invalid result snapshot path"):
         results.restore(root, "core", run)
     assert not run.exists()
+
+
+def test_merge_combines_runs_keeping_judgments_current_and_refuses_disagreement(inputs, monkeypatch):
+    root, _, _, _ = inputs
+    monkeypatch.setattr(cli, "find_root", lambda: root)
+    bench = load_bench(root, "core")
+    base = root / "runs" / "core"
+    (base / "collection.jsonl").write_text('{"argv": ["base"]}')
+    added = root / "runs" / "added"
+    sample = next((base / "understanding" / "gpt-6.1-sol").glob("*.json"))
+    record = read_json(sample)
+    write_json(added / "understanding" / "opus-5.5" / f"{record['item']}__r1.json", {**record, "model": "opus-5.5"})
+    (added / "collection.jsonl").write_text('{"argv": ["added"]}\n')
+    # An identical sample with its own mtime: legacy judgments keep the freshness they had in their own run.
+    copy = added / sample.relative_to(base)
+    copy.parent.mkdir(parents=True)
+    shutil.copyfile(sample, copy)
+    os.utime(copy, (sample.stat().st_mtime + 60,) * 2)
+    judgment = read_json(base / "judgments" / "opus-5.5" / sample.relative_to(base))
+    for judge, mtime, score in [("current", copy.stat().st_mtime, 2), ("stale", sample.stat().st_mtime, 0)]:
+        write_json(added / "judgments" / judge / sample.relative_to(base), {
+            **judgment, "judge": judge, "target_mtime": mtime, "scores": dict.fromkeys(judgment["scores"], score)})
+
+    assert cli.main(["merge", "--run", "merged", "--from", "core,added", "--no-sync"]) == 0
+    merged = root / "runs" / "merged"
+    scores = scoring.aggregate(merged, bench.trait_weights, bench=bench)
+    assert set(scores["understanding"]) == {"gpt-6.1-sol", "opus-5.5"}
+    assert scores["understanding"]["gpt-6.1-sol"]["vision"] == pytest.approx(200 / 3)
+    assert scores["stale_judgments"]["total"] == 1
+    assert (merged / "collection.jsonl").read_text() == '{"argv": ["base"]}\n{"argv": ["added"]}\n'
+
+    write_json(added / "understanding" / "gpt-6.1-sol" / f"{record['item']}__r1.json", {**record, "answer": "changed"})
+    assert cli.main(["merge", "--run", "conflict", "--from", "core,added", "--no-sync"]) == 2
+    assert not (root / "runs" / "conflict").exists()
 
 
 def test_release_restores_selected_runs_from_repository_results(inputs, monkeypatch):
