@@ -1,0 +1,103 @@
+{
+  "settings_id": "d1420308a4561f99",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_smug",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "answer": "仅凭我的知识，我无法可靠地认出这个角色，也就不能确定它的名字和对应的网络梗。\n\n从图片能看到的信息：\n\n- **外形**：黄色、圆润的 3D 渲染小生物，脸颊和下巴肉嘟嘟的，没有耳朵、尾巴之类特别标志性的特征，我想不到对应的知名角色。\n- **表情**：眼皮半耷拉，嘴是一条平直、微微下撇的线，脸颊泛着红晕。\n- **感觉**：一副无语、不屑、淡定或\"装高冷\"的样子。\n\n这种\"半眯眼加平嘴\"的表情常被用来表达\"无语\"\"嫌弃\"\"懒得理你\"\"一脸不服但忍了\"之类的情绪，很多人把它当回复表情用。它的神态有点让我想到懒蛋黄（Gudetama）那种懒洋洋的感觉，但造型和腮红对不上，我不敢断定，只能作为参考方向。\n\n如果你想确定出处，可以：\n\n1. 告诉我你在哪里看到它（比如某个视频、动画、游戏或聊天群），或者图上配的文字。\n2. 用以图搜图工具（如百度识图、Google Lens、SauceNAO）搜一下，通常能很快找到角色名和梗的来源。\n\n你提供更多信息后，我可以帮你解释这个梗的含义和用法。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 46.2,
+    "tokens": {
+      "input": 938,
+      "cached_input": 0,
+      "cache_write": 936,
+      "output": 9303,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0048389,
+    "tools_used": [],
+    "cost_usd": 0.0048389,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 936,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 9303,
+      "output_tokens_details": {
+        "thinking_tokens": 8820
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 936,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 9303,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 936,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 936
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-haiku-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:19:07Z",
+    "finished_at": "2026-10-29T18:19:53Z",
+    "revision": "ba9f0aa",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/opus-5.5-max/write_prompt.giraffe__r1.json",
+  "target_sha256": "700be57b76507038cd912cc1b0e43e3e30507762409f99cdce649897845723a5",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "c99198274ce45f86",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "scores": {
+    "pose": 1,
+    "hands_on_belly": 2,
+    "eyes": 0,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 1,
+    "render": 0,
+    "background": 2,
+    "vibe": 2,
+    "identity": 2
+  },
+  "hallucinations": [
+    "The pose leans backward instead of hunching forward with slightly bent knees.",
+    "The eyes are wide-open glossy black ovals instead of squeezed-shut curved arcs.",
+    "The mouth explicitly has no teeth, contradicting the visible teeth in the reference.",
+    "A distinct elongated neck and separate large head contradict the merged head-and-torso silhouette.",
+    "The specified flat, outlined 2D kawaii style contradicts the glossy 3D CG rendering."
+  ],
+  "rationale": "The prompt clearly covers belly-clutching hands, a plain background, hysterical meme energy, and recognizable giraffe markings and features. It contradicts several defining pose, facial, silhouette, and rendering details; the mouth lacks teeth, and the pale belly area is not specified as an oval patch.",
+  "raw": "{\"scores\":{\"pose\":1,\"hands_on_belly\":2,\"eyes\":0,\"mouth\":1,\"body\":1,\"belly_patch\":1,\"render\":0,\"background\":2,\"vibe\":2,\"identity\":2},\"hallucinations\":[\"The pose leans backward instead of hunching forward with slightly bent knees.\",\"The eyes are wide-open glossy black ovals instead of squeezed-shut curved arcs.\",\"The mouth explicitly has no teeth, contradicting the visible teeth in the reference.\",\"A distinct elongated neck and separate large head contradict the merged head-and-torso silhouette.\",\"The specified flat, outlined 2D kawaii style contradicts the glossy 3D CG rendering.\"],\"rationale\":\"The prompt clearly covers belly-clutching hands, a plain background, hysterical meme energy, and recognizable giraffe markings and features. It contradicts several defining pose, facial, silhouette, and rendering details; the mouth lacks teeth, and the pale belly area is not specified as an oval patch.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d88-b60c-71a1-a96b-91fc01369293",
+    "seconds": 16.1,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12882,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 300,
+      "reasoning_output_tokens": 89
+    },
+    "tokens": {
+      "input": 12882,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 300,
+      "reasoning": 89
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:58:29Z",
+    "finished_at": "2026-10-30T15:58:45Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "settings_id": "d1420308a4561f99",
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "vendor": "anthropic",
+  "item": "write_prompt_zh.giraffe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出长颈鹿版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "A cute 2D cartoon illustration in meme-sticker style of a giraffe-themed version of the viral Chinese internet mascot \"Laughing Nailong\" (大笑奶龙, also called 奶蛙). Base character: a plump, round, pale creamy-yellow creature with a small dragon-like look, short stubby arms and legs, a little curled tail, and a wide, frog-like mouth. Giraffe transformation: a long, slender giraffe neck rising from its chubby round body, orange-brown giraffe spots across the yellow skin, two short ossicone horns with dark tufts on top of the head, and rounded giraffe ears. Expression: laughing uncontrollably, head tilted back, eyes squeezed shut into happy upward-arched lines, a huge open-mouthed toothy grin, rosy blush on the cheeks, a few small tears of joy flying off the face, body bouncing with laughter. Cute and goofy, not scary. Style: clean bold outlines, flat bright saturated colors, minimal soft shading, expressive and funny, high resolution. Composition: single character, centered, full body, plain white background, no text, no watermark, no extra characters or props, no photorealism.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 57.0,
+    "tokens": {
+      "input": 668,
+      "cached_input": 0,
+      "cache_write": 666,
+      "output": 11834,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0060504,
+    "tools_used": [],
+    "cost_usd": 0.0060504,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 666,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 11834,
+      "output_tokens_details": {
+        "thinking_tokens": 11435
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 666,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 11834,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 666,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 666
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-haiku-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:16:28Z",
+    "finished_at": "2026-10-29T18:17:25Z",
+    "revision": "ba9f0aa",
+    "nwb_version": "0.1.0"
+  }
+}

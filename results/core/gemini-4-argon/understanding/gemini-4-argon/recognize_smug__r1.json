@@ -1,0 +1,70 @@
+{
+  "settings_id": "0a4d731222ad1478",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "vendor": "google",
+  "item": "recognize_smug",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "answer": "这张表情包里的角色是**奶龙**（一只圆滚滚、亮黄色、带腮红的国产3D动画小龙形象）。\n\n它常被用于以下经典的网络梗和表情包语境中：\n\n1. **“审视 / 质疑 / 看穿一切”表情包**：由于图中奶龙半眯着眼、抿着嘴、带着点傲娇和不屑的小眼神，常被网友配上**“我就静静地看着你装”**、**“盯——”**、**“你最好说的是实话”**、**“看透不说透”**等文字，用来表达无语、怀疑或傲娇的情绪。\n2. **“我是奶龙”抽象梗**：在抖音、B站等平台上，围绕奶龙衍生出了大量抽象二创梗（其中最出名的是配合魔性音乐或配音大喊**“我是奶龙！我才是奶龙！”**，以及与“暴暴龙”相关的真假奶龙玩梗热潮），这张图也经常作为“奶龙本龙”的经典代表头像或评论区打卡图出现。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 11.7,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-4-argon-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-4-argon-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 12549,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "${NWB_AGY_ACP}"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME",
+      "NWB_AGY_ACP",
+      "NWB_AGY_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:15:55Z",
+    "finished_at": "2026-10-29T18:16:07Z",
+    "revision": "673dc6b",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6-luna-max/write_prompt.giraffe__r1.json",
+  "target_sha256": "63d81ba8292fe002087dea23d623ff1f76a69bd7225d2a5c9136bd49f01a4c7b",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "7cee3440d246c857",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6-luna-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 2,
+    "vibe": 0,
+    "identity": 2
+  },
+  "hallucinations": [
+    "Gives the character 'subtle baby-dragon wings'; Nailong has no wings.",
+    "Specifies a 'long gently curved giraffe neck', which contradicts the meme's defining no-neck, head-merged-into-torso body."
+  ],
+  "rationale": "The prompt makes the giraffe clearly recognizable and gets the 3D render, pale background and shut eyes. It misses the hunched doubled-over pose, the pale belly patch, the cavernous teeth-and-tongue mouth and the unhinged meme vibe, describes only one hand on the belly, and steers toward 'cute' with an invented wing detail.",
+  "raw": "```json\n{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 2, \"mouth\": 1, \"body\": 1, \"belly_patch\": 0, \"render\": 2, \"background\": 2, \"vibe\": 0, \"identity\": 2}, \"hallucinations\": [\"Gives the character 'subtle baby-dragon wings'; Nailong has no wings.\", \"Specifies a 'long gently curved giraffe neck', which contradicts the meme's defining no-neck, head-merged-into-torso body.\"], \"rationale\": \"The prompt makes the giraffe clearly recognizable and gets the 3D render, pale background and shut eyes. It misses the hunched doubled-over pose, the pale belly patch, the cavernous teeth-and-tongue mouth and the unhinged meme vibe, describes only one hand on the belly, and steers toward 'cute' with an invented wing detail.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.312",
+    "seconds": 11.4,
+    "tokens": {
+      "input": 1736,
+      "cached_input": 0,
+      "cache_write": 1734,
+      "output": 918,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.03248790000000001,
+    "tools_used": [],
+    "cost_usd": 0.03248790000000001,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1734,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 918,
+      "output_tokens_details": {
+        "thinking_tokens": 613
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1734,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 918,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1734,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1734
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:57:52Z",
+    "finished_at": "2026-10-30T15:58:04Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "settings_id": "4e1f1b03b3c609b5",
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "vendor": "anthropic",
+  "item": "write_prompt_zh.giraffe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出长颈鹿版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "一幅1:1正方形的扁平2D卡通贴纸插画（聊天软件表情包风格）。画面中央是一只圆滚滚、胖乎乎的卡通长颈鹿，拟人化地用两条短粗的后腿直立站着。身体是一个又圆又鼓的梨形大肚子，两只短短的小前臂捧着肚子，正毫无顾忌地捧腹大笑。主体颜色是明亮柔和的奶油蛋黄色（暖黄色），肚皮是更浅的奶油色椭圆，身上和脖子上分布着几块边缘圆润、形状不规则的焦糖橘色斑块。脖子又粗又长，长度与圆身体大致等高，呈柔和的弧形。脑袋很大，约为身体的一半，脸正对观众，头微微后仰并略歪向一侧。头顶有两个短短的、顶端带深棕色小圆球的角，两侧各有一只圆圆的小耳朵。脖子后侧有一排短短的焦糖橘色鬃毛，身后有一条短小的尾巴，尾尖带一小撮橘色毛，脚是圆圆的深棕色小蹄子。脸宽而圆，吻部短而圆润，表情是傻乎乎、得意洋洋的开怀大笑：双眼紧紧眯成两道向上弯的粗弧线，眼角飞出一两颗小小的笑出来的泪珠。嘴巴张得极大，几乎占据半张脸，呈宽阔的D形大张口，露出深粉红色的口腔、翘起的鲜粉色舌头和上排几颗圆钝的小白牙，脸颊被笑得鼓起。画风简单、圆润、憨态可掬又略显滑稽：粗细均匀的深棕近黑色轮廓线，纯色平涂，仅有极简的卡通阴影，没有毛发质感。背景为纯白色，没有任何场景或杂物；角色居中、全身入镜，占画面约80%。画面中不要出现任何文字、水印、边框，不要写实风格，不要3D渲染，不要照片质感。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 97.6,
+    "tokens": {
+      "input": 647,
+      "cached_input": 0,
+      "cache_write": 645,
+      "output": 11857,
+      "reasoning": null
+    },
+    "resolved_model": "claude-sonnet-5-5",
+    "cost_usd_reported": 0.121154,
+    "tools_used": [],
+    "cost_usd": 0.121154,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 645,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 11857,
+      "output_tokens_details": {
+        "thinking_tokens": 11126
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 645,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 11857,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 645,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 645
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:18:00Z",
+    "finished_at": "2026-10-29T18:19:38Z",
+    "revision": "90e0bea",
+    "nwb_version": "0.1.0"
+  }
+}

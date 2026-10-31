@@ -1,0 +1,882 @@
+{
+  "nwb_version": "0.1.0",
+  "stale_judgments": {
+    "total": 0,
+    "reasons": {}
+  },
+  "suite": "core",
+  "judges": [
+    "gpt-6.1-sol"
+  ],
+  "judge_health": {
+    "gpt-6.1-sol": {
+      "understanding": {
+        "n": 17,
+        "spread": 18.26350103672159,
+        "deviation": null
+      }
+    }
+  },
+  "understanding": {
+    "haiku-5.5-max": {
+      "fields": {
+        "pose": 100.0,
+        "eyes": 100.0
+      },
+      "field_items": {
+        "pose": 4,
+        "eyes": 4
+      },
+      "family_classes": {},
+      "family_macro": null,
+      "joint": 100.0,
+      "visual_joint": 100.0,
+      "repetition_consistency": null,
+      "repetition_consistency_images": 0,
+      "categories": {},
+      "overall": 34.48717948717949,
+      "text": 31.180555555555557,
+      "vision": 34.48717948717949,
+      "languages": {
+        "zh": 28.61111111111111,
+        "en": 33.75
+      },
+      "grounding": 100.0,
+      "blind": 0.0,
+      "visual_gain": 100.0,
+      "hallucinations_per_answer": 0.5882352941176471,
+      "items": {
+        "describe": 44.44444444444444,
+        "describe_en": 50.0,
+        "grounding.facepalm": 100.0,
+        "grounding.folded": 100.0,
+        "grounding.laugh": 100.0,
+        "grounding.official": 100.0,
+        "knowledge_en": 15.0,
+        "knowledge_zh": 10.0,
+        "recognize_angry": 0.0,
+        "recognize_en": 0.0,
+        "recognize_facepalm": 0.0,
+        "recognize_folded_arms": 0.0,
+        "recognize_naiwa": 0.0,
+        "recognize_official": 15.0,
+        "recognize_smug": 0.0,
+        "recognize_variant": 33.333333333333336,
+        "recognize_zh": 0.0,
+        "write_prompt.cat": 50.0,
+        "write_prompt.giraffe": 20.0,
+        "write_prompt_zh.cat": 35.0,
+        "write_prompt_zh.giraffe": 25.0
+      },
+      "per_judge": {
+        "gpt-6.1-sol": 17.516339869281044
+      },
+      "contaminated": 0
+    }
+  },
+  "state_understanding": {},
+  "imagegen": {},
+  "samples": {
+    "understanding": [
+      {
+        "model": "haiku-5.5-max",
+        "item": "describe",
+        "modality": "text",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/describe__r1.json",
+        "answer": "按你的要求，我不看图，也不使用工具，只凭记忆回答。我对这张图的具体细节记忆并不可靠，下面每一项都标了把握程度（高／中／低）。低把握的部分请不要直接当作依据。另外，奶龙有很多版本和二次创作，我想到的未必是你说的那张「最经典」的图。\n\n**奶龙**（英文圈常写作 Nailong）是中国网络上的表情包卡通形象。\n\n| 项目 | 我的记忆 | 把握 |\n|---|---|---|\n| 整体造型 | 黄色系、卡通化的类龙／类恐龙生物，圆胖、憨态可掬 | 中 |\n| 姿势 | 大笑时身体略微后仰，手臂可能抬起或放在肚子上 | 低 |\n| 表情 | 眼睛眯成弯弯的弧线（或闭合），嘴巴大张呈大笑弧度 | 中（具体形状低） |\n| 身体比例 | 头部偏大，肚子鼓圆，四肢短粗 | 中低 |\n| 角／尾／翼 | 记不清有没有，也记不清形状 | 低 |\n| 配色 | 主色为奶黄／浅黄，肚子或局部偏白，五官和线条为深棕或黑色 | 中低 |\n| 渲染风格 | 简洁的平面卡通风，轮廓清楚，少量明暗；是否有粗描边不确定 | 低 |\n| 背景 | 印象中是纯色或白底，无复杂场景；可能带配字，但不确定是否属于这张图 | 低 |\n\n**画之前最需要核对的地方：**\n1. 黄色的具体色相和明度。这是识别度最高的特征之一，但我说不出准确色号。\n2. 面部细节：眼睛形状、是否有腮红、是否露牙或吐舌。\n3. 是否有角、尾巴、翅膀，以及手脚的数量和形状。\n4. 姿势：是站、坐还是躺，身体朝向是正面还是侧面。\n\n建议找一张可靠的参考图，并与同一张图的其他来源对比确认，再校正上面的内容。如果你把参考图里看到的关键细节用文字告诉我，我可以帮你整理成线稿要点和配色表。",
+        "score": 44.44444444444444,
+        "joint": null,
+        "per_judge": {
+          "gpt-6.1-sol": 44.44444444444444
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "gpt-6.1-sol": "正确提到闭眼弧线和白色简单背景，但捧腹、巨口、身体比例及浅色腹斑仅部分覆盖；后仰姿势和平面卡通渲染与参考相反，也未体现抽象癫狂感。错误或可疑细节均明确标为不确定，因此不列为幻觉。"
+        }
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "describe_en",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/describe_en__r1.json",
+        "answer": "This is from memory only, so treat it as a sketch to check against a reference. I've noted my confidence for each part.\n\n**Body shape (fairly confident)**\n- Very round and chubby, like a soft dough ball, with a big rounded belly and a large head that blends into the body with little or no visible neck.\n- Short, stubby limbs with small hands and feet.\n- Compact and squat rather than tall.\n\n**Pose (low confidence)**\n- I picture an upright, front-facing figure, possibly tilted back or bouncing mid-laugh, with arms raised or hands near the belly. I can't reliably recall the exact gesture or whether it's sitting or standing.\n\n**Expression (fairly confident)**\n- A big, open-mouthed laugh, with eyes squeezed into curved crescents (closed-eye, \"^^\"-style).\n- The mouth is a wide open shape. I'm not sure whether teeth or a tongue are shown.\n\n**Colors (moderately confident)**\n- Body: soft cream or butter yellow, a pale, milky yellow. The \"奶\" (milk) in the name probably refers to this.\n- Features (eyes, mouth lines): dark brown or near-black. The mouth interior is probably darker or pinkish.\n- A lighter belly and pink cheeks are possible, but I'm not sure of either.\n- I can't give reliable hex values.\n\n**Rendering style (uncertain)**\n- Simple, clean 2D cartoon with smooth shapes and minimal shading, probably with a dark outline, like a sticker. I'm not sure whether it's a flat vector look or has soft, 3D-like shading.\n\n**Background (low confidence)**\n- The versions I recall most often appear on a plain white or transparent background, as a standalone sticker-style figure, perhaps with a faint ground shadow.\n\n**Where I'm unsure (check before drawing)**\n- **Dragon features:** The name suggests a dragon, but I can't recall whether it has horns, a crest, or a tail, or what they look like.\n- **Pose and arms:** The exact gesture and arm arrangement.\n- **奶蛙:** Whether it's the same design or a different, frog-like variant.\n- **Details:** Exact colors, outline weight, and whether the mouth shows teeth.\n- **Versions:** Whether several laughing versions exist. My memory may blend them.\n\nA single reference image would settle most of these quickly.",
+        "score": 50.0,
+        "joint": null,
+        "per_judge": {
+          "gpt-6.1-sol": 50.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "gpt-6.1-sol": "The answer covers closed curved eyes, a bulky neckless body with short limbs, and a plain white background, but only vaguely suggests hands near the belly, a lighter belly, and an open laughing mouth. It misses the forward-hunched standing pose, belly-clutching gesture, detailed enormous mouth, glossy 3D rendering, and absurd meme energy; contradictory suggestions are explicitly marked uncertain."
+        }
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "grounding.facepalm.blind",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/grounding.facepalm.blind__r1.json",
+        "answer": "```json\n{\"pose\": \"unknown\", \"eyes\": \"unknown\"}\n```\n\nNo image came through with your message, so I can't determine either field. If you try attaching it again, I'll check it.",
+        "score": 0.0,
+        "joint": 0.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 0.0,
+          "eyes": 0.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "grounding.facepalm",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "grounding.facepalm",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/grounding.facepalm__r1.json",
+        "answer": "```json\n{\"pose\": \"facepalm\", \"eyes\": \"open\"}\n```",
+        "score": 100.0,
+        "joint": 100.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 100.0,
+          "eyes": 100.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "grounding.folded.blind",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/grounding.folded.blind__r1.json",
+        "answer": "```json\n{\"pose\": \"unknown\", \"eyes\": \"unknown\"}\n```\n\nNo image came through with your message, so I couldn't determine either field. If you attach it again, I'll check it.",
+        "score": 0.0,
+        "joint": 0.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 0.0,
+          "eyes": 0.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "grounding.folded",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "grounding.folded",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/grounding.folded__r1.json",
+        "answer": "```json\n{\"pose\": \"folded_arms\", \"eyes\": \"open\"}\n```",
+        "score": 100.0,
+        "joint": 100.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 100.0,
+          "eyes": 100.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "grounding.laugh.blind",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/grounding.laugh.blind__r1.json",
+        "answer": "```json\n{\n  \"pose\": \"unknown\",\n  \"eyes\": \"unknown\"\n}\n```\n\nNo image came through with your message, so I couldn't determine either field. If you attach it again, I'll check it.",
+        "score": 0.0,
+        "joint": 0.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 0.0,
+          "eyes": 0.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "grounding.laugh",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "grounding.laugh",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/grounding.laugh__r1.json",
+        "answer": "```json\n{\"pose\": \"belly_clutch\", \"eyes\": \"closed\"}\n```",
+        "score": 100.0,
+        "joint": 100.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 100.0,
+          "eyes": 100.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "grounding.official.blind",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/grounding.official.blind__r1.json",
+        "answer": "```json\n{\n  \"pose\": \"unknown\",\n  \"eyes\": \"unknown\"\n}\n```\n\nNo image came through with your message, so I can't determine either field. If you attach the image again, I'll check it.",
+        "score": 0.0,
+        "joint": 0.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 0.0,
+          "eyes": 0.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "grounding.official",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "grounding.official",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/grounding.official__r1.json",
+        "answer": "```json\n{\"pose\": \"raised_hands\", \"eyes\": \"open\"}\n```",
+        "score": 100.0,
+        "joint": 100.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 100.0,
+          "eyes": 100.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "knowledge_en",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/knowledge_en__r1.json",
+        "answer": "I know this meme only in outline, so here is what I'm fairly sure of and what I'm not. My knowledge may also be out of date.\n\n**Name**\n- 大笑奶龙 means \"laughing Nailong.\" 奶龙 (nǎi lóng, roughly \"milk dragon\") is the character, and 大笑 names the version where it's laughing.\n- 奶蛙 (\"milk frog\") is a nickname I've seen mentioned, but I don't know how common it is or why it's used.\n\n**Appearance (from memory, so check images)**\n- A plump, yellowish cartoon creature with a rounded body and a simple, goofy face.\n- The laughing version has its mouth wide open in a loud laugh.\n- I'm not sure about finer details, such as exact colors, limbs, or whether it has horns or a tail.\n\n**Origin**\n- I don't reliably know who created it, where it first appeared, or when it spread widely. I'd rather not invent a backstory.\n\n**Jokes and remixes**\n- I can't name specific jokes or remix series with confidence, so I won't guess at examples.\n- Memes like this typically get used as sticker packs, paired with captions, pasted into other scenes, set to its laugh in short videos, and made into merchandise such as plush toys. I'm not certain which of these apply to Nailong specifically.\n- The 大笑 label suggests other expression variants exist, but I don't know their names.\n\n**Where to check**\n- Search \"奶龙 起源\" (origin) and \"奶龙 梗\" (jokes or memes) on Baidu Baike, Zhihu, Bilibili, or Xiaohongshu. These are likely to have better-sourced answers, including who made it and which remixes are well known.\n- I also don't have reliable details on any controversies around it.\n\nIf you share examples you've seen, I can help you make sense of them.",
+        "score": 15.0,
+        "joint": null,
+        "per_judge": {
+          "gpt-6.1-sol": 15.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "gpt-6.1-sol": "The answer partially describes the yellow, plump character, mentions 奶蛙 as a nickname, and identifies the open-mouthed laugh. It omits the AI mutation, documented origin, frog-like variant details, and specific jokes and remixes, but makes no confident false claims."
+        }
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "knowledge_zh",
+        "modality": "text",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/knowledge_zh__r1.json",
+        "answer": "我对「奶龙」这类网络梗的记忆有限，下面只写我有一定把握的部分，不确定的会直接标出。\n\n### 一、来源\n- 据我所知，「奶龙」是在中文网络上流行起来的卡通形象或表情包角色。\n- 它最初是谁创作的、先在哪个平台出现、具体何时走红，我**不确定**，没有可靠的印象。\n- 名字里的「奶」和「龙」，大概分别指颜色或软萌的感觉，以及龙的形象，但这只是字面上的推测。\n\n### 二、外观（印象较模糊，以实际图像为准）\n- 我印象中它的主体偏黄，圆胖可爱，表情大多比较憨、比较萌。\n- 名字带「龙」，但它是否有明显的龙或恐龙特征（如角、尾巴），我记不清。\n- 「大笑奶龙」应该指它大笑、张大嘴的表情或版本。它是独立角色，还是「奶龙」的表情变体，我**不确定**。\n\n### 三、「奶蛙」这个别名\n- 我**无法确认**「奶蛙」是不是「大笑奶龙」的别名，也不知道这个叫法从哪来。\n- 可能和形象有点像青蛙有关，也可能只是玩笑式的叫法，但这些都是推测。\n\n### 四、相关的梗与二创\n我对具体作品不够了解，所以只说这类梗常见的玩法，不代表我确定奶龙都有这些作品：\n- **表情包**：用大笑的形象表达「笑死了」「哈哈哈」之类的情绪，常配上文字。\n- **鬼畜或魔性剪辑**：配上重复的音效或BGM做成短视频，是国内网络梗很常见的二创方式。\n- **同人创作**：画风改编、与其他角色互动、更换场景或身份等。\n- **周边**：我不确定是否有官方玩偶、挂件等，也说不出具体的热门款式。\n\n### 五、需要注意\n- 网络梗变化很快，我的知识有截止时间，最新的热度和新衍生作品我可能并不了解。\n- 如果你看到的形象和我描述的不一样，可能是我记错了，或混淆了类似的角色，请以实际图像为准。\n- 想核实来源、创作者和最早的版本，可以查阅萌娘百科或百度百科，也可以在B站、抖音、小红书搜索「奶龙」「大笑奶龙」「奶蛙」，看最早的投稿和创作者说明。",
+        "score": 10.0,
+        "joint": null,
+        "per_judge": {
+          "gpt-6.1-sol": 10.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "gpt-6.1-sol": "The answer partially describes Nailong as a yellow, round cartoon character and mentions a laughing, open-mouthed expression, but omits the defining origin, AI mutation, aliases, pose details, and specific remix traditions. Its speculative statements are explicitly marked uncertain, so they do not count as hallucinations."
+        }
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "recognize_angry",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/recognize_angry__r1.json",
+        "answer": "**角色：** 画面中是一个3D渲染的红色圆胖小人，身体像水滴或蛋形，几乎没有脖子，绿色眼睛，眉头紧皱，嘴角下撇，手臂贴在身体两侧，表情很生气。我无法确定它的正式名字或原始出处，不想凭印象随便给一个名字。\n\n**梗：** 底部文字是\"切换愤怒模式😡\"。\"切换XX模式\"是中文网络上常见的句式，通常用来调侃某人从平和突然变得暴怒，或表达\"被惹毛了\"的情绪。这张图是带文字的反应图，适合用在忍无可忍的场景里。\n\n至于它具体属于哪个固定的网络梗或系列，我没有可靠的把握。如果你想查清出处，可以用以图搜图工具（如百度识图、搜狗识图、Google Lens）搜这张图，或在B站、抖音、小红书搜\"切换愤怒模式\"，看看哪些内容在用它。如果你知道它的来源或名字，告诉我，我可以帮你解释背后的梗。",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "gpt-6.1-sol": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "gpt-6.1-sol": "回答未识别原角色奶龙，也未指出该图属于大笑奶龙／变异奶龙／奶蛙梗，或说明其为AI生成的非官方变异版本。回答明确表示不确定出处，没有作出可确认的幻觉断言。"
+        }
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "recognize_en",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/recognize_en__r1.json",
+        "answer": "From memory alone, I can't identify this one with confidence.\n\n**The character:** It's a 3D-rendered, bean-shaped yellow figure with a pale cream belly, squeezed-shut laughing eyes, a wide-open mouth full of teeth, and dark grey hands clutching its stomach as it doubles over. I don't recognize it as a named mascot or established character, so I can't give you an official name.\n\n**The meme:** The pose and expression fit a \"cracking up\" or \"laughing so hard it hurts\" reaction. Images like this have circulated as reaction memes, but I can't reliably recall this specific one's origin, and the image has no visible caption or watermark to trace it. It may be a still from a short 3D animation, which would fit the smooth rendering.\n\n**Other names:** I don't know of an established alternate title for this exact image. People often describe similar images as \"laughing blob,\" \"yellow blob laughing,\" or \"blob laughing hysterically,\" but those are descriptive labels, not official names.\n\nTo find the actual origin and any alternate names, try a reverse image search with Google Lens, TinEye, or SauceNAO. Know Your Meme is a good place to check the entry once you have a name to search for.",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "gpt-6.1-sol": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "gpt-6.1-sol": "The answer describes the image but does not identify 奶龙, the 大笑奶龙 meme family, its unofficial AI-generated nature, or the aliases 变异奶龙 and 奶蛙. Its speculative origin and descriptive labels are explicitly qualified, so they do not count as hallucinations."
+        }
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "recognize_facepalm",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/recognize_facepalm__r1.json",
+        "answer": "我无法确定这个角色的名字，也说不准它属于哪个网络梗。光凭外形，我没办法可靠地对上出处，所以不想随便编一个答案误导你。\n\n图中能看到的特征：\n- 圆滚滚的黄色身体，是光滑的 3D 渲染风格\n- 绿色的大圆眼睛、黑色瞳孔，表情有点呆萌\n- 嘴角微微上扬，带着一点得意或坏笑\n- 一只手抬到脸侧、靠近眼睛的位置，像是在偷看、遮光或做思考状，这类姿势在表情包里很常见\n\n这种黄色团子风格的角色网上很多，单看图片很难确定具体是哪一个。\n\n你可以试试这些方法查出处：\n1. **以图搜图**：Google Lens、TinEye、百度识图、搜狗识图，通常能找到原始来源或相关讨论。\n2. **Know Your Meme**（knowyourmeme.com）：用\"yellow blob green eyes 3D\"之类的描述搜索。\n3. **看原始来源**：如果图片来自视频或帖子，看看标题、评论区或弹幕，经常会直接写出角色名或梗的名字。\n\n如果你告诉我它是在哪里看到的、配的文字是什么，或者你已经有一个猜测的名字，我可以帮你梳理这个梗的背景和用法。不过我无法核实图片本身，只能根据你提供的信息来讲。",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "gpt-6.1-sol": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "gpt-6.1-sol": "The answer identifies neither 奶龙, the yellow chubby cartoon dragon/dinosaur, nor the 大笑奶龙 / 变异奶龙 / 奶蛙 meme family. It explicitly expresses uncertainty and makes no confidently false claims."
+        }
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "recognize_folded_arms",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/recognize_folded_arms__r1.json",
+        "answer": "仅凭我的知识，我无法可靠地认出这个角色，也不能确定它属于哪个网络梗，所以不想随便报一个名字误导你。\n\n从画面能看到的特征：\n- 黄色、圆润的3D卡通造型，身体轮廓像豆子或梨子\n- 一双大眼睛，眼睛周围是绿色的，嘴角微微上扬，带点笑意\n- 双臂交叉抱在胸前，腹部偏浅，接近米白色\n- 背景是白色到浅灰的渐变，看起来像3D渲染的素材\n\n从姿态推测，抱臂加微笑的样子常被用来表达\"看你表演\"\"等你解释\"\"嘴上不说但很满意\"之类的情绪，所以它很可能是作为反应类表情包使用的。不过这只是根据姿态做的推测，无法确定出处。\n\n你可以试试：\n1. 用识图工具（如 Google Lens、百度识图、TinEye）搜索原图，通常能很快找到角色名和出处。\n2. 告诉我你是在哪里看到它的（哪个平台、哪个动画、游戏或视频），或者图上有没有文字。我可以根据我的知识帮你分析。\n\n另外，网络梗更新很快，如果它是比较新的梗，我的知识里可能没有收录，这种情况下请以实际搜索结果为准。",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "gpt-6.1-sol": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "gpt-6.1-sol": "回答仅描述了外观，没有认出角色原型是奶龙，也没有识别出大笑奶龙／变异奶龙／奶蛙梗。外观描述与图片基本一致，其余推测均明确标注为不确定，没有可确认的幻觉。"
+        }
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "recognize_naiwa",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/recognize_naiwa__r1.json",
+        "answer": "**直接说结论：** 我无法可靠地认出这只鸟的具体角色名字，也无法确定它属于哪个有名字的网络梗。我能确定的是图片内容、配文含义和常见用法。\n\n**画面内容**\n这是一只黄色、身体圆润的卡通小鸟（有点像小鸭子或小鸡），大眼睛带绿色眼圈，嘴巴很小，侧头斜眼看向画外，表情呆萌又带点惊讶。它看起来像网上常见的“黄色小鸟”类表情包素材，但我不能确定它出自哪部动画、游戏或品牌，所以不想随便给它起名字。\n\n**配文“惊鸿一瞥”**\n- **字面意思**：“惊鸿”指受惊飞起的大雁或天鹅，“一瞥”是匆匆看一眼。\n- **出处**：曹植《洛神赋》“翩若惊鸿，婉若游龙”，原本形容洛神体态轻盈、美得惊人，后来引申为匆匆一瞥就印象深刻。\n\n**网络上的用法**\n这张图属于“成语配动物表情”的玩法：\n- 画面里是一只鸟，正好呼应“惊鸿”（“鸿”本指大雁一类的大型飞禽）的意象。\n- 斜眼偷看的神态契合“一瞥”的意思。\n- 常用来调侃“偶然一瞥就被惊艳到”“匆匆看一眼就很在意”，或形容偷瞄、心动的瞬间，语气偏搞笑、自嘲。\n\n如果你知道这张图是在哪里看到的，或者有没有配套的其他表情，告诉我，我可以帮你分析它的语境。",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "gpt-6.1-sol": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "将图中角色确定描述为黄色卡通小鸟，并据此声称画面中的鸟呼应“惊鸿”的飞禽意象；实际是奶龙变异后的蛙状“奶蛙”。"
+        ],
+        "rationales": {
+          "gpt-6.1-sol": "回答没有识别出基础角色奶龙，也未指出其属于大笑奶龙／变异奶龙／奶蛙梗家族。它完全遗漏了“奶蛙”及其与奶龙的变异关系，并错误地将角色认作鸟。"
+        }
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "recognize_official",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/recognize_official__r1.json",
+        "answer": "这个角色应该是**「奶龙」**（Nǎilóng，英文有时写作 Nailong）。\n\n判断依据：\n- 黄橙色的圆润身体，造型像一只小恐龙或小龙\n- 浅色的肚皮像奶油一样，名字里的「奶」大概由此而来\n- 四肢短小，爪子和脚掌带有棕色的爪垫\n- 圆眼睛、粉色腮红，张着小嘴、举起双手，是一副惊讶的样子\n\n它是近年在中文互联网走红的表情包形象，常用来表达惊讶、懵圈、无语或呆萌的情绪，网友也经常给它配上文字或做各种二创。\n\n我是凭记忆和图像特征判断的，对它的原始出处和走红经过不太确定。如果你知道的信息和我说的不一样，告诉我，我可以再帮你分析。",
+        "score": 15.0,
+        "joint": null,
+        "per_judge": {
+          "gpt-6.1-sol": 15.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "称图中角色有“粉色腮红”，但图中的粉色区域在举起的手掌上，脸颊并无粉色腮红。"
+        ],
+        "rationales": {
+          "gpt-6.1-sol": "回答正确识别了奶龙及其黄胖、龙或恐龙般的外形，但未说明它出自中国儿童动画。回答也未区分这张官方角色图与非官方的“大笑奶龙／奶蛙”变体。"
+        }
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "recognize_smug",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/recognize_smug__r1.json",
+        "answer": "仅凭我的知识，我无法可靠地认出这个角色，也就不能确定它的名字和对应的网络梗。\n\n从图片能看到的信息：\n\n- **外形**：黄色、圆润的 3D 渲染小生物，脸颊和下巴肉嘟嘟的，没有耳朵、尾巴之类特别标志性的特征，我想不到对应的知名角色。\n- **表情**：眼皮半耷拉，嘴是一条平直、微微下撇的线，脸颊泛着红晕。\n- **感觉**：一副无语、不屑、淡定或\"装高冷\"的样子。\n\n这种\"半眯眼加平嘴\"的表情常被用来表达\"无语\"\"嫌弃\"\"懒得理你\"\"一脸不服但忍了\"之类的情绪，很多人把它当回复表情用。它的神态有点让我想到懒蛋黄（Gudetama）那种懒洋洋的感觉，但造型和腮红对不上，我不敢断定，只能作为参考方向。\n\n如果你想确定出处，可以：\n\n1. 告诉我你在哪里看到它（比如某个视频、动画、游戏或聊天群），或者图上配的文字。\n2. 用以图搜图工具（如百度识图、Google Lens、SauceNAO）搜一下，通常能很快找到角色名和梗的来源。\n\n你提供更多信息后，我可以帮你解释这个梗的含义和用法。",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "gpt-6.1-sol": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "gpt-6.1-sol": "回答未认出角色是奶龙，也未说明其中国儿童动画角色背景；同时未识别出大笑奶龙／变异奶龙／奶蛙梗家族。对懒蛋黄的联想明确标为不确定，不计为幻觉。"
+        }
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "recognize_variant",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/recognize_variant__r1.json",
+        "answer": "**简短结论：** 我无法确定这张图模仿的是某个具体、有名字的中文网络梗或表情包。它更像是熊猫表情包里常见的通用情绪表达\"笑到捧腹\"，而不是某张可以确认出处的原图复刻。\n\n**判断依据**\n\n1. **动作：** 身体前倾，双手按住肚子，像是笑到直不起腰。这是\"笑到肚子疼\"的典型姿势，中文网络上常用来表达\"笑死我了\"\"太好笑了\"。\n2. **表情：** 眼睛眯成弯月形，嘴巴大张，露出牙齿和舌头，是开怀大笑的状态，与\"熊猫头\"类表情包中常见的大笑表情相近。\n3. **角色设定：** 圆润的胖体型、黑白配色、圆耳朵，符合中文网络里熊猫形象的常见设定。\n4. **画风：** 毛发质感细腻，光影柔和，背景干净，更像3D渲染或AI生成的插画，而不是常见的手绘或截图式表情包。这说明它可能只是借用了\"熊猫捧腹大笑\"的意象，而非复刻某个具体的梗。\n\n**局限**\n- 画面中没有固定文字、标志性道具或独特配色，无法据此对应到具体梗名。\n- 我无法联网核实，也不确定是否存在以这个形象为原型的特定表情包，所以不想凭印象编造出处。\n\n**可能相关的方向（可信度较低，仅供参考）**\n- **\"熊猫头\"系列：** 中文网络最常见的熊猫表情包之一，常用于大笑、吃瓜、无语等情绪。情绪上与这张图最接近，但画风和全身形象不同。\n- **通用的\"笑到捧腹\"反应图：** 指向的是一类情绪，而不是某个具体的梗。\n\n如果你知道这张图的来源（比如在哪个平台、什么聊天语境下看到的）或配的文字，告诉我，我可以帮你进一步判断。",
+        "score": 33.333333333333336,
+        "joint": null,
+        "per_judge": {
+          "gpt-6.1-sol": 33.333333333333336
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "gpt-6.1-sol": "回答准确描述了前倾、双手捧腹、眼睛眯闭和张嘴大笑的姿态，但未识别出大笑奶龙／奶蛙梗，也未介绍奶龙的原始角色设定。对具体出处的判断明确保留了不确定性，没有可列出的自信幻觉。"
+        }
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "recognize_zh",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/recognize_zh__r1.json",
+        "answer": "我没能认出这个角色，也无法确定它对应的具体网络梗，所以下面的内容主要基于画面本身。\n\n**1. 角色外形**\n- 黄色、表面光滑的 3D 渲染小人，身体圆润像豆子，肚子处有一块偏白的色块。\n- 双眼眯成细线，张大嘴大笑，露出上排牙齿。\n- 灰色的双手按着肚子，动作是\"笑到肚子疼\"。\n\n我不知道它的正式名字，也不确定它是不是某个有名字的原创角色。\n\n**2. 相关网络梗**\n从画面看，它属于\"大笑捂肚子\"类的反应图（表情包），常用来表示\"笑死我了\"\"太好笑了\"。但这类图很多，我不能确定它对应哪一个具体的梗。它也可能是我的知识截止后才流行的新梗。\n\n**3. 别名**\n我不知道它有哪些公认的别名。如果我随便给一个名字，很可能是编的，所以不给。\n\n**4. 如何找到准确答案**\n- 告诉我图片的来源，比如平台、帖子标题或配文，以及它是否来自某个视频、动画或游戏，我可以帮你分析。\n- 用 Google Lens、百度识图或 TinEye 搜索，通常能很快找到出处和名称。\n- 在贴吧、小红书、B站或 Reddit 上搜索\"黄色 3D 小人 笑到捂肚子\"或\"yellow 3D blob laughing meme\"。",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "gpt-6.1-sol": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "gpt-6.1-sol": "回答明确表示无法识别角色、具体网络梗及别名，未覆盖奶龙身份、变异版本的 AI 非官方性质或奶蛙的含义。画面描述基本符合图片，且对未知信息保持不确定，没有可确认的幻觉。"
+        }
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "write_prompt.cat",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/write_prompt.cat__r1.json",
+        "answer": "A cartoon illustration of a plump, laughing cat in a viral meme style. The cat has a squat, round body, a big round head, pale butter-yellow fur, and short stubby arms and legs ending in tiny paws. Its face is dominated by an enormous, wide-open laughing mouth that stretches almost across the whole face, like a frog's grin, showing a row of small white teeth and a pink tongue. Its eyes are squeezed shut into happy upward crescents, and its cheeks have rosy blush spots. It has pointed cat ears, a small pink triangle nose, and a few whiskers. Pose it mid-laugh, slightly goofy and bouncy, with its arms tucked against its belly as if laughing hard. Simple flat digital art with thick clean outlines, soft cel shading, bright cheerful colors, and a plain solid light background, with one centered character shown full body. No text, no captions, no watermarks, no other characters.",
+        "score": 50.0,
+        "joint": null,
+        "per_judge": {
+          "gpt-6.1-sol": 50.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "The specified flat digital illustration with thick outlines and cel shading contradicts the reference's glossy 3D CG rendering."
+        ],
+        "rationales": {
+          "gpt-6.1-sol": "The prompt captures the closed eyes, enormous laughing mouth, plain background, and recognizable feline features. The hunched stance and belly-clutching are vague, the merged head-and-torso shape and pale belly patch are missing, and the cheerful flat-art treatment misses the reference's rendering and unhinged energy."
+        }
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "write_prompt.giraffe",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/write_prompt.giraffe__r1.json",
+        "answer": "A cute, chubby cartoon giraffe drawn in the style of \"Laughing Nailong,\" a plump, soft, creamy pale-yellow meme character with a round bean-shaped body, a big round head with rosy blush circles on the cheeks, short stubby arms with tiny hands, and short plump legs ending in small rounded feet. The giraffe keeps its long neck, now thick, soft, and gently curved, and adds classic giraffe traits: two short ossicone horns with dark brown tufts on top of its head, large irregular brown-orange spots across its back, neck, and legs, and a thin tail with a dark tuft at the tip. It is laughing uproariously, with its head tilted back, neck arched, eyes squeezed shut into happy upward-arching curves, a huge wide-open mouth showing a few teeth and a pink tongue, and one hand pressed to its round belly while its whole body shakes with joy. Style: glossy, cute 3D cartoon sticker with smooth soft shading, clean thick outlines, and bright warm colors. Full body, centered, facing the viewer, on a plain soft pastel background with a few small laugh-burst motion lines around it. No text, no watermark, no realistic fur.",
+        "score": 20.0,
+        "joint": null,
+        "per_judge": {
+          "gpt-6.1-sol": 20.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "A distinct long neck contradicts the reference's neckless silhouette with the head merging into the torso.",
+          "The head-back, neck-arched laughing pose contradicts the reference's hunched-forward pose.",
+          "Only one hand presses the belly, whereas the reference has both hands clutching it."
+        ],
+        "rationales": {
+          "gpt-6.1-sol": "The prompt clearly supplies giraffe identity, squeezed-shut eyes, and a huge laughing mouth with teeth and tongue. It misses the defining hunched posture, two-handed belly clutch, pale belly patch, and unhinged energy; its body shape, rendering, and background only partly match."
+        }
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "write_prompt_zh.cat",
+        "modality": "text",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/write_prompt_zh.cat__r1.json",
+        "answer": "A chubby, round cartoon cat drawn as the cat version of Laughing Nailong (大笑奶龙), a plump, pale butter-yellow character with a soft, pudgy, bean-shaped body, a slightly lighter cream belly, stubby arms and legs, and a short tail. Keep that squishy proportion and milky yellow coat, and give it cat features: pointed triangular ears, long whiskers, a small pink nose, and a cat tail. Its face shows an exaggerated, uproarious laugh: eyes squeezed shut into happy upward crescent arcs, a huge wide-open mouth with a pink tongue, rosy cheeks, and a few tiny tears of joy at the corners of the eyes. Pose: leaning back slightly, paws clutching its round belly while laughing. Flat 2D vector sticker style, bold clean outlines, soft cel shading, plain pastel background, square composition, single character centered, cute and funny meme aesthetic, no text, no watermark.",
+        "score": 35.0,
+        "joint": null,
+        "per_judge": {
+          "gpt-6.1-sol": 35.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Specifies leaning backward instead of hunching forward with slightly bent knees.",
+          "Specifies a flat 2D vector sticker style instead of a glossy 3D CG render."
+        ],
+        "rationales": {
+          "gpt-6.1-sol": "The prompt clearly covers belly-clutching paws, closed crescent eyes, and bulky bean-shaped proportions, but only partially specifies the mouth, belly patch, background, and unhinged mood. It contradicts the required pose and rendering style, while retaining a yellow Nailong body with added cat cues rather than fully carrying through feline coloring or markings."
+        }
+      },
+      {
+        "model": "haiku-5.5-max",
+        "item": "write_prompt_zh.giraffe",
+        "modality": "text",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/haiku-5.5-max/write_prompt_zh.giraffe__r1.json",
+        "answer": "A cute 2D cartoon illustration in meme-sticker style of a giraffe-themed version of the viral Chinese internet mascot \"Laughing Nailong\" (大笑奶龙, also called 奶蛙). Base character: a plump, round, pale creamy-yellow creature with a small dragon-like look, short stubby arms and legs, a little curled tail, and a wide, frog-like mouth. Giraffe transformation: a long, slender giraffe neck rising from its chubby round body, orange-brown giraffe spots across the yellow skin, two short ossicone horns with dark tufts on top of the head, and rounded giraffe ears. Expression: laughing uncontrollably, head tilted back, eyes squeezed shut into happy upward-arched lines, a huge open-mouthed toothy grin, rosy blush on the cheeks, a few small tears of joy flying off the face, body bouncing with laughter. Cute and goofy, not scary. Style: clean bold outlines, flat bright saturated colors, minimal soft shading, expressive and funny, high resolution. Composition: single character, centered, full body, plain white background, no text, no watermark, no extra characters or props, no photorealism.",
+        "score": 25.0,
+        "joint": null,
+        "per_judge": {
+          "gpt-6.1-sol": 25.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Specifies a flat 2D illustration with bold outlines, contradicting the required glossy 3D CG appearance.",
+          "Adds a long, slender neck, contradicting the required silhouette in which the head merges directly into the torso."
+        ],
+        "rationales": {
+          "gpt-6.1-sol": "The prompt clearly supplies closed arc-shaped eyes, a plain white background, and recognizable giraffe features. It omits the hunched pose, belly-clutching hands, pale belly patch, and mouth interior details; its long neck, 2D style, and emphasis on cuteness depart from the reference."
+        }
+      }
+    ],
+    "imagegen": []
+  },
+  "leaderboards": {
+    "visual_understanding": [
+      {
+        "model": "haiku-5.5-max",
+        "rank": 1,
+        "score": 34.48717948717949,
+        "diagnostic_score": 34.48717948717949,
+        "conditions": [],
+        "settings_status": "recorded",
+        "settings_ids": [
+          "d1420308a4561f99"
+        ],
+        "collection_profiles": [],
+        "judges": {
+          "gpt-6.1-sol": 9
+        },
+        "score_interval": [
+          18.51851851851852,
+          46.07142857142857
+        ],
+        "rank_range": [
+          1,
+          1
+        ],
+        "completed": 13,
+        "required": 13,
+        "repetitions": 1,
+        "status": "complete",
+        "bootstrap": {
+          "resamples": 2000,
+          "seed": 6643,
+          "clusters": 8,
+          "cluster": "source image"
+        },
+        "label": "Claude Haiku 5.5 (max)"
+      }
+    ],
+    "imagegen": []
+  },
+  "collection": {
+    "started_at": "2026-10-29T18:13:34Z",
+    "finished_at": "2026-10-30T15:57:09Z",
+    "revisions": [
+      "ac0e9ff",
+      "ba9f0aa"
+    ],
+    "dirty": false,
+    "recorded": 42,
+    "tasks": 42,
+    "subject_profiles": {},
+    "judge_profiles": {
+      "gpt-6.1-sol": [
+        "Codex legacy-v1"
+      ]
+    }
+  },
+  "labels": {
+    "haiku-5.5-max": "Claude Haiku 5.5 (max)"
+  },
+  "efficiency": {
+    "suite": "core",
+    "visual_understanding": {
+      "haiku-5.5-max": {
+        "tasks": 13,
+        "token_tasks": 13,
+        "token_totals": {
+          "input": 13880,
+          "output": 68248,
+          "reasoning": null,
+          "cached_input": 0,
+          "cache_write": 13854
+        },
+        "token_counts": {
+          "input": 13,
+          "output": 13,
+          "reasoning": 0,
+          "cached_input": 13,
+          "cache_write": 13
+        },
+        "mean_input_tokens": 1067.6923076923076,
+        "mean_output_tokens": 5249.846153846154,
+        "mean_reasoning_tokens": null,
+        "median_seconds": 30.5,
+        "cost_tasks": 13,
+        "mean_cost_usd": 0.002758334615384615,
+        "estimated_cost_usd": 0.03585835,
+        "known_cost_usd": 0.03585835,
+        "reported_cost_usd": 0.036897400000000004,
+        "price": {
+          "input": 0.1,
+          "cached_input": 0.01,
+          "cache_write": 0.125,
+          "output": 0.5,
+          "unit": "USD/1M tokens",
+          "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "as_of": "2026-10-29"
+        }
+      }
+    },
+    "imagegen": {
+      "haiku-5.5-max": {
+        "tasks": 0,
+        "images": 0,
+        "median_seconds": null
+      }
+    },
+    "whole_run": {
+      "haiku-5.5-max": {
+        "understanding": {
+          "tasks": 25,
+          "token_tasks": 25,
+          "token_totals": {
+            "input": 21924,
+            "output": 163264,
+            "reasoning": null,
+            "cached_input": 0,
+            "cache_write": 21874
+          },
+          "token_counts": {
+            "input": 25,
+            "output": 25,
+            "reasoning": 0,
+            "cached_input": 25,
+            "cache_write": 25
+          },
+          "mean_input_tokens": 876.96,
+          "mean_output_tokens": 6530.56,
+          "mean_reasoning_tokens": null,
+          "median_seconds": 35.9,
+          "cost_tasks": 25,
+          "mean_cost_usd": 0.00337485,
+          "estimated_cost_usd": 0.08437125,
+          "known_cost_usd": 0.08437125,
+          "reported_cost_usd": 0.0860118,
+          "price": {
+            "input": 0.1,
+            "cached_input": 0.01,
+            "cache_write": 0.125,
+            "output": 0.5,
+            "unit": "USD/1M tokens",
+            "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+            "as_of": "2026-10-29"
+          }
+        },
+        "imagegen": {
+          "tasks": 0,
+          "images": 0,
+          "median_seconds": null
+        }
+      }
+    },
+    "judges": {
+      "gpt-6.1-sol": {
+        "tasks": 17,
+        "token_tasks": 17,
+        "token_totals": {
+          "input": 216970,
+          "output": 4132,
+          "reasoning": 1992,
+          "cached_input": 145408,
+          "cache_write": 0
+        },
+        "token_counts": {
+          "input": 17,
+          "output": 17,
+          "reasoning": 17,
+          "cached_input": 17,
+          "cache_write": 17
+        },
+        "mean_input_tokens": 12762.941176470587,
+        "mean_output_tokens": 243.05882352941177,
+        "mean_reasoning_tokens": 117.17647058823529,
+        "median_seconds": 14.2,
+        "cost_tasks": 17,
+        "mean_cost_usd": 0.011704988235294117,
+        "estimated_cost_usd": 0.1989848,
+        "known_cost_usd": 0.1989848,
+        "reported_cost_usd": null,
+        "price": {
+          "input": 2.0,
+          "cached_input": 0.1,
+          "cache_write": 2.5,
+          "output": 10.0,
+          "unit": "USD/1M tokens",
+          "source": "https://developers.openai.com/api/docs/pricing",
+          "as_of": "2026-10-25"
+        }
+      }
+    }
+  }
+}

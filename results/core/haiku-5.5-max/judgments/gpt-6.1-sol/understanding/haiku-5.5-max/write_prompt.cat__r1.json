@@ -1,0 +1,91 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/haiku-5.5-max/write_prompt.cat__r1.json",
+  "target_sha256": "655ef4fa8854e781693090be6c10ab2de31dc3b68bb7df80ba3af2fedcd0b860",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "bf9ae17121ad8cdc",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "scores": {
+    "pose": 1,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 0,
+    "background": 2,
+    "vibe": 1,
+    "identity": 2
+  },
+  "hallucinations": [
+    "The specified flat digital illustration with thick outlines and cel shading contradicts the reference's glossy 3D CG rendering."
+  ],
+  "rationale": "The prompt captures the closed eyes, enormous laughing mouth, plain background, and recognizable feline features. The hunched stance and belly-clutching are vague, the merged head-and-torso shape and pale belly patch are missing, and the cheerful flat-art treatment misses the reference's rendering and unhinged energy.",
+  "raw": "{\"scores\":{\"pose\":1,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":2,\"body\":1,\"belly_patch\":0,\"render\":0,\"background\":2,\"vibe\":1,\"identity\":2},\"hallucinations\":[\"The specified flat digital illustration with thick outlines and cel shading contradicts the reference's glossy 3D CG rendering.\"],\"rationale\":\"The prompt captures the closed eyes, enormous laughing mouth, plain background, and recognizable feline features. The hunched stance and belly-clutching are vague, the merged head-and-torso shape and pale belly patch are missing, and the cheerful flat-art treatment misses the reference's rendering and unhinged energy.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d86-c614-7b31-8831-d267239069fb",
+    "seconds": 30.6,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12705,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 493,
+      "reasoning_output_tokens": 344
+    },
+    "tokens": {
+      "input": 12705,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 493,
+      "reasoning": 344
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:56:22Z",
+    "finished_at": "2026-10-30T15:56:52Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

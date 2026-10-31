@@ -1,0 +1,84 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/haiku-5.5-max/recognize_smug__r1.json",
+  "target_sha256": "a7c9c530063dcbf9ea75b185fa52d326815decb4ca61102d2287396daf8b81f1",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "caabb8b7b30e006b",
+  "judge_images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0
+  },
+  "hallucinations": [],
+  "rationale": "回答未认出角色是奶龙，也未说明其中国儿童动画角色背景；同时未识别出大笑奶龙／变异奶龙／奶蛙梗家族。对懒蛋黄的联想明确标为不确定，不计为幻觉。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0},\"hallucinations\":[],\"rationale\":\"回答未认出角色是奶龙，也未说明其中国儿童动画角色背景；同时未识别出大笑奶龙／变异奶龙／奶蛙梗家族。对懒蛋黄的联想明确标为不确定，不计为幻觉。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d86-918d-74e3-bb11-02d26aa5317e",
+    "seconds": 11.9,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12628,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 166,
+      "reasoning_output_tokens": 76
+    },
+    "tokens": {
+      "input": 12628,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 166,
+      "reasoning": 76
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:56:08Z",
+    "finished_at": "2026-10-30T15:56:20Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

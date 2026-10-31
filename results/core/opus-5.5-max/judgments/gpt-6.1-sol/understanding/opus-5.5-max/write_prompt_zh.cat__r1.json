@@ -1,0 +1,93 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/opus-5.5-max/write_prompt_zh.cat__r1.json",
+  "target_sha256": "cd2e4055f2456426c6d482eea9bf773c44efd0e7b2003282eebec29ff1efa9c4",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "0f363abfae5a5601",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 0,
+    "background": 2,
+    "vibe": 2,
+    "identity": 1
+  },
+  "hallucinations": [
+    "The body leans backward with feet kicking up, contradicting the standing, forward-hunched pose with slightly bent knees.",
+    "The mouth explicitly has no teeth, contradicting the visible teeth in the reference.",
+    "The requested flat 2D style and explicit exclusion of 3D rendering contradict the glossy 3D CG reference."
+  ],
+  "rationale": "The answer clearly covers belly-clutching paws, closed curved eyes, body shape, belly patch, plain background, and unhinged laughter, but contradicts the pose and rendering style and omits teeth. Cat features are added to a bright-yellow blob without natural feline coloring or markings, so identity receives partial credit.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":2,\"eyes\":2,\"mouth\":1,\"body\":2,\"belly_patch\":2,\"render\":0,\"background\":2,\"vibe\":2,\"identity\":1},\"hallucinations\":[\"The body leans backward with feet kicking up, contradicting the standing, forward-hunched pose with slightly bent knees.\",\"The mouth explicitly has no teeth, contradicting the visible teeth in the reference.\",\"The requested flat 2D style and explicit exclusion of 3D rendering contradict the glossy 3D CG reference.\"],\"rationale\":\"The answer clearly covers belly-clutching paws, closed curved eyes, body shape, belly patch, plain background, and unhinged laughter, but contradicts the pose and rendering style and omits teeth. Cat features are added to a bright-yellow blob without natural feline coloring or markings, so identity receives partial credit.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d88-d5c8-7023-ad45-51ad957c83ba",
+    "seconds": 13.8,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12875,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 308,
+      "reasoning_output_tokens": 116
+    },
+    "tokens": {
+      "input": 12875,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 308,
+      "reasoning": 116
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:58:37Z",
+    "finished_at": "2026-10-30T15:58:51Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

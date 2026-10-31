@@ -1,0 +1,100 @@
+{
+  "settings_id": "4e1f1b03b3c609b5",
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "vendor": "anthropic",
+  "item": "write_prompt.cat",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a cat version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A flat 2D cartoon sticker of an extremely chubby, goofy yellow cat bursting into a huge, shameless belly laugh. Its body is a squishy, mochi-like, pear-shaped blob in bright butter-yellow. An oversized round head merges directly into a fat round body with no neck. A paler cream-colored round belly sticks out in front. The arms and legs are tiny stubby nubs ending in round paws with no visible fingers. On top of the head are two small rounded-triangle cat ears with pink insides and, between them, one small curled tuft of hair. A short stubby tail curls up behind. The face is simple and wide: two small, solid, glossy black oval eyes set far apart with tiny white highlights, cheeks pushed up by the grin, a tiny pink triangle nose, and three thin whiskers on each cheek. The mouth is an enormous wide-open D-shaped laugh filling about half the face, deep red-pink inside with a bright pink tongue and two tiny white fangs. Pose: head tipped slightly back, body leaning back with the belly thrust forward, one paw clutching the belly and the other flung up in the air, with a few short motion lines beside the head to show it is shaking with laughter. Mood: dopey, smug, uncontrollably cheerful. Style: clean, smooth dark outline of even thickness, flat solid colors with only minimal soft shading and a small glossy highlight on the head and belly, simple slightly crude childlike shapes, emoji/chat-sticker look with a thin white sticker border. Full body, centered, square composition, plain pure white background. No text, no realistic fur texture, no photorealism, no extra characters or props.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 71.3,
+    "tokens": {
+      "input": 642,
+      "cached_input": 0,
+      "cache_write": 640,
+      "output": 8923,
+      "reasoning": null
+    },
+    "resolved_model": "claude-sonnet-5-5",
+    "cost_usd_reported": 0.09179400000000001,
+    "tools_used": [],
+    "cost_usd": 0.09179400000000001,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 640,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 8923,
+      "output_tokens_details": {
+        "thinking_tokens": 8366
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 640,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 8923,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 640,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 640
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:15:09Z",
+    "finished_at": "2026-10-29T18:16:21Z",
+    "revision": "90e0bea",
+    "nwb_version": "0.1.0"
+  }
+}

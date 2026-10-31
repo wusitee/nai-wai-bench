@@ -1,0 +1,100 @@
+{
+  "settings_id": "d1420308a4561f99",
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "vendor": "anthropic",
+  "item": "write_prompt.giraffe",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a giraffe version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A cute, chubby cartoon giraffe drawn in the style of \"Laughing Nailong,\" a plump, soft, creamy pale-yellow meme character with a round bean-shaped body, a big round head with rosy blush circles on the cheeks, short stubby arms with tiny hands, and short plump legs ending in small rounded feet. The giraffe keeps its long neck, now thick, soft, and gently curved, and adds classic giraffe traits: two short ossicone horns with dark brown tufts on top of its head, large irregular brown-orange spots across its back, neck, and legs, and a thin tail with a dark tuft at the tip. It is laughing uproariously, with its head tilted back, neck arched, eyes squeezed shut into happy upward-arching curves, a huge wide-open mouth showing a few teeth and a pink tongue, and one hand pressed to its round belly while its whole body shakes with joy. Style: glossy, cute 3D cartoon sticker with smooth soft shading, clean thick outlines, and bright warm colors. Full body, centered, facing the viewer, on a plain soft pastel background with a few small laugh-burst motion lines around it. No text, no watermark, no realistic fur.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 57.1,
+    "tokens": {
+      "input": 665,
+      "cached_input": 0,
+      "cache_write": 663,
+      "output": 11885,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0060753,
+    "tools_used": [],
+    "cost_usd": 0.0060753,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 663,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 11885,
+      "output_tokens_details": {
+        "thinking_tokens": 11481
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 663,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 11885,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 663,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 663
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-haiku-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:15:31Z",
+    "finished_at": "2026-10-29T18:16:28Z",
+    "revision": "ba9f0aa",
+    "nwb_version": "0.1.0"
+  }
+}

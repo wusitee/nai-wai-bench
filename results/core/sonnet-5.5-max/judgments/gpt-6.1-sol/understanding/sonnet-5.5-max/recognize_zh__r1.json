@@ -1,0 +1,87 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/sonnet-5.5-max/recognize_zh__r1.json",
+  "target_sha256": "dee44cee93e7ffa840a9abf030fee7005ddfbdb1f9c901c7bce7886ead25fa62",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "dc78a111dcd85758",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "scores": {
+    "base_character": 2,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [],
+  "rationale": "回答认出了黄色、圆胖的国产动画角色奶龙，但未识别图中的大笑奶龙变体，转而介绍「我是奶龙／我才是奶龙」梗。未说明该变体由AI生成且非官方，也未提到「变异奶龙」「奶蛙」及其含义。",
+  "raw": "{\"scores\":{\"base_character\":2,\"identifies_meme\":0,\"ai_variant\":0,\"aliases\":0,\"naiwa\":0},\"hallucinations\":[],\"rationale\":\"回答认出了黄色、圆胖的国产动画角色奶龙，但未识别图中的大笑奶龙变体，转而介绍「我是奶龙／我才是奶龙」梗。未说明该变体由AI生成且非官方，也未提到「变异奶龙」「奶蛙」及其含义。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d8a-027b-7fc2-bf77-312c00f76c88",
+    "seconds": 23.6,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13132,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 360,
+      "reasoning_output_tokens": 243
+    },
+    "tokens": {
+      "input": 13132,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 360,
+      "reasoning": 243
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:59:54Z",
+    "finished_at": "2026-10-30T16:00:17Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

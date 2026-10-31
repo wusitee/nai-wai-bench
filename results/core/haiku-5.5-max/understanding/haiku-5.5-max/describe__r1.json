@@ -1,0 +1,100 @@
+{
+  "settings_id": "d1420308a4561f99",
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "vendor": "anthropic",
+  "item": "describe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "不看任何图片，仅凭你的记忆，详细描述最经典的那张「大笑奶龙」（奶蛙）图片的画面：姿势、表情、身体造型、配色、渲染风格和背景，让从没见过它的画师能照着画出来。不确定的地方请说明。",
+  "images": [],
+  "answer": "按你的要求，我不看图，也不使用工具，只凭记忆回答。我对这张图的具体细节记忆并不可靠，下面每一项都标了把握程度（高／中／低）。低把握的部分请不要直接当作依据。另外，奶龙有很多版本和二次创作，我想到的未必是你说的那张「最经典」的图。\n\n**奶龙**（英文圈常写作 Nailong）是中国网络上的表情包卡通形象。\n\n| 项目 | 我的记忆 | 把握 |\n|---|---|---|\n| 整体造型 | 黄色系、卡通化的类龙／类恐龙生物，圆胖、憨态可掬 | 中 |\n| 姿势 | 大笑时身体略微后仰，手臂可能抬起或放在肚子上 | 低 |\n| 表情 | 眼睛眯成弯弯的弧线（或闭合），嘴巴大张呈大笑弧度 | 中（具体形状低） |\n| 身体比例 | 头部偏大，肚子鼓圆，四肢短粗 | 中低 |\n| 角／尾／翼 | 记不清有没有，也记不清形状 | 低 |\n| 配色 | 主色为奶黄／浅黄，肚子或局部偏白，五官和线条为深棕或黑色 | 中低 |\n| 渲染风格 | 简洁的平面卡通风，轮廓清楚，少量明暗；是否有粗描边不确定 | 低 |\n| 背景 | 印象中是纯色或白底，无复杂场景；可能带配字，但不确定是否属于这张图 | 低 |\n\n**画之前最需要核对的地方：**\n1. 黄色的具体色相和明度。这是识别度最高的特征之一，但我说不出准确色号。\n2. 面部细节：眼睛形状、是否有腮红、是否露牙或吐舌。\n3. 是否有角、尾巴、翅膀，以及手脚的数量和形状。\n4. 姿势：是站、坐还是躺，身体朝向是正面还是侧面。\n\n建议找一张可靠的参考图，并与同一张图的其他来源对比确认，再校正上面的内容。如果你把参考图里看到的关键细节用文字告诉我，我可以帮你整理成线稿要点和配色表。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 65.8,
+    "tokens": {
+      "input": 685,
+      "cached_input": 0,
+      "cache_write": 683,
+      "output": 12829,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0065512999999999995,
+    "tools_used": [],
+    "cost_usd": 0.0065512999999999995,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 683,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 12829,
+      "output_tokens_details": {
+        "thinking_tokens": 12041
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 683,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 12829,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 683,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 683
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-haiku-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:14:35Z",
+    "finished_at": "2026-10-29T18:15:41Z",
+    "revision": "ba9f0aa",
+    "nwb_version": "0.1.0"
+  }
+}

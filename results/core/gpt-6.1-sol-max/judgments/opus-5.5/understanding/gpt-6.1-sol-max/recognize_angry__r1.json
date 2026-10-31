@@ -1,0 +1,111 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.1-sol-max/recognize_angry__r1.json",
+  "target_sha256": "16d59cbd9f628475182d39ec0c946aacf51b9153189ff0c311cc0b905d114e71",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "01aff8474a646a89",
+  "judge_images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6.1-sol-max",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0
+  },
+  "hallucinations": [
+    "Identifies the character as an angry Ugandan Knuckles (乌干达战士) remix derived from Sonic's Knuckles, when it is a red mutated 奶龙 from the 大笑奶龙/变异奶龙/奶蛙 meme family",
+    "Attributes the sticker to the 'Do you know da wae?' VRChat meme, which is unrelated to this image"
+  ],
+  "rationale": "The model misidentified the red, bulky, green-eyed mutated 奶龙 as Ugandan Knuckles and tied it to the wrong meme. It never mentions 奶龙, the 大笑奶龙/奶蛙 meme family, or the AI-generated mutation.",
+  "raw": "```json\n{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"ai_variant\": 0}, \"hallucinations\": [\"Identifies the character as an angry Ugandan Knuckles (乌干达战士) remix derived from Sonic's Knuckles, when it is a red mutated 奶龙 from the 大笑奶龙/变异奶龙/奶蛙 meme family\", \"Attributes the sticker to the 'Do you know da wae?' VRChat meme, which is unrelated to this image\"], \"rationale\": \"The model misidentified the red, bulky, green-eyed mutated 奶龙 as Ugandan Knuckles and tied it to the wrong meme. It never mentions 奶龙, the 大笑奶龙/奶蛙 meme family, or the AI-generated mutation.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.312",
+    "seconds": 7.2,
+    "tokens": {
+      "input": 1753,
+      "cached_input": 0,
+      "cache_write": 1751,
+      "output": 412,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0224941,
+    "tools_used": [],
+    "cost_usd": 0.0224941,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1751,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 412,
+      "output_tokens_details": {
+        "thinking_tokens": 135
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1751,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 412,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1751,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1751
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:54:39Z",
+    "finished_at": "2026-10-30T15:54:46Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

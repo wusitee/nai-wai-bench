@@ -1,0 +1,100 @@
+{
+  "settings_id": "d1420308a4561f99",
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "vendor": "anthropic",
+  "item": "knowledge_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "What is the Chinese internet meme \"大笑奶龙\" (Laughing Nailong, also called \"奶蛙\")? Explain its origin, what it looks like, and the related jokes and remixes. Say so plainly where you are unsure instead of guessing.",
+  "images": [],
+  "answer": "I know this meme only in outline, so here is what I'm fairly sure of and what I'm not. My knowledge may also be out of date.\n\n**Name**\n- 大笑奶龙 means \"laughing Nailong.\" 奶龙 (nǎi lóng, roughly \"milk dragon\") is the character, and 大笑 names the version where it's laughing.\n- 奶蛙 (\"milk frog\") is a nickname I've seen mentioned, but I don't know how common it is or why it's used.\n\n**Appearance (from memory, so check images)**\n- A plump, yellowish cartoon creature with a rounded body and a simple, goofy face.\n- The laughing version has its mouth wide open in a loud laugh.\n- I'm not sure about finer details, such as exact colors, limbs, or whether it has horns or a tail.\n\n**Origin**\n- I don't reliably know who created it, where it first appeared, or when it spread widely. I'd rather not invent a backstory.\n\n**Jokes and remixes**\n- I can't name specific jokes or remix series with confidence, so I won't guess at examples.\n- Memes like this typically get used as sticker packs, paired with captions, pasted into other scenes, set to its laugh in short videos, and made into merchandise such as plush toys. I'm not certain which of these apply to Nailong specifically.\n- The 大笑 label suggests other expression variants exist, but I don't know their names.\n\n**Where to check**\n- Search \"奶龙 起源\" (origin) and \"奶龙 梗\" (jokes or memes) on Baidu Baike, Zhihu, Bilibili, or Xiaohongshu. These are likely to have better-sourced answers, including who made it and which remixes are well known.\n- I also don't have reliable details on any controversies around it.\n\nIf you share examples you've seen, I can help you make sense of them.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 60.9,
+    "tokens": {
+      "input": 663,
+      "cached_input": 0,
+      "cache_write": 661,
+      "output": 12326,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0062954,
+    "tools_used": [],
+    "cost_usd": 0.0062954,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 661,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 12326,
+      "output_tokens_details": {
+        "thinking_tokens": 11725
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 661,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 12326,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 661,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 661
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-haiku-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:13:34Z",
+    "finished_at": "2026-10-29T18:14:35Z",
+    "revision": "ba9f0aa",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gemini-4-argon/recognize_angry__r1.json",
+  "target_sha256": "19c701686a47be7603b7b10da5200b1ddf91926287c477ea001a95e1c0e1f8d0",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "53327c92457a4ae1",
+  "judge_images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0
+  },
+  "hallucinations": [],
+  "rationale": "The model describes the red, angry, pale-bellied character accurately but never links it to 奶龙 or the 大笑奶龙/变异奶龙/奶蛙 meme family, and says it can't determine the origin. It lists AI generation only as one uncertain possibility, so no checklist item is covered, but it makes no confident false claims.",
+  "raw": "{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"ai_variant\": 0}, \"hallucinations\": [], \"rationale\": \"The model describes the red, angry, pale-bellied character accurately but never links it to 奶龙 or the 大笑奶龙/变异奶龙/奶蛙 meme family, and says it can't determine the origin. It lists AI generation only as one uncertain possibility, so no checklist item is covered, but it makes no confident false claims.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.312",
+    "seconds": 6.3,
+    "tokens": {
+      "input": 1945,
+      "cached_input": 0,
+      "cache_write": 1943,
+      "output": 434,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0244886,
+    "tools_used": [],
+    "cost_usd": 0.0244886,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1943,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 434,
+      "output_tokens_details": {
+        "thinking_tokens": 271
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1943,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 434,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1943,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1943
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:53:42Z",
+    "finished_at": "2026-10-30T15:53:49Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

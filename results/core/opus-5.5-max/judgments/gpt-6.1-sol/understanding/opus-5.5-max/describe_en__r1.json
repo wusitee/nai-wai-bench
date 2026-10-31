@@ -1,0 +1,88 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/opus-5.5-max/describe_en__r1.json",
+  "target_sha256": "61d5776058ff000697a827e971232be041b1cb79bd0725838c62136aa49c7b55",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "274b7fef5e0a59df",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 1,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 1,
+    "vibe": 0
+  },
+  "hallucinations": [],
+  "rationale": "The body shape and pale oval belly patch are clearly covered, while the hands, eyes, rendering, and background are diluted by conflicting alternatives. The pose bends backward instead of forward, the mouth description omits visible teeth, and the absurd, unhinged quality is missing; contradictory details are framed as uncertain rather than confident claims.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":1,\"mouth\":1,\"body\":2,\"belly_patch\":2,\"render\":1,\"background\":1,\"vibe\":0},\"hallucinations\":[],\"rationale\":\"The body shape and pale oval belly patch are clearly covered, while the hands, eyes, rendering, and background are diluted by conflicting alternatives. The pose bends backward instead of forward, the mouth description omits visible teeth, and the absurd, unhinged quality is missing; contradictory details are framed as uncertain rather than confident claims.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d87-7fb6-7950-ac3f-873547cd2395",
+    "seconds": 23.5,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13635,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 410,
+      "reasoning_output_tokens": 284
+    },
+    "tokens": {
+      "input": 13635,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 410,
+      "reasoning": 284
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:57:09Z",
+    "finished_at": "2026-10-30T15:57:33Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

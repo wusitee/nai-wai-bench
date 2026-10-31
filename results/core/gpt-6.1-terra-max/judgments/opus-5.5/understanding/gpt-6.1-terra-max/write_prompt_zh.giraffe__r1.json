@@ -1,0 +1,116 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.1-terra-max/write_prompt_zh.giraffe__r1.json",
+  "target_sha256": "d85e81dd1229dc178d170e1ead21c3de77326ed8188bb2f16690c28f2c255281",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "6c76d95571406847",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.1-terra-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 1,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 2,
+    "vibe": 1,
+    "identity": 2
+  },
+  "hallucinations": [
+    "Describes the head tilted back and small hands raised at the chest, which contradicts the meme's doubled-over pose with hands clutching the belly",
+    "Gives the giraffe '鹿角' (antlers); giraffes have ossicones, not antlers",
+    "Specifies a distinctly long thin neck, which contradicts the neckless, head-merged-into-torso Nailong body"
+  ],
+  "rationale": "The prompt correctly covers the huge open mouth with teeth and tongue, the 3D toy render, the white background and recognizable giraffe markings, but it gets the pose and hand placement wrong, omits the belly patch, and leans cute rather than unhinged.",
+  "raw": "```json\n{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 1, \"mouth\": 2, \"body\": 1, \"belly_patch\": 0, \"render\": 2, \"background\": 2, \"vibe\": 1, \"identity\": 2}, \"hallucinations\": [\"Describes the head tilted back and small hands raised at the chest, which contradicts the meme's doubled-over pose with hands clutching the belly\", \"Gives the giraffe '鹿角' (antlers); giraffes have ossicones, not antlers\", \"Specifies a distinctly long thin neck, which contradicts the neckless, head-merged-into-torso Nailong body\"], \"rationale\": \"The prompt correctly covers the huge open mouth with teeth and tongue, the 3D toy render, the white background and recognizable giraffe markings, but it gets the pose and hand placement wrong, omits the belly patch, and leans cute rather than unhinged.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.312",
+    "seconds": 12.8,
+    "tokens": {
+      "input": 1740,
+      "cached_input": 0,
+      "cache_write": 1738,
+      "output": 1085,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.03595960000000001,
+    "tools_used": [],
+    "cost_usd": 0.03595960000000001,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1738,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1085,
+      "output_tokens_details": {
+        "thinking_tokens": 769
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1738,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1085,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1738,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1738
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:56:03Z",
+    "finished_at": "2026-10-30T15:56:16Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

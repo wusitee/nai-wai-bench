@@ -1,0 +1,85 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/sonnet-5.5-max/recognize_variant__r1.json",
+  "target_sha256": "42a9630ae91e8c1a58cf4a4fc43689f1412d2f0e389b6e15c87e36943c175411",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "ff09fed9b254228b",
+  "judge_images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "scores": {
+    "identifies_meme": 0,
+    "laugh_pose": 2,
+    "base_character": 0
+  },
+  "hallucinations": [],
+  "rationale": "回答未识别出大笑奶龙／奶蛙梗，而是推测为熊猫头反应图；但准确描述了前倾、双手捂腹、闭眼张嘴大笑的姿态。未介绍奶龙原本是中国儿童动画中的黄色胖龙／恐龙角色，出处推测已明确表达不确定，因此不列为自信断言的幻觉。",
+  "raw": "{\"scores\":{\"identifies_meme\":0,\"laugh_pose\":2,\"base_character\":0},\"hallucinations\":[],\"rationale\":\"回答未识别出大笑奶龙／奶蛙梗，而是推测为熊猫头反应图；但准确描述了前倾、双手捂腹、闭眼张嘴大笑的姿态。未介绍奶龙原本是中国儿童动画中的黄色胖龙／恐龙角色，出处推测已明确表达不确定，因此不列为自信断言的幻觉。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d89-ffa6-7802-b937-0f3eeed6f95d",
+    "seconds": 13.7,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13242,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 225,
+      "reasoning_output_tokens": 101
+    },
+    "tokens": {
+      "input": 13242,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 225,
+      "reasoning": 101
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:59:53Z",
+    "finished_at": "2026-10-30T16:00:07Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "settings_id": "8bdf006b7d3fc51c",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "**角色**：看起来是 3D 无对白动画《奇宝萌兵》（*Oddbods*，新加坡 One Animation 出品）里的红色角色 **Fuse**。\n\n图里的特征和他吻合：\n- 通体鲜红、豆子形的圆滚身体，浅粉色肚皮\n- 粗眉骨、绿眼睛、皱眉的怒脸\n- 叉腰或抱臂的姿势\n\nFuse 在剧中的人设是力气大、爱发号施令、脾气火爆。名字取自英语 \"short fuse\"（导火索短，意思是一点就着），所以经常被拿来表示生气。\n\n**梗和用法**：\n- **\"切换/开启 XX 模式\"句式**：表示\"我要生气了\"\"别惹我\"，多半是玩笑式的假装发火，属于\"生气类\"反应表情包。\n- **\"红温\"**：这个网络用语形容被气到、急到脸发红、破防。角色本身就是红色加怒脸，很适合配\"我红温了\"这类场景。\n- **方便二创**：《奇宝萌兵》没有台词，全靠表情和动作，截图很容易加字做成表情包。\n\n角色识别我比较有把握。但这张\"切换愤怒模式\"是否出自某个特定的爆款梗或固定系列，我凭记忆无法确定，上面是根据常见用法做的说明。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 216.6,
+    "tokens": {
+      "input": 689,
+      "cached_input": 0,
+      "cache_write": 687,
+      "output": 18831,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.382124,
+    "tools_used": [],
+    "cost_usd": 0.382124,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 687,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 18831,
+      "output_tokens_details": {
+        "thinking_tokens": 18361
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 687,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 18831,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 687,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 687
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T19:11:08Z",
+    "finished_at": "2026-10-29T19:14:44Z",
+    "revision": "5c571b8",
+    "nwb_version": "0.1.0"
+  }
+}

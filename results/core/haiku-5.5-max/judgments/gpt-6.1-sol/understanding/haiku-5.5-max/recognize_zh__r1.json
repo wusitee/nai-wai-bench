@@ -1,0 +1,87 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/haiku-5.5-max/recognize_zh__r1.json",
+  "target_sha256": "9a465d686d9dcf9a7a91aaef92d782ade1502b0d44919004f966995af543931c",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "11c08bb73b9af197",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [],
+  "rationale": "回答明确表示无法识别角色、具体网络梗及别名，未覆盖奶龙身份、变异版本的 AI 非官方性质或奶蛙的含义。画面描述基本符合图片，且对未知信息保持不确定，没有可确认的幻觉。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"ai_variant\":0,\"aliases\":0,\"naiwa\":0},\"hallucinations\":[],\"rationale\":\"回答明确表示无法识别角色、具体网络梗及别名，未覆盖奶龙身份、变异版本的 AI 非官方性质或奶蛙的含义。画面描述基本符合图片，且对未知信息保持不确定，没有可确认的幻觉。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d86-c013-74a2-a639-bfb39c1314b9",
+    "seconds": 13.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13724,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 133,
+      "reasoning_output_tokens": 30
+    },
+    "tokens": {
+      "input": 13724,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 133,
+      "reasoning": 30
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:56:20Z",
+    "finished_at": "2026-10-30T15:56:33Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

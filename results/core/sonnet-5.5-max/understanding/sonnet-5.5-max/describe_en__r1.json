@@ -1,0 +1,100 @@
+{
+  "settings_id": "4e1f1b03b3c609b5",
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "vendor": "anthropic",
+  "item": "describe_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Without looking at any images, describe the most iconic image of Laughing Nailong (大笑奶龙 / 奶蛙) from memory: its pose, expression, body shape, colors, rendering style, and background, in enough detail for an artist who has never seen it to draw it. Say where you are unsure.",
+  "images": [],
+  "answer": "I can't point to one canonical \"Laughing Nailong\" file with certainty. This is my best reconstruction of the character's standard design plus its usual laughing variant. Anything marked *(unsure)* is a guess, and the rest I'm fairly confident about.\n\n**Composition**\n- One character, front-on, centered, filling most of the frame, like a sticker or emoji.\n\n**Pose**\n- Upright and facing the viewer, roughly symmetrical, on stubby legs with the feet apart and the belly pushed forward.\n- For the laughing cue, the head tips slightly back, the arms lift a little outward or a stubby hand rests on the belly, and there may be tiny shake lines or tears. *(unsure)*\n\n**Expression**\n- The defining feature is a huge open-mouth grin spanning most of the face width. The inside is red-pink with a small lighter-pink tongue.\n- The eyes are either small, wide-set black dots with white highlights (the vacant, goofy look the character is known for) or squeezed into upturned arcs for the laughing version. *(unsure which)*\n- There are no eyebrows, or only minimal ones. *(unsure)*\n\n**Body shape**\n- Chubby and pear- or egg-shaped, with the head and torso merged and no visible neck. The head is about half the total height.\n- The arms, legs, hands and feet are short, round and stubby, with no fine detail. There is a short stub of a tail.\n- A lighter oval belly patch sits on the front.\n- Small pale spikes or bumps sit on the head and along the back and tail, which gives the dino-dragon cue. Their count and placement are *(unsure)*.\n\n**Colors** (descriptive, not recalled values)\n- The body is a bright, warm yellow somewhere between lemon and golden.\n- The belly and muzzle are pale cream.\n- The mouth is red-pink, with a lighter pink tongue.\n- The eyes are black with white highlights.\n- The outline is a darker golden-brown or orange rather than pure black. *(unsure)*\n- The spikes are cream or pale yellow. *(unsure)*\n\n**Rendering style**\n- Flat 2D cartoon in a clean, vector-like sticker style, with even-weight outlines and solid fills.\n- Shading is minimal: at most a soft darker-yellow cel shadow along the underside, plus a small white highlight on the head.\n- Many circulating copies are low-res and JPEG-crunchy, but that isn't part of the design.\n\n**Background**\n- Plain white or transparent, possibly with a thin white sticker border. There is no scenery.\n\n**Where I'm unsure**\n- Whether there is one definitive \"most iconic\" laughing image or several similar variants.\n- The eye treatment, spike count, outline color and exact hand pose.\n- **奶蛙:** I don't know whether this is a nickname for the same character, a frog-like variant, or something separate. A very wide laughing mouth with wide-set eyes could read as frog-like, which might explain the name, but that is speculation.\n\n**If you only get five things right:** a yellow, chubby, egg-shaped dino body; a cream belly; a huge open grin with a pink tongue; stubby limbs with small spikes; and a flat sticker look on a plain background. Check against a real reference before finalizing.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 81.9,
+    "tokens": {
+      "input": 655,
+      "cached_input": 0,
+      "cache_write": 653,
+      "output": 9408,
+      "reasoning": null
+    },
+    "resolved_model": "claude-sonnet-5-5",
+    "cost_usd_reported": 0.096696,
+    "tools_used": [],
+    "cost_usd": 0.096696,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 653,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 9408,
+      "output_tokens_details": {
+        "thinking_tokens": 8322
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 653,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 9408,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 653,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 653
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:16:38Z",
+    "finished_at": "2026-10-29T18:18:00Z",
+    "revision": "90e0bea",
+    "nwb_version": "0.1.0"
+  }
+}

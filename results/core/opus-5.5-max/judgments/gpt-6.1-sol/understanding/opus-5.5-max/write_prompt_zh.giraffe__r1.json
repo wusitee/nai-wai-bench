@@ -1,0 +1,95 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/opus-5.5-max/write_prompt_zh.giraffe__r1.json",
+  "target_sha256": "e73b9e6d0168259e19d22627357068ddd09d9d3195a38b007b182d63c0bd8b64",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "5b9a2a900006c09e",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 0,
+    "background": 2,
+    "vibe": 2,
+    "identity": 2
+  },
+  "hallucinations": [
+    "The character stands upright with its head tilted back instead of hunching forward with slightly bent knees.",
+    "The arms are thrown into the air instead of clutching the belly.",
+    "A distinct, moderately long neck replaces the reference's merged head and torso.",
+    "The mouth explicitly has no teeth, contradicting the reference's visible teeth.",
+    "The prescribed flat 2D cartoon style and explicit exclusion of 3D contradict the glossy 3D CG reference."
+  ],
+  "rationale": "The answer clearly covers the closed laughing eyes, pale belly patch, plain background, unhinged humor, and recognizable giraffe features. It contradicts the required posture, hand placement, and rendering style, while only partially matching the mouth and body anatomy.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":0,\"eyes\":2,\"mouth\":1,\"body\":1,\"belly_patch\":2,\"render\":0,\"background\":2,\"vibe\":2,\"identity\":2},\"hallucinations\":[\"The character stands upright with its head tilted back instead of hunching forward with slightly bent knees.\",\"The arms are thrown into the air instead of clutching the belly.\",\"A distinct, moderately long neck replaces the reference's merged head and torso.\",\"The mouth explicitly has no teeth, contradicting the reference's visible teeth.\",\"The prescribed flat 2D cartoon style and explicit exclusion of 3D contradict the glossy 3D CG reference.\"],\"rationale\":\"The answer clearly covers the closed laughing eyes, pale belly patch, plain background, unhinged humor, and recognizable giraffe features. It contradicts the required posture, hand placement, and rendering style, while only partially matching the mouth and body anatomy.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d88-f4dd-78e0-8be3-38d086816b09",
+    "seconds": 17.4,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12947,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 345,
+      "reasoning_output_tokens": 142
+    },
+    "tokens": {
+      "input": 12947,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 345,
+      "reasoning": 142
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:58:45Z",
+    "finished_at": "2026-10-30T15:59:02Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

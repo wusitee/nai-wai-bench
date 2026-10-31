@@ -1,0 +1,89 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gemini-4-argon/knowledge_en__r1.json",
+  "target_sha256": "38124002b72cf5ec1524887cb4cac2ed2793f6962e700471ef12cf9a62b6c994",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "a081f8447485ebd8",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 1,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer correctly describes the base character and partially covers the aliases, the frog-like connection to Nailong, and the laughing appearance. It omits the AI-generated origin and specific remix lore; its speculative details are explicitly marked uncertain and therefore are not counted as hallucinations.",
+  "raw": "{\"scores\":{\"base_character\":2,\"ai_variant\":0,\"xingye_origin\":0,\"aliases\":1,\"naiwa\":1,\"laugh_pose\":1,\"junti_quan\":0,\"official_reply\":0,\"trait_variants\":0,\"rarity_titles\":0},\"hallucinations\":[],\"rationale\":\"The answer correctly describes the base character and partially covers the aliases, the frog-like connection to Nailong, and the laughing appearance. It omits the AI-generated origin and specific remix lore; its speculative details are explicitly marked uncertain and therefore are not counted as hallucinations.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d84-1ce3-7763-9f2c-50b1394ae591",
+    "seconds": 18.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13588,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 298,
+      "reasoning_output_tokens": 172
+    },
+    "tokens": {
+      "input": 13588,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 298,
+      "reasoning": 172
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:53:27Z",
+    "finished_at": "2026-10-30T15:53:45Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}
