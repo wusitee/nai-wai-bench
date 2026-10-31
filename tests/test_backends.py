@@ -10,7 +10,7 @@ from pathlib import Path
 
 import pytest
 
-from nwb.backends import BackendError, Request, tokens
+from nwb.backends import BackendError, Request, run_cli, tokens
 from nwb.backends.acp import AcpBackend, AcpConnection, acp_usage
 from nwb.backends.codex import CodexBackend, ISOLATED_FEATURES, audit_rollout, recorded_tool_profile
 from nwb.backends.claude import ClaudeBackend
@@ -211,8 +211,11 @@ def test_cli_stages_attachments_and_records_usage(tmp_path, monkeypatch, backend
         from nwb.util import media_type
         monkeypatch.setattr("nwb.backends.claude.media_type", lambda p: paths.append(p) or media_type(p))
 
+    monkeypatch.setattr("nwb.backends.shutil.which", lambda name: f"/opt/bin/{name}.cmd")
+
     def run(command, **kwargs):
         assert Path(kwargs["cwd"]) != Path.cwd()
+        assert command[0] == f"/opt/bin/{backend}.cmd" and kwargs["encoding"] == "utf-8"
         assert str(source) not in str(command) + kwargs["input"]
         if backend == "codex":
             paths.extend(Path(command[i + 1]) for i, value in enumerate(command) if value == "--image")
@@ -232,7 +235,7 @@ def test_cli_stages_attachments_and_records_usage(tmp_path, monkeypatch, backend
         assert [p.read_bytes() for p in paths] == [b"image", b"second"]
         return SimpleNamespace(stdout="\n".join(json.dumps(e) for e in events), stderr="", returncode=0)
 
-    monkeypatch.setattr(f"nwb.backends.{backend}.subprocess.run", run)
+    monkeypatch.setattr("nwb.backends.subprocess.run", run)
     monkeypatch.setattr(f"nwb.backends.{backend}.cli_version", lambda _: "test")
     resp = (CodexBackend if backend == "codex" else ClaudeBackend)(spec).run(Request("hello", [source, second]))
     assert resp.text == "OK" and all(not p.exists() for p in paths)
@@ -241,6 +244,13 @@ def test_cli_stages_attachments_and_records_usage(tmp_path, monkeypatch, backend
     else:
         assert resp.meta["tokens"]["input"] == 60 and resp.meta["tokens"]["output"] == 40
         assert resp.meta["resolved_model"] == "resolved" and resp.meta["cost_usd_reported"] == 0.25
+
+
+def test_batch_shims_refuse_arguments_cmd_exe_would_reinterpret(monkeypatch):
+    monkeypatch.setattr("nwb.backends.shutil.which", lambda name: rf"C:\npm\{name}.cmd")
+    monkeypatch.setattr("nwb.backends.subprocess.run", lambda *a, **k: pytest.fail("cmd.exe must not start"))
+    with pytest.raises(BackendError, match="A&B"):
+        run_cli(["codex", "exec", "--image", r"C:\Users\A&B\Temp\image-1.png"])
 
 
 def test_unknown_usage_stays_null_and_acp_occupancy_is_not_token_usage():

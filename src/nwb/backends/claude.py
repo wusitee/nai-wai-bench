@@ -8,7 +8,7 @@ import tempfile
 import time
 from pathlib import Path
 
-from nwb.backends import BackendError, Request, Response, cli_version, neutral_inputs, tokens
+from nwb.backends import BackendError, Request, Response, cli_version, neutral_inputs, run_cli, tokens
 from nwb.config import ModelSpec
 from nwb.util import media_type
 
@@ -49,8 +49,7 @@ class ClaudeBackend:
         started = time.monotonic()
         with tempfile.TemporaryDirectory(prefix="nwb-claude-") as cwd:
             try:
-                proc = subprocess.run(self.command(), input=message + "\n", capture_output=True,
-                                      text=True, cwd=cwd, timeout=self.timeout)
+                proc = run_cli(self.command(), input=message + "\n", cwd=cwd, timeout=self.timeout)
             except subprocess.TimeoutExpired as e:
                 raise BackendError(f"claude timed out after {self.timeout}s") from e
         result = None
