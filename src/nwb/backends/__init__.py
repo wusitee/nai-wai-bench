@@ -106,11 +106,18 @@ def get_backend(spec: ModelSpec):
     raise ValueError(f"model {spec.name}: unknown backend {spec.backend!r}")
 
 
+def executable(name: str) -> str:
+    """The CLI's path on PATH. Windows starts npm-installed CLIs only through their `.cmd` shim's full
+    path; recorded command templates keep the bare name."""
+    return shutil.which(name) or name
+
+
 @functools.cache
 def cli_version(command: str) -> str | None:
     """`<command> --version` output (first line), recorded with each result as the client version."""
     try:
-        out = subprocess.run([command, "--version"], capture_output=True, text=True, timeout=30).stdout
+        out = subprocess.run([executable(command), "--version"], capture_output=True, encoding="utf-8",
+                             timeout=30).stdout
     except (OSError, subprocess.TimeoutExpired):
         return None
     return out.strip().splitlines()[0] if out.strip() else None

@@ -8,7 +8,7 @@ import tempfile
 import time
 from pathlib import Path
 
-from nwb.backends import BackendError, Request, Response, cli_version, neutral_inputs, tokens
+from nwb.backends import BackendError, Request, Response, cli_version, executable, neutral_inputs, tokens
 from nwb.config import ModelSpec
 from nwb.util import media_type
 
@@ -47,10 +47,12 @@ class ClaudeBackend:
         content.append({"type": "text", "text": req.prompt})
         message = json.dumps({"type": "user", "message": {"role": "user", "content": content}})
         started = time.monotonic()
+        command = self.command()
+        command[0] = executable(command[0])
         with tempfile.TemporaryDirectory(prefix="nwb-claude-") as cwd:
             try:
-                proc = subprocess.run(self.command(), input=message + "\n", capture_output=True,
-                                      text=True, cwd=cwd, timeout=self.timeout)
+                proc = subprocess.run(command, input=message + "\n", capture_output=True,
+                                      encoding="utf-8", cwd=cwd, timeout=self.timeout)
             except subprocess.TimeoutExpired as e:
                 raise BackendError(f"claude timed out after {self.timeout}s") from e
         result = None

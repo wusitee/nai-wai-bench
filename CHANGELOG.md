@@ -5,6 +5,10 @@ Software releases use semantic versions; suite ids version the evaluation panels
 
 ## Unreleased
 
+- Add the Claude Fable 5.1 configuration to the maintained model registry.
+- Start the Claude and Codex CLIs through their resolved executables and read their output as UTF-8,
+  so npm `.cmd` shims and non-UTF-8 console code pages on Windows work; recorded command templates
+  keep the bare command name.
 - Refuse settings-mismatched successful results before any request unless `--force` is explicit;
   leave collection logs and snapshots unchanged on no-op collection commands.
 - Support the recorded `legacy-v1` and `isolated-v1` Codex tool profiles and disclose the retained

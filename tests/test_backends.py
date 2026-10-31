@@ -211,8 +211,11 @@ def test_cli_stages_attachments_and_records_usage(tmp_path, monkeypatch, backend
         from nwb.util import media_type
         monkeypatch.setattr("nwb.backends.claude.media_type", lambda p: paths.append(p) or media_type(p))
 
+    monkeypatch.setattr("nwb.backends.shutil.which", lambda name: f"/opt/bin/{name}.cmd")
+
     def run(command, **kwargs):
         assert Path(kwargs["cwd"]) != Path.cwd()
+        assert command[0] == f"/opt/bin/{backend}.cmd" and kwargs["encoding"] == "utf-8"
         assert str(source) not in str(command) + kwargs["input"]
         if backend == "codex":
             paths.extend(Path(command[i + 1]) for i, value in enumerate(command) if value == "--image")
