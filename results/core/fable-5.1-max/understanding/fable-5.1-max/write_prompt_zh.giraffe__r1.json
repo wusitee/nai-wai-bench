@@ -1,0 +1,100 @@
+{
+  "settings_id": "8c7d55a4a7adc4cb",
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "vendor": "anthropic",
+  "item": "write_prompt_zh.giraffe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出长颈鹿版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "A cute, extremely simple cartoon mascot giraffe in the style of a modern preschool 3D-animated TV show: smooth, rounded, slightly glossy surfaces like a soft vinyl toy, bright saturated colors, soft simple shading, very few details. The body is a plump egg/bean shape in bright custard yellow, dotted with a few soft-edged caramel-brown giraffe patches. A thick, chubby sausage-like neck rises from the body to an oversized round head (about as big as the body), topped with two tiny knobby horns with dark brown tips and two small rounded ears; a short tail with a dark tuft at the back. Four short stubby limbs with no fingers or hooves. The face is minimal: two tiny black dot-eyes set very far apart, squeezed shut into two small upward-curving arcs because it is laughing so hard, and an enormous wide-open laughing mouth shaped like a huge rounded half-oval that fills almost the entire lower half of the face, with a dark red interior and a small pink tongue at the bottom, no teeth. Pose: full body, facing the viewer at a slight three-quarter angle, head thrown back with the neck arched backward, belly pushed out, whole body leaning back as it laughs hysterically; one stubby arm raised and pointing straight at the viewer in a smug, mocking way, the other arm pressed against its round belly; a few short curved motion lines near the head and shoulders to show it shaking with laughter. Expression: gleeful, smug, mocking, clearly laughing at the viewer. Plain solid white background with a soft shadow under the feet, character centered, square 1:1 composition, reaction-image / chat-sticker style. No text, no letters, no watermark, no realistic fur texture, no extra limbs.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 122.4,
+    "tokens": {
+      "input": 716,
+      "cached_input": 0,
+      "cache_write": 714,
+      "output": 8148,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 0.4217000000000001,
+    "tools_used": [],
+    "cost_usd": 0.4217000000000001,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 714,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 8148,
+      "output_tokens_details": {
+        "thinking_tokens": 7560
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 714,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 8148,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 714,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 714
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T11:48:49Z",
+    "finished_at": "2026-11-01T11:50:51Z",
+    "revision": "c8f2158",
+    "nwb_version": "0.1.0"
+  }
+}

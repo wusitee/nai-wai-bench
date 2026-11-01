@@ -1,0 +1,103 @@
+{
+  "settings_id": "8c7d55a4a7adc4cb",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "vendor": "anthropic",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "老实说，这张图我没法百分之百确认它是哪个\"有名有姓\"的IP角色，所以先说能看出来的，再说我的判断：\n\n**图里是什么**\n一个Q版3D渲染的红色\"小怪兽/软胶玩偶\"造型：梨形圆滚滚的身体、浅粉色肚皮、短手、没脖子，绿色眼睛配下压的粗眉和一字撇嘴，整体是\"憋着火、拱着肩\"的姿态。它不像迪士尼/皮克斯/三丽鸥/任天堂那类大IP的角色（没有卡比的脚和腮红、没有愤怒鸟的喙、没有史迪仔的耳朵），更像是一套原创或AI生成的3D风格表情包里的角色。\n\n**属于哪个梗**\n配文\"切换愤怒模式😡\"属于\"**切换XX模式**\"系列表情包格式——同一个（或同一类）角色配不同文案，比如\"切换摆烂模式\"\"切换嘲讽模式\"\"切换上班模式\"\"切换冷漠模式\"，在聊天里用来宣告\"我现在的状态/情绪切换了\"，带点自嘲和夸张。红色+皱眉是直接套用\"红色=生气\"的通用符号（和😡表情、《头脑特工队》里的怒怒、绘本《颜色怪兽》里红色代表愤怒是同一套逻辑），所以很可能它在同系列里还有蓝色（难过）、绿色（嫉妒）、黄色（开心）等版本。\n\n**我的结论**：大概率是某个\"情绪小怪兽\"主题的原创/AI 3D表情包中的\"愤怒\"那一张，角色本身没有正式名字；梗的核心在\"切换XX模式\"这个句式，而不是角色。\n\n如果你知道它来自哪个博主或哪套表情包，可以告诉我，我可以再帮你核对细节。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 737.9,
+    "tokens": {
+      "input": 760,
+      "cached_input": 0,
+      "cache_write": 758,
+      "output": 48837,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 2.45703,
+    "tools_used": [],
+    "cost_usd": 2.45703,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 758,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 48837,
+      "output_tokens_details": {
+        "thinking_tokens": 48185
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 758,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 48837,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 758,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 758
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T12:10:55Z",
+    "finished_at": "2026-11-01T12:23:13Z",
+    "revision": "c8f2158",
+    "nwb_version": "0.1.0"
+  }
+}

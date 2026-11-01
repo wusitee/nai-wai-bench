@@ -150,8 +150,9 @@ observations, not rows of the 0.1.0 comparison:
 | `gpt-6.1-sol-max`, `gpt-6-astra-max`, `gpt-6.1-terra-max`, `gpt-6-luna-max` | `max`, `isolated-v1` | `opus-5.5` |
 | `opus-5.5-max`, `sonnet-5.5-max`, `haiku-5.5-max` | `max` | `gpt-6.1-sol` |
 | `fable-5.1-core` | `high` | none |
+| `fable-5.1-max` | `max` | none |
 
-These judge sets are smaller than the default ensemble, and `fable-5.1-core` is unjudged, so its scores
+These judge sets are smaller than the default ensemble, and the two Fable runs are unjudged, so its scores
 cover only the key-scored grounding items. The retained high-effort `gpt-6.1-sol` and `gpt-6-astra` rows
 use `legacy-v1`. Score differences from the release rows therefore mix effort with judge and
 collection-profile changes; a controlled effort comparison needs matching profiles and judges.
