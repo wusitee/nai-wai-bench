@@ -2,7 +2,8 @@
 
 [English](backends.md) | [简体中文](backends.zh-CN.md) | 繁體中文
 
-大多數模型透過本機已安裝並已登入的 Agent CLI 執行，因此基準使用的是現有訂閱；`openai` 後端則以 API 密鑰
+大多數模型透過本機已安裝並已登入的 Agent CLI 執行，因此基準使用的是現有訂閱或 CLI 自己的供應商設定：
+Codex、Claude Code（也可接入其他供應商的 Anthropic 相容介面）、pi 和 ACP Agent。`openai` 後端則以 API 密鑰
 呼叫 OpenAI 相容介面。模型在 `models.toml` 中設定；本機特有的路徑或額外的模型請寫在 `models.local.toml`
 （已被 git 忽略）中，它會按模型逐項合併。
 
@@ -17,18 +18,19 @@
 
 | 欄位 | 含義 |
 |---|---|
-| `backend` | `codex`、`claude`、`acp` 或 `openai` |
+| `backend` | `codex`、`claude`、`pi`、`acp` 或 `openai` |
 | `vendor` | 用於避免評審為自家廠商的模型評分 |
-| `model` | 傳給後端的模型 id |
+| `model` | 傳給後端的模型 id（pi：`provider/id`） |
 | `label` | 結果網站中的顯示名稱（預設使用模型條目名稱） |
 | `can` | 可包含 `text`、`vision`（接受圖片輸入）、`image`（生成圖片） |
 | `reasoning` | 僅限 Codex：`model_reasoning_effort` |
 | `effort` | 僅限 Claude：`--effort` 等級 |
-| `command`、`env` | 僅限 ACP：Agent 指令和額外的環境變數；會展開 `~`、`${VAR}` 和 `${NWB_ROOT}`（儲存庫根目錄） |
+| `command` | 僅限 ACP：Agent 指令；會展開 `~`、`${VAR}` 和 `${NWB_ROOT}`（儲存庫根目錄） |
+| `env` | ACP、Claude 和 pi：額外的環境變數，展開方式同 `command`；只記錄變數名稱 |
 | `config` | 僅限 ACP：要設定的工作階段選項，格式為 `{ id = "value" }` |
 | `auth` | 僅限 ACP：每次工作階段前呼叫 `authenticate` 所用的驗證方式 id |
 | `base_url`、`api_key_env` | 僅限 OpenAI：API 基礎網址（以 `/v1` 結尾）和存放密鑰的環境變數名稱 |
-| `cc_switch` | 僅限 OpenAI：從哪個 [CC Switch](https://github.com/farion1231/cc-switch) 供應商讀取基礎網址和密鑰 |
+| `cc_switch` | OpenAI 和 Claude：從哪個 [CC Switch](https://github.com/farion1231/cc-switch) 供應商讀取介面網址和密鑰 |
 | `timeout` | 每次呼叫的逾時秒數（預設 600） |
 
 ## Codex（`backend = "codex"`）
@@ -51,6 +53,35 @@
 使用 Claude Code 登入執行 `claude -p`。工具、MCP 伺服器和設定來源都會被停用，程式設計 Agent 的系統提示詞
 也會被替換為中性的提示詞。圖片透過 `--input-format stream-json` 以內容區塊形式傳送。僅支援文字和視覺。
 
+### 透過 Claude Code 執行其他供應商的模型
+
+Claude Code 可以透過 Anthropic 相容介面執行其他供應商的模型。由於設定來源已被停用，介面必須寫在模型條目中：
+以 `env` 設定 `ANTHROPIC_BASE_URL` 和密鑰變數，或以 `cc_switch` 讀取 CC Switch 中 Claude Code 供應商的環境
+變數。明確的 `env` 會覆寫 CC Switch 中的值。`model` 傳給 `--model`，必須是該供應商的模型 id。範例見
+[英文文件](backends.md#other-providers-through-claude-code)。
+
+條目設定了 `ANTHROPIC_BASE_URL` 時，必須同時提供 `ANTHROPIC_AUTH_TOKEN` 或 `ANTHROPIC_API_KEY`，否則呼叫失敗，
+因為 Claude Code 會退回使用自己的登入。繼承來的 `ANTHROPIC_*` 環境變數和 `CLAUDE_CODE_OAUTH_TOKEN` 會被移除，
+Anthropic 憑證不會傳給其他供應商。設定中只記錄介面主機名稱、CC Switch 供應商名稱和環境變數名稱，不記錄變數值；也不保留 Claude Code
+依 Anthropic 價格估算的費用。除非供應商說明支援 Claude Code 的 effort 控制，否則請使用 `effort = "default"`。
+請把 `vendor` 設為模型的實際廠商。
+
+## pi（`backend = "pi"`）
+
+以 RPC 模式（`pi --mode rpc`）執行 [pi 程式設計 Agent](https://github.com/earendil-works/pi)（`@earendil-works/pi-coding-agent`），
+使用 pi 的訂閱登入、API 密鑰環境變數，以及 `~/.pi/agent/models.json`（或 `PI_CODING_AGENT_DIR`）中的自訂
+供應商，因此可以接入 pi 支援的任何供應商，包括本機的 OpenAI 相容服務。工作階段不會儲存；工具、擴充功能（包括
+pi 內建的 MCP 支援）、技能、提示詞範本、佈景主題、上下文檔案和自動連網（如模型目錄更新）都會被停用；系統提示詞
+替換為中性的提示詞，不載入全域 `SYSTEM.md` 和 `APPEND_SYSTEM.md`，pi 仍會在其中附上暫存工作目錄。pi 的自動重試也會關閉，失敗的樣本在下次執行時重試。僅支援
+文字和視覺。
+
+`model` 必須精確寫成 `provider/id` 或 `id`。pi 找不到模型時會改用其他模型，遇到不支援的思考等級會自動降級，
+且都不報錯，所以評測程式在傳送提示詞前會讀取工作階段狀態；所選模型、思考等級或圖片輸入能力與請求不符時呼叫失敗。
+pi 模型目錄中沒有的 id 會沿用該供應商預設模型的能力，請在 pi 的 `models.json` 中宣告它，使圖片輸入和推理
+能力準確。`effort` 可取 `off`、`minimal`、`low`、`medium`、`high`、`xhigh`、`max`，或以 `default` 保留
+pi 設定的等級；實際等級記錄在 `meta.session_config`。如需乾淨、可重現的設定，可用
+`env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }` 指向專用且已登入的 pi 目錄。
+
 ## ACP Agent（`backend = "acp"`）
 
 任何透過 stdio 使用 [Agent Client Protocol](https://agentclientprotocol.com) 的 Agent。用戶端依序傳送
@@ -70,6 +101,13 @@ Agent 則用 `session/set_model`）設定 `model` 和 `config` 選項，然後�
   `--dump-config` 檢查合成後的設定樹並補充該 patch。無論工作階段選擇哪個模型，該 ACP Agent 只在預設模型支援
   圖片輸入時才接受圖片，因此
   `deepseek-v4.1-flash` 還會套用 `config/dsh-flash-default.patch.yml`。DeepSeek-V4-Pro 僅支援文字。
+  dsh 會為每張圖片附上 SHA-256 和 dsh 主目錄下依內容定址的副本路徑，並追加一則說明暫存工作目錄和檔案策略的
+  執行階段上下文訊息。
+
+  智譜 GLM 模型透過 `config/dsh-glm.patch.yml` 中 dsh 的 pi-ai 路由執行：`zai-coding-cn`（open.bigmodel.cn，
+  密鑰放在 `ZAI_CODING_CN_API_KEY`）和 `zai`（api.z.ai，密鑰放在 `ZAI_API_KEY`），兩者的模型目錄都指向
+  GLM Coding Plan 介面。`glm-5.3`（僅文字）和 `glm-5.3-flash`（接受圖片，另套用
+  `config/dsh-glm-flash-default.patch.yml`）條目使用 `zai-coding-cn`。
 - **Kimi Code**（`kimi acp`）：`config = { mode = "default" }` 讓每次工具呼叫都需要批准，而評測程式在理解題中
   會拒絕批准。規劃模式不適用：K3 會先草擬計劃，再反覆嘗試退出規劃模式或向使用者提問，直到呼叫逾時。
   視覺呼叫可能較慢，偶爾會卡住直到逾時；重新執行即可重試。Agent 需要存取 `api.kimi.com`；該主機被封鎖時，

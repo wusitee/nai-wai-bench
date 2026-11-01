@@ -1,5 +1,5 @@
-"""Backends drive locally installed agent CLIs, so runs use existing logins instead of API keys, or call
-OpenAI-compatible APIs directly.
+"""Backends drive locally installed agent CLIs, so runs use existing logins or the CLIs' own provider
+configuration instead of keys in this repository, or call OpenAI-compatible APIs directly.
 
 Every call runs in a fresh, empty temporary working directory so agents never pick up this
 repository's AGENTS.md / CLAUDE.md or any other project context.
@@ -13,6 +13,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from nwb.config import ModelSpec
+from nwb.util import expand
 
 
 class BackendError(RuntimeError):
@@ -77,6 +78,12 @@ def tokens(backend: str, usage: dict | None) -> dict:
                       cached_input=(u.get("prompt_tokens_details") or {}).get("cached_tokens"),
                       output=u.get("completion_tokens"),
                       reasoning=(u.get("completion_tokens_details") or {}).get("reasoning_tokens"))
+    elif backend == "pi":
+        # pi reports uncached input; cache reads and writes are additional, and output includes reasoning.
+        counters = [u.get(k) for k in ("input", "cacheRead", "cacheWrite")]
+        result.update(input=sum(counters) if all(v is not None for v in counters) else None,
+                      cached_input=u.get("cacheRead"), cache_write=u.get("cacheWrite"), output=u.get("output"),
+                      reasoning=u.get("reasoning"))
     elif backend == "acp":
         result.update(input=u.get("inputTokens"), cached_input=u.get("cachedReadTokens"),
                       cache_write=u.get("cachedWriteTokens"), output=u.get("outputTokens"),
@@ -103,20 +110,36 @@ def get_backend(spec: ModelSpec):
     if spec.backend == "openai":
         from nwb.backends.openai_compat import OpenAICompatBackend
         return OpenAICompatBackend(spec)
+    if spec.backend == "pi":
+        from nwb.backends.pi import PiBackend
+        return PiBackend(spec)
     raise ValueError(f"model {spec.name}: unknown backend {spec.backend!r}")
 
 
-def run_cli(command: list[str], **kwargs) -> subprocess.CompletedProcess:
-    """Run a CLI through its executable on PATH and read its output as UTF-8; recorded command templates
-    keep the bare name. Windows starts npm-installed CLIs only through the full path of their `.cmd` shim,
-    and cmd.exe parses that command line again, so arguments it would reinterpret are refused."""
+def extra_env(spec: ModelSpec) -> dict[str, str]:
+    """The model entry's `env` table with ~ and ${VAR} expanded; an unset variable fails the call."""
+    try:
+        return {k: expand(v) for k, v in spec.options.get("env", {}).items()}
+    except RuntimeError as e:
+        raise BackendError(f"model {spec.name}: {e}") from e
+
+
+def cli_command(command: list[str]) -> list[str]:
+    """`command` started through its executable on PATH; recorded command templates keep the bare name.
+    Windows starts npm-installed CLIs only through the full path of their `.cmd` shim, and cmd.exe parses
+    that command line again, so arguments it would reinterpret are refused."""
     command = [shutil.which(command[0]) or command[0], *command[1:]]
     if Path(command[0]).suffix.lower() in {".bat", ".cmd"}:
         if unsafe := next((arg for arg in command if set(arg) & set("%!&|<>^")), None):
             raise BackendError(f"cannot pass {unsafe!r} safely through {Path(command[0]).name}; use paths "
                                "without % ! & | < > ^ (e.g. set TEMP) or a native executable")
+    return command
+
+
+def run_cli(command: list[str], **kwargs) -> subprocess.CompletedProcess:
+    """Run a CLI through `cli_command` and read its output as UTF-8."""
     # Errors from a shim can use the console code page; decoding must not hide the exit status.
-    return subprocess.run(command, capture_output=True, encoding="utf-8", errors="replace", **kwargs)
+    return subprocess.run(cli_command(command), capture_output=True, encoding="utf-8", errors="replace", **kwargs)
 
 
 @functools.cache

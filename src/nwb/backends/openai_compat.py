@@ -5,46 +5,20 @@ provider entry."""
 import base64
 import json
 import os
-import sqlite3
 import time
-import tomllib
 import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
 
 from nwb.backends import BackendError, Request, Response, neutral_inputs, tokens
+from nwb.backends.cc_switch import openai_credentials
 from nwb.config import ModelSpec
 from nwb.util import media_type
 
 SYSTEM_PROMPT = "You are a helpful assistant."
 RETRY_STATUS = {429, 500, 502, 503, 504}
 RETRIES = 3
-
-
-def cc_switch_credentials(provider: str, db_path: Path | None = None) -> tuple[str, str]:
-    """(base_url, api_key) of a CC Switch provider's OpenAI-compatible endpoint, read from its pi or
-    codex configuration in CC Switch's database (CC_SWITCH_DB, default ~/.cc-switch/cc-switch.db)."""
-    db = db_path or Path(os.environ.get("CC_SWITCH_DB", "~/.cc-switch/cc-switch.db")).expanduser()
-    if not db.is_file():
-        raise BackendError(f"CC Switch database not found: {db}")
-    con = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
-    try:
-        rows = con.execute("select app_type, settings_config from providers where name = ?", (provider,)).fetchall()
-    finally:
-        con.close()
-    for app, raw in rows:
-        cfg = json.loads(raw)
-        if app == "pi" and cfg.get("baseUrl") and cfg.get("apiKey"):
-            return cfg["baseUrl"], cfg["apiKey"]
-        if app == "codex" and (key := cfg.get("auth", {}).get("OPENAI_API_KEY")):
-            providers = tomllib.loads(cfg.get("config", "")).get("model_providers", {})
-            base = next((p["base_url"] for p in providers.values() if p.get("base_url")), None)
-            if base:
-                return base, key
-    if not rows:
-        raise BackendError(f"no CC Switch provider named {provider!r}")
-    raise BackendError(f"CC Switch provider {provider!r} has no OpenAI-compatible (pi or codex) configuration")
 
 
 class OpenAICompatBackend:
@@ -56,7 +30,7 @@ class OpenAICompatBackend:
         opts = self.spec.options
         base, key = None, None
         if provider := opts.get("cc_switch"):
-            base, key = cc_switch_credentials(provider)
+            base, key = openai_credentials(provider)
         base = opts.get("base_url", base)
         if env := opts.get("api_key_env"):
             key = os.environ.get(env) or key

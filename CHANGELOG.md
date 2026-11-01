@@ -27,6 +27,14 @@ Software releases use semantic versions; suite ids version the evaluation panels
 - Add an offline release build driven by a manifest of suite runs, normalized input hashes, and judge
   selections. Publishing uses the same build and requires an explicit manifest.
 - Include the GPT-6.1 Terra and GPT-5.6-Sol comparison configurations in the maintained model registry.
+- Add the `pi` backend (pi coding agent in RPC mode), which confirms the selected model, thinking level, and
+  image input before prompting.
+- Run other providers' models through Claude Code from an entry's `env` or a CC Switch provider; such entries
+  must supply their own key, inherited Anthropic credentials are withheld from these endpoints, and Claude
+  Code's cost estimate is not retained.
+- Add GLM-5.3 and GLM-5.3-Flash through dsh's pi-ai routes for Zhipu's GLM providers.
+- Show `awaiting judges` for panels whose missing cells and repetitions are collected but unjudged, and
+  document collecting and sharing results without judge access.
 
 ## [0.1.0] - 2026-10-25
 

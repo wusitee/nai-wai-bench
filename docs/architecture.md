@@ -10,7 +10,7 @@ flowchart TD
     D["bench/: tasks, keys, rubric, images"] --> C["cli.py + config.py"]
     M["models.toml + local overrides"] --> C
     C --> T["tracks.py: jobs, resume, parallel execution"]
-    T --> B["backends/: Codex, Claude, ACP, HTTP API"]
+    T --> B["backends/: Codex, Claude, pi, ACP, HTTP API"]
     B --> R["runs/&lt;run&gt;/: working answers and generated images"]
     R --> J["judge.py: free-form and image judgments"]
     J --> B
@@ -42,9 +42,9 @@ when their recorded identity matches. Errors remain recorded for retry.
 The whole batch is checked before requests: a successful record with different settings requires a
 new run or explicit `--force`. A no-op writes no collection log and does not refresh snapshots.
 
-The backends share `Request` and `Response`. Codex and Claude drive their logged-in CLIs; ACP drives
-configured agents such as DeepSeek Harness, Kimi, and Antigravity; the OpenAI-compatible backend uses
-HTTP directly. CLI/ACP calls use temporary working directories, attachments receive neutral names, and
+The backends share `Request` and `Response`. Codex, Claude Code, and pi drive their logged-in CLIs
+(Claude Code also reaches other providers' Anthropic-compatible endpoints); ACP drives configured agents
+such as DeepSeek Harness, Kimi, and Antigravity; the OpenAI-compatible backend uses HTTP directly. CLI/ACP calls use temporary working directories, attachments receive neutral names, and
 understanding calls disable or reject tools and record attempted tool use. Generated images have a
 separate verbatim-prompt audit. Usage, timing, effective settings, collection revision, and available
 vendor image provenance are retained with the observations.

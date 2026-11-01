@@ -12,12 +12,15 @@ import pytest
 
 from nwb.backends import BackendError, Request, run_cli, tokens
 from nwb.backends.acp import AcpBackend, AcpConnection, acp_usage
+from nwb.backends.cc_switch import claude_env, openai_credentials
 from nwb.backends.codex import CodexBackend, ISOLATED_FEATURES, audit_rollout, recorded_tool_profile
 from nwb.backends.claude import ClaudeBackend
-from nwb.backends.openai_compat import OpenAICompatBackend, cc_switch_credentials
+from nwb.backends.openai_compat import OpenAICompatBackend
+from nwb.backends.pi import PiBackend
 from nwb.config import ModelSpec, model_settings
 
 FAKE_AGENT = Path(__file__).with_name("fake_acp_agent.py")
+FAKE_PI = Path(__file__).with_name("fake_pi_agent.py")
 
 
 def test_codex_versioned_tool_profiles_control_and_record_isolation(tmp_path):
@@ -154,20 +157,101 @@ def test_openai_backend_sends_system_prompt_and_inline_images(tmp_path, monkeypa
     assert user["content"][1]["image_url"]["url"].startswith("data:image/png;base64,")
 
 
-def test_cc_switch_credentials_from_pi_or_codex_provider(tmp_path):
+def test_cc_switch_provider_credentials_for_openai_and_claude_code(tmp_path):
     db = tmp_path / "cc-switch.db"
     con = sqlite3.connect(db)
     con.execute("create table providers (name text, app_type text, settings_config text)")
     con.execute("insert into providers values (?, ?, ?)", ("Pi P", "pi", json.dumps(
         {"baseUrl": "https://pi.example/v1", "apiKey": "k1"})))
-    con.execute("insert into providers values (?, ?, ?)", ("Codex P", "claude", json.dumps({"env": {}})))
+    con.execute("insert into providers values (?, ?, ?)", ("Codex P", "claude", json.dumps({"env": {
+        "ANTHROPIC_BASE_URL": "https://claude.example/anthropic", "ANTHROPIC_AUTH_TOKEN": "k3"}})))
     con.execute("insert into providers values (?, ?, ?)", ("Codex P", "codex", json.dumps({
         "auth": {"OPENAI_API_KEY": "k2"},
         "config": 'model = "m"\n[model_providers.custom]\nbase_url = "https://codex.example/v1"\n'})))
     con.commit()
     con.close()
-    assert cc_switch_credentials("Pi P", db) == ("https://pi.example/v1", "k1")
-    assert cc_switch_credentials("Codex P", db) == ("https://codex.example/v1", "k2")
+    assert openai_credentials("Pi P", db) == ("https://pi.example/v1", "k1")
+    assert openai_credentials("Codex P", db) == ("https://codex.example/v1", "k2")
+    assert claude_env("Codex P", db)["ANTHROPIC_AUTH_TOKEN"] == "k3"
+    with pytest.raises(BackendError, match="no Claude Code configuration"):
+        claude_env("Pi P", db)
+
+
+def test_claude_custom_endpoint_excludes_inherited_credentials_and_provider_switches(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "anthropic-secret")
+    monkeypatch.setenv("CLAUDE_CODE_OAUTH_TOKEN", "subscription-secret")
+    provider_switches = {"CLAUDE_CODE_USE_BEDROCK", "CLAUDE_CODE_USE_VERTEX", "CLAUDE_CODE_USE_FOUNDRY"}
+    for switch in provider_switches:
+        monkeypatch.setenv(switch, "1")
+    monkeypatch.setenv("PROVIDER_TOKEN", "provider-secret")
+    spec = ModelSpec("m", "claude", "other", "other-model", frozenset({"text"}), {"effort": "default", "env": {
+        "ANTHROPIC_BASE_URL": "https://api.provider.test/anthropic", "ANTHROPIC_AUTH_TOKEN": "${PROVIDER_TOKEN}"}})
+    seen = {}
+
+    def run(command, **kwargs):
+        seen.update(kwargs["env"])
+        return SimpleNamespace(stdout=json.dumps({"type": "result", "result": "OK", "total_cost_usd": 0.25}),
+                               stderr="", returncode=0)
+
+    monkeypatch.setattr("nwb.backends.claude.subprocess.run", run)
+    monkeypatch.setattr("nwb.backends.claude.cli_version", lambda _: "test")
+    resp = ClaudeBackend(spec).run(Request("hello"))
+    assert not ({"ANTHROPIC_API_KEY", "CLAUDE_CODE_OAUTH_TOKEN"} | provider_switches) & set(seen)
+    assert seen["ANTHROPIC_BASE_URL"] == "https://api.provider.test/anthropic"
+    assert seen["ANTHROPIC_AUTH_TOKEN"] == "provider-secret"
+    assert resp.meta["cost_usd_reported"] is None  # Claude Code's estimate uses Anthropic prices
+    settings, _ = model_settings(spec, tmp_path)
+    assert settings["endpoint"] == "api.provider.test" and "secret" not in json.dumps(settings)
+    # Without its own key, Claude Code would fall back to the stored login for the other endpoint.
+    seen.clear()
+    del spec.options["env"]["ANTHROPIC_AUTH_TOKEN"]
+    with pytest.raises(BackendError, match="ANTHROPIC_AUTH_TOKEN or ANTHROPIC_API_KEY"):
+        ClaudeBackend(spec).run(Request("hello"))
+    assert not seen
+
+
+def pi_backend(monkeypatch, model="provider/vision-model", **options) -> PiBackend:
+    command = PiBackend.command
+    monkeypatch.setattr(PiBackend, "command", lambda self: [sys.executable, str(FAKE_PI), *command(self)[1:]])
+    monkeypatch.setattr("nwb.backends.pi.cli_version", lambda _: "test")
+    return PiBackend(ModelSpec("m", "pi", "v", model, frozenset({"text", "vision"}), {"timeout": 30, **options}))
+
+
+def test_pi_rpc_sends_neutral_images_confirms_settings_and_records_usage(tmp_path, monkeypatch):
+    source = tmp_path / "nailong-semantic.png"
+    source.write_bytes(b"image")
+    resp = pi_backend(monkeypatch, effort="high").run(Request("这是谁？", [source]))
+    received = json.loads(resp.text)
+    assert Path(received["cwd"]) != Path.cwd() and not Path(received["cwd"]).exists()
+    assert {"--no-tools", "--no-context-files"} <= set(received["argv"]) and received["auto_retry"] is False
+    assert received["images"] == [{"type": "image", "data": base64.b64encode(b"image").decode(),
+                                   "mimeType": "image/png"}]
+    assert resp.meta["session_config"] == {"thinkingLevel": "high"}
+    assert resp.meta["resolved_model"] == "provider/vision-model" and resp.meta["tools_used"] == []
+    assert resp.meta["tokens"] == {"input": 60, "cached_input": 20, "cache_write": 30, "output": 5, "reasoning": 2}
+    assert resp.meta["cost_usd_reported"] == 0.25
+
+
+def test_pi_timeout_kills_the_cli_under_its_launcher(monkeypatch):
+    # npm starts pi through a launcher on Windows; killing only the launcher leaves the pipes open.
+    launcher = "import subprocess, sys; subprocess.run([sys.executable, '-c', 'import time; time.sleep(20)'])"
+    monkeypatch.setattr(PiBackend, "command", lambda self: [sys.executable, "-c", launcher])
+    started = time.monotonic()
+    with pytest.raises(BackendError, match="timed out"):
+        PiBackend(ModelSpec("m", "pi", "v", "p/m", frozenset({"text"}), {"timeout": 1})).run(Request("hello"))
+    assert time.monotonic() - started < 10
+
+
+def test_pi_rejects_fallback_models_clamped_thinking_dropped_images_and_errors(tmp_path, monkeypatch):
+    image = tmp_path / "x.png"
+    image.write_bytes(b"image")
+    for env, images, error in [({"FAKE_PI_RESOLVED": "provider/default-model"}, [], "exact provider/id"),
+                               ({"FAKE_PI_CLAMP": "off"}, [], "did not confirm thinking level"),
+                               ({"FAKE_PI_TEXT_ONLY": "1"}, [image], "does not accept image"),
+                               ({"FAKE_PI_ERROR": "overloaded"}, [], "pi error: overloaded")]:
+        with pytest.raises(BackendError, match=error):
+            pi_backend(monkeypatch, effort="high", env=env).run(Request("hello", images))
 
 
 def test_acp_rejects_unavailable_or_unconfirmed_effort():
@@ -255,7 +339,7 @@ def test_batch_shims_refuse_arguments_cmd_exe_would_reinterpret(monkeypatch):
 
 
 def test_unknown_usage_stays_null_and_acp_occupancy_is_not_token_usage():
-    for backend in ("codex", "claude", "acp", "openai"):
+    for backend in ("codex", "claude", "acp", "openai", "pi"):
         assert all(v is None for v in tokens(backend, None).values())
     assert tokens("claude", {"input_tokens": 12})["input"] is None
     occupancy = [{"sessionUpdate": "usage_update", "used": 42, "size": 1000}]

@@ -29,8 +29,12 @@
 
 环境要求：Python 3.12+、[uv](https://docs.astral.sh/uv/)，以及至少一个已登录的 Agent CLI 或 API 密钥：
 [Codex](https://github.com/openai/codex)（OpenAI 模型与图像生成）、
-[Claude Code](https://claude.com/claude-code)、ACP Agent（如 DeepSeek Harness、Kimi Code、Antigravity），
+[Claude Code](https://claude.com/claude-code)（Anthropic 模型，或其他供应商的 Anthropic 兼容接口）、
+[pi](https://github.com/earendil-works/pi)（pi 支持的任何供应商）、
+ACP Agent（如 DeepSeek Harness、Kimi Code、Antigravity），
 或 OpenAI 兼容 API（如小米 MiMo，密钥来自环境变量或 [CC Switch](https://github.com/farion1231/cc-switch)）。
+收集结果不需要评审模型；没有评审权限的协作者可以分享结果，交由他人评审（见
+[Contributing results](docs/contributing-results.md)）。
 
 ```sh
 uv sync
@@ -54,7 +58,9 @@ uv run nwb site                                   # 写入 site/index.html
 - [评测方法](docs/methodology.zh-CN.md)：研究依据、调用预算、对照设计和局限
 - [可选的表情迁移](docs/design.zh-CN.md#可选的表情迁移)：把愤怒、扶额、得意三种表情迁移到猫和青蛙身上，
   每个图像模型 12 张图；另有表情提取题，均不使用 LLM 评分
-- [后端与模型](docs/backends.zh-CN.md)：各 Agent CLI 的调用与隔离方式，以及如何添加模型
+- [后端与模型](docs/backends.zh-CN.md)：各 Agent CLI 的调用与隔离方式，以及如何添加模型（包括 pi 和通过
+  Claude Code 接入的其他供应商）
+- [Contributing results](docs/contributing-results.md)（英文）：没有评审权限时如何收集、分享结果，以及如何评审分享来的结果
 - [素材来源](bench/reference/SOURCE.md)：参考图、表情包和事实的出处
 
 参考图和表情包仅供非商业研究使用。

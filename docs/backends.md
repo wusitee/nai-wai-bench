@@ -3,12 +3,14 @@
 English | [简体中文](backends.zh-CN.md) | [繁體中文](backends.zh-Hant.md)
 
 Most models run through agent CLIs that are already installed and logged in on your machine, so the
-benchmark uses existing subscriptions; the `openai` backend calls an OpenAI-compatible API with a key.
+benchmark uses existing subscriptions or the CLIs' own provider configuration: Codex, Claude Code (also
+for other providers' Anthropic-compatible endpoints), pi, and ACP agents. The `openai` backend calls an
+OpenAI-compatible API with a key.
 Models are configured in `models.toml`; put machine-specific paths or extra models in `models.local.toml`
 (git-ignored), which is merged per model.
 
 Every agent call starts in a fresh, empty temporary directory so agents never load this repository's
-`AGENTS.md`/`CLAUDE.md` or other project context. The Claude and Codex CLIs are started through the
+`AGENTS.md`/`CLAUDE.md` or other project context. The Claude, Codex, and pi CLIs are started through the
 executable found on `PATH` at call time (on Windows, the npm `.cmd` shim) and their output is read as
 UTF-8; the recorded command template keeps the bare command name. `cmd.exe` parses a `.cmd` shim's
 command line again, so a call is refused when an argument, such as the shim path or an attachment path
@@ -17,8 +19,8 @@ under `TEMP`, contains `% ! & | < > ^`; use a plain `TEMP` path or a native exec
 Every attachment is copied at call time into a separate fresh temporary directory as `image-1.<ext>`,
 `image-2.<ext>`, and so on, preserving order. This covers subject stimuli, generation references, and
 judges' reference and generated images. Codex receives only these neutral paths through `--image`;
-ACP image blocks contain base64 data and MIME type, with no URI or name; Claude uses base64 sources;
-the OpenAI backend uses data URLs. Logical repository/run-relative paths remain in records only.
+ACP and pi image blocks contain base64 data and MIME type, with no URI or name; Claude uses base64
+sources; the OpenAI backend uses data URLs. Logical repository/run-relative paths remain in records only.
 Generated-image collection excludes input copies by content hash. The API backend starts no agent process
 and sends no working directory; all CLI/ACP processes use fresh temporary working directories.
 
@@ -30,17 +32,18 @@ their turn without text when their API cannot be reached.
 ## Collection settings and metadata
 
 `effort` is shared across backends: Codex sets `model_reasoning_effort` (the legacy `reasoning` key is
-still accepted), Claude passes `--effort`, and ACP sets its advertised session option. The configured
-ACP `effort_option` selects that option explicitly; otherwise the `thought_level` category is used.
+still accepted), Claude passes `--effort`, pi passes `--thinking`, and ACP sets its advertised session
+option. The configured ACP `effort_option` selects that option explicitly; otherwise the `thought_level`
+category is used.
 DeepSeek uses `reasoning_effort=high`; Kimi uses `thinking=high`, below its `max` setting. Gemini's `high`
 is encoded in its model id and recorded with `effort_source="model-id"`. The image relay stays `low`.
-An unavailable or unconfirmed ACP setting fails with `BackendError`; unsupported API effort also fails.
+An unavailable or unconfirmed ACP or pi setting fails with `BackendError`; unsupported API effort also fails.
 `default` leaves the client's effort control unset.
 
 Each subject/judge record stores sanitized `settings` and a 16-hex `settings_id`. Settings include the
 backend, configured model, effort/source, requested ACP config, command template, hashes of referenced
-repository files, and API hostname. Environment names may be recorded; their values and API keys are
-excluded. Labels, prices, and timeouts do not change identity. Changed settings or referenced patches
+repository files, and the hostname of an OpenAI- or Anthropic-compatible endpoint. Environment names may
+be recorded; their values and API keys are excluded. Labels, prices, and timeouts do not change identity. Changed settings or referenced patches
 prevent reuse of cached samples; successful records require a new run or explicit `--force` before
 replacement. Image jobs additionally require `input_names="neutral"`. ACP also records
 all reported current session values as `meta.session_config`. `meta.resolved_model` holds the model the
@@ -64,8 +67,12 @@ Raw `meta.usage` is retained. `meta.tokens` normalizes these counters:
 
 Missing counters are `null`, never inferred as zero. Codex output already includes reasoning. Claude
 input sums `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`; its reported
-dollar estimate is retained as both `cost_usd` and `cost_usd_reported`. OpenAI-compatible usage maps
-prompt/completion counters and their cache/reasoning details. ACP accepts per-call `inputTokens`,
+dollar estimate is retained as both `cost_usd` and `cost_usd_reported`, except for custom endpoints, where
+it would apply Anthropic prices. OpenAI-compatible usage maps prompt/completion counters and their
+cache/reasoning details. pi reports uncached input, so normalized input adds its `cacheRead` and
+`cacheWrite`; output includes its `reasoning` subset. pi reports counters a provider omits as 0.
+`meta.usage` sums these counters and pi's list-price `cost` over the turn's assistant messages; the cost is
+retained as `cost_usd_reported`, also for subscription logins. ACP accepts per-call `inputTokens`,
 `outputTokens`, `thoughtTokens`, `cachedReadTokens`, and `cachedWriteTokens` from prompt results,
 usage notifications, or `_meta`. When a native ACP `totalTokens` proves that cache counters are
 additional to `inputTokens`, normalization adds them to input; otherwise input is treated as inclusive.
@@ -84,9 +91,9 @@ readable; their missing telemetry stays unknown.
 
 | Field | Meaning |
 |---|---|
-| `backend` | `codex`, `claude`, `acp`, or `openai` |
+| `backend` | `codex`, `claude`, `pi`, `acp`, or `openai` |
 | `vendor` | Used to keep judges from scoring their own vendor's models |
-| `model` | Model id passed to the backend |
+| `model` | Model id passed to the backend (pi: `provider/id`) |
 | `label` | Display name in the results site (defaults to the model entry name) |
 | `can` | Any of `text`, `vision` (accepts images), `image` (generates images) |
 | `effort` | Reasoning level, or `default` when no graded control is exposed |
@@ -94,12 +101,13 @@ readable; their missing telemetry stays unknown.
 | `effort_option` | ACP option id for effort (e.g. `reasoning_effort` or `thinking`) |
 | `effort_source` | `model-id` when effort is encoded in the model id |
 | `tool_profile` | Codex only: versioned `legacy-v1` or `isolated-v1` text/vision command configuration |
-| `command`, `env` | ACP only: agent command and extra environment; `~`, `${VAR}`, and `${NWB_ROOT}` (repository root) are expanded |
+| `command` | ACP only: agent command; `~`, `${VAR}`, and `${NWB_ROOT}` (repository root) are expanded |
+| `env` | ACP, Claude, and pi: extra environment, expanded like `command`; only variable names are recorded |
 | `config` | ACP only: session config options to set, as `{ id = "value" }` |
 | `usage_command` | ACP only: opt-in advertised local command for session token totals (currently Kimi `/usage`) |
 | `auth` | ACP only: an auth method id to call `authenticate` with before each session |
 | `base_url`, `api_key_env` | OpenAI only: API base URL (ending in `/v1`) and the environment variable holding the key |
-| `cc_switch` | OpenAI only: name of a [CC Switch](https://github.com/farion1231/cc-switch) provider to take the base URL and key from |
+| `cc_switch` | OpenAI and Claude: name of a [CC Switch](https://github.com/farion1231/cc-switch) provider to take the endpoint and key from |
 | `timeout` | Seconds per call (default 600) |
 
 ## Codex (`backend = "codex"`)
@@ -149,6 +157,69 @@ Runs `claude -p` with the Claude Code login. Tools, MCP servers, and settings so
 coding-agent system prompt is replaced with a neutral one. Images are sent as content blocks via
 `--input-format stream-json`. Text and vision only.
 
+### Other providers through Claude Code
+
+Claude Code can run another provider's model through an Anthropic-compatible endpoint. Because settings
+sources are disabled, the endpoint comes from the model entry: `env` sets `ANTHROPIC_BASE_URL` and a key
+variable, or `cc_switch` takes the environment of a CC Switch Claude Code provider (the `env` object
+CC Switch writes into Claude Code's settings). Explicit `env` values override CC Switch values. `model` is
+passed to `--model` and must be the provider's model id.
+
+```toml
+[models."deepseek-v4-pro-cc"]
+label = "DeepSeek-V4-Pro (Claude Code)"
+backend = "claude"
+vendor = "deepseek"
+model = "deepseek-v4-pro"
+effort = "default"
+env = { ANTHROPIC_BASE_URL = "https://api.deepseek.com/anthropic", ANTHROPIC_AUTH_TOKEN = "${DEEPSEEK_API_KEY}" }
+can = ["text"]
+```
+
+When an entry sets `ANTHROPIC_BASE_URL`, it must also provide `ANTHROPIC_AUTH_TOKEN` or `ANTHROPIC_API_KEY`;
+otherwise the call fails, because Claude Code would fall back to its own login. Inherited `ANTHROPIC_*`
+variables and `CLAUDE_CODE_OAUTH_TOKEN` are removed from the call's environment, so Anthropic credentials
+never reach the other provider. Inherited Bedrock, Vertex, and Foundry routing switches are also removed
+so the request reaches the configured endpoint. The settings record the endpoint hostname, the CC Switch
+provider name, and environment variable names, never their values. Claude Code's
+cost estimate is not retained for these entries. Use `effort = "default"` unless the provider documents
+support for Claude Code's effort control; the harness cannot confirm that the endpoint applied it. Set
+`vendor` to the model's vendor so judge independence still applies. Images are sent as for Anthropic
+models; list `vision` only if the endpoint accepts image blocks.
+
+## pi (`backend = "pi"`)
+
+Runs the [pi coding agent](https://github.com/earendil-works/pi) (`@earendil-works/pi-coding-agent`) in RPC
+mode (`pi --mode rpc`), using pi's subscription logins, API-key environment variables, and custom providers
+from `~/.pi/agent/models.json` (or `PI_CODING_AGENT_DIR`). This reaches any provider pi supports, including
+local OpenAI-compatible servers. Sessions are not saved, and tools, extensions (including pi's built-in MCP
+support), skills, prompt templates, themes, context files, and automatic network activity such as catalog
+refreshes are disabled. The coding-agent system prompt is replaced with a neutral one, global `SYSTEM.md`
+and `APPEND_SYSTEM.md` files are not loaded, and pi still adds the temporary working directory. pi's
+automatic retry is turned off; failed samples are retried on the next run. Text and vision only.
+
+`model` must name the model exactly as `provider/id` or `id`. Because pi falls back to another model and
+clamps unsupported thinking levels without failing, the harness reads the session state before prompting
+and fails when the selected model, the thinking level, or the model's image input differs from the request.
+An id missing from pi's model registry inherits the capabilities of the provider's default model; declare
+it in pi's `models.json` so its image input and reasoning support are accurate. `effort` is a pi thinking
+level (`off`, `minimal`, `low`, `medium`, `high`, `xhigh`, or `max`), or `default` to keep pi's configured
+level; the session's level is recorded in `meta.session_config`.
+
+```toml
+[models."qwen3-vl-pi"]
+label = "Qwen3-VL (pi, OpenRouter)"
+backend = "pi"
+vendor = "alibaba"
+model = "openrouter/qwen/qwen3-vl-235b-a22b-instruct"
+effort = "default"
+can = ["text", "vision"]
+```
+
+pi still reads its global `settings.json`, which can set defaults such as the thinking level. For a clean,
+reproducible configuration, point `env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }` at a dedicated, logged-in
+pi directory.
+
 ## ACP agents (`backend = "acp"`)
 
 Any agent that speaks the [Agent Client Protocol](https://agentclientprotocol.com) over stdio. The client
@@ -170,7 +241,18 @@ agent itself where possible:
   can add tool plugins; after upgrading, check the composed tree with `--dump-config` and extend the patch.
   The ACP agent accepts images only when its default model takes image input, whatever model the session
   selects, so `deepseek-v4.1-flash` also applies `config/dsh-flash-default.patch.yml`. DeepSeek-V4-Pro is
-  text-only.
+  text-only. dsh adds its own context: each image is annotated with its SHA-256 and the path of a
+  content-addressed copy under the dsh home directory, and a runtime-context message states the temporary
+  working directory and file policy. Its ACP `agentInfo` version (`deepseek-harness-acp 0.0.1`) does not
+  follow dsh releases, so `meta.client` does not identify the dsh version.
+
+  Zhipu GLM models use dsh's pi-ai routes from `config/dsh-glm.patch.yml`: `zai-coding-cn`
+  (open.bigmodel.cn, key in `ZAI_CODING_CN_API_KEY`) and `zai` (api.z.ai, key in `ZAI_API_KEY`). Both
+  catalogs point at the GLM Coding Plan endpoints; set a route's `baseURL` in another patch to use a different
+  endpoint. The `glm-5.3` and `glm-5.3-flash` entries use `zai-coding-cn`. GLM-5.3 is text-only;
+  GLM-5.3-Flash accepts images and applies `config/dsh-glm-flash-default.patch.yml`, for the reason above.
+  For Z.ai, override `model` with `'["zai","glm-5.3"]'` in `models.local.toml`; a Z.ai vision entry needs
+  a default-model patch that names `zai`.
 - **Kimi Code** (`kimi acp`): `config = { mode = "default" }` makes every tool call ask for approval, which
   the harness rejects for understanding prompts. Plan mode is unsuitable: K3 drafts a plan and repeatedly
   tries to leave plan mode or ask the user a question, until the call times out.
