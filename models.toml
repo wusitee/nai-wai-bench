@@ -154,6 +154,16 @@ price = { input = 10.0, cached_input = 0.25, cache_write = 12.50, output = 50.0,
 can = ["text", "vision"]
 
 # Max-effort comparison configurations; effort variants remain separate rows.
+[models."fable-5.1-max"]
+timeout = 2400  # max effort can think for ~20 minutes on one vision item
+label = "Claude Fable 5.1"
+backend = "claude"
+vendor = "anthropic"
+model = "claude-fable-5-1"
+effort = "max"
+price = { input = 10.0, cached_input = 0.25, cache_write = 12.50, output = 50.0, unit = "USD/1M tokens", source = "https://platform.claude.com/docs/en/about-claude/pricing", as_of = "2026-10-31" }
+can = ["text", "vision"]
+
 [models."opus-5.5-max"]
 timeout = 2400  # max effort can think for ~20 minutes on one vision item
 label = "Claude Opus 5.5"
