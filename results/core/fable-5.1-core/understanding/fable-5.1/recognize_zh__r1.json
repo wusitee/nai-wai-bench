@@ -1,0 +1,103 @@
+{
+  "settings_id": "548ef2024561e924",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.1",
+  "vendor": "anthropic",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "凭我的记忆来判断：\n\n**角色**：图中这个黄色、大肚子、咧着大嘴狂笑的 3D 小怪物，就是网上俗称的“**鸡块（Chicken Nugget / Nugget）**”角色。它本身并不是什么知名动画的主角，而是一段老的 3D 笑场动画素材，因为长得像一块炸鸡块（圆滚滚、黄色、肚皮浅色），被网友拿来当“鸡块”用。\n\n**相关网络梗**：它是 2023–2024 年在 TikTok 上爆火的 “**Gegagedigedagedago**” 梗的主角。该梗的音频是一首关于 chicken nuggets 的儿歌式/搞怪歌曲被加速、鬼畜混音后的版本，歌词听起来像一串含糊的 “Gegagedigedagedago……”，配上这个鸡块怪物捧腹大笑、扭动的画面，常被用作“突然破防狂笑”“无厘头嘲笑”的反应图/梗视频。\n\n**常见别名**：\n- Gegagedigedagedago（也写作 Gegagedigedagedago meme / “格嘎格迪格达格达够”）\n- Chicken Nugget meme / Nugget meme / Laughing Chicken Nugget（笑鸡块）\n- 中文圈里一般叫 **鸡块梗、鸡块歌、笑鸡块**，有时也被戏称为“咯咯哒”“鸡块怪”\n\n（提醒：以上完全是凭记忆作答，细节如角色确切出处、原曲作者等我并不百分百确定，如需精确信息建议再核实。）",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 30.7,
+    "tokens": {
+      "input": 1453,
+      "cached_input": 0,
+      "cache_write": 1451,
+      "output": 1640,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 0.11104000000000001,
+    "tools_used": [],
+    "cost_usd": 0.11104000000000001,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1451,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1640,
+      "output_tokens_details": {
+        "thinking_tokens": 1067
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1451,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1640,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1451,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1451
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T03:48:59Z",
+    "finished_at": "2026-10-31T03:49:30Z",
+    "revision": "592016c",
+    "nwb_version": "0.1.0"
+  }
+}

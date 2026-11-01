@@ -11,6 +11,11 @@ Software releases use semantic versions; suite ids version the evaluation panels
 - Record the costliest `modelUsage` entry as a Claude result's `resolved_model`. Claude Code also lists
   auxiliary models there, so earlier Claude records can name `claude-haiku-5-5` for answers and
   judgments the requested model produced, as their reported costs show.
+- Add the Claude Fable 5.1 configuration to the maintained model registry.
+- Start the Claude and Codex CLIs through their resolved executables and read their output as UTF-8,
+  so npm `.cmd` shims and non-UTF-8 console code pages on Windows work; recorded command templates
+  keep the bare command name, and arguments that `cmd.exe` would reinterpret are refused.
+- Add `nwb merge` to combine separately collected runs into a fresh run for a release manifest.
 - Refuse settings-mismatched successful results before any request unless `--force` is explicit;
   leave collection logs and snapshots unchanged on no-op collection commands.
 - Support the recorded `legacy-v1` and `isolated-v1` Codex tool profiles and disclose the retained

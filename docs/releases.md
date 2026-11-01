@@ -119,6 +119,20 @@ of existing results. Legacy literal executable paths and current environment-var
 also produce different fingerprints; restoration and re-scoring are available without replaying calls.
 Panels mixing recorded settings within a model retain diagnostic scores but cannot receive a rank.
 
+A release selects one run per suite, so rows collected in separate runs must be combined first. Judge
+new rows in their own runs, because resuming a retained run stops on a judgment recorded under different
+settings. Then merge without model calls:
+
+```sh
+uv run nwb merge --suite core --run NEW_RUN --from RETAINED_RUN,ADDED_RUN
+```
+
+The target must be a fresh run. Sources stay unchanged, missing ones are restored from their saved
+results, collection logs are concatenated in source order, and a file that differs between sources
+stops the merge without creating the target. Legacy judgments that identify their sample by
+modification time are converted to content hashes checked against their own source, so stale
+judgments stay stale. Pin the merged run in a new manifest after reviewing it.
+
 Use the ordinary `nwb understand`, `imagegen`, `judge`, `report`, and `export` commands for individual
 runs. `report`, `site`, and `export` require an existing run. An archived comparison is not selected by
 searching for the newest directory: update or add an explicit manifest after reviewing its input runs.
@@ -135,10 +149,12 @@ observations, not rows of the 0.1.0 comparison:
 | `gemini-4-argon` | `gemini-4-argon-high` (high through the model id) | `opus-5.5`, `gpt-6.1-sol` |
 | `gpt-6.1-sol-max`, `gpt-6-astra-max`, `gpt-6.1-terra-max`, `gpt-6-luna-max` | `max`, `isolated-v1` | `opus-5.5` |
 | `opus-5.5-max`, `sonnet-5.5-max`, `haiku-5.5-max` | `max` | `gpt-6.1-sol` |
+| `fable-5.1-core` | `high` | none |
 
-These judge sets are smaller than the default ensemble, and the retained high-effort `gpt-6.1-sol` and
-`gpt-6-astra` rows use `legacy-v1`. Score differences from the release rows therefore mix effort with
-judge and collection-profile changes; a controlled effort comparison needs matching profiles and judges.
+These judge sets are smaller than the default ensemble, and `fable-5.1-core` is unjudged, so its scores
+cover only the key-scored grounding items. The retained high-effort `gpt-6.1-sol` and `gpt-6-astra` rows
+use `legacy-v1`. Score differences from the release rows therefore mix effort with judge and
+collection-profile changes; a controlled effort comparison needs matching profiles and judges.
 
 ## Publish
 

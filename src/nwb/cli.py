@@ -151,6 +151,14 @@ def cmd_restore(args, root, bench, models, defaults):
     return 0
 
 
+def cmd_merge(args, root, bench, models, defaults):
+    names = [s.strip() for s in args.sources.split(",") if s.strip()]
+    path = results.merge(root, bench.suite, args.run_dir, [root / "runs" / name for name in names])
+    _sync_results(args, root, bench)
+    print(f"merged {len(names)} runs into {path}")
+    return 0
+
+
 def select_names(models, spec: str) -> list[str]:
     names = [s.strip() for s in spec.split(",") if s.strip()]
     unknown = [n for n in names if n not in models]
@@ -213,6 +221,8 @@ def build_parser() -> argparse.ArgumentParser:
     sp = with_run(sub.add_parser("sync", help="save an existing run as Git-ready results"), jobs=False)
     sp.add_argument("--judges", help="comma-separated recorded judges to count (default: all)")
     with_run(sub.add_parser("restore", help="restore working files from saved repository results"), jobs=False)
+    sp = with_run(sub.add_parser("merge", help="combine runs into a new run without model calls"), jobs=False, sync=True)
+    sp.add_argument("--from", dest="sources", required=True, help="comma-separated source runs")
     sp = sub.add_parser("release", help="build both suites and raw bundles from a pinned release manifest (offline)")
     sp.add_argument("--manifest", required=True, help="release TOML selecting runs, content hashes, and judges")
     sp.add_argument("--out", help="output directory (default: site/)")
@@ -221,7 +231,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 COMMANDS = {"list": cmd_list, "understand": cmd_understand, "imagegen": cmd_imagegen,
             "judge": cmd_judge, "report": cmd_report, "site": cmd_site, "export": cmd_export,
-            "sync": cmd_sync, "restore": cmd_restore}
+            "sync": cmd_sync, "restore": cmd_restore, "merge": cmd_merge}
 
 
 def main(argv=None) -> int:
