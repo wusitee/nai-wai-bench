@@ -7,7 +7,8 @@ Software releases use semantic versions; suite ids version the evaluation panels
 
 - Use Opus 5.5 as the sole default judge and for the selected 0.1.0 core comparison, including
   self-judgments; retain other judges' raw verdicts and score reports, sites, snapshots, exports, and merges
-  with the configured judge pools unless `--judges` selects another recorded pool.
+  with each track's configured judge pool unless `--judges` selects another recorded pool. `nwb judge --judges`
+  only chooses which judges to call.
 - Add Gemini 4 Argon and max-effort configurations of GPT-6.1-Sol, GPT-6-Astra, GPT-6.1 Terra,
   GPT-6-Luna, and Claude Opus/Sonnet/Haiku 5.5, with saved core understanding runs judged by reduced
   judge sets; the 0.1.0 release selection is unchanged.

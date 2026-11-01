@@ -204,8 +204,9 @@ needs `vision`. Recognition judges receive the actual stimulus as well as the re
 recognition judgments made without the image do not count and must be regenerated. Grounding checks and
 their blind controls need no judge calls. Claude Opus 5.5 is the sole default judge for both tracks,
 configured under `[defaults].judges` (part 1) and `[defaults].image_judges` (part 2) in `models.toml`.
-Reports, sites, exports, and saved snapshots count only the configured judge pools unless `--judges`
-selects another set. Other retained judgments remain available for explicit re-scoring. Release builds
+Reports, sites, exports, and saved snapshots count only the configured judge pools, each for its own track,
+unless `--judges` selects another set for both; `nwb judge --judges` only chooses which judges to call.
+Other retained judgments remain available for explicit re-scoring. Release builds
 use their manifest's pinned judge selection. Judges answer in JSON; replies that fail validation are
 retried once and then recorded as errors.
 

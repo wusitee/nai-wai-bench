@@ -64,7 +64,8 @@ removed only when they were listed in the previous snapshot. Generated HTML, unr
 configuration, and temporary files are excluded.
 
 Scoring for reports, sites, exports, snapshots, and merges uses the configured judge pools (Opus 5.5 only
-by default). `--judges` selects a different recorded pool without requesting new judgments. Raw verdicts
+by default), each for its own track. `--judges` selects a different recorded pool for both tracks without
+requesting new judgments; on `nwb judge` it only chooses which judges to call. Raw verdicts
 from other judges remain in snapshots and bundles. Release builds use the explicit judge selection in
 their manifest, independently of these defaults.
 

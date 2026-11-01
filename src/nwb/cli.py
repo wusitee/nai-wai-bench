@@ -56,7 +56,7 @@ def cmd_list(args, root, bench, models, defaults):
 def cmd_understand(args, root, bench, models, defaults):
     selected = select_models(models, args.models, "text")
     jobs = tracks.understanding_jobs(bench, selected, _items(bench, args.items), args.reps, args.run_dir)
-    return _collect(args, root, bench, jobs, judges=_scoring_judges(args, models, defaults))
+    return _collect(args, root, bench, jobs, judges=_scoring_judges(None, models, defaults))
 
 
 def cmd_imagegen(args, root, bench, models, defaults):
@@ -66,7 +66,7 @@ def cmd_imagegen(args, root, bench, models, defaults):
     if tiers and all(t.state for t in tiers) and args.animals == "default":
         animals = [bench.animals[a] for a in bench.state_animals]
     jobs = tracks.imagegen_jobs(bench, selected, tiers, animals, args.reps, args.run_dir)
-    return _collect(args, root, bench, jobs, judges=_scoring_judges(args, models, defaults))
+    return _collect(args, root, bench, jobs, judges=_scoring_judges(None, models, defaults))
 
 
 def cmd_judge(args, root, bench, models, defaults):
@@ -79,7 +79,7 @@ def cmd_judge(args, root, bench, models, defaults):
         jobs += judge.judge_jobs(bench, judges, args.run_dir, {track})
     if not jobs:
         print("no judge calls needed; grounding checks are scored locally by `nwb report`", file=sys.stderr)
-    return _collect(args, root, bench, jobs, judges=_scoring_judges(args, models, defaults))
+    return _collect(args, root, bench, jobs, judges=_scoring_judges(None, models, defaults))
 
 
 def _collect(args, root, bench, jobs, *, judges):
@@ -103,7 +103,7 @@ def _sync_results(args, root, bench, *, judges=None, scores=None):
 def cmd_report(args, root, bench, models, defaults):
     if not args.run_dir.is_dir():
         raise FileNotFoundError(f"run not found: {args.run_dir}")
-    judges = _scoring_judges(args, models, defaults)
+    judges = _scoring_judges(args.judges, models, defaults)
     scores = scoring.aggregate(args.run_dir, bench.trait_weights, judges, bench=bench)
     write_json(args.run_dir / "scores.json", scores)
     html_path = args.run_dir / "report.html"
@@ -123,7 +123,7 @@ def cmd_report(args, root, bench, models, defaults):
 def cmd_site(args, root, bench, models, defaults):
     if not args.run_dir.is_dir():
         raise FileNotFoundError(f"run not found: {args.run_dir}")
-    judges = _scoring_judges(args, models, defaults)
+    judges = _scoring_judges(args.judges, models, defaults)
     scores = scoring.aggregate(args.run_dir, bench.trait_weights, judges, bench=bench)
     out = Path(args.out) if args.out else root / "site"
     index = site.build(bench, models, args.run_dir, scores, out, repo_url=args.repo_url,
@@ -134,13 +134,13 @@ def cmd_site(args, root, bench, models, defaults):
 
 def cmd_export(args, root, bench, models, defaults):
     archive = bundle.export(args.run_dir, bench, Path(args.out) if args.out else args.run_dir,
-                            judges=_scoring_judges(args, models, defaults))
+                            judges=_scoring_judges(args.judges, models, defaults))
     print(f"wrote {archive}")
     return 0
 
 
 def cmd_sync(args, root, bench, models, defaults):
-    judges = _scoring_judges(args, models, defaults)
+    judges = _scoring_judges(args.judges, models, defaults)
     snapshot = results.sync(root, bench, args.run_dir, judges=judges)
     print(f"saved results to {snapshot}")
     return 0
@@ -155,7 +155,7 @@ def cmd_restore(args, root, bench, models, defaults):
 def cmd_merge(args, root, bench, models, defaults):
     names = [s.strip() for s in args.sources.split(",") if s.strip()]
     path = results.merge(root, bench.suite, args.run_dir, [root / "runs" / name for name in names])
-    _sync_results(args, root, bench, judges=_scoring_judges(args, models, defaults))
+    _sync_results(args, root, bench, judges=_scoring_judges(None, models, defaults))
     print(f"merged {len(names)} runs into {path}")
     return 0
 
@@ -168,13 +168,16 @@ def select_names(models, spec: str) -> list[str]:
     return names
 
 
-def _scoring_judges(args, models, defaults):
-    spec = getattr(args, "judges", None)
-    if spec is None:
-        if "judges" not in defaults and "image_judges" not in defaults:
-            return None
-        spec = ",".join(defaults.get("judges", []) + defaults.get("image_judges", []))
-    return set(select_names(models, spec))
+def _scoring_judges(spec, models, defaults):
+    """Judges counted in scores: an explicit selection for both tracks, else the configured pools (per track
+    when they differ). `nwb judge --judges` only chooses which judges to call."""
+    if spec is not None:
+        return set(select_names(models, spec))
+    if "judges" not in defaults and "image_judges" not in defaults:
+        return None
+    text = set(select_names(models, ",".join(defaults.get("judges", []))))
+    image = set(select_names(models, ",".join(defaults.get("image_judges") or defaults.get("judges", []))))
+    return text if text == image else {"understanding": text, "imagegen": image}
 
 
 def _finish(ok: int, failed: int) -> int:

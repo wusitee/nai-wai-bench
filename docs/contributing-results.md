@@ -41,9 +41,9 @@ Do not run `nwb judge`; it calls the configured judges. Each command saves a por
 `results/<suite>/<run>/`. Commit that directory and open a pull request, or send the archive written by
 `uv run nwb export --suite <suite> --run <run>`.
 
-You can judge with models you do have (`nwb judge --judges NAME`), but reports, snapshots, and exports
-count only the configured judge pool unless `--judges` selects others, so these judgments stay a local
-diagnostic. They are retained in the shared results.
+You can judge with models you do have (`nwb judge --judges NAME`). The saved snapshot and later reports
+and exports still count only the configured judge pool, so these judgments do not change shared scores;
+view them with `nwb report --judges NAME --no-sync`, which leaves the snapshot unchanged. They are retained in the shared results.
 
 ## Judging shared results
 

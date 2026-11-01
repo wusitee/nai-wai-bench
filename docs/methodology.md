@@ -81,7 +81,8 @@ than many cat repetitions. Run counts below exclude failures and the judge's sin
 Claude Opus 5.5 is the sole default judge for both tracks, including Anthropic subjects. Use the same
 configured pool across subjects and record it. When multiple judges are explicitly selected, other-vendor
 judgments take precedence; same-vendor judgments contribute only when no independent judge is available.
-Report, site, export, and snapshot scoring use the configured pools unless `--judges` overrides them.
+Report, site, export, and snapshot scoring use the configured pools unless `--judges` overrides them;
+`nwb judge --judges` only chooses which judges to call.
 Published comparisons retain their manifest's pinned judge selection. Judge health is a
 disagreement diagnostic, not proof of evaluator correctness or a reason to remove a judge merely
 because it changes the ordering. Choose judge exclusions using fixed calibration cases before comparing

@@ -197,7 +197,7 @@ def test_cli_automatically_saves_benchmark_results(inputs, monkeypatch, command)
     if command == "imagegen":
         args = ["imagegen", "--models", "chatgpt-image", "--tiers", "name_zh", "--animals", "cat"]
     elif command == "judge":
-        args = ["judge", "--track", "understanding", "--force"]
+        args = ["judge", "--judges", "gpt-6.1-sol", "--track", "understanding", "--force"]
     elif command == "report":
         args = ["report", "--judges", "opus-5.5"]
     else:
@@ -205,8 +205,8 @@ def test_cli_automatically_saves_benchmark_results(inputs, monkeypatch, command)
         if command == "no-sync":
             args.append("--no-sync")
     assert cli.main([*args, "--run", "core"]) == (1 if command == "failed" else 0)
-    if command == "judge":
-        assert set(requested_judges) == {"opus-5.5"}
+    if command == "judge":  # the selection chooses calls; the snapshot still counts the configured pool
+        assert set(requested_judges) == {"gpt-6.1-sol"}
     snapshot = root / "results/core/core"
     if command == "no-sync":
         assert not snapshot.exists()
@@ -225,7 +225,6 @@ def test_cli_scores_only_configured_or_explicit_judges(inputs, monkeypatch, comm
     run = root / "runs/core"
     monkeypatch.chdir(root)
     monkeypatch.setattr("nwb.site.shutil.which", lambda _: None)
-    (root / "models.local.toml").write_text('[defaults]\njudges = ["opus-5.5"]\nimage_judges = ["opus-5.5"]\n')
     verdicts = {p: p.read_bytes() for p in (run / "judgments").rglob("*.json")}
     site_scores = []
     build = cli.site.build
@@ -236,9 +235,13 @@ def test_cli_scores_only_configured_or_explicit_judges(inputs, monkeypatch, comm
 
     monkeypatch.setattr(cli.site, "build", capture_site_scores)
 
-    for selection, expected_judges, expected_score in [
-        (None, ["opus-5.5"], 100), ("gpt-6.1-sol", ["gpt-6.1-sol"], 0), ("", [], None),
+    for image_judges, selection, expected_judges, expected_score in [
+        ("opus-5.5", None, ["opus-5.5"], 100), ("opus-5.5", "gpt-6.1-sol", ["gpt-6.1-sol"], 0),
+        ("opus-5.5", "", [], None),
+        ("gpt-6.1-sol", None, ["opus-5.5"], 100),  # an image-only judge never scores answers
     ]:
+        (root / "models.local.toml").write_text(
+            f'[defaults]\njudges = ["opus-5.5"]\nimage_judges = ["{image_judges}"]\n')
         args = [command, "--run", "core"]
         if selection is not None:
             args += ["--judges", selection]

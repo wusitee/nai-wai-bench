@@ -153,7 +153,7 @@ def test_export_is_deterministic_sanitized_and_rescorable(tmp_path, capsys):
     (run / "report.html").write_text("excluded")
     (run / "secrets.log").write_text("excluded")
     (run / "collection.jsonl").write_text(json.dumps({"path": str(Path.home() / "private")}) + "\n")
-    args = SimpleNamespace(run_dir=run, out=str(tmp_path / "bundles"))
+    args = SimpleNamespace(run_dir=run, out=str(tmp_path / "bundles"), judges=None)
     assert cli.cmd_export(args, bench.root, bench, models, {}) == 0
     archive = next((tmp_path / "bundles").glob("*.zip"))
     original = archive.read_bytes()

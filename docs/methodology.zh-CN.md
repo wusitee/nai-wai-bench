@@ -55,16 +55,17 @@
 | 每个被测模型的工作量 | 一次重复所需的调用 |
 |---|---:|
 | 生成题组 | 30 次图像生成请求 |
-| 用两个已配置的评审评审生成图 | 60 次视觉评审请求 |
+| 用默认的 Opus 评审评审生成图 | 30 次视觉评审请求 |
 | 视觉理解 | 13 次回答请求 |
 | 文字／语言诊断 | 8 次回答请求 |
 | 无图对照 | 4 次回答请求 |
-| 用两个具备视觉能力的评审评审全部自由作答的理解题 | 34 次评审请求 |
+| 用默认的 Opus 评审评审全部自由作答的理解题 | 17 次评审请求 |
 | 评审视觉核对题及其对照 | 0 |
 
-配置两个评审并不保证得到两份独立评审：如果被测模型与其中一个评审同属一家厂商，就只有另一个评审的分数计入。
-所有被测模型应使用同一组已配置的评审，并记录下来。要让每个被测模型都有两家独立厂商的评审，可能需要三家厂商
-的评审。评审健康度是用来诊断分歧的，既不能证明评估器正确，也不能仅因为某个评审改变了排序就把它剔除。应在
+两部分的默认评审都只有 Claude Opus 5.5，Anthropic 的被测模型也由它评审。所有被测模型应使用同一组已配置的
+评审，并记录下来。显式选择多个评审时，优先计入其他厂商的评审；只有没有独立评审时，才计入同厂商的评审。
+report、site、export 和结果快照按已配置的评审计分，除非用 `--judges` 另行指定；`nwb judge --judges` 只决定
+调用哪些评审。已发布的比较沿用发布清单中固定的评审选择。评审健康度是用来诊断分歧的，既不能证明评估器正确，也不能仅因为某个评审改变了排序就把它剔除。应在
 比较被测模型的分数之前，用固定的校准样例决定排除哪些评审。
 
 ```sh
@@ -75,7 +76,7 @@ uv run nwb report --run pilot
 # 完整、可比较的题组；understand 也会收集文字诊断和无图对照。
 uv run nwb understand --run comparison --models VISION_MODEL
 uv run nwb imagegen --run comparison --models IMAGE_MODEL --animals default
-uv run nwb judge --run comparison --judges VISION_JUDGE_A,VISION_JUDGE_B
+uv run nwb judge --run comparison
 uv run nwb report --run comparison
 uv run nwb site --run comparison
 ```
