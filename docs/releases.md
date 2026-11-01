@@ -141,6 +141,10 @@ be deleted to build the selected release.
 
 ## Saved runs outside the release
 
+`results/naihub-v1/fable-5.1-max-naihub` is an archived Nai-hub run at `max`: three repetitions of the
+fixed panel, scored locally from the answer keys, so it needs no judges. A subscription limit interrupted
+it; 17 samples used the Claude Code login and 127 an API key, with the same recorded settings.
+
 `results/core/` also keeps single-model understanding runs that no manifest selects. They are archived
 observations, not rows of the 0.1.0 comparison:
 
