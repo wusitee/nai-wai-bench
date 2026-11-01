@@ -15,7 +15,8 @@ Software releases use semantic versions; suite ids version the evaluation panels
 - Record the costliest `modelUsage` entry as a Claude result's `resolved_model`. Claude Code also lists
   auxiliary models there, so earlier Claude records can name `claude-haiku-5-5` for answers and
   judgments the requested model produced, as their reported costs show.
-- Add the Claude Fable 5.1 configuration to the maintained model registry.
+- Add the Claude Fable 5.1 configuration to the maintained model registry, with a saved Nai-hub v1 run;
+  the 0.1.0 release selection is unchanged.
 - Start the Claude and Codex CLIs through their resolved executables and read their output as UTF-8,
   so npm `.cmd` shims and non-UTF-8 console code pages on Windows work; recorded command templates
   keep the bare command name, and arguments that `cmd.exe` would reinterpret are refused.

@@ -165,6 +165,9 @@ the saved scores. The retained high-effort `gpt-6.1-sol` and `gpt-6-astra` rows
 use `legacy-v1`. Score differences from the release rows therefore mix effort with judge and
 collection-profile changes; a controlled effort comparison needs matching profiles and judges.
 
+`results/naihub-v1/fable-5.1-naihub` is the matching archived Nai-hub run: three repetitions of the
+fixed panel at `high`, scored locally from the answer keys, so it needs no judges.
+
 ## Publish
 
 After reviewing and authorizing the generated release:
