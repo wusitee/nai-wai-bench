@@ -1,0 +1,86 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1-max/recognize_folded_arms__r1.json",
+  "target_sha256": "a23ee0409d54b881b1c577d7f6b3a773de099b18bd9730e4af9bedb2388dfc9c",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "f841bab2b612d4e9",
+  "judge_images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "scores": {
+    "base_character": 1,
+    "identifies_meme": 0
+  },
+  "hallucinations": [
+    "声称奶龙通常有“更大的黑眼睛”，与其官方设定中的绿色眼睛不符。"
+  ],
+  "rationale": "回答提到了奶龙及其黄色胖龙形象，但仅将其作为不确定的候选，也未说明它来自中国儿童动画。回答没有识别出大笑奶龙／变异奶龙／奶蛙梗家族。",
+  "raw": "{\"scores\":{\"base_character\":1,\"identifies_meme\":0},\"hallucinations\":[\"声称奶龙通常有“更大的黑眼睛”，与其官方设定中的绿色眼睛不符。\"],\"rationale\":\"回答提到了奶龙及其黄色胖龙形象，但仅将其作为不确定的候选，也未说明它来自中国儿童动画。回答没有识别出大笑奶龙／变异奶龙／奶蛙梗家族。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a197d4-f741-7a93-bfc5-2b5c7f99c193",
+    "seconds": 18.4,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12019,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 370,
+      "reasoning_output_tokens": 260
+    },
+    "tokens": {
+      "input": 12019,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 370,
+      "reasoning": 260
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T15:57:58Z",
+    "finished_at": "2026-11-01T15:58:17Z",
+    "revision": "67c68f1",
+    "nwb_version": "0.1.0"
+  }
+}

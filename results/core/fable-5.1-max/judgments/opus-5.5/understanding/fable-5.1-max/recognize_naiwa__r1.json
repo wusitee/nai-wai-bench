@@ -1,0 +1,111 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/fable-5.1-max/recognize_naiwa__r1.json",
+  "target_sha256": "433949f4e85358d5f426d54f11240c99dbdbb1c2c0b43eb17e6a412dcfa1debb",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "2b2507590546b207",
+  "judge_images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "Confidently describes the character as a 3D yellow bird/chick (小鸟/小鸡造型) rather than a mutated Nailong (奶蛙)",
+    "Claims the sticker belongs to a generic '扭头看镜头' family that is often made into a full set captioned '？', '哦？', '急了急了'; this is an unsupported, likely fabricated attribution in place of the 奶龙/奶蛙 meme"
+  ],
+  "rationale": "The answer never mentions 奶龙, 大笑奶龙, or 奶蛙, and misreads the image as a generic bird/chick cartoon. It explains only the caption joke, so no checklist item is covered.",
+  "raw": "{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"naiwa\": 0}, \"hallucinations\": [\"Confidently describes the character as a 3D yellow bird/chick (小鸟/小鸡造型) rather than a mutated Nailong (奶蛙)\", \"Claims the sticker belongs to a generic '扭头看镜头' family that is often made into a full set captioned '？', '哦？', '急了急了'; this is an unsupported, likely fabricated attribution in place of the 奶龙/奶蛙 meme\"], \"rationale\": \"The answer never mentions 奶龙, 大笑奶龙, or 奶蛙, and misreads the image as a generic bird/chick cartoon. It explains only the caption joke, so no checklist item is covered.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.309",
+    "seconds": 8.8,
+    "tokens": {
+      "input": 2343,
+      "cached_input": 0,
+      "cache_write": 2341,
+      "output": 581,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0306547,
+    "tools_used": [],
+    "cost_usd": 0.0306547,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2341,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 581,
+      "output_tokens_details": {
+        "thinking_tokens": 317
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2341,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 581,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2341,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2341
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T15:57:39Z",
+    "finished_at": "2026-11-01T15:57:48Z",
+    "revision": "67c68f1",
+    "nwb_version": "0.1.0"
+  }
+}

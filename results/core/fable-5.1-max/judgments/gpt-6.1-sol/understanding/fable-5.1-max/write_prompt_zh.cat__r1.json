@@ -1,0 +1,94 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1-max/write_prompt_zh.cat__r1.json",
+  "target_sha256": "13008e3fc511925269adb7c09c7bfbd417f10d23958b40944bd238c80358caa8",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "b0c8bfde851b4736",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 1,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 0,
+    "background": 2,
+    "vibe": 2,
+    "identity": 1
+  },
+  "hallucinations": [
+    "Flat 2D rendering with thick outlines and no shading contradicts the glossy 3D CG style.",
+    "A head-back, backward-leaning pose contradicts the forward-hunched laughing pose.",
+    "One paw pointing at the viewer contradicts both paws clutching the belly.",
+    "Thick, angular ^-shaped eyes contradict the thin curved arcs."
+  ],
+  "rationale": "The answer captures the bulky body, pale belly patch, plain background, and absurd laughter, but reverses the pose and rendering style. Belly-clutching and mouth details are incomplete, including missing visible teeth, while the banana-yellow blob relies on added cat cues rather than natural feline coloring or markings.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":1,\"mouth\":1,\"body\":2,\"belly_patch\":2,\"render\":0,\"background\":2,\"vibe\":2,\"identity\":1},\"hallucinations\":[\"Flat 2D rendering with thick outlines and no shading contradicts the glossy 3D CG style.\",\"A head-back, backward-leaning pose contradicts the forward-hunched laughing pose.\",\"One paw pointing at the viewer contradicts both paws clutching the belly.\",\"Thick, angular ^-shaped eyes contradict the thin curved arcs.\"],\"rationale\":\"The answer captures the bulky body, pale belly patch, plain background, and absurd laughter, but reverses the pose and rendering style. Belly-clutching and mouth details are incomplete, including missing visible teeth, while the banana-yellow blob relies on added cat cues rather than natural feline coloring or markings.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a197d5-b4d1-75a3-8ad7-18575632b817",
+    "seconds": 21.2,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 11587,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 428,
+      "reasoning_output_tokens": 235
+    },
+    "tokens": {
+      "input": 11587,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 428,
+      "reasoning": 235
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T15:58:47Z",
+    "finished_at": "2026-11-01T15:59:08Z",
+    "revision": "67c68f1",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1-max/write_prompt_zh.giraffe__r1.json",
+  "target_sha256": "76c7e71fdba03be62493f82bf5e7662d9e3cbbf3419d2464005722eefdcc96a0",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "bd5ecd0444109341",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 2,
+    "vibe": 1,
+    "identity": 2
+  },
+  "hallucinations": [
+    "The character leans backward with its head thrown back, contradicting the forward-hunched laughing pose.",
+    "One arm points at the viewer instead of both hands clutching the belly.",
+    "The mouth explicitly has no teeth, contradicting the visible teeth in the reference.",
+    "A distinct elongated neck separates the head from the torso, contradicting the reference's neckless silhouette."
+  ],
+  "rationale": "The prompt clearly covers giraffe identity, closed curved eyes, glossy 3D rendering, and a plain background, but reverses the pose and only partly captures the belly-clutching gesture and mouth. It omits the pale belly patch, changes the body silhouette, and emphasizes preschool cuteness over the reference’s absurd, unhinged meme energy.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":1,\"body\":1,\"belly_patch\":0,\"render\":2,\"background\":2,\"vibe\":1,\"identity\":2},\"hallucinations\":[\"The character leans backward with its head thrown back, contradicting the forward-hunched laughing pose.\",\"One arm points at the viewer instead of both hands clutching the belly.\",\"The mouth explicitly has no teeth, contradicting the visible teeth in the reference.\",\"A distinct elongated neck separates the head from the torso, contradicting the reference's neckless silhouette.\"],\"rationale\":\"The prompt clearly covers giraffe identity, closed curved eyes, glossy 3D rendering, and a plain background, but reverses the pose and only partly captures the belly-clutching gesture and mouth. It omits the pale belly patch, changes the body silhouette, and emphasizes preschool cuteness over the reference’s absurd, unhinged meme energy.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a197d5-b78c-7410-b311-e3658a05beb0",
+    "seconds": 12.4,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12224,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 376,
+      "reasoning_output_tokens": 170
+    },
+    "tokens": {
+      "input": 12224,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 376,
+      "reasoning": 170
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T15:58:48Z",
+    "finished_at": "2026-11-01T15:59:00Z",
+    "revision": "67c68f1",
+    "nwb_version": "0.1.0"
+  }
+}

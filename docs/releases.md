@@ -141,10 +141,6 @@ be deleted to build the selected release.
 
 ## Saved runs outside the release
 
-`results/naihub-v1/fable-5.1-max-naihub` is an archived Nai-hub run at `max`: three repetitions of the
-fixed panel, scored locally from the answer keys, so it needs no judges. A subscription limit interrupted
-it; 17 samples used the Claude Code login and 127 an API key, with the same recorded settings.
-
 `results/core/` also keeps single-model understanding runs that no manifest selects. They are archived
 observations, not rows of the 0.1.0 comparison:
 
@@ -153,16 +149,19 @@ observations, not rows of the 0.1.0 comparison:
 | `gemini-4-argon` | `gemini-4-argon-high` (high through the model id) | `opus-5.5`, `gpt-6.1-sol` |
 | `gpt-6.1-sol-max`, `gpt-6-astra-max`, `gpt-6.1-terra-max`, `gpt-6-luna-max` | `max`, `isolated-v1` | `opus-5.5` |
 | `opus-5.5-max`, `sonnet-5.5-max`, `haiku-5.5-max` | `max` | `gpt-6.1-sol` |
-| `fable-5.1-core` | `high` | none |
-| `fable-5.1-max` | `max` | none |
+| `fable-5.1-core` | `high` | `opus-5.5`, `gpt-6.1-sol` |
+| `fable-5.1-max` | `max` | `opus-5.5`, `gpt-6.1-sol` |
 
-These judge sets are smaller than the default ensemble, and the two Fable runs are unjudged, so its scores
-cover only the key-scored grounding items. The retained high-effort `gpt-6.1-sol` and `gpt-6-astra` rows
+These judge sets are smaller than the default ensemble. Saved scores leave out a judge from the subject's
+own vendor when another judge exists, so the saved scores of the two Fable runs count only `gpt-6.1-sol`;
+`nwb report --judges opus-5.5 --no-sync` shows their Opus scores. The retained high-effort `gpt-6.1-sol` and `gpt-6-astra` rows
 use `legacy-v1`. Score differences from the release rows therefore mix effort with judge and
 collection-profile changes; a controlled effort comparison needs matching profiles and judges.
 
-`results/naihub-v1/fable-5.1-naihub` is the matching archived Nai-hub run: three repetitions of the
-fixed panel at `high`, scored locally from the answer keys, so it needs no judges.
+`results/naihub-v1/` keeps the matching archived Nai-hub runs `fable-5.1-naihub` (`high`) and
+`fable-5.1-max-naihub` (`max`): three repetitions of the fixed panel, scored locally from the answer
+keys, so they need no judges. A subscription limit interrupted the `max` run; 17 samples used the
+Claude Code login and 127 an API key, with the same recorded settings.
 
 ## Publish
 
