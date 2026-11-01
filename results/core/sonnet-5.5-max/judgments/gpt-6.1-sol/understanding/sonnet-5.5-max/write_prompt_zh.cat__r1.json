@@ -1,0 +1,92 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/sonnet-5.5-max/write_prompt_zh.cat__r1.json",
+  "target_sha256": "d2f4cbe09227ef438b806662fe957fd987b43f5e2fa13ee812b77b9a67686929",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "a6cf9b02a9502750",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 1,
+    "render": 0,
+    "background": 2,
+    "vibe": 1,
+    "identity": 2
+  },
+  "hallucinations": [
+    "指定坐在地上、身体向后仰，与站立、躯干前屈且膝盖微弯的参考姿势相反。",
+    "指定扁平2D矢量插画并明确禁止3D渲染，与参考的光泽3D CG效果相反。"
+  ],
+  "rationale": "明确覆盖了双爪捧腹、闭眼弧线、纯白背景及多种猫的辨识特征。巨嘴缺少明确的可见牙齿，体型和浅色腹部仅部分符合，整体更偏软萌，且姿势与渲染风格明显错误。",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":2,\"eyes\":2,\"mouth\":1,\"body\":1,\"belly_patch\":1,\"render\":0,\"background\":2,\"vibe\":1,\"identity\":2},\"hallucinations\":[\"指定坐在地上、身体向后仰，与站立、躯干前屈且膝盖微弯的参考姿势相反。\",\"指定扁平2D矢量插画并明确禁止3D渲染，与参考的光泽3D CG效果相反。\"],\"rationale\":\"明确覆盖了双爪捧腹、闭眼弧线、纯白背景及多种猫的辨识特征。巨嘴缺少明确的可见牙齿，体型和浅色腹部仅部分符合，整体更偏软萌，且姿势与渲染风格明显错误。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d8a-480f-7fb2-88d1-8b16d12f53ea",
+    "seconds": 24.7,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12533,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 494,
+      "reasoning_output_tokens": 292
+    },
+    "tokens": {
+      "input": 12533,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 494,
+      "reasoning": 292
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T16:00:12Z",
+    "finished_at": "2026-10-30T16:00:36Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6-luna-max/recognize_angry__r1.json",
+  "target_sha256": "cc851fd4963dc722765d7c13aa85326f61d3091c81c0836f08a42ee723b0931a",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "9a84547a1a6386a3",
+  "judge_images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6-luna-max",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0
+  },
+  "hallucinations": [],
+  "rationale": "The model accurately describes the image as a red 3D cartoon monster with the caption 「切换愤怒模式」. It does not identify it as a 奶龙 variant, and it does not connect it to the 大笑奶龙/变异奶龙/奶蛙 meme or its AI-generated, unofficial origin.",
+  "raw": "{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"ai_variant\": 0}, \"hallucinations\": [], \"rationale\": \"The model accurately describes the image as a red 3D cartoon monster with the caption 「切换愤怒模式」. It does not identify it as a 奶龙 variant, and it does not connect it to the 大笑奶龙/变异奶龙/奶蛙 meme or its AI-generated, unofficial origin.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.312",
+    "seconds": 6.5,
+    "tokens": {
+      "input": 1677,
+      "cached_input": 0,
+      "cache_write": 1675,
+      "output": 298,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0195979,
+    "tools_used": [],
+    "cost_usd": 0.0195979,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1675,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 298,
+      "output_tokens_details": {
+        "thinking_tokens": 142
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1675,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 298,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1675,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1675
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:57:25Z",
+    "finished_at": "2026-10-30T15:57:31Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

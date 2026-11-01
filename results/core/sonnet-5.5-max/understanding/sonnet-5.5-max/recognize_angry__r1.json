@@ -1,0 +1,103 @@
+{
+  "settings_id": "4e1f1b03b3c609b5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "**角色**：我无法确定这个角色的具体名字和出处，不想随便给一个名字误导你。\n\n画面里是一个全身通红、圆滚滚的 3D 卡通生物：皮肤光滑，肚子是浅粉红色，绿色的眼睛，眉头紧皱，一脸怒气。红色加愤怒的设定容易让人联想到《头脑特工队》里的\"怒怒\"，但怒怒是方方正正、头顶冒火的造型，和这个不一样，所以应该不是同一个角色。\n\n**梗的类型**：这是一张中文互联网常见的情绪类表情包。\n\n- 配文\"切换愤怒模式\"加上😡，借用了手机或游戏里\"切换模式\"的说法，意思是\"我要进入生气状态了\"。\n- 通常是半开玩笑地用，比如被惹毛了、忍无可忍、要开始\"输出\"的时候，在群聊里发一张，表示\"我现在很不爽，你们小心点\"。语气多半是滑稽夸张，不是真的发火。\n- \"切换××模式\"本身是一个通用句式，可以替换成\"摆烂模式\"\"社恐模式\"\"打工人模式\"等，配合不同表情图使用。\n\n如果想查准确出处，可以用以图搜图（比如搜狗、百度识图或 Google Lens），或者看看这张图最初是在哪个平台、哪条视频里流传的。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 20.8,
+    "tokens": {
+      "input": 692,
+      "cached_input": 0,
+      "cache_write": 690,
+      "output": 2133,
+      "reasoning": null
+    },
+    "resolved_model": "claude-sonnet-5-5",
+    "cost_usd_reported": 0.024093999999999997,
+    "tools_used": [],
+    "cost_usd": 0.024093999999999997,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 690,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 2133,
+      "output_tokens_details": {
+        "thinking_tokens": 1655
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 690,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 2133,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 690,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 690
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:20:54Z",
+    "finished_at": "2026-10-29T18:21:15Z",
+    "revision": "90e0bea",
+    "nwb_version": "0.1.0"
+  }
+}

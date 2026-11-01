@@ -1,0 +1,92 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gemini-4-argon/write_prompt_zh.giraffe__r1.json",
+  "target_sha256": "a773482f5c56cd305a19a3433d31956555a64f580cda0790254933fdc5cd4028",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "2ba0e0810a6f125e",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 1,
+    "render": 2,
+    "background": 0,
+    "vibe": 2,
+    "identity": 2
+  },
+  "hallucinations": [
+    "One foreleg slaps the belly while the other points forward, contradicting the required two-handed belly-clutching pose.",
+    "A blurred warm indoor background contradicts the plain white or light-grey background with no scene or props."
+  ],
+  "rationale": "The answer clearly conveys the laughing expression, bulky neckless body, 3D rendering, absurd energy, and recognizable giraffe features. It omits the standing, hunched posture with bent knees, only partly matches the belly gesture and pale oval patch, and specifies an incorrect background.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":2,\"body\":2,\"belly_patch\":1,\"render\":2,\"background\":0,\"vibe\":2,\"identity\":2},\"hallucinations\":[\"One foreleg slaps the belly while the other points forward, contradicting the required two-handed belly-clutching pose.\",\"A blurred warm indoor background contradicts the plain white or light-grey background with no scene or props.\"],\"rationale\":\"The answer clearly conveys the laughing expression, bulky neckless body, 3D rendering, absurd energy, and recognizable giraffe features. It omits the standing, hunched posture with bent knees, only partly matches the belly gesture and pale oval patch, and specifies an incorrect background.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d85-a6e0-7d20-871f-275dbc543e62",
+    "seconds": 21.7,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12399,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 497,
+      "reasoning_output_tokens": 331
+    },
+    "tokens": {
+      "input": 12399,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 497,
+      "reasoning": 331
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:55:08Z",
+    "finished_at": "2026-10-30T15:55:30Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

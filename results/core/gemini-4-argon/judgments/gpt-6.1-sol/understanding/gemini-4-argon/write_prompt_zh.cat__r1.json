@@ -1,0 +1,93 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gemini-4-argon/write_prompt_zh.cat__r1.json",
+  "target_sha256": "a6b6c297d7db38fdf263eef64949036bb9a498b0336993edb9de7a9a95405da4",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "7034ed6a33a97204",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 1,
+    "background": 2,
+    "vibe": 2,
+    "identity": 1
+  },
+  "hallucinations": [
+    "One paw points forward instead of both paws clutching the belly.",
+    "The mouth interior is pink rather than dark.",
+    "The surface is described as matte rather than glossy."
+  ],
+  "rationale": "The prompt captures exaggerated hysterical laughter, closed curved eyes, and a simple 3D studio presentation, but misses the forward-hunched pose, two-handed belly clutch, and pale belly patch. The oversized distinct head weakens the merged head-and-torso anatomy, while cat ears and faint whiskers on a butter-yellow body provide only token feline identity.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":1,\"body\":1,\"belly_patch\":0,\"render\":1,\"background\":2,\"vibe\":2,\"identity\":1},\"hallucinations\":[\"One paw points forward instead of both paws clutching the belly.\",\"The mouth interior is pink rather than dark.\",\"The surface is described as matte rather than glossy.\"],\"rationale\":\"The prompt captures exaggerated hysterical laughter, closed curved eyes, and a simple 3D studio presentation, but misses the forward-hunched pose, two-handed belly clutch, and pale belly patch. The oversized distinct head weakens the merged head-and-torso anatomy, while cat ears and faint whiskers on a butter-yellow body provide only token feline identity.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d85-76a6-7fe2-93de-2bdc89c9ba30",
+    "seconds": 34.2,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12219,
+      "cached_input_tokens": 3968,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 614,
+      "reasoning_output_tokens": 447
+    },
+    "tokens": {
+      "input": 12219,
+      "cached_input": 3968,
+      "cache_write": 0,
+      "output": 614,
+      "reasoning": 447
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:54:56Z",
+    "finished_at": "2026-10-30T15:55:30Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "settings_id": "0a4d731222ad1478",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "vendor": "google",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "这张表情包里的角色是**奶龙**（或者神似奶龙/大眼黄鸟风格的3D卡通形象，实际上它更准确地说是常被称为**“下头鸟” / “审视鸟” / 3D小黄鸟**的网图形象，有时也和国外动画短片里的角色混淆，不过在国内社交平台上最常被称为**“高雅人士”/“审视”小黄鸟**或来自某部3D动画短片的角色）。\n\n我们来具体拆解一下它的出处与梗：\n\n1. **角色出处**：\n   这个黄色的、长着绿色大眼圈和尖嘴的生物，实际上出自一部国外的 3D 搞笑动画短片（创作者是 **3D 动画师 / 艺术家** 制作的无厘头短片，角色是一只呆萌又充满吐槽欲的黄色鸟类/呆呆鸟，国内网友常直接叫它**“小黄鸟”**或**“眼神清澈的小黄鸟”**，也有人叫它**“警惕鸟”**）。\n\n2. **所属网络梗**：\n   * **“惊鸿一瞥” / “礼貌审视” / “突然警觉”**：原图中这只黄色生物微微侧头、瞪大眼睛直勾勾地斜视镜头，表情既呆滞又带着一丝微妙的嫌弃、震惊或警惕。\n   * 国内网友给它配上**“惊鸿一瞥”**、**“暗中观察”**、**“看傻子一样看你”**等文字。用成语“惊鸿一瞥”（原本形容女性轻盈如雁之姿或极其惊艳的一眼）来搭配它呆头呆脑、充满审视感的滑稽眼神，形成强烈的**反差幽默**，常用于群聊中对群友发出的离谱言论或奇葩图片表示“无语地看了一眼”、“被震惊到侧目”。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 16.1,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-4-argon-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-4-argon-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 12726,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "${NWB_AGY_ACP}"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME",
+      "NWB_AGY_ACP",
+      "NWB_AGY_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:15:26Z",
+    "finished_at": "2026-10-29T18:15:42Z",
+    "revision": "673dc6b",
+    "nwb_version": "0.1.0"
+  }
+}

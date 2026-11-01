@@ -1,0 +1,117 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6-astra-max/write_prompt.giraffe__r1.json",
+  "target_sha256": "b1aa22e85f26b79eb5523c9eb532c02b3a5b7d5238e4622f9aa906abd86819ff",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "2a01935f981f308e",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6-astra-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 0,
+    "vibe": 2,
+    "identity": 2
+  },
+  "hallucinations": [
+    "Head tipped backward with shoulders lifted and belly pushed forward, the opposite of the meme's hunched-forward, doubled-over pose",
+    "Stubby arms held beside the chest rather than clutching the belly",
+    "Blurred green background instead of a plain white or light-grey background",
+    "Blurry animation-screenshot look rather than a glossy 3D CG render with studio lighting"
+  ],
+  "rationale": "The prompt nails the squeezed arc eyes, huge dark mouth with teeth and tongue, pale belly, absurd energy, and a recognizable giraffe (ossicones, neck, brown patches). However, it gets the signature pose wrong (leaning back, hands not on belly), uses a green scene background instead of plain white, and its elongated neck conflicts with the neckless bean body.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 2, \"body\": 1, \"belly_patch\": 2, \"render\": 1, \"background\": 0, \"vibe\": 2, \"identity\": 2}, \"hallucinations\": [\"Head tipped backward with shoulders lifted and belly pushed forward, the opposite of the meme's hunched-forward, doubled-over pose\", \"Stubby arms held beside the chest rather than clutching the belly\", \"Blurred green background instead of a plain white or light-grey background\", \"Blurry animation-screenshot look rather than a glossy 3D CG render with studio lighting\"], \"rationale\": \"The prompt nails the squeezed arc eyes, huge dark mouth with teeth and tongue, pale belly, absurd energy, and a recognizable giraffe (ossicones, neck, brown patches). However, it gets the signature pose wrong (leaning back, hands not on belly), uses a green scene background instead of plain white, and its elongated neck conflicts with the neckless bean body.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.312",
+    "seconds": 11.4,
+    "tokens": {
+      "input": 1896,
+      "cached_input": 0,
+      "cache_write": 1894,
+      "output": 906,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.03354360000000001,
+    "tools_used": [],
+    "cost_usd": 0.03354360000000001,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1894,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 906,
+      "output_tokens_details": {
+        "thinking_tokens": 549
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1894,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 906,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1894,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1894
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:56:50Z",
+    "finished_at": "2026-10-30T15:57:02Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

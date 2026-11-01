@@ -1,0 +1,100 @@
+{
+  "settings_id": "4e1f1b03b3c609b5",
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "vendor": "anthropic",
+  "item": "grounding.laugh.blind",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Look only at the attached image. Return a JSON object with two keys: pose (one of belly_clutch, raised_hands, facepalm, folded_arms) and eyes (open or closed). Use unknown for a field you cannot determine. Do not infer the answer from a meme's name or typical appearance.",
+  "images": [],
+  "answer": "```json\n{\n  \"pose\": \"unknown\",\n  \"eyes\": \"unknown\"\n}\n```\n\nNo image came through in this conversation, so I can't determine either field. If you re-attach it, I'll classify it from what's visible.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 5.0,
+    "tokens": {
+      "input": 656,
+      "cached_input": 0,
+      "cache_write": 654,
+      "output": 360,
+      "reasoning": null
+    },
+    "resolved_model": "claude-sonnet-5-5",
+    "cost_usd_reported": 0.00622,
+    "tools_used": [],
+    "cost_usd": 0.00622,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 654,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 360,
+      "output_tokens_details": {
+        "thinking_tokens": 287
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 654,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 360,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 654,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 654
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:22:36Z",
+    "finished_at": "2026-10-29T18:22:41Z",
+    "revision": "90e0bea",
+    "nwb_version": "0.1.0"
+  }
+}

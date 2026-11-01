@@ -1,0 +1,100 @@
+{
+  "settings_id": "8bdf006b7d3fc51c",
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "vendor": "anthropic",
+  "item": "write_prompt.cat",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a cat version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A chubby, egg-shaped, bright lemon-yellow cartoon cat laughing hysterically. Its absurdly huge, wide-open mouth fills most of its face, and two tiny black dot eyes sit at the very top of its head. It is drawn as a simple 2D children's-cartoon mascot reaction sticker on a plain white background.\n\nBody: one smooth, squat blob with no neck. The head and body merge into a single rounded shape that is wider at the bottom, with tiny stubby arms, two short nub feet and a short stubby tail. The fur is flat yellow like a baby chick, with no stripes, patterns or fur texture, and there is a pale cream oval patch on the belly. The cat features are minimal: two small rounded triangle ears on top, pink inside; three thin whiskers on each cheek; and a tiny pink nose just above the mouth.\n\nFace: the mouth gapes in a giant \"HAHAHA\" belly laugh. It is a huge half-moon opening with a gently curved top edge and a deep round bottom, stretching almost the full width of the head. Inside it is dark red with a pink tongue and no teeth. The small shiny dot eyes sit far apart above that enormous mouth, giving the cat a dopey, almost frog-like look. Soft pink blush ovals sit on the cheeks. The head is tipped back slightly, the round belly is pushed forward, and the little paws rest on its tummy. A few short shake lines at its sides show it trembling with laughter.\n\nStyle: clean dark outlines, flat saturated colors with only soft, simple shading, smooth and rounded, adorable but dumb and slightly unhinged. Full body, front view, centered, square image, no text, not a realistic cat.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 83.1,
+    "tokens": {
+      "input": 638,
+      "cached_input": 0,
+      "cache_write": 636,
+      "output": 7760,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.16029600000000002,
+    "tools_used": [],
+    "cost_usd": 0.16029600000000002,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 636,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 7760,
+      "output_tokens_details": {
+        "thinking_tokens": 7188
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 636,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 7760,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 636,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 636
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:16:11Z",
+    "finished_at": "2026-10-29T18:17:34Z",
+    "revision": "42b42f8",
+    "nwb_version": "0.1.0"
+  }
+}

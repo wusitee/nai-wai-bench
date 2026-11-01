@@ -1,0 +1,89 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/opus-5.5-max/knowledge_en__r1.json",
+  "target_sha256": "a1de2c606752c52224c3e4fd882d3d8c2f2e9fb2e618d266033a9342cf7fc727",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "f3ae1261b58309d0",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 0,
+    "naiwa": 0,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 1,
+    "rarity_titles": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer correctly describes the base character and gives limited coverage of exaggerated laughter and character/celebrity edits. It misses the specific AI variant, documented origin, aliases, iconic pose details, and associated jokes; no confident claim is demonstrably false under the supplied references.",
+  "raw": "{\"scores\":{\"base_character\":2,\"ai_variant\":0,\"xingye_origin\":0,\"aliases\":0,\"naiwa\":0,\"laugh_pose\":1,\"junti_quan\":0,\"official_reply\":0,\"trait_variants\":1,\"rarity_titles\":0},\"hallucinations\":[],\"rationale\":\"The answer correctly describes the base character and gives limited coverage of exaggerated laughter and character/celebrity edits. It misses the specific AI variant, documented origin, aliases, iconic pose details, and associated jokes; no confident claim is demonstrably false under the supplied references.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d87-7fd1-7ec3-beec-55549578bcc1",
+    "seconds": 20.1,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13109,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 365,
+      "reasoning_output_tokens": 239
+    },
+    "tokens": {
+      "input": 13109,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 365,
+      "reasoning": 239
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:57:09Z",
+    "finished_at": "2026-10-30T15:57:29Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

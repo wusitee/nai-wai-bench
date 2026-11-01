@@ -1,0 +1,100 @@
+{
+  "settings_id": "8bdf006b7d3fc51c",
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "vendor": "anthropic",
+  "item": "write_prompt_zh.giraffe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出长颈鹿版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "A meme-style reaction sticker of a chubby cartoon giraffe laughing hysterically. The giraffe looks like a simple, round children's-cartoon mascot standing upright on two short legs. It has a squat, pear-shaped body in bright, warm yolk-yellow with smooth cartoon skin and no fur texture. A big round belly carries a pale cream oval patch. It has tiny stubby arms, short stumpy legs with small brown hooves, and a short tail ending in a brown tuft. Its neck is thick, chubby and only moderately long, with cute chibi proportions rather than realistic ones. The head is big and rounded, with two short giraffe horns (ossicones) topped by dark-brown rounded knobs, small oval ears sticking out to the sides, and a short brown mane down the back of the neck. A few soft, rounded caramel-brown giraffe spots are scattered over the yellow skin, with none on the belly. The face is the whole joke: an enormous gaping laughing mouth, as wide as a frog's, stretching almost from one side of the head to the other and filling the entire lower half of the face. The mouth is a huge flat-topped, round-bottomed half-moon opening with a deep red inside, a pink tongue and no teeth. The eyes are squeezed shut into thick black upward-curved arcs (like ^ ^) from laughing so hard, with pink blush on the cheeks and tiny tears of joy flying from the corners. The head is tilted slightly back and the stubby arms are thrown up in the air. The whole body shakes with loud, smug, slightly unhinged, over-the-top laughter that is silly and cheeky, never scary. Style: flat 2D cartoon with clean bold dark-brown outlines, bright saturated colors and minimal soft cel shading. Centered front view, with the character filling most of a square 1:1 frame on a plain white background, like a viral chat-app emoji sticker. No text, no captions, no watermark, no realistic giraffe anatomy, no visible teeth, not 3D.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 91.7,
+    "tokens": {
+      "input": 643,
+      "cached_input": 0,
+      "cache_write": 641,
+      "output": 8405,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.17323599999999997,
+    "tools_used": [],
+    "cost_usd": 0.17323599999999997,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 641,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 8405,
+      "output_tokens_details": {
+        "thinking_tokens": 7706
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 641,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 8405,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 641,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 641
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:20:30Z",
+    "finished_at": "2026-10-29T18:22:02Z",
+    "revision": "42b42f8",
+    "nwb_version": "0.1.0"
+  }
+}

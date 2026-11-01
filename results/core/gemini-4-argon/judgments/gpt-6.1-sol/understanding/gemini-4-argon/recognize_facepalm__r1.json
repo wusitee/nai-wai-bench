@@ -1,0 +1,84 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gemini-4-argon/recognize_facepalm__r1.json",
+  "target_sha256": "c14e4e172f1a7c3fb90caa9793122ef5627e307ff0307f49a0b7e007e0605cdc",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "015fa4fbf5be5acc",
+  "judge_images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0
+  },
+  "hallucinations": [],
+  "rationale": "回答未认出角色是奶龙，也未识别其属于大笑奶龙／变异奶龙／奶蛙梗家族。对“Roll Safe”的描述只是姿势类比，未明确断言该图的出处，不能据此判为幻觉。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0},\"hallucinations\":[],\"rationale\":\"回答未认出角色是奶龙，也未识别其属于大笑奶龙／变异奶龙／奶蛙梗家族。对“Roll Safe”的描述只是姿势类比，未明确断言该图的出处，不能据此判为幻觉。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d84-cddf-7993-9ff5-e2232984e913",
+    "seconds": 12.4,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12479,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 120,
+      "reasoning_output_tokens": 29
+    },
+    "tokens": {
+      "input": 12479,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 120,
+      "reasoning": 29
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:54:12Z",
+    "finished_at": "2026-10-30T15:54:25Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

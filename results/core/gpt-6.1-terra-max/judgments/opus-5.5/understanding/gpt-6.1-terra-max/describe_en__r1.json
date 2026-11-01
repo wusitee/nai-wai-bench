@@ -1,0 +1,111 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.1-terra-max/describe_en__r1.json",
+  "target_sha256": "671fcf1de23e3d47a983f58db7083eede9a0009fc076b6d4a0ddcf4dcceb385e",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "9e55288760ecc3d5",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.1-terra-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 0,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 1,
+    "background": 0,
+    "vibe": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer only vaguely covers the laughing expression, the plump body with short limbs, and the 3D style. It openly declines to describe the pose, eyes, markings or background, so most items score zero, but it makes no false confident claims.",
+  "raw": "```json\n{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 0, \"mouth\": 1, \"body\": 1, \"belly_patch\": 0, \"render\": 1, \"background\": 0, \"vibe\": 0}, \"hallucinations\": [], \"rationale\": \"The answer only vaguely covers the laughing expression, the plump body with short limbs, and the 3D style. It openly declines to describe the pose, eyes, markings or background, so most items score zero, but it makes no false confident claims.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.312",
+    "seconds": 9.6,
+    "tokens": {
+      "input": 1533,
+      "cached_input": 0,
+      "cache_write": 1531,
+      "output": 401,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0205019,
+    "tools_used": [],
+    "cost_usd": 0.0205019,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1531,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 401,
+      "output_tokens_details": {
+        "thinking_tokens": 227
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1531,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 401,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1531,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1531
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:55:28Z",
+    "finished_at": "2026-10-30T15:55:37Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

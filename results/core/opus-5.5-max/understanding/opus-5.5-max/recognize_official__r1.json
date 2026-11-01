@@ -1,0 +1,103 @@
+{
+  "settings_id": "8bdf006b7d3fc51c",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_official",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "我认不出这是哪个角色，也不知道它出自哪个网络梗，所以不想编一个出处给你。\n\n**图里能看到的：**\n- 3D渲染的橙黄色小恐龙（或小怪兽），表面有绒毛质感\n- 绿色大眼睛，嘴巴张成一个小小的\"O\"形\n- 双手举起，有棕色小爪子，手掌上有粉色肉垫\n- 奶油色的大肚皮，短腿，脚上也有爪子\n\n这类表情包一般用来表达惊讶、\"哇！\"\"啊？\"，或者举手投降、求抱抱。\n\n**它像什么、哪里不像：**\n- 像**小火龙**：配色接近，但小火龙尾巴上有火焰，脸型也不同。\n- 像**亚古兽**：黄橙色、绿眼睛、带爪子，但亚古兽是长嘴尖牙，不是这种圆脑袋小O嘴。\n\n所以它可能是某个表情包作者或3D形象品牌的原创角色，也可能来自我不熟悉的动画或游戏。\n\n**查出处的方法：**\n1. 如果是在微信里收到的，长按表情可以看到它所属的表情专辑和作者。\n2. 用识图工具搜，比如百度识图、Google Lens，或在小红书、抖音搜\"黄色小恐龙表情包\"。\n3. 如果你在哪里看到它和某个梗一起出现，把上下文告诉我，我可以帮你分析。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 284.8,
+    "tokens": {
+      "input": 913,
+      "cached_input": 0,
+      "cache_write": 911,
+      "output": 25117,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.509636,
+    "tools_used": [],
+    "cost_usd": 0.509636,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 911,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 25117,
+      "output_tokens_details": {
+        "thinking_tokens": 24608
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 911,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 25117,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 911,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 911
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T19:21:07Z",
+    "finished_at": "2026-10-29T19:25:52Z",
+    "revision": "5c571b8",
+    "nwb_version": "0.1.0"
+  }
+}

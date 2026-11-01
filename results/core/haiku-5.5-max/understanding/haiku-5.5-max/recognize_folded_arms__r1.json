@@ -1,0 +1,103 @@
+{
+  "settings_id": "d1420308a4561f99",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "仅凭我的知识，我无法可靠地认出这个角色，也不能确定它属于哪个网络梗，所以不想随便报一个名字误导你。\n\n从画面能看到的特征：\n- 黄色、圆润的3D卡通造型，身体轮廓像豆子或梨子\n- 一双大眼睛，眼睛周围是绿色的，嘴角微微上扬，带点笑意\n- 双臂交叉抱在胸前，腹部偏浅，接近米白色\n- 背景是白色到浅灰的渐变，看起来像3D渲染的素材\n\n从姿态推测，抱臂加微笑的样子常被用来表达\"看你表演\"\"等你解释\"\"嘴上不说但很满意\"之类的情绪，所以它很可能是作为反应类表情包使用的。不过这只是根据姿态做的推测，无法确定出处。\n\n你可以试试：\n1. 用识图工具（如 Google Lens、百度识图、TinEye）搜索原图，通常能很快找到角色名和出处。\n2. 告诉我你是在哪里看到它的（哪个平台、哪个动画、游戏或视频），或者图上有没有文字。我可以根据我的知识帮你分析。\n\n另外，网络梗更新很快，如果它是比较新的梗，我的知识里可能没有收录，这种情况下请以实际搜索结果为准。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 30.5,
+    "tokens": {
+      "input": 937,
+      "cached_input": 0,
+      "cache_write": 935,
+      "output": 5751,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0030627000000000002,
+    "tools_used": [],
+    "cost_usd": 0.0030627000000000002,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 935,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 5751,
+      "output_tokens_details": {
+        "thinking_tokens": 5288
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 935,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 5751,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 935,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 935
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-haiku-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:19:21Z",
+    "finished_at": "2026-10-29T18:19:52Z",
+    "revision": "ba9f0aa",
+    "nwb_version": "0.1.0"
+  }
+}

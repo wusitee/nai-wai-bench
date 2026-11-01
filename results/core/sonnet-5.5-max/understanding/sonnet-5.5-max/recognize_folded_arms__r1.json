@@ -1,0 +1,103 @@
+{
+  "settings_id": "4e1f1b03b3c609b5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "我不能确定这个角色的名字，也不想随便编一个出处，所以没法准确告诉你它属于哪个梗。\n\n**我能看到的：**\n- 这是一个 3D 渲染的黄色圆润角色，身体上窄下宽，像水滴或豆子，几乎没有脖子。\n- 它有绿色的眼睛、黑色的瞳孔，嘴巴是一条很小的微笑线。\n- 双臂交叉抱在胸前，手是灰褐色，肚子是米色。\n- 背景是白到灰的渐变，像是从视频、动画或宣传素材里截出来的。\n\n**表情包的情绪：**\n双臂交叉加淡定微笑，通常表达\"我不慌\"\"我就静静看着\"\"看戏\"\"从容或略带得意\"这类意思。至于它是哪部作品里的角色，我没法确认。\n\n**查出处的办法：**\n1. 用 Google Lens、TinEye 或百度识图反向搜图，这类 3D 角色通常很快能搜到来源。\n2. 告诉我图片是从哪里来的，比如某个视频、游戏、群聊或帖子，我可以帮你分析这个梗怎么用。\n3. 如果你或朋友有猜测的名字，也可以告诉我，我再帮你判断是否吻合。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 38.9,
+    "tokens": {
+      "input": 918,
+      "cached_input": 0,
+      "cache_write": 916,
+      "output": 4136,
+      "reasoning": null
+    },
+    "resolved_model": "claude-sonnet-5-5",
+    "cost_usd_reported": 0.045028,
+    "tools_used": [],
+    "cost_usd": 0.045028,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 916,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 4136,
+      "output_tokens_details": {
+        "thinking_tokens": 3694
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 916,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 4136,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 916,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 916
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:21:51Z",
+    "finished_at": "2026-10-29T18:22:30Z",
+    "revision": "90e0bea",
+    "nwb_version": "0.1.0"
+  }
+}

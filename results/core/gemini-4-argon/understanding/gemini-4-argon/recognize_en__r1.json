@@ -1,0 +1,70 @@
+{
+  "settings_id": "0a4d731222ad1478",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "vendor": "google",
+  "item": "recognize_en",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Who is this character, and which internet meme is this image from? Does the meme have other names?",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "I cannot reliably identify this specific character or the exact internet meme it comes from based on my existing knowledge alone. \n\nWhile the image shows a 3D-animated, earless yellow creature with dark-gray hands holding its belly and laughing against a white background, I do not have verified information on the character's name, the source animation, or the alternative names for the meme, and I want to avoid guessing or fabricating details.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 17.4,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-4-argon-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-4-argon-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 12771,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "${NWB_AGY_ACP}"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME",
+      "NWB_AGY_ACP",
+      "NWB_AGY_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:15:08Z",
+    "finished_at": "2026-10-29T18:15:26Z",
+    "revision": "673dc6b",
+    "nwb_version": "0.1.0"
+  }
+}

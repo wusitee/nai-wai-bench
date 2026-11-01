@@ -1,0 +1,88 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/opus-5.5-max/recognize_naiwa__r1.json",
+  "target_sha256": "c8863b41bdb2b2fbfab5b26586c7f097fc2912c8b0e1a213e428d7800591986d",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "6b51c5d730508d04",
+  "judge_images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "将图中角色断定为黄色鸟类，并据此解释为“鸿是鸟、图中也是鸟”的字面笑点；实际是变异奶龙的奶蛙形象。",
+    "声称它不属于特定网络梗；该图属于大笑奶龙／变异奶龙／奶蛙梗家族。"
+  ],
+  "rationale": "回答没有识别出奶龙及其奶蛙变体，也没有指出所属的网络梗家族。对出处的不确定表述不计为幻觉，但将角色当作鸟并据此解释笑点属于错误判断。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"naiwa\":0},\"hallucinations\":[\"将图中角色断定为黄色鸟类，并据此解释为“鸿是鸟、图中也是鸟”的字面笑点；实际是变异奶龙的奶蛙形象。\",\"声称它不属于特定网络梗；该图属于大笑奶龙／变异奶龙／奶蛙梗家族。\"],\"rationale\":\"回答没有识别出奶龙及其奶蛙变体，也没有指出所属的网络梗家族。对出处的不确定表述不计为幻觉，但将角色当作鸟并据此解释笑点属于错误判断。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d88-32be-7190-a89b-1a3e9ec96102",
+    "seconds": 19.4,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12546,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 346,
+      "reasoning_output_tokens": 182
+    },
+    "tokens": {
+      "input": 12546,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 346,
+      "reasoning": 182
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:57:55Z",
+    "finished_at": "2026-10-30T15:58:14Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "settings_id": "d1420308a4561f99",
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "vendor": "anthropic",
+  "item": "describe_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Without looking at any images, describe the most iconic image of Laughing Nailong (大笑奶龙 / 奶蛙) from memory: its pose, expression, body shape, colors, rendering style, and background, in enough detail for an artist who has never seen it to draw it. Say where you are unsure.",
+  "images": [],
+  "answer": "This is from memory only, so treat it as a sketch to check against a reference. I've noted my confidence for each part.\n\n**Body shape (fairly confident)**\n- Very round and chubby, like a soft dough ball, with a big rounded belly and a large head that blends into the body with little or no visible neck.\n- Short, stubby limbs with small hands and feet.\n- Compact and squat rather than tall.\n\n**Pose (low confidence)**\n- I picture an upright, front-facing figure, possibly tilted back or bouncing mid-laugh, with arms raised or hands near the belly. I can't reliably recall the exact gesture or whether it's sitting or standing.\n\n**Expression (fairly confident)**\n- A big, open-mouthed laugh, with eyes squeezed into curved crescents (closed-eye, \"^^\"-style).\n- The mouth is a wide open shape. I'm not sure whether teeth or a tongue are shown.\n\n**Colors (moderately confident)**\n- Body: soft cream or butter yellow, a pale, milky yellow. The \"奶\" (milk) in the name probably refers to this.\n- Features (eyes, mouth lines): dark brown or near-black. The mouth interior is probably darker or pinkish.\n- A lighter belly and pink cheeks are possible, but I'm not sure of either.\n- I can't give reliable hex values.\n\n**Rendering style (uncertain)**\n- Simple, clean 2D cartoon with smooth shapes and minimal shading, probably with a dark outline, like a sticker. I'm not sure whether it's a flat vector look or has soft, 3D-like shading.\n\n**Background (low confidence)**\n- The versions I recall most often appear on a plain white or transparent background, as a standalone sticker-style figure, perhaps with a faint ground shadow.\n\n**Where I'm unsure (check before drawing)**\n- **Dragon features:** The name suggests a dragon, but I can't recall whether it has horns, a crest, or a tail, or what they look like.\n- **Pose and arms:** The exact gesture and arm arrangement.\n- **奶蛙:** Whether it's the same design or a different, frog-like variant.\n- **Details:** Exact colors, outline weight, and whether the mouth shows teeth.\n- **Versions:** Whether several laughing versions exist. My memory may blend them.\n\nA single reference image would settle most of these quickly.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 46.2,
+    "tokens": {
+      "input": 677,
+      "cached_input": 0,
+      "cache_write": 675,
+      "output": 9244,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0047572,
+    "tools_used": [],
+    "cost_usd": 0.0047572,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 675,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 9244,
+      "output_tokens_details": {
+        "thinking_tokens": 8454
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 675,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 9244,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 675,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 675
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-haiku-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-haiku-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:15:41Z",
+    "finished_at": "2026-10-29T18:16:27Z",
+    "revision": "ba9f0aa",
+    "nwb_version": "0.1.0"
+  }
+}

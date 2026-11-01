@@ -1,0 +1,114 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6-luna-max/knowledge_zh__r1.json",
+  "target_sha256": "8b10b9f8d018a375424f643e5779736076db8e2dae7296c828fb75d584511f2d",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "f06e2c2cca3c0d1f",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6-luna-max",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 1,
+    "xingye_origin": 0,
+    "aliases": 1,
+    "naiwa": 2,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [
+    "Describes Nailong's typical look as having a light-blue belly (浅蓝色肚皮); the official design is a yellow body with green eyes, and a blue belly is not supported."
+  ],
+  "rationale": "The answer correctly identifies Nailong and says 奶蛙 is a modified Nailong rather than a real frog. It treats 大笑奶龙 as an unofficial remix but never says it is AI-generated, and it misses the 星野 origin, the 变异奶龙 alias, the belly-clutching pose, the 军体拳 remix, the official-reply copypasta, the trait-variant genre and the rarity titles.",
+  "raw": "{\"scores\": {\"base_character\": 2, \"ai_variant\": 1, \"xingye_origin\": 0, \"aliases\": 1, \"naiwa\": 2, \"laugh_pose\": 1, \"junti_quan\": 0, \"official_reply\": 0, \"trait_variants\": 0, \"rarity_titles\": 0}, \"hallucinations\": [\"Describes Nailong's typical look as having a light-blue belly (浅蓝色肚皮); the official design is a yellow body with green eyes, and a blue belly is not supported.\"], \"rationale\": \"The answer correctly identifies Nailong and says 奶蛙 is a modified Nailong rather than a real frog. It treats 大笑奶龙 as an unofficial remix but never says it is AI-generated, and it misses the 星野 origin, the 变异奶龙 alias, the belly-clutching pose, the 军体拳 remix, the official-reply copypasta, the trait-variant genre and the rarity titles.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.312",
+    "seconds": 11.6,
+    "tokens": {
+      "input": 2565,
+      "cached_input": 0,
+      "cache_write": 2563,
+      "output": 951,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.03986100000000001,
+    "tools_used": [],
+    "cost_usd": 0.03986100000000001,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2563,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 951,
+      "output_tokens_details": {
+        "thinking_tokens": 631
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2563,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 951,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2563,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2563
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:57:24Z",
+    "finished_at": "2026-10-30T15:57:36Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

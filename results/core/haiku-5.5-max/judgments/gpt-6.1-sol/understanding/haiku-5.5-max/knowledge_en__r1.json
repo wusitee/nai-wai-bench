@@ -1,0 +1,89 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/haiku-5.5-max/knowledge_en__r1.json",
+  "target_sha256": "07b8ec259e58f276ab65fab1073f5c65d86882990c004f7cea5c7769e6eb502e",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "8c42c240bc220189",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "scores": {
+    "base_character": 1,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 1,
+    "naiwa": 0,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer partially describes the yellow, plump character, mentions 奶蛙 as a nickname, and identifies the open-mouthed laugh. It omits the AI mutation, documented origin, frog-like variant details, and specific jokes and remixes, but makes no confident false claims.",
+  "raw": "{\"scores\":{\"base_character\":1,\"ai_variant\":0,\"xingye_origin\":0,\"aliases\":1,\"naiwa\":0,\"laugh_pose\":1,\"junti_quan\":0,\"official_reply\":0,\"trait_variants\":0,\"rarity_titles\":0},\"hallucinations\":[],\"rationale\":\"The answer partially describes the yellow, plump character, mentions 奶蛙 as a nickname, and identifies the open-mouthed laugh. It omits the AI mutation, documented origin, frog-like variant details, and specific jokes and remixes, but makes no confident false claims.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d85-fd3e-7d12-b20e-bed84aa4b565",
+    "seconds": 11.5,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12795,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 216,
+      "reasoning_output_tokens": 86
+    },
+    "tokens": {
+      "input": 12795,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 216,
+      "reasoning": 86
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:55:30Z",
+    "finished_at": "2026-10-30T15:55:42Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

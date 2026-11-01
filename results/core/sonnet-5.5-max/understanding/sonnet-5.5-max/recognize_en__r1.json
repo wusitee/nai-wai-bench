@@ -1,0 +1,103 @@
+{
+  "settings_id": "4e1f1b03b3c609b5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_en",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Who is this character, and which internet meme is this image from? Does the meme have other names?",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "I can't confidently say which character or meme this is. I'd rather not guess and give you a wrong name or invented alternate names.\n\n**What I can see:**\n- A 3D-rendered, plump yellow creature with a cream belly patch and dark gray, glove-like hands\n- Squinting eyes and a wide-open mouth with small white teeth, laughing hard\n- Hands clutching its stomach, bent forward, on a plain white background\n\nThe clean render and background suggest a still from a short CGI animation or promo clip. It's probably used as a \"laughing hysterically\" reaction image.\n\n**How to find the source and other names:**\n- **Reverse image search:** Google Lens, TinEye, or Yandex Images often identify cartoon stills and meme templates quickly.\n- **Know Your Meme:** Search terms like \"yellow guy laughing\" or \"laughing yellow creature\" may turn up the template and its aliases.\n- **Ask a community:** r/tipofmytongue is good for tracking down a character or clip from a screenshot.\n\nIf you remember where you saw it, such as a video, a caption, or a platform, tell me and I can help narrow it down.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 37.2,
+    "tokens": {
+      "input": 1371,
+      "cached_input": 0,
+      "cache_write": 1369,
+      "output": 4301,
+      "reasoning": null
+    },
+    "resolved_model": "claude-sonnet-5-5",
+    "cost_usd_reported": 0.04849,
+    "tools_used": [],
+    "cost_usd": 0.04849,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1369,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 4301,
+      "output_tokens_details": {
+        "thinking_tokens": 3928
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1369,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 4301,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1369,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1369
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:19:38Z",
+    "finished_at": "2026-10-29T18:20:15Z",
+    "revision": "90e0bea",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "settings_id": "4e1f1b03b3c609b5",
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "vendor": "anthropic",
+  "item": "knowledge_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "What is the Chinese internet meme \"大笑奶龙\" (Laughing Nailong, also called \"奶蛙\")? Explain its origin, what it looks like, and the related jokes and remixes. Say so plainly where you are unsure instead of guessing.",
+  "images": [],
+  "answer": "I know the 奶龙 (Nailong, literally \"milk dragon\") meme only in broad strokes, so I've separated what I'm fairly sure of from what I can't vouch for.\n\n**Appearance (fairly confident)**\n- It's a chubby, yellow, cartoonish dragon- or dinosaur-like creature with a round body and a goofy, wide-open grin.\n- The laughing face is the best-known version. I assume that's what 大笑 refers to.\n- The style is simple and \"ugly-cute\" (丑萌).\n- I may be wrong on smaller details like the eyes, teeth, belly color, or horns.\n\n**Origin (mostly unsure)**\n- It spread mainly through WeChat/QQ stickers and short video (Douyin, Bilibili). As I recall, it got big around 2024 and the backlash peaked in early 2025.\n- I don't reliably know who created the original character, when, or in what work, and I won't guess a name.\n- I vaguely remember merchandise licensing and ownership or copyright disputes around the character. I can't give names, dates, or outcomes.\n\n**Names**\n- I can't confirm whether 大笑奶龙 is an official name or just a descriptive label for the laughing version.\n- I don't recognize 奶蛙 as an established alias. It could be a community nickname, a variant, or a mix-up with another character, but I can't verify it.\n\n**Jokes and remixes (moderate confidence on the broad strokes)**\n- **Sticker spam:** Flooding group chats with Nailong stickers was the main vehicle.\n- **Catchphrases:** I believe \"我是奶龙\" (\"I'm Nailong\") and \"I'm the *real* Nailong\" riffs circulated as audio and song bits. I can't quote lyrics or attribute them.\n- **Backlash:** A \"反奶龙\" (anti-Nailong) movement emerged, especially in anime/ACG communities, where admins banned the stickers. I recall hobbyists building image-recognition bots to detect and auto-ban Nailong images in chat groups. The backlash became a meme in its own right.\n- **Specific viral edits:** I can't name particular edits or remixes without making them up.\n\nMy knowledge may also be missing developments from the past several months. If you tell me where you saw 奶蛙, I can help work out what it refers to, but I won't pretend to know it.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 94.9,
+    "tokens": {
+      "input": 643,
+      "cached_input": 0,
+      "cache_write": 641,
+      "output": 11745,
+      "reasoning": null
+    },
+    "resolved_model": "claude-sonnet-5-5",
+    "cost_usd_reported": 0.120018,
+    "tools_used": [],
+    "cost_usd": 0.120018,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 641,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 11745,
+      "output_tokens_details": {
+        "thinking_tokens": 10967
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 641,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 11745,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 641,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 641
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:13:34Z",
+    "finished_at": "2026-10-29T18:15:09Z",
+    "revision": "90e0bea",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gemini-4-argon/recognize_zh__r1.json",
+  "target_sha256": "c929b356a0c6185c58ce642a019a01bd1c82c967d07abd5c9060f52b629165c7",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "cfd072fdf6800c97",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "将图中角色认定为俄罗斯动画《Booba》的 Loola，并声称这是其在某集中变成巨大黄色水熊虫的形态；图中实际是奶龙的非官方 AI 变异形象。",
+    "将该图的来源及相关梗描述为《Booba》角色先说“Oh no no no no”再捂肚狂笑的动画片段，错误归因了该图及其梗。"
+  ],
+  "rationale": "回答完全误认了角色和梗，未识别大笑奶龙的非官方 AI 变异性质，也未给出“变异奶龙”“奶蛙”别名或解释奶蛙与奶龙的关系，所有检查项均为零分。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"ai_variant\":0,\"aliases\":0,\"naiwa\":0},\"hallucinations\":[\"将图中角色认定为俄罗斯动画《Booba》的 Loola，并声称这是其在某集中变成巨大黄色水熊虫的形态；图中实际是奶龙的非官方 AI 变异形象。\",\"将该图的来源及相关梗描述为《Booba》角色先说“Oh no no no no”再捂肚狂笑的动画片段，错误归因了该图及其梗。\"],\"rationale\":\"回答完全误认了角色和梗，未识别大笑奶龙的非官方 AI 变异性质，也未给出“变异奶龙”“奶蛙”别名或解释奶蛙与奶龙的关系，所有检查项均为零分。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d85-3757-7331-bd26-c5e1c4919f95",
+    "seconds": 16.1,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13838,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 297,
+      "reasoning_output_tokens": 94
+    },
+    "tokens": {
+      "input": 13838,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 297,
+      "reasoning": 94
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:54:40Z",
+    "finished_at": "2026-10-30T15:54:56Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

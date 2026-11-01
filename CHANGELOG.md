@@ -5,6 +5,12 @@ Software releases use semantic versions; suite ids version the evaluation panels
 
 ## Unreleased
 
+- Add Gemini 4 Argon and max-effort configurations of GPT-6.1-Sol, GPT-6-Astra, GPT-6.1 Terra,
+  GPT-6-Luna, and Claude Opus/Sonnet/Haiku 5.5, with saved core understanding runs judged by reduced
+  judge sets; the 0.1.0 release selection is unchanged.
+- Record the costliest `modelUsage` entry as a Claude result's `resolved_model`. Claude Code also lists
+  auxiliary models there, so earlier Claude records can name `claude-haiku-5-5` for answers and
+  judgments the requested model produced, as their reported costs show.
 - Add the Claude Fable 5.1 configuration to the maintained model registry.
 - Start the Claude and Codex CLIs through their resolved executables and read their output as UTF-8,
   so npm `.cmd` shims and non-UTF-8 console code pages on Windows work; recorded command templates

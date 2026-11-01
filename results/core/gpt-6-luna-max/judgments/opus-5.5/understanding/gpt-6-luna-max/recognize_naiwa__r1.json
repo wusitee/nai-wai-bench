@@ -1,0 +1,111 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6-luna-max/recognize_naiwa__r1.json",
+  "target_sha256": "334700dd3c7adc7493d4accfd813b76524a81f5eb34758f00b6f2f0ef9eec912",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "25499dfca96a3447",
+  "judge_images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6-luna-max",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "Confidently claims the character is commonly just called “小黄鸭” (yellow duck); it is actually a mutated 奶龙 (奶蛙).",
+    "Assigns the image to a standalone “惊鸿一瞥” meme, treating the caption text as the meme family instead of the 大笑奶龙/奶蛙 family."
+  ],
+  "rationale": "The model misidentifies the character as a generic yellow bird or duck and never mentions 奶龙, 大笑奶龙, or 奶蛙. It only paraphrases the caption, so no checklist item is covered.",
+  "raw": "{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"naiwa\": 0}, \"hallucinations\": [\"Confidently claims the character is commonly just called “小黄鸭” (yellow duck); it is actually a mutated 奶龙 (奶蛙).\", \"Assigns the image to a standalone “惊鸿一瞥” meme, treating the caption text as the meme family instead of the 大笑奶龙/奶蛙 family.\"], \"rationale\": \"The model misidentifies the character as a generic yellow bird or duck and never mentions 奶龙, 大笑奶龙, or 奶蛙. It only paraphrases the caption, so no checklist item is covered.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.312",
+    "seconds": 9.1,
+    "tokens": {
+      "input": 1734,
+      "cached_input": 0,
+      "cache_write": 1732,
+      "output": 561,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.025493599999999998,
+    "tools_used": [],
+    "cost_usd": 0.025493599999999998,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1732,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 561,
+      "output_tokens_details": {
+        "thinking_tokens": 328
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1732,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 561,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1732,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1732
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:57:36Z",
+    "finished_at": "2026-10-30T15:57:45Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

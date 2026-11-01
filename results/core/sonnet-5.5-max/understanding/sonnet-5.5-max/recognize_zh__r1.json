@@ -1,0 +1,103 @@
+{
+  "settings_id": "4e1f1b03b3c609b5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "**角色：奶龙（Nailong，字面意思\"奶油龙\"）**\n\n我是凭外观认出来的：圆滚滚的黄色身体、奶白色肚皮、深灰色的手，加上大嘴憨笑的造型，都符合国产动画角色奶龙的设计。图里是它常见的\"捂着肚子狂笑\"姿势，常被当作\"笑死\"表情包用。\n\n**相关的梗：「我是奶龙 / 我才是奶龙」**\n- 这个梗大约在 2024 年前后，借短视频平台上的洗脑台词和魔性画风走红，之后奶龙成了 QQ、微信、B站等处常见的表情包素材。\n- 后来出现了对立的\"反奶龙 / 打奶龙\"风潮。有些群聊会识别奶龙表情包，发了就禁言或踢出群。\n\n**常见别名**\n- 奶龙梗、\"我才是奶龙\"梗\n- 对立面叫\"反奶龙\"\"打奶龙\"\n\n我没法查证，角色出处和梗的细节我记得不够完整，上面的别名也可能不全。如果你指的是别的梗，比如单纯的\"狂笑\"表情包，告诉我图的来源，我可以再对一下。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 115.2,
+    "tokens": {
+      "input": 1384,
+      "cached_input": 0,
+      "cache_write": 1382,
+      "output": 14120,
+      "reasoning": null
+    },
+    "resolved_model": "claude-sonnet-5-5",
+    "cost_usd_reported": 0.146732,
+    "tools_used": [],
+    "cost_usd": 0.146732,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1382,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 14120,
+      "output_tokens_details": {
+        "thinking_tokens": 13698
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1382,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 14120,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1382,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1382
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:18:41Z",
+    "finished_at": "2026-10-29T18:20:36Z",
+    "revision": "90e0bea",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "settings_id": "8bdf006b7d3fc51c",
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "vendor": "anthropic",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "A cartoon reaction sticker of a chubby, bright-yellow cartoon cat bursting into uncontrollable, hysterical laughter. Character design: the cat is a single round, egg-shaped blob with no neck. Its head and body merge into one plump shape that is slightly wider at the bottom. It is bright lemon yellow with a smooth, flat cartoon surface and no visible fur, and has a pale cream oval patch on its belly and soft pink blush ovals on both cheeks. It has two small triangular cat ears with pink insides, a tiny pink triangular nose, three thin dark whiskers on each side of its face, tiny stubby arms with round paws, short nubby feet with little pink toe beans, and a short curled tail. Expression and pose: its eyes are squeezed tightly shut into thick upward-curved lines, and big tears of laughter spurt from the corners of its eyes. Its mouth is a gigantic wide-open half-moon grin stretching from ear to ear, so wide it nearly splits its round face in half and gives it a goofy, almost frog-like look while it still clearly reads as a cat. The inside of the mouth is deep red with a pink tongue and no teeth. Its cheeks are squished up, its whole round body leans back, both tiny front paws clutch its belly, and its little feet kick up as it shakes with laughter, with small motion lines and flying teardrops around it. Style: simple flat 2D cartoon, bold smooth dark-brown outlines, bright saturated colors, minimal soft shading, cute yet absurd and slightly unhinged, like a popular messaging-app sticker. Full body, centered, plain white background, square composition. No text, no captions, no watermark, not realistic, no 3D render.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 122.5,
+    "tokens": {
+      "input": 640,
+      "cached_input": 0,
+      "cache_write": 638,
+      "output": 10505,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.21521200000000001,
+    "tools_used": [],
+    "cost_usd": 0.21521200000000001,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 638,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 10505,
+      "output_tokens_details": {
+        "thinking_tokens": 9919
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 638,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 10505,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 638,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 638
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:19:58Z",
+    "finished_at": "2026-10-29T18:22:00Z",
+    "revision": "42b42f8",
+    "nwb_version": "0.1.0"
+  }
+}

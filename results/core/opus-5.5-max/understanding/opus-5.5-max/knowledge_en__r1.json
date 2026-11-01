@@ -1,0 +1,100 @@
+{
+  "settings_id": "8bdf006b7d3fc51c",
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "vendor": "anthropic",
+  "item": "knowledge_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "What is the Chinese internet meme \"大笑奶龙\" (Laughing Nailong, also called \"奶蛙\")? Explain its origin, what it looks like, and the related jokes and remixes. Say so plainly where you are unsure instead of guessing.",
+  "images": [],
+  "answer": "# 奶龙 (Nailong) and \"大笑奶龙\"\n\n奶龙 (Nailong) is a real character, and it became a huge Chinese internet meme. However, I can't confirm \"大笑奶龙\" as a distinct meme with its own origin story, and I don't recognize \"奶蛙\" as a nickname for it.\n\n## What 奶龙 is\n\n- **Fairly confident:** It's a cartoon character from a Chinese children's IP. It spread through short animated videos and sticker packs (表情包) on platforms like Douyin, Bilibili, WeChat and QQ.\n- **The name:** 奶龙 literally means \"milk dragon.\" 奶 also often suggests \"babyish,\" as in 奶声奶气. I don't know the creators' stated reason for the name.\n- **Unsure:** I don't reliably remember the studio behind it or the launch year. I have only a vague sense that it dates to the early 2020s, so treat that as unverified.\n\n## What it looks like\n\n- **Fairly confident:** It's bright yellow, round and chubby, somewhere between a little dragon and a dinosaur. Its big head merges into its body, and it has stubby limbs, big round eyes and a very wide mouth. The mouth is often drawn gaping open in exaggerated expressions.\n- **Moderately confident:** In the cartoon it has a squeaky, childish voice, which later became material for remixes.\n\n## How it became a meme (peaking around 2024)\n\n- **Fairly confident:** It was hugely popular with young kids, who flooded QQ and WeChat group chats with Nailong stickers.\n- Older users first mocked it as a symbol of 小学生 (elementary-schooler) spam. It then spread further as people started using it ironically.\n\n## Related jokes and remixes\n\n- **\"我才是奶龙！\" (\"I'm the real Nailong!\"):** I believe a cartoon scene where two Nailongs argue over which one is real became a template for any \"I'm the real X\" dispute. I'm less sure of the exact wording.\n- **Face edits (P图):** People pasted Nailong's face onto other characters, celebrities and existing meme templates.\n- **鬼畜 remixes:** Bilibili users chopped its voice lines into songs.\n- **Anti-Nailong bots:** I'm fairly sure group admins made QQ bot plugins that automatically detect and recall Nailong images. I believe at least one was built for NoneBot, a common QQ bot framework.\n\nI'm confident the face edits and 鬼畜 remixes existed as genres, but I can't name specific famous examples.\n\n## \"大笑奶龙\" specifically\n\nMany Nailong stickers show it laughing with its mouth stretched huge, and people use them as mocking \"LOL\" reactions. \"大笑奶龙\" may simply describe that group of images. I don't know of one particular laughing image with a documented origin, so I can't tell you where a specific one came from.\n\n## \"奶蛙\"\n\nI don't recognize this as a name for Nailong, and I won't invent an explanation. It may be niche, regional, or newer than my knowledge.\n\n## Caveat\n\nChinese meme slang changes quickly, and anything after my training data won't be reflected here. To verify origins, 萌娘百科 (Moegirlpedia) and 小鸡词典 (Jikipedia) usually document Chinese memes in detail.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 156.1,
+    "tokens": {
+      "input": 638,
+      "cached_input": 0,
+      "cache_write": 636,
+      "output": 15134,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.307776,
+    "tools_used": [],
+    "cost_usd": 0.307776,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 636,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 15134,
+      "output_tokens_details": {
+        "thinking_tokens": 14026
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 636,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 15134,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 636,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 636
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:13:34Z",
+    "finished_at": "2026-10-29T18:16:11Z",
+    "revision": "42b42f8",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gemini-4-argon/knowledge_zh__r1.json",
+  "target_sha256": "c299b845adb5712888f541533fb5e5a6c2ba870a52c77ae9b0a1b9e84457742c",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "b1b5ee7ca40d5df3",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 1,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [
+    "将特指的“大笑奶龙”形象归入原作动画中的标志性大笑动作；参考说明它是非官方的AI生成变异形象。"
+  ],
+  "rationale": "回答正确介绍了奶龙的基础形象，部分提及“奶蛙”别称、蛙状外观及捧腹张嘴的笑姿，但未说明其变异奶龙身份和星野起源。其余内容主要是泛泛的奶龙二创介绍，未覆盖清单中的特定梗、传播事件和标题套路。",
+  "raw": "{\"scores\":{\"base_character\":2,\"ai_variant\":0,\"xingye_origin\":0,\"aliases\":1,\"naiwa\":1,\"laugh_pose\":1,\"junti_quan\":0,\"official_reply\":0,\"trait_variants\":0,\"rarity_titles\":0},\"hallucinations\":[\"将特指的“大笑奶龙”形象归入原作动画中的标志性大笑动作；参考说明它是非官方的AI生成变异形象。\"],\"rationale\":\"回答正确介绍了奶龙的基础形象，部分提及“奶蛙”别称、蛙状外观及捧腹张嘴的笑姿，但未说明其变异奶龙身份和星野起源。其余内容主要是泛泛的奶龙二创介绍，未覆盖清单中的特定梗、传播事件和标题套路。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d84-61e2-78d1-8c5c-dc971cb7a88e",
+    "seconds": 31.5,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13464,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 546,
+      "reasoning_output_tokens": 354
+    },
+    "tokens": {
+      "input": 13464,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 546,
+      "reasoning": 354
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:53:45Z",
+    "finished_at": "2026-10-30T15:54:16Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

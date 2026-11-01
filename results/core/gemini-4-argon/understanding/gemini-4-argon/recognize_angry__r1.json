@@ -1,0 +1,70 @@
+{
+  "settings_id": "0a4d731222ad1478",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "vendor": "google",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "从图片来看，这是一个**3D渲染的红色卡通角色**（外形类似无耳无角的圆润怪兽或蛙类，有着绿色的眼白、粉红色的圆肚子，双手背在身后，眉头紧锁），配文为**“切换愤怒模式😡”**。\n\n不过仅凭我现有的知识库，我**无法确定**该角色的具体原始出处（例如它具体叫什么名字、来自哪部动画、游戏还是AI生成的形象）以及它背后对应的特定网络梗源。\n\n它的用法属于常见的**“状态切换/情绪表达”类表情包**（如“切换战斗模式”、“切换红温/愤怒模式”），通过圆润呆萌的体型、背手老干部式的站姿与“凶狠生气”的表情形成反差萌，用来在聊天中半开玩笑地表达“我要生气了 / 我红温了”。如果你知道它的出处或想了解其他相关内容，欢迎告诉我！",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 16.4,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-4-argon-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-4-argon-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 12881,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "${NWB_AGY_ACP}"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME",
+      "NWB_AGY_ACP",
+      "NWB_AGY_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:15:40Z",
+    "finished_at": "2026-10-29T18:15:56Z",
+    "revision": "673dc6b",
+    "nwb_version": "0.1.0"
+  }
+}

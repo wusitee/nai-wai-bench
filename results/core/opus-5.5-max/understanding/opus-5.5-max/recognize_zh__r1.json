@@ -1,0 +1,103 @@
+{
+  "settings_id": "8bdf006b7d3fc51c",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "坦白说，我**无法确定**这是哪个作品里的哪个角色，所以也说不出它对应的具体梗名和别名。如果硬给出名字，很可能是编的，会误导你。\n\n**从图上能确定的：**\n- 一个3D渲染的生物，黄色身体，胖乎乎的梨形体型，奶白色肚皮，深灰色的手。\n- 它双眼眯成缝，张大嘴露出牙齿，双手捂着肚子弯腰大笑。这是典型的“笑到肚子疼”的姿势。\n- 造型有点像青蛙或蛤蟆，背景是白色，看起来像动画或短视频的截图。\n\n**关于用途：**\n这类图在网上常被当作“笑死我了”“哈哈哈”“绷不住了”之类的大笑反应图来用。但我不确定它是不是某个有固定名称、有固定出处的梗。\n\n如果你知道它出自哪部动画、游戏或视频，或者在哪个平台、配着什么文字看到的，告诉我后我可以帮你进一步分析。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 1021.5,
+    "tokens": {
+      "input": 1380,
+      "cached_input": 1065,
+      "cache_write": 313,
+      "output": 88515,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 1.773025,
+    "tools_used": [],
+    "cost_usd": 1.773025,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 313,
+      "cache_read_input_tokens": 1065,
+      "output_tokens": 88515,
+      "output_tokens_details": {
+        "thinking_tokens": 88148
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 313,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 88515,
+          "cache_read_input_tokens": 1065,
+          "cache_creation_input_tokens": 313,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 313
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:54:06Z",
+    "finished_at": "2026-10-29T19:11:08Z",
+    "revision": "5c571b8",
+    "nwb_version": "0.1.0"
+  }
+}

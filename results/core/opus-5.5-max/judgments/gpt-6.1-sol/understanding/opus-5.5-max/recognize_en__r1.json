@@ -1,0 +1,87 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/opus-5.5-max/recognize_en__r1.json",
+  "target_sha256": "ade5735df3e1920b5dd5e12c74226ae955a9686dca1072a2e0ca80d2b7e280d7",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "c943e6c93ef8d254",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer explicitly declines identification and provides none of the required information about 奶龙, the meme family, its unofficial AI-generated origin, or its aliases. Its visual description is consistent with the image and contains no confident false claims.",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"ai_variant\":0,\"aliases\":0,\"naiwa\":0},\"hallucinations\":[],\"rationale\":\"The answer explicitly declines identification and provides none of the required information about 奶龙, the meme family, its unofficial AI-generated origin, or its aliases. Its visual description is consistent with the image and contains no confident false claims.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d87-e2ba-79c1-8894-307ebd9bfaf3",
+    "seconds": 10.2,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13032,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 135,
+      "reasoning_output_tokens": 45
+    },
+    "tokens": {
+      "input": 13032,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 135,
+      "reasoning": 45
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:57:35Z",
+    "finished_at": "2026-10-30T15:57:45Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

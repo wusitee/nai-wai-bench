@@ -1,0 +1,100 @@
+{
+  "settings_id": "4e1f1b03b3c609b5",
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "vendor": "anthropic",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "一张1:1方形的搞笑卡通猫咪表情包贴纸插画。画面正中只有一只极度圆胖的小猫，整体像一团软糯的麻薯。大脑袋占整体高度一半以上，比身体还宽，直接连在圆滚滚的身体上，没有脖子。四肢又短又粗，只有小圆爪，身侧露出一小截短尾巴。头顶是两只小小的三角形猫耳，耳内粉色。脸颊两侧各有三根短胡须，鼻子是一个很小的粉色倒三角。毛色是明亮柔和的蛋黄色（暖黄），肚皮和嘴边是更浅的奶白色。\n\n表情是毫无形象的放声大笑。头微微后仰，嘴巴张得极大，几乎和整张脸一样宽，形状像一个上缘平直、下缘圆弧的大半圆（像横放的字母D）。嘴里是深粉红色，露出一条粉色小舌头，不画尖牙。双眼笑得紧紧眯成向上弯的弧线（像 ^ ^），眼角挤出两三滴喜极而泣的小泪珠。脸颊鼓起，带淡淡的红晕，整体神情憨憨的，有点得意又夸张。姿势是坐在地上，身体略向后仰，两只小短爪按在圆鼓鼓的肚子上，像笑到肚子疼，身体两侧画几条短短的抖动线，表示笑得发抖。\n\n画风是扁平的2D手绘矢量卡通：粗细均匀的深棕色粗描边，大块纯色填充，只有极简的阴影和一两处小高光。造型简单、傻乎乎、略带滑稽，像聊天软件里的搞笑表情包。背景为干净的纯白色，仅在脚下有一小片柔和的椭圆形淡影，没有其他场景或道具。线条清晰锐利，色彩饱和明快。\n\n不要出现：任何文字、字幕、水印、其他角色；写实毛发、3D渲染、照片质感；龙角、翅膀、鳞片或人类特征。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 73.4,
+    "tokens": {
+      "input": 645,
+      "cached_input": 0,
+      "cache_write": 643,
+      "output": 8833,
+      "reasoning": null
+    },
+    "resolved_model": "claude-sonnet-5-5",
+    "cost_usd_reported": 0.09090600000000001,
+    "tools_used": [],
+    "cost_usd": 0.09090600000000001,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 643,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 8833,
+      "output_tokens_details": {
+        "thinking_tokens": 8104
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 643,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 8833,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 643,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 643
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:17:28Z",
+    "finished_at": "2026-10-29T18:18:41Z",
+    "revision": "90e0bea",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "settings_id": "4e1f1b03b3c609b5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "sonnet-5.5-max",
+  "vendor": "anthropic",
+  "item": "recognize_official",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "我无法确定这个角色的名字，也不知道它出自哪个网络梗。我不想随便编一个名字误导你。\n\n**图中能看到的特征：**\n- 橙黄色、毛绒质感的圆胖小恐龙（或小怪兽）形象，是 3D 渲染风格\n- 绿色大眼睛，嘴巴是一个小小的\"o\"形，表情像是惊讶或\"哇？\"\n- 双臂举起，手掌有粉色腮红般的肉垫，爪子是棕色的\n- 肚子是奶白色，脚上有小趾甲\n\n**我的判断：**\n- 它有点像小恐龙或小火龙类的吉祥物，但和宝可梦的小火龙（没有火焰尾巴）、《小恐龙阿贡》都对不上。\n- 从姿势和表情看，它大概被用作\"惊讶\"\"举手\"\"投降\"\"哇\"之类的反应表情包。\n- 仅凭这张图，我没法确认它是哪部动画、哪个 IP，或者是否属于某个特定的梗。\n\n**你可以这样查：**\n1. 用 Google Lens、百度识图或搜狗识图搜这张图。\n2. 看看表情包所在的贴纸包名称、作者署名或水印。\n3. 回想它是在哪个平台（微信、抖音、B站、小红书等）出现的，评论区或原视频里通常有人会提到出处。\n\n如果你能告诉我它是在哪里看到的，或者图上原本有什么配字，我可以帮你一起分析。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 22.7,
+    "tokens": {
+      "input": 917,
+      "cached_input": 0,
+      "cache_write": 915,
+      "output": 2498,
+      "reasoning": null
+    },
+    "resolved_model": "claude-sonnet-5-5",
+    "cost_usd_reported": 0.028644,
+    "tools_used": [],
+    "cost_usd": 0.028644,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 915,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 2498,
+      "output_tokens_details": {
+        "thinking_tokens": 1978
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 915,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 2498,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 915,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 915
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:22:30Z",
+    "finished_at": "2026-10-29T18:22:53Z",
+    "revision": "90e0bea",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "settings_id": "0a4d731222ad1478",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "vendor": "google",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "1. **图中的角色**：\n   这是俄罗斯动画系列 **《Booba》（布巴）** 中的角色 **Loola（卢拉）**——更具体地说，是 Loola 在动画中变成了一只**巨大的黄色水熊虫（缓步动物 / Tardigrade）** 时的形态（出自《Booba》中关于水熊虫的一集）。不过在中文互联网的语境下，大家通常直接根据它的外貌和魔性笑声，把它称为**“黄皮耗子”**、**“黄色怪兽”**或直接叫它的洗脑空耳名。\n\n2. **相关的网络梗**：\n   它与风靡抖音、TikTok、B站等平台的魔性洗脑搞笑视频梗 **“Oh no no no no”（哦不不不不 / 捂肚狂笑怪）** 有关。\n   原视频片段中，这只黄色生物先是用极其魔性、滑稽的怪声说出类似 **“Oh no, no, no, no...”** 的声音，随后捂着肚子发出震耳欲聋、停不下来的狂笑声。这段视频经常被网友用作搞笑视频的结尾、绿幕素材，或者用来嘲笑某些离谱、尴尬的场面。\n\n3. **这个梗的别名**：\n   - **中文常见别名/空耳**：“**欧内的手，好汉**”（或“欧内的手”——结合另一个经典空耳，有时会被混用，但针对这个音频最直接的称呼是**“Oh no no no 捂肚笑”**、**“黄皮耗子狂笑”**、**“黄色大胖子笑”**、**“布巴黄怪笑”**、**“水熊虫狂笑”**）。\n   - **英文圈常见别名**：**“Yellow Creature Laughing”**（黄色生物大笑）、**“Oh No No No Laughing Meme”**、**“Yellow Tardigrade Laughing”**。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 15.4,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-4-argon-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-4-argon-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 12735,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "${NWB_AGY_ACP}"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME",
+      "NWB_AGY_ACP",
+      "NWB_AGY_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:15:07Z",
+    "finished_at": "2026-10-29T18:15:23Z",
+    "revision": "673dc6b",
+    "nwb_version": "0.1.0"
+  }
+}

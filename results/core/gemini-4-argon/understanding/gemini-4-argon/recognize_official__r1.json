@@ -1,0 +1,70 @@
+{
+  "settings_id": "0a4d731222ad1478",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "vendor": "google",
+  "item": "recognize_official",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "这张图片里的角色是**奶龙（Nailong）**。\n\n### 1. 角色介绍\n**奶龙**是由中国原创动漫团队（第七印象文化传媒）创作的3D动画IP角色。它的设定是一只来自异星球、呆萌可爱又有点贪吃的小恐龙（全身鹅黄色、有着大大的肚子），经常和它的好朋友少年“小七”一起经历各种搞笑日常。\n\n### 2. 所属的网络梗\n奶龙在短视频平台（如抖音、B站、小红书等）和社交软件中衍生出了多个非常出圈的抽象梗和表情包文化，最著名的包括：\n\n* **“我是奶龙！”（奶龙音/唐氏奶龙梗）**：\n  源自带有奶龙贴纸特效的搞笑视频或配音模仿。网友们常刻意用夹子音或夸张憨傻的语气大喊“我是奶龙！”，或者用来调侃身边行为举止看起来呆呆的、憨憨的朋友。\n* **“今夜星光闪闪，我爱你的心满满”**：\n  奶龙扭动身体跳舞时最经典的洗脑背景音乐（BGM），常被网友拿来制作各种鬼畜、反差或土味整活视频。\n* **“肚肚打雷啦！”**：\n  奶龙贪吃人设的经典台词（“糟糕，肚肚打雷啦”），常被做成表情包用来表达“饿了”、“想吃饭”。\n* **奶龙表情包对决/入侵**：\n  由于奶龙的表情包在微信、QQ中使用频率极高（尤其是低龄群体和情侣之间，也有大量年轻人带着“抽象反讽”的心态使用），它常与**Loopy（露比）**、**吉伊卡哇（Chiikawa）**、**大耳狗**等并列，被网友戏称为“表情包界的几大巨头”之一。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 14.8,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-4-argon-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-4-argon-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 12804,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "${NWB_AGY_ACP}"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME",
+      "NWB_AGY_ACP",
+      "NWB_AGY_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:16:07Z",
+    "finished_at": "2026-10-29T18:16:22Z",
+    "revision": "673dc6b",
+    "nwb_version": "0.1.0"
+  }
+}

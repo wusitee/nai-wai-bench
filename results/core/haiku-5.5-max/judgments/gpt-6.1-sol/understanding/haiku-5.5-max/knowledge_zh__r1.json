@@ -1,0 +1,89 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/haiku-5.5-max/knowledge_zh__r1.json",
+  "target_sha256": "c8bcbfd72e5687e4cdd65b71736b8bd69e975c8b47d61280783c9465be823e2b",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "24569797c1cb9f60",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "scores": {
+    "base_character": 1,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 0,
+    "naiwa": 0,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer partially describes Nailong as a yellow, round cartoon character and mentions a laughing, open-mouthed expression, but omits the defining origin, AI mutation, aliases, pose details, and specific remix traditions. Its speculative statements are explicitly marked uncertain, so they do not count as hallucinations.",
+  "raw": "{\"scores\":{\"base_character\":1,\"ai_variant\":0,\"xingye_origin\":0,\"aliases\":0,\"naiwa\":0,\"laugh_pose\":1,\"junti_quan\":0,\"official_reply\":0,\"trait_variants\":0,\"rarity_titles\":0},\"hallucinations\":[],\"rationale\":\"The answer partially describes Nailong as a yellow, round cartoon character and mentions a laughing, open-mouthed expression, but omits the defining origin, AI mutation, aliases, pose details, and specific remix traditions. Its speculative statements are explicitly marked uncertain, so they do not count as hallucinations.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d86-29ec-7ff0-afd0-58832f7d94fd",
+    "seconds": 14.8,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13549,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 238,
+      "reasoning_output_tokens": 105
+    },
+    "tokens": {
+      "input": 13549,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 238,
+      "reasoning": 105
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:55:42Z",
+    "finished_at": "2026-10-30T15:55:56Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

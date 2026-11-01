@@ -1,0 +1,67 @@
+{
+  "settings_id": "0a4d731222ad1478",
+  "track": "understanding",
+  "model": "gemini-4-argon",
+  "vendor": "google",
+  "item": "write_prompt.giraffe",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a giraffe version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A 3D animated character render of a chubby, pear-shaped baby giraffe with smooth, matte bright-yellow skin, large round brown giraffe spots, stubby little arms and legs, and two tiny brown ossicones (giraffe horns) with small droopy ears on top of its oversized round head. The giraffe has a disproportionately huge, round, protruding creamy-yellow belly. It is in the middle of an exaggerated, uproarious, full-bodied belly laugh: its head is thrown all the way back, its eyes are squeezed tightly shut into happy upward-curved crescents, and its enormous, wide-open mouth takes up most of its face, revealing a bright pink tongue and two tiny rounded white teeth at the top. One of its stubby front hooves is slapping its giant round belly in amusement, while the other is raised in the air. The character has a short, thick neck rather than a long one, keeping a compact, squishy, toy-like chibi proportion. Soft studio lighting, smooth Pixar-style 3D shading, vibrant colors, clean solid light-pastel background, playful and contagious joyful energy.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 12.9,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-4-argon-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-4-argon-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 11544,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-4-argon-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "${NWB_AGY_ACP}"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME",
+      "NWB_AGY_ACP",
+      "NWB_AGY_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:14:26Z",
+    "finished_at": "2026-10-29T18:14:39Z",
+    "revision": "673dc6b",
+    "nwb_version": "0.1.0"
+  }
+}

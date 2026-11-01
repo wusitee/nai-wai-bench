@@ -1,0 +1,88 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/opus-5.5-max/describe__r1.json",
+  "target_sha256": "506df7690b87098f907a35bcf14cdc1d0649bd06e62974fa7d848261ce12b8af",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "c07b974f73f2d6af",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 1,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 2,
+    "vibe": 1
+  },
+  "hallucinations": [],
+  "rationale": "身体轮廓、浅色肚皮、柔光3D质感和白底描述符合参考，但默认采用后仰、双手外张，偏离前倾捧腹的核心姿势；闭眼仅为备选倾向，嘴部缺少可见牙齿，抽象失控感也较弱。相悖或可疑细节已明确标为不确定，因此未列为幻觉。",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":1,\"mouth\":1,\"body\":2,\"belly_patch\":2,\"render\":2,\"background\":2,\"vibe\":1},\"hallucinations\":[],\"rationale\":\"身体轮廓、浅色肚皮、柔光3D质感和白底描述符合参考，但默认采用后仰、双手外张，偏离前倾捧腹的核心姿势；闭眼仅为备选倾向，嘴部缺少可见牙齿，抽象失控感也较弱。相悖或可疑细节已明确标为不确定，因此未列为幻觉。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d87-7fef-7620-ab76-525809ae9d2e",
+    "seconds": 25.4,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13796,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 394,
+      "reasoning_output_tokens": 238
+    },
+    "tokens": {
+      "input": 13796,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 394,
+      "reasoning": 238
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:57:09Z",
+    "finished_at": "2026-10-30T15:57:35Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

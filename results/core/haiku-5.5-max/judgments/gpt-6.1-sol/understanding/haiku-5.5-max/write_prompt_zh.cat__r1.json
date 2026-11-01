@@ -1,0 +1,92 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/haiku-5.5-max/write_prompt_zh.cat__r1.json",
+  "target_sha256": "020b60e3d1151c6b32feff633010f7e5386444db1fbe22f1397ebfdff06dca75",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "d11b8127b51a764d",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "haiku-5.5-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 1,
+    "render": 0,
+    "background": 1,
+    "vibe": 1,
+    "identity": 1
+  },
+  "hallucinations": [
+    "Specifies leaning backward instead of hunching forward with slightly bent knees.",
+    "Specifies a flat 2D vector sticker style instead of a glossy 3D CG render."
+  ],
+  "rationale": "The prompt clearly covers belly-clutching paws, closed crescent eyes, and bulky bean-shaped proportions, but only partially specifies the mouth, belly patch, background, and unhinged mood. It contradicts the required pose and rendering style, while retaining a yellow Nailong body with added cat cues rather than fully carrying through feline coloring or markings.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":2,\"eyes\":2,\"mouth\":1,\"body\":2,\"belly_patch\":1,\"render\":0,\"background\":1,\"vibe\":1,\"identity\":1},\"hallucinations\":[\"Specifies leaning backward instead of hunching forward with slightly bent knees.\",\"Specifies a flat 2D vector sticker style instead of a glossy 3D CG render.\"],\"rationale\":\"The prompt clearly covers belly-clutching paws, closed crescent eyes, and bulky bean-shaped proportions, but only partially specifies the mouth, belly patch, background, and unhinged mood. It contradicts the required pose and rendering style, while retaining a yellow Nailong body with added cat cues rather than fully carrying through feline coloring or markings.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.165.0",
+    "thread_id": "01a18d86-f46a-7191-afe2-18c06fa4214a",
+    "seconds": 19.4,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12711,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 362,
+      "reasoning_output_tokens": 193
+    },
+    "tokens": {
+      "input": 12711,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 362,
+      "reasoning": 193
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-30T15:56:33Z",
+    "finished_at": "2026-10-30T15:56:53Z",
+    "revision": "ac0e9ff",
+    "nwb_version": "0.1.0"
+  }
+}

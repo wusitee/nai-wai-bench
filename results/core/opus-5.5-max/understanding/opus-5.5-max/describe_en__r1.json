@@ -1,0 +1,100 @@
+{
+  "settings_id": "8bdf006b7d3fc51c",
+  "track": "understanding",
+  "model": "opus-5.5-max",
+  "vendor": "anthropic",
+  "item": "describe_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Without looking at any images, describe the most iconic image of Laughing Nailong (大笑奶龙 / 奶蛙) from memory: its pose, expression, body shape, colors, rendering style, and background, in enough detail for an artist who has never seen it to draw it. Say where you are unsure.",
+  "images": [],
+  "answer": "I know Nailong's general design fairly well, but **I don't reliably remember one specific, canonical \"大笑奶龙 / 奶蛙\" image.** This is my best reconstruction: the general character design plus the most likely form of the laughing meme. Each point carries a confidence tag. Check a real reference before finalizing if accuracy matters.\n\n**Confidence key:** **[high]** fairly sure · **[med]** partly remembered · **[low]** essentially a guess\n\n### What it is\n- Nailong (奶龙, \"milk dragon\") is a yellow, roly-poly character from a Chinese kids' cartoon. It became a huge reaction-image meme in China around 2024 and later spread abroad. Despite the name, it looks like a yellow blob with a face, not a dragon. [high]\n- 奶蛙 (\"milk frog\") is, I believe, a joke nickname. The huge mouth, wide-set eyes and squat body make the laughing face look froggy. It might instead refer to a specific frog-like edit or recolor. [low]\n\n### Composition and pose\n- One character, centered, facing the viewer almost straight on (maybe a slight 3/4 turn). It fills most of the frame, shown full body or cropped around the belly. [med]\n- It stands upright, with the head and upper body tilted back a little as if mid-guffaw. [low]\n- I don't remember the arm position. Likely options are stubby arms raised at the sides, held near the chest, or one paw on the belly. [low]\n\n### Body shape\n- One soft, chubby mass: a big round head flowing straight into a round belly, with no neck. The silhouette is like an egg or gumdrop, widest near the bottom. [high]\n- The arms are very short and stubby, with mitten-like hands and no clear fingers. The legs are short and thick with rounded feet. A small tail is usually hidden from the front. [med]\n- The skin is smooth, with no horns, spikes or scales that I recall. If anything is on the head, it's tiny rounded nubs. [low]\n- There is no visible nose (at most tiny nostril dots) and no eyebrows. [med]\n\n### Face and expression\n- **Eyes:** squeezed shut into thick black upward arcs (^ ^), set high and wide apart, maybe with small tears at the outer corners. [low]\n  - Alternative: its normal eyes stay open while the mouth does the laughing. Those are big, round, glossy black dots with white highlights. [med that these are its normal eyes]\n- **Mouth:** the dominant feature. [med]\n  - It is a huge open grin stretching nearly cheek to cheek, shaped roughly like a sideways \"D\" or half-moon (flatter top edge, rounded bottom).\n  - The inside is dark red, with a pink-red tongue filling the lower part. Teeth are absent or not prominent.\n  - This oversized mouth is what makes it look like a frog.\n- **Cheeks:** pink blush ovals beside or below the eyes. [med–low]\n\n### Colors (approximate starting palette)\n\n| Element | Color | Confidence |\n|---|---|---|\n| Body | Warm, saturated egg-yolk or butter yellow, ~`#FFD43B` | high for yellow; hex is a guess |\n| Shadows | Orange-yellow, ~`#E9A52A` | low |\n| Belly | Paler cream oval, ~`#FFF2C2` | med–low that it's visible |\n| Blush | Soft pink, ~`#F59A9A` | med–low |\n| Mouth interior | Deep red, ~`#9E1B1B` | med |\n| Tongue | Coral pink-red, ~`#E86565` | med |\n| Eyes and lines | Black or very dark brown | med |\n\n### Rendering style [low–med]\nThere are two plausible versions; I lean toward the first.\n1. **3D screenshot from the cartoon:**\n   - Smooth, slightly glossy, toy-like surfaces with soft, diffuse lighting and gentle shading.\n   - A highlight on top of the head, giving the look of a budget kids' 3D show.\n   - Circulating copies are often low-res and blurry from heavy compression, which is part of the meme's appeal.\n2. **2D chat-sticker style (WeChat 表情包):** flat fills, thick dark outlines, minimal shading.\n\n### Background [low]\n- **Sticker version:** plain white or transparent.\n- **Screenshot version:** a soft, blurry, pastel cartoon room or outdoor scene.\n- There may be a caption such as 哈哈哈 (\"hahaha\") on top, but I don't remember one specifically.\n\n### Quick construction for the artist\n1. Draw a big circle for the head overlapping a slightly larger, lower oval for the body. Merge them into one silhouette.\n2. Add stubby arm nubs at the sides and two short rounded feet.\n3. Place ^ ^ eye arcs high and wide, with blush ovals below them.\n4. Cut a very wide half-moon mouth across the lower face. Fill it dark red and add the tongue.\n5. Tilt the whole figure back 5–10°. Shade with soft orange-yellow and add a shiny highlight on the top of the head.\n\n### What to verify against a real reference\n- Whether there is one canonical image at all, or many variants\n- Eyes closed or open\n- Arm position\n- 2D or 3D rendering\n- Background\n- What exactly 奶蛙 refers to",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.294",
+    "seconds": 130.3,
+    "tokens": {
+      "input": 653,
+      "cached_input": 0,
+      "cache_write": 651,
+      "output": 12775,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.260716,
+    "tools_used": [],
+    "cost_usd": 0.260716,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 651,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 12775,
+      "output_tokens_details": {
+        "thinking_tokens": 10967
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 651,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 12775,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 651,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 651
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T18:17:47Z",
+    "finished_at": "2026-10-29T18:19:58Z",
+    "revision": "42b42f8",
+    "nwb_version": "0.1.0"
+  }
+}
