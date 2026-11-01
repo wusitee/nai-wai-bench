@@ -30,7 +30,8 @@ An attempted failed repetition cannot silently disappear from eligibility. A gen
 image provider's safety system refused for the verified verbatim prompt scores 0 without judges (see
 [backends.md](backends.md#codex-backend--codex)); refusals are outcomes, so they are not retried
 automatically. Incomplete or uneven panels have coverage and status but no rank or ranking score. Failed, contaminated, stale, and
-unjudged samples cannot fill a cell. Additional animals and text tasks cannot change the fixed-panel score.
+unjudged samples cannot fill a cell; a panel whose missing cells are all collected but unjudged has the
+status `awaiting judges`. Additional animals and text tasks cannot change the fixed-panel score.
 Models can use different repetition counts, shown beside their scores; compare the same count when
 possible. Exact scores share ranks when equal. These ranks describe the observed panel, not statistical
 significance or general multimodal ability.

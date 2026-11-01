@@ -1,0 +1,10 @@
+# DeepSeek Harness patch overlay: route Zhipu GLM models through pi-ai's catalog providers.
+# zai-coding-cn uses open.bigmodel.cn with ZAI_CODING_CN_API_KEY; zai uses api.z.ai with ZAI_API_KEY.
+# Both catalogs point at the GLM Coding Plan endpoints.
+- id: llm-pi-ai
+  config:
+    providers:
+      zai-coding-cn:
+        apiKeyEnv: ZAI_CODING_CN_API_KEY
+      zai:
+        apiKeyEnv: ZAI_API_KEY

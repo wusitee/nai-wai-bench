@@ -1,0 +1,6 @@
+# DeepSeek Harness patch overlay: make GLM-5.3-Flash (zai-coding-cn) the ACP default model. The ACP agent
+# accepts image prompts only when its default model takes image input, whichever model a session selects later.
+- id: acp
+  config:
+    provider: zai-coding-cn
+    model: glm-5.3-flash

@@ -157,15 +157,16 @@ def test_visual_ranking_ignores_text_scores_and_legacy_text_only_judgments(tmp_p
     assert rows[0]["model"] == "visual" and rows[0]["score"] == 100  # invalid independent judge cannot displace it
 
 
-def _image_sample(run, bench, model, tier, animal, rep=1, score=2, verbatim=True):
+def _image_sample(run, bench, model, tier, animal, rep=1, score=2, verbatim=True, judged=True):
     selected_tier = bench.all_tiers[tier]
     target = f"imagegen/{model}/{tier}/{animal}__r{rep}.json"
     write_json(run / target, {
         "track": "imagegen", "model": model, "vendor": "subject", "tier": tier, "animal": animal,
         "rep": rep, "prompt": selected_tier.render(bench.animals[animal]), "images": ["image.png"],
         "meta": {"audit": {"verbatim": verbatim}}})
-    _judgment(run, "j", "independent", target, traits={t: score for t in bench.traits}, identity=2,
-              failure_modes=[], rationale="")
+    if judged:
+        _judgment(run, "j", "independent", target, traits={t: score for t in bench.traits}, identity=2,
+                  failure_modes=[], rationale="")
 
 
 def test_optional_states_are_scored_separately_and_never_use_the_laughing_rubric(tmp_path):
@@ -192,10 +193,13 @@ def test_optional_states_are_scored_separately_and_never_use_the_laughing_rubric
 
 def test_generation_panel_requires_coverage_balanced_repeats_and_prompt_audit(tmp_path):
     bench = load_bench(find_root())
-    for model in ("full", "partial", "changed", "unverified", "refused"):
+    for model in ("full", "partial", "changed", "unverified", "refused", "unjudged"):
         for tier in bench.tiers:
             for animal in bench.select_animals("default"):
                 if model == "partial" and animal.id != "cat":
+                    continue
+                if model == "unjudged":  # collected without access to the judge models
+                    _image_sample(tmp_path, bench, model, tier, animal.id, judged=animal.id == "cat")
                     continue
                 if model == "refused" and (tier, animal.id) == ("name_zh", "cat"):
                     write_json(tmp_path / "imagegen/refused/name_zh/cat__r1.json", {
@@ -211,6 +215,7 @@ def test_generation_panel_requires_coverage_balanced_repeats_and_prompt_audit(tm
     assert rows["full"]["bootstrap"]["clusters"] == 6
     assert rows["full"]["completed"] == rows["full"]["required"] == 30
     assert rows["partial"]["completed"] == 5 and rows["partial"]["rank"] is None
+    assert rows["partial"]["status"] == "incomplete" and rows["unjudged"]["status"] == "awaiting judges"
     assert rows["changed"]["completed"] == rows["unverified"]["completed"] == 0
     # A provider refusal of the verbatim prompt fills its cell with 0 instead of leaving the panel incomplete.
     assert rows["refused"]["rank"] == 2 and rows["refused"]["score"] == pytest.approx(100 * 29 / 30)

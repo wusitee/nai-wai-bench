@@ -208,6 +208,29 @@ effort_option = "reasoning_effort"
 price = { input = 0.30, cached_input = 0.006, output = 1.20, unit = "USD/1M tokens", source = "https://api-docs.deepseek.com/quick_start/pricing/", as_of = "2026-10-25" }
 can = ["text", "vision"]
 
+# Zhipu GLM through dsh's pi-ai routes (config/dsh-glm.patch.yml): zai-coding-cn reads ZAI_CODING_CN_API_KEY.
+[models."glm-5.3"]
+label = "GLM-5.3"
+backend = "acp"
+vendor = "zhipu"
+command = ["dsh", "--profile", "acp", "--patch", "${NWB_ROOT}/config/dsh-no-tools.patch.yml",
+           "--patch", "${NWB_ROOT}/config/dsh-glm.patch.yml"]
+model = '["zai-coding-cn","glm-5.3"]'
+effort = "high"
+effort_option = "reasoning_effort"
+can = ["text"]
+
+[models."glm-5.3-flash"]
+label = "GLM-5.3-Flash"
+backend = "acp"
+vendor = "zhipu"
+command = ["dsh", "--profile", "acp", "--patch", "${NWB_ROOT}/config/dsh-no-tools.patch.yml",
+           "--patch", "${NWB_ROOT}/config/dsh-glm.patch.yml", "--patch", "${NWB_ROOT}/config/dsh-glm-flash-default.patch.yml"]
+model = '["zai-coding-cn","glm-5.3-flash"]'
+effort = "high"
+effort_option = "reasoning_effort"
+can = ["text", "vision"]
+
 [models."kimi-k3"]
 timeout = 300
 label = "Kimi K3"

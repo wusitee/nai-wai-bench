@@ -28,15 +28,17 @@ Small score differences are not evidence of a reliable ordering. An optional, un
 whether generators can transfer other 奶蛙 expressions (angry, facepalm, smug) to other animals.
 
 Judges from several vendors score every sample; a model is never scored by its own vendor's judges when
-an independent judge is available.
+an independent judge is available. Collecting results needs no judge access:
+[contributors](docs/contributing-results.md) can share results for judging elsewhere.
 
 ## Getting started
 
 Requirements: Python 3.12+, [uv](https://docs.astral.sh/uv/), and at least one logged-in agent CLI or API key:
 [Codex](https://github.com/openai/codex) (OpenAI models and image generation),
-[Claude Code](https://claude.com/claude-code), an ACP agent such as DeepSeek Harness, Kimi Code, or
-Antigravity, or an OpenAI-compatible API such as Xiaomi MiMo (key from an environment variable or
-[CC Switch](https://github.com/farion1231/cc-switch)).
+[Claude Code](https://claude.com/claude-code) (Anthropic models, or other providers' Anthropic-compatible
+endpoints), [pi](https://github.com/earendil-works/pi) (any provider pi supports), an ACP agent such as
+DeepSeek Harness (DeepSeek and GLM models), Kimi Code, or Antigravity, or an OpenAI-compatible API such as
+Xiaomi MiMo (key from an environment variable or [CC Switch](https://github.com/farion1231/cc-switch)).
 
 ```sh
 uv sync
@@ -82,7 +84,10 @@ not significance claims or subscription bills. See the [methodology](docs/method
 - [Evaluation methodology](docs/methodology.md): research basis, budget, controls, and limitations
 - [Optional state transfer](docs/design.md#optional-state-transfer): transfer angry, facepalm, and smug
   expressions to cat/frog in 12 images per generator; separate state-extraction checks, without LLM grading
-- [Backends and models](docs/backends.md): how each agent CLI is driven and isolated, and how to add models
+- [Backends and models](docs/backends.md): how each agent CLI is driven and isolated, and how to add models,
+  including pi and other providers through Claude Code
+- [Contributing results](docs/contributing-results.md): collecting and sharing results without judge access,
+  and judging shared results
 - [Sources](bench/reference/SOURCE.md): where the reference image, stickers, and facts come from
 
 The reference image and stickers are included for non-commercial research use only.

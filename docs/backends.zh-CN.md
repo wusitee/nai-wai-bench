@@ -2,7 +2,8 @@
 
 [English](backends.md) | 简体中文 | [繁體中文](backends.zh-Hant.md)
 
-大多数模型通过本机已安装并已登录的 Agent CLI 运行，因此基准使用的是现有订阅；`openai` 后端则用 API 密钥
+大多数模型通过本机已安装并已登录的 Agent CLI 运行，因此基准使用的是现有订阅或 CLI 自己的供应商配置：
+Codex、Claude Code（也可接入其他供应商的 Anthropic 兼容接口）、pi 和 ACP Agent。`openai` 后端则用 API 密钥
 调用 OpenAI 兼容接口。模型在 `models.toml` 中配置；本机特有的路径或额外的模型请写在 `models.local.toml`
 （已被 git 忽略）中，它会按模型逐项合并。
 
@@ -17,18 +18,19 @@
 
 | 字段 | 含义 |
 |---|---|
-| `backend` | `codex`、`claude`、`acp` 或 `openai` |
+| `backend` | `codex`、`claude`、`pi`、`acp` 或 `openai` |
 | `vendor` | 用于避免评审给自家厂商的模型打分 |
-| `model` | 传给后端的模型 id |
+| `model` | 传给后端的模型 id（pi：`provider/id`） |
 | `label` | 结果网站中的显示名称（默认使用模型条目名） |
 | `can` | 可包含 `text`、`vision`（接受图片输入）、`image`（生成图片） |
 | `reasoning` | 仅 Codex：`model_reasoning_effort` |
 | `effort` | 仅 Claude：`--effort` 等级 |
-| `command`、`env` | 仅 ACP：Agent 命令和额外的环境变量；会展开 `~`、`${VAR}` 和 `${NWB_ROOT}`（仓库根目录） |
+| `command` | 仅 ACP：Agent 命令；会展开 `~`、`${VAR}` 和 `${NWB_ROOT}`（仓库根目录） |
+| `env` | ACP、Claude 和 pi：额外的环境变量，展开方式同 `command`；只记录变量名 |
 | `config` | 仅 ACP：要设置的会话配置项，格式为 `{ id = "value" }` |
 | `auth` | 仅 ACP：每次会话前调用 `authenticate` 所用的认证方式 id |
 | `base_url`、`api_key_env` | 仅 OpenAI：API 基础地址（以 `/v1` 结尾）和存放密钥的环境变量名 |
-| `cc_switch` | 仅 OpenAI：从哪个 [CC Switch](https://github.com/farion1231/cc-switch) 供应商读取基础地址和密钥 |
+| `cc_switch` | OpenAI 和 Claude：从哪个 [CC Switch](https://github.com/farion1231/cc-switch) 供应商读取接口地址和密钥 |
 | `timeout` | 每次调用的超时秒数（默认 600） |
 
 ## Codex（`backend = "codex"`）
@@ -51,6 +53,33 @@
 使用 Claude Code 登录运行 `claude -p`。工具、MCP 服务器和设置来源都会被禁用，编程 Agent 的系统提示词
 也会被替换为中性的提示词。图片通过 `--input-format stream-json` 以内容块形式发送。仅支持文本和视觉。
 
+### 通过 Claude Code 运行其他供应商的模型
+
+Claude Code 可以通过 Anthropic 兼容接口运行其他供应商的模型。由于设置来源已被禁用，接口必须写在模型条目里：
+用 `env` 设置 `ANTHROPIC_BASE_URL` 和密钥变量，或用 `cc_switch` 读取 CC Switch 中 Claude Code 供应商的环境
+变量。显式的 `env` 会覆盖 CC Switch 中的值。`model` 传给 `--model`，必须是该供应商的模型 id。示例见
+[英文文档](backends.md#other-providers-through-claude-code)。
+
+条目设置了 `ANTHROPIC_BASE_URL` 时，继承来的 `ANTHROPIC_*` 环境变量会被移除，Anthropic 凭据不会发给其他
+供应商。设置中只记录接口主机名、CC Switch 供应商名和环境变量名，不记录变量值；也不保留 Claude Code 按
+Anthropic 价格估算的费用。除非供应商说明支持 Claude Code 的 effort 控制，否则请使用 `effort = "default"`。
+请把 `vendor` 设为模型的实际厂商。
+
+## pi（`backend = "pi"`）
+
+以 RPC 模式（`pi --mode rpc`）运行 [pi 编程 Agent](https://github.com/earendil-works/pi)（`@earendil-works/pi-coding-agent`），
+使用 pi 的订阅登录、API 密钥环境变量，以及 `~/.pi/agent/models.json`（或 `PI_CODING_AGENT_DIR`）中的自定义
+供应商，因此可以接入 pi 支持的任何供应商，包括本地的 OpenAI 兼容服务。会话不会保存；工具、扩展（包括 pi 内置
+的 MCP 支持）、技能、提示词模板、主题、上下文文件和自动联网（如模型目录刷新）都会被禁用；系统提示词替换为中性
+的提示词，pi 仍会在其中附上临时工作目录。pi 的自动重试也会关闭，失败的样本在下次运行时重试。仅支持文本和视觉。
+
+`model` 必须精确写成 `provider/id` 或 `id`。pi 找不到模型时会换用其他模型，遇到不支持的思考等级会自动降级，
+且都不报错，所以评测程序在发送提示词前会读取会话状态；所选模型、思考等级或图片输入能力与请求不符时调用失败。
+pi 模型目录中没有的 id 会沿用该供应商默认模型的能力，请在 pi 的 `models.json` 中声明它，使图片输入和推理
+能力准确。`effort` 可取 `off`、`minimal`、`low`、`medium`、`high`、`xhigh`、`max`，或用 `default` 保留
+pi 配置的等级；实际等级记录在 `meta.session_config`。如需干净、可复现的配置，可用
+`env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }` 指向专用且已登录的 pi 目录。
+
 ## ACP Agent（`backend = "acp"`）
 
 任何通过 stdio 使用 [Agent Client Protocol](https://agentclientprotocol.com) 的 Agent。客户端依次发送
@@ -70,6 +99,13 @@ Agent 则用 `session/set_model`）设置 `model` 和 `config` 选项，然后�
   `--dump-config` 检查合成后的配置树并补充该 patch。无论会话选择哪个模型，该 ACP Agent 只在默认模型支持
   图片输入时才接受图片，因此
   `deepseek-v4.1-flash` 还会应用 `config/dsh-flash-default.patch.yml`。DeepSeek-V4-Pro 仅支持文本。
+  dsh 会给每张图片附上 SHA-256 和 dsh 主目录下按内容寻址的副本路径，并追加一条说明临时工作目录和文件策略的
+  运行时上下文消息。
+
+  智谱 GLM 模型通过 `config/dsh-glm.patch.yml` 中 dsh 的 pi-ai 路由运行：`zai-coding-cn`（open.bigmodel.cn，
+  密钥放在 `ZAI_CODING_CN_API_KEY`）和 `zai`（api.z.ai，密钥放在 `ZAI_API_KEY`），两者的模型目录都指向
+  GLM Coding Plan 接口。`glm-5.3`（仅文本）和 `glm-5.3-flash`（接受图片，另应用
+  `config/dsh-glm-flash-default.patch.yml`）条目使用 `zai-coding-cn`。
 - **Kimi Code**（`kimi acp`）：`config = { mode = "default" }` 让每次工具调用都需要批准，而评测程序在理解题中
   会拒绝批准。计划模式不适用：K3 会先起草计划，再反复尝试退出计划模式或向用户提问，直到调用超时。
   视觉调用可能较慢，偶尔会卡住直到超时；重新运行即可重试。Agent 需要访问 `api.kimi.com`；该主机被屏蔽时，

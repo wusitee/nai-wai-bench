@@ -257,12 +257,12 @@ def model_settings(spec: ModelSpec, root: Path | None = None, *, generate: bool 
     opts = spec.options
     effort = opts.get("effort", opts.get("reasoning", "default"))
     source = "none" if effort in ("default", "unexposed") else {
-        "codex": "cli-flag", "claude": "cli-flag", "acp": "session-config",
+        "codex": "cli-flag", "claude": "cli-flag", "pi": "cli-flag", "acp": "session-config",
     }.get(spec.backend, "none")
     if opts.get("effort_source") == "model-id":
         source = "model-id"
     command = opts.get("command", [])
-    if spec.backend in ("codex", "claude"):
+    if spec.backend in ("codex", "claude", "pi"):
         from nwb.backends import get_backend
         backend = get_backend(spec)
         command = backend.command([], generate) if spec.backend == "codex" else backend.command()
@@ -300,14 +300,17 @@ def model_settings(spec: ModelSpec, root: Path | None = None, *, generate: bool 
     if spec.backend == "openai":
         base = opts.get("base_url")
         if not base and opts.get("cc_switch"):
-            from nwb.backends.openai_compat import cc_switch_credentials
+            from nwb.backends.cc_switch import openai_credentials
             try:
-                base, _ = cc_switch_credentials(opts["cc_switch"])
+                base, _ = openai_credentials(opts["cc_switch"])
             except RuntimeError:
                 pass  # Missing credentials are reported as a per-job backend error.
         settings["endpoint"] = urlsplit(base).hostname if base else None
-        if opts.get("cc_switch"):
-            settings["cc_switch"] = opts["cc_switch"]
+    elif spec.backend == "claude" and (opts.get("cc_switch") or "ANTHROPIC_BASE_URL" in opts.get("env", {})):
+        from nwb.backends.claude import endpoint
+        settings["endpoint"] = endpoint(spec)
+    if spec.backend in ("openai", "claude") and opts.get("cc_switch"):
+        settings["cc_switch"] = opts["cc_switch"]
     digest = hashlib.sha256(json.dumps(settings, sort_keys=True, separators=(",", ":")).encode()).hexdigest()[:16]
     return settings, digest
 
