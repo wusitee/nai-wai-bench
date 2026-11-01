@@ -40,6 +40,9 @@ Software releases use semantic versions; suite ids version the evaluation panels
 - Add GLM-5.3 and GLM-5.3-Flash through dsh's pi-ai routes for Zhipu's GLM providers.
 - Show `awaiting judges` for panels whose missing cells and repetitions are collected but unjudged, and
   document collecting and sharing results without judge access.
+- Add the Claude Fable 5.1 max-effort configuration with saved core and Nai-hub v1 runs, and save Opus 5.5
+  and GPT-6.1-Sol judgments for both Fable core runs, scored with the Opus-only default; the 0.1.0
+  release selection is unchanged.
 
 ## [0.1.0] - 2026-10-25
 

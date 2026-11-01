@@ -1,0 +1,94 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1-max/write_prompt.giraffe__r1.json",
+  "target_sha256": "a907f4bbe38dd3006e7f06ad869f2b9e0a78876cee31af03421a29c00db51d54",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "2de1c49aba51d4bd",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 2,
+    "vibe": 0,
+    "identity": 2
+  },
+  "hallucinations": [
+    "The backward-leaning posture contradicts the required forward-hunched pose.",
+    "Arms flung out to the sides contradict both hands clutching the belly.",
+    "A distinct stub neck conflicts with the neckless, merged head and torso.",
+    "Matte-plastic shading contradicts the glossy finish."
+  ],
+  "rationale": "The prompt clearly covers the giraffe identity, closed eyes, enormous laughing mouth, pale belly patch, and plain background. It reverses the defining posture and hand placement, introduces a neck and conflicting shading, and emphasizes cute children's-cartoon joy rather than absurd, unhinged meme energy.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":0,\"eyes\":2,\"mouth\":2,\"body\":1,\"belly_patch\":2,\"render\":1,\"background\":2,\"vibe\":0,\"identity\":2},\"hallucinations\":[\"The backward-leaning posture contradicts the required forward-hunched pose.\",\"Arms flung out to the sides contradict both hands clutching the belly.\",\"A distinct stub neck conflicts with the neckless, merged head and torso.\",\"Matte-plastic shading contradicts the glossy finish.\"],\"rationale\":\"The prompt clearly covers the giraffe identity, closed eyes, enormous laughing mouth, pale belly patch, and plain background. It reverses the defining posture and hand placement, introduces a neck and conflicting shading, and emphasizes cute children's-cartoon joy rather than absurd, unhinged meme energy.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a197d5-7556-7ca3-8861-877b08d0293b",
+    "seconds": 26.5,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 11630,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 480,
+      "reasoning_output_tokens": 301
+    },
+    "tokens": {
+      "input": 11630,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 480,
+      "reasoning": 301
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T15:58:31Z",
+    "finished_at": "2026-11-01T15:58:57Z",
+    "revision": "67c68f1",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "settings_id": "8c7d55a4a7adc4cb",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "vendor": "anthropic",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "我没法百分之百确定这个角色的来源，只能根据图片特征给你一个判断：\n\n**图片特征**\n- 一只黄色、无脖子、浑身圆滚滚的 3D 小怪物，肚子是浅奶黄色\n- 小小的绿眼睛、一字型的微笑\n- 双手抱胸、略带得意/不屑的表情\n\n**它可能是什么**\n\n它最像一个独立的 3D 表情包角色，而不是主流动画/游戏里的知名角色。它的造型（黄色胖身子 + 浅色肚皮 + 抱胸 + 淡定微笑）跟近年中文互联网上流行的\"黄色胖胖怪\"类角色很接近——其中最出名的是**奶龙**（2024–2025 年爆火的黄色小胖龙表情包，衍生出\"我是奶龙\"\"奶龙 vs 小八\"等梗）。不过奶龙通常有两个小角和更大的黑眼睛，而这张图的角色没有角、眼睛是绿色的，所以我不敢肯定它就是奶龙，也可能是类似风格的另一个\"黄团子\"角色。\n\n**它在表情包里的用法**\n\n不管出处是什么，这种\"抱臂 + 得意微笑\"的姿势在表情包里一般表达：\n- \"哼，我早就知道了\" / \"看戏\" / \"吃瓜\"\n- \"就这？\" / \"我倒要看看你怎么收场\"\n- 一种淡定、自信、不屑的态度\n\n如果你能告诉我这张图是在什么场合看到的（比如配的文字、来源平台），我可以帮你进一步缩小范围。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 1898.5,
+    "tokens": {
+      "input": 2034,
+      "cached_input": 0,
+      "cache_write": 2030,
+      "output": 124230,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 6.252140000000001,
+    "tools_used": [],
+    "cost_usd": 6.252140000000001,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 2030,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 124230,
+      "output_tokens_details": {
+        "thinking_tokens": 123672
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2030,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 60230,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1046,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1046
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T12:24:26Z",
+    "finished_at": "2026-11-01T12:56:04Z",
+    "revision": "c8f2158",
+    "nwb_version": "0.1.0"
+  }
+}

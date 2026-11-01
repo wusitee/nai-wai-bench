@@ -1,0 +1,91 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1-max/write_prompt.cat__r1.json",
+  "target_sha256": "baed53b08a227c6ad4b94dbebec4e72c95b10d9c89b0ec2932511999d8a97137",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "12c7ae1aa157200c",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 2,
+    "vibe": 1,
+    "identity": 1
+  },
+  "hallucinations": [
+    "One paw is raised to point at or mock the viewer, contradicting the reference pose with both paws clutching the belly."
+  ],
+  "rationale": "The prompt clearly covers the eyes, mouth, body shape, belly patch, rendering, and background, but omits the forward-hunched stance and specifies only one paw on the belly. Its cute mascot framing weakens the unhinged meme energy, while the bright yellow body with added feline features provides only partial cat identity.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":2,\"body\":2,\"belly_patch\":2,\"render\":2,\"background\":2,\"vibe\":1,\"identity\":1},\"hallucinations\":[\"One paw is raised to point at or mock the viewer, contradicting the reference pose with both paws clutching the belly.\"],\"rationale\":\"The prompt clearly covers the eyes, mouth, body shape, belly patch, rendering, and background, but omits the forward-hunched stance and specifies only one paw on the belly. Its cute mascot framing weakens the unhinged meme energy, while the bright yellow body with added feline features provides only partial cat identity.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a197d5-692e-7811-9896-a8c87c49bffa",
+    "seconds": 20.0,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12172,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 427,
+      "reasoning_output_tokens": 273
+    },
+    "tokens": {
+      "input": 12172,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 427,
+      "reasoning": 273
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T15:58:28Z",
+    "finished_at": "2026-11-01T15:58:48Z",
+    "revision": "67c68f1",
+    "nwb_version": "0.1.0"
+  }
+}

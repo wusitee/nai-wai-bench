@@ -156,17 +156,23 @@ observations, not rows of the 0.1.0 comparison:
 | `gemini-4-argon` | `gemini-4-argon-high` (high through the model id) | `opus-5.5`, `gpt-6.1-sol` |
 | `gpt-6.1-sol-max`, `gpt-6-astra-max`, `gpt-6.1-terra-max`, `gpt-6-luna-max` | `max`, `isolated-v1` | `opus-5.5` |
 | `opus-5.5-max`, `sonnet-5.5-max`, `haiku-5.5-max` | `max` | `gpt-6.1-sol` |
-| `fable-5.1-core` | `high` | none |
+| `fable-5.1-core` | `high` | `opus-5.5`, `gpt-6.1-sol` |
+| `fable-5.1-max` | `max` | `opus-5.5`, `gpt-6.1-sol` |
 
-Their saved scores count every recorded judge, and `fable-5.1-core` is unjudged, so its scores cover
-only the key-scored grounding items. Re-scoring with the default Opus-only pool leaves the Claude `max`
-runs at `awaiting judges` until Opus judges them; pass their recorded judges with `--judges` to reproduce
-the saved scores. The retained high-effort `gpt-6.1-sol` and `gpt-6-astra` rows
+The two Fable runs are saved with the default Opus-only pool, like the published site; their
+GPT-6.1-Sol verdicts stay in the snapshot as raw judgments, and
+`uv run nwb report --run fable-5.1-core --judges gpt-6.1-sol --no-sync` shows those scores (use
+`--run fable-5.1-max` for the `max` run). The other runs' saved scores count every recorded judge.
+Re-scoring them with the default pool leaves the Claude `max` runs at `awaiting judges` until Opus judges
+them; pass their recorded judges with `--judges` to reproduce the saved scores. The retained high-effort
+`gpt-6.1-sol` and `gpt-6-astra` rows
 use `legacy-v1`. Score differences from the release rows therefore mix effort with judge and
 collection-profile changes; a controlled effort comparison needs matching profiles and judges.
 
-`results/naihub-v1/fable-5.1-naihub` is the matching archived Nai-hub run: three repetitions of the
-fixed panel at `high`, scored locally from the answer keys, so it needs no judges.
+`results/naihub-v1/` keeps the matching archived Nai-hub runs `fable-5.1-naihub` (`high`) and
+`fable-5.1-max-naihub` (`max`): three repetitions of the fixed panel, scored locally from the answer
+keys, so they need no judges. A subscription limit interrupted the `max` run; 17 samples used the
+Claude Code login and 127 an API key, with the same recorded settings.
 
 ## Publish
 

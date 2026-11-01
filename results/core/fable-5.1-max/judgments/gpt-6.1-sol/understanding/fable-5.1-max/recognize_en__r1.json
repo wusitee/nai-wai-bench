@@ -1,0 +1,91 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1-max/recognize_en__r1.json",
+  "target_sha256": "fe239094eec1b6464e02b4ab3332f1aa9d1b5579bb2f302562ce4048853b80d9",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "00165dbe971f970f",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "Misidentifies the character as a shark and the meme as \"Laughing Shark,\" rather than the 大笑奶龙 / 变异奶龙 / 奶蛙 meme family.",
+    "Claims the character has no established name, although it is a mutated version of 奶龙 (Nailong).",
+    "Claims the clip was lifted from a children's animation, whereas this meme variant is unofficial and AI-generated."
+  ],
+  "rationale": "The answer gets the visible laughing pose right but misidentifies both the character and the meme. It does not provide the supported aliases or explain the AI-generated mutation and the meaning of 奶蛙.",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"ai_variant\":0,\"aliases\":0,\"naiwa\":0},\"hallucinations\":[\"Misidentifies the character as a shark and the meme as \\\"Laughing Shark,\\\" rather than the 大笑奶龙 / 变异奶龙 / 奶蛙 meme family.\",\"Claims the character has no established name, although it is a mutated version of 奶龙 (Nailong).\",\"Claims the clip was lifted from a children's animation, whereas this meme variant is unofficial and AI-generated.\"],\"rationale\":\"The answer gets the visible laughing pose right but misidentifies both the character and the meme. It does not provide the supported aliases or explain the AI-generated mutation and the meaning of 奶蛙.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a197d4-bcee-7031-878e-6cf3e32a3f78",
+    "seconds": 14.9,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12471,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 270,
+      "reasoning_output_tokens": 103
+    },
+    "tokens": {
+      "input": 12471,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 270,
+      "reasoning": 103
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T15:57:43Z",
+    "finished_at": "2026-11-01T15:57:58Z",
+    "revision": "67c68f1",
+    "nwb_version": "0.1.0"
+  }
+}

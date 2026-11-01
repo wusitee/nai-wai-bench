@@ -1,0 +1,85 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1-max/recognize_angry__r1.json",
+  "target_sha256": "18f946ee69e9528a681c59967eaf14ae49e461bbac611682350ee6be2974df76",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "1e036b806009faef",
+  "judge_images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 1
+  },
+  "hallucinations": [],
+  "rationale": "回答没有识别出原型奶龙，也没有指出它属于大笑奶龙／变异奶龙／奶蛙梗。仅模糊猜测可能是AI生成的表情包，未说明它是奶龙的非官方变异版本；错误的角色来源判断明确带有不确定措辞，因此不列为幻觉。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"ai_variant\":1},\"hallucinations\":[],\"rationale\":\"回答没有识别出原型奶龙，也没有指出它属于大笑奶龙／变异奶龙／奶蛙梗。仅模糊猜测可能是AI生成的表情包，未说明它是奶龙的非官方变异版本；错误的角色来源判断明确带有不确定措辞，因此不列为幻觉。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a197d4-a1bb-78c0-9720-f5f440a48b5e",
+    "seconds": 16.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12451,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 234,
+      "reasoning_output_tokens": 122
+    },
+    "tokens": {
+      "input": 12451,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 234,
+      "reasoning": 122
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T15:57:36Z",
+    "finished_at": "2026-11-01T15:57:53Z",
+    "revision": "67c68f1",
+    "nwb_version": "0.1.0"
+  }
+}
