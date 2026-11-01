@@ -177,10 +177,13 @@ def test_cc_switch_provider_credentials_for_openai_and_claude_code(tmp_path):
         claude_env("Pi P", db)
 
 
-def test_claude_custom_endpoint_never_receives_inherited_anthropic_credentials(tmp_path, monkeypatch):
+def test_claude_custom_endpoint_excludes_inherited_credentials_and_provider_switches(tmp_path, monkeypatch):
     from types import SimpleNamespace
     monkeypatch.setenv("ANTHROPIC_API_KEY", "anthropic-secret")
     monkeypatch.setenv("CLAUDE_CODE_OAUTH_TOKEN", "subscription-secret")
+    provider_switches = {"CLAUDE_CODE_USE_BEDROCK", "CLAUDE_CODE_USE_VERTEX", "CLAUDE_CODE_USE_FOUNDRY"}
+    for switch in provider_switches:
+        monkeypatch.setenv(switch, "1")
     monkeypatch.setenv("PROVIDER_TOKEN", "provider-secret")
     spec = ModelSpec("m", "claude", "other", "other-model", frozenset({"text"}), {"effort": "default", "env": {
         "ANTHROPIC_BASE_URL": "https://api.provider.test/anthropic", "ANTHROPIC_AUTH_TOKEN": "${PROVIDER_TOKEN}"}})
@@ -194,7 +197,8 @@ def test_claude_custom_endpoint_never_receives_inherited_anthropic_credentials(t
     monkeypatch.setattr("nwb.backends.claude.subprocess.run", run)
     monkeypatch.setattr("nwb.backends.claude.cli_version", lambda _: "test")
     resp = ClaudeBackend(spec).run(Request("hello"))
-    assert not {"ANTHROPIC_API_KEY", "CLAUDE_CODE_OAUTH_TOKEN"} & set(seen)
+    assert not ({"ANTHROPIC_API_KEY", "CLAUDE_CODE_OAUTH_TOKEN"} | provider_switches) & set(seen)
+    assert seen["ANTHROPIC_BASE_URL"] == "https://api.provider.test/anthropic"
     assert seen["ANTHROPIC_AUTH_TOKEN"] == "provider-secret"
     assert resp.meta["cost_usd_reported"] is None  # Claude Code's estimate uses Anthropic prices
     settings, _ = model_settings(spec, tmp_path)

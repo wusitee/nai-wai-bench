@@ -179,8 +179,9 @@ can = ["text"]
 When an entry sets `ANTHROPIC_BASE_URL`, it must also provide `ANTHROPIC_AUTH_TOKEN` or `ANTHROPIC_API_KEY`;
 otherwise the call fails, because Claude Code would fall back to its own login. Inherited `ANTHROPIC_*`
 variables and `CLAUDE_CODE_OAUTH_TOKEN` are removed from the call's environment, so Anthropic credentials
-never reach the other provider. The settings record the endpoint
-hostname, the CC Switch provider name, and environment variable names, never their values. Claude Code's
+never reach the other provider. Inherited Bedrock, Vertex, and Foundry routing switches are also removed
+so the request reaches the configured endpoint. The settings record the endpoint hostname, the CC Switch
+provider name, and environment variable names, never their values. Claude Code's
 cost estimate is not retained for these entries. Use `effort = "default"` unless the provider documents
 support for Claude Code's effort control; the harness cannot confirm that the endpoint applied it. Set
 `vendor` to the model's vendor so judge independence still applies. Images are sent as for Anthropic
