@@ -50,8 +50,12 @@ class ClaudeBackend:
             raise BackendError("the claude backend cannot generate images")
         configured = self.configured_env()
         custom = bool(configured.get("ANTHROPIC_BASE_URL"))
-        # Inherited Anthropic credentials and model settings must not reach another provider.
-        env = {**{k: v for k, v in os.environ.items() if not (custom and k.startswith("ANTHROPIC_"))},
+        if custom and not (configured.get("ANTHROPIC_AUTH_TOKEN") or configured.get("ANTHROPIC_API_KEY")):
+            raise BackendError(f"model {self.spec.name}: its endpoint needs ANTHROPIC_AUTH_TOKEN or ANTHROPIC_API_KEY; "
+                               "otherwise Claude Code would send its own login there")
+        # Inherited Anthropic credentials, model settings, and subscription tokens must not reach another provider.
+        env = {**{k: v for k, v in os.environ.items()
+                  if not (custom and (k.startswith("ANTHROPIC_") or k == "CLAUDE_CODE_OAUTH_TOKEN"))},
                **configured}
         content = [
             {"type": "image", "source": {"type": "base64", "media_type": media_type(Path(p)),

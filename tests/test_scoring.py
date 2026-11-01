@@ -193,13 +193,17 @@ def test_optional_states_are_scored_separately_and_never_use_the_laughing_rubric
 
 def test_generation_panel_requires_coverage_balanced_repeats_and_prompt_audit(tmp_path):
     bench = load_bench(find_root())
-    for model in ("full", "partial", "changed", "unverified", "refused", "unjudged"):
+    for model in ("full", "partial", "changed", "unverified", "refused", "unjudged", "rejudged"):
         for tier in bench.tiers:
             for animal in bench.select_animals("default"):
                 if model == "partial" and animal.id != "cat":
                     continue
                 if model == "unjudged":  # collected without access to the judge models
                     _image_sample(tmp_path, bench, model, tier, animal.id, judged=animal.id == "cat")
+                    continue
+                if model == "rejudged":  # a second repetition collected after the first was judged
+                    _image_sample(tmp_path, bench, model, tier, animal.id)
+                    _image_sample(tmp_path, bench, model, tier, animal.id, rep=2, judged=False)
                     continue
                 if model == "refused" and (tier, animal.id) == ("name_zh", "cat"):
                     write_json(tmp_path / "imagegen/refused/name_zh/cat__r1.json", {
@@ -215,7 +219,14 @@ def test_generation_panel_requires_coverage_balanced_repeats_and_prompt_audit(tm
     assert rows["full"]["bootstrap"]["clusters"] == 6
     assert rows["full"]["completed"] == rows["full"]["required"] == 30
     assert rows["partial"]["completed"] == 5 and rows["partial"]["rank"] is None
-    assert rows["partial"]["status"] == "incomplete" and rows["unjudged"]["status"] == "awaiting judges"
+    assert rows["partial"]["status"] == "incomplete"
+    assert rows["unjudged"]["status"] == rows["rejudged"]["status"] == "awaiting judges"
+    # A failed repetition needs recollection, which judging cannot provide.
+    write_json(tmp_path / "imagegen/unjudged/name_zh/cat__r2.json", {
+        "track": "imagegen", "model": "unjudged", "tier": "name_zh", "animal": "cat", "rep": 2,
+        "prompt": bench.tiers["name_zh"].render(bench.animals["cat"]), "error": "failed repeat"})
+    rows = {r["model"]: r for r in aggregate(tmp_path, bench.trait_weights, bench=bench)["leaderboards"]["imagegen"]}
+    assert rows["unjudged"]["status"] == "incomplete"
     assert rows["changed"]["completed"] == rows["unverified"]["completed"] == 0
     # A provider refusal of the verbatim prompt fills its cell with 0 instead of leaving the panel incomplete.
     assert rows["refused"]["rank"] == 2 and rows["refused"]["score"] == pytest.approx(100 * 29 / 30)

@@ -16,8 +16,8 @@ them later from the shared files.
 | Image-generation ranking | Vision judges | Every image |
 | Optional state-transfer images | Unscored | None |
 
-Without judgments, `nwb report` shows the locally scored results. A row whose remaining panel cells are
-collected but not yet judged has the status `awaiting judges` instead of `incomplete`.
+Without judgments, `nwb report` shows the locally scored results. A row whose remaining panel cells and
+repetitions are collected but not yet judged has the status `awaiting judges`.
 
 ## Collecting without judges
 

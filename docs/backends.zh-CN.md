@@ -60,8 +60,9 @@ Claude Code 可以通过 Anthropic 兼容接口运行其他供应商的模型。
 变量。显式的 `env` 会覆盖 CC Switch 中的值。`model` 传给 `--model`，必须是该供应商的模型 id。示例见
 [英文文档](backends.md#other-providers-through-claude-code)。
 
-条目设置了 `ANTHROPIC_BASE_URL` 时，继承来的 `ANTHROPIC_*` 环境变量会被移除，Anthropic 凭据不会发给其他
-供应商。设置中只记录接口主机名、CC Switch 供应商名和环境变量名，不记录变量值；也不保留 Claude Code 按
+条目设置了 `ANTHROPIC_BASE_URL` 时，必须同时提供 `ANTHROPIC_AUTH_TOKEN` 或 `ANTHROPIC_API_KEY`，否则调用失败，
+因为 Claude Code 会退回使用自己的登录。继承来的 `ANTHROPIC_*` 环境变量和 `CLAUDE_CODE_OAUTH_TOKEN` 会被移除，
+Anthropic 凭据不会发给其他供应商。设置中只记录接口主机名、CC Switch 供应商名和环境变量名，不记录变量值；也不保留 Claude Code 按
 Anthropic 价格估算的费用。除非供应商说明支持 Claude Code 的 effort 控制，否则请使用 `effort = "default"`。
 请把 `vendor` 设为模型的实际厂商。
 
@@ -71,7 +72,7 @@ Anthropic 价格估算的费用。除非供应商说明支持 Claude Code 的 ef
 使用 pi 的订阅登录、API 密钥环境变量，以及 `~/.pi/agent/models.json`（或 `PI_CODING_AGENT_DIR`）中的自定义
 供应商，因此可以接入 pi 支持的任何供应商，包括本地的 OpenAI 兼容服务。会话不会保存；工具、扩展（包括 pi 内置
 的 MCP 支持）、技能、提示词模板、主题、上下文文件和自动联网（如模型目录刷新）都会被禁用；系统提示词替换为中性
-的提示词，pi 仍会在其中附上临时工作目录。pi 的自动重试也会关闭，失败的样本在下次运行时重试。仅支持文本和视觉。
+的提示词，不加载全局 `SYSTEM.md` 和 `APPEND_SYSTEM.md`，pi 仍会在其中附上临时工作目录。pi 的自动重试也会关闭，失败的样本在下次运行时重试。仅支持文本和视觉。
 
 `model` 必须精确写成 `provider/id` 或 `id`。pi 找不到模型时会换用其他模型，遇到不支持的思考等级会自动降级，
 且都不报错，所以评测程序在发送提示词前会读取会话状态；所选模型、思考等级或图片输入能力与请求不符时调用失败。

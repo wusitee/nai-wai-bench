@@ -176,8 +176,10 @@ env = { ANTHROPIC_BASE_URL = "https://api.deepseek.com/anthropic", ANTHROPIC_AUT
 can = ["text"]
 ```
 
-When an entry sets `ANTHROPIC_BASE_URL`, inherited `ANTHROPIC_*` variables are removed from the call's
-environment, so Anthropic credentials never reach the other provider. The settings record the endpoint
+When an entry sets `ANTHROPIC_BASE_URL`, it must also provide `ANTHROPIC_AUTH_TOKEN` or `ANTHROPIC_API_KEY`;
+otherwise the call fails, because Claude Code would fall back to its own login. Inherited `ANTHROPIC_*`
+variables and `CLAUDE_CODE_OAUTH_TOKEN` are removed from the call's environment, so Anthropic credentials
+never reach the other provider. The settings record the endpoint
 hostname, the CC Switch provider name, and environment variable names, never their values. Claude Code's
 cost estimate is not retained for these entries. Use `effort = "default"` unless the provider documents
 support for Claude Code's effort control; the harness cannot confirm that the endpoint applied it. Set
@@ -186,14 +188,14 @@ models; list `vision` only if the endpoint accepts image blocks.
 
 ## pi (`backend = "pi"`)
 
-Runs the [pi coding agent](https://github.com/earendil-works/pi) (`@earendil-works/pi-coding-agent`) in
-RPC mode (`pi --mode rpc`), using pi's subscription logins, API-key environment variables, and custom
-providers from `~/.pi/agent/models.json` (or `PI_CODING_AGENT_DIR`). This reaches any provider pi supports,
-including local OpenAI-compatible servers. Sessions are not saved, and tools, extensions (including pi's
-built-in MCP support), skills, prompt templates, themes, context files, and automatic network activity such
-as catalog refreshes are disabled. The coding-agent system prompt is replaced with a neutral one, to which
-pi still adds the temporary working directory. pi's automatic retry is turned off; failed samples are
-retried on the next run. Text and vision only.
+Runs the [pi coding agent](https://github.com/earendil-works/pi) (`@earendil-works/pi-coding-agent`) in RPC
+mode (`pi --mode rpc`), using pi's subscription logins, API-key environment variables, and custom providers
+from `~/.pi/agent/models.json` (or `PI_CODING_AGENT_DIR`). This reaches any provider pi supports, including
+local OpenAI-compatible servers. Sessions are not saved, and tools, extensions (including pi's built-in MCP
+support), skills, prompt templates, themes, context files, and automatic network activity such as catalog
+refreshes are disabled. The coding-agent system prompt is replaced with a neutral one, global `SYSTEM.md`
+and `APPEND_SYSTEM.md` files are not loaded, and pi still adds the temporary working directory. pi's
+automatic retry is turned off; failed samples are retried on the next run. Text and vision only.
 
 `model` must name the model exactly as `provider/id` or `id`. Because pi falls back to another model and
 clamps unsupported thinking levels without failing, the harness reads the session state before prompting

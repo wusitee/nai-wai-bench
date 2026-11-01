@@ -413,10 +413,12 @@ def leaderboards(bench: Bench, scores: dict, run_dir: Path) -> dict:
                 if (s["model"] == model and key in required and s[metric] is not None
                         and (track != "imagegen" or s["verbatim"] is True)):
                     cells[key].append(s)
-            # Collected cells that only lack judgments, e.g. from a collaborator without the judge models.
-            unjudged = {tuple(s[f] for f in fields) for s in samples
+            # Collected repetitions that only lack judgments, e.g. from a contributor without the judge models.
+            unjudged = {(tuple(s[f] for f in fields), s["rep"]) for s in samples
                         if s["model"] == model and tuple(s[f] for f in fields) in required and s[metric] is None
                         and (track != "imagegen" or s["verbatim"] is True)}
+            scored = {(key, s["rep"]) for key, cell in cells.items() for s in cell}
+            awaiting = bool(unjudged) and scored | unjudged == {(c, r) for c in required for r in attempted_reps}
             rep_sets = [{s["rep"] for s in cell} for cell in cells.values()]
             complete = bool(required) and set(cells) == required
             balanced = complete and all(rs == attempted_reps for rs in rep_sets)
@@ -443,8 +445,8 @@ def leaderboards(bench: Bench, scores: dict, run_dir: Path) -> dict:
                          "completed": len(cells), "required": len(required),
                          "repetitions": min(map(len, rep_sets), default=0) if complete else 0,
                          "status": "mixed conditions" if differences else "complete" if balanced else
-                                   "incomplete repetitions" if complete else
-                                   "awaiting judges" if set(cells) | unjudged == required else "incomplete"})
+                                   "awaiting judges" if awaiting else
+                                   "incomplete repetitions" if complete else "incomplete"})
         rows.sort(key=lambda r: (r["score"] is None, -(r["score"] or 0), r["model"]))
         previous, rank = None, 0
         for index, row in enumerate(rows, 1):

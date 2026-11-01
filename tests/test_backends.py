@@ -180,6 +180,7 @@ def test_cc_switch_provider_credentials_for_openai_and_claude_code(tmp_path):
 def test_claude_custom_endpoint_never_receives_inherited_anthropic_credentials(tmp_path, monkeypatch):
     from types import SimpleNamespace
     monkeypatch.setenv("ANTHROPIC_API_KEY", "anthropic-secret")
+    monkeypatch.setenv("CLAUDE_CODE_OAUTH_TOKEN", "subscription-secret")
     monkeypatch.setenv("PROVIDER_TOKEN", "provider-secret")
     spec = ModelSpec("m", "claude", "other", "other-model", frozenset({"text"}), {"effort": "default", "env": {
         "ANTHROPIC_BASE_URL": "https://api.provider.test/anthropic", "ANTHROPIC_AUTH_TOKEN": "${PROVIDER_TOKEN}"}})
@@ -193,10 +194,17 @@ def test_claude_custom_endpoint_never_receives_inherited_anthropic_credentials(t
     monkeypatch.setattr("nwb.backends.claude.subprocess.run", run)
     monkeypatch.setattr("nwb.backends.claude.cli_version", lambda _: "test")
     resp = ClaudeBackend(spec).run(Request("hello"))
-    assert "ANTHROPIC_API_KEY" not in seen and seen["ANTHROPIC_AUTH_TOKEN"] == "provider-secret"
+    assert not {"ANTHROPIC_API_KEY", "CLAUDE_CODE_OAUTH_TOKEN"} & set(seen)
+    assert seen["ANTHROPIC_AUTH_TOKEN"] == "provider-secret"
     assert resp.meta["cost_usd_reported"] is None  # Claude Code's estimate uses Anthropic prices
     settings, _ = model_settings(spec, tmp_path)
     assert settings["endpoint"] == "api.provider.test" and "secret" not in json.dumps(settings)
+    # Without its own key, Claude Code would fall back to the stored login for the other endpoint.
+    seen.clear()
+    del spec.options["env"]["ANTHROPIC_AUTH_TOKEN"]
+    with pytest.raises(BackendError, match="ANTHROPIC_AUTH_TOKEN or ANTHROPIC_API_KEY"):
+        ClaudeBackend(spec).run(Request("hello"))
+    assert not seen
 
 
 def pi_backend(monkeypatch, model="provider/vision-model", **options) -> PiBackend:
@@ -219,6 +227,16 @@ def test_pi_rpc_sends_neutral_images_confirms_settings_and_records_usage(tmp_pat
     assert resp.meta["resolved_model"] == "provider/vision-model" and resp.meta["tools_used"] == []
     assert resp.meta["tokens"] == {"input": 60, "cached_input": 20, "cache_write": 30, "output": 5, "reasoning": 2}
     assert resp.meta["cost_usd_reported"] == 0.25
+
+
+def test_pi_timeout_kills_the_cli_under_its_launcher(monkeypatch):
+    # npm starts pi through a launcher on Windows; killing only the launcher leaves the pipes open.
+    launcher = "import subprocess, sys; subprocess.run([sys.executable, '-c', 'import time; time.sleep(20)'])"
+    monkeypatch.setattr(PiBackend, "command", lambda self: [sys.executable, "-c", launcher])
+    started = time.monotonic()
+    with pytest.raises(BackendError, match="timed out"):
+        PiBackend(ModelSpec("m", "pi", "v", "p/m", frozenset({"text"}), {"timeout": 1})).run(Request("hello"))
+    assert time.monotonic() - started < 10
 
 
 def test_pi_rejects_fallback_models_clamped_thinking_dropped_images_and_errors(tmp_path, monkeypatch):

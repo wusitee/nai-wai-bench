@@ -6,6 +6,7 @@ import base64
 import json
 import os
 import queue
+import signal
 import subprocess
 import tempfile
 import threading
@@ -26,6 +27,18 @@ def _client() -> str | None:
     return f"pi {version}" if version else None
 
 
+def _kill_tree(proc: subprocess.Popen) -> None:
+    """Kill pi with its children: on Windows pi runs under an npm `.cmd` launcher, and the node process it
+    starts keeps the pipes open when only the launcher is killed."""
+    if os.name == "nt":
+        subprocess.run(["taskkill", "/F", "/T", "/PID", str(proc.pid)], capture_output=True)
+        return
+    try:
+        os.killpg(proc.pid, signal.SIGKILL)
+    except ProcessLookupError:
+        pass  # already exited
+
+
 def _total(values) -> float | None:
     values = list(values)
     return sum(values) if values and all(isinstance(v, (int, float)) for v in values) else None
@@ -39,10 +52,11 @@ class PiBackend:
 
     def command(self) -> list[str]:
         # --no-extensions also disables pi's built-in MCP support, so no MCP servers are started.
+        # An empty --append-system-prompt keeps pi from appending a global APPEND_SYSTEM.md.
         cmd = [
             "pi", "--mode", "rpc", "--no-session", "--offline", "--no-tools", "--no-extensions", "--no-skills",
             "--no-prompt-templates", "--no-themes", "--no-context-files", "--system-prompt", SYSTEM_PROMPT,
-            "--model", self.spec.model,
+            "--append-system-prompt", "", "--model", self.spec.model,
         ]
         if self.effort != "default":
             cmd += ["--thinking", self.effort]
@@ -92,7 +106,7 @@ class PiBackend:
         until the agent finishes."""
         proc = subprocess.Popen(cli_command(self.command()), stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                 stderr=stderr, cwd=cwd, env={**os.environ, **extra_env(self.spec)}, text=True,
-                                encoding="utf-8")
+                                encoding="utf-8", start_new_session=True)
         lines = queue.Queue()
 
         def read():
@@ -107,7 +121,7 @@ class PiBackend:
         expired = threading.Event()
         # The watchdog bounds writes as well as waits: a large prompt (base64 images) blocks on a full pipe if
         # pi stops reading, and killing pi unblocks it.
-        watchdog = threading.Timer(self.timeout, lambda: (expired.set(), proc.kill()))
+        watchdog = threading.Timer(self.timeout, lambda: (expired.set(), _kill_tree(proc)))
         watchdog.start()
 
         def send(command: dict) -> None:
@@ -152,7 +166,7 @@ class PiBackend:
             try:
                 proc.wait(10)
             except subprocess.TimeoutExpired:
-                proc.kill()
+                _kill_tree(proc)
 
     def _check(self, state: dict, has_images: bool) -> None:
         """pi falls back to another model and clamps unsupported thinking levels without failing."""
