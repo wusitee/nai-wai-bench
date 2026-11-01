@@ -56,6 +56,7 @@ def inputs(tmp_path):
 def test_release_builds_both_suites_offline_and_bundles_keep_their_pinned_identity(inputs, monkeypatch):
     root, manifest, suites, _ = inputs
     out = root / "site"
+    (root / "models.local.toml").write_text('[defaults]\njudges = ["gpt-6.1-sol"]\nimage_judges = ["gpt-6.1-sol"]\n')
     monkeypatch.setattr(cli, "find_root", lambda: root)
     monkeypatch.setattr("nwb.site.shutil.which", lambda _: None)
 
@@ -186,11 +187,17 @@ def test_cli_automatically_saves_benchmark_results(inputs, monkeypatch, command)
     from types import SimpleNamespace
     backend = SimpleNamespace(run=respond)
     monkeypatch.setattr("nwb.tracks.get_backend", lambda _: backend)
-    monkeypatch.setattr("nwb.judge.get_backend", lambda _: backend)
+    requested_judges = []
+
+    def judge_backend(model):
+        requested_judges.append(model.name)
+        return backend
+
+    monkeypatch.setattr("nwb.judge.get_backend", judge_backend)
     if command == "imagegen":
         args = ["imagegen", "--models", "chatgpt-image", "--tiers", "name_zh", "--animals", "cat"]
     elif command == "judge":
-        args = ["judge", "--judges", "opus-5.5", "--track", "understanding", "--force"]
+        args = ["judge", "--track", "understanding", "--force"]
     elif command == "report":
         args = ["report", "--judges", "opus-5.5"]
     else:
@@ -198,15 +205,57 @@ def test_cli_automatically_saves_benchmark_results(inputs, monkeypatch, command)
         if command == "no-sync":
             args.append("--no-sync")
     assert cli.main([*args, "--run", "core"]) == (1 if command == "failed" else 0)
+    if command == "judge":
+        assert set(requested_judges) == {"opus-5.5"}
     snapshot = root / "results/core/core"
     if command == "no-sync":
         assert not snapshot.exists()
     else:
         meta = read_json(snapshot / results.METADATA)
         assert meta["input_sha256"] == bundle.input_digest(root / "runs/core", bench)
+        assert read_json(snapshot / "scores.json")["judges"] == ["opus-5.5"]
         if command == "failed":
             failures = [read_json(p) for p in (snapshot / "understanding").rglob("*.json")]
             assert sum("error" in r for r in failures) == 2
+
+
+@pytest.mark.parametrize("command", ["report", "site", "sync", "export"])
+def test_cli_scores_only_configured_or_explicit_judges(inputs, monkeypatch, command):
+    root, _, _, _ = inputs
+    run = root / "runs/core"
+    monkeypatch.chdir(root)
+    monkeypatch.setattr("nwb.site.shutil.which", lambda _: None)
+    (root / "models.local.toml").write_text('[defaults]\njudges = ["opus-5.5"]\nimage_judges = ["opus-5.5"]\n')
+    verdicts = {p: p.read_bytes() for p in (run / "judgments").rglob("*.json")}
+    site_scores = []
+    build = cli.site.build
+
+    def capture_site_scores(bench, models, run_dir, scores, out, **kwargs):
+        site_scores.append(scores)
+        return build(bench, models, run_dir, scores, out, **kwargs)
+
+    monkeypatch.setattr(cli.site, "build", capture_site_scores)
+
+    for selection, expected_judges, expected_score in [
+        (None, ["opus-5.5"], 100), ("gpt-6.1-sol", ["gpt-6.1-sol"], 0), ("", [], None),
+    ]:
+        args = [command, "--run", "core"]
+        if selection is not None:
+            args += ["--judges", selection]
+        if command in ("site", "export"):
+            args += ["--out", str(root / "output")]
+        assert cli.main(args) == 0
+        if command == "export":
+            with zipfile.ZipFile(next((root / "output").glob("*.zip"))) as archive:
+                scores = json.loads(archive.read("scores.json"))
+        elif command == "site":
+            scores = site_scores[-1]
+        else:
+            path = run if command == "report" else root / "results/core/core"
+            scores = read_json(path / "scores.json")
+        assert scores["judges"] == expected_judges
+        assert scores["understanding"]["gpt-6.1-sol"]["vision"] == expected_score
+        assert all(p.read_bytes() == data for p, data in verdicts.items())
 
 
 @pytest.mark.parametrize("damage", ["content", "path"])
