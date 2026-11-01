@@ -153,8 +153,9 @@ observations, not rows of the 0.1.0 comparison:
 | `fable-5.1-max` | `max` | `opus-5.5`, `gpt-6.1-sol` |
 
 These judge sets are smaller than the default ensemble. Saved scores leave out a judge from the subject's
-own vendor when another judge exists, so the saved scores of the two Fable runs count only `gpt-6.1-sol`;
-`nwb report --judges opus-5.5 --no-sync` shows their Opus scores. The retained high-effort `gpt-6.1-sol` and `gpt-6-astra` rows
+own vendor when another judge exists, so the saved scores of the two Fable runs count only `gpt-6.1-sol`.
+`uv run nwb report --run fable-5.1-core --judges opus-5.5 --no-sync` shows the Opus scores of the `high`
+run; use `--run fable-5.1-max` for the `max` run. The retained high-effort `gpt-6.1-sol` and `gpt-6-astra` rows
 use `legacy-v1`. Score differences from the release rows therefore mix effort with judge and
 collection-profile changes; a controlled effort comparison needs matching profiles and judges.
 
