@@ -27,9 +27,9 @@ Only complete fixed panels receive provisional ranks. Partial runs remain visibl
 Small score differences are not evidence of a reliable ordering. An optional, unscored suite also tests
 whether generators can transfer other 奶蛙 expressions (angry, facepalm, smug) to other animals.
 
-Judges from several vendors score every sample; a model is never scored by its own vendor's judges when
-an independent judge is available. Collecting results needs no judge access:
-[contributors](docs/contributing-results.md) can share results for judging elsewhere.
+Claude Opus 5.5 judges free-form answers and generated images by default; answer-keyed tasks are scored
+locally. Reports use the configured judge pool unless `--judges` selects another. Collecting results needs
+no judge access: [contributors](docs/contributing-results.md) can share results for judging elsewhere.
 
 ## Getting started
 
@@ -49,7 +49,7 @@ uv run nwb understand --models opus-5.5,gpt-6.1-sol,deepseek-v4-pro,mimo-v2.6-pr
 # Image generation: six animals × five tiers = 30 images per model
 uv run nwb imagegen --models chatgpt-image --animals default
 
-uv run nwb judge                                  # default judges from models.toml
+uv run nwb judge                                  # default judges from models.toml (needs Claude Code)
 uv run nwb report                                 # writes runs/main/report.html
 uv run nwb site                                   # writes site/index.html
 ```
@@ -88,6 +88,8 @@ not significance claims or subscription bills. See the [methodology](docs/method
   including pi and other providers through Claude Code
 - [Contributing results](docs/contributing-results.md): collecting and sharing results without judge access,
   and judging shared results
+- [Episode videos](docs/video.md): format, data rules, build pipeline, and publishing for the Bilibili
+  result videos
 - [Sources](bench/reference/SOURCE.md): where the reference image, stickers, and facts come from
 
 The reference image and stickers are included for non-commercial research use only.

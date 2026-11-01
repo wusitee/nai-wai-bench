@@ -14,12 +14,8 @@
 # subscription CLIs are not billed per token. Update `as_of` whenever a price is re-checked.
 
 [defaults]
-judges = ["opus-5.5", "gpt-6.1-sol", "gemini-3.8-flash", "deepseek-v4-pro"]
-# Image judging needs vision. Gemini 3.8 Flash rated every image trait "partial" in testing, whatever the
-# image showed, so it judges only the understanding track by default. Kimi K3.1 Pro gives every image
-# model at least two independent judges; on the v1 images it agreed with Opus and GPT more closely than
-# DeepSeek-V4.1-Flash did (rank correlation 0.89 and 0.92).
-image_judges = ["opus-5.5", "gpt-6.1-sol", "kimi-k3.1-pro"]
+judges = ["opus-5.5"]
+image_judges = ["opus-5.5"]
 
 # --- OpenAI via Codex CLI (ChatGPT login) ---
 

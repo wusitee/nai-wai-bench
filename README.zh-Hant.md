@@ -23,7 +23,8 @@
 幾分的差距不足以證明排序可靠。另有一個不計分的可選題組，測試圖像模型能否把奶蛙的其他表情
 （憤怒、扶額、得意）遷移到別的動物身上。
 
-每個樣本都由多家廠商的評審模型評分；只要有其他廠商的評審可用，模型就不會由同廠商的評審評分。
+預設由 Claude Opus 5.5 評審自由作答和生成圖片；按答案鍵計分的題目在本地計分。報告只統計已設定的評審，
+除非用 `--judges` 另行指定。
 
 ## 快速開始
 
@@ -45,7 +46,7 @@ uv run nwb understand --models opus-5.5,gpt-6.1-sol,deepseek-v4-pro,mimo-v2.6-pr
 # 圖像生成：6 種動物 × 5 檔 = 每個模型 30 張圖
 uv run nwb imagegen --models chatgpt-image --animals default
 
-uv run nwb judge                                  # 使用 models.toml 中的預設評審
+uv run nwb judge                                  # 使用 models.toml 中的預設評審（需要 Claude Code）
 uv run nwb report                                 # 產生 runs/main/report.html
 uv run nwb site                                   # 寫入 site/index.html
 ```

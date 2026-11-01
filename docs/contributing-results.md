@@ -2,8 +2,8 @@
 
 Collecting answers and images needs only the models under test. LLM judges score free-form answers and
 generated images; answer-keyed tasks are scored locally. Contributors without access to the configured
-judges (`[defaults]` in `models.toml`) can collect and share results, and someone with the judges scores
-them later from the shared files.
+judges (by default Claude Opus 5.5 through Claude Code, `[defaults]` in `models.toml`) can collect and
+share results, and someone with the judges scores them later from the shared files.
 
 ## What needs a judge
 
@@ -11,9 +11,9 @@ them later from the shared files.
 |---|---|---|
 | Nai-hub v1 visual ranking (`--suite naihub-v1`) | Local answer keys | None |
 | Core grounding probes, no-image controls, state extraction | Local answer keys | None |
-| Core visual ranking (recognition items and grounding probes) | Vision judges for recognition, keys for grounding | Recognition items |
-| Text diagnostics (lore, description, prompt writing) | Text judges with reference notes | Every item |
-| Image-generation ranking | Vision judges | Every image |
+| Core visual ranking (recognition items and grounding probes) | Vision judge for recognition, keys for grounding | Recognition items |
+| Text diagnostics (lore, description, prompt writing) | Text judge with reference notes | Every item |
+| Image-generation ranking | Vision judge | Every image |
 | Optional state-transfer images | Unscored | None |
 
 Without judgments, `nwb report` shows the locally scored results. A row whose remaining panel cells and
@@ -41,8 +41,9 @@ Do not run `nwb judge`; it calls the configured judges. Each command saves a por
 `results/<suite>/<run>/`. Commit that directory and open a pull request, or send the archive written by
 `uv run nwb export --suite <suite> --run <run>`.
 
-Do not judge a shared run with other models: reports count every recorded judge unless `--judges`
-restricts them, so other judges change the run's scores. Judge a separate local run instead.
+You can judge with models you do have (`nwb judge --judges NAME`). The saved snapshot and later reports
+and exports still count only the configured judge pool, so these judgments do not change shared scores;
+view them with `nwb report --judges NAME --no-sync`, which leaves the snapshot unchanged. They are retained in the shared results.
 
 ## Judging shared results
 

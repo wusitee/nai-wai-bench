@@ -15,7 +15,7 @@ gpt_6_1_sol_judge_profiles = ["legacy-v1", "isolated-v1"]
 [suites.core]
 run = "rel-0.1-with-gpt-5.6-sol"
 sha256 = "fe97af0a88871800e87962cf1bda0e7390c3ca169bcc0f7d51bf77b90a649c50"
-judges = ["opus-5.5", "gpt-6.1-sol", "gemini-3.8-flash", "deepseek-v4-pro", "kimi-k3.1-pro"]
+judges = ["opus-5.5"]
 
 [suites.naihub-v1]
 run = "rel-0.1-naihub-with-gpt-5.6-sol"

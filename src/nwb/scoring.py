@@ -15,6 +15,8 @@ from nwb.util import extract_json, read_json
 HALLUCINATION_PENALTY = 10
 NAME_TIERS = ("name_zh", "name_en")
 CEILING_TIER = "described_detailed"  # the knowledge ratio's denominator: the best-specified prompt
+# Judges counted in scores: None for every recorded judge, one set for both tracks, or a set per track.
+JudgeSelection = set[str] | dict[str, set[str]] | None
 
 
 def understanding_score(judgment: dict) -> float:
@@ -84,13 +86,14 @@ def judgment_prompt(bench: Bench, rec: dict) -> str | None:
     return None
 
 
-def _load_judgments(run_dir: Path, judges: set[str] | None, bench: Bench | None = None,
+def _load_judgments(run_dir: Path, judges: JudgeSelection, bench: Bench | None = None,
                     stale: dict | None = None) -> dict[str, list[dict]]:
     """Check sample identity and the current judge request, without constructing a backend."""
     by_target = defaultdict(list)
     for path in sorted((run_dir / "judgments").rglob("*.json")):
         j = read_json(path)
-        if "error" in j or (judges is not None and j["judge"] not in judges):
+        allowed = judges.get(j["target"].split("/", 1)[0], set()) if isinstance(judges, dict) else judges
+        if "error" in j or (allowed is not None and j["judge"] not in allowed):
             continue
         target = run_dir / j["target"]
         reason = None
@@ -140,7 +143,7 @@ def _profile_groups(records, identifier: str) -> dict[str, list[str]]:
     return {name: sorted(profiles) for name, profiles in sorted(groups.items())}
 
 
-def aggregate(run_dir: Path, trait_weights: dict[str, float], judges: set[str] | None = None,
+def aggregate(run_dir: Path, trait_weights: dict[str, float], judges: JudgeSelection = None,
               expected: dict[str, str] | None = None, bench: Bench | None = None) -> dict:
     """Score a run. `expected` (Bench.expected_prompts) restricts it to samples made with the current
     prompts, leaving out removed items and tiers and samples whose prompt has since changed."""
