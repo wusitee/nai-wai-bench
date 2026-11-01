@@ -57,11 +57,13 @@ uv run nwb report --run alice-core
 Commit the updated results directory. Restoring never overwrites a working run: after a contributor
 updates shared results, remove the old `runs/<run>/` before judging again.
 
-To compare a contributed model with other runs, combine them into a fresh run without model calls, then
-judge and report that run; the [release workflow](releases.md) describes the merge rules.
+To compare a contributed model with other runs, judge it in its own run first, then combine the runs
+without model calls and report the merged run. Judging after merging can fail when retained judgments
+have different settings identities; the [release workflow](releases.md) describes the merge rules.
 
 ```sh
 uv run nwb merge --suite core --run comparison --from main,alice-core
+uv run nwb report --suite core --run comparison
 ```
 
 Rows still need matching collection conditions to be compared; see the [methodology](methodology.md).
