@@ -55,16 +55,17 @@
 | 每個受測模型的工作量 | 一次重複所需的呼叫 |
 |---|---:|
 | 生成題組 | 30 次圖像生成請求 |
-| 用兩個已設定的評審評審生成圖 | 60 次視覺評審請求 |
+| 用預設的 Opus 評審評審生成圖 | 30 次視覺評審請求 |
 | 視覺理解 | 13 次回答請求 |
 | 文字／語言診斷 | 8 次回答請求 |
 | 無圖對照 | 4 次回答請求 |
-| 用兩個具備視覺能力的評審評審全部自由作答的理解題 | 34 次評審請求 |
+| 用預設的 Opus 評審評審全部自由作答的理解題 | 17 次評審請求 |
 | 評審視覺核對題及其對照 | 0 |
 
-設定兩個評審並不保證得到兩份獨立評審：如果受測模型與其中一個評審同屬一家廠商，就只有另一個評審的分數計入。
-所有受測模型應使用同一組已設定的評審，並記錄下來。要讓每個受測模型都有兩家獨立廠商的評審，可能需要三家廠商
-的評審。評審健康度是用來診斷分歧的，既不能證明評估器正確，也不能僅因為某個評審改變了排序就把它剔除。應在
+兩部分的預設評審都只有 Claude Opus 5.5，Anthropic 的受測模型也由它評審。所有受測模型應使用同一組已設定的
+評審，並記錄下來。明確選擇多個評審時，優先計入其他廠商的評審；只有沒有獨立評審時，才計入同廠商的評審。
+report、site、export 和結果快照按已設定的評審計分，除非用 `--judges` 另行指定；`nwb judge --judges` 只決定
+呼叫哪些評審。已發布的比較沿用發布清單中固定的評審選擇。評審健康度是用來診斷分歧的，既不能證明評估器正確，也不能僅因為某個評審改變了排序就把它剔除。應在
 比較受測模型的分數之前，用固定的校準樣例決定排除哪些評審。
 
 ```sh
@@ -75,7 +76,7 @@ uv run nwb report --run pilot
 # 完整、可比較的題組；understand 也會收集文字診斷和無圖對照。
 uv run nwb understand --run comparison --models VISION_MODEL
 uv run nwb imagegen --run comparison --models IMAGE_MODEL --animals default
-uv run nwb judge --run comparison --judges VISION_JUDGE_A,VISION_JUDGE_B
+uv run nwb judge --run comparison
 uv run nwb report --run comparison
 uv run nwb site --run comparison
 ```

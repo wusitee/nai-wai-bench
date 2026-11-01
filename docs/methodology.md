@@ -71,17 +71,19 @@ than many cat repetitions. Run counts below exclude failures and the judge's sin
 | Work per subject model | Calls at one repetition |
 |---|---:|
 | Generation panel | 30 image-generation requests |
-| Generation judging with two configured judges | 60 vision-judge requests |
+| Generation judging with the default Opus judge | 30 vision-judge requests |
 | Visual understanding | 13 answer requests |
 | Text/language diagnostics | 8 answer requests |
 | No-image controls | 4 answer requests |
-| Judging all free-form understanding answers with two vision-capable judges | 34 judge requests |
+| Judging all free-form understanding answers with the default Opus judge | 17 judge requests |
 | Judging grounding answers and controls | 0 |
 
-Two configured judges do not guarantee two independent judgments: when the subject shares a vendor
-with one, only the other contributes. Use the same configured pool across subjects and record it.
-To get two independent vendors for every subject may require three judge vendors; the default image
-judges therefore come from three vendors (see `[defaults]` in `models.toml`). Judge health is a
+Claude Opus 5.5 is the sole default judge for both tracks, including Anthropic subjects. Use the same
+configured pool across subjects and record it. When multiple judges are explicitly selected, other-vendor
+judgments take precedence; same-vendor judgments contribute only when no independent judge is available.
+Report, site, export, and snapshot scoring use the configured pools unless `--judges` overrides them;
+`nwb judge --judges` only chooses which judges to call.
+Published comparisons retain their manifest's pinned judge selection. Judge health is a
 disagreement diagnostic, not proof of evaluator correctness or a reason to remove a judge merely
 because it changes the ordering. Choose judge exclusions using fixed calibration cases before comparing
 subject scores.
@@ -94,7 +96,7 @@ uv run nwb report --run pilot
 # Full comparable panels; understand also collects text diagnostics and blind controls.
 uv run nwb understand --run comparison --models VISION_MODEL
 uv run nwb imagegen --run comparison --models IMAGE_MODEL --animals default
-uv run nwb judge --run comparison --judges VISION_JUDGE_A,VISION_JUDGE_B
+uv run nwb judge --run comparison
 uv run nwb report --run comparison
 uv run nwb site --run comparison
 ```

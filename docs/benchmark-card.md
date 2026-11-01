@@ -33,10 +33,12 @@ judges, collection dates/revisions, missing telemetry, and separate judge resour
 The selected 0.1.0 comparison includes both `legacy-v1` and `isolated-v1` Codex collection profiles,
 as [documented in the release workflow](releases.md#selected-comparison). The original baseline left
 shell, image-viewing, and agent features available; the isolated collection disabled them. Historical
-Codex judge configurations also differ. Row labels and collection metadata expose these profiles.
+Codex judge configurations also differ in the retained raw data. The selected comparison uses only
+Opus 5.5 judgments, including self-judgments; other judges' verdicts remain available for re-scoring.
+Row labels and collection metadata expose the selected profiles.
 Within-row homogeneity does not make the whole comparison uniform: the observed ranks may include effects
 of both the model and its collector configuration. Use matching profiles and judge conditions for
-controlled model comparisons. Original observations and numeric scores are preserved.
+controlled model comparisons. Original observations and raw judgment scores are preserved.
 
 Paired cluster-bootstrap intervals resample source images or animals with observed within-cell repetition
 means and fixed judges. They are sensitivity estimates, not significance tests, population claims, or

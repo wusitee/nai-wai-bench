@@ -202,24 +202,29 @@ uv run nwb site --run states
 Any configured model with `text` can judge text answers; judging recognition answers and generated images
 needs `vision`. Recognition judges receive the actual stimulus as well as the reference notes. Legacy
 recognition judgments made without the image do not count and must be regenerated. Grounding checks and
-their blind controls need no judge calls. Default judges are listed
-under `[defaults].judges` (part 1) and `[defaults].image_judges` (part 2) in `models.toml`. Judges answer in
-JSON; replies that fail validation are retried once and then recorded as errors.
+their blind controls need no judge calls. Claude Opus 5.5 is the sole default judge for both tracks,
+configured under `[defaults].judges` (part 1) and `[defaults].image_judges` (part 2) in `models.toml`.
+Reports, sites, exports, and saved snapshots count only the configured judge pools, each for its own track,
+unless `--judges` selects another set for both; `nwb judge --judges` only chooses which judges to call.
+Other retained judgments remain available for explicit re-scoring. Release builds
+use their manifest's pinned judge selection. Judges answer in JSON; replies that fail validation are
+retried once and then recorded as errors.
 
 Image judges describe what they see for each trait, then rate it with a word (`absent`, `partial`,
 `match`; identity `no`, `partly`, `clearly`) that maps to 0–2.
 
 Each sample's score is the mean over judges, excluding judges from the subject's own vendor when at least one
 independent judge exists (self-judging was visibly lenient in testing). A failure mode counts when at least
-half of the judges flag it. Each judgment is tied to the version of the sample it scored and to the exact
+half of the judges flag it. With the sole Opus default, Anthropic subjects also use Opus judgments.
+Each judgment is tied to the version of the sample it scored and to the exact
 judge prompt: `nwb judge` redoes it when either changes, and `nwb report` ignores judgments when target content or the grading prompt has changed. The report also counts only samples made with the current prompts, so samples of
 removed or reworded items and tiers drop out until they are regenerated.
 
 The report's **judge health** table shows, per judge and track, the spread of its scores across samples and
 its mean distance from the other judges on the same samples. A near-zero spread means the judge is not
 discriminating; a large distance means it disagrees with the panel. Either is a reason to leave the judge
-out: `nwb report --judges` counts only the listed judges. Gemini 3.8 Flash (via Antigravity) is excluded from the default image judges for
-this reason: it rated every trait of every image `partial`, even when its own notes described a match.
+out: `nwb report --judges` counts only the listed judges. Choose judge pools using fixed calibration
+cases before comparing subject scores.
 
 ## Results site (`nwb site`)
 

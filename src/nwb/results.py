@@ -5,7 +5,7 @@ import json
 import shutil
 from pathlib import Path, PurePosixPath
 
-from nwb import __version__, bundle
+from nwb import __version__, bundle, scoring
 from nwb.config import Bench, SUITES, validate_run_suite
 from nwb.util import read_json, write_bytes, write_json
 
@@ -40,7 +40,13 @@ def _metadata(snapshot: Path, suite: str, run: str) -> dict:
     return meta
 
 
-def sync(root: Path, bench: Bench, run_dir: Path, *, judges: set[str] | None = None,
+def _selection(judges: scoring.JudgeSelection) -> list[str] | dict[str, list[str]] | None:
+    if isinstance(judges, dict):
+        return {track: sorted(names) for track, names in sorted(judges.items())}
+    return sorted(judges) if judges is not None else None
+
+
+def sync(root: Path, bench: Bench, run_dir: Path, *, judges: scoring.JudgeSelection = None,
          scores: dict | None = None) -> Path:
     snapshot = directory(root, bench.suite, run_dir)
     validate_run_suite(run_dir, bench.suite)
@@ -53,7 +59,7 @@ def sync(root: Path, bench: Bench, run_dir: Path, *, judges: set[str] | None = N
     for name in previous["files"].keys() - prepared.files.keys():
         _file(snapshot, name).unlink(missing_ok=True)
     meta = {"format": 1, "nwb_version": __version__, "suite": bench.suite, "run": run_dir.name,
-            "input_sha256": prepared.input_sha256, "judges": sorted(judges) if judges is not None else None,
+            "input_sha256": prepared.input_sha256, "judges": _selection(judges),
             "files": {name: hashlib.sha256(data).hexdigest() for name, data in sorted(prepared.files.items())}}
     if not (snapshot / METADATA).is_file() or read_json(snapshot / METADATA) != meta:
         write_json(snapshot / METADATA, meta)

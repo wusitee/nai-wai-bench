@@ -11,7 +11,7 @@ and the high/xhigh GPT-5.6-Sol configurations:
 
 | Suite | Raw run | Judge policy |
 |---|---|---|
-| `core` | `rel-0.1-with-gpt-5.6-sol` | Only the recorded judge names listed in the manifest; vendor exclusion still applies per sample |
+| `core` | `rel-0.1-with-gpt-5.6-sol` | Opus 5.5 only, including its judgments of Opus and other Anthropic subjects |
 | `naihub-v1` | `rel-0.1-naihub-with-gpt-5.6-sol` | Local answer-key scoring, without judges |
 
 This historical comparison mixes two recorded Codex collection profiles:
@@ -25,10 +25,11 @@ Both disable web/browser access. The isolated profile additionally disables shel
 plugins, skill search, goals, sleeping, image-viewing tools, and interactive mode features. The complete
 feature list and versioned `tool_profile` option are in [backend documentation](backends.md#codex-tool-profiles).
 The maintained backend recreates both recorded command configurations. Historical `gpt-6.1-sol`
-judgments also include both profiles; reports expose recorded subject and judge profiles and label
+judgments, retained for alternative re-scoring, also include both profiles; reports expose recorded subject and judge profiles and label
 each ranked row. These remain provisional observed rankings across different model and collector
 configurations. The collection-profile effect is confounded with the model: use matching profiles
-and judge conditions for controlled comparisons. The original observations and numeric scores are retained.
+and judge conditions for controlled comparisons. All original observations and judges' raw verdicts are
+retained. Derived scores use only Opus 5.5; Naihub-v1 continues to use its local answer keys.
 
 The manifest records the software version, collection-source artifact identity, run names, normalized
 SHA-256 input digests, and explicit judge selections. Collection source identity describes the retained
@@ -62,11 +63,17 @@ not just its most recent model. An unchanged file is left untouched; obsolete ge
 removed only when they were listed in the previous snapshot. Generated HTML, unrelated logs, local
 configuration, and temporary files are excluded.
 
+Scoring for reports, sites, exports, snapshots, and merges uses the configured judge pools (Opus 5.5 only
+by default), each for its own track. `--judges` selects a different recorded pool for both tracks without
+requesting new judgments; on `nwb judge` it only chooses which judges to call. Raw verdicts
+from other judges remain in snapshots and bundles. Release builds use the explicit judge selection in
+their manifest, independently of these defaults.
+
 Use `--no-sync` on collection or reporting commands for local experiments. To save an existing run
 explicitly, with an optional recorded judge selection:
 
 ```sh
-uv run nwb sync --suite core --run RUN --judges opus-5.5,gpt-6.1-sol
+uv run nwb sync --suite core --run RUN --judges opus-5.5
 ```
 
 Saving writes files under `results/`; include them with the corresponding source/configuration
@@ -151,8 +158,10 @@ observations, not rows of the 0.1.0 comparison:
 | `opus-5.5-max`, `sonnet-5.5-max`, `haiku-5.5-max` | `max` | `gpt-6.1-sol` |
 | `fable-5.1-core` | `high` | none |
 
-These judge sets are smaller than the default ensemble, and `fable-5.1-core` is unjudged, so its scores
-cover only the key-scored grounding items. The retained high-effort `gpt-6.1-sol` and `gpt-6-astra` rows
+Their saved scores count every recorded judge, and `fable-5.1-core` is unjudged, so its scores cover
+only the key-scored grounding items. Re-scoring with the default Opus-only pool leaves the Claude `max`
+runs at `awaiting judges` until Opus judges them; pass their recorded judges with `--judges` to reproduce
+the saved scores. The retained high-effort `gpt-6.1-sol` and `gpt-6-astra` rows
 use `legacy-v1`. Score differences from the release rows therefore mix effort with judge and
 collection-profile changes; a controlled effort comparison needs matching profiles and judges.
 
