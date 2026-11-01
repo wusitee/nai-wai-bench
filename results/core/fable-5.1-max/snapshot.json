@@ -4,9 +4,11 @@
   "suite": "core",
   "run": "fable-5.1-max",
   "input_sha256": "41cb0237b4f4fcede26dbc83a6c5f475fd94e4b95869877fa3c43b0c265fce54",
-  "judges": null,
+  "judges": [
+    "opus-5.5"
+  ],
   "files": {
-    "BUNDLE-README.md": "4485b2a922fc77ea43f87545ae8e6dceef5bdd28a5d065a885e294b9e178c656",
+    "BUNDLE-README.md": "4e1deba1c0c54fa4c66991dcb40695e10c6b5c3d66ffaa9912dc74efa7f737ee",
     "collection.jsonl": "1dc95c0014418b702043584784d9c90bee2e220a566a69fdaa6debbc67ebfee5",
     "judgments/gpt-6.1-sol/understanding/fable-5.1-max/describe__r1.json": "0f6127d4c3c24bc8f0ba5b8317718878c54ca7be1b93225266c651c94115dc50",
     "judgments/gpt-6.1-sol/understanding/fable-5.1-max/describe_en__r1.json": "57a9d855e224d81026162b4c73adf637b96124389fd29d32979d346307e9a20e",
@@ -42,7 +44,7 @@
     "judgments/opus-5.5/understanding/fable-5.1-max/write_prompt.giraffe__r1.json": "624599a8357b643518f8148627c289052c5beb2ff68847b144da9d10cdf21ab8",
     "judgments/opus-5.5/understanding/fable-5.1-max/write_prompt_zh.cat__r1.json": "6240c710926bd1b691cc3958535fe0a3f12ae52fbd8da37528f84341b7d2f1e0",
     "judgments/opus-5.5/understanding/fable-5.1-max/write_prompt_zh.giraffe__r1.json": "25a3bd619dafd734a5daef18ffeb10e4e1622dc89fa05a1fce379bf1289d2139",
-    "scores.json": "396910216d211a4b96626370d78d48c37fb563b9a7dc5ae6c7bb4bb38630fab7",
+    "scores.json": "3fb5ef617c880996e30ebd69c5c9513430dbbba080f6e75d3b57ae70f6d1c518",
     "understanding/fable-5.1-max/describe__r1.json": "d146a26c7a079ccf5a640b956922ae006e3c130deb73c73653d85e522022bfab",
     "understanding/fable-5.1-max/describe_en__r1.json": "9a52b73140a3f2f2f5fb6451f32069f63c198e18e812db8bdccd6aebbbcfe87b",
     "understanding/fable-5.1-max/grounding.facepalm.blind__r1.json": "d7a68710638ca108be2767793a95e9842951643723eeff386c1d498494cce01a",
