@@ -77,7 +77,7 @@ code,.mono{font:12px var(--mono)}
 .tabs a{padding:3px 0;border-bottom:2px solid transparent;text-decoration:none;color:var(--muted);font-size:13px;
 font-weight:800;letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap}
 .tabs a:hover{color:var(--fg)}.tabs a[aria-current]{color:var(--yellow);border-color:var(--yellow)}
-.sections{display:flex;gap:16px;overflow-x:auto;flex:1;justify-content:flex-end}
+.sections{display:flex;gap:16px;overflow-x:auto;flex:1}.sections a:first-child{margin-left:auto}
 .sections a{font:10.5px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);text-decoration:none;white-space:nowrap}
 .sections a:hover{color:var(--fg)}
 main{max-width:1180px;margin:auto;padding:40px 20px 72px}
@@ -170,7 +170,7 @@ footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--line);color:v
 @keyframes pulse{50%{opacity:.4}}@keyframes grow{from{transform:scaleX(0)}}
 @media(prefers-reduced-motion:reduce){*,:before,:after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 @media(max-width:760px){.meter{min-width:90px}.hero{grid-template-columns:1fr}.hero>img{width:120px}.mosaic{grid-template-columns:repeat(6,1fr)}
-.state{grid-template-columns:1fr}.state figure img{max-width:200px}h1{font-size:32px}.sections{justify-content:flex-start}}
+.state{grid-template-columns:1fr}.state figure img{max-width:200px}h1{font-size:32px}.sections a:first-child{margin-left:0}}
 """
 
 

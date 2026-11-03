@@ -16,7 +16,7 @@ th:first-child,td:first-child{text-align:left}th{background:#f6f8fa}
 .gallery td{text-align:center;width:180px}.gallery img{width:170px;border-radius:6px;display:block;margin:auto}
 .muted{color:#656d76;font-size:12px}.bad{color:#cf222e}.ans{white-space:pre-wrap;text-align:left;font-size:13px}
 details{margin:.4rem 0}summary{cursor:pointer;font-weight:600}
-.scroll{overflow-x:auto}.efficiency-chart{max-width:960px}
+.scroll{overflow-x:auto}.efficiency-chart{min-width:640px;max-width:960px}
 @media (prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}th{background:#161b22}
 th,td{border-color:#30363d}.muted{color:#8d96a0}}
 """
