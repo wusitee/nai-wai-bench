@@ -228,7 +228,7 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--bundle-url", help="download URL for the raw results zip")
     sp.add_argument("--repo-url", help="link to the source repository in the footer")
     sp.add_argument("--suite-tabs", action="store_true",
-                    help="link every suite's page, assuming core at the site root and others in <suite>/")
+                    help="link every page of the published release layout (index at the root, meme-id/, visual-detail/)")
     sp = with_run(sub.add_parser("export", help="export a portable raw results bundle"), jobs=False)
     sp.add_argument("--out", help="output directory (default: run directory)")
     sp.add_argument("--judges", help="comma-separated judges to count (default: configured judge pools)")
