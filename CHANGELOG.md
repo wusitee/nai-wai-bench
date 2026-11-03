@@ -5,6 +5,11 @@ Software releases use semantic versions; suite ids version the evaluation panels
 
 ## Unreleased
 
+- Present the `core` and `naihub-v1` visual rankings as 识梗 Meme ID and 看图 Visual detail, and combine them
+  in the versioned 奶蛙指数 · NaiWai Index (Meme ID 1/3, Visual detail 2/3, with paired bootstrap intervals).
+  Release sites open with the index and write `index.json`; suite pages move to `meme-id/` and
+  `visual-detail/`, and `naihub-v1/` redirects. Image generation moves to an experimental section outside
+  the index.
 - Use Opus 5.5 as the sole default judge and for the selected 0.1.0 core comparison, including
   self-judgments; retain other judges' raw verdicts and score reports, sites, snapshots, exports, and merges
   with each track's configured judge pool unless `--judges` selects another recorded pool. `nwb judge --judges`

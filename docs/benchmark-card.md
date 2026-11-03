@@ -8,7 +8,9 @@ own subscriptions and API accounts. See the [release history](../CHANGELOG.md).
 
 Use the results to inspect this meme-specific behavior, compare matched collection conditions, and study
 prompt and image dependence. Do not use them as a general intelligence, general image-quality, safety,
-or deployment suitability ranking. The two quality panels have independent scores, with no combined rank.
+or deployment suitability ranking. The NaiWai Index combines the Meme ID and Visual detail rankings with
+fixed 1:2 weights; it orders models on this benchmark and is not an accuracy. Image generation is
+experimental and outside the index.
 
 ## Composition and labels
 

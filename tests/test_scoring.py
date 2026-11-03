@@ -7,7 +7,7 @@ import pytest
 
 from nwb import report
 from nwb.config import find_root, load_bench
-from nwb.scoring import aggregate, grounding_score, image_scores, understanding_score
+from nwb.scoring import aggregate, grounding_score, image_scores, naiwai_index, understanding_score
 from nwb.util import write_json
 
 WEIGHTS = {"pose": 2.0, "render": 1.0}
@@ -398,3 +398,20 @@ def test_bootstrap_rank_bounds_use_observed_integer_ranks(monkeypatch):
                                              (.0123, "$0.0123"), (12.345, "$12.35"), (12345, "$12,340")])
 def test_efficiency_cost_format(value, expected):
     assert report._cost(value) == expected
+
+
+def test_naiwai_index_counts_visual_detail_double_and_ranks_only_models_ranked_in_both():
+    root = find_root()
+    suites = {}
+    for suite, metric, scores in [("core", "score", {"a": 90, "b": 30, "only-core": 50}),
+                                  ("naihub-v1", "joint", {"a": 0, "b": 60})]:
+        bench = load_bench(root, suite)
+        samples = [{"model": m, "item": i.id, metric: v} for m, v in scores.items() if m != "only-core"
+                   for i in bench.items if i.modality == "vision"]
+        board = [{"model": m, "score": v, "rank": 1} for m, v in scores.items()]
+        suites[suite] = (bench, {"samples": {"understanding": samples}, "leaderboards": {"visual_understanding": board}})
+    rows = {r["model"]: r for r in naiwai_index(suites)["rows"]}
+    # An equal-weight mean would tie a and b at 45.
+    assert (rows["b"]["rank"], rows["b"]["score"], rows["b"]["score_interval"]) == (1, 50, [50, 50])
+    assert (rows["a"]["rank"], rows["a"]["score"], rows["a"]["rank_range"]) == (2, 30, [2, 2])
+    assert (rows["only-core"]["rank"], rows["only-core"]["status"]) == (None, "partial")

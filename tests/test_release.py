@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from nwb import __version__, bundle, cli, release, results, scoring
+from nwb import __version__, bundle, cli, release, results, scoring, site
 from nwb.backends import BackendError, Response
 from nwb.config import find_root, load_bench
 from nwb.judge import understanding_prompt
@@ -65,19 +65,23 @@ def test_release_builds_both_suites_offline_and_bundles_keep_their_pinned_identi
 
     monkeypatch.setattr("nwb.backends.get_backend", no_backend)
     assert cli.main(["release", "--manifest", str(manifest), "--out", str(out)]) == 0
-    assert read_json(out / "scores.json")["understanding"]["gpt-6.1-sol"]["vision"] == 100
+    assert read_json(out / "meme-id/scores.json")["understanding"]["gpt-6.1-sol"]["vision"] == 100
     assert read_json(out / "release.json")["manifest"]["suites"] == suites
     assert (out / ".nojekyll").exists()
+    # The overview page lists models with partial panels without an index rank.
+    index = read_json(out / "index.json")
+    assert [(r["model"], r["rank"], r["status"]) for r in index["rows"]] == [("gpt-6.1-sol", None, "partial")]
+    assert "NaiWai Index" in (out / "index.html").read_text()
+    assert "url=../visual-detail/" in (out / "naihub-v1/index.html").read_text()
     for suite, spec in suites.items():
-        page = out / ("" if suite == "core" else suite)
+        page = out / site.PAGES[suite]
         assert (page / "index.html").exists()
         scores = read_json(page / "scores.json")
         assert scores["judges"] == spec["judges"]
         assert bundle.input_digest(root / "runs" / suite, load_bench(root, suite)) == spec["sha256"]
         assert not (root / "runs" / suite / "scores.json").exists()
         archive = next((out / "bundles").glob(f"*-{suite}-{suite}.zip"))
-        download = ("" if suite == "core" else "../") + f"bundles/{archive.name}"
-        assert download in (page / "index.html").read_text()
+        assert f"../bundles/{archive.name}" in (page / "index.html").read_text()
         restored = root / "restored" / suite
         with zipfile.ZipFile(archive) as saved:
             saved.extractall(restored)

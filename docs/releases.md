@@ -104,8 +104,10 @@ The output contains:
 
 | Path | Contents |
 |---|---|
-| `index.html`, `images/`, `scores.json` | Core results and assets |
-| `naihub-v1/` | Nai-hub results, assets, and scores |
+| `index.html`, `images/`, `index.json` | NaiWai Index overview and its versioned rows |
+| `meme-id/` | Meme ID (`core`) page, assets, and scores |
+| `visual-detail/` | Visual detail (`naihub-v1`) page, assets, and scores |
+| `naihub-v1/` | Redirect to `visual-detail/` for earlier links |
 | `bundles/` | Portable raw bundles linked from each suite's page |
 | `release.json` | Selected manifest, its hash, and build revision |
 | `.nojekyll` | GitHub Pages marker |

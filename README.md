@@ -10,22 +10,26 @@ called **奶蛙**): an AI-generated, "mutated" 奶龙 doubled over with laughter
 <img src="bench/reference/nailong_laugh.png" width="200" alt="The canonical 大笑奶龙 image">
 
 **Results:** [wusitee.github.io/nai-wai-bench](https://wusitee.github.io/nai-wai-bench/) (0.1.0 release:
-95% bootstrap intervals and rank ranges); [Nai-hub v1 casebook](https://wusitee.github.io/nai-wai-bench/naihub-v1/).
+95% bootstrap intervals and rank ranges).
 
-It publishes two independent rankings:
+It publishes two visual-understanding rankings and combines them into the **奶蛙指数 · NaiWai Index**:
 
-1. **Visual understanding**: recognize the meme and its variants, distinguish official artwork, and answer
-   image-grounded questions with fixed answer keys. Text-only lore, visual memory, and prompt writing in
-   Chinese and English are separate diagnostics; they do not affect visual rank.
-2. **Image generation**: image models draw the meme as other animals (cat, panda, frog, giraffe, octopus,
-   and elephant in the default panel)
-   from five prompt tiers: the meme's name in Chinese, its name in English, a brief description, a detailed
-   description of its 3D look, and the reference image. Matched name-only and described results measure
-   sensitivity to prompt detail.
+1. **识梗 Meme ID** (`--suite core`, 13 image tasks): recognize the meme and its variants, name it and its
+   aliases, and distinguish official artwork. Nine free-form answers are LLM-judged; four pose and eye
+   checks use fixed answer keys.
+2. **看图 Visual detail** (`--suite naihub-v1`, 24 images): report family, subject count, posture, eyes,
+   mouth, gesture, and tears, scored locally against answer keys. An image counts only when all seven
+   fields are correct.
 
-Only complete fixed panels receive provisional ranks. Partial runs remain visible with coverage counts.
-Small score differences are not evidence of a reliable ordering. An optional, unscored suite also tests
-whether generators can transfer other 奶蛙 expressions (angry, facepalm, smug) to other animals.
+The index is the weighted mean of both scores (Meme ID 1/3, Visual detail 2/3) for models ranked in both.
+Text-only lore, visual memory, and prompt writing in Chinese and English are diagnostics outside every
+ranking. Only complete fixed panels receive provisional ranks. Partial runs remain visible with coverage
+counts. Small score differences are not evidence of a reliable ordering.
+
+**Image generation** is an experimental track outside the index: image models draw the meme as other
+animals from five prompt tiers (its Chinese name, its English name, a brief description, a detailed
+description of its 3D look, and the reference image). An optional, unscored set also tests transferring
+other 奶蛙 expressions (angry, facepalm, smug) to other animals.
 
 Claude Opus 5.5 judges free-form answers and generated images by default; answer-keyed tasks are scored
 locally. Reports use the configured judge pool unless `--judges` selects another. Collecting results needs
@@ -78,8 +82,8 @@ not significance claims or subscription bills. See the [methodology](docs/method
 
 - [Architecture](docs/architecture.md): execution flow, scoring paths, result storage, and interactive board
 - [Release workflow](docs/releases.md): pinned comparison inputs, offline builds, raw bundles, and publishing
-- [Nai-hub v1 evaluation set](docs/naihub-eval-set.md): optional 24-image expansion with local answer
-  keys, no-image controls, and eight transfer references (`--suite naihub-v1`)
+- [Visual detail set (Nai-hub v1)](docs/naihub-eval-set.md): the 24-image answer-keyed panel with
+  no-image controls and eight transfer references (`--suite naihub-v1`)
 - [Benchmark design](docs/design.md): items, tiers, rubrics, scoring, results site, and run layout
 - [Evaluation methodology](docs/methodology.md): research basis, budget, controls, and limitations
 - [Optional state transfer](docs/design.md#optional-state-transfer): transfer angry, facepalm, and smug

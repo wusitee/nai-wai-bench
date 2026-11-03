@@ -61,11 +61,15 @@ def build(root: Path, manifest_path: Path, out: Path) -> Path:
 
     for suite, bench, run_dir, scores, judges in prepared:
         archive = bundle.export(run_dir, bench, out / "bundles", judges=judges, scores=scores)
-        page_dir = out if suite == "core" else out / suite
-        download = ("" if suite == "core" else "../") + f"bundles/{archive.name}"
+        page_dir = out / site.PAGES[suite]
         site.build(bench, models, run_dir, scores, page_dir, repo_url=manifest.get("repo_url"),
-                   suite_tabs=True, bundle_url=download)
+                   suite_tabs=True, bundle_url=f"../bundles/{archive.name}")
         write_json(page_dir / "scores.json", scores)
+    index = scoring.naiwai_index({suite: (bench, scores) for suite, bench, _, scores, _ in prepared})
+    site.build_index({suite: (bench, scores) for suite, bench, _, scores, _ in prepared}, index, models, out,
+                     repo_url=manifest.get("repo_url"))
+    site.write_redirects(out)
+    write_json(out / "index.json", index)
     write_json(out / "release.json", {
         "manifest": manifest,
         "manifest_sha256": hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
