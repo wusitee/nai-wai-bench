@@ -1,0 +1,103 @@
+{
+  "settings_id": "8bc2f526580c51a3",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "vendor": "anthropic",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "我不能确定这个角色的确切出处，下面是我能判断的部分。\n\n**角色**：这是一个3D渲染的红色胖墩墩的卡通形象，身体像一团圆润的果冻或史莱姆，皱着眉，绿色的眼睛怒视前方，双臂抱在身前。它的造型接近网络上常见的\"红色愤怒小怪物\"风格素材，但我没法确定它出自哪部作品或哪个原创账号，不想乱编。\n\n**梗的类型**：这属于\"切换××模式\"系列表情包，常见的有\"切换愤怒模式\"\"切换摆烂模式\"\"切换工作模式\"等。\n\n- 配文\"切换愤怒模式\"加上红色的生气表情符号，意思是\"我要开始生气了/我现在火大了\"。\n- 红色的身体、紧绷的表情和抱臂的姿态，都在强化\"气鼓鼓\"的感觉。\n- 因为角色本身圆滚滚，看上去有点可爱，所以它的愤怒带着一种\"凶但不吓人\"的反差萌，常用来半开玩笑地表达不满、吐槽或\"警告\"朋友。\n\n如果你记得这张图是从哪个视频、游戏或博主那里看到的，告诉我，我可以帮你一起判断它的来源。你也可以用以图搜图，比如百度识图或 Google Lens，通常能很快找到原始出处。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 12.8,
+    "tokens": {
+      "input": 726,
+      "cached_input": 0,
+      "cache_write": 724,
+      "output": 974,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.012857600000000002,
+    "tools_used": [],
+    "cost_usd": 0.012857600000000002,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 724,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 974,
+      "output_tokens_details": {
+        "thinking_tokens": 495
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 724,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 974,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 724,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 724
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:44:37Z",
+    "finished_at": "2026-10-25T00:44:50Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

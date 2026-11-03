@@ -10,6 +10,8 @@ Software releases use semantic versions; suite ids version the evaluation panels
   Release sites open with the index and write `index.json`; suite pages move to `meme-id/` and
   `visual-detail/`, and `naihub-v1/` redirects. Image generation moves to an experimental section outside
   the index.
+- Select Claude Fable 5.1 (high) in the 0.1.0 comparison through the merged runs `rel-0.1-with-fable-5.1`
+  and `rel-0.1-naihub-with-fable-5.1`, matching the published site; earlier rows are unchanged.
 - Use Opus 5.5 as the sole default judge and for the selected 0.1.0 core comparison, including
   self-judgments; retain other judges' raw verdicts and score reports, sites, snapshots, exports, and merges
   with each track's configured judge pool unless `--judges` selects another recorded pool. `nwb judge --judges`
@@ -20,8 +22,7 @@ Software releases use semantic versions; suite ids version the evaluation panels
 - Record the costliest `modelUsage` entry as a Claude result's `resolved_model`. Claude Code also lists
   auxiliary models there, so earlier Claude records can name `claude-haiku-5-5` for answers and
   judgments the requested model produced, as their reported costs show.
-- Add the Claude Fable 5.1 configuration to the maintained model registry, with a saved Nai-hub v1 run;
-  the 0.1.0 release selection is unchanged.
+- Add the Claude Fable 5.1 configuration to the maintained model registry, with a saved Nai-hub v1 run.
 - Start the Claude and Codex CLIs through their resolved executables and read their output as UTF-8,
   so npm `.cmd` shims and non-UTF-8 console code pages on Windows work; recorded command templates
   keep the bare command name, and arguments that `cmd.exe` would reinterpret are refused.
@@ -46,8 +47,7 @@ Software releases use semantic versions; suite ids version the evaluation panels
 - Show `awaiting judges` for panels whose missing cells and repetitions are collected but unjudged, and
   document collecting and sharing results without judge access.
 - Add the Claude Fable 5.1 max-effort configuration with saved core and Nai-hub v1 runs, and save Opus 5.5
-  and GPT-6.1-Sol judgments for both Fable core runs, scored with the Opus-only default; the 0.1.0
-  release selection is unchanged.
+  and GPT-6.1-Sol judgments for both Fable core runs, scored with the Opus-only default.
 
 ## [0.1.0] - 2026-10-25
 
