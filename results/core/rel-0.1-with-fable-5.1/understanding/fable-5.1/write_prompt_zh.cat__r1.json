@@ -1,0 +1,100 @@
+{
+  "settings_id": "548ef2024561e924",
+  "track": "understanding",
+  "model": "fable-5.1",
+  "vendor": "anthropic",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "A sticker-style cartoon meme illustration of a cat redesigned as a chubby, cute, blob-shaped mascot, laughing hysterically. The character has a round, soft, dumpling-like body with no visible neck, very short stubby arms and legs, and smooth bright canary-yellow skin like a rubber toy. Replace typical cat anatomy with simplified mascot features: two small rounded cat ears on top of the head, three short thin whiskers on each cheek, a tiny pink triangular nose, and a short curled cat tail. The face is the focus: eyes squeezed shut into two upward-curving arcs (like upside-down \"U\" shapes) with small rosy pink blush circles on the cheeks, and an enormous wide-open mouth taking up most of the lower face, shaped like a huge rounded \"D\", showing a flat red-pink interior, a small pink tongue at the bottom, and a row of tiny white teeth along the top edge. The head is tilted slightly back as if cackling uncontrollably, with a smug, mischievous, almost unhinged \"laughing at you\" energy. One stubby hand is lifted toward the mouth as if pointing or covering it mid-laugh. Add two or three small curved motion lines near the head and a couple of tiny tear drops flying from the corners of the eyes to show laughing-until-crying. Art style: flat 2D vector cartoon, very simple shapes, thick clean black outlines, flat fills with minimal soft shading, high saturation, glossy childlike kawaii aesthetic similar to Chinese kids' animation mascots. Centered composition, bust-up or full body, on a plain pure white background, no text, no watermark, no extra objects.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 20.5,
+    "tokens": {
+      "input": 712,
+      "cached_input": 0,
+      "cache_write": 710,
+      "output": 926,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 0.060520000000000004,
+    "tools_used": [],
+    "cost_usd": 0.060520000000000004,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 710,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 926,
+      "output_tokens_details": {
+        "thinking_tokens": 366
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 710,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 926,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 710,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 710
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T03:48:34Z",
+    "finished_at": "2026-10-31T03:48:55Z",
+    "revision": "592016c",
+    "nwb_version": "0.1.0"
+  }
+}

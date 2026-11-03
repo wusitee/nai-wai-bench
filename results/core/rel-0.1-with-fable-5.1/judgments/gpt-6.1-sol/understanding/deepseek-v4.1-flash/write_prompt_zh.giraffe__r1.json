@@ -1,0 +1,94 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/deepseek-v4.1-flash/write_prompt_zh.giraffe__r1.json",
+  "target_sha256": "d83542a3440ddb94b85e5e4ecca5a33b2092f93ea2a5fc0c9e7f81260b106f3d",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "8a917b1ae800b166",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 0,
+    "background": 2,
+    "vibe": 1,
+    "identity": 2
+  },
+  "hallucinations": [
+    "将目标的前倾捧腹姿势描述为仰头、身体后仰。",
+    "将双手捧腹改为一手捂肚、一手举起。",
+    "要求明显拉长的脖子，与目标头身相连、没有明显脖子的体型相矛盾。",
+    "要求厚黑描边的扁平2D贴纸风格，与目标的光泽3D CG渲染相矛盾。"
+  ],
+  "rationale": "提示词清楚覆盖了闭眼、大嘴露齿露舌、浅色肚皮、白底及多种长颈鹿辨识特征，但姿势、双手动作、颈部结构和渲染风格偏离参考。整体强调贱萌可爱，对抽象、略显失控的表情包气质仅部分覆盖。",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":2,\"body\":1,\"belly_patch\":2,\"render\":0,\"background\":2,\"vibe\":1,\"identity\":2},\"hallucinations\":[\"将目标的前倾捧腹姿势描述为仰头、身体后仰。\",\"将双手捧腹改为一手捂肚、一手举起。\",\"要求明显拉长的脖子，与目标头身相连、没有明显脖子的体型相矛盾。\",\"要求厚黑描边的扁平2D贴纸风格，与目标的光泽3D CG渲染相矛盾。\"],\"rationale\":\"提示词清楚覆盖了闭眼、大嘴露齿露舌、浅色肚皮、白底及多种长颈鹿辨识特征，但姿势、双手动作、颈部结构和渲染风格偏离参考。整体强调贱萌可爱，对抽象、略显失控的表情包气质仅部分覆盖。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719d-2894-7573-8408-ec68238da12a",
+    "seconds": 18.5,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12795,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 487,
+      "reasoning_output_tokens": 238
+    },
+    "tokens": {
+      "input": 12795,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 487,
+      "reasoning": 238
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:51:27Z",
+    "finished_at": "2026-10-25T05:51:45Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

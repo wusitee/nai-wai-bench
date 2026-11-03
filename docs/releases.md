@@ -6,13 +6,17 @@ independent of this workflow.
 
 ## Selected comparison
 
-[`releases/0.1.0.toml`](../releases/0.1.0.toml) selects the expanded comparison including GPT-6.1 Terra
-and the high/xhigh GPT-5.6-Sol configurations:
+[`releases/0.1.0.toml`](../releases/0.1.0.toml) selects the expanded comparison including GPT-6.1 Terra,
+the high/xhigh GPT-5.6-Sol configurations, and Claude Fable 5.1 (high):
 
 | Suite | Raw run | Judge policy |
 |---|---|---|
-| `core` | `rel-0.1-with-gpt-5.6-sol` | Opus 5.5 only, including its judgments of Opus and other Anthropic subjects |
-| `naihub-v1` | `rel-0.1-naihub-with-gpt-5.6-sol` | Local answer-key scoring, without judges |
+| `core` | `rel-0.1-with-fable-5.1` | Opus 5.5 only, including its judgments of Opus and other Anthropic subjects |
+| `naihub-v1` | `rel-0.1-naihub-with-fable-5.1` | Local answer-key scoring, without judges |
+
+Each selected run is an `nwb merge` of the earlier comparison run (`rel-0.1-with-gpt-5.6-sol`,
+`rel-0.1-naihub-with-gpt-5.6-sol`) and the Fable run (`fable-5.1-core`, `fable-5.1-naihub`); all four
+sources remain saved. Fable's Nai-hub row has three repetitions per image, averaged within each image.
 
 This historical comparison mixes two recorded Codex collection profiles:
 
@@ -48,7 +52,7 @@ for selected runs. Restoration verifies checksums and suite membership before wr
 working run takes precedence. Explicit restoration requires a fresh working directory:
 
 ```sh
-uv run nwb restore --suite core --run rel-0.1-with-gpt-5.6-sol
+uv run nwb restore --suite core --run rel-0.1-with-fable-5.1
 ```
 
 Raw ZIP bundles are still available for separate downloads. Extract them into fresh run directories;
@@ -150,8 +154,9 @@ be deleted to build the selected release.
 
 ## Saved runs outside the release
 
-`results/core/` also keeps single-model understanding runs that no manifest selects. They are archived
-observations, not rows of the 0.1.0 comparison:
+`results/core/` also keeps single-model understanding runs that no manifest selects directly. Apart from
+`fable-5.1-core`, a source of the selected merged run, they are archived observations, not rows of the
+0.1.0 comparison:
 
 | Runs | Subject settings | Recorded judges |
 |---|---|---|
@@ -171,8 +176,8 @@ them; pass their recorded judges with `--judges` to reproduce the saved scores. 
 use `legacy-v1`. Score differences from the release rows therefore mix effort with judge and
 collection-profile changes; a controlled effort comparison needs matching profiles and judges.
 
-`results/naihub-v1/` keeps the matching archived Nai-hub runs `fable-5.1-naihub` (`high`) and
-`fable-5.1-max-naihub` (`max`): three repetitions of the fixed panel, scored locally from the answer
+`results/naihub-v1/` keeps the matching Nai-hub runs `fable-5.1-naihub` (`high`, merged into the selected
+run) and `fable-5.1-max-naihub` (`max`, archived): three repetitions of the fixed panel, scored locally from the answer
 keys, so they need no judges. A subscription limit interrupted the `max` run; 17 samples used the
 Claude Code login and 127 an API key, with the same recorded settings.
 

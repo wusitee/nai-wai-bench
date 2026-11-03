@@ -1,0 +1,81 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/gpt-6-astra/write_prompt_zh.giraffe__r1.json",
+  "target_sha256": "32538ab9b6fec72a1650c3eee718d1f9aa7b75e2dd60beb28f4a880c4fd93ff5",
+  "settings_id": "c5b99b49261f87dd",
+  "judge_prompt": "b9a13bbe827679dd",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 1,
+    "background": 0,
+    "vibe": 1,
+    "identity": 2
+  },
+  "hallucinations": [
+    "Setting the scene on a blurred green grass background under outdoor sunlight (contradicts the plain white/light-grey studio background with no props).",
+    "Giving the character a distinct slender long neck (contradicts having no distinct neck where the head merges into the torso).",
+    "Describing the torso as leaning slightly backwards (contradicts the torso being hunched/bent forward doubled over with laughter)."
+  ],
+  "rationale": "The prompt captures the giraffe identity and squeezed-shut eyes well, but contradicts key meme traits by adding a long neck, a green grass background, and a backward-leaning pose, while omitting the contrasting belly patch and visible teeth.",
+  "raw": "```json\n{\n  \"scores\": {\n    \"pose\": 0,\n    \"hands_on_belly\": 1,\n    \"eyes\": 2,\n    \"mouth\": 1,\n    \"body\": 1,\n    \"belly_patch\": 0,\n    \"render\": 1,\n    \"background\": 0,\n    \"vibe\": 1,\n    \"identity\": 2\n  },\n  \"hallucinations\": [\n    \"Setting the scene on a blurred green grass background under outdoor sunlight (contradicts the plain white/light-grey studio background with no props).\",\n    \"Giving the character a distinct slender long neck (contradicts having no distinct neck where the head merges into the torso).\",\n    \"Describing the torso as leaning slightly backwards (contradicts the torso being hunched/bent forward doubled over with laughter).\"\n  ],\n  \"rationale\": \"The prompt captures the giraffe identity and squeezed-shut eyes well, but contradicts key meme traits by adding a long neck, a green grass background, and a backward-leaning pose, while omitting the contrasting belly patch and visible teeth.\"\n}\n```",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 37.7,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 18230,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:08:00Z",
+    "finished_at": "2026-10-25T02:08:38Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

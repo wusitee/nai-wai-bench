@@ -1,0 +1,107 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/kimi-k3.1-pro/recognize_smug__r1.json",
+  "target_sha256": "50e97517c9a4b0620acef7284937933d7b8ff9ef604723483df7e89cd5ea0b8d",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "7b2dd57add774951",
+  "judge_images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "scores": {
+    "base_character": 2,
+    "identifies_meme": 1
+  },
+  "hallucinations": [],
+  "rationale": "The answer correctly identifies 奶龙 as the yellow little dinosaur from a Chinese animation. It only names a generic '奶龙表情包/奶龙梗' and never recognizes the image as a mutated variant in the 大笑奶龙/变异奶龙/奶蛙 family, so meme identification is vague; its visual description (narrowed eyes, puffed cheeks) matches the image.",
+  "raw": "{\"scores\": {\"base_character\": 2, \"identifies_meme\": 1}, \"hallucinations\": [], \"rationale\": \"The answer correctly identifies 奶龙 as the yellow little dinosaur from a Chinese animation. It only names a generic '奶龙表情包/奶龙梗' and never recognizes the image as a mutated variant in the 大笑奶龙/变异奶龙/奶蛙 family, so meme identification is vague; its visual description (narrowed eyes, puffed cheeks) matches the image.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 8.8,
+    "tokens": {
+      "input": 1966,
+      "cached_input": 0,
+      "cache_write": 1964,
+      "output": 477,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.025493099999999998,
+    "tools_used": [],
+    "cost_usd": 0.025493099999999998,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1964,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 477,
+      "output_tokens_details": {
+        "thinking_tokens": 300
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1964,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 477,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1964,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1964
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:03:08Z",
+    "finished_at": "2026-10-25T02:03:17Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}
