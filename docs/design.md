@@ -7,22 +7,27 @@ nai-wai-bench (Chinese name: 奶蛙bench) measures how well AI models know the C
 belly, laughing with its eyes squeezed shut and its mouth agape. The canonical image is
 `bench/reference/nailong_laugh.png`; sources are listed in `bench/reference/SOURCE.md`.
 
-There are two independent, provisional rankings: **image generation** and **visual understanding**.
-There is no combined score across them. Text/language performance is diagnostic only. See
-[evaluation methodology](methodology.md) for the research basis, budget, and limits of the protocol.
+There are two provisional visual-understanding rankings, each from its own suite:
 
-Unless stated otherwise, this document describes the default `core` suite. The optional
-[naihub-v1 evaluation set](naihub-eval-set.md) provides a separate 24-image, answer-keyed visual
-panel with broader pose/style coverage and eight transfer references. Select it with `--suite naihub-v1`
-and use a separate run; its joint-accuracy scores are not comparable with the core panel's scores.
+- **识梗 Meme ID** (`--suite core`): 13 image tasks on recognizing and naming the meme and its variants.
+- **看图 Visual detail** (`--suite naihub-v1`): 24 answer-keyed images with broader pose and style
+  coverage; see the [Nai-hub v1 evaluation set](naihub-eval-set.md).
+
+Release builds combine them into the **奶蛙指数 · NaiWai Index** ([methodology](methodology.md#naiwai-index)).
+Image generation is an experimental ranking outside the index. Text/language performance is diagnostic
+only. See [evaluation methodology](methodology.md) for the research basis, budget, and limits of the protocol.
+
+Suite ids are internal: pages and documentation use the public names. Unless stated otherwise, this
+document describes the Meme ID suite (`core`), which also holds the text diagnostics and image
+generation. Use a separate run per suite; the two suites' scores are on different scales.
 
 ## Ranking panels
 
-- **Image generation:** six default animals (cat, panda, frog, giraffe, octopus, elephant) × all five tiers,
+- **Image generation (experimental):** six default animals (cat, panda, frog, giraffe, octopus, elephant) × all five tiers,
   or 30 cells. Each cell needs a current judgment and a verified verbatim prompt audit (`true`). Changed
   and unverified prompts are visible in diagnostics but ineligible for ranking.
-- **Visual understanding:** all 13 image-input items: nine recognition tasks and four answer-keyed
-  grounding checks. Text-only models are not listed in this ranking.
+- **Visual understanding (Meme ID):** all 13 image-input items: nine recognition tasks and four
+  answer-keyed grounding checks. Text-only models are not listed in this ranking.
 
 Each panel score is the arithmetic mean of its cell means; repetitions are averaged within each cell
 first. Every required cell must be scored, with every attempted repetition id scored in every cell.
@@ -229,24 +234,25 @@ cases before comparing subject scores.
 ## Results site (`nwb site`)
 
 `uv run nwb site --run RUN` builds a bilingual Chinese/English site in `site/`, separate from the local
-report. Each page covers one suite and run. It opens with the visual-understanding and image-generation
-rankings, with coverage and repetitions per cell; an image-generation panel without results is left out. The
-remaining sections appear when the run has data for them:
+report. Each page covers one suite and run, titled with the suite's public name. It opens with that suite's
+visual-understanding ranking, with coverage and repetitions per cell. The remaining sections appear when
+the run has data for them, with the experimental generation tracks after the understanding results:
 
 - **Casebook:** one card per answer-keyed image item, grouped by the task file's `category`. Each card shows
   the image, its answer key, a verdict strip (one segment per model, in visual-ranking order; green when
   every field is correct), each model's wrong fields with the label it gave, and raw replies including
   the no-image control. Models that answered only the no-image control get no verdict, but their replies
-  are listed. The naihub-v1 page leads with the casebook and a mosaic of its images.
-- **Image generation:** one gallery per animal with every core tier, score, failure modes, and prompt
-  audit (provider refusals appear as refused cells; a record's `meta.fill_note` labels images made through
-  another route, with the hover text naming it); diagnostic tier means and matched knowledge ratios.
-- **State transfer:** each source image beside its generated outputs, unscored.
+  are listed. The Visual detail page opens with a mosaic of its images.
 - **Understanding diagnostics:** summary columns that have values in the run; for suites with family
   labels, joint, visual-joint, family-macro, per-field, and per-category heatmaps; free-form answers;
   optional state extraction as its own casebook.
 - **Efficiency:** visual-panel token coverage, reported token means, client time, list API cost estimates,
   and a score-versus-output-tokens scatter; generation image counts and client time.
+- **Image generation (experimental):** the image-generation ranking, then one gallery per animal with every
+  core tier, score, failure modes, and prompt audit (provider refusals appear as refused cells; a record's
+  `meta.fill_note` labels images made through another route, with the hover text naming it); diagnostic
+  tier means and matched knowledge ratios.
+- **State transfer (experimental):** each source image beside its generated outputs, unscored.
 - **Models** (access metadata, C2PA provenance, and the answer-key annotator when the suite names one)
   and **judge health** when the run has judgments.
 
@@ -267,8 +273,9 @@ C2PA names only `ChatGPT · gpt-image` for OpenAI and “Created by Google Gener
 
 `scripts/publish_site.sh RELEASE_MANIFEST.toml` uses `nwb release` to build the selected comparison
 into a fresh temporary directory, then replaces the `gh-pages` branch on `origin` with that generated
-site and its raw bundles. The manifest is required; there are no implicit run names. The core suite
-goes at the root and naihub-v1 at `naihub-v1/`, with suite tabs and `.nojekyll`. It requires `uv`, Git,
+site and its raw bundles. The manifest is required; there are no implicit run names. The NaiWai Index
+overview goes at the root, Meme ID at `meme-id/`, and Visual detail at `visual-detail/`, with page tabs and
+`.nojekyll`; `naihub-v1/` redirects to `visual-detail/`. It requires `uv`, Git,
 configured Git author identity, and push access, and leaves the checked-out branch unchanged.
 See the [release workflow](releases.md) for input validation and local review before publishing.
 Working runs and site files stay git-ignored; portable copies under `results/` sync with the source branch.

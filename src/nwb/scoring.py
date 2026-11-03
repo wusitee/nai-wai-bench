@@ -384,17 +384,21 @@ def _summarize_imagegen(samples: list[dict]) -> dict:
     return summary
 
 
-def leaderboards(bench: Bench, scores: dict, run_dir: Path) -> dict:
-    """Rank only a complete, balanced fixed panel; extra tasks never change a panel's score."""
-    expected = bench.expected_prompts()
-    panels = {
+def _panels(bench: Bench) -> dict:
+    """Fixed ranking panels: track, required cells, cell key fields, and the per-sample metric."""
+    return {
         "visual_understanding": ("understanding", {(i.id,) for i in bench.items if i.modality == "vision"},
                                  ("item",), "joint" if bench.suite == "naihub-v1" else "score"),
         "imagegen": ("imagegen", {(t, a.id) for t in bench.tiers for a in bench.select_animals("default")},
                      ("tier", "animal"), "overall"),
     }
+
+
+def leaderboards(bench: Bench, scores: dict, run_dir: Path) -> dict:
+    """Rank only a complete, balanced fixed panel; extra tasks never change a panel's score."""
+    expected = bench.expected_prompts()
     boards = {}
-    for name, (track, required, fields, metric) in panels.items():
+    for name, (track, required, fields, metric) in _panels(bench).items():
         samples = scores["samples"][track]
         models = {p.name for p in (run_dir / track).iterdir() if p.is_dir()} if (run_dir / track).is_dir() else set()
         rows = []
@@ -474,11 +478,8 @@ def _percentile(values: list[float], q: float) -> float:
     return values[low] + (values[min(low + 1, len(values) - 1)] - values[low]) * (index - low)
 
 
-def _bootstrap(rows, samples, required, fields, metric, bench, track):
-    """Paired source/animal cluster draws; keep all cells and their observed repetition means."""
-    ranked = [r for r in rows if r["score"] is not None]
-    if not ranked:
-        return
+def _draws(models, samples, required, fields, metric, bench, track) -> tuple[dict[str, list[float]], int]:
+    """Panel scores under paired source/animal cluster resampling; keep all cells and their repetition means."""
     items = {i.id: i for i in bench.items}
     clusters = defaultdict(list)
     for cell in sorted(required):
@@ -486,26 +487,86 @@ def _bootstrap(rows, samples, required, fields, metric, bench, track):
         clusters[cluster].append(cell)
     groups = list(clusters.values())
     cell_scores = {}
-    for row in ranked:
-        cell_scores[row["model"]] = {
-            cell: mean(s[metric] for s in samples if s["model"] == row["model"]
+    for model in models:
+        cell_scores[model] = {
+            cell: mean(s[metric] for s in samples if s["model"] == model
                        and tuple(s[f] for f in fields) == cell
                        and (track != "imagegen" or s["verbatim"] is True)) for cell in sorted(required)}
-    draws, ranks = defaultdict(list), defaultdict(list)
+    draws = defaultdict(list)
     rng = random.Random(BOOTSTRAP_SEED)
     for _ in range(BOOTSTRAP_RESAMPLES):
         cells = [cell for group in rng.choices(groups, k=len(groups)) for cell in group]
-        values = {m: mean(cs[c] for c in cells) for m, cs in cell_scores.items()}
-        for model, value in values.items():
-            draws[model].append(value)
-            ranks[model].append(1 + sum(v > value for v in values.values()))
-    for row in ranked:
-        model = row["model"]
-        row["score_interval"] = [_percentile(draws[model], q) for q in (.025, .975)]
-        ordered_ranks = sorted(ranks[model])
-        row["rank_range"] = [ordered_ranks[math.ceil(len(ordered_ranks) * q) - 1] for q in (.025, .975)]
-        row["bootstrap"] = {"resamples": BOOTSTRAP_RESAMPLES, "seed": BOOTSTRAP_SEED,
-                            "clusters": len(groups), "cluster": "animal" if track == "imagegen" else "source image"}
+        for model, cs in cell_scores.items():
+            draws[model].append(mean(cs[c] for c in cells))
+    return draws, len(groups)
+
+
+def _intervals(rows: list[dict], draws: dict[str, list[float]]) -> None:
+    """95% percentile score intervals and rank ranges over the same resamples for every ranked row."""
+    ranked = [r["model"] for r in rows if r["score"] is not None]
+    ranks = {m: sorted(1 + sum(draws[o][i] > draws[m][i] for o in ranked) for i in range(BOOTSTRAP_RESAMPLES))
+             for m in ranked}
+    for row in rows:
+        if row["score"] is not None:
+            row["score_interval"] = [_percentile(draws[row["model"]], q) for q in (.025, .975)]
+            row["rank_range"] = [ranks[row["model"]][math.ceil(BOOTSTRAP_RESAMPLES * q) - 1] for q in (.025, .975)]
+
+
+def _bootstrap(rows, samples, required, fields, metric, bench, track):
+    ranked = [r["model"] for r in rows if r["score"] is not None]
+    if not ranked:
+        return
+    draws, clusters = _draws(ranked, samples, required, fields, metric, bench, track)
+    _intervals(rows, draws)
+    for row in rows:
+        if row["score"] is not None:
+            row["bootstrap"] = {"resamples": BOOTSTRAP_RESAMPLES, "seed": BOOTSTRAP_SEED,
+                                "clusters": clusters, "cluster": "animal" if track == "imagegen" else "source image"}
+
+
+# NaiWai Index v1: weighted mean of the two visual rankings. Nai-hub's answer-keyed panel counts double the
+# smaller, partly judge-scored Meme ID panel.
+INDEX_VERSION = 1
+INDEX_WEIGHTS = {"core": 1, "naihub-v1": 2}
+
+
+def naiwai_index(suites: dict[str, tuple[Bench, dict]]) -> dict:
+    """Combine each suite's ranked visual score; models ranked in every component receive an index rank.
+
+    Suites are resampled independently, so pairing their draws by resample number gives joint draws."""
+    boards = {suite: {r["model"]: r for r in suites[suite][1]["leaderboards"]["visual_understanding"]}
+              for suite in INDEX_WEIGHTS}
+    total = sum(INDEX_WEIGHTS.values())
+    rows = []
+    for model in sorted(set().union(*boards.values())):
+        parts = {suite: boards[suite].get(model, {}).get("score") for suite in INDEX_WEIGHTS}
+        complete = all(v is not None for v in parts.values())
+        rows.append({"model": model, "rank": None,
+                     "score": sum(INDEX_WEIGHTS[s] * v for s, v in parts.items()) / total if complete else None,
+                     "components": {s: {"score": v, "rank": boards[s].get(model, {}).get("rank")}
+                                    for s, v in parts.items()},
+                     "status": "complete" if complete else "partial",
+                     "score_interval": None, "rank_range": None})
+    rows.sort(key=lambda r: (r["score"] is None, -(r["score"] or 0), r["model"]))
+    previous, rank = None, 0
+    for position, row in enumerate(rows, 1):
+        if row["score"] is not None:
+            if row["score"] != previous:
+                rank = position
+            row["rank"] = rank
+            previous = row["score"]
+    ranked = [r["model"] for r in rows if r["score"] is not None]
+    if ranked:
+        combined = {m: [0.0] * BOOTSTRAP_RESAMPLES for m in ranked}
+        for suite, weight in INDEX_WEIGHTS.items():
+            bench, scores = suites[suite]
+            track, required, fields, metric = _panels(bench)["visual_understanding"]
+            draws, _ = _draws(ranked, scores["samples"][track], required, fields, metric, bench, track)
+            for m in ranked:
+                combined[m] = [c + weight * d / total for c, d in zip(combined[m], draws[m])]
+        _intervals(rows, combined)
+    return {"version": INDEX_VERSION, "weights": INDEX_WEIGHTS, "rows": rows,
+            "bootstrap": {"resamples": BOOTSTRAP_RESAMPLES, "seed": BOOTSTRAP_SEED, "pairing": "independent suites"}}
 
 
 def _token_cost(tokens: dict, price: dict) -> float | None:

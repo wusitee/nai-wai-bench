@@ -53,9 +53,9 @@ vendor image provenance are retained with the observations.
 
 | Panel | Inputs | Scoring | Ranking |
 |---|---|---|---|
-| Core understanding | 13 visual tasks, eight text diagnostics, four blind controls | Nine visual recognition tasks use LLM judges; four visual grounding tasks use local keys | Equal item weight across the 13 visual tasks |
-| Nai-hub understanding | 24 visual tasks and 24 blind controls | Seven fields per image, scored locally | All seven fields correct earns 100; otherwise 0, averaged by image |
-| Standard generation | Six default animals × five tiers | LLM judges rate weighted style traits and target-animal identity | 30-cell panel; overall = style × identity / 2 |
+| Meme ID understanding (`core`) | 13 visual tasks, eight text diagnostics, four blind controls | Nine visual recognition tasks use LLM judges; four visual grounding tasks use local keys | Equal item weight across the 13 visual tasks |
+| Visual detail understanding (`naihub-v1`) | 24 visual tasks and 24 blind controls | Seven fields per image, scored locally | All seven fields correct earns 100; otherwise 0, averaged by image |
+| Standard generation (experimental) | Six default animals × five tiers | LLM judges rate weighted style traits and target-animal identity | 30-cell panel; overall = style × identity / 2 |
 | Optional state transfer | Core: three sources; Nai-hub: eight sources | Extraction uses local keys; generated transfers are unscored | Separate diagnostics and galleries |
 
 `judge.py` sends free-form answers or generated images to configured judges through the same backends.
@@ -66,7 +66,8 @@ Only complete, balanced panels with homogeneous recorded settings receive ranks.
 cover subject prompts, target content or legacy timestamps, current judge prompts, and visual evidence
 paths. Tool-contaminated answers are excluded. Generation ranking requires verified verbatim prompts;
 verified provider refusals count as zero. Text answers, blind controls, and optional state tasks remain
-diagnostics. The two rankings have no combined score.
+diagnostics. Release builds combine the two visual rankings into the NaiWai Index (`naiwai_index()`,
+Visual detail weighted 2:1); image generation stays outside it.
 
 Reports also expose contributing judges, coverage, paired cluster-bootstrap intervals, repetition
 consistency, and usage/price diagnostics. The methodology describes their limits.
@@ -91,6 +92,7 @@ fills a missing working run; existing working runs take precedence. Saving resul
 the normal Git workflow. The benchmark does not issue Git commits or pushes during collection.
 
 `release.py` restores missing selected runs, validates the manifest's version, input hashes and judge
-selection, and rejects stale judgments before producing both suite pages and raw bundles. Publishing
+selection, and rejects stale judgments before producing both suite pages, the NaiWai Index overview, and raw
+bundles. Publishing
 is a separate explicit invocation of `scripts/publish_site.sh`, which builds into a fresh directory
 and replaces `gh-pages`. See [release operations](releases.md) and [scoring details](design.md).

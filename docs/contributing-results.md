@@ -9,11 +9,11 @@ share results, and someone with the judges scores them later from the shared fil
 
 | Result | Scoring | Judge calls |
 |---|---|---|
-| Nai-hub v1 visual ranking (`--suite naihub-v1`) | Local answer keys | None |
-| Core grounding probes, no-image controls, state extraction | Local answer keys | None |
-| Core visual ranking (recognition items and grounding probes) | Vision judge for recognition, keys for grounding | Recognition items |
+| Visual detail ranking (`--suite naihub-v1`) | Local answer keys | None |
+| Meme ID grounding probes, no-image controls, state extraction | Local answer keys | None |
+| Meme ID ranking (`--suite core`: recognition items and grounding probes) | Vision judge for recognition, keys for grounding | Recognition items |
 | Text diagnostics (lore, description, prompt writing) | Text judge with reference notes | Every item |
-| Image-generation ranking | Vision judge | Every image |
+| Experimental image-generation ranking | Vision judge | Every image |
 | Optional state-transfer images | Unscored | None |
 
 Without judgments, `nwb report` shows the locally scored results. A row whose remaining panel cells and
