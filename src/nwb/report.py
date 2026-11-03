@@ -173,7 +173,7 @@ def efficiency_section(scores: dict, label=lambda m: m) -> str:
         floor = max(0, math.floor((min(y for *_, y in points) - 5) / 10) * 10)
         ceiling = min(100, math.ceil((max(y for *_, y in points) + 5) / 10) * 10)
         ypos = lambda y: bottom - (bottom - top) * (y - floor) / (ceiling - floor)
-        out.append(f"<svg class=efficiency-chart viewBox='0 0 {width} {height}' role=img "
+        out.append(f"<div class=scroll><svg class=efficiency-chart viewBox='0 0 {width} {height}' role=img "
                    "aria-label='得分 Score / 每题输出 token Output tokens per task'>")
         for y in range(floor, ceiling + 1, 10 if ceiling - floor <= 60 else 20):
             yy = ypos(y)
@@ -193,25 +193,27 @@ def efficiency_section(scores: dict, label=lambda m: m) -> str:
             text = f"{x / 1000:g}k" if x >= 1000 else f"{x:g}"
             out.append(f"<path d='M{xx:.1f} {top}V{bottom}' stroke='var(--line,#d0d7de)'/>"
                        f"<text x='{xx:.1f}' y={bottom + 22} text-anchor=middle font-size=13 fill=currentColor>{text}</text>")
-        # Labels drop the effort suffix unless two points would share a name. Each label sits beside its dot,
-        # trying both sides at increasing vertical offsets until it clears the other labels and dots.
+        # Labels drop the effort suffix unless two points would share a name. Each label sits beside its dot:
+        # both sides are tried at growing vertical offsets across the plot, taking the first spot clear of other
+        # labels and dots, or the least crowded spot when none is clear.
         shorts = [label(m).split(" (")[0] for m, _, _ in points]
         dots = [(xpos(x), ypos(y)) for _, x, y in points]
         labels = []
         for (m, x, y), short, (xx, yy) in zip(points, shorts, dots):
             short = label(m) if shorts.count(short) > 1 else short
-            size = len(short) * 7
+            size = sum(13 if ord(c) > 0x2e7f else 7 for c in short)  # CJK glyphs are about twice as wide
             sides = ("end", "start") if xx > (left + right) / 2 else ("start", "end")
-            candidates = [(side, yy + 4 + offset) for offset in (0, -14, 14, -28, 28, -42, 42) for side in sides]
-            anchor, ty = candidates[0]
-            for side, base in candidates:
+            offsets = [0] + [sign * step for step in range(14, bottom - top, 14) for sign in (-1, 1)]
+            candidates = [(side, yy + 4 + offset) for offset in offsets for side in sides]
+
+            def clashes(side, base, xx=xx, size=size):
                 start = xx - 9 - size if side == "end" else xx + 9
-                if start < left or start + size > width or not top + 10 <= base <= bottom - 2:
-                    continue
-                if not any(start < lx + lw and lx < start + size and abs(base - ly) < 14 for lx, ly, lw in labels) \
-                        and not any(start - 6 < dx < start + size + 6 and base - 17 < dy < base + 8 for dx, dy in dots):
-                    anchor, ty = side, base
-                    break
+                return (sum(start < lx + lw and lx < start + size and abs(base - ly) < 14 for lx, ly, lw in labels)
+                        + sum(start - 6 < dx < start + size + 6 and base - 17 < dy < base + 8 for dx, dy in dots))
+
+            fits = [(side, base) for side, base in candidates if top + 10 <= base <= bottom - 2
+                    and left <= (xx - 9 - size if side == "end" else xx + 9) <= width - size] or candidates[:1]
+            anchor, ty = next((c for c in fits if not clashes(*c)), None) or min(fits, key=lambda c: clashes(*c))
             tx = xx - 9 if anchor == "end" else xx + 9
             labels.append((tx - size if anchor == "end" else tx, ty, size))
             out.append(f"<circle cx='{xx:.1f}' cy='{yy:.1f}' r=5 fill='var(--bar,#c98500)'><title>"
@@ -220,7 +222,7 @@ def efficiency_section(scores: dict, label=lambda m: m) -> str:
         out.append(f"<text x={(left + right) // 2} y={bottom + 52} text-anchor=middle fill=currentColor font-size=13>"
                    "每题输出 token Output tokens per task" + (" · 对数刻度 log scale" if logarithmic else "") + "</text>"
                    f"<text x=16 y={(top + bottom) // 2} transform='rotate(-90 16 {(top + bottom) // 2})' text-anchor=middle "
-                   "fill=currentColor font-size=13>得分 Score</text></svg>")
+                   "fill=currentColor font-size=13>得分 Score</text></svg></div>")
     else:
         out.append("<p class=muted>No ranked models have output-token telemetry for this panel.</p>")
     if missing:
