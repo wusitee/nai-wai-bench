@@ -233,10 +233,11 @@ cases before comparing subject scores.
 
 ## Results site (`nwb site`)
 
-`uv run nwb site --run RUN` builds a bilingual Chinese/English site in `site/`, separate from the local
-report. Each page covers one suite and run, titled with the suite's public name. It opens with that suite's
-visual-understanding ranking, with coverage and repetitions per cell. The remaining sections appear when
-the run has data for them, with the experimental generation tracks after the understanding results:
+`uv run nwb site --run RUN` builds a bilingual Chinese/English site with a single dark theme in `site/`,
+separate from the local report. Each page covers one suite and run, titled with the suite's public name. It
+opens with that suite's visual-understanding ranking, with coverage and repetitions per cell; the top three
+ranks are colored and the rest gray. The remaining sections appear when the run has data for them, with the
+experimental generation tracks after the understanding results:
 
 - **Casebook:** one card per answer-keyed image item, grouped by the task file's `category`. Each card shows
   the image, its answer key, a verdict strip (one segment per model, in visual-ranking order; green when
@@ -247,7 +248,8 @@ the run has data for them, with the experimental generation tracks after the und
   labels, joint, visual-joint, family-macro, per-field, and per-category heatmaps; free-form answers;
   optional state extraction as its own casebook.
 - **Efficiency:** visual-panel token coverage, reported token means, client time, list API cost estimates,
-  and a score-versus-output-tokens scatter; generation image counts and client time.
+  and a score-versus-output-tokens scatter whose score axis spans the plotted scores; generation image counts
+  and client time.
 - **Image generation (experimental):** the image-generation ranking, then one gallery per animal with every
   core tier, score, failure modes, and prompt audit (provider refusals appear as refused cells; a record's
   `meta.fill_note` labels images made through another route, with the hover text naming it); diagnostic
@@ -257,9 +259,9 @@ the run has data for them, with the experimental generation tracks after the und
   and **judge health** when the run has judgments.
 
 Missing judgments appear as dashes. With repetitions, galleries and casebook cards show the first
-repetition while summaries include every sample. Heatmap cells darken as scores fall below 100. When a
-suite's `[dataset].annotation_record` names an annotator model, that model is flagged in the ranking: its
-score measures agreement with its own labels.
+repetition while summaries include every sample. Heatmap cells take on stronger color as scores fall below
+100. When a suite's `[dataset].annotation_record` names an annotator model, that model is flagged in the
+ranking: its score measures agreement with its own labels.
 
 The header records the software version, suite, collection date range, run name, build date, and build repository commit (`git rev-parse --short HEAD`,
 marked when `bench/` or `src/` have uncommitted changes). With `--repo-url`, the methodology and

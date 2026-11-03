@@ -1,6 +1,7 @@
 import hashlib
 import json
 import os
+import re
 from dataclasses import replace
 from statistics import mean
 
@@ -349,6 +350,14 @@ def test_efficiency_prices_cache_subsets_missing_usage_and_separate_judges():
     table = rendered.split("</table>", 1)[0]
     assert table.index("&lt;larger&gt;") < table.index("&lt;m&gt;")
     assert ">1,000</td>" in table and "无用量数据 No usage data: &lt;missing&gt;" in rendered
+
+
+def test_efficiency_chart_gives_coinciding_points_separate_labels():
+    rows = {f"m{i}": {"mean_output_tokens": 100} for i in range(8)}
+    rendered = report.efficiency_section({"efficiency": {"visual_understanding": rows}, "leaderboards": {
+        "visual_understanding": [{"model": m, "score": 100} for m in rows]}})
+    spots = re.findall(r"<text x='([\d.]+)' y='([\d.]+)' text-anchor='(?:start|end)'[^>]*>m\d</text>", rendered)
+    assert len(spots) == 8 and len(set(spots)) == 8
 
 
 def test_paired_bootstrap_keeps_identical_models_tied_and_records_collection(tmp_path):
