@@ -81,6 +81,9 @@ def test_extract_html_uses_last_block():
     (SVG_STATIC, "2d-s1", None),
     (SVG_STATIC.replace('<circle', '<image href="data:image/png;base64,iVBORw0KGgo="/><circle'), "2d-s1",
      "raster or embedded element"),
+    (SVG_STATIC.replace("</defs>", '<linearGradient id="g2" href="#g"/></defs>'), "2d-s1", None),
+    (SVG_STATIC.replace("<circle", '<a href="https://example.com"></a><circle'), "2d-s1", "non-fragment href"),
+    (SVG_STATIC.replace('viewBox="0 0 240 242"', 'viewBox="nonsense"'), "2d-s1", "viewBox"),
     (SVG_CSS_LOOP, "2d-s1", "CSS animation or transition"),
     (SVG_STATIC.replace('viewBox="0 0 240 242"', 'viewBox="0 0 100 100"'), "2d-s1", "viewBox"),
     (three_page(ROUND_CHARACTER).replace("from 'three'", "from 'https://unpkg.com/three'"), "3d-s1",
@@ -113,16 +116,30 @@ browser = pytest.mark.skipif(not _browser_available(), reason="needs the fronten
     (SVG_CSS_LOOP, "2d-s2", None),
     (three_page(ROUND_CHARACTER, "ch.rotation.y = Math.sin(2 * Math.PI * t / 1500); renderer.render(scene, cam);"),
      "3d-s2", None),
-    # Network access hidden from the static gates: an image element created from script, and fetch.
+    # Raster and network access hidden from the static gates: a script-built data: image, and fetch whose
+    # evidence the page tries to erase.
     (svg_scripted("c.setAttribute('cx', 60 + t / 25);",
                   "const i = document.createElementNS('http://www.w3.org/2000/svg', 'image');"
-                  "i.setAttribute('href', 'https://example.com/a.png'); document.querySelector('svg').append(i);"),
-     "2d-s2", "network requests"),
-    (svg_scripted("c.setAttribute('cx', 60 + t / 25);", "window['fe' + 'tch']('https://example.com/x');"),
+                  "i.setAttribute('href', 'da' + 'ta:image/png;base64,iVBORw0KGgo=');"
+                  "document.querySelector('svg').append(i);"),
+     "2d-s2", "forbidden elements: image"),
+    (svg_scripted("c.setAttribute('cx', 60 + t / 25);",
+                  "window['fe' + 'tch']('https://example.com/x'); console.debug = () => {};"),
      "2d-s2", "forbidden API calls: fetch"),
-    (svg_scripted("c.setAttribute('cx', 60 + Math.random() * 100);"), "2d-s2", "non-deterministic"),
+    (svg_scripted("c.setAttribute('cx', 60 + t / 25 + (t === 200 ? Math.random() * 50 : 0));"), "2d-s2",
+     "non-deterministic"),
+    (svg_scripted("c.setAttribute('cx', 60 + 100 * Math.sin(Math.PI * t / 1500));"), "2d-s2", "does not loop"),
     (svg_scripted(""), "2d-s2", "static animation"),
-    (three_page(FLAT_CHARACTER), "3d-s1", "is flat"),
+    # Invisible depth does not rescue a flat cutout.
+    (three_page(FLAT_CHARACTER + """
+const ghost = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 3), new THREE.MeshBasicMaterial({ transparent: true, opacity: 0 }));
+ghost.position.set(0, 1, -1.5); ch.add(ghost);"""), "3d-s1", "is flat"),
+    (three_page(ROUND_CHARACTER + """
+const big = new THREE.DataTexture(new Uint8Array(128 * 128 * 4).fill(200), 128, 128); big.needsUpdate = true;
+body.material = new THREE.ShaderMaterial({ uniforms: { big: { value: big } },
+  vertexShader: 'varying vec2 v; void main() { v = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+  fragmentShader: 'uniform sampler2D big; varying vec2 v; void main() { gl_FragColor = texture2D(big, v); }' });"""),
+     "3d-s1", "texture larger than 64x64"),
 ])
 def test_runtime_gates(tmp_path, html, kind, expected):
     from nwb.frontend_render import render_page
@@ -156,13 +173,13 @@ def test_scores_gate_failures_and_excludes_same_vendor_judges(tmp_path, monkeypa
         shutil.copyfile(image, stem / "frame_00.png")
     digest = hashlib.sha256(image.read_bytes()).hexdigest()
     target = "frontend/subject/001/2d-s1__r1/frame_00.json"
-    for judge, vendor, answers in (("other", "anthropic", [True] * 3 + [False] * 3), ("own", "openai", [True] * 6)):
+    questions = list(corpus.task("001").frames[0].questions)
+    for judge, vendor, answers, asked in (("other", "anthropic", [True] * 3 + [False] * 3, questions),
+                                          ("own", "openai", [True] * 6, questions),
+                                          ("outdated", "anthropic", [True], ["An old question?"])):
         write_json(run / "frontend-judgments" / judge / target,
                    {"judge": judge, "judge_vendor": vendor, "image": "frontend/subject/001/2d-s1__r1/frame_00.png",
-                    "image_sha256": digest, "answers": answers})
-    write_json(run / "frontend-judgments" / "other" / "frontend/subject/001/2d-s1__r1/stale.json",
-               {"judge": "other", "judge_vendor": "anthropic", "image": "frame.png", "image_sha256": "0" * 64,
-                "answers": [True]})
+                    "image_sha256": digest, "questions": asked, "answers": answers})
     rows = {r["kind"]: r for r in frontend.aggregate(corpus, run)["rows"]}
-    assert rows["2d-s1"]["score"] == 0.5  # the subject's own vendor is left out
+    assert rows["2d-s1"]["score"] == 0.5  # the subject's own vendor and outdated questions are left out
     assert rows["2d-mem"]["score"] == 0.0 and rows["2d-mem"]["gates_passed"] == 0

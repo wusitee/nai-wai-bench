@@ -134,8 +134,8 @@ _COMMON = {
     "data: URI": r"\bdata:[\w.+-]+/[\w.+-]+",
     "base64 decoding": r"\batob\s*\(",
     "external script": r"<\s*script\b[^>]*\bsrc\s*=",
-    "non-fragment href": r"\bhref\s*=\s*[\"']?(?!\s*#)",
 }
+_HREF = re.compile(r"""\bhref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))""", re.I)
 _STATIC_2D = {
     "SMIL animation": r"<\s*(animate|animateTransform|animateMotion|set)\b",
     "CSS animation or transition": r"@keyframes\b|\banimation(-name)?\s*:|\btransition\s*:",
@@ -153,13 +153,18 @@ def static_gates(html: str | None, kind: str, width: int, height: int) -> list[s
     for name, pattern in _COMMON.items():
         if re.search(pattern, html, re.I):
             failures.append(name)
+    if any(not "".join(m.groups(default="")).strip().startswith("#") for m in _HREF.finditer(html)):
+        failures.append("non-fragment href")
     if dimension(kind) == "2d":
         svgs = re.findall(r"<\s*svg\b[^>]*>", html, re.I)
         if len(svgs) != 1:
             failures.append(f"expected one inline <svg>, found {len(svgs)}")
         else:
             box = re.search(r"\bviewBox\s*=\s*[\"']([^\"']*)[\"']", svgs[0])
-            numbers = [float(n) for n in re.split(r"[\s,]+", box[1].strip())] if box else []
+            try:
+                numbers = [float(n) for n in re.split(r"[\s,]+", box[1].strip())] if box else []
+            except ValueError:
+                numbers = []
             if numbers != [0, 0, width, height]:
                 failures.append(f'svg viewBox is not "0 0 {width} {height}"')
         if re.search(r"<\s*(foreignObject|canvas)\b", html, re.I):
@@ -244,11 +249,17 @@ def collect_jobs(corpus: Corpus, models: list[ModelSpec], task_ids: list[str], k
 
 
 def samples(run_dir: Path) -> list[tuple[Path, dict]]:
+    """Successful samples, excluding step 2 samples whose step 1 sample has changed since."""
     found = []
     for path in sorted((run_dir / "frontend").glob("*/*/*__r*.json")):
         record = read_json(path)
-        if record.get("track") == "frontend" and "error" not in record:
-            found.append((path, record))
+        if record.get("track") != "frontend" or "error" in record:
+            continue
+        if depends := record.get("depends_on"):
+            source = run_dir / depends["sample"]
+            if not source.is_file() or hashlib.sha256(source.read_bytes()).hexdigest() != depends["sha256"]:
+                continue
+        found.append((path, record))
     return found
 
 
@@ -275,8 +286,7 @@ class ModelJudge:
         self.backend = get_backend(spec)
 
     def request_prompt(self, questions: Sequence[str]) -> str:
-        numbered = "\n".join(f"{i}. {q}" for i, q in enumerate(questions, 1))
-        return fill(self.prompt, QUESTIONS=numbered).strip()
+        return judge_prompt(self.prompt, questions)
 
     def answer(self, image: Path, questions: Sequence[str]) -> dict:
         last = None
@@ -287,6 +297,11 @@ class ModelJudge:
             except ValueError as e:
                 last = e
         raise ValueError(f"no valid judgment after {self.ATTEMPTS} attempts: {last}")
+
+
+def judge_prompt(template: str, questions: Sequence[str]) -> str:
+    numbered = "\n".join(f"{i}. {q}" for i, q in enumerate(questions, 1))
+    return fill(template, QUESTIONS=numbered).strip()
 
 
 def parse_answers(reply: str, count: int) -> list[bool]:
@@ -350,11 +365,11 @@ def judge_jobs(corpus: Corpus, judges: list[ChecklistJudge], run_dir: Path, *, c
     targets = []  # (output relative path, image, questions, base extras)
     task_ids = set()
     for path, record in samples(run_dir):
+        task_ids.add(record["task"])
         render_dir = path.with_suffix("")
         render = render_current(record, render_dir)
         if render is None or render["gates"] or record["static_gates"]:
             continue  # unrendered samples wait; gate failures score 0 without judging
-        task_ids.add(record["task"])
         for name, image, questions in judged_images(corpus, record, render, render_dir):
             targets.append((Path(rel(render_dir, run_dir)) / f"{name}.json", image, questions,
                             {"model": record["model"], "vendor": record["vendor"], "sample": rel(path, run_dir)}))
@@ -412,6 +427,13 @@ def _judgments(corpus: Corpus, run_dir: Path, judges: set[str] | None) -> dict[s
     return by_target
 
 
+def _fresh(corpus: Corpus, judgments: list[dict], questions: Sequence[str]) -> list[dict]:
+    """Judgments of these exact questions with the current judge prompt (None for non-prompt judges)."""
+    expected = sha256_text(judge_prompt(corpus.prompts["judge"]["prompt"], questions))
+    return [j for j in judgments if j.get("questions") == list(questions) and len(j["answers"]) == len(questions)
+            and j.get("judge_prompt") in (None, expected)]
+
+
 def yes_share(judgment: dict) -> float:
     return sum(judgment["answers"]) / len(judgment["answers"])
 
@@ -429,9 +451,9 @@ def score_sample(corpus: Corpus, path: Path, record: dict, run_dir: Path, by_tar
     if record["static_gates"] or render["gates"]:
         return {**result, "status": "gate failed", "score": 0.0, "images": {}}
     images, judges_used = {}, set()
-    for name, _, _ in judged_images(corpus, record, render, render_dir):
+    for name, _, questions in judged_images(corpus, record, render, render_dir):
         target = f"{rel(render_dir, run_dir)}/{name}.json"
-        counted = pick_judges(by_target.get(target, []), record["vendor"])
+        counted = pick_judges(_fresh(corpus, by_target.get(target, []), questions), record["vendor"])
         if not counted:
             return {**result, "status": "unjudged", "score": None}
         judges_used.update(j["judge"] for j in counted)
@@ -456,7 +478,8 @@ def _bootstrap(scores_by_task: dict[str, list[float]], rng: random.Random) -> tu
 
 def aggregate(corpus: Corpus, run_dir: Path, judges: set[str] | None = None) -> dict:
     by_target = _judgments(corpus, run_dir, judges)
-    scored = [score_sample(corpus, path, record, run_dir, by_target) for path, record in samples(run_dir)]
+    found = samples(run_dir)
+    scored = [score_sample(corpus, path, record, run_dir, by_target) for path, record in found]
     rows = []
     for model in sorted({s["model"] for s in scored}):
         for kind in KINDS:
@@ -475,12 +498,10 @@ def aggregate(corpus: Corpus, run_dir: Path, judges: set[str] | None = None) -> 
                          "views_score": mean([s.get("views_score") for s in done if s["status"] == "scored"]),
                          "ci95": list(ci) if ci else None})
     controls = {}
-    for target, judgments in by_target.items():
-        if not target.startswith("_controls/"):
-            continue
-        _, task_id, kind, _ = target.split("/", 3)
-        for j in judgments:
-            controls.setdefault(j["judge"], {}).setdefault(f"{task_id}/{kind}", []).append(yes_share(j))
+    for task_id, name, _, questions in control_images(corpus, sorted({r["task"] for _, r in found}), run_dir):
+        for j in _fresh(corpus, by_target.get(f"_controls/{task_id}/{name}.json", []), questions):
+            group = f"{task_id}/{name.split('/')[0]}"
+            controls.setdefault(j["judge"], {}).setdefault(group, []).append(yes_share(j))
     controls = {judge: {k: mean(v) for k, v in sorted(groups.items())} for judge, groups in sorted(controls.items())}
     return {"corpus": CORPUS, "experimental": True, "index_included": False, "three_d_ranked": False,
             "judges": sorted(judges) if judges else None, "rows": rows, "samples": scored, "controls": controls,

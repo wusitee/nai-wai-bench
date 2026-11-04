@@ -113,7 +113,8 @@ this corpus; it has its own `nwb frontend` command.
 
 A step 2 sample uses the step 1 sample of the same model and rep, even when step 1 failed its gates;
 its record stores the step 1 sample path, hash, and static gate result under `depends_on`. Recollecting
-step 1 makes its step 2 sample stale. Memory kinds are independent of the GIF tasks (task id `mem`,
+step 1 makes its step 2 sample stale: it is ignored by rendering, judging, and reports until collected
+again. Memory kinds are independent of the GIF tasks (task id `mem`,
 240 × 240) and are judged with the `[memory]` checklist in the task manifest, which follows the
 image-generation traits in `bench/rubric.toml`.
 
@@ -144,23 +145,33 @@ renderer verifies.
 
 Model HTML is untrusted. `nwb.frontend_render` renders each sample in its own subprocess with
 Playwright's headless Chromium, using its OS sandbox, SwiftShader WebGL, main-thread animation (so
-seeking is exact), and a dead proxy. The page is served from memory at `http://nwb.invalid/`; every
-request other than the page and, for 3D, the vendored three.js files is aborted. Pages never see
-`file://` URLs. A sample that exceeds 180 seconds is killed.
+seeking is exact), and a dead proxy. The page is served from memory at `http://nwb.invalid/` with a
+Content Security Policy that allows only inline scripts and styles (and, for 3D, the vendored three.js
+files), so images, fonts, frames, and connections are refused; every request other than the
+page and the vendored files is also aborted. Pages never see `file://` URLs. A sample that exceeds 180
+seconds is killed.
 
 Static gates read the source: the HTML block, size, forbidden elements and URLs, the 2D `<svg>` and
 `viewBox`, static-only rules for step 1 and memory pages, and 3D import specifiers. APIs that comments
 may mention (`fetch`, timers) are checked at runtime instead. Runtime gates fail a sample on:
 
-- requests or WebSockets, calls to timers, `fetch`, `XMLHttpRequest`, workers, `Image`, and similar
-  APIs (replaced before page scripts run), page errors, and `console.error`;
-- 2D: animation in a static page, both or neither timing method in step 2;
+- requests or WebSockets, CSP violations, page errors, and `console.error`;
+- calls to timers, `fetch`, `XMLHttpRequest`, workers, `Image`, and similar APIs, and WebGL texture
+  uploads with data larger than 64 × 64; these are replaced or wrapped before page scripts run and
+  report through a console channel the page cannot clear;
+- forbidden elements in the live DOM after any render (`img`, `image`, `iframe`, `object`, `video`,
+  `foreignObject`, `link`, ..., and `canvas` in 2D), including elements created by script;
+- 2D: animation in a static page, both or neither timing method in step 2, rechecked after every
+  render;
 - 3D: `nwb.ready` not true within 20 seconds, a malformed `window.nwb`, a canvas that is not W × H,
-  image textures or textures larger than 64 × 64, and characters that are unnamed, have fewer than two
-  visible meshes, or are flat (depth/width below 0.3 along the reference camera);
-- determinism: rendering a time again after other times changes more than 0.1% of pixels;
-- step 2: no keyframe differs from t = 0 by more than 0.5% of pixels, or t = 0 and t = D differ by
-  more than 1%.
+  image textures or textures larger than 64 × 64 (material properties and shader uniforms), and
+  characters that are unnamed, have fewer than two drawn meshes, or are flat (depth/width below 0.3
+  along the reference camera). Hidden, layer-excluded, and fully transparent meshes do not count;
+- determinism: rendering every keyframe time again, in a shuffled order after other renders, changes
+  more than 0.1% of pixels;
+- step 2: no keyframe differs from t = 0 by more than 0.5% of pixels, or any keyframe time t and
+  t + D differ by more than 1%. A motion whose period divides D also passes; the judges compare
+  keyframes.
 
 The renderer writes `frame_NN.png` at each keyframe time (only `frame_00` for static kinds), a 12 fps
 `preview.gif` for step 2, and, for 3D, `view_side`, `view_back`, `view_three_quarter`, and `view_top`
@@ -179,7 +190,8 @@ no for each question. Judges sit behind a small `ChecklistJudge` interface; the 
 tracks, judges from the subject's own vendor are left out when another judge exists; those judge calls
 are skipped.
 
-An image's score is the share of yes answers, averaged over the counted judges. A sample's score is
+Judgments count only for the current image bytes, questions, and judge prompt. An image's score is the
+share of yes answers, averaged over the counted judges. A sample's score is
 the mean over its judged images: one frame for static kinds, eight for step 2, plus the four views for
 3D. Samples that fail a gate score 0 without judging. Scores are reported per model and kind, with 3D
 keyframe and view sub-scores, and 95% bootstrap intervals that resample tasks and reps.
@@ -204,5 +216,5 @@ uv run --extra frontend nwb frontend report --run pilot
 Subject calls may take up to 30 minutes. Samples are `runs/<run>/frontend/<model>/<task>/<kind>__r<rep>.json`,
 renders are in the directory with the same stem, and judgments are under `runs/<run>/frontend-judgments/`.
 `report` writes `runs/<run>/frontend/scores.json` and `gallery.html`, which shows the reference GIF and
-keyframes beside each sample's renders, judge answers, a sandboxed live preview of 2D animations, and the
-page source as text. Every stage resumes and skips finished work; `--force` redoes it.
+keyframes beside each sample's renders, the rendered loop, judge answers, and the page source as text.
+The gallery never runs model code. Every stage resumes and skips finished work; `--force` redoes it.

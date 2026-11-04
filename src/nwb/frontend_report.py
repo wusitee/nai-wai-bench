@@ -1,15 +1,14 @@
-"""Local gallery and summary for the experimental frontend track (runs/<run>/frontend/gallery.html)."""
+"""Local gallery and summary for the experimental frontend track (runs/<run>/frontend/gallery.html).
+
+The gallery never runs model code: it shows the harness renders and links the page source as text."""
 
 import html
 import os
 from pathlib import Path
 
-from nwb.frontend import KINDS, MEMORY, Corpus, judged_images, samples, step
-from nwb.frontend_render import page_document, render_current
+from nwb.frontend import KINDS, MEMORY, Corpus, judged_images, samples
+from nwb.frontend_render import render_current
 
-# Live previews run model code inside an opaque-origin sandboxed iframe that may load nothing.
-CSP = ("<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; "
-       "style-src 'unsafe-inline'; script-src 'unsafe-inline'\">")
 STYLE = """
 body{font:14px/1.45 system-ui,sans-serif;margin:24px;color:#222;background:#fafafa}
 h1{font-size:22px}h2{margin-top:36px;border-bottom:1px solid #ddd}h3{margin:18px 0 6px}
@@ -38,15 +37,6 @@ def _answers(questions, by_judge: dict) -> str:
     return f"<details><summary>answers</summary><ol>{rows}</ol></details>"
 
 
-def _live_2d(record: dict) -> str:
-    """A sandboxed live preview of a 2D page, driving window.nwb.render(t) when the page uses it."""
-    driver = ("<script>(function(){var D=%d;function f(ts){if(window.nwb&&typeof nwb.render==='function')"
-              "nwb.render(ts%%D);requestAnimationFrame(f)}requestAnimationFrame(f)})()</script>" % record["duration_ms"])
-    doc = page_document(record["html"], False, head=CSP) + driver
-    return (f'<figure><iframe sandbox="allow-scripts" width="{record["width"]}" height="{record["height"]}" '
-            f'srcdoc="{html.escape(doc)}"></iframe><figcaption>live (sandboxed)</figcaption></figure>')
-
-
 def _sample_html(corpus: Corpus, path: Path, record: dict, scored: dict, base: Path) -> str:
     render_dir = path.with_suffix("")
     render = render_current(record, render_dir)
@@ -63,8 +53,6 @@ def _sample_html(corpus: Corpus, path: Path, record: dict, scored: dict, base: P
     if render and render.get("preview"):
         tiles.append(f'<figure><img src="{_link(render_dir / render["preview"], base)}" width="{record["width"]}">'
                      f"<figcaption>rendered loop</figcaption></figure>")
-    if render and step(record["kind"]) == "s2" and record["kind"].startswith("2d") and not gates:
-        tiles.append(_live_2d(record))
     images = scored.get("images", {})
     if render:
         for name, image, questions in judged_images(corpus, record, render, render_dir):

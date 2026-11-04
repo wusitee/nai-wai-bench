@@ -12,6 +12,7 @@ import hashlib
 import io
 import json
 import os
+import random
 import re
 import signal
 import subprocess
@@ -34,22 +35,42 @@ MAX_TEXTURE = 64
 VIEW_FOV = 35
 VENDOR = Path(__file__).resolve().parents[2] / "bench" / "frontend-v1" / "vendor" / "three"
 
-# Runs before any page script. Calls to forbidden APIs are recorded (and fail the gate) instead of acting.
+# Runs before any page script, in every frame. Calls to forbidden APIs and texture uploads larger than
+# the limit are reported through a console.debug captured here, so a page cannot erase the evidence.
+FORBIDDEN_TAG = "__nwb_forbidden__ "
 INIT_SCRIPT = """
 (() => {
-  const log = { forbidden: [] };
-  Object.defineProperty(window, '__nwbLog', { value: log });
-  const record = (name, result) => function () { log.forbidden.push(name); return result; };
+  const debug = console.debug.bind(console), report = name => debug('%(tag)s' + name);
+  const record = (name, result) => function () { report(name); return result; };
   for (const name of ['setTimeout', 'setInterval', 'requestAnimationFrame', 'requestIdleCallback'])
     window[name] = record(name, 0);
-  window.fetch = function () { log.forbidden.push('fetch'); return new Promise(() => {}); };
+  window.fetch = function () { report('fetch'); return new Promise(() => {}); };
   for (const name of ['XMLHttpRequest', 'WebSocket', 'EventSource', 'Worker', 'SharedWorker', 'RTCPeerConnection',
                       'Image', 'createImageBitmap'])
-    window[name] = function () { log.forbidden.push(name); throw new TypeError(name + ' is not available'); };
+    window[name] = function () { report(name); throw new TypeError(name + ' is not available'); };
   if (navigator.sendBeacon) navigator.sendBeacon = record('sendBeacon', false);
   URL.createObjectURL = record('URL.createObjectURL', '');
+  // Render targets upload no data; anything else above the limit is an image-sized texture.
+  for (const proto of [window.WebGLRenderingContext?.prototype, window.WebGL2RenderingContext?.prototype]) {
+    if (!proto) continue;
+    for (const name of ['texImage2D', 'texSubImage2D']) {
+      const original = proto[name], sub = name === 'texSubImage2D';
+      proto[name] = function (...a) {
+        let w, h, data;
+        if (a.length <= 7) { data = a[a.length - 1]; w = data?.width ?? data?.videoWidth; h = data?.height ?? data?.videoHeight; }
+        else { w = a[sub ? 4 : 3]; h = a[sub ? 5 : 4]; data = a[8]; }
+        if (data != null && typeof data !== 'number' && (w > %(max)d || h > %(max)d)) report(`texture upload ${w}x${h}`);
+        return original.apply(this, a);
+      };
+    }
+  }
 })();
-"""
+""" % {"tag": FORBIDDEN_TAG, "max": MAX_TEXTURE}
+
+# Elements that could show raster or external content, checked in the live DOM after every render.
+FORBIDDEN_DOM = """two => [...document.querySelectorAll('img, image, picture, iframe, frame, object, embed, video, ' +
+  'audio, source, track, foreignObject, link, base, portal, meta[http-equiv]' + (two ? ', canvas' : ''))]
+  .map(e => e.tagName.toLowerCase())"""
 
 SEEK_2D = """t => {
   for (const a of document.getAnimations()) { a.pause(); a.currentTime = t; }
@@ -78,7 +99,12 @@ INSPECT_3D = """async ({ W, H, minRatio, maxTexture }) => {
   if (canvas.width !== W || canvas.height !== H) problems.push(`canvas is ${canvas.width}x${canvas.height}, not ${W}x${H}`);
   n.render(0);
   const textures = new Set(), add = v => { if (v?.isTexture) textures.add(v); };
-  n.scene.traverse(o => { for (const m of [].concat(o.material || [])) for (const k in m) add(m[k]); });
+  n.scene.traverse(o => {
+    for (const m of [].concat(o.material || [])) {
+      for (const k in m) add(m[k]);
+      for (const u of Object.values(m.uniforms || {})) for (const v of [].concat(u?.value ?? [])) add(v);
+    }
+  });
   add(n.scene.background); add(n.scene.environment);
   for (const t of textures)
     for (const img of [].concat(t.image ?? [])) {
@@ -90,13 +116,20 @@ INSPECT_3D = """async ({ W, H, minRatio, maxTexture }) => {
     }
   n.scene.updateMatrixWorld(true);
   const cam = n.cameras.ref; cam.updateMatrixWorld();
+  // Only geometry that can draw pixels counts: hidden, layer-excluded, or fully transparent meshes do not.
+  const drawn = o => {
+    if (!o.isMesh || !o.layers.test(cam.layers)) return false;
+    for (let a = o; a; a = a.parent) if (!a.visible) return false;
+    return [].concat(o.material || []).some(m => m.visible !== false && m.colorWrite !== false
+      && !(m.transparent && m.opacity <= 0.02));
+  };
   const characters = [], p = new THREE.Vector3();
   n.characters.forEach((c, i) => {
     if (!c?.isObject3D) { problems.push(`characters[${i}] is not an Object3D`); return; }
     const label = c.name || `characters[${i}]`, box = new THREE.Box3();
     let meshes = 0;
     c.traverse(o => {
-      const pos = o.isMesh && o.visible ? o.geometry?.attributes?.position : null;
+      const pos = drawn(o) ? o.geometry?.attributes?.position : null;
       if (!pos) return;
       meshes++;
       for (let k = 0; k < pos.count; k++)
@@ -223,19 +256,30 @@ def render_page(html: str, kind: str, width: int, height: int, duration_ms: int,
     times = timestamps if animated else [0]
     vendor = vendored_files() if three_d else {}
     document = page_document(html, three_d).encode()
-    gates, errors, blocked = [], [], []
+    # The CSP blocks every image, font, frame, and connection; scripts may only be inline or vendored.
+    csp = ("default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'; "
+           "script-src 'unsafe-inline' 'unsafe-eval'" + (f" {ORIGIN}/vendor/three/" if three_d else ""))
+    gates, errors, blocked, forbidden, elements = [], [], [], [], set()
+    timing = {"declarative": False, "scripted": False}
     evidence: dict = {"frames": [], "views": []}
     out_dir.mkdir(parents=True, exist_ok=True)
 
     def route(r):
         url = r.request.url
         if url == f"{ORIGIN}/index.html":
-            return r.fulfill(status=200, body=document, content_type="text/html; charset=utf-8")
+            return r.fulfill(status=200, body=document, headers={"Content-Type": "text/html; charset=utf-8",
+                                                                  "Content-Security-Policy": csp})
         name = url.removeprefix(f"{ORIGIN}/vendor/three/")
         if three_d and url.startswith(f"{ORIGIN}/vendor/three/") and name in vendor and name.endswith(".js"):
             return r.fulfill(status=200, body=vendor[name], content_type="text/javascript")
         blocked.append(url[:200])
         return r.abort()
+
+    def console(m):
+        if m.text.startswith(FORBIDDEN_TAG):
+            forbidden.append(m.text.removeprefix(FORBIDDEN_TAG)[:100])
+        elif m.type == "error":
+            errors.append(f"console.error: {m.text}"[:500])
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True, chromium_sandbox=True, proxy={"server": "http://127.0.0.1:9"},
@@ -250,13 +294,27 @@ def render_page(html: str, kind: str, width: int, height: int, duration_ms: int,
         page = context.new_page()
         page.set_default_timeout(STEP_TIMEOUT_MS)
         page.on("pageerror", lambda e: errors.append(f"uncaught: {e}"[:500]))
-        page.on("console", lambda m: m.type == "error" and errors.append(f"console.error: {m.text}"[:500]))
+        page.on("console", console)
+
+        def inspect() -> None:
+            """Checks repeated after every render, since a page can change itself while rendering."""
+            elements.update(page.evaluate(FORBIDDEN_DOM, not three_d))
+            if not three_d:
+                info = page.evaluate(INSPECT_2D)
+                timing["declarative"] |= bool(info["animations"] or info["smil"])
+                timing["scripted"] |= info["scripted"]
 
         def shot() -> bytes:
             return page.screenshot(type="png", animations="allow", caret="initial")
 
+        def render_at(t: int) -> bytes:
+            draw(t)
+            inspect()
+            return shot()
+
         try:
             page.goto(f"{ORIGIN}/index.html", wait_until="load")
+            inspect()
             if three_d:
                 # Poll from Python: Playwright's own page-side polling would use the disabled timers.
                 deadline = time.monotonic() + STEP_TIMEOUT_MS / 1000
@@ -272,75 +330,70 @@ def render_page(html: str, kind: str, width: int, height: int, duration_ms: int,
                     evidence["scene"] = info
                 draw = (lambda t: page.evaluate("t => window.nwb.render(t)", t)) if not gates else None
                 evidence["mode"] = "render(t)"
+            elif not animated:
+                draw = lambda t: None  # noqa: E731
+                evidence["mode"] = "static"
+            elif timing["declarative"] == timing["scripted"]:
+                draw = None  # both or neither; reported below
+            elif timing["declarative"]:
+                draw = lambda t: page.evaluate(SEEK_2D, t)  # noqa: E731
+                evidence["mode"] = "declarative"
             else:
-                info = page.evaluate(INSPECT_2D)
-                declarative = bool(info["animations"] or info["smil"])
-                evidence.update(info)
-                if not animated:
-                    if declarative or info["scripted"]:
-                        gates.append("animation in a static task")
-                    draw = lambda t: None  # noqa: E731
-                    evidence["mode"] = "static"
-                elif declarative and info["scripted"]:
-                    gates.append("uses both declarative animation and window.nwb.render")
-                    draw = None
-                elif not declarative and not info["scripted"]:
-                    gates.append("no animation: neither declarative animation nor window.nwb.render")
-                    draw = None
-                elif declarative:
-                    draw = lambda t: page.evaluate(SEEK_2D, t)  # noqa: E731
-                    evidence["mode"] = "declarative"
-                else:
-                    draw = lambda t: page.evaluate("t => window.nwb.render(t)", t)  # noqa: E731
-                    evidence["mode"] = "render(t)"
+                draw = lambda t: page.evaluate("t => window.nwb.render(t)", t)  # noqa: E731
+                evidence["mode"] = "render(t)"
             if draw is not None:
-                draw(times[0])
-                shot()  # warm-up: the first seek after load can reach the compositor one frame late
+                render_at(times[0])  # warm-up: the first seek after load can reach the compositor one frame late
                 shots = []
                 for i, t in enumerate(times):
-                    draw(t)
-                    shots.append(shot())
+                    shots.append(render_at(t))
                     (out_dir / f"frame_{i:02d}.png").write_bytes(shots[-1])
                     evidence["frames"].append({"file": f"frame_{i:02d}.png", "t": t})
                 if three_d:
                     for view in ("side", "back", "three_quarter", "top"):
                         hidden = page.evaluate(VIEW_3D, {"view": view, "W": width, "H": height, "fov": VIEW_FOV})
+                        inspect()
                         (out_dir / f"view_{view}.png").write_bytes(shot())
                         evidence["views"].append({"file": f"view_{view}.png", "view": view, "t": 0,
                                                   "hidden": hidden[:50]})
-                # Render a time again after others, so state carried between calls shows up.
-                again = len(times) // 2
-                draw(times[again])
-                checks = {"determinism_diff": diff_fraction(shots[again], shot())}
+                # Every time again, in a fixed shuffled order, so state carried between calls shows up.
+                order = list(range(len(times)))
+                random.Random(len(times)).shuffle(order)
+                repeat = {times[i]: diff_fraction(shots[i], render_at(times[i])) for i in order}
+                checks = {"determinism_diff": max(repeat.values())}
                 if animated:
-                    draw(duration_ms)
-                    checks["loop_diff"] = diff_fraction(shots[0], shot())
+                    loop = {t: diff_fraction(shots[i], render_at(t + duration_ms)) for i, t in enumerate(times)}
+                    checks["loop_diff"] = max(loop.values())
                     checks["motion_diff"] = max(diff_fraction(shots[0], s) for s in shots[1:])
-                    previews = []
                     step = 1000 / PREVIEW_FPS
-                    for k in range(int(duration_ms // step) or 1):
-                        draw(round(k * step))
-                        previews.append(shot())
+                    previews = [render_at(round(k * step)) for k in range(int(duration_ms // step) or 1)]
                     _save_gif(previews, out_dir / "preview.gif", round(step))
                     evidence["preview"] = "preview.gif"
                 evidence["checks"] = checks
                 if checks["determinism_diff"] > DETERMINISM_LIMIT:
-                    gates.append(f"non-deterministic: rendering t={times[again]} again changed "
-                                 f"{checks['determinism_diff']:.1%} of pixels")
+                    t = max(repeat, key=repeat.get)
+                    gates.append(f"non-deterministic: rendering t={t} again changed {repeat[t]:.1%} of pixels")
                 if animated and checks["loop_diff"] > LOOP_LIMIT:
-                    gates.append(f"does not loop: t=0 and t={duration_ms} differ in {checks['loop_diff']:.1%} of pixels")
+                    t = max(loop, key=loop.get)
+                    gates.append(f"does not loop: t={t} and t={t + duration_ms} differ in {loop[t]:.1%} of pixels")
                 if animated and checks["motion_diff"] <= MOTION_MIN:
                     gates.append("static animation: no keyframe differs from t=0")
             else:
                 (out_dir / "failed.png").write_bytes(shot())
                 evidence["failed_screenshot"] = "failed.png"
-            forbidden = page.evaluate("() => window.__nwbLog.forbidden")
         except PlaywrightError as e:
             gates.append(f"render failed: {str(e).splitlines()[0][:300]}")
-            forbidden = []
         finally:
             context.close()
             browser.close()
+    if not three_d:
+        if not animated and (timing["declarative"] or timing["scripted"]):
+            gates.append("animation in a static task")
+        elif animated and timing["declarative"] and timing["scripted"]:
+            gates.append("uses both declarative animation and window.nwb.render")
+        elif animated and not timing["declarative"] and not timing["scripted"]:
+            gates.append("no animation: neither declarative animation nor window.nwb.render")
+    if elements:
+        gates.append(f"forbidden elements: {', '.join(sorted(elements))}")
     if forbidden:
         gates.append(f"forbidden API calls: {', '.join(sorted(set(forbidden)))}")
     if blocked:
@@ -348,7 +401,7 @@ def render_page(html: str, kind: str, width: int, height: int, duration_ms: int,
     if errors:
         gates.append(f"page errors: {errors[0]}")
     return {"gates": gates, "errors": errors[:20], "blocked": blocked[:20], "forbidden": sorted(set(forbidden)),
-            **evidence}
+            "elements": sorted(elements), "timing": timing, **evidence}
 
 
 def _save_gif(frames: list[bytes], path: Path, duration: int) -> None:
