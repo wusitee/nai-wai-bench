@@ -126,6 +126,11 @@ browser = pytest.mark.skipif(not _browser_available(), reason="needs the fronten
     (svg_scripted("c.setAttribute('cx', 60 + t / 25);",
                   "window['fe' + 'tch']('https://example.com/x'); console.debug = () => {};"),
      "2d-s2", "forbidden API calls: fetch"),
+    (svg_scripted("c.setAttribute('cx', 60 + t / 25);",
+                  "const host = document.createElement('div'); document.body.append(host);"
+                  "host.attachShadow({ mode: 'closed' }).append(document.createElement('canvas'));"
+                  "document.querySelectorAll = () => [];"),
+     "2d-s2", "shadow root"),
     (svg_scripted("c.setAttribute('cx', 60 + t / 25 + (t === 200 ? Math.random() * 50 : 0));"), "2d-s2",
      "non-deterministic"),
     (svg_scripted("c.setAttribute('cx', 60 + 100 * Math.sin(Math.PI * t / 1500));"), "2d-s2", "does not loop"),
@@ -133,7 +138,9 @@ browser = pytest.mark.skipif(not _browser_available(), reason="needs the fronten
     # Invisible depth does not rescue a flat cutout.
     (three_page(FLAT_CHARACTER + """
 const ghost = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 3), new THREE.MeshBasicMaterial({ transparent: true, opacity: 0 }));
-ghost.position.set(0, 1, -1.5); ch.add(ghost);"""), "3d-s1", "is flat"),
+ghost.position.set(0, 1, -1.5); ch.add(ghost);
+const empty = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 3), new THREE.MeshBasicMaterial());
+empty.geometry.setDrawRange(0, 0); ch.add(empty);"""), "3d-s1", "is flat"),
     (three_page(ROUND_CHARACTER + """
 const big = new THREE.DataTexture(new Uint8Array(128 * 128 * 4).fill(200), 128, 128); big.needsUpdate = true;
 body.material = new THREE.ShaderMaterial({ uniforms: { big: { value: big } },
@@ -154,6 +161,21 @@ def test_runtime_gates(tmp_path, html, kind, expected):
         assert any(expected in g for g in result["gates"]), result["gates"]
 
 
+@browser
+def test_harness_views_keep_characters_inside_an_occluder(tmp_path):
+    from PIL import Image
+    from nwb.frontend_render import render_page
+
+    # The characters are parented to a room box that encloses every harness camera.
+    html = three_page(ROUND_CHARACTER).replace("scene.add(ch);", """
+const room = new THREE.Mesh(new THREE.BoxGeometry(40, 40, 40), new THREE.MeshBasicMaterial({ color: '#553311', side: THREE.BackSide }));
+scene.add(room); room.add(ch);""")
+    result = render_page(html, "3d-s1", 240, 242, 1500, [0], tmp_path)
+    assert result["gates"] == []
+    for view in frontend.VIEWS:
+        assert len(Image.open(tmp_path / f"view_{view}.png").getcolors(240 * 242)) > 50, view
+
+
 def test_scores_gate_failures_and_excludes_same_vendor_judges(tmp_path, monkeypatch):
     from nwb import frontend_render
 
@@ -167,8 +189,8 @@ def test_scores_gate_failures_and_excludes_same_vendor_judges(tmp_path, monkeypa
         task = "001" if kind == "2d-s1" else frontend.MEMORY
         stem = frontend.sample_stem(run, "subject", task, kind, 1)
         write_json(stem.with_suffix(".json"), {"track": "frontend", "model": "subject", "vendor": "openai",
-                                               "task": task, "kind": kind, "rep": 1, "html": "<svg/>",
-                                               "html_sha256": "x", "static_gates": []})
+                                               "task": task, "kind": kind, "rep": 1, "html": SVG_STATIC,
+                                               "html_sha256": "x", "width": 240, "height": 242})
         write_json(stem / "render.json", {"html_sha256": "x", "harness": "h", "gates": gates})
         shutil.copyfile(image, stem / "frame_00.png")
     digest = hashlib.sha256(image.read_bytes()).hexdigest()

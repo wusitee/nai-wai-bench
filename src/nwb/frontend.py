@@ -255,6 +255,8 @@ def samples(run_dir: Path) -> list[tuple[Path, dict]]:
         record = read_json(path)
         if record.get("track") != "frontend" or "error" in record:
             continue
+        # Static gates are recomputed, so gate fixes apply to samples collected earlier.
+        record["static_gates"] = static_gates(record.get("html"), record["kind"], record["width"], record["height"])
         if depends := record.get("depends_on"):
             source = run_dir / depends["sample"]
             if not source.is_file() or hashlib.sha256(source.read_bytes()).hexdigest() != depends["sha256"]:

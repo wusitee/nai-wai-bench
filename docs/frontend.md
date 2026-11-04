@@ -151,22 +151,28 @@ files), so images, fonts, frames, and connections are refused; every request oth
 page and the vendored files is also aborted. Pages never see `file://` URLs. A sample that exceeds 180
 seconds is killed.
 
-Static gates read the source: the HTML block, size, forbidden elements and URLs, the 2D `<svg>` and
+Static gates read the source and are recomputed whenever samples are loaded, so gate fixes apply to
+earlier samples: the HTML block, size, forbidden elements and URLs, the 2D `<svg>` and
 `viewBox`, static-only rules for step 1 and memory pages, and 3D import specifiers. APIs that comments
 may mention (`fetch`, timers) are checked at runtime instead. Runtime gates fail a sample on:
 
 - requests or WebSockets, CSP violations, page errors, and `console.error`;
 - calls to timers, `fetch`, `XMLHttpRequest`, workers, `Image`, and similar APIs, and WebGL texture
-  uploads with data larger than 64 × 64; these are replaced or wrapped before page scripts run and
-  report through a console channel the page cannot clear;
+  data uploads into a texture larger than 64 × 64 (including tiled and pixel-unpack-buffer uploads);
+  these are replaced or wrapped before page scripts run and report through a console channel the page
+  cannot clear;
 - forbidden elements in the live DOM after any render (`img`, `image`, `iframe`, `object`, `video`,
-  `foreignObject`, `link`, ..., and `canvas` in 2D), including elements created by script;
+  `foreignObject`, `link`, ..., and `canvas` in 2D), including elements created by script, and any
+  author shadow root. The DOM is read through the DevTools protocol, which page scripts cannot
+  intercept;
 - 2D: animation in a static page, both or neither timing method in step 2, rechecked after every
   render;
 - 3D: `nwb.ready` not true within 20 seconds, a malformed `window.nwb`, a canvas that is not W × H,
   image textures or textures larger than 64 × 64 (material properties and shader uniforms), and
   characters that are unnamed, have fewer than two drawn meshes, or are flat (depth/width below 0.3
-  along the reference camera). Hidden, layer-excluded, and fully transparent meshes do not count;
+  along the reference camera). Hidden, layer-excluded, fully transparent, and empty-draw-range meshes
+  do not count, and bounds use the drawn vertices of every instance. Vertex-shader displacement is
+  not modeled; the novel-view checklists also ask about visible depth;
 - determinism: rendering every keyframe time again, in a shuffled order after other renders, changes
   more than 0.1% of pixels;
 - step 2: no keyframe differs from t = 0 by more than 0.5% of pixels, or any keyframe time t and
@@ -177,8 +183,8 @@ The renderer writes `frame_NN.png` at each keyframe time (only `frame_00` for st
 `preview.gif` for step 2, and, for 3D, `view_side`, `view_back`, `view_three_quarter`, and `view_top`
 at t = 0. Harness cameras orbit the characters' bounding sphere; "front" is the reference camera's
 horizontal direction. For each view, non-character meshes whose bounds block the line of sight to a
-character's center (walls, a room box) are hidden, and the near plane sits just in front of the
-sphere; `render.json` lists the hidden meshes. `render.json` records gates and evidence; changing the
+character's center (walls, a room box) stop drawing for that view (characters parented to them still
+draw), and the near plane sits just in front of the sphere; `render.json` lists the hidden meshes. `render.json` records gates and evidence; changing the
 renderer or vendored files re-renders every sample.
 
 ## Judging and scoring

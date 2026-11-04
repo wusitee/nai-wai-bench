@@ -50,27 +50,60 @@ INIT_SCRIPT = """
     window[name] = function () { report(name); throw new TypeError(name + ' is not available'); };
   if (navigator.sendBeacon) navigator.sendBeacon = record('sendBeacon', false);
   URL.createObjectURL = record('URL.createObjectURL', '');
-  // Render targets upload no data; anything else above the limit is an image-sized texture.
+  // Data uploads are checked against both their own size and the destination texture's allocation, so
+  // tiling and pixel-unpack-buffer offsets cannot build a larger image. Render targets upload no data.
+  const allocated = new WeakMap(), limit = %(max)d;
   for (const proto of [window.WebGLRenderingContext?.prototype, window.WebGL2RenderingContext?.prototype]) {
     if (!proto) continue;
-    for (const name of ['texImage2D', 'texSubImage2D']) {
-      const original = proto[name], sub = name === 'texSubImage2D';
-      proto[name] = function (...a) {
-        let w, h, data;
-        if (a.length <= 7) { data = a[a.length - 1]; w = data?.width ?? data?.videoWidth; h = data?.height ?? data?.videoHeight; }
-        else { w = a[sub ? 4 : 3]; h = a[sub ? 5 : 4]; data = a[8]; }
-        if (data != null && typeof data !== 'number' && (w > %(max)d || h > %(max)d)) report(`texture upload ${w}x${h}`);
-        return original.apply(this, a);
-      };
-    }
+    const { getParameter, texImage2D, texSubImage2D, texStorage2D } = proto;
+    const bound = (gl, target) => getParameter.call(gl, target === 0x0DE1 ? 0x8069 : 0x8514);
+    const sized = source => [source?.width ?? source?.videoWidth, source?.height ?? source?.videoHeight];
+    const check = (gl, target, w, h, data) => {
+      if (data == null) return;
+      const [aw, ah] = allocated.get(bound(gl, target)) || [0, 0];
+      if (Math.max(w, aw) > limit || Math.max(h, ah) > limit) report(`texture upload ${Math.max(w, aw)}x${Math.max(h, ah)}`);
+    };
+    proto.texImage2D = function (...a) {
+      const [w, h] = a.length <= 6 ? sized(a[5]) : [a[3], a[4]], data = a.length <= 6 ? a[5] : a[8];
+      const texture = bound(this, a[0]);
+      if (a[1] === 0 && texture) allocated.set(texture, [w, h]);
+      check(this, a[0], w, h, data);
+      return texImage2D.apply(this, a);
+    };
+    proto.texSubImage2D = function (...a) {
+      const [w, h] = a.length <= 7 ? sized(a[6]) : [a[4], a[5]];
+      check(this, a[0], w, h, a.length <= 7 ? a[6] : a[8]);
+      return texSubImage2D.apply(this, a);
+    };
+    if (texStorage2D) proto.texStorage2D = function (...a) {
+      const texture = bound(this, a[0]);
+      if (texture) allocated.set(texture, [a[3], a[4]]);
+      return texStorage2D.apply(this, a);
+    };
   }
 })();
 """ % {"tag": FORBIDDEN_TAG, "max": MAX_TEXTURE}
 
-# Elements that could show raster or external content, checked in the live DOM after every render.
-FORBIDDEN_DOM = """two => [...document.querySelectorAll('img, image, picture, iframe, frame, object, embed, video, ' +
-  'audio, source, track, foreignObject, link, base, portal, meta[http-equiv]' + (two ? ', canvas' : ''))]
-  .map(e => e.tagName.toLowerCase())"""
+# Elements that could show raster or external content. The live DOM is read through the DevTools protocol,
+# which page scripts cannot intercept and which includes closed shadow roots; author shadow roots fail too.
+FORBIDDEN_ELEMENTS = {"img", "image", "picture", "iframe", "frame", "object", "embed", "video", "audio", "source",
+                      "track", "foreignobject", "link", "base", "portal"}
+
+
+def dom_problems(cdp, two_d: bool) -> set[str]:
+    found, stack = set(), [cdp.send("DOM.getDocument", {"depth": -1, "pierce": True})["root"]]
+    while stack:
+        node = stack.pop()
+        name = (node.get("localName") or "").lower()
+        if node.get("nodeType") == 1 and (name in FORBIDDEN_ELEMENTS or (two_d and name == "canvas")
+                                          or (name == "meta" and "http-equiv" in node.get("attributes", [])[::2])):
+            found.add(name)
+        shadows = node.get("shadowRoots", [])
+        if any(r.get("shadowRootType") != "user-agent" for r in shadows):
+            found.add("shadow root")
+        stack += node.get("children", []) + shadows + ([node["contentDocument"]] if "contentDocument" in node else [])
+    return found
+
 
 SEEK_2D = """t => {
   for (const a of document.getAnimations()) { a.pause(); a.currentTime = t; }
@@ -118,7 +151,8 @@ INSPECT_3D = """async ({ W, H, minRatio, maxTexture }) => {
   const cam = n.cameras.ref; cam.updateMatrixWorld();
   // Only geometry that can draw pixels counts: hidden, layer-excluded, or fully transparent meshes do not.
   const drawn = o => {
-    if (!o.isMesh || !o.layers.test(cam.layers)) return false;
+    if (!o.isMesh || !o.layers.test(cam.layers) || o.geometry?.drawRange?.count === 0) return false;
+    if (o.isInstancedMesh && o.count === 0) return false;
     for (let a = o; a; a = a.parent) if (!a.visible) return false;
     return [].concat(o.material || []).some(m => m.visible !== false && m.colorWrite !== false
       && !(m.transparent && m.opacity <= 0.02));
@@ -132,8 +166,16 @@ INSPECT_3D = """async ({ W, H, minRatio, maxTexture }) => {
       const pos = drawn(o) ? o.geometry?.attributes?.position : null;
       if (!pos) return;
       meshes++;
-      for (let k = 0; k < pos.count; k++)
-        box.expandByPoint(p.fromBufferAttribute(pos, k).applyMatrix4(o.matrixWorld).applyMatrix4(cam.matrixWorldInverse));
+      // Bounds of the vertices actually drawn: the draw range (through the index) and every instance.
+      const index = o.geometry.index, range = o.geometry.drawRange;
+      const end = Math.min(range.start + range.count, index ? index.count : pos.count);
+      const instances = o.isInstancedMesh ? o.count : 1, local = new THREE.Matrix4(), world = new THREE.Matrix4();
+      for (let i = 0; i < instances; i++) {
+        if (o.isInstancedMesh) o.getMatrixAt(i, local);
+        world.multiplyMatrices(cam.matrixWorldInverse, o.matrixWorld).multiply(local);
+        for (let k = range.start; k < end; k++)
+          box.expandByPoint(p.fromBufferAttribute(pos, index ? index.getX(k) : k).applyMatrix4(world));
+      }
     });
     const size = box.isEmpty() ? new THREE.Vector3() : box.getSize(new THREE.Vector3());
     const ratio = size.z / Math.max(size.x, 1e-9);
@@ -173,6 +215,9 @@ VIEW_3D = """async ({ view, W, H, fov }) => {
   const own = new Set();
   for (const c of n.characters) c.traverse(o => own.add(o));
   const targets = n.characters.map(c => new THREE.Box3().setFromObject(c, true).getCenter(new THREE.Vector3()));
+  cam.layers.mask = ref.layers.mask;
+  // Layers are per object, so emptying an occluder's mask hides only its own drawing, never characters
+  // parented to it.
   const hidden = [], hit = new THREE.Vector3();
   n.scene.traverse(o => {
     if (!o.isMesh || !o.visible || own.has(o)) return;
@@ -180,13 +225,16 @@ VIEW_3D = """async ({ view, W, H, fov }) => {
     for (const target of targets) {
       const ray = new THREE.Ray(cam.position.clone(), target.clone().sub(cam.position).normalize());
       if (ray.intersectBox(bounds, hit) && hit.distanceTo(cam.position) < target.distanceTo(cam.position)) {
-        hidden.push(o); o.visible = false; break;
+        hidden.push([o, o.layers.mask]); o.layers.mask = 0; break;
       }
     }
   });
-  n.renderer.render(n.scene, cam);
-  for (const o of hidden) o.visible = true;
-  return hidden.map(o => o.name || o.type);
+  try {
+    n.renderer.render(n.scene, cam);
+  } finally {
+    for (const [o, mask] of hidden) o.layers.mask = mask;
+  }
+  return hidden.map(([o]) => o.name || o.type);
 }"""
 
 
@@ -295,10 +343,11 @@ def render_page(html: str, kind: str, width: int, height: int, duration_ms: int,
         page.set_default_timeout(STEP_TIMEOUT_MS)
         page.on("pageerror", lambda e: errors.append(f"uncaught: {e}"[:500]))
         page.on("console", console)
+        cdp = context.new_cdp_session(page)
 
         def inspect() -> None:
             """Checks repeated after every render, since a page can change itself while rendering."""
-            elements.update(page.evaluate(FORBIDDEN_DOM, not three_d))
+            elements.update(dom_problems(cdp, not three_d))
             if not three_d:
                 info = page.evaluate(INSPECT_2D)
                 timing["declarative"] |= bool(info["animations"] or info["smil"])
