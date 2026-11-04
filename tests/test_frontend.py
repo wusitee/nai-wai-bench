@@ -140,7 +140,15 @@ browser = pytest.mark.skipif(not _browser_available(), reason="needs the fronten
 const ghost = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 3), new THREE.MeshBasicMaterial({ transparent: true, opacity: 0 }));
 ghost.position.set(0, 1, -1.5); ch.add(ghost);
 const empty = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 3), new THREE.MeshBasicMaterial());
-empty.geometry.setDrawRange(0, 0); ch.add(empty);"""), "3d-s1", "is flat"),
+empty.geometry.setDrawRange(0, 0); ch.add(empty);
+const none = new THREE.InstancedBufferGeometry().copy(new THREE.BoxGeometry(2, 2, 3)); none.instanceCount = 0;
+ch.add(new THREE.Mesh(none, new THREE.MeshBasicMaterial()));"""), "3d-s1", "is flat"),
+    # 64x64 tiles uploaded into a larger texture.
+    (three_page(ROUND_CHARACTER + """
+const gl = renderer.getContext(), raw = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, raw);
+gl.texStorage2D(gl.TEXTURE_2D, 1, gl.RGBA8, 128, 128);
+gl.texSubImage2D(gl.TEXTURE_2D, 0, 64, 64, 64, 64, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(64 * 64 * 4));
+renderer.resetState();"""), "3d-s1", "texture upload 128x128"),
     (three_page(ROUND_CHARACTER + """
 const big = new THREE.DataTexture(new Uint8Array(128 * 128 * 4).fill(200), 128, 128); big.needsUpdate = true;
 body.material = new THREE.ShaderMaterial({ uniforms: { big: { value: big } },

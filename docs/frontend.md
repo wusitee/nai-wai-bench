@@ -158,7 +158,8 @@ may mention (`fetch`, timers) are checked at runtime instead. Runtime gates fail
 
 - requests or WebSockets, CSP violations, page errors, and `console.error`;
 - calls to timers, `fetch`, `XMLHttpRequest`, workers, `Image`, and similar APIs, and WebGL texture
-  data uploads into a texture larger than 64 × 64 (including tiled and pixel-unpack-buffer uploads);
+  data uploads into a texture that was ever allocated larger than 64 × 64 (including tiled and
+  pixel-unpack-buffer uploads);
   these are replaced or wrapped before page scripts run and report through a console channel the page
   cannot clear;
 - forbidden elements in the live DOM after any render (`img`, `image`, `iframe`, `object`, `video`,
@@ -170,8 +171,9 @@ may mention (`fetch`, timers) are checked at runtime instead. Runtime gates fail
 - 3D: `nwb.ready` not true within 20 seconds, a malformed `window.nwb`, a canvas that is not W × H,
   image textures or textures larger than 64 × 64 (material properties and shader uniforms), and
   characters that are unnamed, have fewer than two drawn meshes, or are flat (depth/width below 0.3
-  along the reference camera). Hidden, layer-excluded, fully transparent, and empty-draw-range meshes
-  do not count, and bounds use the drawn vertices of every instance. Vertex-shader displacement is
+  along the reference camera). Hidden, layer-excluded, fully transparent, and empty-draw-range meshes,
+  meshes with no instances, and material groups that paint nothing do not count, and bounds use the
+  drawn vertices of every instance. Vertex-shader displacement is
   not modeled; the novel-view checklists also ask about visible depth;
 - determinism: rendering every keyframe time again, in a shuffled order after other renders, changes
   more than 0.1% of pixels;

@@ -50,14 +50,20 @@ INIT_SCRIPT = """
     window[name] = function () { report(name); throw new TypeError(name + ' is not available'); };
   if (navigator.sendBeacon) navigator.sendBeacon = record('sendBeacon', false);
   URL.createObjectURL = record('URL.createObjectURL', '');
-  // Data uploads are checked against both their own size and the destination texture's allocation, so
-  // tiling and pixel-unpack-buffer offsets cannot build a larger image. Render targets upload no data.
+  // Data uploads are checked against both their own size and the largest allocation the destination
+  // texture ever had (any face, even a failed call), so tiling, reallocation, and pixel-unpack-buffer
+  // offsets cannot build a larger image. Render targets upload no data.
   const allocated = new WeakMap(), limit = %(max)d;
   for (const proto of [window.WebGLRenderingContext?.prototype, window.WebGL2RenderingContext?.prototype]) {
     if (!proto) continue;
     const { getParameter, texImage2D, texSubImage2D, texStorage2D } = proto;
     const bound = (gl, target) => getParameter.call(gl, target === 0x0DE1 ? 0x8069 : 0x8514);
     const sized = source => [source?.width ?? source?.videoWidth, source?.height ?? source?.videoHeight];
+    const allocate = (texture, w, h) => {
+      if (!texture) return;
+      const [aw, ah] = allocated.get(texture) || [0, 0];
+      allocated.set(texture, [Math.max(aw, w || 0), Math.max(ah, h || 0)]);
+    };
     const check = (gl, target, w, h, data) => {
       if (data == null) return;
       const [aw, ah] = allocated.get(bound(gl, target)) || [0, 0];
@@ -65,8 +71,7 @@ INIT_SCRIPT = """
     };
     proto.texImage2D = function (...a) {
       const [w, h] = a.length <= 6 ? sized(a[5]) : [a[3], a[4]], data = a.length <= 6 ? a[5] : a[8];
-      const texture = bound(this, a[0]);
-      if (a[1] === 0 && texture) allocated.set(texture, [w, h]);
+      if (a[1] === 0) allocate(bound(this, a[0]), w, h);
       check(this, a[0], w, h, data);
       return texImage2D.apply(this, a);
     };
@@ -76,8 +81,7 @@ INIT_SCRIPT = """
       return texSubImage2D.apply(this, a);
     };
     if (texStorage2D) proto.texStorage2D = function (...a) {
-      const texture = bound(this, a[0]);
-      if (texture) allocated.set(texture, [a[3], a[4]]);
+      allocate(bound(this, a[0]), a[3], a[4]);
       return texStorage2D.apply(this, a);
     };
   }
@@ -150,12 +154,20 @@ INSPECT_3D = """async ({ W, H, minRatio, maxTexture }) => {
   n.scene.updateMatrixWorld(true);
   const cam = n.cameras.ref; cam.updateMatrixWorld();
   // Only geometry that can draw pixels counts: hidden, layer-excluded, or fully transparent meshes do not.
-  const drawn = o => {
-    if (!o.isMesh || !o.layers.test(cam.layers) || o.geometry?.drawRange?.count === 0) return false;
-    if (o.isInstancedMesh && o.count === 0) return false;
-    for (let a = o; a; a = a.parent) if (!a.visible) return false;
-    return [].concat(o.material || []).some(m => m.visible !== false && m.colorWrite !== false
-      && !(m.transparent && m.opacity <= 0.02));
+  const paints = m => m && m.visible !== false && m.colorWrite !== false && !(m.transparent && m.opacity <= 0.02);
+  // Index ranges three.js draws for a mesh: material groups with a painting material (or the whole
+  // geometry for a single material), clipped to the draw range. Empty when nothing is drawn.
+  const drawnRanges = o => {
+    const g = o.geometry;
+    if (!o.isMesh || !g?.attributes?.position || !o.layers.test(cam.layers)) return [];
+    if ((o.isInstancedMesh && o.count === 0) || (g.isInstancedBufferGeometry && g.instanceCount === 0)) return [];
+    for (let a = o; a; a = a.parent) if (!a.visible) return [];
+    const total = g.index ? g.index.count : g.attributes.position.count;
+    const start = g.drawRange.start, end = Math.min(total, start + g.drawRange.count);
+    const groups = Array.isArray(o.material)
+      ? g.groups.filter(r => paints(o.material[r.materialIndex])).map(r => [r.start, r.start + r.count])
+      : paints(o.material) ? [[0, total]] : [];
+    return groups.map(([a, b]) => [Math.max(a, start), Math.min(b, end)]).filter(([a, b]) => b > a);
   };
   const characters = [], p = new THREE.Vector3();
   n.characters.forEach((c, i) => {
@@ -163,18 +175,18 @@ INSPECT_3D = """async ({ W, H, minRatio, maxTexture }) => {
     const label = c.name || `characters[${i}]`, box = new THREE.Box3();
     let meshes = 0;
     c.traverse(o => {
-      const pos = drawn(o) ? o.geometry?.attributes?.position : null;
-      if (!pos) return;
+      const ranges = drawnRanges(o);
+      if (!ranges.length) return;
       meshes++;
-      // Bounds of the vertices actually drawn: the draw range (through the index) and every instance.
-      const index = o.geometry.index, range = o.geometry.drawRange;
-      const end = Math.min(range.start + range.count, index ? index.count : pos.count);
+      // Bounds of the vertices actually drawn, for every instance.
+      const pos = o.geometry.attributes.position, index = o.geometry.index;
       const instances = o.isInstancedMesh ? o.count : 1, local = new THREE.Matrix4(), world = new THREE.Matrix4();
       for (let i = 0; i < instances; i++) {
         if (o.isInstancedMesh) o.getMatrixAt(i, local);
         world.multiplyMatrices(cam.matrixWorldInverse, o.matrixWorld).multiply(local);
-        for (let k = range.start; k < end; k++)
-          box.expandByPoint(p.fromBufferAttribute(pos, index ? index.getX(k) : k).applyMatrix4(world));
+        for (const [a, b] of ranges)
+          for (let k = a; k < b; k++)
+            box.expandByPoint(p.fromBufferAttribute(pos, index ? index.getX(k) : k).applyMatrix4(world));
       }
     });
     const size = box.isEmpty() ? new THREE.Vector3() : box.getSize(new THREE.Vector3());
