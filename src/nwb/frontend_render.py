@@ -113,8 +113,9 @@ INSPECT_3D = """async ({ W, H, minRatio, maxTexture }) => {
 }"""
 
 # Harness cameras orbit the characters' bounding sphere. "Front" is the reference camera's horizontal
-# direction from the characters; the near plane sits just in front of the sphere, so walls or props
-# between a harness camera and the characters are clipped instead of hiding them.
+# direction from the characters. Non-character meshes whose bounds block the line of sight to a
+# character's center (walls, a room box around the camera) are hidden for that view, and the near plane
+# sits just in front of the sphere.
 VIEW_3D = """async ({ view, W, H, fov }) => {
   const THREE = await import('three');
   const n = window.nwb, rad = THREE.MathUtils.degToRad;
@@ -136,7 +137,23 @@ VIEW_3D = """async ({ view, W, H, fov }) => {
   cam.position.copy(sphere.center).addScaledVector(dir, dist);
   cam.lookAt(sphere.center);
   cam.updateMatrixWorld();
+  const own = new Set();
+  for (const c of n.characters) c.traverse(o => own.add(o));
+  const targets = n.characters.map(c => new THREE.Box3().setFromObject(c, true).getCenter(new THREE.Vector3()));
+  const hidden = [], hit = new THREE.Vector3();
+  n.scene.traverse(o => {
+    if (!o.isMesh || !o.visible || own.has(o)) return;
+    const bounds = new THREE.Box3().setFromObject(o, true);
+    for (const target of targets) {
+      const ray = new THREE.Ray(cam.position.clone(), target.clone().sub(cam.position).normalize());
+      if (ray.intersectBox(bounds, hit) && hit.distanceTo(cam.position) < target.distanceTo(cam.position)) {
+        hidden.push(o); o.visible = false; break;
+      }
+    }
+  });
   n.renderer.render(n.scene, cam);
+  for (const o of hidden) o.visible = true;
+  return hidden.map(o => o.name || o.type);
 }"""
 
 
@@ -287,9 +304,10 @@ def render_page(html: str, kind: str, width: int, height: int, duration_ms: int,
                     evidence["frames"].append({"file": f"frame_{i:02d}.png", "t": t})
                 if three_d:
                     for view in ("side", "back", "three_quarter", "top"):
-                        page.evaluate(VIEW_3D, {"view": view, "W": width, "H": height, "fov": VIEW_FOV})
+                        hidden = page.evaluate(VIEW_3D, {"view": view, "W": width, "H": height, "fov": VIEW_FOV})
                         (out_dir / f"view_{view}.png").write_bytes(shot())
-                        evidence["views"].append({"file": f"view_{view}.png", "view": view, "t": 0})
+                        evidence["views"].append({"file": f"view_{view}.png", "view": view, "t": 0,
+                                                  "hidden": hidden[:50]})
                 # Render a time again after others, so state carried between calls shows up.
                 again = len(times) // 2
                 draw(times[again])

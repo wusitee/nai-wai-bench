@@ -165,8 +165,9 @@ may mention (`fetch`, timers) are checked at runtime instead. Runtime gates fail
 The renderer writes `frame_NN.png` at each keyframe time (only `frame_00` for static kinds), a 12 fps
 `preview.gif` for step 2, and, for 3D, `view_side`, `view_back`, `view_three_quarter`, and `view_top`
 at t = 0. Harness cameras orbit the characters' bounding sphere; "front" is the reference camera's
-horizontal direction, and the near plane sits just in front of the sphere so that walls between a
-harness camera and the characters are clipped. `render.json` records gates and evidence; changing the
+horizontal direction. For each view, non-character meshes whose bounds block the line of sight to a
+character's center (walls, a room box) are hidden, and the near plane sits just in front of the
+sphere; `render.json` lists the hidden meshes. `render.json` records gates and evidence; changing the
 renderer or vendored files re-renders every sample.
 
 ## Judging and scoring
