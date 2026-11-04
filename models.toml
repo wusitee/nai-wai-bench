@@ -265,6 +265,20 @@ config = { mode = "default" }
 price = { input = 2.0, cached_input = 0.20, cache_write = 2.0, output = 10.0, unit = "USD/1M tokens", source = "https://platform.kimi.ai/", as_of = "2026-10-25" }
 can = ["text", "vision"]
 
+# --- pi coding agent ---
+
+# Undisclosed preview model on the TokenRhythm router (Chat Completions). The `tokenrhythm` provider is
+# declared in the dedicated pi directory's models.json (see docs/backends.md); its key stays there.
+[models."egg-alpha"]
+label = "egg-alpha (pi, TokenRhythm)"
+backend = "pi"
+vendor = "undisclosed"
+model = "tokenrhythm/egg-alpha"
+effort = "high"
+env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
+price = { input = 0.0, cached_input = 0.0, cache_write = 0.0, output = 0.0, unit = "USD/1M tokens", source = "https://tokenrhythm.studio/v1/models (free preview, listed at 0 CNY)", as_of = "2026-11-04" }
+can = ["text", "vision"]
+
 # --- OpenAI-compatible APIs ---
 
 # Xiaomi MiMo Token Plan; the endpoint and key are read from this CC Switch provider at run time.

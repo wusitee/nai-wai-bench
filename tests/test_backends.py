@@ -16,7 +16,7 @@ from nwb.backends.cc_switch import claude_env, openai_credentials
 from nwb.backends.codex import CodexBackend, ISOLATED_FEATURES, audit_rollout, recorded_tool_profile
 from nwb.backends.claude import ClaudeBackend
 from nwb.backends.openai_compat import OpenAICompatBackend
-from nwb.backends.pi import PiBackend
+from nwb.backends.pi import PiBackend, _rate_limit_wait
 from nwb.config import ModelSpec, model_settings
 
 FAKE_AGENT = Path(__file__).with_name("fake_acp_agent.py")
@@ -252,6 +252,25 @@ def test_pi_rejects_fallback_models_clamped_thinking_dropped_images_and_errors(t
                                ({"FAKE_PI_ERROR": "overloaded"}, [], "pi error: overloaded")]:
         with pytest.raises(BackendError, match=error):
             pi_backend(monkeypatch, effort="high", env=env).run(Request("hello", images))
+
+
+def test_pi_resends_rate_limited_prompts_after_the_provider_hint(tmp_path, monkeypatch):
+    limits, waits, sleep = tmp_path / "limits", [], time.sleep
+    # subprocess polls with short sleeps; only the backend's own waits are recorded and skipped.
+    monkeypatch.setattr("nwb.backends.pi.time.sleep", lambda s: waits.append(s) if s >= 1 else sleep(s))
+    limits.write_text("2")
+    backend = pi_backend(monkeypatch, effort="high", env={"FAKE_PI_RATE_LIMITS": str(limits)})
+    resp = backend.run(Request("hello"))
+    assert json.loads(resp.text)["auto_retry"] is False and resp.meta["rate_limit_retries"] == 2 and waits == [4, 4]
+    limits.write_text("99")
+    with pytest.raises(BackendError, match="pi error: 429"):
+        backend.run(Request("hello"))
+    # Long hints are honored up to the call timeout; other errors and other statuses are not retried.
+    assert _rate_limit_wait('429: {"retryAfterSeconds":    180}', 0, 600) == 181
+    assert _rate_limit_wait("429: retry-after: 9999", 0, 600) == 600
+    assert _rate_limit_wait("Rate limit exceeded", 3, 600) == 40
+    assert _rate_limit_wait('400: {"error":"invalid rate_limit parameter"}', 0, 600) is None
+    assert _rate_limit_wait("overloaded", 0, 600) is None
 
 
 def test_acp_rejects_unavailable_or_unconfirmed_effort():

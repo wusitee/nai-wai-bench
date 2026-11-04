@@ -196,7 +196,11 @@ local OpenAI-compatible servers. Sessions are not saved, and tools, extensions (
 support), skills, prompt templates, themes, context files, and automatic network activity such as catalog
 refreshes are disabled. The coding-agent system prompt is replaced with a neutral one, global `SYSTEM.md`
 and `APPEND_SYSTEM.md` files are not loaded, and pi still adds the temporary working directory. pi's
-automatic retry is turned off; failed samples are retried on the next run. Text and vision only.
+automatic retry is turned off, because pi ends the turn before retrying. A provider rate-limit error (HTTP 429)
+is instead resent in a fresh session after the provider's retry-after hint, honored up to the call's `timeout`
+(without a hint: 5, 10, 20… seconds, at most 120), up to six times; an error that leads with another HTTP status is
+not retried; `meta.rate_limit_retries` counts these and `meta.seconds` covers the final attempt. Other
+failed samples are retried on the next run. Text and vision only.
 
 `model` must name the model exactly as `provider/id` or `id`. Because pi falls back to another model and
 clamps unsupported thinking levels without failing, the harness reads the session state before prompting
@@ -219,6 +223,34 @@ can = ["text", "vision"]
 pi still reads its global `settings.json`, which can set defaults such as the thinking level. For a clean,
 reproducible configuration, point `env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }` at a dedicated, logged-in
 pi directory.
+
+### TokenRhythm (`egg-alpha`)
+
+`egg-alpha` is an undisclosed preview model on the TokenRhythm router. Its Chat Completions endpoint
+accepts images and `reasoning_effort`; its Anthropic endpoint rejects the model. The entry uses
+`PI_CODING_AGENT_DIR=~/.pi-nwb`, whose `models.json` declares the provider. `apiKey` may be a literal,
+`$NAME`, or `!command`:
+
+```json
+{
+  "providers": {
+    "tokenrhythm": {
+      "baseUrl": "https://tokenrhythm.studio/v1",
+      "api": "openai-completions",
+      "apiKey": "$TOKENRHYTHM_API_KEY",
+      "compat": { "thinkingFormat": "openai", "supportsReasoningEffort": true,
+                  "supportsDeveloperRole": false, "supportsStore": false },
+      "models": [{ "id": "egg-alpha", "reasoning": true, "input": ["text", "image"],
+                   "contextWindow": 1000000, "maxTokens": 128000,
+                   "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 } }]
+    }
+  }
+}
+```
+
+With `thinkingFormat = "openai"`, pi sends its thinking level as `reasoning_effort`, so `effort = "high"`
+applies. The router rate-limits bursts with HTTP 429 (`MODEL_CALL_FAILED`, with `retryAfterSeconds`), so
+collect with `--jobs 1`.
 
 ## ACP agents (`backend = "acp"`)
 

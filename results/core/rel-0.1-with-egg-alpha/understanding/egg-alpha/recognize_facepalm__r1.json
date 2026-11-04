@@ -1,0 +1,84 @@
+{
+  "settings_id": "7e9b52a50fc5ff45",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "egg-alpha",
+  "vendor": "undisclosed",
+  "item": "recognize_facepalm",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "answer": "这张图中的角色是**奶龙（Nailong）**——一只圆滚滚的黄色小龙，绿色大眼睛、奶白色的肚皮是它的标志性特征。它出自国产动画短片系列《奶龙》， originally 讲的是奶龙和小七（一位少年）的搞笑日常。\n\n它所属的网络梗就是中文互联网上的**\"奶龙表情包\"梗**：\n\n- 奶龙因为表情呆萌、神态\"憨憨的\"，被网友大量截图、二创成表情包，你这张就是典型的 3D 二创渲染版本（扶额思考的动作）。\n- 在抽象文化圈里，奶龙表情包常被反讽式地使用，和\"唐\"（形容行为呆傻的网络 slang）、\"我是奶龙\"等梗绑定，衍生出大量玩梗、恶搞甚至\"反奶龙\"的内容。\n- 类似\"无语\"\"思考\"\"憨笑\"这类奶龙表情，经常出现在聊天和评论区里表达\"我不知道该说什么了\"的情绪。\n\n所以简单总结：角色是奶龙，梗是\"奶龙表情包/抽象奶龙\"这一系列中文网络迷因。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "client": "pi 1.5.0",
+    "seconds": 33.6,
+    "stop_reason": "stop",
+    "rate_limit_retries": 1,
+    "tools_used": [],
+    "usage": {
+      "input": 327,
+      "output": 1555,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1319,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 327,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1555,
+      "reasoning": 1319
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "tokenrhythm/egg-alpha",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "tokenrhythm/egg-alpha",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-04T04:35:37Z",
+    "finished_at": "2026-11-04T04:36:35Z",
+    "revision": "44479d0",
+    "nwb_version": "0.1.0"
+  }
+}

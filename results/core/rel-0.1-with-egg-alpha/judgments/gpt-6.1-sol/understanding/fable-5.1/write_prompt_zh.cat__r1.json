@@ -1,0 +1,94 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1/write_prompt_zh.cat__r1.json",
+  "target_sha256": "6d78d7bc74cf7ddf0221ed1f6eb3ef952c3b9e6da3b251f15c6fb1bee3bc097e",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "956fbc25ac83bddb",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "fable-5.1",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 0,
+    "render": 0,
+    "background": 2,
+    "vibe": 2,
+    "identity": 1
+  },
+  "hallucinations": [
+    "One hand is raised toward the mouth instead of both hands clutching the belly.",
+    "The mouth has a flat red-pink interior rather than a dark interior.",
+    "The specified flat 2D vector style contradicts the glossy 3D CG reference.",
+    "Bright canary-yellow rubber-like skin with token cat features contradicts the required natural feline coloring or markings."
+  ],
+  "rationale": "The answer covers the closed eyes, bulky neckless body, plain background, and unhinged laughter, but omits the hunched standing pose and pale belly patch. The mouth is only partly correct, while the hand placement, rendering style, and token feline cues miss key requirements.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":0,\"eyes\":2,\"mouth\":1,\"body\":2,\"belly_patch\":0,\"render\":0,\"background\":2,\"vibe\":2,\"identity\":1},\"hallucinations\":[\"One hand is raised toward the mouth instead of both hands clutching the belly.\",\"The mouth has a flat red-pink interior rather than a dark interior.\",\"The specified flat 2D vector style contradicts the glossy 3D CG reference.\",\"Bright canary-yellow rubber-like skin with token cat features contradicts the required natural feline coloring or markings.\"],\"rationale\":\"The answer covers the closed eyes, bulky neckless body, plain background, and unhinged laughter, but omits the hunched standing pose and pale belly patch. The mouth is only partly correct, while the hand placement, rendering style, and token feline cues miss key requirements.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a19118-bc62-7b10-8b5f-7d3c293d85f2",
+    "seconds": 19.7,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12204,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 393,
+      "reasoning_output_tokens": 202
+    },
+    "tokens": {
+      "input": 12204,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 393,
+      "reasoning": 202
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T08:34:39Z",
+    "finished_at": "2026-10-31T08:34:59Z",
+    "revision": "bd3cba6",
+    "nwb_version": "0.1.0"
+  }
+}

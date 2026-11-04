@@ -236,7 +236,7 @@ def efficiency_section(scores: dict, label=lambda m: m) -> str:
         out.append("</table>")
     out.append("<p class=muted>Visual metrics cover retained tasks in the fixed visual panel, including failures with reported usage; "
                "token means use reported fields only. Panel cost requires complete repetition coverage, usage and prices for every panel task. "
-               "Seconds are end-to-end client time, not model speed. Image relay tokens are not generator cost. "
+               "Seconds are end-to-end client time, not model speed; for pi samples resent after a provider rate limit they cover only the final attempt. Image relay tokens are not generator cost. "
                "Whole-run subject totals and separate judge totals (cost to evaluate) are in scores.json.</p>")
     return "\n".join(out)
 

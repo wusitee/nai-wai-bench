@@ -10,6 +10,10 @@ Software releases use semantic versions; suite ids version the evaluation panels
   Release sites open with the index and write `index.json`; suite pages move to `meme-id/` and
   `visual-detail/`, and `naihub-v1/` redirects. Image generation moves to an experimental section outside
   the index.
+- Add egg-alpha, an undisclosed preview model on the TokenRhythm router, run through pi at high effort, and
+  select it in the 0.1.0 comparison through `rel-0.1-with-egg-alpha` and `rel-0.1-naihub-with-egg-alpha`;
+  earlier rows are unchanged. The pi backend now resends provider-rate-limited (HTTP 429) prompts after the
+  provider's retry hint.
 - Select Claude Fable 5.1 (high) in the 0.1.0 comparison through the merged runs `rel-0.1-with-fable-5.1`
   and `rel-0.1-naihub-with-fable-5.1`, matching the published site; earlier rows are unchanged.
 - Use Opus 5.5 as the sole default judge and for the selected 0.1.0 core comparison, including

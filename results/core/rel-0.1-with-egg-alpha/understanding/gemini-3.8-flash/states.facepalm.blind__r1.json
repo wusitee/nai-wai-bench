@@ -1,0 +1,65 @@
+{
+  "settings_id": "c5b99b49261f87dd",
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "vendor": "google",
+  "item": "states.facepalm.blind",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Look only at the attached character. Report its visible expression and gesture, not an imagined inner feeling. Return JSON with four keys: state (angry, facepalm, smug, laughing, or other), eyes (open, closed, or narrowed), mouth (open or closed), and gesture (behind_back, forehead, belly_clutch, folded_arms, or out_of_frame). Use unknown when a field cannot be determined. Do not assume the character must be laughing or invent gestures outside the frame.",
+  "images": [],
+  "answer": "```json\n{\n  \"state\": \"unknown\",\n  \"eyes\": \"unknown\",\n  \"mouth\": \"unknown\",\n  \"gesture\": \"unknown\"\n}\n```",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 33.4,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 13892,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:54:07Z",
+    "finished_at": "2026-10-25T00:54:41Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

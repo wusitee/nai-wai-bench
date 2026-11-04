@@ -7,16 +7,20 @@ independent of this workflow.
 ## Selected comparison
 
 [`releases/0.1.0.toml`](../releases/0.1.0.toml) selects the expanded comparison including GPT-6.1 Terra,
-the high/xhigh GPT-5.6-Sol configurations, and Claude Fable 5.1 (high):
+the high/xhigh GPT-5.6-Sol configurations, Claude Fable 5.1 (high), and egg-alpha (high, pi through the
+TokenRhythm router):
 
 | Suite | Raw run | Judge policy |
 |---|---|---|
-| `core` | `rel-0.1-with-fable-5.1` | Opus 5.5 only, including its judgments of Opus and other Anthropic subjects |
-| `naihub-v1` | `rel-0.1-naihub-with-fable-5.1` | Local answer-key scoring, without judges |
+| `core` | `rel-0.1-with-egg-alpha` | Opus 5.5 only, including its judgments of Opus and other Anthropic subjects |
+| `naihub-v1` | `rel-0.1-naihub-with-egg-alpha` | Local answer-key scoring, without judges |
 
-Each selected run is an `nwb merge` of the earlier comparison run (`rel-0.1-with-gpt-5.6-sol`,
-`rel-0.1-naihub-with-gpt-5.6-sol`) and the Fable run (`fable-5.1-core`, `fable-5.1-naihub`); all four
-sources remain saved. Fable's Nai-hub row has three repetitions per image, averaged within each image.
+Each selected run is a chain of `nwb merge`s; every source remains saved. The earlier comparison runs
+(`rel-0.1-with-gpt-5.6-sol`, `rel-0.1-naihub-with-gpt-5.6-sol`) were merged with the Fable runs
+(`fable-5.1-core`, `fable-5.1-naihub`) into `rel-0.1-with-fable-5.1` and `rel-0.1-naihub-with-fable-5.1`,
+and those with the egg-alpha runs (`egg-alpha-core`, `egg-alpha-naihub`). The Fable and egg-alpha Nai-hub
+rows have three repetitions per image, averaged within each image. egg-alpha's vendor is undisclosed, so
+judge independence from Opus 5.5 cannot be confirmed.
 
 This historical comparison mixes two recorded Codex collection profiles:
 
@@ -52,7 +56,7 @@ for selected runs. Restoration verifies checksums and suite membership before wr
 working run takes precedence. Explicit restoration requires a fresh working directory:
 
 ```sh
-uv run nwb restore --suite core --run rel-0.1-with-fable-5.1
+uv run nwb restore --suite core --run rel-0.1-with-egg-alpha
 ```
 
 Raw ZIP bundles are still available for separate downloads. Extract them into fresh run directories;

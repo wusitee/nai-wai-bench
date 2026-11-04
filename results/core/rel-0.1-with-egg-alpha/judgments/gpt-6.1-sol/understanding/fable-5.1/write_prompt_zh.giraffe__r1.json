@@ -1,0 +1,93 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1/write_prompt_zh.giraffe__r1.json",
+  "target_sha256": "0b1ae44ad15f1daa10ed15c9181d98bee0c26fdaf1f1e6bfb95fa6a698f078c0",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "0199db2d1179eaca",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "fable-5.1",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 0,
+    "background": 2,
+    "vibe": 1,
+    "identity": 2
+  },
+  "hallucinations": [
+    "Specifies a flat 2D drawing with minimal shading, contradicting the glossy 3D CG appearance.",
+    "Adds a long, distinct neck ending in a small head, contradicting the merged head-and-torso silhouette.",
+    "Directs the neck backward and head into a thrown-back pose, contradicting the forward-hunched laughing posture."
+  ],
+  "rationale": "The prompt clearly covers the closed eyes, enormous detailed laughing mouth, plain background, and recognizable giraffe features. It only partly captures the belly-clutching gesture, bulky anatomy, and absurd mood, while missing the belly patch and contradicting the required pose and rendering style.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":2,\"body\":1,\"belly_patch\":0,\"render\":0,\"background\":2,\"vibe\":1,\"identity\":2},\"hallucinations\":[\"Specifies a flat 2D drawing with minimal shading, contradicting the glossy 3D CG appearance.\",\"Adds a long, distinct neck ending in a small head, contradicting the merged head-and-torso silhouette.\",\"Directs the neck backward and head into a thrown-back pose, contradicting the forward-hunched laughing posture.\"],\"rationale\":\"The prompt clearly covers the closed eyes, enormous detailed laughing mouth, plain background, and recognizable giraffe features. It only partly captures the belly-clutching gesture, bulky anatomy, and absurd mood, while missing the belly patch and contradicting the required pose and rendering style.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a19118-d0bc-77d1-b7bc-1a381f616d4b",
+    "seconds": 15.4,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 11723,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 348,
+      "reasoning_output_tokens": 163
+    },
+    "tokens": {
+      "input": 11723,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 348,
+      "reasoning": 163
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T08:34:44Z",
+    "finished_at": "2026-10-31T08:35:00Z",
+    "revision": "bd3cba6",
+    "nwb_version": "0.1.0"
+  }
+}

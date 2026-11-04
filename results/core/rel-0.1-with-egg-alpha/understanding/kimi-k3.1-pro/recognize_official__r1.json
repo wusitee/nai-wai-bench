@@ -1,0 +1,80 @@
+{
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "vendor": "moonshot",
+  "item": "recognize_official",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "这是**奶龙**，国产动画《奶龙》中的黄色小恐龙角色。\n\n它属于网上的**“奶龙梗”**，常见于“奶龙舞”“我是奶龙”等短视频、表情包和抽象二创中。图中这种举起双手、呆呆站着的造型，就是奶龙表情包里很典型的一类。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 14.2,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20307,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 371,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20678 / 1048576 tokens (2%)\nSession total: 20307 input, 371 output",
+      "usage": {
+        "inputTokens": 20307,
+        "outputTokens": 371
+      }
+    },
+    "tokens_source": "usage-command",
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 20678,
+        "size": 1048576
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:47:42Z",
+    "finished_at": "2026-10-25T00:47:56Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}
