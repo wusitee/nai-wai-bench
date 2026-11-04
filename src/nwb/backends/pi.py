@@ -6,6 +6,7 @@ import base64
 import json
 import os
 import queue
+import re
 import signal
 import subprocess
 import tempfile
@@ -20,6 +21,11 @@ from nwb.util import media_type
 
 SYSTEM_PROMPT = "You are a helpful assistant."
 ANSWERED = ("stop", "length")
+# Provider rate limits arrive as an assistant error such as `429: {..."retryAfterSeconds":12...}`. pi's own retry
+# cannot be used (it ends the turn first), so the prompt is resent in a fresh session after the provider's hint.
+RATE_LIMITED = re.compile(r"^\s*429\b|rate.?limit", re.I)
+RETRY_AFTER = re.compile(r"retry.?after.?(?:seconds)?\W{0,3}(\d+(?:\.\d+)?)", re.I)
+RETRIES = 6
 
 
 def _client() -> str | None:
@@ -68,19 +74,25 @@ class PiBackend:
             raise BackendError("the pi backend cannot generate images")
         images = [{"type": "image", "data": base64.b64encode(Path(p).read_bytes()).decode(),
                    "mimeType": media_type(Path(p))} for p in req.images]
-        started = time.monotonic()
-        with tempfile.TemporaryDirectory(prefix="nwb-pi-") as cwd, \
-                tempfile.TemporaryFile("w+", encoding="utf-8") as stderr:
-            try:
-                state, messages = self._session(cwd, stderr, req.prompt, images)
-            except BackendError as e:
-                stderr.seek(0)
-                tail = stderr.read()[-600:].strip()
-                raise BackendError(f"{e}{' | stderr: ' + tail if tail else ''}") from e
-        replies = [m for m in messages if m.get("role") == "assistant"]
-        if not replies:
-            raise BackendError("pi returned no assistant message")
-        last = replies[-1]
+        for attempt in range(RETRIES + 1):
+            started = time.monotonic()
+            with tempfile.TemporaryDirectory(prefix="nwb-pi-") as cwd, \
+                    tempfile.TemporaryFile("w+", encoding="utf-8") as stderr:
+                try:
+                    state, messages = self._session(cwd, stderr, req.prompt, images)
+                except BackendError as e:
+                    stderr.seek(0)
+                    tail = stderr.read()[-600:].strip()
+                    raise BackendError(f"{e}{' | stderr: ' + tail if tail else ''}") from e
+            replies = [m for m in messages if m.get("role") == "assistant"]
+            if not replies:
+                raise BackendError("pi returned no assistant message")
+            last = replies[-1]
+            error = str(last.get("errorMessage", ""))
+            if last.get("stopReason") != "error" or not RATE_LIMITED.search(error) or attempt == RETRIES:
+                break
+            hint = RETRY_AFTER.search(error)
+            time.sleep(min(float(hint.group(1)) + 1 if hint else 5 * 2 ** attempt, 120))
         if last.get("stopReason") not in ANSWERED:
             raise BackendError(f"pi {last.get('stopReason')}: {str(last.get('errorMessage', ''))[:800]}")
         # One assistant message without tools; counters are summed over the turn and stay unknown if missing.
@@ -92,6 +104,7 @@ class PiBackend:
         return Response(text=text, meta={
             "backend": "pi", "model": self.spec.model, "client": _client(),
             "seconds": round(time.monotonic() - started, 1), "stop_reason": last.get("stopReason"),
+            "rate_limit_retries": attempt,
             "tools_used": [b.get("name") or "tool" for m in replies for b in m.get("content", [])
                            if b.get("type") == "toolCall"],
             "usage": usage, "tokens": tokens("pi", usage),

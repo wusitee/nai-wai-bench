@@ -72,7 +72,7 @@ Anthropic 憑證不會傳給其他供應商。設定中只記錄介面主機名�
 使用 pi 的訂閱登入、API 密鑰環境變數，以及 `~/.pi/agent/models.json`（或 `PI_CODING_AGENT_DIR`）中的自訂
 供應商，因此可以接入 pi 支援的任何供應商，包括本機的 OpenAI 相容服務。工作階段不會儲存；工具、擴充功能（包括
 pi 內建的 MCP 支援）、技能、提示詞範本、佈景主題、上下文檔案和自動連網（如模型目錄更新）都會被停用；系統提示詞
-替換為中性的提示詞，不載入全域 `SYSTEM.md` 和 `APPEND_SYSTEM.md`，pi 仍會在其中附上暫存工作目錄。pi 的自動重試也會關閉，失敗的樣本在下次執行時重試。僅支援
+替換為中性的提示詞，不載入全域 `SYSTEM.md` 和 `APPEND_SYSTEM.md`，pi 仍會在其中附上暫存工作目錄。pi 的自動重試會關閉，因為 pi 在重試前就結束了本輪。服務商的限流錯誤（HTTP 429）改為依服務商給出的重試等待時間（沒有時依序等 5、10、20… 秒，最多 120 秒）在新工作階段中重送，最多六次；`meta.rate_limit_retries` 記錄重送次數，`meta.seconds` 只計最後一次。其他失敗的樣本在下次執行時重試。僅支援
 文字和視覺。
 
 `model` 必須精確寫成 `provider/id` 或 `id`。pi 找不到模型時會改用其他模型，遇到不支援的思考等級會自動降級，
@@ -81,6 +81,33 @@ pi 模型目錄中沒有的 id 會沿用該供應商預設模型的能力，請�
 能力準確。`effort` 可取 `off`、`minimal`、`low`、`medium`、`high`、`xhigh`、`max`，或以 `default` 保留
 pi 設定的等級；實際等級記錄在 `meta.session_config`。如需乾淨、可重現的設定，可用
 `env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }` 指向專用且已登入的 pi 目錄。
+
+### TokenRhythm（`egg-alpha`）
+
+`egg-alpha` 是 TokenRhythm 路由上一個未公開來源的預覽模型。它的 Chat Completions 介面接受圖片和
+`reasoning_effort`，Anthropic 介面則不提供該模型。該條目使用 `PI_CODING_AGENT_DIR=~/.pi-nwb`，在其中的
+`models.json` 宣告供應商；`apiKey` 可以是明文、`$NAME` 或 `!command`：
+
+```json
+{
+  "providers": {
+    "tokenrhythm": {
+      "baseUrl": "https://tokenrhythm.studio/v1",
+      "api": "openai-completions",
+      "apiKey": "$TOKENRHYTHM_API_KEY",
+      "compat": { "thinkingFormat": "openai", "supportsReasoningEffort": true,
+                  "supportsDeveloperRole": false, "supportsStore": false },
+      "models": [{ "id": "egg-alpha", "reasoning": true, "input": ["text", "image"],
+                   "contextWindow": 1000000, "maxTokens": 128000,
+                   "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 } }]
+    }
+  }
+}
+```
+
+設定 `thinkingFormat = "openai"` 後，pi 會把思考等級作為 `reasoning_effort` 傳送，因此 `effort = "high"`
+生效。該路由對突發請求限流，回傳 HTTP 429（`MODEL_CALL_FAILED`，附 `retryAfterSeconds`），所以請用
+`--jobs 1` 採集。
 
 ## ACP Agent（`backend = "acp"`）
 

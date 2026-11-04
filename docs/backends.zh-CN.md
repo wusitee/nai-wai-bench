@@ -72,7 +72,7 @@ Anthropic 价格估算的费用。除非供应商说明支持 Claude Code 的 ef
 使用 pi 的订阅登录、API 密钥环境变量，以及 `~/.pi/agent/models.json`（或 `PI_CODING_AGENT_DIR`）中的自定义
 供应商，因此可以接入 pi 支持的任何供应商，包括本地的 OpenAI 兼容服务。会话不会保存；工具、扩展（包括 pi 内置
 的 MCP 支持）、技能、提示词模板、主题、上下文文件和自动联网（如模型目录刷新）都会被禁用；系统提示词替换为中性
-的提示词，不加载全局 `SYSTEM.md` 和 `APPEND_SYSTEM.md`，pi 仍会在其中附上临时工作目录。pi 的自动重试也会关闭，失败的样本在下次运行时重试。仅支持文本和视觉。
+的提示词，不加载全局 `SYSTEM.md` 和 `APPEND_SYSTEM.md`，pi 仍会在其中附上临时工作目录。pi 的自动重试会关闭，因为 pi 在重试前就结束了本轮。服务商的限流错误（HTTP 429）改为按服务商给出的重试等待时间（没有时依次等 5、10、20… 秒，最多 120 秒）在新会话中重发，最多六次；`meta.rate_limit_retries` 记录重发次数，`meta.seconds` 只计最后一次。其他失败的样本在下次运行时重试。仅支持文本和视觉。
 
 `model` 必须精确写成 `provider/id` 或 `id`。pi 找不到模型时会换用其他模型，遇到不支持的思考等级会自动降级，
 且都不报错，所以评测程序在发送提示词前会读取会话状态；所选模型、思考等级或图片输入能力与请求不符时调用失败。
@@ -80,6 +80,33 @@ pi 模型目录中没有的 id 会沿用该供应商默认模型的能力，请�
 能力准确。`effort` 可取 `off`、`minimal`、`low`、`medium`、`high`、`xhigh`、`max`，或用 `default` 保留
 pi 配置的等级；实际等级记录在 `meta.session_config`。如需干净、可复现的配置，可用
 `env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }` 指向专用且已登录的 pi 目录。
+
+### TokenRhythm（`egg-alpha`）
+
+`egg-alpha` 是 TokenRhythm 路由上一个未公开来源的预览模型。它的 Chat Completions 接口接受图片和
+`reasoning_effort`，Anthropic 接口则不提供该模型。该条目使用 `PI_CODING_AGENT_DIR=~/.pi-nwb`，在其中的
+`models.json` 声明供应商；`apiKey` 可以是明文、`$NAME` 或 `!command`：
+
+```json
+{
+  "providers": {
+    "tokenrhythm": {
+      "baseUrl": "https://tokenrhythm.studio/v1",
+      "api": "openai-completions",
+      "apiKey": "$TOKENRHYTHM_API_KEY",
+      "compat": { "thinkingFormat": "openai", "supportsReasoningEffort": true,
+                  "supportsDeveloperRole": false, "supportsStore": false },
+      "models": [{ "id": "egg-alpha", "reasoning": true, "input": ["text", "image"],
+                   "contextWindow": 1000000, "maxTokens": 128000,
+                   "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 } }]
+    }
+  }
+}
+```
+
+设置 `thinkingFormat = "openai"` 后，pi 会把思考等级作为 `reasoning_effort` 发送，因此 `effort = "high"`
+生效。该路由对突发请求限流，返回 HTTP 429（`MODEL_CALL_FAILED`，附 `retryAfterSeconds`），所以请用
+`--jobs 1` 采集。
 
 ## ACP Agent（`backend = "acp"`）
 
