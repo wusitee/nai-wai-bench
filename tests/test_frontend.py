@@ -1,0 +1,168 @@
+import hashlib
+import re
+import shutil
+
+import pytest
+
+from nwb import frontend
+from nwb.config import find_root
+from nwb.util import write_json
+
+ROOT = find_root()
+TIMES = [0, 200, 400, 600, 800, 1000, 1200, 1400]
+
+SVG_STATIC = """<!doctype html><html><head></head><body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 242" width="240" height="242">
+<defs><linearGradient id="g"><stop offset="0" stop-color="gold"/><stop offset="1" stop-color="orange"/></linearGradient></defs>
+<g id="character"><circle cx="120" cy="120" r="60" fill="url(#g)"/></g></svg></body></html>"""
+
+SVG_CSS_LOOP = """<!doctype html><html><head><style>
+@keyframes sway { 0%, 100% { transform: translateX(0) } 50% { transform: translateX(60px) } }
+#character { animation: sway 1500ms linear infinite }</style></head><body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 242" width="240" height="242">
+<g id="character"><circle cx="60" cy="120" r="40" fill="gold"/></g></svg></body></html>"""
+
+
+def svg_scripted(render_body: str, setup: str = "") -> str:
+    return f"""<!doctype html><html><body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 242" width="240" height="242">
+<g id="character"><circle id="c" cx="60" cy="120" r="40" fill="gold"/></g></svg>
+<script>{setup}
+const c = document.getElementById('c');
+window.nwb = {{ render(t) {{ {render_body} }} }};</script></body></html>"""
+
+
+def three_page(character: str, render_body: str = "renderer.render(scene, cam);") -> str:
+    return f"""<!doctype html><html><head></head><body><script type="module">
+import * as THREE from 'three';
+const renderer = new THREE.WebGLRenderer({{ preserveDrawingBuffer: true }});
+renderer.setPixelRatio(1); renderer.setSize(240, 242); document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color('#eeeeee');
+const cam = new THREE.PerspectiveCamera(40, 240 / 242, 0.1, 100); cam.position.set(0, 1, 5); cam.lookAt(0, 1, 0);
+scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 2));
+const ch = new THREE.Group(); ch.name = 'character'; scene.add(ch);
+{character}
+window.nwb = {{ scene, renderer, cameras: {{ ref: cam }}, characters: [ch], render(t) {{ {render_body} }}, ready: true }};
+</script></body></html>"""
+
+
+ROUND_CHARACTER = """
+const body = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 16), new THREE.MeshStandardMaterial({ color: 'gold' }));
+body.position.y = 1; ch.add(body);
+const belly = new THREE.Mesh(new THREE.SphereGeometry(0.6, 32, 16), new THREE.MeshStandardMaterial({ color: '#fff3c0' }));
+belly.position.set(0, 0.8, 0.5); ch.add(belly);"""
+
+# A textured cutout: two planes facing the camera, the brief's "flat textured plane" failure.
+FLAT_CHARACTER = """
+const canvas = document.createElement('canvas'); canvas.width = canvas.height = 32;
+const g = canvas.getContext('2d'); g.fillStyle = 'gold'; g.fillRect(0, 0, 32, 32);
+const material = new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(canvas) });
+for (const x of [-0.5, 0.5]) { const m = new THREE.Mesh(new THREE.PlaneGeometry(1, 2), material); m.position.set(x, 1, 0); ch.add(m); }"""
+
+
+def test_prompts_fill_every_placeholder():
+    corpus = frontend.load_corpus(ROOT)
+    for kind in frontend.KINDS:
+        task = corpus.memory if kind.endswith("mem") else corpus.task("001")
+        prompt = frontend.subject_prompt(corpus, task, kind, step1="<html></html>")
+        assert not re.findall(r"\{[A-Z_0-9]+\}", prompt), kind
+        assert f"{task.width}x{task.height}" in prompt
+    assert len(frontend.subject_images(corpus.task("001"), "2d-s2")) == 8
+    assert frontend.subject_images(corpus.memory, "3d-mem") == []
+
+
+def test_extract_html_uses_last_block():
+    reply = "draft:\n```html\n<p>old</p>\n```\nfinal:\n```HTML\n<p>new</p>\n```\n"
+    assert frontend.extract_html(reply) == "<p>new</p>"
+    assert frontend.extract_html("no code here") is None
+
+
+@pytest.mark.parametrize("html, kind, expected", [
+    (SVG_STATIC, "2d-s1", None),
+    (SVG_STATIC.replace('<circle', '<image href="data:image/png;base64,iVBORw0KGgo="/><circle'), "2d-s1",
+     "raster or embedded element"),
+    (SVG_CSS_LOOP, "2d-s1", "CSS animation or transition"),
+    (SVG_STATIC.replace('viewBox="0 0 240 242"', 'viewBox="0 0 100 100"'), "2d-s1", "viewBox"),
+    (three_page(ROUND_CHARACTER).replace("from 'three'", "from 'https://unpkg.com/three'"), "3d-s1",
+     "imports outside the vendored three.js"),
+    (three_page(ROUND_CHARACTER).replace("<head>", '<head><script type="importmap">{}</script>'), "3d-s1",
+     "own import map"),
+])
+def test_static_gates(html, kind, expected):
+    failures = frontend.static_gates(html, kind, 240, 242)
+    if expected is None:
+        assert failures == []
+    else:
+        assert any(expected in f for f in failures), failures
+
+
+def _browser_available() -> bool:
+    try:
+        from playwright.sync_api import sync_playwright
+        with sync_playwright() as p:
+            return __import__("os").path.exists(p.chromium.executable_path)
+    except Exception:
+        return False
+
+
+browser = pytest.mark.skipif(not _browser_available(), reason="needs the frontend extra and Playwright Chromium")
+
+
+@browser
+@pytest.mark.parametrize("html, kind, expected", [
+    (SVG_CSS_LOOP, "2d-s2", None),
+    (three_page(ROUND_CHARACTER, "ch.rotation.y = Math.sin(2 * Math.PI * t / 1500); renderer.render(scene, cam);"),
+     "3d-s2", None),
+    # Network access hidden from the static gates: an image element created from script, and fetch.
+    (svg_scripted("c.setAttribute('cx', 60 + t / 25);",
+                  "const i = document.createElementNS('http://www.w3.org/2000/svg', 'image');"
+                  "i.setAttribute('href', 'https://example.com/a.png'); document.querySelector('svg').append(i);"),
+     "2d-s2", "network requests"),
+    (svg_scripted("c.setAttribute('cx', 60 + t / 25);", "window['fe' + 'tch']('https://example.com/x');"),
+     "2d-s2", "forbidden API calls: fetch"),
+    (svg_scripted("c.setAttribute('cx', 60 + Math.random() * 100);"), "2d-s2", "non-deterministic"),
+    (svg_scripted(""), "2d-s2", "static animation"),
+    (three_page(FLAT_CHARACTER), "3d-s1", "is flat"),
+])
+def test_runtime_gates(tmp_path, html, kind, expected):
+    from nwb.frontend_render import render_page
+
+    result = render_page(html, kind, 240, 242, 1500, TIMES, tmp_path)
+    if expected is None:
+        assert result["gates"] == []
+        assert len(result["frames"]) == 8 and (tmp_path / "preview.gif").is_file()
+        if kind.startswith("3d"):
+            assert [v["view"] for v in result["views"]] == list(frontend.VIEWS)
+    else:
+        assert any(expected in g for g in result["gates"]), result["gates"]
+
+
+def test_scores_gate_failures_and_excludes_same_vendor_judges(tmp_path, monkeypatch):
+    from nwb import frontend_render
+
+    corpus = frontend.load_corpus(ROOT)
+    run = tmp_path / "run"
+    image = run / "frame.png"
+    image.parent.mkdir(parents=True)
+    shutil.copyfile(corpus.task("001").frames[0].image, image)
+    monkeypatch.setattr(frontend_render, "harness_id", lambda: "h")
+    for kind, gates in (("2d-s1", []), ("2d-mem", ["no animation"])):
+        task = "001" if kind == "2d-s1" else frontend.MEMORY
+        stem = frontend.sample_stem(run, "subject", task, kind, 1)
+        write_json(stem.with_suffix(".json"), {"track": "frontend", "model": "subject", "vendor": "openai",
+                                               "task": task, "kind": kind, "rep": 1, "html": "<svg/>",
+                                               "html_sha256": "x", "static_gates": []})
+        write_json(stem / "render.json", {"html_sha256": "x", "harness": "h", "gates": gates})
+        shutil.copyfile(image, stem / "frame_00.png")
+    digest = hashlib.sha256(image.read_bytes()).hexdigest()
+    target = "frontend/subject/001/2d-s1__r1/frame_00.json"
+    for judge, vendor, answers in (("other", "anthropic", [True] * 3 + [False] * 3), ("own", "openai", [True] * 6)):
+        write_json(run / "frontend-judgments" / judge / target,
+                   {"judge": judge, "judge_vendor": vendor, "image": "frontend/subject/001/2d-s1__r1/frame_00.png",
+                    "image_sha256": digest, "answers": answers})
+    write_json(run / "frontend-judgments" / "other" / "frontend/subject/001/2d-s1__r1/stale.json",
+               {"judge": "other", "judge_vendor": "anthropic", "image": "frame.png", "image_sha256": "0" * 64,
+                "answers": [True]})
+    rows = {r["kind"]: r for r in frontend.aggregate(corpus, run)["rows"]}
+    assert rows["2d-s1"]["score"] == 0.5  # the subject's own vendor is left out
+    assert rows["2d-mem"]["score"] == 0.0 and rows["2d-mem"]["gates_passed"] == 0

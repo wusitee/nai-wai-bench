@@ -218,6 +218,13 @@ def check_manifest(manifest: Path, *, prepare: bool = False) -> int:
             if view["view"] not in {"side", "back", "three_quarter", "top"}:
                 raise ValueError(f"{task_id}: unknown novel view {view['view']!r}")
             _questions(view["questions"], f"{task_id} {view['view']}")
+    memory = data.get("memory")
+    if memory is not None:
+        _questions(memory["questions"], "memory")
+        for view in memory["novel_views"]:
+            if view["view"] not in {"side", "back", "three_quarter", "top"}:
+                raise ValueError(f"memory: unknown novel view {view['view']!r}")
+            _questions(view["questions"], f"memory {view['view']}")
     for path, content in generated:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(content)

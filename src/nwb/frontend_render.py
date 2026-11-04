@@ -1,0 +1,419 @@
+"""Sandboxed rendering and runtime gates for frontend samples.
+
+Model-generated HTML is untrusted. Each sample renders in its own subprocess running headless Chromium
+(Playwright) with its OS sandbox, software WebGL (SwiftShader), and a dead proxy. The page is served from
+memory at a reserved origin; every request except the page itself and, for 3D, the vendored three.js
+files is aborted and fails the sample. Pages never see file:// URLs. The parent kills the subprocess
+when it exceeds its time budget, which also fails the sample.
+"""
+
+import argparse
+import hashlib
+import io
+import json
+import os
+import re
+import signal
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+from nwb.util import read_json, write_json
+
+ORIGIN = "http://nwb.invalid"
+RENDER_TIMEOUT = 180  # seconds for one sample, including browser start
+STEP_TIMEOUT_MS = 20_000
+PREVIEW_FPS = 12
+DIFF_LEVEL = 8  # a pixel differs when any channel differs by more than this
+DETERMINISM_LIMIT = 0.001  # share of differing pixels allowed when the same time is rendered again
+LOOP_LIMIT = 0.01  # between t = 0 and t = D
+MOTION_MIN = 0.005  # some keyframe must differ from t = 0 by more than this
+MIN_DEPTH_RATIO = 0.3  # character depth / width along the reference camera, to catch flat cutouts
+MAX_TEXTURE = 64
+VIEW_FOV = 35
+VENDOR = Path(__file__).resolve().parents[2] / "bench" / "frontend-v1" / "vendor" / "three"
+
+# Runs before any page script. Calls to forbidden APIs are recorded (and fail the gate) instead of acting.
+INIT_SCRIPT = """
+(() => {
+  const log = { forbidden: [] };
+  Object.defineProperty(window, '__nwbLog', { value: log });
+  const record = (name, result) => function () { log.forbidden.push(name); return result; };
+  for (const name of ['setTimeout', 'setInterval', 'requestAnimationFrame', 'requestIdleCallback'])
+    window[name] = record(name, 0);
+  window.fetch = function () { log.forbidden.push('fetch'); return new Promise(() => {}); };
+  for (const name of ['XMLHttpRequest', 'WebSocket', 'EventSource', 'Worker', 'SharedWorker', 'RTCPeerConnection',
+                      'Image', 'createImageBitmap'])
+    window[name] = function () { log.forbidden.push(name); throw new TypeError(name + ' is not available'); };
+  if (navigator.sendBeacon) navigator.sendBeacon = record('sendBeacon', false);
+  URL.createObjectURL = record('URL.createObjectURL', '');
+})();
+"""
+
+SEEK_2D = """t => {
+  for (const a of document.getAnimations()) { a.pause(); a.currentTime = t; }
+  for (const s of document.querySelectorAll('svg')) { s.pauseAnimations(); s.setCurrentTime(t / 1000); }
+}"""
+
+INSPECT_2D = """() => ({
+  animations: document.getAnimations().length,
+  smil: document.querySelectorAll('animate, animateTransform, animateMotion, set').length,
+  scripted: typeof window.nwb?.render === 'function',
+})"""
+
+INSPECT_3D = """async ({ W, H, minRatio, maxTexture }) => {
+  const THREE = await import('three');
+  const n = window.nwb, problems = [];
+  if (!n || typeof n !== 'object') return { problems: ['window.nwb is missing'] };
+  if (!n.scene?.isScene) problems.push('nwb.scene is not a THREE.Scene');
+  if (!n.renderer?.isWebGLRenderer) problems.push('nwb.renderer is not a THREE.WebGLRenderer');
+  if (!n.cameras?.ref?.isCamera) problems.push('nwb.cameras.ref is not a camera');
+  if (typeof n.render !== 'function') problems.push('nwb.render is not a function');
+  if (!Array.isArray(n.characters) || !n.characters.length) problems.push('nwb.characters is not a non-empty array');
+  if (problems.length) return { problems };
+  if (!n.renderer.getContext().getContextAttributes()?.preserveDrawingBuffer)
+    problems.push('renderer was created without preserveDrawingBuffer');
+  const canvas = n.renderer.domElement;
+  if (canvas.width !== W || canvas.height !== H) problems.push(`canvas is ${canvas.width}x${canvas.height}, not ${W}x${H}`);
+  n.render(0);
+  const textures = new Set(), add = v => { if (v?.isTexture) textures.add(v); };
+  n.scene.traverse(o => { for (const m of [].concat(o.material || [])) for (const k in m) add(m[k]); });
+  add(n.scene.background); add(n.scene.environment);
+  for (const t of textures)
+    for (const img of [].concat(t.image ?? [])) {
+      if (!img) continue;
+      if (img instanceof HTMLImageElement || img instanceof ImageBitmap || img instanceof HTMLVideoElement)
+        problems.push('image texture');
+      else if ((img.width || 0) > maxTexture || (img.height || 0) > maxTexture)
+        problems.push(`texture larger than ${maxTexture}x${maxTexture} (${img.width}x${img.height})`);
+    }
+  n.scene.updateMatrixWorld(true);
+  const cam = n.cameras.ref; cam.updateMatrixWorld();
+  const characters = [], p = new THREE.Vector3();
+  n.characters.forEach((c, i) => {
+    if (!c?.isObject3D) { problems.push(`characters[${i}] is not an Object3D`); return; }
+    const label = c.name || `characters[${i}]`, box = new THREE.Box3();
+    let meshes = 0;
+    c.traverse(o => {
+      const pos = o.isMesh && o.visible ? o.geometry?.attributes?.position : null;
+      if (!pos) return;
+      meshes++;
+      for (let k = 0; k < pos.count; k++)
+        box.expandByPoint(p.fromBufferAttribute(pos, k).applyMatrix4(o.matrixWorld).applyMatrix4(cam.matrixWorldInverse));
+    });
+    const size = box.isEmpty() ? new THREE.Vector3() : box.getSize(new THREE.Vector3());
+    const ratio = size.z / Math.max(size.x, 1e-9);
+    characters.push({ name: c.name, meshes, width: size.x, height: size.y, depth: size.z, ratio });
+    if (!c.name) problems.push(`${label} has no name`);
+    if (meshes < 2) problems.push(`${label} has fewer than two visible meshes`);
+    else if (!(ratio >= minRatio)) problems.push(`${label} is flat: depth/width ${ratio.toFixed(2)} < ${minRatio}`);
+  });
+  return { problems, characters, textures: textures.size };
+}"""
+
+# Harness cameras orbit the characters' bounding sphere. "Front" is the reference camera's horizontal
+# direction from the characters; the near plane sits just in front of the sphere, so walls or props
+# between a harness camera and the characters are clipped instead of hiding them.
+VIEW_3D = """async ({ view, W, H, fov }) => {
+  const THREE = await import('three');
+  const n = window.nwb, rad = THREE.MathUtils.degToRad;
+  n.render(0);
+  const box = new THREE.Box3();
+  for (const c of n.characters) box.expandByObject(c, true);
+  const sphere = box.getBoundingSphere(new THREE.Sphere());
+  const ref = n.cameras.ref; ref.updateMatrixWorld();
+  const up = new THREE.Vector3(0, 1, 0);
+  const front = ref.getWorldPosition(new THREE.Vector3()).sub(sphere.center).setY(0);
+  if (front.lengthSq() < 1e-12) front.set(0, 0, 1);
+  front.normalize();
+  const [yaw, elevation] = { side: [90, 10], back: [180, 10], three_quarter: [45, 20], top: [0, 80] }[view];
+  const dir = front.applyAxisAngle(up, rad(yaw)).multiplyScalar(Math.cos(rad(elevation)))
+    .addScaledVector(up, Math.sin(rad(elevation)));
+  const half = Math.min(rad(fov) / 2, Math.atan(Math.tan(rad(fov) / 2) * W / H));
+  const r = Math.max(sphere.radius, 1e-6), dist = r / Math.sin(half) * 1.05;
+  const cam = new THREE.PerspectiveCamera(fov, W / H, Math.max(dist - r * 1.02, dist * 1e-3), dist + r * 100);
+  cam.position.copy(sphere.center).addScaledVector(dir, dist);
+  cam.lookAt(sphere.center);
+  cam.updateMatrixWorld();
+  n.renderer.render(n.scene, cam);
+}"""
+
+
+def _image_modules():
+    try:
+        from PIL import Image, ImageChops
+    except ImportError as exc:
+        raise ValueError("frontend rendering requires the 'frontend' extra: uv sync --extra frontend") from exc
+    return Image, ImageChops
+
+
+def harness_id() -> str:
+    """Identifies the harness code and vendored three.js; changing either re-renders every sample."""
+    digest = hashlib.sha256(Path(__file__).read_bytes())
+    digest.update((VENDOR / "manifest.json").read_bytes())
+    return digest.hexdigest()[:16]
+
+
+def vendored_files() -> dict[str, bytes]:
+    manifest = read_json(VENDOR / "manifest.json")
+    files = {}
+    for name, expected in manifest["files"].items():
+        content = (VENDOR / name).read_bytes()
+        if hashlib.sha256(content).hexdigest() != expected:
+            raise ValueError(f"vendored three.js file {name} does not match its manifest hash")
+        files[name] = content
+    return files
+
+
+def blank_png(path: Path, width: int, height: int) -> Path:
+    if not path.is_file():
+        Image, _ = _image_modules()
+        path.parent.mkdir(parents=True, exist_ok=True)
+        Image.new("RGB", (width, height), "white").save(path)
+    return path
+
+
+def diff_fraction(a: bytes, b: bytes) -> float:
+    Image, ImageChops = _image_modules()
+    x, y = Image.open(io.BytesIO(a)).convert("RGB"), Image.open(io.BytesIO(b)).convert("RGB")
+    if x.size != y.size:
+        return 1.0
+    r, g, bl = ImageChops.difference(x, y).split()
+    histogram = ImageChops.lighter(ImageChops.lighter(r, g), bl).histogram()
+    return sum(histogram[DIFF_LEVEL + 1:]) / (x.width * x.height)
+
+
+def page_document(html: str, three_d: bool, head: str = "") -> str:
+    """The served page: the model's document with a margin reset and, for 3D, the import map first."""
+    inject = head + "<style>html,body{margin:0;padding:0;overflow:hidden;background:#fff}</style>"
+    if three_d:
+        imports = {"three": "/vendor/three/build/three.module.js", "three/addons/": "/vendor/three/examples/jsm/"}
+        inject = f'<script type="importmap">{json.dumps({"imports": imports})}</script>' + inject
+    for tag in (r"<head\b[^>]*>", r"<html\b[^>]*>"):
+        if m := re.search(tag, html, re.I):
+            return html[:m.end()] + inject + html[m.end():]
+    return inject + html
+
+
+def render_page(html: str, kind: str, width: int, height: int, duration_ms: int, timestamps: list[int],
+                out_dir: Path) -> dict:
+    """Render one sample in this process and return its runtime gates and evidence."""
+    from playwright.sync_api import Error as PlaywrightError, sync_playwright
+
+    three_d = kind.startswith("3d")
+    animated = kind.endswith("s2")
+    times = timestamps if animated else [0]
+    vendor = vendored_files() if three_d else {}
+    document = page_document(html, three_d).encode()
+    gates, errors, blocked = [], [], []
+    evidence: dict = {"frames": [], "views": []}
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    def route(r):
+        url = r.request.url
+        if url == f"{ORIGIN}/index.html":
+            return r.fulfill(status=200, body=document, content_type="text/html; charset=utf-8")
+        name = url.removeprefix(f"{ORIGIN}/vendor/three/")
+        if three_d and url.startswith(f"{ORIGIN}/vendor/three/") and name in vendor and name.endswith(".js"):
+            return r.fulfill(status=200, body=vendor[name], content_type="text/javascript")
+        blocked.append(url[:200])
+        return r.abort()
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True, chromium_sandbox=True, proxy={"server": "http://127.0.0.1:9"},
+                                    # Main-thread animation keeps paused, seeked frames exact.
+                                    args=["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--disable-threaded-animation",
+                                          "--force-webrtc-ip-handling-policy=disable_non_proxied_udp"])
+        context = browser.new_context(viewport={"width": width, "height": height}, device_scale_factor=1,
+                                      service_workers="block", accept_downloads=False)
+        context.route("**/*", route)
+        context.route_web_socket("**/*", lambda ws: (blocked.append(ws.url[:200]), ws.close()))
+        context.add_init_script(INIT_SCRIPT)
+        page = context.new_page()
+        page.set_default_timeout(STEP_TIMEOUT_MS)
+        page.on("pageerror", lambda e: errors.append(f"uncaught: {e}"[:500]))
+        page.on("console", lambda m: m.type == "error" and errors.append(f"console.error: {m.text}"[:500]))
+
+        def shot() -> bytes:
+            return page.screenshot(type="png", animations="allow", caret="initial")
+
+        try:
+            page.goto(f"{ORIGIN}/index.html", wait_until="load")
+            if three_d:
+                # Poll from Python: Playwright's own page-side polling would use the disabled timers.
+                deadline = time.monotonic() + STEP_TIMEOUT_MS / 1000
+                while not page.evaluate("() => window.nwb?.ready === true"):
+                    if time.monotonic() > deadline:
+                        gates.append("window.nwb.ready never became true")
+                        break
+                    time.sleep(0.05)
+                if not gates:
+                    info = page.evaluate(INSPECT_3D, {"W": width, "H": height, "minRatio": MIN_DEPTH_RATIO,
+                                                      "maxTexture": MAX_TEXTURE})
+                    gates += info.pop("problems")
+                    evidence["scene"] = info
+                draw = (lambda t: page.evaluate("t => window.nwb.render(t)", t)) if not gates else None
+                evidence["mode"] = "render(t)"
+            else:
+                info = page.evaluate(INSPECT_2D)
+                declarative = bool(info["animations"] or info["smil"])
+                evidence.update(info)
+                if not animated:
+                    if declarative or info["scripted"]:
+                        gates.append("animation in a static task")
+                    draw = lambda t: None  # noqa: E731
+                    evidence["mode"] = "static"
+                elif declarative and info["scripted"]:
+                    gates.append("uses both declarative animation and window.nwb.render")
+                    draw = None
+                elif not declarative and not info["scripted"]:
+                    gates.append("no animation: neither declarative animation nor window.nwb.render")
+                    draw = None
+                elif declarative:
+                    draw = lambda t: page.evaluate(SEEK_2D, t)  # noqa: E731
+                    evidence["mode"] = "declarative"
+                else:
+                    draw = lambda t: page.evaluate("t => window.nwb.render(t)", t)  # noqa: E731
+                    evidence["mode"] = "render(t)"
+            if draw is not None:
+                draw(times[0])
+                shot()  # warm-up: the first seek after load can reach the compositor one frame late
+                shots = []
+                for i, t in enumerate(times):
+                    draw(t)
+                    shots.append(shot())
+                    (out_dir / f"frame_{i:02d}.png").write_bytes(shots[-1])
+                    evidence["frames"].append({"file": f"frame_{i:02d}.png", "t": t})
+                if three_d:
+                    for view in ("side", "back", "three_quarter", "top"):
+                        page.evaluate(VIEW_3D, {"view": view, "W": width, "H": height, "fov": VIEW_FOV})
+                        (out_dir / f"view_{view}.png").write_bytes(shot())
+                        evidence["views"].append({"file": f"view_{view}.png", "view": view, "t": 0})
+                # Render a time again after others, so state carried between calls shows up.
+                again = len(times) // 2
+                draw(times[again])
+                checks = {"determinism_diff": diff_fraction(shots[again], shot())}
+                if animated:
+                    draw(duration_ms)
+                    checks["loop_diff"] = diff_fraction(shots[0], shot())
+                    checks["motion_diff"] = max(diff_fraction(shots[0], s) for s in shots[1:])
+                    previews = []
+                    step = 1000 / PREVIEW_FPS
+                    for k in range(int(duration_ms // step) or 1):
+                        draw(round(k * step))
+                        previews.append(shot())
+                    _save_gif(previews, out_dir / "preview.gif", round(step))
+                    evidence["preview"] = "preview.gif"
+                evidence["checks"] = checks
+                if checks["determinism_diff"] > DETERMINISM_LIMIT:
+                    gates.append(f"non-deterministic: rendering t={times[again]} again changed "
+                                 f"{checks['determinism_diff']:.1%} of pixels")
+                if animated and checks["loop_diff"] > LOOP_LIMIT:
+                    gates.append(f"does not loop: t=0 and t={duration_ms} differ in {checks['loop_diff']:.1%} of pixels")
+                if animated and checks["motion_diff"] <= MOTION_MIN:
+                    gates.append("static animation: no keyframe differs from t=0")
+            else:
+                (out_dir / "failed.png").write_bytes(shot())
+                evidence["failed_screenshot"] = "failed.png"
+            forbidden = page.evaluate("() => window.__nwbLog.forbidden")
+        except PlaywrightError as e:
+            gates.append(f"render failed: {str(e).splitlines()[0][:300]}")
+            forbidden = []
+        finally:
+            context.close()
+            browser.close()
+    if forbidden:
+        gates.append(f"forbidden API calls: {', '.join(sorted(set(forbidden)))}")
+    if blocked:
+        gates.append(f"network requests: {', '.join(blocked[:5])}")
+    if errors:
+        gates.append(f"page errors: {errors[0]}")
+    return {"gates": gates, "errors": errors[:20], "blocked": blocked[:20], "forbidden": sorted(set(forbidden)),
+            **evidence}
+
+
+def _save_gif(frames: list[bytes], path: Path, duration: int) -> None:
+    Image, _ = _image_modules()
+    images = [Image.open(io.BytesIO(f)).convert("RGB") for f in frames]
+    images[0].save(path, save_all=True, append_images=images[1:], duration=duration, loop=0)
+
+
+def render_current(record: dict, render_dir: Path) -> dict | None:
+    """The render of exactly this sample with the current harness, or None."""
+    path = render_dir / "render.json"
+    if not path.is_file():
+        return None
+    render = read_json(path)
+    if render.get("html_sha256") != record.get("html_sha256") or render.get("harness") != harness_id():
+        return None
+    return render
+
+
+def render_sample(record: dict, timestamps: list[int], render_dir: Path) -> dict:
+    """Render in a killable subprocess and write render.json."""
+    started = time.monotonic()
+    base = {"html_sha256": record.get("html_sha256"), "harness": harness_id(), "kind": record["kind"]}
+    if record.get("html") is None:
+        result = {"gates": ["no html to render"]}
+    else:
+        render_dir.mkdir(parents=True, exist_ok=True)
+        for old in [*render_dir.glob("*.png"), *render_dir.glob("*.gif")]:
+            old.unlink()
+        job = render_dir / "job.json"
+        write_json(job, {"html": record["html"], "kind": record["kind"], "width": record["width"],
+                         "height": record["height"], "duration_ms": record["duration_ms"], "timestamps": timestamps})
+        proc = subprocess.Popen([sys.executable, "-m", "nwb.frontend_render", str(job)], start_new_session=True,
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        try:
+            stdout, stderr = proc.communicate(timeout=RENDER_TIMEOUT)
+        except subprocess.TimeoutExpired:
+            os.killpg(proc.pid, signal.SIGKILL)
+            proc.communicate()
+            result = {"gates": [f"render timed out after {RENDER_TIMEOUT}s"]}
+        else:
+            if proc.returncode == 0:
+                result = json.loads(stdout.strip().splitlines()[-1])
+            else:
+                raise RuntimeError(f"renderer exited {proc.returncode}: {stderr.strip()[-800:]}")
+        job.unlink(missing_ok=True)
+    (render_dir / "page.html").parent.mkdir(parents=True, exist_ok=True)
+    if record.get("html") is not None:
+        (render_dir / "page.html").write_text(record["html"], encoding="utf-8")
+    render = {**base, **result, "seconds": round(time.monotonic() - started, 1)}
+    write_json(render_dir / "render.json", render)
+    return render
+
+
+def render_all(corpus, run_dir: Path, force: bool = False) -> tuple[int, int]:
+    from nwb.frontend import samples, step
+
+    todo = [(p, r) for p, r in samples(run_dir) if force or render_current(r, p.with_suffix("")) is None]
+    print(f"rendering {len(todo)} samples", file=sys.stderr)
+    failed = 0
+    for n, (path, record) in enumerate(todo, 1):
+        task = corpus.task(record["task"])
+        timestamps = [f.timestamp_ms for f in task.frames] if step(record["kind"]) == "s2" else [0]
+        try:
+            render = render_sample(record, timestamps, path.with_suffix(""))
+            status = "ok" if not render["gates"] else "GATES " + "; ".join(render["gates"])[:300]
+        except (RuntimeError, ValueError, OSError) as e:
+            failed += 1
+            status = f"ERROR {e}"[:300]
+        print(f"[{n}/{len(todo)}] render {path.relative_to(run_dir).with_suffix('')} {status}", file=sys.stderr)
+    return len(todo) - failed, failed
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Render one frontend sample job (internal).")
+    parser.add_argument("job", type=Path)
+    args = parser.parse_args(argv)
+    job = read_json(args.job)
+    result = render_page(job["html"], job["kind"], job["width"], job["height"], job["duration_ms"],
+                         job["timestamps"], args.job.parent)
+    print(json.dumps(result, ensure_ascii=False))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

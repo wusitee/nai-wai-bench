@@ -16,6 +16,8 @@
 [defaults]
 judges = ["opus-5.5"]
 image_judges = ["opus-5.5"]
+# Experimental frontend track (docs/frontend.md).
+frontend_judges = ["opus-5.5", "gpt-6.1-sol"]
 
 # --- OpenAI via Codex CLI (ChatGPT login) ---
 

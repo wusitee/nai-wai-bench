@@ -1,9 +1,10 @@
-# Experimental frontend corpus
+# Experimental frontend track
 
-`bench/frontend-v1/` contains draft reference data for inline-SVG and three.js reconstruction.
-It is outside the NaiWai Index. The corpus and its checklists await human review; no frontend model
-results, judging, scoring, browser renderer, or site integration are implemented yet. The 3D component
-is unranked until calibrated.
+Models rebuild animated 奶蛙 GIFs as hand-written web pages: inline SVG (2D) or three.js scenes (3D).
+`bench/frontend-v1/` holds the reference corpus, checklists, prompts, and a vendored three.js. The track
+is outside the NaiWai Index, and the corpus and its checklists await human review. The 3D component is
+unranked until calibrated. Results are local (`nwb frontend report` writes a gallery); site
+integration is not implemented.
 
 ## Corpus
 
@@ -60,7 +61,7 @@ Novel-view questions are structural priors: bodies should have volume, facial fe
 front, and visible pale belly patches belong on the front. A single source view does not establish
 hidden geometry. These questions do not claim reference-truth side/back images or require invented
 hidden markings. Novel views apply to the static scene or animation at t=0, so their questions avoid later motion states.
-The view names denote harness cameras; camera placement is not implemented yet.
+The view names denote the harness cameras described under [Rendering and gates](#rendering-and-gates).
 
 Review points include task `005`'s partially closed eyes, task `007`'s initial eye state, and task
 `009`'s small eye/brow details. Task `006` intentionally avoids the hidden pink character's face and
@@ -97,5 +98,110 @@ uv run --extra data python scripts/prepare_frontend.py --sample /path/to/referen
 ```
 
 Changing reference bytes, sampling, or checklist meanings changes the experimental evaluation inputs;
-freeze reviewed inputs before collecting comparisons. Existing benchmark commands do not load this
-corpus as a suite.
+freeze reviewed inputs before collecting comparisons. The core and Nai-hub suite commands do not load
+this corpus; it has its own `nwb frontend` command.
+
+## Task kinds
+
+| Kind | Input | Output |
+|---|---|---|
+| `2d-s1` | `frame_00` | Static inline SVG |
+| `2d-s2` | The same model's `2d-s1` page and all eight keyframes with timestamps | Animated SVG |
+| `3d-s1` | `frame_00` | Static three.js scene |
+| `3d-s2` | The same model's `3d-s1` page and all eight keyframes with timestamps | Animated three.js scene |
+| `2d-mem`, `3d-mem` | No image: "draw 大笑奶龙 from memory" | Static SVG or three.js scene |
+
+A step 2 sample uses the step 1 sample of the same model and rep, even when step 1 failed its gates;
+its record stores the step 1 sample path, hash, and static gate result under `depends_on`. Recollecting
+step 1 makes its step 2 sample stale. Memory kinds are independent of the GIF tasks (task id `mem`,
+240 × 240) and are judged with the `[memory]` checklist in the task manifest, which follows the
+image-generation traits in `bench/rubric.toml`.
+
+[Prompts](../bench/frontend-v1/prompts.toml) state every contract. A reply must contain an
+` ```html ` block; the last one counts. Shared rules: offline, a W × H viewport at device pixel ratio 1,
+no raster images (`<img>`, `<image>`, `url()` other than `url(#id)`, `data:` URIs, base64), no external
+resources or network APIs, no timers or animation frames, at most 256 KB, and no uncaught exceptions or
+console errors. Breaking any rule scores 0.
+
+- **2D:** one inline `<svg viewBox="0 0 W H">`, one named `<g>` per character with nested named
+  parts; no `<foreignObject>`, `<canvas>`, or nested `<svg>`. Step 1 and memory pages are static (no
+  script, SMIL, CSS animations, or transitions). Step 2 uses exactly one timing method: declarative
+  animation (CSS, SMIL, or Web Animations), which the harness pauses and seeks, or
+  `window.nwb = { render(t) }`. The loop period is the GIF duration D, and t = 0 is `frame_00`.
+- **3D:** a module script importing only `three` and the vendored addons through the harness import
+  map; geometry built in code; procedural `CanvasTexture`/`DataTexture` up to 64 × 64; a renderer with
+  `preserveDrawingBuffer`. The page sets
+  `window.nwb = { scene, renderer, cameras: { ref }, characters, render(t), ready: true }`.
+  `characters` lists the named character groups the harness cameras are fitted to (an addition to the
+  original contract, so that walls and floors do not dominate the fit). `render(t)` renders
+  synchronously with `cameras.ref` and must be deterministic.
+
+The vendored [three.js r187](../bench/frontend-v1/vendor/three/manifest.json) contains unmodified files
+from the npm tarball; the manifest records the tarball integrity and per-file hashes, which the
+renderer verifies.
+
+## Rendering and gates
+
+Model HTML is untrusted. `nwb.frontend_render` renders each sample in its own subprocess with
+Playwright's headless Chromium, using its OS sandbox, SwiftShader WebGL, main-thread animation (so
+seeking is exact), and a dead proxy. The page is served from memory at `http://nwb.invalid/`; every
+request other than the page and, for 3D, the vendored three.js files is aborted. Pages never see
+`file://` URLs. A sample that exceeds 180 seconds is killed.
+
+Static gates read the source: the HTML block, size, forbidden elements and URLs, the 2D `<svg>` and
+`viewBox`, static-only rules for step 1 and memory pages, and 3D import specifiers. APIs that comments
+may mention (`fetch`, timers) are checked at runtime instead. Runtime gates fail a sample on:
+
+- requests or WebSockets, calls to timers, `fetch`, `XMLHttpRequest`, workers, `Image`, and similar
+  APIs (replaced before page scripts run), page errors, and `console.error`;
+- 2D: animation in a static page, both or neither timing method in step 2;
+- 3D: `nwb.ready` not true within 20 seconds, a malformed `window.nwb`, a canvas that is not W × H,
+  image textures or textures larger than 64 × 64, and characters that are unnamed, have fewer than two
+  visible meshes, or are flat (depth/width below 0.3 along the reference camera);
+- determinism: rendering a time again after other times changes more than 0.1% of pixels;
+- step 2: no keyframe differs from t = 0 by more than 0.5% of pixels, or t = 0 and t = D differ by
+  more than 1%.
+
+The renderer writes `frame_NN.png` at each keyframe time (only `frame_00` for static kinds), a 12 fps
+`preview.gif` for step 2, and, for 3D, `view_side`, `view_back`, `view_three_quarter`, and `view_top`
+at t = 0. Harness cameras orbit the characters' bounding sphere; "front" is the reference camera's
+horizontal direction, and the near plane sits just in front of the sphere so that walls between a
+harness camera and the characters are clipped. `render.json` records gates and evidence; changing the
+renderer or vendored files re-renders every sample.
+
+## Judging and scoring
+
+A checklist judge sees one rendered image and its questions, never the reference, and answers yes or
+no for each question. Judges sit behind a small `ChecklistJudge` interface; the default
+`ModelJudge` asks an LLM through the normal backends. The default pool is
+`[defaults].frontend_judges` in `models.toml` (Claude Opus 5.5 and GPT-6.1-Sol). As in the other
+tracks, judges from the subject's own vendor are left out when another judge exists; those judge calls
+are skipped.
+
+An image's score is the share of yes answers, averaged over the counted judges. A sample's score is
+the mean over its judged images: one frame for static kinds, eight for step 2, plus the four views for
+3D. Samples that fail a gate score 0 without judging. Scores are reported per model and kind, with 3D
+keyframe and view sub-scores, and 95% bootstrap intervals that resample tasks and reps.
+
+Because every expected answer is yes, `nwb frontend judge` also judges calibration controls for each
+task in the run: the reference keyframes (should score high), a blank page and another panel task's
+keyframes (should score low), and, for memory, the canonical meme image, a blank page, and task
+`003`'s first frame.
+
+## Running the track
+
+```sh
+uv sync --extra frontend
+uv run --extra frontend playwright install chromium
+uv run --extra frontend nwb frontend collect --run pilot --models gpt-6.1-sol --tasks 001
+uv run --extra frontend nwb frontend render --run pilot
+uv run --extra frontend nwb frontend judge --run pilot
+uv run --extra frontend nwb frontend report --run pilot
+```
+
+`collect` defaults to all tasks and all kinds with one rep; step 1 samples are collected before step 2.
+Subject calls may take up to 30 minutes. Samples are `runs/<run>/frontend/<model>/<task>/<kind>__r<rep>.json`,
+renders are in the directory with the same stem, and judgments are under `runs/<run>/frontend-judgments/`.
+`report` writes `runs/<run>/frontend/scores.json` and `gallery.html`, which shows the reference GIF and
+keyframes beside each sample's renders, judge answers, a sandboxed live preview of 2D animations, and the
+page source as text. Every stage resumes and skips finished work; `--force` redoes it.

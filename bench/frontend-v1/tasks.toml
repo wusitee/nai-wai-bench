@@ -1624,3 +1624,44 @@ questions = [
   "Does the main character look rounded with visible depth from above?",
   "Does the main body extend in depth beneath the head rather than appearing as a thin sheet?",
 ]
+
+# From-memory variants (2d-mem, 3d-mem): no reference image. Questions describe the meme's canonical
+# laughing pose, following the image-generation traits in ../rubric.toml.
+[memory]
+width = 240
+height = 240
+questions = [
+  "Is there a yellow character with a bulky, rounded body?",
+  "Does the head merge into the torso without a distinct neck?",
+  "Is there a pale oval patch on the character's belly?",
+  "Are both of the character's hands pressed against its belly?",
+  "Are the character's eyes squeezed shut into thin curved arcs?",
+  "Is the character's mouth wide open, showing a dark interior?",
+  "Is the character's upper body leaning or hunched forward, as if doubled over with laughter?",
+]
+
+[[memory.novel_views]]
+view = "side"
+questions = [
+  "Does the character appear as a rounded solid body with clear front-to-back depth rather than a flat cutout?",
+]
+
+[[memory.novel_views]]
+view = "back"
+questions = [
+  "Is the character seen from behind, with its eyes and mouth not facing the camera?",
+  "Does the body still look full and rounded from behind?",
+]
+
+[[memory.novel_views]]
+view = "three_quarter"
+questions = [
+  "Are the face and part of the side of the body visible at the same time?",
+  "Is the pale belly patch on the front of the body?",
+]
+
+[[memory.novel_views]]
+view = "top"
+questions = [
+  "Is the top of the character's head visible as a rounded shape?",
+]

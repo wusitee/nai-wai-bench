@@ -160,6 +160,47 @@ def cmd_merge(args, root, bench, models, defaults):
     return 0
 
 
+def cmd_frontend(args, root, models, defaults) -> int:
+    from nwb import frontend, frontend_render, frontend_report
+
+    corpus = frontend.load_corpus(root)
+    run_dir = root / "runs" / args.run
+    if args.action != "collect" and not run_dir.is_dir():
+        raise FileNotFoundError(f"run not found: {run_dir}")
+    if args.action == "collect":
+        selected = select_models(models, args.models, "vision")
+        task_ids = list(corpus.tasks) if args.tasks == "all" else [t.strip() for t in args.tasks.split(",") if t.strip()]
+        if unknown := [t for t in task_ids if t not in corpus.tasks]:
+            raise ValueError(f"unknown frontend task(s) {unknown}; choose from: {', '.join(corpus.tasks)}")
+        kinds = list(frontend.KINDS) if args.kinds == "all" else [k.strip() for k in args.kinds.split(",") if k.strip()]
+        if unknown := [k for k in kinds if k not in frontend.KINDS]:
+            raise ValueError(f"unknown kind(s) {unknown}; choose from: {', '.join(frontend.KINDS)}")
+        ok = failed = 0
+        for second in (False, True):  # step 2 prompts embed the collected step 1 pages
+            jobs = frontend.collect_jobs(corpus, selected, task_ids, kinds, args.reps, run_dir, second_steps=second)
+            done, bad = tracks.run_jobs(jobs, args.jobs, args.force, run_dir=run_dir)
+            ok, failed = ok + done, failed + bad
+        return _finish(ok, failed)
+    if args.action == "render":
+        return _finish(*frontend_render.render_all(corpus, run_dir, args.force))
+    names = select_names(models, args.judges or ",".join(defaults.get("frontend_judges", [])))
+    if args.action == "judge":
+        prompt = corpus.prompts["judge"]["prompt"]
+        judges = [frontend.ModelJudge(models[n], prompt) for n in names]
+        return _finish(*frontend.run_judges(corpus, judges, run_dir, args.jobs, args.force))
+    scores = frontend.aggregate(corpus, run_dir, set(names))
+    write_json(run_dir / "frontend" / "scores.json", scores)
+    for row in scores["rows"]:
+        ci = f"{row['ci95'][0]:.2f}-{row['ci95'][1]:.2f}" if row["ci95"] else "-"
+        score = f"{row['score']:.2f}" if row["score"] is not None else "-"
+        print(f"  {row['model']:20} {row['kind']:7} {score:>5}  CI {ci:9}  gates {row['gates_passed']}/{row['scored']}"
+              f" of {row['samples']}")
+    for judge, groups in scores["controls"].items():
+        print(f"  controls {judge}: " + ", ".join(f"{k} {v:.2f}" for k, v in groups.items()))
+    print(f"wrote {frontend_report.gallery(corpus, run_dir, scores)}")
+    return 0
+
+
 def select_names(models, spec: str) -> list[str]:
     names = [s.strip() for s in spec.split(",") if s.strip()]
     unknown = [n for n in names if n not in models]
@@ -237,6 +278,16 @@ def build_parser() -> argparse.ArgumentParser:
     with_run(sub.add_parser("restore", help="restore working files from saved repository results"), jobs=False)
     sp = with_run(sub.add_parser("merge", help="combine runs into a new run without model calls"), jobs=False, sync=True)
     sp.add_argument("--from", dest="sources", required=True, help="comma-separated source runs")
+    sp = sub.add_parser("frontend", help="experimental: rebuild GIFs as SVG/three.js pages (docs/frontend.md)")
+    sp.add_argument("action", choices=["collect", "render", "judge", "report"])
+    sp.add_argument("--run", default="frontend", help="run name; results go to runs/<run>/ (default: frontend)")
+    sp.add_argument("--models", help="collect: comma-separated subject models")
+    sp.add_argument("--tasks", default="all", help="collect: 'all' or comma-separated task ids (default: all)")
+    sp.add_argument("--kinds", default="all", help=f"collect: 'all' or comma-separated of {', '.join(('2d-s1', '2d-s2', '3d-s1', '3d-s2', '2d-mem', '3d-mem'))}")
+    sp.add_argument("--reps", type=int, default=1, help="collect: samples per task and kind (default: 1)")
+    sp.add_argument("--judges", help="judge/report: comma-separated judges (default: [defaults].frontend_judges)")
+    sp.add_argument("--jobs", type=int, default=2, help="parallel calls (default: 2)")
+    sp.add_argument("--force", action="store_true", help="redo work that already succeeded")
     sp = sub.add_parser("release", help="build both suites and raw bundles from a pinned release manifest (offline)")
     sp.add_argument("--manifest", required=True, help="release TOML selecting runs, content hashes, and judges")
     sp.add_argument("--out", help="output directory (default: site/)")
@@ -253,6 +304,11 @@ def main(argv=None) -> int:
     try:
         root = find_root()
         os.environ.setdefault("NWB_ROOT", str(root))
+        if args.command == "frontend":
+            if args.action == "collect" and not args.models:
+                raise ValueError("frontend collect needs --models")
+            models, defaults = load_models(root)
+            return cmd_frontend(args, root, models, defaults)
         if args.command == "release":
             index = release.build(root, Path(args.manifest), Path(args.out) if args.out else root / "site")
             print(f"wrote {index}")
