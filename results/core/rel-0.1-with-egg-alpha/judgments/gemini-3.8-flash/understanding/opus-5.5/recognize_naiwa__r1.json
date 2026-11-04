@@ -1,0 +1,75 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/opus-5.5/recognize_naiwa__r1.json",
+  "target_sha256": "fb0a11115eeefb241468a34342dc46889a5dbe2cfd9c675ca1bae249463e914b",
+  "settings_id": "c5b99b49261f87dd",
+  "input_names": "neutral",
+  "judge_prompt": "ae4812f33b703d8b",
+  "judge_images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "track": "understanding",
+  "model": "opus-5.5",
+  "scores": {
+    "base_character": 1,
+    "identifies_meme": 1,
+    "naiwa": 1
+  },
+  "hallucinations": [
+    "Claims the character is a 3D cartoon bird with a small sharp beak."
+  ],
+  "rationale": "The model missed the Nailong and Naiwa meme context, misidentifying the subject as a bird.",
+  "raw": "{\"scores\": {\"base_character\": 1, \"identifies_meme\": 1, \"naiwa\": 1}, \"hallucinations\": [\"Claims the character is a 3D cartoon bird with a small sharp beak.\"], \"rationale\": \"The model missed the Nailong and Naiwa meme context, misidentifying the subject as a bird.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 26.8,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 17257,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:21:37Z",
+    "finished_at": "2026-10-25T02:22:03Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "opus-5.5",
+  "vendor": "anthropic",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "## 关于角色\n\n图中是一个**黄色、圆润的3D卡通小鸟形象**：大眼睛带绿色眼圈，小小的尖嘴，正侧着脸用眼角斜瞄。这种黄色小鸟在中文表情包圈很常见，但**我无法确定它出自哪部动画、广告或模型作品**，所以不编造具体出处。如果你知道来源，欢迎告诉我。\n\n## 关于这个梗：「惊鸿一瞥」\n\n这张图的笑点在于**成语的字面化双关**：\n\n- **原意**：「惊鸿一瞥」形容匆匆一眼却留下深刻印象，多指惊艳的美人。「惊鸿」源自曹植《洛神赋》中的「翩若惊鸿」，陆游也有诗句「伤心桥下春波绿，曾是惊鸿照影来」。\n- **表情包里的意思**：\n  - 「惊鸿」被拆成字面意思，即一只**受惊的鸟**。\n  - 「一瞥」就是图里那个**斜眼一瞄**的动作。\n\n一只呆呆的黄鸟斜着眼偷看，配上一个文绉绉的成语，形成反差，所以显得很好笑。\n\n## 常见用法\n\n- 在群聊里**偷偷围观**、潜水看戏时发\n- 看到离谱、可疑的发言，表示**斜眼打量、意味深长**\n- 调侃自己「路过看了一眼」\n\n它属于网络上很流行的**「成语/古诗词字面化」类谐音、双关表情包**。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 15.2,
+    "tokens": {
+      "input": 722,
+      "cached_input": 0,
+      "cache_write": 720,
+      "output": 1036,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.026619600000000004,
+    "tools_used": [],
+    "cost_usd": 0.026619600000000004,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 720,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1036,
+      "output_tokens_details": {
+        "thinking_tokens": 495
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 720,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1036,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 720,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 720
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:42:50Z",
+    "finished_at": "2026-10-25T00:43:06Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

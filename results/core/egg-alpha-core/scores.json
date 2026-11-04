@@ -1,0 +1,905 @@
+{
+  "nwb_version": "0.1.0",
+  "stale_judgments": {
+    "total": 0,
+    "reasons": {}
+  },
+  "suite": "core",
+  "judges": [
+    "opus-5.5"
+  ],
+  "judge_health": {
+    "opus-5.5": {
+      "understanding": {
+        "n": 17,
+        "spread": 25.979343917686574,
+        "deviation": null
+      }
+    }
+  },
+  "understanding": {
+    "egg-alpha": {
+      "fields": {
+        "pose": 100.0,
+        "eyes": 100.0
+      },
+      "field_items": {
+        "pose": 4,
+        "eyes": 4
+      },
+      "family_classes": {},
+      "family_macro": null,
+      "joint": 100.0,
+      "visual_joint": 100.0,
+      "repetition_consistency": null,
+      "repetition_consistency_images": 0,
+      "categories": {},
+      "overall": 55.0,
+      "text": 27.84722222222222,
+      "vision": 55.0,
+      "languages": {
+        "zh": 21.38888888888889,
+        "en": 34.30555555555556
+      },
+      "grounding": 100.0,
+      "blind": 0.0,
+      "visual_gain": 100.0,
+      "hallucinations_per_answer": 1.7058823529411764,
+      "items": {
+        "describe": 35.55555555555556,
+        "describe_en": 62.22222222222223,
+        "grounding.facepalm": 100.0,
+        "grounding.folded": 100.0,
+        "grounding.laugh": 100.0,
+        "grounding.official": 100.0,
+        "knowledge_en": 5.0,
+        "knowledge_zh": 15.0,
+        "recognize_angry": 0.0,
+        "recognize_en": 0.0,
+        "recognize_facepalm": 75.0,
+        "recognize_folded_arms": 50.0,
+        "recognize_naiwa": 40.0,
+        "recognize_official": 75.0,
+        "recognize_smug": 65.0,
+        "recognize_variant": 0.0,
+        "recognize_zh": 10.0,
+        "write_prompt.cat": 30.0,
+        "write_prompt.giraffe": 40.0,
+        "write_prompt_zh.cat": 5.0,
+        "write_prompt_zh.giraffe": 30.0
+      },
+      "per_judge": {
+        "opus-5.5": 31.633986928104576
+      },
+      "contaminated": 0
+    }
+  },
+  "state_understanding": {},
+  "imagegen": {},
+  "samples": {
+    "understanding": [
+      {
+        "model": "egg-alpha",
+        "item": "describe",
+        "modality": "text",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/egg-alpha/describe__r1.json",
+        "answer": "先说明：我没有真的调取图片，下面是凭我对中文互联网上那张最常见「大笑奶龙」表情包的记忆做的重建。网上有二创、抠图、加字版本，所以个别细节（尤其是手臂位置和背景是否透明）我不能 100% 保证，下面会标出来。\n\n**整体印象**\n它不是 2D 手绘，而是一张 3D 卡通渲染的角色抠图，被当成表情包用。画面里几乎只有角色本身，占画面大部分，构图居中，像商品渲染图/贴纸。角色是一只 Q 版、圆滚滚的黄色小龙（网友有时戏称\"奶蛙\"，但造型是龙/小恐龙，不是青蛙）。\n\n**姿势**\n- 大致正面或四分之三侧面朝向观众，身体重心后仰，呈\"笑得前仰后合\"的状态。\n- 头向后／向侧上方仰起，下巴抬高，肚子往前挺。\n- 两条小短腿分开站着或微蹲，脚圆钝。\n- 手臂很短，抬在胸前或身体两侧，像笑到拍手／捂肚子的动作。（不确定：不同版本里手的位置有差异，有的更像两手张开，有的像一手捂肚。）\n- 身后有一条短尾巴露出。\n\n**表情（重点）**\n- 眼睛闭着，眯成两条弯弯的弧线／倒 U 形，是典型\"笑到闭眼\"。\n- 嘴巴张得非常大，呈大笑状，嘴角上扬，开口接近梯形或大 O 形。\n- 嘴里能看到粉红／偏红的口腔和舌头；是否露牙齿我不太确定，印象中可能有少量白色小牙，但不敢保证。\n- 脸颊鼓鼓的，整体表情夸张、憨傻、喜庆。\n\n**身体造型**\n- 大头小身，头身比接近 1:1 甚至头更大，整体梨形／水滴形，圆胖。\n- 头顶有两个小圆角状突起（小角／小耳朵）。\n- 四肢短粗圆润，手脚都是圆钝的，没有锋利爪子。\n- 背部是否有小翅膀／小鳍我不确定，经典大笑图里不明显。\n\n**配色**\n- 主体：明亮的奶黄／明黄色。\n- 腹部、嘴周：更浅的奶白／浅黄。\n- 口腔：粉红到暗红，舌头粉色，牙齿（若有）白色。\n- 闭眼线条：深棕／黑色。\n- 阴影偏暖橙黄，整体高饱和、暖色调。\n\n**渲染风格**\n- 平滑 3D 卡通渲染，类似软胶／塑料玩具质感。\n- 边缘圆润，没有黑色描边。\n- 柔和打光，轻微高光，阴影柔和，不写实。\n- 表情和比例都刻意夸张，偏\"萌系表情包\"。\n\n**背景**\n- 我记得是纯白或接近纯白的干净背景，也可能是透明抠图；没有场景道具。脚下是否有淡投影不确定。\n\n**给画师的建议总结**\n画一只圆胖明黄 Q 版 3D 小龙，仰头闭眼、嘴巴大张大笑，露粉色口腔舌头，短手抬在胸前／两侧，短腿分开，白底抠图，软胶质感、无描边、暖色柔光。手臂具体位置和有无牙齿请再核对原图，因为这两点我记忆最模糊。",
+        "score": 35.55555555555556,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 35.55555555555556
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "States confidently that the body leans backward (重心后仰), with the head tilted up, chin raised and belly thrust forward. The reference shows the torso hunched forward and doubled over.",
+          "Describes the style as cute, kawaii-leaning (偏萌系表情包, 憨傻喜庆). The reference's vibe is absurd, unhinged 抽象 meme energy, not merely cute."
+        ],
+        "rationales": {
+          "opus-5.5": "The eyes, 3D glossy render and plain white background are described correctly. The core pose is reversed (leaning back instead of doubled over), hands on the belly appear only as a hedged option, the mouth and body descriptions are only partly right (pink interior, unsure about teeth, big head instead of a neckless merged body), and the vibe is misread as cute."
+        }
+      },
+      {
+        "model": "egg-alpha",
+        "item": "describe_en",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/egg-alpha/describe_en__r1.json",
+        "answer": "## Caveat first\n\nI know 奶龙 (Nailong) as the chubby yellow baby‑dragon mascot of a Chinese 3D‑animated web series that blew up on Douyin/Bilibili, and I know that a **laughing** frame of it became a hugely popular reaction sticker (\"大笑奶龙\"). What I *can't* claim is that there is one single canonical \"most iconic\" file — the circulating image exists in many crops, re‑renders and fan‑edited versions. Below is the version I remember most strongly, with confidence flags at the end. I'm also not familiar with **奶蛙** as an established alias; it may be a fan nickname (the wide mouth reads frog‑like) or a different thing entirely, so I can't describe a separate \"milk frog\" design.\n\n## Overall silhouette and proportions\n\nChibi, roughly 2 to 2.5 heads tall. The head is enormous — close to half the total height — and rounded like a slightly squashed ball with a short, blunt, wide muzzle. The body is a pear/egg shape with a big protruding belly, tapering to short stubby legs. Arms are short and thick with simple rounded three‑ or four‑fingered hands (no claws to speak of). A short, fat tail tapers behind it, usually with a rounded leaf/spade‑shaped tip. Two small nub horns or ear‑like bumps sit on top of the head. I believe there is a low row of small rounded spikes or plates running down the back onto the tail — medium confidence.\n\n## Pose\n\nFront‑facing or slight three‑quarter view, standing. The upper body and head tip **backward** with the belly pushed forward — the classic \"doubled over backwards\" laugh. Head tilted up so the chin lifts and the underside of the muzzle shows a bit. Arms are lifted away from the body: my memory is one or both hands raised near chest/face height, or one hand slapping the belly. Legs slightly apart, feet flat, tail acting as a counterweight behind. Overall the pose is loose and off‑balance, not stiff.\n\n## Expression (the important part)\n\n- **Mouth:** enormously wide open, taking up most of the lower face — a big upward‑curving grin‑shaped opening, corners pulled far back and up. Dark pink/red interior, a rounded pink tongue visible at the bottom. Possibly a couple of small blunt white teeth at the lower front — low confidence.\n- **Eyes:** squeezed shut into two thick upward crescents (^ ^ / inverted‑U arcs), pure black, no visible whites. Cheeks bunched up beneath them.\n- Optional in some edits: a tear drop or sweat drop at the outer eye corner, and blush ovals on the cheeks.\n- The comic effect comes from the mouth being *too* big for the face — many meme versions exaggerate it further until it looks slightly uncanny.\n\n## Colors\n\n- Body: saturated warm yellow, roughly a golden/egg yolk yellow.\n- Belly, muzzle underside, inner ears, palms: paler cream / light butter yellow.\n- Horns and back spikes: slightly darker, more orange‑yellow.\n- Mouth: dark maroon‑red cavity, salmon‑pink tongue.\n- Eyes/linework: near‑black. No black outlines around the body — it's shape‑against‑shape.\n\n## Rendering style\n\nClean, glossy **3D CGI**, not 2D. Think vinyl designer toy: smooth matte‑to‑satin plastic surface, soft broad specular highlights on the forehead, cheeks and belly, gentle ambient occlusion in the creases, a soft key light from the upper front and a faint rim/edge light separating it from the background. Soft contact shadow under the feet. Saturated, bright, kid‑animation lighting; no texture, no fur, no scales, no heavy shading. Anti‑aliased clean edges, no hand‑drawn line art.\n\n## Background and framing\n\nFor the sticker/meme form I remember it as **isolated on plain white or transparent**, centered, square crop, either full body or waist‑up. In‑show screenshots have simple cartoon environments behind it, but those aren't the iconic version. Some fan variants add radiating speed lines, floating 哈哈哈 text, or a stretched/warped face.\n\n## Where I'm unsure\n\n1. **Hands/arms** — I can't reliably say whether it's hands on belly, both arms up, or one hand pointing. This is my weakest point.\n2. **Teeth** — whether any are shown, and how many.\n3. **Tears/blush** — may be from fan edits rather than the original.\n4. **Wings** — I don't think it has wings, but I'm not fully certain.\n5. **Exact hue and the back‑spike row** — approximate.\n6. Whether the truly \"most iconic\" file is an official show frame, an official emoji pack render, or a fan‑warped edit. My description leans toward the clean official‑looking render.\n7. **奶蛙** — as noted, I can't confirm this name refers to the same character.\n\nIf you need fidelity, treat the above as a strong stylistic brief rather than a tracing reference, and verify the arm pose against an actual image.",
+        "score": 62.22222222222223,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 62.22222222222223
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Confidently states the upper body and head tip backward with the belly pushed forward and chin lifted, which contradicts the hunched-forward, doubled-over pose"
+        ],
+        "rationales": {
+          "opus-5.5": "The answer gets the eyes, mouth, pale belly, glossy 3D render and white background right. It confidently reverses the pose (leaning back instead of hunched forward), only hedges on hands-on-belly, and describes a big separate chibi head rather than a neckless bean body. It also only gestures at the absurd meme vibe."
+        }
+      },
+      {
+        "model": "egg-alpha",
+        "item": "grounding.facepalm.blind",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/egg-alpha/grounding.facepalm.blind__r1.json",
+        "answer": "```json\n{\n  \"pose\": \"unknown\",\n  \"eyes\": \"unknown\"\n}\n```\n\nI don't see an image attached to your message — only the text instructions came through. If you re-send it with the image included, I'll classify the pose and eye state from what's actually visible.",
+        "score": 0.0,
+        "joint": 0.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 0.0,
+          "eyes": 0.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "grounding.facepalm",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "egg-alpha",
+        "item": "grounding.facepalm",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/egg-alpha/grounding.facepalm__r1.json",
+        "answer": "{\n  \"pose\": \"facepalm\",\n  \"eyes\": \"open\"\n}",
+        "score": 100.0,
+        "joint": 100.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 100.0,
+          "eyes": 100.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "egg-alpha",
+        "item": "grounding.folded.blind",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/egg-alpha/grounding.folded.blind__r1.json",
+        "answer": "I don't see an attached image in our conversation — nothing was included with your message, so I have no visual information to evaluate.\n\n```json\n{\n  \"pose\": \"unknown\",\n  \"eyes\": \"unknown\"\n}\n```\n\nIf you upload the image, I'll classify the pose (belly_clutch, raised_hands, facepalm, or folded_arms) and whether the eyes are open or closed based solely on what's visible.",
+        "score": 0.0,
+        "joint": 0.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 0.0,
+          "eyes": 0.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "grounding.folded",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "egg-alpha",
+        "item": "grounding.folded",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/egg-alpha/grounding.folded__r1.json",
+        "answer": "```json\n{\n  \"pose\": \"folded_arms\",\n  \"eyes\": \"open\"\n}\n```",
+        "score": 100.0,
+        "joint": 100.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 100.0,
+          "eyes": 100.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "egg-alpha",
+        "item": "grounding.laugh.blind",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/egg-alpha/grounding.laugh.blind__r1.json",
+        "answer": "```json\n{\n  \"pose\": \"unknown\",\n  \"eyes\": \"unknown\"\n}\n```\n\nI don't actually see an image attached to your message — only the text instructions came through. If you re-send it with the image included, I can classify the pose and eye state.",
+        "score": 0.0,
+        "joint": 0.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 0.0,
+          "eyes": 0.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "grounding.laugh",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "egg-alpha",
+        "item": "grounding.laugh",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/egg-alpha/grounding.laugh__r1.json",
+        "answer": "{\"pose\": \"belly_clutch\", \"eyes\": \"closed\"}",
+        "score": 100.0,
+        "joint": 100.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 100.0,
+          "eyes": 100.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "egg-alpha",
+        "item": "grounding.official.blind",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/egg-alpha/grounding.official.blind__r1.json",
+        "answer": "```json\n{\n  \"pose\": \"unknown\",\n  \"eyes\": \"unknown\"\n}\n```\n\nI don't see an attached image in our conversation — only your text message came through. Could you re-upload or attach the image? Once I can see it, I'll return the JSON with the `pose` and `eyes` fields filled in based on what's actually visible.",
+        "score": 0.0,
+        "joint": 0.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 0.0,
+          "eyes": 0.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "grounding.official",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "egg-alpha",
+        "item": "grounding.official",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/egg-alpha/grounding.official__r1.json",
+        "answer": "{\"pose\": \"raised_hands\", \"eyes\": \"open\"}",
+        "score": 100.0,
+        "joint": 100.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 100.0,
+          "eyes": 100.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "egg-alpha",
+        "item": "knowledge_en",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/egg-alpha/knowledge_en__r1.json",
+        "answer": "## The character behind the meme\n\n**奶龙 (Nǎilóng)** is a Chinese animated IP character: a very fat, egg‑shaped, bright yellow dragon-like creature with stubby little arms and legs, a big round head that merges into its body, huge eyes and an enormous mouth. It stars in short, dialogue-light slapstick cartoons alongside a human boy usually called **小七 (Xiǎo Qī)**. The shorts blew up on Douyin/Kuaishou/Bilibili and as WeChat sticker packs, and the character became hugely popular with young children — which is exactly why older netizens later adopted it ironically.\n\nI believe the IP belongs to **咏声动漫 (Winsing Animation**, the Guangzhou studio behind 猪猪侠/GG Bond), and that it spread mainly from around 2021 onward. I'm reasonably but not fully confident on the studio and dates, so treat those specifics as approximate.\n\n## The \"大笑奶龙\" image\n\n\"大笑奶龙\" is a specific expression/frame of the character laughing hysterically — head tilted back, mouth stretched extremely wide, eyes squeezed shut or bulging. It escaped the cartoon and became a standalone reaction image, used roughly like \"LMAO\" / \"笑死\" — but very often **mockingly**, i.e. laughing *at* someone rather than with them. It fits the sarcastic reaction-image culture of 抽象/贴‑class internet speech (\"典\", \"乐\", \"笑嘻了\").\n\nPart of the joke is the contrast: a saccharine preschool character repurposed as a sneering, slightly grotesque laughing face. The image is frequently deep-fried, over-saturated, stretched, or given cursed 3D/AI makeovers.\n\n## \"奶蛙\"\n\nThis is the part I'm **least sure about**, so I'll be explicit: my understanding is that the wide-mouthed laughing pose looks frog-like, and netizens made green, frog-ified edits of the character, which picked up the nickname **奶蛙** (\"milk frog\"), sometimes treated as a separate cursed species living in the same meme universe. I cannot confirm the exact first image, the platform it started on, or whether it originally came from fan edits versus a bootleg toy or an off-model frame. If you need the precise origin story, don't rely on me for it.\n\n## Jokes and remixes\n\nThings I'm fairly confident circulate:\n\n- **Ironic/anti-fandom usage.** Because 奶龙 is seen as cringe kids' content, teenagers and 抽象 communities use it deliberately to annoy, calling the show \"答辩\" (a euphemism for 大便, \"crap\") and posting the laughing face at people.\n- **Insult usage.** Calling someone 奶龙, or using the derpy face to imply they look/behave stupidly. This overlaps with the 2024 slang \"唐\"/\"唐人,\" which is an ableist insult — worth knowing that this strand of the meme is genuinely offensive, not neutral.\n- **The \"龙\" pun.** 奶龙 imagery got absorbed into the existing \"龙图\" reaction-image culture partly because of the shared 龙 character. I'm confident the pun exists; I'm *not* confident enough about the etymology of 龙图 itself to explain it.\n- **鬼畜 / 音MAD / phonk and DJ edits.** The laugh and other clips get sampled into Bilibili 鬼畜 videos and Douyin electronic remixes, often with the character headbanging or 社会摇-ing.\n- **Cursed/horror edits.** \"阴间版奶龙,\" realistic 3D renders, AI-generated abominations, and bootleg-merch photos are a whole subgenre.\n- **Rhyming catchphrases.** I have a recollection of slogans along the lines of \"奶龙一笑，生死难料.\" I'd call that likely but unverified.\n\n## Caveats\n\nThis is a fast-mutating short-video meme, and my knowledge has a cutoff, so later developments (2025 onward, new variants, any film or official reaction from the rights holder) may be missing entirely. I've flagged the specific points I'd otherwise be guessing at — especially the origin of 奶蛙 and the 龙图 connection.",
+        "score": 5.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 5.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Claims 大笑奶龙 is a specific expression/frame of the character from the cartoon that 'escaped the cartoon', implying official origin, when it is an unofficial AI-generated variant",
+          "Describes the iconic pose as 'head tilted back', contradicting the hunched-forward, belly-clutching pose"
+        ],
+        "rationales": {
+          "opus-5.5": "The answer describes 奶龙 correctly and partly captures the laughing face and the frog-like 奶蛙 edits (with hedging), but it wrongly presents 大笑奶龙 as an official cartoon frame. It misses the 星野 origin, the 变异奶龙 alias, the 军体拳 remix, the official-reply copypasta, the trait-swap genre and the rarity-title posts."
+        }
+      },
+      {
+        "model": "egg-alpha",
+        "item": "knowledge_zh",
+        "modality": "text",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/egg-alpha/knowledge_zh__r1.json",
+        "answer": "## 先说结论\n\n「大笑奶龙」是国产动画 IP **奶龙**的一张（系列）表情截图，因为角色张大嘴狂笑的样子很像青蛙／蟾蜍，被网友戏称为 **「奶蛙」**，后来脱离原动画语境，成为中文互联网上流传很广的抽象表情包之一。\n\n下面分开讲，并标注我的把握程度。\n\n---\n\n## 一、本体：奶龙是什么（比较有把握）\n\n- **奶龙**是国产低幼向 3D 动画《奶龙》里的主角，形象是一只圆滚滚的**黄色小龙**，大脑袋、大眼睛、短手短脚、肚子鼓鼓，头上有小小的角／呆毛，性格憨傻贪吃。\n- 搭档是一个人类小男孩**小七**，剧情基本是每集几分钟的短故事：奶龙闯祸、闹笑话，最后有一点小道理。\n- 大约 2021 年前后开始在抖音、快手、B 站以及各视频平台少儿区走红，属于典型的「短视频时代低幼动画」，在小孩群体里知名度极高，衍生出大量玩具、文具、联名商品。\n\n**不确定 / 不敢说的部分：**\n- 具体出品公司我记不准，不敢乱报（我脑子里有几个候选但对不上号），请以官方资料为准。\n- 首播的具体年份、集数、有没有出过大电影，我记忆模糊，不确定。\n\n---\n\n## 二、「大笑奶龙」／「奶蛙」这个梗（中等把握）\n\n- 来源是动画中奶龙**张大嘴放声大笑**的画面：嘴张成一个巨大的圆形／椭圆，眼睛眯成缝或瞪得很圆，整张脸的比例被拉得很奇怪。\n- 网友觉得这个造型不像龙，反而像**青蛙、蟾蜍或者某种深海生物**，于是叫它「**奶蛙**」，也有人叫「蛤蟆龙」「蟾龙」之类的变体（后两个叫法我把握较低）。\n- 它被截成静态图和 GIF，当作表情包使用，语义大致是：\n  - 「笑死」「乐」——单纯表示爆笑；\n  - 更多时候带**嘲讽、阴阳怪气、幸灾乐祸**的意味，类似「笑嘻了」「就这？」的语气；\n  - 也常被用来「嘲笑对方的审美／年龄」，因为它自带「小学生最爱」的标签。\n- 传播主阵地是 QQ 群、贴吧、B 站评论区、抖音评论区，时间上我的印象是 **2023—2024 年**大规模流行，但具体起点我无法确认。\n\n**不确定：** 它出自哪一集、哪一分钟，以及最早是谁截的图、在哪个平台先火的，我完全不知道，不编。\n\n---\n\n## 三、相关梗与二创（部分把握，部分是印象）\n\n比较有把握的：\n\n1. **抽象化 / 深炸（deep-fried）处理**：加噪点、拉高饱和度、红眼发光、加混响音效，做成「精神污染」版本。\n2. **恐怖化 / 写实化二创**：把奶蛙画成克苏鲁式怪物、SCP 风格、或者用 3D 软件／AI 重绘成写实青蛙，走「童年阴影」路线。\n3. **表情包联动**：和其他嘲讽系表情包（悲伤蛙 Pepe、doge、各类「乐」图）拼在一起，或做成九宫格「大笑合集」。\n4. **反奶龙情绪**：奶龙因为铺得太广、被部分成年网友视为「低质低幼动画」的代表，网上存在成规模的「反奶龙」玩梗文化——把奶龙 P 进各种灾难／暴力场景、做鬼畜和音 MAD、写「奶龙必须消失」之类的段子。大笑奶龙常常是这类二创的素材入口。\n   - 需要说明：这类内容多为黑色幽默和审美吐槽，不完全等于认真的人身攻击，但确实包含大量血腥／猎奇的改编。\n5. **代际梗**：「小孩哥小孩姐人手一只奶龙」——用奶龙来指代小学生的审美和消费习惯，进而衍生「你的童年是喜羊羊，他的童年是奶龙」这类对比。\n\n把握较低、只是模糊印象的：\n\n- 有没有官方下场玩「奶蛙」这个梗（比如官方出青蛙联名或自嘲表情包），我不确定，倾向于**没有明确证据**，不要当事实引用。\n- 网上流传的一些「奶龙语录」「奶龙名言」，我分不清哪些是原动画台词、哪些是网友编的，建议不要轻信。\n\n---\n\n## 四、一句话总结\n\n奶龙是国产低幼动画里的黄色小龙；「大笑奶龙／奶蛙」是它张嘴狂笑时因形似青蛙而被网友截取、命名并抽象化的表情包，主要用来表达爆笑或嘲讽，并催生了大量恐怖化、鬼畜化和「反奶龙」向的二创。\n\n关于出品方、具体集数、梗的确切起源时间，我的记忆不可靠，这几项请自行核实。",
+        "score": 15.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 15.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Claims 大笑奶龙 is a screenshot of a laughing scene from the official 奶龙 animation. It is actually an unofficial AI-generated mutated variant that originated as a 星野 agent avatar. The model hedges on which episode, but it presents the animation-screenshot origin as fact."
+        ],
+        "rationales": {
+          "opus-5.5": "The model correctly describes the base character and the 奶蛙 nickname as a frog-like reading of Nailong. However, it treats the meme as a screenshot from the official animation, and it misses the AI/星野 origin, the 军体拳 remix, the official-reply copypasta, the trait-swap genre and the rarity-title posts."
+        }
+      },
+      {
+        "model": "egg-alpha",
+        "item": "recognize_angry",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/egg-alpha/recognize_angry__r1.json",
+        "answer": "这张表情包里的角色是 **Ugandan Knuckles（乌干达纳克鲁斯）**。\n\n**角色来源：**\n它的原型是世嘉《索尼克》系列中的角色 **纳克鲁斯（Knuckles the Echidna，针鼠纳克鲁斯）**——一只红色的针鼹。表情包中这个圆滚滚、矮胖变形的版本，最早出自 YouTube 动画师 Gregzilla 的恶搞动画。\n\n**所属网络梗：**\n这是 2017 年底至 2018 年初爆火的 **\"Ugandan Knuckles\" 梗**，主要在 **VRChat** 中流行。玩家们使用这个矮胖版纳克鲁斯的模型，成群结队地用夸张的非洲口音骚扰其他玩家，经典台词包括：\n\n- **\"Do you know da way?\"**（你知道\"路\"吗？）\n- **\"You must follow da way\"**（你必须追随这条路）\n- 还会发出\"啧啧啧\"的弹舌声，并朝人\"吐口水\"\n\n这个梗因为病毒式传播而成为 2018 年最具代表性的网络迷因之一（也因口音模仿引发过一些争议）。\n\n你这张图是国内网友二次创作的表情包，配上了\"切换愤怒模式😡\"的文字，用它瞪眼皱眉的表情来表达\"我要生气了\"的意思。",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Confidently identifies the character as Ugandan Knuckles (Sonic's Knuckles the Echidna) when it is a mutated 奶龙 from the 大笑奶龙/变异奶龙/奶蛙 meme family",
+          "Claims the image belongs to the 2017–2018 VRChat 'Ugandan Knuckles' meme rather than the 奶龙 mutation meme",
+          "Describes the sticker as a Chinese netizen remix of Ugandan Knuckles, a misattribution of the image's origin"
+        ],
+        "rationales": {
+          "opus-5.5": "The model misidentified the red mutated 奶龙 as Ugandan Knuckles and never mentions 奶龙, the 大笑奶龙/奶蛙 meme, or its AI-generated unofficial nature. Its Ugandan Knuckles background may be accurate in itself but is irrelevant to this image."
+        }
+      },
+      {
+        "model": "egg-alpha",
+        "item": "recognize_en",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/egg-alpha/recognize_en__r1.json",
+        "answer": "The character is a 3D‑rendered, overweight yellow blob‑like creature (with a pale belly and dark grey hands) clutching its stomach and laughing hysterically. It isn't from a film or game — it's a standalone 3D animation made for reaction memes.\n\nThe meme is most commonly known as the **\"Laughing Yellow Guy / Laughing Yellow Blob\"** (a.k.a. the **\"Haha Guy\"** or **\"The Giggler\"**), used as a reaction image/video for \"me laughing at my own joke,\" \"when the joke is so bad it's good,\" or uncontrollable laughter.\n\nOther names you'll see for it include:\n- **Laughing Fat Yellow Guy / Fat Yellow Blob**\n- **Yellow Creature laughing / Yellow Thing**\n- **ROFL Guy / Giggling Blob**\n- Sometimes just tagged **\"me when I laugh\"** or paired with the \"goofy ahh / cartoon wheeze laugh\" audio.\n\nSo in short: it's the laughing yellow blob reaction meme, aka the \"Laughing Yellow Guy / Haha Guy / Giggler.\"",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Claims the character isn't from any film or game and is a standalone 3D animation made for reaction memes. It is actually a mutated variant of 奶龙 (Nailong) from a Chinese children's animation.",
+          "Invents meme names such as 'Laughing Yellow Guy / Laughing Yellow Blob', 'Haha Guy', 'The Giggler', 'ROFL Guy / Giggling Blob' and 'Laughing Fat Yellow Guy' as the meme's established names, instead of 大笑奶龙 / 变异奶龙 / 奶蛙.",
+          "Asserts an association with 'goofy ahh / cartoon wheeze laugh' audio as a standard pairing, which is unsupported."
+        ],
+        "rationales": {
+          "opus-5.5": "The model never recognizes 奶龙 or the 大笑奶龙/变异奶龙/奶蛙 meme. It describes the image's visual features accurately (pale belly, grey hands, laughing pose) but fabricates generic English meme names and a false origin story."
+        }
+      },
+      {
+        "model": "egg-alpha",
+        "item": "recognize_facepalm",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/egg-alpha/recognize_facepalm__r1.json",
+        "answer": "这张图中的角色是**奶龙（Nailong）**——一只圆滚滚的黄色小龙，绿色大眼睛、奶白色的肚皮是它的标志性特征。它出自国产动画短片系列《奶龙》， originally 讲的是奶龙和小七（一位少年）的搞笑日常。\n\n它所属的网络梗就是中文互联网上的**\"奶龙表情包\"梗**：\n\n- 奶龙因为表情呆萌、神态\"憨憨的\"，被网友大量截图、二创成表情包，你这张就是典型的 3D 二创渲染版本（扶额思考的动作）。\n- 在抽象文化圈里，奶龙表情包常被反讽式地使用，和\"唐\"（形容行为呆傻的网络 slang）、\"我是奶龙\"等梗绑定，衍生出大量玩梗、恶搞甚至\"反奶龙\"的内容。\n- 类似\"无语\"\"思考\"\"憨笑\"这类奶龙表情，经常出现在聊天和评论区里表达\"我不知道该说什么了\"的情绪。\n\n所以简单总结：角色是奶龙，梗是\"奶龙表情包/抽象奶龙\"这一系列中文网络迷因。",
+        "score": 75.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 75.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The answer correctly identifies 奶龙 as a yellow, chubby dragon from a Chinese animation. It calls the image a 3D fan remix, but places it only in a generic '奶龙表情包/抽象奶龙' meme and never names the 大笑奶龙/变异奶龙/奶蛙 family."
+        }
+      },
+      {
+        "model": "egg-alpha",
+        "item": "recognize_folded_arms",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/egg-alpha/recognize_folded_arms__r1.json",
+        "answer": "这只黄色、抱臂一脸得意的小胖家伙是**奶龙**——一个圆滚滚的黄色卡通形象，最早源自抖音等平台上的国产 3D 动画短片/表情包系列。\n\n它属于中文互联网上的 **“奶龙”梗（抽象/烂梗文化）**：因为形象呆萌、表情魔性，被网友大量截取做成表情包，配上各种阴阳怪气或自信满满的表情（比如这张抱臂“我就静静看着你装”的姿态），常用于调侃、整活和“抽象”对话中。\n\n简单来说：角色 = 奶龙，梗 = 奶龙表情包/抽象烂梗系列。",
+        "score": 50.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 50.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The answer identifies the character as 奶龙, a yellow chubby cartoon from a Chinese animation, but never says it is a dragon or dinosaur. It places the image only in a generic 奶龙 meme or 抽象烂梗 category and does not recognize it as the mutated 大笑奶龙 / 变异奶龙 / 奶蛙 variant."
+        }
+      },
+      {
+        "model": "egg-alpha",
+        "item": "recognize_naiwa",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/egg-alpha/recognize_naiwa__r1.json",
+        "answer": "**角色：奶龙（Nailong）**\n\n图中这个黄色、圆滚滚、大眼睛的小家伙是国产动画《奶龙》（又名《奶龙小七》）里的主角\"奶龙\"——一只黄色的小恐龙，和小男孩小七一起生活。这张图是把它的脸做了拉伸/变形处理后的截图。\n\n**所属网络梗：奶龙表情包 / \"抽象奶龙\"系列**\n\n- 奶龙因为造型呆萌、表情夸张，从2023年起在抖音、B站、QQ群等平台被大量二次创作，形成了庞大的\"奶龙表情包\"生态。\n- 常见玩法是把奶龙的脸做扭曲、拉伸、糊化处理，再配上文言腔或成语字幕，比如\"惊鸿一瞥\"\"回眸一笑\"\"怒发冲冠\"等，制造出一种\"土味+抽象\"的反差喜感。你这张配\"惊鸿一瞥\"就属于这一类。\n- 由此还衍生出\"奶龙文学\"\"奶龙抽象话\"等亚文化，甚至带点反讽意味地被用来调侃低龄向内容。\n\n（小提示：这类表情包多为网友二次创作，与官方形象已有较大出入。）",
+        "score": 40.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 40.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Describes the image as a stretched/distorted screenshot of Nailong's face, when it is actually the smooth 3D frog-like 奶蛙 variant with bulging green-sclera eyes"
+        ],
+        "rationales": {
+          "opus-5.5": "The answer correctly describes 奶龙 as a chubby yellow cartoon dinosaur and places the image in the remixed 奶龙 meme family, but only under the generic name 抽象奶龙. It never names 大笑奶龙, 变异奶龙 or 奶蛙, and it misses the frog-like features."
+        }
+      },
+      {
+        "model": "egg-alpha",
+        "item": "recognize_official",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/egg-alpha/recognize_official__r1.json",
+        "answer": "这个角色是**奶龙（Nailong）**。\n\n它出自国产动画短片系列《奶龙》，是一只黄色、圆滚滚、贪吃又呆萌的小恐龙（设定上是\"龙\"），有着大大的绿色眼睛和奶白色的肚皮。\n\n**所属的网络梗：** 奶龙是近年来在抖音、B站、微信等中文社交平台上非常火的表情包/梗形象。因为它表情丰富、动作憨态可掬，被网友大量截取制作成表情包，常用于表达\"呆住\"\"震惊\"\"卖萌\"\"无语\"等情绪。围绕它还衍生出了\"奶龙文学\"、各种配音二创和\"抽象奶龙\"等二次创作梗，属于典型的\"萌系抽象\"网络文化符号。",
+        "score": 75.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 75.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The answer correctly identifies 奶龙 as a yellow, chubby cartoon dragon from a Chinese animation, and its visual details (green eyes, pale belly) match the image. It avoids calling the image the 大笑奶龙/奶蛙 mutation, but it never explicitly says this is official artwork distinct from that unofficial variant, so official_art gets only partial credit."
+        }
+      },
+      {
+        "model": "egg-alpha",
+        "item": "recognize_smug",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/egg-alpha/recognize_smug__r1.json",
+        "answer": "这个表情包里的角色是**奶龙（Nailong）**。\n\n**角色介绍：**\n奶龙是国产3D动画短片《奶龙》中的主角，是一只黄色、圆滚滚的小恐龙（设定上是来自异星球的呆萌小龙），性格贪吃、憨憨的，和小男孩\"小七\"一起经历各种搞笑日常。该动画在抖音、B站等平台上传播很广。\n\n**所属网络梗：**\n这张图属于**\"奶龙表情包\"**梗文化。图中奶龙眯着眼、鼓着腮红、嘴角微微上扬的表情，被网友广泛用作表达：\n- **得意/嘚瑟**：\"就这？\"式的自信微笑\n- **无语/憋笑**：似笑非笑的微妙神情\n- **傲娇/不屑**：斜眼睥睨的感觉\n\n奶龙表情包在微信、QQ群聊中非常流行，甚至衍生出一种\"反讽式喜爱\"的亚文化——网友一边说它\"憨\"一边疯狂使用它的各种截图，形成了独特的\"奶龙学\"玩梗风气。",
+        "score": 65.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 65.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Describes the mouth as '嘴角微微上扬' (corners slightly upturned), but the image shows a flat or slightly downturned smug closed mouth."
+        ],
+        "rationales": {
+          "opus-5.5": "The answer correctly describes Nailong as a yellow, chubby dinosaur from a Chinese animation. It treats the image only as a generic '奶龙表情包' and implies it is an ordinary screenshot, without recognizing the mutated 大笑/变异奶龙/奶蛙 meme family."
+        }
+      },
+      {
+        "model": "egg-alpha",
+        "item": "recognize_variant",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/egg-alpha/recognize_variant__r1.json",
+        "answer": "**我的判断：这张图最像是在模仿经典的\"姚明大笑\"表情包（暴走漫画/Rage Comics 系中的 \"Yao Ming Face\"），并结合了\"笑到捂肚子/笑到肚子疼\"的梗。**\n\n判断依据主要有以下几点：\n\n1. **眼睛的画法**：熊猫的双眼紧闭成两条向下弯的弧线（月牙形），这正是姚明笑脸最标志性的特征——笑到眼睛完全眯成缝。相比之下，另一个常被做成熊猫头的\"金馆长笑\"眼睛是眯着但仍睁开、带贱兮兮的眼神，与图中不符。\n\n2. **嘴部形态**：嘴巴张得极大，露出上排牙齿和舌头，呈放声大笑状。姚明脸的原图就是这种毫无形象管理的开怀大笑，而不是微笑或坏笑。\n\n3. **头部倾斜角度**：头向一侧歪，配合后仰的姿态，还原了姚明在记者会上笑到歪头的那一瞬间的构图感。\n\n4. **双手捂肚子的动作**：这是中文网络语境里\"笑到肚子疼\"\"笑不活了\"\"2333\"的经典肢体表达，进一步强化了\"爆笑\"这一情绪，属于对该梗的夸张化演绎。\n\n5. **载体选择**：用熊猫来承载暴走漫画式的夸张人脸表情，也符合中文互联网\"熊猫头表情包\"的传统——把魔性的人类表情安在熊猫身上。这张 3D 渲染图可以看作是把暴走漫画的简笔画风格\"立体化、萌化\"的版本。\n\n需要说明的是，这类 AI 生成或 3D 化的表情图往往是多个梗的融合体，未必有唯一出处；但从\"闭眼弯月 + 血盆大口狂笑 + 歪头 + 捂肚\"这几个核心视觉要素来看，\"姚明笑\"是匹配度最高的原型。",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Confidently identifies the image as a parody of the 'Yao Ming Face' (姚明大笑) Rage Comics meme rather than 大笑奶龙/奶蛙",
+          "Describes the panda as having a backward-leaning (后仰) posture, but the image shows it hunched forward"
+        ],
+        "rationales": {
+          "opus-5.5": "The model misidentifies the meme as Yao Ming Face and never mentions 大笑奶龙, 奶蛙 or Nailong. It correctly notes the shut eyes, gaping mouth and belly-clutching, so it gets partial credit on the pose, but it wrongly describes the posture as leaning back."
+        }
+      },
+      {
+        "model": "egg-alpha",
+        "item": "recognize_zh",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/egg-alpha/recognize_zh__r1.json",
+        "answer": "图中的角色是**奶龙（Nailong）**——一只黄色、圆滚滚、白肚皮的卡通小龙，这张是它捧腹大笑的表情包截图。\n\n- **相关网络梗**：它出自国产短篇动画《奶龙》，后来被网友做成大量表情包，演变成抽象圈里的\"**奶龙 / 我是奶龙**\"梗，常用来表示\"傻乐、憨笑、绷不住\"，并进一步和抽象骂人 slang\"**唐（唐氏）**\"绑定，用奶龙那副憨笑模样来调侃\"看起来很唐/很憨\"的人或行为。\n- **别名/外号**：小奶龙、黄胖龙，在抽象语境里也被叫作\"**唐龙**\"\"**奶龙大帝**\"等。\n\n简单说：角色=奶龙，关联梗=\"奶龙/我是奶龙\"（与\"唐\"梗相通），别名有小奶龙、唐龙、奶龙大帝。",
+        "score": 10.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 10.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Implies the laughing image comes from the official 《奶龙》 animation (\"它出自国产短篇动画《奶龙》\") rather than being an unofficial AI-generated mutated variant",
+          "Lists the meme's aliases as 小奶龙, 黄胖龙, 唐龙 and 奶龙大帝, which appear fabricated and omit the real aliases 变异奶龙 and 奶蛙"
+        ],
+        "rationales": {
+          "opus-5.5": "The answer correctly identifies the base character 奶龙 and calls the image a laughing sticker, but ties it to the wrong meme (\"我是奶龙\" and the 唐 meme). It never mentions 大笑奶龙, 变异奶龙, 奶蛙 or the AI-generated mutation, and gives what look like made-up aliases."
+        }
+      },
+      {
+        "model": "egg-alpha",
+        "item": "write_prompt.cat",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/egg-alpha/write_prompt.cat__r1.json",
+        "answer": "A single centered cartoon sticker illustration of a very chubby bright-yellow cat laughing hysterically, drawn in a simple flat kids'-animation style with thick clean black outlines and highly saturated colors on a plain solid white background. The cat has an oversized round head, a fat pear-shaped body, tiny stubby rounded triangular ears, short thick arms and legs, and a small stubby tail. Its head is thrown back and tilted slightly to one side in unrestrained laughter: both eyes are squeezed completely shut into upward-curving crescent arcs, with two tiny cartoon teardrops squirting from the outer corners of the eyes and pink oval blush marks on the cheeks. Its mouth is gaping enormously wide open, taking up most of the lower face, a huge rounded dark-red cavity with a big pink tongue curled at the bottom and a simple white strip of teeth along the top edge, the corners of the mouth pulled far up into a manic grin. One stubby paw is raised up near its face mid-gesture and the other slaps its own round belly; small curved motion lines and two or three tiny sparkle marks around the head emphasize the shaking, wheezing laughter. Simple cute mascot design, no shading detail, no text, no watermark, no border, square image, character filling most of the frame, reads clearly as an exaggerated laughing reaction emoji.",
+        "score": 30.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 30.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Head thrown back in laughter, which contradicts the reference's hunched-forward, doubled-over pose",
+          "Flat 2D kids'-animation style with thick black outlines and no shading, which contradicts the reference's glossy 3D CG render"
+        ],
+        "rationales": {
+          "opus-5.5": "The prompt nails the shut crescent eyes, the huge gaping mouth and the plain white background. However, it specifies a flat 2D style, a head-thrown-back pose, only one paw on the belly, no belly patch, and an oversized distinct head, and it reduces the cat to a yellow Nailong with token ears and a tail, framed as cute mascot rather than absurd meme."
+        }
+      },
+      {
+        "model": "egg-alpha",
+        "item": "write_prompt.giraffe",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/egg-alpha/write_prompt.giraffe__r1.json",
+        "answer": "Centered single-character 3D cartoon meme sticker of a cute giraffe version of a chubby yellow baby-dragon laughing mascot: bright butter-yellow giraffe with warm tan/brown giraffe spots, long but stubby chibi neck, two tiny ossicone horns, round ears, big rounded muzzle, white belly patch, pear-shaped body, short arms raised in delight, tiny hooves, small tail tuft. The face is the focus: head tilted slightly back, eyes squeezed shut into happy black crescent slits, cheeks puffed, enormous wide-open laughing mouth taking up most of the face, dark red mouth interior, pink tongue, a few small white teeth, exaggerated joyful “laughing so hard” expression. Smooth toy-like vinyl/clay render, thick rounded shapes, simple clean pale background, high saturation, playful Chinese chat-sticker energy, no text, no watermark, not realistic, not scary.",
+        "score": 40.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 40.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Short arms raised in delight; the meme has both hands clutching the belly",
+          "Head tilted slightly back; the meme pose is hunched or doubled forward",
+          "Long but stubby neck; the meme body has no distinct neck"
+        ],
+        "rationales": {
+          "opus-5.5": "The face (crescent eyes, huge dark mouth with teeth and tongue), belly patch, 3D toy render, pale background, and giraffe identity are well specified. The signature doubled-over, belly-clutching pose is missing and contradicted by raised arms and a tilted-back head, and the vibe leans cute rather than unhinged."
+        }
+      },
+      {
+        "model": "egg-alpha",
+        "item": "write_prompt_zh.cat",
+        "modality": "text",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/egg-alpha/write_prompt_zh.cat__r1.json",
+        "answer": "一只憨傻滑稽的肥胖卡通小生物（像青蛙与幼龙混血的吉祥物）的正面半身表情包特写：通体均匀的奶油黄／浅蛋黄色，皮肤光滑无毛、像软胶玩具有轻微哑光反光；身形是圆滚滚的土豆／水滴形，没有脖子，头与身体浑然一体，被大笑挤得更扁更宽；头顶有两只极小的圆钝角状凸起，身后一条又短又粗的小尾巴；四肢短小得可笑，两条小短手向身体两侧张开并微微上举，小短腿几乎看不见。表情是夸张到变形的放声狂笑：嘴巴横向咧开、占据整张脸的大半，呈一个巨大上扬的月牙形黑色口腔，嘴角一直拉到脸颊两侧，下唇内只露出一点点粉色小舌头，几乎没有牙齿（最多两颗很小的钝白牙）；双眼因大笑挤成两条向上弯的黑色细弧线（形如 ^ ^），脸颊有淡淡腮红；头部略微后仰，整个姿态像笑到失控。风格：简洁圆润的 3D 卡通渲染，柔和均匀的正面打光与浅淡阴影，比例刻意幼态化；画质做成低分辨率网络表情包截图感，带轻微 JPEG 压缩噪点与模糊。构图：正方形画幅，角色居中并几乎占满画面，纯白或极浅灰纯色背景；画面中不要文字、不要水印、不要边框、不要其他物体或多余角色。",
+        "score": 5.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 5.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Describes the head tilted back (头部略微后仰) instead of the torso hunched forward with knees bent",
+          "Describes both arms spread outward and slightly raised instead of hands clutching the belly",
+          "Says there are almost no teeth (几乎没有牙齿), contradicting the visible teeth in the reference",
+          "Specifies a uniform body color (通体均匀), contradicting the pale belly patch"
+        ],
+        "rationales": {
+          "opus-5.5": "The prompt covers the arc eyes, huge dark mouth, neckless bean body, 3D render and plain background well. However, it entirely omits the cat (it describes a frog/dragon hybrid with horns) and gets the pose, hands, belly patch and teeth wrong; it also leans cute (腮红, 幼态) and uses a matte rather than glossy finish."
+        }
+      },
+      {
+        "model": "egg-alpha",
+        "item": "write_prompt_zh.giraffe",
+        "modality": "text",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/egg-alpha/write_prompt_zh.giraffe__r1.json",
+        "answer": "方形中文表情包贴纸风格，纯白背景，粗黑描边，扁平明亮配色，Q版可爱搞笑。画面中央是一只“长颈鹿版黄色圆润小龙”混合角色：全身奶黄色，身体矮胖圆滚，脖子弹性地拉长成长颈鹿的长脖子，脖子上有浅棕色不规则长颈鹿斑点，头顶两只小长颈鹿角和圆耳朵，保留小恐龙般的短手短脚、小尾巴和圆肚皮。角色正在夸张大笑，头微微后仰，眼睛眯成两条弯月线，脸颊鼓起，嘴巴张得巨大像青蛙一样横向咧开，露出粉色口腔、舌头和几颗小白牙，表情极其魔性、憨憨、爆笑；两只小手举在脸旁或捂着肚子，姿态像在笑到停不下来。整体像高质量网络表情包/聊天贴纸，居中构图，干净轮廓，轻微阴影，可爱、滑稽、传染性强；不要写实，不要复杂背景，不要文字，不要水印。",
+        "score": 30.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 30.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Specifies flat 2D sticker style with thick black outlines, which contradicts the glossy 3D CG render of the meme",
+          "Head tilted back (头微微后仰) instead of the hunched-forward, doubled-over pose"
+        ],
+        "rationales": {
+          "opus-5.5": "The answer gets the squinting arc eyes, the huge laughing mouth and the plain white background right, but it renders the character as a flat outlined 2D sticker, tilts the head back instead of hunching forward, hedges on the hands-on-belly gesture, and omits the pale belly patch. The giraffe identity is mostly token cues (spots only on the neck, small horns) on a cream-yellow Nailong body, and the elongated neck also conflicts with the neckless bean silhouette."
+        }
+      }
+    ],
+    "imagegen": []
+  },
+  "leaderboards": {
+    "visual_understanding": [
+      {
+        "model": "egg-alpha",
+        "rank": 1,
+        "score": 55.0,
+        "diagnostic_score": 55.0,
+        "conditions": [],
+        "settings_status": "recorded",
+        "settings_ids": [
+          "7e9b52a50fc5ff45"
+        ],
+        "collection_profiles": [],
+        "judges": {
+          "opus-5.5": 9
+        },
+        "score_interval": [
+          33.17171717171717,
+          74.28571428571429
+        ],
+        "rank_range": [
+          1,
+          1
+        ],
+        "completed": 13,
+        "required": 13,
+        "repetitions": 1,
+        "status": "complete",
+        "bootstrap": {
+          "resamples": 2000,
+          "seed": 6643,
+          "clusters": 8,
+          "cluster": "source image"
+        },
+        "label": "egg-alpha (pi, TokenRhythm) (high)"
+      }
+    ],
+    "imagegen": []
+  },
+  "collection": {
+    "started_at": "2026-11-04T04:25:13Z",
+    "finished_at": "2026-11-04T05:51:15Z",
+    "revisions": [
+      "44479d0",
+      "acefac8"
+    ],
+    "dirty": false,
+    "recorded": 42,
+    "tasks": 42,
+    "subject_profiles": {},
+    "judge_profiles": {}
+  },
+  "labels": {
+    "egg-alpha": "egg-alpha (pi, TokenRhythm) (high)"
+  },
+  "efficiency": {
+    "suite": "core",
+    "visual_understanding": {
+      "egg-alpha": {
+        "tasks": 13,
+        "token_tasks": 13,
+        "token_totals": {
+          "input": 5594,
+          "output": 10737,
+          "reasoning": 8555,
+          "cached_input": 0,
+          "cache_write": 0
+        },
+        "token_counts": {
+          "input": 13,
+          "output": 13,
+          "reasoning": 13,
+          "cached_input": 13,
+          "cache_write": 13
+        },
+        "mean_input_tokens": 430.3076923076923,
+        "mean_output_tokens": 825.9230769230769,
+        "mean_reasoning_tokens": 658.0769230769231,
+        "median_seconds": 13.9,
+        "cost_tasks": 13,
+        "mean_cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "known_cost_usd": 0.0,
+        "reported_cost_usd": 0,
+        "price": {
+          "input": 0.0,
+          "cached_input": 0.0,
+          "cache_write": 0.0,
+          "output": 0.0,
+          "unit": "USD/1M tokens",
+          "source": "https://tokenrhythm.studio/v1/models (free preview, listed at 0 CNY)",
+          "as_of": "2026-11-04"
+        }
+      }
+    },
+    "imagegen": {
+      "egg-alpha": {
+        "tasks": 0,
+        "images": 0,
+        "median_seconds": null
+      }
+    },
+    "whole_run": {
+      "egg-alpha": {
+        "understanding": {
+          "tasks": 25,
+          "token_tasks": 25,
+          "token_totals": {
+            "input": 7128,
+            "output": 28363,
+            "reasoning": 21016,
+            "cached_input": 0,
+            "cache_write": 0
+          },
+          "token_counts": {
+            "input": 25,
+            "output": 25,
+            "reasoning": 25,
+            "cached_input": 25,
+            "cache_write": 25
+          },
+          "mean_input_tokens": 285.12,
+          "mean_output_tokens": 1134.52,
+          "mean_reasoning_tokens": 840.64,
+          "median_seconds": 17.9,
+          "cost_tasks": 25,
+          "mean_cost_usd": 0.0,
+          "estimated_cost_usd": 0.0,
+          "known_cost_usd": 0.0,
+          "reported_cost_usd": 0,
+          "price": {
+            "input": 0.0,
+            "cached_input": 0.0,
+            "cache_write": 0.0,
+            "output": 0.0,
+            "unit": "USD/1M tokens",
+            "source": "https://tokenrhythm.studio/v1/models (free preview, listed at 0 CNY)",
+            "as_of": "2026-11-04"
+          }
+        },
+        "imagegen": {
+          "tasks": 0,
+          "images": 0,
+          "median_seconds": null
+        }
+      }
+    },
+    "judges": {
+      "opus-5.5": {
+        "tasks": 17,
+        "token_tasks": 17,
+        "token_totals": {
+          "input": 42051,
+          "output": 12874,
+          "reasoning": null,
+          "cached_input": 0,
+          "cache_write": 42017
+        },
+        "token_counts": {
+          "input": 17,
+          "output": 17,
+          "reasoning": 0,
+          "cached_input": 17,
+          "cache_write": 17
+        },
+        "mean_input_tokens": 2473.5882352941176,
+        "mean_output_tokens": 757.2941176470588,
+        "mean_reasoning_tokens": null,
+        "median_seconds": 10.5,
+        "cost_tasks": 17,
+        "mean_cost_usd": 0.027511823529411766,
+        "estimated_cost_usd": 0.46770100000000003,
+        "known_cost_usd": 0.46770100000000003,
+        "reported_cost_usd": 0.5993058,
+        "price": {
+          "input": 4.0,
+          "cached_input": 0.2,
+          "cache_write": 5.0,
+          "output": 20.0,
+          "unit": "USD/1M tokens",
+          "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "as_of": "2026-10-25"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "settings_id": "548ef2024561e924",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.1",
+  "vendor": "anthropic",
+  "item": "recognize_en",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Who is this character, and which internet meme is this image from? Does the meme have other names?",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "I can't identify this one with confidence, so let me be upfront about what I do and don't know.\n\n**What I can say:** This is a widely circulated reaction image/GIF of a chubby, yellow, fish- or shark-like CGI creature doubled over laughing with its eyes squeezed shut and hands on its belly. It's used online as a generic \"laughing hysterically / this is too funny / point-and-laugh\" reaction, especially on TikTok, Douyin, Discord, and Twitter/X, often paired with distorted or exaggerated laughter audio.\n\n**What I'm not sure about:** I don't reliably know the character's name or the exact show it comes from. It appears to be from a low-budget 3D animated children's series (possibly Chinese-produced), but I can't name the specific title with certainty, and I'd rather not guess and give you a wrong answer that you'd repeat elsewhere.\n\n**Names you may see it under:** It mostly circulates descriptively rather than under one fixed name — things like \"laughing yellow fish,\" \"laughing yellow monster/blob,\" \"fat laughing shark,\" or simply \"the laughing fish meme.\" It's sometimes conflated with other laughing-creature memes (like the real-life \"laughing pufferfish\" clips), but it's a separate image.\n\nIf you want a definitive source, a reverse image search (Google Lens, TinEye) or a look at Know Your Meme would pin down the character and origin quickly — I'd just need you to lift the no-tools restriction for me to check.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 25.1,
+    "tokens": {
+      "input": 1439,
+      "cached_input": 0,
+      "cache_write": 1437,
+      "output": 1321,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 0.09481,
+    "tools_used": [],
+    "cost_usd": 0.09481,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1437,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1321,
+      "output_tokens_details": {
+        "thinking_tokens": 831
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1437,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1321,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1437,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1437
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T03:49:16Z",
+    "finished_at": "2026-10-31T03:49:41Z",
+    "revision": "592016c",
+    "nwb_version": "0.1.0"
+  }
+}

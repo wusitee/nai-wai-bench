@@ -1,0 +1,127 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.1-terra-xhigh/describe_en__r1.json",
+  "target_sha256": "1844b5a2d4b692402fe3485bc858b0b601928a74f3d7aafde6d75e1fddd39f4f",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "03b837299c24f17c",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.1-terra-xhigh",
+  "scores": {
+    "pose": 1,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 0,
+    "render": 0,
+    "background": 2,
+    "vibe": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer correctly gives the curved-slit eyes, the pear-shaped neckless body and the plain light background, and it captures the oversized mouth only partly. It misses the hunched pose, the hands on the belly, the belly patch, the 3D CG render and the absurd meme energy, but its arm and mouth-color guesses are explicitly hedged, so they are not counted as hallucinations.",
+  "raw": "```json\n{\"scores\": {\"pose\": 1, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 1, \"body\": 2, \"belly_patch\": 0, \"render\": 0, \"background\": 2, \"vibe\": 0}, \"hallucinations\": [], \"rationale\": \"The answer correctly gives the curved-slit eyes, the pear-shaped neckless body and the plain light background, and it captures the oversized mouth only partly. It misses the hunched pose, the hands on the belly, the belly patch, the 3D CG render and the absurd meme energy, but its arm and mouth-color guesses are explicitly hedged, so they are not counted as hallucinations.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.308",
+    "seconds": 11.6,
+    "tokens": {
+      "input": 1683,
+      "cached_input": 0,
+      "cache_write": 1681,
+      "output": 844,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0305779,
+    "tools_used": [],
+    "cost_usd": 0.0305779,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1681,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 844,
+      "output_tokens_details": {
+        "thinking_tokens": 616
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1681,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 844,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1681,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1681
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-28T16:34:38Z",
+    "finished_at": "2026-10-28T16:34:50Z",
+    "revision": "07d52c9+archive",
+    "nwb_version": "0.1.0",
+    "source_commit": "07d52c9418172b2b7b01e6ed0abc2ca504c64a76",
+    "source_archive_sha256": "fb2d8a524452a6d15b9090848ff3c5dc753975173dba45cdffae5384e0a35c07",
+    "collector_wrapper_sha256": "43804988d112d60f028efd345efd0e4a4a6b07a72cdf28bea2ce5ec45fa23ca3",
+    "tool_disable_features": [
+      "shell_tool",
+      "unified_exec",
+      "multi_agent",
+      "multi_agent_v2",
+      "plugins",
+      "skill_search",
+      "goals",
+      "sleep_tool",
+      "view_image",
+      "collaboration_modes",
+      "default_mode_request_user_input"
+    ]
+  }
+}

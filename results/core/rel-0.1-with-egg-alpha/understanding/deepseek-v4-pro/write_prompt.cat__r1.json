@@ -1,0 +1,73 @@
+{
+  "settings_id": "cefccff5b65c93e5",
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "vendor": "deepseek",
+  "item": "write_prompt.cat",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a cat version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A chubby, bright yellow cartoon cat with smooth plush-like fur, an oversized round head, small rounded cat ears, tiny whiskers, and a small pear-shaped body with stubby arms and legs. It is laughing extremely hard with its eyes squeezed shut into happy upward-curved arches, its mouth stretched open in a huge grin showing a pink tongue, its head tilted slightly back, and both front paws raised upward. The pose and expression are exaggeratedly gleeful, like a reaction meme of a cute toy laughing. Simple clean background, 3D render style, soft smooth lighting, adorable plush-toy texture.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "stop_reason": "end_turn",
+    "client": "deepseek-harness-acp 0.0.1",
+    "seconds": 22.0,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+      "reasoning_effort": "high"
+    },
+    "resolved_model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 1284,
+        "size": 1000000
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:51:31Z",
+    "finished_at": "2026-10-25T00:51:53Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}
