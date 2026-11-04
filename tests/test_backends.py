@@ -16,7 +16,7 @@ from nwb.backends.cc_switch import claude_env, openai_credentials
 from nwb.backends.codex import CodexBackend, ISOLATED_FEATURES, audit_rollout, recorded_tool_profile
 from nwb.backends.claude import ClaudeBackend
 from nwb.backends.openai_compat import OpenAICompatBackend
-from nwb.backends.pi import PiBackend
+from nwb.backends.pi import PiBackend, _rate_limit_wait
 from nwb.config import ModelSpec, model_settings
 
 FAKE_AGENT = Path(__file__).with_name("fake_acp_agent.py")
@@ -265,6 +265,12 @@ def test_pi_resends_rate_limited_prompts_after_the_provider_hint(tmp_path, monke
     limits.write_text("99")
     with pytest.raises(BackendError, match="pi error: 429"):
         backend.run(Request("hello"))
+    # Long hints are honored up to the call timeout; other errors and other statuses are not retried.
+    assert _rate_limit_wait('429: {"retryAfterSeconds":    180}', 0, 600) == 181
+    assert _rate_limit_wait("429: retry-after: 9999", 0, 600) == 600
+    assert _rate_limit_wait("Rate limit exceeded", 3, 600) == 40
+    assert _rate_limit_wait('400: {"error":"invalid rate_limit parameter"}', 0, 600) is None
+    assert _rate_limit_wait("overloaded", 0, 600) is None
 
 
 def test_acp_rejects_unavailable_or_unconfirmed_effort():

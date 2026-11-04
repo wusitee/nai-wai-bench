@@ -186,7 +186,8 @@ the client and default/unexposed otherwise; labels show non-default recorded eff
 judges and sample counts are disclosed per row, because vendor exclusion can produce different panels.
 
 The Efficiency table covers the fixed visual tasks: token coverage, reported-only mean input/output
-(including reasoning) and reasoning tokens, median end-to-end client seconds, and estimated list API
+(including reasoning) and reasoning tokens, median end-to-end client seconds (for pi samples resent after a
+provider rate limit, only the final attempt), and estimated list API
 cost per task and full panel. Missing fields are excluded from means and displayed as unavailable;
 full-panel cost requires complete task coverage and usage. Prices include their source and as-of date
 from `models.toml`. Input tokens include cached reads and cache writes: subtract those subsets from

@@ -197,8 +197,9 @@ support), skills, prompt templates, themes, context files, and automatic network
 refreshes are disabled. The coding-agent system prompt is replaced with a neutral one, global `SYSTEM.md`
 and `APPEND_SYSTEM.md` files are not loaded, and pi still adds the temporary working directory. pi's
 automatic retry is turned off, because pi ends the turn before retrying. A provider rate-limit error (HTTP 429)
-is instead resent in a fresh session after the provider's retry-after hint (otherwise 5, 10, 20… seconds, at most
-120), up to six times; `meta.rate_limit_retries` counts these and `meta.seconds` covers the final attempt. Other
+is instead resent in a fresh session after the provider's retry-after hint, honored up to the call's `timeout`
+(without a hint: 5, 10, 20… seconds, at most 120), up to six times; an error that leads with another HTTP status is
+not retried; `meta.rate_limit_retries` counts these and `meta.seconds` covers the final attempt. Other
 failed samples are retried on the next run. Text and vision only.
 
 `model` must name the model exactly as `provider/id` or `id`. Because pi falls back to another model and

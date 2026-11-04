@@ -23,9 +23,19 @@ SYSTEM_PROMPT = "You are a helpful assistant."
 ANSWERED = ("stop", "length")
 # Provider rate limits arrive as an assistant error such as `429: {..."retryAfterSeconds":12...}`. pi's own retry
 # cannot be used (it ends the turn first), so the prompt is resent in a fresh session after the provider's hint.
-RATE_LIMITED = re.compile(r"^\s*429\b|rate.?limit", re.I)
-RETRY_AFTER = re.compile(r"retry.?after.?(?:seconds)?\W{0,3}(\d+(?:\.\d+)?)", re.I)
+# A message that leads with another HTTP status (e.g. `400: invalid rate_limit parameter`) is not a rate limit.
+RATE_LIMITED = re.compile(r"^\s*429\b|^(?!\s*\d{3}\b).*rate.?limit", re.I | re.S)
+RETRY_AFTER = re.compile(r"retry.?after.?(?:seconds)?[\"'\s:=]*(\d+(?:\.\d+)?)", re.I)
 RETRIES = 6
+
+
+def _rate_limit_wait(error: str, attempt: int, limit: float) -> float | None:
+    """Seconds to wait before resending a rate-limited prompt, or None for any other error. The provider's hint
+    is honored up to the per-call timeout; without one, waits back off from 5 seconds up to 120."""
+    if not RATE_LIMITED.search(error):
+        return None
+    hint = RETRY_AFTER.search(error)
+    return min(float(hint.group(1)) + 1, limit) if hint else min(5 * 2 ** attempt, 120)
 
 
 def _client() -> str | None:
@@ -88,11 +98,10 @@ class PiBackend:
             if not replies:
                 raise BackendError("pi returned no assistant message")
             last = replies[-1]
-            error = str(last.get("errorMessage", ""))
-            if last.get("stopReason") != "error" or not RATE_LIMITED.search(error) or attempt == RETRIES:
+            wait = _rate_limit_wait(str(last.get("errorMessage", "")), attempt, self.timeout)
+            if last.get("stopReason") != "error" or wait is None or attempt == RETRIES:
                 break
-            hint = RETRY_AFTER.search(error)
-            time.sleep(min(float(hint.group(1)) + 1 if hint else 5 * 2 ** attempt, 120))
+            time.sleep(wait)
         if last.get("stopReason") not in ANSWERED:
             raise BackendError(f"pi {last.get('stopReason')}: {str(last.get('errorMessage', ''))[:800]}")
         # One assistant message without tools; counters are summed over the turn and stay unknown if missing.
