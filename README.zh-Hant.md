@@ -71,7 +71,7 @@ uv run nwb site                                   # 寫入 site/index.html
 
 ## 文件
 
-- [架構](docs/architecture.md)（英文）：執行流程、計分路徑、結果儲存和互動式榜單
+- [架構](docs/architecture.md)（英文）：執行流程、計分路徑、結果儲存和互動式架構圖
 - [發佈流程](docs/releases.md)（英文）：固定比較的輸入、離線建置、原始資料包和發佈
 - [看圖題組（Nai-hub v1）](docs/naihub-eval-set.md)（英文）：24 張按答案鍵計分的圖，帶無圖對照和
   8 張遷移參考圖（`--suite naihub-v1`）

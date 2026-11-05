@@ -35,6 +35,17 @@
 `understanding.overall` 欄位現在等同於已有題目的看圖平均分，不再是文字與視覺的混合分。診斷平均分使用
 已有的題目，可能與合格的排名分數不同。
 
+## 版本中繼資料與結果包
+
+排名要求同一模型的必需格子和重複使用一致的 `settings_id` 與 effort，且沒有 `meta.fill_note`
+標記的替代路線填補。混合條件保留診斷分但不排名；全部缺少舊版設定的列會明確標出。
+報告還會核對目前提示詞、被評審內容和視覺證據，並顯示實際參與的評審、收集日期／修訂、
+配對自助法區間和名次範圍。完整規則見[英文版本與資格說明](design.md#release-metadata-and-eligibility)。
+
+`uv run nwb export --run RUN --suite SUITE` 在工作執行目錄中產生經過淨化的原始結果 ZIP，
+保留回答、圖片、評審、收集記錄和新計算的分數。還原和重新計分使用包內 `BUNDLE-README.md` 的指令。
+跨題組的固定輸入、合併和離線建置見[發佈流程](releases.md)。
+
 ## 第一部分：理解（`nwb understand`）
 
 文字模型和視覺模型回答關於這個迷因的問題。題目定義在 `bench/tasks.toml` 的 `[understanding.*]` 中：
@@ -193,7 +204,7 @@ C2PA 對 OpenAI 僅標註 `ChatGPT · gpt-image`，對 Google 僅標註「Create
 產生的網站取代 `origin` 上的 `gh-pages` 分支。根目錄是奶蛙指數總覽，識梗在 `meme-id/`，看圖在
 `visual-detail/`；`naihub-v1/` 跳轉到 `visual-detail/`。
 需要 `uv`、Git、已設定的 Git 作者身分和推送權限，不會改變目前簽出的
-分支。產生的執行資料和網站檔案在原始碼分支上仍被 git 忽略。
+分支。工作執行和網站檔案仍被 git 忽略；`results/` 中的可攜副本隨原始碼分支儲存。
 
 首次啟用 GitHub Pages：`gh api -X POST repos/OWNER/REPO/pages -f 'source[branch]=gh-pages' -f 'source[path]=/'`；
 若已啟用則改用 `-X PUT`。用 `gh api repos/OWNER/REPO/pages/builds/latest` 檢查建置狀態，用
@@ -211,8 +222,14 @@ runs/<run>/judgments/<judge>/<與被評審樣本相同的路徑>
 runs/<run>/scores.json, runs/<run>/report.html
 ```
 
-命令會跳過用目前提示詞已成功生成的樣本，並重做記錄了 `error` 或用其他提示詞生成的樣本，所以中斷的
-執行可以從中斷處繼續。服務商拒絕生成的樣本會作為結果保留；`--force` 會重新生成所選的全部樣本。
+收集、評審和產生報告時，還會更新 `results/<suite>/<run>/` 中經過淨化的可攜副本，供正常 Git 提交。
+工作執行缺失時會從儲存的結果還原；已有工作執行優先。`--no-sync` 可讓本機實驗不更新副本，
+`nwb sync` 可明確儲存現有執行。驗證、還原和合併規則見[發佈流程](releases.md#saving-results-to-git)。
+
+指令會重用提示詞、輸入和設定都相符的成功樣本，並重試記錄了 `error` 的樣本。成功樣本的提示詞、輸入或
+收集設定改變時，整個批次會在寫記錄和請求模型前停止；請選擇新的執行名稱，或明確用 `--force` 取代。
+不需要執行任何任務時，不會更新收集記錄或結果副本。服務商拒絕生成的樣本會作為結果保留；
+`--force` 會重新生成所選的全部樣本。
 
 ## 擴充
 
