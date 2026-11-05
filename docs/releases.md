@@ -25,7 +25,9 @@ judge independence from Opus 5.5 cannot be confirmed.
 
 `chatgpt-images-2.6` repeats the `chatgpt-image` configuration after OpenAI's Images 2.6 launch on
 2026-11-04. Codex names no image model in its output or C2PA credentials, so the row relies on OpenAI's
-statement that Images 2.6 serves Codex; the `chatgpt-image` row is the same relay collected in October.
+statement that Images 2.6 serves Codex on all plans ([announcement](https://openai.com/index/introducing-images-2-6/),
+[availability post](https://x.com/OpenAI/status/2118124966055223755)); the `chatgpt-image` row is the same
+relay collected in October.
 Opus 5.5 verdicts for the October `chatgpt-image` images were added in `rel-0.1-with-images-2.6`, so both
 rows are scored by the same judge.
 
