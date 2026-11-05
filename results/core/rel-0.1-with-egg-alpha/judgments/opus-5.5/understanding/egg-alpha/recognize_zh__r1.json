@@ -1,0 +1,113 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/egg-alpha/recognize_zh__r1.json",
+  "target_sha256": "5d7c49b202143a9af219e3c09294c696d1b73705b92a5d3400725f0469fd4d93",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "d4aec6061a281ccd",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "egg-alpha",
+  "scores": {
+    "base_character": 2,
+    "identifies_meme": 1,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "Implies the laughing image comes from the official 《奶龙》 animation (\"它出自国产短篇动画《奶龙》\") rather than being an unofficial AI-generated mutated variant",
+    "Lists the meme's aliases as 小奶龙, 黄胖龙, 唐龙 and 奶龙大帝, which appear fabricated and omit the real aliases 变异奶龙 and 奶蛙"
+  ],
+  "rationale": "The answer correctly identifies the base character 奶龙 and calls the image a laughing sticker, but ties it to the wrong meme (\"我是奶龙\" and the 唐 meme). It never mentions 大笑奶龙, 变异奶龙, 奶蛙 or the AI-generated mutation, and gives what look like made-up aliases.",
+  "raw": "{\"scores\": {\"base_character\": 2, \"identifies_meme\": 1, \"ai_variant\": 0, \"aliases\": 0, \"naiwa\": 0}, \"hallucinations\": [\"Implies the laughing image comes from the official 《奶龙》 animation (\\\"它出自国产短篇动画《奶龙》\\\") rather than being an unofficial AI-generated mutated variant\", \"Lists the meme's aliases as 小奶龙, 黄胖龙, 唐龙 and 奶龙大帝, which appear fabricated and omit the real aliases 变异奶龙 and 奶蛙\"], \"rationale\": \"The answer correctly identifies the base character 奶龙 and calls the image a laughing sticker, but ties it to the wrong meme (\\\"我是奶龙\\\" and the 唐 meme). It never mentions 大笑奶龙, 变异奶龙, 奶蛙 or the AI-generated mutation, and gives what look like made-up aliases.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.309",
+    "seconds": 11.8,
+    "tokens": {
+      "input": 2743,
+      "cached_input": 0,
+      "cache_write": 2741,
+      "output": 838,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.038964900000000004,
+    "tools_used": [],
+    "cost_usd": 0.038964900000000004,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2741,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 838,
+      "output_tokens_details": {
+        "thinking_tokens": 513
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2741,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 838,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2741,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2741
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-04T05:50:39Z",
+    "finished_at": "2026-11-04T05:50:51Z",
+    "revision": "44479d0",
+    "nwb_version": "0.1.0"
+  }
+}

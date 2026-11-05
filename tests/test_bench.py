@@ -21,7 +21,7 @@ def test_bench_data_and_models_load(bench):
             assert animal.en in tier.render(animal) or animal.zh in tier.render(animal) or tier.reference
     assert set(bench.trait_weights) == set(bench.traits)
     models, defaults = load_models(find_root())
-    assert {m.backend for m in models.values()} <= {"codex", "claude", "acp", "openai"}
+    assert {m.backend for m in models.values()} <= {"codex", "claude", "acp", "openai", "pi"}
     assert set(defaults["judges"]) | set(defaults["image_judges"]) <= set(models)
     assert all("vision" in models[j].can for j in defaults["image_judges"])
     assert {a.id for a in bench.select_animals("default")} == {"cat", "panda", "frog", "giraffe", "octopus", "elephant"}

@@ -1,0 +1,80 @@
+{
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "vendor": "openai",
+  "item": "recognize_facepalm",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "answer": "这是**奶龙**，出自国产动画《奶龙》。\n\n它属于网上的**“奶龙”表情包／抽象梗**，和“我是奶龙”等玩梗属于同一类。这张扶额的图通常用来表达“无语”“头疼”或“让我想想”，没有固定唯一的配文。",
+  "contaminated": false,
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17083-fe3b-7d91-9e02-828ffdb9f195",
+    "seconds": 45.1,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 11667,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 960,
+      "reasoning_output_tokens": 878
+    },
+    "tokens": {
+      "input": 11667,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 960,
+      "reasoning": 878
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:44:20Z",
+    "finished_at": "2026-10-25T00:45:05Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,13 +1,15 @@
 import hashlib
 import json
 import os
+import re
 from dataclasses import replace
+from statistics import mean
 
 import pytest
 
 from nwb import report
 from nwb.config import find_root, load_bench
-from nwb.scoring import aggregate, grounding_score, image_scores, understanding_score
+from nwb.scoring import aggregate, grounding_score, image_scores, naiwai_index, understanding_score
 from nwb.util import write_json
 
 WEIGHTS = {"pose": 2.0, "render": 1.0}
@@ -350,6 +352,14 @@ def test_efficiency_prices_cache_subsets_missing_usage_and_separate_judges():
     assert ">1,000</td>" in table and "无用量数据 No usage data: &lt;missing&gt;" in rendered
 
 
+def test_efficiency_chart_gives_coinciding_points_separate_labels():
+    rows = {f"m{i}": {"mean_output_tokens": 100} for i in range(8)}
+    rendered = report.efficiency_section({"efficiency": {"visual_understanding": rows}, "leaderboards": {
+        "visual_understanding": [{"model": m, "score": 100} for m in rows]}})
+    spots = re.findall(r"<text x='([\d.]+)' y='([\d.]+)' text-anchor='(?:start|end)'[^>]*>m\d</text>", rendered)
+    assert len(spots) == 8 and len(set(spots)) == 8
+
+
 def test_paired_bootstrap_keeps_identical_models_tied_and_records_collection(tmp_path):
     bench = load_bench(find_root())
     bench = replace(bench, items=[i for i in bench.items if i.modality == "vision" and i.answers])
@@ -398,3 +408,38 @@ def test_bootstrap_rank_bounds_use_observed_integer_ranks(monkeypatch):
                                              (.0123, "$0.0123"), (12.345, "$12.35"), (12345, "$12,340")])
 def test_efficiency_cost_format(value, expected):
     assert report._cost(value) == expected
+
+
+def _index_suites(scores: dict[str, dict]) -> dict:
+    """Both suites with per-item visual scores: `scores[suite][model]` maps an item position to its score."""
+    root, suites = find_root(), {}
+    for suite, metric in [("core", "score"), ("naihub-v1", "joint")]:
+        bench = load_bench(root, suite)
+        items = [i.id for i in bench.items if i.modality == "vision"]
+        samples = [{"model": m, "item": item, metric: score(n)} for m, score in scores[suite].items() if score
+                   for n, item in enumerate(items)]
+        board = [{"model": m, "rank": 1, "score": mean(score(n) for n in range(len(items))) if score else 50}
+                 for m, score in scores[suite].items()]
+        suites[suite] = (bench, {"samples": {"understanding": samples}, "leaderboards": {"visual_understanding": board}})
+    return suites
+
+
+def test_naiwai_index_counts_visual_detail_double_and_ranks_only_models_ranked_in_both():
+    rows = {r["model"]: r for r in naiwai_index(_index_suites({
+        "core": {"a": lambda n: 90, "b": lambda n: 30, "only-core": None},
+        "naihub-v1": {"a": lambda n: 0, "b": lambda n: 60}}))["rows"]}
+    # An equal-weight mean would tie a and b at 45.
+    assert (rows["b"]["rank"], rows["b"]["score"], rows["b"]["score_interval"]) == (1, 50, [50, 50])
+    assert (rows["a"]["rank"], rows["a"]["score"], rows["a"]["rank_range"]) == (2, 30, [2, 2])
+    assert (rows["only-core"]["rank"], rows["only-core"]["status"]) == (None, "partial")
+
+
+def test_naiwai_index_pairs_component_draws_across_models():
+    # Same varying Visual detail pattern, with b ahead on every item: wide, overlapping intervals, but b leads in
+    # every paired draw, so neither rank range moves.
+    rows = {r["model"]: r for r in naiwai_index(_index_suites({
+        "core": {"a": lambda n: 40, "b": lambda n: 40},
+        "naihub-v1": {"a": lambda n: 100 * (n % 3 == 0), "b": lambda n: 100 * (n % 3 == 0) + 6}}))["rows"]}
+    (a_lo, a_hi), (b_lo, b_hi) = rows["a"]["score_interval"], rows["b"]["score_interval"]
+    assert a_hi - a_lo > 10 and b_lo < a_hi and b_hi - a_hi == b_lo - a_lo == 4
+    assert (rows["b"]["rank_range"], rows["a"]["rank_range"]) == ([1, 1], [2, 2])

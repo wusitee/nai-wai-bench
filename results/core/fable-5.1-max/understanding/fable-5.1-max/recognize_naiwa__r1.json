@@ -1,0 +1,103 @@
+{
+  "settings_id": "8c7d55a4a7adc4cb",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "vendor": "anthropic",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "这张图我只能凭记忆判断，说实话我**没法百分之百确定它的确切出处**，但可以给你我的看法：\n\n**画面里的角色**\n- 是一只 3D 渲染的黄色小鸟/小鸡造型的卡通角色：身体光滑、通体黄色，眼睛很大、绿色虹膜配特别大的黑瞳孔，嘴巴又短又圆，整体是一种“呆呆的、一脸懵”的质感。\n- 截图里它的身体朝向一边，头却猛地扭过来盯着镜头，正是那种“被叫到名字 / 听到动静 / 偷看被抓包”的瞬间表情。\n- 它看起来像是从某部低幼向 3D 动画（或 3D 短片）里截出来的帧，但具体是哪部作品，我凭记忆对不上一个有把握的名字，就不乱编一个角色名给你了。\n\n**它属于哪个梗**\n- 文字“惊鸿一瞥”是一个常见的表情包套路：原本是形容“像惊飞的鸿雁一样轻盈的一瞥”，带有惊艳、美好的意味；网络用法则是反差式的“反讽”——用一个傻乎乎、眼神呆滞、慌张扭头的形象，配上这句很文艺的词，制造“嘴上说惊鸿一瞥，画面实际是一脸懵”的喜感。\n- 使用场景一般是：\n  - 聊天中突然被 cue 到、被点名时发一张，表示“？？？我吗？”\n  - 偷看别人/被抓包时的“回头瞥一眼”；\n  - 看到某个离谱发言时“瞟一眼”，表达无语或震惊。\n- 它和“回眸一笑”“我看看是谁在说话”“瞅你咋地”这类“扭头看镜头”系表情包属于同一类，常被做成一整套（配文换成“？”“哦？”“急了急了”等）。\n\n如果你想要确切的动画出处，用图片反搜（百度识图/Google Lens）一下会比我靠记忆猜更可靠。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 645.6,
+    "tokens": {
+      "input": 761,
+      "cached_input": 0,
+      "cache_write": 759,
+      "output": 47387,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 2.38455,
+    "tools_used": [],
+    "cost_usd": 2.38455,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 759,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 47387,
+      "output_tokens_details": {
+        "thinking_tokens": 46665
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 759,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 47387,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 759,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 759
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T12:00:09Z",
+    "finished_at": "2026-11-01T12:10:55Z",
+    "revision": "c8f2158",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -92,7 +92,9 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
     assert "ChatGPT gpt-image" in html and "Prompt changed" in html
     assert answer.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;') in html
     assert unrelated.read_text() == "keep"
-    assert "Image generation ranking" in html and "Visual understanding ranking" in html
+    ranking_name = site.SUITE_TEXT[suite]["name"][1] + " ranking"
+    assert "Experimental · image generation" in html and "Image generation ranking" in html
+    assert html.index(ranking_name) < html.index("Experimental · image generation")
     assert "incomplete" in html and "0/30" in html
     assert "Optional state transfer · unscored" in html and f"Source: {state_item.state}" in html
     assert "Optional state extraction · answer-keyed" in html
@@ -102,10 +104,10 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
         ranking = html.split("<table class=ranking>", 1)[1].split("</table>", 1)[0]
         assert "评审 Judges:" not in ranking
         assert "Answer keys are GPT-6-Astra annotations not yet checked by a person" in html
-        assert "Key annotator" in html and "href='../'" in html and "blind-only reply" in html
+        assert "Key annotator" in html and "href='../meme-id/'" in html and "blind-only reply" in html
         assert f"id='case-{unseen.id.split('.')[1]}'" in html
     else:
-        assert "Answer-key diagnostics" not in html and "href='naihub-v1/'" in html
+        assert "Answer-key diagnostics" not in html and "href='../visual-detail/'" in html and "href='../'" in html
     local_report = report.render(bench, "test", scores)
     assert "Image generation ranking" in local_report and "Visual understanding ranking" in local_report
     assert "incomplete" in local_report and "&lt;unsafe&gt;" in local_report
@@ -153,7 +155,7 @@ def test_export_is_deterministic_sanitized_and_rescorable(tmp_path, capsys):
     (run / "report.html").write_text("excluded")
     (run / "secrets.log").write_text("excluded")
     (run / "collection.jsonl").write_text(json.dumps({"path": str(Path.home() / "private")}) + "\n")
-    args = SimpleNamespace(run_dir=run, out=str(tmp_path / "bundles"))
+    args = SimpleNamespace(run_dir=run, out=str(tmp_path / "bundles"), judges=None)
     assert cli.cmd_export(args, bench.root, bench, models, {}) == 0
     archive = next((tmp_path / "bundles").glob("*.zip"))
     original = archive.read_bytes()

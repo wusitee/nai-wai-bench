@@ -1,0 +1,91 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1-max/knowledge_zh__r1.json",
+  "target_sha256": "c161f9e32e300a76d31d58931bcff112f9e1586413e90111104404c83842858d",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "db1060bf5d0ccb91",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 1,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [
+    "将标志性大笑奶龙描述为“仰头大笑”；参考形象是身体前倾、双手捧腹大笑。"
+  ],
+  "rationale": "正确介绍了奶龙本体，部分覆盖奶蛙别称及闭眼张嘴的笑容，但遗漏AI变异属性、星野起源和主要二创梗，也未准确说明奶蛙的变异形态。官方素材出处的说法虽错误，但已明确标注不确定，因此不列为幻觉。",
+  "raw": "{\"scores\":{\"base_character\":2,\"ai_variant\":0,\"xingye_origin\":0,\"aliases\":1,\"naiwa\":1,\"laugh_pose\":1,\"junti_quan\":0,\"official_reply\":0,\"trait_variants\":0,\"rarity_titles\":0},\"hallucinations\":[\"将标志性大笑奶龙描述为“仰头大笑”；参考形象是身体前倾、双手捧腹大笑。\"],\"rationale\":\"正确介绍了奶龙本体，部分覆盖奶蛙别称及闭眼张嘴的笑容，但遗漏AI变异属性、星野起源和主要二创梗，也未准确说明奶蛙的变异形态。官方素材出处的说法虽错误，但已明确标注不确定，因此不列为幻觉。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a197d4-9f7d-7013-977f-5f186b952d76",
+    "seconds": 25.9,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13678,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 505,
+      "reasoning_output_tokens": 324
+    },
+    "tokens": {
+      "input": 13678,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 505,
+      "reasoning": 324
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T15:57:36Z",
+    "finished_at": "2026-11-01T15:58:02Z",
+    "revision": "67c68f1",
+    "nwb_version": "0.1.0"
+  }
+}

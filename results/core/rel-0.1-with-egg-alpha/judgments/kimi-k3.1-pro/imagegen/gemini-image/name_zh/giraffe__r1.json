@@ -1,0 +1,89 @@
+{
+  "judge": "kimi-k3.1-pro",
+  "judge_vendor": "moonshot",
+  "target": "imagegen/gemini-image/name_zh/giraffe__r1.json",
+  "target_sha256": "d39b9c6dd0d79cf2ec1e4c6d07bc2a6c7bdcc7c9f6af61176e9a773889c90dbf",
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "judge_prompt": "6f759f177814ec15",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/gemini-image/name_zh/giraffe__r1/inline-0.jpg"
+  ],
+  "track": "imagegen",
+  "model": "gemini-image",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 1,
+    "render": 1,
+    "background": 0,
+    "vibe": 1
+  },
+  "identity": 2,
+  "failure_modes": [
+    "generic_cute",
+    "multiple_subjects"
+  ],
+  "rationale": "The giraffe identity and laughing facial expression are clear, but the signature doubled-over pose, belly-clutching gesture, merged head-and-body shape, and plain meme setting are missing. It reads primarily as a polished, cute savanna character scene.",
+  "raw": "pose: Stands upright on four legs with no forward-hunched, doubled-over posture — absent.  \nhands_on_belly: All four legs are visible and none clutch or press the belly — absent.  \neyes: Eyes are squeezed shut into thin curved arcs — match.  \nmouth: Huge open mouth with a dark interior, teeth, and tongue — match.  \nbody: Stocky torso and thick limbs, but a long, distinctly separate giraffe neck — partial.  \nbelly_patch: Lighter cream underside, but no clearly defined contrasting oval patch — partial.  \nrender: Polished 3D CG character, though with outdoor lighting rather than the cheap studio-render look — partial.  \nbackground: Detailed savanna with grass, trees, and other animals — absent.  \nvibe: Exaggerated laughter, but predominantly cute and wholesome rather than absurd or unhinged — partial.  \nidentity: Immediately recognizable as a giraffe, with a long neck, ossicones, and natural spotted markings — clearly.\n\n{\"traits\":{\"pose\":\"absent\",\"hands_on_belly\":\"absent\",\"eyes\":\"match\",\"mouth\":\"match\",\"body\":\"partial\",\"belly_patch\":\"partial\",\"render\":\"partial\",\"background\":\"absent\",\"vibe\":\"partial\"},\"identity\":\"clearly\",\"failure_modes\":[\"generic_cute\",\"multiple_subjects\"],\"rationale\":\"The giraffe identity and laughing facial expression are clear, but the signature doubled-over pose, belly-clutching gesture, merged head-and-body shape, and plain meme setting are missing. It reads primarily as a polished, cute savanna character scene.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 24.0,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 22813,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 747,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 23560 / 1048576 tokens (2%)\nSession total: 22813 input, 747 output",
+      "usage": {
+        "inputTokens": 22813,
+        "outputTokens": 747
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:56:23Z",
+    "finished_at": "2026-10-25T01:56:47Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

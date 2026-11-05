@@ -1,0 +1,120 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "imagegen/gemini-image/name_zh/giraffe__r1.json",
+  "target_sha256": "d39b9c6dd0d79cf2ec1e4c6d07bc2a6c7bdcc7c9f6af61176e9a773889c90dbf",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "6f759f177814ec15",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/gemini-image/name_zh/giraffe__r1/inline-0.jpg"
+  ],
+  "track": "imagegen",
+  "model": "gemini-image",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 1,
+    "background": 0,
+    "vibe": 0
+  },
+  "identity": 2,
+  "failure_modes": [
+    "generic_cute",
+    "realistic_animal",
+    "multiple_subjects"
+  ],
+  "rationale": "A clearly identifiable, cute semi-realistic baby giraffe laughing in a busy savanna scene with other animals. It keeps the closed eyes and open mouth but misses the hunched belly-clutching pose, the neckless bean body, the belly patch, the plain background and the unhinged meme vibe.",
+  "raw": "- **pose:** The giraffe stands upright on four legs with its head tossed back. There is no forward hunch or doubled-over posture. → absent\n- **hands_on_belly:** All four hooves stay on the ground, and nothing clutches the belly. → absent\n- **eyes:** The visible eye is squeezed shut into a curved arc with lashes. → match\n- **mouth:** The mouth is wide open and laughing, with teeth and a pink tongue. However, the interior is pink rather than dark, and the mouth doesn't dominate the face the way the reference's does. → partial\n- **body:** The torso is chubby with short, thick legs, but the giraffe has a long, distinct neck rather than a head merged into a bean-shaped body. → partial\n- **belly_patch:** The underside is only slightly lighter, and spots continue across the chest. There is no distinct pale oval patch. → absent\n- **render:** This is a soft, furry, Pixar-like semi-realistic render under natural outdoor light. It is CG-ish but not the glossy studio look of the reference. → partial\n- **background:** The image shows a detailed savanna with acacia trees, a dirt path, zebras and antelope. → absent\n- **vibe:** The image feels wholesome, joyful and cute, with none of the absurd, unhinged meme energy. → absent\n- **identity:** The giraffe is clearly recognizable from its ossicones, ears, reticulated spot pattern and tail tuft. → clearly\n\n```json\n{\"traits\": {\"pose\": \"absent\", \"hands_on_belly\": \"absent\", \"eyes\": \"match\", \"mouth\": \"partial\", \"body\": \"partial\", \"belly_patch\": \"absent\", \"render\": \"partial\", \"background\": \"absent\", \"vibe\": \"absent\"}, \"identity\": \"clearly\", \"failure_modes\": [\"generic_cute\", \"realistic_animal\", \"multiple_subjects\"], \"rationale\": \"A clearly identifiable, cute semi-realistic baby giraffe laughing in a busy savanna scene with other animals. It keeps the closed eyes and open mouth but misses the hunched belly-clutching pose, the neckless bean body, the belly patch, the plain background and the unhinged meme vibe.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 15.7,
+    "tokens": {
+      "input": 3804,
+      "cached_input": 0,
+      "cache_write": 3802,
+      "output": 1295,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0565602,
+    "tools_used": [],
+    "cost_usd": 0.0565602,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3802,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1295,
+      "output_tokens_details": {
+        "thinking_tokens": 560
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3802,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1295,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3802,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3802
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:07:53Z",
+    "finished_at": "2026-10-25T02:08:09Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

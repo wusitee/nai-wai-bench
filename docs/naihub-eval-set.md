@@ -1,9 +1,11 @@
-# Nai-hub v1 evaluation set
+# Nai-hub v1 evaluation set (看图 Visual detail)
 
-`--suite naihub-v1` selects a versioned expansion of the default `core` benchmark: 24 static
-images, one shared structured question per image, and 24 matched no-image controls. All
-understanding answers are scored locally, without LLM judges. This tests family recognition
-and visible features; the core suite retains free-form lore, language, and prompt-writing tasks.
+`--suite naihub-v1` selects the **看图 Visual detail** ranking: 24 static images, one shared
+structured question per image, and 24 matched no-image controls. All understanding answers are
+scored locally, without LLM judges. This tests family recognition and visible features; the
+**识梗 Meme ID** suite (`core`) retains free-form recognition, lore, language, and prompt-writing tasks.
+Visual detail counts 2/3 of the [NaiWai Index](methodology.md#naiwai-index). The suite id carries
+the panel version: changed images or answer keys require a new id.
 
 Images, keys, source links, upstream revisions where available, and SHA-256 hashes are in
 [bench/naihub-v1/tasks.toml](../bench/naihub-v1/tasks.toml). Vendored images have neutral numeric
@@ -113,13 +115,14 @@ uv run nwb report --suite naihub-v1 --run naihub-v1
 uv run nwb site --suite naihub-v1 --run naihub-v1 --out site/naihub-v1
 ```
 
-The site page leads with a casebook of all 24 images, showing each model's wrong fields, and flags
-the answer-key annotator in the ranking. `scripts/publish_site.sh` publishes it under `naihub-v1/`
-beside the core results; see [Results site](design.md#results-site-nwb-site).
+The site page shows its ranking, then a casebook of all 24 images with each model's wrong fields, and
+flags the answer-key annotator in the ranking. `scripts/publish_site.sh` publishes it as Visual detail
+under `visual-detail/`, with `naihub-v1/` redirecting there; see
+[Results site](design.md#results-site-nwb-site).
 
 Replace `VISION_MODEL` with a configured name. `--items vision` selects just the 24 image-input
 items; `--items grounding.naihub_v1_017` selects the tear case and its blind control. Text-only
-models can run controls but cannot fill the visual panel. The default `core` suite retains its
+models can run controls but cannot fill the visual panel. The default Meme ID suite (`core`) retains its
 13-image visual panel and existing prompts and scoring rules.
 
 ## Optional generation transfer

@@ -1,0 +1,88 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1-max/describe__r1.json",
+  "target_sha256": "d146a26c7a079ccf5a640b956922ae006e3c130deb73c73653d85e522022bfab",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "c5f8deff3cbaa0ab",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 1,
+    "render": 2,
+    "background": 2,
+    "vibe": 1
+  },
+  "hallucinations": [],
+  "rationale": "The answer clearly covers closed curved eyes, the neckless bulky body, 3D rendering, and a white background, but reverses the defining forward-hunched pose and only tentatively mentions one hand on the belly. The pale belly patch is uncertain, visible teeth are not correctly described, and the absurd, unhinged mood is only partly conveyed; the conflicting details are explicitly marked uncertain, so they are not listed as hallucinations.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":1,\"body\":2,\"belly_patch\":1,\"render\":2,\"background\":2,\"vibe\":1},\"hallucinations\":[],\"rationale\":\"The answer clearly covers closed curved eyes, the neckless bulky body, 3D rendering, and a white background, but reverses the defining forward-hunched pose and only tentatively mentions one hand on the belly. The pale belly patch is uncertain, visible teeth are not correctly described, and the absurd, unhinged mood is only partly conveyed; the conflicting details are explicitly marked uncertain, so they are not listed as hallucinations.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a197d4-32ae-7ea1-b908-ab22dd1a61ef",
+    "seconds": 28.4,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13747,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 501,
+      "reasoning_output_tokens": 353
+    },
+    "tokens": {
+      "input": 13747,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 501,
+      "reasoning": 353
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T15:57:08Z",
+    "finished_at": "2026-11-01T15:57:36Z",
+    "revision": "67c68f1",
+    "nwb_version": "0.1.0"
+  }
+}

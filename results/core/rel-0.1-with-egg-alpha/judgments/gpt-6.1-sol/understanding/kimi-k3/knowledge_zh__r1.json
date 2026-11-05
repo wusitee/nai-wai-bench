@@ -1,0 +1,92 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/kimi-k3/knowledge_zh__r1.json",
+  "target_sha256": "509103b55eccff6377d197ce3f095fb454a90b5461959ea744e62f28f29cd5bf",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "4464626ec298fe84",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "kimi-k3",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 1,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 1,
+    "rarity_titles": 0
+  },
+  "hallucinations": [
+    "称奶龙“有小翅膀”，与官方角色外观不符。",
+    "称奶龙“设定上与奶/牛奶有关”，属于编造的角色设定。"
+  ],
+  "rationale": "回答正确介绍了奶龙的基本身份，部分涉及奶蛙称呼、蛙化形象、大笑表情和角色缝合二创，但未说明大笑奶龙是非官方AI变异形象。星野起源、军体拳混剪、官方回复定型文和稀有奶龙标题等关键内容均缺失。",
+  "raw": "{\"scores\":{\"base_character\":2,\"ai_variant\":0,\"xingye_origin\":0,\"aliases\":1,\"naiwa\":1,\"laugh_pose\":1,\"junti_quan\":0,\"official_reply\":0,\"trait_variants\":1,\"rarity_titles\":0},\"hallucinations\":[\"称奶龙“有小翅膀”，与官方角色外观不符。\",\"称奶龙“设定上与奶/牛奶有关”，属于编造的角色设定。\"],\"rationale\":\"回答正确介绍了奶龙的基本身份，部分涉及奶蛙称呼、蛙化形象、大笑表情和角色缝合二创，但未说明大笑奶龙是非官方AI变异形象。星野起源、军体拳混剪、官方回复定型文和稀有奶龙标题等关键内容均缺失。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a171a1-9e8f-76a1-998d-f4271d57114f",
+    "seconds": 22.7,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13206,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 523,
+      "reasoning_output_tokens": 328
+    },
+    "tokens": {
+      "input": 13206,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 523,
+      "reasoning": 328
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:56:19Z",
+    "finished_at": "2026-10-25T05:56:42Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

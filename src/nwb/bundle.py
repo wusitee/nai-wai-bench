@@ -82,7 +82,7 @@ def _digest(files: dict[str, bytes]) -> str:
     return hashlib.sha256(json.dumps(entries, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 
-def prepare(run_dir: Path, bench: Bench, *, judges: set[str] | None = None,
+def prepare(run_dir: Path, bench: Bench, *, judges: scoring.JudgeSelection = None,
             scores: dict | None = None) -> PreparedBundle:
     if not run_dir.is_dir():
         raise FileNotFoundError(f"run not found: {run_dir}")
@@ -91,12 +91,18 @@ def prepare(run_dir: Path, bench: Bench, *, judges: set[str] | None = None,
     files = _export_inputs(run_dir, bench)
     digest = _digest(files)
     files["scores.json"] = _json_bytes(scores)
-    selection = "" if judges is None else f" --judges {','.join(sorted(judges))}" if judges else " --judges ''"
+    pools = ""
+    if isinstance(judges, dict):  # Per-track pools have no single --judges equivalent.
+        selection = ""
+        pools = (f" with `judges = {json.dumps(sorted(judges.get('understanding', [])))}` and "
+                 f"`image_judges = {json.dumps(sorted(judges.get('imagegen', [])))}` under `[defaults]`")
+    else:
+        selection = "" if judges is None else f" --judges {','.join(sorted(judges))}" if judges else " --judges ''"
     files["BUNDLE-README.md"] = (
         f"# nai-wai-bench {__version__} results\n\nSuite: `{bench.suite}`. Run: `{run_dir.name}`.\n\n"
         f"{CANARY}\n\nTo re-score, use the matching benchmark source (software version {__version__}), "
         "restore these files into "
-        f"`runs/{run_dir.name}/`, then run:\n\n"
+        f"`runs/{run_dir.name}/`, then run{pools}:\n\n"
         f"```sh\nuv run nwb report --run {run_dir.name} --suite {bench.suite}{selection}\n```\n\n"
         "Home-directory prefixes in JSON strings are replaced with `~`. Judgment target hashes refer to the "
         "sanitized exported records; legacy mtime identity is converted to content identity without making stale "
@@ -105,7 +111,8 @@ def prepare(run_dir: Path, bench: Bench, *, judges: set[str] | None = None,
     return PreparedBundle(files, digest)
 
 
-def export(run_dir: Path, bench: Bench, out: Path, *, judges: set[str] | None = None, scores: dict | None = None) -> Path:
+def export(run_dir: Path, bench: Bench, out: Path, *, judges: scoring.JudgeSelection = None,
+           scores: dict | None = None) -> Path:
     prepared = prepare(run_dir, bench, judges=judges, scores=scores)
     out.mkdir(parents=True, exist_ok=True)
     archive = out / f"nai-wai-bench-{__version__}-{bench.suite}-{run_dir.name}.zip"

@@ -1,0 +1,124 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.1-terra-xhigh/recognize_angry__r1.json",
+  "target_sha256": "5be0bb7673772b1c8df11e8e18e1e6792d5d3ad3193fe89672373a09f933d303",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "f5f91560b798aded",
+  "judge_images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6.1-terra-xhigh",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0
+  },
+  "hallucinations": [],
+  "rationale": "The model reads the image as a generic '红温' (red-faced, angry) sticker and says it can't name the character. It never mentions 奶龙, the 大笑奶龙/变异奶龙/奶蛙 meme family, or that the variant is AI-generated and unofficial. Its visual description (all red, glaring) is accurate and it fabricates nothing, so it simply misses every checklist item.",
+  "raw": "{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"ai_variant\": 0}, \"hallucinations\": [], \"rationale\": \"The model reads the image as a generic '红温' (red-faced, angry) sticker and says it can't name the character. It never mentions 奶龙, the 大笑奶龙/变异奶龙/奶蛙 meme family, or that the variant is AI-generated and unofficial. Its visual description (all red, glaring) is accurate and it fabricates nothing, so it simply misses every checklist item.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.308",
+    "seconds": 7.5,
+    "tokens": {
+      "input": 1691,
+      "cached_input": 0,
+      "cache_write": 1689,
+      "output": 395,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.021757500000000003,
+    "tools_used": [],
+    "cost_usd": 0.021757500000000003,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1689,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 395,
+      "output_tokens_details": {
+        "thinking_tokens": 212
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1689,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 395,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1689,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1689
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-28T16:34:57Z",
+    "finished_at": "2026-10-28T16:35:05Z",
+    "revision": "07d52c9+archive",
+    "nwb_version": "0.1.0",
+    "source_commit": "07d52c9418172b2b7b01e6ed0abc2ca504c64a76",
+    "source_archive_sha256": "fb2d8a524452a6d15b9090848ff3c5dc753975173dba45cdffae5384e0a35c07",
+    "collector_wrapper_sha256": "43804988d112d60f028efd345efd0e4a4a6b07a72cdf28bea2ce5ec45fa23ca3",
+    "tool_disable_features": [
+      "shell_tool",
+      "unified_exec",
+      "multi_agent",
+      "multi_agent_v2",
+      "plugins",
+      "skill_search",
+      "goals",
+      "sleep_tool",
+      "view_image",
+      "collaboration_modes",
+      "default_mode_request_user_input"
+    ]
+  }
+}

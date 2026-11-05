@@ -9,22 +9,26 @@
 <img src="bench/reference/nailong_laugh.png" width="200" alt="大笑奶龙原图">
 
 **结果：**[wusitee.github.io/nai-wai-bench](https://wusitee.github.io/nai-wai-bench/)（0.1.0 版：
-含 95% bootstrap 区间和排名区间）；[奶蛙图鉴 Nai-hub v1](https://wusitee.github.io/nai-wai-bench/naihub-v1/)。
+附 95% 自助法区间与名次范围）。
 
-基准发布两个相互独立的排名：
+基准发布两个看图理解排名，并合成为**奶蛙指数 · NaiWai Index**：
 
-1. **视觉理解**：认出这个梗及其变体，区分官方形象图，并回答有固定答案键的看图问题。纯文字的来龙去脉、
-   凭记忆描述画面以及中英文提示词写作单独作为诊断项，不影响视觉排名。
-2. **图像生成**：图像模型把这个梗画成其他动物（默认题组为猫、熊猫、青蛙、长颈鹿、章鱼和大象），
-   提示词分五档：中文梗名、英文梗名、简略描述、详细描述（细致说明其 3D 外观）和参考原图。
-   对比相同动物在“只给梗名”和“给出描述”时的结果，可以衡量模型对提示词详细程度的敏感度。
+1. **识梗 Meme ID**（`--suite core`，13 道看图题）：认出这个梗及其变体，说出梗名和别名，区分官方形象图。
+   9 道自由回答由 LLM 评审打分，4 道姿势与眼睛核对题按固定答案键计分。
+2. **看图 Visual detail**（`--suite naihub-v1`，24 张图）：回答类别、数量、姿态、眼睛、嘴巴、手势和眼泪，
+   在本地与答案键比对。七项全部答对，这张图才算答对。
 
+指数是两项得分的加权平均（识梗 1/3、看图 2/3），只有两项都有名次的模型才进入指数。
+纯文字的来龙去脉、凭记忆描述画面以及中英文提示词写作只作诊断，不进入任何排名。
 只有完整跑完固定题组的模型才会获得暂定名次。不完整的结果仍会显示，并标明完成的格数。
-几分的差距不足以证明排序可靠。另有一个不计分的可选题组，测试图像模型能否把奶蛙的其他表情
-（愤怒、扶额、得意）迁移到别的动物身上。
+几分的差距不足以证明排序可靠。
 
-每个样本都由多家厂商的评审模型打分；只要有其他厂商的评审可用，模型就不会由同厂商的评审来评分。
-收集结果不需要评审模型：[协作者](docs/contributing-results.md)可以分享结果，交由他人评审。
+**图像生成**是不计入指数的实验项目：图像模型按五档提示词（中文梗名、英文梗名、简略描述、
+详细描述其 3D 外观、参考原图）把这个梗画成其他动物。另有一个不计分的可选题组，测试能否把奶蛙的
+其他表情（愤怒、扶额、得意）迁移到别的动物身上。
+
+默认由 Claude Opus 5.5 评审自由作答和生成图片；按答案键计分的题目在本地计分。报告只统计已配置的评审，
+除非用 `--judges` 另行指定。收集结果不需要评审模型：[协作者](docs/contributing-results.md)可以分享结果，交由他人评审。
 
 ## 快速开始
 
@@ -44,7 +48,7 @@ uv run nwb understand --models opus-5.5,gpt-6.1-sol,deepseek-v4-pro,mimo-v2.6-pr
 # 图像生成：6 种动物 × 5 档 = 每个模型 30 张图
 uv run nwb imagegen --models chatgpt-image --animals default
 
-uv run nwb judge                                  # 使用 models.toml 中的默认评审
+uv run nwb judge                                  # 使用 models.toml 中的默认评审（需要 Claude Code）
 uv run nwb report                                 # 生成 runs/main/report.html
 uv run nwb site                                   # 写入 site/index.html
 ```
@@ -69,7 +73,7 @@ uv run nwb site                                   # 写入 site/index.html
 
 - [架构](docs/architecture.md)（英文）：执行流程、计分路径、结果存储和交互式榜单
 - [发布流程](docs/releases.md)（英文）：固定对比的输入、离线构建、原始数据包和发布
-- [Nai-hub v1 评测集](docs/naihub-eval-set.md)（英文）：可选的 24 张图扩展题组，带本地答案键、无图对照和
+- [看图题组（Nai-hub v1）](docs/naihub-eval-set.md)（英文）：24 张按答案键计分的图，带无图对照和
   8 张迁移参考图（`--suite naihub-v1`）
 - [基准设计](docs/design.zh-CN.md)：题目、档位、评分标准、计分方式、结果网站和结果目录结构
 - [评测方法](docs/methodology.zh-CN.md)：研究依据、调用预算、对照设计和局限
@@ -78,6 +82,7 @@ uv run nwb site                                   # 写入 site/index.html
 - [后端与模型](docs/backends.zh-CN.md)：各 Agent CLI 的调用与隔离方式，以及如何添加模型（包括 pi 和通过
   Claude Code 接入的其他供应商）
 - [贡献结果](docs/contributing-results.md)（英文）：没有评审权限时如何收集、分享结果，以及如何评审分享来的结果
+- [节目视频](docs/video.md)（英文）：B 站结果视频的格式、数据规则、制作流程和发布
 - [素材来源](bench/reference/SOURCE.md)：参考图、表情包和事实的出处
 
 参考图和表情包仅供非商业研究使用。

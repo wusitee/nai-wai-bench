@@ -1,0 +1,103 @@
+{
+  "settings_id": "8c7d55a4a7adc4cb",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "vendor": "anthropic",
+  "item": "recognize_facepalm",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "answer": "这是**奶龙（Nailong）**——国产3D动画《奶龙》里的主角：一只黄色、圆滚滚、没脖子、绿色大眼睛、奶白色肚皮、短手短脚的小龙，设定上贪吃、爱装傻、有点\"贱萌\"。图片顶部裁掉了它头上的小角，但黄色胖身子＋绿眼珠＋浅色肚皮是它的标志性特征。（手的颜色偏深，可能是渲染阴影，也可能是网友二创P上去的。）\n\n它属于的网络梗：\n- **\"奶龙表情包\"**：2024年前后奶龙表情包在抖音、B站、微博、微信群里大规模刷屏，被称为继\"吗喽\"\"卡皮巴拉\"之后的新一代表情包顶流，通常用来表达装傻、心虚、无辜、\"我不理解\"、\"绷不住了\"等情绪。\n- 这一张是经典的**\"奶龙扶额/摸头\"**款：眼神往旁边飘、嘴角一抹坏笑，常配文\"哎呀不好意思\"\"让我想想\"\"我装的\"\"我有一个大胆的想法\"之类，表示尴尬、心虚或憋着坏。\n- 奶龙本身也带有争议属性：因为刷屏过度、被指画风低龄/营销痕迹重，还曾被质疑抄袭，引发过\"抵制奶龙\"的讨论，所以\"奶龙\"这个词本身也带了点\"烂梗/刷屏\"的色彩。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 765.2,
+    "tokens": {
+      "input": 966,
+      "cached_input": 0,
+      "cache_write": 964,
+      "output": 48542,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 2.4464000000000006,
+    "tools_used": [],
+    "cost_usd": 2.4464000000000006,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 964,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 48542,
+      "output_tokens_details": {
+        "thinking_tokens": 48020
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 964,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 48542,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 964,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 964
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T12:11:40Z",
+    "finished_at": "2026-11-01T12:24:26Z",
+    "revision": "c8f2158",
+    "nwb_version": "0.1.0"
+  }
+}

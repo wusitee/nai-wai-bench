@@ -1,0 +1,115 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/deepseek-v4-pro/describe__r1.json",
+  "target_sha256": "78b1d4f8274028305f5960e199497b437860a8fc821aaa29b26659562a2edb49",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "e45c799ef9a692c5",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 0,
+    "render": 1,
+    "background": 2,
+    "vibe": 0
+  },
+  "hallucinations": [
+    "Confidently describes the image as a half-body/bust close-up with arms barely visible, contradicting the standing, hunched-over pose with both hands clutching the belly",
+    "Asserts Nailong has a pair of small wings on its back (only the color is hedged), a feature the character does not have",
+    "Describes a huge head on a small body ('大头小身'), contradicting the bulky bean-shaped body where the head merges into the torso"
+  ],
+  "rationale": "The answer correctly covers the squeezed arc eyes, the huge mouth with tongue, the neckless pear-shaped body, the 3D render and the plain light background. It misses the hunched pose, the hands on the belly, the pale belly patch and the absurd meme vibe, framing the image as a cute bust close-up instead.",
+  "raw": "```json\n{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 1, \"body\": 2, \"belly_patch\": 0, \"render\": 1, \"background\": 2, \"vibe\": 0}, \"hallucinations\": [\"Confidently describes the image as a half-body/bust close-up with arms barely visible, contradicting the standing, hunched-over pose with both hands clutching the belly\", \"Asserts Nailong has a pair of small wings on its back (only the color is hedged), a feature the character does not have\", \"Describes a huge head on a small body ('大头小身'), contradicting the bulky bean-shaped body where the head merges into the torso\"], \"rationale\": \"The answer correctly covers the squeezed arc eyes, the huge mouth with tongue, the neckless pear-shaped body, the 3D render and the plain light background. It misses the hunched pose, the hands on the belly, the pale belly patch and the absurd meme vibe, framing the image as a cute bust close-up instead.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 17.9,
+    "tokens": {
+      "input": 3491,
+      "cached_input": 0,
+      "cache_write": 3489,
+      "output": 1062,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.049579200000000004,
+    "tools_used": [],
+    "cost_usd": 0.049579200000000004,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3489,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1062,
+      "output_tokens_details": {
+        "thinking_tokens": 718
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3489,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1062,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3489,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3489
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:54:01Z",
+    "finished_at": "2026-10-25T01:54:19Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

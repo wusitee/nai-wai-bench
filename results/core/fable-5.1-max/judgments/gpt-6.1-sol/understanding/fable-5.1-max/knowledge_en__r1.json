@@ -1,0 +1,93 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1-max/knowledge_en__r1.json",
+  "target_sha256": "8037092d880cf172e97a190554d16418e7781f12172eccc92ee93ab1175bd59a",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "369801ba8d967e43",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 0,
+    "naiwa": 0,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 1,
+    "rarity_titles": 0
+  },
+  "hallucinations": [
+    "Describes the iconic laughing pose as throwing its head back; it actually hunches forward and clutches its belly.",
+    "Places the animation's studio in Guangzhou; the verified company is based in Shenzhen.",
+    "Dates the animation's initial appearance to around 2022–2023; it launched in 2020."
+  ],
+  "rationale": "The answer correctly identifies the base character and partially covers the laughing expression and character crossover remixes. It misses the AI mutation, Xingye origin, established aliases, and distinctive remix traditions; its explicitly uncertain claims are excluded from hallucinations.",
+  "raw": "{\"scores\":{\"base_character\":2,\"ai_variant\":0,\"xingye_origin\":0,\"aliases\":0,\"naiwa\":0,\"laugh_pose\":1,\"junti_quan\":0,\"official_reply\":0,\"trait_variants\":1,\"rarity_titles\":0},\"hallucinations\":[\"Describes the iconic laughing pose as throwing its head back; it actually hunches forward and clutches its belly.\",\"Places the animation's studio in Guangzhou; the verified company is based in Shenzhen.\",\"Dates the animation's initial appearance to around 2022–2023; it launched in 2020.\"],\"rationale\":\"The answer correctly identifies the base character and partially covers the laughing expression and character crossover remixes. It misses the AI mutation, Xingye origin, established aliases, and distinctive remix traditions; its explicitly uncertain claims are excluded from hallucinations.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a197d4-32ab-7d02-8001-60df5686c1d8",
+    "seconds": 35.4,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12768,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 708,
+      "reasoning_output_tokens": 527
+    },
+    "tokens": {
+      "input": 12768,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 708,
+      "reasoning": 527
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T15:57:08Z",
+    "finished_at": "2026-11-01T15:57:43Z",
+    "revision": "67c68f1",
+    "nwb_version": "0.1.0"
+  }
+}

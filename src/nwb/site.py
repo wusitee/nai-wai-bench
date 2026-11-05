@@ -1,5 +1,5 @@
-"""Static, bilingual (中文 / English) results site for a run: one index.html plus resized images,
-ready to publish with GitHub Pages."""
+"""Static, bilingual (中文 / English) results site: one index.html per suite plus resized images, and for
+releases a NaiWai Index overview page, ready to publish with GitHub Pages."""
 
 import datetime
 import shutil
@@ -12,6 +12,7 @@ from nwb import CANARY, __version__
 from nwb.config import SUITES, Bench, ModelSpec, UnderstandingItem
 from nwb.report import (UNCERTAINTY_NOTE, collection_profiles_text, collection_text, efficiency_section, stale_text, fmt, judge_text,
                         model_html, rank_range, score_text)
+from nwb.scoring import INDEX_WEIGHTS
 from nwb.util import extract_json, read_json
 
 FAILURE_ZH = {"generic_cute": "泛泛的可爱风", "realistic_animal": "写实动物", "plain_nailong": "只是奶龙本体",
@@ -20,18 +21,18 @@ ACCESS = {"codex": "Codex CLI", "claude": "Claude Code", "acp": "ACP agent", "op
 CONDITION = {"described": ("文字描述", "description"), "reference": ("参考图", "reference image")}
 IMAGE_WIDTH = 768
 
-# Per suite: tab label, page title, introduction (zh, en), and whether the answer-keyed casebook
-# is the page's centerpiece (shown before the generation galleries).
+# Per suite: public name (zh, en), introduction (zh, en), and whether the hero shows a mosaic of the
+# answer-keyed images instead of the reference portrait. Suite ids stay internal; pages use the names.
 SUITE_TEXT = {
     "core": {
-        "tab": ("主榜", "Core"), "title": ("奶蛙bench", "nai-wai-bench"), "casebook_first": False,
-        "intro": ("测试 AI 模型对中文网络梗“大笑奶龙”（又称“奶蛙”）的掌握：能否从图片中认出它和它的变体，"
-                  "以及能否按它的 3D 风格把它画成别的动物。",
-                  "How well do AI models know the Chinese meme 大笑奶龙 (Laughing Nailong, also called 奶蛙)? "
-                  "Can they recognize it and its variants in images, and draw other animals in its 3D style?"),
+        "name": ("识梗", "Meme ID"), "mosaic": False,
+        "intro": ("AI 模型能否从图片中认出中文网络梗“大笑奶龙”（又称“奶蛙”）和它的变体，说出它属于哪个梗、"
+                  "有哪些别名，并分清官方奶龙？",
+                  "Can AI models recognize the Chinese meme 大笑奶龙 (Laughing Nailong, also called 奶蛙) and its "
+                  "variants in images, name the meme and its aliases, and tell it apart from official Nailong?"),
     },
     "naihub-v1": {
-        "tab": ("奶蛙图鉴", "Nai-hub v1"), "title": ("奶蛙图鉴", "Nai-hub v1 casebook"), "casebook_first": True,
+        "name": ("看图", "Visual detail"), "mosaic": True,
         "intro": ("24 张图，同一道看图题：这是奶蛙、官方奶龙，还是别的角色？有几只？什么姿态、眼睛、嘴巴和手势？"
                   "有没有流泪？七项全部答对才算这张图答对。其中 8 张还被拿来测试：能否把同样的姿势搬到猫和青蛙身上。",
                   "24 images, one question each: is it 奶蛙, official Nailong, or someone else? How many are there? "
@@ -40,6 +41,11 @@ SUITE_TEXT = {
                   "and a frog."),
     },
 }
+INDEX_NAME = ("奶蛙指数", "NaiWai Index")
+# Published release layout: the index at the site root, every suite in a subdirectory named after it.
+PAGES = {"index": "", "core": "meme-id", "naihub-v1": "visual-detail"}
+# Earlier published suite paths, kept as redirects to the current pages.
+REDIRECTS = {"naihub-v1": "naihub-v1"}
 CATEGORY = {"anchors": ("经典锚点", "Anchors"), "pose_action": ("姿势动作", "Pose and action"),
             "appearance": ("外观造型", "Appearance"), "context": ("场景与多角色", "Context"),
             "negative_control": ("反例对照", "Negative controls")}
@@ -47,94 +53,124 @@ FIELD_ZH = {"family": "类别", "subjects": "数量", "posture": "姿态", "eyes
             "gesture": "手势", "tears": "眼泪", "pose": "姿势", "state": "表情"}
 
 CSS = """
-:root{--bg:#fbf8f0;--fg:#1d1b16;--ink2:#4f4a3f;--muted:#736d60;--line:#e8e1cf;--card:#fffdf8;--soft:#f3ecda;
---yellow:#f5c518;--link:#8a5a00;--bar:#c98500;--good:#0ca30c;--bad:#d03b3b;--good-ink:#006300;--bad-ink:#b4261e;
---heat:#c2410c;--heat-ink:#fff;--shadow:0 1px 2px rgba(60,40,0,.06),0 6px 18px rgba(60,40,0,.05)}
-@media (prefers-color-scheme:dark){:root{--bg:#14130f;--fg:#ece8df;--ink2:#cfc8b8;--muted:#a39d90;--line:#2e2b24;
---card:#1c1a15;--soft:#28251d;--link:#f0b429;--bar:#f0b429;--good-ink:#57c46f;--bad-ink:#f2777a;--heat:#d9592a;
---heat-ink:#ece8df;--shadow:none}}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:64px}
-body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
-a{color:var(--link)}code,.mono{font:12.5px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 90%,transparent);
-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.top>div{max-width:1180px;margin:auto;padding:8px 20px;display:flex;gap:10px 18px;align-items:center;flex-wrap:wrap}
-.brand{font-weight:800;color:var(--fg);text-decoration:none}
-.tabs{display:flex;gap:2px;background:var(--soft);border-radius:99px;padding:3px}
-.tabs a{padding:2px 12px;border-radius:99px;text-decoration:none;color:var(--ink2);font-size:13.5px;font-weight:600}
-.tabs a[aria-current]{background:var(--yellow);color:#1d1b16}
-.sections{display:flex;gap:14px;overflow-x:auto;font-size:13.5px;flex:1}
-.sections a{color:var(--ink2);text-decoration:none;white-space:nowrap}.sections a:hover{color:var(--link)}
-main{max-width:1180px;margin:auto;padding:30px 20px 64px}
-h1{font-size:34px;line-height:1.2;margin:0 0 10px}h2{font-size:23px;margin:60px 0 8px}h3{font-size:17px;margin:28px 0 8px}
-.en{color:var(--muted);font-weight:400}.muted{color:var(--muted);font-size:13px}.lede{font-size:16.5px;margin:0 0 12px}
-.hero{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
-.hero.solo{grid-template-columns:1fr}.hero>img{width:170px;border-radius:22px;box-shadow:var(--shadow)}
-.badge{display:inline-block;background:var(--yellow);color:#1d1b16;border-radius:99px;padding:1px 10px;font-size:12px;font-weight:700}
-.mosaic{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;margin:24px 0 0}
-.mosaic a{display:block;aspect-ratio:1;border-radius:10px;overflow:hidden;background:var(--card);border:1px solid var(--line)}
-.mosaic img{width:100%;height:100%;object-fit:cover;transition:transform .15s}.mosaic a:hover img{transform:scale(1.08)}
-.note{border:1px solid var(--line);border-left:4px solid var(--yellow);background:var(--card);border-radius:12px;
-padding:10px 14px;margin:22px 0}
+:root{color-scheme:dark;--bg:#050505;--fg:#f5f5f5;--ink2:#d4d4d4;--muted:#8f8f8f;--dim:#808080;
+--line:rgba(255,255,255,.07);--card:rgba(23,23,23,.45);--cell:#0d0d0d;--soft:rgba(255,255,255,.05);
+--yellow:#facc15;--link:#facc15;--green:#22c55e;--blue:#0ea5e9;--orange:#f97316;--bar:rgba(161,161,170,.45);
+--good:#22c55e;--bad:#ef4444;--good-ink:#4ade80;--bad-ink:#f87171;--heat:#c2410c;--heat-ink:#fff;
+--sans:Geist,"Geist Sans",Inter,system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+--mono:"Geist Mono","SF Mono","JetBrains Mono",ui-monospace,Menlo,Consolas,monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:64px;background:var(--bg)}
+body{margin:0;min-height:100vh;color:var(--fg);font:15px/1.6 var(--sans);-webkit-font-smoothing:antialiased;
+background:linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 0),linear-gradient(180deg,rgba(255,255,255,.03) 1px,transparent 0);
+background-size:40px 40px}
+body:before{content:"";position:fixed;inset:0;z-index:50;pointer-events:none;opacity:.012;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+body:after{content:"";position:fixed;left:0;right:0;bottom:0;height:1px;pointer-events:none;
+background:linear-gradient(90deg,transparent,rgba(250,204,21,.3),transparent)}
+::selection{background:rgba(250,204,21,.3)}
+a{color:var(--link);text-decoration-color:rgba(250,204,21,.35);text-underline-offset:3px}
+code,.mono{font:12px var(--mono)}
+.top{position:sticky;top:0;z-index:5;background:rgba(5,5,5,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top>div{max-width:1180px;margin:auto;padding:12px 20px;display:flex;gap:10px 24px;align-items:center;flex-wrap:wrap}
+.brand{font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--fg);text-decoration:none;white-space:nowrap}
+.brand span{color:var(--yellow)}
+.tabs{display:flex;gap:20px;overflow-x:auto;max-width:100%}
+.tabs a{padding:3px 0;border-bottom:2px solid transparent;text-decoration:none;color:var(--muted);font-size:13px;
+font-weight:800;letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap}
+.tabs a:hover{color:var(--fg)}.tabs a[aria-current]{color:var(--yellow);border-color:var(--yellow)}
+.sections{display:flex;gap:16px;overflow-x:auto;flex:1}.sections a:first-child{margin-left:auto}
+.sections a{font:10.5px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);text-decoration:none;white-space:nowrap}
+.sections a:hover{color:var(--fg)}
+main{max-width:1180px;margin:auto;padding:40px 20px 72px}
+h1,h2,h3{font-weight:800;letter-spacing:-.02em;text-transform:uppercase}
+h1{font-size:46px;line-height:1.05;margin:0 0 16px}h2{font-size:25px;line-height:1.2;margin:68px 0 10px}
+h3{font-size:16px;margin:30px 0 8px}
+.en{color:var(--muted);font-weight:inherit}.muted{color:var(--muted);font-size:13px}.lede{font-size:16.5px;margin:0 0 16px;color:var(--ink2)}
+.hero{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center}
+.hero.solo{grid-template-columns:1fr}.hero>img{width:170px;border-radius:10px;border:1px solid var(--line);box-shadow:0 0 70px rgba(250,204,21,.14)}
+.badge{display:inline-flex;align-items:center;gap:7px;font:10.5px var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--yellow);
+border:1px solid rgba(250,204,21,.3);background:rgba(250,204,21,.06);border-radius:4px;padding:3px 9px}
+.badge:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--yellow);animation:pulse 2s cubic-bezier(.4,0,.6,1) infinite}
+.stamp{font:11px var(--mono);color:var(--dim);margin-left:6px}.stamp code{font-size:11px}
+.mosaic{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;margin:28px 0 0}
+.mosaic a{display:block;aspect-ratio:1;border-radius:6px;overflow:hidden;background:var(--card);border:1px solid var(--line)}
+.mosaic img{width:100%;height:100%;object-fit:cover;opacity:.85;transition:transform .15s,opacity .15s}
+.mosaic a:hover img{transform:scale(1.08);opacity:1}
+.note{border:1px solid var(--line);border-left:2px solid var(--yellow);background:var(--card);border-radius:6px;
+padding:12px 16px;margin:24px 0;color:var(--ink2);font-size:14px}
 .panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:18px;margin-top:12px}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);min-width:0}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px 22px;backdrop-filter:blur(12px);min-width:0}
 .panel h3{margin:0 0 4px}
 table{border-collapse:collapse;width:100%}
-th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top;font-size:14px}
-th{font-size:12px;color:var(--muted);font-weight:600;vertical-align:bottom}th.n,td.n{text-align:right;font-variant-numeric:tabular-nums}
-tr:last-child>td{border-bottom:0}.scroll{overflow-x:auto}.card-table{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 8px}
-.rank{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--soft);font-weight:700;font-size:12.5px}
-.rank.first{background:var(--yellow);color:#1d1b16}
-.meter{display:flex;align-items:center;gap:8px;min-width:140px}.meter b{min-width:36px;text-align:right;font-variant-numeric:tabular-nums}
-.track{position:relative;flex:1;min-width:48px;height:10px;background:var(--soft);border-radius:0 4px 4px 0}
-.fill{display:block;height:100%;background:var(--bar);border-radius:0 4px 4px 0}
-.interval{position:absolute;top:4px;height:2px;background:var(--fg)}
-.interval:before,.interval:after{content:"";position:absolute;top:-3px;width:1px;height:8px;background:var(--fg)}
+th,td{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top;font-size:14px}
+th{font:500 10px/1.5 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);vertical-align:bottom}
+th.n,td.n{text-align:right;font-variant-numeric:tabular-nums}td.n{font-family:var(--mono);font-size:13px}
+tr:last-child>td{border-bottom:0}tr:hover>td{background-color:rgba(255,255,255,.02)}.scroll{overflow-x:auto}
+.card-table{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:4px 10px}
+.rank{font:700 12px var(--mono);color:var(--dim);font-variant-numeric:tabular-nums}
+.t1{--tier:var(--green)}.t2{--tier:var(--blue)}.t3{--tier:var(--orange)}
+.t1 .rank,.t2 .rank,.t3 .rank{color:var(--tier)}
+.meter{display:flex;align-items:center;gap:10px;min-width:150px}
+.meter b{min-width:36px;text-align:right;font:700 13px var(--mono);font-variant-numeric:tabular-nums}
+.track{position:relative;flex:1;min-width:48px;height:6px;background:rgba(255,255,255,.05);border-radius:99px}
+.fill{display:block;height:100%;border-radius:99px;background:var(--tier,var(--bar));transform-origin:left;animation:grow .6s ease-out both;
+box-shadow:0 0 8px color-mix(in srgb,var(--tier,transparent) 35%,transparent)}
+.interval{position:absolute;top:2px;height:2px;background:rgba(255,255,255,.6)}
+.interval:before,.interval:after{content:"";position:absolute;top:-3px;width:1px;height:8px;background:rgba(255,255,255,.6)}
 .interval:before{left:0}.interval:after{right:0}
-.ranking{min-width:520px}.ranking td{padding:4px 6px;line-height:1.25}.ranking th:nth-child(4){white-space:nowrap}
-.ranking b .muted{font-size:12px;font-weight:400}.ranking .meter{flex-wrap:wrap;gap:3px 8px}
-.ranking .meter b{font-size:13px;white-space:nowrap}.row-meta{font-size:10.5px;line-height:1.25;margin-top:2px;color:var(--muted)}
-.status{display:inline-block;white-space:nowrap;font-size:10.5px;font-weight:400;color:var(--muted);background:var(--soft);border-radius:4px;padding:0 4px}
-.status.mixed{color:var(--bad-ink);background:color-mix(in srgb,var(--bad) 10%,var(--card))}
+.ranking{min-width:520px}.ranking td{padding:9px 8px;line-height:1.3}.ranking th:nth-child(4){white-space:nowrap}
+.ranking b{font:600 13px var(--mono);color:var(--ink2)}.ranking b .muted{font-size:12px;font-weight:400}
+.ranking .meter{flex-wrap:wrap;gap:4px 10px}.ranking .meter b{font-size:12.5px;white-space:nowrap;color:var(--muted)}
+.ranking :is(.t1,.t2,.t3) b,.ranking :is(.t1,.t2,.t3) .meter b{color:var(--fg)}
+.row-meta{font:10.5px/1.4 var(--mono);margin-top:3px;color:var(--dim)}
+.status{display:inline-block;white-space:nowrap;font:10px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);
+border:1px solid var(--line);border-radius:3px;padding:0 5px}
+.status.mixed{color:var(--bad-ink);border-color:rgba(239,68,68,.35)}
 .efficiency th{max-width:155px}.efficiency td.n{white-space:nowrap}.efficiency td:first-child{min-width:150px}
-.efficiency-chart{display:block;width:100%;height:auto;margin-top:18px}
-.flag{display:inline-block;font-size:11px;font-weight:600;border:1px solid var(--line);border-radius:6px;padding:0 6px;color:var(--ink2);margin-left:4px}
-.heat{text-align:right;font-variant-numeric:tabular-nums;box-shadow:inset 0 0 0 1px var(--card)}.heat.hi{color:var(--heat-ink)}
+.efficiency-chart{display:block;width:100%;min-width:680px;height:auto;margin-top:22px;padding:14px;background:var(--card);border:1px solid var(--line);border-radius:8px}
+.efficiency-chart path{stroke:var(--line)}.efficiency-chart text{fill:var(--muted);font-family:var(--mono);font-size:12px}
+.efficiency-chart circle{fill:var(--yellow);stroke:var(--bg);stroke-width:2;filter:drop-shadow(0 0 4px rgba(250,204,21,.55))}
+.flag{display:inline-block;font:600 10px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--yellow);
+border:1px solid rgba(250,204,21,.3);border-radius:3px;padding:0 5px;margin:2px 0 0 4px}
+.heat{text-align:right;font:13px var(--mono);font-variant-numeric:tabular-nums;box-shadow:inset 0 0 0 1px var(--cell)}.heat.hi{color:var(--heat-ink)}
 .group{display:flex;align-items:baseline;gap:10px;margin:30px 0 10px}.group h3{margin:0}
-.cases{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
-.case{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);
-display:flex;flex-direction:column;scroll-margin-top:70px}.case:target{outline:3px solid var(--yellow)}
-.case>a img{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;background:var(--soft)}
+.cases{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.case{background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:border-color .15s;
+display:flex;flex-direction:column;scroll-margin-top:70px}.case:hover{border-color:rgba(255,255,255,.16)}
+.case:target{outline:2px solid var(--yellow)}
+.case>a img{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;background:rgba(255,255,255,.03)}
 .case>div{padding:12px 14px 14px;display:flex;flex-direction:column;gap:9px}
-.case-title{font-weight:700;line-height:1.3}.case-title span{color:var(--muted);font-weight:400;font-size:12px}
+.case-title{font-weight:700;line-height:1.3}.case-title span{color:var(--muted);font:400 11px var(--mono)}
 .chips{display:flex;flex-wrap:wrap;gap:4px}
-.chip{display:inline-flex;flex-direction:column;background:var(--soft);border-radius:8px;padding:2px 7px;line-height:1.25;
-font:12px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-.chip small{font:10.5px system-ui,sans-serif;color:var(--muted)}
-.verdict{display:flex;align-items:center;gap:10px;font-size:13px}.verdict b{white-space:nowrap}
-.segs{display:flex;gap:2px;flex:1}.seg{flex:1;height:10px;background:var(--bad)}.seg.ok{background:var(--good)}
-.seg:first-child{border-radius:4px 0 0 4px}.seg:last-child{border-radius:0 4px 4px 0}
-.case details{background:none;border:0;padding:0;margin:0;font-size:13px}.case summary{font-weight:600;font-size:13px}
+.chip{display:inline-flex;flex-direction:column;background:var(--soft);border:1px solid var(--line);border-radius:4px;padding:2px 7px;
+line-height:1.25;font:12px var(--mono)}
+.chip small{font:9.5px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.verdict{display:flex;align-items:center;gap:10px;font-size:13px}.verdict b{white-space:nowrap;font-family:var(--mono)}
+.segs{display:flex;gap:2px;flex:1}.seg{flex:1;height:6px;background:var(--bad);opacity:.85}.seg.ok{background:var(--good);opacity:1}
+.seg:first-child{border-radius:99px 0 0 99px}.seg:last-child{border-radius:0 99px 99px 0}
+.case details{background:none;border:0;padding:0;margin:0;font-size:13px;backdrop-filter:none}
+.case summary{font:600 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink2)}
 .who{list-style:none;padding:0;margin:6px 0 0}.who li{padding:4px 0;border-top:1px solid var(--line)}
 .mark-ok{color:var(--good-ink);font-weight:700}.mark-no{color:var(--bad-ink);font-weight:700}
 .miss{display:inline-block;margin-right:8px}.miss code{background:var(--soft);border-radius:4px;padding:0 4px}
-.raw{white-space:pre-wrap;word-break:break-word;font:12px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-background:var(--soft);border-radius:8px;padding:6px 8px;margin:4px 0 8px;max-height:220px;overflow:auto}
+.raw{white-space:pre-wrap;word-break:break-word;font:12px var(--mono);color:var(--ink2);
+background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:6px;padding:6px 8px;margin:4px 0 8px;max-height:220px;overflow:auto}
 .gallery{table-layout:fixed;min-width:760px}.gallery td,.gallery th{text-align:center}
-.gallery img{width:100%;max-width:190px;aspect-ratio:1;object-fit:contain;border-radius:12px;display:block;margin:0 auto 4px;background:var(--soft)}
+.gallery img{width:100%;max-width:190px;aspect-ratio:1;object-fit:contain;border-radius:6px;display:block;margin:0 auto 4px;background:var(--soft)}
 .gallery td:first-child,.gallery th:first-child{text-align:left}
-.score{font-size:19px;font-weight:700}.tag{font-size:11.5px;color:var(--bad-ink)}
-details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin:8px 0}
+.score{font:700 18px var(--mono)}.tag{font-size:11.5px;color:var(--bad-ink)}
+details{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:8px 12px;margin:8px 0}
 summary{cursor:pointer;font-weight:600}.ans{white-space:pre-wrap;font-size:13px}
 .refused{display:flex;align-items:center;justify-content:center;aspect-ratio:1;max-width:190px;margin:0 auto 4px;
-border:1px dashed var(--line);border-radius:12px;color:var(--bad-ink);font-size:13px}
+border:1px dashed var(--line);border-radius:6px;color:var(--bad-ink);font-size:13px}
 .state{display:grid;grid-template-columns:190px 1fr;gap:18px;background:var(--card);border:1px solid var(--line);
-border-radius:16px;padding:16px;margin:14px 0;box-shadow:var(--shadow)}
-.state figure{margin:0}.state figure img{width:100%;border-radius:12px;background:var(--soft)}
+border-radius:8px;padding:16px;margin:14px 0}
+.state figure{margin:0}.state figure img{width:100%;border-radius:6px;background:var(--soft)}
 .state figcaption{font-weight:700;margin-top:6px}.state .gallery{min-width:640px}
-footer{margin-top:56px;color:var(--muted);font-size:13px}
+footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--line);color:var(--dim);font-size:12.5px}
+@keyframes pulse{50%{opacity:.4}}@keyframes grow{from{transform:scaleX(0)}}
+@media(prefers-reduced-motion:reduce){*,:before,:after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 @media(max-width:760px){.meter{min-width:90px}.hero{grid-template-columns:1fr}.hero>img{width:120px}.mosaic{grid-template-columns:repeat(6,1fr)}
-.state{grid-template-columns:1fr}.state figure img{max-width:200px}h1{font-size:28px}}
+.state{grid-template-columns:1fr}.state figure img{max-width:200px}h1{font-size:32px}.sections a:first-child{margin-left:0}}
 """
 
 
@@ -187,9 +223,41 @@ def _revision(root: Path) -> str | None:
 
 
 def _suite_href(here: str, target: str) -> str:
-    """Published layout: the core suite at the site root, every other suite in a subdirectory named after it."""
-    to_root = "" if here == "core" else "../"
-    return (to_root + ("" if target == "core" else f"{target}/")) or "./"
+    """Relative link between pages of the published layout; `index` is the overview page."""
+    return (("../" if PAGES[here] else "") + (f"{PAGES[target]}/" if PAGES[target] else "")) or "./"
+
+
+def _head(title: str) -> str:
+    return (f"<!doctype html><!-- {CANARY} --><html lang=zh><meta charset=utf-8><meta name=viewport "
+            f"content='width=device-width,initial-scale=1'><title>{e(title)}</title><style>{CSS}</style>")
+
+
+def _header(here: str, links: str, tabs: bool) -> str:
+    names = {"index": INDEX_NAME, **{s: SUITE_TEXT[s]["name"] for s in SUITES}}
+    tab_html = ("<div class=tabs>" + "".join(
+        f"<a href='{_suite_href(here, page)}'{' aria-current=page' if page == here else ''}>"
+        f"{e(names[page][0])} {e(names[page][1])}</a>" for page in PAGES) + "</div>" if tabs else "")
+    home = _suite_href(here, "index") if tabs else "#"
+    return (f"<header class=top><div><a class=brand href='{home}'>奶蛙<span>BENCH</span></a>{tab_html}"
+            f"<nav class=sections>{links}</nav></div></header><main>")
+
+
+def _footer(repo_url: str | None, blob: str | None) -> str:
+    repo = f" · <a href='{e(repo_url, quote=True)}'>源代码 Source</a>" if repo_url else ""
+    sources = (f"<a href='{e(blob, quote=True)}/bench/reference/SOURCE.md'>SOURCE.md</a>" if blob
+               else "bench/reference/SOURCE.md")
+    return (f"<footer>奶蛙bench · nai-wai-bench{repo} · 参考图、表情包、二创与官方形象图的出处见 {sources}，"
+            "仅供非商业研究使用。<span class=en> Sources of the reference image, stickers, remixes, and official "
+            "artwork are listed in SOURCE.md. For non-commercial research use.</span></footer></main></html>")
+
+
+def _rank_cells(row: dict) -> tuple[str, str]:
+    """A ranking row's class (the top three ranks get their own color) and its zero-padded rank cell."""
+    rank = row["rank"]
+    if rank is None:
+        return "", "<td>–</td>"
+    tier = f" class=t{rank}" if rank <= 3 else ""
+    return tier, f"<td><span class=rank>{rank:02d}</span></td>"
 
 
 def _ranking(rows: list[dict], label, flags: dict[str, str], judge_label, judged: bool = True) -> str:
@@ -199,8 +267,7 @@ def _ranking(rows: list[dict], label, flags: dict[str, str], judge_label, judged
            "<th>得分 Score<br><span class=en>95% 区间 interval</span></th>"
            "<th>名次范围<br>Rank range</th><th class=n>已计分<br>Scored</th></tr>"]
     for row in rows:
-        rank = (f"<span class='rank{' first' if row['rank'] == 1 else ''}'>{row['rank']}</span>"
-                if row["rank"] is not None else "–")
+        tier, rank = _rank_cells(row)
         interval = ""
         if row.get("score_interval"):
             lo, hi = row["score_interval"]
@@ -220,22 +287,22 @@ def _ranking(rows: list[dict], label, flags: dict[str, str], judge_label, judged
         meta = f"<div class=row-meta>{' '.join(chips)}</div>" if chips else ""
         if judged:
             meta += f"<div class=row-meta>评审 Judges: {e(judge_text(row, judge_label))}</div>"
-        out.append(f"<tr><td>{rank}</td><td><b>{model_html(label(row['model']))}</b>{flags.get(row['model'], '')}{meta}</td>"
+        out.append(f"<tr{tier}>{rank}<td><b>{model_html(label(row['model']))}</b>{flags.get(row['model'], '')}{meta}</td>"
                    f"<td>{meter}</td><td>{rank_range(row)}</td><td class=n>{row['completed']}/{row['required']} "
                    f"<span class=muted title='每格重复 repetitions per cell'>×{row['repetitions']}</span></td></tr>")
     return "\n".join(out) + "</table></div>"
 
 
 def _heat(value: float | None, note: str = "") -> str:
-    """A 0–100 score cell shaded by its shortfall: the surface at 100, one warm hue at full strength at 0."""
+    """A 0–100 score cell shaded by its shortfall: the cell surface at 100, one warm hue at full strength at 0."""
     if value is None:
         return "<td class=heat>–</td>"
     miss = max(0.0, min(100.0, 100 - value))
-    style = f"background:color-mix(in oklab,var(--heat) {miss:.0f}%,var(--card))"
+    style = f"background:color-mix(in oklab,var(--heat) {miss:.0f}%,var(--cell))"
     return f"<td class='heat{' hi' if miss >= 75 else ''}' style='{style}'>{fmt(value)}{note}</td>"
 
 
-HEAT_NOTE = "颜色越深，分数越低。<span class=en> Darker cells mark lower scores.</span>"
+HEAT_NOTE = "颜色越浓，分数越低。<span class=en> Stronger color marks lower scores.</span>"
 
 
 def _image_cell(s: dict | None, image: str | None, alt: str, scored: bool = True, meta: dict | None = None) -> str:
@@ -432,40 +499,34 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
     state_keyed = [i for i in bench.state_items if i.modality == "vision" and i.id in sampled]
     core_tiers = [t for t in bench.tiers.values() if any(t.id == s["tier"] for s in img_samples)]
     state_samples = [s for s in img_samples if s["state"]]
-    sections = ["rankings"] + (["casebook", "gallery"] if text["casebook_first"] else ["gallery", "casebook"])
-    sections += ["efficiency", "states", "understanding", "models", "judges"]
+    # Image generation and state transfer are experimental side tracks, kept after the understanding results.
+    sections = ["rankings", "casebook", "understanding", "efficiency", "gallery", "states", "models", "judges"]
     present = {"rankings": True, "casebook": bool(keyed), "gallery": bool(core_tiers), "states": bool(state_samples),
                "understanding": bool(und_samples), "efficiency": True, "models": True, "judges": bool(scores.get("judge_health"))}
-    nav_text = {"rankings": "排名 Rankings", "casebook": "图鉴 Casebook", "gallery": "图像 Images",
+    nav_text = {"rankings": "排名 Ranking", "casebook": "图鉴 Casebook", "gallery": "图像生成 Image gen",
                 "states": "姿势迁移 Transfer", "understanding": "理解 Understanding", "models": "模型 Models",
                 "judges": "评审 Judges", "efficiency": "效率 Efficiency"}
 
     revision = _revision(bench.root)
     # Link the documentation of the exact commit the results were built from.
     blob = f"{repo_url}/blob/{revision.split()[0]}" if repo_url and revision else None
-    html = [f"<!doctype html><!-- {CANARY} --><html lang=zh><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'>"
-            f"<title>{e(text['title'][0])} · {e(text['title'][1])}</title><style>{CSS}</style>"]
-    tabs = ("<div class=tabs>" + "".join(
-        f"<a href='{_suite_href(bench.suite, s)}'{' aria-current=page' if s == bench.suite else ''}>"
-        f"{e(SUITE_TEXT[s]['tab'][0])} {e(SUITE_TEXT[s]['tab'][1])}</a>" for s in SUITES) + "</div>"
-            if suite_tabs else "")
+    html = [_head(f"{text['name'][0]} · {text['name'][1]} · 奶蛙bench")]
     links = "".join(f"<a href='#{s}'>{nav_text[s]}</a>" for s in sections if present[s])
     links += f"<a href='{e(blob, quote=True)}/docs/methodology.md'>方法 Methodology</a>" if blob else ""
     if bundle_url:
         links += f"<a href='{e(bundle_url, quote=True)}'>Download raw results</a>"
-    home = _suite_href(bench.suite, "core") if suite_tabs else "#"
-    html.append(f"<header class=top><div><a class=brand href='{home}'>奶蛙bench</a>{tabs}"
-                f"<nav class=sections>{links}</nav></div></header><main>")
+    html.append(_header(bench.suite, links, suite_tabs))
 
     # --- hero ---
-    stamp = e(collection_text(scores)) + " · " + f"run <code>{e(run_dir.name)}</code> · {datetime.date.today().isoformat()}"
+    stamp = (e(collection_text(scores)) + f" · suite <code>{e(bench.suite)}</code> · run <code>{e(run_dir.name)}</code>"
+             f" · {datetime.date.today().isoformat()}")
     stamp += f" · revision <code>{e(revision)}</code>" if revision else ""
-    mosaic = bool(keyed) and text["casebook_first"]
+    mosaic = bool(keyed) and text["mosaic"]
     portrait = "" if mosaic else f"<img src='{e(asset(bench.reference_image))}' alt='大笑奶龙'>"
     html.append(f"<div class='hero{' solo' if mosaic else ''}'>{portrait}<div>"
-                f"<h1>{e(text['title'][0])} <span class=en>{e(text['title'][1])}</span></h1>"
+                f"<h1>{e(text['name'][0])} <span class=en>{e(text['name'][1])}</span></h1>"
                 f"<p class=lede>{e(text['intro'][0])}<br><span class=en>{e(text['intro'][1])}</span></p>"
-                f"<span class=badge>{e(__version__)} 首个版本 · First release</span> <span class=muted>{stamp}</span></div></div>")
+                f"<span class=badge>{e(__version__)} 首个版本 · First release</span> <span class=stamp>{stamp}</span></div></div>")
     if mosaic:
         html.append("<div class=mosaic>" + "".join(
             f"<a href='#case-{e(i.id.split('.', 1)[1])}' title='{e(i.title)}'>"
@@ -503,26 +564,18 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
     joint = ("七项全部答对才得分。<span class=en> All seven fields must be correct for a sample to score.</span>"
              if bench.suite == "naihub-v1" else "")
     judge_label = lambda m: models[m].label if m in models else m
-    imagegen_rows = boards.get("imagegen", [])
-    imagegen_panel = (
-        "<div class=panel><h3>图像生成 <span class=en>Image generation ranking</span></h3>"
-        f"<p class=muted>固定题组：{len(panel_animals)} 种动物 × {len(bench.tiers)} 档提示词；只计入核实为原样传递的提示词，"
-        "服务商拒绝生成记 0 分。<br><span class=en>Fixed panel: "
-        f"{len(panel_animals)} animals × {len(bench.tiers)} prompt tiers; verified verbatim prompts only. "
-        "Provider refusals score 0.</span></p>" + _ranking(imagegen_rows, label, {}, judge_label) + "</div>"
-        if imagegen_rows else "")
-    scope = ("两个排名相互独立，不合成总分。<span class=en> Two independent rankings, no combined score.</span> "
-             if imagegen_rows else "本次运行没有标准图像生成题组的结果。"
-             "<span class=en> This run has no standard image-generation panel results.</span> ")
+    weight = (f"计入奶蛙指数，权重 {INDEX_WEIGHTS[bench.suite]}/{sum(INDEX_WEIGHTS.values())}。"
+              f"<span class=en> Weight {INDEX_WEIGHTS[bench.suite]}/{sum(INDEX_WEIGHTS.values())} in the "
+              f"<a href='{_suite_href(bench.suite, 'index')}'>NaiWai Index</a>.</span> " if suite_tabs else "")
     body["rankings"] = (
-        "<h2 id=rankings>排名 <span class=en>Rankings</span></h2><div class=panels><div class=panel>"
-        "<h3>视觉理解 <span class=en>Visual understanding ranking</span></h3>"
+        f"<h2 id=rankings>{e(text['name'][0])}排名 <span class=en>{e(text['name'][1])} ranking</span></h2>"
+        "<div class=panel>"
         f"<p class=muted>固定题组：{len(vision_items)} 道看图题（{len(vision_items) - grounding} 道自由回答识别、"
         f"{grounding} 道按答案键计分的视觉核对）。文字知识与无图对照只作诊断。{joint}<br><span class=en>Fixed panel: "
         f"{len(vision_items)} image-input tasks ({len(vision_items) - grounding} free-form recognition, {grounding} "
         "answer-keyed grounding checks). Text knowledge and no-image controls are diagnostics.</span></p>"
-        + _ranking(boards.get("visual_understanding", []), label, flags, judge_label, len(vision_items) > grounding) + "</div>" + imagegen_panel
-        + f"</div><p class=muted>{scope}有缺失、失败、未评分或不合格格子的模型不参与排名；×N 为每格重复次数。"
+        + _ranking(boards.get("visual_understanding", []), label, flags, judge_label, len(vision_items) > grounding)
+        + f"</div><p class=muted>{weight}有缺失、失败、未评分或不合格格子的模型不参与排名；×N 为每格重复次数。"
         "<span class=en> Missing, failed, unjudged, or ineligible cells leave a model unranked; ×N is "
         "repetitions per cell.</span></p>"
         + f"<p class=muted>{UNCERTAINTY_NOTE}</p>"
@@ -532,7 +585,7 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
     # --- casebook ---
     if keyed:
         body["casebook"] = (
-            "<h2 id=casebook>看图图鉴 <span class=en>Casebook</span></h2>"
+            "<h2 id=casebook>图鉴 <span class=en>Casebook</span></h2>"
             "<p>每张图都问同一个问题，要求按固定标签返回 JSON，再在本地与答案键逐项比对。色条每格代表一个模型"
             "（按视觉理解排名排序）：绿色为全部答对，红色为至少错一项。展开卡片可看每个模型错在哪里，以及原始回答。"
             "<br><span class=en>Every image gets the same question, answered as JSON with fixed labels and compared "
@@ -545,11 +598,18 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
     by_cell = {(s["model"], s["animal"], s["tier"]): s for s in sorted(img_samples, key=lambda s: -s["rep"])}
     img_models = sorted({s["model"] for s in img_samples}, key=lambda m: (-(summary.get(m, {}).get("overall") or 0), m))
     if core_tiers:
-        part = ["<h2 id=gallery>图像生成 <span class=en>Image generation</span></h2>"
+        part = ["<h2 id=gallery>图像生成（实验）<span class=en>Experimental · image generation</span></h2>"
                 "<p>让模型画“⟨动物⟩版的大笑奶龙”，提示词分五档。评审对照原图，按 9 项加权视觉特征打分，"
-                "再乘以能否认出目标动物（0–100）。<br><span class=en>Models draw an animal version of the meme from five "
-                "prompt tiers. Judges compare each image with the reference on nine weighted visual traits, "
-                "scaled by whether the target animal is recognizable (0–100).</span></p>",
+                "再乘以能否认出目标动物（0–100）。这是实验项目，不计入奶蛙指数。<br><span class=en>Models draw an "
+                "animal version of the meme from five prompt tiers. Judges compare each image with the reference on "
+                "nine weighted visual traits, scaled by whether the target animal is recognizable (0–100). This "
+                "experimental track does not enter the NaiWai Index.</span></p>",
+                "<h3>图像生成排名 <span class=en>Image generation ranking</span></h3>"
+                f"<p class=muted>固定题组：{len(panel_animals)} 种动物 × {len(bench.tiers)} 档提示词；"
+                "只计入核实为原样传递的提示词，服务商拒绝生成记 0 分。<br><span class=en>Fixed panel: "
+                f"{len(panel_animals)} animals × {len(bench.tiers)} prompt tiers; verified verbatim prompts only. "
+                "Provider refusals score 0.</span></p>"
+                + _ranking(boards.get("imagegen", []), label, {}, judge_label),
                 "<details><summary>提示词 · Prompts</summary><table><tr><th>档位 Tier</th><th>提示词（以猫为例）"
                 " Prompt (cat)</th></tr>"]
         cat = bench.animals.get("cat") or next(iter(bench.animals.values()))
@@ -721,12 +781,114 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
         body["judges"] = "\n".join(part)
 
     html += [body[s] for s in sections if s in body]
-    repo = f" · <a href='{e(repo_url, quote=True)}'>源代码 Source</a>" if repo_url else ""
-    sources = (f"<a href='{e(blob, quote=True)}/bench/reference/SOURCE.md'>SOURCE.md</a>" if blob
-               else "bench/reference/SOURCE.md")
-    html.append(f"<footer>奶蛙bench · nai-wai-bench{repo} · 参考图、表情包、二创与官方形象图的出处见 {sources}，"
-                "仅供非商业研究使用。<span class=en> Sources of the reference image, stickers, remixes, and official "
-                "artwork are listed in SOURCE.md. For non-commercial research use.</span></footer></main></html>")
+    html.append(_footer(repo_url, blob))
     index = out / "index.html"
     index.write_text("\n".join(html), encoding="utf-8")
     return index
+
+
+def build_index(suites: dict[str, tuple[Bench, dict]], index: dict, models: dict[str, ModelSpec], out: Path,
+                repo_url: str | None = None) -> Path:
+    """Release overview page: the NaiWai Index, then each component ranking linking to its suite page."""
+    (out / "images").mkdir(parents=True, exist_ok=True)
+    root = next(iter(suites.values()))[0].root
+    reference = suites["core"][0].reference_image
+    portrait = _copy_image(reference, out, "images/bench/" + reference.relative_to(root / "bench").with_suffix("").as_posix())
+    labels = {m: label for _, scores in suites.values() for m, label in scores.get("labels", {}).items()}
+    label = lambda m: labels.get(m, models[m].label if m in models else m)
+    judge_label = lambda m: models[m].label if m in models else m
+    revision = _revision(root)
+    blob = f"{repo_url}/blob/{revision.split()[0]}" if repo_url and revision else None
+    total = sum(index["weights"].values())
+    annotators = {bench.annotator for bench, _ in suites.values() if bench.annotator}
+
+    links = "<a href='#index'>指数 Index</a><a href='#components'>组成排名 Components</a>"
+    links += f"<a href='{e(blob, quote=True)}/docs/methodology.md#naiwai-index'>方法 Methodology</a>" if blob else ""
+    html = [_head(f"{INDEX_NAME[0]} · {INDEX_NAME[1]} · 奶蛙bench"), _header("index", links, True)]
+    weights_zh = "、".join(f"{SUITE_TEXT[s]['name'][0]} {w}/{total}" for s, w in index["weights"].items())
+    weights_en = ", ".join(f"{SUITE_TEXT[s]['name'][1]} {w}/{total}" for s, w in index["weights"].items())
+    html.append(
+        f"<div class=hero><img src='{e(portrait)}' alt='大笑奶龙'><div>"
+        f"<h1>{e(INDEX_NAME[0])} <span class=en>{e(INDEX_NAME[1])}</span></h1>"
+        "<p class=lede>AI 模型对中文网络梗“大笑奶龙”（又称“奶蛙”）看得有多懂？奶蛙指数合并两个独立的看图排名："
+        "识梗（认出梗和变体、说出别名、分清官方奶龙）与看图（逐项看清数量、姿态、表情、手势和眼泪）。"
+        "<br><span class=en>How well do AI models understand images of the Chinese meme 大笑奶龙 (Laughing Nailong, "
+        "also called 奶蛙)? The NaiWai Index combines two independent visual rankings: Meme ID (recognize the meme "
+        "and its variants, name its aliases, tell it from official Nailong) and Visual detail (read subject count, "
+        "posture, expression, gesture, and tears field by field).</span></p>"
+        f"<span class=badge>{e(__version__)} 首个版本 · First release</span> <span class=stamp>index v{index['version']}"
+        f" · {datetime.date.today().isoformat()}" + (f" · revision <code>{e(revision)}</code>" if revision else "")
+        + "</span></div></div>")
+
+    out_rows = ["<div class=scroll><table class=ranking><tr><th>名次<br>Rank</th><th>模型 Model</th>"
+                "<th>指数 Index<br><span class=en>95% 区间 interval</span></th><th>名次范围<br>Rank range</th>"
+                + "".join(f"<th class=n><a href='{_suite_href('index', s)}'>{e(SUITE_TEXT[s]['name'][0])}</a><br>"
+                          f"{e(SUITE_TEXT[s]['name'][1])} ×{w}</th>" for s, w in index["weights"].items())
+                + "</tr>"]
+    for row in index["rows"]:
+        tier, rank = _rank_cells(row)
+        interval = ""
+        if row["score_interval"]:
+            lo, hi = row["score_interval"]
+            interval = f"<span class=interval style='left:{lo:.3f}%;width:{hi - lo:.3f}%'></span>"
+        meter = (f"<div class=meter><span class=track><span class=fill style='width:{row['score']:.1f}%'></span>"
+                 f"{interval}</span><b>{score_text(row)}</b></div>" if row["score"] is not None else "–")
+        meta = ("<div class=row-meta><span class=status>partial</span></div>" if row["status"] != "complete" else "")
+        flag = "<br><span class=flag>答案键标注者 Key annotator</span>" if row["model"] in annotators else ""
+        parts = "".join(f"<td class=n>{fmt(c['score'], 1)}"
+                        + (f" <span class=muted>#{c['rank']}</span>" if c["rank"] is not None else "") + "</td>"
+                        for c in row["components"].values())
+        out_rows.append(f"<tr{tier}>{rank}<td><b>{model_html(label(row['model']))}</b>{flag}{meta}</td>"
+                        f"<td>{meter}</td><td>{rank_range(row)}</td>{parts}</tr>")
+    html.append(
+        f"<h2 id=index>{e(INDEX_NAME[0])} <span class=en>{e(INDEX_NAME[1])}</span></h2>"
+        "<div class=panel>" + "\n".join(out_rows) + "</table></div></div>"
+        f"<p class=muted>指数 = 两个排名得分的加权平均（{weights_zh}）。看图是答案键本地计分的较大题组，权重加倍；"
+        "识梗包含 LLM 评审的自由回答。两项都完整排名的模型才有指数名次。两个分数的尺度不同：识梗是逐项部分得分，"
+        "看图要求七项全对，所以指数只用于排序，不是正确率。<span class=en> Index = weighted mean of the two ranking "
+        f"scores ({weights_en}). Visual detail is the larger panel, scored locally against answer keys, and counts "
+        "double; Meme ID includes LLM-judged free-form answers. Only models ranked in both components receive an "
+        "index rank. The scales differ (Meme ID awards partial credit; Visual detail requires all seven fields), so "
+        "the index orders models and is not an accuracy.</span></p>"
+        "<p class=muted>区间与名次范围来自两个题组各自独立的 2,000 次聚类自助重抽样，按序号配对后加权。"
+        "<span class=en> Intervals and rank ranges pair each component's independent 2,000 cluster-bootstrap draws "
+        "by draw number before weighting.</span> " + UNCERTAINTY_NOTE + "</p>"
+        + ("<p class=muted>看图的答案键由 GPT-6-Astra 标注、尚未经人工校验，Astra 的看图得分只反映与自己标注的一致程度。"
+           "<span class=en> Visual detail answer keys are GPT-6-Astra annotations not yet checked by a person, so "
+           "Astra's Visual detail score measures agreement with its own labels.</span></p>" if annotators else ""))
+
+    panels = []
+    for suite in index["weights"]:
+        bench, scores = suites[suite]
+        name = SUITE_TEXT[suite]["name"]
+        vision_items = [i for i in bench.items if i.modality == "vision"]
+        flags = ({bench.annotator: "<br><span class=flag>答案键标注者 Key annotator</span>"} if bench.annotator else {})
+        panels.append(
+            f"<div class=panel><h3><a href='{_suite_href('index', suite)}'>{e(name[0])}</a> "
+            f"<span class=en>{e(name[1])} ranking</span></h3>"
+            f"<p class=muted>{len(vision_items)} 道看图题 · suite <code>{e(suite)}</code><span class=en> · "
+            f"{len(vision_items)} image tasks</span></p>"
+            + _ranking(scores["leaderboards"].get("visual_understanding", []), label, flags, judge_label,
+                       any(not i.answers for i in vision_items)) + "</div>")
+    imagegen = bool(suites["core"][1]["samples"]["imagegen"])
+    html.append(
+        "<h2 id=components>组成排名 <span class=en>Component rankings</span></h2><div class=panels>"
+        + "".join(panels) + "</div>"
+        + ("<p class=muted>图像生成是实验项目，不计入指数，见"
+           f"<a href='{_suite_href('index', 'core')}#gallery'>识梗页的图像生成部分</a>。<span class=en> Image "
+           "generation is an experimental track outside the index; see the Meme ID page.</span></p>" if imagegen else ""))
+    html.append(_footer(repo_url, blob))
+    page = out / "index.html"
+    page.write_text("\n".join(html), encoding="utf-8")
+    return page
+
+
+def write_redirects(out: Path) -> None:
+    """Small pages at earlier published suite paths that forward to the current suite pages."""
+    for suite, old in REDIRECTS.items():
+        target = f"../{PAGES[suite]}/"
+        (out / old).mkdir(parents=True, exist_ok=True)
+        (out / old / "index.html").write_text(
+            f"<!doctype html><meta charset=utf-8><title>Moved</title><meta http-equiv=refresh content='0; url={target}'>"
+            f"<link rel=canonical href='{target}'><p><a href='{target}'>{e(SUITE_TEXT[suite]['name'][1])}</a></p>",
+            encoding="utf-8")

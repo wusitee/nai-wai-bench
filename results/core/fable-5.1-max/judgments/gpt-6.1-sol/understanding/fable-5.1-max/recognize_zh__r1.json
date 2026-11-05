@@ -1,0 +1,90 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1-max/recognize_zh__r1.json",
+  "target_sha256": "5c11fa48f32fba293f257e958e9912a236b86b071d84aba3ca75d5197dfbb5b7",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "f8a293dd6946ce20",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "将图中角色断言为黄色的“胖鲨鱼”；实际是奶龙的非官方变异形象。",
+    "声称该形象来自儿童向3D动画或动画素材，并由“大笑后突然严肃”的片段截出；实际属于AI生成的变异奶龙梗图。"
+  ],
+  "rationale": "回答错误识别了角色，未指出大笑奶龙梗及其AI生成、非官方的性质。也未提供“变异奶龙”“奶蛙”这两个别名，或解释奶蛙与奶龙的关系。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"ai_variant\":0,\"aliases\":0,\"naiwa\":0},\"hallucinations\":[\"将图中角色断言为黄色的“胖鲨鱼”；实际是奶龙的非官方变异形象。\",\"声称该形象来自儿童向3D动画或动画素材，并由“大笑后突然严肃”的片段截出；实际属于AI生成的变异奶龙梗图。\"],\"rationale\":\"回答错误识别了角色，未指出大笑奶龙梗及其AI生成、非官方的性质。也未提供“变异奶龙”“奶蛙”这两个别名，或解释奶蛙与奶龙的关系。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a197d5-4dff-70c3-bc5e-1c784ae64d44",
+    "seconds": 26.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12679,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 453,
+      "reasoning_output_tokens": 285
+    },
+    "tokens": {
+      "input": 12679,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 453,
+      "reasoning": 285
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T15:58:21Z",
+    "finished_at": "2026-11-01T15:58:47Z",
+    "revision": "67c68f1",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -56,7 +56,7 @@ def cmd_list(args, root, bench, models, defaults):
 def cmd_understand(args, root, bench, models, defaults):
     selected = select_models(models, args.models, "text")
     jobs = tracks.understanding_jobs(bench, selected, _items(bench, args.items), args.reps, args.run_dir)
-    return _collect(args, root, bench, jobs)
+    return _collect(args, root, bench, jobs, judges=_scoring_judges(None, models, defaults))
 
 
 def cmd_imagegen(args, root, bench, models, defaults):
@@ -66,7 +66,7 @@ def cmd_imagegen(args, root, bench, models, defaults):
     if tiers and all(t.state for t in tiers) and args.animals == "default":
         animals = [bench.animals[a] for a in bench.state_animals]
     jobs = tracks.imagegen_jobs(bench, selected, tiers, animals, args.reps, args.run_dir)
-    return _collect(args, root, bench, jobs)
+    return _collect(args, root, bench, jobs, judges=_scoring_judges(None, models, defaults))
 
 
 def cmd_judge(args, root, bench, models, defaults):
@@ -79,13 +79,13 @@ def cmd_judge(args, root, bench, models, defaults):
         jobs += judge.judge_jobs(bench, judges, args.run_dir, {track})
     if not jobs:
         print("no judge calls needed; grounding checks are scored locally by `nwb report`", file=sys.stderr)
-    return _collect(args, root, bench, jobs)
+    return _collect(args, root, bench, jobs, judges=_scoring_judges(None, models, defaults))
 
 
-def _collect(args, root, bench, jobs):
+def _collect(args, root, bench, jobs, *, judges):
     outcome = tracks.run_jobs(jobs, args.jobs, args.force, run_dir=args.run_dir)
     if any(outcome):
-        _sync_results(args, root, bench)
+        _sync_results(args, root, bench, judges=judges)
     return _finish(*outcome)
 
 
@@ -103,7 +103,7 @@ def _sync_results(args, root, bench, *, judges=None, scores=None):
 def cmd_report(args, root, bench, models, defaults):
     if not args.run_dir.is_dir():
         raise FileNotFoundError(f"run not found: {args.run_dir}")
-    judges = set(select_names(models, args.judges)) if args.judges is not None else None
+    judges = _scoring_judges(args.judges, models, defaults)
     scores = scoring.aggregate(args.run_dir, bench.trait_weights, judges, bench=bench)
     write_json(args.run_dir / "scores.json", scores)
     html_path = args.run_dir / "report.html"
@@ -123,7 +123,7 @@ def cmd_report(args, root, bench, models, defaults):
 def cmd_site(args, root, bench, models, defaults):
     if not args.run_dir.is_dir():
         raise FileNotFoundError(f"run not found: {args.run_dir}")
-    judges = set(select_names(models, args.judges)) if args.judges is not None else None
+    judges = _scoring_judges(args.judges, models, defaults)
     scores = scoring.aggregate(args.run_dir, bench.trait_weights, judges, bench=bench)
     out = Path(args.out) if args.out else root / "site"
     index = site.build(bench, models, args.run_dir, scores, out, repo_url=args.repo_url,
@@ -133,13 +133,14 @@ def cmd_site(args, root, bench, models, defaults):
 
 
 def cmd_export(args, root, bench, models, defaults):
-    archive = bundle.export(args.run_dir, bench, Path(args.out) if args.out else args.run_dir)
+    archive = bundle.export(args.run_dir, bench, Path(args.out) if args.out else args.run_dir,
+                            judges=_scoring_judges(args.judges, models, defaults))
     print(f"wrote {archive}")
     return 0
 
 
 def cmd_sync(args, root, bench, models, defaults):
-    judges = set(select_names(models, args.judges)) if args.judges is not None else None
+    judges = _scoring_judges(args.judges, models, defaults)
     snapshot = results.sync(root, bench, args.run_dir, judges=judges)
     print(f"saved results to {snapshot}")
     return 0
@@ -154,7 +155,7 @@ def cmd_restore(args, root, bench, models, defaults):
 def cmd_merge(args, root, bench, models, defaults):
     names = [s.strip() for s in args.sources.split(",") if s.strip()]
     path = results.merge(root, bench.suite, args.run_dir, [root / "runs" / name for name in names])
-    _sync_results(args, root, bench)
+    _sync_results(args, root, bench, judges=_scoring_judges(None, models, defaults))
     print(f"merged {len(names)} runs into {path}")
     return 0
 
@@ -165,6 +166,18 @@ def select_names(models, spec: str) -> list[str]:
     if unknown:
         raise ValueError(f"unknown model(s) {unknown}; choose from: {', '.join(models)}")
     return names
+
+
+def _scoring_judges(spec, models, defaults):
+    """Judges counted in scores: an explicit selection for both tracks, else the configured pools (per track
+    when they differ). `nwb judge --judges` only chooses which judges to call."""
+    if spec is not None:
+        return set(select_names(models, spec))
+    if "judges" not in defaults and "image_judges" not in defaults:
+        return None
+    text = set(select_names(models, ",".join(defaults.get("judges", []))))
+    image = set(select_names(models, ",".join(defaults.get("image_judges") or defaults.get("judges", []))))
+    return text if text == image else {"understanding": text, "imagegen": image}
 
 
 def _finish(ok: int, failed: int) -> int:
@@ -207,19 +220,20 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--track", choices=["understanding", "imagegen", "all"], default="all")
 
     sp = with_run(sub.add_parser("report", help="aggregate scores and write report.html"), jobs=False, sync=True)
-    sp.add_argument("--judges", help="comma-separated judges to count (default: every judge with results)")
+    sp.add_argument("--judges", help="comma-separated judges to count (default: configured judge pools)")
 
     sp = with_run(sub.add_parser("site", help="build a static results site (for GitHub Pages)"), jobs=False)
     sp.add_argument("--out", help="output directory (default: site/)")
-    sp.add_argument("--judges", help="comma-separated judges to count (default: every judge with results)")
+    sp.add_argument("--judges", help="comma-separated judges to count (default: configured judge pools)")
     sp.add_argument("--bundle-url", help="download URL for the raw results zip")
     sp.add_argument("--repo-url", help="link to the source repository in the footer")
     sp.add_argument("--suite-tabs", action="store_true",
-                    help="link every suite's page, assuming core at the site root and others in <suite>/")
+                    help="link every page of the published release layout (index at the root, meme-id/, visual-detail/)")
     sp = with_run(sub.add_parser("export", help="export a portable raw results bundle"), jobs=False)
     sp.add_argument("--out", help="output directory (default: run directory)")
+    sp.add_argument("--judges", help="comma-separated judges to count (default: configured judge pools)")
     sp = with_run(sub.add_parser("sync", help="save an existing run as Git-ready results"), jobs=False)
-    sp.add_argument("--judges", help="comma-separated recorded judges to count (default: all)")
+    sp.add_argument("--judges", help="comma-separated recorded judges to count (default: configured judge pools)")
     with_run(sub.add_parser("restore", help="restore working files from saved repository results"), jobs=False)
     sp = with_run(sub.add_parser("merge", help="combine runs into a new run without model calls"), jobs=False, sync=True)
     sp.add_argument("--from", dest="sources", required=True, help="comma-separated source runs")

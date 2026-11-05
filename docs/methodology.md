@@ -3,14 +3,15 @@
 English | [简体中文](methodology.zh-CN.md) | [繁體中文](methodology.zh-Hant.md)
 
 This is a small, domain-specific benchmark of 大笑奶龙 / 奶蛙 knowledge, recognition, and animal-style
-transfer. It is not a general intelligence or general image-quality benchmark. Its two provisional
-rankings measure image generation and visual understanding independently. The implemented scoring and
-coverage rules are described in [design.md](design.md).
+transfer. It is not a general intelligence or general image-quality benchmark. Two provisional
+visual-understanding rankings, 识梗 Meme ID and 看图 Visual detail, are combined into the
+[NaiWai Index](#naiwai-index); image generation is an experimental ranking outside the index. The
+implemented scoring and coverage rules are described in [design.md](design.md).
 
-The panels and budgets below describe the default `core` suite. The optional
-[naihub-v1 set](naihub-eval-set.md) uses 24 structured image questions and paired no-image controls,
+The panels and budgets below describe the Meme ID suite (`core`). The Visual detail suite
+([naihub-v1](naihub-eval-set.md)) uses 24 structured image questions and paired no-image controls,
 with local answer keys, all-field joint accuracy, per-field diagnostics, and separate family macro
-accuracy. Its labels remain provisional; it does not reproduce the core ranking protocol.
+accuracy. Its labels remain provisional; it does not reproduce the Meme ID ranking protocol.
 
 ## Research basis
 
@@ -31,16 +32,16 @@ pipelines are unnecessary for this small corpus and can require substantially mo
 models. Fixed answer keys need no evaluator model, and existing reference-grounded trait judgments
 remain inspectable without introducing a large evaluation stack.
 
-## What the two rankings measure
+## What the rankings measure
 
-**Image generation** uses six animals across five prompt tiers: 30 cells per model. Cat and panda test
+**Image generation** (experimental) uses six animals across five prompt tiers: 30 cells per model. Cat and panda test
 familiar mammal identities; frog checks the meme's amphibian association; giraffe and octopus stress
 transferring the pose onto different anatomy; elephant tests distinctive ears and trunk. This is a
 purposeful small panel, not a representative sample of animals. Five tiers distinguish performance
 with names, descriptions, and a reference. Their mean measures performance on this meme task across
 prompt conditions, so inspect tier scores when comparing name recall with reference-based transfer.
 
-**Visual understanding** uses nine recognition questions and four grounding questions. Recognition
+**Visual understanding** (Meme ID) uses nine recognition questions and four grounding questions. Recognition
 includes the canonical image in two languages, an animal remix, circulating variants, and official art
 as a negative control. These tasks combine visual evidence with cultural knowledge. The four grounding
 items ask the same pose and eye-state question about four different images; their answer keys contain
@@ -63,6 +64,32 @@ it is evidence about this task's image dependence, not a pure measure of visual 
 always predicts open eyes already gets 75% on that field; report pose and eye answers when auditing,
 and do not assume a 50% chance baseline for the overall score.
 
+## NaiWai Index
+
+Release builds rank models on the **奶蛙指数 · NaiWai Index**, a weighted mean of the two visual rankings:
+
+    index = (Meme ID score + 2 × Visual detail score) / 3
+
+Only models ranked in both components (complete, balanced panels under one setting) receive an index rank;
+others are listed as partial. Visual detail counts double because it is the larger panel (24 images versus
+13 tasks) and is scored entirely against local answer keys. Meme ID adds cultural knowledge, naming, and
+aliases, but nine of its 13 tasks depend on one LLM judge, which also grades its own vendor's models in the
+selected comparison. Each effort configuration is a separate row.
+
+The components use different metrics: Meme ID awards partial credit per item, while Visual detail requires
+all seven fields to be correct. Their scales are not calibrated against each other, so the index orders
+models on this benchmark and is not an accuracy. Component scores and ranks are shown beside it because
+the two skills diverge: a model can rank near the top of one component and near the bottom of the other.
+
+Intervals and rank ranges pair each component's 2,000 cluster-bootstrap draws by draw number and apply the
+same weights. This treats the components as independent samples, although five Visual detail images reuse
+Meme ID stimuli, one as a crop. Visual detail keys are GPT-6-Astra annotations pending human validation,
+so Astra's index also includes agreement with its own labels; the site flags it.
+
+The index definition is versioned (`index.json` records version and weights). Changing a component suite,
+such as validated keys under a new suite id, or changing weights creates a new index version; scores from
+different versions are not comparable.
+
 ## A constrained evaluation budget
 
 Start with one repetition on the entire panel for every model. Broad, matched coverage is more useful
@@ -71,17 +98,19 @@ than many cat repetitions. Run counts below exclude failures and the judge's sin
 | Work per subject model | Calls at one repetition |
 |---|---:|
 | Generation panel | 30 image-generation requests |
-| Generation judging with two configured judges | 60 vision-judge requests |
+| Generation judging with the default Opus judge | 30 vision-judge requests |
 | Visual understanding | 13 answer requests |
 | Text/language diagnostics | 8 answer requests |
 | No-image controls | 4 answer requests |
-| Judging all free-form understanding answers with two vision-capable judges | 34 judge requests |
+| Judging all free-form understanding answers with the default Opus judge | 17 judge requests |
 | Judging grounding answers and controls | 0 |
 
-Two configured judges do not guarantee two independent judgments: when the subject shares a vendor
-with one, only the other contributes. Use the same configured pool across subjects and record it.
-To get two independent vendors for every subject may require three judge vendors; the default image
-judges therefore come from three vendors (see `[defaults]` in `models.toml`). Judge health is a
+Claude Opus 5.5 is the sole default judge for both tracks, including Anthropic subjects. Use the same
+configured pool across subjects and record it. When multiple judges are explicitly selected, other-vendor
+judgments take precedence; same-vendor judgments contribute only when no independent judge is available.
+Report, site, export, and snapshot scoring use the configured pools unless `--judges` overrides them;
+`nwb judge --judges` only chooses which judges to call.
+Published comparisons retain their manifest's pinned judge selection. Judge health is a
 disagreement diagnostic, not proof of evaluator correctness or a reason to remove a judge merely
 because it changes the ordering. Choose judge exclusions using fixed calibration cases before comparing
 subject scores.
@@ -94,7 +123,7 @@ uv run nwb report --run pilot
 # Full comparable panels; understand also collects text diagnostics and blind controls.
 uv run nwb understand --run comparison --models VISION_MODEL
 uv run nwb imagegen --run comparison --models IMAGE_MODEL --animals default
-uv run nwb judge --run comparison --judges VISION_JUDGE_A,VISION_JUDGE_B
+uv run nwb judge --run comparison
 uv run nwb report --run comparison
 uv run nwb site --run comparison
 ```
@@ -157,7 +186,8 @@ the client and default/unexposed otherwise; labels show non-default recorded eff
 judges and sample counts are disclosed per row, because vendor exclusion can produce different panels.
 
 The Efficiency table covers the fixed visual tasks: token coverage, reported-only mean input/output
-(including reasoning) and reasoning tokens, median end-to-end client seconds, and estimated list API
+(including reasoning) and reasoning tokens, median end-to-end client seconds (for pi samples resent after a
+provider rate limit, only the final attempt), and estimated list API
 cost per task and full panel. Missing fields are excluded from means and displayed as unavailable;
 full-panel cost requires complete task coverage and usage. Prices include their source and as-of date
 from `models.toml`. Input tokens include cached reads and cache writes: subtract those subsets from

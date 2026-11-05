@@ -1,0 +1,86 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1-max/recognize_facepalm__r1.json",
+  "target_sha256": "ceda3af3c36b6ccb7b5fb868427cd8e3b36c2398750c3fe39db5ab50ff0d1505",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "7b8ee31512b013af",
+  "judge_images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "scores": {
+    "base_character": 2,
+    "identifies_meme": 0
+  },
+  "hallucinations": [
+    "“图片顶部裁掉了它头上的小角”与图像不符：头顶完整可见，没有小角被顶部裁切的迹象。"
+  ],
+  "rationale": "正确识别了奶龙及其黄色、圆胖的动画角色身份。但只归为泛泛的“奶龙表情包”和“扶额/摸头”款，没有识别出大笑奶龙／变异奶龙／奶蛙梗家族。",
+  "raw": "{\"scores\":{\"base_character\":2,\"identifies_meme\":0},\"hallucinations\":[\"“图片顶部裁掉了它头上的小角”与图像不符：头顶完整可见，没有小角被顶部裁切的迹象。\"],\"rationale\":\"正确识别了奶龙及其黄色、圆胖的动画角色身份。但只归为泛泛的“奶龙表情包”和“扶额/摸头”款，没有识别出大笑奶龙／变异奶龙／奶蛙梗家族。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a197d4-e15e-7371-83b1-dd71ba3c3ee1",
+    "seconds": 13.6,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12532,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 225,
+      "reasoning_output_tokens": 100
+    },
+    "tokens": {
+      "input": 12532,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 225,
+      "reasoning": 100
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T15:57:53Z",
+    "finished_at": "2026-11-01T15:58:06Z",
+    "revision": "67c68f1",
+    "nwb_version": "0.1.0"
+  }
+}

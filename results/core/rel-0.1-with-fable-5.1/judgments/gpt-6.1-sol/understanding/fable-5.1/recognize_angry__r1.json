@@ -1,0 +1,87 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1/recognize_angry__r1.json",
+  "target_sha256": "f6a5eebeb959fc03135158cf0a288a55d3bb0485454be451489cf2b6b00ffe90",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "805d94894e8daf6b",
+  "judge_images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "track": "understanding",
+  "model": "fable-5.1",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 1
+  },
+  "hallucinations": [
+    "声称角色“双臂抱在胸前”，但图中手臂位于身体两侧偏后，并未抱胸。"
+  ],
+  "rationale": "回答没有认出原型是奶龙，也未识别大笑奶龙／变异奶龙／奶蛙梗，只围绕配文解释“切换模式”。它试探性提到网友自制或 AI 生成，部分涉及生成方式，但没有说明这是奶龙的非官方变异形象。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"ai_variant\":1},\"hallucinations\":[\"声称角色“双臂抱在胸前”，但图中手臂位于身体两侧偏后，并未抱胸。\"],\"rationale\":\"回答没有认出原型是奶龙，也未识别大笑奶龙／变异奶龙／奶蛙梗，只围绕配文解释“切换模式”。它试探性提到网友自制或 AI 生成，部分涉及生成方式，但没有说明这是奶龙的非官方变异形象。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a19117-d9b0-7c71-a523-5285d1206c5b",
+    "seconds": 11.9,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 11846,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 234,
+      "reasoning_output_tokens": 98
+    },
+    "tokens": {
+      "input": 11846,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 234,
+      "reasoning": 98
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T08:33:41Z",
+    "finished_at": "2026-10-31T08:33:53Z",
+    "revision": "bd3cba6",
+    "nwb_version": "0.1.0"
+  }
+}

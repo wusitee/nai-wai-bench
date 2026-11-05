@@ -1,0 +1,100 @@
+{
+  "settings_id": "8c7d55a4a7adc4cb",
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "vendor": "anthropic",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "A crude, flat 2D cartoon meme sticker of a chubby cat laughing hysterically. The cat is a round, egg-shaped yellow blob with bright banana-yellow fur and a slightly paler cream oval on its belly, almost no neck, two small triangular ears on top of its head, a tiny dot nose, three thin whiskers on each cheek, short stubby arms and legs, and a short little tail. Its face is dominated by an enormous wide-open laughing mouth that stretches almost the entire width of its head, with a dark red interior and a pink tongue, the corners curled up so far that the face looks almost frog-like. Both eyes are squeezed shut into thick, upward-curving arcs like two ^ shapes, with raised eyebrows and big pink blush circles on the cheeks. A few comic teardrops fly out from the corners of its eyes. The cat tilts its head back and leans backward, one tiny paw clutching its belly and the other paw pointing straight at the viewer as if mocking them, with small motion lines around the body to show it shaking with laughter. Thick, slightly uneven black outlines, flat solid colors with no shading or gradients, intentionally simple and goofy like a hand-drawn doodle. Centered on a plain pure white background, square 1:1 composition, no text, no watermark, no background details.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 46.7,
+    "tokens": {
+      "input": 712,
+      "cached_input": 0,
+      "cache_write": 710,
+      "output": 3079,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 0.16817,
+    "tools_used": [],
+    "cost_usd": 0.16817,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 710,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 3079,
+      "output_tokens_details": {
+        "thinking_tokens": 2639
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 710,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 3079,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 710,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 710
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T11:48:02Z",
+    "finished_at": "2026-11-01T11:48:49Z",
+    "revision": "c8f2158",
+    "nwb_version": "0.1.0"
+  }
+}

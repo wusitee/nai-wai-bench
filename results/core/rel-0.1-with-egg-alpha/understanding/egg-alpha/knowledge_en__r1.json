@@ -1,0 +1,80 @@
+{
+  "settings_id": "7e9b52a50fc5ff45",
+  "track": "understanding",
+  "model": "egg-alpha",
+  "vendor": "undisclosed",
+  "item": "knowledge_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "What is the Chinese internet meme \"大笑奶龙\" (Laughing Nailong, also called \"奶蛙\")? Explain its origin, what it looks like, and the related jokes and remixes. Say so plainly where you are unsure instead of guessing.",
+  "images": [],
+  "answer": "## The character behind the meme\n\n**奶龙 (Nǎilóng)** is a Chinese animated IP character: a very fat, egg‑shaped, bright yellow dragon-like creature with stubby little arms and legs, a big round head that merges into its body, huge eyes and an enormous mouth. It stars in short, dialogue-light slapstick cartoons alongside a human boy usually called **小七 (Xiǎo Qī)**. The shorts blew up on Douyin/Kuaishou/Bilibili and as WeChat sticker packs, and the character became hugely popular with young children — which is exactly why older netizens later adopted it ironically.\n\nI believe the IP belongs to **咏声动漫 (Winsing Animation**, the Guangzhou studio behind 猪猪侠/GG Bond), and that it spread mainly from around 2021 onward. I'm reasonably but not fully confident on the studio and dates, so treat those specifics as approximate.\n\n## The \"大笑奶龙\" image\n\n\"大笑奶龙\" is a specific expression/frame of the character laughing hysterically — head tilted back, mouth stretched extremely wide, eyes squeezed shut or bulging. It escaped the cartoon and became a standalone reaction image, used roughly like \"LMAO\" / \"笑死\" — but very often **mockingly**, i.e. laughing *at* someone rather than with them. It fits the sarcastic reaction-image culture of 抽象/贴‑class internet speech (\"典\", \"乐\", \"笑嘻了\").\n\nPart of the joke is the contrast: a saccharine preschool character repurposed as a sneering, slightly grotesque laughing face. The image is frequently deep-fried, over-saturated, stretched, or given cursed 3D/AI makeovers.\n\n## \"奶蛙\"\n\nThis is the part I'm **least sure about**, so I'll be explicit: my understanding is that the wide-mouthed laughing pose looks frog-like, and netizens made green, frog-ified edits of the character, which picked up the nickname **奶蛙** (\"milk frog\"), sometimes treated as a separate cursed species living in the same meme universe. I cannot confirm the exact first image, the platform it started on, or whether it originally came from fan edits versus a bootleg toy or an off-model frame. If you need the precise origin story, don't rely on me for it.\n\n## Jokes and remixes\n\nThings I'm fairly confident circulate:\n\n- **Ironic/anti-fandom usage.** Because 奶龙 is seen as cringe kids' content, teenagers and 抽象 communities use it deliberately to annoy, calling the show \"答辩\" (a euphemism for 大便, \"crap\") and posting the laughing face at people.\n- **Insult usage.** Calling someone 奶龙, or using the derpy face to imply they look/behave stupidly. This overlaps with the 2024 slang \"唐\"/\"唐人,\" which is an ableist insult — worth knowing that this strand of the meme is genuinely offensive, not neutral.\n- **The \"龙\" pun.** 奶龙 imagery got absorbed into the existing \"龙图\" reaction-image culture partly because of the shared 龙 character. I'm confident the pun exists; I'm *not* confident enough about the etymology of 龙图 itself to explain it.\n- **鬼畜 / 音MAD / phonk and DJ edits.** The laugh and other clips get sampled into Bilibili 鬼畜 videos and Douyin electronic remixes, often with the character headbanging or 社会摇-ing.\n- **Cursed/horror edits.** \"阴间版奶龙,\" realistic 3D renders, AI-generated abominations, and bootleg-merch photos are a whole subgenre.\n- **Rhyming catchphrases.** I have a recollection of slogans along the lines of \"奶龙一笑，生死难料.\" I'd call that likely but unverified.\n\n## Caveats\n\nThis is a fast-mutating short-video meme, and my knowledge has a cutoff, so later developments (2025 onward, new variants, any film or official reaction from the rights holder) may be missing entirely. I've flagged the specific points I'd otherwise be guessing at — especially the origin of 奶蛙 and the 龙图 connection.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "client": "pi 1.5.0",
+    "seconds": 65.5,
+    "stop_reason": "stop",
+    "tools_used": [],
+    "usage": {
+      "input": 125,
+      "output": 3922,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 3012,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 125,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 3922,
+      "reasoning": 3012
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "tokenrhythm/egg-alpha",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "tokenrhythm/egg-alpha",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-04T04:26:02Z",
+    "finished_at": "2026-11-04T04:27:08Z",
+    "revision": "acefac8",
+    "nwb_version": "0.1.0"
+  }
+}

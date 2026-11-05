@@ -1,0 +1,103 @@
+{
+  "settings_id": "8c7d55a4a7adc4cb",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "vendor": "anthropic",
+  "item": "recognize_en",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Who is this character, and which internet meme is this image from? Does the meme have other names?",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "This is the **\"Laughing Shark\"** meme – a reaction GIF/video of a chubby, yellow, cartoon shark cracking up, clutching his belly, eyes squeezed shut and mouth wide open. It's used as a \"that's hilarious / I'm dying\" reaction, or to mock something absurd.\n\n**The character:** He isn't a famous named character – in meme usage he's just \"the laughing shark\" (or \"the fat yellow shark\"). The clip is lifted from a low‑budget 3D kids' animation. I'll be honest: I can't confidently name the exact show it came from, and attributions online are inconsistent. He is often mistaken for Sharko from *Zig & Sharko*, but that's not him – Sharko is blue‑grey and muscular, not yellow and round.\n\n**Other names the meme goes by:**\n- \"Laughing Shark\" / \"Shark Laughing\" (the most common tags on Tenor/Giphy)\n- \"Fat Shark Laughing\" / \"Yellow Shark Laughing\" / \"Chubby Shark Laughing\"\n- \"Laughing then serious\" / \"laughs then stops\" – a popular cut of the clip where he laughs hysterically and then abruptly goes deadpan\n- Non‑English variants: *\"tiburón riéndose\"* (Spanish), *\"tubarão rindo\"* (Portuguese), *\"鲨鱼笑\"* (Chinese)\n\nIf you have the original video or a caption attached to it, I can help narrow down the actual source show.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 1249.2,
+    "tokens": {
+      "input": 2942,
+      "cached_input": 0,
+      "cache_write": 2938,
+      "output": 81640,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 4.1408000000000005,
+    "tools_used": [],
+    "cost_usd": 4.1408000000000005,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 2938,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 81640,
+      "output_tokens_details": {
+        "thinking_tokens": 81143
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2938,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 17640,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1500,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1500
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T11:50:51Z",
+    "finished_at": "2026-11-01T12:11:40Z",
+    "revision": "c8f2158",
+    "nwb_version": "0.1.0"
+  }
+}

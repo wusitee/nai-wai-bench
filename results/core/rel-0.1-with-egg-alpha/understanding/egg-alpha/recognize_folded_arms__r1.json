@@ -1,0 +1,84 @@
+{
+  "settings_id": "7e9b52a50fc5ff45",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "egg-alpha",
+  "vendor": "undisclosed",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "这只黄色、抱臂一脸得意的小胖家伙是**奶龙**——一个圆滚滚的黄色卡通形象，最早源自抖音等平台上的国产 3D 动画短片/表情包系列。\n\n它属于中文互联网上的 **“奶龙”梗（抽象/烂梗文化）**：因为形象呆萌、表情魔性，被网友大量截取做成表情包，配上各种阴阳怪气或自信满满的表情（比如这张抱臂“我就静静看着你装”的姿态），常用于调侃、整活和“抽象”对话中。\n\n简单来说：角色 = 奶龙，梗 = 奶龙表情包/抽象烂梗系列。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "client": "pi 1.5.0",
+    "seconds": 31.0,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 341,
+      "output": 1794,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1662,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 341,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1794,
+      "reasoning": 1662
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "tokenrhythm/egg-alpha",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "tokenrhythm/egg-alpha",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-04T04:37:12Z",
+    "finished_at": "2026-11-04T04:37:43Z",
+    "revision": "44479d0",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -8,7 +8,9 @@ own subscriptions and API accounts. See the [release history](../CHANGELOG.md).
 
 Use the results to inspect this meme-specific behavior, compare matched collection conditions, and study
 prompt and image dependence. Do not use them as a general intelligence, general image-quality, safety,
-or deployment suitability ranking. The two quality panels have independent scores, with no combined rank.
+or deployment suitability ranking. The NaiWai Index combines the Meme ID and Visual detail rankings with
+fixed 1:2 weights; it orders models on this benchmark and is not an accuracy. Image generation is
+experimental and outside the index.
 
 ## Composition and labels
 
@@ -33,10 +35,12 @@ judges, collection dates/revisions, missing telemetry, and separate judge resour
 The selected 0.1.0 comparison includes both `legacy-v1` and `isolated-v1` Codex collection profiles,
 as [documented in the release workflow](releases.md#selected-comparison). The original baseline left
 shell, image-viewing, and agent features available; the isolated collection disabled them. Historical
-Codex judge configurations also differ. Row labels and collection metadata expose these profiles.
+Codex judge configurations also differ in the retained raw data. The selected comparison uses only
+Opus 5.5 judgments, including self-judgments; other judges' verdicts remain available for re-scoring.
+Row labels and collection metadata expose the selected profiles.
 Within-row homogeneity does not make the whole comparison uniform: the observed ranks may include effects
 of both the model and its collector configuration. Use matching profiles and judge conditions for
-controlled model comparisons. Original observations and numeric scores are preserved.
+controlled model comparisons. Original observations and raw judgment scores are preserved.
 
 Paired cluster-bootstrap intervals resample source images or animals with observed within-cell repetition
 means and fixed judges. They are sensitivity estimates, not significance tests, population claims, or

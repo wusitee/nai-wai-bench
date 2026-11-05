@@ -6,13 +6,21 @@ independent of this workflow.
 
 ## Selected comparison
 
-[`releases/0.1.0.toml`](../releases/0.1.0.toml) selects the expanded comparison including GPT-6.1 Terra
-and the high/xhigh GPT-5.6-Sol configurations:
+[`releases/0.1.0.toml`](../releases/0.1.0.toml) selects the expanded comparison including GPT-6.1 Terra,
+the high/xhigh GPT-5.6-Sol configurations, Claude Fable 5.1 (high), and egg-alpha (high, pi through the
+TokenRhythm router):
 
 | Suite | Raw run | Judge policy |
 |---|---|---|
-| `core` | `rel-0.1-with-gpt-5.6-sol` | Only the recorded judge names listed in the manifest; vendor exclusion still applies per sample |
-| `naihub-v1` | `rel-0.1-naihub-with-gpt-5.6-sol` | Local answer-key scoring, without judges |
+| `core` | `rel-0.1-with-egg-alpha` | Opus 5.5 only, including its judgments of Opus and other Anthropic subjects |
+| `naihub-v1` | `rel-0.1-naihub-with-egg-alpha` | Local answer-key scoring, without judges |
+
+Each selected run is a chain of `nwb merge`s; every source remains saved. The earlier comparison runs
+(`rel-0.1-with-gpt-5.6-sol`, `rel-0.1-naihub-with-gpt-5.6-sol`) were merged with the Fable runs
+(`fable-5.1-core`, `fable-5.1-naihub`) into `rel-0.1-with-fable-5.1` and `rel-0.1-naihub-with-fable-5.1`,
+and those with the egg-alpha runs (`egg-alpha-core`, `egg-alpha-naihub`). The Fable and egg-alpha Nai-hub
+rows have three repetitions per image, averaged within each image. egg-alpha's vendor is undisclosed, so
+judge independence from Opus 5.5 cannot be confirmed.
 
 This historical comparison mixes two recorded Codex collection profiles:
 
@@ -25,10 +33,11 @@ Both disable web/browser access. The isolated profile additionally disables shel
 plugins, skill search, goals, sleeping, image-viewing tools, and interactive mode features. The complete
 feature list and versioned `tool_profile` option are in [backend documentation](backends.md#codex-tool-profiles).
 The maintained backend recreates both recorded command configurations. Historical `gpt-6.1-sol`
-judgments also include both profiles; reports expose recorded subject and judge profiles and label
+judgments, retained for alternative re-scoring, also include both profiles; reports expose recorded subject and judge profiles and label
 each ranked row. These remain provisional observed rankings across different model and collector
 configurations. The collection-profile effect is confounded with the model: use matching profiles
-and judge conditions for controlled comparisons. The original observations and numeric scores are retained.
+and judge conditions for controlled comparisons. All original observations and judges' raw verdicts are
+retained. Derived scores use only Opus 5.5; Naihub-v1 continues to use its local answer keys.
 
 The manifest records the software version, collection-source artifact identity, run names, normalized
 SHA-256 input digests, and explicit judge selections. Collection source identity describes the retained
@@ -47,7 +56,7 @@ for selected runs. Restoration verifies checksums and suite membership before wr
 working run takes precedence. Explicit restoration requires a fresh working directory:
 
 ```sh
-uv run nwb restore --suite core --run rel-0.1-with-gpt-5.6-sol
+uv run nwb restore --suite core --run rel-0.1-with-egg-alpha
 ```
 
 Raw ZIP bundles are still available for separate downloads. Extract them into fresh run directories;
@@ -62,11 +71,17 @@ not just its most recent model. An unchanged file is left untouched; obsolete ge
 removed only when they were listed in the previous snapshot. Generated HTML, unrelated logs, local
 configuration, and temporary files are excluded.
 
+Scoring for reports, sites, exports, snapshots, and merges uses the configured judge pools (Opus 5.5 only
+by default), each for its own track. `--judges` selects a different recorded pool for both tracks without
+requesting new judgments; on `nwb judge` it only chooses which judges to call. Raw verdicts
+from other judges remain in snapshots and bundles. Release builds use the explicit judge selection in
+their manifest, independently of these defaults.
+
 Use `--no-sync` on collection or reporting commands for local experiments. To save an existing run
 explicitly, with an optional recorded judge selection:
 
 ```sh
-uv run nwb sync --suite core --run RUN --judges opus-5.5,gpt-6.1-sol
+uv run nwb sync --suite core --run RUN --judges opus-5.5
 ```
 
 Saving writes files under `results/`; include them with the corresponding source/configuration
@@ -97,8 +112,10 @@ The output contains:
 
 | Path | Contents |
 |---|---|
-| `index.html`, `images/`, `scores.json` | Core results and assets |
-| `naihub-v1/` | Nai-hub results, assets, and scores |
+| `index.html`, `images/`, `index.json` | NaiWai Index overview and its versioned rows |
+| `meme-id/` | Meme ID (`core`) page, assets, and scores |
+| `visual-detail/` | Visual detail (`naihub-v1`) page, assets, and scores |
+| `naihub-v1/` | Redirect to `visual-detail/` for earlier links |
 | `bundles/` | Portable raw bundles linked from each suite's page |
 | `release.json` | Selected manifest, its hash, and build revision |
 | `.nojekyll` | GitHub Pages marker |
@@ -141,20 +158,32 @@ be deleted to build the selected release.
 
 ## Saved runs outside the release
 
-`results/core/` also keeps single-model understanding runs that no manifest selects. They are archived
-observations, not rows of the 0.1.0 comparison:
+`results/core/` also keeps single-model understanding runs that no manifest selects directly. Apart from
+`fable-5.1-core`, a source of the selected merged run, they are archived observations, not rows of the
+0.1.0 comparison:
 
 | Runs | Subject settings | Recorded judges |
 |---|---|---|
 | `gemini-4-argon` | `gemini-4-argon-high` (high through the model id) | `opus-5.5`, `gpt-6.1-sol` |
 | `gpt-6.1-sol-max`, `gpt-6-astra-max`, `gpt-6.1-terra-max`, `gpt-6-luna-max` | `max`, `isolated-v1` | `opus-5.5` |
 | `opus-5.5-max`, `sonnet-5.5-max`, `haiku-5.5-max` | `max` | `gpt-6.1-sol` |
-| `fable-5.1-core` | `high` | none |
+| `fable-5.1-core` | `high` | `opus-5.5`, `gpt-6.1-sol` |
+| `fable-5.1-max` | `max` | `opus-5.5`, `gpt-6.1-sol` |
 
-These judge sets are smaller than the default ensemble, and `fable-5.1-core` is unjudged, so its scores
-cover only the key-scored grounding items. The retained high-effort `gpt-6.1-sol` and `gpt-6-astra` rows
+The two Fable runs are saved with the default Opus-only pool, like the published site; their
+GPT-6.1-Sol verdicts stay in the snapshot as raw judgments, and
+`uv run nwb report --run fable-5.1-core --judges gpt-6.1-sol --no-sync` shows those scores (use
+`--run fable-5.1-max` for the `max` run). The other runs' saved scores count every recorded judge.
+Re-scoring them with the default pool leaves the Claude `max` runs at `awaiting judges` until Opus judges
+them; pass their recorded judges with `--judges` to reproduce the saved scores. The retained high-effort
+`gpt-6.1-sol` and `gpt-6-astra` rows
 use `legacy-v1`. Score differences from the release rows therefore mix effort with judge and
 collection-profile changes; a controlled effort comparison needs matching profiles and judges.
+
+`results/naihub-v1/` keeps the matching Nai-hub runs `fable-5.1-naihub` (`high`, merged into the selected
+run) and `fable-5.1-max-naihub` (`max`, archived): three repetitions of the fixed panel, scored locally from the answer
+keys, so they need no judges. A subscription limit interrupted the `max` run; 17 samples used the
+Claude Code login and 127 an API key, with the same recorded settings.
 
 ## Publish
 

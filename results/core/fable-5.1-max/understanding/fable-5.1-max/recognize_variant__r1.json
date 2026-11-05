@@ -1,0 +1,103 @@
+{
+  "settings_id": "8c7d55a4a7adc4cb",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "vendor": "anthropic",
+  "item": "recognize_variant",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。",
+  "images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "answer": "**我的判断：这张图模仿的是中文网络最经典的「熊猫头表情包」，具体是其中“哈哈哈哈哈 / 笑死我了”那一款大笑表情（原型是韩国演员崔成国，即“金馆长”的夸张笑脸被 P 到熊猫头上），并把它做成了 3D 立体版。**\n\n判断依据：\n\n1. **主体是熊猫，而且是“拟人化、会做人类表情”的熊猫**  \n   中文互联网里最有辨识度的熊猫梗就是熊猫头表情包——黑白熊猫头上套一张人脸的夸张表情。图里这只熊猫不是在吃竹子、打滚的写实熊猫，而是站立、做出人类情绪动作，正是熊猫头表情包的用法。\n\n2. **面部表情与“金馆长大笑”版高度一致**  \n   熊猫头大笑款的标志特征是：眼睛笑到眯成一条缝（闭眼）、嘴巴张到极大、露出整排上牙、整张脸都被“笑”占满。这张 3D 熊猫完全复刻了这几点，连嘴角上扬的弧度和露牙的方式都很像。\n\n3. **双手捂肚、身体前倾的姿势对应“笑到肚子疼 / 捧腹大笑”**  \n   表情包里常配的文字是“哈哈哈哈哈哈”“笑死我了”“笑到肚子疼”，而“捂着肚子笑弯腰”正是这类文字对应的标准肢体语言。图中熊猫两只手按在圆鼓鼓的肚皮上、上身前倾，就是把这个梗的身体动作具象化了。\n\n4. **构图像表情包**  \n   纯白/浅灰背景、主体居中、没有任何场景，和表情包“抠图贴脸”的呈现方式一致，而不是电影或插画的叙事式构图。\n\n5. **排除项**  \n   它不太像《功夫熊猫》的阿宝：阿宝通常穿补丁短裤、眼睛是绿色且睁开、体型和脸型风格也不同；而且《功夫熊猫》是好莱坞电影，不属于“中文网络梗”。所以这张图更合理的解释是用 3D 渲染（很可能是 AI 生成）重做了平面的熊猫头“笑死我了”表情包。\n\n一句话总结：这是“熊猫头 · 哈哈哈哈 / 笑死我了（捧腹大笑）”表情包的立体化翻版。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 68.3,
+    "tokens": {
+      "input": 1511,
+      "cached_input": 0,
+      "cache_write": 1509,
+      "output": 4413,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 0.25085,
+    "tools_used": [],
+    "cost_usd": 0.25085,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1509,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 4413,
+      "output_tokens_details": {
+        "thinking_tokens": 3544
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1509,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 4413,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1509,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1509
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T11:59:01Z",
+    "finished_at": "2026-11-01T12:00:09Z",
+    "revision": "c8f2158",
+    "nwb_version": "0.1.0"
+  }
+}

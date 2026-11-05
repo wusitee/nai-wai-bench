@@ -1,0 +1,103 @@
+{
+  "settings_id": "8c7d55a4a7adc4cb",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.1-max",
+  "vendor": "anthropic",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "**图里的角色**\n\n这是一只黄皮肤、白肚皮、龇着一口尖牙、捂着肚子狂笑的 3D 卡通\"胖鲨鱼\"。它并不是哪部大牌动画的主角——经常有人把它当成《鲨鱼哥与美人鱼》（Zig & Sharko）里的鲨鱼哥，但鲨鱼哥是蓝色的肌肉鲨，不是这只。这只黄鲨来自一段低成本的儿童向 3D 动画/动画素材，角色本身没有什么知名度，是因为这段\"仰头捧腹大笑，然后突然收住、一脸严肃\"的片段被截出来才火起来的。老实说，具体出自哪一部片子我记得不够准确，就不瞎编了。\n\n**相关的网络梗**\n\n它最有名的身份是 Reddit 上的 **\"Moe Lester\"** 梗配图。\"Moe Lester\" 是一个谐音恶搞名字（读起来就是 \"molester\"），玩法是做成假新闻标题/假人物介绍——\"Moe Lester, 45, arrested after…\"之类——然后配上这只咧着大嘴傻笑的黄鲨，用它那副\"笑得很开心但莫名瘆人\"的脸来制造黑色幽默。它和 Hugh Jass、Mike Hunt、Ben Dover 这类\"谐音假名\"梗是一个系列。\n\n**别名**\n\n- 同一张图/同一段视频在 TikTok 和抖音上也被当作反应素材用，叫 **\"Laughing Shark\"**（笑鲨 / 鲨鱼大笑），也有人叫 **\"Fat Shark Laughing\"**、**\"Yellow Shark Laugh\"**；中文圈一般就叫\"鲨鱼笑\"\"黄鲨大笑\"或\"笑死鲨鱼了\"。\n- \"Moe Lester\" 本身也有写成 \"Mo Lester\" 的，偶尔会和老梗 \"Chester the Molester\" 并提。\n\n一句话总结：这是\"Moe Lester / 笑鲨\"梗里那只黄色胖鲨鱼，用来表示\"笑到捂肚子\"或者给谐音假名梗配脸。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 554.9,
+    "tokens": {
+      "input": 1453,
+      "cached_input": 0,
+      "cache_write": 1451,
+      "output": 37936,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 1.9258399999999998,
+    "tools_used": [],
+    "cost_usd": 1.9258399999999998,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1451,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 37936,
+      "output_tokens_details": {
+        "thinking_tokens": 37174
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1451,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 37936,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1451,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1451
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "max"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-01T11:49:46Z",
+    "finished_at": "2026-11-01T11:59:01Z",
+    "revision": "c8f2158",
+    "nwb_version": "0.1.0"
+  }
+}

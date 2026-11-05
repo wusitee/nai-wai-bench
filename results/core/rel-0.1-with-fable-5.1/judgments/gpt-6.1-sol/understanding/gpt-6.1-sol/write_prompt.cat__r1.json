@@ -1,0 +1,92 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6.1-sol/write_prompt.cat__r1.json",
+  "target_sha256": "d8e03955906630a1c011dbd11b433e6dd5bad8cb32623c0087074521ab607d52",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "4599c56fcbf956d7",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 1,
+    "render": 2,
+    "background": 1,
+    "vibe": 2,
+    "identity": 1
+  },
+  "hallucinations": [
+    "The backward-tipped head and forward-thrust belly contradict the hunched-forward laughing pose.",
+    "The paws hover beside the belly instead of clutching or pressing it."
+  ],
+  "rationale": "The prompt captures the closed eyes, merged pear-shaped body, 3D rendering, and unhinged laughter, but contradicts the pose and hand placement. Teeth, an oval belly patch, and a white or light-grey background are unspecified; the golden-yellow, frog-like design provides only partial cat identity.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":0,\"eyes\":2,\"mouth\":1,\"body\":2,\"belly_patch\":1,\"render\":2,\"background\":1,\"vibe\":2,\"identity\":1},\"hallucinations\":[\"The backward-tipped head and forward-thrust belly contradict the hunched-forward laughing pose.\",\"The paws hover beside the belly instead of clutching or pressing it.\"],\"rationale\":\"The prompt captures the closed eyes, merged pear-shaped body, 3D rendering, and unhinged laughter, but contradicts the pose and hand placement. Teeth, an oval belly patch, and a white or light-grey background are unspecified; the golden-yellow, frog-like design provides only partial cat identity.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a171a0-f7bd-7022-805b-d13aa8486799",
+    "seconds": 21.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12692,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 537,
+      "reasoning_output_tokens": 379
+    },
+    "tokens": {
+      "input": 12692,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 537,
+      "reasoning": 379
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:55:36Z",
+    "finished_at": "2026-10-25T05:55:57Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}
