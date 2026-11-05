@@ -2,9 +2,9 @@
 
 Models rebuild animated 奶蛙 GIFs as hand-written web pages: inline SVG (2D) or three.js scenes (3D).
 `bench/frontend-v1/` holds the reference corpus, checklists, prompts, and a vendored three.js. The track
-is outside the NaiWai Index, and the corpus and its checklists await human review. The 3D component is
-unranked until calibrated. Results are local (`nwb frontend report` writes a gallery); site
-integration is not implemented.
+is outside the NaiWai Index, and the corpus and its checklists await human review. Samples are checked
+by scripted gates; likeness is reviewed by people in a local gallery (`nwb frontend report`), and there
+is no automatic quality score or ranking. Site integration is not implemented.
 
 ## Corpus
 
@@ -53,8 +53,7 @@ is applied. Metadata and filenames are provenance, not extra model input.
 
 Checklists were drafted by Claude Opus 5.5 from timestamped contact sheets and have **not** been
 human-validated. GPT-6.1-Sol performed visual spot checks and tooling QA. Every question describes an observable property expected to receive **yes** for a
-faithful reconstruction. A judge should eventually see only the rendered frame and its questions;
-the reference image must be withheld. The manifest's questions are evaluator metadata, not subject
+faithful reconstruction. The questions are review prompts shown in the gallery, not subject
 prompts.
 
 Novel-view questions are structural priors: bodies should have volume, facial features belong on the
@@ -65,8 +64,7 @@ The view names denote the harness cameras described under [Rendering and gates](
 
 Review points include task `005`'s partially closed eyes, task `007`'s initial eye state, and task
 `009`'s small eye/brow details. Task `006` intentionally avoids the hidden pink character's face and
-an unreadable hand. Some showcase questions describe absence while still expecting yes. All-yes
-questions require judge calibration against wrong and blank renders before scores are interpreted.
+an unreadable hand. Some showcase questions describe absence while still expecting yes.
 
 ## Local preparation and validation
 
@@ -113,16 +111,15 @@ this corpus; it has its own `nwb frontend` command.
 
 A step 2 sample uses the step 1 sample of the same model and rep, even when step 1 failed its gates;
 its record stores the step 1 sample path, hash, and static gate result under `depends_on`. Recollecting
-step 1 makes its step 2 sample stale: it is ignored by rendering, judging, and reports until collected
-again. Memory kinds are independent of the GIF tasks (task id `mem`,
-240 × 240) and are judged with the `[memory]` checklist in the task manifest, which follows the
-image-generation traits in `bench/rubric.toml`.
+step 1 makes its step 2 sample stale: it is ignored by rendering and reports until collected again.
+Memory kinds are independent of the GIF tasks (task id `mem`, 240 × 240); their review checklist is
+`[memory]` in the task manifest, which follows the image-generation traits in `bench/rubric.toml`.
 
 [Prompts](../bench/frontend-v1/prompts.toml) state every contract. A reply must contain an
 ` ```html ` block; the last one counts. Shared rules: offline, a W × H viewport at device pixel ratio 1,
 no raster images (`<img>`, `<image>`, `url()` other than `url(#id)`, `data:` URIs, base64), no external
 resources or network APIs, no timers or animation frames, at most 256 KB, and no uncaught exceptions or
-console errors. Breaking any rule scores 0.
+console errors. Breaking any rule fails the sample's gates.
 
 - **2D:** one inline `<svg viewBox="0 0 W H">`, one named `<g>` per character with nested named
   parts; no `<foreignObject>`, `<canvas>`, or nested `<svg>`. Step 1 and memory pages are static (no
@@ -178,7 +175,7 @@ may mention (`fetch`, timers) are checked at runtime instead. Runtime gates fail
 - determinism: rendering every keyframe time again, in a shuffled order after other renders, changes
   more than 0.1% of pixels;
 - step 2: no keyframe differs from t = 0 by more than 0.5% of pixels, or any keyframe time t and
-  t + D differ by more than 1%. A motion whose period divides D also passes; the judges compare
+  t + D differ by more than 1%. A motion whose period divides D also passes; reviewers compare
   keyframes.
 
 The renderer writes `frame_NN.png` at each keyframe time (only `frame_00` for static kinds), a 12 fps
@@ -189,25 +186,17 @@ character's center (walls, a room box) stop drawing for that view (characters pa
 draw), and the near plane sits just in front of the sphere; `render.json` lists the hidden meshes. `render.json` records gates and evidence; changing the
 renderer or vendored files re-renders every sample.
 
-## Judging and scoring
+## Review
 
-A checklist judge sees one rendered image and its questions, never the reference, and answers yes or
-no for each question. Judges sit behind a small `ChecklistJudge` interface; the default
-`ModelJudge` asks an LLM through the normal backends. The default pool is
-`[defaults].frontend_judges` in `models.toml` (GPT-6-Astra at xhigh). As in the other
-tracks, judges from the subject's own vendor are left out when another judge exists; those judge calls
-are skipped.
+Quality is judged by people. Automatic LLM checklist judging was tried in the pilot and removed: with or
+without a stronger judge, rough drawings that had the right scene layout received full marks, because
+the questions test the presence of parts rather than likeness.
 
-Judgments count only for the current image bytes, questions, and judge prompt. An image's score is the
-share of yes answers, averaged over the counted judges. A sample's score is
-the mean over its judged images: one frame for static kinds, eight for step 2, plus the four views for
-3D. Samples that fail a gate score 0 without judging. Scores are reported per model and kind, with 3D
-keyframe and view sub-scores, and 95% bootstrap intervals that resample tasks and reps.
-
-Because every expected answer is yes, `nwb frontend judge` also judges calibration controls for each
-task in the run: the reference keyframes (should score high), a blank page and another panel task's
-keyframes (should score low), and, for memory, the canonical meme image, a blank page, and task
-`003`'s first frame.
+`nwb frontend report` writes `summary.json` with each sample's gate status and a `gallery.html` for
+review. The gallery shows the reference GIF and keyframes, and for each sample the rendered loop beside
+the reference GIF, every rendered keyframe beside its reference keyframe with that frame's checklist,
+the 3D harness views, generation time and output tokens, and the page source as text. It never runs
+model code.
 
 ## Running the track
 
@@ -216,13 +205,10 @@ uv sync --extra frontend
 uv run --extra frontend playwright install chromium
 uv run --extra frontend nwb frontend collect --run pilot --models gpt-6.1-sol --tasks 001
 uv run --extra frontend nwb frontend render --run pilot
-uv run --extra frontend nwb frontend judge --run pilot
 uv run --extra frontend nwb frontend report --run pilot
 ```
 
 `collect` defaults to all tasks and all kinds with one rep; step 1 samples are collected before step 2.
 Subject calls may take up to 30 minutes. Samples are `runs/<run>/frontend/<model>/<task>/<kind>__r<rep>.json`,
-renders are in the directory with the same stem, and judgments are under `runs/<run>/frontend-judgments/`.
-`report` writes `runs/<run>/frontend/scores.json` and `gallery.html`, which shows the reference GIF and
-keyframes beside each sample's renders, the rendered loop, judge answers, and the page source as text.
-The gallery never runs model code. Every stage resumes and skips finished work; `--force` redoes it.
+and renders are in the directory with the same stem. `report` writes `runs/<run>/frontend/summary.json`
+and `gallery.html`. Every stage resumes and skips finished work; `--force` redoes it.

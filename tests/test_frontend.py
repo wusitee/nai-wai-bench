@@ -1,6 +1,4 @@
-import hashlib
 import re
-import shutil
 
 import pytest
 
@@ -184,32 +182,22 @@ scene.add(room); room.add(ch);""")
         assert len(Image.open(tmp_path / f"view_{view}.png").getcolors(240 * 242)) > 50, view
 
 
-def test_scores_gate_failures_and_excludes_same_vendor_judges(tmp_path, monkeypatch):
+def test_summary_recomputes_static_gates_and_drops_stale_step2(tmp_path, monkeypatch):
     from nwb import frontend_render
 
     corpus = frontend.load_corpus(ROOT)
     run = tmp_path / "run"
-    image = run / "frame.png"
-    image.parent.mkdir(parents=True)
-    shutil.copyfile(corpus.task("001").frames[0].image, image)
     monkeypatch.setattr(frontend_render, "harness_id", lambda: "h")
-    for kind, gates in (("2d-s1", []), ("2d-mem", ["no animation"])):
-        task = "001" if kind == "2d-s1" else frontend.MEMORY
-        stem = frontend.sample_stem(run, "subject", task, kind, 1)
-        write_json(stem.with_suffix(".json"), {"track": "frontend", "model": "subject", "vendor": "openai",
-                                               "task": task, "kind": kind, "rep": 1, "html": SVG_STATIC,
-                                               "html_sha256": "x", "width": 240, "height": 242})
+    # A stored gate failure from an older checker no longer counts; a runtime gate failure does.
+    for kind, gates in (("2d-s1", []), ("3d-s1", ["window.nwb.ready never became true"])):
+        stem = frontend.sample_stem(run, "subject", "001", kind, 1)
+        write_json(stem.with_suffix(".json"), {"track": "frontend", "model": "subject", "task": "001", "kind": kind,
+                                               "rep": 1, "html": SVG_STATIC, "html_sha256": "x", "width": 240,
+                                               "height": 242, "static_gates": ["non-fragment href"]})
         write_json(stem / "render.json", {"html_sha256": "x", "harness": "h", "gates": gates})
-        shutil.copyfile(image, stem / "frame_00.png")
-    digest = hashlib.sha256(image.read_bytes()).hexdigest()
-    target = "frontend/subject/001/2d-s1__r1/frame_00.json"
-    questions = list(corpus.task("001").frames[0].questions)
-    for judge, vendor, answers, asked in (("other", "anthropic", [True] * 3 + [False] * 3, questions),
-                                          ("own", "openai", [True] * 6, questions),
-                                          ("outdated", "anthropic", [True], ["An old question?"])):
-        write_json(run / "frontend-judgments" / judge / target,
-                   {"judge": judge, "judge_vendor": vendor, "image": "frontend/subject/001/2d-s1__r1/frame_00.png",
-                    "image_sha256": digest, "questions": asked, "answers": answers})
-    rows = {r["kind"]: r for r in frontend.aggregate(corpus, run)["rows"]}
-    assert rows["2d-s1"]["score"] == 0.5  # the subject's own vendor and outdated questions are left out
-    assert rows["2d-mem"]["score"] == 0.0 and rows["2d-mem"]["gates_passed"] == 0
+    step2 = frontend.sample_stem(run, "subject", "001", "2d-s2", 1).with_suffix(".json")
+    write_json(step2, {"track": "frontend", "model": "subject", "task": "001", "kind": "2d-s2", "rep": 1,
+                       "html": SVG_CSS_LOOP, "width": 240, "height": 242,
+                       "depends_on": {"sample": "frontend/subject/001/2d-s1__r1.json", "sha256": "0" * 64}})
+    result = frontend.summary(corpus, run)
+    assert {s["kind"]: s["status"] for s in result["samples"]} == {"2d-s1": "passed", "3d-s1": "gate failed"}

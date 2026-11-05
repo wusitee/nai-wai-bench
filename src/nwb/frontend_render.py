@@ -276,14 +276,6 @@ def vendored_files() -> dict[str, bytes]:
     return files
 
 
-def blank_png(path: Path, width: int, height: int) -> Path:
-    if not path.is_file():
-        Image, _ = _image_modules()
-        path.parent.mkdir(parents=True, exist_ok=True)
-        Image.new("RGB", (width, height), "white").save(path)
-    return path
-
-
 def diff_fraction(a: bytes, b: bytes) -> float:
     Image, ImageChops = _image_modules()
     x, y = Image.open(io.BytesIO(a)).convert("RGB"), Image.open(io.BytesIO(b)).convert("RGB")
