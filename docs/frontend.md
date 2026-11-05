@@ -194,7 +194,7 @@ renderer or vendored files re-renders every sample.
 A checklist judge sees one rendered image and its questions, never the reference, and answers yes or
 no for each question. Judges sit behind a small `ChecklistJudge` interface; the default
 `ModelJudge` asks an LLM through the normal backends. The default pool is
-`[defaults].frontend_judges` in `models.toml` (Claude Opus 5.5 and GPT-6.1-Sol). As in the other
+`[defaults].frontend_judges` in `models.toml` (GPT-6-Astra at xhigh). As in the other
 tracks, judges from the subject's own vendor are left out when another judge exists; those judge calls
 are skipped.
 
