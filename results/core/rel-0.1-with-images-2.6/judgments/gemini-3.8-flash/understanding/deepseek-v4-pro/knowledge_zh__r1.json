@@ -1,0 +1,81 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/deepseek-v4-pro/knowledge_zh__r1.json",
+  "target_sha256": "f3836a9f89f035a9f0c460b1b9b022284b37fa12b741e6a28f66f5e5a0c7cf1a",
+  "settings_id": "c5b99b49261f87dd",
+  "judge_prompt": "9c9dcb75500ee249",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 1,
+    "xingye_origin": 0,
+    "aliases": 1,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [
+    "Claiming that '大笑奶龙' is an animation screenshot ('截图') or drawing from an episode rather than an AI-generated image.",
+    "Claiming that '奶蛙' was named because the gaping mouth of the laughing expression resembles an open-mouthed frog, rather than describing the mutated frog-like variant with bulging eyes and green sclera.",
+    "Fabricating specific quotes/memes such as '奶龙：我笑得像只青蛙' and '这哪里是奶龙，明明是奶蛙'."
+  ],
+  "rationale": "The model correctly describes the base character 奶龙 and partially captures its unofficial status, the alias 奶蛙, and aspects of the gaping laugh, but misses the Xingye origin, military boxing remix, official warning copypasta, and AI trait variations. Furthermore, it hallucinates that the meme originates as an animation screenshot and invents a false explanation for the name '奶蛙'.",
+  "raw": "{\n  \"scores\": {\n    \"base_character\": 2,\n    \"ai_variant\": 1,\n    \"xingye_origin\": 0,\n    \"aliases\": 1,\n    \"naiwa\": 1,\n    \"laugh_pose\": 1,\n    \"junti_quan\": 0,\n    \"official_reply\": 0,\n    \"trait_variants\": 0,\n    \"rarity_titles\": 0\n  },\n  \"hallucinations\": [\n    \"Claiming that '大笑奶龙' is an animation screenshot ('截图') or drawing from an episode rather than an AI-generated image.\",\n    \"Claiming that '奶蛙' was named because the gaping mouth of the laughing expression resembles an open-mouthed frog, rather than describing the mutated frog-like variant with bulging eyes and green sclera.\",\n    \"Fabricating specific quotes/memes such as '奶龙：我笑得像只青蛙' and '这哪里是奶龙，明明是奶蛙'.\"\n  ],\n  \"rationale\": \"The model correctly describes the base character 奶龙 and partially captures its unofficial status, the alias 奶蛙, and aspects of the gaping laugh, but misses the Xingye origin, military boxing remix, official warning copypasta, and AI trait variations. Furthermore, it hallucinates that the meme originates as an animation screenshot and invents a false explanation for the name '奶蛙'.\"\n}",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 51.8,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 20400,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:54:40Z",
+    "finished_at": "2026-10-25T01:55:31Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

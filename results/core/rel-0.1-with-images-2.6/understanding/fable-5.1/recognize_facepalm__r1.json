@@ -1,0 +1,103 @@
+{
+  "settings_id": "548ef2024561e924",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.1",
+  "vendor": "anthropic",
+  "item": "recognize_facepalm",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "answer": "这张图我能看清的是：一个黄色、圆滚滚的 3D 渲染小角色，长着大大的绿色眼睛，一只手扶着额头，表情介于“无奈”和“苦笑”之间。\n\n说实话，我**不能确定**它具体出自哪个作品。它的画风很像近几年在抖音/小红书/微博上流行的那类“软萌 3D 小人”表情包（和“棉花糖小人”“小黄人”之类风格接近），但我凭记忆无法把它准确对应到某个明确的角色名或 IP，不想硬编一个来误导你。\n\n从用法上看，这类图通常属于“**扶额 / 无语 / 头疼 / 我真是服了**”这一类反应梗，用来表达对某件事感到无奈又有点好笑。\n\n如果你允许我联网搜索，我可以帮你做反向图片查找来确认出处；或者你告诉我是在哪看到的（什么平台、配的什么文字），我也许能缩小范围。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 33.7,
+    "tokens": {
+      "input": 968,
+      "cached_input": 0,
+      "cache_write": 966,
+      "output": 1668,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 0.10274000000000001,
+    "tools_used": [],
+    "cost_usd": 0.10274000000000001,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 966,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1668,
+      "output_tokens_details": {
+        "thinking_tokens": 1326
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 966,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1668,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 966,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 966
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T03:50:05Z",
+    "finished_at": "2026-10-31T03:50:39Z",
+    "revision": "592016c",
+    "nwb_version": "0.1.0"
+  }
+}

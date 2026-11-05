@@ -1,0 +1,93 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gemini-3.8-flash/describe_en__r1.json",
+  "target_sha256": "9ae5f917a9cee66ab9f3ae96625882cb0d0a8169553838a03e79f7946d203cf1",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "292f485d4936a977",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "scores": {
+    "pose": 1,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 1,
+    "render": 1,
+    "background": 1,
+    "vibe": 1
+  },
+  "hallucinations": [
+    "The head and upper torso tilt backward; the reference pose bends forward.",
+    "The mouth cavity is described as pink/coral rather than dark.",
+    "The finish is explicitly described as matte and not glossy, contradicting the glossy reference.",
+    "The suggested light-blue or cream gradient and grassy cartoon clearing contradict the reference's plain white or light-grey background."
+  ],
+  "rationale": "The answer captures the body shape and closed eyes well, but weakens the belly-clutching pose with alternatives and reverses the torso's lean. Mouth details, belly patch, rendering, background, and absurd meme energy are only partially captured.",
+  "raw": "{\"scores\":{\"pose\":1,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":1,\"body\":2,\"belly_patch\":1,\"render\":1,\"background\":1,\"vibe\":1},\"hallucinations\":[\"The head and upper torso tilt backward; the reference pose bends forward.\",\"The mouth cavity is described as pink/coral rather than dark.\",\"The finish is explicitly described as matte and not glossy, contradicting the glossy reference.\",\"The suggested light-blue or cream gradient and grassy cartoon clearing contradict the reference's plain white or light-grey background.\"],\"rationale\":\"The answer captures the body shape and closed eyes well, but weakens the belly-clutching pose with alternatives and reverses the torso's lean. Mouth details, belly patch, rendering, background, and absurd meme energy are only partially captured.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719d-4d76-7f51-ba8a-89fe03f94651",
+    "seconds": 22.1,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12926,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 426,
+      "reasoning_output_tokens": 251
+    },
+    "tokens": {
+      "input": 12926,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 426,
+      "reasoning": 251
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:51:36Z",
+    "finished_at": "2026-10-25T05:51:58Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

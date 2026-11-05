@@ -1,0 +1,81 @@
+{
+  "settings_id": "7e9b52a50fc5ff45",
+  "track": "understanding",
+  "model": "egg-alpha",
+  "vendor": "undisclosed",
+  "item": "write_prompt.cat",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a cat version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A single centered cartoon sticker illustration of a very chubby bright-yellow cat laughing hysterically, drawn in a simple flat kids'-animation style with thick clean black outlines and highly saturated colors on a plain solid white background. The cat has an oversized round head, a fat pear-shaped body, tiny stubby rounded triangular ears, short thick arms and legs, and a small stubby tail. Its head is thrown back and tilted slightly to one side in unrestrained laughter: both eyes are squeezed completely shut into upward-curving crescent arcs, with two tiny cartoon teardrops squirting from the outer corners of the eyes and pink oval blush marks on the cheeks. Its mouth is gaping enormously wide open, taking up most of the lower face, a huge rounded dark-red cavity with a big pink tongue curled at the bottom and a simple white strip of teeth along the top edge, the corners of the mouth pulled far up into a manic grin. One stubby paw is raised up near its face mid-gesture and the other slaps its own round belly; small curved motion lines and two or three tiny sparkle marks around the head emphasize the shaking, wheezing laughter. Simple cute mascot design, no shading detail, no text, no watermark, no border, square image, character filling most of the frame, reads clearly as an exaggerated laughing reaction emoji.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "client": "pi 1.5.0",
+    "seconds": 12.7,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 127,
+      "output": 681,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 410,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 127,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 681,
+      "reasoning": 410
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "tokenrhythm/egg-alpha",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "tokenrhythm/egg-alpha",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-04T04:31:23Z",
+    "finished_at": "2026-11-04T04:31:36Z",
+    "revision": "44479d0",
+    "nwb_version": "0.1.0"
+  }
+}

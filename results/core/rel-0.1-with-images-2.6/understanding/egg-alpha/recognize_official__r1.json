@@ -1,0 +1,84 @@
+{
+  "settings_id": "7e9b52a50fc5ff45",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "egg-alpha",
+  "vendor": "undisclosed",
+  "item": "recognize_official",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "这个角色是**奶龙（Nailong）**。\n\n它出自国产动画短片系列《奶龙》，是一只黄色、圆滚滚、贪吃又呆萌的小恐龙（设定上是\"龙\"），有着大大的绿色眼睛和奶白色的肚皮。\n\n**所属的网络梗：** 奶龙是近年来在抖音、B站、微信等中文社交平台上非常火的表情包/梗形象。因为它表情丰富、动作憨态可掬，被网友大量截取制作成表情包，常用于表达\"呆住\"\"震惊\"\"卖萌\"\"无语\"等情绪。围绕它还衍生出了\"奶龙文学\"、各种配音二创和\"抽象奶龙\"等二次创作梗，属于典型的\"萌系抽象\"网络文化符号。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "client": "pi 1.5.0",
+    "seconds": 6.9,
+    "stop_reason": "stop",
+    "rate_limit_retries": 1,
+    "tools_used": [],
+    "usage": {
+      "input": 342,
+      "output": 286,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 134,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 342,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 286,
+      "reasoning": 134
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "tokenrhythm/egg-alpha",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "tokenrhythm/egg-alpha",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-04T04:37:43Z",
+    "finished_at": "2026-11-04T04:38:08Z",
+    "revision": "44479d0",
+    "nwb_version": "0.1.0"
+  }
+}

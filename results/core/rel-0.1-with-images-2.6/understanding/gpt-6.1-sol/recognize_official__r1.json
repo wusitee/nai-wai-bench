@@ -1,0 +1,80 @@
+{
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "vendor": "openai",
+  "item": "recognize_official",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "这是 **奶龙**，出自动画《奶龙》的黄色小龙。\n\n它属于网络上的 **“奶龙梗”及奶龙表情包系列**，常与“我是奶龙！”等台词一起传播。这张图没有配文，无法进一步确定它对应哪个具体段子。",
+  "contaminated": false,
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17084-58fe-7681-9a71-266f96eec8ed",
+    "seconds": 15.0,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 11691,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 308,
+      "reasoning_output_tokens": 236
+    },
+    "tokens": {
+      "input": 11691,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 308,
+      "reasoning": 236
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:44:43Z",
+    "finished_at": "2026-10-25T00:44:58Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

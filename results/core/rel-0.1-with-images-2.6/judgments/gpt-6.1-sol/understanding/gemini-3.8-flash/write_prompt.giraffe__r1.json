@@ -1,0 +1,91 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gemini-3.8-flash/write_prompt.giraffe__r1.json",
+  "target_sha256": "8efd81d11deec42d55a43c2d3170d483863faaf961a08df96dbe3f1b3821c7a8",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "a275ef71e9e210c8",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 1,
+    "vibe": 1,
+    "identity": 2
+  },
+  "hallucinations": [
+    "The head-thrown-back laughter pose contradicts the reference's forward-hunched, doubled-over pose."
+  ],
+  "rationale": "The prompt clearly covers belly-holding, squeezed-shut eyes, a glossy 3D style, and recognizable giraffe features. It omits the pale belly patch, teeth, dark mouth interior, and merged head-and-torso silhouette; the pastel background and strongly adorable tone only partly match the reference.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":2,\"eyes\":2,\"mouth\":1,\"body\":1,\"belly_patch\":0,\"render\":2,\"background\":1,\"vibe\":1,\"identity\":2},\"hallucinations\":[\"The head-thrown-back laughter pose contradicts the reference's forward-hunched, doubled-over pose.\"],\"rationale\":\"The prompt clearly covers belly-holding, squeezed-shut eyes, a glossy 3D style, and recognizable giraffe features. It omits the pale belly patch, teeth, dark mouth interior, and merged head-and-torso silhouette; the pastel background and strongly adorable tone only partly match the reference.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719e-7c4d-7451-b915-e0878a16573f",
+    "seconds": 18.7,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12622,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 391,
+      "reasoning_output_tokens": 246
+    },
+    "tokens": {
+      "input": 12622,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 391,
+      "reasoning": 246
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:52:54Z",
+    "finished_at": "2026-10-25T05:53:12Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

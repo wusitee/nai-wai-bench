@@ -1,0 +1,112 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.1-sol/recognize_en__r1.json",
+  "target_sha256": "43b3a25857d2be6d7b6af7002910a1e7b99b6026fa0d243b6bfbcc22fa2838d5",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "f990667b6a73b812",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "Confidently names the meme the 'Laughing Yellow Lizard' reaction meme, with alternate names 'Laughing Lizard', 'Laughing Dinosaur', and 'Yellow Dinosaur Laughing'. These appear to be made-up English labels, not the meme's actual names (大笑奶龙 / 变异奶龙 / 奶蛙)."
+  ],
+  "rationale": "The answer never identifies the character as 奶龙 or the meme as 大笑奶龙/变异奶龙/奶蛙, and says nothing about its AI-generated mutated origin. Instead it confidently gives invented English meme names, while correctly hedging only on the character's official name.",
+  "raw": "{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"ai_variant\": 0, \"aliases\": 0, \"naiwa\": 0}, \"hallucinations\": [\"Confidently names the meme the 'Laughing Yellow Lizard' reaction meme, with alternate names 'Laughing Lizard', 'Laughing Dinosaur', and 'Yellow Dinosaur Laughing'. These appear to be made-up English labels, not the meme's actual names (大笑奶龙 / 变异奶龙 / 奶蛙).\"], \"rationale\": \"The answer never identifies the character as 奶龙 or the meme as 大笑奶龙/变异奶龙/奶蛙, and says nothing about its AI-generated mutated origin. Instead it confidently gives invented English meme names, while correctly hedging only on the character's official name.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 9.5,
+    "tokens": {
+      "input": 2538,
+      "cached_input": 0,
+      "cache_write": 2536,
+      "output": 604,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.032623400000000004,
+    "tools_used": [],
+    "cost_usd": 0.032623400000000004,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2536,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 604,
+      "output_tokens_details": {
+        "thinking_tokens": 315
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2536,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 604,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2536,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2536
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:59:40Z",
+    "finished_at": "2026-10-25T01:59:50Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

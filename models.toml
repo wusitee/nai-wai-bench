@@ -119,6 +119,16 @@ model = "gpt-6.1-sol"
 effort = "low"
 can = ["image"]
 
+# The same Codex relay after OpenAI's 2026-11-04 Images 2.6 launch, which OpenAI states covers Codex on
+# every plan. Codex still requests `gpt-image-2` and reports no effective image model or variant.
+[models."chatgpt-images-2.6"]
+label = "ChatGPT Images 2.6 (Codex built-in image_gen)"
+backend = "codex"
+vendor = "openai"
+model = "gpt-6.1-sol"
+effort = "low"
+can = ["image"]
+
 # --- Anthropic via Claude Code CLI ---
 
 [models."opus-5.5"]

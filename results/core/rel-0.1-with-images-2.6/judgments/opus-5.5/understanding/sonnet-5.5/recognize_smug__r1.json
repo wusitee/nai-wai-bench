@@ -1,0 +1,107 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/sonnet-5.5/recognize_smug__r1.json",
+  "target_sha256": "882e72c0848f288f34de631dc8a2a31db9d196de1567ba38249b31013fdbf280",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "d38d0b87483a4e88",
+  "judge_images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0
+  },
+  "hallucinations": [],
+  "rationale": "The model said it couldn't identify the character. It never mentions 奶龙 or the 大笑奶龙/变异奶龙/奶蛙 meme family, and only describes the image as a generic yellow frog/toad reaction sticker. Its visual description is accurate and its guesses are explicitly hedged, so nothing counts as a confident hallucination.",
+  "raw": "{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0}, \"hallucinations\": [], \"rationale\": \"The model said it couldn't identify the character. It never mentions 奶龙 or the 大笑奶龙/变异奶龙/奶蛙 meme family, and only describes the image as a generic yellow frog/toad reaction sticker. Its visual description is accurate and its guesses are explicitly hedged, so nothing counts as a confident hallucination.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 6.8,
+    "tokens": {
+      "input": 2323,
+      "cached_input": 0,
+      "cache_write": 2321,
+      "output": 404,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0270454,
+    "tools_used": [],
+    "cost_usd": 0.0270454,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2321,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 404,
+      "output_tokens_details": {
+        "thinking_tokens": 245
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2321,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 404,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2321,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2321
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:05:49Z",
+    "finished_at": "2026-10-25T02:05:55Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

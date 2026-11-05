@@ -10,6 +10,10 @@ Software releases use semantic versions; suite ids version the evaluation panels
   Release sites open with the index and write `index.json`; suite pages move to `meme-id/` and
   `visual-detail/`, and `naihub-v1/` redirects. Image generation moves to an experimental section outside
   the index.
+- Add ChatGPT Images 2.6 (`chatgpt-images-2.6`, Codex built-in image generation) to the experimental image
+  track and select it in the 0.1.0 comparison through `rel-0.1-with-images-2.6`. That run also adds Opus 5.5
+  verdicts for the October `chatgpt-image` row, which had none under the Opus-only judge policy; no existing
+  verdicts change.
 - Add egg-alpha, an undisclosed preview model on the TokenRhythm router, run through pi at high effort, and
   select it in the 0.1.0 comparison through `rel-0.1-with-egg-alpha` and `rel-0.1-naihub-with-egg-alpha`;
   earlier rows are unchanged. The pi backend now resends provider-rate-limited (HTTP 429) prompts after the
