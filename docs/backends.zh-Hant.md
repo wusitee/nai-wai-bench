@@ -14,6 +14,17 @@ Codex、Claude Code（也可接入其他供應商的 Anthropic 相容介面）�
 
 理解題的回答為空時會記錄為錯誤，並在下次執行時重試。部分 ACP Agent 在無法連上自己的 API 時，會不輸出任何文字就結束回合。
 
+## 收集設定與中繼資料
+
+`effort` 是各後端共用的設定：Codex 設定 `model_reasoning_effort`，Claude 傳入 `--effort`，pi 傳入
+`--thinking`，ACP 設定其公布的工作階段選項（由 `effort_option` 指定，否則使用 `thought_level` 類別）。
+`default` 不設定用戶端的 effort 控制；`effort_source = "model-id"` 表示等級包含在模型 id 中。
+ACP 或 pi 無法設定或確認請求的等級時呼叫失敗；API 不支援 effort 控制時也會失敗。
+
+樣本和評審記錄儲存 `settings`、`settings_id`、UTC 收集時間、原始碼修訂和版本。指令或設定改變後，
+已成功的記錄不能自動覆寫，必須選擇新的執行或明確使用 `--force`。token、快取、用戶端耗時和費用的
+記錄規則，以及 Kimi 的可選 `/usage` 指令，見[英文中繼資料說明](backends.md#collection-settings-and-metadata)。
+
 ## 模型欄位
 
 | 欄位 | 含義 |
@@ -23,11 +34,15 @@ Codex、Claude Code（也可接入其他供應商的 Anthropic 相容介面）�
 | `model` | 傳給後端的模型 id（pi：`provider/id`） |
 | `label` | 結果網站中的顯示名稱（預設使用模型條目名稱） |
 | `can` | 可包含 `text`、`vision`（接受圖片輸入）、`image`（生成圖片） |
-| `reasoning` | 僅限 Codex：`model_reasoning_effort` |
-| `effort` | 僅限 Claude：`--effort` 等級 |
+| `effort` | 推理等級；未提供控制時使用 `default` |
+| `reasoning` | Codex 的舊版 `effort` 別名 |
+| `effort_option` | ACP 的 effort 選項 id，如 `reasoning_effort` 或 `thinking` |
+| `effort_source` | 等級包含在模型 id 中時為 `model-id` |
+| `tool_profile` | 僅限 Codex：`legacy-v1` 或 `isolated-v1` 文字／視覺指令設定 |
 | `command` | 僅限 ACP：Agent 指令；會展開 `~`、`${VAR}` 和 `${NWB_ROOT}`（儲存庫根目錄） |
 | `env` | ACP、Claude 和 pi：額外的環境變數，展開方式同 `command`；只記錄變數名稱 |
 | `config` | 僅限 ACP：要設定的工作階段選項，格式為 `{ id = "value" }` |
+| `usage_command` | 僅限 ACP：明確啟用用戶端公布的本機 token 用量指令，目前為 Kimi `/usage` |
 | `auth` | 僅限 ACP：每次工作階段前呼叫 `authenticate` 所用的驗證方式 id |
 | `base_url`、`api_key_env` | 僅限 OpenAI：API 基礎網址（以 `/v1` 結尾）和存放密鑰的環境變數名稱 |
 | `cc_switch` | OpenAI 和 Claude：從哪個 [CC Switch](https://github.com/farion1231/cc-switch) 供應商讀取介面網址和密鑰 |
@@ -40,6 +55,13 @@ Codex、Claude Code（也可接入其他供應商的 Anthropic 相容介面）�
 自帶網絡搜尋）、瀏覽器操作和電腦操作。文字呼叫時還會關閉圖像生成。
 
 **隔離限制。** `--ignore-user-config` 無法阻止 Codex 載入全域指令（`$CODEX_HOME/AGENTS.md`）及已安裝的技能。全新的工作目錄能排除儲存庫脈絡，但無法完全清除 Codex 的脈絡。需要乾淨的評測環境時，請使用專用、已登入且不含個人指令和技能的 `CODEX_HOME`。早期試跑樣本使用了普通使用者目錄。
+
+`tool_profile = "legacy-v1"` 保留原始文字／視覺指令，shell、圖片檢視和 Agent 功能仍可用；
+理解回答中的工具呼叫仍會使樣本失去計分資格。`isolated-v1` 另外關閉這些功能以及外掛、技能搜尋、
+目標、等待和互動模式功能。圖像生成中轉不受該區別影響。完整開關列表見
+[英文工具設定說明](backends.md#codex-tool-profiles)。
+目前發佈的比較混用了兩種設定，模型與收集器的影響無法分離；逐列標籤會顯示設定。
+受控比較應使用相同設定和新的執行名稱，見[發佈條件](releases.md#selected-comparison)。
 
 **圖像生成**（`can = ["image"]`）使用 Codex 內建的 `image_gen` 工具。對話模型會被要求把基準提示詞原樣
 交給該工具；圖片從 `$CODEX_HOME/generated_images/<thread>/` 複製出來。之後評測程式讀取工作階段記錄

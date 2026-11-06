@@ -39,8 +39,9 @@ Accuracy takes priority over everything else.
   the video and description show: numbers, ranks, rank ranges, intervals, ticks and crosses, token
   counts, costs, and quotes. Scenes, the cover, and the metadata script contain only layout and
   captions. Quotes are exact substrings of saved answers, asserted by the script.
-- Ranks: scores equal at one decimal share a rank. Say "N 个…中第 K", and show rank ranges or
-  intervals when ranks are close. Never give a rank to an unranked (mixed-condition) row.
+- Ranks: use the ranks in `scores.json`; only exactly equal unrounded scores share a rank. Displayed
+  scores can round to the same decimal while retaining different ranks. Say "N 个…中第 K", and show
+  rank ranges or intervals when ranks are close. Never give a rank to an unranked row.
 - Score every row with the release's judges, as on the results site. When a judge shares a row's
   vendor, label that row on screen. When it shares the subject's vendor, also score the comparison
   with an independent judge, and show the subject's result among the rows that judge scored
