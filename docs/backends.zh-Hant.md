@@ -131,6 +131,13 @@ pi 設定的等級；實際等級記錄在 `meta.session_config`。如需乾淨�
 生效。該路由對突發請求限流，回傳 HTTP 429（`MODEL_CALL_FAILED`，附 `retryAfterSeconds`），所以請用
 `--jobs 1` 採集。
 
+### 智譜 GLM（`glm-5.3-flash-pi`）
+
+`glm-5.3-flash-pi` 透過 pi 內建的 `zai-coding-cn` 供應商（open.bigmodel.cn 的 GLM Coding Plan 介面，金鑰
+讀取 `ZAI_CODING_CN_API_KEY`）執行 GLM-5.3-Flash，無須在 `models.json` 中宣告。pi 的模型目錄中，GLM-5.3
+系列只有 GLM-5.3-Flash 支援圖片輸入；`effort = "high"` 會作為 `reasoning_effort: "high"` 傳送。部分視覺
+提示詞會讓模型陷入很長且不收斂的推理；該條目每次呼叫最多等待 900 秒，逾時的樣本會在下次執行時重試。
+
 ## ACP Agent（`backend = "acp"`）
 
 任何透過 stdio 使用 [Agent Client Protocol](https://agentclientprotocol.com) 的 Agent。用戶端依序傳送
