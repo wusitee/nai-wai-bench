@@ -1,0 +1,91 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/kimi-k3/describe__r1.json",
+  "target_sha256": "14039890d6e78459480f19adfb55f1a3c1b55626fcfb9ad1d029e83cd3bdc4e7",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "f70efea8a045e04a",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "kimi-k3",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 2,
+    "vibe": 0
+  },
+  "hallucinations": [
+    "将头部和身体的主要动势描述为后仰、重心向后倒，与参考图弯腰前倾的姿势相反。",
+    "将表面描述为哑光或半哑光的软胶、毛绒玩具质感，与参考图有光泽的 CG 表面不符。"
+  ],
+  "rationale": "准确覆盖了闭眼弧线、浅色椭圆肚皮和浅色背景，但捧腹动作含糊，嘴部缺少明确可见的牙齿与舌头，身体描述也未体现头身相连、没有明显脖子的特点。姿势方向错误，渲染仅部分符合，整体偏软萌可爱，未传达抽象、略显失控的表情包气质。",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":1,\"body\":1,\"belly_patch\":2,\"render\":1,\"background\":2,\"vibe\":0},\"hallucinations\":[\"将头部和身体的主要动势描述为后仰、重心向后倒，与参考图弯腰前倾的姿势相反。\",\"将表面描述为哑光或半哑光的软胶、毛绒玩具质感，与参考图有光泽的 CG 表面不符。\"],\"rationale\":\"准确覆盖了闭眼弧线、浅色椭圆肚皮和浅色背景，但捧腹动作含糊，嘴部缺少明确可见的牙齿与舌头，身体描述也未体现头身相连、没有明显脖子的特点。姿势方向错误，渲染仅部分符合，整体偏软萌可爱，未传达抽象、略显失控的表情包气质。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a171a1-4a51-7da2-ab70-b3475910e340",
+    "seconds": 21.5,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13018,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 562,
+      "reasoning_output_tokens": 330
+    },
+    "tokens": {
+      "input": 13018,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 562,
+      "reasoning": 330
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:55:57Z",
+    "finished_at": "2026-10-25T05:56:19Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

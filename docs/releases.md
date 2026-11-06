@@ -7,20 +7,22 @@ independent of this workflow.
 ## Selected comparison
 
 [`releases/0.1.0.toml`](../releases/0.1.0.toml) selects the expanded comparison including GPT-6.1 Terra,
-the high/xhigh GPT-5.6-Sol configurations, Claude Fable 5.1 (high), and egg-alpha (high, pi through the
-TokenRhythm router):
+the high/xhigh GPT-5.6-Sol configurations, Claude Fable 5.1 (high), egg-alpha (high, pi through the TokenRhythm
+router), and GLM-5.3-Flash (high, pi through Zhipu's GLM Coding Plan endpoint):
 
 | Suite | Raw run | Judge policy |
 |---|---|---|
-| `core` | `rel-0.1-with-egg-alpha` | Opus 5.5 only, including its judgments of Opus and other Anthropic subjects |
-| `naihub-v1` | `rel-0.1-naihub-with-egg-alpha` | Local answer-key scoring, without judges |
+| `core` | `rel-0.1-with-glm-5.3-flash` | Opus 5.5 only, including its judgments of Opus and other Anthropic subjects |
+| `naihub-v1` | `rel-0.1-naihub-with-glm-5.3-flash` | Local answer-key scoring, without judges |
 
 Each selected run is a chain of `nwb merge`s; every source remains saved. The earlier comparison runs
 (`rel-0.1-with-gpt-5.6-sol`, `rel-0.1-naihub-with-gpt-5.6-sol`) were merged with the Fable runs
 (`fable-5.1-core`, `fable-5.1-naihub`) into `rel-0.1-with-fable-5.1` and `rel-0.1-naihub-with-fable-5.1`,
-and those with the egg-alpha runs (`egg-alpha-core`, `egg-alpha-naihub`). The Fable and egg-alpha Nai-hub
-rows have three repetitions per image, averaged within each image. egg-alpha's vendor is undisclosed, so
-judge independence from Opus 5.5 cannot be confirmed.
+those with the egg-alpha runs (`egg-alpha-core`, `egg-alpha-naihub`) into `rel-0.1-with-egg-alpha` and
+`rel-0.1-naihub-with-egg-alpha`, and those with the GLM-5.3-Flash runs (`glm-5.3-flash-pi-core`,
+`glm-5.3-flash-pi-naihub`). The Fable, egg-alpha, and GLM-5.3-Flash Nai-hub rows have three repetitions per
+image, averaged within each image. egg-alpha's vendor is undisclosed, so judge independence from Opus 5.5
+cannot be confirmed.
 
 This historical comparison mixes two recorded Codex collection profiles:
 
@@ -56,7 +58,7 @@ for selected runs. Restoration verifies checksums and suite membership before wr
 working run takes precedence. Explicit restoration requires a fresh working directory:
 
 ```sh
-uv run nwb restore --suite core --run rel-0.1-with-egg-alpha
+uv run nwb restore --suite core --run rel-0.1-with-glm-5.3-flash
 ```
 
 Raw ZIP bundles are still available for separate downloads. Extract them into fresh run directories;

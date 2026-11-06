@@ -1,0 +1,81 @@
+{
+  "settings_id": "680aa2edad69d268",
+  "track": "understanding",
+  "model": "glm-5.3-flash-pi",
+  "vendor": "zhipu",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "表情包贴纸插画：一只体型圆胖、淡黄色的卡通小猫，头部与身体比例夸张、脑袋又大又圆，头顶长着一对短小圆钝的黄色小角，头顶两侧是圆润的猫耳朵，脸颊两侧各有三根细细的黑色胡须；一双黑色小豆点眼睛因大笑挤成两道弯弯的弧线，嘴巴张到极大、呈夸张的捧腹大笑状，露出粉红色的舌头和口腔上颚，身体微微向后仰，两只短短的小圆手臂向上举起，圆鼓鼓的肚子微微颤动；扁平矢量卡通风格，粗而圆润的描边，色彩干净明快（淡黄色主体、白色肚皮、粉色内耳），表情呆萌滑稽、喜感十足；纯白色背景，主体居中、正面视角，四周留出白色贴纸边框，构图简洁，高清细节。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "zai-coding-cn/glm-5.3-flash",
+    "client": "pi 1.5.0",
+    "seconds": 36.7,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 101,
+      "output": 1345,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1152,
+      "cost": 0.0006876499999999999
+    },
+    "tokens": {
+      "input": 101,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1345,
+      "reasoning": 1152
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "zai-coding-cn/glm-5.3-flash",
+    "cost_usd_reported": 0.0006876499999999999
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "zai-coding-cn/glm-5.3-flash",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "zai-coding-cn/glm-5.3-flash",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-06T07:12:34Z",
+    "finished_at": "2026-11-06T07:13:10Z",
+    "revision": "ef8832f+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

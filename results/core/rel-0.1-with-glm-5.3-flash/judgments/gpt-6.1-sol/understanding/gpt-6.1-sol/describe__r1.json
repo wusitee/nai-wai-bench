@@ -1,0 +1,88 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6.1-sol/describe__r1.json",
+  "target_sha256": "2da6ab4139518efbc8466e16489b290baa8c1927ceb18e1c42ce9614d5d4a347",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "d84cd1a983e2b548",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 1,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 0,
+    "vibe": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer clearly covers the bulky, neckless body with short thick limbs and the smooth, softly shaded 3D rendering. It partially describes narrowed eyes and a large laughing mouth, but leaves the defining pose, belly-clutching hands, belly patch, background, and absurd meme energy unspecified.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":0,\"eyes\":1,\"mouth\":1,\"body\":2,\"belly_patch\":0,\"render\":2,\"background\":0,\"vibe\":0},\"hallucinations\":[],\"rationale\":\"The answer clearly covers the bulky, neckless body with short thick limbs and the smooth, softly shaded 3D rendering. It partially describes narrowed eyes and a large laughing mouth, but leaves the defining pose, belly-clutching hands, belly patch, background, and absurd meme energy unspecified.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719f-ed57-7a42-a799-58cbaaf865da",
+    "seconds": 15.0,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12814,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 275,
+      "reasoning_output_tokens": 156
+    },
+    "tokens": {
+      "input": 12814,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 275,
+      "reasoning": 156
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:54:28Z",
+    "finished_at": "2026-10-25T05:54:43Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

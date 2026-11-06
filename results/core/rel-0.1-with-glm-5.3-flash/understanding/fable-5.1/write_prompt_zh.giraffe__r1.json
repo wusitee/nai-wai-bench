@@ -1,0 +1,100 @@
+{
+  "settings_id": "548ef2024561e924",
+  "track": "understanding",
+  "model": "fable-5.1",
+  "vendor": "anthropic",
+  "item": "write_prompt_zh.giraffe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出长颈鹿版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "A single cute cartoon character in a Chinese internet meme sticker style, flat 2D digital drawing, thick clean black outlines, flat solid colors, minimal shading, plain white background, square sticker composition, no text.\n\nThe character is a giraffe-ified version of a chubby yellow blob mascot: a short, round, pudgy body shaped like a soft dumpling or a fat gummy drop, very smooth and rounded with no visible limbs except two tiny stubby arms and two tiny stubby feet. The whole body is bright buttery yellow. It has a comically long, thick, tube-like neck rising from the blob body, covered in large rounded chocolate-brown patches like a giraffe's coat, ending in a small round head. On top of the head are two short rounded ossicones (little knob-tipped giraffe horns), and two tiny round ears. A short tuft of a brown mane runs down the back of the neck, plus a tiny tail with a brown tuft.\n\nThe expression is the key: an exaggerated, uncontrollable belly laugh. Eyes are squeezed completely shut into two upward-curving arcs (like \"^ ^\"), with little laugh-wrinkle lines beside them. The mouth is enormous, wide open and stretched into a huge \"D\"-shaped laughing grin that takes up most of the face, showing a dark red mouth interior, a single row of flat white cartoon teeth along the top, and a pink tongue. Two round pink blush circles on the cheeks. A few small teardrops fly out from the corners of the eyes from laughing too hard. The long neck is bent slightly backward as if the head is thrown back mid-laugh, and small motion lines around the body suggest it is shaking with laughter. One stubby arm is raised near the belly as if clutching it.\n\nOverall mood: goofy, smug, mocking laughter, extremely simple and childlike, kawaii, meme sticker aesthetic, high contrast, centered, bold and readable at small size.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 20.7,
+    "tokens": {
+      "input": 715,
+      "cached_input": 0,
+      "cache_write": 713,
+      "output": 1109,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 0.06973,
+    "tools_used": [],
+    "cost_usd": 0.06973,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 713,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1109,
+      "output_tokens_details": {
+        "thinking_tokens": 461
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 713,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1109,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 713,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 713
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T03:48:55Z",
+    "finished_at": "2026-10-31T03:49:16Z",
+    "revision": "592016c",
+    "nwb_version": "0.1.0"
+  }
+}

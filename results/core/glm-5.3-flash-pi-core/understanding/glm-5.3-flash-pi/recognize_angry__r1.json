@@ -1,0 +1,84 @@
+{
+  "settings_id": "680aa2edad69d268",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "glm-5.3-flash-pi",
+  "vendor": "zhipu",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "这张图我能比较确定的是它的**梗属性**，但角色本身我要坦白说没法百分百指认：\n\n**梗：属于“切换XX模式”表情包系列**\n图片底部红底白字加emoji的“切换愤怒模式😡”是典型的“切换模式”表情包格式。这类表情包在微信、抖音等平台非常流行（近两年尤其多，很多是AI生成的3D可爱风形象），同一个圆滚滚的角色会有不同“模式”：切换愤怒模式、切换可爱模式、切换战斗模式、切换摆烂模式等等，用来幽默地表达“我要切换情绪状态了”。“切换愤怒模式”就是卖萌式地表示“我生气了/我要发火了”。\n\n**角色本身：**\n它是一个3D渲染的红色蛋形/团子状小生物，配色特征是：红色身体、浅色肚皮、绿色眼睛、粗黑的愤怒眉毛。这个设计很容易让人联想到两类经典形象：\n\n- **《愤怒的小鸟》里的红色小鸟“胖红（Red）”**——红色圆身、浅色肚皮、粗黑怒眉、电影版里正是绿眼睛，而且“愤怒”主题也和文案高度契合；\n- **《刺猬索尼克》里的纳克鲁斯（Knuckles）**——红色身体、绿色眼睛、胸前浅色毛的设定也很像。\n\n不过图中角色没有喙、没有羽毛或拳刺等标志性细节，整体过于“光滑简化”，所以我倾向于认为它更可能是表情包作者（或AI）创作的**通用红色怒怒小团子**，设计上借鉴了上述形象的元素。\n\n如果你知道这张图的出处表情包名称，欢迎告诉我，我可以帮你进一步分析它的用法。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "zai-coding-cn/glm-5.3-flash",
+    "client": "pi 1.5.0",
+    "seconds": 678.1,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 170,
+      "output": 22745,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 22384,
+      "cost": 0.011397999999999998
+    },
+    "tokens": {
+      "input": 170,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 22745,
+      "reasoning": 22384
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "zai-coding-cn/glm-5.3-flash",
+    "cost_usd_reported": 0.011397999999999998
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "zai-coding-cn/glm-5.3-flash",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "zai-coding-cn/glm-5.3-flash",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-06T08:16:53Z",
+    "finished_at": "2026-11-06T08:28:11Z",
+    "revision": "ef8832f+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

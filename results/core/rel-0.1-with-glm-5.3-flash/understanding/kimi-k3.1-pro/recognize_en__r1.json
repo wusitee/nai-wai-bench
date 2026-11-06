@@ -1,0 +1,73 @@
+{
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "vendor": "moonshot",
+  "item": "recognize_en",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Who is this character, and which internet meme is this image from? Does the meme have other names?",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "This is the **Laughing Yellow Creature** meme: a yellow 3D-animated character clutching its belly while laughing hysterically. It’s commonly used to react to something absurdly funny or to depict uncontrollable laughter.\n\nI don’t know a reliable canonical character name or original animation source; in meme culture it’s usually identified simply by its appearance. Other common names include:\n\n- **Yellow Guy Laughing**\n- **Yellow Creature Laughing**\n- **Laughing Yellow Guy**\n- **Laughing Yellow Blob**\n- **Yellow Monster Laughing**",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 44.1,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20780,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 1710,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 22490 / 1048576 tokens (2%)\nSession total: 20780 input, 1710 output",
+      "usage": {
+        "inputTokens": 20780,
+        "outputTokens": 1710
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:46:17Z",
+    "finished_at": "2026-10-25T00:47:01Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

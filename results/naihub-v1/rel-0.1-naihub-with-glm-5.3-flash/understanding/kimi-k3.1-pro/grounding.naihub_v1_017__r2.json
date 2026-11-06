@@ -1,0 +1,74 @@
+{
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "vendor": "moonshot",
+  "suite": "naihub-v1",
+  "item": "grounding.naihub_v1_017",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 2,
+  "prompt": "Look only at the attached image. Return one JSON object with family, subjects, posture, eyes, mouth, tears, and gesture. Classify family as the unofficial mutated Nailong/Naiwa meme family, official Nailong artwork, or an unrelated character. Count the main characters, not background decorations. For multiple characters, use mixed for eyes, mouth, or gesture only when their visible states differ. Upright means a biped whose visible hips sit above downward-extending thighs; leaning or hunching the torso alone does not make it crouched. Feet and knees may be cropped if both hips and upper thighs visibly establish this arrangement. Crouched requires visibly bent knees and hips lowered toward knee level; prone means lying belly-down. Use out_of_frame for posture if the crop or occlusion hides the hips and thighs, including a torso-only crop even when its upper body is vertical. Narrowed eyes have visibly reduced eyelid openings; closed eyes have no visible pupil aperture. Use phone_hold whenever a phone is held, even if the other hand rests on the belly. Use hands_on_head for two hands at the head, forehead for a hand on the front of the forehead, and hand_at_head for another head touch. Use chin_rest for hands touching/supporting the chin, fighting_pose for the wide bent-knee open-palm-and-fist stance. Use behind_back when the visible arm gesture is behind the torso without a hanging front hand. Use raised_arms for one or both arms lifted or extended away from the torso when no more specific gesture applies. Use covered for eyes or mouth hidden by an object; use out_of_frame for hands outside the image. Use unknown for any field you cannot determine, including when no image is attached. For tears, report present only for visible tear drops or streams, otherwise absent. Do not infer an emotion, motion sequence, or hidden gesture.\nAllowed labels: {\"family\": [\"mutated_nailong\", \"official_nailong\", \"other\"], \"subjects\": [\"one\", \"two\", \"four\", \"five\"], \"posture\": [\"upright\", \"crouched\", \"prone\", \"seated\", \"quadruped\", \"out_of_frame\"], \"eyes\": [\"open\", \"closed\", \"narrowed\", \"covered\", \"mixed\"], \"mouth\": [\"open\", \"closed\", \"covered\", \"mixed\"], \"tears\": [\"present\", \"absent\"], \"gesture\": [\"belly_clutch\", \"behind_back\", \"forehead\", \"chin_rest\", \"forearms_on_ground\", \"phone_hold\", \"folded_arms\", \"holding_hands\", \"mixed\", \"hand_at_head\", \"hands_on_head\", \"thumb_up\", \"pointing\", \"fighting_pose\", \"raised_arms\", \"none\", \"out_of_frame\"]}",
+  "images": [
+    "bench/naihub-v1/images/017.jpg"
+  ],
+  "answer": "{\"family\":\"mutated_nailong\",\"subjects\":\"one\",\"posture\":\"out_of_frame\",\"eyes\":\"open\",\"mouth\":\"closed\",\"tears\":\"present\",\"gesture\":\"out_of_frame\"}",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 6.3,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20729,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 115,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20844 / 1048576 tokens (2%)\nSession total: 20729 input, 115 output",
+      "usage": {
+        "inputTokens": 20729,
+        "outputTokens": 115
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:09:33Z",
+    "finished_at": "2026-10-25T01:09:39Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

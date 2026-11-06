@@ -1,0 +1,84 @@
+{
+  "settings_id": "680aa2edad69d268",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "glm-5.3-flash-pi",
+  "vendor": "zhipu",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "这个黄色圆滚滚的角色是**奶龙（Nailong）**。\n\n**出处：** 奶龙最初来自国产3D儿童动画《奶龙与小七》，是一只会卖萌的胖胖黄色小龙。\n\n**梗的由来：** 大约从2023年起，奶龙在中文互联网上爆红，被做成大量表情包和鬼畜素材。你图里这个“抱臂、眯眼、一脸欠揍”的3D渲染形象尤其流行，常被用来表达“自信满满”“不屑”“阴阳怪气”的情绪，类似“就这？”“你等着”的语气。后来这个形象还通过抖音等平台传播到海外，成为TikTok上“Chinese brainrot（中式脑腐梗）”的代表性角色之一。\n\n需要说明的是，奶龙表情包大多并非官方出品，而是网友二次创作，2024年版权方大规模维权下架二创内容一事本身也一度引发热议，反而让“奶龙梗”传播得更广。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "zai-coding-cn/glm-5.3-flash",
+    "client": "pi 1.5.0",
+    "seconds": 134.5,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 395,
+      "output": 4544,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 4321,
+      "cost": 0.0023312499999999996
+    },
+    "tokens": {
+      "input": 395,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 4544,
+      "reasoning": 4321
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "zai-coding-cn/glm-5.3-flash",
+    "cost_usd_reported": 0.0023312499999999996
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "zai-coding-cn/glm-5.3-flash",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "zai-coding-cn/glm-5.3-flash",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-06T09:05:14Z",
+    "finished_at": "2026-11-06T09:07:29Z",
+    "revision": "ef8832f+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

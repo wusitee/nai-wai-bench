@@ -1,0 +1,103 @@
+{
+  "settings_id": "548ef2024561e924",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.1",
+  "vendor": "anthropic",
+  "item": "recognize_smug",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "answer": "仅凭图片判断，我并不能百分之百确定，说一下我的判断和依据：\n\n**角色推测**\n这是一只黄色、圆滚滚、脸颊泛红、眯眼歪嘴的 3D 渲染角色。从造型（黄色皮肤、圆脑袋、没有明显嘴喙、脸颊腮红）来看，最像是**可达鸭（Psyduck）的二创/拟人化 3D 版本**，也有可能是某款国产 3D 动画/短视频里原创的\"黄色小胖蛙/小胖鸭\"形象。因为表情被改得很夸张，脱离了原版的呆萌设定，所以不太容易一眼锁定出处。\n\n**所属网络梗**\n这张图的核心在于那副**\"眯眼、嘴角一抿、一脸不屑/嘲讽\"**的表情，属于中文互联网常见的\"**傲娇 / 嫌弃 / 无语 / 就这？**\"类表情包。典型用法包括：\n- 回复别人时表示\"呵呵\"\"我看你怎么编\"\n- 表达\"懒得理你\"\"看破不说破\"\n- 配文常见\"你说得对，但是……\"\"笑死，根本不听\"等阴阳怪气语境\n\n**提醒**\n由于我无法联网核实，角色出处这一点属于推测；如果你知道它出自哪部动画或哪个博主的作品，欢迎告诉我，我可以再帮你分析相关梗的演变。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 30.2,
+    "tokens": {
+      "input": 984,
+      "cached_input": 0,
+      "cache_write": 982,
+      "output": 1374,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 0.08836000000000001,
+    "tools_used": [],
+    "cost_usd": 0.08836000000000001,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 982,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1374,
+      "output_tokens_details": {
+        "thinking_tokens": 875
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 982,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1374,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 982,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 982
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T03:50:27Z",
+    "finished_at": "2026-10-31T03:50:57Z",
+    "revision": "592016c",
+    "nwb_version": "0.1.0"
+  }
+}
