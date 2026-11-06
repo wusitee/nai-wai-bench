@@ -1,0 +1,91 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/deepseek-v4.1-flash/describe_en__r1.json",
+  "target_sha256": "dd582aaa524a4b5731a4c4a6ca43e745ba4d5a96ba9f0eadc894a12e7ad5fe60",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "72e21cc999f018f5",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "pose": 1,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 2,
+    "vibe": 1
+  },
+  "hallucinations": [
+    "Describes smooth matte surfaces, whereas the reference has a glossy finish.",
+    "Describes an oversized spherical head on a small body, whereas the reference has a bulky pear/bean-shaped body with the head merging into the torso."
+  ],
+  "rationale": "The answer matches the closed eyes, pale belly patch, and plain background, but only partly captures the body, mouth, rendering, and absurd meme energy. Its preferred backward-leaning pose contradicts the forward hunch, and hands clutching the belly appear only as an uncertain alternative.",
+  "raw": "{\"scores\":{\"pose\":1,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":1,\"body\":1,\"belly_patch\":2,\"render\":1,\"background\":2,\"vibe\":1},\"hallucinations\":[\"Describes smooth matte surfaces, whereas the reference has a glossy finish.\",\"Describes an oversized spherical head on a small body, whereas the reference has a bulky pear/bean-shaped body with the head merging into the torso.\"],\"rationale\":\"The answer matches the closed eyes, pale belly patch, and plain background, but only partly captures the body, mouth, rendering, and absurd meme energy. Its preferred backward-leaning pose contradicts the forward hunch, and hands clutching the belly appear only as an uncertain alternative.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719b-ded3-7092-a465-a5b6e21d31dd",
+    "seconds": 20.6,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13048,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 564,
+      "reasoning_output_tokens": 402
+    },
+    "tokens": {
+      "input": 13048,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 564,
+      "reasoning": 402
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:50:02Z",
+    "finished_at": "2026-10-25T05:50:23Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

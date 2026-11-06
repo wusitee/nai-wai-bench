@@ -126,6 +126,11 @@ pass the benchmark prompt to the tool verbatim; images are copied from
 were made and whether each received the prompt unchanged. Reference-tier prompts attach the reference image
 with `--image`.
 
+The tool has no model parameter: Codex (through at least 0.168 prereleases) requests `gpt-image-2`, and
+OpenAI's service chooses the image model behind it. Neither the tool result nor the image's C2PA credentials
+(`ChatGPT` / `gpt-image`) name the effective model or variant, so an image-model version is identified only
+by collection date and Codex version (`meta.client`).
+
 When the image tool's result reports `moderation_blocked`, the provider's safety system rejected the
 request or its output. The sample is then recorded with `refused` and no images instead of an error.
 A refusal is a model outcome: it is not retried automatically (`--force` regenerates it), and when its

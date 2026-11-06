@@ -1,0 +1,103 @@
+{
+  "settings_id": "8bc2f526580c51a3",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "vendor": "anthropic",
+  "item": "recognize_facepalm",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "answer": "我不能确定这是哪个角色，也不想随便编一个名字。\n\n**画面内容**\n- 这是一个3D渲染的黄色圆润\"软体\"角色，绿色眼睛配黑瞳孔，嘴巴是一条淡淡的微笑弧线，肚子是浅米色。\n- 它一只手扶着额头，表情平静甚至带点微笑。\n\n**可能的梗类型**\n这类图一般用作\"扶额／无语／头疼\"的反应图，常见含义有：\n- 对离谱的事感到无奈（\"我真的会谢\"）\n- 被队友或同事气笑了，但已经懒得说什么\n- 思考人生或\"这事怎么处理\"的状态\n\n它的特点是表情并不生气，反而带着微笑，所以反差感强，适合表达\"心累但还得保持礼貌\"的情绪。\n\n**查来源的办法**\n- 用以图搜图（Google Lens、百度识图、TinEye）。\n- 在小红书、B站或微博搜\"黄色小人 扶额 表情包\"。\n- 去 Know Your Meme 搜 \"yellow blob facepalm\" 或 \"yellow creature hand on forehead\"。\n\n如果你记得这张图是在哪个视频、游戏或动画里看到的，告诉我，我可以帮你一起推断。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 12.2,
+    "tokens": {
+      "input": 932,
+      "cached_input": 0,
+      "cache_write": 930,
+      "output": 932,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0131756,
+    "tools_used": [],
+    "cost_usd": 0.0131756,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 930,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 932,
+      "output_tokens_details": {
+        "thinking_tokens": 489
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 930,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 932,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 930,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 930
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:44:45Z",
+    "finished_at": "2026-10-25T00:44:57Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "imagegen/chatgpt-image/reference/frog__r1.json",
+  "target_sha256": "475e41894e85ac3615f199b64200925609afe9b26bbb3ea669121c6cf1505a36",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "473f269d1ad8389c",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/chatgpt-image/reference/frog__r1/exec-f4548837-8d8b-4d60-accc-12567db903a8.png"
+  ],
+  "track": "imagegen",
+  "model": "chatgpt-image",
+  "traits": {
+    "pose": 2,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 2,
+    "vibe": 1
+  },
+  "identity": 2,
+  "failure_modes": [],
+  "rationale": "A faithful frog adaptation that copies the reference's hunched belly-clutching pose, arc eyes, pear body, belly patch, render style and background. The mouth lacks the teeth and manic gape, which softens the unhinged meme energy toward cuteness.",
+  "raw": "- **Pose:** The frog stands with its torso hunched forward and its knees bent, as if doubled over laughing. Rating: **match**\n- **Hands on belly:** Both green webbed hands with toe-pad fingertips press on the belly. Rating: **match**\n- **Eyes:** The eyes are squeezed shut into thin curved arcs on raised frog eye bumps. Rating: **match**\n- **Mouth:** The mouth is large and open with a dark interior and a pink tongue. There are no visible teeth, and it reads as a happy laugh rather than the reference's hysterical teeth-bared gape. Rating: **partial**\n- **Body:** The body is bulky and pear-shaped, the head merges into the torso with no neck, and the limbs are short and thick. Rating: **match**\n- **Belly patch:** A pale cream oval belly patch stands out against the green body. Rating: **match**\n- **Render:** It is a glossy 3D CG render with soft studio lighting. Rating: **match**\n- **Background:** The background is plain white to light grey with no props. Rating: **match**\n- **Vibe:** The pose carries the meme energy, but the softer, friendly expression makes it more cute than unhinged. Rating: **partial**\n- **Identity:** The frog is clearly recognizable from its green coloring, top-set eye bumps, wide frog mouth, and webbed toe-pad hands and feet. Rating: **clearly**\n\n{\"traits\": {\"pose\": \"match\", \"hands_on_belly\": \"match\", \"eyes\": \"match\", \"mouth\": \"partial\", \"body\": \"match\", \"belly_patch\": \"match\", \"render\": \"match\", \"background\": \"match\", \"vibe\": \"partial\"}, \"identity\": \"clearly\", \"failure_modes\": [], \"rationale\": \"A faithful frog adaptation that copies the reference's hunched belly-clutching pose, arc eyes, pear body, belly patch, render style and background. The mouth lacks the teeth and manic gape, which softens the unhinged meme energy toward cuteness.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 11.3,
+    "tokens": {
+      "input": 4464,
+      "cached_input": 0,
+      "cache_write": 4462,
+      "output": 986,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0557659,
+    "tools_used": [],
+    "cost_usd": 0.0557659,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 4462,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 986,
+      "output_tokens_details": {
+        "thinking_tokens": 312
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 4462,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 986,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 4462,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 4462
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-05T04:03:59Z",
+    "finished_at": "2026-11-05T04:04:10Z",
+    "revision": "aa69823+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

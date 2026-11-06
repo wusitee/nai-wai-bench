@@ -1,0 +1,93 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6-astra/write_prompt_zh.giraffe__r1.json",
+  "target_sha256": "32538ab9b6fec72a1650c3eee718d1f9aa7b75e2dd60beb28f4a880c4fd93ff5",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "b9a13bbe827679dd",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 1,
+    "background": 0,
+    "vibe": 2,
+    "identity": 2
+  },
+  "hallucinations": [
+    "身体后倾、胖肚子挺起的姿势与躯干前屈、略微屈膝的捧腹大笑姿势相矛盾。",
+    "鲜明的细长脖子与参考要求的头身相连、无明显脖子相矛盾。",
+    "绿色草地背景与参考要求的纯白或浅灰色无场景背景相矛盾。"
+  ],
+  "rationale": "准确描述了眯眼狂笑、失控的喜剧气质及可辨认的长颈鹿特征，但姿势和背景明显偏离参考。前蹄仅收在胸腹前，未明确捧腹；嘴部缺少牙齿，身体缺少浅色椭圆腹斑，渲染虽为光滑低成本三维质感，却采用日光而非柔和棚光。",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":1,\"body\":1,\"belly_patch\":0,\"render\":1,\"background\":0,\"vibe\":2,\"identity\":2},\"hallucinations\":[\"身体后倾、胖肚子挺起的姿势与躯干前屈、略微屈膝的捧腹大笑姿势相矛盾。\",\"鲜明的细长脖子与参考要求的头身相连、无明显脖子相矛盾。\",\"绿色草地背景与参考要求的纯白或浅灰色无场景背景相矛盾。\"],\"rationale\":\"准确描述了眯眼狂笑、失控的喜剧气质及可辨认的长颈鹿特征，但姿势和背景明显偏离参考。前蹄仅收在胸腹前，未明确捧腹；嘴部缺少牙齿，身体缺少浅色椭圆腹斑，渲染虽为光滑低成本三维质感，却采用日光而非柔和棚光。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719f-e398-7620-8ff5-e01c83d4eebb",
+    "seconds": 22.5,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12853,
+      "cached_input_tokens": 3968,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 557,
+      "reasoning_output_tokens": 303
+    },
+    "tokens": {
+      "input": 12853,
+      "cached_input": 3968,
+      "cache_write": 0,
+      "output": 557,
+      "reasoning": 303
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:54:26Z",
+    "finished_at": "2026-10-25T05:54:48Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

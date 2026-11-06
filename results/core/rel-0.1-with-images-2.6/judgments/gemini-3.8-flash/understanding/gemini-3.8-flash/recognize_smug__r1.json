@@ -1,0 +1,74 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/gemini-3.8-flash/recognize_smug__r1.json",
+  "target_sha256": "1876316bb8f70ed9455c09dbec9e2a6f7fe294a13bd3684f0b249ec9e8426550",
+  "settings_id": "c5b99b49261f87dd",
+  "input_names": "neutral",
+  "judge_prompt": "ced19d40802234c0",
+  "judge_images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "scores": {
+    "base_character": 1,
+    "identifies_meme": 1
+  },
+  "hallucinations": [
+    "Claiming the image is a screenshot taken directly from the official Nailong animation."
+  ],
+  "rationale": "The response identifies the base character but misses the specific mutated meme family, incorrectly claiming the unofficial image is an official animation screenshot.",
+  "raw": "```json\n{\n  \"scores\": {\n    \"base_character\": 1,\n    \"identifies_meme\": 1\n  },\n  \"hallucinations\": [\n    \"Claiming the image is a screenshot taken directly from the official Nailong animation.\"\n  ],\n  \"rationale\": \"The response identifies the base character but misses the specific mutated meme family, incorrectly claiming the unofficial image is an official animation screenshot.\"\n}\n```",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 23.6,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 16967,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:03:10Z",
+    "finished_at": "2026-10-25T02:03:34Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

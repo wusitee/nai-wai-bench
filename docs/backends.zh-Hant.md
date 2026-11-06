@@ -68,6 +68,10 @@ ACP 或 pi 無法設定或確認請求的等級時呼叫失敗；API 不支援 e
 （`$CODEX_HOME/sessions/**/rollout-*-<thread>.jsonl`），在 `meta.audit` 中記錄 `image_gen` 的呼叫次數，
 以及每次呼叫收到的提示詞是否未被改動。`reference` 檔位的提示詞會用 `--image` 附上原圖。
 
+該工具沒有模型參數：Codex（至少到 0.168 預發佈版）請求的都是 `gpt-image-2`，背後實際用哪個圖像模型由 OpenAI 服務決定。
+工具結果和圖片的 C2PA 憑證（`ChatGPT` / `gpt-image`）都不寫實際模型或變體，因此圖像模型的版本只能按採集日期和
+Codex 版本（`meta.client`）區分。
+
 如果圖像工具的結果回報 `moderation_blocked`，表示服務商的安全系統拒絕了請求或生成結果。此時樣本記錄為 `refused`，不含圖片，而不是記錄為錯誤。拒絕生成屬於模型的結果：不會自動重試（`--force` 會重新生成），且只要提示詞核對為原樣傳遞，它在排名題組中記 0 分。
 
 ## Claude（`backend = "claude"`）

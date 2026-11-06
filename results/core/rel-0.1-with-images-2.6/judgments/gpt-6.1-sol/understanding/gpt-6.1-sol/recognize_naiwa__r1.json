@@ -1,0 +1,87 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6.1-sol/recognize_naiwa__r1.json",
+  "target_sha256": "b74ee4128ae8603d473460709677462b473c8c61e5cec95fb9af1e1c5d531155",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "9c125eb36f9c8b93",
+  "judge_images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "将图中角色断言为“3D 小黄鸟”；实际是奶龙的蛙状变异版本“奶蛙”。"
+  ],
+  "rationale": "回答未识别奶龙，也未指出大笑奶龙／变异奶龙梗家族或“奶蛙”身份。对正式名称和梗归属明确表示不确定不算幻觉，但“小黄鸟”的肯定描述错误。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"naiwa\":0},\"hallucinations\":[\"将图中角色断言为“3D 小黄鸟”；实际是奶龙的蛙状变异版本“奶蛙”。\"],\"rationale\":\"回答未识别奶龙，也未指出大笑奶龙／变异奶龙梗家族或“奶蛙”身份。对正式名称和梗归属明确表示不确定不算幻觉，但“小黄鸟”的肯定描述错误。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a171a0-ae0e-7901-8f0d-c0f1ae765a71",
+    "seconds": 13.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12156,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 174,
+      "reasoning_output_tokens": 52
+    },
+    "tokens": {
+      "input": 12156,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 174,
+      "reasoning": 52
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:55:17Z",
+    "finished_at": "2026-10-25T05:55:31Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

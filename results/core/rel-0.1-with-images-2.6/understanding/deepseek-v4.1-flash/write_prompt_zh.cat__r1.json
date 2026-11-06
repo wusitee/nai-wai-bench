@@ -1,0 +1,76 @@
+{
+  "settings_id": "f54f604c4f61c57e",
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "vendor": "deepseek",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "生成一张正方形表情包插画，画的是猫版的“大笑奶龙”：一只奶黄色、圆滚滚、胖得像汤圆的小猫，保留猫的圆三角耳、三根细胡须和上翘尾巴，但身体比例像奶龙——大头、小短身、几乎没脖子、短短的前爪和后腿；全身光滑奶黄色，肚皮和嘴周为浅奶油白，耳内和脸颊带淡粉色。它正在魔性大笑：眼睛眯成两条弯弯的“><”弧线，嘴巴夸张地张到极大、几乎占满下半张脸，露出上排几颗方形白牙和粉色舌头，笑到脑袋后仰、身体歪向一侧，脸颊鼓鼓，一只前爪捧着圆肚皮，另一只前爪开心举起，后腿蹬地。正面偏侧、近景居中构图，角色占画面大部分，白色粗贴纸描边和轻微投影，背景为干净的浅奶油色纯色；采用3D卡通或潮玩盲盒质感，圆润软胶材质，柔和明亮棚拍光，高饱和暖色，呆萌、夸张、魔性、适合微信表情包；不要龙角、龙翼、鳞片，不要写实猫毛，不要复杂背景，不要文字、水印、logo、多余角色。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+    "stop_reason": "end_turn",
+    "client": "deepseek-harness-acp 0.0.1",
+    "seconds": 31.2,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+      "reasoning_effort": "high"
+    },
+    "resolved_model": "[\"deepseek-official\",\"deepseek-flash\"]",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 3557,
+        "size": 1000000
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-flash-default.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53",
+      "config/dsh-flash-default.patch.yml": "e681660b1857478d"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:43:00Z",
+    "finished_at": "2026-10-25T00:43:31Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}
