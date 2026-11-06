@@ -255,8 +255,8 @@ collect with `--jobs 1`.
 ### Zhipu GLM (`glm-5.3-flash-pi`)
 
 `glm-5.3-flash-pi` runs GLM-5.3-Flash through pi's built-in `zai-coding-cn` provider (the open.bigmodel.cn
-GLM Coding Plan endpoint, key in `ZAI_CODING_CN_API_KEY`), so no `models.json` entry is needed. pi's catalog
-lists GLM-5.3-Flash as the only GLM-5.3 model with image input, and maps `effort = "high"` to
+GLM Coding Plan endpoint, key in `ZAI_CODING_CN_API_KEY`), so no `models.json` entry is needed. In that
+provider's catalog GLM-5.3-Flash is the only GLM-5.3 model with image input; pi maps `effort = "high"` to
 `reasoning_effort: "high"`. Some vision prompts send the model into very long reasoning that does not
 finish; the entry allows 900 seconds per call, and timed-out samples are retried on the next run.
 

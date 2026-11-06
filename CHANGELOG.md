@@ -10,9 +10,9 @@ Software releases use semantic versions; suite ids version the evaluation panels
   Release sites open with the index and write `index.json`; suite pages move to `meme-id/` and
   `visual-detail/`, and `naihub-v1/` redirects. Image generation moves to an experimental section outside
   the index.
-- Add GLM-5.3-Flash, the GLM-5.3 model with image input, run through pi's built-in `zai-coding-cn` provider at
-  high effort (`glm-5.3-flash-pi`), and select it in the 0.1.0 comparison through `rel-0.1-with-glm-5.3-flash`
-  and `rel-0.1-naihub-with-glm-5.3-flash`; earlier rows are unchanged.
+- Add GLM-5.3-Flash, the GLM Coding Plan's GLM-5.3 model with image input, run through pi's built-in
+  `zai-coding-cn` provider at high effort (`glm-5.3-flash-pi`), and select it in the 0.1.0 comparison through
+  `rel-0.1-with-glm-5.3-flash` and `rel-0.1-naihub-with-glm-5.3-flash`; earlier rows are unchanged.
 - Add egg-alpha, an undisclosed preview model on the TokenRhythm router, run through pi at high effort, and
   select it in the 0.1.0 comparison through `rel-0.1-with-egg-alpha` and `rel-0.1-naihub-with-egg-alpha`;
   earlier rows are unchanged. The pi backend now resends provider-rate-limited (HTTP 429) prompts after the

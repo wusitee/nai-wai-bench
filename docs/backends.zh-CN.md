@@ -133,8 +133,8 @@ pi 配置的等级；实际等级记录在 `meta.session_config`。如需干净�
 ### 智谱 GLM（`glm-5.3-flash-pi`）
 
 `glm-5.3-flash-pi` 通过 pi 内置的 `zai-coding-cn` 供应商（open.bigmodel.cn 的 GLM Coding Plan 接口，密钥
-读取 `ZAI_CODING_CN_API_KEY`）运行 GLM-5.3-Flash，无需在 `models.json` 中声明。pi 的模型目录中，GLM-5.3
-系列只有 GLM-5.3-Flash 支持图片输入；`effort = "high"` 会作为 `reasoning_effort: "high"` 发送。部分视觉
+读取 `ZAI_CODING_CN_API_KEY`）运行 GLM-5.3-Flash，无需在 `models.json` 中声明。在该供应商的模型目录
+中，GLM-5.3 系列只有 GLM-5.3-Flash 支持图片输入；`effort = "high"` 会作为 `reasoning_effort: "high"` 发送。部分视觉
 提示词会让模型陷入很长且不收敛的推理；该条目每次调用最多等待 900 秒，超时的样本会在下次运行时重试。
 
 ## ACP Agent（`backend = "acp"`）
