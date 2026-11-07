@@ -84,6 +84,8 @@ not significance claims or subscription bills. See the [methodology](docs/method
 - [Release workflow](docs/releases.md): pinned comparison inputs, offline builds, raw bundles, and publishing
 - [Visual detail set (Nai-hub v1)](docs/naihub-eval-set.md): the 24-image answer-keyed panel with
   no-image controls and eight transfer references (`--suite naihub-v1`)
+- [Experimental frontend track](docs/frontend.md): models rebuild GIFs as SVG or three.js pages,
+  rendered in a sandboxed browser, gate-checked, and reviewed by people in a gallery (`nwb frontend`)
 - [Benchmark design](docs/design.md): items, tiers, rubrics, scoring, results site, and run layout
 - [Evaluation methodology](docs/methodology.md): research basis, budget, controls, and limitations
 - [Optional state transfer](docs/design.md#optional-state-transfer): transfer angry, facepalm, and smug
