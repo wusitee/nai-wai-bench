@@ -1,0 +1,32 @@
+{
+  "settings_id": "c5b99b49261f87dd",
+  "track": "imagegen",
+  "model": "gemini-image",
+  "vendor": "google",
+  "tier": "described_brief",
+  "animal": "frog",
+  "rep": 1,
+  "prompt": "A 3D cartoon frog doubled over with laughter, clutching its belly, on a plain white background.",
+  "reference": false,
+  "error": "BackendError: agent produced no image: The image generation tool call failed due to a quota exhaustion error:\n\n- **What blocked the operation:**\n  The `generate_image` tool returned:\n  `GenerateContent failed: Error 429, Message: You have exhausted your capacity on this model. Your quota will reset after 26m30s., Status: RESOURCE_EXHAUST",
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:51:10Z",
+    "finished_at": "2026-10-25T05:51:41Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

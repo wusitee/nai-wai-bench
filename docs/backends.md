@@ -126,6 +126,11 @@ pass the benchmark prompt to the tool verbatim; images are copied from
 were made and whether each received the prompt unchanged. Reference-tier prompts attach the reference image
 with `--image`.
 
+The tool has no model parameter: Codex (through at least 0.168 prereleases) requests `gpt-image-2`, and
+OpenAI's service chooses the image model behind it. Neither the tool result nor the image's C2PA credentials
+(`ChatGPT` / `gpt-image`) name the effective model or variant, so an image-model version is identified only
+by collection date and Codex version (`meta.client`).
+
 When the image tool's result reports `moderation_blocked`, the provider's safety system rejected the
 request or its output. The sample is then recorded with `refused` and no images instead of an error.
 A refusal is a model outcome: it is not retried automatically (`--force` regenerates it), and when its
@@ -251,6 +256,16 @@ accepts images and `reasoning_effort`; its Anthropic endpoint rejects the model.
 With `thinkingFormat = "openai"`, pi sends its thinking level as `reasoning_effort`, so `effort = "high"`
 applies. The router rate-limits bursts with HTTP 429 (`MODEL_CALL_FAILED`, with `retryAfterSeconds`), so
 collect with `--jobs 1`.
+
+### Zhipu GLM (`glm-5.3-flash-pi`)
+
+`glm-5.3-flash-pi` runs GLM-5.3-Flash through pi's built-in `zai-coding-cn` provider (the open.bigmodel.cn
+GLM Coding Plan endpoint, key in `ZAI_CODING_CN_API_KEY`), so no `models.json` entry is needed. In that
+provider's catalog GLM-5.3-Flash is the only GLM-5.3 model with image input; pi maps `effort = "high"` to
+`reasoning_effort: "high"`. Some vision prompts send the model into very long reasoning that does not
+finish; the entry allows 900 seconds per call, and timed-out samples are retried on the next run.
+The entry's token prices are estimates from pi-ai 1.5.0's model catalog, rather than independently
+verified official rates; Coding Plan subscriptions are not billed per token.
 
 ## ACP agents (`backend = "acp"`)
 

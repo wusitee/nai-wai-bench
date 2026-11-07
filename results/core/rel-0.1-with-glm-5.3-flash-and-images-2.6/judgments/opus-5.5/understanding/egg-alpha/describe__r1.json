@@ -1,0 +1,114 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/egg-alpha/describe__r1.json",
+  "target_sha256": "6fa2c1f7076ab5e91e25e05dd51639ed9aba44d2417aae5c2c84343882d55103",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "cf015a19069709cc",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "egg-alpha",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 1,
+    "render": 2,
+    "background": 2,
+    "vibe": 0
+  },
+  "hallucinations": [
+    "States confidently that the body leans backward (重心后仰), with the head tilted up, chin raised and belly thrust forward. The reference shows the torso hunched forward and doubled over.",
+    "Describes the style as cute, kawaii-leaning (偏萌系表情包, 憨傻喜庆). The reference's vibe is absurd, unhinged 抽象 meme energy, not merely cute."
+  ],
+  "rationale": "The eyes, 3D glossy render and plain white background are described correctly. The core pose is reversed (leaning back instead of doubled over), hands on the belly appear only as a hedged option, the mouth and body descriptions are only partly right (pink interior, unsure about teeth, big head instead of a neckless merged body), and the vibe is misread as cute.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 2, \"mouth\": 1, \"body\": 1, \"belly_patch\": 1, \"render\": 2, \"background\": 2, \"vibe\": 0}, \"hallucinations\": [\"States confidently that the body leans backward (重心后仰), with the head tilted up, chin raised and belly thrust forward. The reference shows the torso hunched forward and doubled over.\", \"Describes the style as cute, kawaii-leaning (偏萌系表情包, 憨傻喜庆). The reference's vibe is absurd, unhinged 抽象 meme energy, not merely cute.\"], \"rationale\": \"The eyes, 3D glossy render and plain white background are described correctly. The core pose is reversed (leaning back instead of doubled over), hands on the belly appear only as a hedged option, the mouth and body descriptions are only partly right (pink interior, unsure about teeth, big head instead of a neckless merged body), and the vibe is misread as cute.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.309",
+    "seconds": 12.3,
+    "tokens": {
+      "input": 2603,
+      "cached_input": 0,
+      "cache_write": 2601,
+      "output": 967,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.04049,
+    "tools_used": [],
+    "cost_usd": 0.04049,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2601,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 967,
+      "output_tokens_details": {
+        "thinking_tokens": 627
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2601,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 967,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2601,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2601
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-04T05:49:42Z",
+    "finished_at": "2026-11-04T05:49:54Z",
+    "revision": "44479d0",
+    "nwb_version": "0.1.0"
+  }
+}

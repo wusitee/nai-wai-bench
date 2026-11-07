@@ -1,0 +1,103 @@
+{
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "opus-5.5",
+  "vendor": "anthropic",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "说实话，我**无法确定**这个角色的具体名字和出处，不想乱编一个给你。\n\n**我能确定的是：**\n- 这是一个**3D 渲染的卡通形象**：通体黄色、梨形（上窄下宽）的软糯身体，米色大肚皮，绿色圆眼睛，嘴角带一点淡淡的微笑，**双手抱胸**。\n- 作为表情包，它通常表达**淡定、自信、得意、\"我早就知道了\"或\"我看你怎么解释\"**之类的情绪。抱胸加平静微笑的组合，很适合用来表示\"稳如老狗\"\"胸有成竹\"\"静静看你表演\"。\n\n**我不确定的是：**\n- 它最初来自哪部动画、短片、游戏或哪位 3D 艺术家的作品；\n- 它具体对应哪一个网络梗，以及梗的名字。\n\n如果你知道它在哪个平台流行（比如抖音、B站、TikTok、Reddit），或者记得配套的文字或台词，可以告诉我，我可以帮你一起分析。你也可以用以图搜图（例如 Google 识图、百度识图）找到它的原始出处。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 16.1,
+    "tokens": {
+      "input": 944,
+      "cached_input": 0,
+      "cache_write": 942,
+      "output": 1018,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0281116,
+    "tools_used": [],
+    "cost_usd": 0.0281116,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 942,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1018,
+      "output_tokens_details": {
+        "thinking_tokens": 616
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 942,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1018,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 942,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 942
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:43:07Z",
+    "finished_at": "2026-10-25T00:43:23Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

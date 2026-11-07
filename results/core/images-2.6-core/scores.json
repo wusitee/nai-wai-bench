@@ -1,0 +1,1320 @@
+{
+  "nwb_version": "0.1.0",
+  "stale_judgments": {
+    "total": 0,
+    "reasons": {}
+  },
+  "suite": "core",
+  "judges": [
+    "opus-5.5"
+  ],
+  "judge_health": {
+    "opus-5.5": {
+      "imagegen": {
+        "n": 29,
+        "spread": 27.152712640836814,
+        "deviation": null
+      }
+    }
+  },
+  "understanding": {},
+  "state_understanding": {},
+  "imagegen": {
+    "chatgpt-images-2.6": {
+      "overall": 60.15151515151515,
+      "tiers": {
+        "described_brief": {
+          "overall": 75.37878787878788,
+          "style": 75.37878787878788,
+          "n": 6
+        },
+        "described_detailed": {
+          "overall": 89.77272727272727,
+          "style": 89.77272727272727,
+          "n": 6
+        },
+        "name_en": {
+          "overall": 33.90151515151515,
+          "style": 36.36363636363637,
+          "n": 6
+        },
+        "name_zh": {
+          "overall": 31.25,
+          "style": 34.090909090909086,
+          "n": 6
+        },
+        "reference": {
+          "overall": 70.45454545454545,
+          "style": 70.45454545454545,
+          "n": 6
+        }
+      },
+      "animals": {
+        "cat": 72.72727272727272,
+        "elephant": 58.409090909090914,
+        "frog": 69.54545454545455,
+        "giraffe": 61.81818181818183,
+        "octopus": 54.31818181818183,
+        "panda": 44.090909090909086
+      },
+      "knowledge_ratio": 0.36286919831223624,
+      "knowledge_animals": 6,
+      "identity": 1.9310344827586208,
+      "traits": {
+        "pose": 0.8275862068965517,
+        "hands_on_belly": 1.3448275862068966,
+        "eyes": 1.7586206896551724,
+        "mouth": 1.4482758620689655,
+        "body": 1.6206896551724137,
+        "belly_patch": 1.5862068965517242,
+        "render": 1.4827586206896552,
+        "background": 1.1379310344827587,
+        "vibe": 0.7931034482758621
+      },
+      "failure_modes": {
+        "realistic_animal": 1,
+        "generic_cute": 11,
+        "text_or_watermark": 1,
+        "multiple_subjects": 1
+      },
+      "not_verbatim": 0,
+      "n": 30
+    }
+  },
+  "samples": {
+    "understanding": [],
+    "imagegen": [
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "described_brief",
+        "animal": "cat",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/described_brief/cat__r1.json",
+        "prompt": "A 3D cartoon cat doubled over with laughter, clutching its belly, on a plain white background.",
+        "images": [
+          "imagegen/chatgpt-images-2.6/described_brief/cat__r1/exec-93556a04-8b02-4df2-b2b4-26ff82a751b7.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 84.0909090909091,
+        "overall": 84.0909090909091,
+        "per_judge": {
+          "opus-5.5": 84.0909090909091
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 2.0,
+          "hands_on_belly": 2.0,
+          "eyes": 2.0,
+          "mouth": 2.0,
+          "body": 1.0,
+          "belly_patch": 1.0,
+          "render": 2.0,
+          "background": 1.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [],
+        "rationales": {
+          "opus-5.5": "The image captures the meme's core pose, belly-clutching, closed eyes and huge laughing mouth on a clearly identifiable tabby cat in 3D. It loses points for keeping normal cat proportions instead of the bean body, for the yellow emphasis marks, and for a cuter, more polished feel than the reference's unhinged energy."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "described_brief",
+        "animal": "elephant",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/described_brief/elephant__r1.json",
+        "prompt": "A 3D cartoon elephant doubled over with laughter, clutching its belly, on a plain white background.",
+        "images": [
+          "imagegen/chatgpt-images-2.6/described_brief/elephant__r1/exec-ac318c32-7e69-47bb-b21f-39339ca7d585.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 77.27272727272727,
+        "overall": 77.27272727272727,
+        "per_judge": {
+          "opus-5.5": 77.27272727272727
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 2.0,
+          "hands_on_belly": 2.0,
+          "eyes": 2.0,
+          "mouth": 1.0,
+          "body": 1.0,
+          "belly_patch": 0.0,
+          "render": 2.0,
+          "background": 2.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [],
+        "rationales": {
+          "opus-5.5": "The image nails the doubled-over, belly-clutching, squeezed-eye laugh pose on a clearly recognizable elephant against a white background. It loses points for the missing pale belly patch, an elephant-shaped rather than bean-shaped body, a pink rather than dark mouth, and a polished cute feel instead of the meme's unhinged energy."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "described_brief",
+        "animal": "frog",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/described_brief/frog__r1.json",
+        "prompt": "A 3D cartoon frog doubled over with laughter, clutching its belly, on a plain white background.",
+        "images": [
+          "imagegen/chatgpt-images-2.6/described_brief/frog__r1/exec-0e446a05-3610-49b2-bc6e-92b01caa4ecc.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 72.72727272727273,
+        "overall": 72.72727272727273,
+        "per_judge": {
+          "opus-5.5": 72.72727272727273
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 1.0,
+          "hands_on_belly": 2.0,
+          "eyes": 2.0,
+          "mouth": 1.0,
+          "body": 1.0,
+          "belly_patch": 2.0,
+          "render": 2.0,
+          "background": 2.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [],
+        "rationales": {
+          "opus-5.5": "A clearly recognizable 3D frog clutching its belly with squeezed-shut eyes and a huge laughing mouth on white, but the forward hunch is mild, the mouth lacks the dark interior and teeth, the slender frog limbs lose the bulky bean shape, and the tone is cute rather than unhinged."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "described_brief",
+        "animal": "giraffe",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/described_brief/giraffe__r1.json",
+        "prompt": "A 3D cartoon giraffe doubled over with laughter, clutching its belly, on a plain white background.",
+        "images": [
+          "imagegen/chatgpt-images-2.6/described_brief/giraffe__r1/exec-a595b928-5178-4a3f-83cc-6283bbcba826.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 72.72727272727273,
+        "overall": 72.72727272727273,
+        "per_judge": {
+          "opus-5.5": 72.72727272727273
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 2.0,
+          "hands_on_belly": 2.0,
+          "eyes": 2.0,
+          "mouth": 1.0,
+          "body": 0.0,
+          "belly_patch": 2.0,
+          "render": 1.0,
+          "background": 2.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [],
+        "rationales": {
+          "opus-5.5": "The pose, belly-clutching, shut eyes and white background match the meme well, and the giraffe is unmistakable. However, it keeps a slender long-necked anatomy instead of Nailong's bulky neckless bean body, and its polished Pixar render and pink mouth feel more charming than unhinged."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "described_brief",
+        "animal": "octopus",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/described_brief/octopus__r1.json",
+        "prompt": "A 3D cartoon octopus doubled over with laughter, clutching its belly, on a plain white background.",
+        "images": [
+          "imagegen/chatgpt-images-2.6/described_brief/octopus__r1/exec-9e238b85-b219-42cf-bf2a-cb70da36f93b.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 59.09090909090909,
+        "overall": 59.09090909090909,
+        "per_judge": {
+          "opus-5.5": 59.09090909090909
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 0.0,
+          "hands_on_belly": 2.0,
+          "eyes": 2.0,
+          "mouth": 1.0,
+          "body": 1.0,
+          "belly_patch": 0.0,
+          "render": 2.0,
+          "background": 2.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [],
+        "rationales": {
+          "opus-5.5": "A clearly recognizable octopus laughing with closed-arc eyes and arms clutching its belly on a white background in glossy 3D, but it leans back instead of being doubled over, has no pale belly patch, and reads as a cute emoji rather than the unhinged Nailong meme."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "described_brief",
+        "animal": "panda",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/described_brief/panda__r1.json",
+        "prompt": "A 3D cartoon giant panda doubled over with laughter, clutching its belly, on a plain white background.",
+        "images": [
+          "imagegen/chatgpt-images-2.6/described_brief/panda__r1/exec-527e8698-37bf-4f34-b0cb-730590ef99c7.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 86.36363636363636,
+        "overall": 86.36363636363636,
+        "per_judge": {
+          "opus-5.5": 86.36363636363636
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 2.0,
+          "hands_on_belly": 2.0,
+          "eyes": 2.0,
+          "mouth": 2.0,
+          "body": 2.0,
+          "belly_patch": 1.0,
+          "render": 1.0,
+          "background": 2.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [],
+        "rationales": {
+          "opus-5.5": "The image faithfully reproduces the meme's hunched, belly-clutching, eyes-shut, gaping-mouth pose on a clearly recognizable panda. However, the plush, high-end fur render and cuter tone lose some of the reference's glossy, cheap, unhinged meme feel."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "described_detailed",
+        "animal": "cat",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/described_detailed/cat__r1.json",
+        "prompt": "A 3D-rendered cartoon cat character that looks like a still from a cheap, smooth CG animation. Pose: standing with the torso hunched forward and knees slightly bent, doubled over with laughter, both hands pressed on its round belly. Face: eyes squeezed shut into thin curved arcs; an enormous gaping mouth that takes up most of the face, showing a dark throat, a row of small teeth, and a tongue. Body: bulky pear-shaped body with no neck, the small head merging straight into the torso; short thick arms and legs, small simple hands, and a pale oval belly patch. Rendering: smooth, seamless, slightly glossy matte-plastic skin with no fur strands or fine texture, so the cat's fur, markings, and colors appear only as smooth color patches on the sculpted surface; soft diffuse studio lighting with gentle shadows; simple shading like a low-budget AI-generated 3D model; slightly soft focus like a compressed video screenshot. Background: plain white to light grey and empty. Keep the cat clearly recognizable from its head shape, ears, snout, and coloring.",
+        "images": [
+          "imagegen/chatgpt-images-2.6/described_detailed/cat__r1/exec-42eca1fa-a71d-42e7-a613-cb8e5b6dda8b.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 93.18181818181819,
+        "overall": 93.18181818181819,
+        "per_judge": {
+          "opus-5.5": 93.18181818181819
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 2.0,
+          "hands_on_belly": 2.0,
+          "eyes": 2.0,
+          "mouth": 2.0,
+          "body": 2.0,
+          "belly_patch": 2.0,
+          "render": 2.0,
+          "background": 2.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [],
+        "rationales": {
+          "opus-5.5": "A faithful cat adaptation of Laughing Nailong: the pose, belly-clutching, arc eyes, gaping mouth, belly patch, render and background all match, with clear orange-tabby identity. The somewhat cuter, more polished look slightly softens the absurd meme vibe."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "described_detailed",
+        "animal": "elephant",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/described_detailed/elephant__r1.json",
+        "prompt": "A 3D-rendered cartoon elephant character that looks like a still from a cheap, smooth CG animation. Pose: standing with the torso hunched forward and knees slightly bent, doubled over with laughter, both hands pressed on its round belly. Face: eyes squeezed shut into thin curved arcs; an enormous gaping mouth that takes up most of the face, showing a dark throat, a row of small teeth, and a tongue. Body: bulky pear-shaped body with no neck, the small head merging straight into the torso; short thick arms and legs, small simple hands, and a pale oval belly patch. Rendering: smooth, seamless, slightly glossy matte-plastic skin with no fur strands or fine texture, so the elephant's fur, markings, and colors appear only as smooth color patches on the sculpted surface; soft diffuse studio lighting with gentle shadows; simple shading like a low-budget AI-generated 3D model; slightly soft focus like a compressed video screenshot. Background: plain white to light grey and empty. Keep the elephant clearly recognizable from its head shape, ears, snout, and coloring.",
+        "images": [
+          "imagegen/chatgpt-images-2.6/described_detailed/elephant__r1/exec-49c5fe1f-aad4-44af-8e7e-7694015a0a2e.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 84.0909090909091,
+        "overall": 84.0909090909091,
+        "per_judge": {
+          "opus-5.5": 84.0909090909091
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 1.0,
+          "hands_on_belly": 2.0,
+          "eyes": 2.0,
+          "mouth": 2.0,
+          "body": 2.0,
+          "belly_patch": 2.0,
+          "render": 2.0,
+          "background": 2.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [],
+        "rationales": {
+          "opus-5.5": "A clearly recognizable elephant that reproduces the meme's belly-clutching, arc-eyed, gaping-mouth laugh in a smooth CG style on a plain background. However, the head tilts back rather than doubling over, and the overall feel is cuter and less absurd than the reference."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "described_detailed",
+        "animal": "frog",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/described_detailed/frog__r1.json",
+        "prompt": "A 3D-rendered cartoon frog character that looks like a still from a cheap, smooth CG animation. Pose: standing with the torso hunched forward and knees slightly bent, doubled over with laughter, both hands pressed on its round belly. Face: eyes squeezed shut into thin curved arcs; an enormous gaping mouth that takes up most of the face, showing a dark throat, a row of small teeth, and a tongue. Body: bulky pear-shaped body with no neck, the small head merging straight into the torso; short thick arms and legs, small simple hands, and a pale oval belly patch. Rendering: smooth, seamless, slightly glossy matte-plastic skin with no fur strands or fine texture, so the frog's fur, markings, and colors appear only as smooth color patches on the sculpted surface; soft diffuse studio lighting with gentle shadows; simple shading like a low-budget AI-generated 3D model; slightly soft focus like a compressed video screenshot. Background: plain white to light grey and empty. Keep the frog clearly recognizable from its head shape, ears, snout, and coloring.",
+        "images": [
+          "imagegen/chatgpt-images-2.6/described_detailed/frog__r1/exec-78d54ea5-b8ce-4d60-8474-49c9a2da2741.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 93.18181818181819,
+        "overall": 93.18181818181819,
+        "per_judge": {
+          "opus-5.5": 93.18181818181819
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 2.0,
+          "hands_on_belly": 2.0,
+          "eyes": 2.0,
+          "mouth": 2.0,
+          "body": 2.0,
+          "belly_patch": 2.0,
+          "render": 2.0,
+          "background": 2.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [],
+        "rationales": {
+          "opus-5.5": "A faithful frog adaptation of Laughing Nailong, matching the pose, belly clutch, arc eyes, giant mouth, body shape and render. It leans slightly cuter and more polished than the reference's absurd, unhinged energy."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "described_detailed",
+        "animal": "giraffe",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/described_detailed/giraffe__r1.json",
+        "prompt": "A 3D-rendered cartoon giraffe character that looks like a still from a cheap, smooth CG animation. Pose: standing with the torso hunched forward and knees slightly bent, doubled over with laughter, both hands pressed on its round belly. Face: eyes squeezed shut into thin curved arcs; an enormous gaping mouth that takes up most of the face, showing a dark throat, a row of small teeth, and a tongue. Body: bulky pear-shaped body with no neck, the small head merging straight into the torso; short thick arms and legs, small simple hands, and a pale oval belly patch. Rendering: smooth, seamless, slightly glossy matte-plastic skin with no fur strands or fine texture, so the giraffe's fur, markings, and colors appear only as smooth color patches on the sculpted surface; soft diffuse studio lighting with gentle shadows; simple shading like a low-budget AI-generated 3D model; slightly soft focus like a compressed video screenshot. Background: plain white to light grey and empty. Keep the giraffe clearly recognizable from its head shape, ears, snout, and coloring.",
+        "images": [
+          "imagegen/chatgpt-images-2.6/described_detailed/giraffe__r1/exec-306d5f9a-bd62-4ac3-9e00-0e60a5f4bc7c.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 84.0909090909091,
+        "overall": 84.0909090909091,
+        "per_judge": {
+          "opus-5.5": 84.0909090909091
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 1.0,
+          "hands_on_belly": 2.0,
+          "eyes": 2.0,
+          "mouth": 2.0,
+          "body": 2.0,
+          "belly_patch": 2.0,
+          "render": 2.0,
+          "background": 2.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [],
+        "rationales": {
+          "opus-5.5": "A clearly recognizable giraffe adapted well to the Nailong body, belly-clutch, closed-eye and gaping-mouth template on a plain background. The head tilts back instead of doubling over, and the polished cute finish softens the absurd meme energy."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "described_detailed",
+        "animal": "octopus",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/described_detailed/octopus__r1.json",
+        "prompt": "A 3D-rendered cartoon octopus character that looks like a still from a cheap, smooth CG animation. Pose: standing with the torso hunched forward and knees slightly bent, doubled over with laughter, both hands pressed on its round belly. Face: eyes squeezed shut into thin curved arcs; an enormous gaping mouth that takes up most of the face, showing a dark throat, a row of small teeth, and a tongue. Body: bulky pear-shaped body with no neck, the small head merging straight into the torso; short thick arms and legs, small simple hands, and a pale oval belly patch. Rendering: smooth, seamless, slightly glossy matte-plastic skin with no fur strands or fine texture, so the octopus's fur, markings, and colors appear only as smooth color patches on the sculpted surface; soft diffuse studio lighting with gentle shadows; simple shading like a low-budget AI-generated 3D model; slightly soft focus like a compressed video screenshot. Background: plain white to light grey and empty. Keep the octopus clearly recognizable from its head shape, ears, snout, and coloring.",
+        "images": [
+          "imagegen/chatgpt-images-2.6/described_detailed/octopus__r1/exec-3747e957-9509-43d4-abb0-a058e6d44235.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 100.0,
+        "overall": 100.0,
+        "per_judge": {
+          "opus-5.5": 100.0
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 2.0,
+          "hands_on_belly": 2.0,
+          "eyes": 2.0,
+          "mouth": 2.0,
+          "body": 2.0,
+          "belly_patch": 2.0,
+          "render": 2.0,
+          "background": 2.0,
+          "vibe": 2.0
+        },
+        "failure_modes": [],
+        "rationales": {
+          "opus-5.5": "The image faithfully recreates the Laughing Nailong pose, expression, body shape, belly patch and CG render on a plain background. Purple coloring and prominent suckered tentacles make the octopus identity clear."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "described_detailed",
+        "animal": "panda",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/described_detailed/panda__r1.json",
+        "prompt": "A 3D-rendered cartoon giant panda character that looks like a still from a cheap, smooth CG animation. Pose: standing with the torso hunched forward and knees slightly bent, doubled over with laughter, both hands pressed on its round belly. Face: eyes squeezed shut into thin curved arcs; an enormous gaping mouth that takes up most of the face, showing a dark throat, a row of small teeth, and a tongue. Body: bulky pear-shaped body with no neck, the small head merging straight into the torso; short thick arms and legs, small simple hands, and a pale oval belly patch. Rendering: smooth, seamless, slightly glossy matte-plastic skin with no fur strands or fine texture, so the giant panda's fur, markings, and colors appear only as smooth color patches on the sculpted surface; soft diffuse studio lighting with gentle shadows; simple shading like a low-budget AI-generated 3D model; slightly soft focus like a compressed video screenshot. Background: plain white to light grey and empty. Keep the giant panda clearly recognizable from its head shape, ears, snout, and coloring.",
+        "images": [
+          "imagegen/chatgpt-images-2.6/described_detailed/panda__r1/exec-3dd748f1-35a6-4b80-9bd9-ae4b5878002c.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 84.0909090909091,
+        "overall": 84.0909090909091,
+        "per_judge": {
+          "opus-5.5": 84.0909090909091
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 1.0,
+          "hands_on_belly": 2.0,
+          "eyes": 2.0,
+          "mouth": 2.0,
+          "body": 2.0,
+          "belly_patch": 2.0,
+          "render": 2.0,
+          "background": 2.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [],
+        "rationales": {
+          "opus-5.5": "A clearly recognizable panda that reproduces the meme's paws-on-belly, shut-eyed, gaping-mouth laugh in a matching smooth CG style on a plain background. The forward hunch is milder than the reference and the overall feel leans cute rather than unhinged."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "name_en",
+        "animal": "cat",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/name_en/cat__r1.json",
+        "prompt": "Generate an image: a cat version of the Chinese internet meme \"Laughing Nailong\".",
+        "images": [
+          "imagegen/chatgpt-images-2.6/name_en/cat__r1/exec-bafbc094-08d2-403a-af3b-0dc06140b75b.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 43.18181818181818,
+        "overall": 43.18181818181818,
+        "per_judge": {
+          "opus-5.5": 43.18181818181818
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 0.0,
+          "hands_on_belly": 1.0,
+          "eyes": 2.0,
+          "mouth": 1.0,
+          "body": 2.0,
+          "belly_patch": 1.0,
+          "render": 0.0,
+          "background": 0.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [
+          "realistic_animal"
+        ],
+        "rationales": {
+          "opus-5.5": "A clearly recognizable chubby golden cat laughing with shut-arc eyes, but it is a photorealistic animal in a room, leaning back and pointing instead of hunched over clutching its belly in the glossy 3D meme style."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "name_en",
+        "animal": "elephant",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/name_en/elephant__r1.json",
+        "prompt": "Generate an image: a elephant version of the Chinese internet meme \"Laughing Nailong\".",
+        "images": [
+          "imagegen/chatgpt-images-2.6/name_en/elephant__r1/exec-2ec6ec35-fd74-4351-b555-9a37a879135b.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 34.09090909090909,
+        "overall": 34.09090909090909,
+        "per_judge": {
+          "opus-5.5": 34.09090909090909
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 0.0,
+          "hands_on_belly": 0.0,
+          "eyes": 0.0,
+          "mouth": 1.0,
+          "body": 2.0,
+          "belly_patch": 1.0,
+          "render": 2.0,
+          "background": 0.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [
+          "generic_cute"
+        ],
+        "rationales": {
+          "opus-5.5": "A clearly identifiable chubby 3D elephant with a fitting body and render, but it lacks the meme's defining hunched belly-clutching pose, squeezed-shut eyes and gaping laugh, and it sits on a scene background. It reads as a cute, smug cartoon, not Laughing Nailong."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "name_en",
+        "animal": "frog",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/name_en/frog__r1.json",
+        "prompt": "Generate an image: a frog version of the Chinese internet meme \"Laughing Nailong\".",
+        "images": [
+          "imagegen/chatgpt-images-2.6/name_en/frog__r1/exec-10aa6d94-972a-452a-b3e2-1799ea8bd331.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 50.0,
+        "overall": 50.0,
+        "per_judge": {
+          "opus-5.5": 50.0
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 0.0,
+          "hands_on_belly": 1.0,
+          "eyes": 2.0,
+          "mouth": 1.0,
+          "body": 2.0,
+          "belly_patch": 2.0,
+          "render": 1.0,
+          "background": 0.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [
+          "generic_cute"
+        ],
+        "rationales": {
+          "opus-5.5": "A clearly recognizable chubby frog with arc eyes and a pale belly, but it leans back pointing instead of hunching over clutching its belly with both hands. It sits in a blurred indoor scene with a polished, cute animated-film look rather than the meme's unhinged studio-render style."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "name_en",
+        "animal": "giraffe",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/name_en/giraffe__r1.json",
+        "prompt": "Generate an image: a giraffe version of the Chinese internet meme \"Laughing Nailong\".",
+        "images": [
+          "imagegen/chatgpt-images-2.6/name_en/giraffe__r1/exec-0c813db5-c86a-4769-93f5-9282610d806e.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 43.18181818181818,
+        "overall": 43.18181818181818,
+        "per_judge": {
+          "opus-5.5": 43.18181818181818
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 0.0,
+          "hands_on_belly": 1.0,
+          "eyes": 2.0,
+          "mouth": 1.0,
+          "body": 2.0,
+          "belly_patch": 2.0,
+          "render": 1.0,
+          "background": 0.0,
+          "vibe": 0.0
+        },
+        "failure_modes": [
+          "generic_cute"
+        ],
+        "rationales": {
+          "opus-5.5": "A clearly recognizable chubby giraffe with closed-arc eyes and a pale belly, but it leans back instead of doubling over, sits in an indoor scene, and reads as a cute plush character rather than the unhinged laughing meme."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "name_en",
+        "animal": "octopus",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/name_en/octopus__r1.json",
+        "prompt": "Generate an image: a octopus version of the Chinese internet meme \"Laughing Nailong\".",
+        "images": [
+          "imagegen/chatgpt-images-2.6/name_en/octopus__r1/exec-f463ea72-61d3-4832-8f73-67460df80687.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 29.545454545454547,
+        "overall": 14.772727272727273,
+        "per_judge": {
+          "opus-5.5": 14.772727272727273
+        },
+        "identity": 1.0,
+        "traits": {
+          "pose": 0.0,
+          "hands_on_belly": 0.0,
+          "eyes": 0.0,
+          "mouth": 1.0,
+          "body": 1.0,
+          "belly_patch": 1.0,
+          "render": 2.0,
+          "background": 0.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [
+          "generic_cute"
+        ],
+        "rationales": {
+          "opus-5.5": "A cute yellow 3D octopus with a smug open-mouthed grin, seated in a room scene. It misses the meme's hunched belly-clutching pose, squeezed-shut eyes, hysterical gaping mouth and plain background."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "name_en",
+        "animal": "panda",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/name_en/panda__r1.json",
+        "prompt": "Generate an image: a giant panda version of the Chinese internet meme \"Laughing Nailong\".",
+        "images": [
+          "imagegen/chatgpt-images-2.6/name_en/panda__r1/exec-c671c555-df86-4e38-9612-d1680f7198c8.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 18.181818181818183,
+        "overall": 18.181818181818183,
+        "per_judge": {
+          "opus-5.5": 18.181818181818183
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 0.0,
+          "hands_on_belly": 0.0,
+          "eyes": 0.0,
+          "mouth": 1.0,
+          "body": 1.0,
+          "belly_patch": 1.0,
+          "render": 1.0,
+          "background": 0.0,
+          "vibe": 0.0
+        },
+        "failure_modes": [
+          "generic_cute"
+        ],
+        "rationales": {
+          "opus-5.5": "A clearly recognizable, high-quality cute CG panda with an open-mouthed grin, but it lacks the meme's doubled-over belly-clutching pose, squeezed-shut eyes, plain backdrop, and unhinged laughing energy."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "name_zh",
+        "animal": "cat",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/name_zh/cat__r1.json",
+        "prompt": "生成一张图片：猫版的大笑奶龙（奶蛙）。",
+        "images": [
+          "imagegen/chatgpt-images-2.6/name_zh/cat__r1/exec-17062ffb-66e3-4dbd-8020-0768f18487bf.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 43.18181818181818,
+        "overall": 43.18181818181818,
+        "per_judge": {
+          "opus-5.5": 43.18181818181818
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 0.0,
+          "hands_on_belly": 1.0,
+          "eyes": 2.0,
+          "mouth": 1.0,
+          "body": 2.0,
+          "belly_patch": 2.0,
+          "render": 1.0,
+          "background": 0.0,
+          "vibe": 0.0
+        },
+        "failure_modes": [
+          "generic_cute"
+        ],
+        "rationales": {
+          "opus-5.5": "A clearly recognizable chubby tabby cat with closed-arc eyes, a big open mouth and a Nailong-like body and belly patch, but it stands upright instead of hunching, its paws don't clutch its belly, and the scenic background and kawaii polish replace the meme's unhinged laughing energy."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "name_zh",
+        "animal": "elephant",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/name_zh/elephant__r1.json",
+        "prompt": "生成一张图片：大象版的大笑奶龙（奶蛙）。",
+        "images": [
+          "imagegen/chatgpt-images-2.6/name_zh/elephant__r1/exec-ceed5900-6ebc-44b6-8dba-97c95a285c12.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 34.09090909090909,
+        "overall": 17.045454545454547,
+        "per_judge": {
+          "opus-5.5": 17.045454545454547
+        },
+        "identity": 1.0,
+        "traits": {
+          "pose": 0.0,
+          "hands_on_belly": 0.0,
+          "eyes": 2.0,
+          "mouth": 1.0,
+          "body": 2.0,
+          "belly_patch": 2.0,
+          "render": 1.0,
+          "background": 0.0,
+          "vibe": 0.0
+        },
+        "failure_modes": [
+          "generic_cute"
+        ],
+        "rationales": {
+          "opus-5.5": "A polished, cute yellow elephant with closed-arc eyes and a belly patch, but it lacks the hunched belly-clutching pose, the dark toothy hysterical mouth, the plain background and the absurd meme vibe. The elephant features are clear, but the coloring stays Nailong-yellow."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "name_zh",
+        "animal": "frog",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/name_zh/frog__r1.json",
+        "prompt": "生成一张图片：青蛙版的大笑奶龙（奶蛙）。",
+        "images": [
+          "imagegen/chatgpt-images-2.6/name_zh/frog__r1/exec-0e6babaa-57bb-41b3-9571-efbef154fa31.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 38.63636363636363,
+        "overall": 38.63636363636363,
+        "per_judge": {
+          "opus-5.5": 38.63636363636363
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 0.0,
+          "hands_on_belly": 1.0,
+          "eyes": 1.0,
+          "mouth": 1.0,
+          "body": 2.0,
+          "belly_patch": 2.0,
+          "render": 1.0,
+          "background": 0.0,
+          "vibe": 0.0
+        },
+        "failure_modes": [
+          "generic_cute",
+          "text_or_watermark"
+        ],
+        "rationales": {
+          "opus-5.5": "The image is a clearly identifiable, chubby green frog with a pale belly, but it is a cute Pixar-style cheer in an outdoor scene. It lacks the hunched, belly-clutching, eyes-shut hysterical laugh and the absurd meme vibe of 大笑奶龙."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "name_zh",
+        "animal": "giraffe",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/name_zh/giraffe__r1.json",
+        "prompt": "生成一张图片：长颈鹿版的大笑奶龙（奶蛙）。",
+        "images": [
+          "imagegen/chatgpt-images-2.6/name_zh/giraffe__r1/exec-de8203a3-afd4-40f1-a3d3-ec58461db75f.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 29.545454545454547,
+        "overall": 29.545454545454547,
+        "per_judge": {
+          "opus-5.5": 29.545454545454547
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 0.0,
+          "hands_on_belly": 0.0,
+          "eyes": 2.0,
+          "mouth": 1.0,
+          "body": 1.0,
+          "belly_patch": 2.0,
+          "render": 1.0,
+          "background": 0.0,
+          "vibe": 0.0
+        },
+        "failure_modes": [
+          "generic_cute"
+        ],
+        "rationales": {
+          "opus-5.5": "A clearly recognizable, cute 3D giraffe with closed-arc eyes and a belly patch, but it lacks the hunched belly-clutching pose, the dark toothy hysterical mouth, the plain background and the unhinged meme vibe. It reads as a generic happy kawaii character rather than 大笑奶龙."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "name_zh",
+        "animal": "octopus",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/name_zh/octopus__r1.json",
+        "prompt": "生成一张图片：章鱼版的大笑奶龙（奶蛙）。",
+        "images": [
+          "imagegen/chatgpt-images-2.6/name_zh/octopus__r1/exec-d6a2e281-98cc-4856-b42d-13c1ba6591a0.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 27.272727272727273,
+        "overall": 27.272727272727273,
+        "per_judge": {
+          "opus-5.5": 27.272727272727273
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 0.0,
+          "hands_on_belly": 0.0,
+          "eyes": 2.0,
+          "mouth": 1.0,
+          "body": 1.0,
+          "belly_patch": 1.0,
+          "render": 1.0,
+          "background": 0.0,
+          "vibe": 0.0
+        },
+        "failure_modes": [
+          "generic_cute",
+          "multiple_subjects"
+        ],
+        "rationales": {
+          "opus-5.5": "The image is a clearly recognizable yellow octopus with closed arc eyes and an open laughing mouth, but it is a generic cute Pixar-style character in an underwater scene. It lacks the hunched belly-clutching pose, dark toothy mouth, plain background and absurd meme energy of 大笑奶龙."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "name_zh",
+        "animal": "panda",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/name_zh/panda__r1.json",
+        "prompt": "生成一张图片：熊猫版的大笑奶龙（奶蛙）。",
+        "images": [
+          "imagegen/chatgpt-images-2.6/name_zh/panda__r1/exec-e498febc-ee6f-4d70-b4e5-f05784fb2c3e.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 31.818181818181817,
+        "overall": 31.818181818181817,
+        "per_judge": {
+          "opus-5.5": 31.818181818181817
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 0.0,
+          "hands_on_belly": 0.0,
+          "eyes": 2.0,
+          "mouth": 1.0,
+          "body": 2.0,
+          "belly_patch": 1.0,
+          "render": 1.0,
+          "background": 0.0,
+          "vibe": 0.0
+        },
+        "failure_modes": [
+          "generic_cute"
+        ],
+        "rationales": {
+          "opus-5.5": "The image is clearly a giant panda with a chubby neckless body and closed laughing eyes. However, it is a sitting, polished kawaii panda in a bamboo scene, missing the hunched standing pose, belly-clutching, dark gaping mouth, plain background and unhinged meme vibe."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "reference",
+        "animal": "cat",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/reference/cat__r1.json",
+        "prompt": "参考这张图，画一个同样风格的猫版本。",
+        "images": [
+          "imagegen/chatgpt-images-2.6/reference/cat__r1/exec-5948c6fd-27c2-471d-92fb-deb2d27db042.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 100.0,
+        "overall": 100.0,
+        "per_judge": {
+          "opus-5.5": 100.0
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 2.0,
+          "hands_on_belly": 2.0,
+          "eyes": 2.0,
+          "mouth": 2.0,
+          "body": 2.0,
+          "belly_patch": 2.0,
+          "render": 2.0,
+          "background": 2.0,
+          "vibe": 2.0
+        },
+        "failure_modes": [],
+        "rationales": {
+          "opus-5.5": "A faithful cat adaptation of Laughing Nailong: it keeps the hunched belly-clutching pose, shut arc eyes, giant open mouth, bean body with pale belly, and white CG backdrop, while turning the body into a clearly recognizable orange tabby. The fur texture makes it slightly cuter and less glossy than the reference, but the meme's core traits are all present."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "reference",
+        "animal": "elephant",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/reference/elephant__r1.json",
+        "prompt": "参考这张图，画一个同样风格的大象版本。",
+        "images": [
+          "imagegen/chatgpt-images-2.6/reference/elephant__r1/exec-8ab4ab06-3326-4506-850a-bfdff9bd18ee.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 79.54545454545455,
+        "overall": 79.54545454545455,
+        "per_judge": {
+          "opus-5.5": 79.54545454545455
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 1.0,
+          "hands_on_belly": 2.0,
+          "eyes": 2.0,
+          "mouth": 2.0,
+          "body": 2.0,
+          "belly_patch": 2.0,
+          "render": 1.0,
+          "background": 2.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [],
+        "rationales": {
+          "opus-5.5": "A clearly recognizable elephant that carries over the belly-clutching, shut-eyed, open-mouthed laugh, the pear body and the pale belly patch on a white background. However, it stands upright instead of doubled over, and its polished matte render feels more cute than unhinged meme."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "reference",
+        "animal": "frog",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/reference/frog__r1.json",
+        "prompt": "参考这张图，画一个同样风格的青蛙版本。",
+        "images": [
+          "imagegen/chatgpt-images-2.6/reference/frog__r1/exec-3d54a871-68c9-48aa-aa68-7babc2f560fb.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 93.18181818181819,
+        "overall": 93.18181818181819,
+        "per_judge": {
+          "opus-5.5": 93.18181818181819
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 2.0,
+          "hands_on_belly": 2.0,
+          "eyes": 2.0,
+          "mouth": 2.0,
+          "body": 2.0,
+          "belly_patch": 2.0,
+          "render": 2.0,
+          "background": 2.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [],
+        "rationales": {
+          "opus-5.5": "A faithful frog adaptation of the Laughing Nailong meme: pose, belly clutch, closed-arc eyes, giant laughing mouth, body shape, belly patch, render and background all carry over, with clear frog coloring and spots. Only the vibe is slightly tamer and more polished than the original's unhinged energy."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "reference",
+        "animal": "giraffe",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/reference/giraffe__r1.json",
+        "prompt": "参考这张图，画一个同样风格的长颈鹿版本。",
+        "images": [
+          "imagegen/chatgpt-images-2.6/reference/giraffe__r1/exec-0956572e-4b10-4393-8681-28ff13c8e0f7.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 79.54545454545455,
+        "overall": 79.54545454545455,
+        "per_judge": {
+          "opus-5.5": 79.54545454545455
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 1.0,
+          "hands_on_belly": 2.0,
+          "eyes": 2.0,
+          "mouth": 2.0,
+          "body": 1.0,
+          "belly_patch": 2.0,
+          "render": 2.0,
+          "background": 2.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [],
+        "rationales": {
+          "opus-5.5": "A clearly recognizable giraffe that captures the belly-clutching, eyes-shut, wide-mouthed laugh on a plain background in glossy 3D. It loses points for the head-back rather than hunched-forward pose, a distinct neck, and a cuter, more polished feel than the reference's absurd meme energy."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "reference",
+        "animal": "octopus",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/reference/octopus__r1.json",
+        "prompt": "参考这张图，画一个同样风格的章鱼版本。",
+        "images": [
+          "imagegen/chatgpt-images-2.6/reference/octopus__r1/exec-e6eaba0d-ee83-491c-a933-8a7f81e0c331.png"
+        ],
+        "verbatim": true,
+        "state": "",
+        "refused": false,
+        "style": 70.45454545454545,
+        "overall": 70.45454545454545,
+        "per_judge": {
+          "opus-5.5": 70.45454545454545
+        },
+        "identity": 2.0,
+        "traits": {
+          "pose": 0.0,
+          "hands_on_belly": 2.0,
+          "eyes": 2.0,
+          "mouth": 2.0,
+          "body": 2.0,
+          "belly_patch": 2.0,
+          "render": 1.0,
+          "background": 2.0,
+          "vibe": 1.0
+        },
+        "failure_modes": [],
+        "rationales": {
+          "opus-5.5": "A clearly recognizable octopus Nailong with the right laughing face, belly clutch, belly patch and plain background, but it sits upright instead of doubling over, and the polished, toy-like render softens the absurd meme energy."
+        }
+      },
+      {
+        "model": "chatgpt-images-2.6",
+        "tier": "reference",
+        "animal": "panda",
+        "rep": 1,
+        "target": "imagegen/chatgpt-images-2.6/reference/panda__r1.json",
+        "prompt": "参考这张图，画一个同样风格的熊猫版本。",
+        "images": [],
+        "verbatim": true,
+        "state": "",
+        "refused": true,
+        "style": 0.0,
+        "overall": 0.0,
+        "per_judge": {},
+        "identity": null,
+        "traits": {},
+        "failure_modes": [],
+        "rationales": {}
+      }
+    ]
+  },
+  "leaderboards": {
+    "visual_understanding": [],
+    "imagegen": [
+      {
+        "model": "chatgpt-images-2.6",
+        "rank": 1,
+        "score": 60.15151515151515,
+        "diagnostic_score": 60.15151515151515,
+        "conditions": [],
+        "settings_status": "recorded",
+        "settings_ids": [
+          "45fd827f1214ed0a"
+        ],
+        "collection_profiles": [
+          "Codex legacy-v1"
+        ],
+        "judges": {
+          "opus-5.5": 29
+        },
+        "score_interval": [
+          52.27272727272727,
+          67.46212121212122
+        ],
+        "rank_range": [
+          1,
+          1
+        ],
+        "completed": 30,
+        "required": 30,
+        "repetitions": 1,
+        "status": "complete",
+        "bootstrap": {
+          "resamples": 2000,
+          "seed": 6643,
+          "clusters": 6,
+          "cluster": "animal"
+        },
+        "label": "ChatGPT Images 2.6 (Codex built-in image_gen)"
+      }
+    ]
+  },
+  "collection": {
+    "started_at": "2026-11-05T03:53:00Z",
+    "finished_at": "2026-11-05T04:01:19Z",
+    "revisions": [
+      "aa69823+dirty"
+    ],
+    "dirty": true,
+    "recorded": 59,
+    "tasks": 59,
+    "subject_profiles": {},
+    "judge_profiles": {}
+  },
+  "labels": {
+    "chatgpt-images-2.6": "ChatGPT Images 2.6 (Codex built-in image_gen)"
+  },
+  "efficiency": {
+    "suite": "core",
+    "visual_understanding": {
+      "chatgpt-images-2.6": {
+        "tasks": 0,
+        "token_tasks": 0,
+        "token_totals": {
+          "input": null,
+          "output": null,
+          "reasoning": null,
+          "cached_input": null,
+          "cache_write": null
+        },
+        "token_counts": {
+          "input": 0,
+          "output": 0,
+          "reasoning": 0,
+          "cached_input": 0,
+          "cache_write": 0
+        },
+        "mean_input_tokens": null,
+        "mean_output_tokens": null,
+        "mean_reasoning_tokens": null,
+        "median_seconds": null,
+        "cost_tasks": 0,
+        "mean_cost_usd": null,
+        "estimated_cost_usd": null,
+        "known_cost_usd": null,
+        "reported_cost_usd": null,
+        "price": null
+      }
+    },
+    "imagegen": {
+      "chatgpt-images-2.6": {
+        "tasks": 30,
+        "images": 29,
+        "median_seconds": 33.95
+      }
+    },
+    "whole_run": {
+      "chatgpt-images-2.6": {
+        "understanding": {
+          "tasks": 0,
+          "token_tasks": 0,
+          "token_totals": {
+            "input": null,
+            "output": null,
+            "reasoning": null,
+            "cached_input": null,
+            "cache_write": null
+          },
+          "token_counts": {
+            "input": 0,
+            "output": 0,
+            "reasoning": 0,
+            "cached_input": 0,
+            "cache_write": 0
+          },
+          "mean_input_tokens": null,
+          "mean_output_tokens": null,
+          "mean_reasoning_tokens": null,
+          "median_seconds": null,
+          "cost_tasks": 0,
+          "mean_cost_usd": null,
+          "estimated_cost_usd": null,
+          "known_cost_usd": null,
+          "reported_cost_usd": null,
+          "price": null
+        },
+        "imagegen": {
+          "tasks": 30,
+          "images": 29,
+          "median_seconds": 33.95
+        }
+      }
+    },
+    "judges": {
+      "opus-5.5": {
+        "tasks": 29,
+        "token_tasks": 29,
+        "token_totals": {
+          "input": 131006,
+          "output": 33322,
+          "reasoning": null,
+          "cached_input": 0,
+          "cache_write": 130948
+        },
+        "token_counts": {
+          "input": 29,
+          "output": 29,
+          "reasoning": 0,
+          "cached_input": 29,
+          "cache_write": 29
+        },
+        "mean_input_tokens": 4517.448275862069,
+        "mean_output_tokens": 1149.0344827586207,
+        "mean_reasoning_tokens": null,
+        "median_seconds": 14.0,
+        "cost_tasks": 29,
+        "mean_cost_usd": 0.04556593103448276,
+        "estimated_cost_usd": 1.321412,
+        "known_cost_usd": 1.321412,
+        "reported_cost_usd": 1.7227136,
+        "price": {
+          "input": 4.0,
+          "cached_input": 0.2,
+          "cache_write": 5.0,
+          "output": 20.0,
+          "unit": "USD/1M tokens",
+          "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "as_of": "2026-10-25"
+        }
+      }
+    }
+  }
+}

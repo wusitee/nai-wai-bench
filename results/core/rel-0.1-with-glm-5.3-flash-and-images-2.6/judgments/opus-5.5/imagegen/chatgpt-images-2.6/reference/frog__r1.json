@@ -1,0 +1,116 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "imagegen/chatgpt-images-2.6/reference/frog__r1.json",
+  "target_sha256": "47cad81457736b8fc42db8d0073c6347946407e267cde7828475c84a6b7a8c4f",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "473f269d1ad8389c",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/chatgpt-images-2.6/reference/frog__r1/exec-3d54a871-68c9-48aa-aa68-7babc2f560fb.png"
+  ],
+  "track": "imagegen",
+  "model": "chatgpt-images-2.6",
+  "traits": {
+    "pose": 2,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 2,
+    "vibe": 1
+  },
+  "identity": 2,
+  "failure_modes": [],
+  "rationale": "A faithful frog adaptation of the Laughing Nailong meme: pose, belly clutch, closed-arc eyes, giant laughing mouth, body shape, belly patch, render and background all carry over, with clear frog coloring and spots. Only the vibe is slightly tamer and more polished than the original's unhinged energy.",
+  "raw": "**pose:** The frog stands with knees bent and its torso leaning forward, very close to the reference. The head tilts up slightly instead of down, but it still reads as doubled over with laughter. → match\n\n**hands_on_belly:** Both green hands clutch the center of the belly with fingers interlocking, just like the reference. → match\n\n**eyes:** The eyes are squeezed shut into thin dark curved arcs on raised frog eye bumps. → match\n\n**mouth:** A huge gaping mouth dominates the face, with a dark red interior, visible upper and lower teeth, and a tongue. → match\n\n**body:** The body is bulky and pear-shaped, with no distinct neck because the head merges into the torso, and the limbs are short and thick. → match\n\n**belly_patch:** A pale cream oval belly patch extends up to the throat and contrasts clearly with the green body. → match\n\n**render:** It is a glossy 3D CG render with soft studio lighting. It looks somewhat more polished and Pixar-like than the reference's cheaper look, but it is still clearly in the same mode. → match\n\n**background:** The background is plain white or light grey with no props. → match\n\n**vibe:** The hysterical laughing energy is present, but the polished, smooth look leans a bit cuter and tamer than the reference's unhinged 抽象 feel. → partial\n\n**identity:** The frog is clearly recognizable from its green skin, darker green spots, bulging eye bumps, nostril dots and wide frog mouth. → clearly\n\n**failure modes:** None apply. There is a single subject, no text, and it is not realistic, generic cute, or plain Nailong.\n\n{\"traits\": {\"pose\": \"match\", \"hands_on_belly\": \"match\", \"eyes\": \"match\", \"mouth\": \"match\", \"body\": \"match\", \"belly_patch\": \"match\", \"render\": \"match\", \"background\": \"match\", \"vibe\": \"partial\"}, \"identity\": \"clearly\", \"failure_modes\": [], \"rationale\": \"A faithful frog adaptation of the Laughing Nailong meme: pose, belly clutch, closed-arc eyes, giant laughing mouth, body shape, belly patch, render and background all carry over, with clear frog coloring and spots. Only the vibe is slightly tamer and more polished than the original's unhinged energy.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 14.4,
+    "tokens": {
+      "input": 4464,
+      "cached_input": 0,
+      "cache_write": 4462,
+      "output": 1181,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0595609,
+    "tools_used": [],
+    "cost_usd": 0.0595609,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 4462,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1181,
+      "output_tokens_details": {
+        "thinking_tokens": 430
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 4462,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1181,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 4462,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 4462
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-05T04:00:48Z",
+    "finished_at": "2026-11-05T04:01:03Z",
+    "revision": "aa69823+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

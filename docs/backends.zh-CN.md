@@ -14,6 +14,17 @@ Codex、Claude Code（也可接入其他供应商的 Anthropic 兼容接口）�
 
 理解题的回答为空时会记录为错误，并在下次运行时重试。部分 ACP Agent 在无法连上自己的 API 时，会不输出任何文字就结束回合。
 
+## 收集设置与元数据
+
+`effort` 是各后端共用的配置：Codex 设置 `model_reasoning_effort`，Claude 传入 `--effort`，pi 传入
+`--thinking`，ACP 设置其公布的会话选项（由 `effort_option` 指定，否则使用 `thought_level` 类别）。
+`default` 不设置客户端的 effort 控制；`effort_source = "model-id"` 表示等级包含在模型 id 中。
+ACP 或 pi 无法设置或确认请求的等级时调用失败；API 不支持 effort 控制时也会失败。
+
+样本和评审记录保存 `settings`、`settings_id`、UTC 收集时间、源码修订和版本。命令或设置改变后，
+已成功的记录不能自动覆盖，必须选择新运行或显式使用 `--force`。token、缓存、客户端耗时和费用的
+记录规则，以及 Kimi 的可选 `/usage` 命令，见[英文元数据说明](backends.md#collection-settings-and-metadata)。
+
 ## 模型字段
 
 | 字段 | 含义 |
@@ -23,11 +34,15 @@ Codex、Claude Code（也可接入其他供应商的 Anthropic 兼容接口）�
 | `model` | 传给后端的模型 id（pi：`provider/id`） |
 | `label` | 结果网站中的显示名称（默认使用模型条目名） |
 | `can` | 可包含 `text`、`vision`（接受图片输入）、`image`（生成图片） |
-| `reasoning` | 仅 Codex：`model_reasoning_effort` |
-| `effort` | 仅 Claude：`--effort` 等级 |
+| `effort` | 推理等级；未暴露控制时使用 `default` |
+| `reasoning` | Codex 的旧版 `effort` 别名 |
+| `effort_option` | ACP 的 effort 选项 id，如 `reasoning_effort` 或 `thinking` |
+| `effort_source` | 等级包含在模型 id 中时为 `model-id` |
+| `tool_profile` | 仅 Codex：`legacy-v1` 或 `isolated-v1` 文本／视觉命令配置 |
 | `command` | 仅 ACP：Agent 命令；会展开 `~`、`${VAR}` 和 `${NWB_ROOT}`（仓库根目录） |
 | `env` | ACP、Claude 和 pi：额外的环境变量，展开方式同 `command`；只记录变量名 |
 | `config` | 仅 ACP：要设置的会话配置项，格式为 `{ id = "value" }` |
+| `usage_command` | 仅 ACP：显式启用客户端公布的本地 token 用量命令，目前为 Kimi `/usage` |
 | `auth` | 仅 ACP：每次会话前调用 `authenticate` 所用的认证方式 id |
 | `base_url`、`api_key_env` | 仅 OpenAI：API 基础地址（以 `/v1` 结尾）和存放密钥的环境变量名 |
 | `cc_switch` | OpenAI 和 Claude：从哪个 [CC Switch](https://github.com/farion1231/cc-switch) 供应商读取接口地址和密钥 |
@@ -41,10 +56,21 @@ Codex、Claude Code（也可接入其他供应商的 Anthropic 兼容接口）�
 
 **隔离限制。** `--ignore-user-config` 无法阻止 Codex 加载全局指令（`$CODEX_HOME/AGENTS.md`）和已安装的技能。全新的工作目录能排除仓库上下文，但不能完全清除 Codex 的上下文。需要干净的评测环境时，请使用专用、已登录且不含个人指令和技能的 `CODEX_HOME`。早期试跑样本使用了普通用户目录。
 
+`tool_profile = "legacy-v1"` 保留原始文本／视觉命令，shell、图片查看和 Agent 功能仍可用；
+理解回答中的工具调用仍会使样本失去计分资格。`isolated-v1` 另外关闭这些功能以及插件、技能搜索、
+目标、等待和交互模式功能。图像生成中转不受该区别影响。完整开关列表见
+[英文工具配置说明](backends.md#codex-tool-profiles)。
+当前发布的对比混用了两种配置，模型与收集器的影响无法分离；逐行标签会显示配置。
+受控比较应使用相同配置和新的运行名，见[发布条件](releases.md#selected-comparison)。
+
 **图像生成**（`can = ["image"]`）使用 Codex 内置的 `image_gen` 工具。对话模型会被要求把基准提示词原样
 交给该工具；图片从 `$CODEX_HOME/generated_images/<thread>/` 复制出来。之后评测程序读取会话记录
 （`$CODEX_HOME/sessions/**/rollout-*-<thread>.jsonl`），在 `meta.audit` 中记录 `image_gen` 的调用次数，
 以及每次调用收到的提示词是否未被改动。`reference` 档位的提示词会用 `--image` 附上原图。
+
+该工具没有模型参数：Codex（至少到 0.168 预发布版）请求的都是 `gpt-image-2`，背后实际用哪个图像模型由 OpenAI 服务决定。
+工具结果和图片的 C2PA 凭证（`ChatGPT` / `gpt-image`）都不写实际模型或变体，因此图像模型的版本只能按采集日期和
+Codex 版本（`meta.client`）区分。
 
 如果图像工具的结果报告 `moderation_blocked`，说明服务商的安全系统拒绝了请求或生成结果。此时样本记录为 `refused`，不含图片，而不是记录为错误。拒绝生成属于模型的结果：不会自动重试（`--force` 会重新生成），且只要提示词核对为原样传递，它在排名题组中记 0 分。
 
@@ -107,6 +133,13 @@ pi 配置的等级；实际等级记录在 `meta.session_config`。如需干净�
 设置 `thinkingFormat = "openai"` 后，pi 会把思考等级作为 `reasoning_effort` 发送，因此 `effort = "high"`
 生效。该路由对突发请求限流，返回 HTTP 429（`MODEL_CALL_FAILED`，附 `retryAfterSeconds`），所以请用
 `--jobs 1` 采集。
+
+### 智谱 GLM（`glm-5.3-flash-pi`）
+
+`glm-5.3-flash-pi` 通过 pi 内置的 `zai-coding-cn` 供应商（open.bigmodel.cn 的 GLM Coding Plan 接口，密钥
+读取 `ZAI_CODING_CN_API_KEY`）运行 GLM-5.3-Flash，无需在 `models.json` 中声明。在该供应商的模型目录
+中，GLM-5.3 系列只有 GLM-5.3-Flash 支持图片输入；`effort = "high"` 会作为 `reasoning_effort: "high"` 发送。部分视觉
+提示词会让模型陷入很长且不收敛的推理；该条目每次调用最多等待 900 秒，超时的样本会在下次运行时重试。
 
 ## ACP Agent（`backend = "acp"`）
 

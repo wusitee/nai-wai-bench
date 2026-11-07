@@ -1,0 +1,73 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "recognize_official",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "这张表情包里的角色是**奶龙（Nailong）**——一只圆滚滚的黄色小恐龙/小龙，绿色大眼睛、肚皮发白是它的标志性形象。\n\n**角色背景**：奶龙出自国产3D动画短视频系列《奶龙与小七》，讲的是奶龙和它的好朋友小七（一个蓝色小机器人）的日常故事，最早在抖音等短视频平台连载。\n\n**所属网络梗**：奶龙在2024年前后爆红，成为中文互联网\"抽象文化\"的代表性梗之一，主要包括：\n\n- **\"我是奶龙 / 我才是奶龙\"**：源自网友模仿、争抢\"奶龙身份\"的二创视频，配上奶龙标志性的扭动舞蹈（\"奶龙舞\"），非常魔性。\n- **\"唐龙\"调侃**：因为奶龙表情呆滞、动作憨傻，被网友戏称为\"唐龙\"，用来调侃\"低智但上头\"的内容，常用作阴阳怪气或自嘲的表情包。\n- **阴阳怪气用法**：奶龙一脸无辜、呆萌的表情常被用来表达\"装傻充愣\"\"故意气人\"的情绪，在聊天中广泛使用。\n\n总体来说，它属于2024年中文互联网最火的\"抽象梗\"之一，和\"小马宝莉卡\"\"蛋仔派对\"等一样，是那一波短视频二创文化的代表符号。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 20.2,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20307,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 674,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20981 / 1048576 tokens (2%)\nSession total: 20307 input, 674 output",
+      "usage": {
+        "inputTokens": 20307,
+        "outputTokens": 674
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:44:21Z",
+    "finished_at": "2026-10-25T00:44:41Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

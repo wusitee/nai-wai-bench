@@ -1,0 +1,81 @@
+{
+  "settings_id": "680aa2edad69d268",
+  "track": "understanding",
+  "model": "glm-5.3-flash-pi",
+  "vendor": "zhipu",
+  "item": "write_prompt.giraffe",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a giraffe version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A cute chibi 3D cartoon sticker of a chubby baby giraffe laughing hysterically: comically oversized round head on a tiny plump pear-shaped body, smooth butter-yellow skin with soft orange-brown giraffe patches, two tiny stubby ossicones with rounded tips on top of the head, small floppy ears, blunt rounded snout. Eyes squeezed tightly shut into wide upside-down U-shaped arcs of pure joy, cheeks puffed up. Mouth stretched absurdly wide across the entire lower face in a giant open grin, showing a row of rounded white teeth and a pink tongue, with a single tear of laughter flying off one cheek. Short stubby legs, big round belly, tiny tail with a dark tuft, head tilted slightly back mid-laugh. Clean thick outlines, soft cel shading, flat pale mint-green background, centered composition like a reaction meme sticker, silly exaggerated humor, high resolution, 1:1 aspect ratio.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "zai-coding-cn/glm-5.3-flash",
+    "client": "pi 1.5.0",
+    "seconds": 36.2,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 109,
+      "output": 1234,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1036,
+      "cost": 0.00063335
+    },
+    "tokens": {
+      "input": 109,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1234,
+      "reasoning": 1036
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "zai-coding-cn/glm-5.3-flash",
+    "cost_usd_reported": 0.00063335
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "zai-coding-cn/glm-5.3-flash",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "zai-coding-cn/glm-5.3-flash",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-06T07:12:22Z",
+    "finished_at": "2026-11-06T07:12:58Z",
+    "revision": "ef8832f+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

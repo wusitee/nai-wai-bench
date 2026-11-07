@@ -1,0 +1,88 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6-astra/describe__r1.json",
+  "target_sha256": "268e2cd281780d19363f6206b5799fe29bc0ae639dc8fcbd44e00d6dd8346c82",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "38fa88c9d6e215df",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 1,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 0,
+    "vibe": 0
+  },
+  "hallucinations": [],
+  "rationale": "准确覆盖了圆胖梨形、无明显脖子、短粗四肢和柔光三维塑胶质感；眯眼与巨大张嘴仅部分符合，缺少闭眼弧线及明确的牙齿、舌头细节。未明确描述前倾屈膝站姿、双手捧腹、浅色椭圆腹斑、纯色背景和抽象癫狂感；偏离或缺失的细节均有不确定性说明，不列为幻觉。",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":0,\"eyes\":1,\"mouth\":1,\"body\":2,\"belly_patch\":0,\"render\":2,\"background\":0,\"vibe\":0},\"hallucinations\":[],\"rationale\":\"准确覆盖了圆胖梨形、无明显脖子、短粗四肢和柔光三维塑胶质感；眯眼与巨大张嘴仅部分符合，缺少闭眼弧线及明确的牙齿、舌头细节。未明确描述前倾屈膝站姿、双手捧腹、浅色椭圆腹斑、纯色背景和抽象癫狂感；偏离或缺失的细节均有不确定性说明，不列为幻觉。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719e-c533-75d3-b606-17732c5bbf58",
+    "seconds": 15.0,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12760,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 328,
+      "reasoning_output_tokens": 150
+    },
+    "tokens": {
+      "input": 12760,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 328,
+      "reasoning": 150
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:53:12Z",
+    "finished_at": "2026-10-25T05:53:27Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

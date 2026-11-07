@@ -1,0 +1,84 @@
+{
+  "settings_id": "7e9b52a50fc5ff45",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "egg-alpha",
+  "vendor": "undisclosed",
+  "item": "recognize_variant",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。",
+  "images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "answer": "**我的判断：这张图最像是在模仿经典的\"姚明大笑\"表情包（暴走漫画/Rage Comics 系中的 \"Yao Ming Face\"），并结合了\"笑到捂肚子/笑到肚子疼\"的梗。**\n\n判断依据主要有以下几点：\n\n1. **眼睛的画法**：熊猫的双眼紧闭成两条向下弯的弧线（月牙形），这正是姚明笑脸最标志性的特征——笑到眼睛完全眯成缝。相比之下，另一个常被做成熊猫头的\"金馆长笑\"眼睛是眯着但仍睁开、带贱兮兮的眼神，与图中不符。\n\n2. **嘴部形态**：嘴巴张得极大，露出上排牙齿和舌头，呈放声大笑状。姚明脸的原图就是这种毫无形象管理的开怀大笑，而不是微笑或坏笑。\n\n3. **头部倾斜角度**：头向一侧歪，配合后仰的姿态，还原了姚明在记者会上笑到歪头的那一瞬间的构图感。\n\n4. **双手捂肚子的动作**：这是中文网络语境里\"笑到肚子疼\"\"笑不活了\"\"2333\"的经典肢体表达，进一步强化了\"爆笑\"这一情绪，属于对该梗的夸张化演绎。\n\n5. **载体选择**：用熊猫来承载暴走漫画式的夸张人脸表情，也符合中文互联网\"熊猫头表情包\"的传统——把魔性的人类表情安在熊猫身上。这张 3D 渲染图可以看作是把暴走漫画的简笔画风格\"立体化、萌化\"的版本。\n\n需要说明的是，这类 AI 生成或 3D 化的表情图往往是多个梗的融合体，未必有唯一出处；但从\"闭眼弯月 + 血盆大口狂笑 + 歪头 + 捂肚\"这几个核心视觉要素来看，\"姚明笑\"是匹配度最高的原型。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "client": "pi 1.5.0",
+    "seconds": 21.1,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 715,
+      "output": 1109,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 721,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 715,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1109,
+      "reasoning": 721
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "tokenrhythm/egg-alpha",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "tokenrhythm/egg-alpha",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-04T04:42:28Z",
+    "finished_at": "2026-11-04T04:42:50Z",
+    "revision": "44479d0",
+    "nwb_version": "0.1.0"
+  }
+}

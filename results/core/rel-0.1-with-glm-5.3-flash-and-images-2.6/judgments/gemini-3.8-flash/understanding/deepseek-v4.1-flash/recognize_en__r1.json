@@ -1,0 +1,78 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/deepseek-v4.1-flash/recognize_en__r1.json",
+  "target_sha256": "8370806c34124d404da31fbd0dfac46eb833a5c5059455b418be92b32c91a845",
+  "settings_id": "c5b99b49261f87dd",
+  "input_names": "neutral",
+  "judge_prompt": "ae139857fe4878e6",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "base_character": 1,
+    "identifies_meme": 1,
+    "ai_variant": 1,
+    "aliases": 1,
+    "naiwa": 1
+  },
+  "hallucinations": [
+    "The character is Hariyama, a Fighting-type Pokémon.",
+    "The image is from the 'Hariyama Laughing' / 'Laughing Hariyama' / 'Sumo Laughing' meme."
+  ],
+  "rationale": "The response incorrectly identifies the character as a Pokémon and invents nonexistent meme names.",
+  "raw": "```json\n{\n  \"scores\": {\n    \"base_character\": 1,\n    \"identifies_meme\": 1,\n    \"ai_variant\": 1,\n    \"aliases\": 1,\n    \"naiwa\": 1\n  },\n  \"hallucinations\": [\n    \"The character is Hariyama, a Fighting-type Pokémon.\",\n    \"The image is from the 'Hariyama Laughing' / 'Laughing Hariyama' / 'Sumo Laughing' meme.\"\n  ],\n  \"rationale\": \"The response incorrectly identifies the character as a Pokémon and invents nonexistent meme names.\"\n}\n```",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 26.6,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 16431,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:57:35Z",
+    "finished_at": "2026-10-25T01:58:02Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

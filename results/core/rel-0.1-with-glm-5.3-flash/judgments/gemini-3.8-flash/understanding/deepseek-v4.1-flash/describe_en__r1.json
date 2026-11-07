@@ -1,0 +1,79 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/deepseek-v4.1-flash/describe_en__r1.json",
+  "target_sha256": "dd582aaa524a4b5731a4c4a6ca43e745ba4d5a96ba9f0eadc894a12e7ad5fe60",
+  "settings_id": "c5b99b49261f87dd",
+  "judge_prompt": "72e21cc999f018f5",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "pose": 1,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 2,
+    "vibe": 0
+  },
+  "hallucinations": [
+    "Claiming the character is leaning backward with head tipped up and belly pushed forward, contradicting the hunched/doubled-over pose in the notes.",
+    "Claiming the character has large circular pink blush patches under each eye."
+  ],
+  "rationale": "The model accurately captures the physical anatomy, eyes, mouth, belly patch, and plain background, but misses the hunched-over posture, relegates hands-on-belly to an uncertain alternative, describes a matte toy rather than a glossy render, and frames the aesthetic as cute/kawaii rather than unhinged meme energy.",
+  "raw": "```json\n{\n  \"scores\": {\n    \"pose\": 1,\n    \"hands_on_belly\": 1,\n    \"eyes\": 2,\n    \"mouth\": 2,\n    \"body\": 2,\n    \"belly_patch\": 2,\n    \"render\": 1,\n    \"background\": 2,\n    \"vibe\": 0\n  },\n  \"hallucinations\": [\n    \"Claiming the character is leaning backward with head tipped up and belly pushed forward, contradicting the hunched/doubled-over pose in the notes.\",\n    \"Claiming the character has large circular pink blush patches under each eye.\"\n  ],\n  \"rationale\": \"The model accurately captures the physical anatomy, eyes, mouth, belly patch, and plain background, but misses the hunched-over posture, relegates hands-on-belly to an uncertain alternative, describes a matte toy rather than a glossy render, and frames the aesthetic as cute/kawaii rather than unhinged meme energy.\"\n}\n```",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 37.3,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 18909,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:56:21Z",
+    "finished_at": "2026-10-25T01:56:59Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "settings_id": "548ef2024561e924",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.1",
+  "vendor": "anthropic",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "这张图里的角色应该是网络上很火的「**鹦鹉兄弟**」表情包里的那只黄色鹦鹉。它的特征就是圆滚滚的黄色身体、大大的绿眼圈黑眼珠，还有一副一脸懵、呆滞或偷瞄的神情。\n\n关于这个梗：\n\n- **来源**：「鹦鹉兄弟」出自一部定格（黏土/毛毡质感）动画，里面有两只造型憨厚的鹦鹉，动画截图被网友做成了一大批表情包，大约在 2019 年前后开始在国内社交平台（微博、QQ、微信群等）广泛流传。\n- **常见用法**：这类表情包多用来表达「呆住了」「一脸懵逼」「偷偷看一眼」「震惊但不敢说话」之类的情绪，配文经常是网友自己加的各种吐槽。\n- **这张图的梗**：配字「惊鸿一瞥」本意是形容匆匆一眼就留下深刻印象，这里和鹦鹉斜着眼睛偷瞄的表情形成反差，常用来调侃「偷看一眼」「不小心瞟到了什么」「只看了一眼就被惊到/心动了」的场景，带有明显的搞笑和自嘲意味。\n\n需要说明的是，我没法联网核实，关于原动画的具体名称和首次流行时间可能记得不够精确，但角色归属于「鹦鹉兄弟」系列表情包这一点我比较有把握。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 24.1,
+    "tokens": {
+      "input": 759,
+      "cached_input": 0,
+      "cache_write": 757,
+      "output": 1334,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 0.08186,
+    "tools_used": [],
+    "cost_usd": 0.08186,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 757,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1334,
+      "output_tokens_details": {
+        "thinking_tokens": 811
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 757,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1334,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 757,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 757
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T03:49:41Z",
+    "finished_at": "2026-10-31T03:50:05Z",
+    "revision": "592016c",
+    "nwb_version": "0.1.0"
+  }
+}

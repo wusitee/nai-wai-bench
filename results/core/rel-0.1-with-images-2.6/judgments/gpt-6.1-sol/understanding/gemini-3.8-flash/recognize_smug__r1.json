@@ -1,0 +1,86 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gemini-3.8-flash/recognize_smug__r1.json",
+  "target_sha256": "1876316bb8f70ed9455c09dbec9e2a6f7fe294a13bd3684f0b249ec9e8426550",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "ced19d40802234c0",
+  "judge_images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "scores": {
+    "base_character": 2,
+    "identifies_meme": 0
+  },
+  "hallucinations": [
+    "声称这张图是截取自官方动画中奶龙扬头、半眯眼的瞬间；图中实际是非官方的变异奶龙表情包，原作者及制作方式未知。"
+  ],
+  "rationale": "正确说明了奶龙是国产儿童动画中的黄色、圆滚滚的小恐龙，但未识别出大笑奶龙／变异奶龙／奶蛙梗家族，并错误地将图片来源认定为官方动画截图。",
+  "raw": "{\"scores\":{\"base_character\":2,\"identifies_meme\":0},\"hallucinations\":[\"声称这张图是截取自官方动画中奶龙扬头、半眯眼的瞬间；图中实际是非官方的变异奶龙表情包，原作者及制作方式未知。\"],\"rationale\":\"正确说明了奶龙是国产儿童动画中的黄色、圆滚滚的小恐龙，但未识别出大笑奶龙／变异奶龙／奶蛙梗家族，并错误地将图片来源认定为官方动画截图。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719e-2a84-7ce0-b756-0ed3d26184b8",
+    "seconds": 14.8,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13205,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 183,
+      "reasoning_output_tokens": 52
+    },
+    "tokens": {
+      "input": 13205,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 183,
+      "reasoning": 52
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:52:33Z",
+    "finished_at": "2026-10-25T05:52:47Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

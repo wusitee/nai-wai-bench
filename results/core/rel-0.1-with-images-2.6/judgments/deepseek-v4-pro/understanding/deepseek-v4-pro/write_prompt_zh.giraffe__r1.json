@@ -1,0 +1,87 @@
+{
+  "judge": "deepseek-v4-pro",
+  "judge_vendor": "deepseek",
+  "target": "understanding/deepseek-v4-pro/write_prompt_zh.giraffe__r1.json",
+  "target_sha256": "c5046d8292bd0327b44910cbd14f4f27568dbeec88d1a03a7cc80c19d6dfbe2f",
+  "settings_id": "cefccff5b65c93e5",
+  "judge_prompt": "2a66e2e4151f15ef",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 0,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 2,
+    "vibe": 0,
+    "identity": 2
+  },
+  "hallucinations": [
+    "Long neck (contradicts the reference no-distinct-neck/head-merges-into-torso body shape)"
+  ],
+  "rationale": "The prompt clearly covers the squeezed-shut eyes, huge laughing mouth, 3D cartoon render, plain white background, and giraffe identity, but it omits the hunched doubled-over pose, belly-clutching hands, belly patch, and unhinged abstract vibe, and gives a long neck that conflicts with the noted Nailong body.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 2, \"body\": 0, \"belly_patch\": 0, \"render\": 2, \"background\": 2, \"vibe\": 0, \"identity\": 2}, \"hallucinations\": [\"Long neck (contradicts the reference no-distinct-neck/head-merges-into-torso body shape)\"], \"rationale\": \"The prompt clearly covers the squeezed-shut eyes, huge laughing mouth, 3D cartoon render, plain white background, and giraffe identity, but it omits the hunched doubled-over pose, belly-clutching hands, belly patch, and unhinged abstract vibe, and gives a long neck that conflicts with the noted Nailong body.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "stop_reason": "end_turn",
+    "client": "deepseek-harness-acp 0.0.1",
+    "seconds": 53.9,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+      "reasoning_effort": "high"
+    },
+    "resolved_model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 6948,
+        "size": 1000000
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:55:48Z",
+    "finished_at": "2026-10-25T01:56:42Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}
