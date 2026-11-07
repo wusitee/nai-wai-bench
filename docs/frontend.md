@@ -108,10 +108,23 @@ this corpus; it has its own `nwb frontend` command.
 | `3d-s1` | `frame_00` | Static three.js scene |
 | `3d-s2` | The same model's `3d-s1` page and all eight keyframes with timestamps | Animated three.js scene |
 | `2d-mem`, `3d-mem` | No image: "draw 大笑奶龙 from memory" | Static SVG or three.js scene |
+| `2d-s3`, `3d-s3` | Revision of the same model's step 2 page: the page, its gate results, the eight keyframes, its render at the same times, and for 3D the four harness views | Revised animated page |
+| `2d-mem2`, `3d-mem2` | Revision of the same model's memory page: the page, its gate results, its render, and for 3D the four harness views | Revised static page |
 
-A step 2 sample uses the step 1 sample of the same model and rep, even when step 1 failed its gates;
-its record stores the step 1 sample path, hash, and static gate result under `depends_on`. Recollecting
-step 1 makes its step 2 sample stale: it is ignored by rendering and reports until collected again.
+Each later kind builds on the sample of the same model and rep, even when that sample failed its gates:
+step 2 on step 1, and each revision kind on the page it revises. The record stores the source sample
+path, hash, and static gate result under `depends_on`. Recollecting a sample makes every sample built on
+it, directly or through another sample, stale: they are ignored by rendering, reports, and later
+collection stages until collected again.
+
+The revision kinds give a model one check-and-revise round. The prompt embeds the source task's prompt,
+the page, and its static and runtime gate results; the attachments are the reference keyframes (GIF tasks
+only), the harness's rendered frames, and for 3D the harness views. A page that failed before rendering
+contributes the harness's failure screenshot, if any. The model is shown copies of the rendered images,
+kept in `<kind>__r<rep>.inputs/` beside the revision sample, so later re-renders of the source cannot change
+the record of what it saw; `depends_on` also records the render's harness ID, gate results, and the copies'
+paths and hashes, and a revision whose copies are missing or changed is stale. The model replies with a
+complete page, which is gated like its source kind.
 Memory kinds are independent of the GIF tasks (task id `mem`, 240 × 240); their review checklist is
 `[memory]` in the task manifest, which follows the image-generation traits in `bench/rubric.toml`.
 
@@ -122,8 +135,9 @@ resources or network APIs, no timers or animation frames, at most 256 KB, and no
 console errors. Breaking any rule fails the sample's gates.
 
 - **2D:** one inline `<svg viewBox="0 0 W H">`, one named `<g>` per character with nested named
-  parts; no `<foreignObject>`, `<canvas>`, or nested `<svg>`. Step 1 and memory pages are static (no
-  script, SMIL, CSS animations, or transitions). Step 2 uses exactly one timing method: declarative
+  parts; no `<foreignObject>`, `<canvas>`, or nested `<svg>`. Step 1 and memory pages, including their
+  revisions, are static (no script, SMIL, CSS animations, or transitions). Step 2 and its revision use
+  exactly one timing method: declarative
   animation (CSS, SMIL, or Web Animations), which the harness pauses and seeks, or
   `window.nwb = { render(t) }`. The loop period is the GIF duration D, and t = 0 is `frame_00`.
 - **3D:** a module script importing only `three` and the vendored addons through the harness import
@@ -149,8 +163,10 @@ page and the vendored files is also aborted. Pages never see `file://` URLs. A s
 seconds is killed.
 
 Static gates read the source and are recomputed whenever samples are loaded, so gate fixes apply to
-earlier samples: the HTML block, size, forbidden elements and URLs, the 2D `<svg>` and
-`viewBox`, static-only rules for step 1 and memory pages, and 3D import specifiers. APIs that comments
+earlier samples. A sample whose subject used or requested a tool (`tools_used` or tool permission requests
+in its metadata) fails, as does every sample built on it. Static gates check the HTML block, size,
+forbidden elements and URLs, the 2D `<svg>` and `viewBox`, static-only rules for step 1 and memory pages
+and their revisions, and 3D import specifiers. APIs that comments
 may mention (`fetch`, timers) are checked at runtime instead. Runtime gates fail a sample on:
 
 - requests or WebSockets, CSP violations, page errors, and `console.error`;
@@ -163,7 +179,7 @@ may mention (`fetch`, timers) are checked at runtime instead. Runtime gates fail
   `foreignObject`, `link`, ..., and `canvas` in 2D), including elements created by script, and any
   author shadow root. The DOM is read through the DevTools protocol, which page scripts cannot
   intercept;
-- 2D: animation in a static page, both or neither timing method in step 2, rechecked after every
+- 2D: animation in a static page, both or neither timing method in an animated page, rechecked after every
   render;
 - 3D: `nwb.ready` not true within 20 seconds, a malformed `window.nwb`, a canvas that is not W × H,
   image textures or textures larger than 64 × 64 (material properties and shader uniforms), and
@@ -174,16 +190,16 @@ may mention (`fetch`, timers) are checked at runtime instead. Runtime gates fail
   not modeled; the novel-view checklists also ask about visible depth;
 - determinism: rendering every keyframe time again, in a shuffled order after other renders, changes
   more than 0.1% of pixels;
-- step 2: no keyframe differs from t = 0 by more than 0.5% of pixels, or any keyframe time t and
+- animated kinds (step 2 and its revision): no keyframe differs from t = 0 by more than 0.5% of pixels, or any keyframe time t and
   t + D differ by more than 1%. A motion whose period divides D also passes; reviewers compare
   keyframes.
 
 The renderer writes `frame_NN.png` at each keyframe time (only `frame_00` for static kinds), a 12 fps
-`preview.gif` for step 2, and, for 3D, `view_side`, `view_back`, `view_three_quarter`, and `view_top`
+`preview.gif` for the animated kinds, and, for 3D, `view_side`, `view_back`, `view_three_quarter`, and `view_top`
 at t = 0. Harness cameras orbit the characters' bounding sphere; "front" is the reference camera's
 horizontal direction. For each view, non-character meshes whose bounds block the line of sight to a
 character's center (walls, a room box) stop drawing for that view (characters parented to them still
-draw), and the near plane sits just in front of the sphere; `render.json` lists the hidden meshes. `render.json` records gates and evidence; changing the
+draw), and the near plane sits just in front of the sphere; `render.json` lists the hidden meshes. `render.json` records gates and evidence, and a render whose listed images are missing counts as not rendered; changing the
 renderer or vendored files re-renders every sample.
 
 ## Review
@@ -208,7 +224,10 @@ uv run --extra frontend nwb frontend render --run pilot
 uv run --extra frontend nwb frontend report --run pilot
 ```
 
-`collect` defaults to all tasks and all kinds with one rep; step 1 samples are collected before step 2.
+`collect` defaults to all tasks and all kinds with one rep. It runs in three stages: step 1 and memory
+samples, then step 2, then the revision kinds, after rendering the selected revisions' source samples.
+Renders are serialized across processes by a lock in the run directory. A sample that cannot be collected
+because its source sample or source render is missing counts as a failure.
 Subject calls may take up to 30 minutes. Samples are `runs/<run>/frontend/<model>/<task>/<kind>__r<rep>.json`,
 and renders are in the directory with the same stem. `report` writes `runs/<run>/frontend/summary.json`
 and `gallery.html`. Every stage resumes and skips finished work; `--force` redoes it.

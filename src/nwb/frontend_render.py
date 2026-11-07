@@ -304,7 +304,7 @@ def render_page(html: str, kind: str, width: int, height: int, duration_ms: int,
     from playwright.sync_api import Error as PlaywrightError, sync_playwright
 
     three_d = kind.startswith("3d")
-    animated = kind.endswith("s2")
+    animated = kind.split("-")[1] in ("s2", "s3")
     times = timestamps if animated else [0]
     vendor = vendored_files() if three_d else {}
     document = page_document(html, three_d).encode()
@@ -471,6 +471,11 @@ def render_current(record: dict, render_dir: Path) -> dict | None:
     render = read_json(path)
     if render.get("html_sha256") != record.get("html_sha256") or render.get("harness") != harness_id():
         return None
+    # An interrupted re-render can leave render.json behind without the images it lists.
+    files = [e["file"] for e in render.get("frames", []) + render.get("views", [])]
+    files += [render[k] for k in ("preview", "failed_screenshot") if render.get(k)]
+    if not all((render_dir / f).is_file() for f in files):
+        return None
     return render
 
 
@@ -509,22 +514,37 @@ def render_sample(record: dict, timestamps: list[int], render_dir: Path) -> dict
     return render
 
 
-def render_all(corpus, run_dir: Path, force: bool = False) -> tuple[int, int]:
-    from nwb.frontend import samples, step
+def render_all(corpus, run_dir: Path, force: bool = False, only: set[Path] | None = None) -> tuple[int, int]:
+    """Render samples without a current render (all, or those in `only`). Renders are serialized across
+    processes by a lock in the run directory, and each sample is checked again under the lock."""
+    import fcntl
 
-    todo = [(p, r) for p, r in samples(run_dir) if force or render_current(r, p.with_suffix("")) is None]
+    from nwb.frontend import is_animated, samples
+
+    todo = [(p, r) for p, r in samples(run_dir) if (only is None or p in only)
+            and (force or render_current(r, p.with_suffix("")) is None)]
     print(f"rendering {len(todo)} samples", file=sys.stderr)
     failed = 0
-    for n, (path, record) in enumerate(todo, 1):
-        task = corpus.task(record["task"])
-        timestamps = [f.timestamp_ms for f in task.frames] if step(record["kind"]) == "s2" else [0]
-        try:
-            render = render_sample(record, timestamps, path.with_suffix(""))
-            status = "ok" if not render["gates"] else "GATES " + "; ".join(render["gates"])[:300]
-        except (RuntimeError, ValueError, OSError) as e:
-            failed += 1
-            status = f"ERROR {e}"[:300]
-        print(f"[{n}/{len(todo)}] render {path.relative_to(run_dir).with_suffix('')} {status}", file=sys.stderr)
+    lock_path = run_dir / "frontend" / ".render.lock"
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(lock_path, "w") as lock:
+        for n, (path, record) in enumerate(todo, 1):
+            fcntl.flock(lock, fcntl.LOCK_EX)
+            try:
+                if not force and render_current(record, path.with_suffix("")) is not None:
+                    status = "rendered by another process"
+                else:
+                    task = corpus.task(record["task"])
+                    timestamps = [f.timestamp_ms for f in task.frames] if is_animated(record["kind"]) else [0]
+                    try:
+                        render = render_sample(record, timestamps, path.with_suffix(""))
+                        status = "ok" if not render["gates"] else "GATES " + "; ".join(render["gates"])[:300]
+                    except (RuntimeError, ValueError, OSError) as e:
+                        failed += 1
+                        status = f"ERROR {e}"[:300]
+            finally:
+                fcntl.flock(lock, fcntl.LOCK_UN)
+            print(f"[{n}/{len(todo)}] render {path.relative_to(run_dir).with_suffix('')} {status}", file=sys.stderr)
     return len(todo) - failed, failed
 
 

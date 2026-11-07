@@ -1,8 +1,11 @@
+import json
 import re
+from pathlib import Path
 
 import pytest
 
 from nwb import frontend
+from nwb.backends import Response
 from nwb.config import find_root
 from nwb.util import write_json
 
@@ -60,13 +63,64 @@ for (const x of [-0.5, 0.5]) { const m = new THREE.Mesh(new THREE.PlaneGeometry(
 
 def test_prompts_fill_every_placeholder():
     corpus = frontend.load_corpus(ROOT)
+    revision = {"page": "<html></html>", "gates": ["page errors: x"], "images": "image 1: a render."}
     for kind in frontend.KINDS:
-        task = corpus.memory if kind.endswith("mem") else corpus.task("001")
-        prompt = frontend.subject_prompt(corpus, task, kind, step1="<html></html>")
+        task = corpus.memory if frontend.is_memory(kind) else corpus.task("001")
+        prompt = frontend.subject_prompt(corpus, task, kind, step1="<html></html>", revision=revision)
         assert not re.findall(r"\{[A-Z_0-9]+\}", prompt), kind
         assert f"{task.width}x{task.height}" in prompt
+        if kind in frontend.REVISIONS:
+            assert "- page errors: x" in prompt and "image 1: a render." in prompt
     assert len(frontend.subject_images(corpus.task("001"), "2d-s2")) == 8
     assert frontend.subject_images(corpus.memory, "3d-mem") == []
+
+
+def test_revision_jobs_show_reference_render_and_views(tmp_path, monkeypatch):
+    from nwb import frontend_render
+    from nwb.config import ModelSpec
+
+    corpus = frontend.load_corpus(ROOT)
+    task = corpus.task("001")
+    run = tmp_path / "run"
+    spec = ModelSpec("subject", "claude", "anthropic", "claude-x", frozenset({"vision"}))
+    monkeypatch.setattr(frontend_render, "harness_id", lambda: "h")
+    stem = frontend.sample_stem(run, "subject", "001", "3d-s2", 1)
+    write_json(stem.with_suffix(".json"), {"track": "frontend", "model": "subject", "task": "001", "kind": "3d-s2",
+                                           "rep": 1, "html": three_page(ROUND_CHARACTER), "html_sha256": "x", "width": 240,
+                                           "height": 242})
+    # Without a current render of the source page, the revision waits and counts as blocked.
+    assert frontend.collect_jobs(corpus, [spec], ["001"], ["3d-s3"], 1, run, stage_no=3) == ([], 1)
+    frames = [{"file": f"frame_{i:02d}.png", "t": f.timestamp_ms} for i, f in enumerate(task.frames)]
+    views = [{"file": f"view_{v}.png", "view": v} for v in frontend.VIEWS]
+    for item in frames + views:
+        (stem / item["file"]).parent.mkdir(parents=True, exist_ok=True)
+        (stem / item["file"]).write_bytes(item["file"].encode())
+    write_json(stem / "render.json", {"html_sha256": "x", "harness": "h", "gates": ["does not loop"],
+                                      "frames": frames, "views": views})
+    [job], blocked = frontend.collect_jobs(corpus, [spec], ["001"], ["3d-s3"], 1, run, stage_no=3)
+    assert blocked == 0 and frontend.stage("3d-mem2") == 3
+    assert [Path(p).name for p in job.base["images"]] == [Path(f.image).name for f in task.frames]
+    rendered = job.base["depends_on"]["rendered"]
+    assert [Path(r["file"]).name for r in rendered] == [f["file"] for f in frames] + [v["file"] for v in views]
+    assert job.base["depends_on"]["gates"] == ["does not loop"]
+
+    # The model is shown copies kept with the revision, in reference-then-render order.
+    class Backend:
+        def run(self, req):
+            self.images = req.images
+            return Response(text="```html\n<p>x</p>\n```", meta={})
+    backend = Backend()
+    job.fn(backend=backend)
+    copies = [run / r["file"] for r in rendered]
+    assert backend.images == [f.image for f in task.frames] + copies and all(p.is_file() for p in copies)
+
+    # On resume, lost copies come back from the unchanged source render; a lost source image is a re-render.
+    write_json(job.out, {**job.base, "html": "<p>x</p>"})
+    copies[0].unlink()
+    frontend.collect_jobs(corpus, [spec], ["001"], ["3d-s3"], 1, run, stage_no=3)
+    assert copies[0].read_bytes() == b"frame_00.png"
+    (stem / "view_top.png").unlink()
+    assert frontend_render.render_current(json.loads(stem.with_suffix(".json").read_text()), stem) is None
 
 
 def test_extract_html_uses_last_block():
@@ -187,22 +241,35 @@ scene.add(room); room.add(ch);""")
         assert len(Image.open(tmp_path / f"view_{view}.png").getcolors(240 * 242)) > 50, view
 
 
-def test_summary_recomputes_static_gates_and_drops_stale_step2(tmp_path, monkeypatch):
+def test_summary_recomputes_gates_and_drops_stale_chains(tmp_path, monkeypatch):
     from nwb import frontend_render
 
     corpus = frontend.load_corpus(ROOT)
     run = tmp_path / "run"
     monkeypatch.setattr(frontend_render, "harness_id", lambda: "h")
-    # A stored gate failure from an older checker no longer counts; a runtime gate failure does.
-    for kind, gates in (("2d-s1", []), ("3d-s1", ["window.nwb.ready never became true"])):
+
+    def sample(kind, html, source=None, **extra):
         stem = frontend.sample_stem(run, "subject", "001", kind, 1)
-        write_json(stem.with_suffix(".json"), {"track": "frontend", "model": "subject", "task": "001", "kind": kind,
-                                               "rep": 1, "html": SVG_STATIC, "html_sha256": "x", "width": 240,
-                                               "height": 242, "static_gates": ["non-fragment href"]})
-        write_json(stem / "render.json", {"html_sha256": "x", "harness": "h", "gates": gates})
-    step2 = frontend.sample_stem(run, "subject", "001", "2d-s2", 1).with_suffix(".json")
-    write_json(step2, {"track": "frontend", "model": "subject", "task": "001", "kind": "2d-s2", "rep": 1,
-                       "html": SVG_CSS_LOOP, "width": 240, "height": 242,
-                       "depends_on": {"sample": "frontend/subject/001/2d-s1__r1.json", "sha256": "0" * 64}})
-    result = frontend.summary(corpus, run)
-    assert {s["kind"]: s["status"] for s in result["samples"]} == {"2d-s1": "passed", "3d-s1": "gate failed"}
+        record = {"track": "frontend", "model": "subject", "task": "001", "kind": kind, "rep": 1, "html": html,
+                  "html_sha256": kind, "width": 240, "height": 242, "static_gates": ["non-fragment href"], **extra}
+        if source:
+            path = frontend.sample_stem(run, "subject", "001", source, 1).with_suffix(".json")
+            record["depends_on"] = {"sample": path.relative_to(run).as_posix(),
+                                    "sha256": __import__("hashlib").sha256(path.read_bytes()).hexdigest()}
+        write_json(stem.with_suffix(".json"), record)
+        write_json(stem / "render.json", {"html_sha256": kind, "harness": "h", "gates": []})
+
+    # A stored gate failure from an older checker no longer counts; a runtime gate failure does.
+    sample("3d-s1", SVG_STATIC)
+    write_json(frontend.sample_stem(run, "subject", "001", "3d-s1", 1) / "render.json",
+               {"html_sha256": "3d-s1", "harness": "h", "gates": ["window.nwb.ready never became true"]})
+    # Tool use fails a sample and every sample built on it.
+    sample("2d-s1", SVG_STATIC, meta={"tools_used": ["command_execution"]})
+    sample("2d-s2", SVG_CSS_LOOP, "2d-s1")
+    sample("2d-s3", SVG_CSS_LOOP, "2d-s2")
+    gates = {s["kind"]: s["gates"] for s in frontend.summary(corpus, run)["samples"]}
+    assert gates["2d-s1"] == ["used tools: command_execution"] and gates["2d-s3"] == [frontend.TAINTED]
+    assert any("ready" in g for g in gates["3d-s1"])
+    # Recollecting step 1 makes step 2 and its revision stale.
+    sample("2d-s1", SVG_STATIC)
+    assert {s["kind"] for s in frontend.summary(corpus, run)["samples"]} == {"2d-s1", "3d-s1"}

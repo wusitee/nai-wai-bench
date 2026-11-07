@@ -176,10 +176,17 @@ def cmd_frontend(args, root, models, defaults) -> int:
         if unknown := [k for k in kinds if k not in frontend.KINDS]:
             raise ValueError(f"unknown kind(s) {unknown}; choose from: {', '.join(frontend.KINDS)}")
         ok = failed = 0
-        for second in (False, True):  # step 2 prompts embed the collected step 1 pages
-            jobs = frontend.collect_jobs(corpus, selected, task_ids, kinds, args.reps, run_dir, second_steps=second)
+        for stage_no in (1, 2, 3):  # later prompts embed the collected pages they build on
+            if not any(frontend.stage(k) == stage_no for k in kinds):
+                continue
+            if stage_no == 3:  # revisions are shown the renders of the pages they revise
+                sources = frontend.revision_sources(selected, task_ids, kinds, args.reps, run_dir)
+                failed += frontend_render.render_all(corpus, run_dir, only=sources)[1]
+            jobs, blocked = frontend.collect_jobs(corpus, selected, task_ids, kinds, args.reps, run_dir,
+                                                  stage_no=stage_no)
             done, bad = tracks.run_jobs(jobs, args.jobs, args.force, run_dir=run_dir)
-            ok, failed = ok + done, failed + bad
+            # A sample that cannot be collected because its source is missing counts as a failure.
+            ok, failed = ok + done, failed + bad + blocked
         return _finish(ok, failed)
     if args.action == "render":
         return _finish(*frontend_render.render_all(corpus, run_dir, args.force))
@@ -274,7 +281,9 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--run", default="frontend", help="run name; results go to runs/<run>/ (default: frontend)")
     sp.add_argument("--models", help="collect: comma-separated subject models")
     sp.add_argument("--tasks", default="all", help="collect: 'all' or comma-separated task ids (default: all)")
-    sp.add_argument("--kinds", default="all", help=f"collect: 'all' or comma-separated of {', '.join(('2d-s1', '2d-s2', '3d-s1', '3d-s2', '2d-mem', '3d-mem'))}")
+    sp.add_argument("--kinds", default="all",
+                    help="collect: 'all' or comma-separated of 2d-s1, 2d-s2, 2d-s3, 3d-s1, 3d-s2, 3d-s3, "
+                         "2d-mem, 2d-mem2, 3d-mem, 3d-mem2")
     sp.add_argument("--reps", type=int, default=1, help="collect: samples per task and kind (default: 1)")
     sp.add_argument("--jobs", type=int, default=2, help="collect: parallel calls (default: 2)")
     sp.add_argument("--force", action="store_true", help="redo work that already succeeded")
