@@ -1,0 +1,73 @@
+{
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "vendor": "moonshot",
+  "item": "recognize_facepalm",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "answer": "图里应是 **奶龙** 的猎奇、抽象风二创形象——黄色身体、浅肚皮和绿色大眼睛都是它的特征，只是被画成了“摘眼球”的怪异造型。\n\n它属于网络上的 **“奶龙梗／抽象奶龙表情包”**，常与“我是奶龙，我才是奶龙”等二创内容一起传播，并不是官方动画里的正常造型。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 46.5,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20287,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 1814,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 22101 / 1048576 tokens (2%)\nSession total: 20287 input, 1814 output",
+      "usage": {
+        "inputTokens": 20287,
+        "outputTokens": 1814
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:47:01Z",
+    "finished_at": "2026-10-25T00:47:48Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

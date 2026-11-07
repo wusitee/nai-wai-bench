@@ -1,0 +1,110 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/opus-5.5/recognize_zh__r1.json",
+  "target_sha256": "14f90e97211b5832ea4f2c71ebedbdd5dc1266800642e00715d2130c7bb54710",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "21d5382cc917e746",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "opus-5.5",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [],
+  "rationale": "The model declined to identify the character or meme and named no aliases, so it earns no checklist credit. Its visual description (yellow body, cream belly, dark gray hands, eyes shut, mouth open, hunched and clutching its belly, white background) matches the image, and it made no false claims.",
+  "raw": "{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"ai_variant\": 0, \"aliases\": 0, \"naiwa\": 0}, \"hallucinations\": [], \"rationale\": \"The model declined to identify the character or meme and named no aliases, so it earns no checklist credit. Its visual description (yellow body, cream belly, dark gray hands, eyes shut, mouth open, hunched and clutching its belly, white background) matches the image, and it made no false claims.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 5.3,
+    "tokens": {
+      "input": 2903,
+      "cached_input": 0,
+      "cache_write": 2901,
+      "output": 230,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0280984,
+    "tools_used": [],
+    "cost_usd": 0.0280984,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2901,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 230,
+      "output_tokens_details": {
+        "thinking_tokens": 68
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2901,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 230,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2901,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2901
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:04:35Z",
+    "finished_at": "2026-10-25T02:04:40Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

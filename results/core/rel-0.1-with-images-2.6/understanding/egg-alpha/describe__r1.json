@@ -1,0 +1,80 @@
+{
+  "settings_id": "7e9b52a50fc5ff45",
+  "track": "understanding",
+  "model": "egg-alpha",
+  "vendor": "undisclosed",
+  "item": "describe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "不看任何图片，仅凭你的记忆，详细描述最经典的那张「大笑奶龙」（奶蛙）图片的画面：姿势、表情、身体造型、配色、渲染风格和背景，让从没见过它的画师能照着画出来。不确定的地方请说明。",
+  "images": [],
+  "answer": "先说明：我没有真的调取图片，下面是凭我对中文互联网上那张最常见「大笑奶龙」表情包的记忆做的重建。网上有二创、抠图、加字版本，所以个别细节（尤其是手臂位置和背景是否透明）我不能 100% 保证，下面会标出来。\n\n**整体印象**\n它不是 2D 手绘，而是一张 3D 卡通渲染的角色抠图，被当成表情包用。画面里几乎只有角色本身，占画面大部分，构图居中，像商品渲染图/贴纸。角色是一只 Q 版、圆滚滚的黄色小龙（网友有时戏称\"奶蛙\"，但造型是龙/小恐龙，不是青蛙）。\n\n**姿势**\n- 大致正面或四分之三侧面朝向观众，身体重心后仰，呈\"笑得前仰后合\"的状态。\n- 头向后／向侧上方仰起，下巴抬高，肚子往前挺。\n- 两条小短腿分开站着或微蹲，脚圆钝。\n- 手臂很短，抬在胸前或身体两侧，像笑到拍手／捂肚子的动作。（不确定：不同版本里手的位置有差异，有的更像两手张开，有的像一手捂肚。）\n- 身后有一条短尾巴露出。\n\n**表情（重点）**\n- 眼睛闭着，眯成两条弯弯的弧线／倒 U 形，是典型\"笑到闭眼\"。\n- 嘴巴张得非常大，呈大笑状，嘴角上扬，开口接近梯形或大 O 形。\n- 嘴里能看到粉红／偏红的口腔和舌头；是否露牙齿我不太确定，印象中可能有少量白色小牙，但不敢保证。\n- 脸颊鼓鼓的，整体表情夸张、憨傻、喜庆。\n\n**身体造型**\n- 大头小身，头身比接近 1:1 甚至头更大，整体梨形／水滴形，圆胖。\n- 头顶有两个小圆角状突起（小角／小耳朵）。\n- 四肢短粗圆润，手脚都是圆钝的，没有锋利爪子。\n- 背部是否有小翅膀／小鳍我不确定，经典大笑图里不明显。\n\n**配色**\n- 主体：明亮的奶黄／明黄色。\n- 腹部、嘴周：更浅的奶白／浅黄。\n- 口腔：粉红到暗红，舌头粉色，牙齿（若有）白色。\n- 闭眼线条：深棕／黑色。\n- 阴影偏暖橙黄，整体高饱和、暖色调。\n\n**渲染风格**\n- 平滑 3D 卡通渲染，类似软胶／塑料玩具质感。\n- 边缘圆润，没有黑色描边。\n- 柔和打光，轻微高光，阴影柔和，不写实。\n- 表情和比例都刻意夸张，偏\"萌系表情包\"。\n\n**背景**\n- 我记得是纯白或接近纯白的干净背景，也可能是透明抠图；没有场景道具。脚下是否有淡投影不确定。\n\n**给画师的建议总结**\n画一只圆胖明黄 Q 版 3D 小龙，仰头闭眼、嘴巴大张大笑，露粉色口腔舌头，短手抬在胸前／两侧，短腿分开，白底抠图，软胶质感、无描边、暖色柔光。手臂具体位置和有无牙齿请再核对原图，因为这两点我记忆最模糊。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "client": "pi 1.5.0",
+    "seconds": 39.9,
+    "stop_reason": "stop",
+    "tools_used": [],
+    "usage": {
+      "input": 126,
+      "output": 2407,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1673,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 126,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2407,
+      "reasoning": 1673
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "tokenrhythm/egg-alpha",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "tokenrhythm/egg-alpha",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-04T04:27:08Z",
+    "finished_at": "2026-11-04T04:27:47Z",
+    "revision": "acefac8",
+    "nwb_version": "0.1.0"
+  }
+}

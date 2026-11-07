@@ -1,0 +1,87 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/deepseek-v4.1-flash/recognize_folded_arms__r1.json",
+  "target_sha256": "29530186cdc387d23eea6aabdb461937c89135eeec5bedd939aa760129393ab3",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "56af61bd29156d8d",
+  "judge_images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0
+  },
+  "hallucinations": [
+    "将这张图断言为网友给 Pou 换黄色皮肤、加上手臂制作的二创，错误归因了图中角色的来源。",
+    "将该图归入“Pou 梗”及其相关分支；该图实际属于大笑奶龙／变异奶龙／奶蛙梗家族。"
+  ],
+  "rationale": "回答没有认出奶龙这一黄色胖乎乎的动画龙／恐龙角色，也没有识别出对应的变异奶龙梗家族。虽然开头对 Pou 的判断带有不确定措辞，后续却明确给出了错误的改图来源和梗归属。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0},\"hallucinations\":[\"将这张图断言为网友给 Pou 换黄色皮肤、加上手臂制作的二创，错误归因了图中角色的来源。\",\"将该图归入“Pou 梗”及其相关分支；该图实际属于大笑奶龙／变异奶龙／奶蛙梗家族。\"],\"rationale\":\"回答没有认出奶龙这一黄色胖乎乎的动画龙／恐龙角色，也没有识别出对应的变异奶龙梗家族。虽然开头对 Pou 的判断带有不确定措辞，后续却明确给出了错误的改图来源和梗归属。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719c-6979-7e20-8160-00f8755cb240",
+    "seconds": 13.7,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12961,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 263,
+      "reasoning_output_tokens": 92
+    },
+    "tokens": {
+      "input": 12961,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 263,
+      "reasoning": 92
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:50:38Z",
+    "finished_at": "2026-10-25T05:50:51Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

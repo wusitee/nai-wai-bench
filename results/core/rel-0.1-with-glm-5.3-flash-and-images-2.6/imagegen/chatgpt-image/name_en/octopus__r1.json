@@ -1,0 +1,94 @@
+{
+  "settings_id": "45fd827f1214ed0a",
+  "track": "imagegen",
+  "model": "chatgpt-image",
+  "vendor": "openai",
+  "tier": "name_en",
+  "animal": "octopus",
+  "rep": 1,
+  "prompt": "Generate an image: a octopus version of the Chinese internet meme \"Laughing Nailong\".",
+  "reference": false,
+  "images": [
+    "imagegen/chatgpt-image/name_en/octopus__r1/exec-8c160bd9-abab-481c-8586-177d9e12273c.png"
+  ],
+  "text": "DONE",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17195-13f6-7930-998e-98d61fa2807a",
+    "seconds": 56.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 75834,
+      "cached_input_tokens": 68864,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 202,
+      "reasoning_output_tokens": 14
+    },
+    "tokens": {
+      "input": 75834,
+      "cached_input": 68864,
+      "cache_write": 0,
+      "output": 202,
+      "reasoning": 14
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null,
+    "audit": {
+      "rollout": "~/.codex/sessions/2026/10/25/rollout-2026-10-25T13-42-37-01a17195-13f6-7930-998e-98d61fa2807a.jsonl",
+      "image_gen_calls": 1,
+      "verbatim": true,
+      "sent": [
+        "Generate an image: a octopus version of the Chinese internet meme \"Laughing Nailong\"."
+      ],
+      "calls": [
+        "const result = await tools.image_gen__imagegen({prompt:'Generate an image: a octopus version of the Chinese internet meme \"Laughing Nailong\".'});\n"
+      ],
+      "refused": false
+    },
+    "c2pa": {
+      "generators": [
+        "ChatGPT gpt-image"
+      ],
+      "actions": []
+    }
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "low",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "-c",
+      "model_reasoning_effort=\"low\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:42:37Z",
+    "finished_at": "2026-10-25T05:43:33Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.1-sol/write_prompt_zh.cat__r1.json",
+  "target_sha256": "cb016ab3f7f5945e40369519abe56ab44b7e77b3a08908355da635fa6f94494d",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "247a2f434814aa68",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 2,
+    "vibe": 2,
+    "identity": 1
+  },
+  "hallucinations": [],
+  "rationale": "The prompt covers the squeezed arc eyes, the huge dark mouth with teeth and tongue, the neckless chubby body, the cheap 3D render, the plain light background and the unhinged laughing energy. It misses the hunched, doubled-over pose, the paws clutching the belly (paws are at the chest) and the pale belly patch. The cat identity rests on token ears and whiskers on a cream-yellow Nailong-like body, with no real feline markings.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 2, \"body\": 2, \"belly_patch\": 0, \"render\": 2, \"background\": 2, \"vibe\": 2, \"identity\": 1}, \"hallucinations\": [], \"rationale\": \"The prompt covers the squeezed arc eyes, the huge dark mouth with teeth and tongue, the neckless chubby body, the cheap 3D render, the plain light background and the unhinged laughing energy. It misses the hunched, doubled-over pose, the paws clutching the belly (paws are at the chest) and the pale belly patch. The cat identity rests on token ears and whiskers on a cream-yellow Nailong-like body, with no real feline markings.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 9.5,
+    "tokens": {
+      "input": 1876,
+      "cached_input": 0,
+      "cache_write": 1874,
+      "output": 688,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.029020900000000002,
+    "tools_used": [],
+    "cost_usd": 0.029020900000000002,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1874,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 688,
+      "output_tokens_details": {
+        "thinking_tokens": 433
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1874,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 688,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1874,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1874
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:00:26Z",
+    "finished_at": "2026-10-25T02:00:36Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

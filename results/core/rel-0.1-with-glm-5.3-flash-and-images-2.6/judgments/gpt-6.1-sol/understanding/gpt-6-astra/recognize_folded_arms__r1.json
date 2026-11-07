@@ -1,0 +1,84 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6-astra/recognize_folded_arms__r1.json",
+  "target_sha256": "769d8c1abb1d740ed871c3b1518eeb2f2f2d77072d4da91b55d5bdf88decd85e",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "75b7b37480f15523",
+  "judge_images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "scores": {
+    "base_character": 2,
+    "identifies_meme": 1
+  },
+  "hallucinations": [],
+  "rationale": "正确指出角色原型是国产动画《奶龙》中的黄色小恐龙，但只笼统归为“奶龙梗”，未明确识别为大笑奶龙／变异奶龙／奶蛙这一梗族。没有可确认的幻觉。",
+  "raw": "{\"scores\":{\"base_character\":2,\"identifies_meme\":1},\"hallucinations\":[],\"rationale\":\"正确指出角色原型是国产动画《奶龙》中的黄色小恐龙，但只笼统归为“奶龙梗”，未明确识别为大笑奶龙／变异奶龙／奶蛙这一梗族。没有可确认的幻觉。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719f-5aef-72a1-b156-56c2db2eea15",
+    "seconds": 9.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12333,
+      "cached_input_tokens": 4864,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 144,
+      "reasoning_output_tokens": 54
+    },
+    "tokens": {
+      "input": 12333,
+      "cached_input": 4864,
+      "cache_write": 0,
+      "output": 144,
+      "reasoning": 54
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:53:51Z",
+    "finished_at": "2026-10-25T05:54:00Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

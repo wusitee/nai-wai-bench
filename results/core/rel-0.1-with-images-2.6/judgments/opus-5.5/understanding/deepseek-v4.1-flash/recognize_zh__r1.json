@@ -1,0 +1,114 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/deepseek-v4.1-flash/recognize_zh__r1.json",
+  "target_sha256": "f730ab1be0b660e21829b4f29feef1bcc9fdda8d244f751ddface15b658480ef",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "e989a14edb23cca6",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "Identifies the yellow cartoon creature as 弥勒佛 (Maitreya/Budai/Hotei), which it is not; it is the 大笑奶龙 (mutated Nailong) meme image",
+    "Claims the associated meme is '笑佛'/'Laughing Buddha' rather than 大笑奶龙/变异奶龙/奶蛙",
+    "Lists fabricated aliases (笑佛, 大笑佛, 弥勒笑, 大肚弥勒, Hotei, Budai) for the meme"
+  ],
+  "rationale": "The model misidentified the yellow cartoon creature as the Laughing Buddha, missing 奶龙 and the 大笑奶龙/变异奶龙/奶蛙 meme entirely. All of its character, meme, and alias claims are wrong.",
+  "raw": "{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"ai_variant\": 0, \"aliases\": 0, \"naiwa\": 0}, \"hallucinations\": [\"Identifies the yellow cartoon creature as 弥勒佛 (Maitreya/Budai/Hotei), which it is not; it is the 大笑奶龙 (mutated Nailong) meme image\", \"Claims the associated meme is '笑佛'/'Laughing Buddha' rather than 大笑奶龙/变异奶龙/奶蛙\", \"Lists fabricated aliases (笑佛, 大笑佛, 弥勒笑, 大肚弥勒, Hotei, Budai) for the meme\"], \"rationale\": \"The model misidentified the yellow cartoon creature as the Laughing Buddha, missing 奶龙 and the 大笑奶龙/变异奶龙/奶蛙 meme entirely. All of its character, meme, and alias claims are wrong.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 6.3,
+    "tokens": {
+      "input": 2615,
+      "cached_input": 0,
+      "cache_write": 2613,
+      "output": 331,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.027918600000000002,
+    "tools_used": [],
+    "cost_usd": 0.027918600000000002,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2613,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 331,
+      "output_tokens_details": {
+        "thinking_tokens": 0
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2613,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 331,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2613,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2613
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:55:48Z",
+    "finished_at": "2026-10-25T01:55:54Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

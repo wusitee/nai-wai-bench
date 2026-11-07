@@ -1,0 +1,118 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "imagegen/chatgpt-images-2.6/name_zh/elephant__r1.json",
+  "target_sha256": "572cde065e21f7b3c3b17433221eff20c3892b59abcbd051258db427911feb9b",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "b2a6cf21b4ab17b4",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/chatgpt-images-2.6/name_zh/elephant__r1/exec-ceed5900-6ebc-44b6-8dba-97c95a285c12.png"
+  ],
+  "track": "imagegen",
+  "model": "chatgpt-images-2.6",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 0,
+    "vibe": 0
+  },
+  "identity": 1,
+  "failure_modes": [
+    "generic_cute"
+  ],
+  "rationale": "A polished, cute yellow elephant with closed-arc eyes and a belly patch, but it lacks the hunched belly-clutching pose, the dark toothy hysterical mouth, the plain background and the absurd meme vibe. The elephant features are clear, but the coloring stays Nailong-yellow.",
+  "raw": "**pose:** The elephant stands upright with its head tilted back. Its torso is not hunched forward and its knees are not bent. → absent\n**hands_on_belly:** The paws are raised near the chest and sides, not clutching or pressing the belly. → absent\n**eyes:** Both eyes are squeezed shut into thin curved arcs. → match\n**mouth:** The mouth is wide open with a pink tongue, but the interior is not dark and no teeth show. It reads as a cheerful laugh rather than hysterical. → partial\n**body:** The body is bulky and bean-shaped, the head merges into the torso without a neck, and the limbs are short and thick. → match\n**belly_patch:** A pale cream oval belly patch contrasts with the yellow body. → match\n**render:** It is a glossy 3D CG render, but with polished, Pixar-quality lighting rather than the reference's cheap studio AI-render look. → partial\n**background:** The background is an outdoor scene with rocks, foliage and blue sky, not plain white or grey. → absent\n**vibe:** The image is wholesome and cute, with no unhinged or 抽象 meme energy. → absent\n**identity:** The trunk and large pink-lined ears clearly read as an elephant, but the body keeps Nailong's yellow instead of elephant grey. → partly\n\n{\"traits\": {\"pose\": \"absent\", \"hands_on_belly\": \"absent\", \"eyes\": \"match\", \"mouth\": \"partial\", \"body\": \"match\", \"belly_patch\": \"match\", \"render\": \"partial\", \"background\": \"absent\", \"vibe\": \"absent\"}, \"identity\": \"partly\", \"failure_modes\": [\"generic_cute\"], \"rationale\": \"A polished, cute yellow elephant with closed-arc eyes and a belly patch, but it lacks the hunched belly-clutching pose, the dark toothy hysterical mouth, the plain background and the absurd meme vibe. The elephant features are clear, but the coloring stays Nailong-yellow.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 14.3,
+    "tokens": {
+      "input": 4426,
+      "cached_input": 0,
+      "cache_write": 4424,
+      "output": 1000,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.055634600000000006,
+    "tools_used": [],
+    "cost_usd": 0.055634600000000006,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 4424,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1000,
+      "output_tokens_details": {
+        "thinking_tokens": 341
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 4424,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1000,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 4424,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 4424
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-05T04:00:18Z",
+    "finished_at": "2026-11-05T04:00:32Z",
+    "revision": "aa69823+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

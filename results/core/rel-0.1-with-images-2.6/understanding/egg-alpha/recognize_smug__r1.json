@@ -1,0 +1,84 @@
+{
+  "settings_id": "7e9b52a50fc5ff45",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "egg-alpha",
+  "vendor": "undisclosed",
+  "item": "recognize_smug",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "answer": "这个表情包里的角色是**奶龙（Nailong）**。\n\n**角色介绍：**\n奶龙是国产3D动画短片《奶龙》中的主角，是一只黄色、圆滚滚的小恐龙（设定上是来自异星球的呆萌小龙），性格贪吃、憨憨的，和小男孩\"小七\"一起经历各种搞笑日常。该动画在抖音、B站等平台上传播很广。\n\n**所属网络梗：**\n这张图属于**\"奶龙表情包\"**梗文化。图中奶龙眯着眼、鼓着腮红、嘴角微微上扬的表情，被网友广泛用作表达：\n- **得意/嘚瑟**：\"就这？\"式的自信微笑\n- **无语/憋笑**：似笑非笑的微妙神情\n- **傲娇/不屑**：斜眼睥睨的感觉\n\n奶龙表情包在微信、QQ群聊中非常流行，甚至衍生出一种\"反讽式喜爱\"的亚文化——网友一边说它\"憨\"一边疯狂使用它的各种截图，形成了独特的\"奶龙学\"玩梗风气。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "client": "pi 1.5.0",
+    "seconds": 10.9,
+    "stop_reason": "stop",
+    "rate_limit_retries": 1,
+    "tools_used": [],
+    "usage": {
+      "input": 343,
+      "output": 515,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 288,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 343,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 515,
+      "reasoning": 288
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "tokenrhythm/egg-alpha",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "tokenrhythm/egg-alpha",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-04T04:36:35Z",
+    "finished_at": "2026-11-04T04:37:12Z",
+    "revision": "44479d0",
+    "nwb_version": "0.1.0"
+  }
+}

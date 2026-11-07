@@ -1,0 +1,100 @@
+{
+  "settings_id": "1e77488ebc8a6fba",
+  "track": "understanding",
+  "model": "opus-5.5",
+  "vendor": "anthropic",
+  "item": "describe_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Without looking at any images, describe the most iconic image of Laughing Nailong (大笑奶龙 / 奶蛙) from memory: its pose, expression, body shape, colors, rendering style, and background, in enough detail for an artist who has never seen it to draw it. Say where you are unsure.",
+  "images": [],
+  "answer": "# Laughing Nailong (大笑奶龙): A Description From Memory\n\n**Caveat up front:** Nailong exists in many official poses and countless fan edits, and memes drift as they spread. I'm confident about the character's general design. I'm much less sure which single frame counts as \"the\" laughing image, and I'm unsure what exactly \"奶蛙\" refers to (possibly a frog-like fan variant or nickname). Treat the details below as a composite, with confidence marked.\n\n## Character Design (fairly confident)\n- **Body shape:** A chubby, egg- or pear-shaped blob. It's widest at the bottom, with no distinct neck, so the head and body are essentially one mass. Think of a soft gumdrop or a plump baby dinosaur.\n- **Limbs:** Short stubby arms with rounded, mitten-like hands and no clearly defined fingers. The legs are very short and thick, barely visible under the belly, ending in rounded feet.\n- **Tail:** A small, short, tapering tail at the back, usually hidden or just peeking out in front views.\n- **Head features:** Few or no horns or spikes. If anything is there, it's small and rounded (*unsure*). The overall silhouette is smooth.\n\n## Colors (fairly confident)\n- **Main body:** Warm, saturated yellow, a bit more golden or buttery than lemon.\n- **Belly:** A large oval patch on the front in a paler cream or light yellow.\n- **Cheeks:** Pink or rosy blush circles, often quite prominent.\n- **Mouth interior:** Dark red or deep pink, with a lighter pink tongue.\n- **Eyes:** Black, with white highlight dots when open.\n\n## The Laughing Pose and Expression (moderately confident on the general look, less on specifics)\n- **Viewpoint:** Front-facing or slightly three-quarter, looking roughly at the viewer.\n- **Mouth:** The defining feature. It's opened extremely wide in a huge, almost unhinged guffaw that takes up a large share of the face, maybe a third or more of the head height. It forms a wide \"D\" or half-moon shape, showing the red interior and tongue. Teeth are minimal or absent (*somewhat unsure*).\n- **Eyes:** Squeezed shut into curved lines, like \"^ ^\" arcs or tight crescents, the classic laughing-so-hard squint. Some versions add tear droplets at the corners (*unsure whether the canonical one has tears*).\n- **Cheeks:** Blush pushed up and emphasized by the grin.\n- **Arms:** Most likely raised near the face or chest, or flung outward in glee. Some versions have the hands clutching the belly (*unsure, this varies between versions*).\n- **Overall vibe:** Obnoxious, over-the-top, slightly smug or mocking laughter. That vibe is why it's used as a reaction image.\n\n## Rendering Style (fairly confident)\n- Smooth 3D CGI, like a children's animated series or toy render.\n- Soft, slightly glossy, almost vinyl-toy shading, with gentle gradients and soft highlights on top of the head and belly.\n- No outlines. Form is shown through shading only.\n- The meme versions are frequently degraded: JPEG artifacts, slight blur, oversaturation, or \"deep-fried\" edits. That low quality is part of its meme identity.\n\n## Background (moderately confident)\n- Usually plain white or transparent, with the character cut out as a sticker or emoji.\n- Often cropped tight to the body, sometimes just head and torso.\n- Common edits add Chinese caption text above or below in bold white or black letters (*text varies, no fixed caption I can recall reliably*).\n\n## Quick Brief for an Artist\nDraw a round, buttery-yellow, neckless baby-dinosaur blob with a cream belly oval, pink cheek blushes, and stubby limbs. Give it a gigantic open-mouthed laugh that dominates the face, red inside with a pink tongue, and eyes squeezed into \"^ ^\" arcs. Raise the arms in glee. Render it as soft, glossy 3D CGI with no outlines on a plain white background, ideally a bit low-res and oversaturated for authenticity.\n\nIf you can share which specific version you mean, such as a sticker pack, an animation frame, or a particular edit, I can't view it in this session. You could still compare it against this description and adjust.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 26.4,
+    "tokens": {
+      "input": 686,
+      "cached_input": 0,
+      "cache_write": 684,
+      "output": 1974,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0452163,
+    "tools_used": [],
+    "cost_usd": 0.0452163,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 684,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1974,
+      "output_tokens_details": {
+        "thinking_tokens": 498
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 684,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1974,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 684,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 684
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:42:15Z",
+    "finished_at": "2026-10-25T00:42:42Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

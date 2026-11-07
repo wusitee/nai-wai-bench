@@ -1,0 +1,74 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/gemini-3.8-flash/recognize_folded_arms__r1.json",
+  "target_sha256": "5d208b47c76d1d15d6be46cf1deac5b7be43dca02011d3f7dfbbe9fdde244ff6",
+  "settings_id": "c5b99b49261f87dd",
+  "input_names": "neutral",
+  "judge_prompt": "504af6121cbced91",
+  "judge_images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "scores": {
+    "base_character": 1,
+    "identifies_meme": 1
+  },
+  "hallucinations": [
+    "该模型源于一段独立的3D角色动画/三维建模资产"
+  ],
+  "rationale": "The model missed identifying the base character Nailong and the specific meme family, offering only generic visual descriptions and usages.",
+  "raw": "```json\n{\n  \"scores\": {\n    \"base_character\": 1,\n    \"identifies_meme\": 1\n  },\n  \"hallucinations\": [\n    \"该模型源于一段独立的3D角色动画/三维建模资产\"\n  ],\n  \"rationale\": \"The model missed identifying the base character Nailong and the specific meme family, offering only generic visual descriptions and usages.\"\n}\n```",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 26.9,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 17316,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:02:29Z",
+    "finished_at": "2026-10-25T02:02:56Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

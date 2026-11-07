@@ -1,0 +1,84 @@
+{
+  "settings_id": "7e9b52a50fc5ff45",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "egg-alpha",
+  "vendor": "undisclosed",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "图中的角色是**奶龙（Nailong）**——一只黄色、圆滚滚、白肚皮的卡通小龙，这张是它捧腹大笑的表情包截图。\n\n- **相关网络梗**：它出自国产短篇动画《奶龙》，后来被网友做成大量表情包，演变成抽象圈里的\"**奶龙 / 我是奶龙**\"梗，常用来表示\"傻乐、憨笑、绷不住\"，并进一步和抽象骂人 slang\"**唐（唐氏）**\"绑定，用奶龙那副憨笑模样来调侃\"看起来很唐/很憨\"的人或行为。\n- **别名/外号**：小奶龙、黄胖龙，在抽象语境里也被叫作\"**唐龙**\"\"**奶龙大帝**\"等。\n\n简单说：角色=奶龙，关联梗=\"奶龙/我是奶龙\"（与\"唐\"梗相通），别名有小奶龙、唐龙、奶龙大帝。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "client": "pi 1.5.0",
+    "seconds": 41.3,
+    "stop_reason": "stop",
+    "rate_limit_retries": 1,
+    "tools_used": [],
+    "usage": {
+      "input": 665,
+      "output": 2020,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1817,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 665,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2020,
+      "reasoning": 1817
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "tokenrhythm/egg-alpha",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "tokenrhythm/egg-alpha",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-04T04:40:44Z",
+    "finished_at": "2026-11-04T04:41:42Z",
+    "revision": "44479d0",
+    "nwb_version": "0.1.0"
+  }
+}
