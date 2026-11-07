@@ -1,0 +1,73 @@
+{
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "vendor": "moonshot",
+  "item": "states.smug",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Look only at the attached character. Report its visible expression and gesture, not an imagined inner feeling. Return JSON with four keys: state (angry, facepalm, smug, laughing, or other), eyes (open, closed, or narrowed), mouth (open or closed), and gesture (behind_back, forehead, belly_clutch, folded_arms, or out_of_frame). Use unknown when a field cannot be determined. Do not assume the character must be laughing or invent gestures outside the frame.",
+  "images": [
+    "bench/states/03.jpg"
+  ],
+  "answer": "{\"state\":\"smug\",\"eyes\":\"narrowed\",\"mouth\":\"closed\",\"gesture\":\"out_of_frame\"}",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 13.7,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20404,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 123,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20527 / 1048576 tokens (2%)\nSession total: 20404 input, 123 output",
+      "usage": {
+        "inputTokens": 20404,
+        "outputTokens": 123
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:48:57Z",
+    "finished_at": "2026-10-25T00:49:11Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

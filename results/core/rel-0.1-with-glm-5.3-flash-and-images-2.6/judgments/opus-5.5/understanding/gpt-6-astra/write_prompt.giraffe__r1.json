@@ -1,0 +1,116 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6-astra/write_prompt.giraffe__r1.json",
+  "target_sha256": "002720a816d9743a7966a662ac4807efbe9d123860dc4b361146506a3153cbf5",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "56c98fdee81b63fd",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 1,
+    "vibe": 1,
+    "identity": 2
+  },
+  "hallucinations": [
+    "Pose described as head thrown back with the neck curving backward, which contradicts the hunched-forward, doubled-over pose",
+    "Plain muted green background, which contradicts the plain white or light-grey background",
+    "Forelegs held near the chest instead of clutching the belly"
+  ],
+  "rationale": "The prompt captures the shut eyes, the huge dark laughing mouth, the cheap 3D mascot render and a recognizable yellow giraffe with brown patches and ossicones. It gets the pose wrong (head thrown back instead of doubled over), gives the body a distinct neck, omits both the belly-clutching hands and the pale belly patch, and uses a green background.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 2, \"body\": 1, \"belly_patch\": 0, \"render\": 2, \"background\": 1, \"vibe\": 1, \"identity\": 2}, \"hallucinations\": [\"Pose described as head thrown back with the neck curving backward, which contradicts the hunched-forward, doubled-over pose\", \"Plain muted green background, which contradicts the plain white or light-grey background\", \"Forelegs held near the chest instead of clutching the belly\"], \"rationale\": \"The prompt captures the shut eyes, the huge dark laughing mouth, the cheap 3D mascot render and a recognizable yellow giraffe with brown patches and ossicones. It gets the pose wrong (head thrown back instead of doubled over), gives the body a distinct neck, omits both the belly-clutching hands and the pale belly patch, and uses a green background.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 11.8,
+    "tokens": {
+      "input": 1882,
+      "cached_input": 0,
+      "cache_write": 1880,
+      "output": 975,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.034808000000000006,
+    "tools_used": [],
+    "cost_usd": 0.034808000000000006,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1880,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 975,
+      "output_tokens_details": {
+        "thinking_tokens": 663
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1880,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 975,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1880,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1880
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:58:57Z",
+    "finished_at": "2026-10-25T01:59:09Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

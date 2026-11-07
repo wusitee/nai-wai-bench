@@ -1,0 +1,65 @@
+{
+  "settings_id": "c5b99b49261f87dd",
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "vendor": "google",
+  "item": "write_prompt_zh.giraffe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出长颈鹿版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "A hilarious 3D cartoon sticker of a cute chubby yellow giraffe laughing hysterically, parodying a chaotic laughing meme. The adorable giraffe has a plump round belly, tiny ossicones on its head, and soft brown patches on its bright yellow skin. It is throwing its long neck and head dramatically far backward, chin pointed upward, in an exaggerated, unhinged belly laugh. Its eyes are tightly squeezed shut into happy curved slits with tiny cartoon joy tears bursting from the corners, and its mouth is gaping wide open in an ecstatic, roaring laugh, revealing a cute pink tongue. Its stubby front legs are clutching its round belly in uncontrollable amusement. Highly expressive, infectious humor, 3D animated character render, Pixar and Disney aesthetic, vibrant colors, smooth clay toy texture, clean studio lighting, isolated on a solid plain white background, meme reaction sticker.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 21.8,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 14715,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:43:39Z",
+    "finished_at": "2026-10-25T00:44:01Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

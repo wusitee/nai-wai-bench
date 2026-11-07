@@ -290,6 +290,20 @@ env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
 price = { input = 0.0, cached_input = 0.0, cache_write = 0.0, output = 0.0, unit = "USD/1M tokens", source = "https://tokenrhythm.studio/v1/models (free preview, listed at 0 CNY)", as_of = "2026-11-04" }
 can = ["text", "vision"]
 
+# GLM-5.3-Flash, the GLM Coding Plan's GLM-5.3 model with image input, through pi's built-in `zai-coding-cn`
+# provider (open.bigmodel.cn GLM Coding Plan endpoint); the key is read from ZAI_CODING_CN_API_KEY.
+# Prices are pi-ai 1.5.0 catalog estimates, not independently verified official rates.
+[models."glm-5.3-flash-pi"]
+timeout = 900
+label = "GLM-5.3-Flash (pi)"
+backend = "pi"
+vendor = "zhipu"
+model = "zai-coding-cn/glm-5.3-flash"
+effort = "high"
+env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
+price = { input = 0.15, cached_input = 0.03, cache_write = 0.0, output = 0.5, unit = "USD/1M tokens", source = "pi-ai 1.5.0 model catalog (zai-coding-cn/glm-5.3-flash)", as_of = "2026-11-06" }
+can = ["text", "vision"]
+
 # --- OpenAI-compatible APIs ---
 
 # Xiaomi MiMo Token Plan; the endpoint and key are read from this CC Switch provider at run time.

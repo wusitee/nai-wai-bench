@@ -1,0 +1,86 @@
+{
+  "settings_id": "45fd827f1214ed0a",
+  "track": "imagegen",
+  "model": "chatgpt-image",
+  "vendor": "openai",
+  "tier": "described_brief",
+  "animal": "panda",
+  "rep": 1,
+  "prompt": "A 3D cartoon giant panda doubled over with laughter, clutching its belly, on a plain white background.",
+  "reference": false,
+  "images": [],
+  "refused": "image provider refused (thread 01a17195-f063-7e80-9f18-d10f1f375fd4): moderation_blocked",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17195-f063-7e80-9f18-d10f1f375fd4",
+    "seconds": 41.0,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 24110,
+      "cached_input_tokens": 21376,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 85,
+      "reasoning_output_tokens": 0
+    },
+    "tokens": {
+      "input": 24110,
+      "cached_input": 21376,
+      "cache_write": 0,
+      "output": 85,
+      "reasoning": 0
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null,
+    "audit": {
+      "rollout": "~/.codex/sessions/2026/10/25/rollout-2026-10-25T13-43-34-01a17195-f063-7e80-9f18-d10f1f375fd4.jsonl",
+      "image_gen_calls": 1,
+      "verbatim": true,
+      "sent": [
+        "A 3D cartoon giant panda doubled over with laughter, clutching its belly, on a plain white background."
+      ],
+      "calls": [
+        "// @exec: {\"yield_time_ms\": 120000}\nconst result = await tools.image_gen__imagegen({prompt:\"A 3D cartoon giant panda doubled over with laughter, clutching its belly, on a plain white background.\"});\ngeneratedImage(result);\n"
+      ],
+      "refused": true
+    }
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "low",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "-c",
+      "model_reasoning_effort=\"low\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:43:33Z",
+    "finished_at": "2026-10-25T05:44:14Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

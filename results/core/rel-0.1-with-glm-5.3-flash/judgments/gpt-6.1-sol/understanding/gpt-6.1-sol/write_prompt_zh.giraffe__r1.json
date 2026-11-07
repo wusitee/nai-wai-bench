@@ -1,0 +1,92 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6.1-sol/write_prompt_zh.giraffe__r1.json",
+  "target_sha256": "67114b8dcb35d1b99c873df8b4f0139b346ab7f3a1bad862bfe5a900fcc13654",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "2222bdac9aaf01fe",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 2,
+    "vibe": 2,
+    "identity": 2
+  },
+  "hallucinations": [
+    "要求“细长但肉乎乎的脖子”，与参考中没有明显颈部、头身相连的造型矛盾。",
+    "要求“两只小前蹄蜷在胸前”，与参考中双手捧腹的动作矛盾。"
+  ],
+  "rationale": "提示词明确覆盖了闭眼弯弧、张嘴露齿露舌、三维柔光、白色背景和魔性大笑，也提供了充分的长颈鹿特征。但缺少站立前弯、膝盖微屈的姿态及浅色椭圆腹斑，胸前蜷蹄和明显长颈也偏离参考。",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":0,\"eyes\":2,\"mouth\":2,\"body\":1,\"belly_patch\":0,\"render\":2,\"background\":2,\"vibe\":2,\"identity\":2},\"hallucinations\":[\"要求“细长但肉乎乎的脖子”，与参考中没有明显颈部、头身相连的造型矛盾。\",\"要求“两只小前蹄蜷在胸前”，与参考中双手捧腹的动作矛盾。\"],\"rationale\":\"提示词明确覆盖了闭眼弯弧、张嘴露齿露舌、三维柔光、白色背景和魔性大笑，也提供了充分的长颈鹿特征。但缺少站立前弯、膝盖微屈的姿态及浅色椭圆腹斑，胸前蜷蹄和明显长颈也偏离参考。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a171a1-4353-7231-a61a-468945156b03",
+    "seconds": 17.8,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12266,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 434,
+      "reasoning_output_tokens": 219
+    },
+    "tokens": {
+      "input": 12266,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 434,
+      "reasoning": 219
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:55:56Z",
+    "finished_at": "2026-10-25T05:56:13Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

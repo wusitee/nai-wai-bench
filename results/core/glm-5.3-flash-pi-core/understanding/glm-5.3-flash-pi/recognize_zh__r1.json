@@ -1,0 +1,84 @@
+{
+  "settings_id": "680aa2edad69d268",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "glm-5.3-flash-pi",
+  "vendor": "zhipu",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "图里这个黄色、梨形身材、双手捂着肚子狂笑的 3D 小怪物，据我所知是 **\"TBH creature\"（TBH 小怪兽）** 的 3D 狂笑版本表情包，常被用来表达“笑死我了/乐了”。\n\n**相关的网络梗：**\n它出自 **\"Yippee!\"（耶皮）梗** —— 一个简单的四格涂鸦小生物，后来被做成 3D 模型，配上“Yippee～”的欢呼声在 TikTok/短视频平台爆火，衍生出蹦跳、大笑等各种动图表情包。\n\n**这个梗的常见别名：**\n- **Autism Creature（自闭症小怪兽）**：因为它最初被神经多样性（自闭症谱系）群体广泛使用，用来代表自己\n- **Yippee Creature（Yippee 小怪兽）**\n- **TBH Creature**：TBH 是 \"to be honest\"（说实话）的缩写，源自它最初作为表达“坦白说……”的表情符号\n- 中文圈也常叫它 **“TBH 生物”“自闭症小怪物”**\n\n需要说明：我无法联网搜索核实，如果这张图其实是某个衍生创作或相似的其他角色，我的判断可能有偏差。但从形象特征（黄色圆润身体、浅色肚皮、简单的狂笑脸）来看，它和 TBH/Yippee 小怪兽的 3D 版高度吻合。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "zai-coding-cn/glm-5.3-flash",
+    "client": "pi 1.5.0",
+    "seconds": 380.1,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 858,
+      "output": 12628,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 12306,
+      "cost": 0.006442699999999999
+    },
+    "tokens": {
+      "input": 858,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 12628,
+      "reasoning": 12306
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "zai-coding-cn/glm-5.3-flash",
+    "cost_usd_reported": 0.006442699999999999
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "zai-coding-cn/glm-5.3-flash",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "zai-coding-cn/glm-5.3-flash",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-06T07:13:10Z",
+    "finished_at": "2026-11-06T07:19:30Z",
+    "revision": "ef8832f+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

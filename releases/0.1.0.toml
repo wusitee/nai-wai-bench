@@ -13,11 +13,11 @@ isolated_v1_subjects = ["gpt-6.1-terra-xhigh", "gpt-5.6-sol", "gpt-5.6-sol-xhigh
 gpt_6_1_sol_judge_profiles = ["legacy-v1", "isolated-v1"]
 
 [suites.core]
-run = "rel-0.1-with-images-2.6"
-sha256 = "f5e00e790d5898c3734982364ea1c41bedfcd00208fa9f0bc08620e53f3a629e"
+run = "rel-0.1-with-glm-5.3-flash-and-images-2.6"
+sha256 = "fd3f6428d19b7b8569f6c43f177b572c4f24831651d7bcf7232035311921689d"
 judges = ["opus-5.5"]
 
 [suites.naihub-v1]
-run = "rel-0.1-naihub-with-egg-alpha"
-sha256 = "87b371e8f191899defabacd5840c2345a4970daeace98616fc7a86b45072de6d"
+run = "rel-0.1-naihub-with-glm-5.3-flash"
+sha256 = "85bea329aafcf6e184326c410110dd026d4eadecac3638a104eb24dfee3bb4b5"
 judges = []

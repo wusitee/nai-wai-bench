@@ -1,0 +1,84 @@
+{
+  "settings_id": "680aa2edad69d268",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "glm-5.3-flash-pi",
+  "vendor": "zhipu",
+  "item": "grounding.folded",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Look only at the attached image. Return a JSON object with two keys: pose (one of belly_clutch, raised_hands, facepalm, folded_arms) and eyes (open or closed). Use unknown for a field you cannot determine. Do not infer the answer from a meme's name or typical appearance.",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "```json\n{\n  \"pose\": \"folded_arms\",\n  \"eyes\": \"open\"\n}\n```",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "zai-coding-cn/glm-5.3-flash",
+    "client": "pi 1.5.0",
+    "seconds": 5.4,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 448,
+      "output": 155,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 130,
+      "cost": 0.0001447
+    },
+    "tokens": {
+      "input": 448,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 155,
+      "reasoning": 130
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "zai-coding-cn/glm-5.3-flash",
+    "cost_usd_reported": 0.0001447
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "zai-coding-cn/glm-5.3-flash",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "zai-coding-cn/glm-5.3-flash",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-06T07:31:40Z",
+    "finished_at": "2026-11-06T07:31:46Z",
+    "revision": "ef8832f+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

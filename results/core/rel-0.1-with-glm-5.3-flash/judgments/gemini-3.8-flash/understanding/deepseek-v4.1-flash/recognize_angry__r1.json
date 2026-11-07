@@ -1,0 +1,75 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/deepseek-v4.1-flash/recognize_angry__r1.json",
+  "target_sha256": "7710514cb483f3d0b7b95bc737c8deff9775793bc6b0e0ffc3d673be8bea2e70",
+  "settings_id": "c5b99b49261f87dd",
+  "input_names": "neutral",
+  "judge_prompt": "5859f3308e562398",
+  "judge_images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "base_character": 1,
+    "identifies_meme": 1,
+    "ai_variant": 1
+  },
+  "hallucinations": [
+    "Claims the figure is an original meme character named '红温兽' or '红温宝宝' created to represent the 'hongwen' state."
+  ],
+  "rationale": "The model fails to connect the image to Nailong or the mutated Nailong meme family, mistakenly inventing a standalone 'Hongwen Beast' character.",
+  "raw": "{\n  \"scores\": {\n    \"base_character\": 1,\n    \"identifies_meme\": 1,\n    \"ai_variant\": 1\n  },\n  \"hallucinations\": [\n    \"Claims the figure is an original meme character named '红温兽' or '红温宝宝' created to represent the 'hongwen' state.\"\n  ],\n  \"rationale\": \"The model fails to connect the image to Nailong or the mutated Nailong meme family, mistakenly inventing a standalone 'Hongwen Beast' character.\"\n}",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 32.8,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 17093,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:57:27Z",
+    "finished_at": "2026-10-25T01:57:59Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

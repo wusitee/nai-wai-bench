@@ -1,0 +1,79 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/gemini-3.8-flash/describe_en__r1.json",
+  "target_sha256": "9ae5f917a9cee66ab9f3ae96625882cb0d0a8169553838a03e79f7946d203cf1",
+  "settings_id": "c5b99b49261f87dd",
+  "judge_prompt": "292f485d4936a977",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "scores": {
+    "pose": 1,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 1,
+    "render": 1,
+    "background": 1,
+    "vibe": 0
+  },
+  "hallucinations": [
+    "Head and upper torso tilted slightly backward (the reference is hunched/bent forward doubled over in laughter).",
+    "Highlights are soft and matte, not glossy or metallic (the reference is a glossy 3D CG render)."
+  ],
+  "rationale": "The model accurately captures the core anatomy, belly-clutching pose, and eye expression, but inverts the torso lean (tilted backward instead of hunched forward) and mischaracterizes the finish as matte rather than glossy. It also misses the unhinged 'abstract' (抽象) meme vibe, framing the subject as a conventional cute children's animation character.",
+  "raw": "```json\n{\n  \"scores\": {\n    \"pose\": 1,\n    \"hands_on_belly\": 2,\n    \"eyes\": 2,\n    \"mouth\": 1,\n    \"body\": 2,\n    \"belly_patch\": 1,\n    \"render\": 1,\n    \"background\": 1,\n    \"vibe\": 0\n  },\n  \"hallucinations\": [\n    \"Head and upper torso tilted slightly backward (the reference is hunched/bent forward doubled over in laughter).\",\n    \"Highlights are soft and matte, not glossy or metallic (the reference is a glossy 3D CG render).\"\n  ],\n  \"rationale\": \"The model accurately captures the core anatomy, belly-clutching pose, and eye expression, but inverts the torso lean (tilted backward instead of hunched forward) and mischaracterizes the finish as matte rather than glossy. It also misses the unhinged 'abstract' (抽象) meme vibe, framing the subject as a conventional cute children's animation character.\"\n}\n```",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 39.7,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 18288,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:00:43Z",
+    "finished_at": "2026-10-25T02:01:23Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}
