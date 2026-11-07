@@ -122,8 +122,12 @@ def extract_html(text: str) -> str | None:
 
 # Static gates check what can be read from the source. Behaviour (network, timers, errors, determinism)
 # is checked at render time, so comments that merely mention an API never fail a sample.
+# Element tags in the markup; script bodies are skipped, so code such as `i < track.length` does not match.
+# Elements a script creates are caught by the renderer's live DOM check.
+_ELEMENTS = re.compile(r"<(img|image|picture|iframe|frame|object|embed|video|audio|source|track|link|base|portal)(?=[\s/>])",
+                       re.I)
+_SCRIPT_BODY = re.compile(r"(<script\b[^>]*>).*?(</script\s*>)", re.S | re.I)
 _COMMON = {
-    "raster or embedded element": r"<\s*(img|image|picture|iframe|frame|object|embed|video|audio|source|track|link|base|portal)\b",
     "meta refresh": r"<\s*meta\b[^>]*http-equiv",
     "CSS import or web font": r"@import\b|@font-face\b",
     "url() other than a fragment reference": r"(?<![\w.$])url\(\s*(?![\"']?\s*#)",
@@ -146,6 +150,8 @@ def static_gates(html: str | None, kind: str, width: int, height: int) -> list[s
     failures = []
     if len(html.encode()) > MAX_KB * 1024:
         failures.append(f"larger than {MAX_KB} KB")
+    if _ELEMENTS.search(_SCRIPT_BODY.sub(r"\1\2", html)):
+        failures.append("raster or embedded element")
     for name, pattern in _COMMON.items():
         if re.search(pattern, html, re.I):
             failures.append(name)

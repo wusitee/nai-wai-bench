@@ -80,6 +80,11 @@ def test_extract_html_uses_last_block():
     (SVG_STATIC.replace('<circle', '<image href="data:image/png;base64,iVBORw0KGgo="/><circle'), "2d-s1",
      "raster or embedded element"),
     (SVG_STATIC.replace("</defs>", '<linearGradient id="g2" href="#g"/></defs>'), "2d-s1", None),
+    # Comparisons in code are not element tags.
+    (three_page(ROUND_CHARACTER, "for (let i = 0; i < track.length && i <base.length; i++) {} renderer.render(scene, cam);"),
+     "3d-s1", None),
+    (three_page(ROUND_CHARACTER).replace("<head>", "<head><link rel=stylesheet href=#x>"), "3d-s1",
+     "raster or embedded element"),
     (SVG_STATIC.replace("<circle", '<a href="https://example.com"></a><circle'), "2d-s1", "non-fragment href"),
     (SVG_STATIC.replace('viewBox="0 0 240 242"', 'viewBox="nonsense"'), "2d-s1", "viewBox"),
     (SVG_CSS_LOOP, "2d-s1", "CSS animation or transition"),
