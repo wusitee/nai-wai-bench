@@ -315,14 +315,64 @@ def test_published_snapshot_is_pinned_web_media_and_pages_never_embed_model_code
     assert summary["labels"] == {"subject": "Subject (xhigh)"} and len(summary["tasks"]["001"]["frames"]) == 8
     # A re-sync of unchanged inputs keeps the pin; a changed file breaks it.
     assert frontend_results.sync(tmp_path, corpus, run, {"subject": spec})[1] == digest
-    _, loaded = frontend_results.load(tmp_path, "pub", digest)
+    files, loaded = frontend_results.load(tmp_path, "pub", digest)
     with pytest.raises(ValueError, match="saved results changed"):
         frontend_results.load(tmp_path, "pub", "0" * 64)
 
     out = tmp_path / "site"
-    frontend_site.build(snapshot, loaded, out)
+    frontend_site.build(files, loaded, out)
     page = (out / "frontend/001/index.html").read_text()
     assert "@keyframes sway" not in page and "<iframe" not in page
     assert (out / "frontend/m/subject/001/2d-s2__r1/source.txt").read_text() == SVG_CSS_LOOP
     assert "Subject" in page and "loading=lazy" in page and "prefers-reduced-motion" in page
     assert (out / "frontend/m/subject/001/2d-s2__r1/preview.webp").is_file()
+
+
+def _repin(snapshot: Path, changes: dict[str, bytes]) -> str:
+    """Rewrite snapshot files with consistent checksums, as a hostile or broken sync could, and return the pin."""
+    import hashlib
+    from nwb import frontend_results
+
+    meta = json.loads((snapshot / "snapshot.json").read_text())
+    for name, data in changes.items():
+        (snapshot / name).parent.mkdir(parents=True, exist_ok=True)
+        (snapshot / name).write_bytes(data)
+        meta["files"][name] = hashlib.sha256(data).hexdigest()
+    (snapshot / "snapshot.json").write_text(json.dumps(meta))
+    return frontend_results._digest({name: (snapshot / name).read_bytes() for name in meta["files"]})
+
+
+@pytest.mark.parametrize("change, message", [
+    ("task", "task '../meme-id'"),
+    ("model", "labels"),
+    ("image", "is not a saved image"),
+])
+def test_published_snapshot_rejects_unsafe_identifiers_and_unverified_files(tmp_path, change, message):
+    from nwb import frontend_results
+
+    snapshot = tmp_path / "results/frontend/pub"
+    sample = "frontend/subject/001/2d-s2__r1"
+    files = {"summary.json": {"run": "pub", "corpus": "frontend-v1", "harness": "h", "labels": {"subject": "S"},
+                              "tasks": {"001": {"title": "t", "width": 240, "height": 242, "duration_ms": 1500,
+                                                "frames": []}},
+                              "samples": [{"sample": f"{sample}.json", "model": "subject", "task": "001",
+                                           "kind": "2d-s2", "rep": 1, "status": "passed", "gates": []}]},
+             f"{sample}.json": {"html": SVG_CSS_LOOP},
+             f"{sample}/render.json": {"frames": [{"file": "frame_00.webp", "t": 0}]}}
+    data = {name: json.dumps(value).encode() for name, value in files.items()}
+    data[f"{sample}/frame_00.webp"] = b"webp"
+    (snapshot).mkdir(parents=True)
+    (snapshot / "snapshot.json").write_text(json.dumps({"format": 1, "track": "frontend", "run": "pub", "files": {}}))
+    assert frontend_results.load(tmp_path, "pub", _repin(snapshot, data))[1]["labels"] == {"subject": "S"}
+
+    summary = files["summary.json"]
+    if change == "task":
+        summary["tasks"]["../meme-id"] = summary["tasks"]["001"]
+    elif change == "model":
+        summary["labels"]["m'><svg onload=alert(1)>"] = "x"
+    else:  # a reference to an image outside the checksummed files
+        (snapshot / sample / "extra.webp").write_bytes(b"unlisted")
+        data[f"{sample}/render.json"] = json.dumps({"frames": [{"file": "extra.webp", "t": 0}]}).encode()
+    data["summary.json"] = json.dumps(summary).encode()
+    with pytest.raises(ValueError, match=re.escape(message)):
+        frontend_results.load(tmp_path, "pub", _repin(snapshot, data))

@@ -1,10 +1,12 @@
 """Release pages of the experimental frontend track (frontend/ of the published site).
 
-Built from a verified snapshot (`nwb.frontend_results`). Like the local gallery, the pages never run model
+Built only from the checksum-verified files of a saved run, after `nwb.frontend_results.load` has checked
+every identifier and reference in them. Like the local gallery, the pages never run model
 code: they show the harness renders beside the reference GIFs and link each page's source as plain text.
 Images are lazy-loaded with fixed dimensions, sample details load only when opened, and each task has its
 own page, so the overview stays light."""
 
+import json
 import shutil
 from html import escape as e
 from pathlib import Path
@@ -12,7 +14,6 @@ from pathlib import Path
 from nwb.frontend import KINDS, MEMORY, VIEWS
 from nwb.report import model_html
 from nwb.site import FRONTEND_NAME, _footer, _head, _header
-from nwb.util import read_json
 
 CSS = """
 .fe-tasks{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:14px;margin-top:12px}
@@ -60,7 +61,12 @@ def _img(src: str, width: int, height: int, alt: str, still: str | None = None) 
     return img
 
 
-def build(snapshot: Path, summary: dict, out: Path, repo_url: str | None = None, blob: str | None = None) -> Path:
+def _number(value, pattern: str) -> str:
+    return pattern.format(value) if isinstance(value, (int, float)) and not isinstance(value, bool) and value > 0 else ""
+
+
+def build(files: dict[str, bytes], summary: dict, out: Path, repo_url: str | None = None,
+          blob: str | None = None) -> Path:
     """Write out/frontend/: an overview with the gate table and one page per task."""
     base = out / "frontend"
     if base.exists():
@@ -71,20 +77,21 @@ def build(snapshot: Path, summary: dict, out: Path, repo_url: str | None = None,
     models = sorted(labels, key=lambda m: labels[m].lower())
     by_key = {(s["model"], s["task"], s["kind"], s["rep"]): s["sample"] for s in summary["samples"]}
 
-    def site_dir(stem: str) -> Path:
-        """Snapshot reference/<task>/ and frontend/<model>/... directories under frontend/reference/ and frontend/m/."""
-        return base / ("m/" + stem.removeprefix("frontend/") if stem.startswith("frontend/") else stem)
-
-    def media(name: str | None, sample_stem: str, depth: str) -> str | None:
-        """Copy one snapshot file into the site and return its link from a page `depth` levels below frontend/."""
-        if not name:
-            return None
-        source = snapshot / sample_stem / name
-        target = site_dir(sample_stem) / name
+    def write(stem: str, name: str, data: bytes) -> str:
+        """Write a file of snapshot directory `stem` (reference/<task>/ stays, frontend/<model>/... goes under
+        m/) and return its path below frontend/."""
+        relative = ("m/" + stem.removeprefix("frontend/") if stem.startswith("frontend/") else stem) + "/" + name
+        target = base / relative
+        if not target.resolve().is_relative_to(base.resolve()):
+            raise ValueError(f"frontend page file leaves the output directory: {relative!r}")
         if not target.is_file():
             target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(source, target)
-        return depth + target.relative_to(base).as_posix()
+            target.write_bytes(data)
+        return relative
+
+    def media(name: str | None, stem: str, depth: str) -> str | None:
+        """Publish one verified image and return its link from a page `depth` levels below frontend/."""
+        return depth + write(stem, name, files[f"{stem}/{name}"]) if name else None
 
     docs = f"<a href='{e(blob, quote=True)}/docs/frontend.md'>方法 Method</a>" if blob else ""
     title = f"{FRONTEND_NAME[0]} · {FRONTEND_NAME[1]} · 奶蛙bench"
@@ -102,8 +109,12 @@ def build(snapshot: Path, summary: dict, out: Path, repo_url: str | None = None,
             "a revision is the model's one change after seeing its own render.</span></div>")
 
     # --- overview ---
-    kinds = [k for k in KINDS if any(r["kind"] == k for r in summary["rows"])]
-    rows = {(r["model"], r["kind"]): r for r in summary["rows"]}
+    rows: dict[tuple[str, str], dict] = {}
+    for entry in summary["samples"]:
+        row = rows.setdefault((entry["model"], entry["kind"]), {"samples": 0, "passed": 0})
+        row["samples"] += 1
+        row["passed"] += entry["status"] == "passed"
+    kinds = [k for k in KINDS if any(kind == k for _, kind in rows)]
     table = ["<div class='scroll card-table'><table class=fe-table><tr><th>模型 Model</th>"
              + "".join(f"<th class=n>{e(k)}</th>" for k in kinds) + "</tr>"]
     for model in models:
@@ -126,7 +137,7 @@ def build(snapshot: Path, summary: dict, out: Path, repo_url: str | None = None,
             name = task_id
         else:
             thumb, name = "<span class=fe-mem>?</span>", "凭记忆 From memory"
-        cards.append(f"<a class=fe-task href='{e(task_id)}/'>{thumb}<div><b>{e(name)}</b>{e(task['title'])}"
+        cards.append(f"<a class=fe-task href='{e(task_id, quote=True)}/'>{thumb}<div><b>{e(name)}</b>{e(task['title'])}"
                      f"<br><span class=muted>{count} 个样本 samples</span></div></a>")
     page = [head, _header("frontend", "<a href='#tasks'>题目 Tasks</a><a href='#gates'>检查 Gates</a>" + docs, True),
             "<div class='hero solo'><div>"
@@ -158,12 +169,11 @@ def build(snapshot: Path, summary: dict, out: Path, repo_url: str | None = None,
                         f"not collected</div><figcaption>{label}</figcaption></figure>"), ""
             stem = path.removesuffix(".json")
             entry = status[path]
-            record = read_json(snapshot / path)
-            render_path = snapshot / stem / "render.json"
-            render = read_json(render_path) if render_path.is_file() else None
-            meta = record.get("meta") or {}
-            facts = [f"{meta['seconds']:.0f} s" if meta.get("seconds") else "",
-                     f"{meta['tokens']['output']:,} tok" if (meta.get("tokens") or {}).get("output") else ""]
+            record = json.loads(files[path])
+            render = json.loads(files[f"{stem}/render.json"]) if f"{stem}/render.json" in files else None
+            meta = record.get("meta") if isinstance(record.get("meta"), dict) else {}
+            tokens = meta.get("tokens") if isinstance(meta.get("tokens"), dict) else {}
+            facts = [_number(meta.get("seconds"), "{:.0f} s"), _number(tokens.get("output"), "{:,} tok")]
             mark = {"passed": "<span class=mark-ok>✓</span>", "gate failed": "<span class=mark-no>✗</span>"}.get(
                 entry["status"], "<span class=muted>–</span>")
             frames = (render or {}).get("frames", [])
@@ -180,10 +190,9 @@ def build(snapshot: Path, summary: dict, out: Path, repo_url: str | None = None,
                 main = f"<div class='fe-none bad' style='aspect-ratio:{width}/{height}'>{text}</div>"
             cell = (f"<figure class=fe-cell>{main}<figcaption>{mark} {label}<br>"
                     + " · ".join(e(f) for f in facts if f) + "</figcaption></figure>")
-            source = site_dir(stem) / "source.txt"
-            source.parent.mkdir(parents=True, exist_ok=True)
-            source.write_text(record.get("html") or "", encoding="utf-8")
-            detail = [f"<h4>{e(kind)} · {e(caption[1])} · <a href='../{source.relative_to(base).as_posix()}'>源码 source</a></h4>"]
+            page_source = record.get("html") if isinstance(record.get("html"), str) else ""
+            source = write(stem, "source.txt", page_source.encode())
+            detail = [f"<h4>{e(kind)} · {e(caption[1])} · <a href='../{e(source, quote=True)}'>源码 source</a></h4>"]
             if entry["gates"]:
                 detail.append("<p class=fe-gates>" + "<br>".join(e(g) for g in entry["gates"]) + "</p>")
             # Keyframes pair the reference (left) with the render; renders without a reference and the 3D
@@ -197,9 +206,9 @@ def build(snapshot: Path, summary: dict, out: Path, repo_url: str | None = None,
                 if reference:
                     ref = _img(media(reference["file"], f"reference/{task_id}", "../"), width, height, "reference")
                     pairs.append(f"<figure class=fe-pair><div>{ref}{render_img}</div>"
-                                 f"<figcaption>{reference['t']} ms</figcaption></figure>")
+                                 f"<figcaption>{int(reference['t'])} ms</figcaption></figure>")
                 else:
-                    singles.append(f"<figure class=fe-pair>{render_img}<figcaption>{frame['t']} ms</figcaption></figure>")
+                    singles.append(f"<figure class=fe-pair>{render_img}<figcaption>{int(frame['t'])} ms</figcaption></figure>")
             for view in (render or {}).get("views", []):
                 if view["file"] and view["view"] in VIEWS:
                     singles.append(f"<figure class=fe-pair>{_img(media(view['file'], stem, '../'), width, height, view['view'])}"
@@ -233,7 +242,7 @@ def build(snapshot: Path, summary: dict, out: Path, repo_url: str | None = None,
                          "prompt only asks to draw 大笑奶龙 from memory.</span></p>")
         else:
             strip = "".join(f"<figure>{_img(media(f['file'], f'reference/{task_id}', '../'), width, height, 'keyframe')}"
-                            f"<figcaption>{f['t']} ms</figcaption></figure>" for f in ref_frames)
+                            f"<figcaption>{int(f['t'])} ms</figcaption></figure>" for f in ref_frames)
             gif = media(task["gif"], f"reference/{task_id}", "../")
             reference = (f"<div class=fe-ref><figure>{_img(gif, width, height, task['title'], still=media(ref_frames[0]['file'], f'reference/{task_id}', '../'))}"
                          f"<figcaption>参考 GIF reference · {task['duration_ms']} ms · {width} × {height}</figcaption></figure>"
@@ -243,6 +252,5 @@ def build(snapshot: Path, summary: dict, out: Path, repo_url: str | None = None,
                 f"<p class=muted><a href='../'>← 前端复刻 Frontend rebuild</a></p>"
                 f"<h1>{e('凭记忆' if memory else task_id)} <span class=en>{e(task['title'])}</span></h1>{reference}",
                 *sections, _footer(repo_url, blob)]
-        (base / task_id).mkdir(parents=True, exist_ok=True)
-        (base / task_id / "index.html").write_text("\n".join(page), encoding="utf-8")
+        write(task_id, "index.html", "\n".join(page).encode())
     return base / "index.html"

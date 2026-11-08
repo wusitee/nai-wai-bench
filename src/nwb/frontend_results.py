@@ -8,12 +8,13 @@ restorable, so re-rendering or collecting more needs the working run under runs/
 import hashlib
 import io
 import json
+import re
 from pathlib import Path
 
 from nwb import __version__
 from nwb.bundle import _digest, _json_bytes
 from nwb.config import ModelSpec
-from nwb.frontend import MEMORY, Corpus, rendered_images, samples, summary
+from nwb.frontend import KINDS, MEMORY, VIEWS, Corpus, rendered_images, samples, summary
 from nwb.frontend_render import harness_id, render_current
 from nwb.results import METADATA, _file
 from nwb.util import read_json, write_bytes, write_json
@@ -21,6 +22,10 @@ from nwb.util import read_json, write_bytes, write_json
 FORMAT = 1
 STILL_QUALITY = 85
 LOOP_QUALITY = 70
+# Identifiers used in published paths and markup, and saved media file names.
+NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
+MEDIA = re.compile(r"[a-z0-9_]+\.(?:webp|png|gif)")
+STATUSES = ("passed", "gate failed", "unrendered")
 
 
 def directory(root: Path, run: str) -> Path:
@@ -122,8 +127,67 @@ def sync(root: Path, corpus: Corpus, run_dir: Path, models: dict[str, ModelSpec]
     return snapshot, digest
 
 
-def load(root: Path, run: str, sha256: str) -> tuple[Path, dict]:
-    """Verify a saved snapshot against its checksums and a release pin; returns it and its summary."""
+def _count(value, minimum: int = 0) -> bool:
+    return isinstance(value, int) and not isinstance(value, bool) and value >= minimum
+
+
+def _validate(files: dict[str, bytes]) -> dict:
+    """The summary, after checking that every identifier is safe for paths and markup and that every
+    record, render, and image the pages use is one of the verified files."""
+    def check(ok: bool, what: str) -> None:
+        if not ok:
+            raise ValueError(f"invalid frontend snapshot: {what}")
+
+    def media(name, directory: str, what: str) -> None:
+        check(isinstance(name, str) and bool(MEDIA.fullmatch(name)) and f"{directory}/{name}" in files,
+              f"{what} {name!r} is not a saved image")
+
+    summary = json.loads(files["summary.json"])
+    check(isinstance(summary, dict) and all(isinstance(summary.get(k), str) for k in ("run", "corpus", "harness")),
+          "summary fields")
+    tasks, labels = summary.get("tasks"), summary.get("labels")
+    check(isinstance(tasks, dict) and isinstance(labels, dict), "tasks or labels")
+    for task_id, task in tasks.items():
+        check(bool(NAME.fullmatch(task_id)) and task_id not in ("m", "reference") and isinstance(task, dict) and isinstance(task.get("title"), str)
+              and _count(task.get("width"), 1) and _count(task.get("height"), 1) and _count(task.get("duration_ms"))
+              and isinstance(task.get("frames"), list), f"task {task_id!r}")
+        for frame in task["frames"]:
+            check(isinstance(frame, dict) and _count(frame.get("t")), f"task {task_id!r} frame time")
+            media(frame.get("file"), f"reference/{task_id}", "reference frame")
+        if task["frames"]:
+            media(task.get("gif"), f"reference/{task_id}", "reference GIF")
+    check(all(NAME.fullmatch(m) and isinstance(label, str) for m, label in labels.items()), "labels")
+    check(isinstance(summary.get("samples"), list), "samples")
+    for entry in summary["samples"]:
+        check(isinstance(entry, dict) and entry.get("model") in labels and entry.get("task") in tasks
+              and entry.get("kind") in KINDS and _count(entry.get("rep"), 1) and entry.get("status") in STATUSES
+              and isinstance(entry.get("gates"), list) and all(isinstance(g, str) for g in entry["gates"]),
+              f"sample entry {entry!r}")
+        stem = f"frontend/{entry['model']}/{entry['task']}/{entry['kind']}__r{entry['rep']}"
+        check(entry.get("sample") == f"{stem}.json" and entry["sample"] in files, f"sample {entry.get('sample')!r}")
+        render = json.loads(files[f"{stem}/render.json"]) if f"{stem}/render.json" in files else None
+        check((render is None) == (entry["status"] == "unrendered"), f"render of {stem}")
+        if render is None:
+            continue
+        check(isinstance(render, dict) and isinstance(render.get("frames", []), list)
+              and isinstance(render.get("views", []), list), f"render of {stem}")
+        for frame in render.get("frames", []):
+            check(isinstance(frame, dict) and _count(frame.get("t")), f"frame time in {stem}")
+            if frame.get("file") is not None:
+                media(frame["file"], stem, "render frame")
+        for view in render.get("views", []):
+            check(isinstance(view, dict) and view.get("view") in VIEWS, f"view in {stem}")
+            if view.get("file") is not None:
+                media(view["file"], stem, "render view")
+        for key in ("preview", "failed_screenshot"):
+            if render.get(key) is not None:
+                media(render[key], stem, key)
+    return summary
+
+
+def load(root: Path, run: str, sha256: str) -> tuple[dict[str, bytes], dict]:
+    """Verify a saved snapshot against its checksums and a release pin; returns its verified files, which are
+    all that pages may use, and its validated summary."""
     snapshot = directory(root, run)
     if not (snapshot / METADATA).is_file():
         raise FileNotFoundError(f"saved frontend results not found: {snapshot}; run nwb frontend sync --run {run}")
@@ -141,4 +205,4 @@ def load(root: Path, run: str, sha256: str) -> tuple[Path, dict]:
     if digest != sha256:
         raise ValueError(f"release frontend: saved results changed (expected {sha256}, got {digest}); "
                          "review the changed run before updating the manifest")
-    return snapshot, json.loads(files["summary.json"])
+    return files, _validate(files)
