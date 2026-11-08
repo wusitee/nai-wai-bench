@@ -1,0 +1,74 @@
+{
+  "html_sha256": "f9ae7f4efe7f96e96fa40254b81b4f93212599972728345cecfbc5938cd9d0e8",
+  "harness": "fee9bd636b661bc1",
+  "kind": "3d-s1",
+  "gates": [],
+  "errors": [],
+  "blocked": [],
+  "forbidden": [],
+  "elements": [],
+  "timing": {
+    "declarative": false,
+    "scripted": false
+  },
+  "frames": [
+    {
+      "file": "frame_00.webp",
+      "t": 0
+    }
+  ],
+  "views": [
+    {
+      "file": "view_side.webp",
+      "view": "side",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_back.webp",
+      "view": "back",
+      "t": 0,
+      "hidden": [
+        "plaster-wall"
+      ]
+    },
+    {
+      "file": "view_three_quarter.webp",
+      "view": "three_quarter",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_top.webp",
+      "view": "top",
+      "t": 0,
+      "hidden": []
+    }
+  ],
+  "scene": {
+    "characters": [
+      {
+        "name": "character-left-student",
+        "meshes": 51,
+        "width": 2.3231625931549074,
+        "height": 2.9742197069405867,
+        "depth": 2.4917436223981877,
+        "ratio": 1.0725653166678892
+      },
+      {
+        "name": "character-right-helpful-companion",
+        "meshes": 42,
+        "width": 3.030017892990112,
+        "height": 2.914932247325535,
+        "depth": 2.1771836488851974,
+        "ratio": 0.7185382152105668
+      }
+    ],
+    "textures": 2
+  },
+  "mode": "render(t)",
+  "checks": {
+    "determinism_diff": 0.0
+  },
+  "seconds": 1.7
+}

@@ -1,0 +1,95 @@
+{
+  "html_sha256": "501f795193d5387ae2edde1c2c03f35fa2ce43fde0ba5f1c30591ea62389b3d6",
+  "harness": "fee9bd636b661bc1",
+  "kind": "3d-s2",
+  "gates": [],
+  "errors": [],
+  "blocked": [],
+  "forbidden": [],
+  "elements": [],
+  "timing": {
+    "declarative": false,
+    "scripted": false
+  },
+  "frames": [
+    {
+      "file": "frame_00.webp",
+      "t": 0
+    },
+    {
+      "file": "frame_01.webp",
+      "t": 160
+    },
+    {
+      "file": "frame_02.webp",
+      "t": 340
+    },
+    {
+      "file": "frame_03.webp",
+      "t": 500
+    },
+    {
+      "file": "frame_04.webp",
+      "t": 680
+    },
+    {
+      "file": "frame_05.webp",
+      "t": 840
+    },
+    {
+      "file": "frame_06.webp",
+      "t": 1020
+    },
+    {
+      "file": "frame_07.webp",
+      "t": 1180
+    }
+  ],
+  "views": [
+    {
+      "file": "view_side.webp",
+      "view": "side",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_back.webp",
+      "view": "back",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_three_quarter.webp",
+      "view": "three_quarter",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_top.webp",
+      "view": "top",
+      "t": 0,
+      "hidden": []
+    }
+  ],
+  "scene": {
+    "characters": [
+      {
+        "name": "character-chubby-yellow-duck",
+        "meshes": 11,
+        "width": 3.4736111164093018,
+        "height": 4.5957984064066615,
+        "depth": 3.5246634766691614,
+        "ratio": 1.0146972008520725
+      }
+    ],
+    "textures": 1
+  },
+  "mode": "render(t)",
+  "preview": "preview.webp",
+  "checks": {
+    "determinism_diff": 0.0,
+    "loop_diff": 0.0,
+    "motion_diff": 0.02778346994535519
+  },
+  "seconds": 3.5
+}

@@ -1,0 +1,109 @@
+{
+  "settings_id": "1e77488ebc8a6fba",
+  "track": "frontend",
+  "corpus": "frontend-v1",
+  "model": "opus-5.5",
+  "vendor": "anthropic",
+  "task": "007",
+  "kind": "3d-s1",
+  "rep": 1,
+  "prompt_sha256": "2bcc34f29dadfc95acf5737317a17b0366fa9c286217ac5a148050dfb0a2b58e",
+  "width": 240,
+  "height": 294,
+  "duration_ms": 5540,
+  "input_names": "neutral",
+  "images": [
+    "bench/frontend-v1/assets/007/frame_00.png"
+  ],
+  "prompt": "The attached image is a 240x294 px frame from an animated GIF. Rebuild the scene in 3D with three.js.\n\nTask (3D, static): write an HTML page that builds the scene from code and renders it so that the view from your reference camera reproduces the image as faithfully as you can: characters, poses, facial expressions, hands, props, background, and colors. A later step will animate your scene, so structure it in named groups. For this static step, render(t) may ignore t.\n\nthree.js contract:\n- The harness injects an import map for three.js r187. Import from 'three' and from 'three/addons/'; the only addons available are 'three/addons/controls/OrbitControls.js', 'three/addons/geometries/ConvexGeometry.js', 'three/addons/geometries/ParametricFunctions.js', 'three/addons/geometries/ParametricGeometry.js', 'three/addons/geometries/RoundedBoxGeometry.js', 'three/addons/math/ConvexHull.js', 'three/addons/utils/BufferGeometryUtils.js'. Use one <script type=\"module\">. Do not add an import map or load anything else.\n- Build all geometry in code: no model files, no loaders, no image textures. Procedural CanvasTexture or DataTexture textures up to 64x64 px are allowed.\n- Create the renderer with new THREE.WebGLRenderer({ preserveDrawingBuffer: true }), at pixel ratio 1, with a 240x294 canvas that fills the page.\n- Y is up. Put each character in its own THREE.Group with a descriptive name (for example 'character-left'), with nested named groups for parts that could move (head, eyes, mouth, arms, hands, ...). Characters must be solid 3D volumes: the harness also renders them from the side, the back, a three-quarter angle, and above, with cameras fitted to the characters.\n- Light the scene so the characters read from every side.\n- When the scene is ready, set window.nwb = { scene, renderer, cameras: { ref }, characters, render(t), ready: true }. cameras.ref is the camera for the main view. characters is an array of the character groups. render(t) poses the scene for time t in milliseconds and renders it synchronously with cameras.ref; the same t must always produce identical pixels, whatever was rendered before. Do not use renderer.setAnimationLoop: the harness calls render(t).\n\nRules (breaking any rule scores 0):\n- Reply with exactly one ```html code block containing one complete, self-contained HTML document. If you send several blocks, only the last one counts. Do not use tools; answer directly.\n- The page is rendered offline in a 240x294 px viewport at device pixel ratio 1. Fill exactly that area, starting at the top-left corner.\n- No raster images: no <img>, no <image>, no CSS url(...) except url(#id) references to your own SVG definitions, no data: URIs, no base64, no blob: URLs.\n- No external resources or network access: no external scripts, stylesheets, fonts, iframes, links, fetch, XMLHttpRequest, WebSocket, or any other URL.\n- Do not call setTimeout, setInterval, requestAnimationFrame, or requestIdleCallback. The harness controls time.\n- The file must be at most 256 KB and must run without uncaught exceptions or console errors.",
+  "text": "```html\n<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<style>\nhtml,body{margin:0;padding:0;width:240px;height:294px;overflow:hidden;background:#fffdf0;}\ncanvas{display:block;position:absolute;left:0;top:0;width:240px;height:294px;}\n</style>\n</head>\n<body>\n<script type=\"module\">\nimport * as THREE from 'three';\n\nconst W = 240, H = 294;\nconst renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true, antialias: true });\nrenderer.setPixelRatio(1);\nrenderer.setSize(W, H);\nrenderer.outputColorSpace = THREE.SRGBColorSpace;\ndocument.body.appendChild(renderer.domElement);\n\nconst scene = new THREE.Scene();\n\n// Background: bright glow, white center, pale yellow edges\n{\n  const c = document.createElement('canvas'); c.width = 64; c.height = 64;\n  const g = c.getContext('2d');\n  const grd = g.createRadialGradient(34, 26, 4, 32, 30, 46);\n  grd.addColorStop(0, '#ffffff');\n  grd.addColorStop(0.45, '#fffef4');\n  grd.addColorStop(0.8, '#f8f2c4');\n  grd.addColorStop(1, '#efe49a');\n  g.fillStyle = grd; g.fillRect(0, 0, 64, 64);\n  const tex = new THREE.CanvasTexture(c);\n  tex.colorSpace = THREE.SRGBColorSpace;\n  scene.background = tex;\n}\n\n// Camera\nconst camera = new THREE.PerspectiveCamera(2 * Math.atan(1.9 / 10) * 180 / Math.PI, W / H, 0.1, 100);\ncamera.position.set(0, 0, 10);\ncamera.lookAt(0, 0, 0);\n\n// Lights\nscene.add(new THREE.HemisphereLight(0xffffff, 0xd8c890, 1.6));\nconst key = new THREE.DirectionalLight(0xffffff, 1.8); key.position.set(1, 2, 6); scene.add(key);\nconst fill = new THREE.DirectionalLight(0xfff6e0, 0.7); fill.position.set(-4, 1, 3); scene.add(fill);\nconst rim = new THREE.DirectionalLight(0xffffff, 1.0); rim.position.set(0, 3, -6); scene.add(rim);\nconst rim2 = new THREE.DirectionalLight(0xffffff, 0.6); rim2.position.set(5, -1, -3); scene.add(rim2);\n\n// Materials\nconst yellow = new THREE.MeshStandardMaterial({ color: 0xebcc38, roughness: 0.55, emissive: 0x3a2e00, emissiveIntensity: 0.35 });\nconst handMat = new THREE.MeshStandardMaterial({ color: 0x4d4a26, roughness: 0.7 });\nconst eyeMat = new THREE.MeshStandardMaterial({ color: 0x5a4a20, roughness: 0.8 });\nconst cheekMat = new THREE.MeshStandardMaterial({ color: 0xf0a090, roughness: 0.8, transparent: true, opacity: 0.45 });\n\nlet bellyMat;\n{\n  const c = document.createElement('canvas'); c.width = 64; c.height = 64;\n  const g = c.getContext('2d');\n  const grd = g.createLinearGradient(0, 0, 0, 64);\n  grd.addColorStop(0, '#f2c49a');\n  grd.addColorStop(0.25, '#f4c2b8');\n  grd.addColorStop(0.45, '#fbf2ec');\n  grd.addColorStop(0.58, '#fbf6f2');\n  grd.addColorStop(0.75, '#ecbccc');\n  grd.addColorStop(1, '#ebc0a8');\n  g.fillStyle = grd; g.fillRect(0, 0, 64, 64);\n  const tex = new THREE.CanvasTexture(c);\n  tex.colorSpace = THREE.SRGBColorSpace;\n  bellyMat = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.5, emissive: 0x302020, emissiveIntensity: 0.3 });\n}\n\nfunction limb(a, b, r, mat, name) {\n  const A = new THREE.Vector3(...a), B = new THREE.Vector3(...b);\n  const d = B.clone().sub(A);\n  const len = d.length();\n  const m = new THREE.Mesh(new THREE.CapsuleGeometry(r, len, 6, 14), mat);\n  m.position.copy(A).add(B).multiplyScalar(0.5);\n  m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize());\n  if (name) m.name = name;\n  return m;\n}\n\n// Character\nconst bird = new THREE.Group(); bird.name = 'character-bird';\nscene.add(bird);\n\n// Body\nconst body = new THREE.Group(); body.name = 'body';\nbird.add(body);\n{\n  const prof = [\n    [0, 1.15], [0.30, 1.1], [0.33, 1.0], [0.45, 0.7], [0.6, 0.4], [0.71, 0.0],\n    [0.72, -0.4], [0.62, -0.8], [0.45, -1.1], [0.22, -1.26], [0, -1.3]\n  ].map(p => new THREE.Vector2(p[0], p[1]));\n  const curve = new THREE.SplineCurve(prof);\n  const pts = curve.getPoints(60);\n  pts[0].x = 0; pts[pts.length - 1].x = 0;\n  const geo = new THREE.LatheGeometry(pts, 40);\n  const torso = new THREE.Mesh(geo, yellow);\n  torso.name = 'torso';\n  torso.scale.set(1, 1, 0.88);\n  torso.position.set(-0.2, 0, 0);\n  body.add(torso);\n\n  const belly = new THREE.Mesh(new THREE.SphereGeometry(1, 40, 32), bellyMat);\n  belly.name = 'belly';\n  belly.scale.set(0.62, 0.88, 0.5);\n  belly.position.set(-0.19, -0.25, 0.22);\n  body.add(belly);\n}\n\n// Head\nconst head = new THREE.Group(); head.name = 'head';\nhead.position.set(-0.28, 1.0, 0);\nhead.rotation.z = 0.05;\nbird.add(head);\n{\n  const h = new THREE.Mesh(new THREE.SphereGeometry(1, 40, 32), yellow);\n  h.name = 'skull';\n  h.scale.set(0.31, 0.88, 0.3);\n  h.position.set(0, 0.0, 0);\n  head.add(h);\n\n  const eyes = new THREE.Group(); eyes.name = 'eyes';\n  head.add(eyes);\n  const eyeGeo = new THREE.CapsuleGeometry(0.014, 0.08, 4, 8);\n  const mkEye = (x, name, rot) => {\n    const g = new THREE.Group(); g.name = name;\n    const e = new THREE.Mesh(eyeGeo, eyeMat);\n    e.rotation.z = Math.PI / 2 + rot;\n    g.add(e);\n    g.position.set(x, 0.36, 0.25);\n    g.rotation.y = x * 2.2;\n    eyes.add(g);\n  };\n  mkEye(-0.12, 'eye-left', -0.12);\n  mkEye(0.12, 'eye-right', 0.12);\n\n  const cheeks = new THREE.Group(); cheeks.name = 'cheeks';\n  head.add(cheeks);\n  for (const x of [-0.14, 0.14]) {\n    const c = new THREE.Mesh(new THREE.SphereGeometry(0.06, 16, 12), cheekMat);\n    c.scale.set(1, 0.6, 0.4);\n    c.position.set(x, 0.16, 0.255);\n    cheeks.add(c);\n  }\n  const mouth = new THREE.Group(); mouth.name = 'mouth';\n  mouth.position.set(0, 0.12, 0.29);\n  head.add(mouth);\n}\n\n// Hand builder\nfunction makeHand(name, side) {\n  const g = new THREE.Group(); g.name = name;\n  const palm = new THREE.Mesh(new THREE.SphereGeometry(1, 20, 16), handMat);\n  palm.scale.set(0.1, 0.11, 0.045);\n  palm.position.set(0, -0.08, 0);\n  g.add(palm);\n  const fingers = new THREE.Group(); fingers.name = name + '-fingers';\n  g.add(fingers);\n  const angs = [-0.45, -0.15, 0.15, 0.42];\n  angs.forEach((a, i) => {\n    const len = i === 0 || i === 3 ? 0.12 : 0.15;\n    const sx = Math.sin(a) * 0.08, sy = -0.14;\n    const ex = sx + Math.sin(a) * len, ey = sy - Math.cos(a) * len;\n    fingers.add(limb([sx, sy, 0], [ex, ey, 0], 0.024, handMat));\n  });\n  // thumb\n  fingers.add(limb([side * -0.06, -0.06, 0.03], [side * -0.12, -0.17, 0.07], 0.026, handMat));\n  return g;\n}\n\nfunction makeArm(name, shoulder, wrist, side) {\n  const arm = new THREE.Group(); arm.name = name;\n  arm.position.set(...shoulder);\n  bird.add(arm);\n  const rel = [wrist[0] - shoulder[0], wrist[1] - shoulder[1], wrist[2] - shoulder[2]];\n  const upper = limb([0, 0, 0], rel, 0.11, yellow, name + '-limb');\n  arm.add(upper);\n  const hand = makeHand(side < 0 ? 'hand-left' : 'hand-right', side);\n  hand.position.set(rel[0], rel[1] + 0.02, rel[2]);\n  hand.rotation.z = side * -0.15;\n  arm.add(hand);\n  return arm;\n}\nmakeArm('arm-left', [-0.72, 0.5, 0], [-1.04, -0.62, 0.05], -1);\nmakeArm('arm-right', [0.3, 0.55, 0], [0.57, -0.66, 0.05], 1);\n\n// Legs\nfunction makeLeg(name, x) {\n  const leg = new THREE.Group(); leg.name = name;\n  leg.position.set(x, -1.0, 0);\n  bird.add(leg);\n  const l = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.19, 1.1, 20), yellow);\n  l.position.y = -0.55;\n  leg.add(l);\n  const knee = new THREE.Mesh(new THREE.SphereGeometry(0.19, 20, 14), yellow);\n  leg.add(knee);\n  const foot = new THREE.Group(); foot.name = name + '-foot';\n  foot.position.y = -1.1;\n  leg.add(foot);\n  const f = new THREE.Mesh(new THREE.SphereGeometry(1, 20, 14), yellow);\n  f.scale.set(0.16, 0.08, 0.26);\n  f.position.z = 0.1;\n  foot.add(f);\n  return leg;\n}\nmakeLeg('leg-left', -0.5);\nmakeLeg('leg-right', -0.08);\n\nfunction render(t) {\n  renderer.render(scene, camera);\n}\nrender(0);\n\nwindow.nwb = { scene, renderer, cameras: { ref: camera }, characters: [bird], render, ready: true };\n</script>\n</body>\n</html>\n```",
+  "html": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<style>\nhtml,body{margin:0;padding:0;width:240px;height:294px;overflow:hidden;background:#fffdf0;}\ncanvas{display:block;position:absolute;left:0;top:0;width:240px;height:294px;}\n</style>\n</head>\n<body>\n<script type=\"module\">\nimport * as THREE from 'three';\n\nconst W = 240, H = 294;\nconst renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true, antialias: true });\nrenderer.setPixelRatio(1);\nrenderer.setSize(W, H);\nrenderer.outputColorSpace = THREE.SRGBColorSpace;\ndocument.body.appendChild(renderer.domElement);\n\nconst scene = new THREE.Scene();\n\n// Background: bright glow, white center, pale yellow edges\n{\n  const c = document.createElement('canvas'); c.width = 64; c.height = 64;\n  const g = c.getContext('2d');\n  const grd = g.createRadialGradient(34, 26, 4, 32, 30, 46);\n  grd.addColorStop(0, '#ffffff');\n  grd.addColorStop(0.45, '#fffef4');\n  grd.addColorStop(0.8, '#f8f2c4');\n  grd.addColorStop(1, '#efe49a');\n  g.fillStyle = grd; g.fillRect(0, 0, 64, 64);\n  const tex = new THREE.CanvasTexture(c);\n  tex.colorSpace = THREE.SRGBColorSpace;\n  scene.background = tex;\n}\n\n// Camera\nconst camera = new THREE.PerspectiveCamera(2 * Math.atan(1.9 / 10) * 180 / Math.PI, W / H, 0.1, 100);\ncamera.position.set(0, 0, 10);\ncamera.lookAt(0, 0, 0);\n\n// Lights\nscene.add(new THREE.HemisphereLight(0xffffff, 0xd8c890, 1.6));\nconst key = new THREE.DirectionalLight(0xffffff, 1.8); key.position.set(1, 2, 6); scene.add(key);\nconst fill = new THREE.DirectionalLight(0xfff6e0, 0.7); fill.position.set(-4, 1, 3); scene.add(fill);\nconst rim = new THREE.DirectionalLight(0xffffff, 1.0); rim.position.set(0, 3, -6); scene.add(rim);\nconst rim2 = new THREE.DirectionalLight(0xffffff, 0.6); rim2.position.set(5, -1, -3); scene.add(rim2);\n\n// Materials\nconst yellow = new THREE.MeshStandardMaterial({ color: 0xebcc38, roughness: 0.55, emissive: 0x3a2e00, emissiveIntensity: 0.35 });\nconst handMat = new THREE.MeshStandardMaterial({ color: 0x4d4a26, roughness: 0.7 });\nconst eyeMat = new THREE.MeshStandardMaterial({ color: 0x5a4a20, roughness: 0.8 });\nconst cheekMat = new THREE.MeshStandardMaterial({ color: 0xf0a090, roughness: 0.8, transparent: true, opacity: 0.45 });\n\nlet bellyMat;\n{\n  const c = document.createElement('canvas'); c.width = 64; c.height = 64;\n  const g = c.getContext('2d');\n  const grd = g.createLinearGradient(0, 0, 0, 64);\n  grd.addColorStop(0, '#f2c49a');\n  grd.addColorStop(0.25, '#f4c2b8');\n  grd.addColorStop(0.45, '#fbf2ec');\n  grd.addColorStop(0.58, '#fbf6f2');\n  grd.addColorStop(0.75, '#ecbccc');\n  grd.addColorStop(1, '#ebc0a8');\n  g.fillStyle = grd; g.fillRect(0, 0, 64, 64);\n  const tex = new THREE.CanvasTexture(c);\n  tex.colorSpace = THREE.SRGBColorSpace;\n  bellyMat = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.5, emissive: 0x302020, emissiveIntensity: 0.3 });\n}\n\nfunction limb(a, b, r, mat, name) {\n  const A = new THREE.Vector3(...a), B = new THREE.Vector3(...b);\n  const d = B.clone().sub(A);\n  const len = d.length();\n  const m = new THREE.Mesh(new THREE.CapsuleGeometry(r, len, 6, 14), mat);\n  m.position.copy(A).add(B).multiplyScalar(0.5);\n  m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize());\n  if (name) m.name = name;\n  return m;\n}\n\n// Character\nconst bird = new THREE.Group(); bird.name = 'character-bird';\nscene.add(bird);\n\n// Body\nconst body = new THREE.Group(); body.name = 'body';\nbird.add(body);\n{\n  const prof = [\n    [0, 1.15], [0.30, 1.1], [0.33, 1.0], [0.45, 0.7], [0.6, 0.4], [0.71, 0.0],\n    [0.72, -0.4], [0.62, -0.8], [0.45, -1.1], [0.22, -1.26], [0, -1.3]\n  ].map(p => new THREE.Vector2(p[0], p[1]));\n  const curve = new THREE.SplineCurve(prof);\n  const pts = curve.getPoints(60);\n  pts[0].x = 0; pts[pts.length - 1].x = 0;\n  const geo = new THREE.LatheGeometry(pts, 40);\n  const torso = new THREE.Mesh(geo, yellow);\n  torso.name = 'torso';\n  torso.scale.set(1, 1, 0.88);\n  torso.position.set(-0.2, 0, 0);\n  body.add(torso);\n\n  const belly = new THREE.Mesh(new THREE.SphereGeometry(1, 40, 32), bellyMat);\n  belly.name = 'belly';\n  belly.scale.set(0.62, 0.88, 0.5);\n  belly.position.set(-0.19, -0.25, 0.22);\n  body.add(belly);\n}\n\n// Head\nconst head = new THREE.Group(); head.name = 'head';\nhead.position.set(-0.28, 1.0, 0);\nhead.rotation.z = 0.05;\nbird.add(head);\n{\n  const h = new THREE.Mesh(new THREE.SphereGeometry(1, 40, 32), yellow);\n  h.name = 'skull';\n  h.scale.set(0.31, 0.88, 0.3);\n  h.position.set(0, 0.0, 0);\n  head.add(h);\n\n  const eyes = new THREE.Group(); eyes.name = 'eyes';\n  head.add(eyes);\n  const eyeGeo = new THREE.CapsuleGeometry(0.014, 0.08, 4, 8);\n  const mkEye = (x, name, rot) => {\n    const g = new THREE.Group(); g.name = name;\n    const e = new THREE.Mesh(eyeGeo, eyeMat);\n    e.rotation.z = Math.PI / 2 + rot;\n    g.add(e);\n    g.position.set(x, 0.36, 0.25);\n    g.rotation.y = x * 2.2;\n    eyes.add(g);\n  };\n  mkEye(-0.12, 'eye-left', -0.12);\n  mkEye(0.12, 'eye-right', 0.12);\n\n  const cheeks = new THREE.Group(); cheeks.name = 'cheeks';\n  head.add(cheeks);\n  for (const x of [-0.14, 0.14]) {\n    const c = new THREE.Mesh(new THREE.SphereGeometry(0.06, 16, 12), cheekMat);\n    c.scale.set(1, 0.6, 0.4);\n    c.position.set(x, 0.16, 0.255);\n    cheeks.add(c);\n  }\n  const mouth = new THREE.Group(); mouth.name = 'mouth';\n  mouth.position.set(0, 0.12, 0.29);\n  head.add(mouth);\n}\n\n// Hand builder\nfunction makeHand(name, side) {\n  const g = new THREE.Group(); g.name = name;\n  const palm = new THREE.Mesh(new THREE.SphereGeometry(1, 20, 16), handMat);\n  palm.scale.set(0.1, 0.11, 0.045);\n  palm.position.set(0, -0.08, 0);\n  g.add(palm);\n  const fingers = new THREE.Group(); fingers.name = name + '-fingers';\n  g.add(fingers);\n  const angs = [-0.45, -0.15, 0.15, 0.42];\n  angs.forEach((a, i) => {\n    const len = i === 0 || i === 3 ? 0.12 : 0.15;\n    const sx = Math.sin(a) * 0.08, sy = -0.14;\n    const ex = sx + Math.sin(a) * len, ey = sy - Math.cos(a) * len;\n    fingers.add(limb([sx, sy, 0], [ex, ey, 0], 0.024, handMat));\n  });\n  // thumb\n  fingers.add(limb([side * -0.06, -0.06, 0.03], [side * -0.12, -0.17, 0.07], 0.026, handMat));\n  return g;\n}\n\nfunction makeArm(name, shoulder, wrist, side) {\n  const arm = new THREE.Group(); arm.name = name;\n  arm.position.set(...shoulder);\n  bird.add(arm);\n  const rel = [wrist[0] - shoulder[0], wrist[1] - shoulder[1], wrist[2] - shoulder[2]];\n  const upper = limb([0, 0, 0], rel, 0.11, yellow, name + '-limb');\n  arm.add(upper);\n  const hand = makeHand(side < 0 ? 'hand-left' : 'hand-right', side);\n  hand.position.set(rel[0], rel[1] + 0.02, rel[2]);\n  hand.rotation.z = side * -0.15;\n  arm.add(hand);\n  return arm;\n}\nmakeArm('arm-left', [-0.72, 0.5, 0], [-1.04, -0.62, 0.05], -1);\nmakeArm('arm-right', [0.3, 0.55, 0], [0.57, -0.66, 0.05], 1);\n\n// Legs\nfunction makeLeg(name, x) {\n  const leg = new THREE.Group(); leg.name = name;\n  leg.position.set(x, -1.0, 0);\n  bird.add(leg);\n  const l = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.19, 1.1, 20), yellow);\n  l.position.y = -0.55;\n  leg.add(l);\n  const knee = new THREE.Mesh(new THREE.SphereGeometry(0.19, 20, 14), yellow);\n  leg.add(knee);\n  const foot = new THREE.Group(); foot.name = name + '-foot';\n  foot.position.y = -1.1;\n  leg.add(foot);\n  const f = new THREE.Mesh(new THREE.SphereGeometry(1, 20, 14), yellow);\n  f.scale.set(0.16, 0.08, 0.26);\n  f.position.z = 0.1;\n  foot.add(f);\n  return leg;\n}\nmakeLeg('leg-left', -0.5);\nmakeLeg('leg-right', -0.08);\n\nfunction render(t) {\n  renderer.render(scene, camera);\n}\nrender(0);\n\nwindow.nwb = { scene, renderer, cameras: { ref: camera }, characters: [bird], render, ready: true };\n</script>\n</body>\n</html>",
+  "html_sha256": "a5d4b144703d266829237414f67bd9535d9949ab6b7d8105530430785e1b96c2",
+  "static_gates": [],
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 76.6,
+    "tokens": {
+      "input": 1996,
+      "cached_input": 0,
+      "cache_write": 1994,
+      "output": 7890,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.1740001,
+    "tools_used": [],
+    "cost_usd": 0.1740001,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1994,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 7890,
+      "output_tokens_details": {
+        "thinking_tokens": 3787
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1994,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 7890,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1994,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1994
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-07T03:19:53Z",
+    "finished_at": "2026-11-07T03:21:10Z",
+    "revision": "fc64216+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

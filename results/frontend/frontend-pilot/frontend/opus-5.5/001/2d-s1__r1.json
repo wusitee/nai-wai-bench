@@ -1,0 +1,109 @@
+{
+  "settings_id": "1e77488ebc8a6fba",
+  "track": "frontend",
+  "corpus": "frontend-v1",
+  "model": "opus-5.5",
+  "vendor": "anthropic",
+  "task": "001",
+  "kind": "2d-s1",
+  "rep": 1,
+  "prompt_sha256": "86bf9c71c62f666a92cce42366577815f4c913b887483bf6ef90b10623916f11",
+  "width": 240,
+  "height": 242,
+  "duration_ms": 1500,
+  "input_names": "neutral",
+  "images": [
+    "bench/frontend-v1/assets/001/frame_00.png"
+  ],
+  "prompt": "The attached image is a 240x242 px frame from an animated GIF. Rebuild it by hand as vector art.\n\nTask (2D, static): write an HTML page that reproduces the image as faithfully as you can in inline SVG: characters, poses, facial expressions, hands, props, background, and colors. A later step will animate your SVG, so structure it in named groups.\n- Static only: no <script>, no SMIL (<animate>, <animateTransform>, <animateMotion>, <set>), no CSS animations or transitions.\n\n2D contract:\n- The page body contains a single inline <svg> element with viewBox=\"0 0 240 242\", width=\"240\", and height=\"242\". No nested <svg>, no <foreignObject>, no <canvas>.\n- Put each character in its own <g> with a descriptive id (for example id=\"character-left\"), with nested <g> groups with descriptive ids for parts that could move (head, eyes, mouth, arms, hands, ...).\n- Gradients, clip paths, masks, and SVG filters (for example feGaussianBlur) are allowed.\n\nRules (breaking any rule scores 0):\n- Reply with exactly one ```html code block containing one complete, self-contained HTML document. If you send several blocks, only the last one counts. Do not use tools; answer directly.\n- The page is rendered offline in a 240x242 px viewport at device pixel ratio 1. Fill exactly that area, starting at the top-left corner.\n- No raster images: no <img>, no <image>, no CSS url(...) except url(#id) references to your own SVG definitions, no data: URIs, no base64, no blob: URLs.\n- No external resources or network access: no external scripts, stylesheets, fonts, iframes, links, fetch, XMLHttpRequest, WebSocket, or any other URL.\n- Do not call setTimeout, setInterval, requestAnimationFrame, or requestIdleCallback. The harness controls time.\n- The file must be at most 256 KB and must run without uncaught exceptions or console errors.",
+  "text": "```html\n<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<style>\nhtml,body{margin:0;padding:0;width:240px;height:242px;overflow:hidden;background:#e9e4da;}\nsvg{display:block;}\n</style>\n</head>\n<body>\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 242\" width=\"240\" height=\"242\">\n<defs>\n  <radialGradient id=\"yellowL\" cx=\"0.4\" cy=\"0.3\" r=\"0.8\">\n    <stop offset=\"0\" stop-color=\"#ffd84a\"/>\n    <stop offset=\"0.6\" stop-color=\"#f6bd1c\"/>\n    <stop offset=\"1\" stop-color=\"#d9930c\"/>\n  </radialGradient>\n  <radialGradient id=\"yellowR\" cx=\"0.45\" cy=\"0.3\" r=\"0.8\">\n    <stop offset=\"0\" stop-color=\"#ffda4e\"/>\n    <stop offset=\"0.6\" stop-color=\"#f7c022\"/>\n    <stop offset=\"1\" stop-color=\"#dc980f\"/>\n  </radialGradient>\n  <radialGradient id=\"belly\" cx=\"0.5\" cy=\"0.4\" r=\"0.6\">\n    <stop offset=\"0\" stop-color=\"#fbf0cf\"/>\n    <stop offset=\"1\" stop-color=\"#ead39a\"/>\n  </radialGradient>\n  <linearGradient id=\"wall\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#efece6\"/>\n    <stop offset=\"1\" stop-color=\"#d8cfc2\"/>\n  </linearGradient>\n  <linearGradient id=\"board\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#2c403a\"/>\n    <stop offset=\"1\" stop-color=\"#3b5249\"/>\n  </linearGradient>\n  <linearGradient id=\"desk\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#c9935b\"/>\n    <stop offset=\"1\" stop-color=\"#9c6838\"/>\n  </linearGradient>\n  <filter id=\"soft\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feGaussianBlur stdDeviation=\"2\"/>\n  </filter>\n</defs>\n\n<g id=\"background\">\n  <rect x=\"0\" y=\"0\" width=\"240\" height=\"242\" fill=\"url(#wall)\"/>\n  <rect id=\"blackboard\" x=\"72\" y=\"0\" width=\"168\" height=\"44\" fill=\"url(#board)\"/>\n  <rect x=\"72\" y=\"42\" width=\"168\" height=\"4\" fill=\"#8a7258\"/>\n  <rect x=\"0\" y=\"95\" width=\"60\" height=\"60\" fill=\"#cbbfae\" opacity=\"0.5\" filter=\"url(#soft)\"/>\n  <rect x=\"190\" y=\"100\" width=\"50\" height=\"30\" fill=\"#b8865a\" opacity=\"0.6\" filter=\"url(#soft)\"/>\n  <rect id=\"desk-back\" x=\"0\" y=\"185\" width=\"240\" height=\"57\" fill=\"url(#desk)\"/>\n</g>\n\n<g id=\"character-left\">\n  <g id=\"left-body\">\n    <path d=\"M10 225 C-5 180 5 130 22 105 C32 72 50 55 70 55 C95 55 108 75 110 100 C120 130 128 175 120 225 Z\" fill=\"url(#yellowL)\"/>\n    <ellipse id=\"left-belly\" cx=\"78\" cy=\"172\" rx=\"38\" ry=\"36\" fill=\"url(#belly)\"/>\n  </g>\n  <g id=\"left-head\">\n    <g id=\"left-eyes\">\n      <ellipse cx=\"51\" cy=\"90\" rx=\"7.5\" ry=\"8.5\" fill=\"#2a2a2e\"/>\n      <ellipse cx=\"83\" cy=\"89\" rx=\"7\" ry=\"8\" fill=\"#2a2a2e\"/>\n      <circle cx=\"49\" cy=\"87\" r=\"2\" fill=\"#fff\"/>\n      <circle cx=\"81\" cy=\"86\" r=\"2\" fill=\"#fff\"/>\n    </g>\n    <g id=\"left-mouth\">\n      <path d=\"M62 106 Q68 109 74 106\" stroke=\"#a86d10\" stroke-width=\"1.2\" fill=\"none\" stroke-linecap=\"round\"/>\n    </g>\n  </g>\n  <g id=\"left-arm\">\n    <path d=\"M18 150 C8 170 12 195 25 205 C35 212 48 206 46 196 C40 185 34 170 32 150 Z\" fill=\"url(#yellowL)\"/>\n    <g id=\"left-hand\">\n      <ellipse cx=\"36\" cy=\"203\" rx=\"12\" ry=\"9\" fill=\"#efb21a\"/>\n      <g id=\"left-pencil\">\n        <line x1=\"40\" y1=\"210\" x2=\"18\" y2=\"166\" stroke=\"#e0a43a\" stroke-width=\"3.5\" stroke-linecap=\"round\"/>\n        <line x1=\"40\" y1=\"210\" x2=\"43\" y2=\"215\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n      </g>\n      <path d=\"M28 200 Q34 205 40 200\" stroke=\"#c88b10\" stroke-width=\"1\" fill=\"none\"/>\n    </g>\n  </g>\n</g>\n\n<g id=\"props-left\">\n  <g id=\"notebook-left\">\n    <path d=\"M0 214 L108 204 L118 238 L0 242 Z\" fill=\"#f7f5ef\"/>\n    <path d=\"M58 209 L64 240\" stroke=\"#c9c3b5\" stroke-width=\"1\"/>\n    <g stroke=\"#cfd6e0\" stroke-width=\"0.7\">\n      <line x1=\"6\" y1=\"220\" x2=\"56\" y2=\"215\"/>\n      <line x1=\"6\" y1=\"227\" x2=\"57\" y2=\"222\"/>\n      <line x1=\"6\" y1=\"234\" x2=\"58\" y2=\"229\"/>\n      <line x1=\"66\" y1=\"214\" x2=\"108\" y2=\"210\"/>\n      <line x1=\"67\" y1=\"221\" x2=\"110\" y2=\"217\"/>\n      <line x1=\"68\" y1=\"228\" x2=\"112\" y2=\"224\"/>\n    </g>\n  </g>\n</g>\n\n<g id=\"character-right\">\n  <g id=\"right-body\">\n    <path d=\"M100 120 C95 70 110 42 145 42 C178 42 190 70 192 100 C215 120 240 140 240 170 L240 225 L135 225 C120 190 105 160 100 120 Z\" fill=\"url(#yellowR)\"/>\n    <ellipse id=\"right-belly\" cx=\"205\" cy=\"190\" rx=\"34\" ry=\"24\" fill=\"url(#belly)\" opacity=\"0.85\"/>\n  </g>\n  <g id=\"right-head\">\n    <g id=\"right-eyes\">\n      <ellipse cx=\"121\" cy=\"70\" rx=\"6.5\" ry=\"7.5\" fill=\"#2a2a2e\"/>\n      <ellipse cx=\"147\" cy=\"71\" rx=\"7\" ry=\"8\" fill=\"#2a2a2e\"/>\n      <circle cx=\"119\" cy=\"67\" r=\"1.8\" fill=\"#fff\"/>\n      <circle cx=\"145\" cy=\"68\" r=\"1.9\" fill=\"#fff\"/>\n    </g>\n    <g id=\"right-mouth\">\n      <path d=\"M123 87 Q131 92 139 87\" stroke=\"#8a5a0c\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\"/>\n    </g>\n  </g>\n  <g id=\"right-arm-back\">\n    <path d=\"M110 98 C100 104 96 118 100 128 C106 130 114 124 118 112 Z\" fill=\"#e8a915\"/>\n  </g>\n  <g id=\"right-arm-front\">\n    <path d=\"M160 130 C140 140 115 160 100 172 C92 180 98 195 110 190 C130 178 155 165 172 150 Z\" fill=\"url(#yellowR)\"/>\n    <g id=\"right-hand\">\n      <ellipse cx=\"103\" cy=\"182\" rx=\"13\" ry=\"10\" fill=\"#efb21a\"/>\n      <path d=\"M94 186 Q99 192 106 190\" stroke=\"#c88b10\" stroke-width=\"1\" fill=\"none\"/>\n      <path d=\"M92 178 Q96 174 100 176\" stroke=\"#c88b10\" stroke-width=\"1\" fill=\"none\"/>\n    </g>\n  </g>\n</g>\n\n<g id=\"props-right\">\n  <g id=\"notebook-right\">\n    <path d=\"M150 200 L238 194 L240 226 L160 232 Z\" fill=\"#f6f3ec\"/>\n    <path d=\"M196 197 L200 229\" stroke=\"#c9c3b5\" stroke-width=\"1\"/>\n    <g stroke=\"#cfd6e0\" stroke-width=\"0.7\">\n      <line x1=\"158\" y1=\"207\" x2=\"192\" y2=\"204\"/>\n      <line x1=\"160\" y1=\"214\" x2=\"193\" y2=\"211\"/>\n      <line x1=\"161\" y1=\"221\" x2=\"194\" y2=\"218\"/>\n      <line x1=\"204\" y1=\"203\" x2=\"236\" y2=\"200\"/>\n      <line x1=\"205\" y1=\"210\" x2=\"237\" y2=\"207\"/>\n    </g>\n  </g>\n  <g id=\"pencils\">\n    <line x1=\"140\" y1=\"235\" x2=\"215\" y2=\"230\" stroke=\"#d9a040\" stroke-width=\"2.5\" stroke-linecap=\"round\"/>\n    <line x1=\"150\" y1=\"240\" x2=\"230\" y2=\"236\" stroke=\"#c7473a\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n    <line x1=\"120\" y1=\"215\" x2=\"150\" y2=\"212\" stroke=\"#e0b050\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n  </g>\n</g>\n</svg>\n</body>\n</html>\n```",
+  "html": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<style>\nhtml,body{margin:0;padding:0;width:240px;height:242px;overflow:hidden;background:#e9e4da;}\nsvg{display:block;}\n</style>\n</head>\n<body>\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 242\" width=\"240\" height=\"242\">\n<defs>\n  <radialGradient id=\"yellowL\" cx=\"0.4\" cy=\"0.3\" r=\"0.8\">\n    <stop offset=\"0\" stop-color=\"#ffd84a\"/>\n    <stop offset=\"0.6\" stop-color=\"#f6bd1c\"/>\n    <stop offset=\"1\" stop-color=\"#d9930c\"/>\n  </radialGradient>\n  <radialGradient id=\"yellowR\" cx=\"0.45\" cy=\"0.3\" r=\"0.8\">\n    <stop offset=\"0\" stop-color=\"#ffda4e\"/>\n    <stop offset=\"0.6\" stop-color=\"#f7c022\"/>\n    <stop offset=\"1\" stop-color=\"#dc980f\"/>\n  </radialGradient>\n  <radialGradient id=\"belly\" cx=\"0.5\" cy=\"0.4\" r=\"0.6\">\n    <stop offset=\"0\" stop-color=\"#fbf0cf\"/>\n    <stop offset=\"1\" stop-color=\"#ead39a\"/>\n  </radialGradient>\n  <linearGradient id=\"wall\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#efece6\"/>\n    <stop offset=\"1\" stop-color=\"#d8cfc2\"/>\n  </linearGradient>\n  <linearGradient id=\"board\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#2c403a\"/>\n    <stop offset=\"1\" stop-color=\"#3b5249\"/>\n  </linearGradient>\n  <linearGradient id=\"desk\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#c9935b\"/>\n    <stop offset=\"1\" stop-color=\"#9c6838\"/>\n  </linearGradient>\n  <filter id=\"soft\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feGaussianBlur stdDeviation=\"2\"/>\n  </filter>\n</defs>\n\n<g id=\"background\">\n  <rect x=\"0\" y=\"0\" width=\"240\" height=\"242\" fill=\"url(#wall)\"/>\n  <rect id=\"blackboard\" x=\"72\" y=\"0\" width=\"168\" height=\"44\" fill=\"url(#board)\"/>\n  <rect x=\"72\" y=\"42\" width=\"168\" height=\"4\" fill=\"#8a7258\"/>\n  <rect x=\"0\" y=\"95\" width=\"60\" height=\"60\" fill=\"#cbbfae\" opacity=\"0.5\" filter=\"url(#soft)\"/>\n  <rect x=\"190\" y=\"100\" width=\"50\" height=\"30\" fill=\"#b8865a\" opacity=\"0.6\" filter=\"url(#soft)\"/>\n  <rect id=\"desk-back\" x=\"0\" y=\"185\" width=\"240\" height=\"57\" fill=\"url(#desk)\"/>\n</g>\n\n<g id=\"character-left\">\n  <g id=\"left-body\">\n    <path d=\"M10 225 C-5 180 5 130 22 105 C32 72 50 55 70 55 C95 55 108 75 110 100 C120 130 128 175 120 225 Z\" fill=\"url(#yellowL)\"/>\n    <ellipse id=\"left-belly\" cx=\"78\" cy=\"172\" rx=\"38\" ry=\"36\" fill=\"url(#belly)\"/>\n  </g>\n  <g id=\"left-head\">\n    <g id=\"left-eyes\">\n      <ellipse cx=\"51\" cy=\"90\" rx=\"7.5\" ry=\"8.5\" fill=\"#2a2a2e\"/>\n      <ellipse cx=\"83\" cy=\"89\" rx=\"7\" ry=\"8\" fill=\"#2a2a2e\"/>\n      <circle cx=\"49\" cy=\"87\" r=\"2\" fill=\"#fff\"/>\n      <circle cx=\"81\" cy=\"86\" r=\"2\" fill=\"#fff\"/>\n    </g>\n    <g id=\"left-mouth\">\n      <path d=\"M62 106 Q68 109 74 106\" stroke=\"#a86d10\" stroke-width=\"1.2\" fill=\"none\" stroke-linecap=\"round\"/>\n    </g>\n  </g>\n  <g id=\"left-arm\">\n    <path d=\"M18 150 C8 170 12 195 25 205 C35 212 48 206 46 196 C40 185 34 170 32 150 Z\" fill=\"url(#yellowL)\"/>\n    <g id=\"left-hand\">\n      <ellipse cx=\"36\" cy=\"203\" rx=\"12\" ry=\"9\" fill=\"#efb21a\"/>\n      <g id=\"left-pencil\">\n        <line x1=\"40\" y1=\"210\" x2=\"18\" y2=\"166\" stroke=\"#e0a43a\" stroke-width=\"3.5\" stroke-linecap=\"round\"/>\n        <line x1=\"40\" y1=\"210\" x2=\"43\" y2=\"215\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n      </g>\n      <path d=\"M28 200 Q34 205 40 200\" stroke=\"#c88b10\" stroke-width=\"1\" fill=\"none\"/>\n    </g>\n  </g>\n</g>\n\n<g id=\"props-left\">\n  <g id=\"notebook-left\">\n    <path d=\"M0 214 L108 204 L118 238 L0 242 Z\" fill=\"#f7f5ef\"/>\n    <path d=\"M58 209 L64 240\" stroke=\"#c9c3b5\" stroke-width=\"1\"/>\n    <g stroke=\"#cfd6e0\" stroke-width=\"0.7\">\n      <line x1=\"6\" y1=\"220\" x2=\"56\" y2=\"215\"/>\n      <line x1=\"6\" y1=\"227\" x2=\"57\" y2=\"222\"/>\n      <line x1=\"6\" y1=\"234\" x2=\"58\" y2=\"229\"/>\n      <line x1=\"66\" y1=\"214\" x2=\"108\" y2=\"210\"/>\n      <line x1=\"67\" y1=\"221\" x2=\"110\" y2=\"217\"/>\n      <line x1=\"68\" y1=\"228\" x2=\"112\" y2=\"224\"/>\n    </g>\n  </g>\n</g>\n\n<g id=\"character-right\">\n  <g id=\"right-body\">\n    <path d=\"M100 120 C95 70 110 42 145 42 C178 42 190 70 192 100 C215 120 240 140 240 170 L240 225 L135 225 C120 190 105 160 100 120 Z\" fill=\"url(#yellowR)\"/>\n    <ellipse id=\"right-belly\" cx=\"205\" cy=\"190\" rx=\"34\" ry=\"24\" fill=\"url(#belly)\" opacity=\"0.85\"/>\n  </g>\n  <g id=\"right-head\">\n    <g id=\"right-eyes\">\n      <ellipse cx=\"121\" cy=\"70\" rx=\"6.5\" ry=\"7.5\" fill=\"#2a2a2e\"/>\n      <ellipse cx=\"147\" cy=\"71\" rx=\"7\" ry=\"8\" fill=\"#2a2a2e\"/>\n      <circle cx=\"119\" cy=\"67\" r=\"1.8\" fill=\"#fff\"/>\n      <circle cx=\"145\" cy=\"68\" r=\"1.9\" fill=\"#fff\"/>\n    </g>\n    <g id=\"right-mouth\">\n      <path d=\"M123 87 Q131 92 139 87\" stroke=\"#8a5a0c\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\"/>\n    </g>\n  </g>\n  <g id=\"right-arm-back\">\n    <path d=\"M110 98 C100 104 96 118 100 128 C106 130 114 124 118 112 Z\" fill=\"#e8a915\"/>\n  </g>\n  <g id=\"right-arm-front\">\n    <path d=\"M160 130 C140 140 115 160 100 172 C92 180 98 195 110 190 C130 178 155 165 172 150 Z\" fill=\"url(#yellowR)\"/>\n    <g id=\"right-hand\">\n      <ellipse cx=\"103\" cy=\"182\" rx=\"13\" ry=\"10\" fill=\"#efb21a\"/>\n      <path d=\"M94 186 Q99 192 106 190\" stroke=\"#c88b10\" stroke-width=\"1\" fill=\"none\"/>\n      <path d=\"M92 178 Q96 174 100 176\" stroke=\"#c88b10\" stroke-width=\"1\" fill=\"none\"/>\n    </g>\n  </g>\n</g>\n\n<g id=\"props-right\">\n  <g id=\"notebook-right\">\n    <path d=\"M150 200 L238 194 L240 226 L160 232 Z\" fill=\"#f6f3ec\"/>\n    <path d=\"M196 197 L200 229\" stroke=\"#c9c3b5\" stroke-width=\"1\"/>\n    <g stroke=\"#cfd6e0\" stroke-width=\"0.7\">\n      <line x1=\"158\" y1=\"207\" x2=\"192\" y2=\"204\"/>\n      <line x1=\"160\" y1=\"214\" x2=\"193\" y2=\"211\"/>\n      <line x1=\"161\" y1=\"221\" x2=\"194\" y2=\"218\"/>\n      <line x1=\"204\" y1=\"203\" x2=\"236\" y2=\"200\"/>\n      <line x1=\"205\" y1=\"210\" x2=\"237\" y2=\"207\"/>\n    </g>\n  </g>\n  <g id=\"pencils\">\n    <line x1=\"140\" y1=\"235\" x2=\"215\" y2=\"230\" stroke=\"#d9a040\" stroke-width=\"2.5\" stroke-linecap=\"round\"/>\n    <line x1=\"150\" y1=\"240\" x2=\"230\" y2=\"236\" stroke=\"#c7473a\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n    <line x1=\"120\" y1=\"215\" x2=\"150\" y2=\"212\" stroke=\"#e0b050\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n  </g>\n</g>\n</svg>\n</body>\n</html>",
+  "html_sha256": "ba5924b583762eb342f681f7e637af091713ce3f733eb46cca5cd22deef0e0cd",
+  "static_gates": [],
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.309",
+    "seconds": 33.4,
+    "tokens": {
+      "input": 1286,
+      "cached_input": 0,
+      "cache_write": 1284,
+      "output": 3641,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0832932,
+    "tools_used": [],
+    "cost_usd": 0.0832932,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1284,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 3641,
+      "output_tokens_details": {
+        "thinking_tokens": 381
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1284,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 3641,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1284,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1284
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-05T02:37:36Z",
+    "finished_at": "2026-11-05T02:38:10Z",
+    "revision": "03dd576",
+    "nwb_version": "0.1.0"
+  }
+}

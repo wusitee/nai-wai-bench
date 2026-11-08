@@ -273,3 +273,56 @@ def test_summary_recomputes_gates_and_drops_stale_chains(tmp_path, monkeypatch):
     # Recollecting step 1 makes step 2 and its revision stale.
     sample("2d-s1", SVG_STATIC)
     assert {s["kind"] for s in frontend.summary(corpus, run)["samples"]} == {"2d-s1", "3d-s1"}
+
+
+def test_published_snapshot_is_pinned_web_media_and_pages_never_embed_model_code(tmp_path, monkeypatch):
+    Image = pytest.importorskip("PIL.Image", reason="frontend sync requires the optional frontend extra")
+    from nwb import frontend_render, frontend_results, frontend_site
+    from nwb.config import ModelSpec
+
+    corpus = frontend.load_corpus(ROOT)
+    monkeypatch.setattr(frontend_render, "harness_id", lambda: "h")
+    monkeypatch.setattr(frontend_results, "harness_id", lambda: "h")
+    run = tmp_path / "runs" / "pub"
+    stem = frontend.sample_stem(run, "subject", "001", "2d-s2", 1)
+    write_json(stem.with_suffix(".json"), {"track": "frontend", "model": "subject", "task": "001", "kind": "2d-s2",
+                                           "rep": 1, "html": SVG_CSS_LOOP, "html_sha256": "x", "width": 240,
+                                           "height": 242, "settings": {"effort": "xhigh"},
+                                           "meta": {"seconds": 12.0, "tokens": {"output": 345}}})
+    stem.mkdir(parents=True)
+    frames = []
+    for i, t in enumerate(TIMES):
+        Image.new("RGB", (240, 242), (40 * i % 255, 200, 90)).save(stem / f"frame_{i:02d}.png")
+        frames.append({"file": f"frame_{i:02d}.png", "t": t})
+    loop = [Image.new("RGB", (240, 242), color) for color in ("gold", "orange")]
+    loop[0].save(stem / "preview.gif", save_all=True, append_images=loop[1:], duration=[100, 300], loop=0)
+    write_json(stem / "render.json", {"html_sha256": "x", "harness": "h", "gates": [], "frames": frames,
+                                      "preview": "preview.gif"})
+    spec = ModelSpec("subject", "claude", "anthropic", "m", frozenset({"vision"}), {"label": "Subject"})
+
+    snapshot, digest = frontend_results.sync(tmp_path, corpus, run, {"subject": spec})
+    saved = snapshot / "frontend/subject/001/2d-s2__r1"
+    render = json.loads((saved / "render.json").read_text())
+    assert render["preview"] == "preview.webp" and render["frames"][0]["file"] == "frame_00.webp"
+    with Image.open(saved / "preview.webp") as preview:  # per-frame GIF delays survive re-encoding
+        durations = []
+        for index in range(preview.n_frames):
+            preview.seek(index)
+            preview.load()
+            durations.append(preview.info["duration"])
+    assert durations == [100, 300]
+    summary = json.loads((snapshot / "summary.json").read_text())
+    assert summary["labels"] == {"subject": "Subject (xhigh)"} and len(summary["tasks"]["001"]["frames"]) == 8
+    # A re-sync of unchanged inputs keeps the pin; a changed file breaks it.
+    assert frontend_results.sync(tmp_path, corpus, run, {"subject": spec})[1] == digest
+    _, loaded = frontend_results.load(tmp_path, "pub", digest)
+    with pytest.raises(ValueError, match="saved results changed"):
+        frontend_results.load(tmp_path, "pub", "0" * 64)
+
+    out = tmp_path / "site"
+    frontend_site.build(snapshot, loaded, out)
+    page = (out / "frontend/001/index.html").read_text()
+    assert "@keyframes sway" not in page and "<iframe" not in page
+    assert (out / "frontend/m/subject/001/2d-s2__r1/source.txt").read_text() == SVG_CSS_LOOP
+    assert "Subject" in page and "loading=lazy" in page and "prefers-reduced-motion" in page
+    assert (out / "frontend/m/subject/001/2d-s2__r1/preview.webp").is_file()

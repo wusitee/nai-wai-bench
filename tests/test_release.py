@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from nwb import __version__, bundle, cli, release, results, scoring, site
+from nwb import __version__, bundle, cli, frontend, frontend_results, release, results, scoring, site
 from nwb.backends import BackendError, Response
 from nwb.config import find_root, load_bench
 from nwb.judge import understanding_prompt
@@ -41,12 +41,15 @@ def inputs(tmp_path):
                     "hallucinations": [], "rationale": ""})
         suites[suite] = {"run": suite, "sha256": bundle.input_digest(run, bench),
                          "judges": ["opus-5.5"] if suite == "core" else []}
+    (tmp_path / "runs" / "fe" / "frontend").mkdir(parents=True)
+    _, frontend_sha = frontend_results.sync(tmp_path, frontend.load_corpus(tmp_path), tmp_path / "runs" / "fe", {})
     manifest = tmp_path / "release.toml"
 
     def save():
         lines = [f'nwb_version = "{__version__}"']
         for suite, spec in suites.items():
             lines += [f"[suites.{suite}]", *(f"{k} = {json.dumps(v)}" for k, v in spec.items())]
+        lines += ["[frontend]", 'run = "fe"', f'sha256 = "{frontend_sha}"']
         manifest.write_text("\n".join(lines))
 
     save()
@@ -73,6 +76,7 @@ def test_release_builds_both_suites_offline_and_bundles_keep_their_pinned_identi
     assert [(r["model"], r["rank"], r["status"]) for r in index["rows"]] == [("gpt-6.1-sol", None, "partial")]
     assert "NaiWai Index" in (out / "index.html").read_text()
     assert "url=../visual-detail/" in (out / "naihub-v1/index.html").read_text()
+    assert "Frontend rebuild" in (out / "frontend/index.html").read_text()
     for suite, spec in suites.items():
         page = out / site.PAGES[suite]
         assert (page / "index.html").exists()
@@ -96,7 +100,7 @@ def test_release_builds_both_suites_offline_and_bundles_keep_their_pinned_identi
 
 @pytest.mark.parametrize("problem, message", [
     ("changed", "raw inputs changed"), ("missing", "restore its raw results bundle"),
-    ("mixed", "contains another suite"), ("stale", "stale judgments"),
+    ("mixed", "contains another suite"), ("stale", "stale judgments"), ("frontend", "frontend result checksum"),
 ])
 def test_release_rejects_inconsistent_inputs_before_writing_output(inputs, problem, message):
     root, manifest, suites, save = inputs
@@ -104,6 +108,8 @@ def test_release_rejects_inconsistent_inputs_before_writing_output(inputs, probl
     path = next((run / "understanding").rglob("*.json"))
     if problem == "missing":
         shutil.rmtree(run)
+    elif problem == "frontend":
+        (root / "results/frontend/fe/summary.json").write_text("{}")
     elif problem == "stale":
         judgment = next((run / "judgments/opus-5.5").rglob("*.json"))
         write_json(judgment, {**read_json(judgment), "judge_prompt": "outdated rubric"})

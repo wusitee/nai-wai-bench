@@ -1,0 +1,105 @@
+{
+  "html_sha256": "469abb37d2e84405388cebc2ef4b86c2a2eb81a07a180907205ecbc5bccf27d3",
+  "harness": "fee9bd636b661bc1",
+  "kind": "3d-s2",
+  "gates": [],
+  "errors": [],
+  "blocked": [],
+  "forbidden": [],
+  "elements": [],
+  "timing": {
+    "declarative": false,
+    "scripted": false
+  },
+  "frames": [
+    {
+      "file": "frame_00.webp",
+      "t": 0
+    },
+    {
+      "file": "frame_01.webp",
+      "t": 200
+    },
+    {
+      "file": "frame_02.webp",
+      "t": 400
+    },
+    {
+      "file": "frame_03.webp",
+      "t": 600
+    },
+    {
+      "file": "frame_04.webp",
+      "t": 800
+    },
+    {
+      "file": "frame_05.webp",
+      "t": 1000
+    },
+    {
+      "file": "frame_06.webp",
+      "t": 1200
+    },
+    {
+      "file": "frame_07.webp",
+      "t": 1400
+    }
+  ],
+  "views": [
+    {
+      "file": "view_side.webp",
+      "view": "side",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_back.webp",
+      "view": "back",
+      "t": 0,
+      "hidden": [
+        "plaster-wall"
+      ]
+    },
+    {
+      "file": "view_three_quarter.webp",
+      "view": "three_quarter",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_top.webp",
+      "view": "top",
+      "t": 0,
+      "hidden": []
+    }
+  ],
+  "scene": {
+    "characters": [
+      {
+        "name": "character-left-student",
+        "meshes": 49,
+        "width": 2.281721930503845,
+        "height": 2.816095413844989,
+        "depth": 2.2431537490904843,
+        "ratio": 0.9830968967349828
+      },
+      {
+        "name": "character-right-companion",
+        "meshes": 43,
+        "width": 2.9337300319671633,
+        "height": 2.792351349771374,
+        "depth": 2.0474041892303774,
+        "ratio": 0.6978843202752112
+      }
+    ],
+    "textures": 3
+  },
+  "mode": "render(t)",
+  "preview": "preview.webp",
+  "checks": {
+    "determinism_diff": 0.0,
+    "loop_diff": 0.0,
+    "motion_diff": 0.35134297520661156
+  },
+  "seconds": 4.4
+}

@@ -1,0 +1,109 @@
+{
+  "settings_id": "1e77488ebc8a6fba",
+  "track": "frontend",
+  "corpus": "frontend-v1",
+  "model": "opus-5.5",
+  "vendor": "anthropic",
+  "task": "007",
+  "kind": "2d-s1",
+  "rep": 1,
+  "prompt_sha256": "cede1e1bb16363ea5764593d3a001cb35fe9a48033242b74b3c25d48f92da100",
+  "width": 240,
+  "height": 294,
+  "duration_ms": 5540,
+  "input_names": "neutral",
+  "images": [
+    "bench/frontend-v1/assets/007/frame_00.png"
+  ],
+  "prompt": "The attached image is a 240x294 px frame from an animated GIF. Rebuild it by hand as vector art.\n\nTask (2D, static): write an HTML page that reproduces the image as faithfully as you can in inline SVG: characters, poses, facial expressions, hands, props, background, and colors. A later step will animate your SVG, so structure it in named groups.\n- Static only: no <script>, no SMIL (<animate>, <animateTransform>, <animateMotion>, <set>), no CSS animations or transitions.\n\n2D contract:\n- The page body contains a single inline <svg> element with viewBox=\"0 0 240 294\", width=\"240\", and height=\"294\". No nested <svg>, no <foreignObject>, no <canvas>.\n- Put each character in its own <g> with a descriptive id (for example id=\"character-left\"), with nested <g> groups with descriptive ids for parts that could move (head, eyes, mouth, arms, hands, ...).\n- Gradients, clip paths, masks, and SVG filters (for example feGaussianBlur) are allowed.\n\nRules (breaking any rule scores 0):\n- Reply with exactly one ```html code block containing one complete, self-contained HTML document. If you send several blocks, only the last one counts. Do not use tools; answer directly.\n- The page is rendered offline in a 240x294 px viewport at device pixel ratio 1. Fill exactly that area, starting at the top-left corner.\n- No raster images: no <img>, no <image>, no CSS url(...) except url(#id) references to your own SVG definitions, no data: URIs, no base64, no blob: URLs.\n- No external resources or network access: no external scripts, stylesheets, fonts, iframes, links, fetch, XMLHttpRequest, WebSocket, or any other URL.\n- Do not call setTimeout, setInterval, requestAnimationFrame, or requestIdleCallback. The harness controls time.\n- The file must be at most 256 KB and must run without uncaught exceptions or console errors.",
+  "text": "```html\n<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<style>\nhtml,body{margin:0;padding:0;width:240px;height:294px;overflow:hidden;background:#fff}\nsvg{display:block}\n</style>\n</head>\n<body>\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 294\" width=\"240\" height=\"294\">\n<defs>\n<radialGradient id=\"bgGrad\" cx=\"0.5\" cy=\"0.42\" r=\"0.75\">\n<stop offset=\"0\" stop-color=\"#ffffff\"/>\n<stop offset=\"0.45\" stop-color=\"#fdfbe8\"/>\n<stop offset=\"0.75\" stop-color=\"#f4eba0\"/>\n<stop offset=\"1\" stop-color=\"#d9c34a\"/>\n</radialGradient>\n<linearGradient id=\"bodyGrad\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n<stop offset=\"0\" stop-color=\"#d9b21c\"/>\n<stop offset=\"0.25\" stop-color=\"#efcf3a\"/>\n<stop offset=\"0.55\" stop-color=\"#f6dc55\"/>\n<stop offset=\"0.85\" stop-color=\"#e9c632\"/>\n<stop offset=\"1\" stop-color=\"#f3e27a\"/>\n</linearGradient>\n<linearGradient id=\"headGrad\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n<stop offset=\"0\" stop-color=\"#c8a816\"/>\n<stop offset=\"0.4\" stop-color=\"#e8cc3a\"/>\n<stop offset=\"0.8\" stop-color=\"#e2c434\"/>\n<stop offset=\"1\" stop-color=\"#cfae20\"/>\n</linearGradient>\n<radialGradient id=\"bellyGrad\" cx=\"0.45\" cy=\"0.45\" r=\"0.6\">\n<stop offset=\"0\" stop-color=\"#fbeee8\"/>\n<stop offset=\"0.35\" stop-color=\"#f4d3cf\"/>\n<stop offset=\"0.6\" stop-color=\"#e6dcdc\"/>\n<stop offset=\"0.8\" stop-color=\"#f0e2b0\"/>\n<stop offset=\"1\" stop-color=\"#f2d860\" stop-opacity=\"0\"/>\n</radialGradient>\n<linearGradient id=\"bellyBand\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n<stop offset=\"0\" stop-color=\"#f6c6c4\" stop-opacity=\"0.6\"/>\n<stop offset=\"0.45\" stop-color=\"#ffffff\" stop-opacity=\"0.5\"/>\n<stop offset=\"0.6\" stop-color=\"#cfd8e6\" stop-opacity=\"0.55\"/>\n<stop offset=\"1\" stop-color=\"#e8d070\" stop-opacity=\"0\"/>\n</linearGradient>\n<radialGradient id=\"blush\" cx=\"0.5\" cy=\"0.5\" r=\"0.5\">\n<stop offset=\"0\" stop-color=\"#f08a8a\" stop-opacity=\"0.7\"/>\n<stop offset=\"1\" stop-color=\"#f08a8a\" stop-opacity=\"0\"/>\n</radialGradient>\n<linearGradient id=\"handGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n<stop offset=\"0\" stop-color=\"#8a8a3a\"/>\n<stop offset=\"1\" stop-color=\"#4a4a28\"/>\n</linearGradient>\n<filter id=\"soft\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n<feGaussianBlur stdDeviation=\"2\"/>\n</filter>\n<filter id=\"glow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n<feGaussianBlur stdDeviation=\"6\"/>\n</filter>\n</defs>\n\n<g id=\"background\">\n<rect x=\"0\" y=\"0\" width=\"240\" height=\"294\" fill=\"url(#bgGrad)\"/>\n<ellipse cx=\"200\" cy=\"170\" rx=\"40\" ry=\"90\" fill=\"#ffffff\" opacity=\"0.7\" filter=\"url(#glow)\"/>\n</g>\n\n<g id=\"character-bird\">\n<g id=\"legs\">\n<path id=\"leg-left\" d=\"M72 238 C70 260 72 280 74 294 L94 294 C95 278 97 258 98 240 Z\" fill=\"#e4c22e\"/>\n<path id=\"leg-right\" d=\"M102 240 C103 258 104 278 105 294 L124 294 C126 278 128 258 128 236 Z\" fill=\"#ead03e\"/>\n<path d=\"M98 242 L101 294\" stroke=\"#c9a51e\" stroke-width=\"2\" fill=\"none\" opacity=\"0.6\"/>\n</g>\n\n<g id=\"arm-left\">\n<path d=\"M64 80 C50 100 40 140 38 192 L48 194 C52 150 58 115 70 92 Z\" fill=\"#d8b522\"/>\n<g id=\"hand-left\">\n<path d=\"M37 188 C32 194 27 203 26 212 C28 213 30 210 32 205 C31 211 31 216 33 217 C35 216 35 210 37 206 C37 212 38 217 40 216 C42 214 41 208 42 204 C43 209 45 212 47 210 C48 204 48 196 48 190 Z\" fill=\"url(#handGrad)\"/>\n</g>\n</g>\n\n<g id=\"arm-right\">\n<path d=\"M140 78 C152 100 160 140 162 192 L152 194 C150 150 146 118 136 94 Z\" fill=\"#ead03c\"/>\n<g id=\"hand-right\">\n<path d=\"M152 188 C150 196 150 204 152 210 C154 212 155 208 156 204 C157 209 158 215 160 216 C162 216 162 210 161 205 C163 210 166 216 168 215 C169 213 167 206 165 202 C168 205 171 210 173 209 C173 202 168 194 163 188 Z\" fill=\"url(#handGrad)\"/>\n</g>\n</g>\n\n<g id=\"body\">\n<path d=\"M72 50 C60 70 52 95 52 130 C50 170 55 215 70 242 C85 252 115 252 130 242 C150 220 158 175 156 130 C154 95 146 70 132 50 Z\" fill=\"url(#bodyGrad)\"/>\n<g id=\"belly\">\n<ellipse cx=\"105\" cy=\"170\" rx=\"50\" ry=\"72\" fill=\"url(#bellyGrad)\"/>\n<ellipse cx=\"105\" cy=\"165\" rx=\"46\" ry=\"62\" fill=\"url(#bellyBand)\" filter=\"url(#soft)\"/>\n<ellipse cx=\"102\" cy=\"125\" rx=\"30\" ry=\"14\" fill=\"#f7c2c0\" opacity=\"0.45\" filter=\"url(#soft)\"/>\n<ellipse cx=\"108\" cy=\"185\" rx=\"40\" ry=\"10\" fill=\"#c9d4e4\" opacity=\"0.4\" filter=\"url(#soft)\"/>\n</g>\n</g>\n\n<g id=\"head\">\n<path d=\"M78 0 C74 20 70 40 70 60 C80 70 125 70 134 58 C134 40 130 18 126 0 Z\" fill=\"url(#headGrad)\"/>\n<ellipse cx=\"108\" cy=\"12\" rx=\"10\" ry=\"12\" fill=\"#f2dc66\" opacity=\"0.5\" filter=\"url(#soft)\"/>\n<g id=\"cheeks\">\n<ellipse cx=\"84\" cy=\"56\" rx=\"9\" ry=\"6\" fill=\"url(#blush)\"/>\n<ellipse cx=\"126\" cy=\"54\" rx=\"8\" ry=\"6\" fill=\"url(#blush)\"/>\n</g>\n<g id=\"eyes\">\n<path id=\"eye-left\" d=\"M85 40 Q91 44 97 41\" stroke=\"#7a6418\" stroke-width=\"1.6\" fill=\"none\" stroke-linecap=\"round\"/>\n<path id=\"eye-right\" d=\"M110 40 Q116 44 122 40\" stroke=\"#7a6418\" stroke-width=\"1.6\" fill=\"none\" stroke-linecap=\"round\"/>\n</g>\n<g id=\"beak\">\n<path d=\"M101 46 Q104 50 107 46\" stroke=\"#b8961a\" stroke-width=\"1\" fill=\"none\" opacity=\"0.7\"/>\n</g>\n</g>\n</g>\n</svg>\n</body>\n</html>\n```",
+  "html": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<style>\nhtml,body{margin:0;padding:0;width:240px;height:294px;overflow:hidden;background:#fff}\nsvg{display:block}\n</style>\n</head>\n<body>\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 294\" width=\"240\" height=\"294\">\n<defs>\n<radialGradient id=\"bgGrad\" cx=\"0.5\" cy=\"0.42\" r=\"0.75\">\n<stop offset=\"0\" stop-color=\"#ffffff\"/>\n<stop offset=\"0.45\" stop-color=\"#fdfbe8\"/>\n<stop offset=\"0.75\" stop-color=\"#f4eba0\"/>\n<stop offset=\"1\" stop-color=\"#d9c34a\"/>\n</radialGradient>\n<linearGradient id=\"bodyGrad\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n<stop offset=\"0\" stop-color=\"#d9b21c\"/>\n<stop offset=\"0.25\" stop-color=\"#efcf3a\"/>\n<stop offset=\"0.55\" stop-color=\"#f6dc55\"/>\n<stop offset=\"0.85\" stop-color=\"#e9c632\"/>\n<stop offset=\"1\" stop-color=\"#f3e27a\"/>\n</linearGradient>\n<linearGradient id=\"headGrad\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n<stop offset=\"0\" stop-color=\"#c8a816\"/>\n<stop offset=\"0.4\" stop-color=\"#e8cc3a\"/>\n<stop offset=\"0.8\" stop-color=\"#e2c434\"/>\n<stop offset=\"1\" stop-color=\"#cfae20\"/>\n</linearGradient>\n<radialGradient id=\"bellyGrad\" cx=\"0.45\" cy=\"0.45\" r=\"0.6\">\n<stop offset=\"0\" stop-color=\"#fbeee8\"/>\n<stop offset=\"0.35\" stop-color=\"#f4d3cf\"/>\n<stop offset=\"0.6\" stop-color=\"#e6dcdc\"/>\n<stop offset=\"0.8\" stop-color=\"#f0e2b0\"/>\n<stop offset=\"1\" stop-color=\"#f2d860\" stop-opacity=\"0\"/>\n</radialGradient>\n<linearGradient id=\"bellyBand\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n<stop offset=\"0\" stop-color=\"#f6c6c4\" stop-opacity=\"0.6\"/>\n<stop offset=\"0.45\" stop-color=\"#ffffff\" stop-opacity=\"0.5\"/>\n<stop offset=\"0.6\" stop-color=\"#cfd8e6\" stop-opacity=\"0.55\"/>\n<stop offset=\"1\" stop-color=\"#e8d070\" stop-opacity=\"0\"/>\n</linearGradient>\n<radialGradient id=\"blush\" cx=\"0.5\" cy=\"0.5\" r=\"0.5\">\n<stop offset=\"0\" stop-color=\"#f08a8a\" stop-opacity=\"0.7\"/>\n<stop offset=\"1\" stop-color=\"#f08a8a\" stop-opacity=\"0\"/>\n</radialGradient>\n<linearGradient id=\"handGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n<stop offset=\"0\" stop-color=\"#8a8a3a\"/>\n<stop offset=\"1\" stop-color=\"#4a4a28\"/>\n</linearGradient>\n<filter id=\"soft\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n<feGaussianBlur stdDeviation=\"2\"/>\n</filter>\n<filter id=\"glow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n<feGaussianBlur stdDeviation=\"6\"/>\n</filter>\n</defs>\n\n<g id=\"background\">\n<rect x=\"0\" y=\"0\" width=\"240\" height=\"294\" fill=\"url(#bgGrad)\"/>\n<ellipse cx=\"200\" cy=\"170\" rx=\"40\" ry=\"90\" fill=\"#ffffff\" opacity=\"0.7\" filter=\"url(#glow)\"/>\n</g>\n\n<g id=\"character-bird\">\n<g id=\"legs\">\n<path id=\"leg-left\" d=\"M72 238 C70 260 72 280 74 294 L94 294 C95 278 97 258 98 240 Z\" fill=\"#e4c22e\"/>\n<path id=\"leg-right\" d=\"M102 240 C103 258 104 278 105 294 L124 294 C126 278 128 258 128 236 Z\" fill=\"#ead03e\"/>\n<path d=\"M98 242 L101 294\" stroke=\"#c9a51e\" stroke-width=\"2\" fill=\"none\" opacity=\"0.6\"/>\n</g>\n\n<g id=\"arm-left\">\n<path d=\"M64 80 C50 100 40 140 38 192 L48 194 C52 150 58 115 70 92 Z\" fill=\"#d8b522\"/>\n<g id=\"hand-left\">\n<path d=\"M37 188 C32 194 27 203 26 212 C28 213 30 210 32 205 C31 211 31 216 33 217 C35 216 35 210 37 206 C37 212 38 217 40 216 C42 214 41 208 42 204 C43 209 45 212 47 210 C48 204 48 196 48 190 Z\" fill=\"url(#handGrad)\"/>\n</g>\n</g>\n\n<g id=\"arm-right\">\n<path d=\"M140 78 C152 100 160 140 162 192 L152 194 C150 150 146 118 136 94 Z\" fill=\"#ead03c\"/>\n<g id=\"hand-right\">\n<path d=\"M152 188 C150 196 150 204 152 210 C154 212 155 208 156 204 C157 209 158 215 160 216 C162 216 162 210 161 205 C163 210 166 216 168 215 C169 213 167 206 165 202 C168 205 171 210 173 209 C173 202 168 194 163 188 Z\" fill=\"url(#handGrad)\"/>\n</g>\n</g>\n\n<g id=\"body\">\n<path d=\"M72 50 C60 70 52 95 52 130 C50 170 55 215 70 242 C85 252 115 252 130 242 C150 220 158 175 156 130 C154 95 146 70 132 50 Z\" fill=\"url(#bodyGrad)\"/>\n<g id=\"belly\">\n<ellipse cx=\"105\" cy=\"170\" rx=\"50\" ry=\"72\" fill=\"url(#bellyGrad)\"/>\n<ellipse cx=\"105\" cy=\"165\" rx=\"46\" ry=\"62\" fill=\"url(#bellyBand)\" filter=\"url(#soft)\"/>\n<ellipse cx=\"102\" cy=\"125\" rx=\"30\" ry=\"14\" fill=\"#f7c2c0\" opacity=\"0.45\" filter=\"url(#soft)\"/>\n<ellipse cx=\"108\" cy=\"185\" rx=\"40\" ry=\"10\" fill=\"#c9d4e4\" opacity=\"0.4\" filter=\"url(#soft)\"/>\n</g>\n</g>\n\n<g id=\"head\">\n<path d=\"M78 0 C74 20 70 40 70 60 C80 70 125 70 134 58 C134 40 130 18 126 0 Z\" fill=\"url(#headGrad)\"/>\n<ellipse cx=\"108\" cy=\"12\" rx=\"10\" ry=\"12\" fill=\"#f2dc66\" opacity=\"0.5\" filter=\"url(#soft)\"/>\n<g id=\"cheeks\">\n<ellipse cx=\"84\" cy=\"56\" rx=\"9\" ry=\"6\" fill=\"url(#blush)\"/>\n<ellipse cx=\"126\" cy=\"54\" rx=\"8\" ry=\"6\" fill=\"url(#blush)\"/>\n</g>\n<g id=\"eyes\">\n<path id=\"eye-left\" d=\"M85 40 Q91 44 97 41\" stroke=\"#7a6418\" stroke-width=\"1.6\" fill=\"none\" stroke-linecap=\"round\"/>\n<path id=\"eye-right\" d=\"M110 40 Q116 44 122 40\" stroke=\"#7a6418\" stroke-width=\"1.6\" fill=\"none\" stroke-linecap=\"round\"/>\n</g>\n<g id=\"beak\">\n<path d=\"M101 46 Q104 50 107 46\" stroke=\"#b8961a\" stroke-width=\"1\" fill=\"none\" opacity=\"0.7\"/>\n</g>\n</g>\n</g>\n</svg>\n</body>\n</html>",
+  "html_sha256": "4aacdcf060aa18b4c027ece1704ad64d6ab049f2b04af89e6edd6953fa7227d3",
+  "static_gates": [],
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 33.3,
+    "tokens": {
+      "input": 1547,
+      "cached_input": 0,
+      "cache_write": 1545,
+      "output": 3191,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0763812,
+    "tools_used": [],
+    "cost_usd": 0.0763812,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1545,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 3191,
+      "output_tokens_details": {
+        "thinking_tokens": 435
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1545,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 3191,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1545,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1545
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-07T03:19:20Z",
+    "finished_at": "2026-11-07T03:19:53Z",
+    "revision": "fc64216+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

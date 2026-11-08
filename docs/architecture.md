@@ -82,6 +82,7 @@ with collector configuration; see [release conditions](releases.md#selected-comp
 | `bench/`, `models.toml`, `src/` | Definitions, configured models, implementation | Tracked |
 | `runs/<run>/` | Resumable working observations, judgments, and local reports | Ignored |
 | `results/<suite>/<run>/` | Sanitized portable observations, generated images, scores, and checksum metadata | Included in normal source commits |
+| `results/frontend/<run>/` | Frontend-track records, gate summary, and WebP renders for release pages (`nwb frontend sync`) | Included in normal source commits |
 | `releases/*.toml` | Explicit comparison selection and normalized input pins | Tracked |
 | `site/` or `--out` | Generated pages, assets, scores, bundles, and build metadata | Default output ignored |
 | `models.local.toml` | Local settings and credential references | Ignored |
@@ -93,6 +94,7 @@ the normal Git workflow. The benchmark does not issue Git commits or pushes duri
 
 `release.py` restores missing selected runs, validates the manifest's version, input hashes and judge
 selection, and rejects stale judgments before producing both suite pages, the NaiWai Index overview, and raw
-bundles. Publishing
+bundles. It also verifies the pinned saved frontend run and builds its pages (`frontend_site.py`), which
+show recorded renders and never run model code; see the [frontend track](frontend.md#publishing). Publishing
 is a separate explicit invocation of `scripts/publish_site.sh`, which builds into a fresh directory
 and replaces `gh-pages`. See [release operations](releases.md) and [scoring details](design.md).

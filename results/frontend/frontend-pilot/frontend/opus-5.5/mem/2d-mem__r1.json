@@ -1,0 +1,106 @@
+{
+  "settings_id": "1e77488ebc8a6fba",
+  "track": "frontend",
+  "corpus": "frontend-v1",
+  "model": "opus-5.5",
+  "vendor": "anthropic",
+  "task": "mem",
+  "kind": "2d-mem",
+  "rep": 1,
+  "prompt_sha256": "4043134c78ee044981c2be36804778d327e237c1419c24e509e07d71bd83a549",
+  "width": 240,
+  "height": 240,
+  "duration_ms": 0,
+  "images": [],
+  "prompt": "Draw the Chinese internet meme character 大笑奶龙 (Laughing Nailong, also called 奶蛙) from memory, as it appears in the meme. No reference image is provided.\n\nTask (2D, static, from memory): write an HTML page that draws the character by hand in inline SVG. Structure it in named groups.\n- Static only: no <script>, no SMIL (<animate>, <animateTransform>, <animateMotion>, <set>), no CSS animations or transitions.\n\n2D contract:\n- The page body contains a single inline <svg> element with viewBox=\"0 0 240 240\", width=\"240\", and height=\"240\". No nested <svg>, no <foreignObject>, no <canvas>.\n- Put each character in its own <g> with a descriptive id (for example id=\"character-left\"), with nested <g> groups with descriptive ids for parts that could move (head, eyes, mouth, arms, hands, ...).\n- Gradients, clip paths, masks, and SVG filters (for example feGaussianBlur) are allowed.\n\nRules (breaking any rule scores 0):\n- Reply with exactly one ```html code block containing one complete, self-contained HTML document. If you send several blocks, only the last one counts. Do not use tools; answer directly.\n- The page is rendered offline in a 240x240 px viewport at device pixel ratio 1. Fill exactly that area, starting at the top-left corner.\n- No raster images: no <img>, no <image>, no CSS url(...) except url(#id) references to your own SVG definitions, no data: URIs, no base64, no blob: URLs.\n- No external resources or network access: no external scripts, stylesheets, fonts, iframes, links, fetch, XMLHttpRequest, WebSocket, or any other URL.\n- Do not call setTimeout, setInterval, requestAnimationFrame, or requestIdleCallback. The harness controls time.\n- The file must be at most 256 KB and must run without uncaught exceptions or console errors.",
+  "text": "```html\n<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<style>\n  html, body { margin: 0; padding: 0; width: 240px; height: 240px; overflow: hidden; background: #fff8e6; }\n  svg { display: block; }\n</style>\n</head>\n<body>\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 240\" width=\"240\" height=\"240\">\n  <defs>\n    <radialGradient id=\"bodyGrad\" cx=\"45%\" cy=\"35%\" r=\"70%\">\n      <stop offset=\"0%\" stop-color=\"#ffe66b\"/>\n      <stop offset=\"70%\" stop-color=\"#ffd23a\"/>\n      <stop offset=\"100%\" stop-color=\"#f5b81e\"/>\n    </radialGradient>\n    <radialGradient id=\"bellyGrad\" cx=\"50%\" cy=\"40%\" r=\"60%\">\n      <stop offset=\"0%\" stop-color=\"#fff6c4\"/>\n      <stop offset=\"100%\" stop-color=\"#ffe98a\"/>\n    </radialGradient>\n    <radialGradient id=\"mouthGrad\" cx=\"50%\" cy=\"30%\" r=\"70%\">\n      <stop offset=\"0%\" stop-color=\"#8a1f1f\"/>\n      <stop offset=\"100%\" stop-color=\"#4a0d0d\"/>\n    </radialGradient>\n    <filter id=\"soft\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n      <feGaussianBlur stdDeviation=\"2\"/>\n    </filter>\n    <clipPath id=\"mouthClip\">\n      <path d=\"M84 112 Q120 104 156 112 Q154 168 120 170 Q86 168 84 112 Z\"/>\n    </clipPath>\n  </defs>\n\n  <g id=\"background\">\n    <rect x=\"0\" y=\"0\" width=\"240\" height=\"240\" fill=\"#fff8e6\"/>\n    <ellipse cx=\"120\" cy=\"228\" rx=\"80\" ry=\"8\" fill=\"#e8d9b0\" opacity=\"0.7\"/>\n  </g>\n\n  <g id=\"character-nailong\">\n    <g id=\"tail\">\n      <path d=\"M182 190 Q222 186 228 160 Q214 178 186 172 Z\" fill=\"url(#bodyGrad)\" stroke=\"#c98a10\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/>\n    </g>\n\n    <g id=\"feet\">\n      <g id=\"foot-left\">\n        <ellipse cx=\"88\" cy=\"222\" rx=\"24\" ry=\"10\" fill=\"#ffd23a\" stroke=\"#c98a10\" stroke-width=\"2.5\"/>\n      </g>\n      <g id=\"foot-right\">\n        <ellipse cx=\"152\" cy=\"222\" rx=\"24\" ry=\"10\" fill=\"#ffd23a\" stroke=\"#c98a10\" stroke-width=\"2.5\"/>\n      </g>\n    </g>\n\n    <g id=\"body\">\n      <path d=\"M120 22\n               C 170 22, 196 58, 198 104\n               C 202 150, 200 196, 172 214\n               C 150 226, 90 226, 68 214\n               C 40 196, 38 150, 42 104\n               C 44 58, 70 22, 120 22 Z\"\n            fill=\"url(#bodyGrad)\" stroke=\"#c98a10\" stroke-width=\"3\" stroke-linejoin=\"round\"/>\n      <g id=\"belly\">\n        <ellipse cx=\"120\" cy=\"182\" rx=\"50\" ry=\"36\" fill=\"url(#bellyGrad)\"/>\n        <path d=\"M86 168 Q120 174 154 168\" fill=\"none\" stroke=\"#f0c850\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n        <path d=\"M84 186 Q120 193 156 186\" fill=\"none\" stroke=\"#f0c850\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n        <path d=\"M90 203 Q120 209 150 203\" fill=\"none\" stroke=\"#f0c850\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n      </g>\n      <ellipse id=\"shine\" cx=\"92\" cy=\"50\" rx=\"18\" ry=\"9\" fill=\"#fff6c0\" opacity=\"0.7\" transform=\"rotate(-20 92 50)\"/>\n    </g>\n\n    <g id=\"arms\">\n      <g id=\"arm-left\">\n        <path d=\"M50 140 Q22 128 18 104 Q30 104 36 112 Q44 122 56 126 Z\" fill=\"url(#bodyGrad)\" stroke=\"#c98a10\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/>\n        <g id=\"hand-left\">\n          <circle cx=\"22\" cy=\"104\" r=\"7\" fill=\"#ffd23a\" stroke=\"#c98a10\" stroke-width=\"2.5\"/>\n        </g>\n      </g>\n      <g id=\"arm-right\">\n        <path d=\"M190 140 Q218 128 222 104 Q210 104 204 112 Q196 122 184 126 Z\" fill=\"url(#bodyGrad)\" stroke=\"#c98a10\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/>\n        <g id=\"hand-right\">\n          <circle cx=\"218\" cy=\"104\" r=\"7\" fill=\"#ffd23a\" stroke=\"#c98a10\" stroke-width=\"2.5\"/>\n        </g>\n      </g>\n    </g>\n\n    <g id=\"head\">\n      <g id=\"cheeks\">\n        <ellipse id=\"cheek-left\" cx=\"70\" cy=\"118\" rx=\"13\" ry=\"8\" fill=\"#ff8a8a\" opacity=\"0.75\" filter=\"url(#soft)\"/>\n        <ellipse id=\"cheek-right\" cx=\"170\" cy=\"118\" rx=\"13\" ry=\"8\" fill=\"#ff8a8a\" opacity=\"0.75\" filter=\"url(#soft)\"/>\n      </g>\n\n      <g id=\"eyes\">\n        <g id=\"eye-left\">\n          <path d=\"M78 92 Q92 74 106 90\" fill=\"none\" stroke=\"#2b1a0a\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n          <path d=\"M76 98 L70 102\" stroke=\"#2b1a0a\" stroke-width=\"2.5\" stroke-linecap=\"round\"/>\n        </g>\n        <g id=\"eye-right\">\n          <path d=\"M134 90 Q148 74 162 92\" fill=\"none\" stroke=\"#2b1a0a\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n          <path d=\"M164 98 L170 102\" stroke=\"#2b1a0a\" stroke-width=\"2.5\" stroke-linecap=\"round\"/>\n        </g>\n        <g id=\"tears\">\n          <path d=\"M66 100 Q60 110 64 116 Q70 112 66 100 Z\" fill=\"#9fd8ff\" stroke=\"#5aa8e0\" stroke-width=\"1\"/>\n          <path d=\"M174 100 Q180 110 176 116 Q170 112 174 100 Z\" fill=\"#9fd8ff\" stroke=\"#5aa8e0\" stroke-width=\"1\"/>\n        </g>\n      </g>\n\n      <g id=\"mouth\">\n        <path d=\"M84 112 Q120 104 156 112 Q154 168 120 170 Q86 168 84 112 Z\" fill=\"url(#mouthGrad)\"/>\n        <g clip-path=\"url(#mouthClip)\">\n          <g id=\"tongue\">\n            <ellipse cx=\"120\" cy=\"166\" rx=\"26\" ry=\"16\" fill=\"#ff6f86\"/>\n            <path d=\"M120 154 L120 166\" stroke=\"#d94a64\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n          </g>\n          <path id=\"upper-teeth\" d=\"M88 110 Q120 104 152 110 L152 116 Q120 112 88 116 Z\" fill=\"#ffffff\"/>\n        </g>\n        <path d=\"M84 112 Q120 104 156 112 Q154 168 120 170 Q86 168 84 112 Z\" fill=\"none\" stroke=\"#2b1a0a\" stroke-width=\"3\" stroke-linejoin=\"round\"/>\n        <path d=\"M80 110 Q84 112 86 108\" fill=\"none\" stroke=\"#2b1a0a\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n        <path d=\"M160 110 Q156 112 154 108\" fill=\"none\" stroke=\"#2b1a0a\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n      </g>\n\n      <g id=\"nostrils\">\n        <circle cx=\"114\" cy=\"102\" r=\"1.5\" fill=\"#8a5a10\"/>\n        <circle cx=\"126\" cy=\"102\" r=\"1.5\" fill=\"#8a5a10\"/>\n      </g>\n    </g>\n  </g>\n</svg>\n</body>\n</html>\n```",
+  "html": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<style>\n  html, body { margin: 0; padding: 0; width: 240px; height: 240px; overflow: hidden; background: #fff8e6; }\n  svg { display: block; }\n</style>\n</head>\n<body>\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 240\" width=\"240\" height=\"240\">\n  <defs>\n    <radialGradient id=\"bodyGrad\" cx=\"45%\" cy=\"35%\" r=\"70%\">\n      <stop offset=\"0%\" stop-color=\"#ffe66b\"/>\n      <stop offset=\"70%\" stop-color=\"#ffd23a\"/>\n      <stop offset=\"100%\" stop-color=\"#f5b81e\"/>\n    </radialGradient>\n    <radialGradient id=\"bellyGrad\" cx=\"50%\" cy=\"40%\" r=\"60%\">\n      <stop offset=\"0%\" stop-color=\"#fff6c4\"/>\n      <stop offset=\"100%\" stop-color=\"#ffe98a\"/>\n    </radialGradient>\n    <radialGradient id=\"mouthGrad\" cx=\"50%\" cy=\"30%\" r=\"70%\">\n      <stop offset=\"0%\" stop-color=\"#8a1f1f\"/>\n      <stop offset=\"100%\" stop-color=\"#4a0d0d\"/>\n    </radialGradient>\n    <filter id=\"soft\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n      <feGaussianBlur stdDeviation=\"2\"/>\n    </filter>\n    <clipPath id=\"mouthClip\">\n      <path d=\"M84 112 Q120 104 156 112 Q154 168 120 170 Q86 168 84 112 Z\"/>\n    </clipPath>\n  </defs>\n\n  <g id=\"background\">\n    <rect x=\"0\" y=\"0\" width=\"240\" height=\"240\" fill=\"#fff8e6\"/>\n    <ellipse cx=\"120\" cy=\"228\" rx=\"80\" ry=\"8\" fill=\"#e8d9b0\" opacity=\"0.7\"/>\n  </g>\n\n  <g id=\"character-nailong\">\n    <g id=\"tail\">\n      <path d=\"M182 190 Q222 186 228 160 Q214 178 186 172 Z\" fill=\"url(#bodyGrad)\" stroke=\"#c98a10\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/>\n    </g>\n\n    <g id=\"feet\">\n      <g id=\"foot-left\">\n        <ellipse cx=\"88\" cy=\"222\" rx=\"24\" ry=\"10\" fill=\"#ffd23a\" stroke=\"#c98a10\" stroke-width=\"2.5\"/>\n      </g>\n      <g id=\"foot-right\">\n        <ellipse cx=\"152\" cy=\"222\" rx=\"24\" ry=\"10\" fill=\"#ffd23a\" stroke=\"#c98a10\" stroke-width=\"2.5\"/>\n      </g>\n    </g>\n\n    <g id=\"body\">\n      <path d=\"M120 22\n               C 170 22, 196 58, 198 104\n               C 202 150, 200 196, 172 214\n               C 150 226, 90 226, 68 214\n               C 40 196, 38 150, 42 104\n               C 44 58, 70 22, 120 22 Z\"\n            fill=\"url(#bodyGrad)\" stroke=\"#c98a10\" stroke-width=\"3\" stroke-linejoin=\"round\"/>\n      <g id=\"belly\">\n        <ellipse cx=\"120\" cy=\"182\" rx=\"50\" ry=\"36\" fill=\"url(#bellyGrad)\"/>\n        <path d=\"M86 168 Q120 174 154 168\" fill=\"none\" stroke=\"#f0c850\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n        <path d=\"M84 186 Q120 193 156 186\" fill=\"none\" stroke=\"#f0c850\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n        <path d=\"M90 203 Q120 209 150 203\" fill=\"none\" stroke=\"#f0c850\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n      </g>\n      <ellipse id=\"shine\" cx=\"92\" cy=\"50\" rx=\"18\" ry=\"9\" fill=\"#fff6c0\" opacity=\"0.7\" transform=\"rotate(-20 92 50)\"/>\n    </g>\n\n    <g id=\"arms\">\n      <g id=\"arm-left\">\n        <path d=\"M50 140 Q22 128 18 104 Q30 104 36 112 Q44 122 56 126 Z\" fill=\"url(#bodyGrad)\" stroke=\"#c98a10\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/>\n        <g id=\"hand-left\">\n          <circle cx=\"22\" cy=\"104\" r=\"7\" fill=\"#ffd23a\" stroke=\"#c98a10\" stroke-width=\"2.5\"/>\n        </g>\n      </g>\n      <g id=\"arm-right\">\n        <path d=\"M190 140 Q218 128 222 104 Q210 104 204 112 Q196 122 184 126 Z\" fill=\"url(#bodyGrad)\" stroke=\"#c98a10\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/>\n        <g id=\"hand-right\">\n          <circle cx=\"218\" cy=\"104\" r=\"7\" fill=\"#ffd23a\" stroke=\"#c98a10\" stroke-width=\"2.5\"/>\n        </g>\n      </g>\n    </g>\n\n    <g id=\"head\">\n      <g id=\"cheeks\">\n        <ellipse id=\"cheek-left\" cx=\"70\" cy=\"118\" rx=\"13\" ry=\"8\" fill=\"#ff8a8a\" opacity=\"0.75\" filter=\"url(#soft)\"/>\n        <ellipse id=\"cheek-right\" cx=\"170\" cy=\"118\" rx=\"13\" ry=\"8\" fill=\"#ff8a8a\" opacity=\"0.75\" filter=\"url(#soft)\"/>\n      </g>\n\n      <g id=\"eyes\">\n        <g id=\"eye-left\">\n          <path d=\"M78 92 Q92 74 106 90\" fill=\"none\" stroke=\"#2b1a0a\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n          <path d=\"M76 98 L70 102\" stroke=\"#2b1a0a\" stroke-width=\"2.5\" stroke-linecap=\"round\"/>\n        </g>\n        <g id=\"eye-right\">\n          <path d=\"M134 90 Q148 74 162 92\" fill=\"none\" stroke=\"#2b1a0a\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n          <path d=\"M164 98 L170 102\" stroke=\"#2b1a0a\" stroke-width=\"2.5\" stroke-linecap=\"round\"/>\n        </g>\n        <g id=\"tears\">\n          <path d=\"M66 100 Q60 110 64 116 Q70 112 66 100 Z\" fill=\"#9fd8ff\" stroke=\"#5aa8e0\" stroke-width=\"1\"/>\n          <path d=\"M174 100 Q180 110 176 116 Q170 112 174 100 Z\" fill=\"#9fd8ff\" stroke=\"#5aa8e0\" stroke-width=\"1\"/>\n        </g>\n      </g>\n\n      <g id=\"mouth\">\n        <path d=\"M84 112 Q120 104 156 112 Q154 168 120 170 Q86 168 84 112 Z\" fill=\"url(#mouthGrad)\"/>\n        <g clip-path=\"url(#mouthClip)\">\n          <g id=\"tongue\">\n            <ellipse cx=\"120\" cy=\"166\" rx=\"26\" ry=\"16\" fill=\"#ff6f86\"/>\n            <path d=\"M120 154 L120 166\" stroke=\"#d94a64\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n          </g>\n          <path id=\"upper-teeth\" d=\"M88 110 Q120 104 152 110 L152 116 Q120 112 88 116 Z\" fill=\"#ffffff\"/>\n        </g>\n        <path d=\"M84 112 Q120 104 156 112 Q154 168 120 170 Q86 168 84 112 Z\" fill=\"none\" stroke=\"#2b1a0a\" stroke-width=\"3\" stroke-linejoin=\"round\"/>\n        <path d=\"M80 110 Q84 112 86 108\" fill=\"none\" stroke=\"#2b1a0a\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n        <path d=\"M160 110 Q156 112 154 108\" fill=\"none\" stroke=\"#2b1a0a\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n      </g>\n\n      <g id=\"nostrils\">\n        <circle cx=\"114\" cy=\"102\" r=\"1.5\" fill=\"#8a5a10\"/>\n        <circle cx=\"126\" cy=\"102\" r=\"1.5\" fill=\"#8a5a10\"/>\n      </g>\n    </g>\n  </g>\n</svg>\n</body>\n</html>",
+  "html_sha256": "a7bb03a3c409eaa73e466bc3a057ab0cb4031357158c81ee6e7d39619a831a43",
+  "static_gates": [],
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.309",
+    "seconds": 30.8,
+    "tokens": {
+      "input": 1191,
+      "cached_input": 0,
+      "cache_write": 1189,
+      "output": 3243,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0745711,
+    "tools_used": [],
+    "cost_usd": 0.0745711,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1189,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 3243,
+      "output_tokens_details": {
+        "thinking_tokens": 333
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1189,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 3243,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1189,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1189
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-05T02:37:36Z",
+    "finished_at": "2026-11-05T02:38:07Z",
+    "revision": "03dd576",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -3,8 +3,8 @@
 Models rebuild animated 奶蛙 GIFs as hand-written web pages: inline SVG (2D) or three.js scenes (3D).
 `bench/frontend-v1/` holds the reference corpus, checklists, prompts, and a vendored three.js. The track
 is outside the NaiWai Index, and the corpus and its checklists await human review. Samples are checked
-by scripted gates; likeness is reviewed by people in a local gallery (`nwb frontend report`), and there
-is no automatic quality score or ranking. Site integration is not implemented.
+by scripted gates; likeness is reviewed by people in a local gallery (`nwb frontend report`) and on the
+release site's 复刻 Rebuild pages, and there is no automatic quality score or ranking.
 
 ## Corpus
 
@@ -231,3 +231,31 @@ because its source sample or source render is missing counts as a failure.
 Subject calls may take up to 30 minutes. Samples are `runs/<run>/frontend/<model>/<task>/<kind>__r<rep>.json`,
 and renders are in the directory with the same stem. `report` writes `runs/<run>/frontend/summary.json`
 and `gallery.html`. Every stage resumes and skips finished work; `--force` redoes it.
+
+## Publishing
+
+Release builds read saved results, not working runs. Save a reviewed run as Git-ready results:
+
+```sh
+uv run --extra frontend nwb frontend sync --run pilot
+```
+
+`sync` writes `results/frontend/<run>/`: the sanitized records of the samples that `report` lists
+(home-directory prefixes replaced with `~`), `summary.json` (gate results, display labels with the
+recorded effort, the harness ID, and the task metadata the pages need), and every current render with
+its `render.json`. Renders and reference GIFs are re-encoded as WebP (stills at quality 85, loops at
+quality 70 with each frame's delay kept), or kept as the original file when that is smaller; `render.json`
+names the saved files. `snapshot.json` lists every file's SHA-256, and `sync` prints the digest that a
+release manifest pins. Unchanged files are left untouched, and files no longer produced are removed. The
+saved results are a publication record: the revision input copies are not saved, and re-rendering or
+collecting more needs the working run.
+
+The release manifest's `[frontend]` table selects the saved run and its digest (see
+[releases](releases.md)). `nwb release` verifies every checksum and the digest, then writes `frontend/`:
+an overview with the gate table and one page per task. Each page shows the reference GIF and
+keyframes and, per model, the still page, the animation, and the revision side by side. The keyframe
+comparisons, 3D harness views, gate failures, and a plain-text `source.txt` of each page load only when
+a card is opened. The pages never run model code. Images are lazy-loaded with fixed dimensions,
+offscreen cards skip rendering (`content-visibility`), and readers who prefer reduced motion get
+first frames instead of loops.
+

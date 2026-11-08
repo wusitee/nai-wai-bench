@@ -42,8 +42,10 @@ SUITE_TEXT = {
     },
 }
 INDEX_NAME = ("奶蛙指数", "NaiWai Index")
-# Published release layout: the index at the site root, every suite in a subdirectory named after it.
-PAGES = {"index": "", "core": "meme-id", "naihub-v1": "visual-detail"}
+FRONTEND_NAME = ("复刻", "Rebuild")
+# Published release layout: the index at the site root, every suite and the experimental frontend track in
+# a subdirectory named after it.
+PAGES = {"index": "", "core": "meme-id", "naihub-v1": "visual-detail", "frontend": "frontend"}
 # Earlier published suite paths, kept as redirects to the current pages.
 REDIRECTS = {"naihub-v1": "naihub-v1"}
 CATEGORY = {"anchors": ("经典锚点", "Anchors"), "pose_action": ("姿势动作", "Pose and action"),
@@ -232,12 +234,13 @@ def _head(title: str) -> str:
             f"content='width=device-width,initial-scale=1'><title>{e(title)}</title><style>{CSS}</style>")
 
 
-def _header(here: str, links: str, tabs: bool) -> str:
-    names = {"index": INDEX_NAME, **{s: SUITE_TEXT[s]["name"] for s in SUITES}}
+def _header(here: str, links: str, tabs: bool, up: str = "") -> str:
+    """Page header; `up` prefixes the tab links of pages below a section's directory."""
+    names = {"index": INDEX_NAME, "frontend": FRONTEND_NAME, **{s: SUITE_TEXT[s]["name"] for s in SUITES}}
     tab_html = ("<div class=tabs>" + "".join(
-        f"<a href='{_suite_href(here, page)}'{' aria-current=page' if page == here else ''}>"
+        f"<a href='{up}{_suite_href(here, page)}'{' aria-current=page' if page == here else ''}>"
         f"{e(names[page][0])} {e(names[page][1])}</a>" for page in PAGES) + "</div>" if tabs else "")
-    home = _suite_href(here, "index") if tabs else "#"
+    home = up + _suite_href(here, "index") if tabs else "#"
     return (f"<header class=top><div><a class=brand href='{home}'>奶蛙<span>BENCH</span></a>{tab_html}"
             f"<nav class=sections>{links}</nav></div></header><main>")
 
@@ -876,7 +879,10 @@ def build_index(suites: dict[str, tuple[Bench, dict]], index: dict, models: dict
         + "".join(panels) + "</div>"
         + ("<p class=muted>图像生成是实验项目，不计入指数，见"
            f"<a href='{_suite_href('index', 'core')}#gallery'>识梗页的图像生成部分</a>。<span class=en> Image "
-           "generation is an experimental track outside the index; see the Meme ID page.</span></p>" if imagegen else ""))
+           "generation is an experimental track outside the index; see the Meme ID page.</span></p>" if imagegen else "")
+        + f"<p class=muted>前端复刻（用 SVG 和 three.js 手写网页复刻奶蛙动图）也是实验项目，不计入指数，见<a href='{_suite_href('index', 'frontend')}'>"
+        "复刻页</a>。<span class=en> The frontend rebuild track (hand-written SVG and three.js pages that recreate "
+        "奶蛙 GIFs) is experimental and outside the index too.</span></p>")
     html.append(_footer(repo_url, blob))
     page = out / "index.html"
     page.write_text("\n".join(html), encoding="utf-8")

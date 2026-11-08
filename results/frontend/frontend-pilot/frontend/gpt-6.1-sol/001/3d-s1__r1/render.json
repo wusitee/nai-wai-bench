@@ -1,0 +1,74 @@
+{
+  "html_sha256": "4d71edb55e7db2d4826b40f45d09b744aa6eac8a668d10324a3568fecdeb1cb9",
+  "harness": "fee9bd636b661bc1",
+  "kind": "3d-s1",
+  "gates": [],
+  "errors": [],
+  "blocked": [],
+  "forbidden": [],
+  "elements": [],
+  "timing": {
+    "declarative": false,
+    "scripted": false
+  },
+  "frames": [
+    {
+      "file": "frame_00.webp",
+      "t": 0
+    }
+  ],
+  "views": [
+    {
+      "file": "view_side.webp",
+      "view": "side",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_back.webp",
+      "view": "back",
+      "t": 0,
+      "hidden": [
+        "back-wall"
+      ]
+    },
+    {
+      "file": "view_three_quarter.webp",
+      "view": "three_quarter",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_top.webp",
+      "view": "top",
+      "t": 0,
+      "hidden": []
+    }
+  ],
+  "scene": {
+    "characters": [
+      {
+        "name": "character-left",
+        "meshes": 49,
+        "width": 1.7717152881622313,
+        "height": 2.3336739680845358,
+        "depth": 1.442020802212637,
+        "ratio": 0.8139122644860278
+      },
+      {
+        "name": "character-right",
+        "meshes": 55,
+        "width": 2.4529130814700317,
+        "height": 2.3276363812515513,
+        "depth": 1.5330983790706156,
+        "ratio": 0.6250112939802291
+      }
+    ],
+    "textures": 1
+  },
+  "mode": "render(t)",
+  "checks": {
+    "determinism_diff": 0.0
+  },
+  "seconds": 2.6
+}

@@ -190,6 +190,12 @@ def cmd_frontend(args, root, models, defaults) -> int:
         return _finish(ok, failed)
     if args.action == "render":
         return _finish(*frontend_render.render_all(corpus, run_dir, args.force))
+    if args.action == "sync":
+        from nwb import frontend_results
+
+        snapshot, digest = frontend_results.sync(root, corpus, run_dir, models)
+        print(f"saved results to {snapshot}\ninput sha256 (release pin): {digest}")
+        return 0
     result = frontend.summary(corpus, run_dir)
     write_json(run_dir / "frontend" / "summary.json", result)
     for row in result["rows"]:
@@ -267,7 +273,7 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--bundle-url", help="download URL for the raw results zip")
     sp.add_argument("--repo-url", help="link to the source repository in the footer")
     sp.add_argument("--suite-tabs", action="store_true",
-                    help="link every page of the published release layout (index at the root, meme-id/, visual-detail/)")
+                    help="link every page of the published release layout (index at the root, meme-id/, visual-detail/, frontend/)")
     sp = with_run(sub.add_parser("export", help="export a portable raw results bundle"), jobs=False)
     sp.add_argument("--out", help="output directory (default: run directory)")
     sp.add_argument("--judges", help="comma-separated judges to count (default: configured judge pools)")
@@ -277,7 +283,8 @@ def build_parser() -> argparse.ArgumentParser:
     sp = with_run(sub.add_parser("merge", help="combine runs into a new run without model calls"), jobs=False, sync=True)
     sp.add_argument("--from", dest="sources", required=True, help="comma-separated source runs")
     sp = sub.add_parser("frontend", help="experimental: rebuild GIFs as SVG/three.js pages (docs/frontend.md)")
-    sp.add_argument("action", choices=["collect", "render", "report"])
+    sp.add_argument("action", choices=["collect", "render", "report", "sync"],
+                    help="sync: save the run as Git-ready results for release builds")
     sp.add_argument("--run", default="frontend", help="run name; results go to runs/<run>/ (default: frontend)")
     sp.add_argument("--models", help="collect: comma-separated subject models")
     sp.add_argument("--tasks", default="all", help="collect: 'all' or comma-separated task ids (default: all)")

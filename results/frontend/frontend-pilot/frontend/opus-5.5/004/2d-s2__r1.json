@@ -1,0 +1,121 @@
+{
+  "settings_id": "1e77488ebc8a6fba",
+  "track": "frontend",
+  "corpus": "frontend-v1",
+  "model": "opus-5.5",
+  "vendor": "anthropic",
+  "task": "004",
+  "kind": "2d-s2",
+  "rep": 1,
+  "prompt_sha256": "791be002ff8d609d4d7a6ceea9e2c716da998fa53f4c72130166530eff1a394c",
+  "width": 244,
+  "height": 240,
+  "duration_ms": 1200,
+  "input_names": "neutral",
+  "images": [
+    "bench/frontend-v1/assets/004/frame_00.png",
+    "bench/frontend-v1/assets/004/frame_01.png",
+    "bench/frontend-v1/assets/004/frame_02.png",
+    "bench/frontend-v1/assets/004/frame_03.png",
+    "bench/frontend-v1/assets/004/frame_04.png",
+    "bench/frontend-v1/assets/004/frame_05.png",
+    "bench/frontend-v1/assets/004/frame_06.png",
+    "bench/frontend-v1/assets/004/frame_07.png"
+  ],
+  "depends_on": {
+    "sample": "frontend/opus-5.5/004/2d-s1__r1.json",
+    "sha256": "c854dba145d329ab0b986192c6bcb84418223784e9c4a2c4ea94d4bcf3873dae",
+    "static_gates": []
+  },
+  "prompt": "In step 1 you rebuilt the first frame of an animated GIF as inline SVG. Your step 1 page is below. The attached images are eight keyframes of the same GIF, in order, at these times from the loop start: image 1 at 0 ms, image 2 at 160 ms, image 3 at 340 ms, image 4 at 500 ms, image 5 at 680 ms, image 6 at 840 ms, image 7 at 1020 ms, image 8 at 1180 ms. The GIF loops every 1200 ms.\n\nTask (2D, animation): animate your step 1 page so that it matches the GIF's motion at those times. Start from your step 1 SVG; you may fix or improve it. The animation loops with a period of exactly 1200 ms, and t = 0 must match the first keyframe.\n\nUse exactly one of these timing methods, never both:\nA. Declarative: CSS @keyframes, SMIL, or the Web Animations API (element.animate). Every animation starts at page load and repeats forever. The harness pauses all animations with document.getAnimations() and SVGSVGElement.setCurrentTime() and seeks them to each time.\nB. Scripted: define window.nwb = { render(t) }, where render(t) updates the SVG synchronously to the frame at time t in milliseconds. The same t must always produce the same image, whatever was rendered before.\n\n2D contract:\n- The page body contains a single inline <svg> element with viewBox=\"0 0 244 240\", width=\"244\", and height=\"240\". No nested <svg>, no <foreignObject>, no <canvas>.\n- Put each character in its own <g> with a descriptive id (for example id=\"character-left\"), with nested <g> groups with descriptive ids for parts that could move (head, eyes, mouth, arms, hands, ...).\n- Gradients, clip paths, masks, and SVG filters (for example feGaussianBlur) are allowed.\n\nRules (breaking any rule scores 0):\n- Reply with exactly one ```html code block containing one complete, self-contained HTML document. If you send several blocks, only the last one counts. Do not use tools; answer directly.\n- The page is rendered offline in a 244x240 px viewport at device pixel ratio 1. Fill exactly that area, starting at the top-left corner.\n- No raster images: no <img>, no <image>, no CSS url(...) except url(#id) references to your own SVG definitions, no data: URIs, no base64, no blob: URLs.\n- No external resources or network access: no external scripts, stylesheets, fonts, iframes, links, fetch, XMLHttpRequest, WebSocket, or any other URL.\n- Do not call setTimeout, setInterval, requestAnimationFrame, or requestIdleCallback. The harness controls time.\n- The file must be at most 256 KB and must run without uncaught exceptions or console errors.\n\nYour step 1 page:\n<step1>\n```html\n<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<style>\nhtml,body{margin:0;padding:0;width:244px;height:240px;overflow:hidden;background:#fff;}\nsvg{display:block;}\n</style>\n</head>\n<body>\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 244 240\" width=\"244\" height=\"240\">\n  <defs>\n    <radialGradient id=\"bodyGrad\" cx=\"0.45\" cy=\"0.4\" r=\"0.65\">\n      <stop offset=\"0\" stop-color=\"#ffe866\"/>\n      <stop offset=\"0.6\" stop-color=\"#f7d43a\"/>\n      <stop offset=\"1\" stop-color=\"#e2b52a\"/>\n    </radialGradient>\n    <radialGradient id=\"bellyGrad\" cx=\"0.5\" cy=\"0.45\" r=\"0.55\">\n      <stop offset=\"0\" stop-color=\"#fff2e2\"/>\n      <stop offset=\"0.7\" stop-color=\"#fbe2c2\"/>\n      <stop offset=\"1\" stop-color=\"#f6d58a\"/>\n    </radialGradient>\n    <linearGradient id=\"floorGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#f4f4f4\"/>\n      <stop offset=\"1\" stop-color=\"#d6d6d6\"/>\n    </linearGradient>\n    <radialGradient id=\"handGrad\" cx=\"0.4\" cy=\"0.35\" r=\"0.7\">\n      <stop offset=\"0\" stop-color=\"#8a6a48\"/>\n      <stop offset=\"1\" stop-color=\"#4a3624\"/>\n    </radialGradient>\n    <filter id=\"soft\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n      <feGaussianBlur stdDeviation=\"1.6\"/>\n    </filter>\n    <filter id=\"softer\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n      <feGaussianBlur stdDeviation=\"3\"/>\n    </filter>\n  </defs>\n\n  <g id=\"background\">\n    <rect x=\"0\" y=\"0\" width=\"244\" height=\"240\" fill=\"#fbfbfb\"/>\n    <rect x=\"0\" y=\"205\" width=\"244\" height=\"35\" fill=\"url(#floorGrad)\"/>\n    <ellipse cx=\"125\" cy=\"226\" rx=\"85\" ry=\"8\" fill=\"#b8b0a0\" opacity=\"0.5\" filter=\"url(#softer)\"/>\n  </g>\n\n  <g id=\"character-duck\" filter=\"url(#soft)\">\n    <g id=\"body\">\n      <path d=\"M118 4 C96 4 84 22 84 48 C84 62 76 72 66 92 C52 120 44 160 46 190 C48 214 70 226 125 226 C180 226 204 214 206 190 C208 160 196 118 180 90 C170 72 158 62 156 46 C154 20 140 4 118 4 Z\" fill=\"url(#bodyGrad)\"/>\n      <ellipse id=\"belly\" cx=\"130\" cy=\"142\" rx=\"50\" ry=\"62\" fill=\"url(#bellyGrad)\"/>\n    </g>\n\n    <g id=\"head\">\n      <g id=\"eyes\">\n        <ellipse id=\"eye-left\" cx=\"104\" cy=\"22\" rx=\"4\" ry=\"5\" fill=\"#2a2018\"/>\n        <ellipse id=\"eye-right\" cx=\"131\" cy=\"22\" rx=\"4\" ry=\"5\" fill=\"#2a2018\"/>\n      </g>\n      <g id=\"beak\">\n        <path d=\"M104 40 C110 34 128 34 134 40 C130 50 122 54 119 54 C116 54 108 50 104 40 Z\" fill=\"#e8a020\"/>\n        <path d=\"M106 40 C112 37 126 37 132 40 C126 44 112 44 106 40 Z\" fill=\"#f4bb3a\"/>\n      </g>\n    </g>\n\n    <g id=\"arm-left\">\n      <path d=\"M88 82 C78 86 66 96 60 110 C58 118 66 124 74 118 C82 108 90 100 92 92 Z\" fill=\"#efc532\"/>\n      <g id=\"hand-left\">\n        <path d=\"M58 86 C54 76 62 70 72 72 C82 74 86 82 84 92 C82 102 72 106 64 102 C58 98 58 92 58 86 Z\" fill=\"url(#handGrad)\"/>\n      </g>\n    </g>\n\n    <g id=\"arm-right\">\n      <path d=\"M166 82 C178 88 192 96 196 108 C198 116 190 122 182 116 C174 106 166 98 164 90 Z\" fill=\"#efc532\"/>\n      <g id=\"hand-right\">\n        <path d=\"M200 76 C206 64 218 64 222 72 C226 82 222 94 214 98 C206 102 196 96 196 88 C196 84 198 80 200 76 Z\" fill=\"url(#handGrad)\"/>\n      </g>\n    </g>\n  </g>\n</svg>\n</body>\n</html>\n```\n</step1>",
+  "text": "```html\n<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<style>\nhtml,body{margin:0;padding:0;width:244px;height:240px;overflow:hidden;background:#fff;}\nsvg{display:block;}\n</style>\n</head>\n<body>\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 244 240\" width=\"244\" height=\"240\">\n  <defs>\n    <radialGradient id=\"bodyGrad\" cx=\"0.45\" cy=\"0.4\" r=\"0.65\">\n      <stop offset=\"0\" stop-color=\"#ffe866\"/>\n      <stop offset=\"0.6\" stop-color=\"#f7d43a\"/>\n      <stop offset=\"1\" stop-color=\"#e2b52a\"/>\n    </radialGradient>\n    <radialGradient id=\"bellyGrad\" cx=\"0.5\" cy=\"0.45\" r=\"0.55\">\n      <stop offset=\"0\" stop-color=\"#fff2e2\"/>\n      <stop offset=\"0.7\" stop-color=\"#fbe2c2\"/>\n      <stop offset=\"1\" stop-color=\"#f6d58a\"/>\n    </radialGradient>\n    <linearGradient id=\"floorGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#f4f4f4\"/>\n      <stop offset=\"1\" stop-color=\"#d6d6d6\"/>\n    </linearGradient>\n    <radialGradient id=\"handGrad\" cx=\"0.4\" cy=\"0.35\" r=\"0.7\">\n      <stop offset=\"0\" stop-color=\"#8a6a48\"/>\n      <stop offset=\"1\" stop-color=\"#4a3624\"/>\n    </radialGradient>\n    <filter id=\"soft\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n      <feGaussianBlur stdDeviation=\"1.6\"/>\n    </filter>\n    <filter id=\"softer\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n      <feGaussianBlur stdDeviation=\"3\"/>\n    </filter>\n  </defs>\n\n  <g id=\"background\">\n    <rect x=\"0\" y=\"0\" width=\"244\" height=\"240\" fill=\"#fbfbfb\"/>\n    <rect x=\"0\" y=\"205\" width=\"244\" height=\"35\" fill=\"url(#floorGrad)\"/>\n    <ellipse cx=\"125\" cy=\"226\" rx=\"85\" ry=\"8\" fill=\"#b8b0a0\" opacity=\"0.5\" filter=\"url(#softer)\"/>\n  </g>\n\n  <g id=\"character-duck\" filter=\"url(#soft)\">\n    <g id=\"body\">\n      <path d=\"M118 4 C96 4 84 22 84 48 C84 62 76 72 66 92 C52 120 44 160 46 190 C48 214 70 226 125 226 C180 226 204 214 206 190 C208 160 196 118 180 90 C170 72 158 62 156 46 C154 20 140 4 118 4 Z\" fill=\"url(#bodyGrad)\"/>\n      <ellipse id=\"belly\" cx=\"130\" cy=\"142\" rx=\"50\" ry=\"62\" fill=\"url(#bellyGrad)\"/>\n    </g>\n\n    <g id=\"head\">\n      <g id=\"eyes\">\n        <ellipse id=\"eye-left\" cx=\"104\" cy=\"22\" rx=\"4\" ry=\"5\" fill=\"#2a2018\"/>\n        <ellipse id=\"eye-right\" cx=\"131\" cy=\"22\" rx=\"4\" ry=\"5\" fill=\"#2a2018\"/>\n      </g>\n      <g id=\"beak\">\n        <path d=\"M104 40 C110 34 128 34 134 40 C130 50 122 54 119 54 C116 54 108 50 104 40 Z\" fill=\"#e8a020\"/>\n        <path d=\"M106 40 C112 37 126 37 132 40 C126 44 112 44 106 40 Z\" fill=\"#f4bb3a\"/>\n      </g>\n    </g>\n\n    <g id=\"arm-left\">\n      <path id=\"arm-left-limb\" d=\"M92 92 Q80 98 70 90\" fill=\"none\" stroke=\"#efc532\" stroke-width=\"18\" stroke-linecap=\"round\"/>\n      <g id=\"hand-left\">\n        <ellipse cx=\"0\" cy=\"0\" rx=\"13\" ry=\"10\" fill=\"url(#handGrad)\"/>\n      </g>\n    </g>\n\n    <g id=\"arm-right\">\n      <path id=\"arm-right-limb\" d=\"M162 88 Q190 92 212 80\" fill=\"none\" stroke=\"#efc532\" stroke-width=\"18\" stroke-linecap=\"round\"/>\n      <g id=\"hand-right\">\n        <ellipse cx=\"0\" cy=\"0\" rx=\"13\" ry=\"10\" fill=\"url(#handGrad)\"/>\n      </g>\n    </g>\n  </g>\n</svg>\n<script>\n(function(){\n  // [t, bodyDx, bodyDy, headDx, headDy, LhX, LhY, RhX, RhY]\n  var K = [\n    [0,    0,0, 0,0,  70,90,  212,80],\n    [160,  2,3, 0,4,  18,72,  158,95],\n    [340,  0,4, 2,8,  58,102, 210,92],\n    [500,  4,6, 6,12, 20,103, 185,124],\n    [680,  3,4, 4,6,  18,95,  178,108],\n    [840,  0,1, 0,0,  65,95,  212,92],\n    [1020, 3,2, 4,2,  15,85,  170,110],\n    [1180, 0,4, 0,6,  50,126, 210,110],\n    [1200, 0,0, 0,0,  70,90,  212,80]\n  ];\n  var body = document.getElementById('body');\n  var head = document.getElementById('head');\n  var limbL = document.getElementById('arm-left-limb');\n  var limbR = document.getElementById('arm-right-limb');\n  var handL = document.getElementById('hand-left');\n  var handR = document.getElementById('hand-right');\n\n  function f(n){ return (Math.round(n*100)/100).toString(); }\n\n  function sample(t){\n    var i = 0;\n    while (i < K.length - 2 && t >= K[i+1][0]) i++;\n    var a = K[i], b = K[i+1];\n    var u = (t - a[0]) / (b[0] - a[0]);\n    if (u < 0) u = 0; if (u > 1) u = 1;\n    u = u*u*(3 - 2*u);\n    var out = [];\n    for (var j = 1; j < a.length; j++) out.push(a[j] + (b[j] - a[j]) * u);\n    return out;\n  }\n\n  function arm(limb, hand, sx, sy, hx, hy){\n    var ang = Math.atan2(hy - sy, hx - sx);\n    var ex = hx - Math.cos(ang) * 6, ey = hy - Math.sin(ang) * 6;\n    var cx = (sx + ex) / 2, cy = (sy + ey) / 2 + 8;\n    limb.setAttribute('d', 'M' + f(sx) + ' ' + f(sy) + ' Q' + f(cx) + ' ' + f(cy) + ' ' + f(ex) + ' ' + f(ey));\n    hand.setAttribute('transform', 'translate(' + f(hx) + ' ' + f(hy) + ') rotate(' + f(ang * 180 / Math.PI) + ')');\n  }\n\n  function render(t){\n    t = Number(t) || 0;\n    t = ((t % 1200) + 1200) % 1200;\n    var p = sample(t);\n    var bx = p[0], by = p[1], hdx = p[2], hdy = p[3];\n    var sy = 1 - hdy / 222;\n    var sx = 1 + hdy / 400;\n    body.setAttribute('transform',\n      'translate(' + f(bx) + ' 0) translate(125 226) scale(' + f(sx) + ' ' + f(sy) + ') translate(-125 -226)');\n    head.setAttribute('transform', 'translate(' + f(bx + hdx) + ' ' + f(hdy) + ')');\n    var shoulderDy = hdy * 0.5 + by * 0.2;\n    arm(limbL, handL, 92 + bx, 92 + shoulderDy, p[4], p[5]);\n    arm(limbR, handR, 162 + bx, 88 + shoulderDy, p[6], p[7]);\n  }\n\n  window.nwb = { render: render };\n  render(0);\n})();\n</script>\n</body>\n</html>\n```",
+  "html": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<style>\nhtml,body{margin:0;padding:0;width:244px;height:240px;overflow:hidden;background:#fff;}\nsvg{display:block;}\n</style>\n</head>\n<body>\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 244 240\" width=\"244\" height=\"240\">\n  <defs>\n    <radialGradient id=\"bodyGrad\" cx=\"0.45\" cy=\"0.4\" r=\"0.65\">\n      <stop offset=\"0\" stop-color=\"#ffe866\"/>\n      <stop offset=\"0.6\" stop-color=\"#f7d43a\"/>\n      <stop offset=\"1\" stop-color=\"#e2b52a\"/>\n    </radialGradient>\n    <radialGradient id=\"bellyGrad\" cx=\"0.5\" cy=\"0.45\" r=\"0.55\">\n      <stop offset=\"0\" stop-color=\"#fff2e2\"/>\n      <stop offset=\"0.7\" stop-color=\"#fbe2c2\"/>\n      <stop offset=\"1\" stop-color=\"#f6d58a\"/>\n    </radialGradient>\n    <linearGradient id=\"floorGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#f4f4f4\"/>\n      <stop offset=\"1\" stop-color=\"#d6d6d6\"/>\n    </linearGradient>\n    <radialGradient id=\"handGrad\" cx=\"0.4\" cy=\"0.35\" r=\"0.7\">\n      <stop offset=\"0\" stop-color=\"#8a6a48\"/>\n      <stop offset=\"1\" stop-color=\"#4a3624\"/>\n    </radialGradient>\n    <filter id=\"soft\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n      <feGaussianBlur stdDeviation=\"1.6\"/>\n    </filter>\n    <filter id=\"softer\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n      <feGaussianBlur stdDeviation=\"3\"/>\n    </filter>\n  </defs>\n\n  <g id=\"background\">\n    <rect x=\"0\" y=\"0\" width=\"244\" height=\"240\" fill=\"#fbfbfb\"/>\n    <rect x=\"0\" y=\"205\" width=\"244\" height=\"35\" fill=\"url(#floorGrad)\"/>\n    <ellipse cx=\"125\" cy=\"226\" rx=\"85\" ry=\"8\" fill=\"#b8b0a0\" opacity=\"0.5\" filter=\"url(#softer)\"/>\n  </g>\n\n  <g id=\"character-duck\" filter=\"url(#soft)\">\n    <g id=\"body\">\n      <path d=\"M118 4 C96 4 84 22 84 48 C84 62 76 72 66 92 C52 120 44 160 46 190 C48 214 70 226 125 226 C180 226 204 214 206 190 C208 160 196 118 180 90 C170 72 158 62 156 46 C154 20 140 4 118 4 Z\" fill=\"url(#bodyGrad)\"/>\n      <ellipse id=\"belly\" cx=\"130\" cy=\"142\" rx=\"50\" ry=\"62\" fill=\"url(#bellyGrad)\"/>\n    </g>\n\n    <g id=\"head\">\n      <g id=\"eyes\">\n        <ellipse id=\"eye-left\" cx=\"104\" cy=\"22\" rx=\"4\" ry=\"5\" fill=\"#2a2018\"/>\n        <ellipse id=\"eye-right\" cx=\"131\" cy=\"22\" rx=\"4\" ry=\"5\" fill=\"#2a2018\"/>\n      </g>\n      <g id=\"beak\">\n        <path d=\"M104 40 C110 34 128 34 134 40 C130 50 122 54 119 54 C116 54 108 50 104 40 Z\" fill=\"#e8a020\"/>\n        <path d=\"M106 40 C112 37 126 37 132 40 C126 44 112 44 106 40 Z\" fill=\"#f4bb3a\"/>\n      </g>\n    </g>\n\n    <g id=\"arm-left\">\n      <path id=\"arm-left-limb\" d=\"M92 92 Q80 98 70 90\" fill=\"none\" stroke=\"#efc532\" stroke-width=\"18\" stroke-linecap=\"round\"/>\n      <g id=\"hand-left\">\n        <ellipse cx=\"0\" cy=\"0\" rx=\"13\" ry=\"10\" fill=\"url(#handGrad)\"/>\n      </g>\n    </g>\n\n    <g id=\"arm-right\">\n      <path id=\"arm-right-limb\" d=\"M162 88 Q190 92 212 80\" fill=\"none\" stroke=\"#efc532\" stroke-width=\"18\" stroke-linecap=\"round\"/>\n      <g id=\"hand-right\">\n        <ellipse cx=\"0\" cy=\"0\" rx=\"13\" ry=\"10\" fill=\"url(#handGrad)\"/>\n      </g>\n    </g>\n  </g>\n</svg>\n<script>\n(function(){\n  // [t, bodyDx, bodyDy, headDx, headDy, LhX, LhY, RhX, RhY]\n  var K = [\n    [0,    0,0, 0,0,  70,90,  212,80],\n    [160,  2,3, 0,4,  18,72,  158,95],\n    [340,  0,4, 2,8,  58,102, 210,92],\n    [500,  4,6, 6,12, 20,103, 185,124],\n    [680,  3,4, 4,6,  18,95,  178,108],\n    [840,  0,1, 0,0,  65,95,  212,92],\n    [1020, 3,2, 4,2,  15,85,  170,110],\n    [1180, 0,4, 0,6,  50,126, 210,110],\n    [1200, 0,0, 0,0,  70,90,  212,80]\n  ];\n  var body = document.getElementById('body');\n  var head = document.getElementById('head');\n  var limbL = document.getElementById('arm-left-limb');\n  var limbR = document.getElementById('arm-right-limb');\n  var handL = document.getElementById('hand-left');\n  var handR = document.getElementById('hand-right');\n\n  function f(n){ return (Math.round(n*100)/100).toString(); }\n\n  function sample(t){\n    var i = 0;\n    while (i < K.length - 2 && t >= K[i+1][0]) i++;\n    var a = K[i], b = K[i+1];\n    var u = (t - a[0]) / (b[0] - a[0]);\n    if (u < 0) u = 0; if (u > 1) u = 1;\n    u = u*u*(3 - 2*u);\n    var out = [];\n    for (var j = 1; j < a.length; j++) out.push(a[j] + (b[j] - a[j]) * u);\n    return out;\n  }\n\n  function arm(limb, hand, sx, sy, hx, hy){\n    var ang = Math.atan2(hy - sy, hx - sx);\n    var ex = hx - Math.cos(ang) * 6, ey = hy - Math.sin(ang) * 6;\n    var cx = (sx + ex) / 2, cy = (sy + ey) / 2 + 8;\n    limb.setAttribute('d', 'M' + f(sx) + ' ' + f(sy) + ' Q' + f(cx) + ' ' + f(cy) + ' ' + f(ex) + ' ' + f(ey));\n    hand.setAttribute('transform', 'translate(' + f(hx) + ' ' + f(hy) + ') rotate(' + f(ang * 180 / Math.PI) + ')');\n  }\n\n  function render(t){\n    t = Number(t) || 0;\n    t = ((t % 1200) + 1200) % 1200;\n    var p = sample(t);\n    var bx = p[0], by = p[1], hdx = p[2], hdy = p[3];\n    var sy = 1 - hdy / 222;\n    var sx = 1 + hdy / 400;\n    body.setAttribute('transform',\n      'translate(' + f(bx) + ' 0) translate(125 226) scale(' + f(sx) + ' ' + f(sy) + ') translate(-125 -226)');\n    head.setAttribute('transform', 'translate(' + f(bx + hdx) + ' ' + f(hdy) + ')');\n    var shoulderDy = hdy * 0.5 + by * 0.2;\n    arm(limbL, handL, 92 + bx, 92 + shoulderDy, p[4], p[5]);\n    arm(limbR, handR, 162 + bx, 88 + shoulderDy, p[6], p[7]);\n  }\n\n  window.nwb = { render: render };\n  render(0);\n})();\n</script>\n</body>\n</html>",
+  "html_sha256": "919a274e99ae5585d1631fb703312188099316e390a43d6a91d28cb29e03b417",
+  "static_gates": [],
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 65.6,
+    "tokens": {
+      "input": 4102,
+      "cached_input": 0,
+      "cache_write": 4100,
+      "output": 5373,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.1406575,
+    "tools_used": [],
+    "cost_usd": 0.1406575,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 4100,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 5373,
+      "output_tokens_details": {
+        "thinking_tokens": 2512
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 4100,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 5373,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 4100,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 4100
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-07T03:33:29Z",
+    "finished_at": "2026-11-07T03:34:35Z",
+    "revision": "fc64216+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

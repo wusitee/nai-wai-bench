@@ -5,7 +5,7 @@ import re
 import tomllib
 from pathlib import Path
 
-from nwb import __version__, bundle, results, scoring, site
+from nwb import __version__, bundle, frontend_results, frontend_site, results, scoring, site
 from nwb.config import SUITES, load_bench, load_models, validate_run_suite
 from nwb.util import write_json
 
@@ -27,6 +27,12 @@ def load_manifest(path: Path) -> dict:
         judges = spec.get("judges")
         if not isinstance(judges, list) or any(not isinstance(j, str) or not j for j in judges):
             raise ValueError(f"release suite {suite}: judges must be an explicit list (empty for local scoring)")
+    frontend = manifest.get("frontend")
+    if not isinstance(frontend, dict) or not isinstance(frontend.get("run"), str) or not re.fullmatch(
+            r"[A-Za-z0-9][A-Za-z0-9._-]*", frontend["run"]):
+        raise ValueError("release manifest needs [frontend] with run, the name of saved results under results/frontend/")
+    if not isinstance(frontend.get("sha256"), str) or not re.fullmatch(r"[0-9a-f]{64}", frontend["sha256"]):
+        raise ValueError("release frontend: sha256 must pin the saved results")
     return manifest
 
 
@@ -58,6 +64,7 @@ def build(root: Path, manifest_path: Path, out: Path) -> Path:
         if stale["total"]:
             raise ValueError(f"release suite {suite}: {stale['total']} stale judgments: {stale['reasons']}")
         prepared.append((suite, bench, run_dir, scores, judges))
+    frontend = frontend_results.load(root, manifest["frontend"]["run"], manifest["frontend"]["sha256"])
 
     for suite, bench, run_dir, scores, judges in prepared:
         archive = bundle.export(run_dir, bench, out / "bundles", judges=judges, scores=scores)
@@ -68,6 +75,9 @@ def build(root: Path, manifest_path: Path, out: Path) -> Path:
     index = scoring.naiwai_index({suite: (bench, scores) for suite, bench, _, scores, _ in prepared})
     site.build_index({suite: (bench, scores) for suite, bench, _, scores, _ in prepared}, index, models, out,
                      repo_url=manifest.get("repo_url"))
+    revision = site._revision(root)
+    blob = f"{manifest['repo_url']}/blob/{revision.split()[0]}" if manifest.get("repo_url") and revision else None
+    frontend_site.build(*frontend, out, repo_url=manifest.get("repo_url"), blob=blob)
     site.write_redirects(out)
     write_json(out / "index.json", index)
     write_json(out / "release.json", {

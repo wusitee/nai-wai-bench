@@ -21,3 +21,8 @@ judges = ["opus-5.5"]
 run = "rel-0.1-naihub-with-glm-5.3-flash"
 sha256 = "85bea329aafcf6e184326c410110dd026d4eadecac3638a104eb24dfee3bb4b5"
 judges = []
+
+# Experimental frontend track: saved results under results/frontend/<run>/ (nwb frontend sync), outside the index.
+[frontend]
+run = "frontend-pilot"
+sha256 = "18bebee9e73b79e7bf14c737ee00f16ff5d9b74317c31561da2b08e40aa4970e"
