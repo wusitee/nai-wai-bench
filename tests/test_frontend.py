@@ -344,19 +344,23 @@ def _repin(snapshot: Path, changes: dict[str, bytes]) -> str:
 
 @pytest.mark.parametrize("change, message", [
     ("task", "task '../meme-id'"),
+    ("index", "task 'index.html'"),
     ("model", "labels"),
     ("image", "is not a saved image"),
+    ("frame", "frame in"),
+    ("duplicate", "sample 'frontend/subject/mem/2d-mem__r1.json'"),
+    ("status", "status of"),
 ])
 def test_published_snapshot_rejects_unsafe_identifiers_and_unverified_files(tmp_path, change, message):
     from nwb import frontend_results
 
     snapshot = tmp_path / "results/frontend/pub"
-    sample = "frontend/subject/001/2d-s2__r1"
+    sample = "frontend/subject/mem/2d-mem__r1"
     files = {"summary.json": {"run": "pub", "corpus": "frontend-v1", "harness": "h", "labels": {"subject": "S"},
-                              "tasks": {"001": {"title": "t", "width": 240, "height": 242, "duration_ms": 1500,
+                              "tasks": {"mem": {"title": "t", "width": 240, "height": 240, "duration_ms": 0,
                                                 "frames": []}},
-                              "samples": [{"sample": f"{sample}.json", "model": "subject", "task": "001",
-                                           "kind": "2d-s2", "rep": 1, "status": "passed", "gates": []}]},
+                              "samples": [{"sample": f"{sample}.json", "model": "subject", "task": "mem",
+                                           "kind": "2d-mem", "rep": 1, "status": "passed", "gates": []}]},
              f"{sample}.json": {"html": SVG_CSS_LOOP},
              f"{sample}/render.json": {"frames": [{"file": "frame_00.webp", "t": 0}]}}
     data = {name: json.dumps(value).encode() for name, value in files.items()}
@@ -366,8 +370,14 @@ def test_published_snapshot_rejects_unsafe_identifiers_and_unverified_files(tmp_
     assert frontend_results.load(tmp_path, "pub", _repin(snapshot, data))[1]["labels"] == {"subject": "S"}
 
     summary = files["summary.json"]
-    if change == "task":
-        summary["tasks"]["../meme-id"] = summary["tasks"]["001"]
+    if change in ("task", "index"):
+        summary["tasks"]["../meme-id" if change == "task" else "index.html"] = summary["tasks"]["mem"]
+    elif change == "duplicate":  # would count one sample twice in the gate table
+        summary["samples"].append(summary["samples"][0])
+    elif change == "status":
+        summary["samples"][0]["gates"] = ["page errors: x"]
+    elif change == "frame":
+        data[f"{sample}/render.json"] = json.dumps({"frames": [{"t": 0}]}).encode()
     elif change == "model":
         summary["labels"]["m'><svg onload=alert(1)>"] = "x"
     else:  # a reference to an image outside the checksummed files

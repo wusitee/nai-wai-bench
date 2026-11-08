@@ -14,7 +14,7 @@ from pathlib import Path
 from nwb import __version__
 from nwb.bundle import _digest, _json_bytes
 from nwb.config import ModelSpec
-from nwb.frontend import KINDS, MEMORY, VIEWS, Corpus, rendered_images, samples, summary
+from nwb.frontend import KINDS, MEMORY, VIEWS, Corpus, is_memory, rendered_images, samples, summary
 from nwb.frontend_render import harness_id, render_current
 from nwb.results import METADATA, _file
 from nwb.util import read_json, write_bytes, write_json
@@ -22,8 +22,10 @@ from nwb.util import read_json, write_bytes, write_json
 FORMAT = 1
 STILL_QUALITY = 85
 LOOP_QUALITY = 70
-# Identifiers used in published paths and markup, and saved media file names.
+# Identifiers used in published paths and markup, and saved media file names. Task ids name page
+# directories beside index.html, m/, and reference/, so they take no dots and those two names are reserved.
 NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
+TASK = re.compile(r"[A-Za-z0-9][A-Za-z0-9_-]*")
 MEDIA = re.compile(r"[a-z0-9_]+\.(?:webp|png|gif)")
 STATUSES = ("passed", "gate failed", "unrendered")
 
@@ -148,9 +150,11 @@ def _validate(files: dict[str, bytes]) -> dict:
     tasks, labels = summary.get("tasks"), summary.get("labels")
     check(isinstance(tasks, dict) and isinstance(labels, dict), "tasks or labels")
     for task_id, task in tasks.items():
-        check(bool(NAME.fullmatch(task_id)) and task_id not in ("m", "reference") and isinstance(task, dict) and isinstance(task.get("title"), str)
-              and _count(task.get("width"), 1) and _count(task.get("height"), 1) and _count(task.get("duration_ms"))
-              and isinstance(task.get("frames"), list), f"task {task_id!r}")
+        check(bool(TASK.fullmatch(task_id)) and task_id not in ("m", "reference") and isinstance(task, dict)
+              and isinstance(task.get("title"), str) and _count(task.get("width"), 1) and _count(task.get("height"), 1)
+              and _count(task.get("duration_ms")) and isinstance(task.get("frames"), list)
+              # GIF tasks show their reference; the memory task has none.
+              and (task_id == MEMORY) == (not task["frames"]), f"task {task_id!r}")
         for frame in task["frames"]:
             check(isinstance(frame, dict) and _count(frame.get("t")), f"task {task_id!r} frame time")
             media(frame.get("file"), f"reference/{task_id}", "reference frame")
@@ -158,26 +162,34 @@ def _validate(files: dict[str, bytes]) -> dict:
             media(task.get("gif"), f"reference/{task_id}", "reference GIF")
     check(all(NAME.fullmatch(m) and isinstance(label, str) for m, label in labels.items()), "labels")
     check(isinstance(summary.get("samples"), list), "samples")
+    seen = set()
     for entry in summary["samples"]:
         check(isinstance(entry, dict) and entry.get("model") in labels and entry.get("task") in tasks
-              and entry.get("kind") in KINDS and _count(entry.get("rep"), 1) and entry.get("status") in STATUSES
+              and entry.get("kind") in KINDS and is_memory(entry["kind"]) == (entry["task"] == MEMORY)
+              and _count(entry.get("rep"), 1) and entry.get("status") in STATUSES
               and isinstance(entry.get("gates"), list) and all(isinstance(g, str) for g in entry["gates"]),
               f"sample entry {entry!r}")
         stem = f"frontend/{entry['model']}/{entry['task']}/{entry['kind']}__r{entry['rep']}"
-        check(entry.get("sample") == f"{stem}.json" and entry["sample"] in files, f"sample {entry.get('sample')!r}")
+        check(entry.get("sample") == f"{stem}.json" and entry["sample"] in files and stem not in seen,
+              f"sample {entry.get('sample')!r}")
+        seen.add(stem)
+        record = json.loads(files[entry["sample"]])
+        check(isinstance(record, dict) and isinstance(record.get("html"), (str, type(None))), f"record {stem}")
         render = json.loads(files[f"{stem}/render.json"]) if f"{stem}/render.json" in files else None
-        check((render is None) == (entry["status"] == "unrendered"), f"render of {stem}")
+        # Rendered samples pass exactly when they have no gate failures, as `frontend.summary` reports them.
+        check((render is None) == (entry["status"] == "unrendered")
+              and (render is None or (entry["status"] == "passed") == (not entry["gates"])), f"status of {stem}")
         if render is None:
             continue
         check(isinstance(render, dict) and isinstance(render.get("frames", []), list)
               and isinstance(render.get("views", []), list), f"render of {stem}")
         for frame in render.get("frames", []):
-            check(isinstance(frame, dict) and _count(frame.get("t")), f"frame time in {stem}")
-            if frame.get("file") is not None:
+            check(isinstance(frame, dict) and "file" in frame and _count(frame.get("t")), f"frame in {stem}")
+            if frame["file"] is not None:
                 media(frame["file"], stem, "render frame")
         for view in render.get("views", []):
-            check(isinstance(view, dict) and view.get("view") in VIEWS, f"view in {stem}")
-            if view.get("file") is not None:
+            check(isinstance(view, dict) and "file" in view and view.get("view") in VIEWS, f"view in {stem}")
+            if view["file"] is not None:
                 media(view["file"], stem, "render view")
         for key in ("preview", "failed_screenshot"):
             if render.get(key) is not None:
