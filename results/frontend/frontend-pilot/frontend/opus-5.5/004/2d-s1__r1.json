@@ -1,0 +1,109 @@
+{
+  "settings_id": "1e77488ebc8a6fba",
+  "track": "frontend",
+  "corpus": "frontend-v1",
+  "model": "opus-5.5",
+  "vendor": "anthropic",
+  "task": "004",
+  "kind": "2d-s1",
+  "rep": 1,
+  "prompt_sha256": "98fafd46f21dd6124a7676aeef85e90ee5a873d0bd88ece46ce2e4ce2a069aff",
+  "width": 244,
+  "height": 240,
+  "duration_ms": 1200,
+  "input_names": "neutral",
+  "images": [
+    "bench/frontend-v1/assets/004/frame_00.png"
+  ],
+  "prompt": "The attached image is a 244x240 px frame from an animated GIF. Rebuild it by hand as vector art.\n\nTask (2D, static): write an HTML page that reproduces the image as faithfully as you can in inline SVG: characters, poses, facial expressions, hands, props, background, and colors. A later step will animate your SVG, so structure it in named groups.\n- Static only: no <script>, no SMIL (<animate>, <animateTransform>, <animateMotion>, <set>), no CSS animations or transitions.\n\n2D contract:\n- The page body contains a single inline <svg> element with viewBox=\"0 0 244 240\", width=\"244\", and height=\"240\". No nested <svg>, no <foreignObject>, no <canvas>.\n- Put each character in its own <g> with a descriptive id (for example id=\"character-left\"), with nested <g> groups with descriptive ids for parts that could move (head, eyes, mouth, arms, hands, ...).\n- Gradients, clip paths, masks, and SVG filters (for example feGaussianBlur) are allowed.\n\nRules (breaking any rule scores 0):\n- Reply with exactly one ```html code block containing one complete, self-contained HTML document. If you send several blocks, only the last one counts. Do not use tools; answer directly.\n- The page is rendered offline in a 244x240 px viewport at device pixel ratio 1. Fill exactly that area, starting at the top-left corner.\n- No raster images: no <img>, no <image>, no CSS url(...) except url(#id) references to your own SVG definitions, no data: URIs, no base64, no blob: URLs.\n- No external resources or network access: no external scripts, stylesheets, fonts, iframes, links, fetch, XMLHttpRequest, WebSocket, or any other URL.\n- Do not call setTimeout, setInterval, requestAnimationFrame, or requestIdleCallback. The harness controls time.\n- The file must be at most 256 KB and must run without uncaught exceptions or console errors.",
+  "text": "```html\n<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<style>\nhtml,body{margin:0;padding:0;width:244px;height:240px;overflow:hidden;background:#fff;}\nsvg{display:block;}\n</style>\n</head>\n<body>\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 244 240\" width=\"244\" height=\"240\">\n  <defs>\n    <radialGradient id=\"bodyGrad\" cx=\"0.45\" cy=\"0.4\" r=\"0.65\">\n      <stop offset=\"0\" stop-color=\"#ffe866\"/>\n      <stop offset=\"0.6\" stop-color=\"#f7d43a\"/>\n      <stop offset=\"1\" stop-color=\"#e2b52a\"/>\n    </radialGradient>\n    <radialGradient id=\"bellyGrad\" cx=\"0.5\" cy=\"0.45\" r=\"0.55\">\n      <stop offset=\"0\" stop-color=\"#fff2e2\"/>\n      <stop offset=\"0.7\" stop-color=\"#fbe2c2\"/>\n      <stop offset=\"1\" stop-color=\"#f6d58a\"/>\n    </radialGradient>\n    <linearGradient id=\"floorGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#f4f4f4\"/>\n      <stop offset=\"1\" stop-color=\"#d6d6d6\"/>\n    </linearGradient>\n    <radialGradient id=\"handGrad\" cx=\"0.4\" cy=\"0.35\" r=\"0.7\">\n      <stop offset=\"0\" stop-color=\"#8a6a48\"/>\n      <stop offset=\"1\" stop-color=\"#4a3624\"/>\n    </radialGradient>\n    <filter id=\"soft\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n      <feGaussianBlur stdDeviation=\"1.6\"/>\n    </filter>\n    <filter id=\"softer\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n      <feGaussianBlur stdDeviation=\"3\"/>\n    </filter>\n  </defs>\n\n  <g id=\"background\">\n    <rect x=\"0\" y=\"0\" width=\"244\" height=\"240\" fill=\"#fbfbfb\"/>\n    <rect x=\"0\" y=\"205\" width=\"244\" height=\"35\" fill=\"url(#floorGrad)\"/>\n    <ellipse cx=\"125\" cy=\"226\" rx=\"85\" ry=\"8\" fill=\"#b8b0a0\" opacity=\"0.5\" filter=\"url(#softer)\"/>\n  </g>\n\n  <g id=\"character-duck\" filter=\"url(#soft)\">\n    <g id=\"body\">\n      <path d=\"M118 4 C96 4 84 22 84 48 C84 62 76 72 66 92 C52 120 44 160 46 190 C48 214 70 226 125 226 C180 226 204 214 206 190 C208 160 196 118 180 90 C170 72 158 62 156 46 C154 20 140 4 118 4 Z\" fill=\"url(#bodyGrad)\"/>\n      <ellipse id=\"belly\" cx=\"130\" cy=\"142\" rx=\"50\" ry=\"62\" fill=\"url(#bellyGrad)\"/>\n    </g>\n\n    <g id=\"head\">\n      <g id=\"eyes\">\n        <ellipse id=\"eye-left\" cx=\"104\" cy=\"22\" rx=\"4\" ry=\"5\" fill=\"#2a2018\"/>\n        <ellipse id=\"eye-right\" cx=\"131\" cy=\"22\" rx=\"4\" ry=\"5\" fill=\"#2a2018\"/>\n      </g>\n      <g id=\"beak\">\n        <path d=\"M104 40 C110 34 128 34 134 40 C130 50 122 54 119 54 C116 54 108 50 104 40 Z\" fill=\"#e8a020\"/>\n        <path d=\"M106 40 C112 37 126 37 132 40 C126 44 112 44 106 40 Z\" fill=\"#f4bb3a\"/>\n      </g>\n    </g>\n\n    <g id=\"arm-left\">\n      <path d=\"M88 82 C78 86 66 96 60 110 C58 118 66 124 74 118 C82 108 90 100 92 92 Z\" fill=\"#efc532\"/>\n      <g id=\"hand-left\">\n        <path d=\"M58 86 C54 76 62 70 72 72 C82 74 86 82 84 92 C82 102 72 106 64 102 C58 98 58 92 58 86 Z\" fill=\"url(#handGrad)\"/>\n      </g>\n    </g>\n\n    <g id=\"arm-right\">\n      <path d=\"M166 82 C178 88 192 96 196 108 C198 116 190 122 182 116 C174 106 166 98 164 90 Z\" fill=\"#efc532\"/>\n      <g id=\"hand-right\">\n        <path d=\"M200 76 C206 64 218 64 222 72 C226 82 222 94 214 98 C206 102 196 96 196 88 C196 84 198 80 200 76 Z\" fill=\"url(#handGrad)\"/>\n      </g>\n    </g>\n  </g>\n</svg>\n</body>\n</html>\n```",
+  "html": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<style>\nhtml,body{margin:0;padding:0;width:244px;height:240px;overflow:hidden;background:#fff;}\nsvg{display:block;}\n</style>\n</head>\n<body>\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 244 240\" width=\"244\" height=\"240\">\n  <defs>\n    <radialGradient id=\"bodyGrad\" cx=\"0.45\" cy=\"0.4\" r=\"0.65\">\n      <stop offset=\"0\" stop-color=\"#ffe866\"/>\n      <stop offset=\"0.6\" stop-color=\"#f7d43a\"/>\n      <stop offset=\"1\" stop-color=\"#e2b52a\"/>\n    </radialGradient>\n    <radialGradient id=\"bellyGrad\" cx=\"0.5\" cy=\"0.45\" r=\"0.55\">\n      <stop offset=\"0\" stop-color=\"#fff2e2\"/>\n      <stop offset=\"0.7\" stop-color=\"#fbe2c2\"/>\n      <stop offset=\"1\" stop-color=\"#f6d58a\"/>\n    </radialGradient>\n    <linearGradient id=\"floorGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#f4f4f4\"/>\n      <stop offset=\"1\" stop-color=\"#d6d6d6\"/>\n    </linearGradient>\n    <radialGradient id=\"handGrad\" cx=\"0.4\" cy=\"0.35\" r=\"0.7\">\n      <stop offset=\"0\" stop-color=\"#8a6a48\"/>\n      <stop offset=\"1\" stop-color=\"#4a3624\"/>\n    </radialGradient>\n    <filter id=\"soft\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n      <feGaussianBlur stdDeviation=\"1.6\"/>\n    </filter>\n    <filter id=\"softer\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n      <feGaussianBlur stdDeviation=\"3\"/>\n    </filter>\n  </defs>\n\n  <g id=\"background\">\n    <rect x=\"0\" y=\"0\" width=\"244\" height=\"240\" fill=\"#fbfbfb\"/>\n    <rect x=\"0\" y=\"205\" width=\"244\" height=\"35\" fill=\"url(#floorGrad)\"/>\n    <ellipse cx=\"125\" cy=\"226\" rx=\"85\" ry=\"8\" fill=\"#b8b0a0\" opacity=\"0.5\" filter=\"url(#softer)\"/>\n  </g>\n\n  <g id=\"character-duck\" filter=\"url(#soft)\">\n    <g id=\"body\">\n      <path d=\"M118 4 C96 4 84 22 84 48 C84 62 76 72 66 92 C52 120 44 160 46 190 C48 214 70 226 125 226 C180 226 204 214 206 190 C208 160 196 118 180 90 C170 72 158 62 156 46 C154 20 140 4 118 4 Z\" fill=\"url(#bodyGrad)\"/>\n      <ellipse id=\"belly\" cx=\"130\" cy=\"142\" rx=\"50\" ry=\"62\" fill=\"url(#bellyGrad)\"/>\n    </g>\n\n    <g id=\"head\">\n      <g id=\"eyes\">\n        <ellipse id=\"eye-left\" cx=\"104\" cy=\"22\" rx=\"4\" ry=\"5\" fill=\"#2a2018\"/>\n        <ellipse id=\"eye-right\" cx=\"131\" cy=\"22\" rx=\"4\" ry=\"5\" fill=\"#2a2018\"/>\n      </g>\n      <g id=\"beak\">\n        <path d=\"M104 40 C110 34 128 34 134 40 C130 50 122 54 119 54 C116 54 108 50 104 40 Z\" fill=\"#e8a020\"/>\n        <path d=\"M106 40 C112 37 126 37 132 40 C126 44 112 44 106 40 Z\" fill=\"#f4bb3a\"/>\n      </g>\n    </g>\n\n    <g id=\"arm-left\">\n      <path d=\"M88 82 C78 86 66 96 60 110 C58 118 66 124 74 118 C82 108 90 100 92 92 Z\" fill=\"#efc532\"/>\n      <g id=\"hand-left\">\n        <path d=\"M58 86 C54 76 62 70 72 72 C82 74 86 82 84 92 C82 102 72 106 64 102 C58 98 58 92 58 86 Z\" fill=\"url(#handGrad)\"/>\n      </g>\n    </g>\n\n    <g id=\"arm-right\">\n      <path d=\"M166 82 C178 88 192 96 196 108 C198 116 190 122 182 116 C174 106 166 98 164 90 Z\" fill=\"#efc532\"/>\n      <g id=\"hand-right\">\n        <path d=\"M200 76 C206 64 218 64 222 72 C226 82 222 94 214 98 C206 102 196 96 196 88 C196 84 198 80 200 76 Z\" fill=\"url(#handGrad)\"/>\n      </g>\n    </g>\n  </g>\n</svg>\n</body>\n</html>",
+  "html_sha256": "19c696eed7da3c5cf036f4c6c221c26d73842cd1464893f5d55a6503affb1b17",
+  "static_gates": [],
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 20.3,
+    "tokens": {
+      "input": 1536,
+      "cached_input": 0,
+      "cache_write": 1534,
+      "output": 1902,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0505142,
+    "tools_used": [],
+    "cost_usd": 0.0505142,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1534,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1902,
+      "output_tokens_details": {
+        "thinking_tokens": 220
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1534,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1902,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1534,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1534
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-07T03:19:00Z",
+    "finished_at": "2026-11-07T03:19:20Z",
+    "revision": "fc64216+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

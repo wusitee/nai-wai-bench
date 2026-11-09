@@ -1,0 +1,95 @@
+{
+  "html_sha256": "5698db21af1ec822dcb37d353bff29e9cdc1d205c85b32f6db83c8c3b631164e",
+  "harness": "fee9bd636b661bc1",
+  "kind": "3d-s3",
+  "gates": [],
+  "errors": [],
+  "blocked": [],
+  "forbidden": [],
+  "elements": [],
+  "timing": {
+    "declarative": false,
+    "scripted": false
+  },
+  "frames": [
+    {
+      "file": "frame_00.webp",
+      "t": 0
+    },
+    {
+      "file": "frame_01.webp",
+      "t": 160
+    },
+    {
+      "file": "frame_02.webp",
+      "t": 340
+    },
+    {
+      "file": "frame_03.webp",
+      "t": 500
+    },
+    {
+      "file": "frame_04.webp",
+      "t": 680
+    },
+    {
+      "file": "frame_05.webp",
+      "t": 840
+    },
+    {
+      "file": "frame_06.webp",
+      "t": 1020
+    },
+    {
+      "file": "frame_07.webp",
+      "t": 1180
+    }
+  ],
+  "views": [
+    {
+      "file": "view_side.webp",
+      "view": "side",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_back.webp",
+      "view": "back",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_three_quarter.webp",
+      "view": "three_quarter",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_top.webp",
+      "view": "top",
+      "t": 0,
+      "hidden": []
+    }
+  ],
+  "scene": {
+    "characters": [
+      {
+        "name": "golden-round-bird",
+        "meshes": 27,
+        "width": 2.7493527812789393,
+        "height": 3.9769983146960146,
+        "depth": 1.8773701069956088,
+        "ratio": 0.6828407470220307
+      }
+    ],
+    "textures": 0
+  },
+  "mode": "render(t)",
+  "preview": "preview.webp",
+  "checks": {
+    "determinism_diff": 0.0,
+    "loop_diff": 0.0,
+    "motion_diff": 0.26635928961748634
+  },
+  "seconds": 3.3
+}

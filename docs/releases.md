@@ -53,6 +53,12 @@ configurations. The collection-profile effect is confounded with the model: use 
 and judge conditions for controlled comparisons. All original observations and judges' raw verdicts are
 retained. Derived scores use only Opus 5.5; Naihub-v1 continues to use its local answer keys.
 
+The manifest's `[frontend]` table selects the experimental [frontend track](frontend.md) run, saved under
+`results/frontend/<run>/` by `nwb frontend sync`, and pins its digest. The 0.1.0 manifest selects
+`frontend-pilot`: tasks 001, 004, 007, 008, and the memory task, one sample each, from Claude Opus 5.5,
+GPT-6.1-Sol, and Kimi K3.1 Pro at high effort (without revisions) and from GPT-6-Astra, GPT-6.1-Sol, and
+Claude Opus 5.5 at xhigh and Kimi K3.1 Pro at max (with revisions). The track is outside the index.
+
 The manifest records the software version, collection-source artifact identity, run names, normalized
 SHA-256 input digests, and explicit judge selections. Collection source identity describes the retained
 observations; it is separate from the revision building the current site. Models, efforts, and historical
@@ -129,6 +135,7 @@ The output contains:
 | `index.html`, `images/`, `index.json` | NaiWai Index overview and its versioned rows |
 | `meme-id/` | Meme ID (`core`) page, assets, and scores |
 | `visual-detail/` | Visual detail (`naihub-v1`) page, assets, and scores |
+| `frontend/` | Experimental frontend track (复刻 Rebuild): gate table and one page per task, with WebP renders |
 | `naihub-v1/` | Redirect to `visual-detail/` for earlier links |
 | `bundles/` | Portable raw bundles linked from each suite's page |
 | `release.json` | Selected manifest, its hash, and build revision |

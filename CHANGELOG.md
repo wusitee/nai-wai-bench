@@ -5,6 +5,12 @@ Software releases use semantic versions; suite ids version the evaluation panels
 
 ## Unreleased
 
+- Add the experimental frontend track (`nwb frontend collect|render|report|sync`, `bench/frontend-v1/`):
+  models rebuild animated 奶蛙 GIFs as hand-written inline SVG or three.js pages, with a step-2 animation
+  and one check-and-revise round, rendered in a sandboxed browser and checked by scripted gates; likeness
+  is reviewed by people. Release manifests select a saved frontend run under `[frontend]`, and release
+  sites add the 复刻 Rebuild pages (`frontend/`) with lazy-loaded WebP renders. The 0.1.0 comparison
+  selects `frontend-pilot`; the track is outside the NaiWai Index.
 - Present the `core` and `naihub-v1` visual rankings as 识梗 Meme ID and 看图 Visual detail, and combine them
   in the versioned 奶蛙指数 · NaiWai Index (Meme ID 1/3, Visual detail 2/3, with paired bootstrap intervals).
   Release sites open with the index and write `index.json`; suite pages move to `meme-id/` and

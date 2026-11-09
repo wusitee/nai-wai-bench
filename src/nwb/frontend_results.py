@@ -1,0 +1,220 @@
+"""Git-ready publication snapshot of a frontend run (results/frontend/<run>/), read by release builds.
+
+A snapshot holds the sanitized sample records, the gate summary, the task metadata the site needs, and the
+harness renders and reference GIFs re-encoded for the web (WebP, or the original file when it is smaller).
+It is a publication record, not a working run: lossy renders and the revision input copies are not
+restorable, so re-rendering or collecting more needs the working run under runs/<run>/."""
+
+import hashlib
+import io
+import json
+import re
+from pathlib import Path
+
+from nwb import __version__
+from nwb.bundle import _digest, _json_bytes
+from nwb.config import ModelSpec
+from nwb.frontend import KINDS, MEMORY, VIEWS, Corpus, is_memory, rendered_images, samples, summary
+from nwb.frontend_render import harness_id, render_current
+from nwb.results import METADATA, _file
+from nwb.util import read_json, write_bytes, write_json
+
+FORMAT = 1
+STILL_QUALITY = 85
+LOOP_QUALITY = 70
+# Identifiers used in published paths and markup, and saved media file names. Task ids name page
+# directories beside index.html, m/, and reference/, so they take no dots and those two names are reserved.
+NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
+TASK = re.compile(r"[A-Za-z0-9][A-Za-z0-9_-]*")
+MEDIA = re.compile(r"[a-z0-9_]+\.(?:webp|png|gif)")
+STATUSES = ("passed", "gate failed", "unrendered")
+
+
+def directory(root: Path, run: str) -> Path:
+    return root / "results" / "frontend" / run
+
+
+def _encode(path: Path) -> tuple[str, bytes]:
+    """(suffix, bytes): a WebP re-encoding of an image or animated GIF, or the original when smaller.
+    Variable GIF delays are carried frame by frame."""
+    from PIL import Image
+
+    original = path.read_bytes()
+    with Image.open(path) as image:
+        buffer = io.BytesIO()
+        if getattr(image, "n_frames", 1) > 1:
+            durations = []
+            for index in range(image.n_frames):
+                image.seek(index)
+                durations.append(image.info.get("duration", 100))
+            image.seek(0)
+            image.save(buffer, "WEBP", save_all=True, duration=durations, loop=0, quality=LOOP_QUALITY, method=6)
+        else:
+            image.save(buffer, "WEBP", quality=STILL_QUALITY, method=6)
+    encoded = buffer.getvalue()
+    return (".webp", encoded) if len(encoded) < len(original) else (path.suffix.lower(), original)
+
+
+def _label(models: dict[str, ModelSpec], model: str, records: list[dict]) -> str:
+    """Display label with the recorded reasoning effort, as the suite reports label their rows."""
+    label = models[model].label if model in models else model
+    efforts = {r.get("settings", {}).get("effort") for r in records if r["model"] == model} - {None}
+    if len(efforts) == 1 and (effort := next(iter(efforts))) not in ("default", "unexposed"):
+        if not label.endswith(f" ({effort})"):
+            label += f" ({effort})"
+    return label
+
+
+def prepare(corpus: Corpus, run_dir: Path, models: dict[str, ModelSpec]) -> dict[str, bytes]:
+    files: dict[str, bytes] = {}
+
+    def add(stem: str, source: Path) -> str:
+        suffix, data = _encode(source)
+        files[stem + suffix] = data
+        return stem.rsplit("/", 1)[-1] + suffix
+
+    found = samples(run_dir)
+    gates = summary(corpus, run_dir)
+    records = [record for _, record in found]
+    task_ids = sorted({r["task"] for r in records}, key=lambda t: (t == MEMORY, t))
+    tasks = {}
+    for task_id in task_ids:
+        task = corpus.task(task_id)
+        tasks[task_id] = {"title": task.title, "width": task.width, "height": task.height,
+                          "duration_ms": task.duration_ms, "eligibility": task.eligibility, "frames": []}
+        if task.gif is not None:
+            tasks[task_id]["gif"] = add(f"reference/{task_id}/reference", task.gif)
+            tasks[task_id]["frames"] = [{"t": f.timestamp_ms, "file": add(f"reference/{task_id}/frame_{i:02d}", f.image)}
+                                        for i, f in enumerate(task.frames)]
+    for path, record in found:
+        stem = path.relative_to(run_dir).with_suffix("").as_posix()
+        files[f"{stem}.json"] = _json_bytes(record)
+        render = render_current(record, path.with_suffix(""))
+        if render is None:
+            continue
+        render = dict(render)
+        names = {}
+        for name, image, _, _ in rendered_images(corpus.task(record["task"]), record, path.with_suffix("")):
+            if image.is_file():
+                names[image.name] = add(f"{stem}/{name}", image)
+        for key in ("preview", "failed_screenshot"):
+            if render.get(key):
+                render[key] = add(f"{stem}/{Path(render[key]).stem}", path.with_suffix("") / render[key])
+        for entry in render.get("frames", []) + render.get("views", []):
+            entry["file"] = names.get(entry["file"])
+        files[f"{stem}/render.json"] = _json_bytes(render)
+    labels = {m: _label(models, m, records) for m in sorted({r["model"] for r in records})}
+    files["summary.json"] = _json_bytes({**gates, "run": run_dir.name, "harness": harness_id(), "labels": labels,
+                                         "tasks": tasks})
+    return files
+
+
+def sync(root: Path, corpus: Corpus, run_dir: Path, models: dict[str, ModelSpec]) -> tuple[Path, str]:
+    """Write the snapshot, touching only changed files; returns its directory and input digest."""
+    snapshot = directory(root, run_dir.name)
+    files = prepare(corpus, run_dir, models)
+    previous = read_json(snapshot / METADATA) if (snapshot / METADATA).is_file() else {"files": {}}
+    for name, data in files.items():
+        path = _file(snapshot, name)
+        if not path.is_file() or path.read_bytes() != data:
+            write_bytes(path, data)
+    for name in previous["files"].keys() - files.keys():
+        _file(snapshot, name).unlink(missing_ok=True)
+    digest = _digest(files)
+    meta = {"format": FORMAT, "nwb_version": __version__, "track": "frontend", "run": run_dir.name,
+            "input_sha256": digest,
+            "files": {name: hashlib.sha256(data).hexdigest() for name, data in sorted(files.items())}}
+    if previous != meta:
+        write_json(snapshot / METADATA, meta)
+    return snapshot, digest
+
+
+def _count(value, minimum: int = 0) -> bool:
+    return isinstance(value, int) and not isinstance(value, bool) and value >= minimum
+
+
+def _validate(files: dict[str, bytes]) -> dict:
+    """The summary, after checking that every identifier is safe for paths and markup and that every
+    record, render, and image the pages use is one of the verified files."""
+    def check(ok: bool, what: str) -> None:
+        if not ok:
+            raise ValueError(f"invalid frontend snapshot: {what}")
+
+    def media(name, directory: str, what: str) -> None:
+        check(isinstance(name, str) and bool(MEDIA.fullmatch(name)) and f"{directory}/{name}" in files,
+              f"{what} {name!r} is not a saved image")
+
+    summary = json.loads(files["summary.json"])
+    check(isinstance(summary, dict) and all(isinstance(summary.get(k), str) for k in ("run", "corpus", "harness")),
+          "summary fields")
+    tasks, labels = summary.get("tasks"), summary.get("labels")
+    check(isinstance(tasks, dict) and isinstance(labels, dict), "tasks or labels")
+    for task_id, task in tasks.items():
+        check(bool(TASK.fullmatch(task_id)) and task_id not in ("m", "reference") and isinstance(task, dict)
+              and isinstance(task.get("title"), str) and _count(task.get("width"), 1) and _count(task.get("height"), 1)
+              and _count(task.get("duration_ms")) and isinstance(task.get("frames"), list)
+              # GIF tasks show their reference; the memory task has none.
+              and (task_id == MEMORY) == (not task["frames"]), f"task {task_id!r}")
+        for frame in task["frames"]:
+            check(isinstance(frame, dict) and _count(frame.get("t")), f"task {task_id!r} frame time")
+            media(frame.get("file"), f"reference/{task_id}", "reference frame")
+        if task["frames"]:
+            media(task.get("gif"), f"reference/{task_id}", "reference GIF")
+    check(all(NAME.fullmatch(m) and isinstance(label, str) for m, label in labels.items()), "labels")
+    check(isinstance(summary.get("samples"), list), "samples")
+    seen = set()
+    for entry in summary["samples"]:
+        check(isinstance(entry, dict) and entry.get("model") in labels and entry.get("task") in tasks
+              and entry.get("kind") in KINDS and is_memory(entry["kind"]) == (entry["task"] == MEMORY)
+              and _count(entry.get("rep"), 1) and entry.get("status") in STATUSES
+              and isinstance(entry.get("gates"), list) and all(isinstance(g, str) for g in entry["gates"]),
+              f"sample entry {entry!r}")
+        stem = f"frontend/{entry['model']}/{entry['task']}/{entry['kind']}__r{entry['rep']}"
+        check(entry.get("sample") == f"{stem}.json" and entry["sample"] in files and stem not in seen,
+              f"sample {entry.get('sample')!r}")
+        seen.add(stem)
+        record = json.loads(files[entry["sample"]])
+        check(isinstance(record, dict) and isinstance(record.get("html"), (str, type(None))), f"record {stem}")
+        render = json.loads(files[f"{stem}/render.json"]) if f"{stem}/render.json" in files else None
+        # Rendered samples pass exactly when they have no gate failures, as `frontend.summary` reports them.
+        check((render is None) == (entry["status"] == "unrendered")
+              and (render is None or (entry["status"] == "passed") == (not entry["gates"])), f"status of {stem}")
+        if render is None:
+            continue
+        check(isinstance(render, dict) and isinstance(render.get("frames", []), list)
+              and isinstance(render.get("views", []), list), f"render of {stem}")
+        for frame in render.get("frames", []):
+            check(isinstance(frame, dict) and "file" in frame and _count(frame.get("t")), f"frame in {stem}")
+            if frame["file"] is not None:
+                media(frame["file"], stem, "render frame")
+        for view in render.get("views", []):
+            check(isinstance(view, dict) and "file" in view and view.get("view") in VIEWS, f"view in {stem}")
+            if view["file"] is not None:
+                media(view["file"], stem, "render view")
+        for key in ("preview", "failed_screenshot"):
+            if render.get(key) is not None:
+                media(render[key], stem, key)
+    return summary
+
+
+def load(root: Path, run: str, sha256: str) -> tuple[dict[str, bytes], dict]:
+    """Verify a saved snapshot against its checksums and a release pin; returns its verified files, which are
+    all that pages may use, and its validated summary."""
+    snapshot = directory(root, run)
+    if not (snapshot / METADATA).is_file():
+        raise FileNotFoundError(f"saved frontend results not found: {snapshot}; run nwb frontend sync --run {run}")
+    meta = read_json(snapshot / METADATA)
+    if meta.get("format") != FORMAT or meta.get("track") != "frontend" or meta.get("run") != run \
+            or not isinstance(meta.get("files"), dict) or "summary.json" not in meta["files"]:
+        raise ValueError(f"invalid frontend snapshot metadata: {snapshot / METADATA}")
+    files = {}
+    for name, digest in meta["files"].items():
+        data = _file(snapshot, name).read_bytes()
+        if hashlib.sha256(data).hexdigest() != digest:
+            raise ValueError(f"saved frontend result checksum mismatch: {snapshot / name}")
+        files[name] = data
+    digest = _digest(files)
+    if digest != sha256:
+        raise ValueError(f"release frontend: saved results changed (expected {sha256}, got {digest}); "
+                         "review the changed run before updating the manifest")
+    return files, _validate(files)

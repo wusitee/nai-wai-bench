@@ -1,0 +1,109 @@
+{
+  "settings_id": "410d5ff9b4cc8b4c",
+  "track": "frontend",
+  "corpus": "frontend-v1",
+  "model": "opus-5.5-xhigh",
+  "vendor": "anthropic",
+  "task": "007",
+  "kind": "2d-s1",
+  "rep": 1,
+  "prompt_sha256": "cede1e1bb16363ea5764593d3a001cb35fe9a48033242b74b3c25d48f92da100",
+  "width": 240,
+  "height": 294,
+  "duration_ms": 5540,
+  "input_names": "neutral",
+  "images": [
+    "bench/frontend-v1/assets/007/frame_00.png"
+  ],
+  "prompt": "The attached image is a 240x294 px frame from an animated GIF. Rebuild it by hand as vector art.\n\nTask (2D, static): write an HTML page that reproduces the image as faithfully as you can in inline SVG: characters, poses, facial expressions, hands, props, background, and colors. A later step will animate your SVG, so structure it in named groups.\n- Static only: no <script>, no SMIL (<animate>, <animateTransform>, <animateMotion>, <set>), no CSS animations or transitions.\n\n2D contract:\n- The page body contains a single inline <svg> element with viewBox=\"0 0 240 294\", width=\"240\", and height=\"294\". No nested <svg>, no <foreignObject>, no <canvas>.\n- Put each character in its own <g> with a descriptive id (for example id=\"character-left\"), with nested <g> groups with descriptive ids for parts that could move (head, eyes, mouth, arms, hands, ...).\n- Gradients, clip paths, masks, and SVG filters (for example feGaussianBlur) are allowed.\n\nRules (breaking any rule scores 0):\n- Reply with exactly one ```html code block containing one complete, self-contained HTML document. If you send several blocks, only the last one counts. Do not use tools; answer directly.\n- The page is rendered offline in a 240x294 px viewport at device pixel ratio 1. Fill exactly that area, starting at the top-left corner.\n- No raster images: no <img>, no <image>, no CSS url(...) except url(#id) references to your own SVG definitions, no data: URIs, no base64, no blob: URLs.\n- No external resources or network access: no external scripts, stylesheets, fonts, iframes, links, fetch, XMLHttpRequest, WebSocket, or any other URL.\n- Do not call setTimeout, setInterval, requestAnimationFrame, or requestIdleCallback. The harness controls time.\n- The file must be at most 256 KB and must run without uncaught exceptions or console errors.",
+  "text": "```html\n<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<style>\n  html, body { margin: 0; padding: 0; width: 240px; height: 294px; overflow: hidden; background: #fbf6d8; }\n  svg { display: block; }\n</style>\n</head>\n<body>\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 294\" width=\"240\" height=\"294\">\n  <defs>\n    <linearGradient id=\"bgBase\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#f3eba6\"/>\n      <stop offset=\"0.45\" stop-color=\"#fbf7dc\"/>\n      <stop offset=\"1\" stop-color=\"#ece39a\"/>\n    </linearGradient>\n    <radialGradient id=\"bgGlow\" cx=\"0.62\" cy=\"0.5\" r=\"0.6\">\n      <stop offset=\"0\" stop-color=\"#ffffff\" stop-opacity=\"1\"/>\n      <stop offset=\"0.5\" stop-color=\"#fffef4\" stop-opacity=\"0.85\"/>\n      <stop offset=\"1\" stop-color=\"#fffef4\" stop-opacity=\"0\"/>\n    </radialGradient>\n    <linearGradient id=\"bgLeft\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n      <stop offset=\"0\" stop-color=\"#eadf85\" stop-opacity=\"0.8\"/>\n      <stop offset=\"0.35\" stop-color=\"#eadf85\" stop-opacity=\"0\"/>\n    </linearGradient>\n\n    <radialGradient id=\"bodyGrad\" cx=\"0.42\" cy=\"0.35\" r=\"0.7\">\n      <stop offset=\"0\" stop-color=\"#f6e27a\"/>\n      <stop offset=\"0.55\" stop-color=\"#ecd04c\"/>\n      <stop offset=\"1\" stop-color=\"#d6ae2e\"/>\n    </radialGradient>\n    <linearGradient id=\"bodyEdge\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n      <stop offset=\"0\" stop-color=\"#c99a24\" stop-opacity=\"0.55\"/>\n      <stop offset=\"0.18\" stop-color=\"#c99a24\" stop-opacity=\"0\"/>\n      <stop offset=\"0.82\" stop-color=\"#d9a22c\" stop-opacity=\"0\"/>\n      <stop offset=\"1\" stop-color=\"#d9a22c\" stop-opacity=\"0.45\"/>\n    </linearGradient>\n    <radialGradient id=\"headGrad\" cx=\"0.4\" cy=\"0.35\" r=\"0.65\">\n      <stop offset=\"0\" stop-color=\"#f4e070\"/>\n      <stop offset=\"0.7\" stop-color=\"#e2c43c\"/>\n      <stop offset=\"1\" stop-color=\"#c9a42a\"/>\n    </radialGradient>\n    <linearGradient id=\"bellyGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#eeaa92\"/>\n      <stop offset=\"0.22\" stop-color=\"#f4b8b0\"/>\n      <stop offset=\"0.36\" stop-color=\"#f8d6d2\"/>\n      <stop offset=\"0.45\" stop-color=\"#fdf8f2\"/>\n      <stop offset=\"0.55\" stop-color=\"#fbeee8\"/>\n      <stop offset=\"0.75\" stop-color=\"#f6d2c6\"/>\n      <stop offset=\"1\" stop-color=\"#eeb68e\"/>\n    </linearGradient>\n    <radialGradient id=\"bellyShade\" cx=\"0.5\" cy=\"0.45\" r=\"0.55\">\n      <stop offset=\"0.7\" stop-color=\"#e8c060\" stop-opacity=\"0\"/>\n      <stop offset=\"1\" stop-color=\"#e8c060\" stop-opacity=\"0.55\"/>\n    </radialGradient>\n    <linearGradient id=\"legGrad\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n      <stop offset=\"0\" stop-color=\"#d9b236\"/>\n      <stop offset=\"0.45\" stop-color=\"#f0d55a\"/>\n      <stop offset=\"1\" stop-color=\"#d4a830\"/>\n    </linearGradient>\n    <linearGradient id=\"armGrad\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n      <stop offset=\"0\" stop-color=\"#d8b03a\"/>\n      <stop offset=\"0.5\" stop-color=\"#ecd055\"/>\n      <stop offset=\"1\" stop-color=\"#d2a832\"/>\n    </linearGradient>\n    <radialGradient id=\"blush\" cx=\"0.5\" cy=\"0.5\" r=\"0.5\">\n      <stop offset=\"0\" stop-color=\"#f09a7a\" stop-opacity=\"0.55\"/>\n      <stop offset=\"1\" stop-color=\"#f09a7a\" stop-opacity=\"0\"/>\n    </radialGradient>\n    <filter id=\"soft\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n      <feGaussianBlur stdDeviation=\"1.2\"/>\n    </filter>\n    <filter id=\"softer\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n      <feGaussianBlur stdDeviation=\"3\"/>\n    </filter>\n  </defs>\n\n  <g id=\"background\">\n    <rect x=\"0\" y=\"0\" width=\"240\" height=\"294\" fill=\"url(#bgBase)\"/>\n    <rect x=\"0\" y=\"0\" width=\"240\" height=\"294\" fill=\"url(#bgLeft)\"/>\n    <rect x=\"0\" y=\"0\" width=\"240\" height=\"294\" fill=\"url(#bgGlow)\"/>\n  </g>\n\n  <g id=\"character-yellow-bird\">\n    <g id=\"legs\">\n      <g id=\"leg-left\">\n        <path d=\"M70 238 C73 258 76 278 77 294 L101 294 C101 280 102 263 104 248 Z\" fill=\"url(#legGrad)\"/>\n      </g>\n      <g id=\"leg-right\">\n        <path d=\"M104 248 C106 264 107 280 108 294 L131 294 C132 280 135 262 140 238 Z\" fill=\"url(#legGrad)\"/>\n      </g>\n      <path id=\"leg-gap-shadow\" d=\"M103 250 L104 294\" stroke=\"#b88e22\" stroke-width=\"1.5\" opacity=\"0.5\" filter=\"url(#soft)\"/>\n    </g>\n\n    <g id=\"body\">\n      <path d=\"M105 0 C121 0 131 9 134 26 C138 46 141 66 149 90 C159 116 166 150 164 190 C163 220 156 244 139 258 L72 258 C55 244 47 220 46 190 C45 150 51 116 61 90 C69 66 74 46 78 26 C82 9 90 0 105 0 Z\" fill=\"url(#bodyGrad)\"/>\n      <path d=\"M105 0 C121 0 131 9 134 26 C138 46 141 66 149 90 C159 116 166 150 164 190 C163 220 156 244 139 258 L72 258 C55 244 47 220 46 190 C45 150 51 116 61 90 C69 66 74 46 78 26 C82 9 90 0 105 0 Z\" fill=\"url(#bodyEdge)\"/>\n    </g>\n\n    <g id=\"arm-left\">\n      <path d=\"M66 86 C58 118 48 150 35 182 L50 186 C58 160 66 130 74 100 Z\" fill=\"url(#armGrad)\"/>\n      <path d=\"M72 100 C64 132 57 160 50 184\" stroke=\"#c39a2a\" stroke-width=\"1.5\" fill=\"none\" opacity=\"0.6\" filter=\"url(#soft)\"/>\n      <g id=\"hand-left\">\n        <path d=\"M34 180 C30 186 31 194 36 197 C41 199 47 196 50 190 C51 186 50 183 48 182 Z\" fill=\"#4f4d3c\"/>\n        <g stroke=\"#4f4d3c\" stroke-linecap=\"round\" fill=\"none\">\n          <path d=\"M35 193 C31 199 28 205 27 211\" stroke-width=\"3.2\"/>\n          <path d=\"M38 195 C36 202 34 209 33 216\" stroke-width=\"3.2\"/>\n          <path d=\"M42 195 C41 202 40 209 40 215\" stroke-width=\"3\"/>\n          <path d=\"M46 193 C46 199 46 206 45 212\" stroke-width=\"2.8\"/>\n          <path d=\"M49 187 C52 192 52 198 50 204\" stroke-width=\"2.6\"/>\n        </g>\n      </g>\n    </g>\n\n    <g id=\"arm-right\">\n      <path d=\"M144 86 C152 118 159 152 167 186 L153 190 C149 162 143 130 136 100 Z\" fill=\"url(#armGrad)\"/>\n      <path d=\"M138 100 C145 132 150 162 154 188\" stroke=\"#c39a2a\" stroke-width=\"1.5\" fill=\"none\" opacity=\"0.6\" filter=\"url(#soft)\"/>\n      <g id=\"hand-right\">\n        <path d=\"M152 186 C150 192 152 199 157 201 C163 203 169 199 170 192 C170 188 168 185 166 184 Z\" fill=\"#4f4d3c\"/>\n        <g stroke=\"#4f4d3c\" stroke-linecap=\"round\" fill=\"none\">\n          <path d=\"M154 196 C153 202 153 208 154 214\" stroke-width=\"2.8\"/>\n          <path d=\"M158 199 C158 206 158 212 159 218\" stroke-width=\"3\"/>\n          <path d=\"M162 199 C163 206 164 212 165 217\" stroke-width=\"3.1\"/>\n          <path d=\"M166 197 C168 203 170 208 172 212\" stroke-width=\"3\"/>\n          <path d=\"M152 190 C149 195 149 200 150 205\" stroke-width=\"2.5\"/>\n        </g>\n      </g>\n    </g>\n\n    <g id=\"belly\">\n      <ellipse cx=\"105\" cy=\"174\" rx=\"56\" ry=\"78\" fill=\"url(#bellyGrad)\"/>\n      <ellipse cx=\"105\" cy=\"174\" rx=\"56\" ry=\"78\" fill=\"url(#bellyShade)\"/>\n      <ellipse cx=\"96\" cy=\"150\" rx=\"30\" ry=\"10\" fill=\"#ffffff\" opacity=\"0.55\" filter=\"url(#softer)\"/>\n    </g>\n\n    <g id=\"head\">\n      <path d=\"M105 0 C120 0 130 9 133 26 C135 40 137 52 139 62 C128 70 82 70 71 62 C73 52 75 40 78 26 C82 9 90 0 105 0 Z\" fill=\"url(#headGrad)\" opacity=\"0.6\"/>\n      <ellipse cx=\"92\" cy=\"18\" rx=\"9\" ry=\"12\" fill=\"#fbef9c\" opacity=\"0.5\" filter=\"url(#softer)\"/>\n      <g id=\"cheeks\">\n        <ellipse id=\"cheek-left\" cx=\"87\" cy=\"54\" rx=\"9\" ry=\"6\" fill=\"url(#blush)\"/>\n        <ellipse id=\"cheek-right\" cx=\"125\" cy=\"53\" rx=\"8\" ry=\"6\" fill=\"url(#blush)\"/>\n      </g>\n      <g id=\"eyes\">\n        <g id=\"eye-left\">\n          <path d=\"M83 40 C87 43 93 43 97 40\" stroke=\"#5a4320\" stroke-width=\"2\" stroke-linecap=\"round\" fill=\"none\"/>\n        </g>\n        <g id=\"eye-right\">\n          <path d=\"M111 39 C115 42 120 42 124 38\" stroke=\"#5a4320\" stroke-width=\"2\" stroke-linecap=\"round\" fill=\"none\"/>\n        </g>\n      </g>\n      <g id=\"beak\">\n        <ellipse cx=\"105\" cy=\"49\" rx=\"2.5\" ry=\"1.8\" fill=\"#c98b3a\" opacity=\"0.8\"/>\n      </g>\n    </g>\n  </g>\n</svg>\n</body>\n</html>\n```",
+  "html": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<style>\n  html, body { margin: 0; padding: 0; width: 240px; height: 294px; overflow: hidden; background: #fbf6d8; }\n  svg { display: block; }\n</style>\n</head>\n<body>\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 294\" width=\"240\" height=\"294\">\n  <defs>\n    <linearGradient id=\"bgBase\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#f3eba6\"/>\n      <stop offset=\"0.45\" stop-color=\"#fbf7dc\"/>\n      <stop offset=\"1\" stop-color=\"#ece39a\"/>\n    </linearGradient>\n    <radialGradient id=\"bgGlow\" cx=\"0.62\" cy=\"0.5\" r=\"0.6\">\n      <stop offset=\"0\" stop-color=\"#ffffff\" stop-opacity=\"1\"/>\n      <stop offset=\"0.5\" stop-color=\"#fffef4\" stop-opacity=\"0.85\"/>\n      <stop offset=\"1\" stop-color=\"#fffef4\" stop-opacity=\"0\"/>\n    </radialGradient>\n    <linearGradient id=\"bgLeft\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n      <stop offset=\"0\" stop-color=\"#eadf85\" stop-opacity=\"0.8\"/>\n      <stop offset=\"0.35\" stop-color=\"#eadf85\" stop-opacity=\"0\"/>\n    </linearGradient>\n\n    <radialGradient id=\"bodyGrad\" cx=\"0.42\" cy=\"0.35\" r=\"0.7\">\n      <stop offset=\"0\" stop-color=\"#f6e27a\"/>\n      <stop offset=\"0.55\" stop-color=\"#ecd04c\"/>\n      <stop offset=\"1\" stop-color=\"#d6ae2e\"/>\n    </radialGradient>\n    <linearGradient id=\"bodyEdge\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n      <stop offset=\"0\" stop-color=\"#c99a24\" stop-opacity=\"0.55\"/>\n      <stop offset=\"0.18\" stop-color=\"#c99a24\" stop-opacity=\"0\"/>\n      <stop offset=\"0.82\" stop-color=\"#d9a22c\" stop-opacity=\"0\"/>\n      <stop offset=\"1\" stop-color=\"#d9a22c\" stop-opacity=\"0.45\"/>\n    </linearGradient>\n    <radialGradient id=\"headGrad\" cx=\"0.4\" cy=\"0.35\" r=\"0.65\">\n      <stop offset=\"0\" stop-color=\"#f4e070\"/>\n      <stop offset=\"0.7\" stop-color=\"#e2c43c\"/>\n      <stop offset=\"1\" stop-color=\"#c9a42a\"/>\n    </radialGradient>\n    <linearGradient id=\"bellyGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#eeaa92\"/>\n      <stop offset=\"0.22\" stop-color=\"#f4b8b0\"/>\n      <stop offset=\"0.36\" stop-color=\"#f8d6d2\"/>\n      <stop offset=\"0.45\" stop-color=\"#fdf8f2\"/>\n      <stop offset=\"0.55\" stop-color=\"#fbeee8\"/>\n      <stop offset=\"0.75\" stop-color=\"#f6d2c6\"/>\n      <stop offset=\"1\" stop-color=\"#eeb68e\"/>\n    </linearGradient>\n    <radialGradient id=\"bellyShade\" cx=\"0.5\" cy=\"0.45\" r=\"0.55\">\n      <stop offset=\"0.7\" stop-color=\"#e8c060\" stop-opacity=\"0\"/>\n      <stop offset=\"1\" stop-color=\"#e8c060\" stop-opacity=\"0.55\"/>\n    </radialGradient>\n    <linearGradient id=\"legGrad\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n      <stop offset=\"0\" stop-color=\"#d9b236\"/>\n      <stop offset=\"0.45\" stop-color=\"#f0d55a\"/>\n      <stop offset=\"1\" stop-color=\"#d4a830\"/>\n    </linearGradient>\n    <linearGradient id=\"armGrad\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n      <stop offset=\"0\" stop-color=\"#d8b03a\"/>\n      <stop offset=\"0.5\" stop-color=\"#ecd055\"/>\n      <stop offset=\"1\" stop-color=\"#d2a832\"/>\n    </linearGradient>\n    <radialGradient id=\"blush\" cx=\"0.5\" cy=\"0.5\" r=\"0.5\">\n      <stop offset=\"0\" stop-color=\"#f09a7a\" stop-opacity=\"0.55\"/>\n      <stop offset=\"1\" stop-color=\"#f09a7a\" stop-opacity=\"0\"/>\n    </radialGradient>\n    <filter id=\"soft\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n      <feGaussianBlur stdDeviation=\"1.2\"/>\n    </filter>\n    <filter id=\"softer\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n      <feGaussianBlur stdDeviation=\"3\"/>\n    </filter>\n  </defs>\n\n  <g id=\"background\">\n    <rect x=\"0\" y=\"0\" width=\"240\" height=\"294\" fill=\"url(#bgBase)\"/>\n    <rect x=\"0\" y=\"0\" width=\"240\" height=\"294\" fill=\"url(#bgLeft)\"/>\n    <rect x=\"0\" y=\"0\" width=\"240\" height=\"294\" fill=\"url(#bgGlow)\"/>\n  </g>\n\n  <g id=\"character-yellow-bird\">\n    <g id=\"legs\">\n      <g id=\"leg-left\">\n        <path d=\"M70 238 C73 258 76 278 77 294 L101 294 C101 280 102 263 104 248 Z\" fill=\"url(#legGrad)\"/>\n      </g>\n      <g id=\"leg-right\">\n        <path d=\"M104 248 C106 264 107 280 108 294 L131 294 C132 280 135 262 140 238 Z\" fill=\"url(#legGrad)\"/>\n      </g>\n      <path id=\"leg-gap-shadow\" d=\"M103 250 L104 294\" stroke=\"#b88e22\" stroke-width=\"1.5\" opacity=\"0.5\" filter=\"url(#soft)\"/>\n    </g>\n\n    <g id=\"body\">\n      <path d=\"M105 0 C121 0 131 9 134 26 C138 46 141 66 149 90 C159 116 166 150 164 190 C163 220 156 244 139 258 L72 258 C55 244 47 220 46 190 C45 150 51 116 61 90 C69 66 74 46 78 26 C82 9 90 0 105 0 Z\" fill=\"url(#bodyGrad)\"/>\n      <path d=\"M105 0 C121 0 131 9 134 26 C138 46 141 66 149 90 C159 116 166 150 164 190 C163 220 156 244 139 258 L72 258 C55 244 47 220 46 190 C45 150 51 116 61 90 C69 66 74 46 78 26 C82 9 90 0 105 0 Z\" fill=\"url(#bodyEdge)\"/>\n    </g>\n\n    <g id=\"arm-left\">\n      <path d=\"M66 86 C58 118 48 150 35 182 L50 186 C58 160 66 130 74 100 Z\" fill=\"url(#armGrad)\"/>\n      <path d=\"M72 100 C64 132 57 160 50 184\" stroke=\"#c39a2a\" stroke-width=\"1.5\" fill=\"none\" opacity=\"0.6\" filter=\"url(#soft)\"/>\n      <g id=\"hand-left\">\n        <path d=\"M34 180 C30 186 31 194 36 197 C41 199 47 196 50 190 C51 186 50 183 48 182 Z\" fill=\"#4f4d3c\"/>\n        <g stroke=\"#4f4d3c\" stroke-linecap=\"round\" fill=\"none\">\n          <path d=\"M35 193 C31 199 28 205 27 211\" stroke-width=\"3.2\"/>\n          <path d=\"M38 195 C36 202 34 209 33 216\" stroke-width=\"3.2\"/>\n          <path d=\"M42 195 C41 202 40 209 40 215\" stroke-width=\"3\"/>\n          <path d=\"M46 193 C46 199 46 206 45 212\" stroke-width=\"2.8\"/>\n          <path d=\"M49 187 C52 192 52 198 50 204\" stroke-width=\"2.6\"/>\n        </g>\n      </g>\n    </g>\n\n    <g id=\"arm-right\">\n      <path d=\"M144 86 C152 118 159 152 167 186 L153 190 C149 162 143 130 136 100 Z\" fill=\"url(#armGrad)\"/>\n      <path d=\"M138 100 C145 132 150 162 154 188\" stroke=\"#c39a2a\" stroke-width=\"1.5\" fill=\"none\" opacity=\"0.6\" filter=\"url(#soft)\"/>\n      <g id=\"hand-right\">\n        <path d=\"M152 186 C150 192 152 199 157 201 C163 203 169 199 170 192 C170 188 168 185 166 184 Z\" fill=\"#4f4d3c\"/>\n        <g stroke=\"#4f4d3c\" stroke-linecap=\"round\" fill=\"none\">\n          <path d=\"M154 196 C153 202 153 208 154 214\" stroke-width=\"2.8\"/>\n          <path d=\"M158 199 C158 206 158 212 159 218\" stroke-width=\"3\"/>\n          <path d=\"M162 199 C163 206 164 212 165 217\" stroke-width=\"3.1\"/>\n          <path d=\"M166 197 C168 203 170 208 172 212\" stroke-width=\"3\"/>\n          <path d=\"M152 190 C149 195 149 200 150 205\" stroke-width=\"2.5\"/>\n        </g>\n      </g>\n    </g>\n\n    <g id=\"belly\">\n      <ellipse cx=\"105\" cy=\"174\" rx=\"56\" ry=\"78\" fill=\"url(#bellyGrad)\"/>\n      <ellipse cx=\"105\" cy=\"174\" rx=\"56\" ry=\"78\" fill=\"url(#bellyShade)\"/>\n      <ellipse cx=\"96\" cy=\"150\" rx=\"30\" ry=\"10\" fill=\"#ffffff\" opacity=\"0.55\" filter=\"url(#softer)\"/>\n    </g>\n\n    <g id=\"head\">\n      <path d=\"M105 0 C120 0 130 9 133 26 C135 40 137 52 139 62 C128 70 82 70 71 62 C73 52 75 40 78 26 C82 9 90 0 105 0 Z\" fill=\"url(#headGrad)\" opacity=\"0.6\"/>\n      <ellipse cx=\"92\" cy=\"18\" rx=\"9\" ry=\"12\" fill=\"#fbef9c\" opacity=\"0.5\" filter=\"url(#softer)\"/>\n      <g id=\"cheeks\">\n        <ellipse id=\"cheek-left\" cx=\"87\" cy=\"54\" rx=\"9\" ry=\"6\" fill=\"url(#blush)\"/>\n        <ellipse id=\"cheek-right\" cx=\"125\" cy=\"53\" rx=\"8\" ry=\"6\" fill=\"url(#blush)\"/>\n      </g>\n      <g id=\"eyes\">\n        <g id=\"eye-left\">\n          <path d=\"M83 40 C87 43 93 43 97 40\" stroke=\"#5a4320\" stroke-width=\"2\" stroke-linecap=\"round\" fill=\"none\"/>\n        </g>\n        <g id=\"eye-right\">\n          <path d=\"M111 39 C115 42 120 42 124 38\" stroke=\"#5a4320\" stroke-width=\"2\" stroke-linecap=\"round\" fill=\"none\"/>\n        </g>\n      </g>\n      <g id=\"beak\">\n        <ellipse cx=\"105\" cy=\"49\" rx=\"2.5\" ry=\"1.8\" fill=\"#c98b3a\" opacity=\"0.8\"/>\n      </g>\n    </g>\n  </g>\n</svg>\n</body>\n</html>",
+  "html_sha256": "d21be92be662024ae742779e7ca6c70ab3cdbb62e3ac68b3ca3ce669d1c40487",
+  "static_gates": [],
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 62.9,
+    "tokens": {
+      "input": 1546,
+      "cached_input": 0,
+      "cache_write": 1544,
+      "output": 6196,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.1364742,
+    "tools_used": [],
+    "cost_usd": 0.1364742,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1544,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 6196,
+      "output_tokens_details": {
+        "thinking_tokens": 2201
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1544,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 6196,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1544,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1544
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-07T05:28:05Z",
+    "finished_at": "2026-11-07T05:29:07Z",
+    "revision": "fc64216+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

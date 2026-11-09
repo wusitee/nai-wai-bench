@@ -1,0 +1,108 @@
+{
+  "html_sha256": "590636bfed70119be3fc322e2c52c7cb8f7e1921d15e0ae4d4ac5dd85575ea30",
+  "harness": "fee9bd636b661bc1",
+  "kind": "3d-s3",
+  "gates": [],
+  "errors": [],
+  "blocked": [],
+  "forbidden": [],
+  "elements": [],
+  "timing": {
+    "declarative": false,
+    "scripted": false
+  },
+  "frames": [
+    {
+      "file": "frame_00.webp",
+      "t": 0
+    },
+    {
+      "file": "frame_01.webp",
+      "t": 200
+    },
+    {
+      "file": "frame_02.webp",
+      "t": 400
+    },
+    {
+      "file": "frame_03.webp",
+      "t": 600
+    },
+    {
+      "file": "frame_04.webp",
+      "t": 800
+    },
+    {
+      "file": "frame_05.webp",
+      "t": 1000
+    },
+    {
+      "file": "frame_06.webp",
+      "t": 1200
+    },
+    {
+      "file": "frame_07.webp",
+      "t": 1400
+    }
+  ],
+  "views": [
+    {
+      "file": "view_side.webp",
+      "view": "side",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_back.webp",
+      "view": "back",
+      "t": 0,
+      "hidden": [
+        "rear-wall",
+        "chalkboard",
+        "board-frame-bottom",
+        "chalk-tray"
+      ]
+    },
+    {
+      "file": "view_three_quarter.webp",
+      "view": "three_quarter",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_top.webp",
+      "view": "top",
+      "t": 0,
+      "hidden": []
+    }
+  ],
+  "scene": {
+    "characters": [
+      {
+        "name": "character-left",
+        "meshes": 27,
+        "width": 2.6434982993513336,
+        "height": 4.114829176973007,
+        "depth": 2.7805460550946606,
+        "ratio": 1.0518433303993258
+      },
+      {
+        "name": "character-right",
+        "meshes": 24,
+        "width": 3.353283510594756,
+        "height": 4.5044306660006885,
+        "depth": 3.0845898917961367,
+        "ratio": 0.9198714877672355
+      }
+    ],
+    "textures": 3
+  },
+  "mode": "render(t)",
+  "preview": "preview.webp",
+  "checks": {
+    "determinism_diff": 0.0,
+    "loop_diff": 0.0,
+    "motion_diff": 0.30757575757575756
+  },
+  "seconds": 4.2
+}
