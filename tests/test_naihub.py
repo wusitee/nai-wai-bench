@@ -39,7 +39,7 @@ def test_naihub_panel_has_paired_controls_distinct_assets_and_provenance():
     assert all(c["answers"] == answers_by_image[c["image"]]
                for c in data["state_transfer"]["cases"].values())
     assert {p for p in (bench.root / "bench/naihub-v1/images").iterdir()} == {i.images[0] for i in shown}
-    assert len(load_bench(bench.root).items) == 25  # the default panel is unchanged
+    assert len(load_bench(bench.root).items) == 27  # the default panel is unchanged
 
 
 @pytest.mark.parametrize("change, message", [("hash", "checksum mismatch"), ("label", "declared labels")])

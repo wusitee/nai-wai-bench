@@ -88,7 +88,8 @@ Text and vision LLMs answer questions about the meme. Items are defined in `[und
 
 | Item | Modality | What it tests |
 |---|---|---|
-| `knowledge_zh`, `knowledge_en` | text | Origin, aliases, remixes, and lore, asked in Chinese and in English |
+| `knowledge_zh`, `knowledge_en` | text | Historical broad-lore checklist: origin, aliases, remixes, and lore in Chinese and English |
+| `origin_evidence_zh`, `origin_evidence_en` | text | Origin evidence as of 2026-11-05: Xingye attribution, follow-up corrections, chronology, prompt provenance, and uncertainty |
 | `describe`, `describe_en` | text | Recalling visual traits without seeing the image, in Chinese and English |
 | `write_prompt.<animal>`, `write_prompt_zh.<animal>` | text | Writing animal-version prompts in English and Chinese, for cat and giraffe |
 | `recognize_zh`, `recognize_en` | vision | Identifying the meme from the reference image |
@@ -98,6 +99,13 @@ Text and vision LLMs answer questions about the meme. Items are defined in `[und
 | `recognize_official` | vision | Distinguishing official Nailong artwork from the unofficial meme (negative control) |
 | `grounding.<case>` | vision | Reporting pose and eye state from four existing stimuli using fixed JSON labels |
 | `grounding.<case>.blind` | text | The identical question with the image withheld; a diagnostic control |
+
+The [origin evidence guide](naiwa-origins.md) records sources, timestamped claims, uncertainties, and
+newly written reproduction prompts. The two origin-evidence items are text diagnostics outside all
+rankings. They use separate checklist ids so retained questions and judge requests remain reproducible;
+the original lore notes are historical shorthand, not a complete current provenance account. Default
+core understanding runs include the new items. Text means depend on the available items; compare runs
+with matching item selections. Use `--items origin_evidence_zh,origin_evidence_en` for a separate run.
 
 Every prompt is prefixed with an instruction to answer from the model's own knowledge, and the backends
 disable web search and other tools (see [backends.md](backends.md)). If an agent still calls a tool, the

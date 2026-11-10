@@ -2,7 +2,7 @@
 
 - `nailong_laugh.png`: the canonical 大笑奶龙 (奶龙捧腹大笑) image, from Moegirlpedia,
   [File:奶龙捧腹大笑.png](https://zh.moegirl.org.cn/File:%E5%A5%B6%E9%BE%99%E6%8D%A7%E8%85%B9%E5%A4%A7%E7%AC%91.png).
-- Facts in `bench/rubric.toml` come from the Moegirlpedia article
+- The original core lore notes in `bench/rubric.toml` come from the Moegirlpedia article
   [奶龙 § 大笑奶龙/奶蛙](https://zh.moegirl.org.cn/%E5%A5%B6%E9%BE%99#%E5%A4%A7%E7%AC%91%E5%A5%B6%E9%BE%99/%E5%A5%B6%E8%9B%99)
   (text under CC BY-NC-SA 3.0 CN), as of October 2026. Background notes and the frog-like 奶蛙 variant are
   cross-checked against Chinese Wikipedia, [奶龙](https://zh.wikipedia.org/wiki/%E5%A5%B6%E9%BE%99).
@@ -10,6 +10,17 @@
   sticker variants of the meme family, provided by the project author; their original posters are unknown.
 - The 奶蛙 origin (an AI agent created on 星野 on 2024-10-02) and the frog-like look behind the name are
   corroborated by Lost Media Wiki CN, [奶蛙](https://lostmedia.wikidot.com/naiwa-cx) (revision of 2026-10-08).
+- Current origin evidence (reviewed 2026-11-05): 看仙碎's
+  [initial investigation](https://www.bilibili.com/video/BV1er3x68EZT/), its
+  [pinned agent screenshots](https://www.bilibili.com/video/BV1er3x68EZT/#reply308821531425), and the same
+  creator's [奶蛙，出处确认 follow-up](https://www.bilibili.com/video/BV1ndMk65EwM/).
+  The follow-up identifies the Xingye agent and credits 纲手［百豪］; its displayed creation date concerns
+  the agent, while the original image-generation request remains unavailable. Moegirlpedia cites this
+  follow-up, rather than independently verifying the origin. See the
+  [origin and prompt-provenance guide](../../docs/naiwa-origins.md) for timestamps, primary screenshot
+  links, uncertainties, and reconstruction prompts. The new `origin_*` rubric notes use this review;
+  the original broad-lore checklist remains historical. Lost Media Wiki returned HTTP 503 during this
+  review, so its previously recorded October 8 revision was not independently rechecked.
 - `../stimuli/laughing_panda.jpg`: a panda variant generated with Codex's built-in `image_gen` tool from the
   reference tier prompt (`参考这张图，画一个同样风格的熊猫版本`). It is used as a recognition stimulus.
 - `../stimuli/naiwa_facepalm.jpg`, `../stimuli/naiwa_smug.jpg`, and `../stimuli/naiwa_folded_arms.jpg`:

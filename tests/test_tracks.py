@@ -22,7 +22,7 @@ def test_is_done_only_for_successful_results_of_the_same_job(tmp_path):
 
 
 @pytest.mark.parametrize("suite, item_count, state_count, image_count", [
-    ("core", 25, 6, 12), ("naihub-v1", 48, 16, 32)])
+    ("core", 27, 6, 12), ("naihub-v1", 48, 16, 32)])
 def test_optional_states_forward_the_correct_reference_without_core_cost_or_llm_grading(
         tmp_path, monkeypatch, suite, item_count, state_count, image_count):
     bench = load_bench(find_root(), suite)

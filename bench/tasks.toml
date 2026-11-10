@@ -6,6 +6,8 @@
 # modality: "text" needs a text-capable model, "vision" also sends the listed images.
 # checklist: ids from bench/rubric.toml. animals: expands the item once per animal.
 
+# Historical broad-lore prompts and checklists remain stable for retained results.
+# The origin_evidence items below use the dated evidence review in docs/naiwa-origins.md.
 [understanding.knowledge_zh]
 modality = "text"
 lang = "zh"
@@ -17,6 +19,19 @@ modality = "text"
 lang = "en"
 prompt = "What is the Chinese internet meme \"大笑奶龙\" (Laughing Nailong, also called \"奶蛙\")? Explain its origin, what it looks like, and the related jokes and remixes. Say so plainly where you are unsure instead of guessing."
 checklist = ["base_character", "ai_variant", "xingye_origin", "aliases", "naiwa", "laugh_pose", "junti_quan", "official_reply", "trait_variants", "rarity_titles"]
+
+# Text diagnostics outside all rankings; evidence cutoff: 2026-11-05.
+[understanding.origin_evidence_zh]
+modality = "text"
+lang = "zh"
+prompt = "截至2026年11月5日，关于「奶蛙」的起源有哪些证据？请区分早期站立、睁眼的奶蛙形象与后来的捧腹大笑版本，说明相关平台、创作者归属、早期传播以及后续考据对原先说法的修正。原始生图提示词是否已经找到？「失传媒体」和「儿童邪典」的说法各指什么，证据又有哪些局限？请区分可核查的材料、研究者的推断和未经证实的传闻；不确定就明确说明，不要编造提示词、日期或来源。"
+checklist = ["origin_xingye_evidence", "origin_followup", "origin_chronology", "origin_prompt_limits", "origin_visual_distinction", "origin_lost_media_scope"]
+
+[understanding.origin_evidence_en]
+modality = "text"
+lang = "en"
+prompt = "As of November 5, 2026, what evidence supports accounts of the origin of 奶蛙 (Naiwa)? Distinguish the early standing, open-eyed image from the later belly-clutching laughing variant. Explain the platform, creator attribution, early circulation, and how later research revised the initial account. Has the original image-generation prompt been recovered? What do the lost-media and Elsagate claims refer to, and what are their evidential limits? Separate inspectable material, researchers' inferences, and unverified recollections. State uncertainty plainly; do not invent prompts, dates, or sources."
+checklist = ["origin_xingye_evidence", "origin_followup", "origin_chronology", "origin_prompt_limits", "origin_visual_distinction", "origin_lost_media_scope"]
 
 [understanding.describe]
 modality = "text"

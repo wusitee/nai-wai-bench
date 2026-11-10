@@ -97,6 +97,8 @@ not significance claims or subscription bills. See the [methodology](docs/method
   and judging shared results
 - [Episode videos](docs/video.md): format, data rules, build pipeline, and publishing for the Bilibili
   result videos
+- [Naiwa origins and prompt provenance](docs/naiwa-origins.md): dated video research, the Xingye-agent
+  discovery, evidence limits, reproduction prompts, and Chinese/English origin-evidence diagnostics
 - [Sources](bench/reference/SOURCE.md): where the reference image, stickers, and facts come from
 
 The reference image and stickers are included for non-commercial research use only.

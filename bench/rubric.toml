@@ -18,6 +18,8 @@ text = "奶龙 (Nailong) is a yellow, chubby cartoon dragon/dinosaur character f
 [facts.ai_variant]
 text = "大笑奶龙 is an AI-generated, unofficial, 'mutated' variant of 奶龙, not official artwork."
 
+# Historical broad-lore shorthand, retained for existing judgments. The origin_* facts below
+# distinguish agent evidence, attribution, and the later laughing variant.
 [facts.xingye_origin]
 text = "It originated in October 2024, when a user published an AI agent named 「奶龙」 on the AI platform 「星野」 (Xingye); the agent's avatar was this AI-generated variant."
 
@@ -47,6 +49,27 @@ text = "Correctly identifies the shown image as belonging to the 大笑奶龙 / 
 
 [facts.official_art]
 text = "Correctly distinguishes the shown official 奶龙 character artwork from the unofficial 大笑奶龙 / 奶蛙 mutation; it is not an example of that meme variant."
+
+# Evidence-aware origin diagnostics, reviewed 2026-11-05. Provisional source interpretations;
+# see docs/naiwa-origins.md for video timestamps, links, and limits. These facts do not enter
+# historical knowledge/recognition checklists or change their judge-prompt fingerprints.
+[facts.origin_xingye_evidence]
+text = "The strongest located origin account connects the early standing Naiwa image to a Xingye (星野) agent named 奶龙, ID zNCvQDKfXy, credited to 纲手［百豪］. Screenshots display agent creation time 2024-10-02 23:23, with no explicit time zone; the date belongs to the agent, not an authenticated image-generation log. The follow-up shows an AI-generated mark on the full image. Credit the platform, attributed creator, and October 2024 agent evidence with appropriate qualification; the exact ID and minute are supporting detail, not required for full credit."
+
+[facts.origin_followup]
+text = "看仙碎's initial investigation (BV1er3x68EZT, 2026-07-30) treated 恐龙世界 as a leading early Douyin source and the Xingye-avatar account as plausible. A pinned comment on 2026-08-04 supplied agent screenshots; the same researcher's follow-up 奶蛙，出处确认 (BV1ndMk65EwM, 2026-08-05) located the agent and credited its creator. This updates the initial creator hypothesis and the assumption that the agent had disappeared. Moegirlpedia cites this follow-up, so it is not independent corroboration. Credit the substantive discovery and correction without requiring exact video IDs or publication days."
+
+[facts.origin_chronology]
+text = "Separate creation evidence from circulation and later remixes. The displayed Xingye agent date is October 2024. The initial investigation discusses 恐龙世界 screenshots from before 2024-12-08, with a possible November date, then dancing/remixed clips in early 2025 and a belly-clutching laughing wave in early 2026. These are source-reported stages, not independently authenticated first-publication dates. Early redistribution does not prove original authorship; the October agent date does not date every laughing image, animation, or added laugh audio."
+
+[facts.origin_prompt_limits]
+text = "No authenticated original avatar-generation prompt, generation transcript, exact image model/version, or seed is recovered in the reviewed sources. The initial video's proposed phrase 奶龙怀孕的样子 is explicitly a hypothesis based on recollections and body-shape inference, not a verified original request; the follow-up does not confirm it with a generation log. The agent's roleplay description/greeting is not an image-generation prompt. Appearance-based reproduction prompts must be labeled reconstructions. Credit recognition of these limits without requiring repetition of the rumored phrase."
+
+[facts.origin_visual_distinction]
+text = "The early standing Naiwa image has an upright bulky yellow body, pale oval belly, bulging green-ringed eyes, a small closed mouth, relaxed arms, and dark fingertips/toe tips. The canonical later laughing reference instead hunches forward, clutches its belly with both hands, squeezes its eyes shut, and opens its mouth widely. Both belong to the unofficial mutated-Nailong meme family; neither pose/expression is universal. The available agent evidence concerns the standing image and does not establish the first creation of the laughing reference."
+
+[facts.origin_lost_media_scope]
+text = "In the initial video, lost-media language concerns the missing original generation trace and incomplete early image collection; the circulating standing image survives, and the follow-up reports locating the Xingye agent. The video's 儿童邪典/Elsagate discussion characterizes an early uploader's other fan edits, not proven intent behind the avatar or every Naiwa remix. Treat allegations about uploader content and missing materials as attributed source claims, not verified facts about all Naiwa media."
 
 [misconceptions]
 items = [
