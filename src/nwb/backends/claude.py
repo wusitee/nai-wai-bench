@@ -72,11 +72,18 @@ class ClaudeBackend:
                 proc = run_cli(self.command(), input=message + "\n", cwd=cwd, env=env, timeout=self.timeout)
             except subprocess.TimeoutExpired as e:
                 raise BackendError(f"claude timed out after {self.timeout}s") from e
-        result = None
+        # A reply that reaches the output limit is continued in further turns after Claude Code's own user
+        # prompt, and `result` holds only the last turn's text; the answer is every turn's text in order.
+        result, earlier, turn = None, [], []
         for line in proc.stdout.splitlines():
             if line.startswith("{"):
                 event = json.loads(line)
-                if event.get("type") == "result":
+                if event.get("type") == "assistant":
+                    turn += [b["text"] for b in event["message"].get("content", []) if b.get("type") == "text"]
+                elif event.get("type") == "user":
+                    earlier.append("".join(turn))
+                    turn = []
+                elif event.get("type") == "result":
                     result = event
         if proc.returncode != 0 or result is None or result.get("is_error"):
             detail = (result or {}).get("result") or proc.stderr.strip()[-800:]
@@ -85,9 +92,9 @@ class ClaudeBackend:
         usage_by_model = result.get("modelUsage") or {}
         # Claude Code's cost estimate uses Anthropic prices, which do not apply to other providers' models.
         cost = None if custom else result.get("total_cost_usd")
-        return Response(text=result.get("result", ""), meta={
+        return Response(text="".join(earlier) + result.get("result", ""), meta={
             "backend": "claude", "model": self.spec.model, "client": _client(),
-            "seconds": round(time.monotonic() - started, 1),
+            "seconds": round(time.monotonic() - started, 1), "turns": result.get("num_turns"),
             "tokens": tokens("claude", result.get("usage")),
             "resolved_model": max(usage_by_model, key=lambda m: usage_by_model[m].get("costUSD") or 0,
                                   default=None),
