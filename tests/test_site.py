@@ -37,7 +37,7 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
         "track": "imagegen", "model": model.name, "vendor": model.vendor,
         "suite": suite,
         "tier": "name_zh", "animal": "cat", "rep": 1, "prompt": bench.tiers["name_zh"].render(bench.animals["cat"]),
-        "images": [relative], "meta": {"client": "codex-cli test", "model": "recorded-model",
+        "images": [relative], "meta": {"client": "codex-cli test", "model": "recorded-model", "seconds": 12.5,
         "c2pa": {"generators": ["ChatGPT gpt-image"], "actions": []}, "audit": {"verbatim": False}},
     }
     write_json(image.with_suffix(".json"), record)
@@ -86,6 +86,7 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
     assert CANARY in html and "nai-wai-bench 0.1.0" in html
     assert "https://example.com/results.zip" in html and "Download raw results" in html
     assert "Efficiency" in html and "Stale judgments ignored" not in html  # shown only when some were ignored
+    assert "Run time" in html and "Total client time" in html and "25.0 s" in html
     assert "0.1.0 首个版本 · First release" in html and "Release 0.1.0 results:" in html
     assert "models whose intervals largely overlap are not clearly ordered" in html
     assert model.label in html and "codex-cli test" in html and "recorded-model" in html
@@ -109,6 +110,7 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
     else:
         assert "Answer-key diagnostics" not in html and "href='../visual-detail/'" in html and "href='../'" in html
     local_report = report.render(bench, "test", scores)
+    assert "Run time" in local_report and "25.0 s" in local_report
     assert "Image generation ranking" in local_report and "Visual understanding ranking" in local_report
     assert "incomplete" in local_report and "&lt;unsafe&gt;" in local_report
     assert "Optional state extraction · answer-keyed" in local_report and "State outputs are unscored" in local_report

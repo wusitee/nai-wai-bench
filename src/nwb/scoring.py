@@ -1,6 +1,7 @@
 """Turn judgments into per-sample scores and per-model summaries (all scores are 0-100)."""
 
 from collections import Counter, defaultdict
+from datetime import datetime
 import hashlib
 import math
 import random
@@ -579,20 +580,51 @@ def token_cost(tokens: dict, price: dict) -> float | None:
             + tokens["output"] * price["output"]) / 1_000_000
 
 
+def _timing(records: list[dict]) -> dict:
+    """Summarize retained calls; a collection span includes pauses and overlapping jobs."""
+    timed, intervals = [], []
+    for record in records:
+        seconds = record.get("meta", {}).get("seconds")
+        if isinstance(seconds, (int, float)) and not isinstance(seconds, bool) and math.isfinite(seconds) and seconds >= 0:
+            timed.append((seconds, record))
+        collected = record.get("collected", {})
+        try:
+            start, end = (datetime.fromisoformat(collected[k]) for k in ("started_at", "finished_at"))
+        except (KeyError, TypeError, ValueError):
+            continue
+        if start.utcoffset() is not None and end.utcoffset() is not None and end >= start:
+            intervals.append((start, end))
+    seconds = [s for s, _ in timed]
+    slowest = None
+    if timed:
+        _, record = max(timed, key=lambda pair: pair[0])
+        if "judge" in record:
+            slowest = f"{record['judge']}: {record.get('target', '?')}"
+        else:
+            task = record.get("item") if record.get("track") == "understanding" else "/".join(
+                record.get(k, "?") for k in ("tier", "animal"))
+            slowest = f"{record.get('model', '?')}: {record.get('track', '?')}/{task} · r{record.get('rep', 1)}"
+    return {"tasks": len(records), "failures": sum("error" in r for r in records),
+            "timed_tasks": len(timed), "total_seconds": sum(seconds) if seconds else None,
+            "median_seconds": median(seconds) if seconds else None,
+            "max_seconds": max(seconds) if seconds else None, "slowest_task": slowest,
+            "timestamp_tasks": len(intervals),
+            "wall_seconds": (max(end for _, end in intervals) - min(start for start, _ in intervals)).total_seconds()
+                            if intervals else None}
+
+
 def _resources(records: list[dict], price: dict) -> dict:
     tokens = [r.get("meta", {}).get("tokens") or {} for r in records]
     costs = [token_cost(t, price) for t in tokens]
-    seconds = [r["meta"]["seconds"] for r in records if r.get("meta", {}).get("seconds") is not None]
     totals = {k: sum(t[k] for t in tokens if t.get(k) is not None)
               if any(t.get(k) is not None for t in tokens) else None
               for k in ("input", "output", "reasoning", "cached_input", "cache_write")}
-    return {"tasks": len(records), "token_tasks": sum(any(v is not None for v in t.values()) for t in tokens),
+    return {**_timing(records), "token_tasks": sum(any(v is not None for v in t.values()) for t in tokens),
             "token_totals": totals,
             "token_counts": {k: sum(t.get(k) is not None for t in tokens) for k in totals},
             "mean_input_tokens": mean(t.get("input") for t in tokens),
             "mean_output_tokens": mean(t.get("output") for t in tokens),
             "mean_reasoning_tokens": mean(t.get("reasoning") for t in tokens),
-            "median_seconds": median(seconds) if seconds else None,
             "cost_tasks": sum(c is not None for c in costs), "mean_cost_usd": mean(costs),
             "estimated_cost_usd": sum(costs) if costs and all(c is not None for c in costs) else None,
             "known_cost_usd": sum(c for c in costs if c is not None) if any(c is not None for c in costs) else None,
@@ -619,12 +651,14 @@ def efficiency(records: list[dict], judgments: list[dict], bench, models) -> dic
                 {r.get("rep", 1) for r in visual if r["item"] == item} != reps for item in panel):
             understanding[model]["estimated_cost_usd"] = None
         generated = [r for r in rr if r.get("track") == "imagegen"]
-        secs = [r["meta"]["seconds"] for r in generated if r.get("meta", {}).get("seconds") is not None]
-        images[model] = {"tasks": len(generated), "images": sum(len(r.get("images", [])) for r in generated),
-                         "median_seconds": median(secs) if secs else None}
-        whole[model] = {"understanding": _resources(text, price), "imagegen": images[model]}
+        images[model] = {**_timing(generated), "images": sum(len(r.get("images", [])) for r in generated)}
+        whole[model] = {"total": _timing(rr), "understanding": _resources(text, price), "imagegen": images[model]}
     for model in sorted({r["judge"] for r in judgments if "judge" in r}):
         price = models[model].options.get("price", {}) if model in models else {}
         judge_totals[model] = _resources([r for r in judgments if r.get("judge") == model], price)
-    return {"suite": bench.suite if bench else "core", "visual_understanding": understanding,
+    timing = {"overall": _timing(records + judgments),
+              "tracks": {track: _timing([r for r in records if r.get("track") == track])
+                         for track in ("understanding", "imagegen")}}
+    timing["tracks"]["judgments"] = _timing(judgments)
+    return {"suite": bench.suite if bench else "core", "visual_understanding": understanding, "timing": timing,
             "imagegen": images, "whole_run": whole, "judges": judge_totals}
