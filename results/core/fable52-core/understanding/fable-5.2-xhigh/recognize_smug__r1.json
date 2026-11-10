@@ -1,0 +1,103 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "item": "recognize_smug",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "answer": "这是**奶龙（Nailong）**，国产 3D 动画《奶龙》的主角，一只圆滚滚、脸颊带腮红的黄色小恐龙。\n\n这张图是它眯眼抿嘴的得意表情，属于\"奶龙\"系列表情包和梗：\n\n- **表情包走红**：2024 年前后，奶龙各种夸张魔性的表情被大量截图做成表情包，这张\"眯眼得意脸\"是流传最广的之一，常用来表达得意、不屑、憋笑或\"贱兮兮\"的情绪。\n- **\"我才是奶龙\"**：动画里的一段台词和唱跳片段被大量二创、鬼畜，成为洗脑梗。\n- **\"奶龙大战\"**：2024 年底在抖音、B 站等平台出现了讨厌奶龙和喜欢奶龙的两派对立玩梗，比如用其他角色头像\"讨伐\"奶龙头像，例如\"贝利亚大战奶龙\"。\n- **海外传播**：奶龙后来在 TikTok 等海外平台也火了，在泰国等东南亚地区尤其流行。\n\n简单说，这是\"奶龙\"梗里的经典表情，多用于阴阳怪气或搞怪自得的语境。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 16.5,
+    "tokens": {
+      "input": 752,
+      "cached_input": 0,
+      "cache_write": 750,
+      "output": 903,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 0.021818,
+    "tools_used": [],
+    "cost_usd": 0.021818,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 750,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 903,
+      "output_tokens_details": {
+        "thinking_tokens": 471
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 750
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 903,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 750,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 750,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T03:04:03Z",
+    "finished_at": "2026-11-10T03:04:19Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}

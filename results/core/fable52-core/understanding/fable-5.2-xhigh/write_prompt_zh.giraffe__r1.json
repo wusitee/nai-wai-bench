@@ -1,0 +1,100 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "item": "write_prompt_zh.giraffe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出长颈鹿版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "一张3D卡通渲染的搞笑表情包图片，方形构图（1:1）。主角是一只圆滚滚、胖乎乎的幼年长颈鹿卡通角色，整体风格类似低幼向国产3D电脑动画的截图：造型极简、圆润憨态，皮肤光滑如软胶玩具，带柔和的高光。\n\n角色外观：\n- 全身是鲜亮的蛋黄色，身体呈胖梨形，肚子又圆又鼓，肚皮是一大块奶油白色。\n- 四肢又短又粗，小手圆乎乎的，没有明显的手指细节。\n- 脖子明显偏长，但又粗又软、肉嘟嘟的，像一根胖胖的圆柱。\n- 脖子和后背上散布着几块圆角的浅棕色长颈鹿斑块。\n- 头部圆润饱满，头顶有两根短短的小鹿角，顶端是棕色的圆球；两侧各有一只向外支棱的小耳朵。\n- 口鼻部宽而圆，颜色是奶油白，有两个小鼻孔；脸颊上带淡粉色腮红。\n\n表情和动作（画面重点）：\n- 角色正在夸张地仰头捧腹大笑，带着魔性、幸灾乐祸的嘲笑感。\n- 嘴巴张到极大，几乎占了半张脸，能看到深红色的口腔和粉色的大舌头。\n- 双眼笑得紧紧眯成两道向上弯的弧线，眼角挤出一滴笑出来的眼泪。\n- 头微微后仰，一只小短手捂着圆肚子，另一只手向前指着镜头。\n\n构图与画面：\n- 半身近景，角色居中，镜头略微仰视，从肚子拍到头顶，长脖子和大笑的脸占据画面主体。\n- 背景是简单、虚化的明亮卡通室内场景，浅色墙面，色彩柔和。\n- 光线明亮均匀，色彩饱和度高。\n- 整体带一点动画截图式的轻微模糊和压缩感，像网络上流传的表情包。\n- 画面中不要出现任何文字、字幕、水印或边框。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 29.1,
+    "tokens": {
+      "input": 483,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2112,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 0.044172,
+    "tools_used": [],
+    "cost_usd": 0.044172,
+    "usage": {
+      "input_tokens": 483,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 2112,
+      "output_tokens_details": {
+        "thinking_tokens": 1352
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 483,
+          "output_tokens": 2112,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T03:00:29Z",
+    "finished_at": "2026-11-10T03:00:58Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}

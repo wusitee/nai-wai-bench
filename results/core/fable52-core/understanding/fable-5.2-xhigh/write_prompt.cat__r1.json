@@ -1,0 +1,100 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "item": "write_prompt.cat",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a cat version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A 3D CGI cartoon still in the style of a cheerful children's animated series: a very chubby, round, pudgy cat character with smooth, glossy, bright egg-yolk-yellow skin that looks like soft rubber or vinyl, with no realistic fur texture. It has a pale cream-white round belly, a big oversized head that merges into a plump pear-shaped body with no visible neck, two small rounded triangular cat ears, a tiny pink nose, a few short whiskers, stubby little arms and legs with simple rounded paws, and a short thick tail. The cat is laughing hysterically in an exaggerated, mocking, gleeful way: its head is thrown slightly back, its mouth is stretched enormously wide open and takes up almost half its face, showing a big pink tongue, a dark red mouth interior and a couple of tiny white teeth. Its eyes are squeezed tightly shut into thick upturned crescent arcs, with small teardrops of laughter at the corners, and its round cheeks are pushed up and slightly blushing. One stubby paw clutches its jiggling belly while the other points straight forward at the viewer. The framing is a close-up, front-facing, slightly low-angle shot from the chest up, centered, with the character filling most of the frame like a reaction-image screenshot. The lighting is soft, bright and even, with gentle subsurface glow on the skin, saturated cheerful colors and a simple blurred pastel indoor background. The expression is silly and over the top, as if frozen at the peak of a huge belly laugh. Square format, no text, no captions, no watermark.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 21.2,
+    "tokens": {
+      "input": 476,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1289,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 0.027684,
+    "tools_used": [],
+    "cost_usd": 0.027684,
+    "usage": {
+      "input_tokens": 476,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1289,
+      "output_tokens_details": {
+        "thinking_tokens": 760
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 476,
+          "output_tokens": 1289,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T02:59:23Z",
+    "finished_at": "2026-11-10T02:59:44Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}
