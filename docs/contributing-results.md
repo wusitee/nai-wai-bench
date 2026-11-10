@@ -68,3 +68,32 @@ uv run nwb report --suite core --run comparison
 ```
 
 Rows still need matching collection conditions to be compared; see the [methodology](methodology.md).
+
+## Contribution credit
+
+`uv run nwb contributions` ranks contributors by what their saved calls would cost at official
+pay-as-you-go API prices. It reads every call record under `results/` (answers, generated images,
+judgments, and frontend pages) without model calls and prices each one from its model entry's `price` in
+`models.toml` (plus `models.local.toml`). Plain input, cache reads (`cached_input`), cache writes
+(`cache_write`), and output are billed at their own rates. Subscription CLIs are not billed per token,
+so the total is a value estimate, not a bill. `--brief` omits the per-model breakdown; `--json` prints the
+full ranking.
+
+- A call is counted once, even when merged runs repeat it.
+- A call is credited to the Git author of the commit that first added its record content under
+  `results/`. Calls not yet committed appear as `(uncommitted)`.
+- Calls whose entry has no `price` show "no official price", and calls without reported usage show
+  "no usage". Neither counts as zero, and a contributor with no priced call is unranked. An entry missing
+  from the registry uses the price of configured entries with the same resolved model id when they agree.
+- Prices are the current `price` tables, not the price on the collection date.
+
+Optional `results/contributors.toml` corrects credit when Git authorship is wrong, for example when a
+maintainer commits results someone else collected:
+
+```toml
+[runs]     # "<suite>/<run>" = contributor; applies to collected calls in that run, not to judgments
+"core/alice-core" = "Alice"
+
+[aliases]  # Git author name = displayed name, to merge identities
+"alice-laptop" = "Alice"
+```

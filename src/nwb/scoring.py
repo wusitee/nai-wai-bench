@@ -569,7 +569,7 @@ def naiwai_index(suites: dict[str, tuple[Bench, dict]]) -> dict:
             "bootstrap": {"resamples": BOOTSTRAP_RESAMPLES, "seed": BOOTSTRAP_SEED, "pairing": "independent suites"}}
 
 
-def _token_cost(tokens: dict, price: dict) -> float | None:
+def token_cost(tokens: dict, price: dict) -> float | None:
     if tokens.get("input") is None or tokens.get("output") is None or not all(k in price for k in ("input", "output")):
         return None
     cached, write = tokens.get("cached_input") or 0, tokens.get("cache_write") or 0
@@ -581,7 +581,7 @@ def _token_cost(tokens: dict, price: dict) -> float | None:
 
 def _resources(records: list[dict], price: dict) -> dict:
     tokens = [r.get("meta", {}).get("tokens") or {} for r in records]
-    costs = [_token_cost(t, price) for t in tokens]
+    costs = [token_cost(t, price) for t in tokens]
     seconds = [r["meta"]["seconds"] for r in records if r.get("meta", {}).get("seconds") is not None]
     totals = {k: sum(t[k] for t in tokens if t.get(k) is not None)
               if any(t.get(k) is not None for t in tokens) else None
