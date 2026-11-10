@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+html,body{margin:0;padding:0;width:216px;height:216px;overflow:hidden;background:#ebebeb;}
+canvas{display:block;position:absolute;left:0;top:0;width:216px;height:216px;}
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+import { mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js';
+
+const W = 216, H = 216;
+const renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true, antialias: true });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H);
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+
+// ---------- background gradient ----------
+function gradientTex() {
+  const c = document.createElement('canvas'); c.width = 4; c.height = 64;
+  const g = c.getContext('2d');
+  const gr = g.createLinearGradient(0, 0, 0, 64);
+  gr.addColorStop(0, '#f1f1f1');
+  gr.addColorStop(0.65, '#e8e8e8');
+  gr.addColorStop(0.9, '#dcdcdc');
+  gr.addColorStop(1, '#d4d4d4');
+  g.fillStyle = gr; g.fillRect(0, 0, 4, 64);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+scene.background = gradientTex();
+
+// ---------- camera ----------
+const camera = new THREE.PerspectiveCamera(26, 1, 0.1, 100);
+camera.position.set(0, 1.556, 7);
+camera.lookAt(0, 1.556, 0);
+
+// ---------- lights ----------
+const hemi = new THREE.HemisphereLight(0xffffff, 0x8a7a66, 1.8);
+scene.add(hemi);
+const key = new THREE.DirectionalLight(0xffffff, 2.0); key.position.set(-3, 5, 6); scene.add(key);
+const fill = new THREE.DirectionalLight(0xffffff, 0.5); fill.position.set(4, 1, 3); scene.add(fill);
+const rim = new THREE.DirectionalLight(0xffffff, 1.0); rim.position.set(1, 3, -6); scene.add(rim);
+
+// ---------- materials ----------
+const M = {
+  yellow: new THREE.MeshStandardMaterial({ color: 0xF2BE2C, roughness: 0.78 }),
+  belly: new THREE.MeshStandardMaterial({ color: 0xF6EDDA, roughness: 0.9 }),
+  hand: new THREE.MeshStandardMaterial({ color: 0x5a5a5a, roughness: 0.7 }),
+  mouth: new THREE.MeshBasicMaterial({ color: 0x170a08 }),
+  tongue: new THREE.MeshStandardMaterial({ color: 0x9a2c27, roughness: 0.6 }),
+  teeth: new THREE.MeshStandardMaterial({ color: 0xFAF8F0, roughness: 0.4 }),
+  eye: new THREE.MeshStandardMaterial({ color: 0x3a2614, roughness: 0.6 }),
+};
+
+const SPH = new THREE.SphereGeometry(1, 40, 24);
+const NEGY = new THREE.Vector3(0, -1, 0);
+
+// segment hanging along -Y from origin, length L
+function segY(L, ra, rb, mat) {
+  const g = new THREE.Group();
+  const c = new THREE.Mesh(new THREE.CylinderGeometry(ra, rb, L, 24, 1, true), mat);
+  c.position.y = -L / 2; g.add(c);
+  const s = new THREE.Mesh(SPH, mat); s.scale.setScalar(ra); g.add(s);
+  const e = new THREE.Mesh(SPH, mat); e.scale.setScalar(rb); e.position.y = -L; g.add(e);
+  return g;
+}
+
+function bandPatch(cx, rx, lowFn, upFn, surf, nu = 40, nv = 10) {
+  const pos = [], idx = [];
+  for (let i = 0; i <= nu; i++) {
+    const x = cx - rx * Math.cos(Math.PI * i / nu);
+    const yl = lowFn(x), yu = upFn(x);
+    for (let j = 0; j <= nv; j++) {
+      const y = yl + (yu - yl) * j / nv;
+      const p = surf(x, y); pos.push(p.x, p.y, p.z);
+    }
+  }
+  for (let i = 0; i < nu; i++) for (let j = 0; j < nv; j++) {
+    const a = i * (nv + 1) + j, b = a + nv + 1;
+    idx.push(a, b, a + 1, b, b + 1, a + 1);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  g.setIndex(idx); g.computeVertexNormals();
+  return g;
+}
+
+// ---------- character ----------
+const character = new THREE.Group();
+character.name = 'character-laughing-creature';
+character.position.set(0.25, 0, 0);
+scene.add(character);
+
+const HIP = 0.45;
+
+const torso = new THREE.Group(); torso.name = 'torso';
+torso.position.set(0, HIP, 0);
+character.add(torso);
+
+const bodyG = new THREE.Group(); bodyG.name = 'body';
+torso.add(bodyG);
+
+// body profile (fuller pear shape that flows into the neck)
+const BY0 = 0.28, BY1 = 2.25, BZ = 0.85;
+const BK = 0.70 / (Math.pow(0.4375, 0.35) * Math.pow(0.5625, 0.45));
+function rOf(y) {
+  const t = (y - BY0) / (BY1 - BY0);
+  if (t <= 0 || t >= 1) return 0;
+  return BK * Math.pow(t, 0.35) * Math.pow(1 - t, 0.45);
+}
+function smooth01(u) { u = Math.min(1, Math.max(0, u)); return u * u * (3 - 2 * u); }
+function zS(y) { return BZ - 0.22 * smooth01((y - 1.7) / 0.55); }
+function zO(y) { return -0.1 * smooth01((y - 1.7) / 0.55); }
+{
+  const pts = [];
+  const N = 72;
+  for (let i = 0; i <= N; i++) {
+    const t = (1 - Math.cos(Math.PI * i / N)) / 2;
+    const y = BY0 + t * (BY1 - BY0);
+    let r = rOf(y);
+    if (i === 0 || i === N) r = 0;
+    pts.push(new THREE.Vector2(Math.max(r, 0), y));
+  }
+  let g = new THREE.LatheGeometry(pts, 64);
+  g.deleteAttribute('normal');
+  g.deleteAttribute('uv');
+  const pa = g.attributes.position;
+  for (let i = 0; i < pa.count; i++) {
+    const y = pa.getY(i);
+    pa.setZ(i, pa.getZ(i) * zS(y) + zO(y));
+  }
+  g = mergeVertices(g, 1e-4);
+  g.computeVertexNormals();
+  g.translate(0, -HIP, 0);
+  const body = new THREE.Mesh(g, M.yellow); body.name = 'body-shell';
+  bodyG.add(body);
+}
+
+function bodyPt(x, y) {
+  const r = rOf(y);
+  return new THREE.Vector3(x, y, zS(y) * Math.sqrt(Math.max(r * r - x * x, 0)) + zO(y));
+}
+function bodySurfFactory(offFn) {
+  return (x, y) => {
+    const e = 0.004;
+    const px = bodyPt(x + e, y).sub(bodyPt(x - e, y));
+    const py = bodyPt(x, y + e).sub(bodyPt(x, y - e));
+    const n = new THREE.Vector3().crossVectors(px, py).normalize();
+    return bodyPt(x, y).addScaledVector(n, offFn(x, y));
+  };
+}
+{
+  const cx = -0.03, cy = 1.15, rx = 0.52, ry = 0.66;
+  const h = (x) => ry * Math.sqrt(Math.max(0, 1 - ((x - cx) / rx) ** 2));
+  const off = (x, y) => {
+    const d2 = ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2;
+    return 0.012 + 0.06 * Math.pow(Math.max(0, 1 - d2), 0.7);
+  };
+  const g = bandPatch(cx, rx, x => cy - h(x), x => cy + h(x), bodySurfFactory(off), 44, 26);
+  g.translate(0, -HIP, 0);
+  const belly = new THREE.Mesh(g, M.belly); belly.name = 'belly';
+  bodyG.add(belly);
+}
+
+// ---------- neck + head ----------
+const HA = 0.43, HB = 0.52, HC = 0.46;
+function surfPoint(x, y, off) {
+  const q = Math.max(1 - (x * x) / (HA * HA) - (y * y) / (HB * HB), 0);
+  const z = HC * Math.sqrt(q);
+  const n = new THREE.Vector3(x / (HA * HA), y / (HB * HB), z / (HC * HC)).normalize();
+  return new THREE.Vector3(x, y, z).addScaledVector(n, off);
+}
+function surfNormal(x, y) {
+  const q = Math.max(1 - (x * x) / (HA * HA) - (y * y) / (HB * HB), 0);
+  const z = HC * Math.sqrt(q);
+  return new THREE.Vector3(x / (HA * HA), y / (HB * HB), z / (HC * HC)).normalize();
+}
+const headSurf = (off) => (x, y) => surfPoint(x, y, off);
+
+const neck = new THREE.Group(); neck.name = 'neck';
+neck.position.set(0, 1.62, 0.02);
+torso.add(neck);
+{
+  const nf = new THREE.Mesh(SPH, M.yellow); nf.name = 'neck-filler';
+  nf.scale.set(0.40, 0.36, 0.28); nf.position.set(0, 0.08, -0.06);
+  neck.add(nf);
+}
+
+const head = new THREE.Group(); head.name = 'head';
+head.position.set(0, 0.41, 0);
+neck.add(head);
+{
+  const shell = new THREE.Mesh(new THREE.SphereGeometry(1, 56, 36), M.yellow);
+  shell.scale.set(HA, HB, HC); shell.name = 'head-shell';
+  head.add(shell);
+}
+
+// ---------- mouth (morph: open laugh -> wide grin) ----------
+const OPEN = { cx: 0, cy: -0.2, rx: 0.25, ryU: 0.27, ryL: 0.27, tU: 0.1, tL: 0.035, tg: 0.15 };
+const GRIN = { cx: 0, cy: -0.16, rx: 0.30, ryU: 0.14, ryL: 0.27, tU: 0.08, tL: 0.07, tg: 0.09 };
+
+function lipTubeGeo(S) {
+  const N = 96, R = 8, rad = 0.034;
+  const pts = [], nrm = [];
+  for (let k = 0; k < N; k++) {
+    const a = 2 * Math.PI * k / N;
+    const sa = Math.sin(a);
+    const x = S.cx + S.rx * Math.cos(a);
+    const y = S.cy + (sa >= 0 ? S.ryU : S.ryL) * sa;
+    pts.push(surfPoint(x, y, 0.006));
+    nrm.push(surfNormal(x, y));
+  }
+  const pos = [];
+  const T = new THREE.Vector3(), B = new THREE.Vector3(), N2 = new THREE.Vector3();
+  for (let k = 0; k < N; k++) {
+    T.subVectors(pts[(k + 1) % N], pts[(k - 1 + N) % N]).normalize();
+    B.crossVectors(T, nrm[k]).normalize();
+    N2.crossVectors(B, T).normalize();
+    for (let j = 0; j < R; j++) {
+      const f = 2 * Math.PI * j / R;
+      const c = Math.cos(f) * rad, s = Math.sin(f) * rad;
+      pos.push(
+        pts[k].x + c * N2.x + s * B.x,
+        pts[k].y + c * N2.y + s * B.y,
+        pts[k].z + c * N2.z + s * B.z);
+    }
+  }
+  const idx = [];
+  for (let k = 0; k < N; k++) {
+    const k1 = (k + 1) % N;
+    for (let j = 0; j < R; j++) {
+      const j1 = (j + 1) % R;
+      const a = k * R + j, b = k1 * R + j, c = k1 * R + j1, d = k * R + j1;
+      idx.push(a, d, b, b, d, c);
+    }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  g.setIndex(idx); g.computeVertexNormals();
+  return g;
+}
+
+function mouthParts(S) {
+  const hU = x => S.ryU * Math.sqrt(Math.max(0, 1 - ((x - S.cx) / S.rx) ** 2));
+  const hL = x => S.ryL * Math.sqrt(Math.max(0, 1 - ((x - S.cx) / S.rx) ** 2));
+  const cren = (x, o) => 0.72 + 0.28 * Math.abs(Math.cos((x + o) * Math.PI / 0.075));
+  const interior = bandPatch(S.cx, S.rx, x => S.cy - hL(x), x => S.cy + hU(x), headSurf(0.004), 48, 14);
+  const teethU = bandPatch(S.cx, S.rx * 0.9,
+    x => S.cy + hU(x) * 0.97 - Math.min(S.tU, hU(x) * 0.45) * cren(x, 0),
+    x => S.cy + hU(x) * 0.97, headSurf(0.01), 72, 6);
+  const teethL = bandPatch(S.cx, S.rx * 0.78,
+    x => S.cy - hL(x) * 0.97,
+    x => S.cy - hL(x) * 0.97 + Math.min(S.tL, hL(x) * 0.4) * cren(x, 0.0375),
+    headSurf(0.01), 64, 5);
+  const tw = 0.17;
+  const tongue = bandPatch(S.cx, tw,
+    x => S.cy - hL(x) * 0.96,
+    x => S.cy - hL(x) * 0.96 + S.tg * Math.sqrt(Math.max(0, 1 - ((x - S.cx) / tw) ** 2)),
+    headSurf(0.008), 36, 8);
+  const lips = lipTubeGeo(S);
+  return { interior, teethU, teethL, tongue, lips };
+}
+
+const mouth = new THREE.Group(); mouth.name = 'mouth'; head.add(mouth);
+const mouthMeshes = [];
+{
+  const mO = mouthParts(OPEN), mG = mouthParts(GRIN);
+  const mats = { interior: M.mouth, tongue: M.tongue, teethL: M.teeth, teethU: M.teeth, lips: M.yellow };
+  const names = { interior: 'mouth-interior', tongue: 'tongue', teethL: 'teeth-lower', teethU: 'teeth-upper', lips: 'lips' };
+  for (const k of ['interior', 'tongue', 'teethL', 'teethU', 'lips']) {
+    const g = mO[k];
+    g.morphAttributes.position = [mG[k].attributes.position];
+    g.morphAttributes.normal = [mG[k].attributes.normal];
+    const mesh = new THREE.Mesh(g, mats[k]);
+    mesh.name = names[k];
+    mesh.morphTargetInfluences[0] = 0;
+    mouth.add(mesh);
+    mouthMeshes.push(mesh);
+  }
+}
+
+// eyes (closed, happy arcs)
+const eyes = new THREE.Group(); eyes.name = 'eyes'; head.add(eyes);
+for (const s of [1, -1]) {
+  const eg = new THREE.Group(); eg.name = s > 0 ? 'eye-left' : 'eye-right';
+  const ex = s * 0.19, ey = 0.32, w = 0.085;
+  const pts = [];
+  for (let k = 0; k <= 16; k++) {
+    const dx = -w + 2 * w * k / 16;
+    const y = ey + 0.045 * (1 - (dx / w) ** 2) - s * dx * 0.12;
+    pts.push(surfPoint(ex + dx, y, 0.01));
+  }
+  const curve = new THREE.CatmullRomCurve3(pts);
+  const tube = new THREE.Mesh(new THREE.TubeGeometry(curve, 32, 0.019, 8, false), M.eye);
+  eg.add(tube);
+  for (const p of [pts[0], pts[pts.length - 1]]) {
+    const cap = new THREE.Mesh(SPH, M.eye); cap.scale.setScalar(0.019); cap.position.copy(p); eg.add(cap);
+  }
+  eyes.add(eg);
+}
+
+// ---------- hands ----------
+const FING = new THREE.CapsuleGeometry(0.032, 0.09, 4, 12);
+const THUMB = new THREE.CapsuleGeometry(0.033, 0.06, 4, 12);
+function makeHand(side, name) {
+  const g = new THREE.Group(); g.name = name;
+  const palm = new THREE.Mesh(SPH, M.hand); palm.name = name + '-palm';
+  palm.scale.set(0.12, 0.105, 0.07); palm.position.set(0, -0.07, 0.01);
+  g.add(palm);
+  const angs = [-0.65, -0.22, 0.22, 0.65];
+  angs.forEach((a, i) => {
+    const f = new THREE.Group(); f.name = name + '-finger-' + i;
+    f.position.set(side * Math.sin(a) * 0.085, -0.07 - Math.cos(a) * 0.075, 0.01);
+    f.rotation.z = side * a;
+    const m = new THREE.Mesh(FING, M.hand); m.position.y = -0.065;
+    if (i === 1 || i === 2) m.scale.y = 1.08;
+    f.add(m); g.add(f);
+  });
+  const th = new THREE.Group(); th.name = name + '-thumb';
+  th.position.set(-side * 0.09, -0.05, 0.04);
+  th.rotation.set(0.35, 0, -side * 1.05);
+  const tm = new THREE.Mesh(THUMB, M.hand); tm.position.y = -0.05; th.add(tm);
+  g.add(th);
+  return g;
+}
+
+// ---------- arms ----------
+const L_UP = 0.72, L_FO = 0.6;
+function makeArm(s, side) {
+  const arm = new THREE.Group(); arm.name = 'arm-' + side;
+  const upper = new THREE.Group(); upper.name = 'upperarm-' + side; arm.add(upper);
+  const um = segY(L_UP, 0.21, 0.165, M.yellow); um.name = 'upperarm-' + side + '-mesh'; upper.add(um);
+  const fore = new THREE.Group(); fore.name = 'forearm-' + side; fore.position.y = -L_UP; upper.add(fore);
+  const fm = segY(L_FO, 0.165, 0.11, M.yellow); fm.name = 'forearm-' + side + '-mesh'; fore.add(fm);
+  const hand = makeHand(s, 'hand-' + side); hand.position.y = -L_FO; fore.add(hand);
+  torso.add(arm);
+  return { s, arm, upper, fore, hand, pole: new THREE.Vector3(s * 0.85, 0, -0.5) };
+}
+const arms = [makeArm(1, 'left'), makeArm(-1, 'right')];
+
+// ---------- legs ----------
+const L_TH = 0.364, L_SH = 0.242;
+function makeLeg(s, side) {
+  const leg = new THREE.Group(); leg.name = 'leg-' + side;
+  const thigh = new THREE.Group(); thigh.name = 'thigh-' + side; leg.add(thigh);
+  thigh.add(segY(L_TH, 0.2, 0.155, M.yellow));
+  const shin = new THREE.Group(); shin.name = 'shin-' + side; shin.position.y = -L_TH; thigh.add(shin);
+  shin.add(segY(L_SH, 0.155, 0.11, M.yellow));
+  const foot = new THREE.Group(); foot.name = 'foot-' + side; foot.position.y = -L_SH; shin.add(foot);
+  const fm = new THREE.Mesh(SPH, M.yellow);
+  fm.scale.set(0.13, 0.075, 0.2); fm.position.set(s * 0.02, -0.005, 0.09);
+  foot.add(fm);
+  character.add(leg);
+  return { s, leg, thigh, shin, foot, pole: new THREE.Vector3(s * 0.4, 0, 1) };
+}
+const legs = [makeLeg(1, 'left'), makeLeg(-1, 'right')];
+
+// ---------- ground shadow ----------
+function shadowTex() {
+  const c = document.createElement('canvas'); c.width = 64; c.height = 64;
+  const g = c.getContext('2d');
+  const gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+  gr.addColorStop(0, 'rgba(0,0,0,0.32)');
+  gr.addColorStop(0.55, 'rgba(0,0,0,0.14)');
+  gr.addColorStop(1, 'rgba(0,0,0,0)');
+  g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+const shadow = new THREE.Mesh(new THREE.PlaneGeometry(2.8, 1.9),
+  new THREE.MeshBasicMaterial({ map: shadowTex(), transparent: true, depthWrite: false }));
+shadow.name = 'ground-shadow';
+shadow.rotation.x = -Math.PI / 2;
+shadow.position.set(0.25, 0.002, 0.15);
+scene.add(shadow);
+
+// ---------- animation keys ----------
+const PERIOD = 1220;
+const KT = [0, 180, 340, 520, 680, 860, 1020, 1200];
+const KEYS = {
+  c:    [0, 1, 0, 0.12, 1, 0, 0.12, 1],
+  st:   [0, 0, 1, 0, 0, 0.6, 0, 0],
+  neck: [-0.18, 0.0, -0.4, -0.15, 0.0, -0.4, -0.12, 0.0],
+  head: [-0.2, -0.02, -0.45, -0.22, -0.02, -0.4, -0.18, -0.02],
+  sway: [0, -0.05, -0.02, -0.05, -0.05, -0.02, -0.08, -0.05],
+  roll: [0.03, 0.10, 0.02, 0.07, 0.09, 0.02, 0.11, 0.10],
+  grin: [0, 1, 0, 0, 1, 0, 0, 1],
+  lean: [0, 0, -0.08, 0.04, 0, -0.06, 0.04, 0],
+};
+
+function tangents(v) {
+  const n = v.length, m = new Array(n);
+  const wrapH = KT[0] + PERIOD - KT[n - 1];
+  for (let i = 0; i < n; i++) {
+    const hp = i === 0 ? wrapH : KT[i] - KT[i - 1];
+    const hn = i === n - 1 ? wrapH : KT[i + 1] - KT[i];
+    const dp = (v[i] - v[(i - 1 + n) % n]) / hp;
+    const dn = (v[(i + 1) % n] - v[i]) / hn;
+    if (dp * dn <= 0) m[i] = 0;
+    else m[i] = 3 * (hp + hn) / ((2 * hn + hp) / dp + (hn + 2 * hp) / dn);
+  }
+  return m;
+}
+const TANS = {};
+for (const k in KEYS) TANS[k] = tangents(KEYS[k]);
+
+function evalCh(v, m, t) {
+  const n = v.length;
+  const tt = ((t % PERIOD) + PERIOD) % PERIOD;
+  let i = n - 1;
+  for (let k = 0; k < n - 1; k++) if (tt < KT[k + 1]) { i = k; break; }
+  const j = (i + 1) % n;
+  const t0 = KT[i], t1 = (i === n - 1) ? PERIOD : KT[i + 1];
+  const h = t1 - t0, s = (tt - t0) / h;
+  const s2 = s * s, s3 = s2 * s;
+  return (2 * s3 - 3 * s2 + 1) * v[i] + (s3 - 2 * s2 + s) * h * m[i]
+       + (-2 * s3 + 3 * s2) * v[j] + (s3 - s2) * h * m[j];
+}
+
+// ---------- IK helpers ----------
+const _t = new THREE.Vector3(), _e = new THREE.Vector3(), _w = new THREE.Vector3();
+const _d = new THREE.Vector3(), _o = new THREE.Vector3(), _v = new THREE.Vector3();
+const _q = new THREE.Quaternion(), _qd = new THREE.Quaternion();
+const _m = new THREE.Matrix4();
+const _eu = new THREE.Euler();
+
+function ik(target, L1, L2, pole, elbow, end) {
+  let d = target.length();
+  _d.copy(target).divideScalar(Math.max(d, 1e-6));
+  d = Math.min(Math.max(d, Math.abs(L1 - L2) + 1e-4), L1 + L2 - 1e-4);
+  let ca = (L1 * L1 + d * d - L2 * L2) / (2 * L1 * d);
+  ca = Math.min(1, Math.max(-1, ca));
+  const sa = Math.sqrt(1 - ca * ca);
+  _o.copy(pole).addScaledVector(_d, -pole.dot(_d)).normalize();
+  elbow.copy(_d).multiplyScalar(L1 * ca).addScaledVector(_o, L1 * sa);
+  end.copy(_d).multiplyScalar(d);
+}
+
+function orientChain(upperObj, lowerObj, elbow, end) {
+  upperObj.quaternion.setFromUnitVectors(NEGY, _v.copy(elbow).normalize());
+  _q.copy(upperObj.quaternion).invert();
+  _v.subVectors(end, elbow).normalize().applyQuaternion(_q);
+  lowerObj.quaternion.setFromUnitVectors(NEGY, _v);
+}
+
+// ---------- pose ----------
+function applyPose(t) {
+  const p = {};
+  for (const k in KEYS) p[k] = evalCh(KEYS[k], TANS[k], t);
+  const c = p.c, st = p.st;
+
+  const sx = 1 + 0.15 * c - 0.03 * st;
+  const sy = 1 - 0.32 * c + 0.06 * st;
+  const sz = 1 + 0.15 * c - 0.03 * st;
+  bodyG.scale.set(sx, sy, sz);
+
+  torso.position.set(p.sway, HIP - 0.15 * c + 0.04 * st, 0.03 * c);
+  torso.rotation.set(0.2 * c + p.lean, 0, p.roll);
+
+  neck.position.set(0, 1.62 * sy - 0.06 * c, 0.02 + 0.18 * c);
+  neck.rotation.set(p.neck, 0, 0);
+  head.position.set(0, 0.41 - 0.05 * c, 0);
+  head.rotation.set(p.head, 0, 0);
+  head.scale.set(1 + 0.22 * c - 0.03 * st, 1 - 0.03 * c + 0.05 * st, 1 + 0.14 * c);
+
+  const g = Math.min(1, Math.max(0, p.grin));
+  for (const mm of mouthMeshes) mm.morphTargetInfluences[0] = g;
+
+  // arms: hands planted on knees via 2-bone IK
+  torso.updateMatrix();
+  _m.copy(torso.matrix).invert();
+  for (const A of arms) {
+    A.arm.position.set(A.s * 0.5 * sx, 1.25 * sy, 0);
+    _t.set(p.sway * 0.7 + A.s * (0.52 + 0.08 * c) - 0.08 * c,
+           0.58 - 0.16 * c,
+           0.22 + 0.2 * c).applyMatrix4(_m).sub(A.arm.position);
+    ik(_t, L_UP, L_FO, A.pole, _e, _w);
+    orientChain(A.upper, A.fore, _e, _w);
+    _eu.set(0.3 * c, 0, A.s * (0.15 + 0.12 * c));
+    _qd.setFromEuler(_eu);
+    _q.copy(torso.quaternion).multiply(A.upper.quaternion).multiply(A.fore.quaternion).invert();
+    A.hand.quaternion.copy(_q).multiply(_qd);
+  }
+
+  // legs: feet planted
+  for (const Lg of legs) {
+    Lg.leg.position.set(Lg.s * 0.24 * (1 + 0.15 * c) + p.sway * 0.3,
+                        0.5 - 0.12 * c + 0.04 * st,
+                        0.05 + 0.03 * c);
+    _t.set(Lg.s * 0.34 * (1 + 0.1 * c), 0.08, 0.23).sub(Lg.leg.position);
+    ik(_t, L_TH, L_SH, Lg.pole, _e, _w);
+    orientChain(Lg.thigh, Lg.shin, _e, _w);
+    _q.copy(Lg.thigh.quaternion).multiply(Lg.shin.quaternion).invert();
+    Lg.foot.quaternion.copy(_q);
+  }
+
+  shadow.scale.set(1 + 0.2 * c, 1 + 0.1 * c, 1);
+  shadow.position.x = 0.25 + p.sway * 0.5;
+}
+
+// ---------- API ----------
+function render(t) {
+  applyPose(Number(t) || 0);
+  renderer.render(scene, camera);
+}
+render(0);
+
+window.nwb = {
+  scene,
+  renderer,
+  cameras: { ref: camera },
+  characters: [character],
+  render,
+  ready: true
+};
+</script>
+</body>
+</html>

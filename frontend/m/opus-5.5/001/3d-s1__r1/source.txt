@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+html,body{margin:0;padding:0;overflow:hidden;background:#d8cfc4;}
+canvas{display:block;position:absolute;left:0;top:0;width:240px;height:242px;}
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+
+const W = 240, H = 242;
+const renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true, antialias: true });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H, false);
+renderer.domElement.style.width = W + 'px';
+renderer.domElement.style.height = H + 'px';
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xd8cfc4);
+
+const camera = new THREE.PerspectiveCamera(35, W / H, 0.1, 50);
+camera.position.set(0, 1.4, 4.2);
+camera.lookAt(0, 1.0, 0);
+
+// Lights
+scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+scene.add(new THREE.HemisphereLight(0xfff6e8, 0x8a6a4a, 0.9));
+const key = new THREE.DirectionalLight(0xfff2dd, 1.9);
+key.position.set(-2, 4, 4);
+scene.add(key);
+const fill = new THREE.DirectionalLight(0xffffff, 0.6);
+fill.position.set(3, 2, -4);
+scene.add(fill);
+const side = new THREE.DirectionalLight(0xffffff, 0.4);
+side.position.set(4, 1, 2);
+scene.add(side);
+
+// Materials
+const yellow = new THREE.MeshStandardMaterial({ color: 0xf3b21c, roughness: 0.55, metalness: 0.0 });
+const yellow2 = new THREE.MeshStandardMaterial({ color: 0xf6ba26, roughness: 0.55 });
+const cream = new THREE.MeshStandardMaterial({ color: 0xf2dfae, roughness: 0.6 });
+const black = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.15, metalness: 0.1 });
+const white = new THREE.MeshBasicMaterial({ color: 0xffffff });
+const mouthMat = new THREE.MeshStandardMaterial({ color: 0x3a2410, roughness: 0.5 });
+
+const sphereGeo = new THREE.SphereGeometry(1, 40, 28);
+function ell(rx, ry, rz, mat, name) {
+  const m = new THREE.Mesh(sphereGeo, mat);
+  m.scale.set(rx, ry, rz);
+  if (name) m.name = name;
+  return m;
+}
+function limb(a, b, r, mat, name) {
+  const A = new THREE.Vector3(...a), B = new THREE.Vector3(...b);
+  const dir = B.clone().sub(A);
+  const len = dir.length();
+  const g = new THREE.CapsuleGeometry(r, len, 8, 20);
+  const m = new THREE.Mesh(g, mat);
+  m.position.copy(A).add(B).multiplyScalar(0.5);
+  m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.normalize());
+  if (name) m.name = name;
+  return m;
+}
+function makeEye(name, r) {
+  const g = new THREE.Group(); g.name = name;
+  const e = ell(r, r * 1.08, r * 0.8, black); g.add(e);
+  const h = ell(r * 0.28, r * 0.28, r * 0.2, white);
+  h.position.set(-r * 0.35, r * 0.4, r * 0.7); g.add(h);
+  return g;
+}
+function makeMouth(name, radius, tube) {
+  const g = new THREE.Group(); g.name = name;
+  const t = new THREE.Mesh(new THREE.TorusGeometry(radius, tube, 8, 20, Math.PI * 0.8), mouthMat);
+  t.rotation.z = Math.PI + Math.PI * 0.1;
+  g.add(t);
+  return g;
+}
+
+// ---------- Environment ----------
+const env = new THREE.Group(); env.name = 'environment'; scene.add(env);
+const wall = new THREE.Mesh(new THREE.PlaneGeometry(20, 10), new THREE.MeshStandardMaterial({ color: 0xd6c8ba, roughness: 1 }));
+wall.position.set(0, 2, -4.6); env.add(wall);
+const windowGlow = new THREE.Mesh(new THREE.PlaneGeometry(2.5, 2.5), new THREE.MeshBasicMaterial({ color: 0xf4f1ee }));
+windowGlow.position.set(-3.2, 2.6, -4.5); env.add(windowGlow);
+const board = new THREE.Mesh(new THREE.BoxGeometry(5.5, 1.6, 0.05), new THREE.MeshStandardMaterial({ color: 0x34433f, roughness: 0.9 }));
+board.name = 'chalkboard';
+board.position.set(1.4, 3.05, -4.45); env.add(board);
+const frame = new THREE.Mesh(new THREE.BoxGeometry(5.6, 0.06, 0.12), new THREE.MeshStandardMaterial({ color: 0x8a7a68 }));
+frame.position.set(1.4, 2.24, -4.4); env.add(frame);
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), new THREE.MeshStandardMaterial({ color: 0xb9a48e }));
+floor.rotation.x = -Math.PI / 2; floor.position.y = -0.8; env.add(floor);
+
+const woodDark = new THREE.MeshStandardMaterial({ color: 0x9a6a42, roughness: 0.7 });
+function bgDesk(x, y, z, w) {
+  const g = new THREE.Group();
+  const top = new THREE.Mesh(new THREE.BoxGeometry(w, 0.1, 0.8), woodDark);
+  top.position.y = y; g.add(top);
+  const front = new THREE.Mesh(new THREE.BoxGeometry(w, 0.5, 0.05), new THREE.MeshStandardMaterial({ color: 0x7a5434 }));
+  front.position.set(0, y - 0.3, 0.38); g.add(front);
+  g.position.set(x, 0, z);
+  env.add(g);
+}
+bgDesk(-2.1, 0.85, -3.0, 1.6);
+bgDesk(2.2, 0.9, -3.0, 1.6);
+bgDesk(-2.6, 0.45, -1.8, 1.2);
+bgDesk(2.4, 0.5, -1.8, 1.2);
+
+// Main desk
+const deskMat = new THREE.MeshStandardMaterial({ color: 0xd4a374, roughness: 0.65 });
+const desk = new THREE.Mesh(new THREE.BoxGeometry(5, 0.12, 2.6), deskMat);
+desk.name = 'desk';
+desk.position.set(0, -0.06, 0.0); env.add(desk);
+
+// Notebook texture
+function pageTex(seed) {
+  const c = document.createElement('canvas'); c.width = 64; c.height = 64;
+  const x = c.getContext('2d');
+  x.fillStyle = '#f7f5ef'; x.fillRect(0, 0, 64, 64);
+  x.strokeStyle = '#b9c8dc'; x.lineWidth = 1;
+  for (let i = 6; i < 64; i += 5) { x.beginPath(); x.moveTo(2, i); x.lineTo(62, i); x.stroke(); }
+  x.strokeStyle = '#555'; 
+  let s = seed;
+  const rnd = () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+  for (let i = 6; i < 50; i += 5) {
+    x.beginPath(); x.moveTo(6, i - 1);
+    x.lineTo(10 + rnd() * 45, i - 1); x.stroke();
+  }
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+const pageMatA = new THREE.MeshStandardMaterial({ map: pageTex(3), roughness: 0.9 });
+const pageMatB = new THREE.MeshStandardMaterial({ map: pageTex(17), roughness: 0.9 });
+const paperSide = new THREE.MeshStandardMaterial({ color: 0xeeeae0 });
+
+const props = new THREE.Group(); props.name = 'props'; scene.add(props);
+function openBook(name, x, z, rotY, w, d, matL, matR) {
+  const g = new THREE.Group(); g.name = name;
+  const geo = new THREE.BoxGeometry(w / 2, 0.03, d);
+  const mats = m => [paperSide, paperSide, m, paperSide, paperSide, paperSide];
+  const L = new THREE.Mesh(geo, mats(matL)); L.position.set(-w / 4, 0.02, 0); L.rotation.z = 0.06; g.add(L);
+  const R = new THREE.Mesh(geo, mats(matR)); R.position.set(w / 4, 0.02, 0); R.rotation.z = -0.06; g.add(R);
+  g.position.set(x, 0, z); g.rotation.y = rotY;
+  props.add(g);
+  return g;
+}
+openBook('notebook-left', -0.25, 0.85, 0.15, 0.9, 0.55, pageMatA, pageMatB);
+openBook('notebook-right', 0.95, 0.5, -0.12, 0.95, 0.5, pageMatB, pageMatA);
+
+function pencil(name, a, b, parent) {
+  const g = new THREE.Group(); g.name = name;
+  const A = new THREE.Vector3(...a), B = new THREE.Vector3(...b);
+  const dir = B.clone().sub(A); const len = dir.length();
+  const body = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, len * 0.85, 8), new THREE.MeshStandardMaterial({ color: 0xe8b04a }));
+  body.position.y = len * 0.075; g.add(body);
+  const tip = new THREE.Mesh(new THREE.ConeGeometry(0.025, len * 0.15, 8), new THREE.MeshStandardMaterial({ color: 0x4a4a4a }));
+  tip.rotation.x = Math.PI; tip.position.y = -len * 0.425; g.add(tip);
+  g.position.copy(A).add(B).multiplyScalar(0.5);
+  g.quaternion.setFromUnitVectors(new THREE.Vector3(0, -1, 0), dir.normalize());
+  (parent || props).add(g);
+  return g;
+}
+pencil('pencil-desk-1', [0.55, 0.03, 0.75], [0.95, 0.03, 0.8]);
+pencil('pencil-desk-2', [0.6, 0.03, 0.85], [1.05, 0.03, 0.9]);
+
+// ---------- Left character ----------
+const left = new THREE.Group(); left.name = 'character-left';
+left.position.set(-0.62, 0, 0.05);
+scene.add(left);
+const lBody = new THREE.Group(); lBody.name = 'body'; left.add(lBody);
+const lb = ell(0.68, 0.64, 0.52, yellow); lb.position.set(0, 0.48, 0); lBody.add(lb);
+const ln = ell(0.56, 0.45, 0.46, yellow); ln.position.set(0.02, 0.95, 0); lBody.add(ln);
+const belly = ell(0.36, 0.32, 0.12, cream); belly.name = 'belly'; belly.position.set(0.12, 0.44, 0.44); lBody.add(belly);
+
+const lHead = new THREE.Group(); lHead.name = 'head'; lHead.position.set(0.03, 1.3, 0); left.add(lHead);
+lHead.add(ell(0.48, 0.46, 0.43, yellow));
+const lEyes = new THREE.Group(); lEyes.name = 'eyes'; lHead.add(lEyes);
+const le1 = makeEye('eye-left', 0.085); le1.position.set(-0.18, 0.05, 0.36); le1.rotation.y = -0.4; lEyes.add(le1);
+const le2 = makeEye('eye-right', 0.085); le2.position.set(0.23, 0.03, 0.35); le2.rotation.y = 0.45; lEyes.add(le2);
+const lMouth = makeMouth('mouth', 0.05, 0.012); lMouth.position.set(0.04, -0.13, 0.41); lHead.add(lMouth);
+
+const lArmL = new THREE.Group(); lArmL.name = 'arm-left'; left.add(lArmL);
+lArmL.add(limb([-0.5, 0.72, 0.2], [-0.4, 0.28, 0.48], 0.11, yellow2));
+const lHandL = new THREE.Group(); lHandL.name = 'hand-left'; lHandL.position.set(-0.4, 0.26, 0.5); lArmL.add(lHandL);
+lHandL.add(ell(0.13, 0.11, 0.12, yellow2));
+pencil('pencil', [-0.04, 0.22, -0.02], [0.08, -0.26, 0.12], lHandL);
+
+const lArmR = new THREE.Group(); lArmR.name = 'arm-right'; left.add(lArmR);
+lArmR.add(limb([0.45, 0.6, 0.2], [0.58, 0.14, 0.6], 0.1, yellow2));
+const lHandR = new THREE.Group(); lHandR.name = 'hand-right'; lHandR.position.set(0.6, 0.12, 0.62); lArmR.add(lHandR);
+lHandR.add(ell(0.13, 0.08, 0.13, yellow2));
+
+// ---------- Right character ----------
+const right = new THREE.Group(); right.name = 'character-right';
+right.position.set(0.85, 0, -0.65);
+scene.add(right);
+const rBody = new THREE.Group(); rBody.name = 'body'; right.add(rBody);
+const rb = ell(0.65, 0.8, 0.56, yellow); rb.position.set(0.08, 0.6, 0); rb.rotation.z = 0.25; rBody.add(rb);
+const rn = ell(0.5, 0.45, 0.48, yellow); rn.position.set(-0.28, 1.12, 0.02); rBody.add(rn);
+const rbelly = ell(0.3, 0.35, 0.1, cream); rbelly.position.set(0.0, 0.45, 0.5); rBody.add(rbelly);
+
+const rHead = new THREE.Group(); rHead.name = 'head';
+rHead.position.set(-0.5, 1.45, 0.05); rHead.rotation.set(0.25, -0.3, 0.1);
+right.add(rHead);
+rHead.add(ell(0.52, 0.5, 0.5, yellow));
+const rEyes = new THREE.Group(); rEyes.name = 'eyes'; rHead.add(rEyes);
+const re1 = makeEye('eye-left', 0.09); re1.position.set(-0.18, 0.15, 0.42); re1.rotation.y = -0.4; rEyes.add(re1);
+const re2 = makeEye('eye-right', 0.09); re2.position.set(0.19, 0.14, 0.42); re2.rotation.y = 0.4; rEyes.add(re2);
+const rMouth = makeMouth('mouth', 0.055, 0.013); rMouth.position.set(0.0, -0.04, 0.5); rHead.add(rMouth);
+
+const rArmL = new THREE.Group(); rArmL.name = 'arm-left'; right.add(rArmL);
+// reaching to left character's belly (world hand ~(-0.2,0.42,0.47))
+rArmL.add(limb([-0.65, 0.95, 0.45], [-1.03, 0.45, 1.12], 0.12, yellow2));
+const rHandL = new THREE.Group(); rHandL.name = 'hand-left'; rHandL.position.set(-1.05, 0.42, 1.15); rArmL.add(rHandL);
+rHandL.add(ell(0.15, 0.13, 0.1, yellow2));
+const f1 = ell(0.05, 0.07, 0.05, yellow2); f1.position.set(-0.1, -0.08, 0.02); rHandL.add(f1);
+
+const rArmR = new THREE.Group(); rArmR.name = 'arm-right'; right.add(rArmR);
+rArmR.add(limb([0.35, 0.55, 0.4], [0.2, 0.15, 1.05], 0.11, yellow2));
+const rHandR = new THREE.Group(); rHandR.name = 'hand-right'; rHandR.position.set(0.18, 0.12, 1.08); rArmR.add(rHandR);
+rHandR.add(ell(0.14, 0.08, 0.13, yellow2));
+
+const characters = [left, right];
+
+function render(t) {
+  renderer.render(scene, camera);
+}
+render(0);
+
+window.nwb = { scene, renderer, cameras: { ref: camera }, characters, render, ready: true };
+</script>
+</body>
+</html>

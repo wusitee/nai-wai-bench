@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+html,body{margin:0;padding:0;overflow:hidden;background:#fff;width:244px;height:240px}
+canvas{display:block}
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+import { mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js';
+
+const W = 244, H = 240;
+const renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true, antialias: true });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+
+// ---------- background (procedural gradient) ----------
+const bgc = document.createElement('canvas'); bgc.width = 64; bgc.height = 64;
+const bg = bgc.getContext('2d');
+const grad = bg.createLinearGradient(0, 0, 0, 64);
+grad.addColorStop(0, '#ffffff');
+grad.addColorStop(0.7, '#fcfcfc');
+grad.addColorStop(0.86, '#ececec');
+grad.addColorStop(1, '#d6d6d6');
+bg.fillStyle = grad; bg.fillRect(0, 0, 64, 64);
+const bgTex = new THREE.CanvasTexture(bgc);
+bgTex.colorSpace = THREE.SRGBColorSpace;
+scene.background = bgTex;
+
+// ---------- camera ----------
+const D = 8;
+const cam = new THREE.PerspectiveCamera(THREE.MathUtils.radToDeg(2 * Math.atan(1.2 / D)), W / H, 0.1, 100);
+cam.name = 'ref';
+cam.position.set(0, 0, D);
+cam.lookAt(0, 0, 0);
+cam.updateProjectionMatrix();
+cam.updateMatrixWorld(true);
+
+// ---------- lights ----------
+const hemi = new THREE.HemisphereLight(0xffffff, 0xcbb994, 1.6); hemi.name = 'hemi-light'; scene.add(hemi);
+const key = new THREE.DirectionalLight(0xffffff, 1.6); key.name = 'key-light'; key.position.set(1.5, 2.5, 6); scene.add(key);
+const fill = new THREE.DirectionalLight(0xfff4e0, 0.8); fill.name = 'fill-light'; fill.position.set(-4, 1, 4); scene.add(fill);
+const back = new THREE.DirectionalLight(0xffffff, 1.2); back.name = 'back-light'; back.position.set(0, 3, -6); scene.add(back);
+const sideR = new THREE.DirectionalLight(0xffffff, 0.6); sideR.name = 'side-light'; sideR.position.set(6, 0.5, -1); scene.add(sideR);
+
+// helper: world point at depth z that projects to pixel (px,py)
+function pix(px, py, z) {
+  const v = new THREE.Vector3((px / W) * 2 - 1, -(py / H) * 2 + 1, 0.5).unproject(cam);
+  const dir = v.sub(cam.position).normalize();
+  const t = (z - cam.position.z) / dir.z;
+  return cam.position.clone().addScaledVector(dir, t);
+}
+
+// ---------- character ----------
+const CX = 0.03;
+const character = new THREE.Group();
+character.name = 'character-yellow-bird';
+character.position.set(CX, 0, 0);
+scene.add(character);
+
+const body = new THREE.Group(); body.name = 'body'; character.add(body);
+
+// body profile (r, y)
+const prof = [[0,-1.48],[0.3,-1.45],[0.55,-1.36],[0.74,-1.2],[0.84,-1.0],[0.88,-0.8],[0.885,-0.6],[0.87,-0.4],[0.84,-0.2],[0.78,0.0],[0.7,0.2],[0.62,0.4],[0.54,0.6],[0.48,0.8],[0.43,1.0],[0.40,1.08],[0.35,1.22],[0.28,1.36],[0.18,1.44],[0,1.48]];
+const curve = new THREE.SplineCurve(prof.map(p => new THREE.Vector2(p[0], p[1])));
+const pts = curve.getSpacedPoints(140).map(p => new THREE.Vector2(Math.max(0, p.x), p.y));
+pts[0].x = 0; pts[pts.length - 1].x = 0;
+
+const bodyGeo = new THREE.LatheGeometry(pts, 96, Math.PI, Math.PI * 2);
+bodyGeo.scale(1, 1, 0.9);
+const bodyMat = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 0.6, metalness: 0 });
+const bodyMesh = new THREE.Mesh(bodyGeo, bodyMat);
+bodyMesh.name = 'body-mesh';
+body.add(bodyMesh);
+
+const HEAD_Y = 0.55, BOTTOM = 1.48;
+const head = new THREE.Group(); head.name = 'head'; head.position.set(0, HEAD_Y, 0); body.add(head);
+
+scene.updateMatrixWorld(true);
+
+// vertex colors: yellow with cream belly
+{
+  const pos = bodyGeo.attributes.position, nor = bodyGeo.attributes.normal;
+  const colors = new Float32Array(pos.count * 3);
+  const cY = new THREE.Color(0xf4c838), cB = new THREE.Color(0xf5e0c2), cW = new THREE.Color(0xfbf3e8), tmp = new THREE.Color();
+  const v = new THREE.Vector3();
+  const mw = bodyMesh.matrixWorld;
+  const ss = THREE.MathUtils.smoothstep;
+  for (let i = 0; i < pos.count; i++) {
+    v.fromBufferAttribute(pos, i).applyMatrix4(mw).project(cam);
+    const px = (v.x + 1) * 0.5 * W, py = (1 - v.y) * 0.5 * H;
+    const nz = nor.getZ(i);
+    const d = Math.hypot((px - 134) / 51, (py - 155) / 70);
+    const facing = ss(nz, 0.12, 0.4);
+    const w = (1 - ss(d, 0.72, 1.08)) * facing;
+    const w2 = (1 - ss(d, 0.0, 0.8)) * w;
+    tmp.copy(cY).lerp(cB, w).lerp(cW, w2 * 0.75);
+    colors[i * 3] = tmp.r; colors[i * 3 + 1] = tmp.g; colors[i * 3 + 2] = tmp.b;
+  }
+  bodyGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+}
+
+// raycast onto body surface
+const ray = new THREE.Raycaster();
+const Z = new THREE.Vector3(0, 0, 1);
+function hitBody(px, py) {
+  ray.setFromCamera(new THREE.Vector2((px / W) * 2 - 1, -(py / H) * 2 + 1), cam);
+  const hits = ray.intersectObject(bodyMesh, false);
+  if (!hits.length) return { p: new THREE.Vector3((px - 122) / 100, (120 - py) / 100, 0.4), n: Z.clone() };
+  const h = hits[0];
+  const n = h.face.normal.clone().transformDirection(bodyMesh.matrixWorld).normalize();
+  return { p: h.point.clone(), n };
+}
+
+// ---------- eyes ----------
+const eyes = new THREE.Group(); eyes.name = 'eyes'; head.add(eyes);
+const eyeGeo = new THREE.SphereGeometry(1, 24, 16);
+const eyeMat = new THREE.MeshStandardMaterial({ color: 0x16110d, roughness: 0.3 });
+[['eye-left', 101, 21], ['eye-right', 135, 19]].forEach(([nm, px, py]) => {
+  const h = hitBody(px, py);
+  const g = new THREE.Group(); g.name = nm;
+  g.position.copy(head.worldToLocal(h.p.clone()));
+  g.quaternion.setFromUnitVectors(Z, h.n);
+  const m = new THREE.Mesh(eyeGeo, eyeMat); m.name = nm + '-ball';
+  m.scale.set(0.044, 0.06, 0.03);
+  g.add(m);
+  eyes.add(g);
+});
+
+// ---------- beak / mouth ----------
+let beakGeo = new THREE.SphereGeometry(1, 28, 18);
+{
+  const bp = beakGeo.attributes.position;
+  for (let i = 0; i < bp.count; i++) {
+    const x = bp.getX(i), y = bp.getY(i), z = bp.getZ(i);
+    const k = y < 0 ? 1 + 0.5 * y : 1;
+    bp.setX(i, x * k);
+    bp.setZ(i, z * (y < 0 ? 1 + 0.25 * y : 1));
+  }
+  beakGeo.deleteAttribute('normal');
+  beakGeo.deleteAttribute('uv');
+  beakGeo = mergeVertices(beakGeo);
+  beakGeo.computeVertexNormals();
+}
+const beakMat = new THREE.MeshStandardMaterial({ color: 0xe8922a, roughness: 0.5 });
+const mouth = new THREE.Group(); mouth.name = 'mouth'; head.add(mouth);
+{
+  const hb = hitBody(119, 43);
+  const bdir = hb.n.clone().add(new THREE.Vector3(0, -0.1, 0.25)).normalize();
+  const beak = new THREE.Mesh(beakGeo, beakMat); beak.name = 'beak';
+  beak.position.copy(head.worldToLocal(hb.p.clone())).addScaledVector(hb.n, 0.025);
+  beak.quaternion.setFromUnitVectors(Z, bdir);
+  beak.scale.set(0.12, 0.09, 0.08);
+  mouth.add(beak);
+}
+
+// ---------- arms & hands (rigged) ----------
+const yellowMat = new THREE.MeshStandardMaterial({ color: 0xf4c838, roughness: 0.6 });
+const brownMat = new THREE.MeshStandardMaterial({ color: 0x684427, roughness: 0.5 });
+const sphGeo = new THREE.SphereGeometry(1, 28, 20);
+const UP = new THREE.Vector3(0, 1, 0);
+const upperGeo = new THREE.CylinderGeometry(0.152, 0.16, 1, 24, 1); upperGeo.translate(0, 0.5, 0);
+const foreGeo = new THREE.CylinderGeometry(0.138, 0.15, 1, 24, 1); foreGeo.translate(0, 0.5, 0);
+const toLocal = v => v.sub(character.position);
+
+function joint(r, name) {
+  const m = new THREE.Mesh(sphGeo, yellowMat);
+  m.scale.setScalar(r);
+  m.name = name;
+  return m;
+}
+
+function buildArm(side, S0, hs, thumbOff) {
+  const arm = new THREE.Group(); arm.name = 'arm-' + side; body.add(arm);
+  arm.add(joint(0.16, 'shoulder-' + side));
+  const upper = new THREE.Mesh(upperGeo, yellowMat); upper.name = 'upperarm-' + side; arm.add(upper);
+  const fore = new THREE.Group(); fore.name = 'forearm-' + side; arm.add(fore);
+  fore.add(joint(0.152, 'elbow-' + side));
+  const foreMesh = new THREE.Mesh(foreGeo, yellowMat); foreMesh.name = 'forearm-mesh-' + side; fore.add(foreMesh);
+  const hand = new THREE.Group(); hand.name = 'hand-' + side; fore.add(hand);
+  hand.add(joint(0.138, 'wrist-' + side));
+  const fist = new THREE.Mesh(sphGeo, brownMat); fist.name = 'fist-' + side;
+  fist.scale.copy(hs);
+  hand.add(fist);
+  const thumb = new THREE.Mesh(sphGeo, brownMat); thumb.name = 'thumb-' + side;
+  thumb.scale.set(0.065, 0.08, 0.065);
+  hand.add(thumb);
+  return { arm, upper, fore, foreMesh, hand, fist, thumb, thumbOff, S0 };
+}
+
+const rigL = buildArm('left', toLocal(pix(84, 132, 0.40)),
+  new THREE.Vector3(0.165, 0.2, 0.15), new THREE.Vector3(0.11, -0.04, 0.08));
+const rigR = buildArm('right', toLocal(pix(182, 135, 0.30)),
+  new THREE.Vector3(0.155, 0.2, 0.15), new THREE.Vector3(-0.1, -0.04, 0.08));
+
+const _d = new THREE.Vector3(), _q1 = new THREE.Quaternion(), _q2 = new THREE.Quaternion(), _qi = new THREE.Quaternion();
+function poseArm(r, S, E, Wr, Hc, tilt) {
+  r.arm.position.copy(S);
+  _d.subVectors(E, S); const L1 = Math.max(1e-4, _d.length()); _d.multiplyScalar(1 / L1);
+  _q1.setFromUnitVectors(UP, _d);
+  r.arm.quaternion.copy(_q1);
+  r.upper.scale.set(1, L1, 1);
+  r.fore.position.set(0, L1, 0);
+  _d.subVectors(Wr, E); const L2 = Math.max(1e-4, _d.length()); _d.multiplyScalar(1 / L2);
+  _q2.setFromUnitVectors(UP, _d);
+  _qi.copy(_q1).invert();
+  r.fore.quaternion.copy(_qi).multiply(_q2);
+  r.foreMesh.scale.set(1, L2, 1);
+  r.hand.position.set(0, L2, 0);
+  r.hand.quaternion.copy(_q2).invert();
+  r.fist.position.subVectors(Hc, Wr);
+  r.fist.rotation.set(0, 0, tilt);
+  r.thumb.position.copy(r.fist.position).add(r.thumbOff);
+}
+
+// ---------- soft ground shadow ----------
+{
+  const sc = document.createElement('canvas'); sc.width = 64; sc.height = 64;
+  const sg = sc.getContext('2d');
+  const rg = sg.createRadialGradient(32, 32, 0, 32, 32, 32);
+  rg.addColorStop(0, 'rgba(0,0,0,0.32)');
+  rg.addColorStop(0.6, 'rgba(0,0,0,0.12)');
+  rg.addColorStop(1, 'rgba(0,0,0,0)');
+  sg.fillStyle = rg; sg.fillRect(0, 0, 64, 64);
+  const st = new THREE.CanvasTexture(sc);
+  const shadow = new THREE.Mesh(new THREE.PlaneGeometry(2.8, 2.2),
+    new THREE.MeshBasicMaterial({ map: st, transparent: true, depthWrite: false }));
+  shadow.name = 'ground-shadow';
+  shadow.rotation.x = -Math.PI / 2;
+  shadow.position.set(CX, -1.475, 0);
+  scene.add(shadow);
+}
+
+// ---------- keyframes ----------
+const PERIOD = 1200;
+const KT = [0, 160, 340, 500, 680, 840, 1020, 1180];
+// per side: [elbow px,py,z], [wrist px,py,z], [fist px,py,z], fist tilt ; sy = vertical squash
+const KEYS = [
+  { L: [[57,138,0.50],[70,108,0.55],[73,90,0.58], 0.35], R: [[209,146,0.32],[208,106,0.34],[211,81,0.35], -0.30], sy: 1.0 },
+  { L: [[46,124,0.45],[27,93,0.45],[17,74,0.46], 0.55], R: [[195,143,0.60],[170,110,0.80],[158,95,0.87], 0.25], sy: 0.99 },
+  { L: [[46,142,0.48],[56,118,0.52],[57,100,0.55], 0.30], R: [[213,150,0.32],[211,116,0.34],[211,96,0.36], -0.25], sy: 0.962 },
+  { L: [[48,136,0.45],[28,118,0.45],[19,104,0.46], 0.60], R: [[203,151,0.60],[190,139,0.80],[182,125,0.87], 0.35], sy: 0.955 },
+  { L: [[46,130,0.45],[26,107,0.45],[19,91,0.46], 0.60], R: [[200,147,0.60],[184,126,0.80],[175,110,0.87], 0.30], sy: 0.972 },
+  { L: [[48,142,0.48],[60,114,0.52],[61,96,0.55], 0.30], R: [[213,148,0.32],[211,114,0.34],[211,95,0.36], -0.25], sy: 0.977 },
+  { L: [[45,127,0.45],[24,102,0.45],[17,86,0.46], 0.55], R: [[197,144,0.60],[178,120,0.80],[167,104,0.87], 0.30], sy: 0.972 },
+  { L: [[45,145,0.48],[52,122,0.52],[51,104,0.55], 0.30], R: [[213,152,0.32],[210,124,0.34],[208,106,0.36], -0.25], sy: 0.966 },
+];
+
+const keyVals = KEYS.map(k => {
+  const out = [];
+  for (const sideKey of ['L', 'R']) {
+    const [e, w, h, tilt] = k[sideKey];
+    for (const p of [e, w, h]) {
+      const v = toLocal(pix(p[0], p[1], p[2]));
+      out.push(v.x, v.y, v.z);
+    }
+    out.push(tilt);
+  }
+  out.push(k.sy);
+  return out;
+});
+const NV = keyVals[0].length;
+const cols = [];
+for (let i = 0; i < NV; i++) cols.push(keyVals.map(a => a[i]));
+
+const NK = KT.length;
+const Tk = i => KT[((i % NK) + NK) % NK] + PERIOD * Math.floor(i / NK);
+function sample(vals, t) {
+  const V = i => vals[((i % NK) + NK) % NK];
+  let k = NK - 1;
+  for (let i = 0; i < NK - 1; i++) { if (t < KT[i + 1]) { k = i; break; } }
+  const t0 = Tk(k), t1 = Tk(k + 1);
+  const p0 = V(k), p1 = V(k + 1);
+  const m0 = (V(k + 1) - V(k - 1)) / (Tk(k + 1) - Tk(k - 1));
+  const m1 = (V(k + 2) - V(k)) / (Tk(k + 2) - Tk(k));
+  const h = t1 - t0, s = (t - t0) / h;
+  const s2 = s * s, s3 = s2 * s;
+  return (2 * s3 - 3 * s2 + 1) * p0 + (s3 - 2 * s2 + s) * h * m0 + (-2 * s3 + 3 * s2) * p1 + (s3 - s2) * h * m1;
+}
+
+const vE = new THREE.Vector3(), vW = new THREE.Vector3(), vH = new THREE.Vector3(), vS = new THREE.Vector3();
+const vals = new Array(NV);
+
+function pose(t) {
+  let tt = ((t % PERIOD) + PERIOD) % PERIOD;
+  if (!(tt >= 0 && tt < PERIOD)) tt = 0;
+  for (let i = 0; i < NV; i++) vals[i] = sample(cols[i], tt);
+
+  const sy = vals[20], sx = 1 / Math.sqrt(sy);
+  bodyMesh.scale.set(sx, sy, sx);
+  bodyMesh.position.set(0, -BOTTOM * (1 - sy), 0);
+  head.position.set(0, sy * (HEAD_Y + BOTTOM) - BOTTOM, 0);
+  head.scale.set(sx, sy, sx);
+
+  const rigs = [rigL, rigR];
+  for (let s = 0; s < 2; s++) {
+    const o = s * 10, r = rigs[s];
+    vS.set(r.S0.x * sx, sy * (r.S0.y + BOTTOM) - BOTTOM, r.S0.z * sx);
+    vE.set(vals[o], vals[o + 1], vals[o + 2]);
+    vW.set(vals[o + 3], vals[o + 4], vals[o + 5]);
+    vH.set(vals[o + 6], vals[o + 7], vals[o + 8]);
+    poseArm(r, vS, vE, vW, vH, vals[o + 9]);
+  }
+}
+
+function render(t) {
+  pose(t);
+  scene.updateMatrixWorld(true);
+  renderer.render(scene, cam);
+}
+render(0);
+
+window.nwb = { scene, renderer, cameras: { ref: cam }, characters: [character], render, ready: true };
+</script>
+</body>
+</html>

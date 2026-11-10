@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; padding: 0; width: 240px; height: 240px; overflow: hidden; background: #fff8e6; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <defs>
+    <radialGradient id="bodyGrad" cx="45%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#ffe66b"/>
+      <stop offset="70%" stop-color="#ffd23a"/>
+      <stop offset="100%" stop-color="#f5b81e"/>
+    </radialGradient>
+    <radialGradient id="bellyGrad" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#fff6c4"/>
+      <stop offset="100%" stop-color="#ffe98a"/>
+    </radialGradient>
+    <radialGradient id="mouthGrad" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#8a1f1f"/>
+      <stop offset="100%" stop-color="#4a0d0d"/>
+    </radialGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+    <clipPath id="mouthClip">
+      <path d="M84 112 Q120 104 156 112 Q154 168 120 170 Q86 168 84 112 Z"/>
+    </clipPath>
+  </defs>
+
+  <g id="background">
+    <rect x="0" y="0" width="240" height="240" fill="#fff8e6"/>
+    <ellipse cx="120" cy="228" rx="80" ry="8" fill="#e8d9b0" opacity="0.7"/>
+  </g>
+
+  <g id="character-nailong">
+    <g id="tail">
+      <path d="M182 190 Q222 186 228 160 Q214 178 186 172 Z" fill="url(#bodyGrad)" stroke="#c98a10" stroke-width="2.5" stroke-linejoin="round"/>
+    </g>
+
+    <g id="feet">
+      <g id="foot-left">
+        <ellipse cx="88" cy="222" rx="24" ry="10" fill="#ffd23a" stroke="#c98a10" stroke-width="2.5"/>
+      </g>
+      <g id="foot-right">
+        <ellipse cx="152" cy="222" rx="24" ry="10" fill="#ffd23a" stroke="#c98a10" stroke-width="2.5"/>
+      </g>
+    </g>
+
+    <g id="body">
+      <path d="M120 22
+               C 170 22, 196 58, 198 104
+               C 202 150, 200 196, 172 214
+               C 150 226, 90 226, 68 214
+               C 40 196, 38 150, 42 104
+               C 44 58, 70 22, 120 22 Z"
+            fill="url(#bodyGrad)" stroke="#c98a10" stroke-width="3" stroke-linejoin="round"/>
+      <g id="belly">
+        <ellipse cx="120" cy="182" rx="50" ry="36" fill="url(#bellyGrad)"/>
+        <path d="M86 168 Q120 174 154 168" fill="none" stroke="#f0c850" stroke-width="2" stroke-linecap="round"/>
+        <path d="M84 186 Q120 193 156 186" fill="none" stroke="#f0c850" stroke-width="2" stroke-linecap="round"/>
+        <path d="M90 203 Q120 209 150 203" fill="none" stroke="#f0c850" stroke-width="2" stroke-linecap="round"/>
+      </g>
+      <ellipse id="shine" cx="92" cy="50" rx="18" ry="9" fill="#fff6c0" opacity="0.7" transform="rotate(-20 92 50)"/>
+    </g>
+
+    <g id="arms">
+      <g id="arm-left">
+        <path d="M50 140 Q22 128 18 104 Q30 104 36 112 Q44 122 56 126 Z" fill="url(#bodyGrad)" stroke="#c98a10" stroke-width="2.5" stroke-linejoin="round"/>
+        <g id="hand-left">
+          <circle cx="22" cy="104" r="7" fill="#ffd23a" stroke="#c98a10" stroke-width="2.5"/>
+        </g>
+      </g>
+      <g id="arm-right">
+        <path d="M190 140 Q218 128 222 104 Q210 104 204 112 Q196 122 184 126 Z" fill="url(#bodyGrad)" stroke="#c98a10" stroke-width="2.5" stroke-linejoin="round"/>
+        <g id="hand-right">
+          <circle cx="218" cy="104" r="7" fill="#ffd23a" stroke="#c98a10" stroke-width="2.5"/>
+        </g>
+      </g>
+    </g>
+
+    <g id="head">
+      <g id="cheeks">
+        <ellipse id="cheek-left" cx="70" cy="118" rx="13" ry="8" fill="#ff8a8a" opacity="0.75" filter="url(#soft)"/>
+        <ellipse id="cheek-right" cx="170" cy="118" rx="13" ry="8" fill="#ff8a8a" opacity="0.75" filter="url(#soft)"/>
+      </g>
+
+      <g id="eyes">
+        <g id="eye-left">
+          <path d="M78 92 Q92 74 106 90" fill="none" stroke="#2b1a0a" stroke-width="5" stroke-linecap="round"/>
+          <path d="M76 98 L70 102" stroke="#2b1a0a" stroke-width="2.5" stroke-linecap="round"/>
+        </g>
+        <g id="eye-right">
+          <path d="M134 90 Q148 74 162 92" fill="none" stroke="#2b1a0a" stroke-width="5" stroke-linecap="round"/>
+          <path d="M164 98 L170 102" stroke="#2b1a0a" stroke-width="2.5" stroke-linecap="round"/>
+        </g>
+        <g id="tears">
+          <path d="M66 100 Q60 110 64 116 Q70 112 66 100 Z" fill="#9fd8ff" stroke="#5aa8e0" stroke-width="1"/>
+          <path d="M174 100 Q180 110 176 116 Q170 112 174 100 Z" fill="#9fd8ff" stroke="#5aa8e0" stroke-width="1"/>
+        </g>
+      </g>
+
+      <g id="mouth">
+        <path d="M84 112 Q120 104 156 112 Q154 168 120 170 Q86 168 84 112 Z" fill="url(#mouthGrad)"/>
+        <g clip-path="url(#mouthClip)">
+          <g id="tongue">
+            <ellipse cx="120" cy="166" rx="26" ry="16" fill="#ff6f86"/>
+            <path d="M120 154 L120 166" stroke="#d94a64" stroke-width="2" stroke-linecap="round"/>
+          </g>
+          <path id="upper-teeth" d="M88 110 Q120 104 152 110 L152 116 Q120 112 88 116 Z" fill="#ffffff"/>
+        </g>
+        <path d="M84 112 Q120 104 156 112 Q154 168 120 170 Q86 168 84 112 Z" fill="none" stroke="#2b1a0a" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M80 110 Q84 112 86 108" fill="none" stroke="#2b1a0a" stroke-width="2" stroke-linecap="round"/>
+        <path d="M160 110 Q156 112 154 108" fill="none" stroke="#2b1a0a" stroke-width="2" stroke-linecap="round"/>
+      </g>
+
+      <g id="nostrils">
+        <circle cx="114" cy="102" r="1.5" fill="#8a5a10"/>
+        <circle cx="126" cy="102" r="1.5" fill="#8a5a10"/>
+      </g>
+    </g>
+  </g>
+</svg>
+</body>
+</html>

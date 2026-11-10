@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; padding: 0; width: 244px; height: 240px; overflow: hidden; background: #fafafa; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 244 240" width="244" height="240">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fdfdfd"/>
+      <stop offset="0.75" stop-color="#f7f7f7"/>
+      <stop offset="1" stop-color="#e6e6e6"/>
+    </linearGradient>
+    <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2f2f2"/>
+      <stop offset="1" stop-color="#d9d9d9"/>
+    </linearGradient>
+    <radialGradient id="bodyGrad" cx="0.45" cy="0.42" r="0.65">
+      <stop offset="0" stop-color="#ffe866"/>
+      <stop offset="0.55" stop-color="#f6d63a"/>
+      <stop offset="0.85" stop-color="#e9bd22"/>
+      <stop offset="1" stop-color="#d9a518"/>
+    </radialGradient>
+    <radialGradient id="headGrad" cx="0.45" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#ffec70"/>
+      <stop offset="0.7" stop-color="#f6d63a"/>
+      <stop offset="1" stop-color="#e6b923"/>
+    </radialGradient>
+    <radialGradient id="bellyGrad" cx="0.48" cy="0.45" r="0.55">
+      <stop offset="0" stop-color="#fdf3ec"/>
+      <stop offset="0.55" stop-color="#f9e6d6"/>
+      <stop offset="0.85" stop-color="#f6dcae"/>
+      <stop offset="1" stop-color="#f4d67a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="armGradL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e2b21f"/>
+      <stop offset="1" stop-color="#f7d740"/>
+    </linearGradient>
+    <linearGradient id="armGradR" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f7d740"/>
+      <stop offset="1" stop-color="#e0ad1e"/>
+    </linearGradient>
+    <radialGradient id="handGrad" cx="0.4" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#8a6438"/>
+      <stop offset="0.6" stop-color="#5e3f22"/>
+      <stop offset="1" stop-color="#3f2814"/>
+    </radialGradient>
+    <radialGradient id="beakGrad" cx="0.45" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#f7a640"/>
+      <stop offset="0.7" stop-color="#ec8a22"/>
+      <stop offset="1" stop-color="#d9741a"/>
+    </radialGradient>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="0.9"/>
+    </filter>
+    <filter id="softer" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5"/>
+    </filter>
+    <filter id="shadowBlur" x="-30%" y="-100%" width="160%" height="300%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+
+  <g id="background">
+    <rect x="0" y="0" width="244" height="240" fill="url(#bgGrad)"/>
+    <rect id="floor" x="0" y="200" width="244" height="40" fill="url(#floorGrad)" opacity="0.8"/>
+    <ellipse id="shadow" cx="125" cy="228" rx="64" ry="8" fill="#9a9a9a" opacity="0.45" filter="url(#shadowBlur)"/>
+  </g>
+
+  <g id="character-duck" filter="url(#soft)">
+    <g id="arm-left">
+      <path id="arm-left-upper" d="M60,158 C56,135 57,112 61,98 L80,95 C84,110 86,130 84,150 Z" fill="url(#armGradL)"/>
+      <g id="hand-left">
+        <ellipse cx="69" cy="87" rx="13" ry="18" transform="rotate(-22 69 87)" fill="url(#handGrad)"/>
+        <ellipse id="thumb-left" cx="79" cy="96" rx="5" ry="7" transform="rotate(-30 79 96)" fill="#5a3c20"/>
+        <ellipse cx="65" cy="80" rx="4" ry="6" transform="rotate(-22 65 80)" fill="#a07a4a" opacity="0.5"/>
+      </g>
+    </g>
+
+    <g id="arm-right">
+      <path id="arm-right-upper" d="M186,160 C192,136 196,114 197,98 L216,94 C215,116 207,138 194,165 Z" fill="url(#armGradR)"/>
+      <g id="hand-right">
+        <ellipse cx="210" cy="80" rx="13" ry="19" transform="rotate(24 210 80)" fill="url(#handGrad)"/>
+        <ellipse id="thumb-right" cx="200" cy="90" rx="5" ry="7" transform="rotate(30 200 90)" fill="#5a3c20"/>
+        <ellipse cx="206" cy="72" rx="4" ry="6" transform="rotate(24 206 72)" fill="#a07a4a" opacity="0.5"/>
+      </g>
+    </g>
+
+    <g id="body">
+      <path id="body-shape" d="M120,2 C140,2 152,18 154,40 C156,62 162,82 178,100 C192,118 195,160 191,190 C187,216 160,230 125,230 C90,230 65,218 61,192 C57,160 63,118 78,100 C91,84 87,60 89,40 C91,18 100,2 120,2 Z" fill="url(#bodyGrad)"/>
+      <ellipse id="belly" cx="127" cy="145" rx="48" ry="55" fill="url(#bellyGrad)" filter="url(#softer)"/>
+      <ellipse id="belly-highlight" cx="124" cy="135" rx="26" ry="30" fill="#fff8f4" opacity="0.5" filter="url(#softer)"/>
+    </g>
+
+    <g id="head">
+      <ellipse id="head-shading" cx="121" cy="34" rx="31" ry="32" fill="url(#headGrad)" opacity="0.7" filter="url(#softer)"/>
+      <g id="eyes">
+        <g id="eye-left">
+          <ellipse cx="101" cy="22" rx="3.6" ry="5" fill="#1e1610"/>
+          <circle cx="100" cy="20" r="0.9" fill="#ffffff" opacity="0.6"/>
+        </g>
+        <g id="eye-right">
+          <ellipse cx="135" cy="22" rx="3.6" ry="5" fill="#1e1610"/>
+          <circle cx="134" cy="20" r="0.9" fill="#ffffff" opacity="0.6"/>
+        </g>
+      </g>
+      <g id="beak">
+        <path id="beak-upper" d="M104,44 C106,36 113,33 120,33 C128,33 136,36 138,44 C136,51 128,56 121,58 C114,56 106,51 104,44 Z" fill="url(#beakGrad)"/>
+        <path id="beak-line" d="M107,46 C113,49 128,49 135,46" fill="none" stroke="#c96a18" stroke-width="0.8" opacity="0.5"/>
+        <ellipse cx="116" cy="39" rx="6" ry="3" fill="#fbc070" opacity="0.6"/>
+      </g>
+    </g>
+  </g>
+</svg>
+</body>
+</html>

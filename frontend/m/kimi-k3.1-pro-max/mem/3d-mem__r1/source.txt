@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=240, initial-scale=1">
+<title>Laughing Nailong</title>
+<style>
+html,body{margin:0;width:240px;height:240px;overflow:hidden;background:#f2e4ea}
+canvas{display:block;width:240px;height:240px}
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xf2e4ea);
+
+const renderer = new THREE.WebGLRenderer({
+  antialias: true,
+  preserveDrawingBuffer: true
+});
+renderer.setPixelRatio(1);
+renderer.setSize(240, 240);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.12;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+document.body.appendChild(renderer.domElement);
+
+const ref = new THREE.OrthographicCamera(-2.35, 2.35, 2.35, -2.35, 0.1, 100);
+ref.position.set(3.0, 2.9, 8.5);
+ref.lookAt(0, 1.9, 0);
+
+const yellow = new THREE.MeshStandardMaterial({
+  color: 0xffd43b,
+  roughness: 0.58
+});
+const lipYellow = new THREE.MeshStandardMaterial({
+  color: 0xf3bf2d,
+  roughness: 0.62
+});
+const bellyYellow = new THREE.MeshStandardMaterial({
+  color: 0xfff0ae,
+  roughness: 0.72
+});
+const orange = new THREE.MeshStandardMaterial({
+  color: 0xeaa137,
+  roughness: 0.6
+});
+const mouthDark = new THREE.MeshStandardMaterial({
+  color: 0x49151f,
+  roughness: 0.76
+});
+const tonguePink = new THREE.MeshStandardMaterial({
+  color: 0xf1787f,
+  roughness: 0.62
+});
+const tongueLine = new THREE.MeshStandardMaterial({
+  color: 0xc95668,
+  roughness: 0.7
+});
+const toothWhite = new THREE.MeshStandardMaterial({
+  color: 0xfff9e7,
+  roughness: 0.42
+});
+const eyeBrown = new THREE.MeshStandardMaterial({
+  color: 0x38251a,
+  roughness: 0.72
+});
+const blush = new THREE.MeshStandardMaterial({
+  color: 0xf3a05c,
+  roughness: 0.75
+});
+
+const unitSphere = new THREE.SphereGeometry(1, 48, 32);
+
+function makeGroup(name, parent, position = [0, 0, 0]) {
+  const g = new THREE.Group();
+  g.name = name;
+  g.position.set(...position);
+  parent.add(g);
+  return g;
+}
+
+function ellipsoid(parent, name, position, scale, material, rotation = [0, 0, 0]) {
+  const m = new THREE.Mesh(unitSphere, material);
+  m.name = name;
+  m.position.set(...position);
+  m.scale.set(...scale);
+  m.rotation.set(...rotation);
+  parent.add(m);
+  return m;
+}
+
+function capsuleBetween(parent, name, a, b, radius, material) {
+  const start = new THREE.Vector3(...a);
+  const end = new THREE.Vector3(...b);
+  const direction = end.clone().sub(start);
+  const length = direction.length();
+  const geometry = new THREE.CapsuleGeometry(
+    radius,
+    Math.max(0.001, length - 2 * radius),
+    8,
+    20
+  );
+  const m = new THREE.Mesh(geometry, material);
+  m.name = name;
+  m.position.copy(start).add(end).multiplyScalar(0.5);
+  m.quaternion.setFromUnitVectors(
+    new THREE.Vector3(0, 1, 0),
+    direction.normalize()
+  );
+  parent.add(m);
+  return m;
+}
+
+function tube(parent, name, curve, radius, material, segments = 40) {
+  const m = new THREE.Mesh(
+    new THREE.TubeGeometry(curve, segments, radius, 10, false),
+    material
+  );
+  m.name = name;
+  parent.add(m);
+  return m;
+}
+
+function taperedTube(points, radii, segments = 56, radialSegments = 18) {
+  const curve = new THREE.CatmullRomCurve3(points);
+  const frames = curve.computeFrenetFrames(segments, false);
+  const positions = [];
+  const indices = [];
+
+  for (let i = 0; i <= segments; i++) {
+    const t = i / segments;
+    const center = curve.getPointAt(t);
+    const k = t * (radii.length - 1);
+    const ri = Math.min(Math.floor(k), radii.length - 2);
+    const radius = THREE.MathUtils.lerp(radii[ri], radii[ri + 1], k - ri);
+
+    for (let j = 0; j <= radialSegments; j++) {
+      const angle = j / radialSegments * Math.PI * 2;
+      const c = -Math.cos(angle) * radius;
+      const s = Math.sin(angle) * radius;
+      positions.push(
+        center.x + c * frames.normals[i].x + s * frames.binormals[i].x,
+        center.y + c * frames.normals[i].y + s * frames.binormals[i].y,
+        center.z + c * frames.normals[i].z + s * frames.binormals[i].z
+      );
+    }
+  }
+
+  for (let i = 1; i <= segments; i++) {
+    for (let j = 1; j <= radialSegments; j++) {
+      const a = (radialSegments + 1) * (i - 1) + j - 1;
+      const b = (radialSegments + 1) * i + j - 1;
+      const c = (radialSegments + 1) * i + j;
+      const d = (radialSegments + 1) * (i - 1) + j;
+      indices.push(a, b, d, b, c, d);
+    }
+  }
+
+  const startCenter = positions.length / 3;
+  const start = curve.getPointAt(0);
+  positions.push(start.x, start.y, start.z);
+  for (let j = 0; j < radialSegments; j++) {
+    indices.push(startCenter, j, j + 1);
+  }
+
+  const endCenter = positions.length / 3;
+  const end = curve.getPointAt(1);
+  positions.push(end.x, end.y, end.z);
+  const endRing = segments * (radialSegments + 1);
+  for (let j = 0; j < radialSegments; j++) {
+    indices.push(endCenter, endRing + j + 1, endRing + j);
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+  return geometry;
+}
+
+const character = makeGroup('character-laughing-nailong', scene);
+
+const body = makeGroup('body', character);
+ellipsoid(body, 'round-torso', [0, 0.96, 0], [1.0, 1.0, 0.8], yellow);
+ellipsoid(body, 'cream-belly', [0, 0.89, 0.69], [0.72, 0.70, 0.16], bellyYellow);
+ellipsoid(body, 'left-haunch', [-0.61, 0.48, 0.02], [0.46, 0.46, 0.48], yellow);
+ellipsoid(body, 'right-haunch', [0.61, 0.48, 0.02], [0.46, 0.46, 0.48], yellow);
+
+const head = makeGroup('head', character, [0, 2.38, 0.02]);
+head.rotation.set(-0.10, 0, -0.025);
+ellipsoid(head, 'large-round-head', [0, 0.18, 0], [1.28, 1.08, 0.96], yellow);
+ellipsoid(head, 'laughing-lower-jaw', [0, -0.46, 0.02], [1.03, 0.60, 0.82], yellow);
+
+const horns = makeGroup('horns', head);
+for (const side of [-1, 1]) {
+  const horn = new THREE.Mesh(new THREE.CapsuleGeometry(0.115, 0.25, 8, 20), orange);
+  horn.name = side < 0 ? 'left-rounded-horn' : 'right-rounded-horn';
+  horn.position.set(side * 0.53, 1.17, -0.06);
+  horn.rotation.z = -side * 0.29;
+  horns.add(horn);
+  ellipsoid(
+    horns,
+    side < 0 ? 'left-horn-base' : 'right-horn-base',
+    [side * 0.50, 1.03, -0.04],
+    [0.18, 0.13, 0.16],
+    yellow
+  );
+}
+
+const eyes = makeGroup('eyes', head);
+tube(
+  eyes,
+  'left-squeezed-laughing-eye',
+  new THREE.QuadraticBezierCurve3(
+    new THREE.Vector3(-0.79, 0.48, 0.79),
+    new THREE.Vector3(-0.55, 0.72, 0.92),
+    new THREE.Vector3(-0.30, 0.49, 0.94)
+  ),
+  0.043,
+  eyeBrown
+);
+tube(
+  eyes,
+  'right-squeezed-laughing-eye',
+  new THREE.QuadraticBezierCurve3(
+    new THREE.Vector3(0.30, 0.49, 0.94),
+    new THREE.Vector3(0.55, 0.72, 0.92),
+    new THREE.Vector3(0.79, 0.48, 0.79)
+  ),
+  0.043,
+  eyeBrown
+);
+
+const muzzle = makeGroup('muzzle', head);
+ellipsoid(muzzle, 'rounded-snout', [0, 0.16, 0.73], [0.54, 0.30, 0.31], yellow);
+ellipsoid(muzzle, 'left-nostril', [-0.17, 0.27, 1.025], [0.045, 0.032, 0.025], eyeBrown);
+ellipsoid(muzzle, 'right-nostril', [0.17, 0.27, 1.025], [0.045, 0.032, 0.025], eyeBrown);
+
+ellipsoid(head, 'left-laughing-cheek', [-0.99, -0.05, 0.61], [0.16, 0.10, 0.04], blush, [0, -0.65, 0]);
+ellipsoid(head, 'right-laughing-cheek', [0.99, -0.05, 0.61], [0.16, 0.10, 0.04], blush, [0, 0.65, 0]);
+
+const mouth = makeGroup('mouth', head, [0, -0.15, 0]);
+const mouthShape = new THREE.Shape();
+mouthShape.moveTo(-0.78, 0.22);
+mouthShape.bezierCurveTo(-0.48, 0.40, 0.48, 0.40, 0.78, 0.22);
+mouthShape.bezierCurveTo(0.82, -0.16, 0.55, -0.55, 0, -0.61);
+mouthShape.bezierCurveTo(-0.55, -0.55, -0.82, -0.16, -0.78, 0.22);
+
+function mouthZ(x, y) {
+  return 0.94 - 0.26 * x * x + 0.24 * y;
+}
+
+const mouthGeometry = new THREE.ExtrudeGeometry(mouthShape, {
+  depth: 0.08,
+  steps: 1,
+  bevelEnabled: true,
+  bevelSegments: 4,
+  bevelSize: 0.025,
+  bevelThickness: 0.025,
+  curveSegments: 36
+});
+const mouthPositions = mouthGeometry.attributes.position;
+for (let i = 0; i < mouthPositions.count; i++) {
+  const x = mouthPositions.getX(i);
+  const y = mouthPositions.getY(i);
+  mouthPositions.setZ(i, mouthPositions.getZ(i) + mouthZ(x, y));
+}
+mouthPositions.needsUpdate = true;
+mouthGeometry.computeVertexNormals();
+
+const cavity = new THREE.Mesh(mouthGeometry, mouthDark);
+cavity.name = 'deep-open-laughing-mouth';
+mouth.add(cavity);
+
+const outline = mouthShape.getPoints(72);
+if (outline[0].distanceTo(outline[outline.length - 1]) < 0.001) outline.pop();
+const lipCurve = new THREE.CatmullRomCurve3(
+  outline.map(p => new THREE.Vector3(p.x, p.y, mouthZ(p.x, p.y) + 0.09)),
+  true
+);
+const lip = new THREE.Mesh(
+  new THREE.TubeGeometry(lipCurve, 144, 0.055, 12, true),
+  lipYellow
+);
+lip.name = 'rounded-smiling-lip-rim';
+mouth.add(lip);
+
+const teeth = makeGroup('upper-teeth', mouth);
+for (const side of [-1, 1]) {
+  const tooth = new THREE.Mesh(
+    new RoundedBoxGeometry(0.23, 0.26, 0.11, 3, 0.045),
+    toothWhite
+  );
+  tooth.name = side < 0 ? 'left-front-tooth' : 'right-front-tooth';
+  tooth.position.set(side * 0.14, 0.18, mouthZ(side * 0.14, 0.18) + 0.11);
+  tooth.rotation.z = side * 0.04;
+  teeth.add(tooth);
+}
+
+const tongue = makeGroup('tongue', mouth);
+ellipsoid(
+  tongue,
+  'pink-tongue',
+  [0, -0.36, mouthZ(0, -0.36) + 0.115],
+  [0.46, 0.16, 0.075],
+  tonguePink,
+  [-0.10, 0, 0]
+);
+tube(
+  tongue,
+  'tongue-center-groove',
+  new THREE.QuadraticBezierCurve3(
+    new THREE.Vector3(0, -0.47, mouthZ(0, -0.36) + 0.185),
+    new THREE.Vector3(0, -0.37, mouthZ(0, -0.36) + 0.198),
+    new THREE.Vector3(0, -0.29, mouthZ(0, -0.36) + 0.18)
+  ),
+  0.008,
+  tongueLine,
+  16
+);
+
+for (const side of [-1, 1]) {
+  const label = side < 0 ? 'left' : 'right';
+  const arm = makeGroup(`${label}-arm`, character);
+  capsuleBetween(
+    arm,
+    `${label}-upper-arm`,
+    [side * 0.82, 1.43, 0.03],
+    [side * 1.10, 1.08, 0.25],
+    0.18,
+    yellow
+  );
+  ellipsoid(
+    arm,
+    `${label}-elbow`,
+    [side * 1.10, 1.08, 0.25],
+    [0.19, 0.19, 0.19],
+    yellow
+  );
+  capsuleBetween(
+    arm,
+    `${label}-forearm`,
+    [side * 1.08, 1.06, 0.28],
+    [side * 0.79, 0.88, 0.67],
+    0.17,
+    yellow
+  );
+  const hand = makeGroup(`${label}-hand`, arm);
+  ellipsoid(
+    hand,
+    `${label}-belly-holding-hand`,
+    [side * 0.69, 0.88, 0.77],
+    [0.26, 0.22, 0.18],
+    yellow,
+    [0, side * 0.15, side * 0.18]
+  );
+  for (let i = -1; i <= 1; i++) {
+    ellipsoid(
+      hand,
+      `${label}-rounded-finger-${i + 2}`,
+      [side * (0.65 + i * 0.065), 0.80, 0.90],
+      [0.052, 0.10, 0.055],
+      yellow,
+      [0, 0, side * -0.15]
+    );
+  }
+}
+
+for (const side of [-1, 1]) {
+  const label = side < 0 ? 'left' : 'right';
+  const foot = makeGroup(`${label}-foot`, character, [side * 0.54, 0.25, 0.22]);
+  foot.rotation.y = side * 0.17;
+  ellipsoid(foot, `${label}-wide-foot`, [0, 0, 0], [0.47, 0.25, 0.60], yellow);
+  for (let i = -1; i <= 1; i++) {
+    ellipsoid(
+      foot,
+      `${label}-toenail-${i + 2}`,
+      [i * 0.18, 0.035, 0.555 - Math.abs(i) * 0.035],
+      [0.08, 0.06, 0.09],
+      toothWhite
+    );
+  }
+}
+
+const tail = makeGroup('tail', character);
+const tailMesh = new THREE.Mesh(
+  taperedTube(
+    [
+      new THREE.Vector3(0, 0.73, -0.62),
+      new THREE.Vector3(0, 0.48, -1.05),
+      new THREE.Vector3(0.48, 0.37, -1.27),
+      new THREE.Vector3(0.95, 0.50, -1.12),
+      new THREE.Vector3(1.04, 0.73, -0.92)
+    ],
+    [0.30, 0.26, 0.18, 0.09, 0.015]
+  ),
+  yellow
+);
+tailMesh.name = 'curled-solid-tail';
+tail.add(tailMesh);
+
+const dorsalSpikes = makeGroup('dorsal-spikes', character);
+function addSpike(parent, name, position, radius, height) {
+  const g = makeGroup(name, parent, position);
+  const cone = new THREE.Mesh(new THREE.ConeGeometry(radius, height, 24), orange);
+  cone.rotation.x = -Math.PI / 2;
+  g.add(cone);
+  ellipsoid(g, `${name}-soft-tip`, [0, 0, -height / 2], [0.045, 0.045, 0.045], orange);
+}
+addSpike(dorsalSpikes, 'upper-back-spike', [0, 1.62, -0.72], 0.17, 0.34);
+addSpike(dorsalSpikes, 'middle-back-spike', [0, 1.15, -0.84], 0.18, 0.36);
+addSpike(dorsalSpikes, 'lower-back-spike', [0, 0.72, -0.76], 0.15, 0.30);
+addSpike(head, 'head-back-spike', [0, 0.48, -0.89], 0.15, 0.32);
+
+character.traverse(object => {
+  if (object.isMesh) {
+    object.castShadow = true;
+    object.receiveShadow = true;
+  }
+});
+
+const ground = new THREE.Mesh(
+  new THREE.PlaneGeometry(200, 200),
+  new THREE.MeshStandardMaterial({ color: 0xf2e4ea, roughness: 0.95 })
+);
+ground.name = 'studio-ground';
+ground.rotation.x = -Math.PI / 2;
+ground.position.y = -0.035;
+ground.receiveShadow = true;
+scene.add(ground);
+
+const hemisphere = new THREE.HemisphereLight(0xfff8ec, 0x8f7f91, 1.85);
+scene.add(hemisphere);
+
+const key = new THREE.DirectionalLight(0xfff3df, 3.1);
+key.position.set(-3.5, 7, 5);
+key.castShadow = true;
+key.shadow.mapSize.set(1024, 1024);
+key.shadow.camera.left = -5;
+key.shadow.camera.right = 5;
+key.shadow.camera.top = 6;
+key.shadow.camera.bottom = -3;
+key.shadow.camera.near = 0.1;
+key.shadow.camera.far = 20;
+key.shadow.bias = -0.0003;
+key.shadow.normalBias = 0.02;
+key.target.position.set(0, 1.6, 0);
+scene.add(key, key.target);
+
+const fill = new THREE.DirectionalLight(0xe8f2ff, 1.05);
+fill.position.set(4, 3.5, 3);
+scene.add(fill);
+
+const rim = new THREE.DirectionalLight(0xfff1cf, 1.35);
+rim.position.set(-2, 4.5, -5);
+scene.add(rim);
+
+function render(t) {
+  renderer.render(scene, ref);
+}
+
+window.nwb = {
+  scene,
+  renderer,
+  cameras: { ref },
+  characters: [character],
+  render,
+  ready: true
+};
+
+render(0);
+</script>
+</body>
+</html>

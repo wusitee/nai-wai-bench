@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=244, initial-scale=1">
+<title>Dancing yellow bird</title>
+<style>
+html,body{margin:0;padding:0;width:244px;height:240px;overflow:hidden;background:#fff}
+svg{display:block;width:244px;height:240px}
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" width="244" height="240" viewBox="0 0 244 240" role="img" aria-label="A yellow bird rhythmically waving its brown-tipped wings">
+<defs>
+  <linearGradient id="background" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#fff"/>
+    <stop offset=".8" stop-color="#fff"/>
+    <stop offset="1" stop-color="#f1eef0"/>
+  </linearGradient>
+  <radialGradient id="body-color" cx=".49" cy=".34" r=".75">
+    <stop offset="0" stop-color="#ffdd79"/>
+    <stop offset=".35" stop-color="#f8d27a"/>
+    <stop offset=".66" stop-color="#eec260"/>
+    <stop offset=".87" stop-color="#dfb14b"/>
+    <stop offset="1" stop-color="#c9a444"/>
+  </radialGradient>
+  <linearGradient id="body-bottom" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#e9b95e" stop-opacity="0"/>
+    <stop offset=".55" stop-color="#e5b86b" stop-opacity=".15"/>
+    <stop offset="1" stop-color="#cf9f57" stop-opacity=".65"/>
+  </linearGradient>
+  <radialGradient id="belly-color" cx=".47" cy=".34" r=".68">
+    <stop offset="0" stop-color="#ffe7a8" stop-opacity=".94"/>
+    <stop offset=".43" stop-color="#f9dca0" stop-opacity=".82"/>
+    <stop offset=".76" stop-color="#f1cc91" stop-opacity=".5"/>
+    <stop offset="1" stop-color="#ebc27a" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="head-color" cx=".48" cy=".2" r=".86">
+    <stop offset="0" stop-color="#ffe826"/>
+    <stop offset=".35" stop-color="#ffdb20"/>
+    <stop offset=".64" stop-color="#ffd028"/>
+    <stop offset=".83" stop-color="#f6be2c"/>
+    <stop offset="1" stop-color="#efba43" stop-opacity=".85"/>
+  </radialGradient>
+  <radialGradient id="face-light" cx=".48" cy=".2" r=".72">
+    <stop offset="0" stop-color="#fff04b" stop-opacity=".72"/>
+    <stop offset=".6" stop-color="#ffe136" stop-opacity=".17"/>
+    <stop offset="1" stop-color="#ffd42a" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="left-wing-color" x1=".13" y1=".1" x2=".76" y2=".94">
+    <stop offset="0" stop-color="#ffe843"/>
+    <stop offset=".27" stop-color="#ffdb25"/>
+    <stop offset=".61" stop-color="#ffc322"/>
+    <stop offset="1" stop-color="#e9a31b"/>
+  </linearGradient>
+  <linearGradient id="right-wing-color" x1="0" y1=".5" x2="1" y2=".35">
+    <stop offset="0" stop-color="#df9915"/>
+    <stop offset=".36" stop-color="#f5b716"/>
+    <stop offset=".75" stop-color="#ffd12a"/>
+    <stop offset="1" stop-color="#ffd83c"/>
+  </linearGradient>
+  <radialGradient id="left-hand-color" cx=".3" cy=".2" r=".88">
+    <stop offset="0" stop-color="#a18a43"/>
+    <stop offset=".28" stop-color="#79652d"/>
+    <stop offset=".63" stop-color="#514418"/>
+    <stop offset=".85" stop-color="#66501d"/>
+    <stop offset="1" stop-color="#956519"/>
+  </radialGradient>
+  <linearGradient id="right-hand-color" x1=".72" y1="0" x2=".28" y2="1">
+    <stop offset="0" stop-color="#a08e72"/>
+    <stop offset=".2" stop-color="#8b7754"/>
+    <stop offset=".48" stop-color="#6d542c"/>
+    <stop offset=".8" stop-color="#56401b"/>
+    <stop offset="1" stop-color="#8c611a"/>
+  </linearGradient>
+  <radialGradient id="eye-halo">
+    <stop offset="0" stop-color="#5a6121" stop-opacity=".8"/>
+    <stop offset=".48" stop-color="#7b8224" stop-opacity=".53"/>
+    <stop offset="1" stop-color="#aaa735" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="beak-color" x1="0" y1="0" x2=".15" y2="1">
+    <stop offset="0" stop-color="#ffda43"/>
+    <stop offset=".46" stop-color="#fbc336"/>
+    <stop offset="1" stop-color="#eeb334"/>
+  </linearGradient>
+  <filter id="soft-edge" x="-15%" y="-15%" width="130%" height="130%">
+    <feGaussianBlur stdDeviation="1.15"/>
+  </filter>
+  <filter id="hand-softness" x="-25%" y="-25%" width="150%" height="150%">
+    <feGaussianBlur stdDeviation="1.45"/>
+  </filter>
+  <filter id="eye-softness" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation=".85"/>
+  </filter>
+  <filter id="blur-small" x="-35%" y="-35%" width="170%" height="170%">
+    <feGaussianBlur stdDeviation="2.7"/>
+  </filter>
+  <filter id="blur-medium" x="-35%" y="-35%" width="170%" height="170%">
+    <feGaussianBlur stdDeviation="5"/>
+  </filter>
+  <filter id="blur-large" x="-40%" y="-40%" width="180%" height="180%">
+    <feGaussianBlur stdDeviation="8"/>
+  </filter>
+
+  <path id="body-shape" d="M77 73 C98 64 148 64 170 75 C187 84 191 103 194 123 C197 146 207 165 212 189 C216 209 214 226 207 243 L43 243 C36 232 32 218 35 201 C36 183 40 168 43 149 C46 123 50 91 77 73Z"/>
+  <path id="head-shape" d="M82 78 C84 67 87 54 89 39 C91 23 95 8 104-3 C113-10 136-10 146-2 C156 5 159 18 160 32 C161 48 166 62 175 75 C181 83 184 91 176 99 C163 111 136 111 115 105 C99 101 85 92 82 78Z"/>
+  <path id="left-wing-shape" d="M58 94 C48 101 41 112 38 124 C35 136 40 151 46 158 C51 164 60 163 68 157 C77 150 81 139 84 127 C88 115 88 104 81 98 C75 92 65 90 58 94Z"/>
+  <path id="right-wing-shape" d="M204 88 C214 84 222 92 227 104 C231 113 234 125 230 135 C228 143 218 150 209 152 C201 154 196 147 194 137 C191 124 190 111 194 100 C196 95 199 91 204 88Z"/>
+  <path id="left-hand-shape" d="M55 84 C58 77 63 73 68 74 C75 73 80 77 82 83 C87 90 89 100 87 107 C83 112 75 110 68 108 C61 106 55 103 54 96 C52 92 53 88 55 84Z"/>
+  <path id="right-hand-shape" d="M200 87 C202 82 206 79 207 74 C207 68 209 64 213 62 C217 61 222 64 224 69 C227 75 224 81 221 86 C221 92 217 98 211 101 C207 104 201 102 198 98 C197 95 198 90 200 87Z"/>
+
+  <clipPath id="body-clip"><use href="#body-shape"/></clipPath>
+  <clipPath id="left-wing-clip"><use href="#left-wing-shape"/></clipPath>
+  <clipPath id="right-wing-clip"><use href="#right-wing-shape"/></clipPath>
+  <clipPath id="bird-clip">
+    <use id="texture-body" href="#body-shape"/>
+    <use id="texture-head" href="#head-shape"/>
+    <use href="#left-wing-shape"/>
+    <use href="#right-wing-shape"/>
+    <use id="texture-left-hand" href="#left-hand-shape"/>
+    <use id="texture-right-hand" href="#right-hand-shape"/>
+  </clipPath>
+
+  <pattern id="background-speckles" width="43" height="37" patternUnits="userSpaceOnUse">
+    <g fill="#e7b8ec" opacity=".52">
+      <rect x="3" y="7" width=".7" height=".7"/>
+      <rect x="5" y="9" width=".7" height=".7"/>
+      <rect x="7" y="11" width=".65" height=".65"/>
+      <rect x="25" y="29" width=".8" height=".7"/>
+      <rect x="29" y="33" width=".7" height=".7"/>
+      <rect x="35" y="17" width=".65" height=".65"/>
+      <rect x="18" y="2" width=".7" height=".7"/>
+    </g>
+    <g fill="#b6b8ed" opacity=".46">
+      <rect x="4" y="8" width=".65" height=".65"/>
+      <rect x="8" y="12" width=".7" height=".7"/>
+      <rect x="23" y="27" width=".7" height=".7"/>
+      <rect x="27" y="31" width=".65" height=".65"/>
+      <rect x="37" y="19" width=".7" height=".7"/>
+      <rect x="15" y="22" width=".6" height=".6"/>
+    </g>
+  </pattern>
+  <pattern id="plumage-dither" width="4" height="4" patternUnits="userSpaceOnUse">
+    <rect x=".2" y=".1" width=".65" height=".65" fill="#fff9d9" opacity=".75"/>
+    <rect x="2.2" y="2.1" width=".7" height=".7" fill="#fff8d5" opacity=".66"/>
+    <rect x="2.2" y=".1" width=".6" height=".6" fill="#b16f8b" opacity=".34"/>
+    <rect x=".2" y="2.1" width=".55" height=".55" fill="#c18a54" opacity=".22"/>
+  </pattern>
+  <pattern id="fine-dither" width="7" height="7" patternUnits="userSpaceOnUse">
+    <rect x="1" y="4" width=".65" height=".65" fill="#998ca5" opacity=".32"/>
+    <rect x="5" y="1" width=".6" height=".6" fill="#fffce6" opacity=".65"/>
+    <rect x="3" y="6" width=".6" height=".6" fill="#e49691" opacity=".35"/>
+  </pattern>
+</defs>
+
+<g id="background-layer">
+  <rect width="244" height="240" fill="url(#background)"/>
+  <ellipse cx="127" cy="239" rx="133" ry="12" fill="#b4a5b7" opacity=".23" filter="url(#blur-large)"/>
+  <ellipse cx="23" cy="231" rx="27" ry="8" fill="#d9c3ce" opacity=".15" filter="url(#blur-medium)"/>
+  <rect width="244" height="240" fill="url(#background-speckles)"/>
+</g>
+
+<g id="character-yellow-bird">
+  <g id="body">
+    <use href="#body-shape" fill="#eac464" opacity=".3" filter="url(#blur-small)"/>
+    <use href="#body-shape" fill="url(#body-color)" filter="url(#soft-edge)"/>
+    <g clip-path="url(#body-clip)">
+      <path d="M54 127 C48 158 45 178 43 204 C42 222 47 235 50 245 L67 245 C55 218 61 197 67 174 C73 153 76 135 72 117Z" fill="#c89d32" opacity=".29" filter="url(#blur-medium)"/>
+      <path d="M183 104 C181 129 190 152 196 176 C203 198 208 222 201 245 L218 245 L224 177 L207 116Z" fill="#dc9d35" opacity=".4" filter="url(#blur-medium)"/>
+      <g id="belly">
+        <ellipse cx="127" cy="178" rx="66" ry="88" fill="url(#belly-color)" filter="url(#blur-medium)"/>
+        <path d="M110 103 C127 96 143 104 153 121 C166 147 163 175 172 198 C177 216 180 231 178 244 L82 244 C78 228 83 211 86 195 C91 173 91 147 97 125 C100 113 104 107 110 103Z" fill="#ffe3ae" opacity=".21" filter="url(#blur-large)"/>
+        <ellipse cx="132" cy="215" rx="58" ry="36" fill="#e8bc91" opacity=".21" filter="url(#blur-large)"/>
+      </g>
+      <rect x="30" y="161" width="190" height="82" fill="url(#body-bottom)"/>
+      <path d="M38 201 C35 221 38 234 45 243 L57 243 C48 230 47 215 48 202Z" fill="#afa247" opacity=".35" filter="url(#blur-small)"/>
+    </g>
+  </g>
+
+  <g id="head">
+    <use href="#head-shape" fill="#f8d82c" opacity=".25" filter="url(#blur-small)"/>
+    <use href="#head-shape" fill="url(#head-color)" filter="url(#soft-edge)"/>
+    <ellipse cx="123" cy="26" rx="33" ry="35" fill="url(#face-light)" filter="url(#blur-small)"/>
+    <g id="neck-shading">
+      <path d="M87 52 C90 72 104 80 122 82 C141 86 158 76 165 60 C169 77 177 83 176 91 C164 103 139 105 118 99 C99 94 87 83 84 72Z" fill="#efae20" opacity=".35" filter="url(#blur-medium)"/>
+      <path d="M93 55 C100 64 113 68 128 66 C142 64 151 56 155 45" fill="none" stroke="#f4bb27" stroke-width="12" opacity=".24" filter="url(#blur-medium)"/>
+      <ellipse cx="122" cy="89" rx="27" ry="13" fill="#ffd549" opacity=".47" filter="url(#blur-medium)"/>
+    </g>
+    <g id="eyes">
+      <g id="eye-left">
+        <ellipse cx="103" cy="25" rx="10" ry="12" fill="url(#eye-halo)" filter="url(#eye-softness)"/>
+        <path d="M100 20 C101 18 105 18 107 21 C108 24 106 29 103 30 C100 31 98 28 99 25Z" fill="#495019" opacity=".65" filter="url(#eye-softness)"/>
+        <ellipse cx="103" cy="24.5" rx="3.25" ry="5.05" transform="rotate(13 103 24.5)" fill="#20270c" filter="url(#eye-softness)"/>
+        <ellipse cx="102.5" cy="22.4" rx=".9" ry="1.2" fill="#777742" opacity=".65" filter="url(#eye-softness)"/>
+      </g>
+      <g id="eye-right">
+        <ellipse cx="146" cy="22" rx="10.4" ry="11.8" fill="url(#eye-halo)" filter="url(#eye-softness)"/>
+        <path d="M143 17 C145 15 148 16 150 20 C152 23 150 27 147 28 C144 28 142 25 142 22Z" fill="#53571b" opacity=".76" filter="url(#eye-softness)"/>
+        <ellipse cx="146.4" cy="21.5" rx="3.1" ry="4.65" transform="rotate(-14 146.4 21.5)" fill="#1c250b" filter="url(#eye-softness)"/>
+        <ellipse cx="145.2" cy="18.5" rx=".9" ry="1.15" fill="#b8b766" opacity=".72" filter="url(#eye-softness)"/>
+      </g>
+    </g>
+    <g id="mouth">
+      <ellipse cx="121" cy="44" rx="16" ry="8" fill="#efb332" opacity=".43" filter="url(#blur-small)"/>
+      <path d="M107 40 C114 37 126 36 133 40 C137 42 134 46 128 48 C121 51 112 48 108 46 C105 44 104 42 107 40Z" fill="url(#beak-color)" filter="url(#soft-edge)"/>
+      <path d="M110 40 Q121 36 131 40" fill="none" stroke="#ffe36a" stroke-width="3.5" opacity=".52" filter="url(#soft-edge)"/>
+      <path d="M110 46 Q121 49 131 44" fill="none" stroke="#dca02e" stroke-width="1.4" opacity=".28" filter="url(#soft-edge)"/>
+    </g>
+  </g>
+
+  <g id="arm-right">
+    <g id="wing-right">
+      <use href="#right-wing-shape" fill="#f7c52a" opacity=".3" filter="url(#blur-small)"/>
+      <use href="#right-wing-shape" fill="url(#right-wing-color)" filter="url(#soft-edge)"/>
+      <g clip-path="url(#right-wing-clip)">
+        <g id="right-wing-details">
+          <path d="M198 101 C194 114 197 131 202 144" fill="none" stroke="#d18b13" stroke-width="6" opacity=".51" filter="url(#blur-small)"/>
+          <path d="M222 101 C228 113 229 126 223 137" fill="none" stroke="#ffde3e" stroke-width="6" opacity=".61" filter="url(#blur-small)"/>
+          <ellipse cx="214" cy="128" rx="11" ry="18" fill="#ffc222" opacity=".48" filter="url(#blur-small)"/>
+        </g>
+      </g>
+    </g>
+    <g id="hand-right">
+      <use href="#right-hand-shape" fill="url(#right-hand-color)" filter="url(#hand-softness)"/>
+      <g id="right-hand-details">
+        <path d="M211 66 C214 63 220 66 221 71" fill="none" stroke="#b3a28b" stroke-width="4" stroke-linecap="round" opacity=".55" filter="url(#soft-edge)"/>
+        <path d="M205 84 C209 83 217 84 219 80" fill="none" stroke="#443b22" stroke-width="4" stroke-linecap="round" opacity=".4" filter="url(#hand-softness)"/>
+        <ellipse cx="205" cy="94" rx="5.5" ry="6" fill="#584018" opacity=".65" filter="url(#soft-edge)"/>
+        <path d="M200 99 Q207 104 215 98" fill="none" stroke="#ad781a" stroke-width="3" opacity=".46" filter="url(#soft-edge)"/>
+      </g>
+    </g>
+  </g>
+
+  <g id="arm-left">
+    <g id="wing-left">
+      <use href="#left-wing-shape" fill="#f5c32a" opacity=".28" filter="url(#blur-small)"/>
+      <use href="#left-wing-shape" fill="url(#left-wing-color)" filter="url(#soft-edge)"/>
+      <g clip-path="url(#left-wing-clip)">
+        <g id="left-wing-details">
+          <ellipse cx="47" cy="116" rx="8" ry="15" transform="rotate(20 47 116)" fill="#ffed59" opacity=".6" filter="url(#blur-small)"/>
+          <path d="M45 145 C48 156 56 160 65 154 C74 148 79 132 79 119" fill="none" stroke="#e79c18" stroke-width="7" opacity=".45" filter="url(#blur-small)"/>
+          <ellipse cx="60" cy="133" rx="15" ry="21" fill="#ffc021" opacity=".34" filter="url(#blur-small)"/>
+        </g>
+      </g>
+    </g>
+    <g id="hand-left">
+      <use href="#left-hand-shape" fill="url(#left-hand-color)" filter="url(#hand-softness)"/>
+      <ellipse cx="63" cy="82" rx="6" ry="5" transform="rotate(-28 63 82)" fill="#b3a15e" opacity=".45" filter="url(#hand-softness)"/>
+      <path d="M59 86 C57 91 60 98 65 100" fill="none" stroke="#8e7835" stroke-width="5" stroke-linecap="round" opacity=".55" filter="url(#soft-edge)"/>
+      <path d="M72 83 C78 85 81 94 82 102" fill="none" stroke="#453b18" stroke-width="7" stroke-linecap="round" opacity=".6" filter="url(#hand-softness)"/>
+      <ellipse cx="79" cy="99" rx="6" ry="8" transform="rotate(-23 79 99)" fill="#73551c" opacity=".65" filter="url(#hand-softness)"/>
+      <path d="M64 105 Q75 111 85 108" fill="none" stroke="#a7741a" stroke-width="3" opacity=".48" filter="url(#soft-edge)"/>
+    </g>
+  </g>
+
+  <g id="surface-texture" clip-path="url(#bird-clip)">
+    <rect x="0" y="0" width="244" height="240" fill="url(#plumage-dither)" opacity=".69"/>
+    <rect x="0" y="0" width="244" height="240" fill="url(#fine-dither)" opacity=".43"/>
+  </g>
+</g>
+</svg>
+<script>
+(function(){
+  "use strict";
+
+  const get = id => document.getElementById(id);
+  const numbers = s => s.match(/-?\d+(?:\.\d+)?/g).map(Number);
+  const path = a => "M"+a[0]+" "+a[1]+" C"+a.slice(2).join(" ")+" Z";
+
+  const frames = [
+    {
+      t:0,
+      head:[0,0,0,1,1],
+      body:[0,0,1],
+      lh:[70,94,0,1,1],
+      ls:[70,94,0,1,1],
+      rh:[212,83,0,1,1,0],
+      rs:[212,83,0,1,1],
+      left:"58 94 | 48 101 41 112 38 124 | 35 136 40 151 46 158 | 51 164 60 163 68 157 | 77 150 81 139 84 127 | 88 115 88 104 81 98 | 75 92 65 90 58 94",
+      right:"204 88 | 214 84 222 92 227 104 | 231 113 234 125 230 135 | 228 143 218 150 209 152 | 201 154 196 147 194 137 | 191 124 190 111 194 100 | 196 95 199 91 204 88"
+    },
+    {
+      t:160,
+      head:[-4.5,-0.3,6.5,0.99,1],
+      body:[-0.2,0.6,1.01],
+      lh:[17,76,-13,0.79,1.03],
+      ls:[17,76,-31,1.3,0.95],
+      rh:[158,100,-2,0.99,0.99,1],
+      rs:[158,100,-15,1.6,1.05],
+      left:"27 91 | 15 89 7 88 6 100 | 4 113 8 130 17 136 | 25 142 36 139 44 133 | 52 126 54 114 57 104 | 62 96 66 86 58 83 | 49 82 38 90 27 91",
+      right:"153 108 | 163 98 180 97 193 105 | 205 113 214 125 211 140 | 210 153 196 165 183 168 | 170 170 158 159 151 149 | 143 139 138 127 143 117 | 146 112 148 110 153 108"
+    },
+    {
+      t:340,
+      head:[-3.9,1.4,6,0.99,0.88],
+      body:[0,1.1,1],
+      lh:[58,107,-4,1.04,1],
+      ls:[58,107,0,1,1],
+      rh:[210,96,1,1,1,0.12],
+      rs:[210,96,0,1,1],
+      left:"47 111 | 39 118 34 130 35 141 | 35 153 41 164 49 170 | 55 174 64 168 71 161 | 78 152 80 140 81 129 | 83 118 79 111 71 108 | 63 104 53 106 47 111",
+      right:"204 103 | 214 98 223 108 228 120 | 233 132 233 144 228 153 | 225 159 216 164 207 165 | 199 165 193 156 192 146 | 189 134 190 123 194 113 | 197 107 200 105 204 103"
+    },
+    {
+      t:500,
+      head:[-4,3.2,6.8,1,0.8],
+      body:[0,2.5,1.01],
+      lh:[24,114,-10,0.83,1.05],
+      ls:[24,114,-16,1,0.85],
+      rh:[188,126,2,1,1,1],
+      rs:[188,126,4,1.4,0.83],
+      left:"33 121 | 21 116 13 115 13 128 | 11 140 13 155 20 163 | 25 170 34 170 41 162 | 48 154 52 143 54 132 | 58 120 58 113 51 109 | 44 107 39 116 33 121",
+      right:"179 134 | 188 126 202 120 210 128 | 219 138 222 153 216 167 | 212 179 204 186 194 185 | 182 185 172 178 168 167 | 164 156 164 146 168 140 | 170 136 175 135 179 134"
+    },
+    {
+      t:680,
+      head:[-3.3,0.6,5.3,1,0.85],
+      body:[-0.5,1.5,1],
+      lh:[24,108,-7,0.83,1],
+      ls:[24,108,-20,1.1,0.85],
+      rh:[176,110,-4,1.03,1.03,1],
+      rs:[176,110,-12,1.7,0.95],
+      left:"31 114 | 22 110 14 111 14 124 | 13 138 18 152 25 158 | 31 164 40 161 46 153 | 54 144 57 132 58 121 | 62 112 61 102 54 100 | 45 100 39 111 31 114",
+      right:"165 121 | 179 111 193 112 205 122 | 217 133 223 145 219 157 | 215 169 202 176 191 174 | 179 173 169 166 164 155 | 159 145 157 135 160 128 | 161 124 163 123 165 121"
+    },
+    {
+      t:840,
+      head:[-1.1,-0.5,2.2,1,1],
+      body:[-0.7,0,1],
+      lh:[62,96,-4,1,1],
+      ls:[62,96,0,1,1],
+      rh:[210,96,0,1,1,0.08],
+      rs:[210,96,0,1,1],
+      left:"51 97 | 43 103 37 113 35 126 | 33 138 38 152 44 159 | 50 165 59 163 67 157 | 75 149 79 137 81 125 | 84 113 82 104 75 99 | 68 94 58 93 51 97",
+      right:"204 103 | 214 98 223 107 228 119 | 233 131 233 142 228 151 | 225 158 216 162 207 163 | 199 163 193 155 192 145 | 189 133 190 122 194 112 | 197 106 200 105 204 103"
+    },
+    {
+      t:1020,
+      head:[-3.3,1.6,5.4,1,0.87],
+      body:[-0.2,1.5,1],
+      lh:[20,96,-9,0.82,1.1],
+      ls:[20,96,-24,1.2,0.95],
+      rh:[173,111,-4,1.01,1,1],
+      rs:[173,111,-12,1.65,0.98],
+      left:"28 101 | 18 98 8 99 8 111 | 6 124 9 141 17 149 | 24 157 35 154 43 146 | 51 137 55 125 56 115 | 60 105 61 97 54 93 | 46 92 37 100 28 101",
+      right:"163 123 | 176 113 191 116 202 127 | 214 138 219 150 214 163 | 211 173 199 179 188 176 | 176 174 166 165 162 155 | 157 145 155 135 158 128 | 159 125 161 124 163 123"
+    },
+    {
+      t:1180,
+      head:[-3.8,4.5,5.7,1,0.8],
+      body:[0.3,2.5,1],
+      lh:[46,120,-9,1.06,1],
+      ls:[46,120,-4,1,0.9],
+      rh:[208,114,8,1.06,1,0.2],
+      rs:[208,114,8,1.08,0.95],
+      left:"37 126 | 31 130 28 139 30 150 | 30 161 36 171 43 176 | 51 181 60 175 66 168 | 74 159 77 149 77 140 | 77 130 70 123 62 121 | 53 119 43 121 37 126",
+      right:"200 124 | 211 116 223 121 229 134 | 234 145 231 158 225 166 | 219 173 209 179 202 177 | 194 174 190 167 188 157 | 186 146 188 135 192 130 | 194 127 196 125 200 124"
+    }
+  ];
+
+  frames.forEach(f=>{
+    f.left=numbers(f.left);
+    f.right=numbers(f.right);
+  });
+
+  const fistRaised=numbers("200 87 | 202 82 206 79 207 74 | 207 68 209 64 213 62 | 217 61 222 64 224 69 | 227 75 224 81 221 86 | 221 92 217 98 211 101 | 207 104 201 102 198 98 | 197 95 198 90 200 87");
+  const fistForward=numbers("196 84 | 196 77 201 72 202 67 | 202 61 206 59 211 62 | 216 62 220 67 220 72 | 228 72 231 77 230 83 | 230 89 224 92 220 96 | 215 101 204 104 199 100 | 194 97 193 91 196 84");
+
+  const elements={
+    head:get("head"),
+    headClip:get("texture-head"),
+    body:get("body"),
+    bodyClip:get("texture-body"),
+    leftWing:get("left-wing-shape"),
+    rightWing:get("right-wing-shape"),
+    leftHand:get("hand-left"),
+    rightHand:get("hand-right"),
+    leftHandClip:get("texture-left-hand"),
+    rightHandClip:get("texture-right-hand"),
+    leftDetails:get("left-wing-details"),
+    rightDetails:get("right-wing-details"),
+    rightHandShape:get("right-hand-shape")
+  };
+
+  function transform(p,cx,cy){
+    return "translate("+p[0]+" "+p[1]+") rotate("+p[2]+") scale("+p[3]+" "+p[4]+") translate("+(-cx)+" "+(-cy)+")";
+  }
+
+  function render(t){
+    let time=Number(t);
+    if(!Number.isFinite(time)) time=0;
+    time=((time%1200)+1200)%1200;
+
+    let i=0;
+    while(i<frames.length-1 && time>=frames[i+1].t) i++;
+    const a=frames[i];
+    const b=frames[(i+1)%frames.length];
+    const end=i===frames.length-1 ? 1200 : b.t;
+    const u=(time-a.t)/(end-a.t);
+    const ease=u*u*(3-2*u);
+    const mix=(x,y)=>x.map((v,j)=>v+(y[j]-v)*ease);
+
+    const h=mix(a.head,b.head);
+    const headTransform="translate("+h[0]+" "+h[1]+") translate(124 65) rotate("+h[2]+") scale("+h[3]+" "+h[4]+") translate(-124 -65)";
+    elements.head.setAttribute("transform",headTransform);
+    elements.headClip.setAttribute("transform",headTransform);
+
+    const body=mix(a.body,b.body);
+    const bodyTransform="translate("+body[0]+" "+body[1]+") translate(124 0) scale("+body[2]+" 1) translate(-124 0)";
+    elements.body.setAttribute("transform",bodyTransform);
+    elements.bodyClip.setAttribute("transform",bodyTransform);
+
+    elements.leftWing.setAttribute("d",path(mix(a.left,b.left)));
+    elements.rightWing.setAttribute("d",path(mix(a.right,b.right)));
+
+    const lh=mix(a.lh,b.lh);
+    const rh=mix(a.rh,b.rh);
+    const leftTransform=transform(lh,70,94);
+    const rightTransform=transform(rh,212,83);
+    elements.leftHand.setAttribute("transform",leftTransform);
+    elements.leftHandClip.setAttribute("transform",leftTransform);
+    elements.rightHand.setAttribute("transform",rightTransform);
+    elements.rightHandClip.setAttribute("transform",rightTransform);
+
+    elements.leftDetails.setAttribute("transform",transform(mix(a.ls,b.ls),70,94));
+    elements.rightDetails.setAttribute("transform",transform(mix(a.rs,b.rs),212,83));
+    elements.rightHandShape.setAttribute("d",path(
+      fistRaised.map((v,j)=>v+(fistForward[j]-v)*rh[5])
+    ));
+  }
+
+  window.nwb={render:render};
+  render(0);
+})();
+</script>
+</body>
+</html>

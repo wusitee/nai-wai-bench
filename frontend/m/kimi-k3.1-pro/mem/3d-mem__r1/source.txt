@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大笑奶龙</title>
+<style>
+  html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #fff3dc; }
+  canvas { display: block; width: 240px; height: 240px; }
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xfff3dc);
+
+const renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true, antialias: true });
+renderer.setPixelRatio(1);
+renderer.setSize(240, 240);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+document.body.appendChild(renderer.domElement);
+
+const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+camera.position.set(0, 3.15, 10.2);
+camera.lookAt(0, 2.25, 0);
+
+scene.add(new THREE.HemisphereLight(0xfffbeb, 0x9b805c, 2.1));
+
+const key = new THREE.DirectionalLight(0xffffff, 3.0);
+key.position.set(4, 7, 7);
+key.castShadow = true;
+key.shadow.mapSize.set(1024, 1024);
+key.shadow.camera.left = -6;
+key.shadow.camera.right = 6;
+key.shadow.camera.top = 7;
+key.shadow.camera.bottom = -3;
+key.shadow.camera.near = 0.5;
+key.shadow.camera.far = 25;
+key.shadow.bias = -0.0005;
+scene.add(key);
+
+const backLight = new THREE.DirectionalLight(0xffe5a8, 1.8);
+backLight.position.set(-4, 5, -6);
+scene.add(backLight);
+
+const fillLight = new THREE.DirectionalLight(0xd9ecff, 1.0);
+fillLight.position.set(-6, 3, 4);
+scene.add(fillLight);
+
+const yellow = new THREE.MeshStandardMaterial({ color: 0xf7c843, roughness: 0.72 });
+const lightYellow = new THREE.MeshStandardMaterial({ color: 0xffd95c, roughness: 0.7 });
+const bellyMat = new THREE.MeshStandardMaterial({ color: 0xffedae, roughness: 0.82 });
+const spineMat = new THREE.MeshStandardMaterial({ color: 0xe9a52e, roughness: 0.78 });
+const darkMat = new THREE.MeshStandardMaterial({ color: 0x38231d, roughness: 0.9 });
+const mouthMat = new THREE.MeshStandardMaterial({ color: 0x491b24, roughness: 0.88 });
+const tongueMat = new THREE.MeshStandardMaterial({ color: 0xf17883, roughness: 0.75 });
+const toothMat = new THREE.MeshStandardMaterial({ color: 0xfffdf0, roughness: 0.55 });
+const cheekMat = new THREE.MeshStandardMaterial({ color: 0xf2a63c, roughness: 0.85 });
+
+const sphereGeo = new THREE.SphereGeometry(1, 40, 28);
+
+function ellipsoid(parent, name, position, scale, material) {
+  const mesh = new THREE.Mesh(sphereGeo, material);
+  mesh.name = name;
+  mesh.position.set(...position);
+  mesh.scale.set(...scale);
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  parent.add(mesh);
+  return mesh;
+}
+
+function capsuleBetween(parent, name, a, b, radius, material) {
+  const start = new THREE.Vector3(...a);
+  const end = new THREE.Vector3(...b);
+  const delta = end.clone().sub(start);
+  const length = Math.max(0.01, delta.length() - radius * 2);
+  const mesh = new THREE.Mesh(new THREE.CapsuleGeometry(radius, length, 8, 20), material);
+  mesh.name = name;
+  mesh.position.copy(start).add(end).multiplyScalar(0.5);
+  mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), delta.normalize());
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  parent.add(mesh);
+  return mesh;
+}
+
+function conePart(parent, name, position, radius, height, direction, material) {
+  const mesh = new THREE.Mesh(new THREE.ConeGeometry(radius, height, 20), material);
+  mesh.name = name;
+  mesh.position.set(...position);
+  mesh.quaternion.setFromUnitVectors(
+    new THREE.Vector3(0, 1, 0),
+    new THREE.Vector3(...direction).normalize()
+  );
+  mesh.castShadow = true;
+  parent.add(mesh);
+  return mesh;
+}
+
+const character = new THREE.Group();
+character.name = 'character-laughing-nailong';
+scene.add(character);
+
+const tail = new THREE.Group();
+tail.name = 'tail';
+character.add(tail);
+
+const tailCurve = new THREE.CatmullRomCurve3([
+  new THREE.Vector3(0.45, 1.20, -0.62),
+  new THREE.Vector3(1.05, 0.95, -1.00),
+  new THREE.Vector3(1.72, 0.58, -0.72),
+  new THREE.Vector3(2.00, 0.48, -0.05),
+  new THREE.Vector3(1.83, 0.65, 0.48),
+  new THREE.Vector3(1.55, 0.88, 0.62)
+]);
+const tailSegments = 48;
+const tailRadial = 16;
+const frames = tailCurve.computeFrenetFrames(tailSegments, false);
+const tailPositions = [];
+const tailIndices = [];
+
+for (let i = 0; i <= tailSegments; i++) {
+  const u = i / tailSegments;
+  const p = tailCurve.getPointAt(u);
+  const radius = 0.39 * Math.pow(1 - u, 0.82) + 0.012;
+  for (let j = 0; j <= tailRadial; j++) {
+    const angle = j / tailRadial * Math.PI * 2;
+    const normal = frames.normals[i].clone().multiplyScalar(Math.cos(angle))
+      .add(frames.binormals[i].clone().multiplyScalar(Math.sin(angle)));
+    const v = p.clone().addScaledVector(normal, radius);
+    tailPositions.push(v.x, v.y, v.z);
+  }
+}
+for (let i = 0; i < tailSegments; i++) {
+  for (let j = 0; j < tailRadial; j++) {
+    const a = i * (tailRadial + 1) + j;
+    const b = a + tailRadial + 1;
+    tailIndices.push(a, b, a + 1, b, b + 1, a + 1);
+  }
+}
+const tailTipIndex = tailPositions.length / 3;
+const tailTip = tailCurve.getPointAt(1);
+tailPositions.push(tailTip.x, tailTip.y, tailTip.z);
+for (let j = 0; j < tailRadial; j++) {
+  tailIndices.push(tailTipIndex, tailSegments * (tailRadial + 1) + j, tailSegments * (tailRadial + 1) + j + 1);
+}
+const tailGeo = new THREE.BufferGeometry();
+tailGeo.setAttribute('position', new THREE.Float32BufferAttribute(tailPositions, 3));
+tailGeo.setIndex(tailIndices);
+tailGeo.computeVertexNormals();
+const tailMesh = new THREE.Mesh(tailGeo, yellow);
+tailMesh.name = 'curled-tapered-tail';
+tailMesh.castShadow = true;
+tailMesh.receiveShadow = true;
+tail.add(tailMesh);
+
+const body = new THREE.Group();
+body.name = 'body';
+character.add(body);
+ellipsoid(body, 'round-torso', [0, 1.55, 0], [1.16, 1.36, 0.88], yellow);
+ellipsoid(body, 'cream-belly', [0, 1.43, 0.76], [0.83, 1.02, 0.22], bellyMat);
+ellipsoid(body, 'neck', [0, 2.55, -0.03], [0.82, 0.63, 0.70], yellow);
+
+conePart(body, 'upper-back-spike', [0, 2.35, -0.78], 0.19, 0.43, [0, 0.35, -1], spineMat);
+conePart(body, 'middle-back-spike', [0, 1.79, -0.88], 0.18, 0.40, [0, 0.15, -1], spineMat);
+conePart(body, 'lower-back-spike', [0, 1.23, -0.79], 0.15, 0.34, [0, 0.05, -1], spineMat);
+
+const legs = new THREE.Group();
+legs.name = 'legs-and-feet';
+character.add(legs);
+ellipsoid(legs, 'left-haunch', [-0.76, 0.72, 0.02], [0.66, 0.66, 0.67], yellow);
+ellipsoid(legs, 'right-haunch', [0.76, 0.72, 0.02], [0.66, 0.66, 0.67], yellow);
+
+const leftFoot = new THREE.Group();
+leftFoot.name = 'left-foot';
+legs.add(leftFoot);
+ellipsoid(leftFoot, 'left-foot-volume', [-0.78, 0.29, 0.52], [0.64, 0.30, 0.76], lightYellow);
+const rightFoot = new THREE.Group();
+rightFoot.name = 'right-foot';
+legs.add(rightFoot);
+ellipsoid(rightFoot, 'right-foot-volume', [0.78, 0.29, 0.52], [0.64, 0.30, 0.76], lightYellow);
+
+for (const side of [-1, 1]) {
+  const foot = side < 0 ? leftFoot : rightFoot;
+  for (let i = -1; i <= 1; i++) {
+    ellipsoid(
+      foot,
+      (side < 0 ? 'left' : 'right') + '-toe-' + (i + 2),
+      [side * 0.78 + i * 0.20, 0.34, 1.16 - Math.abs(i) * 0.05],
+      [0.115, 0.09, 0.13],
+      bellyMat
+    );
+  }
+}
+
+const arms = new THREE.Group();
+arms.name = 'arms';
+character.add(arms);
+
+const leftArm = new THREE.Group();
+leftArm.name = 'left-arm';
+arms.add(leftArm);
+capsuleBetween(leftArm, 'left-upper-arm', [-0.94, 2.16, 0.05], [-1.29, 1.60, 0.48], 0.25, yellow);
+capsuleBetween(leftArm, 'left-forearm', [-1.29, 1.60, 0.48], [-0.67, 1.46, 0.96], 0.23, yellow);
+
+const rightArm = new THREE.Group();
+rightArm.name = 'right-arm';
+arms.add(rightArm);
+capsuleBetween(rightArm, 'right-upper-arm', [0.94, 2.16, 0.05], [1.29, 1.60, 0.48], 0.25, yellow);
+capsuleBetween(rightArm, 'right-forearm', [1.29, 1.60, 0.48], [0.67, 1.46, 0.96], 0.23, yellow);
+
+const hands = new THREE.Group();
+hands.name = 'hands-holding-belly';
+arms.add(hands);
+ellipsoid(hands, 'left-hand', [-0.57, 1.47, 1.00], [0.39, 0.28, 0.24], lightYellow);
+ellipsoid(hands, 'right-hand', [0.57, 1.47, 1.00], [0.39, 0.28, 0.24], lightYellow);
+for (const side of [-1, 1]) {
+  for (let i = 0; i < 3; i++) {
+    ellipsoid(
+      hands,
+      (side < 0 ? 'left' : 'right') + '-finger-' + i,
+      [side * (0.42 + i * 0.105), 1.40 - i * 0.025, 1.19],
+      [0.075, 0.10, 0.07],
+      lightYellow
+    );
+  }
+}
+
+const head = new THREE.Group();
+head.name = 'head-tilted-back-laughing';
+head.position.set(0, 3.37, 0.03);
+head.rotation.x = -0.13;
+character.add(head);
+
+ellipsoid(head, 'large-round-head', [0, 0, 0], [1.50, 1.25, 1.12], yellow);
+ellipsoid(head, 'left-head-nub', [-0.57, 1.00, -0.08], [0.24, 0.29, 0.23], lightYellow);
+ellipsoid(head, 'right-head-nub', [0.57, 1.00, -0.08], [0.24, 0.29, 0.23], lightYellow);
+conePart(head, 'little-crown-spike', [0, 1.20, -0.18], 0.15, 0.31, [0, 1, -0.12], spineMat);
+ellipsoid(head, 'left-ear', [-1.37, 0.22, -0.12], [0.23, 0.31, 0.20], yellow);
+ellipsoid(head, 'right-ear', [1.37, 0.22, -0.12], [0.23, 0.31, 0.20], yellow);
+
+const eyes = new THREE.Group();
+eyes.name = 'eyes-closed-with-laughter';
+head.add(eyes);
+
+function laughingEye(name, x) {
+  const group = new THREE.Group();
+  group.name = name;
+  group.position.set(x, 0.50, 1.005);
+  const curve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(-0.28, -0.025, 0),
+    new THREE.Vector3(-0.15, 0.085, 0.018),
+    new THREE.Vector3(0, 0.125, 0.025),
+    new THREE.Vector3(0.15, 0.085, 0.018),
+    new THREE.Vector3(0.28, -0.025, 0)
+  ]);
+  const mesh = new THREE.Mesh(new THREE.TubeGeometry(curve, 28, 0.038, 10, false), darkMat);
+  mesh.castShadow = true;
+  group.add(mesh);
+  eyes.add(group);
+}
+laughingEye('left-happy-eye', -0.62);
+laughingEye('right-happy-eye', 0.62);
+
+ellipsoid(head, 'left-nostril', [-0.17, 0.17, 1.105], [0.047, 0.032, 0.026], darkMat);
+ellipsoid(head, 'right-nostril', [0.17, 0.17, 1.105], [0.047, 0.032, 0.026], darkMat);
+ellipsoid(head, 'left-laughing-cheek', [-1.05, -0.10, 0.79], [0.25, 0.13, 0.055], cheekMat);
+ellipsoid(head, 'right-laughing-cheek', [1.05, -0.10, 0.79], [0.25, 0.13, 0.055], cheekMat);
+
+const mouth = new THREE.Group();
+mouth.name = 'mouth-wide-open-laughing';
+mouth.position.set(0, -0.39, 0);
+head.add(mouth);
+
+ellipsoid(mouth, 'dark-mouth-cavity', [0, 0, 1.045], [0.96, 0.70, 0.15], mouthMat);
+const lip = new THREE.Mesh(new THREE.TorusGeometry(0.72, 0.068, 14, 64), lightYellow);
+lip.name = 'rounded-yellow-mouth-rim';
+lip.position.set(0, 0, 1.13);
+lip.scale.set(1.30, 0.94, 1);
+lip.castShadow = true;
+mouth.add(lip);
+
+ellipsoid(mouth, 'tongue', [0, -0.40, 1.185], [0.59, 0.245, 0.075], tongueMat);
+ellipsoid(mouth, 'tongue-highlight', [0, -0.33, 1.245], [0.34, 0.08, 0.025], new THREE.MeshStandardMaterial({
+  color: 0xff9ba2,
+  roughness: 0.8
+}));
+
+for (const side of [-1, 1]) {
+  const tooth = new THREE.Mesh(new RoundedBoxGeometry(0.29, 0.27, 0.11, 3, 0.045), toothMat);
+  tooth.name = side < 0 ? 'left-upper-tooth' : 'right-upper-tooth';
+  tooth.position.set(side * 0.25, 0.40, 1.19);
+  tooth.rotation.z = side * -0.07;
+  tooth.castShadow = true;
+  mouth.add(tooth);
+}
+
+const ground = new THREE.Mesh(
+  new THREE.PlaneGeometry(200, 200),
+  new THREE.MeshStandardMaterial({ color: 0xffedc9, roughness: 1 })
+);
+ground.name = 'ground';
+ground.rotation.x = -Math.PI / 2;
+ground.position.y = -0.025;
+ground.receiveShadow = true;
+scene.add(ground);
+
+function render(t) {
+  renderer.render(scene, camera);
+}
+
+window.nwb = {
+  scene,
+  renderer,
+  cameras: { ref: camera },
+  characters: [character],
+  render,
+  ready: true
+};
+
+render(0);
+</script>
+</body>
+</html>

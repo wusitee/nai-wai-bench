@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+html,body{margin:0;padding:0;width:216px;height:216px;overflow:hidden;background:#ebebeb;}
+canvas{display:block;position:absolute;left:0;top:0;width:216px;height:216px;}
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+
+const W = 216, H = 216;
+const renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true, antialias: true });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H);
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+
+// ---------- background gradient ----------
+function gradientTex() {
+  const c = document.createElement('canvas'); c.width = 4; c.height = 64;
+  const g = c.getContext('2d');
+  const gr = g.createLinearGradient(0, 0, 0, 64);
+  gr.addColorStop(0, '#f1f1f1');
+  gr.addColorStop(0.65, '#e8e8e8');
+  gr.addColorStop(0.9, '#dcdcdc');
+  gr.addColorStop(1, '#d4d4d4');
+  g.fillStyle = gr; g.fillRect(0, 0, 4, 64);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+scene.background = gradientTex();
+
+// ---------- camera ----------
+const camera = new THREE.PerspectiveCamera(26, 1, 0.1, 100);
+camera.position.set(0, 1.556, 7);
+camera.lookAt(0, 1.556, 0);
+
+// ---------- lights ----------
+const hemi = new THREE.HemisphereLight(0xffffff, 0x8a7a66, 1.8);
+scene.add(hemi);
+const key = new THREE.DirectionalLight(0xffffff, 2.0); key.position.set(-3, 5, 6); scene.add(key);
+const fill = new THREE.DirectionalLight(0xffffff, 0.5); fill.position.set(4, 1, 3); scene.add(fill);
+const rim = new THREE.DirectionalLight(0xffffff, 1.0); rim.position.set(1, 3, -6); scene.add(rim);
+
+// ---------- materials ----------
+const M = {
+  yellow: new THREE.MeshStandardMaterial({ color: 0xF2BE2C, roughness: 0.78 }),
+  belly: new THREE.MeshStandardMaterial({ color: 0xF6EDDA, roughness: 0.9 }),
+  hand: new THREE.MeshStandardMaterial({ color: 0x5a5a5a, roughness: 0.7 }),
+  mouth: new THREE.MeshBasicMaterial({ color: 0x170a08 }),
+  tongue: new THREE.MeshStandardMaterial({ color: 0x9a2c27, roughness: 0.6 }),
+  teeth: new THREE.MeshStandardMaterial({ color: 0xFAF8F0, roughness: 0.4 }),
+  eye: new THREE.MeshStandardMaterial({ color: 0x3a2614, roughness: 0.6 }),
+};
+
+const SPH = new THREE.SphereGeometry(1, 40, 24);
+const O = new THREE.Vector3();
+const UP = new THREE.Vector3(0, 1, 0);
+
+function segment(a, b, ra, rb, mat) {
+  const g = new THREE.Group();
+  const d = new THREE.Vector3().subVectors(b, a); const L = d.length();
+  const c = new THREE.Mesh(new THREE.CylinderGeometry(rb, ra, L, 24, 1, true), mat);
+  c.position.copy(a).addScaledVector(d, 0.5);
+  c.quaternion.setFromUnitVectors(UP, d.clone().normalize());
+  g.add(c);
+  const s = new THREE.Mesh(SPH, mat); s.scale.setScalar(ra); s.position.copy(a); g.add(s);
+  const e = new THREE.Mesh(SPH, mat); e.scale.setScalar(rb); e.position.copy(b); g.add(e);
+  return g;
+}
+
+function bandPatch(cx, rx, lowFn, upFn, surf, nu = 40, nv = 10) {
+  const pos = [], idx = [];
+  for (let i = 0; i <= nu; i++) {
+    const x = cx - rx * Math.cos(Math.PI * i / nu);
+    const yl = lowFn(x), yu = upFn(x);
+    for (let j = 0; j <= nv; j++) {
+      const y = yl + (yu - yl) * j / nv;
+      const p = surf(x, y); pos.push(p.x, p.y, p.z);
+    }
+  }
+  for (let i = 0; i < nu; i++) for (let j = 0; j < nv; j++) {
+    const a = i * (nv + 1) + j, b = a + nv + 1;
+    idx.push(a, b, a + 1, b, b + 1, a + 1);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  g.setIndex(idx); g.computeVertexNormals();
+  return g;
+}
+
+// ---------- character ----------
+const character = new THREE.Group();
+character.name = 'character-laughing-creature';
+character.position.set(0.2, 0, 0);
+scene.add(character);
+
+const HIP = 0.45;
+const P = (x, y, z) => new THREE.Vector3(x, y - HIP, z);
+
+const torso = new THREE.Group(); torso.name = 'torso';
+torso.position.set(0, HIP, 0);
+character.add(torso);
+
+// body profile
+const BY0 = 0.28, BY1 = 2.25, BK = 0.64 / 0.5234, BZ = 0.85;
+function rOf(y) {
+  const t = (y - BY0) / (BY1 - BY0);
+  if (t <= 0 || t >= 1) return 0;
+  return BK * Math.pow(t, 0.35) * Math.pow(1 - t, 0.65);
+}
+{
+  const pts = [];
+  const N = 64;
+  for (let i = 0; i <= N; i++) {
+    const t = (1 - Math.cos(Math.PI * i / N)) / 2;
+    const y = BY0 + t * (BY1 - BY0);
+    let r = rOf(y);
+    if (i === 0 || i === N) r = 0;
+    pts.push(new THREE.Vector2(Math.max(r, 0), y));
+  }
+  const g = new THREE.LatheGeometry(pts, 56);
+  g.scale(1, 1, BZ);
+  g.translate(0, -HIP, 0);
+  const body = new THREE.Mesh(g, M.yellow); body.name = 'body-shell';
+  torso.add(body);
+}
+
+// belly decal (cushion on body front)
+function bodySurfFactory(offFn) {
+  return (x, y) => {
+    const r = rOf(y);
+    const z = BZ * Math.sqrt(Math.max(r * r - x * x, 0));
+    const dr = (rOf(y + 0.005) - rOf(y - 0.005)) / 0.01;
+    const n = new THREE.Vector3(x, -r * dr, z / (BZ * BZ)).normalize();
+    return new THREE.Vector3(x, y, z).addScaledVector(n, offFn(x, y));
+  };
+}
+{
+  const cx = -0.03, cy = 1.1, rx = 0.47, ry = 0.6;
+  const h = (x) => ry * Math.sqrt(Math.max(0, 1 - ((x - cx) / rx) ** 2));
+  const off = (x, y) => {
+    const d2 = ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2;
+    return 0.012 + 0.06 * Math.pow(Math.max(0, 1 - d2), 0.7);
+  };
+  const g = bandPatch(cx, rx, x => cy - h(x), x => cy + h(x), bodySurfFactory(off), 44, 26);
+  g.translate(0, -HIP, 0);
+  const belly = new THREE.Mesh(g, M.belly); belly.name = 'belly';
+  torso.add(belly);
+}
+
+// ---------- head ----------
+const HA = 0.43, HB = 0.52, HC = 0.46;
+function surfPoint(x, y, off) {
+  const q = Math.max(1 - (x * x) / (HA * HA) - (y * y) / (HB * HB), 0);
+  const z = HC * Math.sqrt(q);
+  const n = new THREE.Vector3(x / (HA * HA), y / (HB * HB), z / (HC * HC)).normalize();
+  return new THREE.Vector3(x, y, z).addScaledVector(n, off);
+}
+const headSurf = (off) => (x, y) => surfPoint(x, y, off);
+
+const head = new THREE.Group(); head.name = 'head';
+head.position.copy(P(0, 2.48, 0.02));
+head.rotation.x = -0.3;
+torso.add(head);
+{
+  const shell = new THREE.Mesh(new THREE.SphereGeometry(1, 56, 36), M.yellow);
+  shell.scale.set(HA, HB, HC); shell.name = 'head-shell';
+  head.add(shell);
+}
+
+// mouth
+const mouth = new THREE.Group(); mouth.name = 'mouth'; head.add(mouth);
+{
+  const cx = 0, cy = -0.2, rx = 0.25, ry = 0.27;
+  const h = (x) => ry * Math.sqrt(Math.max(0, 1 - ((x - cx) / rx) ** 2));
+  const interior = new THREE.Mesh(
+    bandPatch(cx, rx, x => cy - h(x), x => cy + h(x), headSurf(0.004), 48, 14), M.mouth);
+  interior.name = 'mouth-interior'; mouth.add(interior);
+
+  const teethG = bandPatch(cx, rx * 0.9,
+    x => {
+      const up = cy + h(x) * 0.97;
+      const th = Math.min(0.1, h(x) * 0.45) * (0.72 + 0.28 * Math.abs(Math.cos(x * Math.PI / 0.075)));
+      return up - th;
+    },
+    x => cy + h(x) * 0.97, headSurf(0.01), 72, 6);
+  const teeth = new THREE.Mesh(teethG, M.teeth); teeth.name = 'teeth'; mouth.add(teeth);
+
+  const tw = 0.17;
+  const tongueG = bandPatch(cx, tw,
+    x => cy - h(x) * 0.96,
+    x => cy - h(x) * 0.96 + 0.15 * Math.sqrt(Math.max(0, 1 - ((x - cx) / tw) ** 2)),
+    headSurf(0.009), 36, 8);
+  const tongue = new THREE.Mesh(tongueG, M.tongue); tongue.name = 'tongue'; mouth.add(tongue);
+
+  const lipPts = [];
+  for (let k = 0; k < 64; k++) {
+    const a = 2 * Math.PI * k / 64;
+    lipPts.push(surfPoint(cx + rx * Math.cos(a), cy + ry * Math.sin(a), 0.006));
+  }
+  const lipCurve = new THREE.CatmullRomCurve3(lipPts, true);
+  const lips = new THREE.Mesh(new THREE.TubeGeometry(lipCurve, 128, 0.034, 10, true), M.yellow);
+  lips.name = 'lips'; mouth.add(lips);
+}
+
+// eyes (closed, happy arcs)
+const eyes = new THREE.Group(); eyes.name = 'eyes'; head.add(eyes);
+for (const s of [1, -1]) {
+  const eg = new THREE.Group(); eg.name = s > 0 ? 'eye-left' : 'eye-right';
+  const ex = s * 0.19, ey = 0.32, w = 0.085;
+  const pts = [];
+  for (let k = 0; k <= 16; k++) {
+    const dx = -w + 2 * w * k / 16;
+    const y = ey + 0.045 * (1 - (dx / w) ** 2) - s * dx * 0.12;
+    pts.push(surfPoint(ex + dx, y, 0.01));
+  }
+  const curve = new THREE.CatmullRomCurve3(pts);
+  const tube = new THREE.Mesh(new THREE.TubeGeometry(curve, 32, 0.019, 8, false), M.eye);
+  eg.add(tube);
+  for (const p of [pts[0], pts[pts.length - 1]]) {
+    const cap = new THREE.Mesh(SPH, M.eye); cap.scale.setScalar(0.019); cap.position.copy(p); eg.add(cap);
+  }
+  eyes.add(eg);
+}
+
+// ---------- hands ----------
+const FING = new THREE.CapsuleGeometry(0.032, 0.09, 4, 12);
+const THUMB = new THREE.CapsuleGeometry(0.033, 0.06, 4, 12);
+function makeHand(side, name) {
+  const g = new THREE.Group(); g.name = name;
+  const palm = new THREE.Mesh(SPH, M.hand); palm.name = name + '-palm';
+  palm.scale.set(0.12, 0.105, 0.07); palm.position.set(0, -0.07, 0.01);
+  g.add(palm);
+  const angs = [-0.65, -0.22, 0.22, 0.65];
+  angs.forEach((a, i) => {
+    const f = new THREE.Group(); f.name = name + '-finger-' + i;
+    f.position.set(side * Math.sin(a) * 0.085, -0.07 - Math.cos(a) * 0.075, 0.01);
+    f.rotation.z = side * a;
+    const m = new THREE.Mesh(FING, M.hand); m.position.y = -0.065;
+    if (i === 1 || i === 2) m.scale.y = 1.08;
+    f.add(m); g.add(f);
+  });
+  const th = new THREE.Group(); th.name = name + '-thumb';
+  th.position.set(-side * 0.09, -0.05, 0.04);
+  th.rotation.set(0.35, 0, -side * 1.05);
+  const tm = new THREE.Mesh(THUMB, M.hand); tm.position.y = -0.05; th.add(tm);
+  g.add(th);
+  return g;
+}
+
+// ---------- arms ----------
+function makeArm(s, name) {
+  const arm = new THREE.Group(); arm.name = name;
+  arm.position.copy(P(s * 0.46, 1.68, 0.0));
+  const elbow = new THREE.Vector3(s * 0.25, -0.6, 0.06);
+  const upper = segment(O, elbow, 0.19, 0.155, M.yellow); upper.name = name + '-upper';
+  arm.add(upper);
+  const fore = new THREE.Group(); fore.name = name.replace('arm', 'forearm');
+  fore.position.copy(elbow); arm.add(fore);
+  const wrist = new THREE.Vector3(-s * 0.19, -0.5, 0.12);
+  const fseg = segment(O, wrist, 0.155, 0.105, M.yellow); fseg.name = fore.name + '-mesh';
+  fore.add(fseg);
+  const hand = makeHand(s, name.replace('arm', 'hand'));
+  hand.position.copy(wrist);
+  hand.rotation.z = s * 0.15;
+  fore.add(hand);
+  return arm;
+}
+const armL = makeArm(1, 'arm-left');
+const armR = makeArm(-1, 'arm-right');
+torso.add(armL, armR);
+
+// ---------- legs ----------
+function makeLeg(s, name) {
+  const leg = new THREE.Group(); leg.name = name;
+  leg.position.set(s * 0.24, 0.5, 0.05);
+  const knee = new THREE.Vector3(s * 0.12, -0.2, 0.28);
+  const thigh = segment(O, knee, 0.2, 0.155, M.yellow); thigh.name = name + '-thigh';
+  leg.add(thigh);
+  const shin = new THREE.Group(); shin.name = name.replace('leg', 'shin');
+  shin.position.copy(knee); leg.add(shin);
+  const ankle = new THREE.Vector3(-s * 0.02, -0.22, -0.1);
+  shin.add(segment(O, ankle, 0.155, 0.11, M.yellow));
+  const foot = new THREE.Group(); foot.name = name.replace('leg', 'foot');
+  foot.position.copy(ankle); shin.add(foot);
+  const fm = new THREE.Mesh(SPH, M.yellow);
+  fm.scale.set(0.13, 0.075, 0.2); fm.position.set(s * 0.02, -0.005, 0.09);
+  foot.add(fm);
+  return leg;
+}
+character.add(makeLeg(1, 'leg-left'), makeLeg(-1, 'leg-right'));
+
+// ---------- ground shadow ----------
+function shadowTex() {
+  const c = document.createElement('canvas'); c.width = 64; c.height = 64;
+  const g = c.getContext('2d');
+  const gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+  gr.addColorStop(0, 'rgba(0,0,0,0.32)');
+  gr.addColorStop(0.55, 'rgba(0,0,0,0.14)');
+  gr.addColorStop(1, 'rgba(0,0,0,0)');
+  g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+const shadow = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 1.8),
+  new THREE.MeshBasicMaterial({ map: shadowTex(), transparent: true, depthWrite: false }));
+shadow.name = 'ground-shadow';
+shadow.rotation.x = -Math.PI / 2;
+shadow.position.set(0.2, 0.002, 0.15);
+scene.add(shadow);
+
+// ---------- API ----------
+function render(t) {
+  renderer.render(scene, camera);
+}
+render(0);
+
+window.nwb = {
+  scene,
+  renderer,
+  cameras: { ref: camera },
+  characters: [character],
+  render,
+  ready: true
+};
+</script>
+</body>
+</html>

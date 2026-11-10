@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+html,body{margin:0;padding:0;width:240px;height:294px;overflow:hidden;background:#fffdf0;}
+canvas{display:block;position:absolute;left:0;top:0;width:240px;height:294px;}
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+
+const W = 240, H = 294;
+const renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true, antialias: true });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+
+// Background: bright glow, white center, pale yellow edges
+{
+  const c = document.createElement('canvas'); c.width = 64; c.height = 64;
+  const g = c.getContext('2d');
+  const grd = g.createRadialGradient(34, 26, 4, 32, 30, 46);
+  grd.addColorStop(0, '#ffffff');
+  grd.addColorStop(0.45, '#fffef4');
+  grd.addColorStop(0.8, '#f8f2c4');
+  grd.addColorStop(1, '#efe49a');
+  g.fillStyle = grd; g.fillRect(0, 0, 64, 64);
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  scene.background = tex;
+}
+
+// Camera
+const camera = new THREE.PerspectiveCamera(2 * Math.atan(1.9 / 10) * 180 / Math.PI, W / H, 0.1, 100);
+camera.position.set(0, 0, 10);
+camera.lookAt(0, 0, 0);
+
+// Lights
+scene.add(new THREE.HemisphereLight(0xffffff, 0xd8c890, 1.6));
+const key = new THREE.DirectionalLight(0xffffff, 1.8); key.position.set(1, 2, 6); scene.add(key);
+const fill = new THREE.DirectionalLight(0xfff6e0, 0.7); fill.position.set(-4, 1, 3); scene.add(fill);
+const rim = new THREE.DirectionalLight(0xffffff, 1.0); rim.position.set(0, 3, -6); scene.add(rim);
+const rim2 = new THREE.DirectionalLight(0xffffff, 0.6); rim2.position.set(5, -1, -3); scene.add(rim2);
+
+// Materials
+const yellow = new THREE.MeshStandardMaterial({ color: 0xebcc38, roughness: 0.55, emissive: 0x3a2e00, emissiveIntensity: 0.35 });
+const handMat = new THREE.MeshStandardMaterial({ color: 0x4d4a26, roughness: 0.7 });
+const eyeMat = new THREE.MeshStandardMaterial({ color: 0x5a4a20, roughness: 0.8 });
+const cheekMat = new THREE.MeshStandardMaterial({ color: 0xf0a090, roughness: 0.8, transparent: true, opacity: 0.45 });
+
+let bellyMat;
+{
+  const c = document.createElement('canvas'); c.width = 64; c.height = 64;
+  const g = c.getContext('2d');
+  const grd = g.createLinearGradient(0, 0, 0, 64);
+  grd.addColorStop(0, '#f2c49a');
+  grd.addColorStop(0.25, '#f4c2b8');
+  grd.addColorStop(0.45, '#fbf2ec');
+  grd.addColorStop(0.58, '#fbf6f2');
+  grd.addColorStop(0.75, '#ecbccc');
+  grd.addColorStop(1, '#ebc0a8');
+  g.fillStyle = grd; g.fillRect(0, 0, 64, 64);
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  bellyMat = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.5, emissive: 0x302020, emissiveIntensity: 0.3 });
+}
+
+function limb(a, b, r, mat, name) {
+  const A = new THREE.Vector3(...a), B = new THREE.Vector3(...b);
+  const d = B.clone().sub(A);
+  const len = d.length();
+  const m = new THREE.Mesh(new THREE.CapsuleGeometry(r, len, 6, 14), mat);
+  m.position.copy(A).add(B).multiplyScalar(0.5);
+  m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize());
+  if (name) m.name = name;
+  return m;
+}
+
+// Character
+const bird = new THREE.Group(); bird.name = 'character-bird';
+scene.add(bird);
+
+// Body
+const body = new THREE.Group(); body.name = 'body';
+bird.add(body);
+{
+  const prof = [
+    [0, 1.15], [0.30, 1.1], [0.33, 1.0], [0.45, 0.7], [0.6, 0.4], [0.71, 0.0],
+    [0.72, -0.4], [0.62, -0.8], [0.45, -1.1], [0.22, -1.26], [0, -1.3]
+  ].map(p => new THREE.Vector2(p[0], p[1]));
+  const curve = new THREE.SplineCurve(prof);
+  const pts = curve.getPoints(60);
+  pts[0].x = 0; pts[pts.length - 1].x = 0;
+  const geo = new THREE.LatheGeometry(pts, 40);
+  const torso = new THREE.Mesh(geo, yellow);
+  torso.name = 'torso';
+  torso.scale.set(1, 1, 0.88);
+  torso.position.set(-0.2, 0, 0);
+  body.add(torso);
+
+  const belly = new THREE.Mesh(new THREE.SphereGeometry(1, 40, 32), bellyMat);
+  belly.name = 'belly';
+  belly.scale.set(0.62, 0.88, 0.5);
+  belly.position.set(-0.19, -0.25, 0.22);
+  body.add(belly);
+}
+
+// Head
+const head = new THREE.Group(); head.name = 'head';
+head.position.set(-0.28, 1.0, 0);
+head.rotation.z = 0.05;
+bird.add(head);
+{
+  const h = new THREE.Mesh(new THREE.SphereGeometry(1, 40, 32), yellow);
+  h.name = 'skull';
+  h.scale.set(0.31, 0.88, 0.3);
+  h.position.set(0, 0.0, 0);
+  head.add(h);
+
+  const eyes = new THREE.Group(); eyes.name = 'eyes';
+  head.add(eyes);
+  const eyeGeo = new THREE.CapsuleGeometry(0.014, 0.08, 4, 8);
+  const mkEye = (x, name, rot) => {
+    const g = new THREE.Group(); g.name = name;
+    const e = new THREE.Mesh(eyeGeo, eyeMat);
+    e.rotation.z = Math.PI / 2 + rot;
+    g.add(e);
+    g.position.set(x, 0.36, 0.25);
+    g.rotation.y = x * 2.2;
+    eyes.add(g);
+  };
+  mkEye(-0.12, 'eye-left', -0.12);
+  mkEye(0.12, 'eye-right', 0.12);
+
+  const cheeks = new THREE.Group(); cheeks.name = 'cheeks';
+  head.add(cheeks);
+  for (const x of [-0.14, 0.14]) {
+    const c = new THREE.Mesh(new THREE.SphereGeometry(0.06, 16, 12), cheekMat);
+    c.scale.set(1, 0.6, 0.4);
+    c.position.set(x, 0.16, 0.255);
+    cheeks.add(c);
+  }
+  const mouth = new THREE.Group(); mouth.name = 'mouth';
+  mouth.position.set(0, 0.12, 0.29);
+  head.add(mouth);
+}
+
+// Hand builder
+function makeHand(name, side) {
+  const g = new THREE.Group(); g.name = name;
+  const palm = new THREE.Mesh(new THREE.SphereGeometry(1, 20, 16), handMat);
+  palm.scale.set(0.1, 0.11, 0.045);
+  palm.position.set(0, -0.08, 0);
+  g.add(palm);
+  const fingers = new THREE.Group(); fingers.name = name + '-fingers';
+  g.add(fingers);
+  const angs = [-0.45, -0.15, 0.15, 0.42];
+  angs.forEach((a, i) => {
+    const len = i === 0 || i === 3 ? 0.12 : 0.15;
+    const sx = Math.sin(a) * 0.08, sy = -0.14;
+    const ex = sx + Math.sin(a) * len, ey = sy - Math.cos(a) * len;
+    fingers.add(limb([sx, sy, 0], [ex, ey, 0], 0.024, handMat));
+  });
+  // thumb
+  fingers.add(limb([side * -0.06, -0.06, 0.03], [side * -0.12, -0.17, 0.07], 0.026, handMat));
+  return g;
+}
+
+function makeArm(name, shoulder, wrist, side) {
+  const arm = new THREE.Group(); arm.name = name;
+  arm.position.set(...shoulder);
+  bird.add(arm);
+  const rel = [wrist[0] - shoulder[0], wrist[1] - shoulder[1], wrist[2] - shoulder[2]];
+  const upper = limb([0, 0, 0], rel, 0.11, yellow, name + '-limb');
+  arm.add(upper);
+  const hand = makeHand(side < 0 ? 'hand-left' : 'hand-right', side);
+  hand.position.set(rel[0], rel[1] + 0.02, rel[2]);
+  hand.rotation.z = side * -0.15;
+  arm.add(hand);
+  return arm;
+}
+makeArm('arm-left', [-0.72, 0.5, 0], [-1.04, -0.62, 0.05], -1);
+makeArm('arm-right', [0.3, 0.55, 0], [0.57, -0.66, 0.05], 1);
+
+// Legs
+function makeLeg(name, x) {
+  const leg = new THREE.Group(); leg.name = name;
+  leg.position.set(x, -1.0, 0);
+  bird.add(leg);
+  const l = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.19, 1.1, 20), yellow);
+  l.position.y = -0.55;
+  leg.add(l);
+  const knee = new THREE.Mesh(new THREE.SphereGeometry(0.19, 20, 14), yellow);
+  leg.add(knee);
+  const foot = new THREE.Group(); foot.name = name + '-foot';
+  foot.position.y = -1.1;
+  leg.add(foot);
+  const f = new THREE.Mesh(new THREE.SphereGeometry(1, 20, 14), yellow);
+  f.scale.set(0.16, 0.08, 0.26);
+  f.position.z = 0.1;
+  foot.add(f);
+  return leg;
+}
+makeLeg('leg-left', -0.5);
+makeLeg('leg-right', -0.08);
+
+function render(t) {
+  renderer.render(scene, camera);
+}
+render(0);
+
+window.nwb = { scene, renderer, cameras: { ref: camera }, characters: [bird], render, ready: true };
+</script>
+</body>
+</html>

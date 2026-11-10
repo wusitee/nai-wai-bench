@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+html,body{margin:0;padding:0;width:240px;height:240px;overflow:hidden;background:#bfe3ff;}
+canvas{display:block;position:absolute;left:0;top:0;width:240px;height:240px;}
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+
+const renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true, antialias: true });
+renderer.setPixelRatio(1);
+renderer.setSize(240, 240);
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xbfe3ff);
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0x998866, 1.6));
+const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(2, 4, 5); scene.add(key);
+const back = new THREE.DirectionalLight(0xffffff, 0.9); back.position.set(-3, 3, -5); scene.add(back);
+const side = new THREE.DirectionalLight(0xffffff, 0.5); side.position.set(-5, 1, 1); scene.add(side);
+
+const mat = (c, r = 0.55) => new THREE.MeshStandardMaterial({ color: c, roughness: r, metalness: 0 });
+const yellow = mat(0xffd23a);
+const cream = mat(0xfff0b0);
+const black = mat(0x1a1410, 0.4);
+const mouthMat = mat(0x8a1e22, 0.5);
+const tongueMat = mat(0xff7f8a, 0.5);
+const cheekMat = mat(0xff9a8a, 0.7);
+const toothMat = mat(0xffffff, 0.4);
+
+// body ellipsoid params
+const A = 1.0, B = 1.15, C = 0.95, CY = 1.15;
+function surf(x, y, off = 0) {
+  const ny = (y - CY) / B, nx = x / A;
+  const z = C * Math.sqrt(Math.max(0, 1 - nx * nx - ny * ny));
+  const n = new THREE.Vector3(x / (A * A), (y - CY) / (B * B), z / (C * C)).normalize();
+  const p = new THREE.Vector3(x, y, z).addScaledVector(n, off);
+  return { p, n };
+}
+function placeOn(obj, x, y, off) {
+  const { p, n } = surf(x, y, off);
+  obj.position.copy(p);
+  obj.lookAt(p.clone().add(n));
+}
+
+const character = new THREE.Group(); character.name = 'nailong';
+scene.add(character);
+
+// body
+const bodyG = new THREE.Group(); bodyG.name = 'body'; character.add(bodyG);
+const body = new THREE.Mesh(new THREE.SphereGeometry(1, 48, 36), yellow);
+body.scale.set(A, B, C); body.position.y = CY; bodyG.add(body);
+
+const belly = new THREE.Mesh(new THREE.SphereGeometry(1, 40, 30), cream);
+belly.scale.set(0.68, 0.58, 0.42); belly.position.set(0, 0.68, 0.53); bodyG.add(belly);
+
+// head (face parts)
+const head = new THREE.Group(); head.name = 'head'; character.add(head);
+
+// eyes: laughing ^ ^ arcs
+const eyes = new THREE.Group(); eyes.name = 'eyes'; head.add(eyes);
+[-1, 1].forEach(s => {
+  const eg = new THREE.Group(); eg.name = s < 0 ? 'eye-right' : 'eye-left';
+  const arc = new THREE.Mesh(new THREE.TorusGeometry(0.11, 0.035, 10, 20, Math.PI), black);
+  arc.position.y = -0.04;
+  const caps = [0, Math.PI].map(a => {
+    const c = new THREE.Mesh(new THREE.SphereGeometry(0.035, 10, 8), black);
+    c.position.set(Math.cos(a) * 0.11, -0.04, 0); return c;
+  });
+  eg.add(arc, ...caps);
+  placeOn(eg, s * 0.36, 1.72, 0.0);
+  eyes.add(eg);
+});
+
+// cheeks
+const cheeks = new THREE.Group(); cheeks.name = 'cheeks'; head.add(cheeks);
+[-1, 1].forEach(s => {
+  const c = new THREE.Mesh(new THREE.SphereGeometry(1, 20, 14), cheekMat);
+  c.scale.set(0.13, 0.08, 0.03);
+  placeOn(c, s * 0.6, 1.45, 0.0);
+  cheeks.add(c);
+});
+
+// mouth: big open D shape
+const mouth = new THREE.Group(); mouth.name = 'mouth'; head.add(mouth);
+const shape = new THREE.Shape();
+const mw = 0.42, mh = 0.4;
+shape.moveTo(-mw, 0);
+shape.lineTo(mw, 0);
+shape.absellipse(0, 0, mw, mh, 0, -Math.PI, true);
+const mGeo = new THREE.ExtrudeGeometry(shape, { depth: 0.06, bevelEnabled: true, bevelThickness: 0.03, bevelSize: 0.03, bevelSegments: 4, curveSegments: 32 });
+const mMesh = new THREE.Mesh(mGeo, mouthMat);
+mMesh.position.z = -0.05;
+mouth.add(mMesh);
+const tongue = new THREE.Mesh(new THREE.SphereGeometry(1, 24, 16), tongueMat);
+tongue.scale.set(0.24, 0.14, 0.06);
+tongue.position.set(0, -0.26, 0.05);
+mouth.add(tongue);
+const teeth = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.06, 0.04), toothMat);
+teeth.position.set(0, -0.04, 0.05);
+mouth.add(teeth);
+placeOn(mouth, 0, 1.42, -0.02);
+
+// arms
+const arms = new THREE.Group(); arms.name = 'arms'; character.add(arms);
+[-1, 1].forEach(s => {
+  const ag = new THREE.Group(); ag.name = s < 0 ? 'arm-right' : 'arm-left';
+  ag.position.set(s * 0.88, 1.0, 0.25);
+  const arm = new THREE.Mesh(new THREE.CapsuleGeometry(0.15, 0.32, 8, 16), yellow);
+  arm.position.set(s * 0.18, 0.05, 0.05);
+  arm.rotation.z = s * 1.0;
+  arm.rotation.x = -0.3;
+  ag.add(arm);
+  const hand = new THREE.Group(); hand.name = s < 0 ? 'hand-right' : 'hand-left';
+  const hm = new THREE.Mesh(new THREE.SphereGeometry(0.17, 16, 12), yellow);
+  hand.position.set(s * 0.36, 0.18, 0.12);
+  hand.add(hm);
+  ag.add(hand);
+  arms.add(ag);
+});
+
+// feet
+const feet = new THREE.Group(); feet.name = 'feet'; character.add(feet);
+[-1, 1].forEach(s => {
+  const f = new THREE.Mesh(new THREE.SphereGeometry(1, 24, 16), yellow);
+  f.name = s < 0 ? 'foot-right' : 'foot-left';
+  f.scale.set(0.28, 0.16, 0.38);
+  f.position.set(s * 0.42, 0.12, 0.25);
+  feet.add(f);
+});
+
+// tail
+const tail = new THREE.Group(); tail.name = 'tail'; character.add(tail);
+const tm = new THREE.Mesh(new THREE.ConeGeometry(0.28, 0.7, 20), yellow);
+tm.rotation.x = -Math.PI / 2 - 0.6;
+tm.position.set(0, 0.42, -0.95);
+tail.add(tm);
+const tb = new THREE.Mesh(new THREE.SphereGeometry(0.28, 16, 12), yellow);
+tb.position.set(0, 0.55, -0.8);
+tail.add(tb);
+
+const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+camera.position.set(0, 1.5, 5.6);
+camera.lookAt(0, 1.12, 0);
+
+function render(t) {
+  renderer.render(scene, camera);
+}
+render(0);
+
+window.nwb = { scene, renderer, cameras: { ref: camera }, characters: [character], render, ready: true };
+</script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; padding: 0; width: 240px; height: 242px; overflow: hidden; background: #ddd5c8; }
+  svg { display: block; position: absolute; left: 0; top: 0; }
+</style>
+</head>
+<body>
+<svg id="scene" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 242" width="240" height="242">
+  <defs>
+    <filter id="blur3" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <filter id="blur1" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1"/>
+    </filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+    <radialGradient id="bodyLeft" cx="0.42" cy="0.3" r="0.75">
+      <stop offset="0" stop-color="#fde07a"/>
+      <stop offset="0.45" stop-color="#f6c431"/>
+      <stop offset="0.85" stop-color="#e9a91f"/>
+      <stop offset="1" stop-color="#d9921a"/>
+    </radialGradient>
+    <radialGradient id="bodyRight" cx="0.4" cy="0.25" r="0.8">
+      <stop offset="0" stop-color="#fde27c"/>
+      <stop offset="0.45" stop-color="#f7c533"/>
+      <stop offset="0.85" stop-color="#eaab20"/>
+      <stop offset="1" stop-color="#d8921a"/>
+    </radialGradient>
+    <radialGradient id="belly" cx="0.45" cy="0.4" r="0.65">
+      <stop offset="0" stop-color="#fbf1da"/>
+      <stop offset="0.7" stop-color="#efdcb4"/>
+      <stop offset="1" stop-color="#e9c98a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="armGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8cb3e"/>
+      <stop offset="1" stop-color="#e3a01e"/>
+    </linearGradient>
+    <linearGradient id="deskGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cfa77d"/>
+      <stop offset="1" stop-color="#b98e63"/>
+    </linearGradient>
+    <linearGradient id="boardGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c3330"/>
+      <stop offset="1" stop-color="#2b4741"/>
+    </linearGradient>
+    <linearGradient id="wallGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ece7de"/>
+      <stop offset="1" stop-color="#d6cdbf"/>
+    </linearGradient>
+    <linearGradient id="pageGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6f3ec"/>
+      <stop offset="1" stop-color="#e2ddd2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ============ BACKGROUND ============ -->
+  <g id="background">
+    <rect id="wall" x="0" y="0" width="240" height="242" fill="url(#wallGrad)"/>
+    <g id="chalkboard" filter="url(#blur1)">
+      <path d="M50,0 L240,0 L240,50 L50,44 Z" fill="url(#boardGrad)"/>
+      <path d="M50,44 L240,50 L240,54 L50,48 Z" fill="#8f8270"/>
+    </g>
+    <g id="back-room" filter="url(#blur3)">
+      <rect x="0" y="60" width="240" height="140" fill="#d3c8b6"/>
+      <rect x="0" y="0" width="52" height="70" fill="#efebe4"/>
+      <path d="M0,92 L30,90 L30,100 L0,102 Z" fill="#8c6a4b"/>
+      <rect x="2" y="100" width="4" height="40" fill="#6b4f37"/>
+      <path d="M196,92 L240,88 L240,104 L196,106 Z" fill="#8a6849"/>
+      <rect x="226" y="104" width="8" height="40" fill="#6d5038"/>
+      <path d="M200,110 L240,108 L240,130 L200,132 Z" fill="#9a7856"/>
+      <rect x="180" y="60" width="60" height="30" fill="#c9bca8"/>
+    </g>
+  </g>
+
+  <!-- ============ DESK ============ -->
+  <g id="desk">
+    <path d="M0,192 L240,196 L240,242 L0,242 Z" fill="url(#deskGrad)"/>
+  </g>
+
+  <!-- ============ LEFT CHARACTER ============ -->
+  <g id="character-left">
+    <ellipse cx="66" cy="208" rx="58" ry="8" fill="#7a5a3a" opacity="0.35" filter="url(#soft)"/>
+    <g id="left-body">
+      <path id="left-body-shape" d="M18,208 C4,182 3,135 20,102 C33,72 48,55 70,55 C96,55 113,72 119,98 C126,128 126,172 116,208 Z" fill="url(#bodyLeft)"/>
+      <g id="left-belly">
+        <ellipse cx="73" cy="172" rx="40" ry="34" fill="url(#belly)"/>
+      </g>
+    </g>
+    <g id="left-head">
+      <g id="left-eyes">
+        <g id="left-eye-l">
+          <ellipse cx="52" cy="90" rx="7" ry="9" fill="#1b1d2c"/>
+          <circle cx="54.5" cy="86.5" r="2" fill="#ffffff" opacity="0.9"/>
+        </g>
+        <g id="left-eye-r">
+          <ellipse cx="86" cy="88" rx="7" ry="9" fill="#1b1d2c"/>
+          <circle cx="88.5" cy="84.5" r="2" fill="#ffffff" opacity="0.9"/>
+        </g>
+      </g>
+      <g id="left-mouth">
+        <path d="M64,108 Q69,110 74,108" stroke="#b8781a" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.7"/>
+      </g>
+    </g>
+    <g id="left-arm-writing">
+      <path id="left-arm-shape" d="M14,140 C6,165 9,192 22,205 C32,213 46,205 42,192 C36,176 31,160 30,142 Z" fill="url(#armGrad)"/>
+      <g id="left-hand-pencil">
+        <g id="left-pencil">
+          <line x1="17" y1="170" x2="38" y2="212" stroke="#4a4a4f" stroke-width="3" stroke-linecap="round"/>
+          <line x1="17" y1="170" x2="21" y2="178" stroke="#7a7a80" stroke-width="2.4" stroke-linecap="round"/>
+          <line x1="36" y1="208" x2="38.5" y2="213" stroke="#d9b58a" stroke-width="2.6" stroke-linecap="round"/>
+        </g>
+        <g id="left-hand">
+          <path d="M22,196 C20,203 26,209 33,206 C38,204 40,198 36,194 C32,190 25,191 22,196 Z" fill="#f2b52a"/>
+          <path d="M27,200 Q30,203 34,201" stroke="#c98a18" stroke-width="0.8" fill="none"/>
+          <path d="M25,196 Q28,198 31,196" stroke="#c98a18" stroke-width="0.8" fill="none"/>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- ============ RIGHT CHARACTER ============ -->
+  <g id="character-right">
+    <ellipse cx="185" cy="214" rx="55" ry="8" fill="#7a5a3a" opacity="0.35" filter="url(#soft)"/>
+    <g id="right-body">
+      <path id="right-body-shape" d="M106,92 C101,62 116,42 140,42 C166,42 186,56 196,76 C216,96 236,130 239,170 C241,196 231,216 202,219 L142,216 C128,202 122,172 126,142 C116,128 109,110 106,92 Z" fill="url(#bodyRight)"/>
+      <ellipse id="right-belly" cx="190" cy="170" rx="34" ry="32" fill="url(#belly)"/>
+    </g>
+    <g id="right-head">
+      <g id="right-eyes">
+        <g id="right-eye-l">
+          <ellipse cx="122" cy="68" rx="6.5" ry="8.5" fill="#1b1d2c"/>
+          <circle cx="124.3" cy="64.8" r="1.9" fill="#ffffff" opacity="0.9"/>
+        </g>
+        <g id="right-eye-r">
+          <ellipse cx="149" cy="70" rx="6.5" ry="8.5" fill="#1b1d2c"/>
+          <circle cx="151.3" cy="66.8" r="1.9" fill="#ffffff" opacity="0.9"/>
+        </g>
+      </g>
+      <g id="right-mouth">
+        <path d="M123,87 Q129,92 135,87" stroke="#3a2a1a" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      </g>
+    </g>
+    <g id="right-arm-reaching">
+      <path id="right-arm-shape" d="M124,106 C110,124 99,150 97,170 C95,186 110,194 118,184 C124,166 136,142 148,124 Z" fill="url(#armGrad)"/>
+      <g id="right-hand-reaching">
+        <path d="M92,178 C88,186 94,196 104,197 C114,198 120,190 117,181 C113,172 98,170 92,178 Z" fill="#eeac25"/>
+        <path d="M96,183 Q100,187 105,186" stroke="#b97f15" stroke-width="0.9" fill="none"/>
+        <path d="M97,189 Q102,192 108,191" stroke="#b97f15" stroke-width="0.9" fill="none"/>
+        <path d="M104,194 Q109,196 114,193" stroke="#b97f15" stroke-width="0.9" fill="none"/>
+      </g>
+    </g>
+    <g id="right-arm-resting">
+      <path d="M224,150 C238,170 238,200 228,211 C219,217 209,207 211,196 C213,181 215,165 224,150 Z" fill="url(#armGrad)"/>
+      <g id="right-hand-resting">
+        <path d="M212,204 C210,212 218,218 226,214 C232,210 230,203 224,201 C219,199 214,200 212,204 Z" fill="#eeac25"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- ============ PROPS ON DESK (front) ============ -->
+  <g id="props">
+    <g id="notebook-left">
+      <path d="M6,214 L60,200 L62,232 L10,240 Z" fill="url(#pageGrad)"/>
+      <path d="M60,200 L117,210 L119,233 L62,232 Z" fill="url(#pageGrad)"/>
+      <line x1="61" y1="200" x2="62" y2="232" stroke="#b9b2a5" stroke-width="1"/>
+      <g stroke="#b0a99c" stroke-width="0.6">
+        <line x1="14" y1="218" x2="56" y2="208"/>
+        <line x1="15" y1="223" x2="57" y2="214"/>
+        <line x1="16" y1="228" x2="58" y2="220"/>
+        <line x1="17" y1="233" x2="58" y2="226"/>
+        <line x1="66" y1="207" x2="112" y2="214"/>
+        <line x1="66" y1="213" x2="113" y2="219"/>
+        <line x1="66" y1="219" x2="114" y2="224"/>
+        <line x1="66" y1="225" x2="114" y2="229"/>
+      </g>
+    </g>
+    <g id="pencil-desk-left">
+      <line x1="86" y1="236" x2="118" y2="226" stroke="#e8b83a" stroke-width="3" stroke-linecap="round"/>
+      <line x1="114" y1="227" x2="119" y2="225.5" stroke="#3d3d40" stroke-width="2.4" stroke-linecap="round"/>
+    </g>
+    <g id="notebook-right">
+      <path d="M158,212 L200,206 L202,234 L160,238 Z" fill="url(#pageGrad)"/>
+      <path d="M200,206 L240,210 L240,236 L202,234 Z" fill="url(#pageGrad)"/>
+      <line x1="200" y1="206" x2="202" y2="234" stroke="#b9b2a5" stroke-width="1"/>
+      <g stroke="#b0a99c" stroke-width="0.6">
+        <line x1="164" y1="217" x2="196" y2="212"/>
+        <line x1="164" y1="223" x2="197" y2="218"/>
+        <line x1="165" y1="229" x2="197" y2="225"/>
+        <line x1="206" y1="214" x2="238" y2="217"/>
+        <line x1="206" y1="220" x2="238" y2="223"/>
+        <line x1="206" y1="226" x2="238" y2="229"/>
+      </g>
+    </g>
+    <g id="pencil-desk-right">
+      <line x1="178" y1="240" x2="214" y2="236" stroke="#d9a43a" stroke-width="2.6" stroke-linecap="round"/>
+      <line x1="212" y1="236.2" x2="217" y2="235.6" stroke="#3d3d40" stroke-width="2" stroke-linecap="round"/>
+      <line x1="140" y1="232" x2="158" y2="238" stroke="#c18a3a" stroke-width="2.2" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>
+<script>
+(function () {
+  var PERIOD = 1500;
+  var K = [0, 200, 400, 600, 800, 1000, 1200, 1400, 1500];
+  // [leftEyeCx, leftEyeCy, leftEyeSpacing, rightEyeCx, rightEyeCy, rightEyeSpacing, handDx, handDy, pencilRot]
+  var V = [
+    [69,   89, 34, 135.5, 69, 27,  0,  0,   0],
+    [65,   87, 31, 131,   69, 28, -5,  0,  -2],
+    [62,   85, 30, 126,   68, 30, -9, -2,  -5],
+    [59,   76, 27, 126.5, 66, 29, -6, -2,  -8],
+    [61.5, 74, 27, 127,   69, 28, -4, -3, -10],
+    [59,   71, 26, 126,   70, 28, -4, -3, -10],
+    [64,   69, 28, 124,   72, 27, -4, -3, -10],
+    [65,   69, 26, 125.5, 72, 27, -4, -3, -10],
+    [69,   89, 34, 135.5, 69, 27,  0,  0,   0]
+  ];
+
+  var LB = "M18,208 C4,182 3,135 20,102 C33,72 48,55 70,55 C96,55 113,72 119,98 C126,128 126,172 116,208 Z";
+  var LA = "M14,140 C6,165 9,192 22,205 C32,213 46,205 42,192 C36,176 31,160 30,142 Z";
+  var RB = "M106,92 C101,62 116,42 140,42 C166,42 186,56 196,76 C216,96 236,130 239,170 C241,196 231,216 202,219 L142,216 C128,202 122,172 126,142 C116,128 109,110 106,92 Z";
+  var RA = "M124,106 C110,124 99,150 97,170 C95,186 110,194 118,184 C124,166 136,142 148,124 Z";
+
+  function $(id) { return document.getElementById(id); }
+  var el = {
+    lBody: $("left-body-shape"), lBelly: $("left-belly"), lHead: $("left-head"),
+    lEyeL: $("left-eye-l"), lEyeR: $("left-eye-r"), lArm: $("left-arm-shape"),
+    lHandPencil: $("left-hand-pencil"),
+    rBody: $("right-body-shape"), rHead: $("right-head"),
+    rEyeL: $("right-eye-l"), rEyeR: $("right-eye-r"), rArm: $("right-arm-shape"),
+    rHand: $("right-hand-reaching")
+  };
+
+  function ss(e0, e1, x) {
+    var t = (x - e0) / (e1 - e0);
+    t = t < 0 ? 0 : (t > 1 ? 1 : t);
+    return t * t * (3 - 2 * t);
+  }
+  function weight(x, y, cx, cy, r0, r1) {
+    return 1 - ss(r0, r1, Math.sqrt((x - cx) * (x - cx) + (y - cy) * (y - cy)));
+  }
+  function deform(path, fn) {
+    return path.replace(/(-?\d*\.?\d+),(-?\d*\.?\d+)/g, function (m, a, b) {
+      var p = fn(+a, +b);
+      return p[0].toFixed(2) + "," + p[1].toFixed(2);
+    });
+  }
+  function sample(t) {
+    t = ((t % PERIOD) + PERIOD) % PERIOD;
+    var i = 0;
+    while (i < K.length - 2 && t >= K[i + 1]) i++;
+    var u = (t - K[i]) / (K[i + 1] - K[i]);
+    var a = V[i], b = V[i + 1], out = [];
+    for (var j = 0; j < a.length; j++) out.push(a[j] + (b[j] - a[j]) * u);
+    return out;
+  }
+  function f(n) { return n.toFixed(2); }
+
+  function render(t) {
+    var p = sample(+t || 0);
+    var lcx = p[0], lcy = p[1], lsp = p[2];
+    var rcx = p[3], rcy = p[4], rsp = p[5];
+    var hdx = p[6], hdy = p[7], prot = p[8];
+
+    // ---- Left character ----
+    var lhx = lcx - 69, lhy = lcy - 89;
+    var lbx = lhx * 0.5, lby = lhy * 0.7;
+    var lFn = function (x, y) {
+      var w = weight(x, y, 66, 80, 25, 115);
+      return [x + lbx * w, y + lby * w];
+    };
+    el.lBody.setAttribute("d", deform(LB, lFn));
+    el.lArm.setAttribute("d", deform(LA, lFn));
+    var bp = lFn(73, 172);
+    el.lBelly.setAttribute("transform", "translate(" + f(bp[0] - 73) + "," + f(bp[1] - 172) + ")");
+    el.lHead.setAttribute("transform", "translate(" + f(lhx) + "," + f(lhy) + ")");
+    var leo = lsp / 2 - 17;
+    el.lEyeL.setAttribute("transform", "translate(" + f(-leo) + ",0)");
+    el.lEyeR.setAttribute("transform", "translate(" + f(leo) + ",0)");
+    el.lHandPencil.setAttribute("transform", "rotate(" + f(prot) + " 32 206)");
+
+    // ---- Right character ----
+    var rhx = rcx - 135.5, rhy = rcy - 69;
+    var rbx = rhx * 0.9, rby = rhy * 0.9;
+    var rFn = function (x, y) {
+      var w = weight(x, y, 135, 65, 30, 105);
+      return [x + rbx * w, y + rby * w];
+    };
+    el.rBody.setAttribute("d", deform(RB, rFn));
+    el.rArm.setAttribute("d", deform(RA, function (x, y) {
+      var q = rFn(x, y);
+      var wh = weight(x, y, 104, 185, 12, 55);
+      return [q[0] + hdx * wh, q[1] + hdy * wh];
+    }));
+    el.rHand.setAttribute("transform", "translate(" + f(hdx) + "," + f(hdy) + ")");
+    el.rHead.setAttribute("transform", "translate(" + f(rhx) + "," + f(rhy) + ")");
+    var reo = rsp / 2 - 13.5;
+    el.rEyeL.setAttribute("transform", "translate(" + f(-reo) + ",0)");
+    el.rEyeR.setAttribute("transform", "translate(" + f(reo) + ",0)");
+  }
+
+  window.nwb = { render: render };
+  render(0);
+})();
+</script>
+</body>
+</html>

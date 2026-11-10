@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Study companions</title>
+<style>
+html,body{margin:0;width:240px;height:242px;overflow:hidden;background:#bfb5a4}
+canvas{display:block;width:240px;height:242px}
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+
+const scene=new THREE.Scene();
+scene.background=new THREE.Color('#bfb5a4');
+const renderer=new THREE.WebGLRenderer({preserveDrawingBuffer:true});
+renderer.setPixelRatio(1);
+renderer.setSize(240,242);
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.08;
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+document.body.appendChild(renderer.domElement);
+
+const viewHeight=4.30;
+const ref=new THREE.OrthographicCamera(-viewHeight*240/242/2,viewHeight*240/242/2,viewHeight/2,-viewHeight/2,.1,40);
+ref.position.set(0,5.25,9);
+ref.lookAt(0,1.80,0);
+
+let seed=321875;
+function rand(){
+  seed=(Math.imul(seed,1664525)+1013904223)>>>0;
+  return seed/4294967296;
+}
+const V=a=>new THREE.Vector3(...a);
+function group(parent,name){
+  const g=new THREE.Group();
+  g.name=name;
+  parent.add(g);
+  return g;
+}
+function material(color,roughness=.85,extra={}){
+  return new THREE.MeshStandardMaterial({color,roughness,...extra});
+}
+function noiseTexture(){
+  const data=new Uint8Array(64*64*4);
+  for(let i=0;i<64*64;i++){
+    const c=115+Math.floor(rand()*80);
+    data[i*4]=data[i*4+1]=data[i*4+2]=c;
+    data[i*4+3]=255;
+  }
+  const t=new THREE.DataTexture(data,64,64,THREE.RGBAFormat);
+  t.wrapS=t.wrapT=THREE.RepeatWrapping;
+  t.repeat.set(3,3);
+  t.magFilter=THREE.LinearFilter;
+  t.minFilter=THREE.LinearFilter;
+  t.needsUpdate=true;
+  return t;
+}
+const nap=noiseTexture();
+const yellow=new THREE.MeshPhysicalMaterial({
+  color:'#ffb510',roughness:.96,bumpMap:nap,bumpScale:.008,
+  sheen:.28,sheenColor:new THREE.Color('#ffda58'),sheenRoughness:1
+});
+const cream=new THREE.MeshPhysicalMaterial({
+  color:'#f1dfb8',roughness:1,bumpMap:nap,bumpScale:.006,
+  sheen:.24,sheenColor:new THREE.Color('#fff0d2'),sheenRoughness:1
+});
+const handMat=material('#5d584c',.95,{bumpMap:nap,bumpScale:.005});
+const creaseMat=material('#454135',1);
+const socketMat=material('#c18d25',.96);
+const eyeMat=material('#7e8077',.67);
+const pupilMat=material('#131812',.32);
+const glintMat=material('#d9ddd3',.3);
+const mouthMat=material('#3e2d13',.95);
+const lipMat=material('#ca8b18',1);
+const paperMat=material('#f4eedf',.98);
+const paperEdgeMat=material('#d5cbb0',1);
+const graphiteMat=material('#403f35',.8);
+const sphereGeometry=new THREE.SphereGeometry(1,40,28);
+
+function mesh(parent,name,geometry,mat){
+  const o=new THREE.Mesh(geometry,mat);
+  o.name=name;
+  o.castShadow=true;
+  o.receiveShadow=true;
+  parent.add(o);
+  return o;
+}
+function ellipsoid(parent,name,pos,scale,mat){
+  const m=mesh(parent,name,sphereGeometry,mat);
+  m.position.set(...pos);
+  m.scale.set(...scale);
+  return m;
+}
+function box(parent,name,pos,size,mat){
+  const m=mesh(parent,name,new THREE.BoxGeometry(...size),mat);
+  m.position.set(...pos);
+  return m;
+}
+function line(parent,name,points,radius,mat){
+  const curve=new THREE.CatmullRomCurve3(points.map(V));
+  return mesh(parent,name,new THREE.TubeGeometry(curve,Math.max(12,points.length*8),radius,8,false),mat);
+}
+
+/* Outward strand normals keep the short nap soft instead of stippled. */
+const fuzzMat=new THREE.MeshPhysicalMaterial({
+  vertexColors:true,roughness:1,side:THREE.FrontSide,
+  sheen:.25,sheenColor:new THREE.Color('#ffe1a0'),sheenRoughness:1
+});
+function fuzz(surface,count,color,length=.014){
+  const geo=surface.geometry;
+  const p=geo.getAttribute('position'),n=geo.getAttribute('normal');
+  const uv=geo.getAttribute('uv'),ix=geo.index;
+  const triangles=ix?ix.count/3:p.count/3;
+  const cumulative=new Float64Array(triangles);
+  const a=new THREE.Vector3(),b=new THREE.Vector3(),c=new THREE.Vector3();
+  const ab=new THREE.Vector3(),ac=new THREE.Vector3();
+  let total=0;
+  for(let j=0;j<triangles;j++){
+    a.fromBufferAttribute(p,ix?ix.getX(j*3):j*3);
+    b.fromBufferAttribute(p,ix?ix.getX(j*3+1):j*3+1);
+    c.fromBufferAttribute(p,ix?ix.getX(j*3+2):j*3+2);
+    total+=ab.subVectors(b,a).cross(ac.subVectors(c,a)).length()*.5;
+    cumulative[j]=total;
+  }
+  const positions=[],normals=[],colors=[],parameters=[];
+  const baseColor=new THREE.Color(color);
+  const normal=new THREE.Vector3(),tmp=new THREE.Vector3(),tangent=new THREE.Vector3();
+  for(let j=0;j<count;j++){
+    const pick=rand()*total;
+    let lo=0,hi=triangles-1;
+    while(lo<hi){
+      const mid=(lo+hi)>>1;
+      if(cumulative[mid]<pick)lo=mid+1;else hi=mid;
+    }
+    const ids=[0,1,2].map(k=>ix?ix.getX(lo*3+k):lo*3+k);
+    const u=Math.sqrt(rand()),v=rand(),weights=[1-u,u*(1-v),u*v];
+    const pos=new THREE.Vector3();
+    normal.set(0,0,0);
+    let parameter=0;
+    for(let k=0;k<3;k++){
+      pos.addScaledVector(tmp.fromBufferAttribute(p,ids[k]),weights[k]);
+      normal.addScaledVector(tmp.fromBufferAttribute(n,ids[k]),weights[k]);
+      if(uv)parameter+=uv.getY(ids[k])*weights[k];
+    }
+    normal.normalize();
+    tangent.set(rand()-.5,rand()-.5,rand()-.5).cross(normal).normalize();
+    const width=.0008+rand()*.0011;
+    const len=length*(.45+rand()*.75);
+    const tip=pos.clone().addScaledVector(normal,len).addScaledVector(tangent,len*(rand()-.5)*.4);
+    pos.addScaledVector(normal,.001);
+    const vertices=[pos.clone().addScaledVector(tangent,-width),pos.clone().addScaledVector(tangent,width),tip];
+    const shade=.98+rand()*.045;
+    for(const q of vertices){
+      positions.push(q.x,q.y,q.z);
+      normals.push(normal.x,normal.y,normal.z);
+      colors.push(baseColor.r*shade,baseColor.g*shade,baseColor.b*shade);
+      parameters.push(parameter);
+    }
+  }
+  const fg=new THREE.BufferGeometry();
+  fg.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
+  fg.setAttribute('normal',new THREE.Float32BufferAttribute(normals,3));
+  fg.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));
+  const fm=new THREE.Mesh(fg,fuzzMat);
+  fm.name='short-soft-fur';
+  fm.castShadow=false;
+  fm.receiveShadow=false;
+  fm.userData.curveParameters=new Float32Array(parameters);
+  surface.add(fm);
+  return fm;
+}
+function furryEllipsoid(parent,name,pos,scale,mat,count=0,color='#ffb915'){
+  const m=ellipsoid(parent,name,pos,scale,mat);
+  if(count)fuzz(m,count,color,.017);
+  return m;
+}
+function profileValue(rows,u,col){
+  const q=u*(rows.length-1);
+  const i=Math.min(rows.length-2,Math.floor(q)),t=q-i;
+  const p0=rows[Math.max(0,i-1)][col],p1=rows[i][col];
+  const p2=rows[i+1][col],p3=rows[Math.min(rows.length-1,i+2)][col];
+  return .5*((2*p1)+(-p0+p2)*t+(2*p0-5*p1+4*p2-p3)*t*t+(-p0+3*p1-3*p2+p3)*t*t*t);
+}
+function torso(parent,rows){
+  const pos=[],uv=[],indices=[];
+  const rings=80,sides=64;
+  for(let j=0;j<=rings;j++){
+    const u=j/rings;
+    const y=profileValue(rows,u,0);
+    const rx=Math.max(.001,profileValue(rows,u,1)),rz=Math.max(.001,profileValue(rows,u,2));
+    const cx=profileValue(rows,u,3),cz=profileValue(rows,u,4);
+    for(let k=0;k<=sides;k++){
+      const a=k/sides*Math.PI*2;
+      pos.push(cx+Math.sin(a)*rx,y,cz+Math.cos(a)*rz);
+      uv.push(k/sides,u);
+    }
+  }
+  for(let j=0;j<rings;j++)for(let k=0;k<sides;k++){
+    const a=j*(sides+1)+k,b=a+sides+1;
+    indices.push(a,a+1,b,a+1,b+1,b);
+  }
+  const g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+  g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));
+  g.setIndex(indices);
+  g.computeVertexNormals();
+  const body=mesh(group(parent,'torso'),'continuous-pear-shaped-body',g,yellow);
+  fuzz(body,7000,'#ffb915',.012);
+  return body.parent;
+}
+function local(character,point){
+  return V(point).sub(character.position).toArray();
+}
+function flowRecord(m,isFur=false){
+  const p=m.geometry.getAttribute('position'),uv=m.geometry.getAttribute('uv');
+  const w=new Float32Array(p.count),bow=new Float32Array(p.count);
+  for(let i=0;i<p.count;i++){
+    const u=isFur?m.userData.curveParameters[i]:uv.getY(i);
+    w[i]=u*u*(3-2*u);
+    bow[i]=4*u*(1-u);
+  }
+  m.frustumCulled=false;
+  p.setUsage(THREE.DynamicDrawUsage);
+  return {mesh:m,rest:new Float32Array(p.array),w,bow};
+}
+function arm(character,name,worldPoints,radii){
+  const armGroup=group(character,name);
+  const curve=new THREE.CatmullRomCurve3(worldPoints.map(p=>V(local(character,p))));
+  const segs=56,sides=24,frames=curve.computeFrenetFrames(segs,false);
+  const pos=[],uv=[],indices=[];
+  for(let i=0;i<=segs;i++){
+    const u=i/segs,at=curve.getPointAt(u);
+    const ri=u*(radii.length-1),r0=Math.min(radii.length-2,Math.floor(ri)),f=ri-r0;
+    const radius=THREE.MathUtils.lerp(radii[r0],radii[r0+1],f);
+    for(let k=0;k<=sides;k++){
+      const theta=k/sides*Math.PI*2;
+      const q=at.clone().addScaledVector(frames.normals[i],Math.cos(theta)*radius)
+        .addScaledVector(frames.binormals[i],Math.sin(theta)*radius);
+      pos.push(q.x,q.y,q.z);
+      uv.push(k/sides,u);
+    }
+  }
+  for(let i=0;i<segs;i++)for(let k=0;k<sides;k++){
+    const a=i*(sides+1)+k,b=a+sides+1;
+    indices.push(a,a+1,b,a+1,b+1,b);
+  }
+  const geometry=new THREE.BufferGeometry();
+  geometry.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+  geometry.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+  const m=mesh(armGroup,'soft-yellow-arm',geometry,yellow);
+  const fur=fuzz(m,1800,'#ffb915',.011);
+  const shoulder=ellipsoid(armGroup,'rounded-shoulder',local(character,worldPoints[0]),[radii[0],radii[0],radii[0]],yellow);
+  return {
+    group:armGroup,surface:m,shoulder,shoulderBase:shoulder.position.clone(),
+    records:[flowRecord(m),flowRecord(fur,true)],
+    endpoint:worldPoints[worldPoints.length-1],character
+  };
+}
+function poseArm(rig,start,end,bend){
+  for(const record of rig.records){
+    const attr=record.mesh.geometry.getAttribute('position');
+    const p=attr.array,rest=record.rest,w=record.w,bow=record.bow;
+    for(let i=0;i<w.length;i++){
+      const a=1-w[i],b=w[i],c=bow[i],j=i*3;
+      p[j]=rest[j]+start.x*a+end.x*b+bend.x*c;
+      p[j+1]=rest[j+1]+start.y*a+end.y*b+bend.y*c;
+      p[j+2]=rest[j+2]+start.z*a+end.z*b+bend.z*c;
+    }
+    attr.needsUpdate=true;
+  }
+  rig.surface.geometry.computeVertexNormals();
+  rig.shoulder.position.copy(rig.shoulderBase).add(start);
+}
+function handGroup(character,name){return group(character,name);}
+function worldEllipsoid(character,parent,name,pos,scale,mat){
+  return ellipsoid(parent,name,local(character,pos),scale,mat);
+}
+function finger(character,parent,name,points,r=.048){
+  const pts=points.map(p=>local(character,p));
+  const m=line(parent,name,pts,r,handMat);
+  ellipsoid(parent,name+'-tip',pts[pts.length-1],[r,r,r],handMat);
+  return m;
+}
+
+const left=group(scene,'character-left-student');
+left.position.set(-.99,0,0);
+const right=group(scene,'character-right-companion');
+right.position.set(1.03,0,-.28);
+const characters=[left,right];
+
+const leftTorso=torso(left,[
+ [.45,0,0,0,0],[.59,.46,.35,0,0],[.88,.67,.46,0,0],
+ [1.25,.72,.51,-.025,0],[1.65,.67,.49,-.02,-.025],
+ [1.97,.57,.44,-.025,-.035],[2.22,.48,.37,-.015,-.015],
+ [2.43,.34,.28,0,0],[2.51,0,0,0,0]
+]);
+const rightTorso=torso(right,[
+ [.43,0,0,.17,0],[.58,.46,.39,.24,0],[.88,.82,.53,.29,0],
+ [1.20,.87,.58,.27,0],[1.60,.82,.55,.13,-.005],
+ [1.95,.70,.49,-.05,0],[2.23,.59,.43,-.18,.01],
+ [2.50,.48,.37,-.24,.015],[2.73,.31,.29,-.37,.02],
+ [2.93,.15,.15,-.48,.02],[3.01,0,0,-.50,.02]
+]);
+const leftBelly=group(left,'cream-belly');
+furryEllipsoid(leftBelly,'rounded-cream-patch',[.015,.91,.47],[.64,.69,.23],cream,2200,'#f1dfb8');
+const rightBelly=group(right,'cream-belly');
+furryEllipsoid(rightBelly,'rounded-cream-patch',[.38,.98,.49],[.48,.59,.205],cream,1800,'#f1dfb8');
+
+function eye(head,name,position,scale=1,angle=0){
+  const g=group(head,name);
+  g.position.set(...position);
+  g.rotation.y=angle;
+  g.scale.setScalar(scale);
+  ellipsoid(g,'golden-eye-rim',[0,0,-.045],[.172,.186,.084],socketMat);
+  ellipsoid(g,'warm-grey-eyeball',[0,0,.012],[.139,.157,.118],eyeMat);
+  const pupil=group(g,'pupil');
+  pupil.position.set(-.010,-.020,.105);
+  ellipsoid(pupil,'dark-rounded-pupil',[0,0,0],[.087,.107,.055],pupilMat);
+  ellipsoid(pupil,'small-soft-catchlight',[-.025,.044,.047],[.016,.020,.009],glintMat);
+  return {group:g,pupil};
+}
+function smile(head,name,points){
+  const mouth=group(head,name);
+  line(mouth,'small-smile-opening',points,.021,mouthMat);
+  line(mouth,'soft-lower-lip',points.map(p=>[p[0],p[1]-.025,p[2]-.007]),.012,lipMat);
+  return mouth;
+}
+const leftHead=group(left,'head');
+leftHead.position.set(0,2.48,0);
+leftHead.rotation.order='YXZ';
+leftHead.rotation.y=.12;
+furryEllipsoid(leftHead,'oval-yellow-head',[-.015,0,0],[.62,.61,.51],yellow,5300,'#ffb915');
+const leftEyeA=eye(leftHead,'eye-left',[-.28,.155,.444],1,-.12);
+const leftEyeB=eye(leftHead,'eye-right',[.365,.10,.407],.94,.23);
+const leftSmile=smile(leftHead,'mouth-smiling',[
+ [-.015,-.275,.479],[.055,-.299,.500],[.145,-.301,.495],[.23,-.269,.463]
+]);
+leftSmile.position.y=.045;
+for(const child of leftSmile.children){
+  child.material=child.material.clone();
+  child.material.transparent=true;
+  child.material.depthWrite=false;
+}
+const surprisedMouth=group(leftHead,'mouth-surprised');
+surprisedMouth.position.set(.095,-.230,.505);
+const openingMat=mouthMat.clone();
+openingMat.transparent=true;
+openingMat.depthWrite=false;
+const openingLipMat=lipMat.clone();
+openingLipMat.transparent=true;
+openingLipMat.depthWrite=false;
+ellipsoid(surprisedMouth,'small-open-mouth',[0,0,0],[.135,.032,.024],openingMat);
+line(surprisedMouth,'rounded-lower-lip',[
+ [-.12,-.013,-.002],[-.06,-.036,.007],[.035,-.038,.008],[.116,-.018,-.002]
+],.010,openingLipMat);
+
+const rightHead=group(right,'head');
+rightHead.position.set(-.53,2.555,.03);
+rightHead.rotation.order='YXZ';
+rightHead.rotation.y=-.48;
+rightHead.rotation.z=.035;
+furryEllipsoid(rightHead,'oval-yellow-head',[0,0,0],[.61,.605,.53],yellow,5600,'#ffb915');
+const rightEyeA=eye(rightHead,'eye-far',[-.285,.25,.448],.91,-.17);
+const rightEyeB=eye(rightHead,'eye-near',[.28,.25,.475],1.04,.08);
+const rightSmile=smile(rightHead,'mouth',[
+ [-.165,-.105,.489],[-.08,-.139,.526],[.025,-.144,.532],[.12,-.111,.504]
+]);
+rightSmile.position.y=-.015;
+
+const farArm=arm(right,'arm-far-around-shoulder',[
+ [.55,2.02,-.20],[.30,1.94,-.13],[.01,1.94,-.02],[-.26,2.02,.12]
+],[.23,.225,.19,.13]);
+const farHand=handGroup(right,'hand-far-on-shoulder');
+worldEllipsoid(right,farHand,'palm',[-.29,2.035,.15],[.15,.17,.11],handMat);
+finger(right,farHand,'finger-index',[[-.30,2.11,.16],[-.39,2.19,.20],[-.43,2.14,.27]],.043);
+finger(right,farHand,'finger-middle',[[-.29,2.04,.20],[-.40,2.09,.26],[-.44,2.04,.29]],.046);
+finger(right,farHand,'finger-ring',[[-.27,1.98,.22],[-.36,2.00,.29],[-.39,1.95,.31]],.043);
+
+const writingArm=arm(left,'arm-left-writing',[
+ [-1.52,1.97,.025],[-1.80,1.64,.12],[-1.96,1.20,.42],[-1.88,.98,.84],[-1.65,.875,1.16]
+],[.25,.235,.185,.18,.145]);
+const restingArm=arm(left,'arm-right-resting',[
+ [-.49,1.86,.15],[-.29,1.45,.39],[-.18,1.10,.72],[-.20,.91,.99]
+],[.225,.21,.17,.13]);
+const restHand=handGroup(left,'hand-right-on-paper');
+const restPalm=worldEllipsoid(left,restHand,'palm',[-.19,.875,1.105],[.18,.135,.17],handMat);
+restPalm.rotation.z=-.10;
+finger(left,restHand,'finger-index',[[-.31,.89,1.15],[-.34,.84,1.28],[-.31,.785,1.36]],.047);
+finger(left,restHand,'finger-middle',[[-.20,.885,1.17],[-.20,.825,1.33],[-.17,.775,1.39]],.051);
+finger(left,restHand,'finger-ring',[[-.09,.88,1.16],[-.08,.82,1.30],[-.04,.78,1.36]],.047);
+finger(left,restHand,'finger-little',[[.005,.865,1.13],[.035,.815,1.24],[.075,.785,1.28]],.040);
+finger(left,restHand,'thumb',[[-.33,.94,1.09],[-.41,.88,1.17],[-.42,.83,1.23]],.057);
+
+const writingHand=handGroup(left,'hand-left-holding-pencil');
+const writePalm=worldEllipsoid(left,writingHand,'palm',[-1.50,.825,1.405],[.21,.135,.18],handMat);
+writePalm.rotation.z=-.32;
+finger(left,writingHand,'curled-index',[
+ [-1.59,.91,1.37],[-1.49,1.005,1.40],[-1.37,.97,1.49],[-1.34,.88,1.59]
+],.059);
+finger(left,writingHand,'curled-middle',[
+ [-1.57,.84,1.49],[-1.45,.89,1.56],[-1.35,.84,1.64],[-1.38,.79,1.65]
+],.054);
+finger(left,writingHand,'curled-ring',[
+ [-1.62,.79,1.49],[-1.53,.78,1.63],[-1.43,.76,1.66]
+],.050);
+finger(left,writingHand,'curled-little',[
+ [-1.69,.79,1.45],[-1.64,.74,1.57],[-1.55,.735,1.61]
+],.046);
+finger(left,writingHand,'thumb-across-pencil',[
+ [-1.59,.915,1.28],[-1.43,.92,1.39],[-1.31,.865,1.51]
+],.068);
+
+const huggingArm=arm(right,'arm-near-embracing',[
+ [1.28,2.015,.15],[1.39,1.82,.40],[1.27,1.61,.66],
+ [.88,1.36,.86],[.42,1.225,.95],[.005,1.225,.96]
+],[.28,.31,.315,.285,.225,.165]);
+const hugHand=handGroup(right,'hand-near-on-belly');
+const hugPalm=worldEllipsoid(right,hugHand,'palm',[-.235,1.145,.985],[.235,.175,.118],handMat);
+hugPalm.rotation.z=-.13;
+finger(right,hugHand,'thumb',[
+ [-.10,1.24,.99],[-.26,1.36,1.015],[-.43,1.395,1.02],[-.51,1.365,1.025]
+],.063);
+finger(right,hugHand,'finger-index',[
+ [-.30,1.235,1.055],[-.47,1.275,1.075],[-.60,1.30,1.07],[-.65,1.265,1.055]
+],.055);
+finger(right,hugHand,'finger-middle',[
+ [-.35,1.135,1.09],[-.53,1.155,1.115],[-.65,1.20,1.10],[-.665,1.155,1.08]
+],.057);
+finger(right,hugHand,'finger-ring',[
+ [-.32,1.035,1.07],[-.49,1.045,1.10],[-.59,1.09,1.08],[-.605,1.055,1.065]
+],.052);
+finger(right,hugHand,'finger-little',[
+ [-.24,.985,1.035],[-.39,.974,1.065],[-.48,1.01,1.045]
+],.046);
+for(const [x,y,z] of [[-.48,1.273,1.127],[-.51,1.153,1.16],[-.48,1.047,1.14]]){
+  line(hugHand,'subtle-knuckle-fold',[
+    local(right,[x-.018,y+.021,z]),local(right,[x+.006,y,z+.004]),local(right,[x+.018,y-.018,z])
+  ],.004,creaseMat);
+}
+
+const environment=group(scene,'classroom-background');
+const wall=mesh(environment,'plaster-wall',new THREE.PlaneGeometry(18,10),material('#c0b9ad',1));
+wall.position.set(0,3,-2.95);
+wall.castShadow=false;
+const frame=mesh(environment,'blackboard-wood-frame',new THREE.PlaneGeometry(4.8,2.36),material('#716754',.95));
+frame.position.set(1.55,3.61,-2.72);
+frame.castShadow=false;
+const boardData=new Uint8Array(64*64*4);
+for(let y=0;y<64;y++)for(let x=0;x<64;x++){
+  const i=(y*64+x)*4,noise=rand()*6+2*Math.sin(x*.21+y*.16);
+  boardData[i]=16+noise;
+  boardData[i+1]=45+noise;
+  boardData[i+2]=44+noise;
+  boardData[i+3]=255;
+}
+const boardTex=new THREE.DataTexture(boardData,64,64,THREE.RGBAFormat);
+boardTex.colorSpace=THREE.SRGBColorSpace;
+boardTex.magFilter=THREE.LinearFilter;
+boardTex.minFilter=THREE.LinearFilter;
+boardTex.needsUpdate=true;
+const board=mesh(environment,'dark-green-blackboard',new THREE.PlaneGeometry(4.58,2.18),material('#ffffff',1,{map:boardTex}));
+board.position.set(1.58,3.64,-2.69);
+board.castShadow=false;
+const rail=mesh(environment,'blackboard-bottom-rail',new THREE.PlaneGeometry(4.8,.07),material('#8b8070',1));
+rail.position.set(1.55,2.445,-2.66);
+rail.castShadow=false;
+
+const distantWood=material('#92703f',.96);
+box(environment,'rear-classroom-desk',[0,1.57,-1.83],[6.4,.12,.73],distantWood);
+box(environment,'rear-desk-front-edge',[0,1.47,-1.48],[6.4,.15,.08],material('#6d502f',1));
+box(environment,'rear-desk-leg-left',[-1.94,.72,-1.8],[.13,1.4,.15],distantWood);
+box(environment,'rear-desk-leg-right',[2.0,.72,-1.8],[.13,1.4,.15],distantWood);
+box(environment,'chair-back-at-right',[2.05,1.23,-1.22],[.70,.13,.14],material('#80603b',1));
+box(environment,'chair-upright-at-right',[2.28,1.19,-1.25],[.10,.77,.12],distantWood);
+box(environment,'small-book-on-rear-desk',[1.85,1.67,-1.94],[.45,.08,.30],material('#9f937d',1));
+box(environment,'small-book-pages',[1.85,1.71,-1.94],[.43,.025,.29],material('#bcb3a1',1));
+
+const woodData=new Uint8Array(64*64*4);
+for(let y=0;y<64;y++)for(let x=0;x<64;x++){
+  const i=(y*64+x)*4;
+  const grain=Math.sin(y*2.08+Math.sin(x*.09)*.6)*5+Math.sin(y*.45+x*.024)*4+(rand()-.5)*7;
+  woodData[i]=180+grain;
+  woodData[i+1]=127+grain*.82;
+  woodData[i+2]=68+grain*.55;
+  woodData[i+3]=255;
+}
+const woodTex=new THREE.DataTexture(woodData,64,64,THREE.RGBAFormat);
+woodTex.wrapS=woodTex.wrapT=THREE.RepeatWrapping;
+woodTex.repeat.set(2,3);
+woodTex.colorSpace=THREE.SRGBColorSpace;
+woodTex.magFilter=THREE.LinearFilter;
+woodTex.minFilter=THREE.LinearFilter;
+woodTex.needsUpdate=true;
+const desk=group(scene,'foreground-wooden-desk');
+box(desk,'thick-honey-colored-tabletop',[0,.535,.25],[7,.17,6.8],material('#ffffff',.8,{map:woodTex}));
+const seamMat=material('#9e703c',.96);
+for(const z of [-.6,1.02,2.92]){
+  box(desk,'fine-wood-board-joint',[0,.621,z],[7,.002,.008],seamMat);
+}
+
+function pageHeight(t,z,depth){
+  return .023+.092*Math.sin(Math.PI*t)+.013*t+.012*Math.cos(z/depth*Math.PI*2);
+}
+function makePage(parent,name,side,width,depth,height,mat,top){
+  const pos=[],uv=[],idx=[],nx=30,nz=18;
+  for(let j=0;j<=nz;j++){
+    const z=(j/nz-.5)*depth;
+    for(let i=0;i<=nx;i++){
+      const t=i/nx;
+      pos.push(side*t*width,height+pageHeight(t,z,depth),z);
+      uv.push(t,j/nz);
+    }
+  }
+  for(let j=0;j<nz;j++)for(let i=0;i<nx;i++){
+    const a=j*(nx+1)+i,b=a+nx+1;
+    if(side>0)idx.push(a,b,a+1,a+1,b,b+1);
+    else idx.push(a,a+1,b,a+1,b+1,b);
+  }
+  const g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+  g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));
+  g.setIndex(idx);
+  g.computeVertexNormals();
+  const page=mesh(parent,name,g,mat);
+  page.castShadow=false;
+  page.receiveShadow=top;
+  return page;
+}
+function book(name,position,angle,width,depth,coverColor,writing=false){
+  const g=group(scene,name);
+  g.position.set(...position);
+  g.rotation.y=angle;
+  box(g,'thin-book-cover',[0,-.005,0],[width*2+.08,.028,depth+.055],material(coverColor,.94));
+  for(let layer=0;layer<6;layer++){
+    const h=.008+layer*.008;
+    const mat=layer===5?paperMat:(layer%2?paperEdgeMat:paperMat);
+    makePage(g,'left-page-layer-'+layer,-1,width,depth,h,mat,layer===5);
+    makePage(g,'right-page-layer-'+layer,1,width,depth,h,mat,layer===5);
+  }
+  const crease=line(g,'central-binding-crease',[[0,.070,-depth/2],[0,.083,0],[0,.070,depth/2]],.007,material('#baa984',1));
+  crease.castShadow=false;
+  if(writing){
+    const pencilWriting=material('#c0b6a1',1);
+    for(let row=0;row<6;row++){
+      const z=-.36+row*.115,pts=[];
+      for(let j=0;j<12;j++){
+        const x=-width*.83+j*.047,zz=z+Math.sin(j*2.0+row)*.009;
+        pts.push([x,.049+pageHeight(-x/width,zz,depth)+.003,zz]);
+      }
+      const stroke=line(g,'faint-pencil-writing-'+row,pts,.0022,pencilWriting);
+      stroke.castShadow=false;
+    }
+  }
+  return g;
+}
+book('open-student-exercise-book',[-.73,.657,1.94],-.24,1.19,1.38,'#9c7850',true);
+book('open-companion-exercise-book',[1.51,.648,1.30],.12,.96,1.39,'#b39765');
+
+const closed=group(scene,'small-stacked-notebook-at-right');
+closed.position.set(1.52,.653,2.42);
+closed.rotation.y=-.19;
+box(closed,'ochre-bottom-cover',[0,0,0],[1.79,.028,.65],material('#ad8547',.9));
+box(closed,'cream-page-block',[0,.034,0],[1.72,.05,.60],paperEdgeMat);
+box(closed,'top-paper-sheet',[0,.065,0],[1.73,.012,.61],paperMat);
+for(let j=0;j<3;j++){
+  box(closed,'fine-page-edge-'+j,[0,.022+j*.013,.303],[1.70,.003,.003],material('#b8ab8f',1));
+}
+function cylinderBetween(parent,name,a,b,radius,mat,segments=12){
+  const av=V(a),bv=V(b),direction=bv.clone().sub(av);
+  const m=mesh(parent,name,new THREE.CylinderGeometry(radius,radius,direction.length(),segments),mat);
+  m.position.copy(av).add(bv).multiplyScalar(.5);
+  m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),direction.normalize());
+  return m;
+}
+function coneBetween(parent,name,a,b,radius,mat,segments=10){
+  const av=V(a),bv=V(b),direction=bv.clone().sub(av);
+  const m=mesh(parent,name,new THREE.ConeGeometry(radius,direction.length(),segments),mat);
+  m.position.copy(av).add(bv).multiplyScalar(.5);
+  m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),direction.normalize());
+  return m;
+}
+const pencil=group(left,'pencil-in-writing-hand');
+const pencilMetal=material('#77766a',.38,{metalness:.52});
+const pencilWood=material('#ceb78b',.91);
+cylinderBetween(pencil,'hexagonal-pencil-barrel',
+ local(left,[-1.675,1.415,1.20]),local(left,[-1.285,.907,1.725]),.026,pencilMetal,6);
+cylinderBetween(pencil,'barrel-dark-edge',
+ local(left,[-1.682,1.413,1.222]),local(left,[-1.295,.909,1.744]),.008,graphiteMat,5);
+coneBetween(pencil,'exposed-wooden-point',
+ local(left,[-1.285,.907,1.725]),local(left,[-1.165,.794,1.887]),.026,pencilWood,6);
+coneBetween(pencil,'graphite-writing-tip',
+ local(left,[-1.194,.822,1.847]),local(left,[-1.16,.789,1.898]),.010,graphiteMat,6);
+cylinderBetween(pencil,'small-silver-top',
+ local(left,[-1.688,1.432,1.181]),local(left,[-1.669,1.407,1.211]),.028,material('#bab9a9',.36,{metalness:.7}),10);
+
+const looseProps=group(scene,'loose-pens-and-pencils');
+const blackPen=material('#302f28',.42);
+const silver=material('#bdbbb0',.3,{metalness:.75});
+cylinderBetween(looseProps,'dark-pen-on-open-book',[-.18,.81,2.64],[.79,.758,2.48],.033,blackPen);
+cylinderBetween(looseProps,'pen-silver-band',[.64,.766,2.505],[.70,.763,2.495],.035,silver);
+coneBetween(looseProps,'pen-point',[.79,.758,2.48],[.88,.752,2.465],.03,silver);
+cylinderBetween(looseProps,'pen-clip',[-.13,.841,2.63],[.11,.83,2.59],.009,silver,8);
+const ochrePencil=material('#b88b40',.8);
+cylinderBetween(looseProps,'loose-wood-pencil',[.51,.705,2.12],[1.68,.705,2.73],.022,ochrePencil,6);
+coneBetween(looseProps,'loose-pencil-sharpened-end',[1.68,.705,2.73],[1.81,.705,2.798],.022,pencilWood,6);
+coneBetween(looseProps,'loose-pencil-graphite',[1.78,.705,2.783],[1.82,.705,2.804],.008,graphiteMat,6);
+cylinderBetween(looseProps,'second-thin-pencil',[.74,.69,2.24],[1.95,.69,2.89],.017,material('#d4af6b',.85),6);
+cylinderBetween(looseProps,'cropped-pencil-at-bottom-left',[-2.17,.70,2.56],[-1.60,.70,3.02],.027,blackPen,8);
+cylinderBetween(looseProps,'cropped-pencil-metal-end',[-1.69,.70,2.945],[-1.60,.70,3.02],.029,silver,10);
+
+scene.add(new THREE.HemisphereLight('#fff5e5','#7a6247',.75));
+scene.add(new THREE.AmbientLight('#fff3e3',.12));
+const key=new THREE.DirectionalLight('#fff0d4',2.6);
+key.position.set(-3.5,7,5);
+key.target.position.set(0,1.1,0);
+key.castShadow=true;
+key.shadow.mapSize.set(1024,1024);
+key.shadow.camera.left=-4;
+key.shadow.camera.right=4;
+key.shadow.camera.top=5;
+key.shadow.camera.bottom=-3;
+key.shadow.camera.near=.5;
+key.shadow.camera.far=18;
+key.shadow.normalBias=.024;
+key.shadow.bias=-.00015;
+key.shadow.radius=4;
+scene.add(key,key.target);
+const fill=new THREE.DirectionalLight('#f6f1e8',.4);
+fill.position.set(4,3,4);
+scene.add(fill);
+const rim=new THREE.DirectionalLight('#fff0cf',1.0);
+rim.position.set(1,5,-4);
+scene.add(rim);
+const backFill=new THREE.DirectionalLight('#e7edf0',.5);
+backFill.position.set(-4,2,-3);
+scene.add(backFill);
+
+function wristRig(character,name,worldPivot,parts){
+  const base=V(local(character,worldPivot));
+  const g=group(character,name);
+  g.position.copy(base);
+  for(const part of parts){
+    g.add(part);
+    part.position.sub(base);
+  }
+  return {group:g,base,character};
+}
+const writingWrist=wristRig(left,'writing-wrist',[-1.50,.825,1.405],[writingHand,pencil]);
+const restingWrist=wristRig(left,'resting-wrist',[-.19,.875,1.105],[restHand]);
+const huggingWrist=wristRig(right,'rubbing-wrist',[-.235,1.145,.985],[hugHand]);
+const farWrist=wristRig(right,'shoulder-wrist',[-.29,2.035,.15],[farHand]);
+huggingWrist.group.scale.set(.90,1.14,1);
+
+function poseWrist(rig,x,y,z,rx=0,ry=0,rz=0){
+  rig.group.position.copy(rig.base);
+  rig.group.position.x+=x;
+  rig.group.position.y+=y;
+  rig.group.position.z+=z;
+  rig.group.rotation.set(rx,ry,rz);
+}
+function wristEndpointDelta(rig,armRig){
+  const rest=V(local(rig.character,armRig.endpoint));
+  return rest.clone().sub(rig.base).multiply(rig.group.scale).applyEuler(rig.group.rotation)
+    .add(rig.group.position).sub(rest);
+}
+
+const times=[0,200,400,600,800,1000,1200,1400,1500];
+const tracks={
+  leftX:[0,-.015,-.030,-.110,-.165,-.180,-.182,-.180,0],
+  leftLift:[0,.035,.070,.210,.290,.310,.315,.310,0],
+  leftTurn:[.12,.15,.20,.62,.82,.90,.90,.90,.12],
+  leftPitch:[0,-.025,-.045,-.15,-.32,-.38,-.38,-.38,0],
+  expression:[0,0,.025,.80,1,1,1,1,0],
+  gaze:[0,.02,.15,.72,1,1,1,1,0],
+  writeX:[-.06,-.13,-.21,-.35,-.42,-.44,-.44,-.44,-.06],
+  writeY:[0,.018,.045,.065,.090,.100,.105,.100,0],
+  writeRoll:[0,.13,.26,.42,.50,.54,.54,.54,0],
+  rubX:[0,-.13,-.30,-.20,-.24,-.30,-.19,-.25,0],
+  rubY:[0,.040,-.070,.055,.025,0,.100,.025,0],
+  rubRoll:[0,.035,-.045,.025,.005,-.025,.035,-.005,0],
+  rightX:[0,-.130,-.145,-.145,-.150,-.160,-.160,-.160,0],
+  rightY:[0,-.025,-.020,-.020,-.005,.025,.028,.025,0],
+  rightTurn:[-.48,-.55,-.57,-.57,-.58,-.57,-.57,-.57,-.48],
+  rightPitch:[0,.025,.020,.010,-.020,-.055,-.055,-.055,0],
+  rightRoll:[.035,.045,.045,.040,.030,.020,.020,.020,.035]
+};
+const zero=new THREE.Vector3();
+
+function render(t){
+  const phase=Number.isFinite(t)?((t%1500)+1500)%1500:0;
+  let index=0;
+  while(index<times.length-2&&phase>=times[index+1])index++;
+  let u=(phase-times[index])/(times[index+1]-times[index]);
+  u=u*u*(3-2*u);
+  const sample=name=>{
+    const values=tracks[name];
+    return values[index]+(values[index+1]-values[index])*u;
+  };
+
+  const lift=sample('leftLift'),rise=lift/.31;
+  leftHead.position.set(sample('leftX'),2.48+lift,0);
+  leftHead.rotation.set(sample('leftPitch'),sample('leftTurn'),0,'YXZ');
+  leftTorso.position.set(-.015*rise,-.035*rise,0);
+  leftTorso.rotation.set(0,0,.035*rise);
+  leftTorso.scale.set(1+.015*rise,1+.075*rise,1);
+  leftBelly.position.set(-.055*rise,.015*rise,0);
+  leftBelly.rotation.set(0,0,.025*rise);
+  leftBelly.scale.set(1+.025*rise,1+.14*rise,1);
+
+  const rightLean=-sample('rightX')/.16;
+  rightHead.position.set(-.53+sample('rightX'),2.555+sample('rightY'),.03);
+  rightHead.rotation.set(sample('rightPitch'),sample('rightTurn'),sample('rightRoll'),'YXZ');
+  rightTorso.position.set(-.020*rightLean,0,0);
+  rightTorso.rotation.set(0,0,.026*rightLean);
+  rightTorso.scale.set(1,1,1);
+  rightBelly.position.set(-.020*rightLean,0,0);
+
+  const expression=sample('expression');
+  leftSmile.visible=expression<.99999;
+  for(const child of leftSmile.children)child.material.opacity=1-expression;
+  surprisedMouth.visible=expression>.00001;
+  surprisedMouth.scale.set(1,.65+.35*expression,1);
+  openingMat.opacity=expression;
+  openingLipMat.opacity=expression;
+
+  const gaze=sample('gaze');
+  leftEyeA.pupil.position.set(-.010+.030*gaze,-.020+.009*gaze,.105);
+  leftEyeB.pupil.position.set(-.010+.020*gaze,-.020+.008*gaze,.105);
+  rightEyeA.pupil.position.set(-.010-.012*rightLean,-.020+.006*rise,.105);
+  rightEyeB.pupil.position.set(-.010-.018*rightLean,-.020+.008*rise,.105);
+
+  poseWrist(writingWrist,sample('writeX'),sample('writeY'),-.025*rise,0,0,sample('writeRoll'));
+  poseWrist(restingWrist,-.025*rise,.035*rise,-.020*rise,0,0,.025*rise);
+  poseWrist(farWrist,-.060*rise,.100*rise,-.015*rise,0,0,.020*rise);
+  poseWrist(huggingWrist,sample('rubX'),sample('rubY'),0,0,0,sample('rubRoll'));
+
+  poseArm(writingArm,
+    new THREE.Vector3(-.080*rise,.130*rise,-.020*rise),
+    wristEndpointDelta(writingWrist,writingArm),
+    new THREE.Vector3(-.055*rise,.005*rise,0));
+  poseArm(restingArm,
+    new THREE.Vector3(-.050*rise,.120*rise,-.010*rise),
+    wristEndpointDelta(restingWrist,restingArm),zero);
+  poseArm(farArm,
+    new THREE.Vector3(-.055*rightLean,-.005*rightLean,0),
+    wristEndpointDelta(farWrist,farArm),
+    new THREE.Vector3(-.012*rise,.020*rise,0));
+  poseArm(huggingArm,
+    new THREE.Vector3(-.055*rightLean,.008*rightLean,0),
+    wristEndpointDelta(huggingWrist,huggingArm),
+    new THREE.Vector3(-.025*rightLean,.005*rise,0));
+
+  scene.updateMatrixWorld(true);
+  renderer.setRenderTarget(null);
+  renderer.render(scene,ref);
+}
+window.nwb={scene,renderer,cameras:{ref},characters,render,ready:true};
+render(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=244, initial-scale=1">
+  <title>Dancing Yellow Chick</title>
+  <style>
+    html, body {
+      margin: 0;
+      width: 244px;
+      height: 240px;
+      overflow: hidden;
+      background: #f6f6f6;
+    }
+    svg {
+      display: block;
+      width: 244px;
+      height: 240px;
+    }
+  </style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 244 240" width="244" height="240">
+  <defs>
+    <linearGradient id="background-fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fafafa"/>
+      <stop offset="0.65" stop-color="#f7f7f7"/>
+      <stop offset="1" stop-color="#eeeeee"/>
+    </linearGradient>
+
+    <radialGradient id="body-fill" cx="46%" cy="25%" r="78%">
+      <stop offset="0" stop-color="#ffed79"/>
+      <stop offset="0.28" stop-color="#ffdf5c"/>
+      <stop offset="0.56" stop-color="#f2c747"/>
+      <stop offset="0.8" stop-color="#dfa938"/>
+      <stop offset="1" stop-color="#bc8530"/>
+    </radialGradient>
+
+    <radialGradient id="head-fill" cx="47%" cy="22%" r="73%">
+      <stop offset="0" stop-color="#fff486"/>
+      <stop offset="0.34" stop-color="#ffe96c"/>
+      <stop offset="0.64" stop-color="#ffdf57" stop-opacity="0.98"/>
+      <stop offset="0.85" stop-color="#f6ce48" stop-opacity="0.84"/>
+      <stop offset="1" stop-color="#e9b83e" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="belly-fill" cx="47%" cy="40%" r="64%">
+      <stop offset="0" stop-color="#fff9dc" stop-opacity="0.98"/>
+      <stop offset="0.42" stop-color="#faf2cd" stop-opacity="0.98"/>
+      <stop offset="0.7" stop-color="#f2e6b5" stop-opacity="0.93"/>
+      <stop offset="0.88" stop-color="#ead696" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#dfba60" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="left-arm-fill" cx="58%" cy="31%" r="79%">
+      <stop offset="0" stop-color="#ffea76"/>
+      <stop offset="0.42" stop-color="#ffdb52"/>
+      <stop offset="0.76" stop-color="#edb537"/>
+      <stop offset="1" stop-color="#ca8d2c"/>
+    </radialGradient>
+
+    <radialGradient id="right-arm-fill" cx="42%" cy="28%" r="82%">
+      <stop offset="0" stop-color="#fff080"/>
+      <stop offset="0.4" stop-color="#ffdd57"/>
+      <stop offset="0.75" stop-color="#edba3c"/>
+      <stop offset="1" stop-color="#cb9130"/>
+    </radialGradient>
+
+    <linearGradient id="left-hand-fill" x1="0.15" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#716d5e"/>
+      <stop offset="0.35" stop-color="#575349"/>
+      <stop offset="0.72" stop-color="#413c33"/>
+      <stop offset="1" stop-color="#332f29"/>
+    </linearGradient>
+
+    <linearGradient id="right-hand-fill" x1="0.1" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#787466"/>
+      <stop offset="0.36" stop-color="#5b584d"/>
+      <stop offset="0.72" stop-color="#454239"/>
+      <stop offset="1" stop-color="#34322c"/>
+    </linearGradient>
+
+    <linearGradient id="beak-fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dba643"/>
+      <stop offset="0.55" stop-color="#c88e32"/>
+      <stop offset="1" stop-color="#ad712a"/>
+    </linearGradient>
+
+    <filter id="ground-blur" x="-30%" y="-150%" width="160%" height="400%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+    <filter id="close-ground-blur" x="-25%" y="-150%" width="150%" height="400%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="2.2"/>
+    </filter>
+    <filter id="soft-edge" x="-8%" y="-5%" width="116%" height="110%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="0.5"/>
+    </filter>
+    <filter id="belly-softness" x="-12%" y="-10%" width="124%" height="120%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="1.8"/>
+    </filter>
+    <filter id="broad-shade" x="-60%" y="-25%" width="220%" height="150%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+    <filter id="arm-shade" x="-80%" y="-30%" width="260%" height="160%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="2.4"/>
+    </filter>
+    <filter id="hand-softness" x="-18%" y="-15%" width="136%" height="130%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="0.6"/>
+    </filter>
+    <filter id="face-softness" x="-45%" y="-40%" width="190%" height="180%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="0.42"/>
+    </filter>
+    <filter id="highlight-softness" x="-70%" y="-40%" width="240%" height="180%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="1.7"/>
+    </filter>
+
+    <path id="torso-shape" d="
+      M84 43
+      C73 52 65 64 61 77
+      C56 91 55 111 56 132
+      C53 150 47 166 42 184
+      C37 201 35 216 38 228
+      C41 239 51 246 65 248
+      L179 248
+      C193 245 203 237 207 224
+      C211 208 207 190 202 172
+      C198 155 194 141 193 125
+      C192 106 189 90 183 75
+      C178 63 169 54 158 45
+      C142 55 102 57 84 43 Z"/>
+
+    <clipPath id="torso-clip">
+      <use href="#torso-shape"/>
+    </clipPath>
+  </defs>
+
+  <g id="background">
+    <rect x="0" y="0" width="244" height="240" fill="url(#background-fill)"/>
+  </g>
+
+  <g id="ground-shadow">
+    <ellipse cx="123" cy="233.5" rx="96" ry="8.5" fill="#777367" opacity="0.17" filter="url(#ground-blur)"/>
+    <ellipse cx="123" cy="237" rx="78" ry="4" fill="#665c43" opacity="0.14" filter="url(#close-ground-blur)"/>
+  </g>
+
+  <g id="character-chick">
+    <g id="torso">
+      <use href="#torso-shape" fill="url(#body-fill)" filter="url(#soft-edge)"/>
+
+      <g id="body-shading" clip-path="url(#torso-clip)">
+        <ellipse cx="42" cy="151" rx="22" ry="103" fill="#aa7125" opacity="0.18" filter="url(#broad-shade)"/>
+        <ellipse cx="205" cy="153" rx="20" ry="101" fill="#ae7b28" opacity="0.12" filter="url(#broad-shade)"/>
+        <ellipse cx="123" cy="246" rx="88" ry="25" fill="#9f702d" opacity="0.17" filter="url(#broad-shade)"/>
+        <ellipse cx="104" cy="77" rx="48" ry="43" fill="#fff28a" opacity="0.12" filter="url(#broad-shade)"/>
+      </g>
+
+      <g id="belly">
+        <path d="
+          M120 63
+          C94 62 76 77 67 100
+          C58 122 53 151 55 176
+          C57 204 74 225 98 232
+          C112 236 135 236 151 231
+          C176 223 189 202 190 176
+          C191 149 184 121 176 99
+          C167 76 147 63 120 63 Z"
+          fill="url(#belly-fill)" filter="url(#belly-softness)"/>
+      </g>
+
+      <g id="arm-contact-shadows" fill="none" stroke="#a77727" stroke-width="5" stroke-linecap="round" opacity="0.11" filter="url(#arm-shade)">
+        <path d="M68 84 C63 103 67 126 61 143"/>
+        <path d="M185 83 C191 103 187 126 194 143"/>
+      </g>
+    </g>
+
+    <g id="arms">
+      <g id="arm-left">
+        <g id="arm-left-yellow">
+          <path id="arm-left-shape" fill="url(#left-arm-fill)" filter="url(#soft-edge)"/>
+          <path id="arm-left-highlight" fill="none" stroke="#fff08a" stroke-width="3.2" stroke-linecap="round" opacity="0.2" filter="url(#highlight-softness)"/>
+        </g>
+
+        <g id="hand-left" filter="url(#hand-softness)">
+          <path d="
+            M-3 -15
+            C2 -16 7 -12 10 -7
+            C13 -2 12 5 8 11
+            C5 16 0 17 -5 13
+            C-10 9 -12 3 -11 -4
+            C-10 -10 -7 -14 -3 -15 Z"
+            fill="url(#left-hand-fill)"/>
+          <path d="M-5 -11 C-1 -14 4 -11 6 -7"
+            fill="none" stroke="#a29a83" stroke-width="2.2" stroke-linecap="round"
+            opacity="0.12" filter="url(#highlight-softness)"/>
+        </g>
+      </g>
+
+      <g id="arm-right">
+        <g id="arm-right-yellow">
+          <path id="arm-right-shape" fill="url(#right-arm-fill)" filter="url(#soft-edge)"/>
+          <path id="arm-right-highlight" fill="none" stroke="#fff18d" stroke-width="3" stroke-linecap="round" opacity="0.2" filter="url(#highlight-softness)"/>
+        </g>
+
+        <g id="hand-right" filter="url(#hand-softness)">
+          <path d="
+            M-3 -17
+            C2 -18 6 -15 8 -10
+            C10 -5 9 0 11 5
+            C12 10 9 15 5 17
+            C1 19 -4 15 -7 11
+            C-11 6 -12 0 -10 -6
+            C-9 -12 -7 -16 -3 -17 Z"
+            fill="url(#right-hand-fill)"/>
+          <path d="M-5 -13 C-1 -16 4 -12 5 -8"
+            fill="none" stroke="#aaa28b" stroke-width="2" stroke-linecap="round"
+            opacity="0.13" filter="url(#highlight-softness)"/>
+        </g>
+      </g>
+    </g>
+
+    <g id="head">
+      <path id="head-shape" d="
+        M106 -4
+        C99 -1 95 8 92 19
+        C90 31 88 41 81 49
+        C86 65 101 77 121 78
+        C141 77 153 65 159 48
+        C155 40 155 31 152 19
+        C149 7 145 -1 138 -4 Z"
+        fill="url(#head-fill)" filter="url(#soft-edge)"/>
+
+      <g id="face">
+        <g id="eyes" fill="#292b22" filter="url(#face-softness)">
+          <g id="eye-left">
+            <ellipse cx="100.7" cy="24.8" rx="2.75" ry="3.85" transform="rotate(8 100.7 24.8)"/>
+            <ellipse cx="100.1" cy="23.5" rx="0.65" ry="0.85" fill="#77785a" opacity="0.16"/>
+          </g>
+          <g id="eye-right">
+            <ellipse cx="140.4" cy="22.4" rx="2.65" ry="3.55" transform="rotate(-7 140.4 22.4)"/>
+            <ellipse cx="139.9" cy="21.2" rx="0.6" ry="0.75" fill="#77785a" opacity="0.14"/>
+          </g>
+        </g>
+
+        <g id="mouth" filter="url(#face-softness)">
+          <path d="
+            M116.4 38.1
+            C118.1 37.1 121.3 36.8 123.2 37.8
+            C123.9 39.1 122.4 41.3 119.9 41.8
+            C117.8 41.5 116.2 40.2 116.4 38.1 Z"
+            fill="url(#beak-fill)" opacity="0.82"/>
+          <path d="M117.4 38.1 Q119.9 37.3 122.3 38"
+            fill="none" stroke="#edbd55" stroke-width="0.75" stroke-linecap="round" opacity="0.48"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
+
+<script>
+(() => {
+  const times = [0, 160, 340, 500, 680, 840, 1020, 1180, 1200];
+  const poses = [
+    { hs: 0, hb: 0, hr: 0, bs: 0, br: 0, lx: 58, ly: 101, lbx: 54, lby: 149, le: 25, lh: -12, ls: 1, lw: 1, rx: 182, ry: 87, rbx: 188, rby: 149, re: 20, rh: -12, rs: 1, rw: 1 },
+    { hs: 5, hb: 1, hr: 1, bs: 1.5, br: 0.4, lx: 16, ly: 96, lbx: 45, lby: 149, le: 14, lh: -8, ls: 0.9, lw: 0.95, rx: 163, ry: 103, rbx: 179, rby: 149, re: 14, rh: -8, rs: 1, rw: 1 },
+    { hs: 8, hb: 1, hr: 1, bs: 2, br: 0.6, lx: 48, ly: 115, lbx: 52, lby: 151, le: 18, lh: -10, ls: 0.9, lw: 0.95, rx: 179, ry: 105, rbx: 190, rby: 151, re: 16, rh: -8, rs: 0.9, rw: 0.95 },
+    { hs: 4, hb: 2, hr: 0, bs: 1, br: 0.2, lx: 24, ly: 121, lbx: 44, lby: 151, le: 14, lh: -14, ls: 0.95, lw: 1, rx: 188, ry: 116, rbx: 198, rby: 153, re: 16, rh: -14, rs: 1, rw: 1 },
+    { hs: 0, hb: 1, hr: -0.5, bs: 0, br: 0, lx: 23, ly: 124, lbx: 45, lby: 153, le: 15, lh: -14, ls: 0.95, lw: 1, rx: 164, ry: 115, rbx: 183, rby: 151, re: 16, rh: -12, rs: 1.05, rw: 1.05 },
+    { hs: 1, hb: 0, hr: 0, bs: 0, br: 0, lx: 56, ly: 107, lbx: 54, lby: 151, le: 20, lh: -10, ls: 0.9, lw: 0.95, rx: 183, ry: 102, rbx: 191, rby: 150, re: 18, rh: -10, rs: 0.9, rw: 0.95 },
+    { hs: -1, hb: 0, hr: -0.5, bs: -0.5, br: -0.2, lx: 19, ly: 109, lbx: 45, lby: 150, le: 16, lh: -10, ls: 0.9, lw: 0.95, rx: 161, ry: 108, rbx: 179, rby: 150, re: 15, rh: -14, rs: 1.05, rw: 1.05 },
+    { hs: 0, hb: 0, hr: 0, bs: 0, br: 0, lx: 45, ly: 117, lbx: 49, lby: 151, le: 18, lh: -12, ls: 1, lw: 1, rx: 180, ry: 109, rbx: 189, rby: 151, re: 16, rh: -10, rs: 0.95, rw: 1 }
+  ];
+
+  const el = {};
+  [
+    "torso", "head",
+    "arm-left-yellow", "arm-left-shape", "arm-left-highlight", "hand-left",
+    "arm-right-yellow", "arm-right-shape", "arm-right-highlight", "hand-right"
+  ].forEach(id => {
+    el[id] = document.getElementById(id);
+  });
+
+  const keys = Object.keys(poses[0]);
+  const mix = (a, b, u) => a + (b - a) * u;
+  const n = value => Math.round(value * 100) / 100;
+
+  function leftArmPath(length, extension) {
+    const l = n(length);
+    const e = n(extension);
+    return `M 7 ${-e}
+      C -4 ${-e} -15 ${n(8 - extension)} -17 4
+      C -20 ${n(length * 0.35)} -17 ${n(length * 0.7)} -9 ${n(length * 0.9)}
+      C -5 ${n(length + 3)} 5 ${n(length + 4)} 10 ${n(length * 0.88)}
+      C 16 ${n(length * 0.68)} 15 ${n(length * 0.36)} 13 12
+      C 12 1 15 ${n(8 - extension)} 12 ${n(3 - extension)}
+      C 11 ${-e} 9 ${n(-extension - 1)} 7 ${-e} Z`;
+  }
+
+  function rightArmPath(length, extension) {
+    const e = n(extension);
+    return `M -6 ${-e}
+      C -12 ${n(1 - extension)} -15 ${n(9 - extension)} -14 6
+      C -15 ${n(length * 0.32)} -17 ${n(length * 0.62)} -12 ${n(length * 0.84)}
+      C -9 ${n(length + 3)} 1 ${n(length + 4)} 7 ${n(length * 0.93)}
+      C 14 ${n(length * 0.77)} 18 ${n(length * 0.45)} 17 18
+      C 16 5 14 ${n(7 - extension)} 9 ${n(2 - extension)}
+      C 5 ${n(-extension - 2)} 0 ${n(-extension - 2)} -6 ${-e} Z`;
+  }
+
+  function positionArm(side, p) {
+    const left = side === "left";
+    const x = left ? p.lx : p.rx;
+    const y = left ? p.ly : p.ry;
+    const bx = left ? p.lbx : p.rbx;
+    const by = left ? p.lby : p.rby;
+    const extension = left ? p.le : p.re;
+    const width = left ? p.lw : p.rw;
+    const handRotation = left ? p.lh : p.rh;
+    const handScale = left ? p.ls : p.rs;
+    const dx = bx - x;
+    const dy = by - y;
+    const length = Math.hypot(dx, dy);
+    const angle = Math.atan2(-dx, dy) * 180 / Math.PI;
+
+    el[`arm-${side}-yellow`].setAttribute(
+      "transform",
+      `translate(${n(x)} ${n(y)}) rotate(${n(angle)}) scale(${n(width)} 1)`
+    );
+    el[`arm-${side}-shape`].setAttribute(
+      "d",
+      left ? leftArmPath(length, extension) : rightArmPath(length, extension)
+    );
+    el[`arm-${side}-highlight`].setAttribute(
+      "d",
+      left
+        ? `M -12 8 C -15 ${n(length * 0.35)} -11 ${n(length * 0.65)} -5 ${n(length * 0.78)}`
+        : `M 12 8 C 15 ${n(length * 0.35)} 12 ${n(length * 0.65)} 6 ${n(length * 0.78)}`
+    );
+    el[`hand-${side}`].setAttribute(
+      "transform",
+      `translate(${n(x)} ${n(y)}) rotate(${n(handRotation)}) scale(${n(handScale)})`
+    );
+  }
+
+  function render(t) {
+    t = ((t % 1200) + 1200) % 1200;
+
+    let i = 0;
+    while (i < 7 && t >= times[i + 1]) i++;
+
+    const u = (t - times[i]) / (times[i + 1] - times[i]);
+    const a = poses[i];
+    const b = poses[(i + 1) % poses.length];
+    const p = {};
+
+    for (const key of keys) p[key] = mix(a[key], b[key], u);
+
+    el.torso.setAttribute(
+      "transform",
+      `translate(${n(p.bs)} 0) rotate(${n(p.br)} 122 237)`
+    );
+    el.head.setAttribute(
+      "transform",
+      `translate(${n(p.hs)} ${n(p.hb)}) rotate(${n(p.hr)} 122 65)`
+    );
+
+    positionArm("left", p);
+    positionArm("right", p);
+  }
+
+  window.nwb = { render };
+  render(0);
+})();
+</script>
+</body>
+</html>

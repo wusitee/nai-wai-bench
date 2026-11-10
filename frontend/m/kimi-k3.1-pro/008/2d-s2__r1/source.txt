@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=216, initial-scale=1">
+<title>Laughing Yellow Character</title>
+<style>
+  html, body { margin: 0; width: 216px; height: 216px; overflow: hidden; }
+  body { background: #f7f7f4; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 216" width="216" height="216" role="img" aria-label="A round yellow character laughing, crouching, and throwing its head back">
+  <defs>
+    <radialGradient id="background-gradient" cx="48%" cy="35%" r="78%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.7" stop-color="#f8f8f5"/>
+      <stop offset="1" stop-color="#eeeeea"/>
+    </radialGradient>
+    <radialGradient id="head-skin" cx="31%" cy="22%" r="82%">
+      <stop offset="0" stop-color="#ffe15a"/>
+      <stop offset="0.38" stop-color="#f9ce2d"/>
+      <stop offset="0.73" stop-color="#efb914"/>
+      <stop offset="1" stop-color="#d99b06"/>
+    </radialGradient>
+    <linearGradient id="body-skin" x1="0" y1="0" x2="1" y2="0.75">
+      <stop offset="0" stop-color="#f8cd2c"/>
+      <stop offset="0.43" stop-color="#efba16"/>
+      <stop offset="0.78" stop-color="#e5a80b"/>
+      <stop offset="1" stop-color="#cd8905"/>
+    </linearGradient>
+    <linearGradient id="left-arm-skin" x1="0" y1="0" x2="1" y2="0.4">
+      <stop offset="0" stop-color="#ffdb3e"/>
+      <stop offset="0.52" stop-color="#f2bd18"/>
+      <stop offset="1" stop-color="#d99a08"/>
+    </linearGradient>
+    <linearGradient id="right-arm-skin" x1="0" y1="0" x2="1" y2="0.6">
+      <stop offset="0" stop-color="#f5c51e"/>
+      <stop offset="0.55" stop-color="#e9ad0d"/>
+      <stop offset="1" stop-color="#cc8805"/>
+    </linearGradient>
+    <linearGradient id="left-leg-skin" x1="0" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#e8ad10"/>
+      <stop offset="0.55" stop-color="#f2bd1b"/>
+      <stop offset="1" stop-color="#d99b0b"/>
+    </linearGradient>
+    <linearGradient id="right-leg-skin" x1="0" y1="0" x2="1" y2="0.8">
+      <stop offset="0" stop-color="#d99a08"/>
+      <stop offset="0.45" stop-color="#efb515"/>
+      <stop offset="1" stop-color="#d28f07"/>
+    </linearGradient>
+    <radialGradient id="belly-gradient" cx="42%" cy="35%" r="72%">
+      <stop offset="0" stop-color="#f4e5b8"/>
+      <stop offset="0.55" stop-color="#ead7a2"/>
+      <stop offset="0.86" stop-color="#ddc489"/>
+      <stop offset="1" stop-color="#cba963"/>
+    </radialGradient>
+    <linearGradient id="mouth-gradient" x1="0" y1="0" x2="0.25" y2="1">
+      <stop offset="0" stop-color="#100e0b"/>
+      <stop offset="0.55" stop-color="#1c130e"/>
+      <stop offset="1" stop-color="#3b1c16"/>
+    </linearGradient>
+    <radialGradient id="tongue-gradient" cx="50%" cy="80%" r="75%">
+      <stop offset="0" stop-color="#e77b62"/>
+      <stop offset="0.65" stop-color="#bf5745"/>
+      <stop offset="1" stop-color="#81362d"/>
+    </radialGradient>
+    <linearGradient id="teeth-gradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.75" stop-color="#fffdf0"/>
+      <stop offset="1" stop-color="#dcd8c5"/>
+    </linearGradient>
+    <linearGradient id="hand-gradient" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#65665a"/>
+      <stop offset="0.45" stop-color="#484a41"/>
+      <stop offset="1" stop-color="#30332f"/>
+    </linearGradient>
+    <filter id="ground-blur" x="-30%" y="-100%" width="160%" height="300%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+    <filter id="soft-blur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="1.5"/>
+    </filter>
+    <clipPath id="head-clip">
+      <path d="M103 9 C120 8 134 15 143 28 C151 41 153 57 151 74 C149 91 142 102 130 110 C116 118 98 117 83 110 C70 103 64 90 62 73 C60 55 65 38 73 25 C81 15 91 10 103 9 Z"/>
+    </clipPath>
+    <clipPath id="belly-clip">
+      <path d="M88 108 C102 110 122 105 133 111 C140 120 142 140 138 154 C134 167 122 175 105 176 C88 176 78 168 75 153 C71 138 73 121 80 113 C82 110 85 109 88 108 Z"/>
+    </clipPath>
+  </defs>
+
+  <g id="background">
+    <rect width="216" height="216" fill="url(#background-gradient)"/>
+    <ellipse id="ground-shadow" cx="109" cy="209" rx="61" ry="6" fill="#8d8b78" opacity="0.2" filter="url(#ground-blur)"/>
+  </g>
+
+  <g id="character-yellow">
+    <g id="legs">
+      <g id="leg-left">
+        <path d="M81 168 C91 165 103 169 108 178 C111 188 107 202 106 216 L79 216 C77 205 73 192 74 182 C74 176 77 171 81 168 Z" fill="url(#left-leg-skin)"/>
+        <path d="M101 179 C103 190 99 204 99 216 L106 216 C107 201 111 188 108 178 Z" fill="#b77b05" opacity="0.28"/>
+        <path d="M81 184 C80 194 83 204 84 211" fill="none" stroke="#ffda3c" stroke-width="2" opacity="0.35" stroke-linecap="round"/>
+      </g>
+      <g id="leg-right">
+        <path d="M125 173 C134 168 145 170 150 179 C154 190 150 204 147 216 L121 216 C122 202 117 188 119 180 C120 177 122 175 125 173 Z" fill="url(#right-leg-skin)"/>
+        <path d="M121 181 C126 190 127 203 126 216 L121 216 C122 202 117 188 119 180 Z" fill="#ad7405" opacity="0.32"/>
+        <path d="M143 185 C145 195 141 205 140 212" fill="none" stroke="#ffd132" stroke-width="2" opacity="0.26" stroke-linecap="round"/>
+      </g>
+    </g>
+
+    <g id="upper-body">
+      <g id="torso">
+        <path d="M83 77 C104 69 135 71 153 82 C169 93 176 113 176 137 C176 158 165 177 149 187 C130 197 98 194 78 181 C64 171 60 150 62 128 C64 106 69 88 83 77 Z" fill="url(#body-skin)"/>
+        <path d="M151 86 C166 100 171 119 170 139 C169 158 160 174 147 183 C160 176 172 159 176 140 C178 116 169 94 153 82 Z" fill="#b97804" opacity="0.2"/>
+        <path d="M70 105 C66 120 65 139 68 151" fill="none" stroke="#ffda3e" stroke-width="3" opacity="0.25" stroke-linecap="round"/>
+      </g>
+
+      <g id="arm-left">
+        <path d="M69 88 C60 94 55 107 49 123 C44 136 40 150 43 159 C45 166 49 170 55 171 L65 164 C60 157 58 151 60 142 C63 129 69 118 75 107 C79 99 77 92 69 88 Z" fill="url(#left-arm-skin)"/>
+        <path d="M48 130 C44 143 43 153 47 160 C49 164 52 166 56 166" fill="none" stroke="#ffe15a" stroke-width="2.2" opacity="0.34" stroke-linecap="round"/>
+        <path d="M61 142 C64 130 69 119 74 111" fill="none" stroke="#bd8105" stroke-width="1.4" opacity="0.35" stroke-linecap="round"/>
+        <g id="hand-left">
+          <path d="M52 158 C58 158 63 162 65 168 L69 177 C70 180 68 182 65 180 L60 173 L63 183 C64 187 61 189 58 185 L54 176 L56 185 C56 189 53 190 51 186 L48 176 L48 183 C48 187 45 187 44 183 L43 172 C42 166 46 160 52 158 Z" fill="url(#hand-gradient)"/>
+          <path d="M48 163 C52 161 58 164 60 168" fill="none" stroke="#88897a" stroke-width="1.2" opacity="0.55" stroke-linecap="round"/>
+          <path d="M54 176 L52 169 M48 176 L47 169 M60 173 L58 168" fill="none" stroke="#272b28" stroke-width="0.8" opacity="0.75" stroke-linecap="round"/>
+        </g>
+      </g>
+
+      <g id="arm-right">
+        <path d="M149 80 C162 84 174 100 181 117 C187 131 190 144 186 156 C183 164 179 170 173 175 L161 166 C167 157 170 148 168 138 C165 124 157 114 149 105 C143 97 142 87 149 80 Z" fill="url(#right-arm-skin)"/>
+        <path d="M177 119 C183 133 185 145 181 155 C179 161 176 165 172 168" fill="none" stroke="#f8ca28" stroke-width="2" opacity="0.32" stroke-linecap="round"/>
+        <path d="M151 105 C159 116 165 126 168 138" fill="none" stroke="#b87904" stroke-width="1.3" opacity="0.4" stroke-linecap="round"/>
+        <g id="hand-right">
+          <path d="M164 158 C170 158 175 162 176 168 C176 172 174 177 173 180 C172 184 169 184 168 180 L169 187 C169 191 166 192 164 188 L161 179 L162 188 C162 192 159 192 157 188 L155 179 L155 185 C155 189 152 189 151 185 L152 173 C152 166 157 161 164 158 Z" fill="url(#hand-gradient)"/>
+          <path d="M159 164 C163 161 169 162 171 166" fill="none" stroke="#8a8b7b" stroke-width="1.2" opacity="0.5" stroke-linecap="round"/>
+          <path d="M161 179 L159 171 M155 179 L155 172 M168 180 L169 171" fill="none" stroke="#272b28" stroke-width="0.8" opacity="0.8" stroke-linecap="round"/>
+        </g>
+      </g>
+
+      <g id="belly">
+        <path d="M88 108 C102 110 122 105 133 111 C140 120 142 140 138 154 C134 167 122 175 105 176 C88 176 78 168 75 153 C71 138 73 121 80 113 C82 110 85 109 88 108 Z" fill="url(#belly-gradient)"/>
+        <g clip-path="url(#belly-clip)">
+          <ellipse cx="106" cy="109" rx="34" ry="10" fill="#a77b26" opacity="0.2" filter="url(#soft-blur)"/>
+          <path d="M76 126 C73 143 78 160 88 168" fill="none" stroke="#fff2c8" stroke-width="3" opacity="0.32" stroke-linecap="round"/>
+          <path d="M134 122 C140 143 132 164 120 172" fill="none" stroke="#b79758" stroke-width="3" opacity="0.22" stroke-linecap="round"/>
+        </g>
+      </g>
+    </g>
+
+    <g id="head">
+      <g id="head-front">
+        <path id="head-shape" d="M103 9 C120 8 134 15 143 28 C151 41 153 57 151 74 C149 91 142 102 130 110 C116 118 98 117 83 110 C70 103 64 90 62 73 C60 55 65 38 73 25 C81 15 91 10 103 9 Z" fill="url(#head-skin)"/>
+        <g id="head-front-shading" clip-path="url(#head-clip)">
+          <path d="M139 24 C151 44 153 68 145 88 C139 103 128 111 113 115 C132 115 147 105 153 88 L158 37 Z" fill="#bd7e03" opacity="0.2"/>
+          <path d="M77 24 C68 40 65 57 67 72" fill="none" stroke="#fff07a" stroke-width="4" opacity="0.34" stroke-linecap="round" filter="url(#soft-blur)"/>
+          <ellipse cx="106" cy="109" rx="31" ry="7" fill="#ba8107" opacity="0.17" filter="url(#soft-blur)"/>
+          <ellipse cx="76" cy="69" rx="10" ry="18" fill="#ffe359" opacity="0.13"/>
+        </g>
+        <g id="face-front">
+          <g id="eyes-front" fill="none" stroke="#251d0c" stroke-width="3.1" stroke-linecap="round">
+            <path d="M76 50 C77 44 81 41 86 42 C91 42 94 46 95 51"/>
+            <path d="M119 49 C121 43 125 41 130 42 C135 43 137 46 138 51"/>
+          </g>
+          <g id="mouth-front">
+            <path d="M78 55 C91 61 112 58 130 53 C136 51 139 55 137 63 C134 85 123 102 107 107 C91 106 81 94 77 75 C75 66 74 58 78 55 Z" fill="#c88a08"/>
+            <path d="M79 58 C94 64 113 59 132 55 C135 54 136 57 135 63 C132 84 121 100 107 103 C93 102 84 91 80 75 C78 68 77 61 79 58 Z" fill="url(#mouth-gradient)"/>
+            <path d="M81 60 C95 64 114 60 132 56 L131 63 C122 68 109 71 96 70 C88 69 83 66 81 60 Z" fill="url(#teeth-gradient)"/>
+            <path d="M84 64 C97 68 114 64 129 60" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.55" stroke-linecap="round"/>
+            <path d="M90 94 C98 89 113 88 123 93 C119 99 113 102 107 103 C100 102 94 99 90 94 Z" fill="url(#tongue-gradient)"/>
+            <path d="M106 94 C108 96 109 99 108 101" fill="none" stroke="#8d3c34" stroke-width="0.8" opacity="0.55" stroke-linecap="round"/>
+            <path d="M91 101 C99 107 110 108 119 102" fill="none" stroke="#f6c126" stroke-width="1.4" opacity="0.7" stroke-linecap="round"/>
+          </g>
+        </g>
+      </g>
+
+      <g id="head-back" opacity="0">
+        <path d="M113 6 C128 4 140 12 146 26 C151 42 151 61 148 77 C145 94 136 105 123 110 C109 113 95 105 89 92 C83 77 84 57 88 39 C92 21 100 10 113 6 Z" fill="url(#head-skin)"/>
+        <path d="M140 17 C150 35 151 61 145 82 C140 99 130 107 117 110 C133 111 145 101 150 84 C155 61 151 34 140 17 Z" fill="#b87904" opacity="0.2"/>
+        <path d="M98 18 C90 33 87 52 88 67" fill="none" stroke="#fff078" stroke-width="3.2" opacity="0.28" stroke-linecap="round"/>
+        <g id="eyes-back" fill="none" stroke="#251d0c" stroke-width="2.7" stroke-linecap="round">
+          <path d="M103 20 C107 15 113 13 119 15"/>
+          <path d="M133 14 C138 15 141 19 142 24"/>
+        </g>
+        <g id="mouth-back">
+          <path d="M116 15 C125 12 138 17 142 23 C145 32 138 49 128 61 C122 69 113 69 106 60 C100 51 99 39 103 29 C106 22 111 17 116 15 Z" fill="#c88a08"/>
+          <path d="M117 18 C125 15 136 19 139 24 C141 32 134 47 126 58 C120 64 114 64 109 58 C104 49 103 39 106 30 C108 24 112 20 117 18 Z" fill="url(#mouth-gradient)"/>
+          <path d="M117 18 C125 15 136 19 139 24 L137 30 C129 26 119 25 108 31 C110 24 113 20 117 18 Z" fill="url(#teeth-gradient)"/>
+          <path d="M110 29 C119 24 129 24 137 28" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.55" stroke-linecap="round"/>
+          <path d="M109 54 C114 51 123 52 128 57 C124 63 116 66 110 60 Z" fill="url(#tongue-gradient)"/>
+          <path d="M110 60 C115 65 121 65 126 60" fill="none" stroke="#f6c126" stroke-width="1.2" opacity="0.65" stroke-linecap="round"/>
+        </g>
+      </g>
+
+      <g id="head-side" opacity="0">
+        <path d="M126 73 C143 75 156 88 160 106 C164 124 158 143 145 153 C132 163 111 161 96 151 C82 142 76 126 79 110 C82 94 93 82 107 76 C113 74 120 73 126 73 Z" fill="url(#head-skin)"/>
+        <path d="M148 84 C160 99 163 121 155 138 C149 151 137 158 123 160 C140 162 154 153 161 138 C169 118 162 96 148 84 Z" fill="#b87904" opacity="0.2"/>
+        <path d="M101 82 C89 91 83 103 82 116" fill="none" stroke="#fff078" stroke-width="3.2" opacity="0.3" stroke-linecap="round"/>
+        <g id="eyes-side" fill="none" stroke="#251d0c" stroke-width="2.8" stroke-linecap="round">
+          <path d="M96 107 C99 102 104 102 108 106"/>
+          <path d="M119 98 C123 96 128 98 130 102"/>
+        </g>
+        <g id="mouth-side">
+          <path d="M91 111 C97 106 106 110 114 118 C122 127 124 140 118 148 C111 154 100 149 92 140 C85 132 83 119 91 111 Z" fill="#c88a08"/>
+          <path d="M92 114 C97 110 105 113 111 120 C118 128 121 139 116 145 C111 150 102 146 95 138 C88 131 86 120 92 114 Z" fill="url(#mouth-gradient)"/>
+          <path d="M92 114 C97 110 105 113 111 120 L108 125 C101 121 94 121 88 125 C88 120 89 116 92 114 Z" fill="url(#teeth-gradient)"/>
+          <path d="M90 123 C96 120 102 121 108 124" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.55" stroke-linecap="round"/>
+          <path d="M98 137 C104 134 113 137 117 143 C113 149 105 146 99 141 Z" fill="url(#tongue-gradient)"/>
+          <path d="M101 144 C107 149 113 149 117 145" fill="none" stroke="#f6c126" stroke-width="1.2" opacity="0.65" stroke-linecap="round"/>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <g id="watermark" opacity="0.58">
+    <text x="187" y="209" fill="#a9aaa5" font-family="Arial, sans-serif" font-size="4.6" letter-spacing="0.1">豆包AI生成</text>
+  </g>
+</svg>
+
+<script>
+(function () {
+  "use strict";
+
+  var period = 1220;
+  var times = [0, 180, 340, 520, 680, 860, 1020, 1200, 1220];
+
+  var poses = {
+    body: [
+      [0, 0, 1, 1, 0],
+      [5, 17, 1.06, 0.90, 0],
+      [0, -6, 0.94, 1.05, 0],
+      [1, 0, 1, 1, 0],
+      [9, 39, 1, 0.55, -8],
+      [0, -6, 0.94, 1.05, 0],
+      [0, 0, 1, 1, 0],
+      [8, 35, 1, 0.62, -12],
+      [0, 0, 1, 1, 0]
+    ],
+    headFront: [
+      [0, 0, 1, 1, 0],
+      [5, 10, 1.04, 0.75, 0],
+      [0, 0, 1, 1, 0],
+      [1, 0, 1, 1, -1],
+      [8, 53, 1.05, 0.55, -12],
+      [0, 0, 1, 1, 0],
+      [0, 0, 1, 1, 0],
+      [0, 0, 1, 1, 0],
+      [0, 0, 1, 1, 0]
+    ],
+    headBack: [
+      [0, 0, 1, 1, 0],
+      [0, 0, 1, 1, 0],
+      [0, 0, 1, 1, -5],
+      [0, 0, 1, 1, 0],
+      [0, 0, 1, 1, 0],
+      [0, -1, 1, 1, -2],
+      [0, 0, 1, 1, 0],
+      [0, 0, 1, 1, 0],
+      [0, 0, 1, 1, 0]
+    ],
+    belly: [
+      [0, 0, 1, 1, 0],
+      [0, 0, 1.05, 1.05, 0],
+      [7, -1, 0.88, 1, 0],
+      [0, 0, 1, 1, 0],
+      [0, 4, 1.08, 1.05, 0],
+      [7, -1, 0.88, 1, 0],
+      [0, 0, 1, 1, 0],
+      [8, 1, 1.05, 1, 0],
+      [0, 0, 1, 1, 0]
+    ],
+    armLeft: [
+      [0, 0, 1, 1, 0],
+      [3, -7, 1, 1, 0],
+      [18, -3, 1, 1, -10],
+      [0, 0, 1, 1, 0],
+      [-7, -24, 1, 1, 0],
+      [18, -3, 1, 1, -10],
+      [0, 0, 1, 1, 0],
+      [0, -28, 1, 1, 0],
+      [0, 0, 1, 1, 0]
+    ],
+    armRight: [
+      [0, 0, 1, 1, 0],
+      [-8, -7, 1, 1, 0],
+      [5, -4, 1, 1, 8],
+      [0, 0, 1, 1, 0],
+      [-17, 5, 1, 1, 0],
+      [5, -4, 1, 1, 8],
+      [0, 0, 1, 1, 0],
+      [-24, 0, 1, 1, 0],
+      [0, 0, 1, 1, 0]
+    ],
+    legLeft: [
+      [0, 0, 1, 1, 0],
+      [-9, 6, 1.05, 0.85, 16],
+      [5, 0, 0.90, 1, 0],
+      [0, 0, 1, 1, 0],
+      [-10, 5, 1.10, 0.82, 20],
+      [5, 0, 0.90, 1, 0],
+      [0, 0, 1, 1, 0],
+      [1, 5, 1.05, 0.85, 12],
+      [0, 0, 1, 1, 0]
+    ],
+    legRight: [
+      [0, 0, 1, 1, 0],
+      [23, 6, 1.10, 0.85, -18],
+      [7, 0, 0.90, 1, 0],
+      [0, 0, 1, 1, 0],
+      [26, 5, 1.12, 0.82, -20],
+      [7, 0, 0.90, 1, 0],
+      [0, 0, 1, 1, 0],
+      [24, 5, 1.10, 0.85, -18],
+      [0, 0, 1, 1, 0]
+    ],
+    frontOpacity: [
+      [1], [1], [0], [1], [1], [0], [1], [0], [1]
+    ],
+    backOpacity: [
+      [0], [0], [1], [0], [0], [1], [0], [0], [0]
+    ],
+    sideOpacity: [
+      [0], [0], [0], [0], [0], [0], [0], [1], [0]
+    ],
+    shadow: [
+      [109, 209, 61, 0.20],
+      [116, 210, 68, 0.22],
+      [112, 209, 55, 0.18],
+      [109, 209, 61, 0.20],
+      [116, 210, 70, 0.23],
+      [112, 209, 55, 0.18],
+      [109, 209, 61, 0.20],
+      [120, 210, 66, 0.22],
+      [109, 209, 61, 0.20]
+    ]
+  };
+
+  var ids = {};
+  [
+    "upper-body", "head-front", "head-back", "head-side", "belly",
+    "arm-left", "arm-right", "leg-left", "leg-right", "ground-shadow"
+  ].forEach(function (id) {
+    ids[id] = document.getElementById(id);
+  });
+
+  function locate(t) {
+    var i = 0;
+    while (i < times.length - 2 && t > times[i + 1]) i++;
+    var span = times[i + 1] - times[i];
+    var u = span ? (t - times[i]) / span : 0;
+    u = Math.max(0, Math.min(1, u));
+    u = u * u * (3 - 2 * u);
+    return [i, u];
+  }
+
+  function sample(name, location) {
+    var values = poses[name];
+    var a = values[location[0]];
+    var b = values[location[0] + 1];
+    var u = location[1];
+    var result = [];
+    for (var i = 0; i < a.length; i++) {
+      result.push(a[i] + (b[i] - a[i]) * u);
+    }
+    return result;
+  }
+
+  function n(value) {
+    return Math.round(value * 1000) / 1000;
+  }
+
+  function transform(p, cx, cy) {
+    return "translate(" + n(p[0]) + " " + n(p[1]) + ") " +
+      "translate(" + cx + " " + cy + ") " +
+      "rotate(" + n(p[4]) + ") " +
+      "scale(" + n(p[2]) + " " + n(p[3]) + ") " +
+      "translate(" + (-cx) + " " + (-cy) + ")";
+  }
+
+  function render(t) {
+    t = Number(t);
+    if (!isFinite(t)) t = 0;
+    t = ((t % period) + period) % period;
+
+    var location = locate(t);
+
+    ids["upper-body"].setAttribute("transform", transform(sample("body", location), 110, 120));
+    ids["head-front"].setAttribute("transform", transform(sample("headFront", location), 107, 60));
+    ids["head-back"].setAttribute("transform", transform(sample("headBack", location), 120, 60));
+    ids["belly"].setAttribute("transform", transform(sample("belly", location), 107, 142));
+    ids["arm-left"].setAttribute("transform", transform(sample("armLeft", location), 69, 90));
+    ids["arm-right"].setAttribute("transform", transform(sample("armRight", location), 149, 80));
+    ids["leg-left"].setAttribute("transform", transform(sample("legLeft", location), 90, 180));
+    ids["leg-right"].setAttribute("transform", transform(sample("legRight", location), 135, 180));
+
+    ids["head-front"].setAttribute("opacity", n(sample("frontOpacity", location)[0]));
+    ids["head-back"].setAttribute("opacity", n(sample("backOpacity", location)[0]));
+    ids["head-side"].setAttribute("opacity", n(sample("sideOpacity", location)[0]));
+
+    var shadow = sample("shadow", location);
+    ids["ground-shadow"].setAttribute("cx", n(shadow[0]));
+    ids["ground-shadow"].setAttribute("cy", n(shadow[1]));
+    ids["ground-shadow"].setAttribute("rx", n(shadow[2]));
+    ids["ground-shadow"].setAttribute("opacity", n(shadow[3]));
+  }
+
+  window.nwb = { render: render };
+  render(0);
+}());
+</script>
+</body>
+</html>

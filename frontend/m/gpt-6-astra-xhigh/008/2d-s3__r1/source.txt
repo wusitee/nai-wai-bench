@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Laughing golden gorilla</title>
+<style>
+html,body{margin:0;width:216px;height:216px;overflow:hidden;background:#f7f8f5}
+svg{display:block;width:216px;height:216px}
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" width="216" height="216" viewBox="0 0 216 216">
+<defs>
+  <linearGradient id="background" x1="0%" y1="0%" x2="15%" y2="100%">
+    <stop stop-color="#fafbf9"/>
+    <stop offset=".75" stop-color="#f5f7f4"/>
+    <stop offset="1" stop-color="#e7e9e3"/>
+  </linearGradient>
+  <radialGradient id="body-gold" gradientUnits="userSpaceOnUse" cx="123" cy="49" r="157">
+    <stop stop-color="#ead058"/>
+    <stop offset=".4" stop-color="#dfb731"/>
+    <stop offset=".74" stop-color="#cc9b23"/>
+    <stop offset="1" stop-color="#ad7819"/>
+  </radialGradient>
+  <linearGradient id="left-leg-gold" x1="0%" y1="20%" x2="100%" y2="60%">
+    <stop stop-color="#976719"/>
+    <stop offset=".32" stop-color="#bd8b21"/>
+    <stop offset=".66" stop-color="#c99b2c"/>
+    <stop offset="1" stop-color="#9d6b17"/>
+  </linearGradient>
+  <linearGradient id="right-leg-gold" x1="0%" y1="30%" x2="100%" y2="60%">
+    <stop stop-color="#a5751c"/>
+    <stop offset=".45" stop-color="#c99a2a"/>
+    <stop offset=".8" stop-color="#d1aa37"/>
+    <stop offset="1" stop-color="#b68b24"/>
+  </linearGradient>
+  <radialGradient id="arm-gold" cx="80%" cy="15%" r="110%">
+    <stop stop-color="#e8c94a"/>
+    <stop offset=".4" stop-color="#dfb731"/>
+    <stop offset=".75" stop-color="#cca025"/>
+    <stop offset="1" stop-color="#af7d1a"/>
+  </radialGradient>
+  <linearGradient id="left-arm-gold" x1="0%" y1="20%" x2="100%" y2="40%">
+    <stop stop-color="#c49120"/>
+    <stop offset=".32" stop-color="#dbad2c"/>
+    <stop offset=".65" stop-color="#ce9b23"/>
+    <stop offset="1" stop-color="#a57219"/>
+  </linearGradient>
+  <radialGradient id="belly-tan" cx="42%" cy="24%" r="88%">
+    <stop stop-color="#d1b187"/>
+    <stop offset=".48" stop-color="#c9a67b"/>
+    <stop offset=".83" stop-color="#bc9463"/>
+    <stop offset="1" stop-color="#a97f4b"/>
+  </radialGradient>
+  <radialGradient id="head-gold" cx="51%" cy="10%" r="92%">
+    <stop stop-color="#f0df87"/>
+    <stop offset=".29" stop-color="#e9ce65"/>
+    <stop offset=".57" stop-color="#dfb844" stop-opacity=".92"/>
+    <stop offset=".79" stop-color="#d6aa33" stop-opacity=".4"/>
+    <stop offset="1" stop-color="#d5aa32" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="lip-gold" x1="0%" y1="0%" x2="80%" y2="100%">
+    <stop stop-color="#77551d"/>
+    <stop offset=".36" stop-color="#987027"/>
+    <stop offset=".7" stop-color="#b58b38"/>
+    <stop offset="1" stop-color="#dfbd69"/>
+  </linearGradient>
+  <radialGradient id="mouth-dark" cx="54%" cy="18%" r="90%">
+    <stop stop-color="#070600"/>
+    <stop offset=".75" stop-color="#0c0802"/>
+    <stop offset="1" stop-color="#24170a"/>
+  </radialGradient>
+  <linearGradient id="teeth" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop stop-color="#fff8dc"/>
+    <stop offset=".65" stop-color="#eee2bb"/>
+    <stop offset="1" stop-color="#b7a980"/>
+  </linearGradient>
+  <linearGradient id="hand-left" x1="0%" y1="0%" x2="100%" y2="60%">
+    <stop stop-color="#716348"/>
+    <stop offset=".5" stop-color="#554d38"/>
+    <stop offset="1" stop-color="#303228"/>
+  </linearGradient>
+  <linearGradient id="hand-right" x1="30%" y1="0%" x2="70%" y2="100%">
+    <stop stop-color="#757052"/>
+    <stop offset=".48" stop-color="#56543e"/>
+    <stop offset="1" stop-color="#34382b"/>
+  </linearGradient>
+  <filter id="ground-blur" x="-40%" y="-120%" width="180%" height="340%">
+    <feGaussianBlur stdDeviation="7"/>
+  </filter>
+  <filter id="soft-shadow" x="-45%" y="-45%" width="190%" height="190%">
+    <feGaussianBlur stdDeviation="2.4"/>
+  </filter>
+  <filter id="cheek-blur" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="1.2"/>
+  </filter>
+  <filter id="soft-edge" x="-10%" y="-10%" width="120%" height="120%">
+    <feGaussianBlur stdDeviation=".4"/>
+  </filter>
+  <filter id="fur-texture" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency=".78 .56" numOctaves="3" seed="17" result="noise"/>
+    <feColorMatrix in="noise" type="saturate" values="0" result="gray-noise"/>
+    <feComposite in="gray-noise" in2="SourceGraphic" operator="in" result="clipped-noise"/>
+    <feBlend in="SourceGraphic" in2="clipped-noise" mode="soft-light" result="grain"/>
+    <feComposite in="SourceGraphic" in2="grain" operator="arithmetic" k1="0" k2=".79" k3=".21" k4="0"/>
+    <feGaussianBlur stdDeviation=".19"/>
+  </filter>
+  <clipPath id="torso-clip"><use href="#torso-outline"/></clipPath>
+</defs>
+
+<g id="background-scene">
+  <path fill="url(#background)" d="M0 0H216V216H0Z"/>
+  <ellipse id="ground-shadow" cx="123" cy="214" rx="82" ry="12" fill="#858778" opacity=".26" filter="url(#ground-blur)"/>
+  <ellipse cx="54" cy="216" rx="54" ry="8" fill="#9a9c90" opacity=".18" filter="url(#ground-blur)"/>
+</g>
+
+<g id="laughing-golden-gorilla" filter="url(#fur-texture)">
+  <g id="legs">
+    <g id="left-leg">
+      <path d="M87 161C97 163 111 171 119 182C117 192 110 202 109 216H78C77 208 76 199 77 188C78 177 81 168 87 161Z" fill="url(#left-leg-gold)"/>
+      <path d="M101 182C101 194 96 204 97 220" fill="none" stroke="#dfb440" stroke-width="10" opacity=".19" filter="url(#soft-shadow)"/>
+    </g>
+    <g id="right-leg">
+      <path d="M130 170C139 167 153 169 160 178C166 188 171 201 177 220H141C138 206 135 195 130 188C126 181 126 176 130 170Z" fill="url(#right-leg-gold)"/>
+      <path d="M143 187C147 197 149 207 153 220" fill="none" stroke="#e4bc48" stroke-width="10" opacity=".19" filter="url(#soft-shadow)"/>
+    </g>
+    <g id="pelvis">
+      <path d="M110 174C119 177 131 177 140 174L136 190C130 185 126 184 121 189C118 193 114 195 111 193Z" fill="#966319" opacity=".53"/>
+    </g>
+  </g>
+
+  <g id="torso">
+    <path id="torso-outline" d="M100 48C87 51 77 64 74 80C71 98 78 117 80 135C81 157 88 173 102 182C113 190 129 190 141 182C153 174 161 158 165 137C169 119 171 99 162 80C155 65 143 55 133 51Z" fill="url(#body-gold)"/>
+    <g clip-path="url(#torso-clip)">
+      <g id="chest-shading">
+        <path d="M96 69C89 87 91 101 101 113C90 115 83 124 84 137C76 120 73 95 81 78Z" fill="#986418" opacity=".24" filter="url(#soft-shadow)"/>
+        <path d="M110 78C122 88 134 89 145 85" fill="none" stroke="#f0ce51" stroke-width="15" opacity=".23" filter="url(#soft-shadow)"/>
+        <path d="M141 101C146 112 145 124 151 135" fill="none" stroke="#9d7119" stroke-width="5" opacity=".3" filter="url(#soft-shadow)"/>
+        <path d="M140 103C142 105 142 108 141 111" fill="none" stroke="#a77c20" stroke-width="2.3" stroke-linecap="round" opacity=".45"/>
+      </g>
+    </g>
+    <g id="belly">
+      <path id="belly-outline" d="M86 113C94 108 106 109 117 112C131 115 143 123 149 134C153 144 149 157 142 166C135 174 123 175 112 171C99 168 90 160 87 149C84 139 82 122 86 113Z" fill="url(#belly-tan)" filter="url(#soft-edge)"/>
+      <path id="belly-lower-shade" d="M91 151C99 168 123 176 139 167" fill="none" stroke="#9a6c39" stroke-width="3" opacity=".17" filter="url(#soft-shadow)"/>
+      <path id="belly-fold" d="M87 114C104 109 132 118 147 132" fill="none" stroke="#8d6d3d" stroke-width="2.5" stroke-linecap="round" opacity="0" filter="url(#soft-edge)"/>
+      <path id="belly-fold-light" d="M87 114C104 109 132 118 147 132" fill="none" stroke="#e6cfaa" stroke-width="2.5" stroke-linecap="round" opacity="0" transform="translate(0 3)" filter="url(#soft-edge)"/>
+    </g>
+  </g>
+
+  <g id="left-arm">
+    <path id="left-arm-outline" d="M92 56C80 58 70 72 67 85C62 103 67 124 72 143C75 155 78 165 82 171C85 175 92 175 94 171C95 167 91 159 89 153C84 137 81 122 82 108C82 94 88 79 95 70Z" fill="url(#left-arm-gold)"/>
+    <path id="left-arm-light" d="M79 91C76 106 78 119 81 129" fill="none" stroke="#edc449" stroke-width="7" stroke-linecap="round" opacity=".3" filter="url(#soft-shadow)"/>
+    <path id="left-forearm-shade" d="M82 126C83 142 88 157 91 164" fill="none" stroke="#865614" stroke-width="4" opacity=".29" filter="url(#soft-shadow)"/>
+    <g id="left-hand">
+      <path d="M82 168C85 171 90 171 93 170L94 175C96 177 99 178 100 181C101 183 99 185 97 184L92 180L95 189C96 193 94 195 92 193L88 183L90 193C91 197 87 198 85 194L83 184L84 193C84 197 80 198 79 194L79 184L78 191C77 193 75 192 76 189L78 177Z" fill="url(#hand-left)"/>
+      <path d="M83 177L81 186M87 178L87 186M91 178L94 182" fill="none" stroke="#918366" stroke-width="1.1" stroke-linecap="round" opacity=".31"/>
+      <path d="M81 192L82 194M87 193L88 195M93 189L94 191" fill="none" stroke="#292b22" stroke-width="1.3" stroke-linecap="round" opacity=".65"/>
+    </g>
+  </g>
+
+  <g id="right-arm">
+    <path id="right-arm-outline" d="M148 63C160 65 171 79 180 92C188 104 194 117 196 130C199 143 193 155 186 166C181 174 178 181 174 185C167 187 157 183 151 179C148 175 148 169 151 161C155 151 159 142 156 132C154 122 146 115 145 103C143 92 140 74 148 63Z" fill="url(#arm-gold)"/>
+    <path id="right-arm-light" d="M157 75C166 82 174 94 177 106" fill="none" stroke="#f1cf52" stroke-width="15" stroke-linecap="round" opacity=".22" filter="url(#soft-shadow)"/>
+    <path id="right-forearm-shade" d="M157 122C166 135 161 154 155 164" fill="none" stroke="#9d7419" stroke-width="7" opacity=".25" filter="url(#soft-shadow)"/>
+    <path id="right-forearm-light" d="M180 158C175 166 173 173 170 177" fill="none" stroke="#ebc343" stroke-width="10" stroke-linecap="round" opacity=".24" filter="url(#soft-shadow)"/>
+    <g id="right-hand">
+      <path d="M153 173C157 176 165 178 170 176C169 181 172 185 172 190L175 197C176 200 173 203 171 200L166 191L169 199C170 202 167 204 165 201L160 192L163 200C163 203 159 204 157 200L153 190L154 196C154 199 151 200 149 197L146 188L145 190C142 191 141 189 143 185L147 180C149 178 151 177 153 173Z" fill="url(#hand-right)"/>
+      <path d="M153 181C158 183 164 184 168 182" fill="none" stroke="#9a9372" stroke-width="2.4" stroke-linecap="round" opacity=".29"/>
+      <path d="M149 185L152 191M155 184L159 193M162 185L166 193M168 186L171 192" fill="none" stroke="#323629" stroke-width="1.1" stroke-linecap="round" opacity=".65"/>
+      <path d="M151 195L152 197M159 199L160 201M167 199L168 201M173 197L174 199" fill="none" stroke="#272c22" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
+    </g>
+  </g>
+
+  <g id="head">
+    <g id="head-fur">
+      <path id="head-outline" d="M96 38C98 27 102 18 111 14C121 10 134 12 141 19C149 26 152 35 150 46C149 58 145 68 145 79C144 93 136 103 122 103C108 103 99 93 94 78C89 66 92 49 96 38Z" fill="url(#body-gold)"/>
+      <use href="#head-outline" fill="url(#head-gold)"/>
+    </g>
+    <g id="face-shading">
+      <path d="M104 29C97 34 93 47 95 59C96 71 104 80 116 83C105 73 101 62 102 50Z" fill="#946521" opacity=".27" filter="url(#cheek-blur)"/>
+      <path d="M139 37C147 42 145 55 139 67C135 75 128 81 121 82C132 71 138 55 139 37Z" fill="#edc957" opacity=".31" filter="url(#cheek-blur)"/>
+      <path d="M104 76C113 85 124 82 132 74" fill="none" stroke="#986c24" stroke-width="3.5" opacity=".15" filter="url(#soft-shadow)"/>
+    </g>
+    <g id="eyes">
+      <g id="left-eye">
+        <path d="M101 23C102 19 105 17 108 17C110 17 113 19 114 21C110 20 107 19 105 21L101 24Z" fill="#705322"/>
+        <path d="M103 21C106 18 109 19 112 21" fill="none" stroke="#3c2c15" stroke-width="1.25" stroke-linecap="round"/>
+        <path d="M102 24C105 21 109 22 112 23" fill="none" stroke="#e2c260" stroke-width="1.3" stroke-linecap="round"/>
+      </g>
+      <g id="right-eye">
+        <path d="M133 28C136 25 140 26 143 29C145 31 145 33 145 34C141 30 137 29 133 30Z" fill="#65491e"/>
+        <path d="M134 28C138 27 142 29 144 32" fill="none" stroke="#342714" stroke-width="1.45" stroke-linecap="round"/>
+        <path d="M134 31C137 30 141 32 143 34" fill="none" stroke="#f0d16a" stroke-width="1.3" opacity=".65"/>
+      </g>
+    </g>
+    <g id="mouth">
+      <g id="nose">
+        <path d="M110 29C114 26 120 27 124 31C125 33 125 35 123 36L111 33Z" fill="#dfbd52" opacity=".64"/>
+        <path d="M112 31C116 30 120 31 123 33" fill="none" stroke="#ac8532" stroke-width="1.1" stroke-linecap="round" opacity=".37"/>
+      </g>
+      <g id="mouth-cavity">
+        <path d="M103 31C111 29 129 34 139 40C138 50 132 62 125 71C119 78 114 80 108 76C100 73 96 63 97 51C97 42 99 34 103 31Z" fill="url(#lip-gold)"/>
+        <path d="M104 33C112 31 129 36 136 41C135 51 128 63 122 69C117 75 112 76 107 72C100 68 98 60 99 51C99 43 100 36 104 33Z" fill="url(#mouth-dark)"/>
+      </g>
+      <g id="upper-teeth">
+        <path d="M106 34C114 34 126 37 134 41L132 45L128 43L125 43L121 41L117 41L113 40L110 40L108 45L106 43L105 38Z" fill="url(#teeth)"/>
+        <path d="M112 35L112 39.5M117 36L116.5 40M122 37.5L121.5 41M127 39L126 42" fill="none" stroke="#b3a47e" stroke-width=".55" opacity=".65"/>
+        <path d="M107 40L108 46L105.8 44L105.4 40Z" fill="#fff1c7"/>
+      </g>
+      <g id="tongue-and-lower-teeth">
+        <path d="M106 62C109 60 112 61 115 64C118 66 121 63 123 61C121 67 117 71 112 70C109 69 106 66 106 62Z" fill="#5c412b"/>
+        <path d="M104 59L107 60L107 64L110 66L114 67L119 64L119 67C114 71 109 70 105 66Z" fill="#e5d5ab"/>
+        <path d="M109 65L110 68M114 66L114 69" fill="none" stroke="#9a8863" stroke-width=".6" opacity=".65"/>
+      </g>
+      <g id="mouth-rim">
+        <path d="M102 38C98 47 98 61 102 68" fill="none" stroke="#e4c16b" stroke-width="1.35" stroke-linecap="round" opacity=".72"/>
+        <path d="M104 74C110 79 118 76 125 69" fill="none" stroke="#efd181" stroke-width="1.6" stroke-linecap="round" opacity=".72"/>
+        <path d="M104 32C113 30 130 36 138 40" fill="none" stroke="#805e22" stroke-width="1.1" stroke-linecap="round"/>
+      </g>
+    </g>
+  </g>
+</g>
+
+<g id="corner-watermark" fill="#fff" opacity=".79">
+  <path d="M180 204H184V209H180ZM181 205V208H183V205Z" fill-rule="evenodd"/>
+  <text x="185" y="208.5" font-family="sans-serif" font-size="4.4" font-weight="600">通义AI生成</text>
+</g>
+</svg>
+
+<script>
+(() => {
+  "use strict";
+  const times = [0,180,340,520,680,860,1020,1200];
+  const period = 1220;
+  const byId = id => document.getElementById(id);
+  const numeric = /[-+]?(?:\d*\.)?\d+(?:[eE][-+]?\d+)?/g;
+
+  const shapes = {
+    "head-outline": [
+      "M96 38C98 27 102 18 111 14C121 10 134 12 141 19C149 26 152 35 150 46C149 58 145 68 145 79C144 93 136 103 122 103C108 103 99 93 94 78C89 66 92 49 96 38Z",
+      "M90 79C93 66 100 59 111 58C122 56 135 61 141 70C148 79 147 89 143 98C140 109 139 116 141 126C137 136 125 141 111 137C96 134 89 124 86 111C84 99 86 88 90 79Z",
+      "M100 32C101 22 106 16 115 14C127 12 138 16 144 24C151 34 152 43 151 54C150 65 154 75 155 87C151 101 138 109 122 107C107 105 96 91 96 77C95 61 97 44 100 32Z",
+      "M70 38C74 26 82 18 93 17C105 16 115 22 122 33C130 45 134 54 137 64C143 76 150 86 149 98C143 110 128 114 114 106C99 99 89 83 80 69C72 58 66 49 70 38Z",
+      "M74 96C78 83 89 75 101 74C114 73 126 79 134 89C141 99 146 108 147 117C146 128 148 136 147 146C138 155 123 156 111 148C96 140 85 133 78 121C71 112 70 104 74 96Z",
+      "M88 38C89 28 96 22 106 20C117 18 131 25 137 35C144 47 145 57 145 67C147 78 152 88 150 98C145 108 130 112 116 107C102 102 93 88 90 73C87 59 85 48 88 38Z",
+      "M65 48C69 34 79 26 91 25C103 24 113 31 120 42C127 53 132 61 135 72C141 85 148 94 144 105C137 115 122 119 108 110C94 102 83 89 75 76C68 65 61 58 65 48Z",
+      "M61 94C65 80 77 69 90 68C103 66 116 72 125 83C135 95 140 104 142 114C145 126 145 136 141 147C131 157 118 155 106 148C91 142 79 133 70 121C61 111 55 103 61 94Z"
+    ],
+    "torso-outline": [
+      "M100 48C87 51 77 64 74 80C71 98 78 117 80 135C81 157 88 173 102 182C113 190 129 190 141 182C153 174 161 158 165 137C169 119 171 99 162 80C155 65 143 55 133 51Z",
+      "M105 88C88 87 70 107 66 126C63 144 74 158 78 174C81 187 95 199 111 204C123 209 139 205 149 195C163 185 173 171 176 151C179 133 176 116 162 103C150 92 138 88 132 87Z",
+      "M100 44C88 60 77 73 74 88C71 104 74 118 76 130C77 155 87 176 102 184C113 191 128 190 141 180C153 168 161 150 163 130C166 109 166 90 156 72C149 57 136 48 129 45Z",
+      "M90 56C79 60 72 76 70 91C68 109 76 126 80 144C83 163 92 179 107 186C119 192 135 189 145 179C156 168 163 151 165 131C169 111 165 91 151 74C140 59 119 54 110 55Z",
+      "M96 104C80 108 65 123 62 142C60 155 72 165 76 179C80 192 93 203 109 208C122 214 141 211 151 200C167 190 176 175 177 156C180 138 176 122 162 108C146 94 123 92 111 99Z",
+      "M95 47C83 60 74 77 70 89C68 106 71 122 74 136C76 157 87 176 101 183C113 191 128 190 139 180C152 168 159 149 161 129C165 109 161 89 149 71C140 56 124 49 121 46Z",
+      "M86 59C75 65 66 80 64 95C62 113 71 130 76 145C81 165 90 180 105 187C117 194 132 191 143 180C155 168 162 150 164 130C167 111 162 92 147 77C133 62 112 57 105 58Z",
+      "M89 100C75 109 60 124 58 142C57 157 68 169 73 182C77 194 90 205 106 210C119 216 137 213 148 202C164 191 173 176 175 157C177 140 170 124 155 109C141 97 119 90 106 94Z"
+    ],
+    "belly-outline": [
+      "M86 113C94 108 106 109 117 112C131 115 143 123 149 134C153 144 149 157 142 166C135 174 123 175 112 171C99 168 90 160 87 149C84 139 82 122 86 113Z",
+      "M85 145C99 143 113 149 126 149C140 150 153 148 159 155C160 166 150 178 140 184C130 191 117 192 105 188C94 184 85 176 83 165C81 156 81 149 85 145Z",
+      "M83 106C94 98 107 100 119 103C135 107 146 116 150 130C153 143 148 159 140 169C131 179 117 178 106 173C94 168 85 158 83 145C81 132 80 114 83 106Z",
+      "M84 117C93 112 106 115 118 118C133 121 144 128 149 140C152 151 146 164 138 172C129 179 116 177 106 173C94 168 87 158 85 146C83 135 81 123 84 117Z",
+      "M84 150C98 148 112 153 125 153C139 154 153 152 159 160C160 171 150 184 140 191C130 198 117 197 105 192C93 188 85 179 83 169C81 160 80 154 84 150Z",
+      "M81 108C92 100 105 102 117 105C132 108 145 117 148 130C151 143 145 157 136 167C127 177 114 177 103 171C91 166 82 156 80 143C78 130 77 116 81 108Z",
+      "M81 119C92 112 105 117 116 120C130 124 141 131 145 141C148 152 142 165 134 172C125 180 112 178 102 172C90 167 83 157 81 146C79 135 78 125 81 119Z",
+      "M80 148C94 146 107 152 119 152C134 154 149 151 155 159C157 171 147 184 137 191C126 198 113 198 102 193C90 188 82 179 80 168C78 159 77 152 80 148Z"
+    ],
+    "belly-lower-shade": [
+      "M91 151C99 168 123 176 139 167",
+      "M88 174C101 190 126 195 141 183",
+      "M87 151C99 171 119 181 138 168",
+      "M90 154C101 172 119 180 137 171",
+      "M87 180C101 196 125 201 141 190",
+      "M84 151C95 169 117 179 135 167",
+      "M86 156C97 174 116 181 134 171",
+      "M84 179C97 195 120 201 137 190"
+    ],
+    "belly-fold": [
+      "M87 114C104 109 132 118 147 132",
+      "M85 145C106 148 134 156 157 150",
+      "M84 106C105 97 136 109 148 126",
+      "M85 118C105 111 133 122 146 137",
+      "M84 150C105 152 135 159 157 154",
+      "M82 108C103 100 132 111 146 127",
+      "M82 120C102 114 129 126 143 138",
+      "M80 148C101 151 130 157 153 153"
+    ],
+    "left-arm-outline": [
+      "M92 56C80 58 70 72 67 85C62 103 67 124 72 143C75 155 78 165 82 171C85 175 92 175 94 171C95 167 91 159 89 153C84 137 81 122 82 108C82 94 88 79 95 70Z",
+      "M94 97C78 101 64 117 56 132C48 144 51 153 57 166C61 175 66 182 69 185C73 189 80 189 83 184C85 179 80 170 77 164C72 154 69 150 73 143C84 140 95 131 103 115Z",
+      "M90 51C79 58 70 75 68 89C64 107 68 126 70 144C72 157 74 166 77 172C80 176 88 176 91 172C93 168 87 159 85 152C81 136 80 122 81 108C82 93 85 74 94 65Z",
+      "M84 58C73 59 67 74 66 88C62 106 67 125 71 144C74 157 77 167 80 174C83 178 90 178 93 174C94 169 90 161 88 154C83 139 80 124 80 110C81 95 84 79 90 69Z",
+      "M86 103C73 109 62 123 55 137C48 149 51 160 57 171C60 179 64 186 67 189C71 193 79 193 82 188C84 183 79 174 76 168C71 158 68 154 71 148C82 144 91 135 98 120Z",
+      "M86 54C76 59 68 76 66 89C62 106 64 125 67 142C69 155 71 165 74 172C77 176 85 177 88 173C90 169 85 161 83 154C79 138 78 123 79 109C80 94 83 76 91 66Z",
+      "M80 59C68 66 62 78 61 91C58 109 64 127 69 144C72 158 76 169 80 176C83 180 90 181 93 176C94 171 90 162 87 155C81 139 78 124 78 110C79 95 82 79 89 69Z",
+      "M79 101C66 110 57 125 52 139C46 151 50 162 55 173C58 183 61 190 64 193C68 197 76 197 79 192C81 187 77 178 74 171C69 162 66 158 69 151C79 147 87 137 94 122Z"
+    ],
+    "left-arm-light": [
+      "M79 91C76 106 78 119 81 129",
+      "M65 127C59 136 58 145 63 155",
+      "M78 91C75 106 76 119 79 129",
+      "M76 92C73 108 76 121 79 132",
+      "M63 133C57 142 58 151 63 161",
+      "M75 92C71 108 73 120 76 131",
+      "M71 94C68 109 72 123 76 134",
+      "M59 135C53 145 55 155 60 164"
+    ],
+    "left-forearm-shade": [
+      "M82 126C83 142 88 157 91 164",
+      "M70 153C72 164 78 175 80 180",
+      "M80 126C81 142 84 156 87 165",
+      "M80 128C82 144 86 160 90 167",
+      "M69 157C70 169 76 180 79 185",
+      "M78 127C79 143 82 158 85 166",
+      "M77 130C80 145 85 161 89 169",
+      "M66 160C68 172 73 182 76 188"
+    ],
+    "right-arm-outline": [
+      "M148 63C160 65 171 79 180 92C188 104 194 117 196 130C199 143 193 155 186 166C181 174 178 181 174 185C167 187 157 183 151 179C148 175 148 169 151 161C155 151 159 142 156 132C154 122 146 115 145 103C143 92 140 74 148 63Z",
+      "M145 91C160 94 177 107 189 122C199 133 205 142 205 151C205 161 195 165 183 170C177 178 173 186 169 191C163 194 153 190 148 185C146 181 150 174 155 168C161 161 170 155 176 150C168 150 157 145 151 134C145 123 139 104 145 91Z",
+      "M145 56C159 62 172 76 181 91C189 104 196 118 198 132C200 145 192 156 185 166C180 174 176 180 172 183C165 186 155 182 149 178C146 174 147 167 150 159C154 149 158 140 155 130C152 119 144 110 142 97C140 85 138 67 145 56Z",
+      "M133 58C150 61 168 77 179 92C189 106 196 118 198 132C200 145 194 157 187 168C181 177 177 182 172 186C165 189 156 183 150 180C147 175 148 170 151 161C155 150 157 141 153 131C149 121 141 113 138 101C134 88 128 69 133 58Z",
+      "M133 90C150 91 171 103 185 119C195 130 203 143 203 151C202 162 192 168 181 174C175 183 173 189 169 194C163 198 152 193 146 188C144 184 148 178 153 171C159 165 168 158 174 153C165 153 154 148 147 138C140 126 130 104 133 90Z",
+      "M134 56C149 61 167 76 178 91C188 104 194 118 196 132C199 145 192 157 184 168C178 176 174 182 169 185C162 187 153 182 147 178C144 174 145 167 148 159C152 149 156 139 153 129C150 118 140 109 137 97C134 85 129 68 134 56Z",
+      "M125 62C144 64 162 79 175 94C185 106 192 119 194 133C197 146 191 157 183 168C177 177 173 183 169 187C162 190 152 185 146 181C143 177 144 170 147 162C151 151 154 142 150 131C146 121 137 114 132 102C128 90 120 73 125 62Z",
+      "M120 85C140 85 161 100 176 116C190 130 197 143 198 154C198 165 190 172 179 178C173 186 168 193 162 197C155 200 145 195 138 189C136 185 139 179 145 172C151 164 160 158 166 154C157 153 146 147 139 136C131 123 117 101 120 85Z"
+    ],
+    "right-arm-light": [
+      "M157 75C166 82 174 94 177 106",
+      "M155 105C169 112 184 129 191 141",
+      "M155 69C165 81 175 96 178 108",
+      "M146 72C160 82 173 96 178 108",
+      "M147 103C164 110 181 128 190 140",
+      "M146 69C159 80 173 96 177 108",
+      "M139 75C153 84 167 98 173 111",
+      "M136 99C153 105 175 125 184 141"
+    ],
+    "right-forearm-shade": [
+      "M157 122C166 135 161 154 155 164",
+      "M178 151C168 158 158 172 154 181",
+      "M156 120C163 135 159 150 153 164",
+      "M154 122C162 136 158 151 154 166",
+      "M176 155C167 163 157 177 152 185",
+      "M153 119C161 134 156 151 151 164",
+      "M151 122C158 136 153 152 149 167",
+      "M168 156C158 164 148 179 143 187"
+    ],
+    "right-forearm-light": [
+      "M180 158C175 166 173 173 170 177",
+      "M190 161C181 169 173 180 168 185",
+      "M179 158C174 166 171 172 168 177",
+      "M181 159C175 168 172 174 168 179",
+      "M189 165C180 172 173 183 168 189",
+      "M178 159C172 167 169 173 165 178",
+      "M176 160C171 168 168 175 164 181",
+      "M181 169C173 176 166 186 160 191"
+    ]
+  };
+  shapes["belly-fold-light"] = shapes["belly-fold"];
+
+  const morphs = Object.entries(shapes).map(([id,paths]) => ({
+    node:byId(id),
+    template:paths[0],
+    values:paths.map(path => path.match(numeric).map(Number))
+  }));
+
+  const mouthMotion = [
+    [117,52,0,1,1],
+    [112,94,-11,1.03,.65],
+    [117,35,-9,1,.76],
+    [91,56,-30,1,.88],
+    [93,117,-22,1,.65],
+    [106,36,-21,.96,.62],
+    [90,70,-8,1.04,.78],
+    [82,118,-31,1,.61]
+  ];
+
+  const transforms = [
+    {id:"mouth",pivot:[117,52],values:mouthMotion},
+    {id:"face-shading",pivot:[117,52],values:mouthMotion},
+    {
+      id:"left-eye",pivot:[107,21],
+      values:[
+        [107,21,0,1,1],
+        [98,72,-8,1,.9],
+        [108,18,-5,.96,.8],
+        [74,37,-31,.94,1],
+        [78,98,-22,.92,.95],
+        [98,24,-19,.9,.75],
+        [74,44,-4,.94,.95],
+        [62,105,-38,.85,1]
+      ]
+    },
+    {
+      id:"right-eye",pivot:[139,29],
+      values:[
+        [139,29,0,1,1],
+        [129,76,-8,1,.9],
+        [137,18,-8,.96,.8],
+        [101,30,-27,1,1],
+        [105,92,-23,1,.95],
+        [123,24,-22,.9,.75],
+        [101,45,-2,1,1],
+        [84,89,-33,1,1]
+      ]
+    },
+    {
+      id:"left-hand",pivot:[86,179],
+      values:[
+        [86,179,0,1,1],
+        [74,192,14,1,.98],
+        [80,179,6,1,1],
+        [84,182,0,1,1],
+        [69,195,15,1,.96],
+        [74,180,11,1,1],
+        [83,184,3,1,1],
+        [65,199,16,1,.94]
+      ]
+    },
+    {
+      id:"right-hand",pivot:[160,183],
+      values:[
+        [160,183,0,1,1],
+        [156,194,18,1.02,.95],
+        [158,183,5,1,1],
+        [158,184,0,1,1],
+        [154,196,18,1,.95],
+        [153,183,7,1,1],
+        [153,186,3,1,1],
+        [145,195,25,1.03,.95]
+      ]
+    },
+    {
+      id:"left-leg",pivot:[95,193],
+      values:[
+        [95,193,0,1,1],
+        [83,207,20,1.12,.86],
+        [90,194,10,1,1],
+        [93,196,4,1,1],
+        [80,211,22,1.13,.88],
+        [84,193,16,1,1],
+        [92,196,6,1,1],
+        [77,212,20,1.1,.88]
+      ]
+    },
+    {
+      id:"right-leg",pivot:[149,193],
+      values:[
+        [149,193,0,1,1],
+        [151,206,-17,1.05,.92],
+        [147,194,2,.84,1],
+        [150,196,0,.95,1],
+        [153,209,-14,1.02,.92],
+        [144,193,2,.9,1],
+        [148,197,0,.95,1],
+        [149,211,-12,1.02,.92]
+      ]
+    },
+    {
+      id:"pelvis",pivot:[122,182],
+      values:[
+        [122,182,0,1,1],
+        [122,202,0,1.15,.8],
+        [118,182,0,1,.95],
+        [124,187,0,1,1],
+        [122,208,0,1.15,.8],
+        [115,182,0,1,1],
+        [121,188,0,1,1],
+        [119,209,0,1.1,.8]
+      ]
+    },
+    {
+      id:"chest-shading",pivot:[122,120],
+      values:[
+        [122,120,0,1,1],
+        [127,154,0,1.12,.79],
+        [121,113,0,1,.98],
+        [121,124,0,1,1],
+        [124,158,0,1.14,.79],
+        [117,115,0,1,.98],
+        [117,126,0,1,1],
+        [118,157,0,1.13,.79]
+      ]
+    }
+  ].map(item => ({...item,node:byId(item.id)}));
+
+  const foldOpacity = [[0],[.37],[0],[.02],[.38],[0],[.02],[.37]];
+  const shadowValues = [
+    [123,82,.26],[121,88,.29],[120,78,.26],[122,83,.26],
+    [120,90,.3],[116,79,.26],[119,83,.27],[116,90,.3]
+  ];
+  const fold = byId("belly-fold");
+  const foldLight = byId("belly-fold-light");
+  const groundShadow = byId("ground-shadow");
+
+  function render(t) {
+    const input = Number(t);
+    const time = ((Number.isFinite(input) ? input : 0) % period + period) % period;
+    let frame = 0;
+    while (frame < times.length - 1 && time >= times[frame+1]) frame++;
+    const next = (frame+1) % times.length;
+    const endTime = next === 0 ? period : times[next];
+    const duration = endTime-times[frame];
+    const u = (time-times[frame])/duration;
+    const u2 = u*u;
+    const u3 = u2*u;
+
+    function sample(rows,component) {
+      const a = rows[frame][component];
+      const b = rows[next][component];
+      if (frame === 7) return a+(b-a)*(3*u2-2*u3);
+      const ma = frame === 0 ? 0 :
+        .72*(rows[frame+1][component]-rows[frame-1][component])/
+        (times[frame+1]-times[frame-1]);
+      const mb = next === 7 ? 0 :
+        .72*(rows[frame+2][component]-rows[frame][component])/
+        (times[frame+2]-times[frame]);
+      return (2*u3-3*u2+1)*a+(u3-2*u2+u)*duration*ma+
+        (-2*u3+3*u2)*b+(u3-u2)*duration*mb;
+    }
+
+    for (const morph of morphs) {
+      let component = 0;
+      morph.node.setAttribute("d",morph.template.replace(numeric,() =>
+        sample(morph.values,component++).toFixed(3)));
+    }
+
+    for (const part of transforms) {
+      const p = Array.from({length:5},(_,k) => sample(part.values,k));
+      const [px,py] = part.pivot;
+      part.node.setAttribute("transform",
+        `translate(${p[0].toFixed(4)} ${p[1].toFixed(4)}) rotate(${p[2].toFixed(4)}) scale(${p[3].toFixed(5)} ${p[4].toFixed(5)}) translate(${-px} ${-py})`);
+    }
+
+    const crease = Math.max(0,sample(foldOpacity,0));
+    fold.setAttribute("opacity",crease.toFixed(4));
+    foldLight.setAttribute("opacity",(crease*.86).toFixed(4));
+    groundShadow.setAttribute("cx",sample(shadowValues,0).toFixed(3));
+    groundShadow.setAttribute("rx",sample(shadowValues,1).toFixed(3));
+    groundShadow.setAttribute("opacity",sample(shadowValues,2).toFixed(4));
+  }
+
+  window.nwb = {render};
+  render(0);
+})();
+</script>
+</body>
+</html>
