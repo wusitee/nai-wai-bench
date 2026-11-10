@@ -70,7 +70,9 @@ diagnostics. Release builds combine the two visual rankings into the NaiWai Inde
 Visual detail weighted 2:1); image generation stays outside it.
 
 Reports also expose contributing judges, coverage, paired cluster-bootstrap intervals, repetition
-consistency, and usage/price diagnostics. The methodology describes their limits.
+consistency, and usage/price diagnostics. The methodology describes their limits. `contributions.py` prices
+every saved call in `results/` at list API prices and ranks contributors by Git authorship of the records
+([contribution credit](contributing-results.md#contribution-credit)).
 Recorded Codex `legacy-v1` and `isolated-v1` collector profiles are shown per row and in collection
 metadata. The retained comparison mixes these profiles, so observed model differences are confounded
 with collector configuration; see [release conditions](releases.md#selected-comparison).
@@ -83,6 +85,7 @@ with collector configuration; see [release conditions](releases.md#selected-comp
 | `runs/<run>/` | Resumable working observations, judgments, and local reports | Ignored |
 | `results/<suite>/<run>/` | Sanitized portable observations, generated images, scores, and checksum metadata | Included in normal source commits |
 | `results/frontend/<run>/` | Frontend-track records, gate summary, and WebP renders for release pages (`nwb frontend sync`) | Included in normal source commits |
+| `results/contributors.toml` | Optional contribution-credit corrections for `nwb contributions` | Tracked when present |
 | `releases/*.toml` | Explicit comparison selection and normalized input pins | Tracked |
 | `site/` or `--out` | Generated pages, assets, scores, bundles, and build metadata | Default output ignored |
 | `models.local.toml` | Local settings and credential references | Ignored |

@@ -52,7 +52,8 @@ def test_aggregate_prefers_independent_current_judges_and_skips_contaminated(tmp
     _judgment(run, "self", "openai", target, scores={"a": 2}, hallucinations=[], rationale="")
     _judgment(run, "other", "anthropic", target, scores={"a": 1}, hallucinations=[], rationale="")
     # Made for an older version of the sample, so it must not count.
-    _judgment(run, "stale", "google", target, current=False, scores={"a": 0}, hallucinations=[], rationale="")
+    _judgment(run, "stale", "google", target, current=False, scores={"a": 0}, hallucinations=[], rationale="",
+              meta={"seconds": 12})
 
     write_json(run / "imagegen/img/name_zh/cat__r1.json",
                {"track": "imagegen", "model": "img", "vendor": "openai", "tier": "name_zh", "animal": "cat",
@@ -71,7 +72,10 @@ def test_aggregate_prefers_independent_current_judges_and_skips_contaminated(tmp
     assert img["overall"] == 100 and img["not_verbatim"] == 1
     assert img["failure_modes"] == {"generic_cute": 1}  # flagged by half of the judges
     assert aggregate(run, WEIGHTS, judges={"self"})["understanding"]["gpt"]["text"] == 100
-    assert aggregate(run, WEIGHTS, judges=set())["understanding"]["gpt"]["text"] is None
+    unselected = aggregate(run, WEIGHTS, judges=set())
+    assert unselected["understanding"]["gpt"]["text"] is None
+    assert unselected["efficiency"]["judges"]["stale"]["total_seconds"] == 12
+    assert unselected["efficiency"]["timing"]["overall"]["total_seconds"] == 12
     # Only samples made with the bench's current prompt count: the image matches, the answers don't.
     current = aggregate(run, WEIGHTS, expected={"imagegen/name_zh/cat": "p", "understanding/q": "changed"})
     assert current["understanding"] == {} and current["imagegen"]["img"]["n"] == 1
@@ -335,7 +339,8 @@ def test_efficiency_prices_cache_subsets_missing_usage_and_separate_judges():
     assert row["estimated_cost_usd"] is None and row["median_seconds"] == 7
     assert result["judges"]["m"]["token_totals"]["output"] == 50
     assert result["whole_run"]["m"]["understanding"]["token_totals"]["output"] == 50
-    assert result["imagegen"]["m"] == {"tasks": 1, "images": 1, "median_seconds": 4}
+    generated = result["imagegen"]["m"]
+    assert (generated["tasks"], generated["images"], generated["median_seconds"], generated["total_seconds"]) == (1, 1, 4, 4)
     no_price = efficiency([used], [], bench, {})["visual_understanding"]["m"]
     assert no_price["mean_output_tokens"] == 50 and no_price["mean_cost_usd"] is None
     fallback = efficiency([used], [], bench, {"m": replace(models["m"], options={"price": {"input": 2, "output": 10}})})
@@ -350,6 +355,61 @@ def test_efficiency_prices_cache_subsets_missing_usage_and_separate_judges():
     table = rendered.split("</table>", 1)[0]
     assert table.index("&lt;larger&gt;") < table.index("&lt;m&gt;")
     assert ">1,000</td>" in table and "无用量数据 No usage data: &lt;missing&gt;" in rendered
+
+
+def test_run_timing_separates_parallel_client_time_resumed_span_and_judges():
+    from nwb.scoring import efficiency
+
+    def collected(start, end):
+        return {"started_at": f"2026-11-{start}", "finished_at": f"2026-11-{end}"}
+
+    base = {"track": "understanding", "model": "<m>", "item": "q"}
+    first = {**base, "rep": 1, "meta": {"seconds": 4},
+             "collected": collected("10T00:00:00Z", "10T00:00:04Z")}
+    parallel = {**base, "rep": 2, "meta": {"seconds": 6},
+                "collected": collected("10T00:00:00+00:00", "10T00:00:06+00:00")}
+    image = {"track": "imagegen", "model": "image", "tier": "name", "animal": "cat", "meta": {"seconds": 3},
+             "collected": collected("11T00:00:00Z", "11T00:00:03Z")}
+    failed = {**base, "rep": 3, "error": "timeout",
+              "collected": collected("11T00:00:04Z", "11T00:00:05Z")}
+    legacy = {**base, "item": "legacy"}
+    judge = {"judge": "judge", "target": "understanding/<m>/q__r2.json", "meta": {"seconds": 2},
+             "collected": collected("11T00:00:05Z", "11T00:00:07Z")}
+    result = efficiency([first, parallel, image, failed, legacy], [judge], None, {})
+    overall = result["timing"]["overall"]
+    assert (overall["tasks"], overall["failures"], overall["timed_tasks"], overall["timestamp_tasks"]) == (6, 1, 4, 5)
+    assert overall["total_seconds"] == 15 and overall["median_seconds"] == 3.5 and overall["max_seconds"] == 6
+    assert overall["wall_seconds"] == 86407 and overall["slowest_task"] == "<m>: understanding/q · r2"
+    understanding = result["whole_run"]["<m>"]["understanding"]
+    assert understanding["total_seconds"] == 10 and understanding["wall_seconds"] == 86405
+    assert result["whole_run"]["<m>"]["total"]["total_seconds"] == 10
+    assert result["timing"]["tracks"]["understanding"]["timed_tasks"] == 2
+    assert result["timing"]["tracks"]["imagegen"]["total_seconds"] == 3
+    assert result["timing"]["tracks"]["imagegen"]["slowest_task"] == "image: imagegen/name/cat · r1"
+    assert result["timing"]["tracks"]["judgments"]["total_seconds"] == result["judges"]["judge"]["total_seconds"] == 2
+    assert result["judges"]["judge"]["slowest_task"] == "judge: understanding/<m>/q__r2.json"
+    overlapping = efficiency([first, parallel], [], None, {})["timing"]["overall"]
+    assert overlapping["total_seconds"] == 10 and overlapping["wall_seconds"] == 6
+
+    html = report.efficiency_section({"efficiency": result})
+    assert "Run time" in html and "Per model and track" in html and "Subject · total" in html
+    assert "15.0 s" in html and "86,407.0 s" in html and "4/6" in html and "5/6" in html
+    assert "&lt;m&gt;: understanding/q · r2" in html and "<m>" not in html
+    assert "Judge" in html and "including failures and stale/unselected judgments" in html
+
+
+def test_run_timing_preserves_unknowns_zero_and_incomplete_timestamps():
+    from nwb.scoring import efficiency
+
+    legacy = {"track": "understanding", "model": "m", "item": "legacy",
+              "collected": {"started_at": "2026-11-10T00:00:00Z"}}
+    unknown = efficiency([legacy], [], None, {})["timing"]["overall"]
+    assert unknown["timed_tasks"] == unknown["timestamp_tasks"] == 0
+    assert all(unknown[k] is None for k in ("total_seconds", "median_seconds", "max_seconds", "slowest_task", "wall_seconds"))
+    zero = efficiency([{**legacy, "meta": {"seconds": 0}}], [], None, {})["timing"]["overall"]
+    assert zero["timed_tasks"] == 1 and zero["total_seconds"] == zero["median_seconds"] == zero["max_seconds"] == 0
+    empty = efficiency([], [], None, {})["timing"]["overall"]
+    assert empty["tasks"] == 0 and empty["total_seconds"] is None
 
 
 def test_efficiency_chart_gives_coinciding_points_separate_labels():

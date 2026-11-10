@@ -94,7 +94,7 @@ not significance claims or subscription bills. See the [methodology](docs/method
 - [Backends and models](docs/backends.md): how each agent CLI is driven and isolated, and how to add models,
   including pi and other providers through Claude Code
 - [Contributing results](docs/contributing-results.md): collecting and sharing results without judge access,
-  and judging shared results
+  judging shared results, and the token-value contributor ranking
 - [Episode videos](docs/video.md): format, data rules, build pipeline, and publishing for the Bilibili
   result videos
 - [Naiwa origins and prompt provenance](docs/naiwa-origins.md): dated video research, the Xingye-agent

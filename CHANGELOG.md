@@ -5,6 +5,9 @@ Software releases use semantic versions; suite ids version the evaluation panels
 
 ## Unreleased
 
+- Add run-time summaries to reports and suite pages: retained-call totals and per-track, per-model,
+  and judge breakdowns, timing coverage, median/slowest tasks, and collection spans that distinguish
+  resumed-session gaps and parallel calls from cumulative client time.
 - Add Chinese/English origin-evidence text diagnostics and a sourced Naiwa origin guide, reviewed on
   2026-11-05 against the initial Bilibili investigation, its pinned screenshots, and the creator's
   origin-confirmation follow-up. Distinguish the early Xingye avatar from the later laughing variant,

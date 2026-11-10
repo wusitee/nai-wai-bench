@@ -1,4 +1,5 @@
 import argparse
+import json
 import os
 import sys
 from pathlib import Path
@@ -294,6 +295,9 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--reps", type=int, default=1, help="collect: samples per task and kind (default: 1)")
     sp.add_argument("--jobs", type=int, default=2, help="collect: parallel calls (default: 2)")
     sp.add_argument("--force", action="store_true", help="redo work that already succeeded")
+    sp = sub.add_parser("contributions", help="rank contributors by the API list-price value of their saved calls")
+    sp.add_argument("--json", action="store_true", help="print the full ranking as JSON")
+    sp.add_argument("--brief", action="store_true", help="omit the per-model breakdown")
     sp = sub.add_parser("release", help="build both suites and raw bundles from a pinned release manifest (offline)")
     sp.add_argument("--manifest", required=True, help="release TOML selecting runs, content hashes, and judges")
     sp.add_argument("--out", help="output directory (default: site/)")
@@ -315,6 +319,13 @@ def main(argv=None) -> int:
                 raise ValueError("frontend collect needs --models")
             models, defaults = load_models(root)
             return cmd_frontend(args, root, models, defaults)
+        if args.command == "contributions":
+            from nwb import contributions
+
+            board = contributions.leaderboard(root, load_models(root)[0])
+            print(json.dumps(board, ensure_ascii=False, indent=2) if args.json
+                  else contributions.render_text(board, details=not args.brief))
+            return 0
         if args.command == "release":
             index = release.build(root, Path(args.manifest), Path(args.out) if args.out else root / "site")
             print(f"wrote {index}")
