@@ -5,6 +5,11 @@ Software releases use semantic versions; suite ids version the evaluation panels
 
 ## Unreleased
 
+- Add Chinese/English origin-evidence text diagnostics and a sourced Naiwa origin guide, reviewed on
+  2026-11-05 against the initial Bilibili investigation, its pinned screenshots, and the creator's
+  origin-confirmation follow-up. Distinguish the early Xingye avatar from the later laughing variant,
+  and historical prompt speculation from newly written reconstruction guidance. Existing ranked panels,
+  generation prompts, retained judgments, and release inputs remain unchanged.
 - Add the experimental frontend track (`nwb frontend collect|render|report|sync`, `bench/frontend-v1/`):
   models rebuild animated 奶蛙 GIFs as hand-written inline SVG or three.js pages, with a step-2 animation
   and one check-and-revise round, rendered in a sandboxed browser and checked by scripted gates; likeness
