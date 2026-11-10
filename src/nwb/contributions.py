@@ -29,11 +29,11 @@ def git_authors(root: Path) -> dict[str, tuple[int, str]]:
     """Map each blob ever committed under results/ to its earliest (author time, author name).
 
     Content identity survives renames, merged runs, and re-syncs that leave a record unchanged, so a
-    record is credited to the commit that first introduced it. Author names follow `.mailmap`. Without
-    Git history the map is empty."""
+    record is credited to the commit that first introduced it, including a merge commit that adds
+    records of its own. Author names follow `.mailmap`. Without Git history the map is empty."""
     try:
         out = subprocess.run(["git", "-c", "core.quotepath=off", "log", "--raw", "--no-abbrev", "--full-history",
-                              "--format=%x01%at%x09%aN", "--", "results"],
+                              "-m", "--format=%x01%at%x09%aN", "--", "results"],
                              cwd=root, capture_output=True, check=True).stdout.decode("utf-8", "replace")
     except (OSError, subprocess.CalledProcessError):
         return {}

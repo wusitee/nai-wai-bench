@@ -24,19 +24,23 @@ def _spec(name, model, price):
                      options={"price": price})
 
 
-def _commit(root, author, when):
+def _git(root, *args, author="Setup", when=1_700_000_000):
     env = {**os.environ, "GIT_AUTHOR_NAME": author, "GIT_AUTHOR_DATE": f"{when} +0000",
            "GIT_AUTHOR_EMAIL": "a@example.invalid",
            "GIT_COMMITTER_NAME": author, "GIT_COMMITTER_EMAIL": "a@example.invalid"}
-    subprocess.run(["git", "add", "-A"], cwd=root, check=True)
-    subprocess.run(["git", "commit", "-qm", author], cwd=root, check=True, env=env)
+    subprocess.run(["git", *args], cwd=root, check=True, env=env)
+
+
+def _commit(root, author, when, *flags):
+    _git(root, "add", "-A")
+    _git(root, "commit", "-qm", author, *flags, author=author, when=when)
 
 
 @pytest.mark.skipif(shutil.which("git") is None, reason="needs git")
 def test_calls_are_priced_deduplicated_and_credited(tmp_path, monkeypatch):
     monkeypatch.setenv("GIT_CONFIG_GLOBAL", os.devnull)  # no dependence on the machine's signing or identity
     monkeypatch.setenv("GIT_CONFIG_NOSYSTEM", "1")
-    subprocess.run(["git", "init", "-q"], cwd=tmp_path, check=True)
+    _git(tmp_path, "init", "-q")
     priced = {"input": 1_000_000, "cached_input": 200_000, "cache_write": 100_000, "output": 100_000}
     zoe = tmp_path / "results/core/zoe"
     (zoe / "snapshot.json").parent.mkdir(parents=True)
@@ -47,6 +51,11 @@ def test_calls_are_priced_deduplicated_and_credited(tmp_path, monkeypatch):
     _commit(tmp_path, "Zoe", 1_700_000_000)
 
     # A merged run repeats Zoe's call with rewritten bytes; Bob judges it, and one call stays uncommitted.
+    # Bob's records first appear in a Git merge commit, which must be credited like any other commit.
+    _git(tmp_path, "checkout", "-qb", "side")
+    _commit(tmp_path, "Side", 1_700_000_050, "--allow-empty")
+    _git(tmp_path, "checkout", "-q", "-")
+    _git(tmp_path, "merge", "-q", "--no-ff", "--no-commit", "side")
     merged = tmp_path / "results/core/merged"
     shutil.copytree(zoe, merged)
     _record(merged / "understanding/paid/a__r1.json", "paid", priced, "t1", note="re-synced")
