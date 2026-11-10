@@ -128,6 +128,44 @@ def _cost(value: float | None) -> str:
     return text.rstrip("0") if decimals > 4 else text
 
 
+def timing_section(efficiency: dict, label=lambda m: m) -> str:
+    timing = efficiency.get("timing")
+    if not timing:
+        return ""
+
+    def table(rows):
+        out = ["<div class=scroll><table class=efficiency><tr><th>Scope</th><th>Model</th>"
+               "<th class=n>Tasks (failed)</th><th class=n>Timed tasks</th><th class=n>Total client time</th>"
+               "<th class=n>Median/task</th><th class=n>Slowest/task</th><th>Slowest task</th>"
+               "<th class=n>Collection span</th><th class=n>Timestamp coverage</th></tr>"]
+        for scope, model, row in rows:
+            if not row.get("tasks"):
+                continue
+            durations = {k: f"{row[k]:,.1f} s" if row.get(k) is not None else "—"
+                         for k in ("total_seconds", "median_seconds", "max_seconds", "wall_seconds")}
+            out.append(f"<tr><td>{escape(scope)}</td><td>{escape(label(model)) if model else '—'}</td>"
+                       f"<td class=n>{row['tasks']} ({row.get('failures', 0)})</td>"
+                       f"<td class=n>{row.get('timed_tasks', 0)}/{row['tasks']}</td>"
+                       + "".join(f"<td class=n>{durations[k]}</td>" for k in ("total_seconds", "median_seconds", "max_seconds"))
+                       + f"<td>{escape(row.get('slowest_task') or '—')}</td>"
+                       f"<td class=n>{durations['wall_seconds']}</td>"
+                       f"<td class=n>{row.get('timestamp_tasks', 0)}/{row['tasks']}</td></tr>")
+        return "\n".join(out) + "</table></div>"
+
+    summary = [("All retained calls", None, timing["overall"])]
+    summary += [(track, None, row) for track, row in timing["tracks"].items()]
+    subjects = [(f"Subject · {track}", model, row)
+                for model, tracks in efficiency.get("whole_run", {}).items() for track, row in tracks.items()]
+    judges = [("Judge", model, row) for model, row in efficiency.get("judges", {}).items()]
+    return ("<h3>运行用时 <span class=en>Run time</span></h3>"
+            "<p>Total client time sums reported per-task seconds; timed-task coverage shows missing timings. "
+            "Collection span runs from the earliest recorded start to the latest finish among tasks with valid "
+            "timestamp pairs; it includes pauses between resumed sessions, while parallel calls overlap. "
+            "Neither measures model generation speed. These totals cover retained subject and judge calls, "
+            "including failures and stale/unselected judgments; overwritten retries are unavailable.</p>"
+            + table(summary) + "<details><summary>Per model and track</summary>" + table(subjects + judges) + "</details>")
+
+
 def efficiency_section(scores: dict, label=lambda m: m) -> str:
     efficiency = scores.get("efficiency", {})
     rows = efficiency.get("visual_understanding", {})
@@ -234,6 +272,7 @@ def efficiency_section(scores: dict, label=lambda m: m) -> str:
             if r["tasks"]:
                 out.append(f"<tr><td>{escape(label(m))}</td><td>{r['images']}</td><td>{fmt(r['median_seconds'], 1)}</td></tr>")
         out.append("</table>")
+    out.append(timing_section(efficiency, label))
     out.append("<p class=muted>Visual metrics cover retained tasks in the fixed visual panel, including failures with reported usage; "
                "token means use reported fields only. Panel cost requires complete repetition coverage, usage and prices for every panel task. "
                "Seconds are end-to-end client time, not model speed; for pi samples resent after a provider rate limit they cover only the final attempt. Image relay tokens are not generator cost. "

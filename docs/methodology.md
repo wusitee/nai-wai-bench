@@ -195,10 +195,26 @@ ordinary input, price each at its configured rate (falling back to the input rat
 all per million tokens. Unknown cache subsets use the ordinary input rate. Subscription CLIs are not
 billed per token: estimates are not actual spend. Input includes each client's harness prompt, so input
 and cost describe running via that client. Output tokens are the more comparable efficiency signal.
-Client time includes session/tool overhead and is not model speed. Generation shows image counts and
-median client time only; relay tokens do not measure generator cost. `scores.json` stores retained
+Client time includes session/tool overhead and is not model speed. Generation usage diagnostics show
+image counts and median client time; relay tokens do not measure generator cost. `scores.json` stores retained
 whole-run subject totals and separate judge totals (cost to evaluate), including failed/stale attempts
 still present on disk; overwritten retries are not a complete trial history.
+
+The Run time tables in reports and suite pages cover all retained calls, with breakdowns by track,
+subject model (total and per track), and judge. They show task/failure counts, timing coverage, summed
+client seconds, median and maximum seconds per task, and the slowest task identity. Totals sum only
+reported `meta.seconds`; missing timing stays unknown rather than counting as zero. Judge timing includes
+stale and unselected judgments because those calls still consumed time. The fixed visual-panel timing
+continues to use only that panel's retained tasks.
+
+Collection span is the earliest `collected.started_at` to the latest `collected.finished_at` among
+records with valid timezone-aware timestamp pairs; timestamp coverage is shown separately. This span
+includes pauses between resumed sessions, and parallel calls overlap, so it is neither cumulative
+client time nor an uninterrupted evaluation duration. Failed calls without `meta.seconds` can still
+contribute timestamps. `scores.json` exposes overall/track timing under `efficiency.timing`, subject
+timing under `efficiency.whole_run` (including a per-model `total`), and judge timing under
+`efficiency.judges`. These are per-run, per-suite summaries, not totals across release suites or the
+separate experimental frontend track.
 
 See the [changelog](../CHANGELOG.md), [benchmark card](benchmark-card.md), and
 [results bundle documentation](design.md#results-bundles) for releases and reproducible re-scoring.
