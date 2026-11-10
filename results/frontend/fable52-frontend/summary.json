@@ -8,43 +8,43 @@
       "model": "fable-5.2-xhigh",
       "kind": "2d-s1",
       "samples": 10,
-      "passed": 0,
-      "unrendered": 10
+      "passed": 9,
+      "unrendered": 0
     },
     {
       "model": "fable-5.2-xhigh",
       "kind": "2d-s2",
       "samples": 10,
-      "passed": 0,
-      "unrendered": 10
+      "passed": 8,
+      "unrendered": 0
     },
     {
       "model": "fable-5.2-xhigh",
       "kind": "3d-s1",
       "samples": 10,
-      "passed": 0,
-      "unrendered": 10
+      "passed": 6,
+      "unrendered": 0
     },
     {
       "model": "fable-5.2-xhigh",
       "kind": "3d-s2",
-      "samples": 4,
-      "passed": 0,
-      "unrendered": 4
+      "samples": 8,
+      "passed": 7,
+      "unrendered": 0
     },
     {
       "model": "fable-5.2-xhigh",
       "kind": "2d-mem",
       "samples": 1,
-      "passed": 0,
-      "unrendered": 1
+      "passed": 1,
+      "unrendered": 0
     },
     {
       "model": "fable-5.2-xhigh",
       "kind": "3d-mem",
       "samples": 1,
-      "passed": 0,
-      "unrendered": 1
+      "passed": 1,
+      "unrendered": 0
     }
   ],
   "samples": [
@@ -54,7 +54,7 @@
       "task": "001",
       "kind": "2d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -63,7 +63,7 @@
       "task": "001",
       "kind": "2d-s2",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -72,7 +72,7 @@
       "task": "001",
       "kind": "3d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -81,7 +81,7 @@
       "task": "001",
       "kind": "3d-s2",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -90,7 +90,7 @@
       "task": "002",
       "kind": "2d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -99,7 +99,7 @@
       "task": "002",
       "kind": "2d-s2",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -108,10 +108,20 @@
       "task": "002",
       "kind": "3d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "gate failed",
       "gates": [
-        "no ```html block"
+        "no ```html block",
+        "no html to render"
       ]
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/002/3d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "002",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
     },
     {
       "sample": "frontend/fable-5.2-xhigh/003/2d-s1__r1.json",
@@ -119,7 +129,7 @@
       "task": "003",
       "kind": "2d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -128,7 +138,7 @@
       "task": "003",
       "kind": "2d-s2",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -137,7 +147,7 @@
       "task": "003",
       "kind": "3d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -146,7 +156,7 @@
       "task": "003",
       "kind": "3d-s2",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -155,7 +165,7 @@
       "task": "004",
       "kind": "2d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -164,7 +174,7 @@
       "task": "004",
       "kind": "2d-s2",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -173,7 +183,7 @@
       "task": "004",
       "kind": "3d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -182,7 +192,7 @@
       "task": "004",
       "kind": "3d-s2",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -191,7 +201,7 @@
       "task": "005",
       "kind": "2d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -200,7 +210,7 @@
       "task": "005",
       "kind": "2d-s2",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -209,7 +219,7 @@
       "task": "005",
       "kind": "3d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -218,9 +228,10 @@
       "task": "005",
       "kind": "3d-s2",
       "rep": 1,
-      "status": "unrendered",
+      "status": "gate failed",
       "gates": [
-        "no ```html block"
+        "no ```html block",
+        "no html to render"
       ]
     },
     {
@@ -229,9 +240,10 @@
       "task": "006",
       "kind": "2d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "gate failed",
       "gates": [
-        "no ```html block"
+        "no ```html block",
+        "no html to render"
       ]
     },
     {
@@ -240,7 +252,7 @@
       "task": "006",
       "kind": "2d-s2",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -249,10 +261,20 @@
       "task": "006",
       "kind": "3d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "gate failed",
       "gates": [
-        "no ```html block"
+        "no ```html block",
+        "no html to render"
       ]
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/006/3d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "006",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
     },
     {
       "sample": "frontend/fable-5.2-xhigh/007/2d-s1__r1.json",
@@ -260,7 +282,7 @@
       "task": "007",
       "kind": "2d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -269,7 +291,7 @@
       "task": "007",
       "kind": "2d-s2",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -278,7 +300,16 @@
       "task": "007",
       "kind": "3d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/007/3d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "007",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
       "gates": []
     },
     {
@@ -287,7 +318,7 @@
       "task": "008",
       "kind": "2d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -296,7 +327,7 @@
       "task": "008",
       "kind": "2d-s2",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -305,10 +336,20 @@
       "task": "008",
       "kind": "3d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "gate failed",
       "gates": [
-        "no ```html block"
+        "no ```html block",
+        "no html to render"
       ]
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/008/3d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "008",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
     },
     {
       "sample": "frontend/fable-5.2-xhigh/009/2d-s1__r1.json",
@@ -316,7 +357,7 @@
       "task": "009",
       "kind": "2d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -325,9 +366,10 @@
       "task": "009",
       "kind": "2d-s2",
       "rep": 1,
-      "status": "unrendered",
+      "status": "gate failed",
       "gates": [
-        "no ```html block"
+        "no ```html block",
+        "no html to render"
       ]
     },
     {
@@ -336,9 +378,10 @@
       "task": "009",
       "kind": "3d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "gate failed",
       "gates": [
-        "no ```html block"
+        "no ```html block",
+        "no html to render"
       ]
     },
     {
@@ -347,7 +390,7 @@
       "task": "010",
       "kind": "2d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -356,9 +399,10 @@
       "task": "010",
       "kind": "2d-s2",
       "rep": 1,
-      "status": "unrendered",
+      "status": "gate failed",
       "gates": [
-        "no ```html block"
+        "no ```html block",
+        "no html to render"
       ]
     },
     {
@@ -367,7 +411,7 @@
       "task": "010",
       "kind": "3d-s1",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -376,7 +420,7 @@
       "task": "mem",
       "kind": "2d-mem",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     },
     {
@@ -385,14 +429,14 @@
       "task": "mem",
       "kind": "3d-mem",
       "rep": 1,
-      "status": "unrendered",
+      "status": "passed",
       "gates": []
     }
   ],
   "run": "fable52-frontend",
-  "harness": "f7025ef3c95e93de",
+  "harness": "fee9bd636b661bc1",
   "labels": {
-    "fable-5.2-xhigh": "Claude Fable 5.2 (Claude Code) (xhigh)"
+    "fable-5.2-xhigh": "Fable 5.2 (xhigh)"
   },
   "tasks": {
     "001": {
