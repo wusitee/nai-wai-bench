@@ -199,7 +199,7 @@ backend = "claude"
 vendor = "anthropic"
 model = "claude-fable-5-2"
 effort = "xhigh"
-price = { input = 8.0, cached_input = 0.20, cache_write = 10.0, output = 40.0, unit = "USD/1M tokens", source = "https://platform.claude.com/docs/en/about-claude/pricing", as_of = "2026-11-03" }
+price = { input = 8.0, cached_input = 0.20, cache_write = 10.0, output = 40.0, unit = "USD/1M tokens", source = "https://platform.claude.com/docs/en/about-claude/pricing", as_of = "2026-11-10" }
 can = ["text", "vision"]
 
 [models."opus-5.5-max"]
