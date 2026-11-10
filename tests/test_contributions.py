@@ -11,11 +11,17 @@ from nwb.contributions import UNCOMMITTED, leaderboard
 PRICE = {"input": 2.0, "cached_input": 0.5, "cache_write": 3.0, "output": 10.0}
 
 
-def _record(path, model, tokens, started, **extra):
+def _record(path, model, tokens, started, resolved=None, **extra):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps({"model": model, "track": "understanding", **extra,
                                 "collected": {"started_at": started},
-                                "meta": {"seconds": 1.0, "tokens": tokens}}), encoding="utf-8")
+                                "meta": {"seconds": 1.0, "tokens": tokens, "resolved_model": resolved}}),
+                    encoding="utf-8")
+
+
+def _spec(name, model, price):
+    return ModelSpec(name=name, backend="claude", vendor="v", model=model, can=frozenset({"text"}),
+                     options={"price": price})
 
 
 def _commit(root, author, when):
@@ -27,7 +33,9 @@ def _commit(root, author, when):
 
 
 @pytest.mark.skipif(shutil.which("git") is None, reason="needs git")
-def test_calls_are_priced_deduplicated_and_credited(tmp_path):
+def test_calls_are_priced_deduplicated_and_credited(tmp_path, monkeypatch):
+    monkeypatch.setenv("GIT_CONFIG_GLOBAL", os.devnull)  # no dependence on the machine's signing or identity
+    monkeypatch.setenv("GIT_CONFIG_NOSYSTEM", "1")
     subprocess.run(["git", "init", "-q"], cwd=tmp_path, check=True)
     priced = {"input": 1_000_000, "cached_input": 200_000, "cache_write": 100_000, "output": 100_000}
     zoe = tmp_path / "results/core/zoe"
@@ -47,8 +55,7 @@ def test_calls_are_priced_deduplicated_and_credited(tmp_path):
     _commit(tmp_path, "Bob", 1_700_000_100)
     _record(merged / "understanding/paid/c__r1.json", "paid", {"input": 10, "output": 0}, "t5")
 
-    models = {"paid": ModelSpec(name="paid", backend="claude", vendor="v", model="m-1", can=frozenset({"text"}),
-                                options={"price": PRICE})}
+    models = {"paid": _spec("paid", "m-1", PRICE)}
     board = leaderboard(tmp_path, models, credits={"runs": {}, "aliases": {"Bob": "Robert"}})
     rows = {r["contributor"]: r for r in board["contributors"]}
     assert board["calls"] == 5
@@ -65,3 +72,21 @@ def test_calls_are_priced_deduplicated_and_credited(tmp_path):
     board = leaderboard(tmp_path, models, credits={"runs": {"core/zoe": "Carol"}, "aliases": {}})
     rows = {r["contributor"]: r for r in board["contributors"]}
     assert "Zoe" not in rows and rows["Carol"]["calls"] == 3 and rows["Bob"]["calls"] == 1
+
+
+def test_retired_entries_use_agreeing_rates_but_image_relays_stay_unpriced(tmp_path):
+    run = tmp_path / "results/core/run"
+    (run / "snapshot.json").parent.mkdir(parents=True)
+    (run / "snapshot.json").write_text("{}")
+    tokens = {"input": 1_000_000, "output": 0}
+    _record(run / "understanding/retired/a__r1.json", "retired", tokens, "t1", resolved="m-1")
+    _record(run / "understanding/split/a__r1.json", "split", tokens, "t2", resolved="m-2")
+    _record(run / "imagegen/relay/a__r1.json", "relay", tokens, "t3", resolved="m-1", track="imagegen")
+
+    # m-1 entries share rates and differ only in price metadata; m-2 entries disagree on a rate.
+    models = {"a": _spec("a", "m-1", {**PRICE, "as_of": "2026-01-01"}),
+              "b": _spec("b", "m-1", {**PRICE, "as_of": "2026-02-02"}),
+              "c": _spec("c", "m-2", PRICE), "d": _spec("d", "m-2", {**PRICE, "input": 4.0})}
+    board = leaderboard(tmp_path, models, authors={}, credits={"runs": {}, "aliases": {}})
+    usd = {m["model"]: m["usd"] for m in board["contributors"][0]["models"]}
+    assert usd == {"retired": pytest.approx(2.0), "split": None, "relay": None}

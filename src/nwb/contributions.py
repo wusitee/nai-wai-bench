@@ -1,4 +1,4 @@
-"""Token-value contribution ranking: saved calls priced at official API list prices, credited to contributors.
+"""Token-value contribution ranking: saved calls priced at API list prices, credited to contributors.
 
 Every saved call record (subject answers, generated images, judgments, frontend pages) under `results/`
 carries its token usage in `meta.tokens`. Each call is priced with its model entry's `price` table and
@@ -29,10 +29,11 @@ def git_authors(root: Path) -> dict[str, tuple[int, str]]:
     """Map each blob ever committed under results/ to its earliest (author time, author name).
 
     Content identity survives renames, merged runs, and re-syncs that leave a record unchanged, so a
-    record is credited to the commit that first introduced it. Without Git history the map is empty."""
+    record is credited to the commit that first introduced it. Author names follow `.mailmap`. Without
+    Git history the map is empty."""
     try:
-        out = subprocess.run(["git", "-c", "core.quotepath=off", "log", "--raw", "--no-abbrev",
-                              "--format=%x01%at%x09%an", "--", "results"],
+        out = subprocess.run(["git", "-c", "core.quotepath=off", "log", "--raw", "--no-abbrev", "--full-history",
+                              "--format=%x01%at%x09%aN", "--", "results"],
                              cwd=root, capture_output=True, check=True).stdout.decode("utf-8", "replace")
     except (OSError, subprocess.CalledProcessError):
         return {}
@@ -55,8 +56,8 @@ def load_credits(root: Path) -> dict:
     path = root / "results" / CREDITS
     data = tomllib.loads(path.read_text(encoding="utf-8")) if path.is_file() else {}
     for table in ("runs", "aliases"):
-        if not all(isinstance(k, str) and isinstance(v, str) and v.strip()
-                   for k, v in data.get(table, {}).items()):
+        section = data.get(table, {})
+        if not isinstance(section, dict) or not all(isinstance(v, str) and v.strip() for v in section.values()):
             raise ValueError(f"{path}: [{table}] must map names to non-empty strings")
     return {"runs": data.get("runs", {}), "aliases": data.get("aliases", {})}
 
@@ -87,17 +88,31 @@ def _calls(root: Path):
             yield key, run_key, judged, record, _blob_sha(data)
 
 
+def _rates(price: dict | None) -> tuple | None:
+    """The billing rates `token_cost` applies, without price metadata such as source and check date."""
+    if not price or "input" not in price or "output" not in price:
+        return None
+    return (price["input"], price.get("cached_input", price["input"]),
+            price.get("cache_write", price["input"]), price["output"])
+
+
 def _price(entry: str, record: dict, models: dict[str, ModelSpec]) -> dict | None:
     """The entry's price; an entry missing from the registry falls back to configured entries for the
-    same resolved model id when they agree on one price."""
+    same resolved model id when their billing rates agree. Generated-image calls never fall back: their
+    tokens describe the relay around the image tool, not image generation."""
     if entry in models:
         price = models[entry].options.get("price")
-        return price if price and "input" in price and "output" in price else None
+        return price if _rates(price) else None
     meta = record.get("meta", {})
     model_id = meta.get("resolved_model") or meta.get("model")
-    prices = {json.dumps(m.options["price"], sort_keys=True) for m in models.values()
-              if model_id and m.model == model_id and m.options.get("price")}
-    return json.loads(prices.pop()) if len(prices) == 1 else None
+    if not model_id or ("judge" not in record and record.get("track") == "imagegen"):
+        return None
+    prices = {}
+    for m in models.values():
+        rates = _rates(m.options.get("price"))
+        if m.model == model_id and rates:
+            prices.setdefault(rates, m.options["price"])
+    return next(iter(prices.values())) if len(prices) == 1 else None
 
 
 def _usage(record: dict) -> dict | None:
@@ -153,7 +168,7 @@ def leaderboard(root: Path, models: dict[str, ModelSpec], *, authors: dict | Non
         for r in model_rows:
             r["roles"] = sorted(r["roles"])
             if not r["priced_calls"]:
-                r["usd"] = None  # no official price or no usage: unknown, never zero
+                r["usd"] = None  # no list price or no usage: unknown, never zero
         priced = [r["usd"] for r in model_rows if r["usd"] is not None]
         rows.append({"contributor": name, "usd": sum(priced) if priced else None, "calls": person["calls"],
                      "runs": sorted(person["runs"]), "models": model_rows,
@@ -162,7 +177,7 @@ def leaderboard(root: Path, models: dict[str, ModelSpec], *, authors: dict | Non
     rows.sort(key=lambda r: (r["usd"] is None, -(r["usd"] or 0), r["contributor"]))
     for rank, row in enumerate(rows, 1):
         row["rank"] = rank if row["usd"] is not None else None
-    return {"unit": "USD at official pay-as-you-go API list prices (models.toml `price`)",
+    return {"unit": "USD at pay-as-you-go API list prices from models.toml `price`",
             "calls": len(calls), "contributors": rows}
 
 
@@ -177,7 +192,7 @@ def render_text(board: dict, *, details: bool = True) -> str:
         usd = f"${row['usd']:,.2f}" if row["usd"] is not None else "no priced usage"
         notes = [f"{row['calls']} calls", f"{len(row['runs'])} runs"]
         if row["unpriced_calls"]:
-            notes.append(f"{row['unpriced_calls']} without official price")
+            notes.append(f"{row['unpriced_calls']} without list price")
         if row["no_usage_calls"]:
             notes.append(f"{row['no_usage_calls']} without usage")
         out.append(f"{rank!s:>3}  {row['contributor']:24} {usd:>14}  {', '.join(notes)}")
@@ -185,7 +200,7 @@ def render_text(board: dict, *, details: bool = True) -> str:
             continue
         for m in row["models"]:
             cost = (f"${m['usd']:,.2f}" if m["usd"] is not None
-                    else "no official price" if m["unpriced_calls"] else "no usage")
+                    else "no list price" if m["unpriced_calls"] else "no usage")
             t = m["tokens"]
             usage = (f"in {_tokens(t['input'])} (cached {_tokens(t['cached_input'])}, "
                      f"write {_tokens(t['cache_write'])}) out {_tokens(t['output'])}"
