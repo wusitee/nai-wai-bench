@@ -1,0 +1,109 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "track": "frontend",
+  "corpus": "frontend-v1",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "task": "010",
+  "kind": "3d-s1",
+  "rep": 1,
+  "prompt_sha256": "b0a444f8d73fc82332aacf7579f446f8070663f1988d52af87b6ae6c02b998f3",
+  "width": 300,
+  "height": 300,
+  "duration_ms": 5000,
+  "input_names": "neutral",
+  "images": [
+    "bench/frontend-v1/assets/010/frame_00.png"
+  ],
+  "prompt": "The attached image is a 300x300 px frame from an animated GIF. Rebuild the scene in 3D with three.js.\n\nTask (3D, static): write an HTML page that builds the scene from code and renders it so that the view from your reference camera reproduces the image as faithfully as you can: characters, poses, facial expressions, hands, props, background, and colors. A later step will animate your scene, so structure it in named groups. For this static step, render(t) may ignore t.\n\nthree.js contract:\n- The harness injects an import map for three.js r187. Import from 'three' and from 'three/addons/'; the only addons available are 'three/addons/controls/OrbitControls.js', 'three/addons/geometries/ConvexGeometry.js', 'three/addons/geometries/ParametricFunctions.js', 'three/addons/geometries/ParametricGeometry.js', 'three/addons/geometries/RoundedBoxGeometry.js', 'three/addons/math/ConvexHull.js', 'three/addons/utils/BufferGeometryUtils.js'. Use one <script type=\"module\">. Do not add an import map or load anything else.\n- Build all geometry in code: no model files, no loaders, no image textures. Procedural CanvasTexture or DataTexture textures up to 64x64 px are allowed.\n- Create the renderer with new THREE.WebGLRenderer({ preserveDrawingBuffer: true }), at pixel ratio 1, with a 300x300 canvas that fills the page.\n- Y is up. Put each character in its own THREE.Group with a descriptive name (for example 'character-left'), with nested named groups for parts that could move (head, eyes, mouth, arms, hands, ...). Characters must be solid 3D volumes: the harness also renders them from the side, the back, a three-quarter angle, and above, with cameras fitted to the characters.\n- Light the scene so the characters read from every side.\n- When the scene is ready, set window.nwb = { scene, renderer, cameras: { ref }, characters, render(t), ready: true }. cameras.ref is the camera for the main view. characters is an array of the character groups. render(t) poses the scene for time t in milliseconds and renders it synchronously with cameras.ref; the same t must always produce identical pixels, whatever was rendered before. Do not use renderer.setAnimationLoop: the harness calls render(t).\n\nRules (breaking any rule scores 0):\n- Reply with exactly one ```html code block containing one complete, self-contained HTML document. If you send several blocks, only the last one counts. Do not use tools; answer directly.\n- The page is rendered offline in a 300x300 px viewport at device pixel ratio 1. Fill exactly that area, starting at the top-left corner.\n- No raster images: no <img>, no <image>, no CSS url(...) except url(#id) references to your own SVG definitions, no data: URIs, no base64, no blob: URLs.\n- No external resources or network access: no external scripts, stylesheets, fonts, iframes, links, fetch, XMLHttpRequest, WebSocket, or any other URL.\n- Do not call setTimeout, setInterval, requestAnimationFrame, or requestIdleCallback. The harness controls time.\n- The file must be at most 256 KB and must run without uncaught exceptions or console errors.",
+  "text": "```html\n<!DOCTYPE html>\n<html><head><meta charset=\"utf-8\">\n<style>html,body{margin:0;padding:0;overflow:hidden;background:#c4e3f0}canvas{display:block;position:absolute;left:0;top:0;width:300px;height:300px}</style>\n</head><body>\n<script type=\"module\">\nimport * as THREE from 'three';\nconst renderer=new THREE.WebGLRenderer({preserveDrawingBuffer:true,antialias:true});\nrenderer.setPixelRatio(1);renderer.setSize(300,300);document.body.appendChild(renderer.domElement);\nconst scene=new THREE.Scene();\n// background\nconst cv=document.createElement('canvas');cv.width=64;cv.height=64;const cx=cv.getContext('2d');\nconst lg=cx.createLinearGradient(0,0,0,64);lg.addColorStop(0,'#cfe9f4');lg.addColorStop(1,'#b8dcee');cx.fillStyle=lg;cx.fillRect(0,0,64,64);\nfunction blob(x,y,r,a){const g=cx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,'rgba(255,255,255,'+a+')');g.addColorStop(1,'rgba(255,255,255,0)');cx.fillStyle=g;cx.fillRect(0,0,64,64);}\nblob(8,6,24,0.8);blob(4,60,20,0.85);blob(34,2,16,0.5);blob(62,44,10,0.4);\nconst bg=new THREE.CanvasTexture(cv);bg.colorSpace=THREE.SRGBColorSpace;scene.background=bg;\n// lights\nscene.add(new THREE.AmbientLight(0xffffff,1.3));\nscene.add(new THREE.HemisphereLight(0xffffff,0xe0b070,1.0));\nconst d1=new THREE.DirectionalLight(0xffffff,2.2);d1.position.set(-2,5,7);scene.add(d1);\nconst d2=new THREE.DirectionalLight(0xffffff,1.2);d2.position.set(3,2,-6);scene.add(d2);\n// materials\nconst yellow=new THREE.MeshStandardMaterial({color:0xf4b02c,roughness:0.65});\nconst cream=new THREE.MeshStandardMaterial({color:0xcfc4ab,roughness:0.8});\nconst gray=new THREE.MeshStandardMaterial({color:0x5e5e5c,roughness:0.8});\nconst dark=new THREE.MeshBasicMaterial({color:0x1a0e0b,side:THREE.DoubleSide});\nconst teethM=new THREE.MeshBasicMaterial({color:0xefeae0,side:THREE.DoubleSide});\nconst lowM=new THREE.MeshBasicMaterial({color:0xb5aaa5,side:THREE.DoubleSide});\nconst browM=new THREE.MeshBasicMaterial({color:0x2a1608});\nconst sg=new THREE.SphereGeometry(1,48,32);\nfunction sph(p,mat,x,y,z,sx,sy,sz,name){const m=new THREE.Mesh(sg,mat);m.position.set(x,y,z);m.scale.set(sx,sy===undefined?sx:sy,sz===undefined?sx:sz);if(name)m.name=name;p.add(m);return m;}\nconst UP=new THREE.Vector3(0,1,0);\nfunction seg(p,a,b,ra,rb,mat){const d=b.clone().sub(a);const len=d.length();\n  const m=new THREE.Mesh(new THREE.CylinderGeometry(rb,ra,len,24,1,true),mat);\n  m.position.copy(a).addScaledVector(d,0.5);m.quaternion.setFromUnitVectors(UP,d.normalize());p.add(m);\n  sph(p,mat,a.x,a.y,a.z,ra);sph(p,mat,b.x,b.y,b.z,rb);}\nconst V=(x,y,z)=>new THREE.Vector3(x,y,z);\n// character\nconst ch=new THREE.Group();ch.name='character-yellow';scene.add(ch);\nconst body=new THREE.Group();body.name='body';ch.add(body);\nsph(body,yellow,0.05,-0.55,0,1.6,1.75,1.35,'torso');\nsph(body,yellow,0.1,0.35,0,1.3,1.05,1.1,'chest');\nconst belly=new THREE.Group();belly.name='belly';ch.add(belly);\nsph(belly,cream,0.17,-0.6,0.42,1.15,1.1,1.05,'belly-patch');\nconst legs=new THREE.Group();legs.name='legs';ch.add(legs);\nsph(legs,yellow,-0.75,-2.2,0.35,0.5,0.3,0.7,'foot-right');\nsph(legs,yellow,0.85,-2.2,0.35,0.5,0.3,0.7,'foot-left');\n// head\nconst R=0.72;\nconst head=new THREE.Group();head.name='head';head.position.set(0.91,0.99,0.4);head.rotation.z=-0.2;ch.add(head);\nsph(head,yellow,0,0,0,R,R,R,'skull');\nfunction decal(fn,cx0,cy0,Rr,mat,name){const N=6,M=40,pos=[],idx=[];\n  const zf=(x,y)=>Math.sqrt(Math.max(Rr*Rr-x*x-y*y,1e-4));\n  pos.push(cx0,cy0,zf(cx0,cy0));\n  for(let i=1;i<=N;i++)for(let j=0;j<M;j++){const t=j/M*Math.PI*2,b=fn(t),f=i/N;const x=cx0+b[0]*f,y=cy0+b[1]*f;pos.push(x,y,zf(x,y));}\n  for(let j=0;j<M;j++)idx.push(0,1+j,1+(j+1)%M);\n  for(let i=1;i<N;i++)for(let j=0;j<M;j++){const a=1+(i-1)*M+j,b=1+(i-1)*M+(j+1)%M,c=1+i*M+j,d=1+i*M+(j+1)%M;idx.push(a,c,d,a,d,b);}\n  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setIndex(idx);g.computeVertexNormals();\n  const m=new THREE.Mesh(g,mat);m.name=name;return m;}\nconst mouth=new THREE.Group();mouth.name='mouth';head.add(mouth);\nconst ox=-0.08,oy=-0.12,ma=0.36;\nmouth.add(decal(t=>{const s=Math.sin(t);return[ma*Math.cos(t),(s>=0?0.03*s:0.45*s)+0.2];},ox,oy-0.2,R+0.006,dark,'mouth-inside'));\nmouth.add(decal(t=>{const s=Math.sin(t);return[0.92*ma*Math.cos(t),(s>=0?0.02*s:0.085*s)+0.02];},ox,oy-0.02,R+0.013,teethM,'teeth-upper'));\nmouth.add(decal(t=>{const s=Math.sin(t);return[0.18*Math.cos(t),(s>=0?0.05:0.07)*s];},ox,oy-0.33,R+0.013,lowM,'teeth-lower'));\n// eyes (closed happy arcs)\nconst eyes=new THREE.Group();eyes.name='eyes';head.add(eyes);\nfunction eye(x,y,tilt,name){const arc=Math.PI*0.75;const g=new THREE.TorusGeometry(0.1,0.02,8,20,arc);g.rotateZ((Math.PI-arc)/2+tilt);\n  const m=new THREE.Mesh(g,browM);const z=Math.sqrt(R*R-x*x-y*y);const n=V(x,y,z).normalize();\n  m.position.copy(n).multiplyScalar(R+0.005);m.quaternion.setFromUnitVectors(V(0,0,1),n);\n  const grp=new THREE.Group();grp.name=name;grp.add(m);eyes.add(grp);}\neye(-0.29,0.19,-0.25,'eye-right');eye(0.27,0.19,0.25,'eye-left');\n// arms\nfunction hand(name,mirror){const h=new THREE.Group();h.name=name;\n  sph(h,gray,0,0,0,0.17,0.15,0.1);\n  for(let i=0;i<4;i++){const a=V(0.1,0.09-0.06*i,0.02);const d=V(1,-0.35-0.15*i,-0.25).normalize();seg(h,a,a.clone().addScaledVector(d,0.17),0.05,0.045,gray);}\n  const ta=V(0,0.1,0.03);seg(h,ta,ta.clone().addScaledVector(V(0.4,1,-0.1).normalize(),0.09),0.05,0.045,gray);\n  if(mirror){h.scale.x=-1;h.rotation.z=0.3;}else h.rotation.z=-0.3;return h;}\nfunction arm(name,S,E,W,H,r0,r1,r2,handName,mirror){const g=new THREE.Group();g.name=name;g.position.copy(S);\n  const e=E.clone().sub(S),w=W.clone().sub(S),hp=H.clone().sub(S);\n  seg(g,V(0,0,0),e,r0,r1,yellow);seg(g,e,w,r1,r2,yellow);\n  const h=hand(handName,mirror);h.position.copy(hp);g.add(h);ch.add(g);return g;}\narm('arm-right',V(-1.0,0.2,0.55),V(-1.15,-0.8,0.95),V(-0.38,-1.0,1.38),V(0.0,-0.97,1.52),0.5,0.42,0.27,'hand-right',false);\narm('arm-left',V(1.35,0.1,0.45),V(1.5,-0.8,0.9),V(0.98,-1.02,1.35),V(0.63,-0.97,1.5),0.45,0.38,0.25,'hand-left',true);\n// camera\nconst ref=new THREE.PerspectiveCamera(18,1,2,60);ref.position.set(0,0,9.5);ref.lookAt(0,0,0);\nfunction render(t){renderer.render(scene,ref);}\nrender(0);\nwindow.nwb={scene,renderer,cameras:{ref},characters:[ch],render,ready:true};\n</script>\n</body></html>\n```",
+  "html": "<!DOCTYPE html>\n<html><head><meta charset=\"utf-8\">\n<style>html,body{margin:0;padding:0;overflow:hidden;background:#c4e3f0}canvas{display:block;position:absolute;left:0;top:0;width:300px;height:300px}</style>\n</head><body>\n<script type=\"module\">\nimport * as THREE from 'three';\nconst renderer=new THREE.WebGLRenderer({preserveDrawingBuffer:true,antialias:true});\nrenderer.setPixelRatio(1);renderer.setSize(300,300);document.body.appendChild(renderer.domElement);\nconst scene=new THREE.Scene();\n// background\nconst cv=document.createElement('canvas');cv.width=64;cv.height=64;const cx=cv.getContext('2d');\nconst lg=cx.createLinearGradient(0,0,0,64);lg.addColorStop(0,'#cfe9f4');lg.addColorStop(1,'#b8dcee');cx.fillStyle=lg;cx.fillRect(0,0,64,64);\nfunction blob(x,y,r,a){const g=cx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,'rgba(255,255,255,'+a+')');g.addColorStop(1,'rgba(255,255,255,0)');cx.fillStyle=g;cx.fillRect(0,0,64,64);}\nblob(8,6,24,0.8);blob(4,60,20,0.85);blob(34,2,16,0.5);blob(62,44,10,0.4);\nconst bg=new THREE.CanvasTexture(cv);bg.colorSpace=THREE.SRGBColorSpace;scene.background=bg;\n// lights\nscene.add(new THREE.AmbientLight(0xffffff,1.3));\nscene.add(new THREE.HemisphereLight(0xffffff,0xe0b070,1.0));\nconst d1=new THREE.DirectionalLight(0xffffff,2.2);d1.position.set(-2,5,7);scene.add(d1);\nconst d2=new THREE.DirectionalLight(0xffffff,1.2);d2.position.set(3,2,-6);scene.add(d2);\n// materials\nconst yellow=new THREE.MeshStandardMaterial({color:0xf4b02c,roughness:0.65});\nconst cream=new THREE.MeshStandardMaterial({color:0xcfc4ab,roughness:0.8});\nconst gray=new THREE.MeshStandardMaterial({color:0x5e5e5c,roughness:0.8});\nconst dark=new THREE.MeshBasicMaterial({color:0x1a0e0b,side:THREE.DoubleSide});\nconst teethM=new THREE.MeshBasicMaterial({color:0xefeae0,side:THREE.DoubleSide});\nconst lowM=new THREE.MeshBasicMaterial({color:0xb5aaa5,side:THREE.DoubleSide});\nconst browM=new THREE.MeshBasicMaterial({color:0x2a1608});\nconst sg=new THREE.SphereGeometry(1,48,32);\nfunction sph(p,mat,x,y,z,sx,sy,sz,name){const m=new THREE.Mesh(sg,mat);m.position.set(x,y,z);m.scale.set(sx,sy===undefined?sx:sy,sz===undefined?sx:sz);if(name)m.name=name;p.add(m);return m;}\nconst UP=new THREE.Vector3(0,1,0);\nfunction seg(p,a,b,ra,rb,mat){const d=b.clone().sub(a);const len=d.length();\n  const m=new THREE.Mesh(new THREE.CylinderGeometry(rb,ra,len,24,1,true),mat);\n  m.position.copy(a).addScaledVector(d,0.5);m.quaternion.setFromUnitVectors(UP,d.normalize());p.add(m);\n  sph(p,mat,a.x,a.y,a.z,ra);sph(p,mat,b.x,b.y,b.z,rb);}\nconst V=(x,y,z)=>new THREE.Vector3(x,y,z);\n// character\nconst ch=new THREE.Group();ch.name='character-yellow';scene.add(ch);\nconst body=new THREE.Group();body.name='body';ch.add(body);\nsph(body,yellow,0.05,-0.55,0,1.6,1.75,1.35,'torso');\nsph(body,yellow,0.1,0.35,0,1.3,1.05,1.1,'chest');\nconst belly=new THREE.Group();belly.name='belly';ch.add(belly);\nsph(belly,cream,0.17,-0.6,0.42,1.15,1.1,1.05,'belly-patch');\nconst legs=new THREE.Group();legs.name='legs';ch.add(legs);\nsph(legs,yellow,-0.75,-2.2,0.35,0.5,0.3,0.7,'foot-right');\nsph(legs,yellow,0.85,-2.2,0.35,0.5,0.3,0.7,'foot-left');\n// head\nconst R=0.72;\nconst head=new THREE.Group();head.name='head';head.position.set(0.91,0.99,0.4);head.rotation.z=-0.2;ch.add(head);\nsph(head,yellow,0,0,0,R,R,R,'skull');\nfunction decal(fn,cx0,cy0,Rr,mat,name){const N=6,M=40,pos=[],idx=[];\n  const zf=(x,y)=>Math.sqrt(Math.max(Rr*Rr-x*x-y*y,1e-4));\n  pos.push(cx0,cy0,zf(cx0,cy0));\n  for(let i=1;i<=N;i++)for(let j=0;j<M;j++){const t=j/M*Math.PI*2,b=fn(t),f=i/N;const x=cx0+b[0]*f,y=cy0+b[1]*f;pos.push(x,y,zf(x,y));}\n  for(let j=0;j<M;j++)idx.push(0,1+j,1+(j+1)%M);\n  for(let i=1;i<N;i++)for(let j=0;j<M;j++){const a=1+(i-1)*M+j,b=1+(i-1)*M+(j+1)%M,c=1+i*M+j,d=1+i*M+(j+1)%M;idx.push(a,c,d,a,d,b);}\n  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setIndex(idx);g.computeVertexNormals();\n  const m=new THREE.Mesh(g,mat);m.name=name;return m;}\nconst mouth=new THREE.Group();mouth.name='mouth';head.add(mouth);\nconst ox=-0.08,oy=-0.12,ma=0.36;\nmouth.add(decal(t=>{const s=Math.sin(t);return[ma*Math.cos(t),(s>=0?0.03*s:0.45*s)+0.2];},ox,oy-0.2,R+0.006,dark,'mouth-inside'));\nmouth.add(decal(t=>{const s=Math.sin(t);return[0.92*ma*Math.cos(t),(s>=0?0.02*s:0.085*s)+0.02];},ox,oy-0.02,R+0.013,teethM,'teeth-upper'));\nmouth.add(decal(t=>{const s=Math.sin(t);return[0.18*Math.cos(t),(s>=0?0.05:0.07)*s];},ox,oy-0.33,R+0.013,lowM,'teeth-lower'));\n// eyes (closed happy arcs)\nconst eyes=new THREE.Group();eyes.name='eyes';head.add(eyes);\nfunction eye(x,y,tilt,name){const arc=Math.PI*0.75;const g=new THREE.TorusGeometry(0.1,0.02,8,20,arc);g.rotateZ((Math.PI-arc)/2+tilt);\n  const m=new THREE.Mesh(g,browM);const z=Math.sqrt(R*R-x*x-y*y);const n=V(x,y,z).normalize();\n  m.position.copy(n).multiplyScalar(R+0.005);m.quaternion.setFromUnitVectors(V(0,0,1),n);\n  const grp=new THREE.Group();grp.name=name;grp.add(m);eyes.add(grp);}\neye(-0.29,0.19,-0.25,'eye-right');eye(0.27,0.19,0.25,'eye-left');\n// arms\nfunction hand(name,mirror){const h=new THREE.Group();h.name=name;\n  sph(h,gray,0,0,0,0.17,0.15,0.1);\n  for(let i=0;i<4;i++){const a=V(0.1,0.09-0.06*i,0.02);const d=V(1,-0.35-0.15*i,-0.25).normalize();seg(h,a,a.clone().addScaledVector(d,0.17),0.05,0.045,gray);}\n  const ta=V(0,0.1,0.03);seg(h,ta,ta.clone().addScaledVector(V(0.4,1,-0.1).normalize(),0.09),0.05,0.045,gray);\n  if(mirror){h.scale.x=-1;h.rotation.z=0.3;}else h.rotation.z=-0.3;return h;}\nfunction arm(name,S,E,W,H,r0,r1,r2,handName,mirror){const g=new THREE.Group();g.name=name;g.position.copy(S);\n  const e=E.clone().sub(S),w=W.clone().sub(S),hp=H.clone().sub(S);\n  seg(g,V(0,0,0),e,r0,r1,yellow);seg(g,e,w,r1,r2,yellow);\n  const h=hand(handName,mirror);h.position.copy(hp);g.add(h);ch.add(g);return g;}\narm('arm-right',V(-1.0,0.2,0.55),V(-1.15,-0.8,0.95),V(-0.38,-1.0,1.38),V(0.0,-0.97,1.52),0.5,0.42,0.27,'hand-right',false);\narm('arm-left',V(1.35,0.1,0.45),V(1.5,-0.8,0.9),V(0.98,-1.02,1.35),V(0.63,-0.97,1.5),0.45,0.38,0.25,'hand-left',true);\n// camera\nconst ref=new THREE.PerspectiveCamera(18,1,2,60);ref.position.set(0,0,9.5);ref.lookAt(0,0,0);\nfunction render(t){renderer.render(scene,ref);}\nrender(0);\nwindow.nwb={scene,renderer,cameras:{ref},characters:[ch],render,ready:true};\n</script>\n</body></html>",
+  "html_sha256": "13604d5122fe555e722710035cf85d3a895904962beed950426fcf0b2f786070",
+  "static_gates": [],
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 606.2,
+    "tokens": {
+      "input": 3252,
+      "cached_input": 0,
+      "cache_write": 3248,
+      "output": 54532,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 1.1068959999999999,
+    "tools_used": [],
+    "cost_usd": 1.1068959999999999,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 3248,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 54532,
+      "output_tokens_details": {
+        "thinking_tokens": 50801
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 3248
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 22532,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1655,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 1655,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T04:02:16Z",
+    "finished_at": "2026-11-10T04:12:22Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}

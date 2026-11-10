@@ -1,0 +1,111 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "track": "frontend",
+  "corpus": "frontend-v1",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "task": "006",
+  "kind": "2d-s1",
+  "rep": 1,
+  "prompt_sha256": "a28c49866ff08594e5b62ab9e897b5b8d0482997fb391c017fa756a63a14db50",
+  "width": 240,
+  "height": 246,
+  "duration_ms": 3200,
+  "input_names": "neutral",
+  "images": [
+    "bench/frontend-v1/assets/006/frame_00.png"
+  ],
+  "prompt": "The attached image is a 240x246 px frame from an animated GIF. Rebuild it by hand as vector art.\n\nTask (2D, static): write an HTML page that reproduces the image as faithfully as you can in inline SVG: characters, poses, facial expressions, hands, props, background, and colors. A later step will animate your SVG, so structure it in named groups.\n- Static only: no <script>, no SMIL (<animate>, <animateTransform>, <animateMotion>, <set>), no CSS animations or transitions.\n\n2D contract:\n- The page body contains a single inline <svg> element with viewBox=\"0 0 240 246\", width=\"240\", and height=\"246\". No nested <svg>, no <foreignObject>, no <canvas>.\n- Put each character in its own <g> with a descriptive id (for example id=\"character-left\"), with nested <g> groups with descriptive ids for parts that could move (head, eyes, mouth, arms, hands, ...).\n- Gradients, clip paths, masks, and SVG filters (for example feGaussianBlur) are allowed.\n\nRules (breaking any rule scores 0):\n- Reply with exactly one ```html code block containing one complete, self-contained HTML document. If you send several blocks, only the last one counts. Do not use tools; answer directly.\n- The page is rendered offline in a 240x246 px viewport at device pixel ratio 1. Fill exactly that area, starting at the top-left corner.\n- No raster images: no <img>, no <image>, no CSS url(...) except url(#id) references to your own SVG definitions, no data: URIs, no base64, no blob: URLs.\n- No external resources or network access: no external scripts, stylesheets, fonts, iframes, links, fetch, XMLHttpRequest, WebSocket, or any other URL.\n- Do not call setTimeout, setInterval, requestAnimationFrame, or requestIdleCallback. The harness controls time.\n- The file must be at most 256 KB and must run without uncaught exceptions or console errors.",
+  "text": ",150\" fill=\"none\" stroke=\"#5c3d3a\" stroke-width=\"7\" opacity=\"0.35\" filter=\"url(#soft3)\"/>\n    <g id=\"pink-body\">\n      <path id=\"pink-body-shape\" d=\"M70,246 C66,220 68,190 77,166 C88,150 104,137 124,130 C144,124 168,124 186,130 C197,134 204,141 208,150 L240,152 L240,246 Z\" fill=\"url(#pinkBodyGrad)\"/>\n      <g id=\"pink-body-details\" clip-path=\"url(#pinkBodyClip)\">\n        <path id=\"pink-belly\" d=\"M80,172 C88,152 106,138 126,131 C148,124 170,124 188,131 C199,136 206,146 208,158 C202,174 184,188 158,193 C128,198 98,192 80,172 Z\" fill=\"url(#pinkBellyGrad)\" filter=\"url(#soft3)\"/>\n        <ellipse id=\"pink-belly-highlight\" cx=\"150\" cy=\"138\" rx=\"30\" ry=\"8\" fill=\"#fff3ea\" opacity=\"0.35\" filter=\"url(#soft3)\"/>\n        <ellipse id=\"pink-hand-shadow\" cx=\"82\" cy=\"160\" rx=\"20\" ry=\"11\" fill=\"#8f5670\" opacity=\"0.4\" filter=\"url(#soft3)\"/>\n        <ellipse id=\"pink-bottom-shadow\" cx=\"186\" cy=\"243\" rx=\"17\" ry=\"9\" fill=\"#5e2d49\" opacity=\"0.65\" filter=\"url(#soft2)\"/>\n        <path id=\"pink-leg-crease\" d=\"M78,168 C92,172 106,188 108,206 C108,226 98,240 84,246\" fill=\"none\" stroke=\"#b9538f\" stroke-width=\"4\" opacity=\"0.35\" filter=\"url(#soft2)\"/>\n      </g>\n    </g>\n    <g id=\"pink-leg-left\">\n      <path id=\"pink-leg-shape\" d=\"M28,214 C27,205 35,198 46,195 C58,189 68,180 78,168 C92,172 106,188 108,206 C108,226 98,240 84,246 L82,246 C62,242 40,232 28,214 Z\" fill=\"url(#pinkLegGrad)\"/>\n      <path d=\"M37,203 C52,196 66,187 77,175\" fill=\"none\" stroke=\"#f8b9d9\" stroke-width=\"4\" stroke-linecap=\"round\" opacity=\"0.6\" filter=\"url(#soft2)\"/>\n      <path d=\"M30,216 C42,232 62,241 82,245\" fill=\"none\" stroke=\"#b24f8a\" stroke-width=\"3\" opacity=\"0.45\" filter=\"url(#soft2)\"/>\n    </g>\n    <g id=\"pink-arm-right\">\n      <path id=\"pink-arm-shape\" d=\"M207,166 C220,160 236,166 240,176 L240,240 C228,246 208,246 199,240 C195,226 198,202 202,184 C203,176 204,170 207,166 Z\" fill=\"url(#pinkArmGrad)\"/>\n      <path d=\"M206,168 C202,180 197,204 198,240\" fill=\"none\" stroke=\"#b9578f\" stroke-width=\"3\" opacity=\"0.5\" filter=\"url(#soft2)\"/>\n      <path id=\"pink-chin-shadow\" d=\"M204,162 C208,173 224,178 240,176\" fill=\"none\" stroke=\"#b7558f\" stroke-width=\"4\" opacity=\"0.5\" filter=\"url(#soft2)\"/>\n    </g>\n    <g id=\"pink-head\">\n      <path id=\"pink-head-shape\" d=\"M204,160 C200,143 203,125 213,115 C216,108 224,105 230,109 C234,107 238,107 240,108 L240,174 L210,174 C206,170 205,165 204,160 Z\" fill=\"url(#pinkHeadGrad)\"/>\n      <g id=\"pink-eye\">\n        <circle cx=\"236\" cy=\"128.5\" r=\"8.2\" fill=\"#f5abd0\"/>\n        <circle cx=\"236.2\" cy=\"129\" r=\"6.3\" fill=\"#f6f3ee\"/>\n        <circle id=\"pink-pupil\" cx=\"237\" cy=\"129.4\" r=\"4.3\" fill=\"#111111\"/>\n        <circle cx=\"238.4\" cy=\"127.6\" r=\"0.9\" fill=\"#ffffff\"/>\n      </g>\n      <g id=\"pink-mouth\">\n        <path d=\"M219,151 Q230,157 240,152\" fill=\"none\" stroke=\"#bd5a94\" stroke-width=\"1.1\" stroke-linecap=\"round\" opacity=\"0.7\"/>\n      </g>\n    </g>\n  </g>\n\n  <!-- ================= GREEN CHARACTER (front arm, rests on pink belly) ================= -->\n  <g id=\"character-green-front\">\n    <g id=\"green-arm-left\">\n      <path id=\"green-arm-left-shape\" d=\"M12,112 C8,98 20,84 36,82 C48,81 56,90 61,102 C66,114 73,126 82,138 C84,146 76,156 62,158 C52,156 40,148 30,138 C22,130 15,121 12,112 Z\" fill=\"url(#greenArmGrad)\"/>\n      <path d=\"M38,84 C50,85 56,96 62,108 C67,119 73,128 80,137\" fill=\"none\" stroke=\"#b4d76a\" stroke-width=\"2\" stroke-linecap=\"round\" opacity=\"0.45\" filter=\"url(#soft1)\"/>\n      <g id=\"green-hand-left\">\n        <g id=\"green-fingers\" fill=\"none\" stroke=\"#5e5229\" stroke-width=\"6\" stroke-linecap=\"round\">\n          <path id=\"green-finger-1\" d=\"M82,141 Q89,140 95,144\"/>\n          <path id=\"green-finger-2\" d=\"M84,149.5 Q92,150 98,154\"/>\n          <path id=\"green-finger-3\" d=\"M81,158 Q88,160 93,164.5\"/>\n        </g>\n        <path id=\"green-palm\" d=\"M57,147 C56,139 65,133 75,135 C84,137 89,144 88,152 C87,160 78,166 68,164 C61,162 58,155 57,147 Z\" fill=\"url(#greenHandGrad)\"/>\n        <g id=\"green-finger-highlights\" fill=\"none\" stroke=\"#877a3e\" stroke-width=\"1.6\" stroke-linecap=\"round\" opacity=\"0.7\">\n          <path d=\"M83,139.4 Q89,138.4 94,141.6\"/>\n          <path d=\"M85,147.8 Q92,148 97,151.4\"/>\n          <path d=\"M82,156.2 Q88,157.8 92,161.6\"/>\n        </g>\n      </g>\n    </g>\n  </g>\n</svg>\n</body>\n</html>\n```",
+  "html": null,
+  "html_sha256": null,
+  "static_gates": [
+    "no ```html block"
+  ],
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 404.7,
+    "tokens": {
+      "input": 34297,
+      "cached_input": 0,
+      "cache_write": 34291,
+      "output": 36106,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 0.893599,
+    "tools_used": [],
+    "cost_usd": 0.893599,
+    "usage": {
+      "input_tokens": 6,
+      "cache_creation_input_tokens": 34291,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 36106,
+      "output_tokens_details": {
+        "thinking_tokens": 27736
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 34291
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 4,
+          "output_tokens": 4106,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 33178,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 33178,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T03:07:16Z",
+    "finished_at": "2026-11-10T03:14:01Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}

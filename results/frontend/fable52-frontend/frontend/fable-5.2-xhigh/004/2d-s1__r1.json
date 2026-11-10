@@ -1,0 +1,109 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "track": "frontend",
+  "corpus": "frontend-v1",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "task": "004",
+  "kind": "2d-s1",
+  "rep": 1,
+  "prompt_sha256": "98fafd46f21dd6124a7676aeef85e90ee5a873d0bd88ece46ce2e4ce2a069aff",
+  "width": 244,
+  "height": 240,
+  "duration_ms": 1200,
+  "input_names": "neutral",
+  "images": [
+    "bench/frontend-v1/assets/004/frame_00.png"
+  ],
+  "prompt": "The attached image is a 244x240 px frame from an animated GIF. Rebuild it by hand as vector art.\n\nTask (2D, static): write an HTML page that reproduces the image as faithfully as you can in inline SVG: characters, poses, facial expressions, hands, props, background, and colors. A later step will animate your SVG, so structure it in named groups.\n- Static only: no <script>, no SMIL (<animate>, <animateTransform>, <animateMotion>, <set>), no CSS animations or transitions.\n\n2D contract:\n- The page body contains a single inline <svg> element with viewBox=\"0 0 244 240\", width=\"244\", and height=\"240\". No nested <svg>, no <foreignObject>, no <canvas>.\n- Put each character in its own <g> with a descriptive id (for example id=\"character-left\"), with nested <g> groups with descriptive ids for parts that could move (head, eyes, mouth, arms, hands, ...).\n- Gradients, clip paths, masks, and SVG filters (for example feGaussianBlur) are allowed.\n\nRules (breaking any rule scores 0):\n- Reply with exactly one ```html code block containing one complete, self-contained HTML document. If you send several blocks, only the last one counts. Do not use tools; answer directly.\n- The page is rendered offline in a 244x240 px viewport at device pixel ratio 1. Fill exactly that area, starting at the top-left corner.\n- No raster images: no <img>, no <image>, no CSS url(...) except url(#id) references to your own SVG definitions, no data: URIs, no base64, no blob: URLs.\n- No external resources or network access: no external scripts, stylesheets, fonts, iframes, links, fetch, XMLHttpRequest, WebSocket, or any other URL.\n- Do not call setTimeout, setInterval, requestAnimationFrame, or requestIdleCallback. The harness controls time.\n- The file must be at most 256 KB and must run without uncaught exceptions or console errors.",
+  "text": "```html\n<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>Yellow duck character</title>\n<style>\n  html, body { margin: 0; padding: 0; background: #ffffff; overflow: hidden; }\n  svg { display: block; }\n</style>\n</head>\n<body>\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 244 240\" width=\"244\" height=\"240\">\n  <defs>\n    <filter id=\"soft\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\">\n      <feGaussianBlur stdDeviation=\"1.1\"/>\n    </filter>\n    <filter id=\"softer\" x=\"-20%\" y=\"-50%\" width=\"140%\" height=\"200%\">\n      <feGaussianBlur stdDeviation=\"4\"/>\n    </filter>\n    <filter id=\"bellyBlur\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n      <feGaussianBlur stdDeviation=\"3\"/>\n    </filter>\n\n    <linearGradient id=\"floorGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#f1f1ee\"/>\n      <stop offset=\"1\" stop-color=\"#d9d8d1\"/>\n    </linearGradient>\n\n    <radialGradient id=\"bodyGrad\" cx=\"0.48\" cy=\"0.38\" r=\"0.68\">\n      <stop offset=\"0\" stop-color=\"#fbe24e\"/>\n      <stop offset=\"0.55\" stop-color=\"#f7d32b\"/>\n      <stop offset=\"0.85\" stop-color=\"#efb820\"/>\n      <stop offset=\"1\" stop-color=\"#e39c18\"/>\n    </radialGradient>\n\n    <radialGradient id=\"headGrad\" cx=\"0.5\" cy=\"0.55\" r=\"0.62\">\n      <stop offset=\"0\" stop-color=\"#fde968\"/>\n      <stop offset=\"0.6\" stop-color=\"#f8d632\"/>\n      <stop offset=\"1\" stop-color=\"#efba20\"/>\n    </radialGradient>\n\n    <radialGradient id=\"bellyGrad\" cx=\"0.5\" cy=\"0.45\" r=\"0.55\">\n      <stop offset=\"0\" stop-color=\"#fdeee6\"/>\n      <stop offset=\"0.6\" stop-color=\"#fce0c2\"/>\n      <stop offset=\"1\" stop-color=\"#f9d08c\"/>\n    </radialGradient>\n\n    <linearGradient id=\"beakGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#fbab2e\"/>\n      <stop offset=\"1\" stop-color=\"#e9790c\"/>\n    </linearGradient>\n\n    <linearGradient id=\"armGradL\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#f2be24\"/>\n      <stop offset=\"1\" stop-color=\"#de9616\"/>\n    </linearGradient>\n    <linearGradient id=\"armGradR\" x1=\"1\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#f2be24\"/>\n      <stop offset=\"1\" stop-color=\"#de9616\"/>\n    </linearGradient>\n\n    <radialGradient id=\"handGrad\" cx=\"0.4\" cy=\"0.35\" r=\"0.7\">\n      <stop offset=\"0\" stop-color=\"#8b6b36\"/>\n      <stop offset=\"0.6\" stop-color=\"#5e4522\"/>\n      <stop offset=\"1\" stop-color=\"#43301a\"/>\n    </radialGradient>\n  </defs>\n\n  <!-- Background -->\n  <g id=\"background\">\n    <rect id=\"bg-wall\" x=\"0\" y=\"0\" width=\"244\" height=\"240\" fill=\"#ffffff\"/>\n    <rect id=\"bg-floor\" x=\"0\" y=\"205\" width=\"244\" height=\"35\" fill=\"url(#floorGrad)\"/>\n  </g>\n\n  <!-- Character -->\n  <g id=\"character-duck\">\n    <g id=\"duck-shadow\" filter=\"url(#softer)\">\n      <ellipse cx=\"125\" cy=\"228\" rx=\"100\" ry=\"9\" fill=\"#a9a08c\" opacity=\"0.7\"/>\n    </g>\n\n    <g id=\"duck-figure\" filter=\"url(#soft)\">\n      <!-- Body -->\n      <g id=\"body\">\n        <path id=\"body-shape\" fill=\"url(#bodyGrad)\"\n              d=\"M 96 66\n                 C 70 84, 46 120, 38 156\n                 C 29 192, 40 222, 80 228\n                 C 106 232, 150 232, 174 228\n                 C 213 222, 223 192, 214 156\n                 C 207 120, 184 84, 158 66 Z\"/>\n        <g id=\"belly\" filter=\"url(#bellyBlur)\">\n          <ellipse cx=\"131\" cy=\"145\" rx=\"43\" ry=\"51\" fill=\"url(#bellyGrad)\"/>\n        </g>\n      </g>\n\n      <!-- Left arm (viewer's left) -->\n      <g id=\"arm-left\">\n        <path id=\"arm-left-shape\" fill=\"url(#armGradL)\"\n              d=\"M 54 98\n                 C 44 114, 42 134, 51 147\n                 C 61 156, 77 151, 82 136\n                 C 86 121, 85 108, 82 98 Z\"/>\n        <g id=\"hand-left\">\n          <path fill=\"url(#handGrad)\"\n                d=\"M 55 84\n                   C 54 74, 66 70, 76 73\n                   C 86 76, 88 88, 85 97\n                   C 82 105, 70 107, 62 103\n                   C 55 99, 55 92, 55 84 Z\"/>\n        </g>\n      </g>\n\n      <!-- Right arm (viewer's right) -->\n      <g id=\"arm-right\">\n        <path id=\"arm-right-shape\" fill=\"url(#armGradR)\"\n              d=\"M 196 92\n                 C 189 109, 189 130, 196 145\n                 C 204 155, 220 150, 224 135\n                 C 227 120, 226 104, 222 92 Z\"/>\n        <g id=\"hand-right\">\n          <path fill=\"url(#handGrad)\"\n                d=\"M 199 72\n                   C 203 63, 216 60, 223 67\n                   C 228 74, 227 88, 222 95\n                   C 216 101, 204 99, 200 92\n                   C 196 85, 196 78, 199 72 Z\"/>\n        </g>\n      </g>\n\n      <!-- Head -->\n      <g id=\"head\">\n        <ellipse id=\"head-shape\" cx=\"126\" cy=\"42\" rx=\"40\" ry=\"44\" fill=\"url(#headGrad)\"/>\n        <g id=\"eyes\">\n          <ellipse id=\"eye-left\" cx=\"107\" cy=\"22\" rx=\"4\" ry=\"5\" fill=\"#2b1c0a\"/>\n          <ellipse id=\"eye-right\" cx=\"146\" cy=\"22\" rx=\"4\" ry=\"5\" fill=\"#2b1c0a\"/>\n        </g>\n        <g id=\"mouth\">\n          <ellipse id=\"beak-lower\" cx=\"127\" cy=\"50\" rx=\"11\" ry=\"4.5\" fill=\"#d46c0a\"/>\n          <path id=\"beak-upper\" fill=\"url(#beakGrad)\"\n                d=\"M 111 44\n                   C 112 37, 120 35, 127 35\n                   C 134 35, 142 37, 143 44\n                   C 143 49, 135 51, 127 51\n                   C 119 51, 111 49, 111 44 Z\"/>\n        </g>\n      </g>\n    </g>\n  </g>\n</svg>\n</body>\n</html>\n```",
+  "html": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>Yellow duck character</title>\n<style>\n  html, body { margin: 0; padding: 0; background: #ffffff; overflow: hidden; }\n  svg { display: block; }\n</style>\n</head>\n<body>\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 244 240\" width=\"244\" height=\"240\">\n  <defs>\n    <filter id=\"soft\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\">\n      <feGaussianBlur stdDeviation=\"1.1\"/>\n    </filter>\n    <filter id=\"softer\" x=\"-20%\" y=\"-50%\" width=\"140%\" height=\"200%\">\n      <feGaussianBlur stdDeviation=\"4\"/>\n    </filter>\n    <filter id=\"bellyBlur\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n      <feGaussianBlur stdDeviation=\"3\"/>\n    </filter>\n\n    <linearGradient id=\"floorGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#f1f1ee\"/>\n      <stop offset=\"1\" stop-color=\"#d9d8d1\"/>\n    </linearGradient>\n\n    <radialGradient id=\"bodyGrad\" cx=\"0.48\" cy=\"0.38\" r=\"0.68\">\n      <stop offset=\"0\" stop-color=\"#fbe24e\"/>\n      <stop offset=\"0.55\" stop-color=\"#f7d32b\"/>\n      <stop offset=\"0.85\" stop-color=\"#efb820\"/>\n      <stop offset=\"1\" stop-color=\"#e39c18\"/>\n    </radialGradient>\n\n    <radialGradient id=\"headGrad\" cx=\"0.5\" cy=\"0.55\" r=\"0.62\">\n      <stop offset=\"0\" stop-color=\"#fde968\"/>\n      <stop offset=\"0.6\" stop-color=\"#f8d632\"/>\n      <stop offset=\"1\" stop-color=\"#efba20\"/>\n    </radialGradient>\n\n    <radialGradient id=\"bellyGrad\" cx=\"0.5\" cy=\"0.45\" r=\"0.55\">\n      <stop offset=\"0\" stop-color=\"#fdeee6\"/>\n      <stop offset=\"0.6\" stop-color=\"#fce0c2\"/>\n      <stop offset=\"1\" stop-color=\"#f9d08c\"/>\n    </radialGradient>\n\n    <linearGradient id=\"beakGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#fbab2e\"/>\n      <stop offset=\"1\" stop-color=\"#e9790c\"/>\n    </linearGradient>\n\n    <linearGradient id=\"armGradL\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#f2be24\"/>\n      <stop offset=\"1\" stop-color=\"#de9616\"/>\n    </linearGradient>\n    <linearGradient id=\"armGradR\" x1=\"1\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#f2be24\"/>\n      <stop offset=\"1\" stop-color=\"#de9616\"/>\n    </linearGradient>\n\n    <radialGradient id=\"handGrad\" cx=\"0.4\" cy=\"0.35\" r=\"0.7\">\n      <stop offset=\"0\" stop-color=\"#8b6b36\"/>\n      <stop offset=\"0.6\" stop-color=\"#5e4522\"/>\n      <stop offset=\"1\" stop-color=\"#43301a\"/>\n    </radialGradient>\n  </defs>\n\n  <!-- Background -->\n  <g id=\"background\">\n    <rect id=\"bg-wall\" x=\"0\" y=\"0\" width=\"244\" height=\"240\" fill=\"#ffffff\"/>\n    <rect id=\"bg-floor\" x=\"0\" y=\"205\" width=\"244\" height=\"35\" fill=\"url(#floorGrad)\"/>\n  </g>\n\n  <!-- Character -->\n  <g id=\"character-duck\">\n    <g id=\"duck-shadow\" filter=\"url(#softer)\">\n      <ellipse cx=\"125\" cy=\"228\" rx=\"100\" ry=\"9\" fill=\"#a9a08c\" opacity=\"0.7\"/>\n    </g>\n\n    <g id=\"duck-figure\" filter=\"url(#soft)\">\n      <!-- Body -->\n      <g id=\"body\">\n        <path id=\"body-shape\" fill=\"url(#bodyGrad)\"\n              d=\"M 96 66\n                 C 70 84, 46 120, 38 156\n                 C 29 192, 40 222, 80 228\n                 C 106 232, 150 232, 174 228\n                 C 213 222, 223 192, 214 156\n                 C 207 120, 184 84, 158 66 Z\"/>\n        <g id=\"belly\" filter=\"url(#bellyBlur)\">\n          <ellipse cx=\"131\" cy=\"145\" rx=\"43\" ry=\"51\" fill=\"url(#bellyGrad)\"/>\n        </g>\n      </g>\n\n      <!-- Left arm (viewer's left) -->\n      <g id=\"arm-left\">\n        <path id=\"arm-left-shape\" fill=\"url(#armGradL)\"\n              d=\"M 54 98\n                 C 44 114, 42 134, 51 147\n                 C 61 156, 77 151, 82 136\n                 C 86 121, 85 108, 82 98 Z\"/>\n        <g id=\"hand-left\">\n          <path fill=\"url(#handGrad)\"\n                d=\"M 55 84\n                   C 54 74, 66 70, 76 73\n                   C 86 76, 88 88, 85 97\n                   C 82 105, 70 107, 62 103\n                   C 55 99, 55 92, 55 84 Z\"/>\n        </g>\n      </g>\n\n      <!-- Right arm (viewer's right) -->\n      <g id=\"arm-right\">\n        <path id=\"arm-right-shape\" fill=\"url(#armGradR)\"\n              d=\"M 196 92\n                 C 189 109, 189 130, 196 145\n                 C 204 155, 220 150, 224 135\n                 C 227 120, 226 104, 222 92 Z\"/>\n        <g id=\"hand-right\">\n          <path fill=\"url(#handGrad)\"\n                d=\"M 199 72\n                   C 203 63, 216 60, 223 67\n                   C 228 74, 227 88, 222 95\n                   C 216 101, 204 99, 200 92\n                   C 196 85, 196 78, 199 72 Z\"/>\n        </g>\n      </g>\n\n      <!-- Head -->\n      <g id=\"head\">\n        <ellipse id=\"head-shape\" cx=\"126\" cy=\"42\" rx=\"40\" ry=\"44\" fill=\"url(#headGrad)\"/>\n        <g id=\"eyes\">\n          <ellipse id=\"eye-left\" cx=\"107\" cy=\"22\" rx=\"4\" ry=\"5\" fill=\"#2b1c0a\"/>\n          <ellipse id=\"eye-right\" cx=\"146\" cy=\"22\" rx=\"4\" ry=\"5\" fill=\"#2b1c0a\"/>\n        </g>\n        <g id=\"mouth\">\n          <ellipse id=\"beak-lower\" cx=\"127\" cy=\"50\" rx=\"11\" ry=\"4.5\" fill=\"#d46c0a\"/>\n          <path id=\"beak-upper\" fill=\"url(#beakGrad)\"\n                d=\"M 111 44\n                   C 112 37, 120 35, 127 35\n                   C 134 35, 142 37, 143 44\n                   C 143 49, 135 51, 127 51\n                   C 119 51, 111 49, 111 44 Z\"/>\n        </g>\n      </g>\n    </g>\n  </g>\n</svg>\n</body>\n</html>",
+  "html_sha256": "28f4114f5ccf180f1e589f99af196d50035279f5b7cc0020dd8f7b182478a26e",
+  "static_gates": [],
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 81.1,
+    "tokens": {
+      "input": 1115,
+      "cached_input": 0,
+      "cache_write": 1113,
+      "output": 6432,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 0.13421300000000003,
+    "tools_used": [],
+    "cost_usd": 0.13421300000000003,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1113,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 6432,
+      "output_tokens_details": {
+        "thinking_tokens": 3894
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 1113
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 6432,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1113,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 1113,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T03:05:18Z",
+    "finished_at": "2026-11-10T03:06:39Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}
