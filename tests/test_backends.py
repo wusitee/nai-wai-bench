@@ -358,8 +358,8 @@ def test_claude_answer_keeps_turns_continued_past_the_output_limit(monkeypatch):
 
     events = [assistant({"type": "thinking", "thinking": ""}), assistant({"type": "text", "text": "<html><bo"}),
               {"type": "user", "message": {"content": [{"type": "text", "text": "Output token limit hit."}]}},
-              assistant({"type": "text", "text": "dy></body></html>"}),
-              {"type": "result", "result": "dy></body></html>", "num_turns": 2, "usage": {"output_tokens": 9}}]
+              assistant({"type": "text", "text": "dy></body>"}), assistant({"type": "text", "text": "</html>"}),
+              {"type": "result", "result": "</html>", "num_turns": 2, "usage": {"output_tokens": 9}}]
     monkeypatch.setattr("nwb.backends.subprocess.run", lambda command, **kwargs: SimpleNamespace(
         stdout="\n".join(json.dumps(e) for e in events), stderr="", returncode=0))
     monkeypatch.setattr("nwb.backends.claude.cli_version", lambda _: "test")

@@ -73,7 +73,8 @@ class ClaudeBackend:
             except subprocess.TimeoutExpired as e:
                 raise BackendError(f"claude timed out after {self.timeout}s") from e
         # A reply that reaches the output limit is continued in further turns after Claude Code's own user
-        # prompt, and `result` holds only the last turn's text; the answer is every turn's text in order.
+        # prompt. Each content block arrives as its own assistant event, and `result` holds only the last text
+        # block, so a continued answer is every turn's text in order.
         result, earlier, turn = None, [], []
         for line in proc.stdout.splitlines():
             if line.startswith("{"):
@@ -92,7 +93,10 @@ class ClaudeBackend:
         usage_by_model = result.get("modelUsage") or {}
         # Claude Code's cost estimate uses Anthropic prices, which do not apply to other providers' models.
         cost = None if custom else result.get("total_cost_usd")
-        return Response(text="".join(earlier) + result.get("result", ""), meta={
+        text = result.get("result", "")
+        if earlier:
+            text = "".join(earlier) + ("".join(turn) or text)
+        return Response(text=text, meta={
             "backend": "claude", "model": self.spec.model, "client": _client(),
             "seconds": round(time.monotonic() - started, 1), "turns": result.get("num_turns"),
             "tokens": tokens("claude", result.get("usage")),

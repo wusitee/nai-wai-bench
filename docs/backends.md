@@ -164,7 +164,7 @@ coding-agent system prompt is replaced with a neutral one. Images are sent as co
 
 A reply that reaches Claude Code's output-token limit is continued in further turns after Claude Code's own
 "Output token limit hit" user prompt, and fails after several continuations. The answer is the text of every
-turn in order (Claude Code's `result` holds only the last turn), and `meta.turns` records the turn count.
+turn in order (Claude Code's `result` holds only the last text block), and `meta.turns` records the turn count.
 For a model it does not recognize, Claude Code requests 32,000 output tokens per turn unless
 `CLAUDE_CODE_MAX_OUTPUT_TOKENS` is set (at most 128,000). The variable is inherited from the collector's
 environment and is not part of the settings identity, so keep it the same within a run.
