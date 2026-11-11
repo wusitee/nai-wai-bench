@@ -350,6 +350,24 @@ def test_cli_stages_attachments_and_records_usage(tmp_path, monkeypatch, backend
         assert resp.meta["resolved_model"] == "resolved" and resp.meta["cost_usd_reported"] == 0.25
 
 
+def test_claude_answer_keeps_turns_continued_past_the_output_limit(monkeypatch):
+    from types import SimpleNamespace
+
+    def assistant(*blocks):
+        return {"type": "assistant", "message": {"content": list(blocks)}}
+
+    events = [assistant({"type": "thinking", "thinking": ""}), assistant({"type": "text", "text": "<html><bo"}),
+              {"type": "user", "message": {"content": [{"type": "text", "text": "Output token limit hit."}]}},
+              assistant({"type": "text", "text": "dy></body>"}), assistant({"type": "text", "text": "</html>"}),
+              {"type": "result", "result": "</html>", "num_turns": 2, "usage": {"output_tokens": 9}}]
+    monkeypatch.setattr("nwb.backends.subprocess.run", lambda command, **kwargs: SimpleNamespace(
+        stdout="\n".join(json.dumps(e) for e in events), stderr="", returncode=0))
+    monkeypatch.setattr("nwb.backends.claude.cli_version", lambda _: "test")
+    spec = ModelSpec("m", "claude", "anthropic", "claude-model", frozenset({"text"}), {"effort": "high"})
+    resp = ClaudeBackend(spec).run(Request("hello"))
+    assert resp.text == "<html><body></body></html>" and resp.meta["turns"] == 2
+
+
 def test_batch_shims_refuse_arguments_cmd_exe_would_reinterpret(monkeypatch):
     monkeypatch.setattr("nwb.backends.shutil.which", lambda name: rf"C:\npm\{name}.cmd")
     monkeypatch.setattr("nwb.backends.subprocess.run", lambda *a, **k: pytest.fail("cmd.exe must not start"))
