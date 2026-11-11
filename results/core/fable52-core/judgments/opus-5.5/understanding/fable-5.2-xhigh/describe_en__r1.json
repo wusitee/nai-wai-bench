@@ -1,0 +1,111 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/fable-5.2-xhigh/describe_en__r1.json",
+  "target_sha256": "27bc202cbd0aeb2d584efbb839c01d90c24d3dd9b9414ca6dd77a95aee61747f",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "748ef10e980d1386",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 1,
+    "render": 2,
+    "background": 1,
+    "vibe": 1
+  },
+  "hallucinations": [],
+  "rationale": "The answer covers the eyes, the neckless pear-shaped body and the glossy CG render well, but it misses the hunched, doubled-over pose (it suggests a front-facing upper-body shot with the head tilted back). It only tentatively mentions hands on the belly, the pale belly patch and a plain background, and it says teeth are not visible. 'Exaggerated and mocking' only partly captures the absurd 抽象 meme vibe.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 2, \"mouth\": 1, \"body\": 2, \"belly_patch\": 1, \"render\": 2, \"background\": 1, \"vibe\": 1}, \"hallucinations\": [], \"rationale\": \"The answer covers the eyes, the neckless pear-shaped body and the glossy CG render well, but it misses the hunched, doubled-over pose (it suggests a front-facing upper-body shot with the head tilted back). It only tentatively mentions hands on the belly, the pale belly patch and a plain background, and it says teeth are not visible. 'Exaggerated and mocking' only partly captures the absurd 抽象 meme vibe.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 15.2,
+    "tokens": {
+      "input": 2380,
+      "cached_input": 0,
+      "cache_write": 2378,
+      "output": 1142,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0421581,
+    "tools_used": [],
+    "cost_usd": 0.0421581,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2378,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1142,
+      "output_tokens_details": {
+        "thinking_tokens": 902
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2378,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1142,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2378,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2378
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-11T01:44:45Z",
+    "finished_at": "2026-11-11T01:45:00Z",
+    "revision": "b0b3b59",
+    "nwb_version": "0.1.0"
+  }
+}
