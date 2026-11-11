@@ -1,0 +1,103 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "这是中文互联网上\"**我才是奶龙**\"梗里的那只黄色胖子。\n\n**角色来源**\n- 它并不是真正的奶龙（国产动画《奶龙》的主角，是一只有小角和尾巴的黄色小胖龙）。\n- 据我的记忆，这个形象出自海外 3D 动画频道 Nutshell Animations 的短片，是其中一个没有正式名字的黄色水滴状角色，这一点我不能完全确定。\n- 因为它通体黄色、肚皮浅色、身材圆滚，和奶龙很像，所以被网友叫作\"假奶龙\"\"盗版奶龙\"。\n\n**所属的梗**\n- 2024 年下半年，抖音、B 站上有人给这个角色的片段配上了\"我是奶龙？我才是奶龙！\"的魔性配音，随后爆火。\n- 之后它成了\"唐\"（抽象、呆傻）文化的代表表情包之一，并衍生出大量二创，比如\"奶龙大战贝利亚\"。\n- 这张双手抱胸、面带微笑的截图，常用来表达\"理直气壮\"\"我才是正主\"\"就这？\"之类的语气。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 455.7,
+    "tokens": {
+      "input": 1566,
+      "cached_input": 0,
+      "cache_write": 1562,
+      "output": 34019,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 0.6882060000000001,
+    "tools_used": [],
+    "cost_usd": 0.6882060000000001,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 1562,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 34019,
+      "output_tokens_details": {
+        "thinking_tokens": 33617
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 1562
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 2019,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 812,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 812,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T03:04:19Z",
+    "finished_at": "2026-11-10T03:11:55Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}

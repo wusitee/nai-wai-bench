@@ -1,0 +1,127 @@
+{
+  "html_sha256": "6daeb4ff9fabde686f9e3566f755345e2117158f60f093de4483c55c27045d7e",
+  "harness": "fee9bd636b661bc1",
+  "kind": "3d-s3",
+  "gates": [],
+  "errors": [],
+  "blocked": [],
+  "forbidden": [],
+  "elements": [],
+  "timing": {
+    "declarative": false,
+    "scripted": false
+  },
+  "frames": [
+    {
+      "file": "frame_00.webp",
+      "t": 0
+    },
+    {
+      "file": "frame_01.webp",
+      "t": 700
+    },
+    {
+      "file": "frame_02.webp",
+      "t": 1400
+    },
+    {
+      "file": "frame_03.webp",
+      "t": 2100
+    },
+    {
+      "file": "frame_04.webp",
+      "t": 2850
+    },
+    {
+      "file": "frame_05.webp",
+      "t": 3550
+    },
+    {
+      "file": "frame_06.webp",
+      "t": 4250
+    },
+    {
+      "file": "frame_07.webp",
+      "t": 4950
+    }
+  ],
+  "views": [
+    {
+      "file": "view_side.webp",
+      "view": "side",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_back.webp",
+      "view": "back",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_three_quarter.webp",
+      "view": "three_quarter",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_top.webp",
+      "view": "top",
+      "t": 0,
+      "hidden": []
+    }
+  ],
+  "scene": {
+    "characters": [
+      {
+        "name": "character-yellow-main",
+        "meshes": 62,
+        "width": 3.4499999999999997,
+        "height": 4.719608337272487,
+        "depth": 3.3843677654997126,
+        "ratio": 0.9809761639129603
+      },
+      {
+        "name": "character-yellow-far-a",
+        "meshes": 62,
+        "width": 0.2106315789473684,
+        "height": 0.2881445090124256,
+        "depth": 0.20662455831472215,
+        "ratio": 0.9809761639129738
+      },
+      {
+        "name": "character-yellow-far-b",
+        "meshes": 62,
+        "width": 0.21280295839646646,
+        "height": 0.24562221722546385,
+        "depth": 0.2722438343003315,
+        "ratio": 1.2793235411376314
+      },
+      {
+        "name": "character-yellow-far-c",
+        "meshes": 62,
+        "width": 0.2056761579882521,
+        "height": 0.21501873038226582,
+        "depth": 0.3033271684235004,
+        "ratio": 1.47478040911687
+      },
+      {
+        "name": "character-yellow-far-d",
+        "meshes": 62,
+        "width": 0.21284370754144544,
+        "height": 0.2110134184614355,
+        "depth": 0.2891765080827202,
+        "ratio": 1.3586331088806611
+      }
+    ],
+    "textures": 4
+  },
+  "mode": "render(t)",
+  "preview": "preview.webp",
+  "checks": {
+    "determinism_diff": 0.0,
+    "loop_diff": 0.0,
+    "motion_diff": 0.9956333333333334
+  },
+  "seconds": 18.8
+}

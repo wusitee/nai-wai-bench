@@ -1,0 +1,100 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "item": "describe_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Without looking at any images, describe the most iconic image of Laughing Nailong (大笑奶龙 / 奶蛙) from memory: its pose, expression, body shape, colors, rendering style, and background, in enough detail for an artist who has never seen it to draw it. Say where you are unsure.",
+  "images": [],
+  "answer": "I'm describing this from memory, and I'm confident about the character's general design but less so about the exact meme frame.\n\n**What I'm fairly sure of**\n\n- **Character:** Nailong (奶龙) is a chubby baby dragon from a Chinese 3D-animated children's series. It became a huge reaction-image meme around 2024.\n- **Body shape:** It is very round and pear-shaped, almost a blob, with a huge head that merges into the torso with no neck. It has stubby arms with tiny rounded fingers, short thick legs, a large belly and a short fat tail.\n- **Colours:** The body is a saturated egg-yolk yellow, the mouth interior is dark red-pink with a rounded pink tongue, and the eyes are black.\n- **Face:** The snout is short and broad with two small nostril dots, the mouth is very wide, and the cheeks are puffy.\n- **Expression:** The mouth is thrown wide open in a belly laugh and takes up much of the face. The eyes are squeezed into upward-curving arcs, and the head is tilted back slightly. The feel is exaggerated and mocking.\n- **Rendering style:** It is smooth, glossy-soft CGI, like a vinyl toy or plasticine, with soft lighting and no outlines or texture detail.\n\n**What I'm unsure of**\n\n- **Pose:** I picture a front-facing, upper-body shot with the arms out or on the belly. There may also be a pointing-and-laughing variant, and I can't say which is the canonical one.\n- **Belly:** I believe it is a paler cream colour, but it may be the same yellow as the body.\n- **Back and head:** I recall a row of small rounded bumps in a slightly darker yellow-orange down the back, and I'm not sure whether there are small nubs on the head.\n- **Teeth:** I don't remember any being visible.\n- **Background:** It is probably a blurred, brightly coloured cartoon interior from the show. It often circulates as a cut-out sticker on plain white, so a plain background would be a safe choice.\n- **\"奶蛙\":** I can't confirm this name. As far as I know, Nailong is a dragon, not a frog. The name could be a nickname or a separate green frog-like derivative meme, in which case the colours above would not apply.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 37.1,
+    "tokens": {
+      "input": 493,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2810,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 0.058172,
+    "tools_used": [],
+    "cost_usd": 0.058172,
+    "usage": {
+      "input_tokens": 493,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 2810,
+      "output_tokens_details": {
+        "thinking_tokens": 2057
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 493,
+          "output_tokens": 2810,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T02:59:51Z",
+    "finished_at": "2026-11-10T03:00:29Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}

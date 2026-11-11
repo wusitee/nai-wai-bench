@@ -1,0 +1,103 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "item": "recognize_facepalm",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "answer": "我认不出这个角色，也无法确定它出自哪个梗，不想随便编一个名字误导你。\n\n从画面上只能看出这些：\n\n- **外形**：一个 3D 渲染的黄色软糯团状生物，绿色圆眼睛、黑瞳孔，肚皮颜色偏浅。\n- **动作**：一只手扶着额头，嘴角微微上扬，像是在思考、无奈或\"让我想想\"。\n- **风格**：质感像黏土或软胶，接近近年流行的 3D 动画短片或 AI 生成的表情包。\n\n它的气质有点像 3D 版的\"思考\"emoji（🤔），也让人联想到《Gang Beasts》那类果冻人，但这只是风格上的相似，不能当作出处。它也可能是我知识范围之后才流行起来的新梗。\n\n如果你告诉我是在哪里看到它的（平台、配文或视频内容），我可以帮你进一步分析它的含义和用法。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 28.9,
+    "tokens": {
+      "input": 735,
+      "cached_input": 0,
+      "cache_write": 733,
+      "output": 1312,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 0.029913000000000002,
+    "tools_used": [],
+    "cost_usd": 0.029913000000000002,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 733,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1312,
+      "output_tokens_details": {
+        "thinking_tokens": 980
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 733
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1312,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 733,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 733,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T03:03:34Z",
+    "finished_at": "2026-11-10T03:04:03Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}

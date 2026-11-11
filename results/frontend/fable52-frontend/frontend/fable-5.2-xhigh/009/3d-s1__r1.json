@@ -1,0 +1,111 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "track": "frontend",
+  "corpus": "frontend-v1",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "task": "009",
+  "kind": "3d-s1",
+  "rep": 1,
+  "prompt_sha256": "bbc4f3ae2c2374e673e699336834788d5b4403bfac20f08ac22bb6bc992edffb",
+  "width": 240,
+  "height": 240,
+  "duration_ms": 4390,
+  "input_names": "neutral",
+  "images": [
+    "bench/frontend-v1/assets/009/frame_00.png"
+  ],
+  "prompt": "The attached image is a 240x240 px frame from an animated GIF. Rebuild the scene in 3D with three.js.\n\nTask (3D, static): write an HTML page that builds the scene from code and renders it so that the view from your reference camera reproduces the image as faithfully as you can: characters, poses, facial expressions, hands, props, background, and colors. A later step will animate your scene, so structure it in named groups. For this static step, render(t) may ignore t.\n\nthree.js contract:\n- The harness injects an import map for three.js r187. Import from 'three' and from 'three/addons/'; the only addons available are 'three/addons/controls/OrbitControls.js', 'three/addons/geometries/ConvexGeometry.js', 'three/addons/geometries/ParametricFunctions.js', 'three/addons/geometries/ParametricGeometry.js', 'three/addons/geometries/RoundedBoxGeometry.js', 'three/addons/math/ConvexHull.js', 'three/addons/utils/BufferGeometryUtils.js'. Use one <script type=\"module\">. Do not add an import map or load anything else.\n- Build all geometry in code: no model files, no loaders, no image textures. Procedural CanvasTexture or DataTexture textures up to 64x64 px are allowed.\n- Create the renderer with new THREE.WebGLRenderer({ preserveDrawingBuffer: true }), at pixel ratio 1, with a 240x240 canvas that fills the page.\n- Y is up. Put each character in its own THREE.Group with a descriptive name (for example 'character-left'), with nested named groups for parts that could move (head, eyes, mouth, arms, hands, ...). Characters must be solid 3D volumes: the harness also renders them from the side, the back, a three-quarter angle, and above, with cameras fitted to the characters.\n- Light the scene so the characters read from every side.\n- When the scene is ready, set window.nwb = { scene, renderer, cameras: { ref }, characters, render(t), ready: true }. cameras.ref is the camera for the main view. characters is an array of the character groups. render(t) poses the scene for time t in milliseconds and renders it synchronously with cameras.ref; the same t must always produce identical pixels, whatever was rendered before. Do not use renderer.setAnimationLoop: the harness calls render(t).\n\nRules (breaking any rule scores 0):\n- Reply with exactly one ```html code block containing one complete, self-contained HTML document. If you send several blocks, only the last one counts. Do not use tools; answer directly.\n- The page is rendered offline in a 240x240 px viewport at device pixel ratio 1. Fill exactly that area, starting at the top-left corner.\n- No raster images: no <img>, no <image>, no CSS url(...) except url(#id) references to your own SVG definitions, no data: URIs, no base64, no blob: URLs.\n- No external resources or network access: no external scripts, stylesheets, fonts, iframes, links, fetch, XMLHttpRequest, WebSocket, or any other URL.\n- Do not call setTimeout, setInterval, requestAnimationFrame, or requestIdleCallback. The harness controls time.\n- The file must be at most 256 KB and must run without uncaught exceptions or console errors.",
+  "text": ",mat){\n  const d=p1.clone().sub(p0);const len=d.length();\n  const m=new THREE.Mesh(new THREE.CapsuleGeometry(r,len,8,16),mat);\n  m.position.copy(p0).addScaledVector(d,0.5);\n  m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),d.normalize());\n  return m;\n}\nconst ZERO=new THREE.Vector3(0,0,0);\n\n// ---------- character ----------\nconst frog=new THREE.Group();frog.name='character-frog';scene.add(frog);\n\n// torso\nconst torso=new THREE.Group();torso.name='torso';frog.add(torso);\nconst torsoMesh=new THREE.Mesh(surf(-4.1,0.32,110,96,1,null,skinCol),skinVMat);\ntorsoMesh.name='torso-skin';torso.add(torsoMesh);\n\n// tank top (masked shell over the torso)\nconst NT=0.34,FB=2.27,BB=1.3,NW=1.65;\nfunction tankMask(th,y,R){\n  if(y>NT+1e-4)return false;\n  const co=Math.cos(th),x=Math.abs(R*Math.sin(th));\n  const t=(NT-y)/(co>=0?FB:BB);\n  if(t<1&&x<NW*Math.sqrt(1-t*t))return false;\n  const a=Math.acos(Math.max(-1,Math.min(1,co)))*180/Math.PI;\n  const da=(a-92)/16,dy=(y+0.5)/0.6;\n  if(da*da+dy*dy<1)return false;\n  return true;\n}\nconst tank=new THREE.Group();tank.name='tank-top';torso.add(tank);\nconst tankMesh=new THREE.Mesh(surf(-3.2,NT,150,288,1.015,tankMask,null),tankMat);\ntankMesh.name='tank-cloth';tank.add(tankMesh);\n\n// trims\nconst TS=1.03;\nfunction sp(x,y,sd){\n  const R=prof(y)*TS;const xx=Math.max(-R,Math.min(R,x));\n  return new THREE.Vector3(xx,y,sd*SZ*Math.sqrt(Math.max(0,R*R-xx*xx)));\n}\nfunction tube(pts,rad,segs,closed){\n  const cv=new THREE.CatmullRomCurve3(pts,closed,'centripetal');\n  return new THREE.Mesh(new THREE.TubeGeometry(cv,segs,rad,6,closed),trimMat);\n}\n{\n  const np=[];\n  for(let d=-90;d<=90;d+=5){const f=d*Math.PI/180;np.push(sp(NW*Math.sin(f),NT-FB*Math.cos(f),1));}\n  np.push(sp(9,NT,1));\n  for(let d=90;d>=-90;d-=5){const f=d*Math.PI/180;np.push(sp(NW*Math.sin(f),NT-BB*Math.cos(f),-1));}\n  np.push(sp(-9,NT,1));\n  const neck=tube(np,0.055,260,true);neck.name='trim-neck';tank.add(neck);\n  for(const sg of [-1,1]){\n    const ap=[];\n    for(let a=0;a<360;a+=15){\n      const ar=a*Math.PI/180;\n      const th=(92+16*Math.cos(ar))*Math.PI/180,y=-0.5+0.6*Math.sin(ar);\n      const R=prof(y)*TS;\n      ap.push(new THREE.Vector3(sg*R*Math.sin(th),y,SZ*R*Math.cos(th)));\n    }\n    const at=tube(ap,0.05,96,true);at.name='trim-arm-'+(sg>0?'left':'right');tank.add(at);\n  }\n  const hp=[];const HR=prof(-3.2)*TS;\n  for(let a=0;a<360;a+=10){const ar=a*Math.PI/180;hp.push(new THREE.Vector3(HR*Math.sin(ar),-3.2,SZ*HR*Math.cos(ar)));}\n  const hem=tube(hp,0.06,120,true);hem.name='trim-hem';tank.add(hem);\n}\n\n// head (pivot at neck seam)\nconst HY=0.3;\nconst head=new THREE.Group();head.name='head';head.position.set(0,HY,0);frog.add(head);\nconst headIn=new THREE.Group();headIn.name='head-inner';headIn.position.set(0,-HY,0);head.add(headIn);\nconst headMesh=new THREE.Mesh(surf(HY,2.3,70,96,1,null,skinCol),skinVMat);\nheadMesh.name='head-skin';headIn.add(headMesh);\n\n// eyes\nfunction makeEye(sg,name){\n  const e=new THREE.Group();e.name=name;\n  const y=1.22,x=0.87*sg,R=prof(y);\n  const z=SZ*Math.sqrt(Math.max(0,R*R-x*x));\n  e.position.set(x*0.985,y,z-0.03);\n  e.rotation.order='YXZ';e.rotation.set(-0.12,0.35*sg,0);\n  const lid=sph(0.33,lidMat);lid.scale.set(1,1,0.5);lid.name=name+'-lid';e.add(lid);\n  const ball=sph(0.265,irisMat);ball.scale.set(1,1,0.72);ball.position.z=0.08;ball.name=name+'-ball';e.add(ball);\n  const pg=new THREE.Group();pg.name=name+'-pupil';pg.position.z=0.255;e.add(pg);\n  const pu=sph(0.11,pupilMat);pu.scale.set(1.2,0.82,0.3);pg.add(pu);\n  const hl=sph(0.03,whiteMat);hl.position.set(-0.08,0.09,0.245);hl.name=name+'-glint';e.add(hl);\n  return e;\n}\nconst eyes=new THREE.Group();eyes.name='eyes';headIn.add(eyes);\neyes.add(makeEye(1,'eye-left'));\neyes.add(makeEye(-1,'eye-right'));\n\n// mouth\nconst mouth=new THREE.Group();mouth.name='mouth';headIn.add(mouth);\n{\n  const mp=[];\n  for(let k=-12;k<=12;k++){\n    const u=k/12,x=0.63*u,au=Math.abs(u);\n    const y=0.525-0.085*au*au*au;\n    const R=prof(y)*1.003;\n    mp.push(new THREE.Vector3(x,y,SZ*Math.sqrt(Math.max(0,R*R-x*x))));\n  }\n  const cv=new THREE.CatmullRomCurve3(mp,false,'centripetal');\n  const mm=new THREE.Mesh(new THREE.TubeGeometry(cv,48,0.024,6,false),mouthMat);\n  mm.name='mouth-line';mouth.add(mm);\n  for(const p of [mp[0],mp[mp.length-1]]){const c=sph(0.03,mouthMat);c.position.copy(p);mouth.add(c);}\n}\n\n// arms\nfunction makeArm(sg,sd){\n  const a=new THREE.Group();a.name='arm-'+sd;a.position.set(sg*2.1,-0.45,0);\n  a.add(sph(0.56,skinMat));\n  const el=new THREE.Vector3(sg*0.17,-1.4,0.05);\n  a.add(cap(ZERO,el,0.5,skinMat));\n  const f=new THREE.Group();f.name='forearm-'+sd;f.position.copy(el);a.add(f);\n  const w=new THREE.Vector3(-sg*0.05,-1.2,0.3);\n  f.add(sph(0.47,skinMat));\n  f.add(cap(ZERO,w,0.42,skinMat));\n  const h=new THREE.Group();h.name='hand-'+sd;h.position.copy(w);f.add(h);\n  const hm=sph(0.46,skinMat);hm.scale.set(0.9,1.1,0.8);hm.position.y=-0.25;h.add(hm);\n  return a;\n}\nfrog.add(makeArm(1,'left'));\nfrog.add(makeArm(-1,'right'));\n\n// legs\nfunction makeLeg(sg,sd){\n  const l=new THREE.Group();l.name='leg-'+sd;l.position.set(sg*0.95,-3.5,0);\n  l.add(cap(ZERO,new THREE.Vector3(sg*0.05,-1.2,0.05),0.62,skinMat));\n  const ft=new THREE.Group();ft.name='foot-'+sd;ft.position.set(sg*0.05,-1.6,0.35);l.add(ft);\n  const fm=sph(0.6,skinMat);fm.scale.set(1,0.5,1.5);ft.add(fm);\n  return l;\n}\nfrog.add(makeLeg(1,'left'));\nfrog.add(makeLeg(-1,'right'));\n\n// ---------- harness hook ----------\nfunction render(t){\n  renderer.render(scene,camera);\n}\nrender(0);\nwindow.nwb={scene,renderer,cameras:{ref:camera},characters:[frog],render,ready:true};\n</script>\n</body></html>\n```",
+  "html": null,
+  "html_sha256": null,
+  "static_gates": [
+    "no ```html block"
+  ],
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 1102.9,
+    "tokens": {
+      "input": 38597,
+      "cached_input": 0,
+      "cache_write": 38587,
+      "output": 100546,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 2.203895,
+    "tools_used": [],
+    "cost_usd": 2.203895,
+    "usage": {
+      "input_tokens": 10,
+      "cache_creation_input_tokens": 38587,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 100546,
+      "output_tokens_details": {
+        "thinking_tokens": 94768
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 38587
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 4,
+          "output_tokens": 4546,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 33742,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 33742,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T03:56:50Z",
+    "finished_at": "2026-11-10T04:15:13Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}

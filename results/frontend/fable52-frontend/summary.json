@@ -1,0 +1,1123 @@
+{
+  "corpus": "frontend-v1",
+  "experimental": true,
+  "index_included": false,
+  "review": "human",
+  "rows": [
+    {
+      "model": "fable-5.2-xhigh",
+      "kind": "2d-s1",
+      "samples": 10,
+      "passed": 9,
+      "unrendered": 0
+    },
+    {
+      "model": "fable-5.2-xhigh",
+      "kind": "2d-s2",
+      "samples": 10,
+      "passed": 8,
+      "unrendered": 0
+    },
+    {
+      "model": "fable-5.2-xhigh",
+      "kind": "2d-s3",
+      "samples": 10,
+      "passed": 10,
+      "unrendered": 0
+    },
+    {
+      "model": "fable-5.2-xhigh",
+      "kind": "3d-s1",
+      "samples": 10,
+      "passed": 6,
+      "unrendered": 0
+    },
+    {
+      "model": "fable-5.2-xhigh",
+      "kind": "3d-s2",
+      "samples": 10,
+      "passed": 8,
+      "unrendered": 0
+    },
+    {
+      "model": "fable-5.2-xhigh",
+      "kind": "3d-s3",
+      "samples": 10,
+      "passed": 9,
+      "unrendered": 0
+    },
+    {
+      "model": "fable-5.2-xhigh",
+      "kind": "2d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "fable-5.2-xhigh",
+      "kind": "2d-mem2",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "fable-5.2-xhigh",
+      "kind": "3d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "fable-5.2-xhigh",
+      "kind": "3d-mem2",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    }
+  ],
+  "samples": [
+    {
+      "sample": "frontend/fable-5.2-xhigh/001/2d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "001",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/001/2d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "001",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/001/2d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "001",
+      "kind": "2d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/001/3d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "001",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/001/3d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "001",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/001/3d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "001",
+      "kind": "3d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/002/2d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "002",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/002/2d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "002",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/002/2d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "002",
+      "kind": "2d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/002/3d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "002",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "no ```html block",
+        "no html to render"
+      ]
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/002/3d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "002",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/002/3d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "002",
+      "kind": "3d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/003/2d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "003",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/003/2d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "003",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/003/2d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "003",
+      "kind": "2d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/003/3d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "003",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/003/3d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "003",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/003/3d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "003",
+      "kind": "3d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/004/2d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "004",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/004/2d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "004",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/004/2d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "004",
+      "kind": "2d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/004/3d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "004",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/004/3d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "004",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/004/3d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "004",
+      "kind": "3d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/005/2d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "005",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/005/2d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "005",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/005/2d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "005",
+      "kind": "2d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/005/3d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "005",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/005/3d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "005",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "no ```html block",
+        "no html to render"
+      ]
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/005/3d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "005",
+      "kind": "3d-s3",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "no module script",
+        "window.nwb.ready never became true"
+      ]
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/006/2d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "006",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "no ```html block",
+        "no html to render"
+      ]
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/006/2d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "006",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/006/2d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "006",
+      "kind": "2d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/006/3d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "006",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "no ```html block",
+        "no html to render"
+      ]
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/006/3d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "006",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/006/3d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "006",
+      "kind": "3d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/007/2d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "007",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/007/2d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "007",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/007/2d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "007",
+      "kind": "2d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/007/3d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "007",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/007/3d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "007",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/007/3d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "007",
+      "kind": "3d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/008/2d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "008",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/008/2d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "008",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/008/2d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "008",
+      "kind": "2d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/008/3d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "008",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "no ```html block",
+        "no html to render"
+      ]
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/008/3d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "008",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/008/3d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "008",
+      "kind": "3d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/009/2d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "009",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/009/2d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "009",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "no ```html block",
+        "no html to render"
+      ]
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/009/2d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "009",
+      "kind": "2d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/009/3d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "009",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "no ```html block",
+        "no html to render"
+      ]
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/009/3d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "009",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/009/3d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "009",
+      "kind": "3d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/010/2d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "010",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/010/2d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "010",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "no ```html block",
+        "no html to render"
+      ]
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/010/2d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "010",
+      "kind": "2d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/010/3d-s1__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "010",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/010/3d-s2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "010",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "character-yellow-far-a has fewer than two visible meshes",
+        "character-yellow-far-b has fewer than two visible meshes",
+        "character-yellow-far-c has fewer than two visible meshes",
+        "character-yellow-far-d has fewer than two visible meshes"
+      ]
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/010/3d-s3__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "010",
+      "kind": "3d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/mem/2d-mem2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "mem",
+      "kind": "2d-mem2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/mem/2d-mem__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "mem",
+      "kind": "2d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/mem/3d-mem2__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "mem",
+      "kind": "3d-mem2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/fable-5.2-xhigh/mem/3d-mem__r1.json",
+      "model": "fable-5.2-xhigh",
+      "task": "mem",
+      "kind": "3d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    }
+  ],
+  "run": "fable52-frontend",
+  "harness": "fee9bd636b661bc1",
+  "labels": {
+    "fable-5.2-xhigh": "Claude Fable 5.2 (xhigh)"
+  },
+  "tasks": {
+    "001": {
+      "title": "Two characters at a school desk, one rubbing the other's belly",
+      "width": 240,
+      "height": 242,
+      "duration_ms": 1500,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.webp"
+        },
+        {
+          "t": 200,
+          "file": "frame_01.webp"
+        },
+        {
+          "t": 400,
+          "file": "frame_02.webp"
+        },
+        {
+          "t": 600,
+          "file": "frame_03.webp"
+        },
+        {
+          "t": 800,
+          "file": "frame_04.webp"
+        },
+        {
+          "t": 1000,
+          "file": "frame_05.webp"
+        },
+        {
+          "t": 1200,
+          "file": "frame_06.webp"
+        },
+        {
+          "t": 1400,
+          "file": "frame_07.webp"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "002": {
+      "title": "Character crossing a sunlit living room in a thinking pose, then saluting",
+      "width": 240,
+      "height": 240,
+      "duration_ms": 5990,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.webp"
+        },
+        {
+          "t": 870,
+          "file": "frame_01.webp"
+        },
+        {
+          "t": 1670,
+          "file": "frame_02.webp"
+        },
+        {
+          "t": 2530,
+          "file": "frame_03.webp"
+        },
+        {
+          "t": 3400,
+          "file": "frame_04.webp"
+        },
+        {
+          "t": 4270,
+          "file": "frame_05.webp"
+        },
+        {
+          "t": 5070,
+          "file": "frame_06.webp"
+        },
+        {
+          "t": 5930,
+          "file": "frame_07.webp"
+        }
+      ],
+      "gif": "reference.gif"
+    },
+    "003": {
+      "title": "Front-facing character standing still and jiggling",
+      "width": 304,
+      "height": 300,
+      "duration_ms": 740,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.webp"
+        },
+        {
+          "t": 100,
+          "file": "frame_01.webp"
+        },
+        {
+          "t": 200,
+          "file": "frame_02.webp"
+        },
+        {
+          "t": 300,
+          "file": "frame_03.webp"
+        },
+        {
+          "t": 420,
+          "file": "frame_04.webp"
+        },
+        {
+          "t": 520,
+          "file": "frame_05.webp"
+        },
+        {
+          "t": 620,
+          "file": "frame_06.webp"
+        },
+        {
+          "t": 720,
+          "file": "frame_07.webp"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "004": {
+      "title": "Front-facing character pumping both fists",
+      "width": 244,
+      "height": 240,
+      "duration_ms": 1200,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.webp"
+        },
+        {
+          "t": 160,
+          "file": "frame_01.webp"
+        },
+        {
+          "t": 340,
+          "file": "frame_02.webp"
+        },
+        {
+          "t": 500,
+          "file": "frame_03.webp"
+        },
+        {
+          "t": 680,
+          "file": "frame_04.webp"
+        },
+        {
+          "t": 840,
+          "file": "frame_05.webp"
+        },
+        {
+          "t": 1020,
+          "file": "frame_06.webp"
+        },
+        {
+          "t": 1180,
+          "file": "frame_07.webp"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "005": {
+      "title": "Close-up character swaying with shy smiles",
+      "width": 240,
+      "height": 240,
+      "duration_ms": 3670,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.webp"
+        },
+        {
+          "t": 530,
+          "file": "frame_01.webp"
+        },
+        {
+          "t": 1000,
+          "file": "frame_02.webp"
+        },
+        {
+          "t": 1530,
+          "file": "frame_03.webp"
+        },
+        {
+          "t": 2070,
+          "file": "frame_04.webp"
+        },
+        {
+          "t": 2600,
+          "file": "frame_05.webp"
+        },
+        {
+          "t": 3070,
+          "file": "frame_06.webp"
+        },
+        {
+          "t": 3600,
+          "file": "frame_07.webp"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "006": {
+      "title": "Green character rubbing the belly of a pink character lying on a bed",
+      "width": 240,
+      "height": 246,
+      "duration_ms": 3200,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.webp"
+        },
+        {
+          "t": 400,
+          "file": "frame_01.webp"
+        },
+        {
+          "t": 900,
+          "file": "frame_02.webp"
+        },
+        {
+          "t": 1300,
+          "file": "frame_03.webp"
+        },
+        {
+          "t": 1800,
+          "file": "frame_04.webp"
+        },
+        {
+          "t": 2200,
+          "file": "frame_05.webp"
+        },
+        {
+          "t": 2700,
+          "file": "frame_06.webp"
+        },
+        {
+          "t": 3100,
+          "file": "frame_07.webp"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "007": {
+      "title": "Full-body character dancing and turning sideways",
+      "width": 240,
+      "height": 294,
+      "duration_ms": 5540,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.png"
+        },
+        {
+          "t": 800,
+          "file": "frame_01.png"
+        },
+        {
+          "t": 1530,
+          "file": "frame_02.png"
+        },
+        {
+          "t": 2330,
+          "file": "frame_03.png"
+        },
+        {
+          "t": 3130,
+          "file": "frame_04.png"
+        },
+        {
+          "t": 3930,
+          "file": "frame_05.png"
+        },
+        {
+          "t": 4670,
+          "file": "frame_06.png"
+        },
+        {
+          "t": 5470,
+          "file": "frame_07.png"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "008": {
+      "title": "Full-body character laughing and bouncing between a crouch and standing",
+      "width": 216,
+      "height": 216,
+      "duration_ms": 1220,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.webp"
+        },
+        {
+          "t": 180,
+          "file": "frame_01.webp"
+        },
+        {
+          "t": 340,
+          "file": "frame_02.webp"
+        },
+        {
+          "t": 520,
+          "file": "frame_03.webp"
+        },
+        {
+          "t": 680,
+          "file": "frame_04.webp"
+        },
+        {
+          "t": 860,
+          "file": "frame_05.webp"
+        },
+        {
+          "t": 1020,
+          "file": "frame_06.webp"
+        },
+        {
+          "t": 1200,
+          "file": "frame_07.webp"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "009": {
+      "title": "Character in a tank top holding in laughter, then laughing",
+      "width": 240,
+      "height": 240,
+      "duration_ms": 4390,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.webp"
+        },
+        {
+          "t": 600,
+          "file": "frame_01.webp"
+        },
+        {
+          "t": 1270,
+          "file": "frame_02.webp"
+        },
+        {
+          "t": 1870,
+          "file": "frame_03.webp"
+        },
+        {
+          "t": 2470,
+          "file": "frame_04.webp"
+        },
+        {
+          "t": 3070,
+          "file": "frame_05.webp"
+        },
+        {
+          "t": 3730,
+          "file": "frame_06.webp"
+        },
+        {
+          "t": 4330,
+          "file": "frame_07.webp"
+        }
+      ],
+      "gif": "reference.gif"
+    },
+    "010": {
+      "title": "Laughing characters falling through the sky over mountains",
+      "width": 300,
+      "height": 300,
+      "duration_ms": 5000,
+      "eligibility": "showcase",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.webp"
+        },
+        {
+          "t": 700,
+          "file": "frame_01.webp"
+        },
+        {
+          "t": 1400,
+          "file": "frame_02.webp"
+        },
+        {
+          "t": 2100,
+          "file": "frame_03.webp"
+        },
+        {
+          "t": 2850,
+          "file": "frame_04.webp"
+        },
+        {
+          "t": 3550,
+          "file": "frame_05.webp"
+        },
+        {
+          "t": 4250,
+          "file": "frame_06.webp"
+        },
+        {
+          "t": 4950,
+          "file": "frame_07.webp"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "mem": {
+      "title": "大笑奶龙 from memory",
+      "width": 240,
+      "height": 240,
+      "duration_ms": 0,
+      "eligibility": "memory",
+      "frames": []
+    }
+  }
+}

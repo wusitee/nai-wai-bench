@@ -1,0 +1,100 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "item": "write_prompt.giraffe",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a giraffe version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A 3D-rendered cartoon character in the style of a glossy CGI children's animated series: a chubby, baby-like giraffe with a soft, rounded, pear-shaped body, smooth bright butter-yellow skin like matte vinyl, a pale cream round belly, stubby little arms and short stumpy legs. It has an oversized round head with puffy cheeks, a thick, slightly elongated neck, a few soft caramel-brown giraffe patches on its back, neck and the top of its head, two small rounded knobby horns, small floppy ears, and a short tail with a dark tuft. The giraffe stands upright like a toddler and is bursting into uproarious, mocking laughter: head thrown back, mouth stretched enormously wide open showing a smooth pink tongue and dark red mouth interior, eyes squeezed shut into thick upward-curving black arcs, tiny tears of laughter at the corners of its eyes, one stubby hand pointing straight at the viewer and the other clutching its jiggling belly. Close-up, front-facing, slightly low-angle shot, with the character filling most of a square frame. Plain, softly blurred pastel background, bright, even, cheerful lighting, soft shadows and saturated colors. It should look like a screenshot from a kids' cartoon used as an internet reaction image, exaggerated and comically smug. No text, no captions, no watermark.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 21.4,
+    "tokens": {
+      "input": 478,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1422,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 0.030352,
+    "tools_used": [],
+    "cost_usd": 0.030352,
+    "usage": {
+      "input_tokens": 478,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1422,
+      "output_tokens_details": {
+        "thinking_tokens": 961
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 478,
+          "output_tokens": 1422,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T02:59:44Z",
+    "finished_at": "2026-11-10T03:00:05Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}

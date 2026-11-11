@@ -1,0 +1,107 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/fable-5.2-xhigh/recognize_official__r1.json",
+  "target_sha256": "9ddf458b5eceea6779d8950492391fc31ae937958785435d88b351e447fc4847",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "102b3439296bf3b9",
+  "judge_images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "scores": {
+    "base_character": 2,
+    "official_art": 1
+  },
+  "hallucinations": [],
+  "rationale": "The model correctly identifies the character as 奶龙, a round yellow cartoon dinosaur from a Chinese animation, and its visual description fits the image. It never claims the image is the 大笑奶龙/奶蛙 mutation, but it also never mentions that meme or separates the official artwork from it, so official_art gets partial credit. The production company attribution is hedged as uncertain, so it is not counted as a hallucination.",
+  "raw": "```json\n{\"scores\": {\"base_character\": 2, \"official_art\": 1}, \"hallucinations\": [], \"rationale\": \"The model correctly identifies the character as 奶龙, a round yellow cartoon dinosaur from a Chinese animation, and its visual description fits the image. It never claims the image is the 大笑奶龙/奶蛙 mutation, but it also never mentions that meme or separates the official artwork from it, so official_art gets partial credit. The production company attribution is hedged as uncertain, so it is not counted as a hallucination.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 10.2,
+    "tokens": {
+      "input": 2448,
+      "cached_input": 0,
+      "cache_write": 2446,
+      "output": 599,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0318158,
+    "tools_used": [],
+    "cost_usd": 0.0318158,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2446,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 599,
+      "output_tokens_details": {
+        "thinking_tokens": 415
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2446,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 599,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2446,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2446
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-11T01:45:53Z",
+    "finished_at": "2026-11-11T01:46:03Z",
+    "revision": "b0b3b59",
+    "nwb_version": "0.1.0"
+  }
+}
