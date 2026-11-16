@@ -1,0 +1,84 @@
+{
+  "settings_id": "a5e02c034d814b84",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-xhigh",
+  "vendor": "alibaba",
+  "item": "recognize_official",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "这是**奶龙**——一只圆滚滚的黄色小胖龙，绿眼睛、奶油色肚皮、小爪子，图里这个举双手、张嘴\"哇\"的姿势是它经典表情包之一。\n\n它出自国产3D动画短片《奶龙》，讲的是这只贪吃、憨憨的小龙和男孩\"小七\"的日常搞笑故事。后来奶龙在抖音、B站、微信等平台爆火，形成了\"奶龙表情包/奶龙梗\"这一网络迷因：网友大量截取或二创它的呆萌动作配上\"好耶\"\"哇哦\"等文字，还有\"我是奶龙\"的配音、专属BGM等衍生玩法，常被用来卖萌、装傻或表达惊讶和欢呼，属于近年中文互联网抽象/可爱系梗文化的代表之一。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 30.5,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 341,
+      "output": 1228,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1063,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 341,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1228,
+      "reasoning": 1063
+    },
+    "session_config": {
+      "thinkingLevel": "xhigh"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "xhigh"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:41:05Z",
+    "finished_at": "2026-11-16T17:41:35Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

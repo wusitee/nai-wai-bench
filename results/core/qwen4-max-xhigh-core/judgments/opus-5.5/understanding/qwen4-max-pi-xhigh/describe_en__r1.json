@@ -1,0 +1,114 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi-xhigh/describe_en__r1.json",
+  "target_sha256": "a41ff90c3bbfb188532bc16038c8af453630cbccc5d09d8564967bee087df709",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "51d72d3c64918549",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "qwen4-max-pi-xhigh",
+  "scores": {
+    "pose": 1,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 1,
+    "vibe": 2
+  },
+  "hallucinations": [
+    "States with moderate confidence that the head is huge, as big as or bigger than the torso, with a separate toddler-proportioned head. The notes describe a bulky pear/bean-shaped body where the head merges into the torso with no distinct neck."
+  ],
+  "rationale": "The answer captures the squeezed-shut eyes, the huge dark gaping mouth, the pale belly, the glossy 3D render and the absurd vibe. It misses the hunched, doubled-over pose with hands on belly (its main guess is arms flung out), gets the body proportions partly wrong, and only vaguely guesses at the plain background.",
+  "raw": "{\"scores\": {\"pose\": 1, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 2, \"body\": 1, \"belly_patch\": 2, \"render\": 2, \"background\": 1, \"vibe\": 2}, \"hallucinations\": [\"States with moderate confidence that the head is huge, as big as or bigger than the torso, with a separate toddler-proportioned head. The notes describe a bulky pear/bean-shaped body where the head merges into the torso with no distinct neck.\"], \"rationale\": \"The answer captures the squeezed-shut eyes, the huge dark gaping mouth, the pale belly, the glossy 3D render and the absurd vibe. It misses the hunched, doubled-over pose with hands on belly (its main guess is arms flung out), gets the body proportions partly wrong, and only vaguely guesses at the plain background.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 15.7,
+    "turns": 1,
+    "tokens": {
+      "input": 2591,
+      "cached_input": 0,
+      "cache_write": 2589,
+      "output": 1226,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.04524,
+    "tools_used": [],
+    "cost_usd": 0.04524,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2589,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1226,
+      "output_tokens_details": {
+        "thinking_tokens": 939
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2589,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1226,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2589,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2589
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:44:58Z",
+    "finished_at": "2026-11-16T17:45:14Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

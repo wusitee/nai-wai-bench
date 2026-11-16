@@ -1,0 +1,84 @@
+{
+  "settings_id": "22124b548d3b109d",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-low",
+  "vendor": "alibaba",
+  "item": "recognize_facepalm",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "answer": "我只能凭印象推测，没法确定它的准确出处，所以先说清楚我知道和不知道的部分：\n\n**画面本身**：一个 3D 渲染的黄色、软胖无定形的“团子”角色，绿色眼球+大黑瞳、细嘴微笑，一只（颜色偏褐的）手扶在额侧，另一只手抱在身前——这个姿势就是经典的“🤔 思考 / 我懂了 / 无语扶额”式表情，常被配上“让我想想”“这就有点意思了”“你在说什么”之类的文字。\n\n**关于身份**：这种“黄色软体生物 + 大眼 + 贱笑”的造型属于近几年很火的一类 3D 抽象小生物表情包（网上常被泛称为 blorbo / glorp 一类“外星团子”，也和“抽象/brainrot”风格的 3D 梗图同源）。它有点让人联想到中文圈的黄色胖角色（比如奶龙那类），但奶龙是有角、有尾巴的小恐龙造型，和这张不完全对得上，所以我不愿意硬认。\n\n**结论**：我没法负责地说出它的具体角色名和所属梗。如果你能补充一点线索——比如你是在哪看到的（抖音/B站/推特/Telegram  sticker 包）、配套文字是什么、有没有同系列的其他表情——我可以帮你更有把握地判断，而不是瞎猜一个名字给你。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 52.7,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 326,
+      "output": 1842,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1547,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 326,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1842,
+      "reasoning": 1547
+    },
+    "session_config": {
+      "thinkingLevel": "low"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "low",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "low"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:43:22Z",
+    "finished_at": "2026-11-16T16:44:14Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

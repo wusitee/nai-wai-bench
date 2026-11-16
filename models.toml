@@ -371,6 +371,63 @@ env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
 price = { input = 1.413, cached_input = 0.071, cache_write = 1.767, output = 4.24, unit = "USD/1M tokens", source = "https://www.alibabacloud.com/help/en/model-studio/model-pricing (qwen4-max, China (Beijing))", as_of = "2026-11-16" }
 can = ["text", "vision"]
 
+# The same model at every other reasoning effort the endpoint accepts, saved as archived runs outside the release
+# (qwen4-max-{off,minimal,low,medium,xhigh}-{core,naihub}). Per Qwen's model notes minimal runs as low and medium as high.
+[models."qwen4-max-pi-off"]
+timeout = 1800
+label = "Qwen4-Max (pi, Token Plan)"
+backend = "pi"
+vendor = "alibaba"
+model = "qwen-token-plan-cn-individual/qwen4-max"
+effort = "off"
+env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
+price = { input = 1.413, cached_input = 0.071, cache_write = 1.767, output = 4.24, unit = "USD/1M tokens", source = "https://www.alibabacloud.com/help/en/model-studio/model-pricing (qwen4-max, China (Beijing))", as_of = "2026-11-16" }
+can = ["text", "vision"]
+
+[models."qwen4-max-pi-minimal"]
+timeout = 1800
+label = "Qwen4-Max (pi, Token Plan)"
+backend = "pi"
+vendor = "alibaba"
+model = "qwen-token-plan-cn-individual/qwen4-max"
+effort = "minimal"
+env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
+price = { input = 1.413, cached_input = 0.071, cache_write = 1.767, output = 4.24, unit = "USD/1M tokens", source = "https://www.alibabacloud.com/help/en/model-studio/model-pricing (qwen4-max, China (Beijing))", as_of = "2026-11-16" }
+can = ["text", "vision"]
+
+[models."qwen4-max-pi-low"]
+timeout = 1800
+label = "Qwen4-Max (pi, Token Plan)"
+backend = "pi"
+vendor = "alibaba"
+model = "qwen-token-plan-cn-individual/qwen4-max"
+effort = "low"
+env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
+price = { input = 1.413, cached_input = 0.071, cache_write = 1.767, output = 4.24, unit = "USD/1M tokens", source = "https://www.alibabacloud.com/help/en/model-studio/model-pricing (qwen4-max, China (Beijing))", as_of = "2026-11-16" }
+can = ["text", "vision"]
+
+[models."qwen4-max-pi-medium"]
+timeout = 1800
+label = "Qwen4-Max (pi, Token Plan)"
+backend = "pi"
+vendor = "alibaba"
+model = "qwen-token-plan-cn-individual/qwen4-max"
+effort = "medium"
+env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
+price = { input = 1.413, cached_input = 0.071, cache_write = 1.767, output = 4.24, unit = "USD/1M tokens", source = "https://www.alibabacloud.com/help/en/model-studio/model-pricing (qwen4-max, China (Beijing))", as_of = "2026-11-16" }
+can = ["text", "vision"]
+
+[models."qwen4-max-pi-xhigh"]
+timeout = 1800
+label = "Qwen4-Max (pi, Token Plan)"
+backend = "pi"
+vendor = "alibaba"
+model = "qwen-token-plan-cn-individual/qwen4-max"
+effort = "xhigh"
+env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
+price = { input = 1.413, cached_input = 0.071, cache_write = 1.767, output = 4.24, unit = "USD/1M tokens", source = "https://www.alibabacloud.com/help/en/model-studio/model-pricing (qwen4-max, China (Beijing))", as_of = "2026-11-16" }
+can = ["text", "vision"]
+
 # The same model at the benchmark's standard effort, for comparison with the max row and with egg-alpha.
 [models."qwen4-max-pi-high"]
 timeout = 1800

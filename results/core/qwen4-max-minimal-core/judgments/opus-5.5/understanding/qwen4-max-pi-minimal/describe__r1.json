@@ -1,0 +1,115 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi-minimal/describe__r1.json",
+  "target_sha256": "6ed473153e48e539cef7940cc73b75c37bb67b834d65f5c26b4fdad519d2bef5",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "51f18721e51e2e32",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "qwen4-max-pi-minimal",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 1,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 0,
+    "vibe": 1
+  },
+  "hallucinations": [
+    "Confidently states the head is about as big as or bigger than the body, which contradicts the bulky pear/bean-shaped body whose head merges into the torso",
+    "Confidently describes the mouth interior as pink, while the reference image has a dark mouth interior"
+  ],
+  "rationale": "The model openly declined to recall the specific meme image. It correctly gave general traits of the character: a pale belly, a 3D CG soft-lit render, short limbs, and (with low confidence) a hugely open laughing mouth. It gave nothing on the hunched pose, the hands on the belly or the plain background, and its eye description (squinting or wide open) was hedged.",
+  "raw": "```json\n{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 1, \"mouth\": 1, \"body\": 1, \"belly_patch\": 2, \"render\": 2, \"background\": 0, \"vibe\": 1}, \"hallucinations\": [\"Confidently states the head is about as big as or bigger than the body, which contradicts the bulky pear/bean-shaped body whose head merges into the torso\", \"Confidently describes the mouth interior as pink, while the reference image has a dark mouth interior\"], \"rationale\": \"The model openly declined to recall the specific meme image. It correctly gave general traits of the character: a pale belly, a 3D CG soft-lit render, short limbs, and (with low confidence) a hugely open laughing mouth. It gave nothing on the hunched pose, the hands on the belly or the plain background, and its eye description (squinting or wide open) was hedged.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 17.5,
+    "turns": 1,
+    "tokens": {
+      "input": 2941,
+      "cached_input": 0,
+      "cache_write": 2939,
+      "output": 1170,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.047254000000000004,
+    "tools_used": [],
+    "cost_usd": 0.047254000000000004,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2939,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1170,
+      "output_tokens_details": {
+        "thinking_tokens": 868
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2939,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1170,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2939,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2939
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:08:23Z",
+    "finished_at": "2026-11-16T17:08:40Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

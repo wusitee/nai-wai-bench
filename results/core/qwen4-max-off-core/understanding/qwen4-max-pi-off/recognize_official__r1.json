@@ -1,0 +1,84 @@
+{
+  "settings_id": "cd8372f0bb6ac1cb",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-off",
+  "vendor": "alibaba",
+  "item": "recognize_official",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "这个角色是**奶龙**。\n\n它出自同名国产3D动画短视频系列《奶龙》，是一只黄色、圆滚滚的小恐龙形象，有着大大的绿色眼睛和呆萌的表情。\n\n**所属网络梗：**\n奶龙在抖音、B站等中文社交平台上广泛传播，成为热门表情包素材。其相关的网络梗主要包括：\n\n1. **呆萌/无辜表情梗**：奶龙各种夸张又可爱的表情（如图中举手惊讶的样子）被大量截取制作成表情包，用于表达\"啊？\"\"懵了\"\"不知所措\"等情绪。\n2. **\"奶龙文学\"/抽象梗**：网友将奶龙与各种荒诞、抽象的文案搭配，形成反差幽默。\n3. **儿童向内容出圈梗**：因其原本面向低龄观众，却被成年网友大量二次创作和解构，本身也成为一个文化现象级的梗。\n\n图中的姿势（双手举起、嘴巴微张呈\"O\"型）是奶龙经典的\"震惊/投降/无辜\"表情包之一。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 9.8,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 341,
+      "output": 214,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 0,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 341,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 214,
+      "reasoning": 0
+    },
+    "session_config": {
+      "thinkingLevel": "off"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "off",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "off"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:05:33Z",
+    "finished_at": "2026-11-16T16:05:43Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

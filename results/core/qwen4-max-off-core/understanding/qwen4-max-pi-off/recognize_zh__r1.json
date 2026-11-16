@@ -1,0 +1,84 @@
+{
+  "settings_id": "cd8372f0bb6ac1cb",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-off",
+  "vendor": "alibaba",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "图里的角色是**奶龙**——一只圆滚滚的黄色小龙（国产3D动画/短视频IP《奶龙》里的主角，搭档是个叫小七的小男孩）。它标志性的形象就是黄皮、白肚皮、眯眼咧嘴大笑、挺着大肚子。\n\n**相关的网络梗：**\n奶龙因为表情夸张、动作魔性，被网友大量截取做成表情包和鬼畜二创，形成了所谓的\"**奶龙梗 / 奶龙宇宙**\"。常见的玩法包括：\n\n- 把它P成各种职业、名人或游戏角色，配上\"我是××奶龙\"之类的台词；\n- 用AI配音让它说抽象台词、唱怪歌，或做\"奶龙笑\"\"奶龙哭\"等情绪包；\n- 在弹幕和评论区刷\"奶龙\"\"这很奶龙\"来表示一种又憨又癫、土味上头的搞笑感。\n\n**这个梗的别名/相关叫法：**\n- \"**小奶龙**\"\"**黄龙**\"（对角色本身的昵称）；\n- \"**奶龙大帝 / 龙帝**\"（二创里给它加的夸张尊称）；\n- 归入更大的\"**抽象梗 / 土味萌物梗**\"一类，和\"胖龙\"\"黄色胖子\"这类调侃称呼也常被混用。\n\n简单说：角色=奶龙，梗=以它为核心的魔性表情包/鬼畜二创（奶龙梗），别名常见的是\"小奶龙\"\"龙帝\"以及被当作\"抽象系黄色胖龙\"来调侃。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 12.4,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 665,
+      "output": 332,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 0,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 665,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 332,
+      "reasoning": 0
+    },
+    "session_config": {
+      "thinkingLevel": "off"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "off",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "off"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:04:50Z",
+    "finished_at": "2026-11-16T16:05:02Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

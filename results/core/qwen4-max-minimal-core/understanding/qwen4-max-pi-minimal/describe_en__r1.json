@@ -1,0 +1,81 @@
+{
+  "settings_id": "1f8854885f90fc43",
+  "track": "understanding",
+  "model": "qwen4-max-pi-minimal",
+  "vendor": "alibaba",
+  "item": "describe_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Without looking at any images, describe the most iconic image of Laughing Nailong (大笑奶龙 / 奶蛙) from memory: its pose, expression, body shape, colors, rendering style, and background, in enough detail for an artist who has never seen it to draw it. Say where you are unsure.",
+  "images": [],
+  "answer": "**Short caveat first:** I know the character 奶龙 (Nailong) reasonably well as a general IP, but I do **not** have a reliable memory of one specific canonical \"大笑奶龙\" picture. There are many laughing frames and sticker crops of it circulating, and I can't confidently point to a single \"the iconic one.\" So below I'll separate (A) what I'm fairly confident about regarding the character's design, from (B) what I'd be inventing if I described a specific image's pose/background. An artist should treat B as unverified.\n\n---\n\n**A. The character design (moderate-to-good confidence)**\n\n- **Species/vibe:** A chubby baby \"milk dragon\" — a cartoon mascot from Chinese short-form 3D animation (it appears in shorts alongside a human boy companion). It reads as much like a fat frog or a yellow blob as like a Western dragon; that frog resemblance is exactly why the mocking nickname 奶蛙 (\"milk frog\") exists. I'm only moderately confident about the nickname's origin story.\n- **Body shape:** Very simplified and pear/egg-shaped. The head is enormous and flows into the torso with essentially no neck — think one continuous rounded lump, wider at the bottom. Limbs are stubby little sausages: short arms, short thick legs, rounded mitten hands and flat rounded feet, no defined fingers or toes in most depictions (I'm unsure whether some renders give it three small digits).\n- **Color:** Saturated, warm, slightly milky yellow overall — like egg-yolk / butter yellow. The belly and lower face are usually a paler cream-yellow. Mouth interior pink/red with a pink tongue. Eyes are large, dark (near-black) with big white specular highlights. I'm not certain about the exact hue split between back and belly, or whether there's any orange shading.\n- **Head features:** Big wide-set eyes, a very wide mouth that stretches nearly across the face, and effectively no protruding snout — the face is flat and front-facing, which is the frog-like part. I believe there are small nub-like horns or ear bumps on top of the head, but **I'm genuinely unsure** whether they're horns, ears, or nothing at all, and I'd be guessing at their count and shape. I also can't reliably say whether it has a visible tail, and if so whether it's a short cone or a curled dragon tail. Teeth: usually I recall a smooth open mouth, possibly a couple of small white teeth — low confidence.\n- **Rendering style:** Clean, bright, glossy-plastic 3D CGI, preschool-cartoon register — soft smooth surfaces, simple ambient lighting, soft shadows, no texture/fur/scales detail. Not hand-drawn, not pixel art. Think \"cheap but cheerful mobile-game mascot render.\" Many circulating versions are low-resolution crops or compression-mangled stickers, so the meme image may look noticeably crunchier than the source animation.\n- **Clothing:** None, as far as I recall.\n\n**B. The laughing image specifically (low confidence — do not trust)**\n\nThe typical laughing read would be: mouth open extremely wide in a big grin or guffaw, eyes squeezed into upward crescents or squeezed shut, head tipped slightly back, arms up or out, body squashed in a laugh. That's a plausible generic description, but I want to be clear that **I'm reconstructing it from \"what a laughing cartoon mascot looks like,\" not recalling a specific picture.** I can't tell you:\n\n- whether the eyes are open, squinted, or closed in the well-known image;\n- whether teeth/tongue/uvula are visible;\n- arm and leg placement, or whether it's a full-body shot vs. a face-only crop;\n- the background — I'd be guessing between a plain white/transparent sticker background, a blurred frame from an episode, or a simple sky/grass scene;\n- whether text, emoji, or caption overlays are part of the \"iconic\" version (Chinese meme stickers often have them, but I can't confirm here).\n\n**Recommendation for the artist:** draw from A (fat yellow neckless blob, huge wide mouth, big glossy dark eyes, stubby limbs, clean 3D plastic shading, cream belly), then pick a laughing pose deliberately rather than trusting my B section. If fidelity to *the* specific meme matters, the reference image needs to be looked up — I'd rather flag that than hand you invented specifics that sound authoritative.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 48.9,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 138,
+      "output": 1993,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1042,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 138,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1993,
+      "reasoning": 1042
+    },
+    "session_config": {
+      "thinkingLevel": "minimal"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "minimal",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "minimal"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:14:19Z",
+    "finished_at": "2026-11-16T16:15:08Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

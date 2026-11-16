@@ -26,10 +26,11 @@ Software releases use semantic versions; suite ids version the evaluation panels
   `visual-detail/`, and `naihub-v1/` redirects. Image generation moves to an experimental section outside
   the index.
 - Add Qwen4-Max through the Qwen Token Plan's CN endpoint as a pi custom provider at max effort
-  (`qwen4-max-pi`, run by the endpoint as xhigh) and at the standard high effort (`qwen4-max-pi-high`), and select both in the 0.1.0
-  comparison through `rel-0.1-with-qwen4-max` and `rel-0.1-naihub-with-qwen4-max`; earlier observations and
-  verdicts are unchanged. Save the max row's frontend-track run as `qwen4-max-frontend` (not selected in the
-  release).
+  (`qwen4-max-pi`, run by the endpoint as xhigh) and at the standard high effort (`qwen4-max-pi-high`), and
+  select both in the 0.1.0 comparison through `rel-0.1-with-qwen4-max` and `rel-0.1-naihub-with-qwen4-max`;
+  earlier observations and verdicts are unchanged. Save the max row's frontend-track run as
+  `qwen4-max-frontend` (not selected in the release). Save archived core and Nai-hub runs of the same model
+  at the other efforts (`qwen4-max-pi-{off,minimal,low,medium,xhigh}`), outside the release.
 - Add GLM-5.3-Flash, the GLM Coding Plan's GLM-5.3 model with image input, run through pi's built-in
   `zai-coding-cn` provider at high effort (`glm-5.3-flash-pi`), and select it in the 0.1.0 comparison through
   `rel-0.1-with-glm-5.3-flash-and-images-2.6` and `rel-0.1-naihub-with-glm-5.3-flash`, retaining the

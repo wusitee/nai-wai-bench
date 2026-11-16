@@ -1,0 +1,84 @@
+{
+  "settings_id": "c7835e1c7781edc5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-medium",
+  "vendor": "alibaba",
+  "item": "recognize_official",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "这个角色是**奶龙**——一只圆滚滚的黄色小恐龙，标志性特征是绿色的大眼睛、小小的鼻孔/嘴巴、米白色的肚皮和棕色的小爪子，常做出举手、惊讶、傻笑等夸张表情。\n\n关于它的来源和梗：\n\n- **出处**：国产3D搞笑动画短片《奶龙》，主角是这只贪吃、憨憨的外星小恐龙，和人类小男孩\"小七\"一起生活，剧情多是日常搞笑、闯祸、吃东西。\n- **网络梗**：主要在抖音、快手、B站等平台以\"奶龙表情包\"形式爆火。因为它表情呆萌又魔性，被大量截图配上\"啊？\"\"我不到啊\"\"在吗\"之类的文字当作聊天表情使用；后来又衍生出大量二创、鬼畜和\"抽象\"玩梗（比如把它P成各种角色、配上严肃或阴间的台词形成反差），属于典型的\"低幼动画角色被成年网友玩成抽象梗\"的现象，和当年的\"小猪佩奇身上纹\"有点类似的路数。\n\n需要说明的是，具体的制作公司、首播时间等细节我记不太准，就不乱讲了；但角色是奶龙、属于奶龙表情包/抽象二创这一类梗，这点是比较确定的。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 23.7,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 341,
+      "output": 648,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 384,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 341,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 648,
+      "reasoning": 384
+    },
+    "session_config": {
+      "thinkingLevel": "medium"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "medium",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "medium"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:14:20Z",
+    "finished_at": "2026-11-16T17:14:44Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

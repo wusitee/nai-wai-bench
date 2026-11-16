@@ -1,0 +1,113 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi-minimal/knowledge_zh__r1.json",
+  "target_sha256": "64a3afc577230b7f7717c21d52a4741473a7fff563940dc4001faf89bbe5bdd2",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "19d5278acd777b71",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "qwen4-max-pi-minimal",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 1,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [],
+  "rationale": "The model correctly describes the base 奶龙 character and explicitly says it doesn't know the meme's specifics. Its tentative guesses roughly match the laughing pose and the frog-like 奶蛙 nickname, though it wrongly suggests the image may be an official frame; because it labels that as speculation, it is not counted as a hallucination. It misses the AI origin, the 星野 agent, the 军体拳 remix, the official-reply copypasta, and the rarity-title genre.",
+  "raw": "```json\n{\"scores\": {\"base_character\": 2, \"ai_variant\": 0, \"xingye_origin\": 0, \"aliases\": 1, \"naiwa\": 1, \"laugh_pose\": 1, \"junti_quan\": 0, \"official_reply\": 0, \"trait_variants\": 0, \"rarity_titles\": 0}, \"hallucinations\": [], \"rationale\": \"The model correctly describes the base 奶龙 character and explicitly says it doesn't know the meme's specifics. Its tentative guesses roughly match the laughing pose and the frog-like 奶蛙 nickname, though it wrongly suggests the image may be an official frame; because it labels that as speculation, it is not counted as a hallucination. It misses the AI origin, the 星野 agent, the 军体拳 remix, the official-reply copypasta, and the rarity-title genre.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 10.5,
+    "turns": 1,
+    "tokens": {
+      "input": 3644,
+      "cached_input": 0,
+      "cache_write": 3642,
+      "output": 788,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0453107,
+    "tools_used": [],
+    "cost_usd": 0.0453107,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3642,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 788,
+      "output_tokens_details": {
+        "thinking_tokens": 503
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3642,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 788,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3642,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3642
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:08:40Z",
+    "finished_at": "2026-11-16T17:08:51Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "settings_id": "1f8854885f90fc43",
+  "track": "understanding",
+  "model": "qwen4-max-pi-minimal",
+  "vendor": "alibaba",
+  "item": "describe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "不看任何图片，仅凭你的记忆，详细描述最经典的那张「大笑奶龙」（奶蛙）图片的画面：姿势、表情、身体造型、配色、渲染风格和背景，让从没见过它的画师能照着画出来。不确定的地方请说明。",
+  "images": [],
+  "answer": "## 先说结论（重要）\n\n我对「奶龙」这个**角色本身**有一些记忆，但对你指定的那张「大笑奶龙／奶蛙」**具体梗图**，我没有可靠、可复现的画面记忆。如果我按你的要求逐项写出姿势、构图、背景、光影，那大概率是我在编造（把同类表情包的常见元素拼起来），而不是回忆。给画师当参考反而有害。\n\n所以下面我把内容分成三档：**较有把握 / 模糊印象 / 完全不知道**，请只把第一档当作弱参考。\n\n---\n\n## 一、较有把握：奶龙这个角色的一般造型\n\n- 中国原创卡通 IP，主要靠短视频/动画短片和表情包传播，2020 年代在中文互联网非常火，也伴随大量恶搞与「反奶龙」二创。\n- **物种设定是小龙，不是青蛙**；因为身形圆扁、嘴大眼凸，网友戏称「奶蛙」。你提到的两个名字指的应是同一角色的不同叫法（这点我中等把握）。\n- **体型**：极度 Q 版，圆滚滚，头几乎和身体一样大甚至更大，四肢短小粗圆，肚子鼓，整体像个软胶玩偶。\n- **配色**：主体明黄／柠檬黄，腹部与口鼻周围偏浅黄或奶白，口腔内部粉红。颜色数量很少，饱和度高。\n- **五官**：眼睛大而圆、间距宽，黑色大瞳仁；吻部短钝；嘴很宽，笑起来能咧到接近脸的两侧。\n- **细节**：头顶有小角/小突起，背后可能有一排小脊突，有一条短尾巴。这几条我把握一般，具体形状说不上来。\n- **渲染**：我印象中官方动画是 3D CG，柔和打光、塑料/软胶质感、无明显描边。中等把握。\n\n## 二、模糊印象（低置信度，可能是我在混淆其他图）\n\n- 「大笑」版本的典型特征是：**嘴张到极大、眼睛眯成缝或瞪圆、头后仰**，属于夸张的狂笑表情。\n- 网上流传的很多版本画质偏低、有压缩噪点，常被裁成方形头像/表情图，有时配「哈哈哈哈」之类的字。\n- 我不确定你说的那张是**官方动画截图**，还是**二创/换脸/贴真人牙齿的恶搞图**——这两类在中文网络都存在，而「最经典的那张」到底指哪张，我判断不了。\n\n## 三、我完全不知道的（请勿让我猜）\n\n- 具体姿势：手举没举、张没张开、是坐着躺着还是站着、身体朝向和倾角。\n- 取景：全身/半身/大头特写，视角高低。\n- 背景：纯色、动画场景、还是被抠图换底，我一概没有记忆。\n- 光照方向、阴影、材质细节、有没有文字水印。\n\n---\n\n## 建议\n\n要让人照着画，**必须找到原图**。搜「奶龙 大笑 表情包」「大笑奶龙 原图」或去表情包站/贴吧翻，比让我描述靠谱得多。\n\n如果你愿意把原图给我（或告诉我它是官方截图还是某张二创），我可以帮你做非常详细的拆解：结构比例、五官定位、配色取色、光影与材质分析，写成画师能直接执行的作画说明。但只凭记忆硬写这张图，我做不到诚实又准确。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 51.8,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 126,
+      "output": 2183,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1429,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 126,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2183,
+      "reasoning": 1429
+    },
+    "session_config": {
+      "thinkingLevel": "minimal"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "minimal",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "minimal"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:13:28Z",
+    "finished_at": "2026-11-16T16:14:20Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

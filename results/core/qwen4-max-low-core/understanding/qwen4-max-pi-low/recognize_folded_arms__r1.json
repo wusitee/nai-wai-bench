@@ -1,0 +1,84 @@
+{
+  "settings_id": "22124b548d3b109d",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-low",
+  "vendor": "alibaba",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "这张图里的角色是**奶龙**——国产3D动画短片《奶龙》（又常和搭档小男孩“小七”一起出现）里的主角：黄色 pear 形胖身子、奶白色肚皮、灰黑色的小手、两只圆圆的大眼睛，标志性动作就是像图里这样抱着胳膊、一脸迷之自信的微笑。\n\n它属于近几年（大约 2023–2024 年起）在抖音、B站、QQ/微信群里爆火的 **“奶龙”抽象表情包梗**：\n\n- 因为造型憨、表情呆而“自信”，被大量截图、二创成表情包，配上“你说得对，但是……”“我不到啊”“急了？”之类的抽象文案。\n- 衍生出“奶龙文学 / 奶龙语录”“小奶龙”“奶龙 vs 小七”等一系列玩梗内容，也常被拿来做“小学生审美”“答辩（大便）”式的反讽调侃，属于典型的**抽象文化 / 土味整活**系表情包，和 Cheems、Floppa 那类动物梗图性质类似，只是主角是这只国产小黄胖龙。\n\n（以上仅凭我自己的记忆作答，没有查证工具；如果你手上的版本是别的二创角色，细节可能略有出入。）",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 64.6,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 341,
+      "output": 2262,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1989,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 341,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2262,
+      "reasoning": 1989
+    },
+    "session_config": {
+      "thinkingLevel": "low"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "low",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "low"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:44:09Z",
+    "finished_at": "2026-11-16T16:45:13Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

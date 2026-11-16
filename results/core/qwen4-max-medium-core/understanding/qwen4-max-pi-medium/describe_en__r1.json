@@ -1,0 +1,81 @@
+{
+  "settings_id": "c7835e1c7781edc5",
+  "track": "understanding",
+  "model": "qwen4-max-pi-medium",
+  "vendor": "alibaba",
+  "item": "describe_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Without looking at any images, describe the most iconic image of Laughing Nailong (大笑奶龙 / 奶蛙) from memory: its pose, expression, body shape, colors, rendering style, and background, in enough detail for an artist who has never seen it to draw it. Say where you are unsure.",
+  "images": [],
+  "answer": "**Up front, an honesty caveat:** I know the character 奶龙 (Nailong) reasonably well as a Chinese short-animation / sticker IP, but I do **not** have a reliable memory of one specific canonical \"大笑奶龙\" image. I can't picture a particular frame and describe it faithfully. So below I separate (A) what I'm fairly confident about in the character design from (B) what would be reconstruction/guesswork about the laughing image. Also, I'm not confident that 奶蛙 is the same character — that may be a different meme or a nickname I don't actually know. Please treat the alias as unverified.\n\n**A. Character design (moderate confidence)**\n\n- **Species/type:** a baby dragon, deliberately infantile and non-threatening. No wings in most depictions I recall.\n- **Body shape:** very chibi — the head is roughly as large as or larger than the torso, a round pear/egg-shaped body with a prominent bulging belly, stubby short arms and legs with simple rounded mitten-like hands and feet, and a short thick tail. Overall silhouette is a soft blob, no sharp angles anywhere.\n- **Color:** milky yellow / cream-yellow overall (the \"奶\" in the name), with a paler cream or off-white belly and muzzle area. Any horns, back spikes, or tail tip are usually a slightly deeper yellow-orange. I'm unsure whether it has two small horns, one, or just bumps — I lean toward two tiny nub horns.\n- **Face:** large round eyes, black pupils with big white highlight dots, set wide apart on a broad face; a short rounded snout; a wide, flexible mouth. Teeth are minimal or absent in most renderings. Cheeks are full.\n- **Rendering style:** 3D CGI, soft matte clay/vinyl-toy look, diffuse lighting, gentle ambient shading, no heavy texture or scales. Plush-toy-adjacent. This is the part I'm most confident about.\n\n**B. The laughing image specifically (low confidence — inference, not memory)**\n\nIf I try to describe the \"iconic laughing\" version, I'm essentially generating a plausible sticker rather than recalling one. What I'd expect, flagged as guesswork:\n\n- Front-facing or slight three-quarter view, upper body or full body, mouth wide open in a big laugh with a pink interior and possibly tongue visible; eyes either squeezed into upward arcs or wide and gleaming.\n- Head tipped back slightly, arms out or up, belly forward — a \"belly laugh\" posture.\n- Background: likely plain white/transparent (sticker crop) or a simple flat cartoon interior. I genuinely don't know which, and I can't confirm any specific background, props, text overlay, or framing.\n\n**What an artist should do with this:** treat section A as a rough design brief and section B as *not* reference. If accuracy to the actual viral image matters, you need the real image — my description of the pose, exact expression, and background could easily be wrong in ways I can't detect myself. I'd rather flag that than hand you a confident-sounding fabrication.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 45.2,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 139,
+      "output": 1726,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1059,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 139,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1726,
+      "reasoning": 1059
+    },
+    "session_config": {
+      "thinkingLevel": "medium"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "medium",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "medium"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:59:27Z",
+    "finished_at": "2026-11-16T17:00:12Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

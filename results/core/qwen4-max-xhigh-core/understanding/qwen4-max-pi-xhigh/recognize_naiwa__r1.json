@@ -1,0 +1,84 @@
+{
+  "settings_id": "a5e02c034d814b84",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-xhigh",
+  "vendor": "alibaba",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "这只黄色圆滚滚、侧着眼睛斜视的小家伙是**奶龙（Nailong）**，出自国产 3D 动画短片《奶龙》系列，设定是一只贪吃、呆萌的黄色小龙，和男孩\"小七\"搭档。\n\n它属于前两年在中文互联网爆火的**\"奶龙 / 龙图\"抽象表情包**梗。网友把奶龙各种呆滞、魔性的脸部特写截出来，配上反差感极强的文案玩梗——这张\"惊鸿一瞥\"就是典型：用形容绝世美人回眸的成语，去配它这张毫无神采的侧脸，制造搞笑反差，同系列还有\"回眸一笑\"\"倾国倾城\"之类。这类表情常被拿来刷屏、阴阳怪气或单纯\"发癫\"，还衍生出\"龙图轰炸\"等玩法。\n\n（以上仅凭我自己的知识判断，未借助任何工具。）",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 253.4,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 151,
+      "output": 12148,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 11959,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 151,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 12148,
+      "reasoning": 11959
+    },
+    "session_config": {
+      "thinkingLevel": "xhigh"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "xhigh"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:36:18Z",
+    "finished_at": "2026-11-16T17:40:32Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

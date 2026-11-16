@@ -304,11 +304,13 @@ The endpoint accepts `reasoning_effort` values `none`, `off`, `minimal`, `low`, 
 `max`, but `qwen4-max` has three thinking levels, `low`, `high`, and `xhigh`; Qwen's [model
 notes](https://docs.qwencloud.com/developer-guides/getting-started/latest-model) map `minimal` to `low`,
 `medium` to `high`, and `max` to `xhigh`, and `none`/`off` turn thinking off. `qwen4-max-pi` records pi's
-requested `max`, which runs at `xhigh`; `qwen4-max-pi-high` is the same model at the standard `high`. Token
-Plan usage is billed in subscription Credits, not per token; the entry's `price` is Alibaba Cloud's
-pay-as-you-go list price for `qwen4-max` in the China (Beijing) region, the same for thinking and non-thinking
-modes. The plan limits concurrent agents by tier (1–2 on Lite, 2–3 on Essential), so collect with `--jobs 2`
-or fewer.
+requested `max`, which runs at `xhigh`; `qwen4-max-pi-high` is the same model at the standard `high`. The
+`qwen4-max-pi-{off,minimal,low,medium,xhigh}` entries cover the remaining efforts; their saved runs
+(`qwen4-max-<effort>-core`, `qwen4-max-<effort>-naihub`) are archived outside the release, and the alias pairs
+serve as repeat runs of one setting. Token Plan usage is billed in subscription Credits, not per token; the
+entry's `price` is Alibaba Cloud's pay-as-you-go list price for `qwen4-max` in the China (Beijing) region, the
+same for thinking and non-thinking modes. The plan limits concurrent agents by tier (1–2 on Lite, 2–3 on
+Essential), so collect with `--jobs 2` or fewer.
 
 ## ACP agents (`backend = "acp"`)
 

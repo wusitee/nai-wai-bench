@@ -1,0 +1,111 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi-low/recognize_variant__r1.json",
+  "target_sha256": "0bca01aee553979438a1ea36b53635883f7f19387625e9187e7aa7092e78a1af",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "c56bb3519baeba56",
+  "judge_images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "track": "understanding",
+  "model": "qwen4-max-pi-low",
+  "scores": {
+    "identifies_meme": 0,
+    "laugh_pose": 1,
+    "base_character": 0
+  },
+  "hallucinations": [
+    "Confidently identifies the image as parodying the 熊猫头 meme (姚明/金馆长 laughing faces) rather than the 大笑奶龙/奶蛙 meme it actually parodies"
+  ],
+  "rationale": "The model accurately describes the pose: hunched forward, clutching the belly, eyes squeezed shut, mouth gaping. But it attributes the image to the 熊猫头 meme rather than 大笑奶龙/奶蛙, and never mentions 奶龙 or its yellow dragon origin.",
+  "raw": "{\"scores\": {\"identifies_meme\": 0, \"laugh_pose\": 1, \"base_character\": 0}, \"hallucinations\": [\"Confidently identifies the image as parodying the 熊猫头 meme (姚明/金馆长 laughing faces) rather than the 大笑奶龙/奶蛙 meme it actually parodies\"], \"rationale\": \"The model accurately describes the pose: hunched forward, clutching the belly, eyes squeezed shut, mouth gaping. But it attributes the image to the 熊猫头 meme rather than 大笑奶龙/奶蛙, and never mentions 奶龙 or its yellow dragon origin.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 9.7,
+    "turns": 1,
+    "tokens": {
+      "input": 3112,
+      "cached_input": 0,
+      "cache_write": 3110,
+      "output": 618,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.037247999999999996,
+    "tools_used": [],
+    "cost_usd": 0.037247999999999996,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3110,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 618,
+      "output_tokens_details": {
+        "thinking_tokens": 396
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3110,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 618,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3110,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3110
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:46:31Z",
+    "finished_at": "2026-11-16T16:46:41Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

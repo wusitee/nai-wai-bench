@@ -1,0 +1,81 @@
+{
+  "settings_id": "c7835e1c7781edc5",
+  "track": "understanding",
+  "model": "qwen4-max-pi-medium",
+  "vendor": "alibaba",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "一张正方形的搞笑聊天表情包，正面贴脸大特写：一只极其肥胖圆润的卡通小猫，通身明亮的奶黄色／蛋黄色，材质像廉价儿童3D动画里光滑的塑料，柔和均匀的打光，几乎没有毛发细节。它没有脖子，巨大的圆脑袋和圆滚滚的身体连成一个黄色球，几乎塞满整个画面；头顶只有两只很小的三角形猫耳，脸颊两侧各有三根细黑胡须，四肢是短小粗圆的黄色小短手。\n\n它正在幸灾乐祸地放声狂笑：双眼完全笑眯，化成两条又粗又黑、向上弯的月牙弧线（形如 ^ ^），没有眼白；嘴巴横向夸张地咧开，宽度几乎等于整张脸，嘴角一直拉到脸颊边缘，张成一个巨大的深黑偏暗红的空洞，里面只有一条小小的粉色舌头和一两颗小白牙——嘴大眼小、像青蛙一样宽阔的咧笑，神情又贱又得意、非常魔性。头微微后仰并略歪向一侧，两只小短爪举在脸颊旁边。\n\n风格：低成本国产儿童3D动画的截图质感，造型极度简化、颜色高饱和、纯白或单一浅色干净背景；画面略微失焦、分辨率偏低、带轻微JPEG压缩噪点，像被反复转发过的社交软件表情包。画面中不要任何文字、字母、水印、边框，不要写实猫毛，不要人类。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 40.2,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 114,
+      "output": 1473,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1172,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 114,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1473,
+      "reasoning": 1172
+    },
+    "session_config": {
+      "thinkingLevel": "medium"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "medium",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "medium"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:59:49Z",
+    "finished_at": "2026-11-16T17:00:30Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "settings_id": "c7835e1c7781edc5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-medium",
+  "vendor": "alibaba",
+  "item": "recognize_smug",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "answer": "这张图里的角色是网络上俗称 **“龙图”** 的那只黄色胖龙（也被叫作“胖龙”“小黄龙”，近几年常被人和儿童动画里的“奶龙”混着叫）。\n\n特征就是图里这样：土黄色的圆胖身躯、半睁的死鱼眼、抿成一条线的嘴，加上两坨腮红，一副似笑非笑、看破一切的“猥琐微笑”表情。\n\n它属于**抽象文化（抽象话）表情包**体系，主要在孙笑川 / 6324 / “带带大师兄”相关的贴吧、B站、QQ群圈子里流传，常和“典中典”“急了急了”“乐”“孝”“赢”“绷不住”这类抽象话搭配使用，也常配上“微微一笑”“你就说是不是吧”之类的文字，用来表达阴阳怪气、嘲讽或“我懂但我不说”的态度。\n\n关于它的确切出处（一般说法是某段国产3D动画/短视频里的龙形角色截图），我记得不够确切，就不瞎编具体作品名了；但作为梗的归属——抽象文化里的“龙图”表情包——是比较明确的。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 38.8,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 342,
+      "output": 1351,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1099,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 342,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1351,
+      "reasoning": 1099
+    },
+    "session_config": {
+      "thinkingLevel": "medium"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "medium",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "medium"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:12:52Z",
+    "finished_at": "2026-11-16T17:13:31Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

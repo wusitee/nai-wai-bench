@@ -1,0 +1,84 @@
+{
+  "settings_id": "22124b548d3b109d",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-low",
+  "vendor": "alibaba",
+  "item": "recognize_en",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Who is this character, and which internet meme is this image from? Does the meme have other names?",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "**Best guess (with some uncertainty):** This looks like the yellow, blob‑bodied 3D character usually identified as **\"Max\"** from the YouTube/TikTok animation channel **Max Design Pro** — the same universe that produced the \"Gedagedigedagedago\" singing chicken‑nugget meme. The smooth yellow body, cream‑colored belly, dark grey hands and plain white background are characteristic of that channel's renders.\n\n**The meme:** it's the frame of him doubled over, clutching his belly and laughing hysterically, used as a reaction image/video for \"something is way funnier than it should be\" — i.e. uncontrollable, wheezing laughter.\n\n**Other names it goes by:** \"laughing yellow guy,\" \"yellow creature laughing,\" \"haha guy / the giggler,\" \"wheeze guy,\" or simply \"Max laughing.\" Because of the shared origin it's also often lumped in with the \"nugget / Gedagedigedagedago\" brainrot meme family, and some people confuse it with the yellow \"Giggler\" creatures from the Glaggleland meme.\n\nI can't verify the exact source video from memory, so treat the character attribution as a likely identification rather than a certainty.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 52.5,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 671,
+      "output": 2181,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1915,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 671,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2181,
+      "reasoning": 1915
+    },
+    "session_config": {
+      "thinkingLevel": "low"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "low",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "low"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:41:45Z",
+    "finished_at": "2026-11-16T16:42:37Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}
