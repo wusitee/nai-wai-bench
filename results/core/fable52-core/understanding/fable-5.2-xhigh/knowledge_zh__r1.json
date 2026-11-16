@@ -1,0 +1,100 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "item": "knowledge_zh",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "「大笑奶龙」（也叫「奶蛙」）是什么？请介绍它的来源、外观以及相关的梗和二创。不确定的地方请直接说明，不要编造。",
+  "images": [],
+  "answer": "**先说结论：我对「大笑奶龙／奶蛙」这个具体的梗没有可靠的了解，没法负责任地介绍它的来源、外观和二创。**它可能是比较新的梗，或者只在小圈子里流传。下面把我确定的和不确定的分开说。\n\n## 比较确定的：它的\"本体\"奶龙\n\n- **来源**：奶龙是国产3D动画《奶龙》的主角，出品方是萌伢动漫，动画大约从2020年前后开始在短视频平台和视频网站连载。主要角色还有小男孩小七和贝爷爷。\n- **外观**：一只圆滚滚、胖乎乎的黄色小龙，大眼睛，肚子圆鼓鼓，整体是低幼向的可爱造型。\n- **相关的梗**（主要在2024年前后爆火）：\n  - 「我才是奶龙」：动画片段被大量鬼畜、翻唱、玩梗。\n  - 「今夜星光闪闪」：奶龙唱歌的片段被广泛传播。\n  - 「反奶龙」：奶龙头像、表情包一度被和\"低龄\"\"唐\"（网络贬义用语）绑定，B站、抖音等平台出现大量嘲讽或\"抵制奶龙\"的二创，后来演变成半玩笑的阵营对立。\n  - 海外传播：2024年底前后，Nailong 在 TikTok、X 等平台也成了表情包和反应图素材。\n\n## 不确定的：「大笑奶龙／奶蛙」本身\n\n- 从名字推测，它可能是奶龙的某个变体形象，比如张大嘴大笑、嘴型或脸型被夸张化后像青蛙。**但这只是望文生义的猜测，不是我掌握的事实。**\n- 我不知道它最早出自哪个视频、图片或作者，也不知道它是官方片段截图、AI 生成，还是网友的建模或手绘二创。\n- 我也不清楚它有哪些固定用法、配套台词或代表性的二创作品。\n\n如果你能告诉我在哪里看到的，或者描述一下它的样子，我可以结合已知的奶龙梗帮你分析它的含义和用法。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 42.2,
+    "tokens": {
+      "input": 465,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 3134,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 0.06454,
+    "tools_used": [],
+    "cost_usd": 0.06454,
+    "usage": {
+      "input_tokens": 465,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 3134,
+      "output_tokens_details": {
+        "thinking_tokens": 2379
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 465,
+          "output_tokens": 3134,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T02:57:54Z",
+    "finished_at": "2026-11-10T02:58:37Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}

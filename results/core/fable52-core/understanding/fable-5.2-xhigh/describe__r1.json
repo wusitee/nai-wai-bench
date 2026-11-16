@@ -1,0 +1,100 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "item": "describe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "不看任何图片，仅凭你的记忆，详细描述最经典的那张「大笑奶龙」（奶蛙）图片的画面：姿势、表情、身体造型、配色、渲染风格和背景，让从没见过它的画师能照着画出来。不确定的地方请说明。",
+  "images": [],
+  "answer": "以下全凭记忆描述，没有看图核对，所以每部分都标了把握程度。先说明一点：我记忆里的奶龙是国产 3D 动画《奶龙》里的黄色小胖龙，不是蛙。\"奶蛙\"这个叫法我不确定是它的外号，还是另一个（比如绿色的）二创形象；如果你指的是后者，下面的描述可能对不上。\n\n**身体造型（比较有把握）**\n- 整体是一个圆滚滚的梨形或鸡蛋形，头和身体连成一体，没有脖子，头顶略窄、肚子最宽。\n- 肚子很大，向前鼓出，是全身的视觉重心。\n- 四肢极短：手臂像两截小短棒，手掌圆钝，手指短粗；腿是两个短墩子，脚掌扁圆。\n- 身后有一条短而粗的小尾巴，正面角度常被身体挡住。\n- 没有翅膀。头顶是否有小角或小鼓包、背上是否有小背刺，我不确定，印象中即使有也很小。\n\n**表情（核心部分，比较有把握）**\n- 嘴巴张得极大，几乎占下半张脸，呈上宽下圆的 D 形或半圆形。\n- 口腔内是深红或暗粉色，里面有一条圆润的粉色舌头。有没有牙齿我不确定，倾向于没有或不明显。\n- 眼睛笑得挤成两道向上拱的弯弧（\"^ ^\"形）。也有流传版本是眯成缝、眼角带笑出的眼泪，哪个算\"最经典\"我不确定。\n- 正常状态下它的眼睛是又大又圆的黑眼珠，带白色高光，两眼间距较宽。\n- 鼻子只是嘴上方的两个小点状鼻孔。\n- 脸颊可能有淡淡的粉橙色腮红，这点不确定。\n\n**姿势（中等把握）**\n- 身体略向后仰，头抬起，是\"仰头捧腹大笑\"的感觉。\n- 我印象最深的版本是一只手捂着或搭在肚子上，另一只手伸出去指着前方，像在指着人嘲笑。\n- 也有双手都捧着肚子的版本，我无法确定哪张最经典。\n- 构图多为正面或略偏四分之三侧面，半身到全身，角色占满画面。\n\n**配色**\n- 主体是高饱和的暖黄色，接近蛋黄或奶油黄，这点很有把握。\n- 肚皮印象中有一块更浅的奶白或浅黄椭圆区域，中等把握。\n- 嘴内深红、舌头粉色、眼睛黑色。\n\n**渲染风格（比较有把握）**\n- 典型的国产低幼向 3D CG 动画质感：表面光滑，像软胶或搪胶玩具，没有鳞片和纹理细节。\n- 光照柔和均匀，阴影浅，边缘有轻微的柔光，整体明亮、圆润。\n\n**背景（最没把握）**\n- 原图应是动画截图，背景是虚化的卡通场景，室内还是户外我记不清。\n- 网上流传的表情包很多被抠成了白底或透明底。照着画的话，用纯色或简单虚化的暖色背景最稳妥。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 39.6,
+    "tokens": {
+      "input": 500,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 3025,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 0.0625,
+    "tools_used": [],
+    "cost_usd": 0.0625,
+    "usage": {
+      "input_tokens": 500,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 3025,
+      "output_tokens_details": {
+        "thinking_tokens": 1890
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 500,
+          "output_tokens": 3025,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T02:59:12Z",
+    "finished_at": "2026-11-10T02:59:51Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}

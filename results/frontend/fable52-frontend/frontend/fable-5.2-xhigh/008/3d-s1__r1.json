@@ -1,0 +1,111 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "track": "frontend",
+  "corpus": "frontend-v1",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "task": "008",
+  "kind": "3d-s1",
+  "rep": 1,
+  "prompt_sha256": "cc96517aee53c5c77eb32cb518e799e2afb7fda8fc77e6f4540e50aad9c08660",
+  "width": 216,
+  "height": 216,
+  "duration_ms": 1220,
+  "input_names": "neutral",
+  "images": [
+    "bench/frontend-v1/assets/008/frame_00.png"
+  ],
+  "prompt": "The attached image is a 216x216 px frame from an animated GIF. Rebuild the scene in 3D with three.js.\n\nTask (3D, static): write an HTML page that builds the scene from code and renders it so that the view from your reference camera reproduces the image as faithfully as you can: characters, poses, facial expressions, hands, props, background, and colors. A later step will animate your scene, so structure it in named groups. For this static step, render(t) may ignore t.\n\nthree.js contract:\n- The harness injects an import map for three.js r187. Import from 'three' and from 'three/addons/'; the only addons available are 'three/addons/controls/OrbitControls.js', 'three/addons/geometries/ConvexGeometry.js', 'three/addons/geometries/ParametricFunctions.js', 'three/addons/geometries/ParametricGeometry.js', 'three/addons/geometries/RoundedBoxGeometry.js', 'three/addons/math/ConvexHull.js', 'three/addons/utils/BufferGeometryUtils.js'. Use one <script type=\"module\">. Do not add an import map or load anything else.\n- Build all geometry in code: no model files, no loaders, no image textures. Procedural CanvasTexture or DataTexture textures up to 64x64 px are allowed.\n- Create the renderer with new THREE.WebGLRenderer({ preserveDrawingBuffer: true }), at pixel ratio 1, with a 216x216 canvas that fills the page.\n- Y is up. Put each character in its own THREE.Group with a descriptive name (for example 'character-left'), with nested named groups for parts that could move (head, eyes, mouth, arms, hands, ...). Characters must be solid 3D volumes: the harness also renders them from the side, the back, a three-quarter angle, and above, with cameras fitted to the characters.\n- Light the scene so the characters read from every side.\n- When the scene is ready, set window.nwb = { scene, renderer, cameras: { ref }, characters, render(t), ready: true }. cameras.ref is the camera for the main view. characters is an array of the character groups. render(t) poses the scene for time t in milliseconds and renders it synchronously with cameras.ref; the same t must always produce identical pixels, whatever was rendered before. Do not use renderer.setAnimationLoop: the harness calls render(t).\n\nRules (breaking any rule scores 0):\n- Reply with exactly one ```html code block containing one complete, self-contained HTML document. If you send several blocks, only the last one counts. Do not use tools; answer directly.\n- The page is rendered offline in a 216x216 px viewport at device pixel ratio 1. Fill exactly that area, starting at the top-left corner.\n- No raster images: no <img>, no <image>, no CSS url(...) except url(#id) references to your own SVG definitions, no data: URIs, no base64, no blob: URLs.\n- No external resources or network access: no external scripts, stylesheets, fonts, iframes, links, fetch, XMLHttpRequest, WebSocket, or any other URL.\n- Do not call setTimeout, setInterval, requestAnimationFrame, or requestIdleCallback. The harness controls time.\n- The file must be at most 256 KB and must run without uncaught exceptions or console errors.",
+  "text": "s.add(seg(A.clone().sub(K),0.33,0.24,yel));\n  const f=grp('foot-'+name,A.clone().sub(K));\n  f.add(ball(1,gray,0.3,0.15,0.46,V(0,-0.1,0.25)));\n  for(let i=-1;i<=1;i++)f.add(ball(0.11,gray,1,0.8,1.3,V(i*0.17,-0.13,0.62)));\n  s.add(f);l.add(s);ch.add(l);return l;\n}\nleg('right',V(-0.5,1.4,0),V(-0.72,1.18,0.85),V(-0.8,0.25,0.5));\nleg('left',V(0.5,1.4,0),V(0.78,1.18,0.85),V(0.86,0.25,0.5));\n\n// ---------- render ----------\nfunction render(t){renderer.render(scene,camera);}\nrender(0);\nwindow.nwb={scene,renderer,cameras:{ref:camera},characters:[ch],render,ready:true};\n</script>\n</body></html>\n```",
+  "html": null,
+  "html_sha256": null,
+  "static_gates": [
+    "no ```html block"
+  ],
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 707.9,
+    "tokens": {
+      "input": 36805,
+      "cached_input": 0,
+      "cache_write": 36797,
+      "output": 65420,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 1.492417,
+    "tools_used": [],
+    "cost_usd": 1.492417,
+    "usage": {
+      "input_tokens": 8,
+      "cache_creation_input_tokens": 36797,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 65420,
+      "output_tokens_details": {
+        "thinking_tokens": 61630
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 36797
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 4,
+          "output_tokens": 1420,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 33663,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 33663,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T03:50:28Z",
+    "finished_at": "2026-11-10T04:02:16Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}

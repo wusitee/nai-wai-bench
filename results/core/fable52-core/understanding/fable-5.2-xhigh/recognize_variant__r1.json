@@ -1,0 +1,103 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "item": "recognize_variant",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。",
+  "images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "answer": "我判断这张图模仿的是**「熊猫头」（熊猫人）表情包里的\"捧腹大笑／笑死我了\"那一类**，不过这是凭画面特征做的推断，不能完全确定。\n\n判断依据：\n\n1. **表情**：眼睛眯成弯弯的一条缝，嘴巴夸张地张大，露出上下两排牙齿。这很像熊猫头表情包最经典的那张\"金馆长大笑脸\"，它是这个系列里的标志性嘲笑表情。\n2. **动作**：双手捂着肚子，身体前倾弯腰，是标准的\"捧腹大笑\"姿势。熊猫头系列里常见这种图，配字多是\"哈哈哈哈笑死我了\"\"笑得肚子疼\"。\n3. **配色与背景**：纯黑白的熊猫配上几乎全白的背景，与熊猫头表情包的黑白简笔画、白底风格一致。\n4. **做法**：把原本粗糙的二维黑白表情包做成毛茸茸的 3D 动画，是近年常见的\"表情包立体化／AI 重制\"玩法。\n\n另外，这只熊猫的体型和 3D 画风也有点像《功夫熊猫》的阿宝。所以它可能是把\"阿宝式的 3D 熊猫形象\"和\"熊猫头大笑表情包\"结合起来的二次创作。\n\n如果你知道这张图的出处或配文，我可以帮你进一步确认具体是哪一个梗。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 24.9,
+    "tokens": {
+      "input": 1279,
+      "cached_input": 0,
+      "cache_write": 1277,
+      "output": 1339,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 0.033173,
+    "tools_used": [],
+    "cost_usd": 0.033173,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1277,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1339,
+      "output_tokens_details": {
+        "thinking_tokens": 829
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 1277
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1339,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1277,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 1277,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T03:01:39Z",
+    "finished_at": "2026-11-10T03:02:04Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}

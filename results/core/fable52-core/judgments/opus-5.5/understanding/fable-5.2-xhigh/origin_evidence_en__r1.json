@@ -1,0 +1,110 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/fable-5.2-xhigh/origin_evidence_en__r1.json",
+  "target_sha256": "c95e29adfac4ab559823be7d74fd339c135af0d66849704d5ab16adbf00d3460",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "b98553c07100f32f",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "scores": {
+    "origin_xingye_evidence": 0,
+    "origin_followup": 0,
+    "origin_chronology": 0,
+    "origin_prompt_limits": 0,
+    "origin_visual_distinction": 0,
+    "origin_lost_media_scope": 0
+  },
+  "hallucinations": [
+    "States confidently that the Nailong meme of around 2024 included a widely shared belly-clutching laughing image. The notes place the belly-clutching laughing wave in early 2026."
+  ],
+  "rationale": "The model declined to give any substantive origin account. It does not mention the Xingye agent, the 看仙碎 follow-up and correction, the circulation chronology, the actual state of prompt recovery, the visual distinction between the two images, or the scope of the lost-media and Elsagate claims. Its generic caveats about evidence, including that reconstructed prompts are not originals, are not tied to the case, and it misdates the laughing image to about 2024.",
+  "raw": "```json\n{\"scores\": {\"origin_xingye_evidence\": 0, \"origin_followup\": 0, \"origin_chronology\": 0, \"origin_prompt_limits\": 0, \"origin_visual_distinction\": 0, \"origin_lost_media_scope\": 0}, \"hallucinations\": [\"States confidently that the Nailong meme of around 2024 included a widely shared belly-clutching laughing image. The notes place the belly-clutching laughing wave in early 2026.\"], \"rationale\": \"The model declined to give any substantive origin account. It does not mention the Xingye agent, the 看仙碎 follow-up and correction, the circulation chronology, the actual state of prompt recovery, the visual distinction between the two images, or the scope of the lost-media and Elsagate claims. Its generic caveats about evidence, including that reconstructed prompts are not originals, are not tied to the case, and it misdates the laughing image to about 2024.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 11.5,
+    "tokens": {
+      "input": 3721,
+      "cached_input": 0,
+      "cache_write": 3719,
+      "output": 866,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0475,
+    "tools_used": [],
+    "cost_usd": 0.0475,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3719,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 866,
+      "output_tokens_details": {
+        "thinking_tokens": 555
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3719,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 866,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3719,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3719
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-11T01:45:12Z",
+    "finished_at": "2026-11-11T01:45:23Z",
+    "revision": "b0b3b59",
+    "nwb_version": "0.1.0"
+  }
+}

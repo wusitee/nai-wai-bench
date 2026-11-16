@@ -1,0 +1,109 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "track": "frontend",
+  "corpus": "frontend-v1",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "task": "008",
+  "kind": "2d-s1",
+  "rep": 1,
+  "prompt_sha256": "43706cf5fff90067f3f927524fd4d017b055414aeaa70f58cadb798d8a5747d9",
+  "width": 216,
+  "height": 216,
+  "duration_ms": 1220,
+  "input_names": "neutral",
+  "images": [
+    "bench/frontend-v1/assets/008/frame_00.png"
+  ],
+  "prompt": "The attached image is a 216x216 px frame from an animated GIF. Rebuild it by hand as vector art.\n\nTask (2D, static): write an HTML page that reproduces the image as faithfully as you can in inline SVG: characters, poses, facial expressions, hands, props, background, and colors. A later step will animate your SVG, so structure it in named groups.\n- Static only: no <script>, no SMIL (<animate>, <animateTransform>, <animateMotion>, <set>), no CSS animations or transitions.\n\n2D contract:\n- The page body contains a single inline <svg> element with viewBox=\"0 0 216 216\", width=\"216\", and height=\"216\". No nested <svg>, no <foreignObject>, no <canvas>.\n- Put each character in its own <g> with a descriptive id (for example id=\"character-left\"), with nested <g> groups with descriptive ids for parts that could move (head, eyes, mouth, arms, hands, ...).\n- Gradients, clip paths, masks, and SVG filters (for example feGaussianBlur) are allowed.\n\nRules (breaking any rule scores 0):\n- Reply with exactly one ```html code block containing one complete, self-contained HTML document. If you send several blocks, only the last one counts. Do not use tools; answer directly.\n- The page is rendered offline in a 216x216 px viewport at device pixel ratio 1. Fill exactly that area, starting at the top-left corner.\n- No raster images: no <img>, no <image>, no CSS url(...) except url(#id) references to your own SVG definitions, no data: URIs, no base64, no blob: URLs.\n- No external resources or network access: no external scripts, stylesheets, fonts, iframes, links, fetch, XMLHttpRequest, WebSocket, or any other URL.\n- Do not call setTimeout, setInterval, requestAnimationFrame, or requestIdleCallback. The harness controls time.\n- The file must be at most 256 KB and must run without uncaught exceptions or console errors.",
+  "text": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Laughing yellow creature</title>\n<style>\n  html, body { margin: 0; padding: 0; width: 216px; height: 216px; overflow: hidden; background: #ececed; }\n  svg { display: block; }\n</style>\n</head>\n<body>\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 216 216\" width=\"216\" height=\"216\">\n  <defs>\n    <linearGradient id=\"bgGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#dfe0e3\"/>\n      <stop offset=\"0.4\" stop-color=\"#eeeeef\"/>\n      <stop offset=\"0.78\" stop-color=\"#eaeaea\"/>\n      <stop offset=\"1\" stop-color=\"#d6d6d8\"/>\n    </linearGradient>\n    <radialGradient id=\"bgGlow\" gradientUnits=\"userSpaceOnUse\" cx=\"50\" cy=\"110\" r=\"120\">\n      <stop offset=\"0\" stop-color=\"#ffffff\" stop-opacity=\"0.75\"/>\n      <stop offset=\"1\" stop-color=\"#ffffff\" stop-opacity=\"0\"/>\n    </radialGradient>\n    <radialGradient id=\"bodyGrad\" gradientUnits=\"userSpaceOnUse\" cx=\"112\" cy=\"95\" r=\"115\">\n      <stop offset=\"0\" stop-color=\"#f4cb50\"/>\n      <stop offset=\"0.55\" stop-color=\"#e9b439\"/>\n      <stop offset=\"1\" stop-color=\"#c48922\"/>\n    </radialGradient>\n    <radialGradient id=\"headGrad\" gradientUnits=\"userSpaceOnUse\" cx=\"120\" cy=\"28\" r=\"66\">\n      <stop offset=\"0\" stop-color=\"#f9d65e\"/>\n      <stop offset=\"0.6\" stop-color=\"#edbb3d\"/>\n      <stop offset=\"1\" stop-color=\"#cc9226\"/>\n    </radialGradient>\n    <radialGradient id=\"bellyGrad\" gradientUnits=\"userSpaceOnUse\" cx=\"121\" cy=\"128\" r=\"50\">\n      <stop offset=\"0\" stop-color=\"#f9f0e5\"/>\n      <stop offset=\"0.65\" stop-color=\"#efdcc9\"/>\n      <stop offset=\"1\" stop-color=\"#dabca2\"/>\n    </radialGradient>\n    <linearGradient id=\"armGradL\" gradientUnits=\"userSpaceOnUse\" x1=\"64\" y1=\"0\" x2=\"102\" y2=\"0\">\n      <stop offset=\"0\" stop-color=\"#d59a2a\"/>\n      <stop offset=\"0.4\" stop-color=\"#f1c549\"/>\n      <stop offset=\"1\" stop-color=\"#dba42f\"/>\n    </linearGradient>\n    <linearGradient id=\"armGradR\" gradientUnits=\"userSpaceOnUse\" x1=\"152\" y1=\"0\" x2=\"198\" y2=\"0\">\n      <stop offset=\"0\" stop-color=\"#d79f2d\"/>\n      <stop offset=\"0.5\" stop-color=\"#ecbc42\"/>\n      <stop offset=\"1\" stop-color=\"#c48922\"/>\n    </linearGradient>\n    <linearGradient id=\"legGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#c88d24\"/>\n      <stop offset=\"1\" stop-color=\"#e0a932\"/>\n    </linearGradient>\n    <linearGradient id=\"handGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#6d6d72\"/>\n      <stop offset=\"1\" stop-color=\"#48484c\"/>\n    </linearGradient>\n    <radialGradient id=\"mouthGrad\" gradientUnits=\"userSpaceOnUse\" cx=\"119\" cy=\"56\" r=\"24\">\n      <stop offset=\"0\" stop-color=\"#7c2b26\"/>\n      <stop offset=\"1\" stop-color=\"#3a0e0d\"/>\n    </radialGradient>\n    <filter id=\"blur3\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n      <feGaussianBlur stdDeviation=\"3\"/>\n    </filter>\n    <filter id=\"blur6\" x=\"-30%\" y=\"-60%\" width=\"160%\" height=\"220%\">\n      <feGaussianBlur stdDeviation=\"6\"/>\n    </filter>\n    <clipPath id=\"torsoClip\">\n      <path d=\"M92 62 C78 72 66 94 65 116 C64 142 68 166 80 182 C96 198 150 201 176 190 C191 180 198 156 197 131 C196 106 185 81 165 62 Z\"/>\n    </clipPath>\n    <clipPath id=\"mouthClip\">\n      <path d=\"M99 40 C99 33 110 31 119 31 C128 31 139 32 139 40 C139 55 133 72 119 72 C105 72 99 55 99 40 Z\"/>\n    </clipPath>\n  </defs>\n\n  <!-- Background -->\n  <g id=\"background\">\n    <rect id=\"bg-wall\" x=\"0\" y=\"0\" width=\"216\" height=\"216\" fill=\"url(#bgGrad)\"/>\n    <rect id=\"bg-glow\" x=\"0\" y=\"0\" width=\"216\" height=\"216\" fill=\"url(#bgGlow)\"/>\n    <ellipse id=\"ground-shadow\" cx=\"138\" cy=\"210\" rx=\"72\" ry=\"13\" fill=\"#8e8e90\" opacity=\"0.38\" filter=\"url(#blur6)\"/>\n  </g>\n\n  <!-- Character -->\n  <g id=\"character-yellow-creature\">\n\n    <g id=\"legs\">\n      <g id=\"leg-left\">\n        <path d=\"M88 178 C89 196 93 208 97 216 L128 216 C127 207 128 198 131 190 Z\" fill=\"url(#legGrad)\"/>\n      </g>\n      <g id=\"leg-right\">\n        <path d=\"M148 190 C151 200 156 210 160 216 L193 216 C193 204 191 190 187 176 Z\" fill=\"url(#legGrad)\"/>\n      </g>\n    </g>\n\n    <g id=\"torso\">\n      <path id=\"torso-shape\" d=\"M92 62 C78 72 66 94 65 116 C64 142 68 166 80 182 C96 198 150 201 176 190 C191 180 198 156 197 131 C196 106 185 81 165 62 Z\" fill=\"url(#bodyGrad)\"/>\n      <g id=\"belly\">\n        <path d=\"M126 104 C147 104 164 120 164 142 C164 163 148 179 126 179 C105 179 89 163 89 141 C89 120 105 104 126 104 Z\" fill=\"url(#bellyGrad)\"/>\n      </g>\n      <g id=\"neck-shadow\" clip-path=\"url(#torsoClip)\">\n        <ellipse cx=\"127\" cy=\"90\" rx=\"38\" ry=\"9\" fill=\"#a56c18\" opacity=\"0.45\" filter=\"url(#blur3)\"/>\n      </g>\n    </g>\n\n    <g id=\"arm-left\">\n      <path id=\"arm-left-shape\" d=\"M90 66 C76 74 66 94 65 116 C64 140 67 160 76 176 C82 182 92 180 95 172 C90 156 89 138 91 120 C93 104 98 90 102 80 Z\" fill=\"url(#armGradL)\"/>\n      <g id=\"hand-left\">\n        <g stroke=\"#515156\" stroke-width=\"5\" stroke-linecap=\"round\" fill=\"none\">\n          <path d=\"M82 184 L79 192\"/>\n          <path d=\"M87 187 L86 196\"/>\n          <path d=\"M93 187 L94 196\"/>\n          <path d=\"M97 181 L101 188\"/>\n        </g>\n        <path d=\"M80 172 C84 167 95 168 98 174 C101 179 100 186 97 189 C93 192 84 191 81 187 C77 183 77 176 80 172 Z\" fill=\"url(#handGrad)\"/>\n      </g>\n    </g>\n\n    <g id=\"arm-right\">\n      <path id=\"arm-right-shape\" d=\"M166 64 C185 80 196 106 197 131 C198 152 193 172 182 184 C174 190 164 188 160 180 C168 166 172 150 171 132 C170 112 164 94 154 80 Z\" fill=\"url(#armGradR)\"/>\n      <g id=\"hand-right\">\n        <g stroke=\"#515156\" stroke-width=\"5.4\" stroke-linecap=\"round\" fill=\"none\">\n          <path d=\"M149 192 L146 200\"/>\n          <path d=\"M155 196 L154 205\"/>\n          <path d=\"M162 196 L163 205\"/>\n          <path d=\"M168 192 L172 199\"/>\n        </g>\n        <path d=\"M147 180 C151 174 165 174 170 180 C173 185 172 193 168 196 C162 199 152 199 148 195 C144 191 144 184 147 180 Z\" fill=\"url(#handGrad)\"/>\n      </g>\n    </g>\n\n    <g id=\"head\">\n      <path id=\"head-shape\" d=\"M93 50 C90 30 105 12 127 12 C148 12 162 30 161 52 C160 70 150 84 126 86 C105 86 95 70 93 50 Z\" fill=\"url(#headGrad)\"/>\n\n      <g id=\"eyes\" fill=\"none\" stroke=\"#6a4311\" stroke-width=\"2\" stroke-linecap=\"round\">\n        <g id=\"eye-left\">\n          <path d=\"M100 23 C103 18 108 17 112 19\"/>\n        </g>\n        <g id=\"eye-right\">\n          <path d=\"M134 24 C139 23 144 26 147 31\"/>\n        </g>\n      </g>\n\n      <g id=\"mouth\">\n        <path id=\"mouth-interior\" d=\"M99 40 C99 33 110 31 119 31 C128 31 139 32 139 40 C139 55 133 72 119 72 C105 72 99 55 99 40 Z\" fill=\"url(#mouthGrad)\" stroke=\"#b5761c\" stroke-width=\"1.4\"/>\n        <g clip-path=\"url(#mouthClip)\">\n          <g id=\"tongue\">\n            <ellipse cx=\"119\" cy=\"60\" rx=\"10\" ry=\"6.5\" fill=\"#9b3c35\"/>\n          </g>\n          <g id=\"teeth-upper\">\n            <path d=\"M100 39 C102 34 111 33 119 33 C127 33 136 34 138 39 C137 44 130 45.5 119 46 C108 45.5 101 44 100 39 Z\" fill=\"#f6f3ec\"/>\n            <g stroke=\"#cfc7b8\" stroke-width=\"0.7\" fill=\"none\">\n              <path d=\"M107 34 L107.5 45\"/>\n              <path d=\"M113 33.5 L113.3 45.6\"/>\n              <path d=\"M119 33 L119 46\"/>\n              <path d=\"M125 33.5 L124.7 45.6\"/>\n              <path d=\"M131 34 L130.5 45\"/>\n            </g>\n          </g>\n          <g id=\"teeth-lower\">\n            <path d=\"M105 63 C109 60.5 129 60.5 133 63 C132 69 126 72 119 72 C112 72 106 69 105 63 Z\" fill=\"#f1ede4\"/>\n            <g stroke=\"#cfc7b8\" stroke-width=\"0.7\" fill=\"none\">\n              <path d=\"M112 61.5 L112.5 71\"/>\n              <path d=\"M119 61 L119 72\"/>\n              <path d=\"M126 61.5 L125.5 71\"/>\n            </g>\n          </g>\n        </g>\n      </g>\n    </g>\n  </g>\n\n  <!-- Watermark label -->\n  <g id=\"watermark\" opacity=\"0.7\">\n    <text x=\"182\" y=\"209\" font-size=\"6\" font-family=\"sans-serif\" fill=\"#8c8c8e\">豆包AI生成</text>\n  </g>\n</svg>\n</body>\n</html>\n```",
+  "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Laughing yellow creature</title>\n<style>\n  html, body { margin: 0; padding: 0; width: 216px; height: 216px; overflow: hidden; background: #ececed; }\n  svg { display: block; }\n</style>\n</head>\n<body>\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 216 216\" width=\"216\" height=\"216\">\n  <defs>\n    <linearGradient id=\"bgGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#dfe0e3\"/>\n      <stop offset=\"0.4\" stop-color=\"#eeeeef\"/>\n      <stop offset=\"0.78\" stop-color=\"#eaeaea\"/>\n      <stop offset=\"1\" stop-color=\"#d6d6d8\"/>\n    </linearGradient>\n    <radialGradient id=\"bgGlow\" gradientUnits=\"userSpaceOnUse\" cx=\"50\" cy=\"110\" r=\"120\">\n      <stop offset=\"0\" stop-color=\"#ffffff\" stop-opacity=\"0.75\"/>\n      <stop offset=\"1\" stop-color=\"#ffffff\" stop-opacity=\"0\"/>\n    </radialGradient>\n    <radialGradient id=\"bodyGrad\" gradientUnits=\"userSpaceOnUse\" cx=\"112\" cy=\"95\" r=\"115\">\n      <stop offset=\"0\" stop-color=\"#f4cb50\"/>\n      <stop offset=\"0.55\" stop-color=\"#e9b439\"/>\n      <stop offset=\"1\" stop-color=\"#c48922\"/>\n    </radialGradient>\n    <radialGradient id=\"headGrad\" gradientUnits=\"userSpaceOnUse\" cx=\"120\" cy=\"28\" r=\"66\">\n      <stop offset=\"0\" stop-color=\"#f9d65e\"/>\n      <stop offset=\"0.6\" stop-color=\"#edbb3d\"/>\n      <stop offset=\"1\" stop-color=\"#cc9226\"/>\n    </radialGradient>\n    <radialGradient id=\"bellyGrad\" gradientUnits=\"userSpaceOnUse\" cx=\"121\" cy=\"128\" r=\"50\">\n      <stop offset=\"0\" stop-color=\"#f9f0e5\"/>\n      <stop offset=\"0.65\" stop-color=\"#efdcc9\"/>\n      <stop offset=\"1\" stop-color=\"#dabca2\"/>\n    </radialGradient>\n    <linearGradient id=\"armGradL\" gradientUnits=\"userSpaceOnUse\" x1=\"64\" y1=\"0\" x2=\"102\" y2=\"0\">\n      <stop offset=\"0\" stop-color=\"#d59a2a\"/>\n      <stop offset=\"0.4\" stop-color=\"#f1c549\"/>\n      <stop offset=\"1\" stop-color=\"#dba42f\"/>\n    </linearGradient>\n    <linearGradient id=\"armGradR\" gradientUnits=\"userSpaceOnUse\" x1=\"152\" y1=\"0\" x2=\"198\" y2=\"0\">\n      <stop offset=\"0\" stop-color=\"#d79f2d\"/>\n      <stop offset=\"0.5\" stop-color=\"#ecbc42\"/>\n      <stop offset=\"1\" stop-color=\"#c48922\"/>\n    </linearGradient>\n    <linearGradient id=\"legGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#c88d24\"/>\n      <stop offset=\"1\" stop-color=\"#e0a932\"/>\n    </linearGradient>\n    <linearGradient id=\"handGrad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n      <stop offset=\"0\" stop-color=\"#6d6d72\"/>\n      <stop offset=\"1\" stop-color=\"#48484c\"/>\n    </linearGradient>\n    <radialGradient id=\"mouthGrad\" gradientUnits=\"userSpaceOnUse\" cx=\"119\" cy=\"56\" r=\"24\">\n      <stop offset=\"0\" stop-color=\"#7c2b26\"/>\n      <stop offset=\"1\" stop-color=\"#3a0e0d\"/>\n    </radialGradient>\n    <filter id=\"blur3\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n      <feGaussianBlur stdDeviation=\"3\"/>\n    </filter>\n    <filter id=\"blur6\" x=\"-30%\" y=\"-60%\" width=\"160%\" height=\"220%\">\n      <feGaussianBlur stdDeviation=\"6\"/>\n    </filter>\n    <clipPath id=\"torsoClip\">\n      <path d=\"M92 62 C78 72 66 94 65 116 C64 142 68 166 80 182 C96 198 150 201 176 190 C191 180 198 156 197 131 C196 106 185 81 165 62 Z\"/>\n    </clipPath>\n    <clipPath id=\"mouthClip\">\n      <path d=\"M99 40 C99 33 110 31 119 31 C128 31 139 32 139 40 C139 55 133 72 119 72 C105 72 99 55 99 40 Z\"/>\n    </clipPath>\n  </defs>\n\n  <!-- Background -->\n  <g id=\"background\">\n    <rect id=\"bg-wall\" x=\"0\" y=\"0\" width=\"216\" height=\"216\" fill=\"url(#bgGrad)\"/>\n    <rect id=\"bg-glow\" x=\"0\" y=\"0\" width=\"216\" height=\"216\" fill=\"url(#bgGlow)\"/>\n    <ellipse id=\"ground-shadow\" cx=\"138\" cy=\"210\" rx=\"72\" ry=\"13\" fill=\"#8e8e90\" opacity=\"0.38\" filter=\"url(#blur6)\"/>\n  </g>\n\n  <!-- Character -->\n  <g id=\"character-yellow-creature\">\n\n    <g id=\"legs\">\n      <g id=\"leg-left\">\n        <path d=\"M88 178 C89 196 93 208 97 216 L128 216 C127 207 128 198 131 190 Z\" fill=\"url(#legGrad)\"/>\n      </g>\n      <g id=\"leg-right\">\n        <path d=\"M148 190 C151 200 156 210 160 216 L193 216 C193 204 191 190 187 176 Z\" fill=\"url(#legGrad)\"/>\n      </g>\n    </g>\n\n    <g id=\"torso\">\n      <path id=\"torso-shape\" d=\"M92 62 C78 72 66 94 65 116 C64 142 68 166 80 182 C96 198 150 201 176 190 C191 180 198 156 197 131 C196 106 185 81 165 62 Z\" fill=\"url(#bodyGrad)\"/>\n      <g id=\"belly\">\n        <path d=\"M126 104 C147 104 164 120 164 142 C164 163 148 179 126 179 C105 179 89 163 89 141 C89 120 105 104 126 104 Z\" fill=\"url(#bellyGrad)\"/>\n      </g>\n      <g id=\"neck-shadow\" clip-path=\"url(#torsoClip)\">\n        <ellipse cx=\"127\" cy=\"90\" rx=\"38\" ry=\"9\" fill=\"#a56c18\" opacity=\"0.45\" filter=\"url(#blur3)\"/>\n      </g>\n    </g>\n\n    <g id=\"arm-left\">\n      <path id=\"arm-left-shape\" d=\"M90 66 C76 74 66 94 65 116 C64 140 67 160 76 176 C82 182 92 180 95 172 C90 156 89 138 91 120 C93 104 98 90 102 80 Z\" fill=\"url(#armGradL)\"/>\n      <g id=\"hand-left\">\n        <g stroke=\"#515156\" stroke-width=\"5\" stroke-linecap=\"round\" fill=\"none\">\n          <path d=\"M82 184 L79 192\"/>\n          <path d=\"M87 187 L86 196\"/>\n          <path d=\"M93 187 L94 196\"/>\n          <path d=\"M97 181 L101 188\"/>\n        </g>\n        <path d=\"M80 172 C84 167 95 168 98 174 C101 179 100 186 97 189 C93 192 84 191 81 187 C77 183 77 176 80 172 Z\" fill=\"url(#handGrad)\"/>\n      </g>\n    </g>\n\n    <g id=\"arm-right\">\n      <path id=\"arm-right-shape\" d=\"M166 64 C185 80 196 106 197 131 C198 152 193 172 182 184 C174 190 164 188 160 180 C168 166 172 150 171 132 C170 112 164 94 154 80 Z\" fill=\"url(#armGradR)\"/>\n      <g id=\"hand-right\">\n        <g stroke=\"#515156\" stroke-width=\"5.4\" stroke-linecap=\"round\" fill=\"none\">\n          <path d=\"M149 192 L146 200\"/>\n          <path d=\"M155 196 L154 205\"/>\n          <path d=\"M162 196 L163 205\"/>\n          <path d=\"M168 192 L172 199\"/>\n        </g>\n        <path d=\"M147 180 C151 174 165 174 170 180 C173 185 172 193 168 196 C162 199 152 199 148 195 C144 191 144 184 147 180 Z\" fill=\"url(#handGrad)\"/>\n      </g>\n    </g>\n\n    <g id=\"head\">\n      <path id=\"head-shape\" d=\"M93 50 C90 30 105 12 127 12 C148 12 162 30 161 52 C160 70 150 84 126 86 C105 86 95 70 93 50 Z\" fill=\"url(#headGrad)\"/>\n\n      <g id=\"eyes\" fill=\"none\" stroke=\"#6a4311\" stroke-width=\"2\" stroke-linecap=\"round\">\n        <g id=\"eye-left\">\n          <path d=\"M100 23 C103 18 108 17 112 19\"/>\n        </g>\n        <g id=\"eye-right\">\n          <path d=\"M134 24 C139 23 144 26 147 31\"/>\n        </g>\n      </g>\n\n      <g id=\"mouth\">\n        <path id=\"mouth-interior\" d=\"M99 40 C99 33 110 31 119 31 C128 31 139 32 139 40 C139 55 133 72 119 72 C105 72 99 55 99 40 Z\" fill=\"url(#mouthGrad)\" stroke=\"#b5761c\" stroke-width=\"1.4\"/>\n        <g clip-path=\"url(#mouthClip)\">\n          <g id=\"tongue\">\n            <ellipse cx=\"119\" cy=\"60\" rx=\"10\" ry=\"6.5\" fill=\"#9b3c35\"/>\n          </g>\n          <g id=\"teeth-upper\">\n            <path d=\"M100 39 C102 34 111 33 119 33 C127 33 136 34 138 39 C137 44 130 45.5 119 46 C108 45.5 101 44 100 39 Z\" fill=\"#f6f3ec\"/>\n            <g stroke=\"#cfc7b8\" stroke-width=\"0.7\" fill=\"none\">\n              <path d=\"M107 34 L107.5 45\"/>\n              <path d=\"M113 33.5 L113.3 45.6\"/>\n              <path d=\"M119 33 L119 46\"/>\n              <path d=\"M125 33.5 L124.7 45.6\"/>\n              <path d=\"M131 34 L130.5 45\"/>\n            </g>\n          </g>\n          <g id=\"teeth-lower\">\n            <path d=\"M105 63 C109 60.5 129 60.5 133 63 C132 69 126 72 119 72 C112 72 106 69 105 63 Z\" fill=\"#f1ede4\"/>\n            <g stroke=\"#cfc7b8\" stroke-width=\"0.7\" fill=\"none\">\n              <path d=\"M112 61.5 L112.5 71\"/>\n              <path d=\"M119 61 L119 72\"/>\n              <path d=\"M126 61.5 L125.5 71\"/>\n            </g>\n          </g>\n        </g>\n      </g>\n    </g>\n  </g>\n\n  <!-- Watermark label -->\n  <g id=\"watermark\" opacity=\"0.7\">\n    <text x=\"182\" y=\"209\" font-size=\"6\" font-family=\"sans-serif\" fill=\"#8c8c8e\">豆包AI生成</text>\n  </g>\n</svg>\n</body>\n</html>",
+  "html_sha256": "9361e4baf802cc26a5b36d4b5f133ea9386b941604d93f5f41fa97978a03ac67",
+  "static_gates": [],
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 127.8,
+    "tokens": {
+      "input": 1097,
+      "cached_input": 0,
+      "cache_write": 1095,
+      "output": 11416,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 0.23380300000000004,
+    "tools_used": [],
+    "cost_usd": 0.23380300000000004,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1095,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 11416,
+      "output_tokens_details": {
+        "thinking_tokens": 7409
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 1095
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 11416,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1095,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 1095,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T03:12:33Z",
+    "finished_at": "2026-11-10T03:14:41Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}

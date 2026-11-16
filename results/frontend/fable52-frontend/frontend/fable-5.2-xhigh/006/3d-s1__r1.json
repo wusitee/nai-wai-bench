@@ -1,0 +1,111 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "track": "frontend",
+  "corpus": "frontend-v1",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "task": "006",
+  "kind": "3d-s1",
+  "rep": 1,
+  "prompt_sha256": "bc1cc50784c3e8c1076167751e7c6bdf331334cf297dd05ee17b4f497b6c8d8f",
+  "width": 240,
+  "height": 246,
+  "duration_ms": 3200,
+  "input_names": "neutral",
+  "images": [
+    "bench/frontend-v1/assets/006/frame_00.png"
+  ],
+  "prompt": "The attached image is a 240x246 px frame from an animated GIF. Rebuild the scene in 3D with three.js.\n\nTask (3D, static): write an HTML page that builds the scene from code and renders it so that the view from your reference camera reproduces the image as faithfully as you can: characters, poses, facial expressions, hands, props, background, and colors. A later step will animate your scene, so structure it in named groups. For this static step, render(t) may ignore t.\n\nthree.js contract:\n- The harness injects an import map for three.js r187. Import from 'three' and from 'three/addons/'; the only addons available are 'three/addons/controls/OrbitControls.js', 'three/addons/geometries/ConvexGeometry.js', 'three/addons/geometries/ParametricFunctions.js', 'three/addons/geometries/ParametricGeometry.js', 'three/addons/geometries/RoundedBoxGeometry.js', 'three/addons/math/ConvexHull.js', 'three/addons/utils/BufferGeometryUtils.js'. Use one <script type=\"module\">. Do not add an import map or load anything else.\n- Build all geometry in code: no model files, no loaders, no image textures. Procedural CanvasTexture or DataTexture textures up to 64x64 px are allowed.\n- Create the renderer with new THREE.WebGLRenderer({ preserveDrawingBuffer: true }), at pixel ratio 1, with a 240x246 canvas that fills the page.\n- Y is up. Put each character in its own THREE.Group with a descriptive name (for example 'character-left'), with nested named groups for parts that could move (head, eyes, mouth, arms, hands, ...). Characters must be solid 3D volumes: the harness also renders them from the side, the back, a three-quarter angle, and above, with cameras fitted to the characters.\n- Light the scene so the characters read from every side.\n- When the scene is ready, set window.nwb = { scene, renderer, cameras: { ref }, characters, render(t), ready: true }. cameras.ref is the camera for the main view. characters is an array of the character groups. render(t) poses the scene for time t in milliseconds and renders it synchronously with cameras.ref; the same t must always produce identical pixels, whatever was rendered before. Do not use renderer.setAnimationLoop: the harness calls render(t).\n\nRules (breaking any rule scores 0):\n- Reply with exactly one ```html code block containing one complete, self-contained HTML document. If you send several blocks, only the last one counts. Do not use tools; answer directly.\n- The page is rendered offline in a 240x246 px viewport at device pixel ratio 1. Fill exactly that area, starting at the top-left corner.\n- No raster images: no <img>, no <image>, no CSS url(...) except url(#id) references to your own SVG definitions, no data: URIs, no base64, no blob: URLs.\n- No external resources or network access: no external scripts, stylesheets, fonts, iframes, links, fetch, XMLHttpRequest, WebSocket, or any other URL.\n- Do not call setTimeout, setInterval, requestAnimationFrame, or requestIdleCallback. The harness controls time.\n- The file must be at most 256 KB and must run without uncaught exceptions or console errors.",
+  "text": "28);\nconst M=(c,r=0.8)=>new THREE.MeshStandardMaterial({color:c,roughness:r,metalness:0});\nconst V=(x,y,z)=>new THREE.Vector3(x,y,z);\nfunction ell(mat,rx,ry,rz,x=0,y=0,z=0,name){const m=new THREE.Mesh(SG,mat);m.scale.set(rx,ry,rz);m.position.set(x,y,z);if(name)m.name=name;return m;}\nfunction grp(name,parent,x=0,y=0,z=0){const g=new THREE.Group();g.name=name;g.position.set(x,y,z);if(parent)parent.add(g);return g;}\nfunction limb(mat,a,b,ra,rb){const g=new THREE.Group();const d=b.clone().sub(a);const L=d.length();\n  const c=new THREE.Mesh(new THREE.CylinderGeometry(rb,ra,L,20,1,true),mat);\n  c.position.copy(a).addScaledVector(d,0.5);c.quaternion.setFromUnitVectors(V(0,1,0),d.clone().normalize());\n  g.add(c,ell(mat,ra,ra,ra,a.x,a.y,a.z),ell(mat,rb,rb,rb,b.x,b.y,b.z));return g;}\nfunction orient(o,xd,yd){const X=xd.clone().normalize(),Y=yd.clone().normalize();const Z=X.clone().cross(Y).normalize();Y.crossVectors(Z,X);\n  o.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(X,Y,Z));}\nfunction hand(mat,name,nf){const h=new THREE.Group();h.name=name;h.add(ell(mat,0.2,0.1,0.2,0.05,0,0,'palm'));\n  for(let i=0;i<nf;i++){const t=i/(nf-1)-0.5;const f=limb(mat,V(0.15,0,t*0.34),V(0.46-Math.abs(t)*0.1,-0.05,t*0.52),0.06,0.05);f.name='finger-'+i;h.add(f);}\n  return h;}\nfunction arm(parent,name,S,E,Hd,r0,r1,r2,mat){const g=grp(name,parent,S.x,S.y,S.z);\n  const u=limb(mat,V(0,0,0),E,r0,r1);u.name='upper';const l=limb(mat,E,Hd,r1,r2);l.name='lower';g.add(u,l);return g;}\nfunction leg(parent,name,Hp,K,F,mat){const g=grp(name,parent,Hp.x,Hp.y,Hp.z);\n  const th=limb(mat,V(0,0,0),K,0.36,0.29);th.name='thigh';const sh=limb(mat,K,F,0.29,0.22);sh.name='shin';\n  const ft=grp('foot',g,F.x,F.y,F.z);ft.add(ell(mat,0.26,0.2,0.3));g.add(th,sh);return g;}\nfunction mouth(rx,ry,rz,hw,y0,cv,r,mat){const pts=[];\n  for(let i=0;i<=16;i++){const u=i/8-1;const x=hw*u,y=y0+cv*u*u;\n    const z=rz*Math.sqrt(Math.max(0.02,1-(x/rx)**2-(y/ry)**2))*1.005;pts.push(V(x,y,z));}\n  return new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),32,r,6,false),mat);}\nfunction box(c,w,h,d,x,y,z,name){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),M(c));m.position.set(x,y,z);m.name=name;return m;}\n\n// ---------- materials ----------\nconst gMat=M(0x9aba60),gBelly=M(0xe8d8bc),gHand=M(0x5c5136),gDark=M(0x3c5522);\nconst pMat=M(0xe8a0b0),pBelly=M(0xf0d8c4),pHand=M(0x9a6470),pDark=M(0x8a4a5a);\nconst white=M(0xffffff,0.4),black=M(0x111111,0.3);\n\n// ---------- green character (standing, left) ----------\nconst green=grp('character-left-green',scene,-1.25,0.5,-0.9);\nconst gBody=grp('body',green);\nconst gb=ell(gMat,1.35,1.75,1.05,-0.05,1.65,0,'torso');gb.rotation.z=-0.18;\ngBody.add(gb,ell(gMat,1.0,0.95,0.85,0.42,2.8,0.03,'chest'),ell(gBelly,0.62,0.78,0.56,0.5,1.65,0.45,'belly-patch'));\nconst gHead=grp('head',green,0.78,3.38,0.1);gHead.rotation.set(0.08,0.15,0);\ngHead.add(ell(gMat,0.7,0.66,0.64,0,0,0,'skull'));\nconst gEyes=grp('eyes',gHead);\nfor(const s of[-1,1]){const e=grp(s<0?'eye-right':'eye-left',gEyes,0.3*s,0.06,0.5);e.rotation.y=s*0.3;\n  e.add(ell(white,0.12,0.12,0.12,0,0,0,'white'),ell(black,0.085,0.085,0.07,0,0,0.065,'pupil'));}\nconst gMouth=grp('mouth',gHead);gMouth.add(mouth(0.7,0.66,0.64,0.4,-0.33,0.09,0.018,gDark));\nconst gaR=arm(green,'arm-right',V(-0.85,2.3,0.6),V(0.58,-0.68,0.9),V(1.25,-0.97,1.47),0.3,0.24,0.19,gMat);\nconst ghR=hand(gHand,'hand-right',4);ghR.position.set(1.3,-0.98,1.52);orient(ghR,V(0.8,0.42,0.43),V(-0.6,0.56,0.57));gaR.add(ghR);\nconst gaL=arm(green,'arm-left',V(1.15,2.6,0.25),V(0.1,-0.7,0.2),V(0.14,-1.2,0.43),0.27,0.22,0.18,gMat);\nconst ghL=hand(gHand,'hand-left',4);ghL.position.set(0.14,-1.22,0.45);orient(ghL,V(-0.15,0.82,0.56),V(-0.1,0.55,-0.83));gaL.add(ghL);\nconst gLegs=grp('legs',green);\nfor(const s of[-1,1]){const f=grp(s<0?'foot-right':'foot-left',gLegs,0.6*s,0.12,0.45);f.add(ell(gMat,0.4,0.2,0.45));}\n\n// ---------- pink character (lying on bed, right) ----------\nconst pink=grp('character-right-pink',scene,0,0.5,0.7);\nconst pBody=grp('body',pink);\npBody.add(ell(pMat,1.35,0.9,0.95,0.25,0.85,0,'belly'),ell(pBelly,1.2,0.8,0.9,0.3,1.02,0.1,'belly-patch'),ell(pMat,0.78,0.72,0.75,1.3,1.05,-0.1,'chest'));\nconst pHead=grp('head',pink,1.85,1.5,-0.15);pHead.rotation.set(-0.15,0.3,0);\npHead.add(ell(pMat,0.42,0.4,0.4,0,0,0,'skull'));\nconst pEars=grp('ears',pHead);\nfor(const s of[-1,1])pEars.add(ell(pMat,0.1,0.1,0.1,0.28*s,0.33,0,s<0?'ear-right':'ear-left'));\nconst pEyes=grp('eyes',pHead);\nfor(const s of[-1,1]){const e=grp(s<0?'eye-right':'eye-left',pEyes,0.17*s,0.08,0.32);e.rotation.y=s*0.3;\n  e.add(ell(white,0.075,0.075,0.075,0,0,0,'white'),ell(black,0.052,0.052,0.045,0,0,0.042,'pupil'));}\nconst pMouth=grp('mouth',pHead);pMouth.add(mouth(0.42,0.4,0.4,0.16,-0.14,0.05,0.012,pDark));\nconst paN=arm(pink,'arm-near',V(1.25,0.95,0.6),V(0.05,-0.55,0.42),V(-0.3,-0.72,0.68),0.22,0.18,0.15,pMat);\nconst phN=hand(pHand,'hand-near',3);phN.scale.setScalar(0.75);phN.position.set(-0.33,-0.72,0.7);orient(phN,V(-1,0,0.3),V(0,1,0));paN.add(phN);\nconst paF=arm(pink,'arm-far',V(1.25,0.95,-0.7),V(0.05,-0.5,-0.35),V(-0.25,-0.7,-0.55),0.22,0.18,0.15,pMat);\nconst phF=hand(pHand,'hand-far',3);phF.scale.setScalar(0.75);phF.position.set(-0.28,-0.7,-0.57);orient(phF,V(-1,0,-0.3),V(0,1,0));paF.add(phF);\nleg(pink,'leg-near',V(-0.7,0.45,0.6),V(-0.55,0.1,0.35),V(-0.5,-0.2,0.72),pMat);\nleg(pink,'leg-far',V(-0.75,0.45,-0.3),V(-0.55,0.15,0.1),V(-0.9,-0.15,0.2),pMat);\n\n// ---------- environment ----------\nconst env=grp('environment',scene);\nconst bed=grp('bed',env);\nbed.add(box(0xe9e5e2,8.5,0.45,5.2,0.25,0.275,0.6,'mattress'),box(0x3a241e,8.7,0.8,5.4,0.25,-0.3,0.6,'frame'),\n  box(0x3d2720,4.4,4.2,0.2,2.4,1.4,-2.1,'headboard'),box(0x553830,4.5,0.14,0.28,2.4,3.5,-2.1,'headboard-rail'));\nconst pil=new THREE.Mesh(new RoundedBoxGeometry(0.6,1.5,1.8,3,0.2),M(0xf2eeea));pil.name='pillow';pil.position.set(2.6,1.2,0.5);pil.rotation.z=-0.3;bed.add(pil);\nconst lamp=grp('lamp',env,0.45,2.95,-1.8);\nconst shade=new THREE.Mesh(new THREE.CylinderGeometry(0.2,0.3,0.6,24),new THREE.MeshBasicMaterial({color:0xfff2dc}));shade.name='shade';\nlamp.add(shade,box(0x2a1a16,0.06,0.06,0.3,0,-0.3,-0.15,'bracket'));\nconst lampLight=new THREE.PointLight(0xffd9b0,5,0,2);lampLight.position.set(0,0.1,0.35);lamp.add(lampLight);\nconst cv=document.createElement('canvas');cv.width=cv.height=64;const cx=cv.getContext('2d');\ncx.fillStyle='#7c5d52';cx.fillRect(0,0,64,64);\nlet gr=cx.createRadialGradient(34,29,2,34,29,20);gr.addColorStop(0,'#ccb2a0');gr.addColorStop(0.45,'#b0937f');gr.addColorStop(1,'#7c5d52');\ncx.fillStyle=gr;cx.fillRect(0,0,64,64);\ngr=cx.createLinearGradient(17,0,22,0);gr.addColorStop(0,'#241614');gr.addColorStop(1,'rgba(36,22,20,0)');\ncx.fillStyle=gr;cx.fillRect(0,0,22,64);\nconst wt=new THREE.CanvasTexture(cv);wt.colorSpace=THREE.SRGBColorSpace;\nconst wall=new THREE.Mesh(new THREE.PlaneGeometry(14,9),new THREE.MeshBasicMaterial({map:wt}));wall.name='wall';wall.position.set(0,3,-2.7);env.add(wall);\nconst floor=new THREE.Mesh(new THREE.PlaneGeometry(40,40),M(0x3a2a24));floor.name='floor';floor.rotation.x=-Math.PI/2;floor.position.y=-0.7;env.add(floor);\n\n// ---------- lights ----------\nscene.add(new THREE.HemisphereLight(0xffeedd,0x554444,1.6));\nconst key=new THREE.DirectionalLight(0xfff0e0,2.3);key.position.set(2.5,6,6);scene.add(key);\nconst back=new THREE.DirectionalLight(0xffe0d0,1.0);back.position.set(-4,4,-6);scene.add(back);\n\nfunction render(t){renderer.render(scene,cam);}\nrender(0);\nwindow.nwb={scene,renderer,cameras:{ref:cam},characters:[green,pink],render,ready:true};\n</script>\n</body></html>\n```",
+  "html": null,
+  "html_sha256": null,
+  "static_gates": [
+    "no ```html block"
+  ],
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 760.4,
+    "tokens": {
+      "input": 36850,
+      "cached_input": 0,
+      "cache_write": 36842,
+      "output": 70414,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 1.592522,
+    "tools_used": [],
+    "cost_usd": 1.592522,
+    "usage": {
+      "input_tokens": 8,
+      "cache_creation_input_tokens": 36842,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 70414,
+      "output_tokens_details": {
+        "thinking_tokens": 65332
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 36842
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 4,
+          "output_tokens": 6414,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 33678,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 33678,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T03:37:48Z",
+    "finished_at": "2026-11-10T03:50:28Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}

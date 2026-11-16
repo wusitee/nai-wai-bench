@@ -1,0 +1,114 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/fable-5.2-xhigh/knowledge_en__r1.json",
+  "target_sha256": "e9c79bebdb3c343db8ab79b1a698a5b6583fbb3b16f6e5cab1c1069c2673bf2d",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "57a23e06dca28e00",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 0,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [
+    "Claims there were plagiarism accusations that Nailong resembled 'an earlier character called 小七'. 小七 is actually Nailong's official companion character, not a prior character it was accused of copying. The model hedges only on the details, not on the claim itself."
+  ],
+  "rationale": "The model correctly describes the base Nailong character and openly says it doesn't know the specific meme. Its hedged guesses (a laughing face with an open mouth, a frog-like look for 奶蛙) partly match the notes. It covers none of the AI-variant origin, the 星野 agent, the 军体拳 remix, the official-reply copypasta, or the rarity-title genre.",
+  "raw": "```json\n{\"scores\": {\"base_character\": 2, \"ai_variant\": 0, \"xingye_origin\": 0, \"aliases\": 0, \"naiwa\": 1, \"laugh_pose\": 1, \"junti_quan\": 0, \"official_reply\": 0, \"trait_variants\": 0, \"rarity_titles\": 0}, \"hallucinations\": [\"Claims there were plagiarism accusations that Nailong resembled 'an earlier character called 小七'. 小七 is actually Nailong's official companion character, not a prior character it was accused of copying. The model hedges only on the details, not on the claim itself.\"], \"rationale\": \"The model correctly describes the base Nailong character and openly says it doesn't know the specific meme. Its hedged guesses (a laughing face with an open mouth, a frog-like look for 奶蛙) partly match the notes. It covers none of the AI-variant origin, the 星野 agent, the 军体拳 remix, the official-reply copypasta, or the rarity-title genre.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 13.3,
+    "tokens": {
+      "input": 3148,
+      "cached_input": 0,
+      "cache_write": 3146,
+      "output": 1101,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0475586,
+    "tools_used": [],
+    "cost_usd": 0.0475586,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3146,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1101,
+      "output_tokens_details": {
+        "thinking_tokens": 767
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3146,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1101,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3146,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3146
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-11T01:44:58Z",
+    "finished_at": "2026-11-11T01:45:12Z",
+    "revision": "b0b3b59",
+    "nwb_version": "0.1.0"
+  }
+}

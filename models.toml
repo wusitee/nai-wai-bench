@@ -192,6 +192,16 @@ effort = "max"
 price = { input = 10.0, cached_input = 0.25, cache_write = 12.50, output = 50.0, unit = "USD/1M tokens", source = "https://platform.claude.com/docs/en/about-claude/pricing", as_of = "2026-10-31" }
 can = ["text", "vision"]
 
+[models."fable-5.2-xhigh"]
+timeout = 2400  # frontend pages can take over 20 minutes per call
+label = "Claude Fable 5.2"
+backend = "claude"
+vendor = "anthropic"
+model = "claude-fable-5-2"
+effort = "xhigh"
+price = { input = 8.0, cached_input = 0.20, cache_write = 10.0, output = 40.0, unit = "USD/1M tokens", source = "https://platform.claude.com/docs/en/about-claude/pricing", as_of = "2026-11-10" }
+can = ["text", "vision"]
+
 [models."opus-5.5-max"]
 timeout = 2400  # max effort can think for ~20 minutes on one vision item
 label = "Claude Opus 5.5"

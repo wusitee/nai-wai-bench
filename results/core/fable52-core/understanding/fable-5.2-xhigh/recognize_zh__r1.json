@@ -1,0 +1,103 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "这个角色应该是西班牙3D动画《咕力咕力》（*Glumpers*）里的黄色胖子 **Fubble**（中文常译作\"肥波\"）。它不是奶龙，只是黄色身体加浅色肚皮的外形和奶龙很像，所以常被认错。\n\n**相关的梗：「我才是奶龙」**\n\n- 2024年前后，抖音、B站上有人拿它的片段配上\"我是奶龙\"\"我才是奶龙！\"的台词，做成鬼畜和搞笑视频。\n- 这个梗随后扩散成一波\"奶龙\"热潮，比如把头像\"奶龙化\"、用\"你是奶龙\"互相调侃。\n- 图中这个捧腹大笑的画面常被当作嘲笑用的表情包。\n\n**别名：**\n\n- 梗本身也叫\"我是奶龙\"\"奶龙梗\"，英文圈称 \"I Am Nailong\" 或 \"I'm the Real Nailong\"。\n- 这个角色则被叫作\"假奶龙\"\"盗版奶龙\"\"山寨奶龙\"或\"黄胖子\"。\n\n以上是凭记忆回答的，角色和梗的出处我比较有把握，但中文译名和各个别名的具体叫法可能有出入。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 58.6,
+    "tokens": {
+      "input": 1219,
+      "cached_input": 0,
+      "cache_write": 1217,
+      "output": 4439,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 0.09487299999999999,
+    "tools_used": [],
+    "cost_usd": 0.09487299999999999,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1217,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 4439,
+      "output_tokens_details": {
+        "thinking_tokens": 4014
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 1217
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 4439,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1217,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 1217,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T03:00:41Z",
+    "finished_at": "2026-11-10T03:01:39Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}

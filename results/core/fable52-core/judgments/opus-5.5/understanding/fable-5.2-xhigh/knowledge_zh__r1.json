@@ -1,0 +1,114 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/fable-5.2-xhigh/knowledge_zh__r1.json",
+  "target_sha256": "a370d7c22e9794650d7ccb50d3642c30c262834f47678ad9de860b0233b71158",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "2acb0dd134d5212f",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 0,
+    "naiwa": 1,
+    "laugh_pose": 0,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [
+    "States confidently that the producer (出品方) of 《奶龙》 is 萌伢动漫. According to the background, the character was created by 谢承恩 and designed by 深圳第七印象文化传媒有限公司."
+  ],
+  "rationale": "The model correctly describes the base 奶龙 character and honestly admits it doesn't know the 大笑奶龙 meme. Its hedged guess that it is a frog-like Nailong variant earns partial credit for 奶蛙. It covers none of the origin, aliases, laughing pose, remixes, official reply or rarity-title items, and it misattributes the production company.",
+  "raw": "```json\n{\"scores\": {\"base_character\": 2, \"ai_variant\": 0, \"xingye_origin\": 0, \"aliases\": 0, \"naiwa\": 1, \"laugh_pose\": 0, \"junti_quan\": 0, \"official_reply\": 0, \"trait_variants\": 0, \"rarity_titles\": 0}, \"hallucinations\": [\"States confidently that the producer (出品方) of 《奶龙》 is 萌伢动漫. According to the background, the character was created by 谢承恩 and designed by 深圳第七印象文化传媒有限公司.\"], \"rationale\": \"The model correctly describes the base 奶龙 character and honestly admits it doesn't know the 大笑奶龙 meme. Its hedged guess that it is a frog-like Nailong variant earns partial credit for 奶蛙. It covers none of the origin, aliases, laughing pose, remixes, official reply or rarity-title items, and it misattributes the production company.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 16.0,
+    "tokens": {
+      "input": 3136,
+      "cached_input": 0,
+      "cache_write": 3134,
+      "output": 1106,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.047563400000000006,
+    "tools_used": [],
+    "cost_usd": 0.047563400000000006,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3134,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1106,
+      "output_tokens_details": {
+        "thinking_tokens": 787
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3134,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1106,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3134,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3134
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-11T01:45:00Z",
+    "finished_at": "2026-11-11T01:45:16Z",
+    "revision": "b0b3b59",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "html_sha256": "dec63f449e4b63c31a83a2e7b824013a6cf60a661bdd2646d67f9c0ddccd44cd",
+  "harness": "fee9bd636b661bc1",
+  "kind": "3d-s3",
+  "gates": [],
+  "errors": [],
+  "blocked": [],
+  "forbidden": [],
+  "elements": [],
+  "timing": {
+    "declarative": false,
+    "scripted": false
+  },
+  "frames": [
+    {
+      "file": "frame_00.webp",
+      "t": 0
+    },
+    {
+      "file": "frame_01.webp",
+      "t": 800
+    },
+    {
+      "file": "frame_02.webp",
+      "t": 1530
+    },
+    {
+      "file": "frame_03.webp",
+      "t": 2330
+    },
+    {
+      "file": "frame_04.webp",
+      "t": 3130
+    },
+    {
+      "file": "frame_05.webp",
+      "t": 3930
+    },
+    {
+      "file": "frame_06.webp",
+      "t": 4670
+    },
+    {
+      "file": "frame_07.webp",
+      "t": 5470
+    }
+  ],
+  "views": [
+    {
+      "file": "view_side.webp",
+      "view": "side",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_back.webp",
+      "view": "back",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_three_quarter.webp",
+      "view": "three_quarter",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_top.webp",
+      "view": "top",
+      "t": 0,
+      "hidden": []
+    }
+  ],
+  "scene": {
+    "characters": [
+      {
+        "name": "character-penguin",
+        "meshes": 52,
+        "width": 4.13051498014118,
+        "height": 8.689999976158141,
+        "depth": 3.647999999999996,
+        "ratio": 0.8831828519056257
+      }
+    ],
+    "textures": 1
+  },
+  "mode": "render(t)",
+  "preview": "preview.webp",
+  "checks": {
+    "determinism_diff": 0.0,
+    "loop_diff": 0.0,
+    "motion_diff": 0.46859410430839005
+  },
+  "seconds": 5.3
+}

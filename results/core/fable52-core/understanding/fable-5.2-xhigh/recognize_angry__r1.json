@@ -1,0 +1,103 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "**我的判断：这很可能是红色改色版的\"奶龙\"**，但不能完全确定。\n\n- **角色**：圆滚滚的大肚子、浅色肚皮和3D建模的胖体型，很像国产动画《奶龙》的主角奶龙。原版是黄色身体配奶白色肚皮，这张被改成了红色，并加上了怒目皱眉的表情。\n- **所属的梗**：\n  - 一是\"奶龙\"系列表情包。奶龙在2024年前后因\"我才是奶龙\"等梗在抖音、B站爆火，衍生出大量改色、魔改的恶搞版本。\n  - 二是\"红温\"梗。这个词源自电竞直播圈，形容人气到脸发红、破防上头。把角色整个染红，再配上\"切换愤怒模式😡\"，就是\"我红温了/我要生气了\"的意思，多用于聊天时假装发火。\n\n我不能完全确定，是因为这张图的绿色眼睛和头部细节与原版奶龙有出入。它也可能是AI生成的图，或是别的角色的二创。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 89.5,
+    "tokens": {
+      "input": 529,
+      "cached_input": 0,
+      "cache_write": 527,
+      "output": 6560,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 0.133843,
+    "tools_used": [],
+    "cost_usd": 0.133843,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 527,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 6560,
+      "output_tokens_details": {
+        "thinking_tokens": 6188
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 527
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 6560,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 527,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 527,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T03:02:04Z",
+    "finished_at": "2026-11-10T03:03:34Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/fable-5.2-xhigh/write_prompt.giraffe__r1.json",
+  "target_sha256": "e33557592ddddcfe2bbe18a7c6cb1f77db503666554f89b94853c81de58ce9c4",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "ecd662e8b47f0f91",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 1,
+    "vibe": 1,
+    "identity": 1
+  },
+  "hallucinations": [
+    "Head thrown back while standing upright, contradicting the hunched, doubled-over pose",
+    "One hand pointing straight at the viewer instead of both hands on the belly",
+    "Thick, slightly elongated neck, contradicting the neckless body where the head merges into the torso"
+  ],
+  "rationale": "The prompt covers the squeezed-arc eyes, pale belly, glossy 3D render and pear-shaped body well. It inverts the pose (upright, head back, pointing) and leaves out the teeth. Its background is pastel and blurred rather than plain white. The giraffe reads as a butter-yellow Nailong with only a few patches and horns, and the mood leans smug and kid-cartoon rather than unhinged.",
+  "raw": "```json\n{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 2, \"mouth\": 1, \"body\": 1, \"belly_patch\": 2, \"render\": 2, \"background\": 1, \"vibe\": 1, \"identity\": 1}, \"hallucinations\": [\"Head thrown back while standing upright, contradicting the hunched, doubled-over pose\", \"One hand pointing straight at the viewer instead of both hands on the belly\", \"Thick, slightly elongated neck, contradicting the neckless body where the head merges into the torso\"], \"rationale\": \"The prompt covers the squeezed-arc eyes, pale belly, glossy 3D render and pear-shaped body well. It inverts the pose (upright, head back, pointing) and leaves out the teeth. Its background is pastel and blurred rather than plain white. The giraffe reads as a butter-yellow Nailong with only a few patches and horns, and the mood leans smug and kid-cartoon rather than unhinged.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 13.9,
+    "tokens": {
+      "input": 2174,
+      "cached_input": 0,
+      "cache_write": 2172,
+      "output": 1100,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.039649500000000004,
+    "tools_used": [],
+    "cost_usd": 0.039649500000000004,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2172,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1100,
+      "output_tokens_details": {
+        "thinking_tokens": 765
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2172,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1100,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2172,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2172
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-11T01:46:22Z",
+    "finished_at": "2026-11-11T01:46:36Z",
+    "revision": "b0b3b59",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "这应该是英国学龄前定格动画《趣趣知知鸟》（Twirlywoos）里的黄色小鸟，看外形是 Chickedy 或 Chick 这两个黄色角色之一，具体是哪一个我不太确定。\n\n它属于\"趣趣知知鸟表情包\"这个系列梗。这部动画的角色眼睛圆、表情呆，网友把截图配上文字做成了很多表情包，在抖音、小红书和微信聊天里流传很广。\n\n这张截的是小鸟侧头斜眼看人的瞬间，配字\"惊鸿一瞥\"。梗点在于一语双关：成语本来形容美人惊艳的一瞥，这里的\"鸿\"又正好是鸟，于是成了\"一只鸟瞥了你一眼\"。它通常用来表达偷瞄、无语的斜眼，或者\"我看到了但不说话\"。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 544.2,
+    "tokens": {
+      "input": 1772,
+      "cached_input": 0,
+      "cache_write": 1766,
+      "output": 42165,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 0.8521540000000001,
+    "tools_used": [],
+    "cost_usd": 0.8521540000000001,
+    "usage": {
+      "input_tokens": 6,
+      "cache_creation_input_tokens": 1766,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 42165,
+      "output_tokens_details": {
+        "thinking_tokens": 41859
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 1766
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1905,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 654,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 654,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T03:01:50Z",
+    "finished_at": "2026-11-10T03:10:55Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "settings_id": "5436659f69a1a4e0",
+  "track": "understanding",
+  "model": "fable-5.2-xhigh",
+  "vendor": "anthropic",
+  "item": "knowledge_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "What is the Chinese internet meme \"大笑奶龙\" (Laughing Nailong, also called \"奶蛙\")? Explain its origin, what it looks like, and the related jokes and remixes. Say so plainly where you are unsure instead of guessing.",
+  "images": [],
+  "answer": "I don't have reliable knowledge of the specific meme \"大笑奶龙\" or its nickname \"奶蛙\", so I can't tell you its origin, exact look, or remixes without guessing. It may be newer than my knowledge or too niche for me to have solid information on. What I can give you is the background on Nailong itself.\n\n## What I'm fairly confident about\n\n- **The character:** 奶龙 (Nailong) is a chubby, bright-yellow baby dragon with a round belly and small limbs, from a Chinese 3D children's animation of the same name. It began spreading through short videos on Douyin around 2020. I believe the studio is the one behind \"我是不白吃\", but I'm not certain.\n- **Meme status:** Around 2024, Nailong became a major target of ironic mockery on Bilibili and Douyin. Users called it \"唐\" (crude slang for \"dumb\") and made \"anti-Nailong\" joke content.\n- **\"我才是奶龙\" (\"I'm the real Nailong\"):** This line from the cartoon was remixed endlessly, often with Ultraman villain Belial (贝利亚) declaring it instead.\n- **\"今夜星光闪闪\":** Nailong dance and song edits set to this track spread widely, including outside China.\n- **Plagiarism jokes:** There were accusations that Nailong resembled an earlier character called 小七, though I'm hazy on the details.\n- **Overseas use:** Around late 2024, \"Nailong\" spread on X/Twitter as an insult and reaction image.\n- **Stickers:** Nailong reaction stickers, including laughing ones, are very common in Chinese chat apps.\n\n## What I don't know\n\n- **Origin:** I can't say which image, clip, or edit \"大笑奶龙\" refers to, or who made it and when.\n- **Appearance:** The name suggests a Nailong laughing with its mouth wide open, but I can't confirm the details.\n- **\"奶蛙\":** The name literally means \"milk frog\", which suggests a frog-like look or a frog mashup. That is inference from the name, not something I know.\n- **Jokes and remixes:** I can't name any tied to this meme without inventing them.\n\nIf you can describe the image or where you saw it, I can help interpret it against the broader Nailong meme culture.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "client": "claude-code 2.1.310",
+    "seconds": 43.9,
+    "tokens": {
+      "input": 478,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 3461,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-2",
+    "cost_usd_reported": 0.071132,
+    "tools_used": [],
+    "cost_usd": 0.071132,
+    "usage": {
+      "input_tokens": 478,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 3461,
+      "output_tokens_details": {
+        "thinking_tokens": 2713
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 478,
+          "output_tokens": 3461,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-2",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-2",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "xhigh"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-10T02:57:54Z",
+    "finished_at": "2026-11-10T02:58:38Z",
+    "revision": "2acf84d",
+    "nwb_version": "0.1.0"
+  }
+}
