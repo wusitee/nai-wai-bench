@@ -4207,12 +4207,20 @@
         "mean_input_tokens": 1250.4583333333333,
         "mean_output_tokens": 1052.0416666666667,
         "mean_reasoning_tokens": 995.4027777777778,
-        "cost_tasks": 0,
-        "mean_cost_usd": null,
-        "estimated_cost_usd": null,
-        "known_cost_usd": null,
+        "cost_tasks": 72,
+        "mean_cost_usd": 0.006227554291666667,
+        "estimated_cost_usd": 0.448383909,
+        "known_cost_usd": 0.448383909,
         "reported_cost_usd": 0,
-        "price": null
+        "price": {
+          "input": 1.413,
+          "cached_input": 0.071,
+          "cache_write": 1.767,
+          "output": 4.24,
+          "unit": "USD/1M tokens",
+          "source": "https://www.alibabacloud.com/help/en/model-studio/model-pricing (qwen4-max, China (Beijing))",
+          "as_of": "2026-11-16"
+        }
       }
     },
     "timing": {
@@ -4318,12 +4326,20 @@
           "mean_input_tokens": 953.3125,
           "mean_output_tokens": 911.0972222222222,
           "mean_reasoning_tokens": 851.1597222222222,
-          "cost_tasks": 0,
-          "mean_cost_usd": null,
-          "estimated_cost_usd": null,
-          "known_cost_usd": null,
+          "cost_tasks": 144,
+          "mean_cost_usd": 0.0052100827847222225,
+          "estimated_cost_usd": 0.750251921,
+          "known_cost_usd": 0.750251921,
           "reported_cost_usd": 0,
-          "price": null
+          "price": {
+            "input": 1.413,
+            "cached_input": 0.071,
+            "cache_write": 1.767,
+            "output": 4.24,
+            "unit": "USD/1M tokens",
+            "source": "https://www.alibabacloud.com/help/en/model-studio/model-pricing (qwen4-max, China (Beijing))",
+            "as_of": "2026-11-16"
+          }
         },
         "imagegen": {
           "tasks": 0,

@@ -29,7 +29,8 @@ with `qwen4-max-naihub` and `qwen4-max-high-naihub` into `rel-0.1-naihub-with-qw
 comparison remains archived without the Images 2.6 additions.
 The Fable, egg-alpha, GLM-5.3-Flash, and both Qwen4-Max Nai-hub rows have three repetitions per image, averaged
 within each image. egg-alpha's vendor is undisclosed, so judge independence from Opus 5.5 cannot be confirmed.
-Qwen4-Max appears at max effort (the endpoint's highest level) and at the standard high effort; most rows use high.
+Qwen4-Max appears at max effort (which the endpoint runs as its highest thinking level, xhigh) and at the
+standard high effort; most rows use high.
 
 `chatgpt-images-2.6` repeats the `chatgpt-image` configuration after OpenAI's Images 2.6 launch on
 2026-11-04. Codex names no image model in its output or C2PA credentials, so the row relies on OpenAI's

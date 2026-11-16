@@ -26,7 +26,7 @@ Software releases use semantic versions; suite ids version the evaluation panels
   `visual-detail/`, and `naihub-v1/` redirects. Image generation moves to an experimental section outside
   the index.
 - Add Qwen4-Max through the Qwen Token Plan's CN endpoint as a pi custom provider at max effort
-  (`qwen4-max-pi`) and at the standard high effort (`qwen4-max-pi-high`), and select both in the 0.1.0
+  (`qwen4-max-pi`, run by the endpoint as xhigh) and at the standard high effort (`qwen4-max-pi-high`), and select both in the 0.1.0
   comparison through `rel-0.1-with-qwen4-max` and `rel-0.1-naihub-with-qwen4-max`; earlier observations and
   verdicts are unchanged. Save the max row's frontend-track run as `qwen4-max-frontend` (not selected in the
   release).
