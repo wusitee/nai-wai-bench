@@ -165,6 +165,10 @@ def check_manifest(manifest: Path, *, prepare: bool = False) -> int:
         raise ValueError("manifest needs tasks with unique ids")
     if dataset["id"] == "frontend-v1" and not 8 <= len(tasks) <= 12:
         raise ValueError("frontend-v1 requires 8–12 GIFs including any showcase")
+    panel = {task["id"] for task in tasks if task["eligibility"] == "panel"}
+    defaults = dataset["default_tasks"]
+    if not defaults or len(set(defaults)) != len(defaults) or not set(defaults) <= panel:
+        raise ValueError("default_tasks must list distinct panel task ids")
     generated = []
     for task in tasks:
         task_id = task["id"]

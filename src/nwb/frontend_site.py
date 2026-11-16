@@ -11,7 +11,7 @@ import shutil
 from html import escape as e
 from pathlib import Path
 
-from nwb.frontend import KINDS, MEMORY, VIEWS
+from nwb.frontend import KINDS, MEMORY, REVISIONS, SOURCE, VIEWS
 from nwb.report import model_html
 from nwb.site import FRONTEND_NAME, _footer, _head, _header
 
@@ -102,11 +102,12 @@ def build(files: dict[str, bytes], summary: dict, out: Path, repo_url: str | Non
              "images are allowed, and pages render offline in a sandbox.</span></p>")
     note = ("<div class=note>实验项目，不计入奶蛙指数，也没有分数或名次：脚本只检查硬性规则（离线、无图片、确定性、循环周期、3D 的立体感等），"
             "像不像由人来看。LLM 评审试过，会给布局对但画得粗糙的作品满分，所以没有采用。每个模型每题一次采样；"
-            "“修订”是模型看过自己的渲染结果后的一次修改。<br><span class=en>Experimental and outside the NaiWai Index, "
+            "“修订”是模型看过自己的渲染和检查结果后的一次修改，默认只修订未通过检查的作品，也可以让每个作品都修订。<br><span class=en>Experimental and outside the NaiWai Index, "
             "with no score or rank. Scripted gates check only hard rules (offline, no raster images, determinism, "
             "loop period, 3D depth, ...); likeness is for people to judge. LLM checklist judging was tried and "
             "dropped because it gave rough drawings with the right layout full marks. One sample per model and task; "
-            "a revision is the model's one change after seeing its own render.</span></div>")
+            "a revision is the model's one change after seeing its own render and gate results. By default only "
+            "pages that failed a gate are revised; a run may also revise every page.</span></div>")
 
     # --- overview ---
     rows: dict[tuple[str, str], dict] = {}
@@ -165,8 +166,12 @@ def build(files: dict[str, bytes], summary: dict, out: Path, repo_url: str | Non
             label = f"{caption[0]} <span class=en>{caption[1]}</span>"
             path = by_key.get((model, task_id, kind, rep))
             if path is None:
-                return (f"<figure class=fe-cell><div class=fe-none style='aspect-ratio:{width}/{height}'>未采集<br>"
-                        f"not collected</div><figcaption>{label}</figcaption></figure>"), ""
+                # A page that passed its gates usually has no revision; only failed pages are revised by default.
+                source = by_key.get((model, task_id, SOURCE[kind], rep)) if kind in REVISIONS else None
+                text = ("已通过，未修订<br>passed, not revised" if source and status[source]["status"] == "passed"
+                        else "未采集<br>not collected")
+                return (f"<figure class=fe-cell><div class=fe-none style='aspect-ratio:{width}/{height}'>{text}</div>"
+                        f"<figcaption>{label}</figcaption></figure>"), ""
             stem = path.removesuffix(".json")
             entry = status[path]
             record = json.loads(files[path])

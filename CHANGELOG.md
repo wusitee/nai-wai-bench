@@ -15,8 +15,9 @@ Software releases use semantic versions; suite ids version the evaluation panels
   generation prompts, retained judgments, and release inputs remain unchanged.
 - Add the experimental frontend track (`nwb frontend collect|render|report|sync`, `bench/frontend-v1/`):
   models rebuild animated 奶蛙 GIFs as hand-written inline SVG or three.js pages, with a step-2 animation
-  and one check-and-revise round, rendered in a sandboxed browser and checked by scripted gates; likeness
-  is reviewed by people. Release manifests select a saved frontend run under `[frontend]`, and release
+  and one revision round for pages that fail a gate (`--revise all` revises every page), rendered in a
+  sandboxed browser and checked by scripted gates; likeness is reviewed by people. `collect` runs the
+  manifest's four default tasks unless `--tasks` selects others. Release manifests select a saved frontend run under `[frontend]`, and release
   sites add the 复刻 Rebuild pages (`frontend/`) with lazy-loaded WebP renders. The 0.1.0 comparison
   selects `frontend-pilot`; the track is outside the NaiWai Index.
 - Present the `core` and `naihub-v1` visual rankings as 识梗 Meme ID and 看图 Visual detail, and combine them

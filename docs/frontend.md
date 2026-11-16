@@ -12,6 +12,10 @@ The [task manifest](../bench/frontend-v1/tasks.toml) contains nine panel GIFs an
 Task `001` is the first 2D and 3D pilot. Each GIF has eight timestamped keyframes with neutral filenames,
 six yes/no questions per frame, and separate side, back, three-quarter, and top checklists.
 
+`collect` runs the manifest's `default_tasks` (`001`, `004`, `007`, `008`) and the memory task unless
+`--tasks` selects others. A page costs tens of thousands of output tokens, so the default set keeps a
+model's run affordable; the other tasks are collected on request.
+
 | Task | Upstream asset | Viewport | Duration (s) | Eligibility / difficulty | Reference GIF |
 |---|---|---|---:|---|---|
 | 001 | naiwa_0001 | 240 × 242 | 1.5 | panel / easy | [Two characters at a school desk, one rubbing the other's belly](../bench/frontend-v1/assets/001/reference.gif) |
@@ -108,8 +112,8 @@ this corpus; it has its own `nwb frontend` command.
 | `3d-s1` | `frame_00` | Static three.js scene |
 | `3d-s2` | The same model's `3d-s1` page and all eight keyframes with timestamps | Animated three.js scene |
 | `2d-mem`, `3d-mem` | No image: "draw 大笑奶龙 from memory" | Static SVG or three.js scene |
-| `2d-s3`, `3d-s3` | Revision of the same model's step 2 page: the page, its gate results, the eight keyframes, its render at the same times, and for 3D the four harness views | Revised animated page |
-| `2d-mem2`, `3d-mem2` | Revision of the same model's memory page: the page, its gate results, its render, and for 3D the four harness views | Revised static page |
+| `2d-s3`, `3d-s3` | Revision of the same model's step 2 page, by default only when it failed a gate: the page, its gate results, the eight keyframes, its render at the same times, and for 3D the four harness views | Revised animated page |
+| `2d-mem2`, `3d-mem2` | Revision of the same model's memory page, by default only when it failed a gate: the page, its gate results, its render, and for 3D the four harness views | Revised static page |
 
 Each later kind builds on the sample of the same model and rep, even when that sample failed its gates:
 step 2 on step 1, and each revision kind on the page it revises. The record stores the source sample
@@ -117,7 +121,12 @@ path, hash, and static gate result under `depends_on`. Recollecting a sample mak
 it, directly or through another sample, stale: they are ignored by rendering, reports, and later
 collection stages until collected again.
 
-The revision kinds give a model one check-and-revise round. The prompt embeds the source task's prompt,
+The revision kinds give a model one check-and-revise round, used as a repair: by default `collect`
+revises only pages that failed a static or runtime gate, including replies without a page. In the runs
+that revised every page, a revision of a passing page was usually a near copy of it and cost about as
+much as the page itself, while revisions of failed pages mostly passed. A page that failed because the
+subject used tools is not revised, since its revision would fail with it. `--revise all` revises every
+page. Revisions already in a run stay part of it under either setting. The prompt embeds the source task's prompt,
 the page, and its static and runtime gate results; the attachments are the reference keyframes (GIF tasks
 only), the harness's rendered frames, and for 3D the harness views. A page that failed before rendering
 contributes the harness's failure screenshot, if any. The model is shown copies of the rendered images,
@@ -224,10 +233,11 @@ uv run --extra frontend nwb frontend render --run pilot
 uv run --extra frontend nwb frontend report --run pilot
 ```
 
-`collect` defaults to all tasks and all kinds with one rep. It runs in three stages: step 1 and memory
-samples, then step 2, then the revision kinds, after rendering the selected revisions' source samples.
-Renders are serialized across processes by a lock in the run directory. A sample that cannot be collected
-because its source sample or source render is missing counts as a failure.
+`collect` defaults to the default tasks, all kinds, and one rep; `--tasks all` selects every task. It
+runs in three stages: step 1 and memory samples, then step 2, then the revision kinds, after rendering
+the selected revisions' source samples. Renders are serialized across processes by a lock in the run
+directory. A sample that cannot be collected because its source sample or source render is missing counts
+as a failure; a revision that is not needed does not, and `collect` reports how many it left out.
 Subject calls may take up to 30 minutes. Samples are `runs/<run>/frontend/<model>/<task>/<kind>__r<rep>.json`,
 and renders are in the directory with the same stem. `report` writes `runs/<run>/frontend/summary.json`
 and `gallery.html`. Every stage resumes and skips finished work; `--force` redoes it.
@@ -253,7 +263,8 @@ collecting more needs the working run.
 The release manifest's `[frontend]` table selects the saved run and its digest (see
 [releases](releases.md)). `nwb release` verifies every checksum and the digest, then writes `frontend/`:
 an overview with the gate table and one page per task. Each page shows the reference GIF and
-keyframes and, per model, the still page, the animation, and the revision side by side. The keyframe
+keyframes and, per model, the still page, the animation, and the revision side by side; a passing page
+without a revision is marked as not revised. The keyframe
 comparisons, 3D harness views, gate failures, and a plain-text `source.txt` of each page load only when
 a card is opened. The pages never run model code. Images are lazy-loaded with fixed dimensions,
 offscreen cards skip rendering (`content-visibility`), and readers who prefer reduced motion get
