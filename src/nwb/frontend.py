@@ -22,7 +22,8 @@ from nwb.util import read_json
 CORPUS = "frontend-v1"
 KINDS = ("2d-s1", "2d-s2", "2d-s3", "3d-s1", "3d-s2", "3d-s3", "2d-mem", "2d-mem2", "3d-mem", "3d-mem2")
 # Each later kind is built from the same model's sample of the earlier kind: step 2 animates step 1, and
-# the revision kinds (s3, mem2) check the rendered result of their source and revise it once.
+# the revision kinds (s3, mem2) check the rendered result of their source and revise it once. By default
+# only pages that failed a gate are revised (`collect_jobs`).
 SOURCE = {"2d-s2": "2d-s1", "3d-s2": "3d-s1", "2d-s3": "2d-s2", "3d-s3": "3d-s2", "2d-mem2": "2d-mem",
           "3d-mem2": "3d-mem"}
 REVISIONS = ("2d-s3", "3d-s3", "2d-mem2", "3d-mem2")
@@ -62,6 +63,7 @@ class Corpus:
     tasks: dict[str, Task]
     memory: Task
     prompts: dict
+    default_tasks: tuple[str, ...]  # the tasks `collect` runs unless told otherwise
 
     def task(self, task_id: str) -> Task:
         return self.memory if task_id == MEMORY else self.tasks[task_id]
@@ -82,7 +84,7 @@ def load_corpus(root: Path) -> Corpus:
     m = data["memory"]
     memory = Task(MEMORY, "大笑奶龙 from memory", m["width"], m["height"], 0, "memory",
                   (Frame(None, 0, tuple(m["questions"])),), {v["view"]: tuple(v["questions"]) for v in m["novel_views"]})
-    return Corpus(directory, tasks, memory, prompts)
+    return Corpus(directory, tasks, memory, prompts, tuple(data["dataset"]["default_tasks"]))
 
 
 def dimension(kind: str) -> str:
@@ -276,13 +278,16 @@ def revision_inputs_dir(stem: Path) -> Path:
 
 
 def collect_jobs(corpus: Corpus, models: list[ModelSpec], task_ids: list[str], kinds: list[str], reps: int,
-                 run_dir: Path, *, stage_no: int) -> tuple[list[Job], int]:
+                 run_dir: Path, *, stage_no: int, revise: str = "failed") -> tuple[list[Job], int]:
     """Subject jobs of one collection stage (see `stage`), and the number of samples blocked because the
     sample they build on, or for revisions its current render, is missing. Stages run in order, with the
-    sources of stage 3 rendered first."""
+    sources of stage 3 rendered first.
+
+    `revise` selects the pages that get a revision: "failed" for those that failed a gate the revision can
+    repair, "all" for every page. A revision that is not needed is neither a job nor blocked."""
     from nwb.frontend_render import render_current
 
-    jobs, blocked = [], 0
+    jobs, blocked, unneeded = [], 0, 0
     for model in models:
         backend = get_backend(_subject(model))
         settings, settings_id = model_settings(model, corpus.root.parents[1])
@@ -313,6 +318,11 @@ def collect_jobs(corpus: Corpus, models: list[ModelSpec], task_ids: list[str], k
                                    "static_gates": (record["static_gates"] if kind in REVISIONS
                                                     else read_json(source).get("static_gates", []))}
                         if kind in REVISIONS:
+                            collected = stem.with_suffix(".json").is_file()
+                            hopeless = revise != "all" and unrepairable(record)
+                            if hopeless and not collected:  # decided without the render
+                                unneeded += 1
+                                continue
                             render = render_current(record, source.with_suffix(""))
                             if render is None:
                                 print(f"{model.name} {task_id} {kind} r{rep}: waiting for its {SOURCE[kind]} render",
@@ -334,12 +344,17 @@ def collect_jobs(corpus: Corpus, models: list[ModelSpec], task_ids: list[str], k
                                 {"file": rel(copy, run_dir), "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                                 for p, copy in feedback])
                             # A finished revision whose copies were lost or altered gets them back from the
-                            # unchanged source render; if the source changed, the job base differs and it reruns.
-                            if stem.with_suffix(".json").is_file():
+                            # unchanged source render, whether or not it would be collected today. If the
+                            # render changed, the copies stay as its record and the job, if any, reruns.
+                            if collected and ((read_json(stem.with_suffix(".json")).get("depends_on") or {})
+                                              .get("rendered") == depends["rendered"]):
                                 for (src, copy), item in zip(feedback, depends["rendered"]):
                                     if not copy.is_file() or hashlib.sha256(copy.read_bytes()).hexdigest() != item["sha256"]:
                                         copy.parent.mkdir(parents=True, exist_ok=True)
                                         shutil.copyfile(src, copy)
+                            if hopeless or (revise != "all" and not gates):
+                                unneeded += 1
+                                continue
                         else:
                             step1 = record.get("html")
                         depends = {"depends_on": depends}
@@ -369,19 +384,36 @@ def collect_jobs(corpus: Corpus, models: list[ModelSpec], task_ids: list[str], k
                               **({"input_names": "neutral"} if attached else {}),
                               "images": [p.relative_to(corpus.root.parents[1]).as_posix() for p in images], **depends},
                         fn=fn, settings=settings, run_dir=run_dir))
+    if unneeded:
+        print(f"{unneeded} revision(s) not needed: the page passed its gates or cannot be repaired", file=sys.stderr)
     return jobs, blocked
 
 
 def revision_sources(models: list[ModelSpec], task_ids: list[str], kinds: list[str], reps: int,
-                     run_dir: Path) -> set[Path]:
-    """Sample files whose renders the selected revisions need."""
-    return {sample_stem(run_dir, model.name, MEMORY if is_memory(kind) else task_id, SOURCE[kind], rep)
-            .with_suffix(".json")
-            for model in models for kind in kinds if kind in REVISIONS
-            for task_id in ([MEMORY] if is_memory(kind) else task_ids) for rep in range(1, reps + 1)}
+                     run_dir: Path, revise: str = "failed") -> set[Path]:
+    """Sample files whose renders `collect_jobs` needs for the selected revisions."""
+    sources = set()
+    for model in models:
+        for kind in kinds:
+            if kind not in REVISIONS:
+                continue
+            for task_id in ([MEMORY] if is_memory(kind) else task_ids):
+                for rep in range(1, reps + 1):
+                    source = sample_stem(run_dir, model.name, task_id, SOURCE[kind], rep).with_suffix(".json")
+                    if revise != "all" and not sample_stem(run_dir, model.name, task_id, kind, rep).with_suffix(".json").is_file():
+                        record = load_sample(run_dir, source)
+                        if record is not None and unrepairable(record):
+                            continue
+                    sources.add(source)
+    return sources
 
 
 TAINTED = "builds on a sample that used tools"
+
+
+def unrepairable(record: dict) -> bool:
+    """Whether a loaded sample used tools or builds on one that did: its revision would fail with it."""
+    return any(g.startswith(("used tools", TAINTED)) for g in record["static_gates"])
 
 
 def tool_use(record: dict) -> list[str]:
@@ -417,7 +449,7 @@ def load_sample(run_dir: Path, path: Path, _seen: dict | None = None) -> dict | 
             copy = run_dir / item["file"]
             if not copy.is_file() or hashlib.sha256(copy.read_bytes()).hexdigest() != item["sha256"]:
                 return None
-        if any(g.startswith(("used tools", TAINTED)) for g in source["static_gates"]):
+        if unrepairable(source):
             gates.append(TAINTED)
     record["static_gates"] = gates
     seen[path] = record

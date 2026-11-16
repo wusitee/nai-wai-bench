@@ -43,7 +43,8 @@ def _manifest(tmp_path):
     index = tmp_path / "source-index.json"
     index.write_text(json.dumps([{"url": "owner/" + "a" * 40 + "/a.gif"}]) + "\n")
     dataset = {"id": "frontend-test", "source_index": index.name,
-               "source_index_sha256": hashlib.sha256(index.read_bytes()).hexdigest(), "keyframes_per_gif": 8}
+               "source_index_sha256": hashlib.sha256(index.read_bytes()).hexdigest(), "keyframes_per_gif": 8,
+               "default_tasks": ["001"]}
     manifest = tmp_path / "tasks.toml"
 
     def inline(value):
@@ -106,6 +107,7 @@ def test_manifest_checks_integrity_and_can_restore_exact_frames(tmp_path):
     (lambda task: task["keyframes"][1].update(timestamp_ms=999), "timestamp differs"),
     (lambda task: task["keyframes"][1].update(source_frame=1), "canonical eight-frame"),
     (lambda task: task["keyframes"][1].update(file="assets/001/laugh.png"), "neutral"),
+    (lambda task: task.update(eligibility="showcase"), "default_tasks"),
 ])
 def test_manifest_rejects_changed_provenance_or_selection(tmp_path, change, message):
     manifest, task, write = _manifest(tmp_path)

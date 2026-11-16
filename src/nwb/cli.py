@@ -170,7 +170,8 @@ def cmd_frontend(args, root, models, defaults) -> int:
         raise FileNotFoundError(f"run not found: {run_dir}")
     if args.action == "collect":
         selected = select_models(models, args.models, "vision")
-        task_ids = list(corpus.tasks) if args.tasks == "all" else [t.strip() for t in args.tasks.split(",") if t.strip()]
+        task_ids = (list(corpus.default_tasks) if args.tasks == "default" else list(corpus.tasks) if args.tasks == "all"
+                    else [t.strip() for t in args.tasks.split(",") if t.strip()])
         if unknown := [t for t in task_ids if t not in corpus.tasks]:
             raise ValueError(f"unknown frontend task(s) {unknown}; choose from: {', '.join(corpus.tasks)}")
         kinds = list(frontend.KINDS) if args.kinds == "all" else [k.strip() for k in args.kinds.split(",") if k.strip()]
@@ -181,10 +182,10 @@ def cmd_frontend(args, root, models, defaults) -> int:
             if not any(frontend.stage(k) == stage_no for k in kinds):
                 continue
             if stage_no == 3:  # revisions are shown the renders of the pages they revise
-                sources = frontend.revision_sources(selected, task_ids, kinds, args.reps, run_dir)
+                sources = frontend.revision_sources(selected, task_ids, kinds, args.reps, run_dir, args.revise)
                 failed += frontend_render.render_all(corpus, run_dir, only=sources)[1]
             jobs, blocked = frontend.collect_jobs(corpus, selected, task_ids, kinds, args.reps, run_dir,
-                                                  stage_no=stage_no)
+                                                  stage_no=stage_no, revise=args.revise)
             done, bad = tracks.run_jobs(jobs, args.jobs, args.force, run_dir=run_dir)
             # A sample that cannot be collected because its source is missing counts as a failure.
             ok, failed = ok + done, failed + bad + blocked
@@ -288,10 +289,13 @@ def build_parser() -> argparse.ArgumentParser:
                     help="sync: save the run as Git-ready results for release builds")
     sp.add_argument("--run", default="frontend", help="run name; results go to runs/<run>/ (default: frontend)")
     sp.add_argument("--models", help="collect: comma-separated subject models")
-    sp.add_argument("--tasks", default="all", help="collect: 'all' or comma-separated task ids (default: all)")
+    sp.add_argument("--tasks", default="default",
+                    help="collect: 'default' (the manifest's default_tasks), 'all', or comma-separated task ids")
     sp.add_argument("--kinds", default="all",
                     help="collect: 'all' or comma-separated of 2d-s1, 2d-s2, 2d-s3, 3d-s1, 3d-s2, 3d-s3, "
                          "2d-mem, 2d-mem2, 3d-mem, 3d-mem2")
+    sp.add_argument("--revise", choices=["failed", "all"], default="failed",
+                    help="collect: pages the revision kinds revise: those that failed a gate (default) or all")
     sp.add_argument("--reps", type=int, default=1, help="collect: samples per task and kind (default: 1)")
     sp.add_argument("--jobs", type=int, default=2, help="collect: parallel calls (default: 2)")
     sp.add_argument("--force", action="store_true", help="redo work that already succeeded")

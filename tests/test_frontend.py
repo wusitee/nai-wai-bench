@@ -90,13 +90,23 @@ def test_revision_jobs_show_reference_render_and_views(tmp_path, monkeypatch):
                                            "height": 242})
     # Without a current render of the source page, the revision waits and counts as blocked.
     assert frontend.collect_jobs(corpus, [spec], ["001"], ["3d-s3"], 1, run, stage_no=3) == ([], 1)
+    # A page that used tools fails for good: its revision is left out without waiting for a render.
+    source = json.loads(stem.with_suffix(".json").read_text())
+    write_json(stem.with_suffix(".json"), {**source, "meta": {"tools_used": ["shell"]}})
+    assert frontend.collect_jobs(corpus, [spec], ["001"], ["3d-s3"], 1, run, stage_no=3) == ([], 0)
+    assert frontend.revision_sources([spec], ["001"], ["3d-s3"], 1, run) == set()
+    write_json(stem.with_suffix(".json"), source)
     frames = [{"file": f"frame_{i:02d}.png", "t": f.timestamp_ms} for i, f in enumerate(task.frames)]
     views = [{"file": f"view_{v}.png", "view": v} for v in frontend.VIEWS]
     for item in frames + views:
         (stem / item["file"]).parent.mkdir(parents=True, exist_ok=True)
         (stem / item["file"]).write_bytes(item["file"].encode())
-    write_json(stem / "render.json", {"html_sha256": "x", "harness": "h", "gates": ["does not loop"],
-                                      "frames": frames, "views": views})
+    render = {"html_sha256": "x", "harness": "h", "frames": frames, "views": views}
+    # A page that passed its gates is revised only on request.
+    write_json(stem / "render.json", {**render, "gates": []})
+    assert frontend.collect_jobs(corpus, [spec], ["001"], ["3d-s3"], 1, run, stage_no=3) == ([], 0)
+    assert len(frontend.collect_jobs(corpus, [spec], ["001"], ["3d-s3"], 1, run, stage_no=3, revise="all")[0]) == 1
+    write_json(stem / "render.json", {**render, "gates": ["does not loop"]})
     [job], blocked = frontend.collect_jobs(corpus, [spec], ["001"], ["3d-s3"], 1, run, stage_no=3)
     assert blocked == 0 and frontend.stage("3d-mem2") == 3
     assert [Path(p).name for p in job.base["images"]] == [Path(f.image).name for f in task.frames]
@@ -114,10 +124,12 @@ def test_revision_jobs_show_reference_render_and_views(tmp_path, monkeypatch):
     copies = [run / r["file"] for r in rendered]
     assert backend.images == [f.image for f in task.frames] + copies and all(p.is_file() for p in copies)
 
-    # On resume, lost copies come back from the unchanged source render; a lost source image is a re-render.
+    # On resume, lost copies come back from the unchanged source render, also for a revision that would no
+    # longer be collected because its page passes; a lost source image is a re-render.
     write_json(job.out, {**job.base, "html": "<p>x</p>"})
     copies[0].unlink()
-    frontend.collect_jobs(corpus, [spec], ["001"], ["3d-s3"], 1, run, stage_no=3)
+    write_json(stem / "render.json", {**render, "gates": []})
+    assert frontend.collect_jobs(corpus, [spec], ["001"], ["3d-s3"], 1, run, stage_no=3) == ([], 0)
     assert copies[0].read_bytes() == b"frame_00.png"
     (stem / "view_top.png").unlink()
     assert frontend_render.render_current(json.loads(stem.with_suffix(".json").read_text()), stem) is None
@@ -325,6 +337,7 @@ def test_published_snapshot_is_pinned_web_media_and_pages_never_embed_model_code
     assert "@keyframes sway" not in page and "<iframe" not in page
     assert (out / "frontend/m/subject/001/2d-s2__r1/source.txt").read_text() == SVG_CSS_LOOP
     assert "Subject" in page and "loading=lazy" in page and "prefers-reduced-motion" in page
+    assert "passed, not revised" in page  # the missing revision of a passing page is not a gap
     assert (out / "frontend/m/subject/001/2d-s2__r1/preview.webp").is_file()
 
 
