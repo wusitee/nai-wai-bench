@@ -1,0 +1,67 @@
+{
+  "html_sha256": "7531951acd5afede23c501dee7ac259f776d9edfc75d9e81c31e985c2b1d2fc8",
+  "harness": "fee9bd636b661bc1",
+  "kind": "3d-s1",
+  "gates": [],
+  "errors": [],
+  "blocked": [],
+  "forbidden": [],
+  "elements": [],
+  "timing": {
+    "declarative": false,
+    "scripted": false
+  },
+  "frames": [
+    {
+      "file": "frame_00.webp",
+      "t": 0
+    }
+  ],
+  "views": [
+    {
+      "file": "view_side.webp",
+      "view": "side",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_back.webp",
+      "view": "back",
+      "t": 0,
+      "hidden": [
+        "background-gradient",
+        "background-noise"
+      ]
+    },
+    {
+      "file": "view_three_quarter.webp",
+      "view": "three_quarter",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_top.webp",
+      "view": "top",
+      "t": 0,
+      "hidden": []
+    }
+  ],
+  "scene": {
+    "characters": [
+      {
+        "name": "character-blob",
+        "meshes": 24,
+        "width": 1.6634623695018096,
+        "height": 3.0174999836087224,
+        "depth": 1.44497549533844,
+        "ratio": 0.8686553551380881
+      }
+    ],
+    "textures": 3
+  },
+  "mode": "render(t)",
+  "checks": {
+    "determinism_diff": 0.0
+  },
+  "seconds": 1.1
+}

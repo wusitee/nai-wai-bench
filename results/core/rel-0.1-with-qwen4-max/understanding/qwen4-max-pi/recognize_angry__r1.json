@@ -1,0 +1,84 @@
+{
+  "settings_id": "a4ba33964638df40",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi",
+  "vendor": "alibaba",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "这只红色、圆滚滚、叉着腰一脸怒气的角色是**奶龙**——不过是被网友改色后的\"红色愤怒版\"，常被称为\"红温奶龙\"。\n\n**角色出处：**\n奶龙原本是国产3D动画短片《奶龙》里的主角，一只黄色的小恐龙，挺着大肚子、四肢短小，和男孩\"小七\"搭档，最初面向低龄观众。\n\n**所属的网络梗：**\n- **奶龙抽象梗**：2023–2024年奶龙在抖音、B站等平台被大量二次创作，表情包里常配上阴阳怪气或\"抽象\"文案，形成了一整套\"奶龙文学\"式的玩梗文化。\n- **\"红温\"梗**：把奶龙P成红色，借用了电竞圈（最早与Uzi相关）的\"红温\"说法，形容人气到脸红发热、破防暴怒的状态。你这张图配文\"切换愤怒模式😡\"正是这个用法——表示\"我要生气了/已进入暴怒状态\"。\n\n所以简单说：这是**奶龙的红温（愤怒）形态表情包**，属于奶龙抽象表情包 + \"红温\"梗的结合体。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 44.9,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 151,
+      "output": 1888,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1628,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 151,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1888,
+      "reasoning": 1628
+    },
+    "session_config": {
+      "thinkingLevel": "max"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "max"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T09:38:57Z",
+    "finished_at": "2026-11-16T09:39:42Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

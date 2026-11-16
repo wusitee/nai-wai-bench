@@ -1,0 +1,80 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/sonnet-5.5/write_prompt.giraffe__r1.json",
+  "target_sha256": "ebc702296e3d4ac30c064ccb1141281e3f6a5fd62d1a38a1763a044d361e1d5d",
+  "settings_id": "c5b99b49261f87dd",
+  "judge_prompt": "7997c39a441517fa",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 0,
+    "background": 2,
+    "vibe": 1,
+    "identity": 2
+  },
+  "hallucinations": [
+    "Describing the visual style as a flat 2D cartoon sticker with outlines and flat colors, which contradicts the 3D CG render requirement.",
+    "Describing the pose as tilted back, which contradicts the hunched/bent forward doubled-over posture."
+  ],
+  "rationale": "The model successfully captures the facial expressions, anatomy, belly patch, background, and giraffe identity, but completely misses the 3D CG render style by opting for a 2D cartoon sticker aesthetic. It also reverses the iconic forward-hunched pose to tilting backwards and weakens the posture and meme vibe with cute, kawaii alternatives.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 2, \"mouth\": 2, \"body\": 2, \"belly_patch\": 2, \"render\": 0, \"background\": 2, \"vibe\": 1, \"identity\": 2}, \"hallucinations\": [\"Describing the visual style as a flat 2D cartoon sticker with outlines and flat colors, which contradicts the 3D CG render requirement.\", \"Describing the pose as tilted back, which contradicts the hunched/bent forward doubled-over posture.\"], \"rationale\": \"The model successfully captures the facial expressions, anatomy, belly patch, background, and giraffe identity, but completely misses the 3D CG render style by opting for a 2D cartoon sticker aesthetic. It also reverses the iconic forward-hunched pose to tilting backwards and weakens the posture and meme vibe with cute, kawaii alternatives.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 59.9,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 16673,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:23:01Z",
+    "finished_at": "2026-10-25T05:24:01Z",
+    "revision": "9f7aef8",
+    "nwb_version": "0.1.0"
+  }
+}

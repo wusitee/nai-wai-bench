@@ -274,6 +274,38 @@ finish; the entry allows 900 seconds per call, and timed-out samples are retried
 The entry's token prices are estimates from pi-ai 1.5.0's model catalog, rather than independently
 verified official rates; Coding Plan subscriptions are not billed per token.
 
+### Qwen Token Plan (`qwen4-max-pi`)
+
+`qwen4-max-pi` runs Qwen4-Max through the Qwen Token Plan individual edition. pi 1.5.0's built-in
+`qwen-token-plan-individual` provider does not list `qwen4-max` and points at the international endpoint,
+which rejects keys issued in mainland China, so `~/.pi-nwb/models.json` declares a provider for the
+CN endpoint:
+
+```json
+{
+  "providers": {
+    "qwen-token-plan-cn-individual": {
+      "baseUrl": "https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
+      "api": "openai-completions",
+      "apiKey": "$QWEN_TOKEN_PLAN_API_KEY",
+      "compat": { "thinkingFormat": "qwen", "supportsReasoningEffort": true, "supportsStrictMode": true,
+                  "supportsDeveloperRole": false, "supportsStore": false },
+      "models": [{ "id": "qwen4-max", "reasoning": true, "input": ["text", "image"],
+                   "contextWindow": 1000000, "maxTokens": 131072,
+                   "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+                   "thinkingLevelMap": { "off": "none", "minimal": "minimal", "low": "low", "medium": "medium",
+                                         "high": "high", "xhigh": "xhigh", "max": "max" } }]
+    }
+  }
+}
+```
+
+The endpoint accepts `reasoning_effort` values `none`, `off`, `minimal`, `low`, `medium`, `high`, `xhigh`,
+and `max`; `qwen4-max-pi` uses `max`, and `qwen4-max-pi-high` is the same model at the standard `high`. Token Plan usage is billed in subscription Credits, not per token; the
+entry's `price` is Alibaba Cloud's pay-as-you-go list price for `qwen4-max` in the China (Beijing) region,
+the same for thinking and non-thinking modes. The plan limits concurrent agents by tier (1–2 on Lite, 2–3 on
+Essential), so collect with `--jobs 2` or fewer.
+
 ## ACP agents (`backend = "acp"`)
 
 Any agent that speaks the [Agent Client Protocol](https://agentclientprotocol.com) over stdio. The client

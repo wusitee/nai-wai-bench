@@ -358,6 +358,31 @@ env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
 price = { input = 0.15, cached_input = 0.03, cache_write = 0.0, output = 0.5, unit = "USD/1M tokens", source = "pi-ai 1.5.0 model catalog (zai-coding-cn/glm-5.3-flash)", as_of = "2026-11-06" }
 can = ["text", "vision"]
 
+# Qwen4-Max through the Qwen Token Plan individual edition's CN endpoint. pi 1.5.0 does not list the model,
+# so `qwen-token-plan-cn-individual` is a custom provider in pi's models.json (see docs/backends.md).
+[models."qwen4-max-pi"]
+timeout = 1800
+label = "Qwen4-Max (pi, Token Plan)"
+backend = "pi"
+vendor = "alibaba"
+model = "qwen-token-plan-cn-individual/qwen4-max"
+effort = "max"
+env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
+price = { input = 1.413, cached_input = 0.071, cache_write = 1.767, output = 4.24, unit = "USD/1M tokens", source = "https://www.alibabacloud.com/help/en/model-studio/model-pricing (qwen4-max, China (Beijing))", as_of = "2026-11-16" }
+can = ["text", "vision"]
+
+# The same model at the benchmark's standard effort, for comparison with the max row and with egg-alpha.
+[models."qwen4-max-pi-high"]
+timeout = 1800
+label = "Qwen4-Max (pi, Token Plan)"
+backend = "pi"
+vendor = "alibaba"
+model = "qwen-token-plan-cn-individual/qwen4-max"
+effort = "high"
+env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
+price = { input = 1.413, cached_input = 0.071, cache_write = 1.767, output = 4.24, unit = "USD/1M tokens", source = "https://www.alibabacloud.com/help/en/model-studio/model-pricing (qwen4-max, China (Beijing))", as_of = "2026-11-16" }
+can = ["text", "vision"]
+
 # --- OpenAI-compatible APIs ---
 
 # Xiaomi MiMo Token Plan; the endpoint and key are read from this CC Switch provider at run time.

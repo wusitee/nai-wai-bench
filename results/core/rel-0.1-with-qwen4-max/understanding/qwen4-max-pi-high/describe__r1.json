@@ -1,0 +1,81 @@
+{
+  "settings_id": "cbf7db799b4cb698",
+  "track": "understanding",
+  "model": "qwen4-max-pi-high",
+  "vendor": "alibaba",
+  "item": "describe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "不看任何图片，仅凭你的记忆，详细描述最经典的那张「大笑奶龙」（奶蛙）图片的画面：姿势、表情、身体造型、配色、渲染风格和背景，让从没见过它的画师能照着画出来。不确定的地方请说明。",
+  "images": [],
+  "answer": "## 先说结论（很重要）\n\n我没法可靠地\"回忆\"出你说的那张具体的图。\n\n我对「奶龙」这个国产动画 IP 有大致印象，但对 **「大笑奶龙」这张特定梗图**——它是动画截图、官方表情包还是二创、具体是哪一帧、\"奶蛙\"这个别名指的是同一张图还是另一个绿色青蛙形象——我的记忆都不足以支撑逐细节的复述。如果我按你的要求写出\"头往后仰 30 度、左手叉腰、背景是浅蓝渐变\"这种细节，那基本是我编的，对画师是负分。\n\n所以下面我把**有把握的**和**没把握的**分开写。\n\n## 中等把握：奶龙这个角色本身\n\n- **配色**：通体明亮的柠檬黄／中黄，饱和度很高；腹部通常是更浅的奶黄或近白色，形成一块\"肚皮\"区域。\n- **体型**：极度圆胖，Q 版比例，头几乎和身体连成一体（没有明显脖子），四肢短粗、末端圆钝，整体像个黄色梨形团子。\n- **五官**：圆眼、黑色瞳孔，嘴很大且能张得夸张，表情走\"憨＋馋\"的路线。\n- **渲染**：3D CGI 短片风格，软胶／塑料玩具质感，柔和的大面积高光和简单阴影，不是写实材质，也不是二维赛璐璐。\n\n## 明确不确定（请不要当参考）\n\n- 头顶有没有角、是几个、什么形状；有没有呆毛。\n- 背上有没有棘／鳍，尾巴的有无与形状。\n- 眼睛的具体大小比例、有没有眼白、笑的时候是眯成缝还是睁圆。\n- 大笑时有没有露牙齿／舌头、口腔内部配色。\n- **那张图的姿势、镜头角度、背景**——这几项我完全没有可信记忆。\n- \"奶蛙\"是不是奶龙的别称（可能因为大嘴像青蛙而得名），还是另一个独立形象。\n\n## 给画师的建议\n\n如果是**画同人**、允许自由发挥，我可以给一个符合该 IP 风格的通用大笑方案（后仰、双手举高、嘴张成大半圆、眼睛眯成两道弯、纯色或白底）——但请把它当作**设计建议，不是对原图的复现**。\n\n如果目标是**还原那张梗图**，唯一靠谱的办法是找一张原图当参考。我这边没有可信的记忆版本可以给。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 45.9,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 126,
+      "output": 1965,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1431,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 126,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1965,
+      "reasoning": 1431
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T14:52:59Z",
+    "finished_at": "2026-11-16T14:53:45Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

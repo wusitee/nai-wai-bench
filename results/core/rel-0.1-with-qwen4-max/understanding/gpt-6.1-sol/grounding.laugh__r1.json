@@ -1,0 +1,80 @@
+{
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "vendor": "openai",
+  "item": "grounding.laugh",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Look only at the attached image. Return a JSON object with two keys: pose (one of belly_clutch, raised_hands, facepalm, folded_arms) and eyes (open or closed). Use unknown for a field you cannot determine. Do not infer the answer from a meme's name or typical appearance.",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "{\"pose\":\"belly_clutch\",\"eyes\":\"closed\"}",
+  "contaminated": false,
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17084-9383-7ea1-9f18-36fbe9e51153",
+    "seconds": 5.7,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12177,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 30,
+      "reasoning_output_tokens": 12
+    },
+    "tokens": {
+      "input": 12177,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 30,
+      "reasoning": 12
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:44:58Z",
+    "finished_at": "2026-10-25T00:45:04Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

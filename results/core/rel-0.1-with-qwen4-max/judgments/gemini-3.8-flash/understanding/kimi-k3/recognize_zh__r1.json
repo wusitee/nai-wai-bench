@@ -1,0 +1,75 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/kimi-k3/recognize_zh__r1.json",
+  "target_sha256": "1eef6e4878e2b36051f4079eac332d6452f3b02c4b410bf3bf0f35083263f505",
+  "settings_id": "c5b99b49261f87dd",
+  "input_names": "neutral",
+  "judge_prompt": "d7b757f2bda2cb07",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "kimi-k3",
+  "scores": {
+    "base_character": 1,
+    "identifies_meme": 1,
+    "ai_variant": 1,
+    "aliases": 1,
+    "naiwa": 1
+  },
+  "hallucinations": [],
+  "rationale": "The model recognizes the base character and meme usage but omits the AI-generated mutation context and specific meme names.",
+  "raw": "```json\n{\n  \"scores\": {\n    \"base_character\": 1,\n    \"identifies_meme\": 1,\n    \"ai_variant\": 1,\n    \"aliases\": 1,\n    \"naiwa\": 1\n  },\n  \"hallucinations\": [],\n  \"rationale\": \"The model recognizes the base character and meme usage but omits the AI-generated mutation context and specific meme names.\"\n}\n```",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 33.2,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 18476,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:14:59Z",
+    "finished_at": "2026-10-25T02:15:32Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

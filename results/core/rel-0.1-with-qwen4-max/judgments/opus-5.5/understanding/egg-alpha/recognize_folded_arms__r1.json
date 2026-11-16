@@ -1,0 +1,107 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/egg-alpha/recognize_folded_arms__r1.json",
+  "target_sha256": "74359f36ee78439c3cdb30d186df21656b07e8008401b7750d88041721853c56",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "2a2f01ae663f824e",
+  "judge_images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "track": "understanding",
+  "model": "egg-alpha",
+  "scores": {
+    "base_character": 1,
+    "identifies_meme": 1
+  },
+  "hallucinations": [],
+  "rationale": "The answer identifies the character as 奶龙, a yellow chubby cartoon from a Chinese animation, but never says it is a dragon or dinosaur. It places the image only in a generic 奶龙 meme or 抽象烂梗 category and does not recognize it as the mutated 大笑奶龙 / 变异奶龙 / 奶蛙 variant.",
+  "raw": "```json\n{\"scores\": {\"base_character\": 1, \"identifies_meme\": 1}, \"hallucinations\": [], \"rationale\": \"The answer identifies the character as 奶龙, a yellow chubby cartoon from a Chinese animation, but never says it is a dragon or dinosaur. It places the image only in a generic 奶龙 meme or 抽象烂梗 category and does not recognize it as the mutated 大笑奶龙 / 变异奶龙 / 奶蛙 variant.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.309",
+    "seconds": 9.3,
+    "tokens": {
+      "input": 2042,
+      "cached_input": 0,
+      "cache_write": 2040,
+      "output": 621,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.028992300000000002,
+    "tools_used": [],
+    "cost_usd": 0.028992300000000002,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2040,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 621,
+      "output_tokens_details": {
+        "thinking_tokens": 452
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2040,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 621,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2040,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2040
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-04T05:50:13Z",
+    "finished_at": "2026-11-04T05:50:22Z",
+    "revision": "44479d0",
+    "nwb_version": "0.1.0"
+  }
+}

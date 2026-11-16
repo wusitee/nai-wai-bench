@@ -1,0 +1,76 @@
+{
+  "settings_id": "f54f604c4f61c57e",
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "vendor": "deepseek",
+  "item": "describe_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Without looking at any images, describe the most iconic image of Laughing Nailong (大笑奶龙 / 奶蛙) from memory: its pose, expression, body shape, colors, rendering style, and background, in enough detail for an artist who has never seen it to draw it. Say where you are unsure.",
+  "images": [],
+  "answer": "Important caveat: I don’t have a reliable memory of one canonical “most iconic” frame. “奶龙” is a 3D yellow baby-dragon character, and “大笑奶龙” is really a family of laughing stickers/emoji. “奶蛙” I remember only as an alternate nickname/variant, probably because the enormous laughing mouth makes him look frog-like; I am not confident that the canonical image is green. Treat the following as a reconstruction of the widely circulated laughing-sticker look, not a verified frame.\n\n**Format and composition**\n- Square sticker/emoji crop, character centered, filling most of the frame.\n- Usually a bust or upper-body/three-quarter view; the huge face and open mouth are the subject. The lower body may be cropped or only suggested.\n- Plain white or transparent background; at most a very soft pale-gray studio shadow. No scenery, no props, no text.\n\n**Body shape**\n- Chibi “baby dragon” proportions: an oversized, nearly spherical head sitting directly on a small pear/egg-shaped body, with almost no neck.\n- Head is roughly as wide as the body and maybe 1.3–1.5 times its height; total character reads as about two head-heights tall.\n- Body is round, soft, and pot-bellied, with a lighter cream oval belly patch.\n- Limbs are very short and stubby: small rounded arms, short legs, flat rounded feet. No fingers beyond simple mitten-like nubs.\n- Two small, rounded, slightly conical horn nubs on top of the head, set fairly wide apart. They should look soft, not sharp.\n- A short tapered tail, usually curled to one side behind the body.\n- Tiny vestigial wings may be present in the full dragon design, but in the laughing sticker they are not prominent; omit them or keep them as tiny rounded nubs behind the shoulders if you want the full “dragon” read. I am unsure how visible they are in the iconic crop.\n\n**Expression**\n- The defining feature is an enormous open-mouth laugh that takes up most of the lower half of the face, making the head look almost frog-like.\n- Mouth: a wide, rounded trapezoid/oval, corners pulled far back and up, dark maroon-red interior, thick coral-pink tongue filling the lower part. No prominent teeth; if any, only two tiny rounded white upper teeth.\n- Eyes: squeezed shut in delight, drawn as two thick black upward-bowed arcs, like “∩ ∩”, with no visible pupils. The cheeks push up into the eyes.\n- Cheeks: large soft circular pink blush patches, one under each eye, partly outside the mouth corners.\n- Nose: two tiny dark oval nostrils just above the mouth; no protruding snout.\n- Overall expression: helpless, belly-laughing, delighted, slightly silly — not a polite smile.\n\n**Pose**\n- The version I recall most strongly is a standing/leaning-back laugh: body tilted back a little, belly pushed forward, head tipped up, feet planted apart and turned slightly outward.\n- Arms are short and raised out to the sides, elbows bent, paws open, as if saying “ta-da” or mid-belly-laugh. An equally plausible variant has both hands resting on the belly; I am unsure which exact hand placement the most-shared frame uses.\n- Legs slightly bent, giving a bouncing or wobbling look. Tail curled up behind.\n- If drawing only the bust, keep the shoulders lifted and the head tilted back slightly; the body pose is secondary.\n\n**Colors**\n- Body: warm saturated banana/butter yellow, not neon; approximately #F6C945–#FFD24A.\n- Belly/muzzle area: pale creamy yellow, approximately #FFF0B8.\n- Horns: same yellow or slightly deeper amber.\n- Blush: soft salmon/coral pink, semi-transparent.\n- Mouth interior: deep wine/maroon, approximately #6E1E1E; tongue: coral pink #F06A7A.\n- Eyes/linework: near-black, warm dark brown-black.\n- I would not recolor him green for “奶蛙” unless you have a reference; in my memory the laughing image is yellow, and “奶蛙” is a nickname for the frog-like mouth rather than necessarily a green character.\n\n**Rendering style**\n- 3D cartoon render, like a soft vinyl/blind-box toy or an animation still: smooth matte surfaces, rounded bevels, soft global illumination, subtle specular highlights, no black outlines.\n- Very little texture. The mouth interior is softly shadowed; the tongue has a slight glossy highlight. Eyes read as matte black beads or thick painted arcs.\n- Lighting is bright, even, and flattering, with a gentle rim light to separate the yellow body from the white background.\n\n**Where I am unsure**\n- Whether the single most iconic image is a full-body standing laugh, a seated belly-laugh, or just the head/bust.\n- Exact arm placement: raised to the sides vs. hands on belly.\n- Whether the tail, wings, and horns are all visible in the iconic crop.\n- Whether “奶蛙” means a green recolor, a frog-like nickname, or a separate character.\n- Exact hex colors, number of teeth, and whether the background is pure white or transparent.\n\nIf an artist draws the oversized round yellow head, closed happy arc-eyes, huge maroon open mouth with pink tongue, pink cheek circles, stubby limbs, and soft 3D toy shading against a plain white ground, they will have the essential image even if the exact pose differs.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+    "stop_reason": "end_turn",
+    "client": "deepseek-harness-acp 0.0.1",
+    "seconds": 58.6,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+      "reasoning_effort": "high"
+    },
+    "resolved_model": "[\"deepseek-official\",\"deepseek-flash\"]",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 7214,
+        "size": 1000000
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-flash-default.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53",
+      "config/dsh-flash-default.patch.yml": "e681660b1857478d"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:42:53Z",
+    "finished_at": "2026-10-25T00:43:52Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

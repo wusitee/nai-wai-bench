@@ -1,0 +1,116 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "imagegen/chatgpt-image/described_brief/frog__r1.json",
+  "target_sha256": "489d89a8f2207ef5853366974b9cb3b311b24b2d74a687d49d8df8d61da5d2f7",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "af63bae5415cd221",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/chatgpt-image/described_brief/frog__r1/exec-6185fbe9-ca42-400b-8b72-a51a37b663ad.png"
+  ],
+  "track": "imagegen",
+  "model": "chatgpt-image",
+  "traits": {
+    "pose": 2,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 2,
+    "vibe": 1
+  },
+  "identity": 2,
+  "failure_modes": [],
+  "rationale": "A clearly recognizable frog reproducing the meme's doubled-over, belly-clutching, eyes-shut hysterical laugh on white, though its lanky frog limbs replace the bulky bean body and the polished render feels less absurd than the reference.",
+  "raw": "**pose:** The frog stands with its torso hunched forward and knees bent in a crouch, doubled over with laughter. → match\n\n**hands_on_belly:** Both webbed hands are pressed and clutching at the belly. → match\n\n**eyes:** Both eyes are squeezed shut, with closed lids forming curved lines on the bulging eye mounds. → match\n\n**mouth:** The enormous gaping mouth dominates the face, with a dark red interior and a large pink tongue. It has no teeth, which suits a frog. → match\n\n**body:** The belly is rounded and the head flows into the torso, but the limbs are long and lanky rather than short and thick, and the body is not a bulky pear shape. → partial\n\n**belly_patch:** A pale cream belly and throat contrast clearly with the green body. → match\n\n**render:** It is a glossy 3D CG render with soft lighting. It is more polished and Pixar-like than the reference's cheap look, but it is neither 2D nor photorealistic. → match\n\n**background:** The background is plain white with only a soft shadow and no props. → match\n\n**vibe:** The hysterical laughter is there, but the polished, charming frog reads as a lively mascot more than unhinged 抽象 meme energy. → partial\n\n**identity:** It is unmistakably a green frog, with bulging eyes, spotted skin, long jumping legs and toe pads. → clearly\n\n```json\n{\"traits\": {\"pose\": \"match\", \"hands_on_belly\": \"match\", \"eyes\": \"match\", \"mouth\": \"match\", \"body\": \"partial\", \"belly_patch\": \"match\", \"render\": \"match\", \"background\": \"match\", \"vibe\": \"partial\"}, \"identity\": \"clearly\", \"failure_modes\": [], \"rationale\": \"A clearly recognizable frog reproducing the meme's doubled-over, belly-clutching, eyes-shut hysterical laugh on white, though its lanky frog limbs replace the bulky bean body and the polished render feels less absurd than the reference.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 15.4,
+    "tokens": {
+      "input": 4430,
+      "cached_input": 0,
+      "cache_write": 4428,
+      "output": 1222,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.060224599999999996,
+    "tools_used": [],
+    "cost_usd": 0.060224599999999996,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 4428,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1222,
+      "output_tokens_details": {
+        "thinking_tokens": 571
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 4428,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1222,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 4428,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 4428
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-05T04:02:07Z",
+    "finished_at": "2026-11-05T04:02:23Z",
+    "revision": "aa69823+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

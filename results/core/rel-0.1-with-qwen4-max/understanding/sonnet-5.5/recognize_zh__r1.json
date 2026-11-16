@@ -1,0 +1,103 @@
+{
+  "settings_id": "8bc2f526580c51a3",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "vendor": "anthropic",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "我没法确定这个角色是谁，也就不想硬编一个梗名和别名来糊弄你。\n\n**画面里能看到的信息：**\n- 一个3D渲染的卡通角色，身体圆滚滚的，像一团黄色的肉球。\n- 肚子是米白色，手是深灰色，像戴了手套。\n- 表情是捧腹大笑：眼睛眯成线，嘴巴张得很大，弯着腰，两手按着肚子。\n- 背景是白色渐变，画面有明显的压缩痕迹，应该是从视频里截出来的。\n\n**为什么不下结论：**\n这类\"捧腹大笑\"的角色常被做成表情包或反应图（reaction meme），用来表示嘲笑、笑到不行或幸灾乐祸。但我对这个具体角色的出处没有把握，不确定它出自哪部动画、广告或短片，也不确定它对应哪个具体的梗。如果随口给一个名字，很可能是错的。\n\n**可以这样查：**\n1. 用图片搜索（Google Lens、百度识图、TinEye、Yandex 图片）搜这张截图。\n2. 去 Know Your Meme 搜 \"yellow laughing character\" 或 \"laughing yellow blob meme\"。\n3. 如果你记得它是在哪个视频、平台或评论区看到的，告诉我上下文，我可以帮你缩小范围。\n\n你要是已经知道它大概叫什么，也可以告诉我，我可以接着聊这个梗的用法和流行过程。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 14.3,
+    "tokens": {
+      "input": 1417,
+      "cached_input": 0,
+      "cache_write": 1415,
+      "output": 1072,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.016632400000000002,
+    "tools_used": [],
+    "cost_usd": 0.016632400000000002,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1415,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1072,
+      "output_tokens_details": {
+        "thinking_tokens": 552
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1415,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1072,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1415,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1415
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:44:22Z",
+    "finished_at": "2026-10-25T00:44:37Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

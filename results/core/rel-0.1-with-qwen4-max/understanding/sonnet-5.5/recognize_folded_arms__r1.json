@@ -1,0 +1,103 @@
+{
+  "settings_id": "8bc2f526580c51a3",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "vendor": "anthropic",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "我不太确定这是哪个角色，也不想随便编一个名字。\n\n**画面内容：**\n- 3D 渲染的黄色圆润角色，身体像水滴或豆子，肚子是米白色的大圆肚\n- 绿色大眼睛，嘴巴是一条淡淡的微笑线\n- 双臂交叉抱在胸前，姿态沉稳，甚至有点“淡定”和“高冷”\n\n**关于梗：**\n这类“抱臂站立、表情平静”的构图，常被用作反应图，大致表达这几种意思：\n- “我就静静看你表演”\n- “我很淡定，你们继续”\n- 对离谱言论或操作的无声回应\n\n不过我无法确认这张图出自哪部作品、哪个具体的梗，硬说容易误导你。\n\n**查证方法：**\n- 用 Google Lens、TinEye 或百度识图以图搜图\n- 在 Know Your Meme 或小红书、B站上搜索“黄色 胖胖 抱臂 表情包”\n- 告诉我你在哪里看到这张图，比如视频、群聊或某个帖子，我可以帮你分析线索\n\n如果你知道它大概出自哪里，我也可以帮你解释这个梗的来龙去脉。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 11.5,
+    "tokens": {
+      "input": 951,
+      "cached_input": 0,
+      "cache_write": 949,
+      "output": 844,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.012449100000000001,
+    "tools_used": [],
+    "cost_usd": 0.012449100000000001,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 949,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 844,
+      "output_tokens_details": {
+        "thinking_tokens": 416
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 949,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 844,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 949,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 949
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:44:50Z",
+    "finished_at": "2026-10-25T00:45:02Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

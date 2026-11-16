@@ -1,0 +1,90 @@
+{
+  "judge": "kimi-k3.1-pro",
+  "judge_vendor": "moonshot",
+  "target": "imagegen/gemini-image/name_en/giraffe__r1.json",
+  "target_sha256": "e6d094b264e17843d4b8a16617d00b4fb8dd53f51d1a76cec9e705232a108a44",
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "judge_prompt": "32da82641658e870",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/gemini-image/name_en/giraffe__r1/inline-0.jpg"
+  ],
+  "track": "imagegen",
+  "model": "gemini-image",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 0,
+    "background": 0,
+    "vibe": 0
+  },
+  "identity": 2,
+  "failure_modes": [
+    "generic_cute",
+    "text_or_watermark",
+    "multiple_subjects"
+  ],
+  "rationale": "The giraffe identity and laughing facial expression are clear, but the upright pose, 2D storybook rendering, busy park background, and cute tone depart substantially from the reference meme.",
+  "raw": "- **pose:** Stands upright rather than hunching forward with bent knees — **absent**\n- **hands_on_belly:** Both forelimbs are wrapped against the belly in a belly-hugging gesture — **match**\n- **eyes:** Eyes are squeezed shut into thin, upward-curving arcs — **match**\n- **mouth:** Huge open mouth with a dark interior, visible teeth, and tongue — **match**\n- **body:** Bulky body and short, thick limbs, but with a distinct giraffe neck and less bean-like silhouette — **partial**\n- **belly_patch:** Large pale oval belly patch contrasts with the spotted yellow body — **match**\n- **render:** Soft, polished 2D cartoon illustration rather than glossy 3D CG — **absent**\n- **background:** Detailed park scene with trees, grass, a path, and confetti — **absent**\n- **vibe:** Cheerful and cute rather than absurd or unhinged — **absent**\n- **identity:** Clearly a giraffe, with ossicones, ears, spotted coloring, a neck, and a tufted tail — **clearly**\n\n{\"traits\": {\"pose\": \"absent\", \"hands_on_belly\": \"match\", \"eyes\": \"match\", \"mouth\": \"match\", \"body\": \"partial\", \"belly_patch\": \"match\", \"render\": \"absent\", \"background\": \"absent\", \"vibe\": \"absent\"}, \"identity\": \"clearly\", \"failure_modes\": [\"generic_cute\", \"text_or_watermark\", \"multiple_subjects\"], \"rationale\": \"The giraffe identity and laughing facial expression are clear, but the upright pose, 2D storybook rendering, busy park background, and cute tone depart substantially from the reference meme.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 27.3,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 22818,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 795,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 23613 / 1048576 tokens (2%)\nSession total: 22818 input, 795 output",
+      "usage": {
+        "inputTokens": 22818,
+        "outputTokens": 795
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:55:07Z",
+    "finished_at": "2026-10-25T01:55:35Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

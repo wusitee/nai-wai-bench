@@ -1,0 +1,68 @@
+{
+  "settings_id": "c5b99b49261f87dd",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "vendor": "google",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "根据您提供的图片以及我自身的知识储备，回答如下：\n\n### 1. 图里的是什么角色？\n图中的角色是一个呈梨形身材、通体黄色、腹部有浅色椭圆斑块、双手呈灰黑色的 **3D 卡通外星人 / 胖胖小怪兽形象**（常被称为 **“黄色胖子” / “黄色外星人”（Yellow Alien / Fat Yellow Guy）**）。\n* 该模型最初出自一段 3D CG 角色动画/资产，其标志性动作是经典的“双手按腹、仰头张大嘴狂笑”（Belly Laugh）。它并不是主流迪士尼或皮克斯等大型动画电影的主角，而是一个被广泛提取并二次创作的 3D 角色动画模型。\n\n---\n\n### 2. 它和哪个网络梗有关？\n它与风靡国内外短视频平台的 **“魔性狂笑 / 捧腹大笑” 反应梗（Reaction Meme）** 直接相关：\n* **梗的表现形式**：该动画片段通常被抠成绿幕素材，配上各种极具感染力、甚至“漏气/哮喘”般的魔性大笑音频（最常见的是西班牙著名笑星 **El Risitas（大笑男）** 的魔性笑声、尖锐婴儿笑声或变调大笑声）。\n* **梗的使用场景**：在短视频（如抖音、B站、TikTok、YouTube Shorts 以及各类“抽象迷因/猫meme/笑话解析”视频）中，常被用作表达**极度爆笑、幸灾乐祸、笑抽了、笑得肚子痛**或**无情嘲讽**的情绪反应切片。\n\n---\n\n### 3. 这个梗还有什么别名？\n因该梗多在短视频和社交媒体中以素材形式流传，根据搭配的音频和使用场景，有以下常见别名与称呼：\n\n* **中文互联网常见称呼/别名**：\n  * **狂笑黄色小人 / 黄色胖子大笑**\n  * **捧腹大笑小人 / 捂肚子狂笑梗**\n  * **魔性大笑小人 / 笑抽了小黄人**\n  * **笑点解析小人**（因常被用在“笑点解析：……”的解说与嘲讽视频结尾）\n\n* **海外互联网常见别名**：\n  * **Yellow Guy Laughing / Fat Yellow Guy Laughing Meme**\n  * **Alien Laughing Meme / Laughing Alien**\n  * **Belly Laugh Meme**",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 319.9,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 35535,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:43:51Z",
+    "finished_at": "2026-10-25T00:49:11Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

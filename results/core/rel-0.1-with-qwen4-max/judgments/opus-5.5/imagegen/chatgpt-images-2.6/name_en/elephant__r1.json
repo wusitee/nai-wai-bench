@@ -1,0 +1,118 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "imagegen/chatgpt-images-2.6/name_en/elephant__r1.json",
+  "target_sha256": "eff5224ebae9d2b4975b646e5e5d7251b5e3d766d3956ce365eb0b16ae6f332e",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "407fdd2a3851c5f0",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/chatgpt-images-2.6/name_en/elephant__r1/exec-2ec6ec35-fd74-4351-b555-9a37a879135b.png"
+  ],
+  "track": "imagegen",
+  "model": "chatgpt-images-2.6",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 0,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 1,
+    "render": 2,
+    "background": 0,
+    "vibe": 1
+  },
+  "identity": 2,
+  "failure_modes": [
+    "generic_cute"
+  ],
+  "rationale": "A clearly identifiable chubby 3D elephant with a fitting body and render, but it lacks the meme's defining hunched belly-clutching pose, squeezed-shut eyes and gaping laugh, and it sits on a scene background. It reads as a cute, smug cartoon, not Laughing Nailong.",
+  "raw": "- **pose:** Upright, with the head tilted slightly back. It is not hunched or doubled over, and the knees aren't visible. **absent**\n- **hands_on_belly:** Both paws are raised in front of the chest, held away from the belly. **absent**\n- **eyes:** Half-open, with visible pupils looking sideways in a smug side-glance. They are not squeezed into arcs. **absent**\n- **mouth:** Open and smiling with a pink tongue, but moderate in size. There are no visible teeth and no dark, gaping interior. **partial**\n- **body:** Chubby, rounded body with the head merging into the torso and short, stubby arms. The shape fits, though the frame is cropped. **match**\n- **belly_patch:** A paler lavender-grey belly area is visible, but its contrast is subtle. **partial**\n- **render:** Soft, velvety 3D CG render with gentle lighting, close to the reference's look. **match**\n- **background:** A blurred indoor scene with furniture and a window, not a plain white or grey background. **absent**\n- **vibe:** The smug side-eye has a hint of meme energy, but it reads mostly as cute and pleased, not hysterical. **partial**\n- **identity:** Grey skin, a trunk, large pink-lined ears and toenail details make it a clear elephant. **clearly**\n\n{\"traits\": {\"pose\": \"absent\", \"hands_on_belly\": \"absent\", \"eyes\": \"absent\", \"mouth\": \"partial\", \"body\": \"match\", \"belly_patch\": \"partial\", \"render\": \"match\", \"background\": \"absent\", \"vibe\": \"partial\"}, \"identity\": \"clearly\", \"failure_modes\": [\"generic_cute\"], \"rationale\": \"A clearly identifiable chubby 3D elephant with a fitting body and render, but it lacks the meme's defining hunched belly-clutching pose, squeezed-shut eyes and gaping laugh, and it sits on a scene background. It reads as a cute, smug cartoon, not Laughing Nailong.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 13.1,
+    "tokens": {
+      "input": 4431,
+      "cached_input": 0,
+      "cache_write": 4429,
+      "output": 959,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.054856600000000005,
+    "tools_used": [],
+    "cost_usd": 0.054856600000000005,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 4429,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 959,
+      "output_tokens_details": {
+        "thinking_tokens": 290
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 4429,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 959,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 4429,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 4429
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-05T03:59:49Z",
+    "finished_at": "2026-11-05T04:00:03Z",
+    "revision": "aa69823+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/gemini-3.8-flash/recognize_official__r1.json",
+  "target_sha256": "d8271c33394496d391415709d6c8a050f1fac34002b4c8a7dd25e7766bcc6b31",
+  "settings_id": "c5b99b49261f87dd",
+  "input_names": "neutral",
+  "judge_prompt": "7516d61bf1ac2ded",
+  "judge_images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "scores": {
+    "base_character": 1,
+    "official_art": 1
+  },
+  "hallucinations": [
+    "Identified the character as an asset created for the '恶龙咆哮' meme rather than the animated character 奶龙.",
+    "Claimed the character is known as '恶龙咆哮小恐龙' popularized via viral audio trends."
+  ],
+  "rationale": "The model fails to identify 奶龙 or distinguish official artwork, misattributing the character entirely to the unrelated '恶龙咆哮' meme.",
+  "raw": "```json\n{\n  \"scores\": {\n    \"base_character\": 1,\n    \"official_art\": 1\n  },\n  \"hallucinations\": [\n    \"Identified the character as an asset created for the '恶龙咆哮' meme rather than the animated character 奶龙.\",\n    \"Claimed the character is known as '恶龙咆哮小恐龙' popularized via viral audio trends.\"\n  ],\n  \"rationale\": \"The model fails to identify 奶龙 or distinguish official artwork, misattributing the character entirely to the unrelated '恶龙咆哮' meme.\"\n}\n```",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 25.3,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 17056,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:02:56Z",
+    "finished_at": "2026-10-25T02:03:21Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

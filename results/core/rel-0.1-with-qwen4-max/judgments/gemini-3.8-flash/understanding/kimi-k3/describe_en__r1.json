@@ -1,0 +1,32 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/kimi-k3/describe_en__r1.json",
+  "target_sha256": "a87bc98c1ccd285e5561c2e288a085626821534d83ee8b12ce08eb751ae991d3",
+  "settings_id": "c5b99b49261f87dd",
+  "judge_prompt": "5336a4436ef48f59",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "kimi-k3",
+  "error": "ValueError: no valid judgment after 2 attempts: no JSON object found in reply",
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:20:32Z",
+    "finished_at": "2026-10-25T05:20:55Z",
+    "revision": "9f7aef8",
+    "nwb_version": "0.1.0"
+  }
+}

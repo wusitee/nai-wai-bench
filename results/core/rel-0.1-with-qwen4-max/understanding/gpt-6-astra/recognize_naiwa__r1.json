@@ -1,0 +1,80 @@
+{
+  "settings_id": "eed12e0ea2261aed",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "vendor": "openai",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "我没能可靠认出这只黄色大眼角色，因此无法确定它的名字和所属网络梗。\n\n图上的“惊鸿一瞥”是在用文雅的词调侃它呆滞的侧目，但仅凭这句配文，我不能确认角色出处。",
+  "contaminated": false,
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6-astra",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17086-9cd8-7671-b800-b6875830c9c8",
+    "seconds": 48.1,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 11415,
+      "cached_input_tokens": 8960,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 868,
+      "reasoning_output_tokens": 799
+    },
+    "tokens": {
+      "input": 11415,
+      "cached_input": 8960,
+      "cache_write": 0,
+      "output": 868,
+      "reasoning": 799
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6-astra",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:47:12Z",
+    "finished_at": "2026-10-25T00:48:00Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

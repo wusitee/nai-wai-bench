@@ -1,0 +1,100 @@
+{
+  "settings_id": "1e77488ebc8a6fba",
+  "track": "understanding",
+  "model": "opus-5.5",
+  "vendor": "anthropic",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "A cute chubby cartoon cat in the style of a soft, rounded children's picture-book mascot, drawn as a reaction meme sticker. The cat has a bright lemon-yellow body that is plump and pear-shaped, like a soft dumpling. Its belly is slightly paler cream-yellow, with stubby little arms and short, stumpy legs. It has small rounded triangular cat ears, a few thin whiskers and a short curled tail.\n\nIt is laughing hysterically. Its huge mouth is opened impossibly wide, taking up nearly half its face, showing a deep red-pink mouth interior and a small pink tongue. Its eyes are squeezed shut into happy upside-down crescent arcs, with big shiny tears of laughter flying from the corners. Its cheeks are flushed pink and its head is tilted back. Its tiny paws are raised beside its face as if it can't stop laughing, and its whole body leans back mid-guffaw.\n\nThe art is a simple flat 2D cartoon with clean thick dark outlines, smooth cel shading and soft glossy highlights. It has the bold, slightly goofy, exaggerated expression typical of viral internet reaction stickers. The single character is centered on a plain white background with no text and a cheerful, silly, contagious mood.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 11.9,
+    "tokens": {
+      "input": 673,
+      "cached_input": 0,
+      "cache_write": 671,
+      "output": 658,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0187595,
+    "tools_used": [],
+    "cost_usd": 0.0187595,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 671,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 658,
+      "output_tokens_details": {
+        "thinking_tokens": 233
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 671,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 658,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 671,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 671
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:42:20Z",
+    "finished_at": "2026-10-25T00:42:32Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

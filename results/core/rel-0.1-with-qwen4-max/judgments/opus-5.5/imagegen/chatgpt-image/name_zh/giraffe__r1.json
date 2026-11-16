@@ -1,0 +1,118 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "imagegen/chatgpt-image/name_zh/giraffe__r1.json",
+  "target_sha256": "772d5915d0891cd3a217350a27584e3d8d2471bde450cda26015fd4bb7bcdec6",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "6f759f177814ec15",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/chatgpt-image/name_zh/giraffe__r1/exec-39f0a78a-92cf-4250-b36a-93dbfc7b84aa.png"
+  ],
+  "track": "imagegen",
+  "model": "chatgpt-image",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 0,
+    "vibe": 0
+  },
+  "identity": 2,
+  "failure_modes": [
+    "generic_cute"
+  ],
+  "rationale": "A clearly recognizable, cute plush-style giraffe with closed-arc eyes and a pale belly, but it stands upright with its head thrown back instead of doubled over and clutching its belly. The savanna backdrop and kawaii polish replace the meme's plain background and unhinged energy.",
+  "raw": "**pose:** The giraffe stands upright with its head thrown back and its torso leaning slightly backward. It is not hunched forward or doubled over, and the knees are not visibly bent. → absent\n\n**hands_on_belly:** The front hooves are raised near the belly, one in front and one at the side, but they hover rather than clutch or press on it. → partial\n\n**eyes:** The eyes are squeezed shut into thin curved arcs. → match\n\n**mouth:** The mouth is huge, open and laughing, with a visible tongue. The interior is bright pink rather than dark, and there are no teeth. It reads as joyful rather than hysterical. → partial\n\n**body:** The lower body is pear-shaped with short thick legs, but there is a long distinct giraffe neck instead of a head merging into the torso. → partial\n\n**belly_patch:** There is a large pale cream oval belly that contrasts with the spotted yellow body. → match\n\n**render:** It is a 3D CG render, but polished and Pixar-like with a fuzzy plush texture. It is not the reference's glossy, slightly cheap studio-render look. → partial\n\n**background:** There is a full savanna scene with acacia trees, mountains, sky, clouds and sparkle effects, rather than a plain white or grey backdrop. → absent\n\n**vibe:** The image is wholesome, cute and kawaii with sparkles, and has none of the reference's absurd, unhinged meme energy. → absent\n\n**identity:** It is clearly a giraffe, with ossicones, ears, a long neck, a brown-spotted coat, hooves and a tufted tail. → clearly\n\n{\"traits\": {\"pose\": \"absent\", \"hands_on_belly\": \"partial\", \"eyes\": \"match\", \"mouth\": \"partial\", \"body\": \"partial\", \"belly_patch\": \"match\", \"render\": \"partial\", \"background\": \"absent\", \"vibe\": \"absent\"}, \"identity\": \"clearly\", \"failure_modes\": [\"generic_cute\"], \"rationale\": \"A clearly recognizable, cute plush-style giraffe with closed-arc eyes and a pale belly, but it stands upright with its head thrown back instead of doubled over and clutching its belly. The savanna backdrop and kawaii polish replace the meme's plain background and unhinged energy.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 15.7,
+    "tokens": {
+      "input": 4436,
+      "cached_input": 0,
+      "cache_write": 4434,
+      "output": 1269,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.061096199999999996,
+    "tools_used": [],
+    "cost_usd": 0.061096199999999996,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 4434,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1269,
+      "output_tokens_details": {
+        "thinking_tokens": 523
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 4434,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1269,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 4434,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 4434
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-05T04:03:35Z",
+    "finished_at": "2026-11-05T04:03:51Z",
+    "revision": "aa69823+dirty",
+    "nwb_version": "0.1.0"
+  }
+}
