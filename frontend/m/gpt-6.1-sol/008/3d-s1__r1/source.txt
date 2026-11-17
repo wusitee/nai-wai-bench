@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Laughing Golden Creature</title>
+<style>
+html,body{margin:0;width:216px;height:216px;overflow:hidden;background:#f7f8f5}
+canvas{display:block;width:216px;height:216px}
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color('#f7f8f5');
+
+const renderer = new THREE.WebGLRenderer({preserveDrawingBuffer:true});
+renderer.setPixelRatio(1);
+renderer.setSize(216,216);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.16;
+document.body.appendChild(renderer.domElement);
+
+const ref = new THREE.OrthographicCamera(-2,2,2,-2,.1,60);
+ref.position.set(3.15,3.52,12);
+ref.lookAt(-.25,2.31,0);
+
+scene.add(new THREE.HemisphereLight('#fffef3','#c1aa7e',2.05));
+const key = new THREE.DirectionalLight('#fff8df',3.15);
+key.position.set(-3.6,7,5);
+key.castShadow = true;
+key.shadow.mapSize.set(1024,1024);
+key.shadow.camera.left=-4;
+key.shadow.camera.right=4;
+key.shadow.camera.top=6;
+key.shadow.camera.bottom=-3;
+key.shadow.normalBias=.025;
+key.shadow.bias=-.00015;
+key.shadow.radius=5;
+scene.add(key);
+const fill = new THREE.DirectionalLight('#ffffff',.65);
+fill.position.set(4,3,-5);
+scene.add(fill);
+
+const floor = new THREE.Mesh(
+  new THREE.PlaneGeometry(200,200),
+  new THREE.MeshStandardMaterial({color:'#f7f8f5',roughness:1})
+);
+floor.rotation.x=-Math.PI/2;
+floor.position.y=-.075;
+floor.receiveShadow=true;
+scene.add(floor);
+
+const gold = new THREE.MeshStandardMaterial({color:'#dbab19',roughness:.94});
+const headGold = new THREE.MeshStandardMaterial({color:'#e8bf32',roughness:.94,side:THREE.DoubleSide});
+const armGold = new THREE.MeshStandardMaterial({color:'#deb01d',roughness:1});
+const beige = new THREE.MeshStandardMaterial({color:'#c3a174',roughness:1,side:THREE.DoubleSide});
+const handMat = new THREE.MeshStandardMaterial({color:'#514b33',roughness:1});
+const fingerMat = new THREE.MeshStandardMaterial({color:'#48432f',roughness:1});
+const nailMat = new THREE.MeshStandardMaterial({color:'#302e24',roughness:.84});
+const eyeMat = new THREE.MeshStandardMaterial({color:'#36260c',roughness:1});
+const lipMat = new THREE.MeshStandardMaterial({color:'#bd8b16',roughness:1});
+const toothMat = new THREE.MeshStandardMaterial({color:'#f5e5b1',roughness:.67});
+const mouthMat = new THREE.MeshBasicMaterial({color:'#160e05',side:THREE.DoubleSide});
+
+let seed=71983;
+function rnd(){
+  seed=(Math.imul(seed,1664525)+1013904223)>>>0;
+  return seed/4294967296;
+}
+function group(name,parent){
+  const g=new THREE.Group();
+  g.name=name;
+  if(parent)parent.add(g);
+  return g;
+}
+function fur(parent,radii,count,color,mask=null,length=.028){
+  const p=[],c=[];
+  const base=new THREE.Color(color);
+  for(let i=0;i<count;i++){
+    const ny=2*rnd()-1,phi=rnd()*Math.PI*2;
+    const rr=Math.sqrt(1-ny*ny);
+    const n=new THREE.Vector3(rr*Math.cos(phi),ny,rr*Math.sin(phi));
+    const v=new THREE.Vector3(n.x*radii[0],n.y*radii[1],n.z*radii[2]);
+    if(mask && !mask(v,n))continue;
+    const normal=new THREE.Vector3(n.x/radii[0],n.y/radii[1],n.z/radii[2]).normalize();
+    let tangent=new THREE.Vector3(0,1,0).cross(normal);
+    if(tangent.lengthSq()<.001)tangent.set(1,0,0);
+    tangent.normalize();
+    const w=.002+rnd()*.0028;
+    const len=length*(.55+rnd()*.8);
+    const root=v.clone().addScaledVector(normal,-.002);
+    const tip=v.clone().addScaledVector(normal,len);
+    tip.y-=len*.22;
+    p.push(
+      root.x+tangent.x*w,root.y+tangent.y*w,root.z+tangent.z*w,
+      root.x-tangent.x*w,root.y-tangent.y*w,root.z-tangent.z*w,
+      tip.x,tip.y,tip.z
+    );
+    const shade=.81+rnd()*.27;
+    for(let j=0;j<3;j++)c.push(base.r*shade,base.g*shade,base.b*shade);
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(p,3));
+  geo.setAttribute('color',new THREE.Float32BufferAttribute(c,3));
+  geo.computeVertexNormals();
+  const mesh=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({
+    vertexColors:true,roughness:1,side:THREE.DoubleSide
+  }));
+  mesh.name='short-golden-fur';
+  parent.add(mesh);
+}
+function ellipsoid(name,parent,pos,scale,mat,furCount=0,furColor='#dcb022',mask=null){
+  const g=group(name,parent);
+  g.position.set(...pos);
+  const mesh=new THREE.Mesh(new THREE.SphereGeometry(1,48,36),mat);
+  mesh.scale.set(...scale);
+  mesh.castShadow=true;
+  mesh.receiveShadow=true;
+  g.add(mesh);
+  if(furCount)fur(g,scale,furCount,furColor,mask);
+  return g;
+}
+function curveTube(name,parent,points,radius,material,segments=24){
+  const curve=new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p)));
+  const mesh=new THREE.Mesh(new THREE.TubeGeometry(curve,segments,radius,9,false),material);
+  mesh.name=name;
+  mesh.castShadow=true;
+  mesh.receiveShadow=true;
+  parent.add(mesh);
+  return mesh;
+}
+function limb(name,parent,a,b,width,depth,material,count){
+  const av=new THREE.Vector3(...a),bv=new THREE.Vector3(...b);
+  const center=av.clone().add(bv).multiplyScalar(.5);
+  const g=ellipsoid(name,parent,center.toArray(),
+    [width,av.distanceTo(bv)*.5+width*.32,depth],material,count);
+  g.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),av.clone().sub(bv).normalize());
+  return g;
+}
+
+const creature=group('laughing-golden-creature',scene);
+const torso=ellipsoid('torso',creature,[0,2.12,-.035],[.83,1.10,.57],gold,3400,'#dfb126',
+  (v,n)=>!(n.z>.65&&v.y<.35&&v.y>-.88&&Math.abs(v.x)<.58));
+
+const bellyGroup=group('soft-tan-belly',creature);
+{
+  const positions=[],indices=[],rings=25,steps=80;
+  for(let r=0;r<=rings;r++){
+    const u=r/rings;
+    for(let j=0;j<=steps;j++){
+      const a=j/steps*Math.PI*2;
+      const wav=1+.012*Math.sin(a*5)+.013*Math.cos(a*3);
+      const x=-.015+.598*u*Math.cos(a)*wav;
+      const y=1.85+.649*u*Math.sin(a)*wav;
+      const zz=Math.max(.015,1-x*x/(.83*.83)-(y-2.12)*(y-2.12)/(1.10*1.10));
+      const z=-.035+.57*Math.sqrt(zz)+.009;
+      positions.push(x,y,z);
+    }
+  }
+  for(let r=0;r<rings;r++)for(let j=0;j<steps;j++){
+    const a=r*(steps+1)+j,b=a+1,c=a+steps+1,d=c+1;
+    indices.push(a,c,b,b,c,d);
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
+  geo.setIndex(indices);
+  geo.computeVertexNormals();
+  const mesh=new THREE.Mesh(geo,beige);
+  mesh.receiveShadow=true;
+  bellyGroup.add(mesh);
+}
+ellipsoid('neck',creature,[-.04,3.03,-.015],[.48,.55,.43],headGold,1100,'#e0b627');
+
+const legs=group('legs',creature);
+for(const side of [-1,1]){
+  const leg=group(side<0?'left-leg':'right-leg',legs);
+  const x=side*.48;
+  ellipsoid('haunch',leg,[x,1.12,-.015],[.38,.59,.39],gold,950);
+  limb('thigh',leg,[x,1.04,.06],[x+side*.055,.56,.26],.285,.315,gold,650);
+  ellipsoid('knee',leg,[x+side*.055,.59,.27],[.285,.30,.30],armGold,450);
+  limb('shin',leg,[x+side*.055,.57,.23],[x+side*.035,.04,.035],.235,.24,gold,650);
+  ellipsoid('foot',leg,[x+side*.045,.035,.20],[.26,.14,.39],gold,250);
+}
+
+const arms=group('arms',creature);
+const leftArm=group('left-arm',arms);
+ellipsoid('shoulder',leftArm,[-.66,2.79,-.015],[.40,.49,.41],armGold,1000);
+limb('upper-arm',leftArm,[-.78,2.72,.025],[-.94,2.03,.105],.29,.30,armGold,1000);
+ellipsoid('elbow',leftArm,[-.91,1.99,.12],[.26,.29,.265],armGold,450);
+limb('forearm',leftArm,[-.92,2.04,.12],[-.75,1.25,.43],.22,.24,armGold,900);
+ellipsoid('wrist-fur',leftArm,[-.755,1.26,.43],[.18,.21,.19],gold,350);
+
+const rightArm=group('right-arm',arms);
+ellipsoid('shoulder',rightArm,[.65,2.79,-.035],[.43,.50,.43],armGold,1100);
+limb('upper-arm',rightArm,[.76,2.70,-.015],[1.10,2.03,.04],.365,.355,armGold,1400);
+ellipsoid('elbow',rightArm,[1.08,1.99,.07],[.335,.35,.335],armGold,650);
+limb('forearm',rightArm,[1.08,2.00,.08],[.85,1.23,.43],.275,.29,armGold,1150);
+ellipsoid('wrist-fur',rightArm,[.85,1.25,.43],[.205,.22,.205],gold,400);
+
+function makeHand(parent,name,x,y,z,side){
+  const hand=group(name,parent);
+  hand.position.set(x,y,z);
+  hand.rotation.z=side*.10;
+  ellipsoid('palm',hand,[0,-.075,.015],[.185,.235,.104],handMat);
+  ellipsoid('knuckles',hand,[0,-.19,.048],[.19,.095,.098],handMat);
+  const fingerLengths=[.245,.31,.30,.225];
+  const fingerXs=[-.125,-.043,.045,.124];
+  for(let i=0;i<4;i++){
+    const fg=group('finger-'+(i+1),hand);
+    const fx=fingerXs[i];
+    const len=fingerLengths[i];
+    const spread=fx*.22;
+    const pts=[
+      [fx,-.17,.065],
+      [fx+spread*.5,-.17-len*.38,.107],
+      [fx+spread,-.17-len*.80,.12],
+      [fx+spread,-.17-len,.09]
+    ];
+    curveTube('finger',fg,pts,.039-(i===3?.005:0),fingerMat,14);
+    ellipsoid('fingertip',fg,pts[3],[.035,.046,.037],fingerMat);
+    ellipsoid('small-dark-nail',fg,[fx+spread,-.17-len+.017,.122],[.024,.045,.009],nailMat);
+  }
+  const tx=-side*.158;
+  curveTube('thumb',hand,[
+    [tx,-.04,.05],
+    [tx-side*.08,-.13,.12],
+    [tx-side*.075,-.245,.155],
+    [tx-side*.02,-.28,.155]
+  ],.055,handMat,16);
+  ellipsoid('thumb-tip',hand,[tx-side*.02,-.28,.155],[.05,.061,.047],fingerMat);
+  return hand;
+}
+makeHand(leftArm,'left-hand',-.735,1.20,.54,-1);
+makeHand(rightArm,'right-hand',.80,1.18,.56,1);
+
+const head=group('head',creature);
+head.position.set(-.035,3.485,.015);
+head.rotation.z=-.165;
+head.rotation.x=-.075;
+
+const RX=.525,RY=.69,RZ=.455;
+const mouthRX=.327,mouthRY=.402,mouthCY=-.084;
+function mouthBoundary(a){
+  const s=Math.sin(a),c=Math.cos(a);
+  return new THREE.Vector2(mouthRX*c*(1+.075*s),mouthCY+mouthRY*s);
+}
+function faceZ(x,y){
+  return RZ*Math.sqrt(Math.max(.005,1-x*x/(RX*RX)-y*y/(RY*RY)));
+}
+{
+  const positions=[],indices=[],n=96,nr=25;
+  for(let r=0;r<=nr;r++){
+    const t=r/nr;
+    for(let j=0;j<=n;j++){
+      const a=j/n*Math.PI*2;
+      const inner=mouthBoundary(a);
+      const x=inner.x*(1-t)+RX*Math.cos(a)*t;
+      const y=inner.y*(1-t)+RY*Math.sin(a)*t;
+      positions.push(x,y,faceZ(x,y));
+    }
+  }
+  for(let r=0;r<nr;r++)for(let j=0;j<n;j++){
+    const a=r*(n+1)+j,c=a+n+1;
+    indices.push(a,c,a+1,a+1,c,c+1);
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
+  geo.setIndex(indices);geo.computeVertexNormals();
+  const mesh=new THREE.Mesh(geo,headGold);
+  mesh.castShadow=true;mesh.receiveShadow=true;
+  mesh.name='face-around-open-mouth';
+  head.add(mesh);
+
+  const bp=[],bi=[];
+  for(let r=0;r<=nr;r++){
+    const t=r/nr;
+    for(let j=0;j<=n;j++){
+      const a=j/n*Math.PI*2;
+      bp.push(RX*t*Math.cos(a),RY*t*Math.sin(a),-RZ*Math.sqrt(Math.max(0,1-t*t)));
+    }
+  }
+  for(let r=0;r<nr;r++)for(let j=0;j<n;j++){
+    const a=r*(n+1)+j,c=a+n+1;
+    bi.push(a,a+1,c,a+1,c+1,c);
+  }
+  const bg=new THREE.BufferGeometry();
+  bg.setAttribute('position',new THREE.Float32BufferAttribute(bp,3));
+  bg.setIndex(bi);bg.computeVertexNormals();
+  const back=new THREE.Mesh(bg,headGold);
+  back.name='back-of-head';back.castShadow=true;back.receiveShadow=true;
+  head.add(back);
+}
+fur(head,[RX,RY,RZ],2100,'#e8c33d',(v,n)=>{
+  if(n.z<.15)return true;
+  const q=v.x*v.x/(.40*.40)+(v.y-mouthCY)*(v.y-mouthCY)/(.51*.51);
+  return q>1.20 && v.y>.25;
+},.020);
+
+const mouth=group('wide-open-laughing-mouth',head);
+{
+  const positions=[],indices=[],n=96,nr=18;
+  for(let r=0;r<=nr;r++){
+    const t=r/nr;
+    for(let j=0;j<=n;j++){
+      const a=j/n*Math.PI*2,p=mouthBoundary(a);
+      const x=p.x*t;
+      const y=mouthCY+(p.y-mouthCY)*t;
+      const z=faceZ(p.x,p.y)-.335*(1-t*t)-.008;
+      positions.push(x,y,z);
+    }
+  }
+  for(let r=0;r<nr;r++)for(let j=0;j<n;j++){
+    const a=r*(n+1)+j,c=a+n+1;
+    indices.push(a,c,a+1,a+1,c,c+1);
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
+  geo.setIndex(indices);geo.computeVertexNormals();
+  const cavity=new THREE.Mesh(geo,mouthMat);
+  cavity.name='deep-dark-mouth-cavity';mouth.add(cavity);
+
+  const points=[];
+  for(let j=0;j<=96;j++){
+    const a=j/96*Math.PI*2,p=mouthBoundary(a);
+    points.push([p.x,p.y,faceZ(p.x,p.y)+.007]);
+  }
+  curveTube('golden-mouth-rim',mouth,points,.023,lipMat,96);
+}
+const teeth=group('upper-teeth',mouth);
+for(let i=0;i<7;i++){
+  const x=(i-3)*.072;
+  const y=.212-.076*Math.pow(x/.25,2);
+  const z=faceZ(x,y)-.026;
+  const tooth=new THREE.Mesh(new RoundedBoxGeometry(.073,.098,.067,2,.012),toothMat);
+  tooth.position.set(x,y-.022,z);
+  tooth.rotation.z=-x*.47;
+  tooth.rotation.y=x*.8;
+  tooth.castShadow=true;
+  teeth.add(tooth);
+}
+curveTube('upper-gum-shadow',mouth,[
+  [-.265,.157,.325],[-.17,.224,.374],[0,.247,.410],[.17,.224,.374],[.265,.157,.325]
+],.018,new THREE.MeshStandardMaterial({color:'#7b561d',roughness:1}),32);
+
+const lowerTeeth=group('lower-teeth',mouth);
+for(let i=0;i<5;i++){
+  const x=-.135+i*.053;
+  const y=-.434+.057*Math.pow((x+.025)/.16,2);
+  const tooth=new THREE.Mesh(new RoundedBoxGeometry(.053,.048,.045,2,.009),toothMat);
+  tooth.position.set(x,y,faceZ(x,y)-.018);
+  tooth.rotation.z=(x+.025)*2;
+  lowerTeeth.add(tooth);
+}
+ellipsoid('tongue-in-shadow',mouth,[-.025,-.345,.145],[.115,.042,.075],
+  new THREE.MeshStandardMaterial({color:'#6b3a1c',roughness:1}));
+curveTube('lower-inner-lip',mouth,[
+  [-.22,-.36,.264],[-.14,-.447,.289],[-.015,-.476,.302],[.11,-.437,.29],[.19,-.36,.27]
+],.018,new THREE.MeshStandardMaterial({color:'#b38638',roughness:1}),28);
+
+const eyes=group('closed-laughing-eyes',head);
+function closedEye(name,cx,cy,width){
+  const eg=group(name,eyes);
+  const pts=[];
+  for(let i=0;i<=16;i++){
+    const t=i/16,x=cx+(t-.5)*width;
+    const y=cy+.060*Math.sin(t*Math.PI);
+    pts.push([x,y,faceZ(x,y)+.016]);
+  }
+  curveTube('closed-eyelid',eg,pts,.018,eyeMat,24);
+  const fold=[];
+  for(let i=0;i<=14;i++){
+    const t=i/14,x=cx+(t-.5)*width*1.1;
+    const y=cy+.035+.058*Math.sin(t*Math.PI);
+    fold.push([x,y,faceZ(x,y)+.012]);
+  }
+  curveTube('raised-golden-eyelid',eg,fold,.026,headGold,24);
+}
+closedEye('left-eye',-.298,.405,.217);
+closedEye('right-eye',.292,.372,.205);
+
+ellipsoid('subtle-nose-bridge',head,[0,.342,.389],[.093,.052,.041],headGold);
+ellipsoid('left-cheek',head,[-.36,-.01,.256],[.075,.19,.066],headGold,120,'#dcb02a');
+ellipsoid('right-cheek',head,[.36,-.01,.256],[.075,.19,.066],headGold,120,'#dcb02a');
+
+const characters=[creature];
+function render(t){
+  renderer.render(scene,ref);
+}
+window.nwb={scene,renderer,cameras:{ref},characters,render,ready:true};
+render(0);
+</script>
+</body>
+</html>

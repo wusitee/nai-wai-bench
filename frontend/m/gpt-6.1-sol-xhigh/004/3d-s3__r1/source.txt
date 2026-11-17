@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+html,body{margin:0;width:244px;height:240px;overflow:hidden;background:#fff}
+canvas{display:block;width:244px;height:240px}
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+
+const scene=new THREE.Scene();
+scene.background=new THREE.Color('#ffffff');
+
+const renderer=new THREE.WebGLRenderer({preserveDrawingBuffer:true});
+renderer.setPixelRatio(1);
+renderer.setSize(244,240);
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.toneMapping=THREE.NoToneMapping;
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+document.body.appendChild(renderer.domElement);
+
+const ref=new THREE.OrthographicCamera(-1.6775,1.6775,1.65,-1.65,.1,30);
+ref.name='reference-camera';
+ref.position.set(0,.13,8);
+ref.lookAt(0,.04,0);
+ref.updateMatrixWorld();
+
+scene.add(new THREE.HemisphereLight(0xfff9e8,0xedc793,1.7));
+const key=new THREE.DirectionalLight(0xfff6dd,2.05);
+key.position.set(-3.5,6,5);
+key.castShadow=true;
+key.shadow.mapSize.set(1024,1024);
+key.shadow.camera.left=-4;
+key.shadow.camera.right=4;
+key.shadow.camera.top=5;
+key.shadow.camera.bottom=-4;
+key.shadow.normalBias=.025;
+key.shadow.bias=-.0003;
+key.shadow.radius=4;
+scene.add(key);
+
+const fill=new THREE.DirectionalLight(0xffffff,.75);
+fill.position.set(4,2,4);
+scene.add(fill);
+
+const back=new THREE.DirectionalLight(0xffedc6,.85);
+back.position.set(1,4,-5);
+scene.add(back);
+
+const character=new THREE.Group();
+character.name='golden-round-bird';
+character.position.x=.035;
+scene.add(character);
+
+const bodyGroup=new THREE.Group();
+bodyGroup.name='body';
+character.add(bodyGroup);
+
+const head=new THREE.Group();
+head.name='head';
+head.position.y=.82;
+character.add(head);
+
+const skin=new THREE.MeshStandardMaterial({
+  vertexColors:true,roughness:1,metalness:0
+});
+const yellow=new THREE.MeshStandardMaterial({
+  color:0xffbc22,roughness:1,metalness:0
+});
+const handMaterial=new THREE.MeshStandardMaterial({
+  vertexColors:true,roughness:1,metalness:0
+});
+const brown=new THREE.MeshStandardMaterial({
+  color:0x51401d,roughness:1
+});
+const brownLight=new THREE.MeshStandardMaterial({
+  color:0x71521f,roughness:1
+});
+const rimMaterial=new THREE.MeshStandardMaterial({
+  color:0x796d17,roughness:1
+});
+const eyeMaterial=new THREE.MeshStandardMaterial({
+  color:0x111603,roughness:.65
+});
+const glintMaterial=new THREE.MeshStandardMaterial({
+  color:0xbec58f,roughness:.55
+});
+const billMaterial=new THREE.MeshStandardMaterial({
+  color:0xffbd26,roughness:1
+});
+
+function ellipsoid(parent,name,material,position,scale){
+  const mesh=new THREE.Mesh(new THREE.SphereGeometry(1,40,28),material);
+  mesh.name=name;
+  mesh.position.set(...position);
+  mesh.scale.set(...scale);
+  mesh.castShadow=true;
+  mesh.receiveShadow=true;
+  parent.add(mesh);
+  return mesh;
+}
+
+const profile=[
+  [-2.08,0],[-2.04,.38],[-1.94,.70],[-1.78,.99],
+  [-1.57,1.125],[-1.30,1.205],[-.99,1.24],[-.67,1.235],
+  [-.36,1.185],[-.06,1.09],[.20,.965],[.43,.825],
+  [.64,.685],[.82,.585],[1.04,.525],[1.27,.495],
+  [1.45,.465],[1.61,.395],[1.74,.285],[1.82,.13],[1.845,0]
+];
+
+function radiusAt(y){
+  let i=0;
+  while(i<profile.length-2&&y>profile[i+1][0])i++;
+  const a=profile[i],b=profile[i+1];
+  const h=b[0]-a[0];
+  const t=THREE.MathUtils.clamp((y-a[0])/h,0,1);
+  const before=profile[Math.max(0,i-1)];
+  const after=profile[Math.min(profile.length-1,i+2)];
+  const m0=(b[1]-before[1])/(b[0]-before[0]);
+  const m1=(after[1]-a[1])/(after[0]-a[0]);
+  const t2=t*t,t3=t2*t;
+  const r=(2*t3-3*t2+1)*a[1]+(t3-2*t2+t)*h*m0
+    +(-2*t3+3*t2)*b[1]+(t3-t2)*h*m1;
+  const d=((6*t2-6*t)*a[1]+(3*t2-4*t+1)*h*m0
+    +(-6*t2+6*t)*b[1]+(3*t2-2*t)*h*m1)/h;
+  return [Math.max(0,r),d];
+}
+
+const gold=new THREE.Color('#ffbc22');
+const headGold=new THREE.Color('#ffdf20');
+const bellyTop=new THREE.Color('#ffe8c0');
+const bellyBottom=new THREE.Color('#faca99');
+const tempColor=new THREE.Color();
+const tempBelly=new THREE.Color();
+
+function skinColor(x,y,front){
+  tempColor.copy(gold).lerp(headGold,THREE.MathUtils.smoothstep(y,.40,1.50));
+  const q=(x/.955)**2+((y+.98)/1.40)**2;
+  const belly=(1-THREE.MathUtils.smoothstep(q,.70,1.26))
+    *THREE.MathUtils.smoothstep(front,.24,.87);
+  tempBelly.copy(bellyBottom).lerp(
+    bellyTop,THREE.MathUtils.smoothstep(y,-1.85,-.20)
+  );
+  tempColor.lerp(tempBelly,belly*.97);
+  return tempColor;
+}
+
+function bodySection(y0,y1,rows,offset){
+  const positions=[],normals=[],colors=[],indices=[];
+  const segments=96;
+  for(let j=0;j<=rows;j++){
+    const y=THREE.MathUtils.lerp(y0,y1,j/rows);
+    const [r,dr]=radiusAt(y);
+    for(let i=0;i<=segments;i++){
+      const angle=i/segments*Math.PI*2;
+      const s=Math.sin(angle),c=Math.cos(angle);
+      const x=r*s;
+      positions.push(x,y-offset,r*.755*c);
+      const n=new THREE.Vector3(s,-dr,c/.755).normalize();
+      normals.push(n.x,n.y,n.z);
+      const color=skinColor(x,y,c);
+      colors.push(color.r,color.g,color.b);
+      if(j<rows&&i<segments){
+        const a=j*(segments+1)+i,b=a+segments+1;
+        indices.push(a,a+1,b,a+1,b+1,b);
+      }
+    }
+  }
+  const geometry=new THREE.BufferGeometry();
+  geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
+  geometry.setAttribute('normal',new THREE.Float32BufferAttribute(normals,3));
+  geometry.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));
+  geometry.setIndex(indices);
+  return geometry;
+}
+
+const torso=new THREE.Mesh(bodySection(-2.08,.82,110,0),skin);
+torso.name='pear-shaped-torso';
+torso.castShadow=true;
+torso.receiveShadow=true;
+bodyGroup.add(torso);
+
+const headMesh=new THREE.Mesh(bodySection(.82,1.845,65,.82),skin);
+headMesh.name='rounded-head-and-neck';
+headMesh.castShadow=true;
+headMesh.receiveShadow=true;
+head.add(headMesh);
+
+const torsoPositions=torso.geometry.attributes.position;
+const torsoNormals=torso.geometry.attributes.normal;
+torsoPositions.setUsage(THREE.DynamicDrawUsage);
+torsoNormals.setUsage(THREE.DynamicDrawUsage);
+const restPositions=torsoPositions.array.slice();
+const restNormals=torsoNormals.array.slice();
+
+const eyes=new THREE.Group();
+eyes.name='eyes';
+head.add(eyes);
+
+function addEye(name,x,y,angle){
+  const group=new THREE.Group();
+  group.name=name;
+  group.position.set(x,y-.82,.294);
+  group.rotation.y=angle;
+  eyes.add(group);
+  ellipsoid(group,'soft-olive-eye-rim',rimMaterial,
+    [0,0,0],[.079,.111,.038]);
+  ellipsoid(group,'black-eye',eyeMaterial,
+    [0,.003,.025],[.057,.086,.037]);
+  ellipsoid(group,'small-eye-catchlight',glintMaterial,
+    [-.015,.033,.058],[.010,.014,.006]);
+}
+addEye('left-eye',-.302,1.362,-.44);
+addEye('right-eye',.302,1.402,.44);
+
+const mouth=new THREE.Group();
+mouth.name='mouth-and-small-bill';
+head.add(mouth);
+ellipsoid(mouth,'soft-yellow-bill',billMaterial,
+  [0,1.117-.82,.387],[.205,.060,.103]);
+ellipsoid(mouth,'lower-bill',billMaterial,
+  [0,1.080-.82,.400],[.158,.025,.077]);
+
+const smilePoints=[
+  new THREE.Vector3(-.140,1.103-.82,.446),
+  new THREE.Vector3(-.073,1.083-.82,.478),
+  new THREE.Vector3(0,1.076-.82,.488),
+  new THREE.Vector3(.073,1.084-.82,.478),
+  new THREE.Vector3(.139,1.104-.82,.446)
+];
+const smile=new THREE.Mesh(
+  new THREE.TubeGeometry(
+    new THREE.CatmullRomCurve3(smilePoints),28,.004,6,false
+  ),
+  new THREE.MeshStandardMaterial({color:0xc99a23,roughness:1})
+);
+smile.name='gentle-mouth-crease';
+mouth.add(smile);
+
+function catmull(a,b,c,d,t){
+  return .5*((2*b)+(-a+c)*t+(2*a-5*b+4*c-d)*t*t
+    +(-a+3*b-3*c+d)*t*t*t);
+}
+
+function organicForearm(parent,name,points){
+  const pos=[],indices=[],colors=[];
+  const rows=60,sides=40;
+  const bright=new THREE.Color('#ffc01b');
+  const shade=new THREE.Color('#ed9f19');
+  const color=new THREE.Color();
+  for(let j=0;j<=rows;j++){
+    const u=j/rows*(points.length-1);
+    const k=Math.min(points.length-2,Math.floor(u));
+    const t=u-k;
+    const p0=points[Math.max(0,k-1)],p1=points[k];
+    const p2=points[k+1],p3=points[Math.min(points.length-1,k+2)];
+    const v=p1.map((_,c)=>catmull(p0[c],p1[c],p2[c],p3[c],t));
+    const [y,x,z,r0]=v,r=Math.max(0,r0);
+    for(let i=0;i<=sides;i++){
+      const a=i/sides*Math.PI*2;
+      pos.push(x+Math.sin(a)*r,y,z+Math.cos(a)*r*.90);
+      color.copy(bright).lerp(shade,.10*(1-Math.cos(a)));
+      colors.push(color.r,color.g,color.b);
+      if(j<rows&&i<sides){
+        const q=j*(sides+1)+i;
+        indices.push(q,q+1,q+sides+1,q+1,q+sides+2,q+sides+1);
+      }
+    }
+  }
+  const geometry=new THREE.BufferGeometry();
+  geometry.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+  geometry.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+  const mesh=new THREE.Mesh(geometry,skin);
+  mesh.name=name;
+  mesh.castShadow=true;
+  mesh.receiveShadow=true;
+  parent.add(mesh);
+  return mesh;
+}
+
+const upAxis=new THREE.Vector3(0,1,0);
+
+function makeSegment(parent,name,start,end){
+  const group=new THREE.Group();
+  group.name=name;
+  parent.add(group);
+  const delta=new THREE.Vector3().subVectors(end,start);
+  const restLength=delta.length();
+  const rotation=new THREE.Quaternion().setFromUnitVectors(
+    upAxis,delta.normalize()
+  );
+  const unturn=new THREE.Group();
+  unturn.name=name+'-rest-orientation';
+  unturn.quaternion.copy(rotation).invert();
+  group.add(unturn);
+  const content=new THREE.Group();
+  content.name=name+'-volume';
+  content.position.copy(start).negate();
+  unturn.add(content);
+  const segment={group,content,restLength,delta:new THREE.Vector3()};
+  setSegment(segment,start,end,1,1);
+  return segment;
+}
+
+function setSegment(segment,start,end,width,depth){
+  segment.delta.subVectors(end,start);
+  const length=segment.delta.length();
+  segment.group.position.copy(start);
+  segment.group.quaternion.setFromUnitVectors(
+    upAxis,segment.delta.divideScalar(length)
+  );
+  segment.group.scale.set(width,length/segment.restLength,depth);
+}
+
+const leftShoulderRest=new THREE.Vector3(-.60,.52,.14);
+const leftElbowRest=new THREE.Vector3(-.89,-.30,.45);
+const leftHandRest=new THREE.Vector3(-.752,.425,.605);
+const rightShoulderRest=new THREE.Vector3(.76,.45,.015);
+const rightElbowRest=new THREE.Vector3(1.17,-.25,.14);
+const rightHandRest=new THREE.Vector3(1.187,.581,.365);
+
+const leftArm=new THREE.Group();
+leftArm.name='left-arm';
+character.add(leftArm);
+const leftUpper=makeSegment(
+  leftArm,'left-upper-arm',leftShoulderRest,leftElbowRest
+);
+const upperLeft=ellipsoid(
+  leftUpper.content,'left-shoulder',yellow,
+  [-.69,.13,.14],[.28,.46,.30]
+);
+upperLeft.rotation.z=-.32;
+
+const leftForearm=makeSegment(
+  leftArm,'left-forearm',leftElbowRest,leftHandRest
+);
+organicForearm(leftForearm.content,'rounded-left-forearm',[
+  [-.51,-.86,.38,0],
+  [-.39,-.90,.41,.20],
+  [-.17,-.925,.46,.295],
+  [.045,-.89,.50,.30],
+  [.235,-.81,.55,.225],
+  [.34,-.76,.57,.16],
+  [.39,-.75,.58,0]
+]);
+
+const rightArm=new THREE.Group();
+rightArm.name='right-arm';
+character.add(rightArm);
+const rightUpper=makeSegment(
+  rightArm,'right-upper-arm',rightShoulderRest,rightElbowRest
+);
+const upperRight=ellipsoid(
+  rightUpper.content,'right-shoulder',yellow,
+  [.94,.08,.015],[.275,.43,.28]
+);
+upperRight.rotation.z=.58;
+
+const rightForearm=makeSegment(
+  rightArm,'right-forearm',rightElbowRest,rightHandRest
+);
+organicForearm(rightForearm.content,'rounded-right-forearm',[
+  [-.40,1.08,.10,0],
+  [-.28,1.17,.14,.205],
+  [-.065,1.225,.20,.265],
+  [.16,1.215,.26,.255],
+  [.36,1.18,.31,.185],
+  [.47,1.175,.33,.135],
+  [.51,1.175,.33,0]
+]);
+
+function palmGeometry(){
+  const geometry=new THREE.SphereGeometry(1,36,28);
+  const positions=geometry.attributes.position;
+  const colors=[];
+  const upper=new THREE.Color('#463919');
+  const lower=new THREE.Color('#805b21');
+  const c=new THREE.Color();
+  for(let i=0;i<positions.count;i++){
+    c.copy(lower).lerp(
+      upper,THREE.MathUtils.smoothstep(positions.getY(i),-.85,.75)
+    );
+    colors.push(c.r,c.g,c.b);
+  }
+  geometry.setAttribute(
+    'color',new THREE.Float32BufferAttribute(colors,3)
+  );
+  return geometry;
+}
+
+function addHand(parent,name,position,size,tilt){
+  const group=new THREE.Group();
+  group.name=name;
+  group.position.copy(position);
+  group.rotation.z=tilt;
+  parent.add(group);
+
+  const palm=new THREE.Mesh(palmGeometry(),handMaterial);
+  palm.name='rounded-brown-palm';
+  palm.scale.set(size,.235,.18);
+  palm.castShadow=true;
+  palm.receiveShadow=true;
+  group.add(palm);
+
+  const fingers=new THREE.Group();
+  fingers.name='curled-fingers';
+  group.add(fingers);
+  for(let i=0;i<3;i++){
+    ellipsoid(fingers,'knuckle-'+(i+1),brown,
+      [(i-1)*size*.52,.158+(i===1?.012:0),-.016],
+      [size*.42,.075,.133]);
+  }
+  const thumb=ellipsoid(group,'curled-thumb',brownLight,
+    [size*.60,-.070,.075],[size*.43,.105,.105]);
+  thumb.rotation.z=-.35;
+  return group;
+}
+
+const leftHand=addHand(
+  leftArm,'left-hand',leftHandRest,.195,.28
+);
+const rightHand=addHand(
+  rightArm,'right-hand',rightHandRest,.175,-.30
+);
+
+const feet=new THREE.Group();
+feet.name='feet';
+character.add(feet);
+const footMaterial=new THREE.MeshStandardMaterial({
+  color:0xe9a725,roughness:1
+});
+ellipsoid(feet,'left-foot',footMaterial,
+  [-.46,-2.025,.20],[.30,.105,.38]);
+ellipsoid(feet,'right-foot',footMaterial,
+  [.46,-2.025,.20],[.30,.105,.38]);
+
+const ground=new THREE.Mesh(
+  new THREE.PlaneGeometry(200,200),
+  new THREE.MeshStandardMaterial({color:0xffffff,roughness:1})
+);
+ground.name='white-ground';
+ground.rotation.x=-Math.PI/2;
+ground.position.y=-2.125;
+ground.receiveShadow=true;
+scene.add(ground);
+
+const pixelsPerUnit=240/3.3;
+const cameraLength=Math.hypot(8,.09);
+const cameraCos=8/cameraLength;
+const cameraSin=.09/cameraLength;
+
+function pixelPosition(local){
+  const p=local.clone().add(character.position).project(ref);
+  return [(p.x+1)*122,(1-p.y)*120];
+}
+const lh0=pixelPosition(leftHandRest);
+const le0=pixelPosition(leftElbowRest);
+const rh0=pixelPosition(rightHandRest);
+const re0=pixelPosition(rightElbowRest);
+
+function frame(t,dip,roll,headX,headHeight,left,right){
+  return {t,v:[dip,roll,headX,headHeight,...left,...right]};
+}
+
+/* Hand x/y, elbow x/y, hand/elbow depth, forearm width,
+   palm width/height, palm roll/yaw/pitch. */
+const frames=[
+  frame(0,0,0,0,1,
+    [lh0[0],lh0[1],le0[0]+3,le0[1]+9,
+      .605,.45,1.08,1,1,.28,0,0],
+    [rh0[0],rh0[1]+3,re0[0],re0[1]+4,
+      .365,.14,1.03,1,1,-.30,0,0]),
+  frame(160,-.020,-.157,2,.97,
+    [17,76,29,128,.30,.18,.92,.77,1.12,.20,-.25,-.04],
+    [158,99,188,160,.94,.57,1.28,1.22,1.12,.30,-.10,.06]),
+  frame(340,-.095,.048,1,.92,
+    [59,106,56,163,.61,.43,1.04,1.02,1.02,.38,.04,.02],
+    [211,97,212,150,.37,.16,1,1.04,1.02,-.25,0,0]),
+  frame(500,-.183,-.134,0,.82,
+    [24,116,30,158,.34,.22,.85,.87,1.04,.40,-.20,-.03],
+    [189,128,194,181,.68,.43,1.24,1.29,1.06,-.10,.10,.04]),
+  frame(680,-.110,-.089,1,.87,
+    [24,106,31,151,.32,.20,.90,.88,1.03,.42,-.22,-.02],
+    [177,111,196,165,.86,.53,1.27,1.31,1.10,.04,-.05,.06]),
+  frame(840,-.018,.025,0,1,
+    [64,97,60,155,.605,.44,1.07,1,1,.30,0,0],
+    [212,96,213,150,.37,.15,1,1.03,1.02,-.25,0,0]),
+  frame(1020,-.101,-.066,2,.86,
+    [20,96,30,143,.32,.20,.87,.78,1.08,.22,-.25,-.04],
+    [174,115,193,168,.88,.55,1.27,1.31,1.10,.15,-.05,.06]),
+  frame(1180,-.194,-.066,1,.83,
+    [45,118,49,168,.50,.38,1.08,1.04,1.02,.48,.05,.01],
+    [210,117,213,169,.42,.20,1.10,1.12,1.04,-.25,0,.01])
+];
+
+const period=1200;
+const count=frames.length;
+const channels=frames[0].v.length;
+
+for(let i=0;i<count;i++){
+  const previous=frames[(i+count-1)%count];
+  const current=frames[i];
+  const next=frames[(i+1)%count];
+  const h0=(current.t-previous.t+period)%period;
+  const h1=(next.t-current.t+period)%period;
+  current.m=new Float64Array(channels);
+  for(let j=0;j<channels;j++){
+    const d0=(current.v[j]-previous.v[j])/h0;
+    const d1=(next.v[j]-current.v[j])/h1;
+    if(d0*d1>0){
+      const w0=2*h1+h0,w1=h1+2*h0;
+      current.m[j]=(w0+w1)/(w0/d0+w1/d1);
+    }
+  }
+}
+const sampled=new Float64Array(channels);
+
+function sample(time){
+  let i=0;
+  while(i<count-1&&time>=frames[i+1].t)i++;
+  const a=frames[i],b=frames[(i+1)%count];
+  const duration=(b.t-a.t+period)%period;
+  const u=(time-a.t)/duration;
+  const u2=u*u,u3=u2*u;
+  const h00=2*u3-3*u2+1;
+  const h10=u3-2*u2+u;
+  const h01=-2*u3+3*u2;
+  const h11=u3-u2;
+  for(let j=0;j<channels;j++){
+    sampled[j]=h00*a.v[j]+h10*duration*a.m[j]
+      +h01*b.v[j]+h11*duration*b.m[j];
+  }
+}
+
+function smoothWeight(y,low,high){
+  const u=THREE.MathUtils.clamp((y-low)/(high-low),0,1);
+  return u*u*(3-2*u);
+}
+function weightDerivative(y,low,high){
+  const u=THREE.MathUtils.clamp((y-low)/(high-low),0,1);
+  return 6*u*(1-u)/(high-low);
+}
+
+let bendCos=1,bendSin=0,headHeight=1,headTX=0,headTY=0,bodyDip=0;
+
+function warpPoint(source,target){
+  const x=source.x,y=source.y;
+  const w=smoothWeight(y,-.34,.82);
+  const bob=smoothWeight(y,-2.08,.82);
+  const rx=bendCos*x-bendSin*headHeight*(y-.82)+headTX;
+  const ry=bendSin*x+bendCos*headHeight*(y-.82)+.82+headTY;
+  target.set(
+    x+(rx-x)*w,
+    y+(ry-y)*w+bodyDip*bob,
+    source.z
+  );
+  return target;
+}
+
+function poseBody(){
+  bodyDip=sampled[0];
+  const roll=sampled[1];
+  headHeight=sampled[3];
+  bendCos=Math.cos(roll);
+  bendSin=Math.sin(roll);
+  headTX=sampled[2]/pixelsPerUnit+.562*headHeight*bendSin;
+  headTY=.562*(1-headHeight*bendCos);
+
+  head.position.set(headTX,.82+headTY+bodyDip,0);
+  head.rotation.set(0,0,roll);
+  head.scale.set(1,headHeight,1);
+
+  const positions=torsoPositions.array;
+  const normals=torsoNormals.array;
+  for(let i=0;i<restPositions.length;i+=3){
+    const x=restPositions[i],y=restPositions[i+1];
+    const w=smoothWeight(y,-.34,.82);
+    const dw=weightDerivative(y,-.34,.82);
+    const bob=smoothWeight(y,-2.08,.82);
+    const dbob=weightDerivative(y,-2.08,.82);
+    const rx=bendCos*x-bendSin*headHeight*(y-.82)+headTX;
+    const ry=bendSin*x+bendCos*headHeight*(y-.82)+.82+headTY;
+    positions[i]=x+(rx-x)*w;
+    positions[i+1]=y+(ry-y)*w+bodyDip*bob;
+    positions[i+2]=restPositions[i+2];
+
+    const a=1+w*(bendCos-1);
+    const b=-w*bendSin*headHeight+dw*(rx-x);
+    const c=w*bendSin;
+    const d=1+w*(bendCos*headHeight-1)+dw*(ry-y)+bodyDip*dbob;
+    const determinant=a*d-b*c;
+    const nx=(d*restNormals[i]-c*restNormals[i+1])/determinant;
+    const ny=(-b*restNormals[i]+a*restNormals[i+1])/determinant;
+    const nz=restNormals[i+2];
+    const inverseLength=1/Math.hypot(nx,ny,nz);
+    normals[i]=nx*inverseLength;
+    normals[i+1]=ny*inverseLength;
+    normals[i+2]=nz*inverseLength;
+  }
+  torsoPositions.needsUpdate=true;
+  torsoNormals.needsUpdate=true;
+}
+
+function screenPoint(px,py,z,target){
+  target.set(
+    (px-122)/pixelsPerUnit-character.position.x,
+    .04+((120-py)/pixelsPerUnit+z*cameraSin)/cameraCos,
+    z
+  );
+}
+
+const leftLimb={
+  upper:leftUpper,forearm:leftForearm,hand:leftHand,
+  restShoulder:leftShoulderRest,
+  shoulder:new THREE.Vector3(),
+  elbow:new THREE.Vector3(),
+  palm:new THREE.Vector3()
+};
+const rightLimb={
+  upper:rightUpper,forearm:rightForearm,hand:rightHand,
+  restShoulder:rightShoulderRest,
+  shoulder:new THREE.Vector3(),
+  elbow:new THREE.Vector3(),
+  palm:new THREE.Vector3()
+};
+
+function poseLimb(limb,offset){
+  screenPoint(
+    sampled[offset],sampled[offset+1],
+    sampled[offset+4],limb.palm
+  );
+  screenPoint(
+    sampled[offset+2],sampled[offset+3],
+    sampled[offset+5],limb.elbow
+  );
+  warpPoint(limb.restShoulder,limb.shoulder);
+
+  const width=sampled[offset+6];
+  setSegment(limb.upper,limb.shoulder,limb.elbow,1.06,1.03);
+  setSegment(
+    limb.forearm,limb.elbow,limb.palm,width,1+(width-1)*.5
+  );
+
+  limb.hand.position.copy(limb.palm);
+  limb.hand.position.z+=.075;
+  limb.hand.position.y+=.075*cameraSin/cameraCos;
+  limb.hand.rotation.set(
+    sampled[offset+11],sampled[offset+10],sampled[offset+9]
+  );
+  const palmWidth=sampled[offset+7];
+  limb.hand.scale.set(
+    palmWidth,
+    sampled[offset+8],
+    1+(palmWidth-1)*.35
+  );
+}
+
+function render(t){
+  const numericTime=Number(t);
+  const time=Number.isFinite(numericTime)
+    ?((numericTime%period)+period)%period:0;
+  sample(time);
+  poseBody();
+  poseLimb(leftLimb,4);
+  poseLimb(rightLimb,16);
+  renderer.render(scene,ref);
+}
+
+window.nwb={
+  scene,
+  renderer,
+  cameras:{ref},
+  characters:[character],
+  render,
+  ready:true
+};
+render(0);
+</script>
+</body>
+</html>

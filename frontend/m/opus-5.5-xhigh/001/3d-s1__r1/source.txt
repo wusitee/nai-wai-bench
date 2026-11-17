@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Yellow blobs in class</title>
+<style>
+html,body{margin:0;padding:0;width:240px;height:242px;overflow:hidden;background:#d2d1ca;}
+canvas{display:block;position:absolute;left:0;top:0;width:240px;height:242px;}
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+
+const W = 240, H = 242;
+const renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true, antialias: true });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFShadowMap;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xd2d1ca);
+
+const camera = new THREE.PerspectiveCamera(40, W / H, 0.1, 100);
+camera.name = 'ref';
+camera.position.set(0, 1.0, 4.2);
+camera.lookAt(0, 1.0, 0);
+scene.add(camera);
+
+// ---------- lights ----------
+const lights = new THREE.Group(); lights.name = 'lights'; scene.add(lights);
+const hemi = new THREE.HemisphereLight(0xfffaf0, 0xc9a77a, 2.8); hemi.name = 'hemi'; lights.add(hemi);
+const key = new THREE.DirectionalLight(0xfff8f0, 1.8); key.name = 'key';
+key.position.set(-2, 4.6, 5.3);
+key.target.position.set(0, 0.6, 0.3);
+key.castShadow = true;
+key.shadow.mapSize.set(1024, 1024);
+{
+  const sc = key.shadow.camera;
+  sc.left = -3; sc.right = 3; sc.top = 3; sc.bottom = -3; sc.near = 1; sc.far = 16;
+}
+key.shadow.bias = -0.0004;
+key.shadow.normalBias = 0.02;
+lights.add(key); lights.add(key.target);
+const fill = new THREE.DirectionalLight(0xfff4ea, 0.9); fill.name = 'fill'; fill.position.set(3, 1.5, 4); lights.add(fill);
+const rim = new THREE.DirectionalLight(0xfff8ee, 1.2); rim.name = 'rim'; rim.position.set(1, 3, -5); lights.add(rim);
+
+// ---------- helpers ----------
+function mulberry32(a) { return function () { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const Z = V(0, 0, 1), Y = V(0, 1, 0), NEGY = V(0, -1, 0);
+const maxAniso = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+
+function makeTex(draw, seed) {
+  const c = document.createElement('canvas'); c.width = 64; c.height = 64;
+  const ctx = c.getContext('2d');
+  draw(ctx, mulberry32(seed));
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  t.anisotropy = maxAniso;
+  return t;
+}
+function pageTex(seed, written, density) {
+  return makeTex((ctx, r) => {
+    ctx.fillStyle = '#d4d5d6'; ctx.fillRect(0, 0, 64, 64);
+    ctx.fillStyle = 'rgba(120,140,175,0.35)';
+    for (let y = 6; y < 64; y += 5) ctx.fillRect(0, y, 64, 1);
+    ctx.fillStyle = 'rgba(200,120,120,0.25)'; ctx.fillRect(8, 0, 1, 64);
+    if (written) {
+      ctx.strokeStyle = 'rgba(50,52,62,0.8)'; ctx.lineWidth = 0.9; ctx.lineJoin = 'round';
+      for (let y = 6; y < 62; y += 5) {
+        if (r() > density) continue;
+        let x = 10 + r() * 3; const end = 24 + r() * 38;
+        ctx.beginPath(); ctx.moveTo(x, y - 1);
+        while (x < end) { x += 1 + r() * 1.8; ctx.lineTo(x, y - 0.5 - r() * 2.8); }
+        ctx.stroke();
+      }
+    }
+  }, seed);
+}
+const pageA = pageTex(11, true, 0.95);
+const pageB = pageTex(23, true, 0.7);
+const pageC = pageTex(37, false, 0);
+
+const woodTex = makeTex((ctx, r) => {
+  ctx.fillStyle = '#bca589'; ctx.fillRect(0, 0, 64, 64);
+  for (let i = 0; i < 26; i++) { const y = r() * 64; ctx.fillStyle = `rgba(120,85,55,${(0.06 + r() * 0.08).toFixed(3)})`; ctx.fillRect(0, y, 64, 0.5 + r() * 1.8); }
+  for (let i = 0; i < 10; i++) { const y = r() * 64; ctx.fillStyle = `rgba(240,225,200,${(0.05 + r() * 0.06).toFixed(3)})`; ctx.fillRect(0, y, 64, 1 + r() * 2); }
+}, 3);
+woodTex.wrapS = woodTex.wrapT = THREE.RepeatWrapping; woodTex.repeat.set(3, 2);
+
+const boardTex = makeTex((ctx, r) => {
+  ctx.fillStyle = '#34463f'; ctx.fillRect(0, 0, 64, 64);
+  for (let i = 0; i < 40; i++) {
+    ctx.fillStyle = `rgba(190,205,195,${(0.02 + r() * 0.04).toFixed(3)})`;
+    ctx.beginPath(); ctx.ellipse(r() * 64, r() * 64, 2 + r() * 8, 1 + r() * 3, r() * 3, 0, Math.PI * 2); ctx.fill();
+  }
+}, 5);
+
+// ---------- materials ----------
+const YELLOW = 0xdcb21f;
+const BELLY = 0xd9d5c6;
+const yellowMat = new THREE.MeshStandardMaterial({ color: YELLOW, roughness: 0.5, metalness: 0 });
+const bodyMat = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 0.5, metalness: 0 });
+const eyeMat = new THREE.MeshStandardMaterial({ color: 0x141210, roughness: 0.25, metalness: 0 });
+const hlMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+const mouthMat = new THREE.MeshStandardMaterial({ color: 0x8a5512, roughness: 0.6 });
+const basic = c => new THREE.MeshBasicMaterial({ color: c });
+
+// ---------- blob body profile ----------
+function smax(a, b, k) { const h = Math.max(k - Math.abs(a - b), 0) / k; return Math.max(a, b) + h * h * k * 0.25; }
+function radiusAt(o, y) {
+  const dyb = (y - o.yb) / o.Hb;
+  const rb = Math.abs(dyb) < 1 ? o.Rb * Math.sqrt(1 - dyb * dyb) : -0.3;
+  const dyh = y - o.yh;
+  const rh = Math.abs(dyh) < o.Rh ? Math.sqrt(o.Rh * o.Rh - dyh * dyh) - 0.01 : -0.3;
+  return smax(rb, rh, o.k);
+}
+function profilePoints(o) {
+  const y0 = o.yb - o.Hb, y1 = o.yh + o.Rh;
+  const N = 90;
+  const pts = [new THREE.Vector2(0, y0)];
+  let lastY = y0;
+  for (let i = 1; i < N; i++) {
+    const t = i / N;
+    const y = y0 + (y1 - y0) * (0.5 - 0.5 * Math.cos(Math.PI * t));
+    const r = radiusAt(o, y);
+    if (r <= 0.004 && y > o.yh) break;
+    pts.push(new THREE.Vector2(Math.max(r, 0.004), y));
+    lastY = y;
+  }
+  pts.push(new THREE.Vector2(0, lastY + 0.002));
+  return pts;
+}
+function paintBelly(geo, b) {
+  const pos = geo.attributes.position, n = pos.count;
+  const col = new Float32Array(n * 3);
+  const cY = new THREE.Color(YELLOW), cB = new THREE.Color(BELLY), c = new THREE.Color();
+  for (let i = 0; i < n; i++) {
+    const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
+    let da = Math.atan2(x, z) - b.az; da = Math.atan2(Math.sin(da), Math.cos(da));
+    const u = da / b.aw, v = (y - b.y) / b.vh;
+    const d = Math.sqrt(u * u + v * v);
+    const w = 1 - THREE.MathUtils.smoothstep(d, b.edge, 1.0);
+    c.copy(cY).lerp(cB, w);
+    col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
+  }
+  geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+}
+
+// ---------- face parts ----------
+function dirFrom(az, el) { return V(Math.cos(el) * Math.sin(az), Math.sin(el), Math.cos(el) * Math.cos(az)); }
+const eyeGeo = new THREE.SphereGeometry(1, 32, 20);
+const hlGeo = new THREE.SphereGeometry(1, 12, 8);
+function addEye(parent, name, R, az, el, re) {
+  const g = new THREE.Group(); g.name = name;
+  const n = dirFrom(az, el);
+  g.position.copy(n).multiplyScalar(R - re * 0.22);
+  g.quaternion.setFromUnitVectors(Z, n);
+  const ball = new THREE.Mesh(eyeGeo, eyeMat); ball.name = 'pupil';
+  ball.scale.set(re, re * 1.12, re * 0.55); g.add(ball);
+  const hl = new THREE.Mesh(hlGeo, hlMat); hl.name = 'eye-highlight';
+  hl.scale.set(re * 0.28, re * 0.28, re * 0.1); hl.position.set(-re * 0.3, re * 0.38, re * 0.5); g.add(hl);
+  parent.add(g);
+  return g;
+}
+function addMouth(parent, R, el, w) {
+  const m = new THREE.Group(); m.name = 'mouth';
+  const n = dirFrom(0, el);
+  m.position.copy(n).multiplyScalar(R - 0.002);
+  m.quaternion.setFromUnitVectors(Z, n);
+  const arc = new THREE.Mesh(new THREE.TorusGeometry(w, w * 0.2, 8, 24, Math.PI), mouthMat);
+  arc.name = 'mouth-line';
+  arc.rotation.z = Math.PI;
+  arc.scale.set(1, 0.55, 0.6);
+  m.add(arc); parent.add(m);
+  return m;
+}
+
+function buildCharacter(name, o) {
+  const g = new THREE.Group(); g.name = name;
+  const body = new THREE.Group(); body.name = 'body'; g.add(body);
+  const geo = new THREE.LatheGeometry(profilePoints(o), 72);
+  paintBelly(geo, o.belly);
+  const bm = new THREE.Mesh(geo, bodyMat); bm.name = 'body-mesh'; body.add(bm);
+  const head = new THREE.Group(); head.name = 'head'; head.position.set(0, o.yh, 0); g.add(head);
+  const hm = new THREE.Mesh(new THREE.SphereGeometry(o.Rh, 64, 40), yellowMat); hm.name = 'head-mesh'; head.add(hm);
+  const face = new THREE.Group(); face.name = 'face'; head.add(face);
+  const eyes = new THREE.Group(); eyes.name = 'eyes'; face.add(eyes);
+  addEye(eyes, 'eye-left', o.Rh, o.eyeAz, o.eyeEl, o.eyeR);
+  addEye(eyes, 'eye-right', o.Rh, -o.eyeAz, o.eyeEl, o.eyeR);
+  addMouth(face, o.Rh, o.mouthEl, o.mouthW);
+  return { g, body, head, o };
+}
+
+function addArm(ch, name, handName, sh, handWorld, opt) {
+  const o = ch.o;
+  const r = radiusAt(o, sh.y) - sh.inset;
+  const S = V(r * Math.sin(sh.az), sh.y, r * Math.cos(sh.az));
+  ch.g.updateMatrixWorld(true);
+  const Hl = ch.g.worldToLocal(handWorld.clone());
+  const d = Hl.clone().sub(S); const L = d.length(); d.normalize();
+  const arm = new THREE.Group(); arm.name = name; arm.position.copy(S);
+  arm.quaternion.setFromUnitVectors(NEGY, d);
+  ch.g.add(arm);
+  const upper = new THREE.Mesh(new THREE.CylinderGeometry(opt.r0, opt.r1, L, 28, 1, true), yellowMat);
+  upper.name = name + '-mesh'; upper.position.y = -L / 2; arm.add(upper);
+  const sj = new THREE.Mesh(new THREE.SphereGeometry(opt.r0, 28, 18), yellowMat); sj.name = 'shoulder'; arm.add(sj);
+  const hand = new THREE.Group(); hand.name = handName; hand.position.set(0, -L, 0); arm.add(hand);
+  const wr = new THREE.Mesh(new THREE.SphereGeometry(opt.r1, 24, 16), yellowMat); wr.name = 'wrist'; hand.add(wr);
+  const hr = opt.hr;
+  const palm = new THREE.Mesh(new THREE.SphereGeometry(1, 28, 18), yellowMat); palm.name = 'palm';
+  palm.scale.set(hr * 1.05, hr * 0.95, hr * 0.72); palm.position.set(0, -hr * 0.55, 0); hand.add(palm);
+  const fingers = new THREE.Group(); fingers.name = 'fingers'; hand.add(fingers);
+  const fg = new THREE.CapsuleGeometry(hr * 0.27, hr * 0.42, 4, 10);
+  for (let i = 0; i < 4; i++) {
+    const t = i - 1.5;
+    const f = new THREE.Mesh(fg, yellowMat); f.name = 'finger-' + i;
+    f.position.set(t * hr * 0.42, -hr * 1.22 + Math.abs(t) * hr * 0.14, -hr * 0.1);
+    f.rotation.z = t * 0.16;
+    fingers.add(f);
+  }
+  const th = new THREE.Mesh(fg, yellowMat); th.name = 'thumb';
+  th.position.set(hr * 0.9, -hr * 0.55, -hr * 0.2); th.rotation.z = 0.9; fingers.add(th);
+  if (opt.back) {
+    arm.updateWorldMatrix(true, false);
+    const q = arm.getWorldQuaternion(new THREE.Quaternion()).invert();
+    const b = opt.back.clone().normalize().applyQuaternion(q); b.y = 0;
+    if (b.lengthSq() > 1e-6) arm.rotateY(Math.atan2(b.x, b.z));
+  }
+  return { arm, hand };
+}
+
+// ---------- pen ----------
+const penMat = new THREE.MeshStandardMaterial({ color: 0x2c2d31, roughness: 0.35, metalness: 0.1 });
+const penMetal = new THREE.MeshStandardMaterial({ color: 0xb8bcc2, roughness: 0.3, metalness: 0.3 });
+function makePen(top, tip) {
+  const pen = new THREE.Group(); pen.name = 'pen';
+  const d = tip.clone().sub(top); const L = d.length(); d.normalize();
+  const r = 0.017;
+  const barrel = new THREE.Mesh(new THREE.CylinderGeometry(r, r, L * 0.78, 16), penMat); barrel.name = 'pen-barrel'; barrel.position.y = -L * 0.39; pen.add(barrel);
+  const capTop = new THREE.Mesh(new THREE.SphereGeometry(r, 12, 8), penMat); capTop.name = 'pen-cap'; pen.add(capTop);
+  const band = new THREE.Mesh(new THREE.CylinderGeometry(r * 1.05, r * 1.05, L * 0.04, 16), penMetal); band.name = 'pen-band'; band.position.y = -L * 0.78; pen.add(band);
+  const cone = new THREE.Mesh(new THREE.ConeGeometry(r, L * 0.18, 16), penMetal); cone.name = 'pen-tip';
+  cone.rotation.x = Math.PI; cone.position.y = -L * 0.8 - L * 0.09; pen.add(cone);
+  const clip = new THREE.Mesh(new THREE.BoxGeometry(0.008, L * 0.3, 0.006), penMetal); clip.name = 'pen-clip';
+  clip.position.set(0, -L * 0.18, r + 0.003); pen.add(clip);
+  pen.position.copy(top); pen.quaternion.setFromUnitVectors(NEGY, d);
+  return pen;
+}
+
+// ---------- classroom ----------
+const classroom = new THREE.Group(); classroom.name = 'classroom'; scene.add(classroom);
+
+const wall = new THREE.Mesh(new THREE.PlaneGeometry(30, 14), basic(0xd2d1ca)); wall.name = 'wall';
+wall.position.set(0, 3, -6); classroom.add(wall);
+const windowP = new THREE.Mesh(new THREE.PlaneGeometry(3.6, 3.4), basic(0xe4e5e1)); windowP.name = 'window-light';
+windowP.position.set(-3.5, 3.3, -5.98); classroom.add(windowP);
+const board = new THREE.Mesh(new THREE.PlaneGeometry(9, 3.2), new THREE.MeshBasicMaterial({ map: boardTex })); board.name = 'chalkboard';
+board.position.set(3.12, 5.3, -5.96); classroom.add(board);
+const tray = new THREE.Mesh(new THREE.BoxGeometry(9, 0.07, 0.1), basic(0xa9a497)); tray.name = 'chalk-tray';
+tray.position.set(3.12, 3.67, -5.9); classroom.add(tray);
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(30, 20), basic(0x8f8070)); floor.name = 'floor';
+floor.rotation.x = -Math.PI / 2; floor.position.set(0, -0.9, -2); classroom.add(floor);
+
+const bg = new THREE.Group(); bg.name = 'background-desks'; classroom.add(bg);
+function bgBox(w, h, d, x, y, z, c, name) { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), basic(c)); m.position.set(x, y, z); m.name = name; bg.add(m); return m; }
+bgBox(2.0, 0.9, 1.0, -2.6, 0.35, -2.8, 0x8c6a4c, 'bg-desk-left');
+bgBox(1.4, 0.55, 0.08, -2.3, 0.85, -2.25, 0x6f533c, 'bg-chair-left');
+bgBox(2.0, 0.9, 1.0, 2.7, 0.35, -2.8, 0x9c7552, 'bg-desk-right');
+bgBox(1.2, 0.6, 0.08, 2.3, 1.0, -1.9, 0x7d5d42, 'bg-chair-right');
+
+const desk = new THREE.Mesh(new THREE.BoxGeometry(6.4, 0.9, 2.6), new THREE.MeshLambertMaterial({ map: woodTex }));
+desk.name = 'desk'; desk.position.set(0, -0.45, 1.5); desk.receiveShadow = true; classroom.add(desk);
+
+const props = new THREE.Group(); props.name = 'desk-props'; classroom.add(props);
+const pageEdgeMat = new THREE.MeshLambertMaterial({ color: 0xcfcfcc });
+const spineMat = new THREE.MeshLambertMaterial({ color: 0x9a9a98 });
+function makeNotebook(name, pw, pd, texL, texR, coverColor) {
+  const g = new THREE.Group(); g.name = name;
+  const cover = new THREE.Mesh(new THREE.BoxGeometry(pw * 2 + 0.04, 0.012, pd + 0.03), new THREE.MeshLambertMaterial({ color: coverColor }));
+  cover.name = 'cover'; cover.position.y = 0.006; g.add(cover);
+  const stack = new THREE.Mesh(new THREE.BoxGeometry(pw * 2 - 0.01, 0.012, pd - 0.01), pageEdgeMat);
+  stack.name = 'page-stack'; stack.position.y = 0.016; g.add(stack);
+  for (const [side, tex] of [[-1, texL], [1, texR]]) {
+    const pg = new THREE.Group(); pg.name = side < 0 ? 'page-left' : 'page-right';
+    pg.position.set(side * 0.004, 0.0225, 0); pg.rotation.z = side * 0.035;
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(pw, pd), new THREE.MeshLambertMaterial({ map: tex }));
+    m.rotation.x = -Math.PI / 2; m.position.x = side * pw / 2;
+    pg.add(m); g.add(pg);
+  }
+  const spine = new THREE.Mesh(new THREE.BoxGeometry(0.008, 0.004, pd), spineMat); spine.name = 'spine';
+  spine.position.y = 0.023; g.add(spine);
+  g.traverse(o => { if (o.isMesh) { o.receiveShadow = true; o.castShadow = true; } });
+  return g;
+}
+const nbL = makeNotebook('notebook-left', 0.5, 0.55, pageA, pageB, 0x6f7f8e);
+nbL.position.set(-0.56, 0.115, 1.205); nbL.rotation.set(0.38, 0.04, 0, 'YXZ'); props.add(nbL);
+const nbR = makeNotebook('notebook-right', 0.55, 0.85, pageC, pageA, 0x8a7766);
+nbR.position.set(0.85, 0.0, 1.05); nbR.rotation.y = -0.12; props.add(nbR);
+
+const woodTipMat = new THREE.MeshLambertMaterial({ color: 0xe2c49a });
+const leadMat = new THREE.MeshLambertMaterial({ color: 0x333333 });
+const eraserMat = new THREE.MeshLambertMaterial({ color: 0xd98c8c });
+const pencils = new THREE.Group(); pencils.name = 'pencils'; props.add(pencils);
+function placePencil(name, a, b, color) {
+  const len = a.distanceTo(b);
+  const g = new THREE.Group(); g.name = name;
+  const bodyL = len * 0.82;
+  const body = new THREE.Mesh(new THREE.CylinderGeometry(0.016, 0.016, bodyL, 6), new THREE.MeshLambertMaterial({ color }));
+  body.position.y = bodyL / 2; g.add(body);
+  const tip = new THREE.Mesh(new THREE.ConeGeometry(0.016, len * 0.14, 6), woodTipMat); tip.position.y = bodyL + len * 0.07; g.add(tip);
+  const lead = new THREE.Mesh(new THREE.ConeGeometry(0.006, len * 0.05, 6), leadMat); lead.position.y = bodyL + len * 0.115; g.add(lead);
+  const er = new THREE.Mesh(new THREE.CylinderGeometry(0.016, 0.016, len * 0.06, 8), eraserMat); er.position.y = -len * 0.03; g.add(er);
+  g.position.copy(a);
+  g.quaternion.setFromUnitVectors(Y, b.clone().sub(a).normalize());
+  g.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+  pencils.add(g);
+  return g;
+}
+placePencil('pencil-1', V(0.6, 0.041, 1.14), V(1.1, 0.041, 1.22), 0xd9822b);
+placePencil('pencil-2', V(1.15, 0.041, 1.3), V(0.72, 0.041, 1.34), 0xc9702a);
+placePencil('pencil-3', V(0.0, 0.016, 1.42), V(0.34, 0.016, 1.5), 0xa8642e);
+
+// ---------- characters ----------
+const PL = {
+  Rb: 0.85, yb: 0.7, Hb: 1.3, Rh: 0.58, yh: 2.03, k: 0.4,
+  eyeAz: 0.29, eyeEl: 0.09, eyeR: 0.062, mouthEl: -0.13, mouthW: 0.042,
+  belly: { az: 0.3, aw: 0.8, y: 0.75, vh: 0.82, edge: 0.72 }
+};
+const left = buildCharacter('character-left', PL);
+left.g.position.set(-0.72, -0.734, 0.1);
+left.g.rotation.y = 0.28;
+scene.add(left.g);
+left.g.updateMatrixWorld(true);
+
+const PR = {
+  Rb: 0.74, yb: 0.75, Hb: 1.35, Rh: 0.52, yh: 2.12, k: 0.4,
+  eyeAz: 0.33, eyeEl: 0.24, eyeR: 0.055, mouthEl: -0.08, mouthW: 0.036,
+  belly: { az: 0.55, aw: 0.7, y: 0.5, vh: 0.65, edge: 0.7 }
+};
+const right = buildCharacter('character-right', PR);
+right.g.rotation.set(0.15, -0.2, 0.28, 'YXZ');
+{
+  const headOff = V(0, PR.yh, 0).applyEuler(right.g.rotation);
+  right.g.position.set(0.44, 1.56, -0.35).sub(headOff);
+}
+scene.add(right.g);
+right.g.updateMatrixWorld(true);
+{
+  const qW = new THREE.Quaternion().setFromEuler(new THREE.Euler(0.05, -0.55, 0, 'YXZ'));
+  right.head.quaternion.copy(right.g.quaternion).invert().multiply(qW);
+}
+
+// arms (character's right = -x side, left = +x side in its own frame)
+const lArmR = addArm(left, 'arm-right', 'hand-right', { y: 1.45, az: -1.6, inset: 0.15 }, V(-0.85, 0.245, 1.08),
+  { r0: 0.17, r1: 0.11, hr: 0.12, back: V(-0.4, 0.8, 0.3) });
+addArm(left, 'arm-left', 'hand-left', { y: 1.45, az: 1.45, inset: 0.15 }, V(0.0, 0.14, 0.42),
+  { r0: 0.16, r1: 0.105, hr: 0.115, back: V(0.2, 1, 0.2) });
+addArm(right, 'arm-right', 'hand-right', { y: 1.55, az: -0.9, inset: 0.16 }, V(-0.1, 0.46, 0.63),
+  { r0: 0.165, r1: 0.11, hr: 0.135, back: V(0.77, 0.1, 0.64) });
+addArm(right, 'arm-left', 'hand-left', { y: 1.45, az: 1.5, inset: 0.16 }, V(1.45, 0.3, 0.05),
+  { r0: 0.16, r1: 0.105, hr: 0.12, back: V(1, 0, 0.2) });
+
+// pen held in the left character's right hand
+const pen = makePen(V(-1.01, 0.40, 0.99), V(-0.68, 0.125, 1.2));
+scene.add(pen);
+scene.updateMatrixWorld(true);
+lArmR.hand.attach(pen);
+
+for (const c of [left.g, right.g]) {
+  c.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+}
+scene.updateMatrixWorld(true);
+
+// ---------- render ----------
+function render(t) {
+  // static pose for this step; t is accepted for later animation
+  renderer.render(scene, camera);
+}
+render(0);
+
+window.nwb = {
+  scene,
+  renderer,
+  cameras: { ref: camera },
+  characters: [left.g, right.g],
+  render,
+  ready: true
+};
+</script>
+</body>
+</html>

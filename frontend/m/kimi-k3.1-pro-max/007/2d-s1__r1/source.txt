@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=240, initial-scale=1">
+<title>Yellow creature</title>
+<style>
+html,body{margin:0;padding:0;width:240px;height:294px;overflow:hidden;background:#eef0ea}
+svg{display:block}
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 294" width="240" height="294">
+  <defs>
+    <radialGradient id="background" cx="50%" cy="40%" r="76%">
+      <stop offset="0" stop-color="#fafbf7"/>
+      <stop offset=".58" stop-color="#f1f2ed"/>
+      <stop offset="1" stop-color="#e6e9e2"/>
+    </radialGradient>
+    <linearGradient id="body-yellow" x1="61" y1="65" x2="140" y2="202" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ddd45d"/>
+      <stop offset=".38" stop-color="#d4c949"/>
+      <stop offset=".75" stop-color="#c8bb3e"/>
+      <stop offset="1" stop-color="#b5a73a"/>
+    </linearGradient>
+    <radialGradient id="head-yellow" cx="99" cy="30" r="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e0d875"/>
+      <stop offset=".48" stop-color="#d5ce5d"/>
+      <stop offset=".82" stop-color="#c5bf51"/>
+      <stop offset="1" stop-color="#b4ae49"/>
+    </radialGradient>
+    <radialGradient id="belly-cream" cx="94" cy="130" r="62" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#efedc5"/>
+      <stop offset=".48" stop-color="#eae6b8"/>
+      <stop offset=".8" stop-color="#e2dda0"/>
+      <stop offset="1" stop-color="#d5cd79"/>
+    </radialGradient>
+    <linearGradient id="left-leg-yellow" x1="60" y1="197" x2="99" y2="257" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d5c74b"/>
+      <stop offset=".55" stop-color="#cdbc42"/>
+      <stop offset="1" stop-color="#bcae3e"/>
+    </linearGradient>
+    <linearGradient id="right-leg-yellow" x1="104" y1="197" x2="130" y2="257" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d1c247"/>
+      <stop offset=".58" stop-color="#c6b53d"/>
+      <stop offset="1" stop-color="#b5a43a"/>
+    </linearGradient>
+    <linearGradient id="arm-yellow" x1="46" y1="72" x2="157" y2="183" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d8cf54"/>
+      <stop offset=".48" stop-color="#cbbf43"/>
+      <stop offset="1" stop-color="#aea23d"/>
+    </linearGradient>
+    <linearGradient id="hand-olive" x1="0" y1="171" x2="0" y2="201" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#b0a448"/>
+      <stop offset=".24" stop-color="#797144"/>
+      <stop offset=".53" stop-color="#595744"/>
+      <stop offset="1" stop-color="#42463d"/>
+    </linearGradient>
+    <filter id="soften" x="-12%" y="-6%" width="124%" height="112%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation=".46"/>
+    </filter>
+    <filter id="blur-small" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation=".85"/>
+    </filter>
+    <filter id="blur-medium" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="2.4"/>
+    </filter>
+    <filter id="blur-large" x="-45%" y="-45%" width="190%" height="190%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+
+  <g id="background-layer">
+    <rect width="240" height="294" fill="url(#background)"/>
+    <ellipse cx="108" cy="144" rx="70" ry="130" fill="#fffde9" opacity=".12" filter="url(#blur-large)"/>
+    <ellipse cx="101" cy="284" rx="37" ry="3.4" fill="#9fa48f" opacity=".1" filter="url(#blur-medium)"/>
+  </g>
+
+  <g id="character-yellow-creature" filter="url(#soften)">
+    <g id="legs">
+      <g id="left-leg">
+        <path d="M61 164 C56 179 55 196 59 216 C62 235 67 253 71 269 C73 278 76 283 80 284 C85 284 89 280 91 274 C95 257 96 239 99 221 C102 203 105 188 105 174 Z" fill="url(#left-leg-yellow)"/>
+        <path d="M63 189 C62 216 70 246 76 269 C78 275 80 278 82 279 C78 264 75 243 72 222 C70 207 69 195 70 183 Z" fill="#e3d568" opacity=".2" filter="url(#blur-medium)"/>
+        <path d="M99 195 C98 217 94 246 90 267 C89 274 86 280 82 282 C91 281 94 269 96 253 L103 207 Z" fill="#948831" opacity=".18" filter="url(#blur-small)"/>
+      </g>
+      <g id="right-leg">
+        <path d="M99 171 C99 190 102 207 105 224 C107 243 108 261 111 276 C112 282 115 285 119 284 C124 283 126 278 127 270 C130 251 129 233 127 216 C125 196 122 179 118 167 Z" fill="url(#right-leg-yellow)"/>
+        <path d="M106 197 C108 222 111 249 114 273 C115 278 117 281 119 281 C116 260 117 237 114 216 C112 204 111 194 110 185 Z" fill="#e0ce5c" opacity=".18" filter="url(#blur-medium)"/>
+        <path d="M122 192 C127 218 128 246 124 270 C123 277 121 281 118 283 C125 282 128 270 129 251 C130 226 126 204 122 192 Z" fill="#95872f" opacity=".16" filter="url(#blur-small)"/>
+      </g>
+    </g>
+
+    <g id="arms">
+      <g id="left-arm">
+        <path d="M73 65 C62 70 58 84 54 102 C50 122 46 143 40 161 C38 169 35 176 32 181 L41 187 C46 176 49 163 52 151 L62 120 C67 101 70 84 78 75 Z" fill="url(#arm-yellow)"/>
+        <path d="M58 88 C54 115 48 144 42 163 C40 170 38 175 36 179" fill="none" stroke="#e1d465" stroke-width="4" stroke-linecap="round" opacity=".18" filter="url(#blur-small)"/>
+        <path d="M58 120 C53 143 49 163 42 179" fill="none" stroke="#958c35" stroke-width="3" opacity=".13" filter="url(#blur-small)"/>
+        <g id="left-hand">
+          <g id="left-fingers" fill="none" stroke="url(#hand-olive)" stroke-width="2.25" stroke-linecap="round">
+            <path d="M31 182 C28 185 25 189 25 193"/>
+            <path d="M33 185 C30 189 29 194 29 198"/>
+            <path d="M36 186 C34 191 33 196 33 200"/>
+            <path d="M39 185 C39 190 38 194 38 197"/>
+          </g>
+          <path id="left-palm" d="M35 171 C31 175 29 180 30 185 C31 189 35 191 39 188 C42 185 43 179 41 175 Z" fill="url(#hand-olive)"/>
+          <path d="M40 179 C43 182 43 186 41 189" fill="none" stroke="#555341" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M31 181 C33 178 36 177 39 178" fill="none" stroke="#929055" stroke-width="1.2" opacity=".28" filter="url(#blur-small)"/>
+        </g>
+      </g>
+
+      <g id="right-arm">
+        <path d="M132 62 C143 67 147 81 149 99 C151 119 152 139 156 157 C158 167 160 176 164 182 L156 188 C151 176 149 161 146 145 L140 117 C137 97 133 82 127 73 Z" fill="url(#arm-yellow)"/>
+        <path d="M144 82 C147 106 148 132 153 154 C155 165 157 173 160 179" fill="none" stroke="#e0d15a" stroke-width="3.5" stroke-linecap="round" opacity=".14" filter="url(#blur-small)"/>
+        <path d="M143 122 C147 146 150 169 157 182" fill="none" stroke="#8e8433" stroke-width="3" opacity=".14" filter="url(#blur-small)"/>
+        <g id="right-hand">
+          <g id="right-fingers" fill="none" stroke="url(#hand-olive)" stroke-width="2.2" stroke-linecap="round">
+            <path d="M160 184 C159 189 158 193 159 196"/>
+            <path d="M162 186 C162 191 162 196 163 199"/>
+            <path d="M165 186 C166 191 166 196 167 199"/>
+            <path d="M168 183 C170 187 172 190 172 193"/>
+          </g>
+          <path id="right-palm" d="M158 172 C156 178 157 184 160 189 C163 191 168 189 169 185 C169 180 166 175 164 172 Z" fill="url(#hand-olive)"/>
+          <path d="M158 179 C155 183 155 187 157 190" fill="none" stroke="#5b5842" stroke-width="2" stroke-linecap="round"/>
+          <path d="M160 179 C162 177 165 178 167 181" fill="none" stroke="#929055" stroke-width="1.1" opacity=".25" filter="url(#blur-small)"/>
+        </g>
+      </g>
+    </g>
+
+    <g id="torso">
+      <path id="torso-shape" d="M92 51 C76 54 64 65 60 81 C56 100 56 123 54 143 C52 164 54 186 59 199 C69 209 84 211 98 205 C109 210 122 202 129 188 C138 169 145 145 146 122 C147 99 144 78 136 64 C126 53 108 48 92 51 Z" fill="url(#body-yellow)"/>
+      <path d="M69 70 C61 88 62 111 59 132 C57 153 58 177 63 190 C65 174 65 153 67 130 C69 103 73 82 82 65 Z" fill="#ece276" opacity=".16" filter="url(#blur-medium)"/>
+      <path d="M132 67 C141 87 140 111 141 133 C140 159 132 184 122 195 C134 176 137 150 135 124 C135 100 132 83 125 69 Z" fill="#978d34" opacity=".17" filter="url(#blur-medium)"/>
+      <path d="M77 66 C87 59 105 57 119 63 C127 69 132 80 133 92 C119 84 89 83 69 94 C69 82 72 73 77 66 Z" fill="#ded45f" opacity=".25" filter="url(#blur-medium)"/>
+
+      <g id="belly">
+        <path id="belly-patch" d="M94 91 C78 93 65 107 60 127 C55 145 59 163 70 174 C81 185 102 187 118 179 C134 172 143 157 144 139 C144 120 135 105 122 97 C113 91 103 89 94 91 Z" fill="url(#belly-cream)" filter="url(#blur-small)"/>
+        <ellipse cx="94" cy="132" rx="34" ry="37" fill="#f4f0cc" opacity=".24" filter="url(#blur-large)"/>
+        <path d="M62 151 C69 170 85 180 102 181 C119 180 133 169 140 153 C136 172 122 184 103 186 C83 187 67 176 62 151 Z" fill="#cfc673" opacity=".14" filter="url(#blur-medium)"/>
+        <path d="M68 113 C75 102 84 97 94 95" fill="none" stroke="#f0ebae" stroke-width="4" stroke-linecap="round" opacity=".18" filter="url(#blur-medium)"/>
+      </g>
+
+      <g id="lower-belly-shading">
+        <path d="M62 181 C72 192 86 195 99 190 C111 194 122 187 130 177 C127 194 115 205 99 205 C84 211 68 205 62 196 Z" fill="#c4b43b" opacity=".3" filter="url(#blur-medium)"/>
+        <path id="crotch-crease" d="M99 185 C97 195 98 205 100 215" fill="none" stroke="#877b2e" stroke-width="2.2" stroke-linecap="round" opacity=".3" filter="url(#blur-small)"/>
+        <path d="M100 202 L100 215" fill="none" stroke="#7c712e" stroke-width=".8" stroke-linecap="round" opacity=".36"/>
+      </g>
+    </g>
+
+    <g id="head">
+      <path id="head-shape" d="M106 20 C98 19 92 23 89 30 C87 35 88 41 84 47 C80 52 79 58 82 63 C87 69 95 70 104 68 C114 70 126 67 132 62 C136 57 134 49 133 43 C134 35 130 28 124 24 C119 21 112 20 106 20 Z" fill="url(#head-yellow)"/>
+      <path d="M94 27 C100 22 111 22 119 25 C124 27 128 31 129 36 C119 30 103 29 92 35 Z" fill="#ede58b" opacity=".24" filter="url(#blur-medium)"/>
+      <path d="M86 42 C84 50 82 56 85 61 C88 65 93 66 98 66 C91 61 90 52 92 43 Z" fill="#aaa448" opacity=".2" filter="url(#blur-small)"/>
+      <path d="M127 31 C133 39 130 47 133 53 C134 59 129 64 123 65 C128 58 126 49 125 41 Z" fill="#9e9943" opacity=".2" filter="url(#blur-small)"/>
+
+      <g id="face">
+        <path id="face-plane" d="M92 37 C100 32 119 34 127 41 C132 47 130 56 124 60 C116 65 101 63 93 58 C87 53 87 43 92 37 Z" fill="#ddd67a" opacity=".34" filter="url(#blur-medium)"/>
+
+        <g id="eye-sockets" fill="#8e8b47" opacity=".24" filter="url(#blur-medium)">
+          <ellipse cx="98" cy="41.5" rx="7" ry="3.4"/>
+          <ellipse cx="120.5" cy="42.5" rx="7" ry="3.3"/>
+        </g>
+
+        <g id="eyes" fill="none" stroke="#66663b" stroke-linecap="round">
+          <path id="left-eye" d="M94.5 42.2 C97 41.5 100 41.6 102.2 42.5" stroke-width="1.25" opacity=".7"/>
+          <path id="right-eye" d="M116.8 42.8 C119.3 42.1 122.2 42.4 124.3 43.3" stroke-width="1.2" opacity=".68"/>
+          <path d="M95 40.7 C98 39.8 101 40.2 103 41" stroke="#b4ad56" stroke-width="1.5" opacity=".55"/>
+          <path d="M116 41.2 C119 40.2 123 40.8 125 42" stroke="#afa851" stroke-width="1.4" opacity=".5"/>
+        </g>
+
+        <g id="muzzle">
+          <path d="M94 48 C99 45 105 46 110 48 C116 46 123 47 127 51 C127 57 119 61 110 61 C101 61 94 57 94 48 Z" fill="#dcd47a" opacity=".58" filter="url(#blur-small)"/>
+          <path d="M96 51 C101 53 105 53 110 52 C116 54 122 53 126 51 C124 57 118 59 110 59 C103 59 98 57 96 51 Z" fill="#e2db89" opacity=".3" filter="url(#blur-small)"/>
+          <path id="nose" d="M104.5 47.8 C107 46.3 113.8 46.2 116.7 47.9 C117.3 49.8 114.6 51.2 110.5 51.2 C106.8 51.2 104.2 50 104.5 47.8 Z" fill="#9e994f" opacity=".43" filter="url(#blur-small)"/>
+          <path d="M107 47.6 C109 47.1 112.5 47.1 114.3 47.8" fill="none" stroke="#77783f" stroke-width=".85" stroke-linecap="round" opacity=".42"/>
+        </g>
+
+        <g id="mouth">
+          <path d="M100.5 55.2 C106 56.1 115.5 56.2 121.2 55.1" fill="none" stroke="#7d793f" stroke-width="1.05" stroke-linecap="round" opacity=".6" filter="url(#blur-small)"/>
+          <path d="M103 57.2 C108 58.2 115 58.1 119 57.1" fill="none" stroke="#eee596" stroke-width="1.1" stroke-linecap="round" opacity=".32" filter="url(#blur-small)"/>
+        </g>
+      </g>
+
+      <g id="head-fur-highlights" fill="none" stroke="#eee588" stroke-linecap="round" opacity=".18" filter="url(#blur-small)">
+        <path d="M94 29 C99 25 105 24 110 24" stroke-width="2.3"/>
+        <path d="M88 36 C88 32 91 29 94 27" stroke-width="1.8"/>
+        <path d="M88 56 C89 60 92 62 96 63" stroke-width="1.6"/>
+      </g>
+    </g>
+  </g>
+</svg>
+</body>
+</html>

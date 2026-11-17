@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+html,body{margin:0;padding:0;width:240px;height:294px;overflow:hidden;background:#fbf8e8}
+canvas{display:block;width:240px;height:294px}
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+
+const W = 240, H = 294;
+const renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true, antialias: true });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+
+// ---------- background (procedural 64x64 glow) ----------
+{
+  const c = document.createElement('canvas'); c.width = 64; c.height = 64;
+  const g = c.getContext('2d');
+  const gr = g.createRadialGradient(36, 30, 2, 34, 32, 50);
+  gr.addColorStop(0, '#fffef8');
+  gr.addColorStop(0.4, '#fcfaea');
+  gr.addColorStop(0.75, '#f4efc8');
+  gr.addColorStop(1, '#ebe3a6');
+  g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  scene.background = tex;
+}
+
+// ---------- helpers ----------
+const ss = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+const named = (o, n) => { o.name = n; return o; };
+const mat = (color, rough = 0.55, extra = {}) =>
+  new THREE.MeshStandardMaterial(Object.assign({ color, roughness: rough, metalness: 0 }, extra));
+
+function profileLathe(pts, segs, n) {
+  const curve = new THREE.SplineCurve(pts.map(p => new THREE.Vector2(p[0], p[1])));
+  const sp = curve.getPoints(n).map(v => new THREE.Vector2(Math.max(0, v.x), v.y));
+  sp[0].x = 0; sp[sp.length - 1].x = 0;
+  return new THREE.LatheGeometry(sp, segs, Math.PI, Math.PI * 2);
+}
+
+function limbGeo(len, r1, r2, segs = 24) {
+  const pts = [], n = 8;
+  for (let i = 0; i <= n; i++) {
+    const a = -Math.PI / 2 + i / n * Math.PI / 2;
+    pts.push(new THREE.Vector2(Math.max(0, Math.cos(a) * r2), -len + Math.sin(a) * r2));
+  }
+  for (let i = 0; i <= n; i++) {
+    const a = i / n * Math.PI / 2;
+    pts.push(new THREE.Vector2(Math.max(0, Math.cos(a) * r1), Math.sin(a) * r1));
+  }
+  pts[0].x = 0; pts[pts.length - 1].x = 0;
+  return new THREE.LatheGeometry(pts, segs);
+}
+
+const sphereGeo = new THREE.SphereGeometry(1, 32, 20);
+
+// ---------- materials ----------
+const yellowMat = mat('#ecc84e', 0.55);
+const legMat = mat('#eecd58', 0.55);
+const handMat = mat('#434a3a', 0.5);
+const footMat = mat('#e2a240', 0.55);
+const eyeMat = mat('#3a3326', 0.6);
+const beakMat = mat('#eba25c', 0.45);
+const bodyMat = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 0.48, metalness: 0 });
+const headMat = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 0.55, metalness: 0 });
+
+// ---------- character ----------
+const penguin = named(new THREE.Group(), 'character-penguin');
+scene.add(penguin);
+
+const bodyG = named(new THREE.Group(), 'body');
+penguin.add(bodyG);
+
+// torso (with pastel iridescent belly baked as vertex colors)
+const torsoPts = [
+  [0, 1.24], [0.42, 1.3], [0.72, 1.46], [0.93, 1.75], [1.06, 2.15], [1.11, 2.6],
+  [1.11, 3.05], [1.07, 3.55], [1.0, 4.05], [0.91, 4.5], [0.84, 4.85], [0.72, 5.15],
+  [0.5, 5.4], [0.25, 5.55], [0, 5.6]
+];
+const torsoGeo = profileLathe(torsoPts, 72, 120);
+{
+  const p = torsoGeo.attributes.position, n = p.count, col = new Float32Array(n * 3);
+  const base = new THREE.Color('#ecc64c'), tmp = new THREE.Color(), bc = new THREE.Color();
+  const stops = [
+    [1.2, '#e6e4f2'], [1.8, '#efc6d0'], [2.4, '#f0b4b8'], [2.85, '#f6dad6'],
+    [3.2, '#fbf5ec'], [3.6, '#f5d0c6'], [4.1, '#f2b6a8'], [4.6, '#f0bc98']
+  ].map(([y, h]) => [y, new THREE.Color(h)]);
+  for (let i = 0; i < n; i++) {
+    const x = p.getX(i), y = p.getY(i), z = p.getZ(i);
+    const r = Math.hypot(x, z) || 1e-6;
+    let k = 0;
+    while (k < stops.length - 2 && y > stops[k + 1][0]) k++;
+    const t = Math.min(1, Math.max(0, (y - stops[k][0]) / (stops[k + 1][0] - stops[k][0])));
+    bc.lerpColors(stops[k][1], stops[k + 1][1], t);
+    const d = (x / 1.05) ** 2 + ((y - 2.88) / 1.68) ** 2;
+    const m = (1 - ss(0.78, 1.0, d)) * ss(0.02, 0.38, z / r);
+    tmp.copy(base).lerp(bc, m);
+    col[i * 3] = tmp.r; col[i * 3 + 1] = tmp.g; col[i * 3 + 2] = tmp.b;
+  }
+  torsoGeo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+}
+const torso = new THREE.Mesh(torsoGeo, bodyMat);
+torso.name = 'torso';
+torso.scale.set(1, 1, 0.88);
+bodyG.add(torso);
+
+// head
+const HA = 0.72, HB = 0.8, HC = 0.64, HY = 0.55;
+const headG = named(new THREE.Group(), 'head');
+headG.position.set(0, 5.0, 0);
+bodyG.add(headG);
+const headGeo = new THREE.SphereGeometry(1, 48, 32);
+{
+  const p = headGeo.attributes.position, n = p.count, col = new Float32Array(n * 3);
+  const base = new THREE.Color('#e9c84c'), top = new THREE.Color('#c9c042'), pink = new THREE.Color('#f0a49a');
+  const tmp = new THREE.Color();
+  const cz = HC * Math.sqrt(Math.max(0, 1 - (0.33 / HA) ** 2 - (0.28 / HB) ** 2));
+  const sig2 = 2 * 0.13 * 0.13;
+  for (let i = 0; i < n; i++) {
+    const ux = p.getX(i), uy = p.getY(i), uz = p.getZ(i);
+    const sx = ux * HA, sy = uy * HB, sz = uz * HC;
+    tmp.copy(base).lerp(top, ss(0.25, 0.95, uy) * 0.75);
+    let w = 0;
+    for (const cx of [-0.33, 0.33]) {
+      const d2 = (sx - cx) ** 2 + (sy + 0.28) ** 2 + (sz - cz) ** 2;
+      w = Math.max(w, 0.6 * Math.exp(-d2 / sig2));
+    }
+    tmp.lerp(pink, w);
+    col[i * 3] = tmp.r; col[i * 3 + 1] = tmp.g; col[i * 3 + 2] = tmp.b;
+  }
+  headGeo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+}
+const headMesh = new THREE.Mesh(headGeo, headMat);
+headMesh.name = 'head-shape';
+headMesh.scale.set(HA, HB, HC);
+headMesh.position.y = HY;
+headG.add(headMesh);
+
+function onHead(x, y, off = 0) {
+  const dy = y - HY;
+  const k = 1 - (x / HA) ** 2 - (dy / HB) ** 2;
+  const z = HC * Math.sqrt(Math.max(k, 0));
+  const nrm = new THREE.Vector3(x / (HA * HA), dy / (HB * HB), z / (HC * HC)).normalize();
+  return { p: new THREE.Vector3(x, y, z).addScaledVector(nrm, off), n: nrm };
+}
+const Zaxis = new THREE.Vector3(0, 0, 1);
+
+// eyes (closed, curved lids)
+const eyesG = named(new THREE.Group(), 'eyes');
+headG.add(eyesG);
+const eyeArc = Math.PI * 0.6, eyeR = 0.12;
+const eyeGeo = new THREE.TorusGeometry(eyeR, 0.022, 8, 24, eyeArc);
+eyeGeo.rotateZ(-Math.PI / 2 - eyeArc / 2);
+eyeGeo.translate(0, eyeR * (1 + Math.cos(eyeArc / 2)) / 2, 0);
+for (const s of [-1, 1]) {
+  const side = s < 0 ? 'left' : 'right';
+  const { p, n } = onHead(s * 0.25, 0.65, 0.006);
+  const eG = named(new THREE.Group(), 'eye-' + side);
+  eG.position.copy(p);
+  eG.quaternion.setFromUnitVectors(Zaxis, n);
+  const lid = new THREE.Mesh(eyeGeo, eyeMat);
+  lid.name = 'eyelid-' + side;
+  lid.rotation.z = -s * 0.1;
+  eG.add(lid);
+  eyesG.add(eG);
+}
+
+// beak / mouth
+const mouthG = named(new THREE.Group(), 'mouth');
+headG.add(mouthG);
+{
+  const { p, n } = onHead(0, 0.48, -0.01);
+  mouthG.position.copy(p);
+  mouthG.quaternion.setFromUnitVectors(Zaxis, n);
+  const bh = 0.13;
+  const bg = new THREE.ConeGeometry(0.06, bh, 16);
+  bg.rotateX(Math.PI / 2);
+  bg.translate(0, 0, bh / 2);
+  const beak = new THREE.Mesh(bg, beakMat);
+  beak.name = 'beak';
+  beak.scale.set(1, 0.8, 1);
+  mouthG.add(beak);
+}
+
+// arms + hands
+function buildHand(g, s) {
+  const palm = new THREE.Mesh(sphereGeo, handMat);
+  palm.name = 'palm';
+  palm.scale.set(0.12, 0.15, 0.07);
+  palm.position.set(0, -0.1, 0);
+  g.add(palm);
+  const fingers = named(new THREE.Group(), 'fingers');
+  g.add(fingers);
+  for (let i = 0; i < 4; i++) {
+    const f = named(new THREE.Group(), 'finger-' + i);
+    const u = (i - 1.5) / 1.5;
+    f.position.set(u * 0.075, -0.2, 0);
+    f.rotation.z = u * 0.28 + s * 0.1;
+    const len = 0.24 - Math.abs(u) * 0.04;
+    const m = new THREE.Mesh(new THREE.CapsuleGeometry(0.032, len, 4, 8), handMat);
+    m.position.y = -len / 2 - 0.01;
+    f.add(m);
+    fingers.add(f);
+  }
+  const th = named(new THREE.Group(), 'thumb');
+  th.position.set(-s * 0.07, -0.1, 0.04);
+  th.rotation.set(-0.6, 0, -s * 0.5);
+  const tm = new THREE.Mesh(new THREE.CapsuleGeometry(0.035, 0.14, 4, 8), handMat);
+  tm.position.y = -0.1;
+  th.add(tm);
+  fingers.add(th);
+}
+
+const armLen = 1.67;
+for (const s of [-1, 1]) {
+  const side = s < 0 ? 'left' : 'right'; // screen side
+  const armG = named(new THREE.Group(), 'arm-' + side);
+  armG.position.set(s * 0.88, 4.25, 0.0);
+  armG.rotation.z = s * 0.228;
+  bodyG.add(armG);
+  const arm = new THREE.Mesh(limbGeo(armLen, 0.17, 0.12), yellowMat);
+  arm.name = 'arm-shape-' + side;
+  armG.add(arm);
+  const handG = named(new THREE.Group(), 'hand-' + side);
+  handG.position.set(0, -armLen, 0);
+  handG.rotation.set(0, -s * 0.35, s * 0.12);
+  armG.add(handG);
+  buildHand(handG, s);
+}
+
+// legs + feet
+for (const s of [-1, 1]) {
+  const side = s < 0 ? 'left' : 'right';
+  const legG = named(new THREE.Group(), 'leg-' + side);
+  legG.position.set(s * 0.31, 1.75, 0);
+  penguin.add(legG);
+  const leg = new THREE.Mesh(limbGeo(1.55, 0.29, 0.22), legMat);
+  leg.name = 'leg-shape-' + side;
+  legG.add(leg);
+  const footG = named(new THREE.Group(), 'foot-' + side);
+  footG.position.set(0, -1.62, 0.1);
+  legG.add(footG);
+  const foot = new THREE.Mesh(sphereGeo, footMat);
+  foot.scale.set(0.24, 0.09, 0.36);
+  footG.add(foot);
+}
+
+// ---------- lights ----------
+scene.add(new THREE.HemisphereLight(0xfff6e0, 0xb59f6e, 1.3));
+const key = new THREE.DirectionalLight(0xfff4e0, 2.0); key.position.set(3, 6, 9); scene.add(key);
+const fill = new THREE.DirectionalLight(0xfff8ee, 0.7); fill.position.set(-6, 2, 6); scene.add(fill);
+const rimL = new THREE.DirectionalLight(0xffffff, 1.4); rimL.position.set(-5, 4, -6); scene.add(rimL);
+const rimR = new THREE.DirectionalLight(0xffffff, 1.4); rimR.position.set(5, 4, -6); scene.add(rimR);
+const top = new THREE.DirectionalLight(0xfffbe8, 0.5); top.position.set(0, 10, 0); scene.add(top);
+
+// ---------- camera ----------
+const camera = new THREE.PerspectiveCamera(20, W / H, 0.1, 100);
+camera.position.set(0.36, 3.44, 16.67);
+camera.lookAt(0.36, 3.44, 0);
+camera.name = 'ref';
+
+function render(t) {
+  renderer.render(scene, camera);
+}
+render(0);
+
+window.nwb = {
+  scene,
+  renderer,
+  cameras: { ref: camera },
+  characters: [penguin],
+  render,
+  ready: true
+};
+</script>
+</body>
+</html>

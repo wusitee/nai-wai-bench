@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A little help with homework</title>
+<style>
+html,body{margin:0;width:240px;height:242px;overflow:hidden;background:#b6a18a}
+body{line-height:0}
+svg{display:block}
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="242" viewBox="0 0 240 242">
+<defs>
+  <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1">
+    <stop stop-color="#bda487"/>
+    <stop offset=".43" stop-color="#c4b5a1"/>
+    <stop offset="1" stop-color="#d4cec0"/>
+  </linearGradient>
+  <linearGradient id="board" x1="0" y1="0" x2=".4" y2="1">
+    <stop stop-color="#102e2f"/>
+    <stop offset="1" stop-color="#173c3e"/>
+  </linearGradient>
+  <linearGradient id="wood" x1="0" y1="0" x2=".25" y2="1">
+    <stop stop-color="#c59042"/>
+    <stop offset=".45" stop-color="#d7a251"/>
+    <stop offset="1" stop-color="#b88139"/>
+  </linearGradient>
+  <linearGradient id="table-front" x1="0" y1="0" x2="1" y2="1">
+    <stop stop-color="#e0af60"/>
+    <stop offset=".5" stop-color="#c4954e"/>
+    <stop offset="1" stop-color="#d9a456"/>
+  </linearGradient>
+  <radialGradient id="left-body" cx=".37" cy=".3" r=".8">
+    <stop stop-color="#ffdc60"/>
+    <stop offset=".45" stop-color="#ffcc35"/>
+    <stop offset=".77" stop-color="#edaa15"/>
+    <stop offset="1" stop-color="#b7770d"/>
+  </radialGradient>
+  <radialGradient id="left-head" cx=".41" cy=".16" r=".91">
+    <stop stop-color="#ffe993"/>
+    <stop offset=".25" stop-color="#ffda59"/>
+    <stop offset=".66" stop-color="#fac22d"/>
+    <stop offset=".87" stop-color="#e7a31c"/>
+    <stop offset="1" stop-color="#cf8b15"/>
+  </radialGradient>
+  <linearGradient id="left-arm" x1="0" y1=".3" x2="1" y2=".6">
+    <stop stop-color="#f2ab13"/>
+    <stop offset=".4" stop-color="#ffd147"/>
+    <stop offset=".7" stop-color="#f8c12a"/>
+    <stop offset="1" stop-color="#cc8d13"/>
+  </linearGradient>
+  <radialGradient id="belly-left" cx=".48" cy=".32" r=".8">
+    <stop stop-color="#f8e7c7"/>
+    <stop offset=".5" stop-color="#ead3af"/>
+    <stop offset=".82" stop-color="#d5b88e"/>
+    <stop offset="1" stop-color="#b7976e"/>
+  </radialGradient>
+  <radialGradient id="right-body" cx=".7" cy=".25" r=".85">
+    <stop stop-color="#ffe37c"/>
+    <stop offset=".41" stop-color="#ffd54a"/>
+    <stop offset=".73" stop-color="#f3b722"/>
+    <stop offset="1" stop-color="#c8860c"/>
+  </radialGradient>
+  <radialGradient id="right-head" cx=".43" cy=".12" r=".92">
+    <stop stop-color="#ffe99c"/>
+    <stop offset=".22" stop-color="#ffda66"/>
+    <stop offset=".58" stop-color="#ffd044"/>
+    <stop offset=".87" stop-color="#e9a51e"/>
+    <stop offset="1" stop-color="#c48a18"/>
+  </radialGradient>
+  <linearGradient id="right-arm" x1=".25" y1="1" x2=".7" y2="0">
+    <stop stop-color="#c78c0d"/>
+    <stop offset=".28" stop-color="#ecb321"/>
+    <stop offset=".57" stop-color="#ffd144"/>
+    <stop offset=".86" stop-color="#ffda5b"/>
+    <stop offset="1" stop-color="#ffe17c"/>
+  </linearGradient>
+  <radialGradient id="belly-right" cx=".65" cy=".25" r=".95">
+    <stop stop-color="#fff0d2"/>
+    <stop offset=".55" stop-color="#e9d5b5"/>
+    <stop offset="1" stop-color="#bea27a"/>
+  </radialGradient>
+  <linearGradient id="hand" x1=".15" y1="0" x2=".75" y2="1">
+    <stop stop-color="#aba083"/>
+    <stop offset=".35" stop-color="#8d8369"/>
+    <stop offset=".72" stop-color="#6f6852"/>
+    <stop offset="1" stop-color="#494637"/>
+  </linearGradient>
+  <linearGradient id="writing-hand" x1=".2" y1="0" x2=".8" y2="1">
+    <stop stop-color="#a99a7a"/>
+    <stop offset=".48" stop-color="#81775d"/>
+    <stop offset="1" stop-color="#484535"/>
+  </linearGradient>
+  <radialGradient id="eye-rim" cx=".32" cy=".2" r=".82">
+    <stop stop-color="#d9cfad"/>
+    <stop offset=".42" stop-color="#b2aa88"/>
+    <stop offset=".78" stop-color="#7e7c5e"/>
+    <stop offset="1" stop-color="#9f8e5a"/>
+  </radialGradient>
+  <radialGradient id="eye-black" cx=".37" cy=".29" r=".77">
+    <stop stop-color="#4e4d3d"/>
+    <stop offset=".39" stop-color="#292c24"/>
+    <stop offset="1" stop-color="#111b17"/>
+  </radialGradient>
+  <linearGradient id="paper-left" x1="0" y1="0" x2=".25" y2="1">
+    <stop stop-color="#fffaf0"/>
+    <stop offset=".65" stop-color="#f3ede1"/>
+    <stop offset="1" stop-color="#d0c8b4"/>
+  </linearGradient>
+  <linearGradient id="paper-right" x1="0" y1=".2" x2="1" y2=".9">
+    <stop stop-color="#fffbed"/>
+    <stop offset=".7" stop-color="#f5efe2"/>
+    <stop offset="1" stop-color="#d8cfba"/>
+  </linearGradient>
+  <linearGradient id="pencil-metal" x1="0" y1="0" x2="1" y2="0">
+    <stop stop-color="#272b27"/>
+    <stop offset=".26" stop-color="#bcbba7"/>
+    <stop offset=".5" stop-color="#e0d9bf"/>
+    <stop offset=".66" stop-color="#777b6c"/>
+    <stop offset="1" stop-color="#32372d"/>
+  </linearGradient>
+  <filter id="background-blur" x="-15%" y="-20%" width="130%" height="140%">
+    <feGaussianBlur stdDeviation="2.1"/>
+  </filter>
+  <filter id="soft-shadow" x="-35%" y="-55%" width="170%" height="210%">
+    <feGaussianBlur stdDeviation="2"/>
+  </filter>
+  <filter id="small-shadow" x="-25%" y="-35%" width="150%" height="170%">
+    <feGaussianBlur stdDeviation=".8"/>
+  </filter>
+  <filter id="fur" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency=".83 .66" numOctaves="3" seed="14" result="noise"/>
+    <feColorMatrix in="noise" type="saturate" values="0" result="gray"/>
+    <feComponentTransfer in="gray" result="soft-grain">
+      <feFuncR type="linear" slope=".7" intercept=".15"/>
+      <feFuncG type="linear" slope=".7" intercept=".15"/>
+      <feFuncB type="linear" slope=".7" intercept=".15"/>
+    </feComponentTransfer>
+    <feComposite in="soft-grain" in2="SourceGraphic" operator="in" result="grain"/>
+    <feBlend in="grain" in2="SourceGraphic" mode="soft-light" result="textured"/>
+    <feDisplacementMap in="textured" in2="noise" scale=".65" xChannelSelector="R" yChannelSelector="G"/>
+    <feGaussianBlur stdDeviation=".1"/>
+  </filter>
+  <filter id="fine-grain" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="6"/>
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer>
+      <feFuncA type="linear" slope="0" intercept=".14"/>
+    </feComponentTransfer>
+  </filter>
+</defs>
+
+<g id="classroom-background">
+  <rect width="240" height="242" fill="url(#wall)"/>
+  <g filter="url(#background-blur)">
+    <path d="M72-8H247V37H73Z" fill="#7c6a50"/>
+    <path d="M79-8H246V30L82 31Z" fill="url(#board)"/>
+    <path d="M78 32H245" fill="none" stroke="#8c8270" stroke-width="5"/>
+    <path d="M75-4V31" stroke="#806345" stroke-width="5"/>
+    <path d="M84 35H240" stroke="#d3c7b0" stroke-width="2" opacity=".7"/>
+    <path d="M0 91L240 86V106L0 113Z" fill="#9a6e3e"/>
+    <path d="M0 91L237 87" stroke="#d2a76e" stroke-width="5"/>
+    <path d="M1 103L240 101V123L0 126Z" fill="#685039"/>
+    <path d="M92 87L107 82 125 88 127 107 98 108Z" fill="#3c3b2f"/>
+    <path d="M109 75L115 74 121 91 113 92Z" fill="#322f26"/>
+    <path d="M109 73Q111 65 115 67L116 80 110 81Z" fill="#a69f8e"/>
+    <path d="M207 89L213 75 222 75 226 90Z" fill="#8c7c5b"/>
+    <path d="M227 87L231 69 239 68 245 89Z" fill="#514c3e"/>
+    <path d="M229 70L232 66 237 66 239 73Z" fill="#9a907c"/>
+    <path d="M0 117L18 111 33 123 23 158 0 160Z" fill="#b68c4d"/>
+    <path d="M203 110L240 111V160L226 145Z" fill="#c3b096"/>
+    <path d="M222 113L240 119V153" fill="none" stroke="#827462" stroke-width="5"/>
+  </g>
+</g>
+
+<g id="table">
+  <path d="M0 202L119 183 240 190V242H0Z" fill="url(#wood)"/>
+  <path d="M0 211L123 194 240 203V242H0Z" fill="url(#table-front)"/>
+  <path d="M0 212L120 195 240 204" fill="none" stroke="#9a6a31" stroke-width="1" opacity=".7"/>
+  <path d="M0 234L94 218M24 242L127 223M151 242L223 233M215 221L239 220" stroke="#8f642f" stroke-width=".55" opacity=".27"/>
+  <path d="M0 220L49 211M176 224L240 231M18 239L64 231" stroke="#f2c77d" stroke-width=".8" opacity=".45"/>
+  <ellipse cx="111" cy="202" rx="103" ry="12" fill="#6e5027" opacity=".22" filter="url(#soft-shadow)"/>
+</g>
+
+<g id="open-notebook-left">
+  <path d="M-3 211L75 197 158 214 167 221 124 231 30 241-3 220Z" fill="#745a39" opacity=".34" filter="url(#small-shadow)"/>
+  <path d="M-2 208L75 197 163 216 163 221 29 239-2 218Z" fill="#827c66"/>
+  <path d="M0 208L75 198 160 216 158 220 30 237 0 216Z" fill="#ded8c3"/>
+  <path d="M1 213L31 233 111 225 159 218" fill="none" stroke="#a69f88" stroke-width=".8"/>
+  <path d="M1 216L30 235 112 227 158 220" fill="none" stroke="#f6edcf" stroke-width="1"/>
+  <path d="M0 205Q35 201 72 199Q81 198 92 203L113 220Q75 225 32 234Z" fill="url(#paper-left)"/>
+  <path d="M75 199Q98 198 119 203L161 215Q138 216 114 222L32 234Q75 224 99 220Z" fill="url(#paper-right)"/>
+  <path d="M75 199Q90 208 101 218Q105 221 114 222" fill="none" stroke="#bcb49c" stroke-width=".8"/>
+  <path d="M78 200Q91 207 98 216" fill="none" stroke="#fffbe9" stroke-width="1.1"/>
+  <g fill="none" stroke="#8e8a79" stroke-width=".45" opacity=".24">
+    <path d="M17 210L63 202M22 213L70 205M27 216L76 208M33 219L82 211"/>
+    <path d="M107 207L134 213M111 210L143 216M115 214L132 217"/>
+  </g>
+  <path d="M30 234Q77 228 115 222L151 217" fill="none" stroke="#6c6958" stroke-width="1"/>
+</g>
+
+<g id="character-left">
+  <g id="left-torso" filter="url(#fur)">
+    <path id="left-torso-shape" d="M31 95C22 95 11 102 4 112C-5 127-6 165-1 184C2 201 23 208 43 207L88 204C105 202 120 198 122 186C125 170 116 139 109 125C103 112 91 103 80 101Z" fill="url(#left-body)"/>
+    <path id="left-belly-shape" d="M43 145C34 150 28 157 25 173C23 185 24 197 31 202C46 211 77 207 93 199C104 190 104 173 96 159C89 146 77 141 63 141C55 140 48 143 43 145Z" fill="url(#belly-left)"/>
+    <path id="left-torso-shade" d="M90 129C106 134 115 155 118 177L111 189C109 166 101 154 94 148Z" fill="#bd830e" opacity=".23"/>
+  </g>
+
+  <g id="left-arm-right">
+    <path id="left-resting-arm-shape" d="M96 123C108 124 116 140 119 154C122 168 124 180 119 188C116 193 108 193 104 187C101 179 102 166 97 154L88 139Z" fill="url(#left-arm)" filter="url(#fur)"/>
+    <g id="left-hand-right" filter="url(#fur)">
+      <path d="M106 184C108 181 114 182 118 185C122 187 126 193 125 196C124 199 121 199 118 198C115 202 111 200 109 199C105 200 102 198 101 195C100 191 102 187 106 184Z" fill="url(#hand)"/>
+      <path d="M107 188Q104 193 107 198M113 188Q110 195 113 199M119 190Q117 195 120 198" fill="none" stroke="#494735" stroke-width="1.25" stroke-linecap="round" opacity=".75"/>
+      <path d="M106 186Q112 184 117 188" fill="none" stroke="#b0a380" stroke-width="1" opacity=".6"/>
+    </g>
+  </g>
+
+  <g id="left-head">
+    <path id="left-head-shape" d="M27 91C29 72 39 56 54 53C68 49 78 52 86 61C96 72 97 87 97 99C102 109 100 118 93 126C86 136 73 142 58 138C41 136 29 126 26 112C24 105 25 98 27 91Z" fill="url(#left-head)" filter="url(#fur)"/>
+    <path id="left-head-highlight" d="M34 75Q44 56 60 55Q73 54 82 65" fill="none" stroke="#fff0a3" stroke-width="1.7" opacity=".42" filter="url(#small-shadow)"/>
+    <path id="left-cheek" d="M81 101C88 101 94 105 97 110C97 116 92 120 86 119C80 118 78 109 81 101Z" fill="#edb22b" opacity=".34" filter="url(#small-shadow)"/>
+
+    <g id="left-eyes">
+      <g id="left-eye-left">
+        <ellipse cx="51.5" cy="88.5" rx="9.4" ry="10.3" transform="rotate(-24 51.5 88.5)" fill="#8e7235" opacity=".42" filter="url(#small-shadow)"/>
+        <ellipse cx="51.8" cy="88.4" rx="8.5" ry="9.7" transform="rotate(-23 51.8 88.4)" fill="url(#eye-rim)" filter="url(#fur)"/>
+        <g id="left-pupil-left">
+          <ellipse cx="54" cy="90.1" rx="5.7" ry="7.5" transform="rotate(-19 54 90.1)" fill="url(#eye-black)"/>
+          <ellipse cx="52.1" cy="86.4" rx="1.6" ry="1.2" fill="#c2b99a" opacity=".43"/>
+        </g>
+        <path d="M45 83Q50 77 55 82" fill="none" stroke="#ecd9a9" stroke-width="1.1" opacity=".65"/>
+      </g>
+      <g id="left-eye-right">
+        <ellipse cx="90.1" cy="94.5" rx="6.6" ry="8.4" transform="rotate(-12 90.1 94.5)" fill="#a38e58"/>
+        <ellipse cx="90.7" cy="94.4" rx="5.6" ry="7.7" transform="rotate(-12 90.7 94.4)" fill="url(#eye-rim)"/>
+        <g id="left-pupil-right">
+          <ellipse cx="92.3" cy="96.1" rx="4.1" ry="5.8" transform="rotate(-11 92.3 96.1)" fill="url(#eye-black)"/>
+          <ellipse cx="91" cy="93.2" rx="1" ry="1.15" fill="#d1c7a9" opacity=".42"/>
+        </g>
+      </g>
+    </g>
+
+    <g id="left-mouth">
+      <path id="left-mouth-opening" d="M66 108.7C69 107.8 74 107.8 78 109.1C78.2 111.9 71 112.6 66 111.1Z" fill="#3f3420" opacity="0"/>
+      <path id="left-mouth-line" d="M65 109C69 112.4 74 113.1 78.5 109.8" fill="none" stroke="#a97518" stroke-width="2" stroke-linecap="round"/>
+      <path id="left-mouth-inner-line" d="M66.3 110.1Q72 113 76.8 110.8" fill="none" stroke="#705124" stroke-width=".8" stroke-linecap="round"/>
+      <path id="left-lip" d="M66 114Q73 117 79 113" fill="none" stroke="#ffdb5b" stroke-width="1" opacity=".65"/>
+    </g>
+    <g id="left-head-fibers" fill="none" stroke="#ffe591" stroke-width=".45" stroke-linecap="round" opacity=".42">
+      <path d="M35 67l-1-2M40 61l-1-2M46 57v-2M54 54l-1-2M61 53v-2M68 54l1-2M75 57l1-2M81 61l2-1M29 81l-2-1M27 91l-2-1M31 113l-2 1M40 125l-1 2"/>
+    </g>
+  </g>
+
+  <g id="left-arm-left">
+    <path id="left-writing-arm-shape" d="M16 107C8 113 3 124 1 139C-2 153-3 177 1 189C4 200 15 206 24 204C31 203 33 198 29 192C25 186 19 184 18 178C17 167 23 151 27 136C30 123 26 109 16 107Z" fill="url(#left-arm)" filter="url(#fur)"/>
+    <path id="left-writing-arm-highlight" d="M8 143C3 158 3 175 8 184" fill="none" stroke="#ffdc5d" stroke-width="4" opacity=".28" filter="url(#small-shadow)"/>
+    <g id="left-held-pencil">
+      <path d="M19.5 169L22.5 167.1 46.6 205.8 45.9 211.7 41.8 208.3Z" fill="#746e55"/>
+      <path d="M20.7 169L22 168.3 45 206.1 43.6 207Z" fill="url(#pencil-metal)"/>
+      <path d="M22 169L43.5 203.8" stroke="#e2d8b9" stroke-width=".8"/>
+      <path d="M43 207L46 211.5 45.9 205.6Z" fill="#c8aa72"/>
+      <path d="M45 209L46 211.5 46 208.2Z" fill="#38392d"/>
+      <path d="M19.5 168L21.6 167" stroke="#302e24" stroke-width="1.7"/>
+    </g>
+    <g id="left-writing-hand" filter="url(#fur)">
+      <path d="M20 190C24 187 30 187 34 191C37 191 40 195 43 199C45 202 46 205 49 208C51 212 47 215 44 214C40 216 37 214 34 213C29 213 25 210 23 207C18 206 16 202 16 198C16 194 18 191 20 190Z" fill="url(#writing-hand)"/>
+      <path d="M30 192C32 189 35 191 38 194L42 199C43 202 40 204 38 202L32 198" fill="#9d906f"/>
+      <path d="M27 200Q33 207 40 211M25 204Q29 210 35 212M34 199Q40 207 45 210" fill="none" stroke="#514c38" stroke-width="1" stroke-linecap="round" opacity=".75"/>
+      <path d="M21 193Q25 190 29 193" fill="none" stroke="#c0ad81" stroke-width="1" opacity=".7"/>
+      <path d="M38 196L42 201" stroke="#b3a17b" stroke-width="1" stroke-linecap="round"/>
+    </g>
+  </g>
+</g>
+
+<g id="character-right">
+  <g id="right-arm-back">
+    <path id="right-back-arm-shape" d="M138 99C130 95 123 99 116 104L104 111C99 114 99 121 104 125C109 130 115 125 122 122L138 117Z" fill="#dba019" filter="url(#fur)"/>
+    <g id="right-hand-back" filter="url(#fur)">
+      <path d="M107 111C103 108 100 109 98 112C95 111 93 113 94 116C95 121 102 126 107 126C111 124 111 116 107 111Z" fill="url(#hand)"/>
+      <path d="M98 114L104 119M96 117L102 123" stroke="#514832" stroke-width="1" stroke-linecap="round"/>
+    </g>
+    <path id="right-back-arm-highlight" d="M126 101Q115 105 108 113L112 124Q123 122 132 117" fill="#edaf20" filter="url(#fur)"/>
+  </g>
+
+  <g id="right-torso" filter="url(#fur)">
+    <path id="right-torso-shape" d="M140 91C129 106 123 121 121 139C118 151 120 169 120 184C122 195 138 200 158 198C172 197 181 194 191 194C207 198 228 198 241 189L245 168C233 147 224 128 212 112C201 96 192 83 185 76Z" fill="url(#right-body)"/>
+    <path d="M186 143C173 148 165 160 164 176C163 188 174 195 192 195C205 198 223 194 229 187C231 177 227 165 219 154C210 143 197 139 186 143Z" fill="url(#belly-right)"/>
+    <path d="M220 139C227 143 234 153 239 163L245 178 242 192 230 191C229 182 222 177 217 169Z" fill="#ffcf43"/>
+    <path d="M226 155Q237 175 237 188" fill="none" stroke="#ffe17b" stroke-width="5" opacity=".45"/>
+    <path d="M132 119Q125 146 130 164L140 178" fill="none" stroke="#c78d13" stroke-width="7" opacity=".3"/>
+  </g>
+
+  <g id="right-head">
+    <path d="M119 62C124 48 136 42 150 42C167 41 178 49 184 62C190 73 192 84 191 96C191 111 181 122 167 124C150 126 133 116 125 104C121 97 117 91 117 82C115 74 116 68 119 62Z" fill="url(#right-head)" filter="url(#fur)"/>
+    <path d="M124 57Q139 43 154 46Q167 46 176 57" fill="none" stroke="#fff0aa" stroke-width="2.4" opacity=".49" filter="url(#small-shadow)"/>
+    <path d="M122 80C129 76 137 79 141 86C144 94 138 101 132 99C124 98 118 92 118 87Z" fill="#efb62d" opacity=".32" filter="url(#small-shadow)"/>
+
+    <g id="right-eyes">
+      <g id="right-eye-left">
+        <path d="M119 60C115 61 113 68 115 73C116 78 121 80 125 76C128 72 126 64 123 62Z" fill="url(#eye-rim)"/>
+        <g id="right-pupil-left">
+          <ellipse cx="119" cy="69.9" rx="4" ry="6.7" transform="rotate(-7 119 69.9)" fill="url(#eye-black)"/>
+          <ellipse cx="118" cy="66.8" rx="1" ry="1.3" fill="#d8c89e" opacity=".45"/>
+        </g>
+        <path d="M117 63Q120 60 123 64" fill="none" stroke="#ebd9a8" stroke-width="1"/>
+      </g>
+      <g id="right-eye-right">
+        <ellipse cx="147.5" cy="73.2" rx="9.4" ry="10.2" transform="rotate(13 147.5 73.2)" fill="#967c3f" opacity=".4" filter="url(#small-shadow)"/>
+        <ellipse cx="147.7" cy="72.7" rx="8.6" ry="9.6" transform="rotate(13 147.7 72.7)" fill="url(#eye-rim)" filter="url(#fur)"/>
+        <g id="right-pupil-right">
+          <ellipse cx="148.9" cy="73.5" rx="6.1" ry="7.3" transform="rotate(10 148.9 73.5)" fill="url(#eye-black)"/>
+          <ellipse cx="147.1" cy="69.7" rx="1.75" ry="1.4" fill="#b2ad8c" opacity=".45"/>
+        </g>
+        <path d="M141 67Q147 62 152 67" fill="none" stroke="#f0dca9" stroke-width="1.1" opacity=".7"/>
+      </g>
+    </g>
+
+    <g id="right-mouth">
+      <path id="right-mouth-shape" d="M119.4 86C125 88.7 130 89.7 137.7 88.2C136.9 91.8 130.9 93.2 126.6 91.3C122.9 90.1 120.8 89.7 119.4 88.5Z" fill="#4e3d20"/>
+      <path id="right-mouth-edge" d="M120 86.2Q128 89.1 137 88" fill="none" stroke="#73521d" stroke-width=".8" stroke-linecap="round"/>
+      <path id="right-lip" d="M124 93Q131 96 137 91.8" fill="none" stroke="#ffda64" stroke-width="1.3" opacity=".65"/>
+    </g>
+    <g id="right-head-fibers" fill="none" stroke="#fff0aa" stroke-width=".5" stroke-linecap="round" opacity=".45">
+      <path d="M123 55l-1-1M128 50l-1-2M134 46v-2M141 44v-2M148 43l1-2M157 44l1-2M165 47l1-2M172 51l2-1M179 57l2-1M185 70l2-1M191 88h2"/>
+    </g>
+  </g>
+
+  <g id="right-arm-front">
+    <path id="right-front-arm-shadow" d="M192 114C205 109 216 120 219 133C223 150 211 165 196 175C177 187 153 192 131 188C121 186 115 183 108 180L109 164C124 165 140 164 154 157C172 149 182 137 182 126C182 120 185 116 192 114Z" fill="#936719" opacity=".27" filter="url(#soft-shadow)"/>
+    <path id="right-front-arm-shape" d="M192 111C204 109 214 119 217 132C221 147 210 161 195 171C177 183 153 189 132 185C123 184 115 181 108 179L109 164C124 165 139 163 153 156C170 148 180 137 181 125C181 119 185 113 192 111Z" fill="url(#right-arm)" filter="url(#fur)"/>
+    <path id="right-front-arm-highlight" d="M207 122C213 134 208 146 199 154C187 165 170 174 151 177" fill="none" stroke="#ffe582" stroke-width="4" stroke-linecap="round" opacity=".26" filter="url(#small-shadow)"/>
+    <g id="right-hand-front">
+      <ellipse cx="102" cy="179" rx="20" ry="11" transform="rotate(17 102 179)" fill="#6b4e29" opacity=".24" filter="url(#soft-shadow)"/>
+      <g filter="url(#fur)">
+        <path d="M115 166C110 163 104 162 100 161C96 157 92 156 89 158C86 159 85 162 88 165L94 169L87 166C83 164 80 166 82 170C82 172 88 175 93 177L87 175C83 174 81 176 84 180C87 183 91 185 96 187C97 191 101 192 106 190C112 189 118 185 120 180C122 174 120 170 115 166Z" fill="url(#hand)"/>
+        <path d="M89 161Q92 164 100 168M84 169Q91 174 99 175M85 178Q91 181 99 183M96 187Q103 187 108 184" fill="none" stroke="#4b4734" stroke-width="1.15" stroke-linecap="round" opacity=".85"/>
+        <path d="M89 159Q94 158 99 163M85 167L94 171M85 175L94 179" fill="none" stroke="#bcaa7e" stroke-width=".85" stroke-linecap="round" opacity=".65"/>
+        <path d="M104 163C108 162 113 164 116 169C118 171 118 175 115 176C111 177 109 172 107 171L101 169" fill="#94876b"/>
+        <path d="M104 164Q111 164 114 170" fill="none" stroke="#bdab7e" stroke-width="1" opacity=".55"/>
+        <path d="M103 170Q106 173 111 173" fill="none" stroke="#6b6046" stroke-width=".9"/>
+      </g>
+    </g>
+    <path id="right-front-arm-cuff" d="M118 166Q121 171 120 178" fill="none" stroke="#edbd39" stroke-width="2" opacity=".55"/>
+    <g id="right-arm-fibers" fill="none" stroke="#ffe391" stroke-width=".4" stroke-linecap="round" opacity=".4">
+      <path d="M132 185l-1 2M143 186v2M154 185l1 2M165 182l1 2M177 178l1 2M189 171l1 2M201 161l2 1M212 149l2 1M217 136h2"/>
+    </g>
+  </g>
+</g>
+
+<g id="open-notebook-right">
+  <path d="M155 193L191 188 221 190 246 202 244 219 201 217 175 213Z" fill="#6a4e2c" opacity=".28" filter="url(#small-shadow)"/>
+  <path d="M154 192L191 188 224 191 245 202 243 216 203 215 176 211Z" fill="#a3916d"/>
+  <path d="M154 191L189 187 222 190 244 201 242 214 204 213 176 209Z" fill="#e1d8bd"/>
+  <path d="M158 196L178 211 204 215 240 216" fill="none" stroke="#9b8c6a" stroke-width=".8"/>
+  <path d="M158 194L178 208 205 212 242 213" fill="none" stroke="#f6edda" stroke-width="1"/>
+  <path d="M154 190Q172 187 190 188L208 207Q190 207 178 205Z" fill="url(#paper-left)"/>
+  <path d="M190 188Q205 187 221 190L244 201 242 211Q222 207 208 209Z" fill="url(#paper-right)"/>
+  <path d="M190 188Q199 196 208 209" fill="none" stroke="#b7ab8c" stroke-width=".8"/>
+  <path d="M192 188Q201 198 209 206" fill="none" stroke="#fffcec" stroke-width="1"/>
+  <path d="M157 191L178 205Q194 208 208 209L241 212" fill="none" stroke="#c5bda5" stroke-width=".7"/>
+  <g stroke="#a9a38d" stroke-width=".4" opacity=".3">
+    <path d="M167 192L181 202M173 191L187 202M202 191L225 197M207 195L232 202"/>
+  </g>
+</g>
+
+<g id="foreground-stationery">
+  <g id="left-table-edge-pencils">
+    <path d="M-3 223L23 242" stroke="#4c4432" stroke-width="4"/>
+    <path d="M-3 222L24 241" stroke="#d7c6a1" stroke-width="2"/>
+    <path d="M3 228L18 239" stroke="#777665" stroke-width="1"/>
+    <path d="M1 233L12 241" stroke="#332d24" stroke-width="3"/>
+    <path d="M3 232L15 241" stroke="#dad4bc" stroke-width="1.2"/>
+  </g>
+  <g id="foreground-pen">
+    <path d="M108 229Q111 220 120 220L137 220Q143 221 145 224" fill="none" stroke="#775c32" stroke-width="4" opacity=".25" filter="url(#small-shadow)"/>
+    <path d="M108 228L113 222Q117 219 125 220L138 220 145 223" fill="none" stroke="#383b32" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M114 222Q122 220 135 221L141 222" fill="none" stroke="#bdbba7" stroke-width="1.2" stroke-linecap="round"/>
+    <path d="M108 230L146 225 151 225" fill="none" stroke="#443d2b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M112 228.5L145 224.5" fill="none" stroke="#c8c2a6" stroke-width=".9"/>
+    <path d="M148 224.7L154 225 149 227Z" fill="#b89a61"/>
+    <path d="M153 225L155 225.3 151 226.1Z" fill="#34382c"/>
+  </g>
+  <g id="horizontal-pencil">
+    <path d="M108 234L169 229" stroke="#684e2a" stroke-width="2.3" opacity=".45"/>
+    <path d="M108 232.8L166 228.6" stroke="#ddbe79" stroke-width="2.4"/>
+    <path d="M111 232L165 228.1" stroke="#eee1b4" stroke-width=".7"/>
+    <path d="M164 227.7L173 228 166 230Z" fill="#aa8a50"/>
+    <path d="M170 228L174 228.2 170 229Z" fill="#39372a"/>
+    <path d="M107 231.5L111 231.2 111.2 233.8 107.2 234Z" fill="#767867"/>
+  </g>
+  <g id="right-scattered-pencils">
+    <path d="M155 219L195 227" stroke="#6c552f" stroke-width="3.1" opacity=".35" filter="url(#small-shadow)"/>
+    <path d="M155 218L192 225.8" stroke="#e6d7ad" stroke-width="2.7" stroke-linecap="round"/>
+    <path d="M155 217.8L191 225.1" stroke="#8e8e77" stroke-width=".8"/>
+    <path d="M190 224.5L198 227 190 226.6Z" fill="#9d8252"/>
+    <path d="M195 225.9L199 227.3 195 227Z" fill="#3c3d30"/>
+    <path d="M181 224L229 236" stroke="#7b572e" stroke-width="3" opacity=".45"/>
+    <path d="M182 222.8L226 233.9" stroke="#514a35" stroke-width="2.1" stroke-linecap="round"/>
+    <path d="M184 222.8L225 233" stroke="#b8b7a2" stroke-width=".8"/>
+    <path d="M225 232.9L232 236 225 235Z" fill="#b49b67"/>
+    <path d="M230 234.8L233 236.3 230 235.8Z" fill="#31352a"/>
+    <path d="M200 218.8L230 225" stroke="#927b50" stroke-width="2.4"/>
+    <path d="M201 218L229 223.9" stroke="#ccc9b2" stroke-width="1.8"/>
+    <path d="M202 217.8L229 223.4" stroke="#52584a" stroke-width=".7"/>
+    <path d="M228 223L234 225.5 228 225Z" fill="#b59b65"/>
+    <path d="M232 224.5L235 225.8 232 225.4Z" fill="#34372c"/>
+    <path d="M222 216L239 219.5" stroke="#f2dfb7" stroke-width="2.2"/>
+    <path d="M222 215.7L239 219.2" stroke="#797d6d" stroke-width=".7"/>
+  </g>
+</g>
+<rect id="photographic-grain" width="240" height="242" filter="url(#fine-grain)" opacity=".17" pointer-events="none"/>
+</svg>
+<script>
+(function(){
+  "use strict";
+  const refs=Object.create(null);
+  const el=id=>refs[id]||(refs[id]=document.getElementById(id));
+  const number=/-?(?:\d*\.?\d+)(?:e[-+]?\d+)?/gi;
+  const pair=/(-?(?:\d*\.?\d+))[\s,]+(-?(?:\d*\.?\d+))/g;
+  const f=n=>String(Math.round(n*1000)/1000);
+  const clamp=n=>Math.max(0,Math.min(1,n));
+  const set=(id,name,value)=>el(id).setAttribute(name,value);
+
+  function morph(id,target){
+    const node=el(id);
+    const source=node.getAttribute("d");
+    const a=source.match(number).map(Number);
+    const b=target.match(number).map(Number);
+    return function(k){
+      let i=0;
+      node.setAttribute("d",source.replace(number,function(){
+        const value=a[i]+(b[i]-a[i])*k;
+        i++;
+        return f(value);
+      }));
+    };
+  }
+
+  function warp(id){
+    const node=el(id),source=node.getAttribute("d");
+    return function(dx,dy){
+      node.setAttribute("d",source.replace(pair,function(all,xx,yy){
+        const x=Number(xx),y=Number(yy);
+        const w=clamp((177-x)/68);
+        return f(x+dx*w)+" "+f(y+dy*w);
+      }));
+    };
+  }
+
+  const moveHead=morph("left-head-shape",
+    "M23 76C25 56 35 39 51 36C64 32 76 35 82 44C88 53 88 66 87 78C89 88 87 98 80 106C73 116 61 122 47 118C32 116 21 106 19 94C17 88 20 82 23 76Z");
+  const moveHeadLight=morph("left-head-highlight",
+    "M29 59Q39 40 55 38Q68 36 77 47");
+  const moveCheek=morph("left-cheek",
+    "M72 82C79 82 85 86 88 91C88 97 83 101 77 100C71 99 69 90 72 82Z");
+  const moveTorso=morph("left-torso-shape",
+    "M27 79C18 82 8 92 1 106C-8 125-7 162-3 181C-1 197 19 206 40 205L84 199C102 195 118 191 120 180C122 163 112 132 104 116C96 101 84 89 74 86Z");
+  const moveBelly=morph("left-belly-shape",
+    "M35 130C26 136 19 147 16 165C14 180 15 195 22 200C38 209 70 203 87 195C99 185 100 164 92 148C84 132 71 124 56 123C48 122 41 125 35 130Z");
+  const moveTorsoShade=morph("left-torso-shade",
+    "M84 115C100 125 110 148 115 171L108 183C104 159 96 145 88 136Z");
+  const moveRestingArm=morph("left-resting-arm-shape",
+    "M91 111C103 112 113 129 117 143C121 157 125 176 120 184C117 189 109 190 105 184C102 176 101 158 96 146L83 127Z");
+  const moveWritingArm=morph("left-writing-arm-shape",
+    "M12 95C3 103-2 116-4 132C-7 148-8 174-4 186C-1 196 7 201 15 199C22 198 23 193 19 188C15 182 10 180 10 174C9 161 15 143 20 128C24 114 22 99 12 95Z");
+  const moveWritingArmLight=morph("left-writing-arm-highlight",
+    "M3 130C-2 148-2 169 3 178");
+
+  const moveLeftSmile=morph("left-mouth-line",
+    "M66 108.7C69 107.8 74 107.8 78 109.1");
+  const moveBackArm=morph("right-back-arm-shape",
+    "M132 95C123 88 115 88 108 91L96 98C91 101 91 108 96 112C101 117 107 112 114 109L132 110Z");
+  const moveBackArmLight=morph("right-back-arm-highlight",
+    "M119 93Q108 94 99 100L104 111Q115 109 125 108");
+  const moveRightTorso=morph("right-torso-shape",
+    "M134 88C123 103 117 120 116 138C114 152 117 169 118 183C120 195 138 199 158 198C172 197 181 194 191 194C207 198 228 198 241 189L245 168C233 147 224 128 212 112C201 96 189 83 181 76Z");
+
+  const moveRightMouth=morph("right-mouth-shape",
+    "M120.5 86C125.4 88 129.5 88.3 135.3 86.5C134.4 89 129.7 90 126.2 89.3C123.2 88.8 121.7 88 120.5 87.4Z");
+  const moveRightMouthEdge=morph("right-mouth-edge",
+    "M121 86.2Q128 88.3 134.8 86.5");
+  const moveRightLip=morph("right-lip",
+    "M124 90.5Q129.5 92.5 135 89.4");
+
+  const moveFrontArm=warp("right-front-arm-shape");
+  const moveFrontShadow=warp("right-front-arm-shadow");
+  const moveFrontLight=warp("right-front-arm-highlight");
+  const moveCuff=warp("right-front-arm-cuff");
+
+  const times=[0,200,400,600,800,1000,1200,1400,1500];
+  const tracks={
+    rise:[0,.23,.32,.65,.86,.97,1,1,1],
+    turn:[0,.06,.13,.64,.91,1,1,1,1],
+    expression:[0,.025,.07,.62,.92,1,1,1,1],
+    eyeLX:[0,-2.2,-1.3,8.2,12.2,9.5,9.7,9.7,9.7],
+    eyeLY:[0,-3.9,-6.4,-15.4,-21.4,-24.9,-24.9,-24.9,-24.9],
+    eyeRX:[0,-3.8,-3.7,-7,-10.6,-11,-11,-11,-11],
+    eyeRY:[0,-7.8,-9.9,-22.4,-30.4,-32.4,-31.9,-31.9,-31.9],
+    mouthX:[0,-4,-4,5,7,5,5,5,5],
+    mouthY:[0,-4,-7,-19,-25,-28.5,-29.5,-29.5,-29.5],
+    writingX:[0,-8,-14,-23,-27,-29,-28,-29,-29],
+    writingY:[0,-2,-3,-7,-7,-7,-7,-7,-7],
+    writingAngle:[0,-5,-8,-11,-13,-13,-12,-13,-13],
+    pencilAngle:[0,-10,-15,-26,-30,-31,-30,-31,-31],
+    rightX:[0,-6,-7,-7,-7,-7,-7,-7,-7],
+    rightY:[0,2,1,1,0,-2,-2,-2,-2],
+    rightEyeY:[0,0,0,0,-.4,-1.5,-1.5,-1.5,-1.5],
+    rightExpression:[0,.25,.38,.5,.7,1,1,1,1],
+    rubX:[0,-7,-18,-10,-13,-17,-10,-13,-13],
+    rubY:[0,-6,0,-6,-6,-3,-7,-6,-6],
+    rubAngle:[0,1,-3,0,-1,-2,1,0,0]
+  };
+
+  function sample(a,t){
+    let i=0;
+    while(i<7&&t>=times[i+1])i++;
+    const u=(t-times[i])/(times[i+1]-times[i]);
+    const p0=a[Math.max(0,i-1)],p1=a[i];
+    const p2=a[i+1],p3=a[Math.min(a.length-1,i+2)];
+    return .5*((2*p1)+(-p0+p2)*u+
+      (2*p0-5*p1+4*p2-p3)*u*u+
+      (-p0+3*p1-3*p2+p3)*u*u*u);
+  }
+
+  function render(time){
+    const input=Number(time);
+    const t=Number.isFinite(input)?((input%1500)+1500)%1500:0;
+    const s={};
+    Object.keys(tracks).forEach(key=>s[key]=sample(tracks[key],t));
+    const rise=clamp(s.rise),turn=clamp(s.turn);
+    const expression=clamp(s.expression);
+    const rightExpression=clamp(s.rightExpression);
+
+    moveHead(rise);
+    moveHeadLight(rise);
+    moveCheek(rise);
+    moveTorso(rise);
+    moveBelly(rise);
+    moveTorsoShade(rise);
+    moveRestingArm(rise);
+    moveWritingArm(rise);
+    moveWritingArmLight(rise);
+
+    set("left-head-fibers","transform",
+      "translate("+f(-5*rise)+" "+f(-17*rise)+")");
+    set("left-hand-right","transform",
+      "translate("+f(rise)+" "+f(-4*rise)+")");
+
+    set("left-eye-left","transform",
+      "translate("+f(s.eyeLX)+" "+f(s.eyeLY)+") rotate("+f(25*turn)+" 51.8 88.4)");
+    set("left-eye-right","transform",
+      "translate("+f(s.eyeRX)+" "+f(s.eyeRY)+") translate(90.7 94.4) rotate("+
+      f(12*turn)+") scale("+f(1-.18*turn)+" "+f(1-.03*turn)+") translate(-90.7 -94.4)");
+    set("left-pupil-left","transform",
+      "translate("+f(2*turn)+" "+f(-3.5*turn)+")");
+    set("left-pupil-right","transform",
+      "translate("+f(.7*turn)+" "+f(-1.5*turn)+")");
+
+    set("left-mouth","transform",
+      "translate("+f(s.mouthX)+" "+f(s.mouthY)+")");
+    moveLeftSmile(expression);
+    set("left-mouth-opening","opacity",f(expression));
+    set("left-mouth-inner-line","opacity",f(1-expression));
+    set("left-lip","opacity",f(.65*(1-.55*expression)));
+
+    set("left-writing-hand","transform",
+      "translate("+f(s.writingX)+" "+f(s.writingY)+") rotate("+f(s.writingAngle)+" 33 200)");
+    set("left-held-pencil","transform",
+      "translate("+f(s.writingX)+" "+f(s.writingY)+") rotate("+f(s.pencilAngle)+" 33 198)");
+
+    moveBackArm(rise);
+    moveBackArmLight(rise);
+    set("right-hand-back","transform",
+      "translate("+f(-2*rise)+" "+f(-12*rise)+")");
+    moveRightTorso(clamp(rise*.6+clamp(-s.rightX/7)*.4));
+    set("right-head","transform",
+      "translate("+f(s.rightX)+" "+f(s.rightY)+")");
+    set("right-eyes","transform",
+      "translate(0 "+f(s.rightEyeY)+")");
+    const look=clamp(-s.rightX/7);
+    set("right-pupil-right","transform",
+      "translate("+f(-3.1*look)+" "+f(-.4*turn)+")");
+    set("right-pupil-left","transform",
+      "translate("+f(-.5*look)+" "+f(-.3*turn)+")");
+    set("right-mouth","transform",
+      "translate("+f(2*look)+" 0)");
+    moveRightMouth(rightExpression);
+    moveRightMouthEdge(rightExpression);
+    moveRightLip(rightExpression);
+
+    moveFrontArm(s.rubX,s.rubY);
+    moveFrontShadow(s.rubX,s.rubY);
+    moveFrontLight(s.rubX,s.rubY);
+    moveCuff(s.rubX,s.rubY);
+    set("right-hand-front","transform",
+      "translate("+f(s.rubX)+" "+f(s.rubY)+") rotate("+f(s.rubAngle)+" 110 175)");
+    set("right-arm-fibers","transform",
+      "translate("+f(s.rubX*.42)+" "+f(s.rubY*.7)+")");
+  }
+
+  window.nwb={render:render};
+  render(0);
+})();
+</script>
+</body>
+</html>

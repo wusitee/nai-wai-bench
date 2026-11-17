@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+html,body{margin:0;padding:0;width:244px;height:240px;overflow:hidden;background:#fff;}
+svg{display:block;}
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 244 240" width="244" height="240">
+  <defs>
+    <radialGradient id="bodyGrad" cx="0.45" cy="0.4" r="0.65">
+      <stop offset="0" stop-color="#ffe866"/>
+      <stop offset="0.6" stop-color="#f7d43a"/>
+      <stop offset="1" stop-color="#e2b52a"/>
+    </radialGradient>
+    <radialGradient id="bellyGrad" cx="0.5" cy="0.45" r="0.55">
+      <stop offset="0" stop-color="#fff2e2"/>
+      <stop offset="0.7" stop-color="#fbe2c2"/>
+      <stop offset="1" stop-color="#f6d58a"/>
+    </radialGradient>
+    <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f4f4"/>
+      <stop offset="1" stop-color="#d6d6d6"/>
+    </linearGradient>
+    <radialGradient id="handGrad" cx="0.4" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#8a6a48"/>
+      <stop offset="1" stop-color="#4a3624"/>
+    </radialGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.6"/>
+    </filter>
+    <filter id="softer" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+
+  <g id="background">
+    <rect x="0" y="0" width="244" height="240" fill="#fbfbfb"/>
+    <rect x="0" y="205" width="244" height="35" fill="url(#floorGrad)"/>
+    <ellipse cx="125" cy="226" rx="85" ry="8" fill="#b8b0a0" opacity="0.5" filter="url(#softer)"/>
+  </g>
+
+  <g id="character-duck" filter="url(#soft)">
+    <g id="body">
+      <path d="M118 4 C96 4 84 22 84 48 C84 62 76 72 66 92 C52 120 44 160 46 190 C48 214 70 226 125 226 C180 226 204 214 206 190 C208 160 196 118 180 90 C170 72 158 62 156 46 C154 20 140 4 118 4 Z" fill="url(#bodyGrad)"/>
+      <ellipse id="belly" cx="130" cy="142" rx="50" ry="62" fill="url(#bellyGrad)"/>
+    </g>
+
+    <g id="head">
+      <g id="eyes">
+        <ellipse id="eye-left" cx="104" cy="22" rx="4" ry="5" fill="#2a2018"/>
+        <ellipse id="eye-right" cx="131" cy="22" rx="4" ry="5" fill="#2a2018"/>
+      </g>
+      <g id="beak">
+        <path d="M104 40 C110 34 128 34 134 40 C130 50 122 54 119 54 C116 54 108 50 104 40 Z" fill="#e8a020"/>
+        <path d="M106 40 C112 37 126 37 132 40 C126 44 112 44 106 40 Z" fill="#f4bb3a"/>
+      </g>
+    </g>
+
+    <g id="arm-left">
+      <path d="M88 82 C78 86 66 96 60 110 C58 118 66 124 74 118 C82 108 90 100 92 92 Z" fill="#efc532"/>
+      <g id="hand-left">
+        <path d="M58 86 C54 76 62 70 72 72 C82 74 86 82 84 92 C82 102 72 106 64 102 C58 98 58 92 58 86 Z" fill="url(#handGrad)"/>
+      </g>
+    </g>
+
+    <g id="arm-right">
+      <path d="M166 82 C178 88 192 96 196 108 C198 116 190 122 182 116 C174 106 166 98 164 90 Z" fill="#efc532"/>
+      <g id="hand-right">
+        <path d="M200 76 C206 64 218 64 222 72 C226 82 222 94 214 98 C206 102 196 96 196 88 C196 84 198 80 200 76 Z" fill="url(#handGrad)"/>
+      </g>
+    </g>
+  </g>
+</svg>
+</body>
+</html>

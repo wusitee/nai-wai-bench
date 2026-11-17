@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; padding: 0; width: 244px; height: 240px; overflow: hidden; background: #fafafa; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 244 240" width="244" height="240">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fdfdfd"/>
+      <stop offset="0.75" stop-color="#f7f7f7"/>
+      <stop offset="1" stop-color="#e6e6e6"/>
+    </linearGradient>
+    <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2f2f2"/>
+      <stop offset="1" stop-color="#d9d9d9"/>
+    </linearGradient>
+    <radialGradient id="bodyGrad" cx="0.45" cy="0.42" r="0.65">
+      <stop offset="0" stop-color="#ffe866"/>
+      <stop offset="0.55" stop-color="#f6d63a"/>
+      <stop offset="0.85" stop-color="#e9bd22"/>
+      <stop offset="1" stop-color="#d9a518"/>
+    </radialGradient>
+    <radialGradient id="headGrad" cx="0.45" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#ffec70"/>
+      <stop offset="0.7" stop-color="#f6d63a"/>
+      <stop offset="1" stop-color="#e6b923"/>
+    </radialGradient>
+    <radialGradient id="bellyGrad" cx="0.48" cy="0.45" r="0.55">
+      <stop offset="0" stop-color="#fdf3ec"/>
+      <stop offset="0.55" stop-color="#f9e6d6"/>
+      <stop offset="0.85" stop-color="#f6dcae"/>
+      <stop offset="1" stop-color="#f4d67a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="handGrad" cx="0.4" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#8a6438"/>
+      <stop offset="0.6" stop-color="#5e3f22"/>
+      <stop offset="1" stop-color="#3f2814"/>
+    </radialGradient>
+    <radialGradient id="beakGrad" cx="0.45" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#f7a640"/>
+      <stop offset="0.7" stop-color="#ec8a22"/>
+      <stop offset="1" stop-color="#d9741a"/>
+    </radialGradient>
+    <filter id="soft" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur stdDeviation="0.9"/>
+    </filter>
+    <filter id="softer" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5"/>
+    </filter>
+    <filter id="shadowBlur" x="-30%" y="-100%" width="160%" height="300%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+
+  <g id="background">
+    <rect x="0" y="0" width="244" height="240" fill="url(#bgGrad)"/>
+    <rect id="floor" x="0" y="200" width="244" height="40" fill="url(#floorGrad)" opacity="0.8"/>
+    <ellipse id="shadow" cx="125" cy="228" rx="64" ry="8" fill="#9a9a9a" opacity="0.45" filter="url(#shadowBlur)"/>
+  </g>
+
+  <g id="character-duck" filter="url(#soft)">
+    <g id="body-rig" transform="translate(121 230) scale(1 1) translate(-121 -230)">
+      <g id="body">
+        <path id="body-shape" d="M120,2 C140,2 152,18 154,40 C156,62 162,82 178,100 C192,118 195,160 191,190 C187,216 160,230 125,230 C90,230 65,218 61,192 C57,160 63,118 78,100 C91,84 87,60 89,40 C91,18 100,2 120,2 Z" fill="url(#bodyGrad)"/>
+        <ellipse id="belly" cx="127" cy="145" rx="48" ry="55" fill="url(#bellyGrad)" filter="url(#softer)"/>
+        <ellipse id="belly-highlight" cx="124" cy="135" rx="26" ry="30" fill="#fff8f4" opacity="0.5" filter="url(#softer)"/>
+      </g>
+      <g id="head" transform="rotate(0 121 40)">
+        <ellipse id="head-shading" cx="121" cy="34" rx="31" ry="32" fill="url(#headGrad)" opacity="0.7" filter="url(#softer)"/>
+        <g id="eyes">
+          <g id="eye-left">
+            <ellipse cx="101" cy="22" rx="3.6" ry="5" fill="#1e1610"/>
+            <circle cx="100" cy="20" r="0.9" fill="#ffffff" opacity="0.6"/>
+          </g>
+          <g id="eye-right">
+            <ellipse cx="135" cy="22" rx="3.6" ry="5" fill="#1e1610"/>
+            <circle cx="134" cy="20" r="0.9" fill="#ffffff" opacity="0.6"/>
+          </g>
+        </g>
+        <g id="beak">
+          <path id="beak-upper" d="M104,44 C106,36 113,33 120,33 C128,33 136,36 138,44 C136,51 128,56 121,58 C114,56 106,51 104,44 Z" fill="url(#beakGrad)"/>
+          <path id="beak-line" d="M107,46 C113,49 128,49 135,46" fill="none" stroke="#c96a18" stroke-width="0.8" opacity="0.5"/>
+          <ellipse cx="116" cy="39" rx="6" ry="3" fill="#fbc070" opacity="0.6"/>
+        </g>
+      </g>
+    </g>
+
+    <g id="arm-left">
+      <g id="arm-left-limb">
+        <path id="arm-left-outline" d="M76,118 L71,96" fill="none" stroke="#d29c1c" stroke-width="22" stroke-linecap="round"/>
+        <path id="arm-left-fill" d="M80,140 L71,96" fill="none" stroke="#f4d03a" stroke-width="18" stroke-linecap="round"/>
+        <path id="arm-left-shine" d="M76,118 L72,104" fill="none" stroke="#ffe877" stroke-width="7" stroke-linecap="round" opacity="0.55"/>
+      </g>
+      <g id="hand-left" transform="translate(69 87) rotate(-22)">
+        <ellipse cx="0" cy="0" rx="13" ry="18" fill="url(#handGrad)"/>
+        <ellipse id="thumb-left" cx="9" cy="9" rx="5" ry="7" transform="rotate(-10 9 9)" fill="#5a3c20"/>
+        <ellipse cx="-4" cy="-7" rx="4" ry="6" fill="#a07a4a" opacity="0.5"/>
+      </g>
+    </g>
+
+    <g id="arm-right">
+      <g id="arm-right-limb">
+        <path id="arm-right-outline" d="M190,117 L206,88" fill="none" stroke="#d29c1c" stroke-width="22" stroke-linecap="round"/>
+        <path id="arm-right-fill" d="M178,142 L206,88" fill="none" stroke="#f4d03a" stroke-width="18" stroke-linecap="round"/>
+        <path id="arm-right-shine" d="M192,115 L202,96" fill="none" stroke="#ffe877" stroke-width="7" stroke-linecap="round" opacity="0.55"/>
+      </g>
+      <g id="hand-right" transform="translate(210 80) rotate(29)">
+        <ellipse cx="0" cy="0" rx="13" ry="18" fill="url(#handGrad)"/>
+        <ellipse id="thumb-right" cx="-9" cy="9" rx="5" ry="7" transform="rotate(10 -9 9)" fill="#5a3c20"/>
+        <ellipse cx="-4" cy="-7" rx="4" ry="6" fill="#a07a4a" opacity="0.5"/>
+      </g>
+    </g>
+  </g>
+</svg>
+<script>
+(function () {
+  var PERIOD = 1200;
+  // [time, scaleX, scaleY, headRot, leftHandX, leftHandY, rightHandX, rightHandY]
+  var K = [
+    [0,    1.00, 1.00,  0.0, 69, 87,  210, 80],
+    [160,  1.05, 1.05,  5.0, 18, 70,  158, 95],
+    [340,  1.08, 0.96,  0.0, 55, 100, 212, 92],
+    [500,  1.20, 0.95,  1.5, 20, 103, 183, 125],
+    [680,  1.05, 1.00,  3.0, 20, 93,  178, 108],
+    [840,  1.02, 1.02,  0.0, 68, 95,  210, 92],
+    [1020, 1.20, 0.98,  2.5, 18, 88,  173, 110],
+    [1180, 1.12, 0.955, 2.5, 48, 102, 208, 103],
+    [1200, 1.00, 1.00,  0.0, 69, 87,  210, 80]
+  ];
+
+  var el = function (id) { return document.getElementById(id); };
+  var rig = el('body-rig');
+  var head = el('head');
+  var shadow = el('shadow');
+  var parts = {
+    left:  { fill: el('arm-left-fill'),  outline: el('arm-left-outline'),  shine: el('arm-left-shine'),  hand: el('hand-left'),  bx: 80,  by: 140, side: -1 },
+    right: { fill: el('arm-right-fill'), outline: el('arm-right-outline'), shine: el('arm-right-shine'), hand: el('hand-right'), bx: 178, by: 142, side: 1 }
+  };
+
+  function f(n) { return (Math.round(n * 100) / 100).toString(); }
+
+  function sample(t) {
+    if (!isFinite(t)) t = 0;
+    t = ((t % PERIOD) + PERIOD) % PERIOD;
+    var i = 0;
+    while (i < K.length - 2 && t >= K[i + 1][0]) i++;
+    var a = K[i], b = K[i + 1];
+    var u = (t - a[0]) / (b[0] - a[0]);
+    if (u < 0) u = 0; if (u > 1) u = 1;
+    var e = 0.5 - 0.5 * Math.cos(Math.PI * u);
+    var out = [];
+    for (var j = 1; j < a.length; j++) out.push(a[j] + (b[j] - a[j]) * e);
+    return out;
+  }
+
+  function quadPt(S, C, W, s) {
+    var m = 1 - s;
+    return [m * m * S[0] + 2 * m * s * C[0] + s * s * W[0],
+            m * m * S[1] + 2 * m * s * C[1] + s * s * W[1]];
+  }
+  function quadSeg(S, C, W, a, b) {
+    var p0 = quadPt(S, C, W, a), p2 = quadPt(S, C, W, b);
+    var w0 = (1 - a) * (1 - b), w1 = (1 - a) * b + a * (1 - b), w2 = a * b;
+    var q = [w0 * S[0] + w1 * C[0] + w2 * W[0], w0 * S[1] + w1 * C[1] + w2 * W[1]];
+    return 'M' + f(p0[0]) + ' ' + f(p0[1]) + ' Q' + f(q[0]) + ' ' + f(q[1]) + ' ' + f(p2[0]) + ' ' + f(p2[1]);
+  }
+
+  function setArm(p, hx, hy, sx, sy) {
+    var Sx = 121 + (p.bx - 121) * sx;
+    var Sy = 230 - (230 - p.by) * sy;
+    var dx = hx - Sx, dy = hy - Sy;
+    var L = Math.sqrt(dx * dx + dy * dy) || 1;
+    var ux = dx / L, uy = dy / L;
+    var Wx = hx - ux * 9, Wy = hy - uy * 9;
+    var nx = -uy, ny = ux;
+    var Cx = (Sx + Wx) / 2 + nx * 4 * p.side;
+    var Cy = (Sy + Wy) / 2 + ny * 4 * p.side;
+    var S = [Sx, Sy], C = [Cx, Cy], W = [Wx, Wy];
+    p.fill.setAttribute('d', 'M' + f(Sx) + ' ' + f(Sy) + ' Q' + f(Cx) + ' ' + f(Cy) + ' ' + f(Wx) + ' ' + f(Wy));
+    p.outline.setAttribute('d', quadSeg(S, C, W, 0.4, 1));
+    p.shine.setAttribute('d', quadSeg(S, C, W, 0.5, 0.85));
+    var ang = Math.atan2(dx, -dy) * 180 / Math.PI;
+    var rot = 0.5 * ang + 16 * p.side;
+    p.hand.setAttribute('transform', 'translate(' + f(hx) + ' ' + f(hy) + ') rotate(' + f(rot) + ')');
+  }
+
+  function render(t) {
+    var v = sample(Number(t));
+    var sx = v[0], sy = v[1], hr = v[2];
+    rig.setAttribute('transform', 'translate(121 230) scale(' + f(sx * 1000) / 1000 + ' ' + f(sy * 1000) / 1000 + ') translate(-121 -230)');
+    head.setAttribute('transform', 'rotate(' + f(hr) + ' 121 40)');
+    shadow.setAttribute('rx', f(64 * sx));
+    shadow.setAttribute('cx', f(121 + 4 * sx));
+    setArm(parts.left, v[3], v[4], sx, sy);
+    setArm(parts.right, v[5], v[6], sx, sy);
+  }
+
+  window.nwb = { render: render };
+  render(0);
+})();
+</script>
+</body>
+</html>

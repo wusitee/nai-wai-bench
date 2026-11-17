@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大笑奶龙</title>
+<style>
+html, body { margin: 0; width: 240px; height: 240px; overflow: hidden; background: #fffdf5; }
+body > svg { display: block; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-labelledby="title">
+  <title id="title">捧着肚子哈哈大笑的黄色奶龙</title>
+  <defs>
+    <radialGradient id="yellow-skin" cx="35%" cy="24%" r="78%">
+      <stop offset="0" stop-color="#fff285"/>
+      <stop offset=".46" stop-color="#ffdc38"/>
+      <stop offset=".82" stop-color="#f9c424"/>
+      <stop offset="1" stop-color="#eaa918"/>
+    </radialGradient>
+    <radialGradient id="head-color" cx="38%" cy="23%" r="80%">
+      <stop offset="0" stop-color="#ffeb6b"/>
+      <stop offset=".55" stop-color="#ffda30"/>
+      <stop offset=".86" stop-color="#fac327"/>
+      <stop offset="1" stop-color="#eeb323"/>
+    </radialGradient>
+    <radialGradient id="belly-color" cx="40%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#fff5b0"/>
+      <stop offset="1" stop-color="#ffe172"/>
+    </radialGradient>
+    <linearGradient id="mouth-color" x1="0" y1="0" x2=".2" y2="1">
+      <stop offset="0" stop-color="#32190d"/>
+      <stop offset=".62" stop-color="#572013"/>
+      <stop offset="1" stop-color="#8e3524"/>
+    </linearGradient>
+    <linearGradient id="tongue-color" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff9987"/>
+      <stop offset="1" stop-color="#ec6558"/>
+    </linearGradient>
+    <filter id="soft-shadow" x="-30%" y="-80%" width="160%" height="260%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+
+  <ellipse cx="125" cy="224" rx="66" ry="7" fill="#baa36a" opacity=".19" filter="url(#soft-shadow)"/>
+
+  <g id="laughing-nailong">
+    <g id="tail">
+      <path d="M161 175 C180 178 194 191 212 183 C213 198 196 212 174 211 L154 201Z"
+            fill="url(#yellow-skin)" stroke="#dfa51c" stroke-width="1"/>
+      <path d="M183 203 Q201 198 207 189" fill="none" stroke="#ffdf59" stroke-width="3" stroke-linecap="round"/>
+    </g>
+
+    <g id="legs-and-feet">
+      <g id="left-foot">
+        <path d="M82 195 C76 201 69 213 66 218 C62 226 80 229 95 225 C104 222 106 208 103 200Z"
+              fill="url(#yellow-skin)" stroke="#e5ac22" stroke-width="1"/>
+        <path d="M73 220 Q74 216 77 215 M82 223 Q83 218 86 217"
+              fill="none" stroke="#dba01b" stroke-width="1.4" stroke-linecap="round"/>
+      </g>
+      <g id="right-foot">
+        <path d="M139 198 C137 208 139 221 147 225 C157 230 179 226 179 220 C179 213 168 207 164 199Z"
+              fill="url(#yellow-skin)" stroke="#e5ac22" stroke-width="1"/>
+        <path d="M163 217 Q167 220 167 224 M171 216 Q175 219 175 222"
+              fill="none" stroke="#dba01b" stroke-width="1.4" stroke-linecap="round"/>
+      </g>
+    </g>
+
+    <g id="body">
+      <path d="M81 117 C63 135 58 164 65 189 C72 214 97 223 124 222 C154 222 175 207 179 185 C183 163 171 133 154 119Z"
+            fill="url(#yellow-skin)" stroke="#e8ae21" stroke-width="1"/>
+      <path d="M113 134 C91 136 78 157 80 181 C81 204 99 216 123 216 C148 216 163 203 163 183 C163 159 143 134 123 133Z"
+            fill="url(#belly-color)"/>
+      <path d="M78 135 Q116 157 162 137" fill="none" stroke="#dca019" stroke-width="5" opacity=".13"/>
+    </g>
+
+    <g id="head">
+      <path d="M59 100 C48 83 52 61 64 43 C76 24 95 17 117 20 C140 20 153 32 165 45 C184 51 196 65 198 83 C203 99 196 117 182 129 C169 142 150 150 126 149 C99 149 76 138 65 121 C60 114 58 108 59 100Z"
+            fill="url(#head-color)" stroke="#e9b223" stroke-width="1"/>
+      <path d="M70 52 C80 33 99 27 116 28" fill="none" stroke="#fff59c" stroke-width="8" stroke-linecap="round" opacity=".28"/>
+
+      <g id="eyes">
+        <g id="left-eye">
+          <path d="M78 68 Q88 56 103 66 Q92 62 81 72Z" fill="#513111"/>
+          <path d="M79 65 L75 62" fill="none" stroke="#875017" stroke-width="2" stroke-linecap="round"/>
+        </g>
+        <g id="right-eye">
+          <path d="M130 62 Q142 49 155 62 L153 66 Q142 57 131 65Z" fill="#513111"/>
+          <path d="M153 59 L156 56" fill="none" stroke="#875017" stroke-width="1.8" stroke-linecap="round"/>
+        </g>
+      </g>
+
+      <g id="muzzle">
+        <path d="M105 79 C123 68 156 68 176 77 C184 80 189 85 188 90 C171 100 128 105 98 93"
+              fill="#ffdb36"/>
+        <ellipse cx="141" cy="78" rx="2.4" ry="1.6" transform="rotate(-12 141 78)" fill="#b78019"/>
+        <ellipse cx="163" cy="78" rx="2.1" ry="1.5" transform="rotate(12 163 78)" fill="#b78019"/>
+      </g>
+
+      <g id="mouth">
+        <path d="M76 89 C96 98 140 101 183 87 C184 107 173 130 153 139 C127 151 96 137 84 116 C79 107 77 98 76 89Z"
+              fill="url(#mouth-color)" stroke="#b87816" stroke-width="1.7" stroke-linejoin="round"/>
+        <path d="M79 91 C108 101 149 99 181 89 C180 94 178 100 175 103 C146 113 109 112 86 103Z"
+              fill="#fffdf0"/>
+        <path d="M88 103 C111 112 147 113 175 103" fill="none" stroke="#e6cf9c" stroke-width="1.2"/>
+        <path d="M111 133 C115 122 131 119 144 125 C154 117 167 121 171 127 C158 143 132 148 111 133Z"
+              fill="url(#tongue-color)"/>
+        <path d="M144 125 Q147 130 145 134" fill="none" stroke="#d65348" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M97 132 Q121 153 151 145" fill="none" stroke="#ffeb67" stroke-width="3.2" stroke-linecap="round" opacity=".8"/>
+      </g>
+
+      <g id="cheeks">
+        <path d="M69 92 Q72 85 79 85" fill="none" stroke="#cf971e" stroke-width="2" stroke-linecap="round"/>
+        <path d="M181 84 Q188 82 191 87" fill="none" stroke="#cf971e" stroke-width="2" stroke-linecap="round"/>
+        <ellipse cx="70" cy="102" rx="7" ry="4" fill="#f3b126" opacity=".38"/>
+        <ellipse cx="186" cy="102" rx="6" ry="4" fill="#f3b126" opacity=".38"/>
+      </g>
+    </g>
+
+    <g id="left-arm">
+      <path d="M69 139 C55 141 46 155 51 169 C55 180 68 184 85 180 L93 166 C80 168 71 163 72 154"
+            fill="url(#yellow-skin)" stroke="#e1a71d" stroke-width="1.2" stroke-linecap="round"/>
+      <g id="left-hand">
+        <path d="M78 165 C81 158 88 156 91 161 C97 156 103 159 102 165 C109 165 111 170 106 174 C108 179 103 184 97 182 C87 185 78 179 78 173Z"
+              fill="url(#yellow-skin)" stroke="#e1a71d" stroke-width="1.1"/>
+        <path d="M91 163 L94 168 M101 167 L100 172" fill="none" stroke="#d99c1b" stroke-width="1.3" stroke-linecap="round"/>
+      </g>
+    </g>
+
+    <g id="right-arm">
+      <path d="M171 141 C184 144 190 155 186 167 C183 177 171 181 157 178 L150 165 C165 167 170 160 167 154"
+            fill="url(#yellow-skin)" stroke="#dda21b" stroke-width="1.2" stroke-linecap="round"/>
+      <g id="right-hand">
+        <path d="M162 163 C157 156 151 156 149 162 C143 158 138 161 140 167 C132 166 131 173 137 176 C136 182 143 184 149 181 C157 182 165 176 165 170Z"
+              fill="url(#yellow-skin)" stroke="#dda21b" stroke-width="1.1"/>
+        <path d="M149 164 L147 169 M140 169 L143 173" fill="none" stroke="#d99c1b" stroke-width="1.3" stroke-linecap="round"/>
+      </g>
+    </g>
+  </g>
+</svg>
+</body>
+</html>

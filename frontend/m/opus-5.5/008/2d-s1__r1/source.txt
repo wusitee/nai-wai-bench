@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; padding: 0; width: 216px; height: 216px; overflow: hidden; background: #eceeef; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 216" width="216" height="216">
+  <defs>
+    <radialGradient id="bgGrad" cx="0.5" cy="0.45" r="0.75">
+      <stop offset="0" stop-color="#f6f7f8"/>
+      <stop offset="1" stop-color="#dcdfe1"/>
+    </radialGradient>
+    <radialGradient id="yellowBody" cx="0.45" cy="0.35" r="0.75">
+      <stop offset="0" stop-color="#f7cf3c"/>
+      <stop offset="0.6" stop-color="#ebb52a"/>
+      <stop offset="1" stop-color="#c98d18"/>
+    </radialGradient>
+    <radialGradient id="yellowHead" cx="0.45" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#fad648"/>
+      <stop offset="0.65" stop-color="#eebb2e"/>
+      <stop offset="1" stop-color="#cf951c"/>
+    </radialGradient>
+    <radialGradient id="bellyGrad" cx="0.45" cy="0.4" r="0.7">
+      <stop offset="0" stop-color="#fbf3dc"/>
+      <stop offset="0.75" stop-color="#f1e1b6"/>
+      <stop offset="1" stop-color="#dcc28a"/>
+    </radialGradient>
+    <linearGradient id="armGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d79c1e"/>
+      <stop offset="0.5" stop-color="#f0bd32"/>
+      <stop offset="1" stop-color="#d49a1e"/>
+    </linearGradient>
+    <linearGradient id="legGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e2a823"/>
+      <stop offset="1" stop-color="#c88e18"/>
+    </linearGradient>
+    <radialGradient id="mouthGrad" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0" stop-color="#5a1410"/>
+      <stop offset="1" stop-color="#2a0806"/>
+    </radialGradient>
+    <linearGradient id="handGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6c6e70"/>
+      <stop offset="1" stop-color="#3f4143"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+
+  <g id="background">
+    <rect x="0" y="0" width="216" height="216" fill="url(#bgGrad)"/>
+    <ellipse cx="130" cy="212" rx="70" ry="8" fill="#c9cccf" opacity="0.6" filter="url(#soft)"/>
+  </g>
+
+  <g id="character-creature">
+    <g id="legs">
+      <g id="leg-left">
+        <path d="M84 170 Q78 195 86 216 L124 216 Q126 192 118 172 Z" fill="url(#legGrad)"/>
+      </g>
+      <g id="leg-right">
+        <path d="M140 172 Q134 195 140 216 L182 216 Q186 192 176 168 Z" fill="url(#legGrad)"/>
+      </g>
+    </g>
+
+    <g id="torso">
+      <path d="M100 52 Q72 62 68 100 Q64 140 76 165 Q92 190 130 188 Q170 188 186 160 Q198 130 190 95 Q182 62 152 52 Z" fill="url(#yellowBody)"/>
+      <g id="belly">
+        <ellipse cx="120" cy="138" rx="40" ry="36" fill="url(#bellyGrad)"/>
+      </g>
+    </g>
+
+    <g id="arm-left">
+      <path d="M80 80 Q66 100 66 130 Q66 160 78 176 L92 176 Q86 150 88 125 Q90 100 96 84 Z" fill="url(#armGrad)"/>
+      <g id="hand-left">
+        <path d="M76 172 Q72 182 78 190 Q80 196 82 192 Q84 196 87 193 Q90 197 92 192 Q96 190 95 184 Q96 176 92 170 Z" fill="url(#handGrad)"/>
+        <path d="M80 190 L79 197 M86 192 L86 199 M92 190 L94 196" stroke="#2f3133" stroke-width="2" stroke-linecap="round"/>
+      </g>
+    </g>
+
+    <g id="arm-right">
+      <path d="M170 82 Q184 100 182 135 Q180 165 168 180 L154 178 Q164 150 162 125 Q160 100 154 86 Z" fill="url(#armGrad)"/>
+      <g id="hand-right">
+        <path d="M152 174 Q146 182 150 192 Q152 198 155 194 Q158 199 161 195 Q164 199 166 194 Q172 190 170 182 Q170 176 166 172 Z" fill="url(#handGrad)"/>
+        <path d="M153 194 L151 200 M160 196 L160 202 M166 193 L169 199" stroke="#2f3133" stroke-width="2" stroke-linecap="round"/>
+      </g>
+    </g>
+
+    <g id="head">
+      <path d="M94 40 Q92 14 118 11 Q148 8 154 30 Q158 50 150 64 Q140 80 120 80 Q100 78 95 62 Z" fill="url(#yellowHead)"/>
+      <g id="eyes">
+        <g id="eye-left">
+          <path d="M102 24 Q107 19 113 22" fill="none" stroke="#3a2a10" stroke-width="2.4" stroke-linecap="round"/>
+        </g>
+        <g id="eye-right">
+          <path d="M138 21 Q144 17 150 22" fill="none" stroke="#3a2a10" stroke-width="2.4" stroke-linecap="round"/>
+        </g>
+      </g>
+      <g id="mouth">
+        <path d="M102 34 Q118 26 136 30 Q140 48 132 62 Q122 74 110 68 Q100 58 102 34 Z" fill="#c78a1a"/>
+        <path d="M104 36 Q118 29 134 32 Q137 48 130 60 Q121 70 111 65 Q102 56 104 36 Z" fill="url(#mouthGrad)"/>
+        <g id="teeth-top">
+          <path d="M105 37 Q118 31 133 33 Q133 38 128 40 Q118 41 108 43 Q105 41 105 37 Z" fill="#fbfbf6"/>
+        </g>
+        <g id="teeth-bottom">
+          <path d="M110 62 Q118 58 128 58 Q127 64 121 67 Q114 68 110 62 Z" fill="#f4f2ea"/>
+        </g>
+        <g id="tongue">
+          <ellipse cx="119" cy="55" rx="9" ry="4" fill="#b8423a" opacity="0.85"/>
+        </g>
+      </g>
+      <ellipse cx="112" cy="18" rx="10" ry="4" fill="#fff3a6" opacity="0.35"/>
+    </g>
+  </g>
+
+  <g id="watermark" opacity="0.7">
+    <rect x="176" y="200" width="36" height="9" rx="2" fill="#ffffff" opacity="0.3"/>
+    <text x="194" y="207" font-size="6" fill="#ffffff" text-anchor="middle" font-family="sans-serif">AI生成</text>
+  </g>
+</svg>
+</body>
+</html>

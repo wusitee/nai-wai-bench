@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+html,body{margin:0;padding:0;width:244px;height:240px;overflow:hidden;background:#fff;}
+svg{display:block;}
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 244 240" width="244" height="240">
+  <defs>
+    <radialGradient id="bodyGrad" cx="0.45" cy="0.4" r="0.65">
+      <stop offset="0" stop-color="#ffe866"/>
+      <stop offset="0.6" stop-color="#f7d43a"/>
+      <stop offset="1" stop-color="#e2b52a"/>
+    </radialGradient>
+    <radialGradient id="bellyGrad" cx="0.5" cy="0.45" r="0.55">
+      <stop offset="0" stop-color="#fff2e2"/>
+      <stop offset="0.7" stop-color="#fbe2c2"/>
+      <stop offset="1" stop-color="#f6d58a"/>
+    </radialGradient>
+    <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f4f4"/>
+      <stop offset="1" stop-color="#d6d6d6"/>
+    </linearGradient>
+    <radialGradient id="handGrad" cx="0.4" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#8a6a48"/>
+      <stop offset="1" stop-color="#4a3624"/>
+    </radialGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.6"/>
+    </filter>
+    <filter id="softer" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+
+  <g id="background">
+    <rect x="0" y="0" width="244" height="240" fill="#fbfbfb"/>
+    <rect x="0" y="205" width="244" height="35" fill="url(#floorGrad)"/>
+    <ellipse cx="125" cy="226" rx="85" ry="8" fill="#b8b0a0" opacity="0.5" filter="url(#softer)"/>
+  </g>
+
+  <g id="character-duck" filter="url(#soft)">
+    <g id="body">
+      <path d="M118 4 C96 4 84 22 84 48 C84 62 76 72 66 92 C52 120 44 160 46 190 C48 214 70 226 125 226 C180 226 204 214 206 190 C208 160 196 118 180 90 C170 72 158 62 156 46 C154 20 140 4 118 4 Z" fill="url(#bodyGrad)"/>
+      <ellipse id="belly" cx="130" cy="142" rx="50" ry="62" fill="url(#bellyGrad)"/>
+    </g>
+
+    <g id="head">
+      <g id="eyes">
+        <ellipse id="eye-left" cx="104" cy="22" rx="4" ry="5" fill="#2a2018"/>
+        <ellipse id="eye-right" cx="131" cy="22" rx="4" ry="5" fill="#2a2018"/>
+      </g>
+      <g id="beak">
+        <path d="M104 40 C110 34 128 34 134 40 C130 50 122 54 119 54 C116 54 108 50 104 40 Z" fill="#e8a020"/>
+        <path d="M106 40 C112 37 126 37 132 40 C126 44 112 44 106 40 Z" fill="#f4bb3a"/>
+      </g>
+    </g>
+
+    <g id="arm-left">
+      <path id="arm-left-limb" d="M92 92 Q80 98 70 90" fill="none" stroke="#efc532" stroke-width="18" stroke-linecap="round"/>
+      <g id="hand-left">
+        <ellipse cx="0" cy="0" rx="13" ry="10" fill="url(#handGrad)"/>
+      </g>
+    </g>
+
+    <g id="arm-right">
+      <path id="arm-right-limb" d="M162 88 Q190 92 212 80" fill="none" stroke="#efc532" stroke-width="18" stroke-linecap="round"/>
+      <g id="hand-right">
+        <ellipse cx="0" cy="0" rx="13" ry="10" fill="url(#handGrad)"/>
+      </g>
+    </g>
+  </g>
+</svg>
+<script>
+(function(){
+  // [t, bodyDx, bodyDy, headDx, headDy, LhX, LhY, RhX, RhY]
+  var K = [
+    [0,    0,0, 0,0,  70,90,  212,80],
+    [160,  2,3, 0,4,  18,72,  158,95],
+    [340,  0,4, 2,8,  58,102, 210,92],
+    [500,  4,6, 6,12, 20,103, 185,124],
+    [680,  3,4, 4,6,  18,95,  178,108],
+    [840,  0,1, 0,0,  65,95,  212,92],
+    [1020, 3,2, 4,2,  15,85,  170,110],
+    [1180, 0,4, 0,6,  50,126, 210,110],
+    [1200, 0,0, 0,0,  70,90,  212,80]
+  ];
+  var body = document.getElementById('body');
+  var head = document.getElementById('head');
+  var limbL = document.getElementById('arm-left-limb');
+  var limbR = document.getElementById('arm-right-limb');
+  var handL = document.getElementById('hand-left');
+  var handR = document.getElementById('hand-right');
+
+  function f(n){ return (Math.round(n*100)/100).toString(); }
+
+  function sample(t){
+    var i = 0;
+    while (i < K.length - 2 && t >= K[i+1][0]) i++;
+    var a = K[i], b = K[i+1];
+    var u = (t - a[0]) / (b[0] - a[0]);
+    if (u < 0) u = 0; if (u > 1) u = 1;
+    u = u*u*(3 - 2*u);
+    var out = [];
+    for (var j = 1; j < a.length; j++) out.push(a[j] + (b[j] - a[j]) * u);
+    return out;
+  }
+
+  function arm(limb, hand, sx, sy, hx, hy){
+    var ang = Math.atan2(hy - sy, hx - sx);
+    var ex = hx - Math.cos(ang) * 6, ey = hy - Math.sin(ang) * 6;
+    var cx = (sx + ex) / 2, cy = (sy + ey) / 2 + 8;
+    limb.setAttribute('d', 'M' + f(sx) + ' ' + f(sy) + ' Q' + f(cx) + ' ' + f(cy) + ' ' + f(ex) + ' ' + f(ey));
+    hand.setAttribute('transform', 'translate(' + f(hx) + ' ' + f(hy) + ') rotate(' + f(ang * 180 / Math.PI) + ')');
+  }
+
+  function render(t){
+    t = Number(t) || 0;
+    t = ((t % 1200) + 1200) % 1200;
+    var p = sample(t);
+    var bx = p[0], by = p[1], hdx = p[2], hdy = p[3];
+    var sy = 1 - hdy / 222;
+    var sx = 1 + hdy / 400;
+    body.setAttribute('transform',
+      'translate(' + f(bx) + ' 0) translate(125 226) scale(' + f(sx) + ' ' + f(sy) + ') translate(-125 -226)');
+    head.setAttribute('transform', 'translate(' + f(bx + hdx) + ' ' + f(hdy) + ')');
+    var shoulderDy = hdy * 0.5 + by * 0.2;
+    arm(limbL, handL, 92 + bx, 92 + shoulderDy, p[4], p[5]);
+    arm(limbR, handR, 162 + bx, 88 + shoulderDy, p[6], p[7]);
+  }
+
+  window.nwb = { render: render };
+  render(0);
+})();
+</script>
+</body>
+</html>

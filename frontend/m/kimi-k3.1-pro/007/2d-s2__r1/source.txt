@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yellow Character Dance</title>
+<style>
+  html, body { margin: 0; width: 240px; height: 294px; overflow: hidden; background: #efefeb; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 294" width="240" height="294">
+  <defs>
+    <radialGradient id="background-light" cx="50%" cy="42%" r="76%">
+      <stop offset="0" stop-color="#fafaf7"/>
+      <stop offset="0.58" stop-color="#f3f3ef"/>
+      <stop offset="1" stop-color="#e4e5e1"/>
+    </radialGradient>
+    <linearGradient id="leg-yellow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c5a329"/>
+      <stop offset="0.28" stop-color="#dfc13e"/>
+      <stop offset="0.62" stop-color="#e5c846"/>
+      <stop offset="1" stop-color="#c5a128"/>
+    </linearGradient>
+    <radialGradient id="body-yellow" cx="43%" cy="25%" r="78%">
+      <stop offset="0" stop-color="#edd65c"/>
+      <stop offset="0.38" stop-color="#e5ca43"/>
+      <stop offset="0.72" stop-color="#d8b833"/>
+      <stop offset="1" stop-color="#bd9824"/>
+    </radialGradient>
+    <radialGradient id="head-yellow" cx="40%" cy="25%" r="75%">
+      <stop offset="0" stop-color="#ebdc7c"/>
+      <stop offset="0.48" stop-color="#e4d064"/>
+      <stop offset="0.82" stop-color="#d8bd4c"/>
+      <stop offset="1" stop-color="#c6a53a"/>
+    </radialGradient>
+    <linearGradient id="left-arm-yellow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c3a12c"/>
+      <stop offset="0.52" stop-color="#ddbf3b"/>
+      <stop offset="1" stop-color="#e6cb47"/>
+    </linearGradient>
+    <linearGradient id="right-arm-yellow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e7cb47"/>
+      <stop offset="0.55" stop-color="#d9b936"/>
+      <stop offset="1" stop-color="#bea02d"/>
+    </linearGradient>
+    <radialGradient id="belly-cream" cx="49%" cy="43%" r="61%">
+      <stop offset="0" stop-color="#faf7e9"/>
+      <stop offset="0.47" stop-color="#f3f0dc"/>
+      <stop offset="0.72" stop-color="#ece6c4"/>
+      <stop offset="0.9" stop-color="#e4d792"/>
+      <stop offset="1" stop-color="#ddc34d" stop-opacity="0.15"/>
+    </radialGradient>
+    <linearGradient id="hand-color" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b39c3c"/>
+      <stop offset="0.28" stop-color="#817c50"/>
+      <stop offset="0.57" stop-color="#606254"/>
+      <stop offset="1" stop-color="#4f534a"/>
+    </linearGradient>
+    <filter id="soft-edge" x="-8%" y="-5%" width="116%" height="110%">
+      <feGaussianBlur stdDeviation="0.38"/>
+    </filter>
+    <filter id="belly-soft" x="-12%" y="-12%" width="124%" height="124%">
+      <feGaussianBlur stdDeviation="1.15"/>
+    </filter>
+    <filter id="soft-shade" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3.2"/>
+    </filter>
+    <filter id="face-soft" x="-20%" y="-30%" width="140%" height="160%">
+      <feGaussianBlur stdDeviation="0.28"/>
+    </filter>
+    <filter id="ground-blur" x="-30%" y="-200%" width="160%" height="500%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+    <filter id="fine-grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="3" seed="17"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.16"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+
+  <g id="background">
+    <rect width="240" height="294" fill="url(#background-light)"/>
+    <ellipse id="floor-shadow" cx="113" cy="292" rx="52" ry="3.5" fill="#77796d" opacity="0.12" filter="url(#ground-blur)"/>
+  </g>
+
+  <g id="yellow-character" filter="url(#soft-edge)">
+    <g id="legs">
+      <g id="leg-left">
+        <path id="leg-left-shape" fill="url(#leg-yellow)"
+          d="M70 195 C68 211 68 229 66 248 C64 267 67 283 71 294 L105 294 C105 279 105 265 109 250 C112 237 115 224 117 208 C103 199 84 195 70 195 Z"/>
+      </g>
+      <g id="leg-right">
+        <path id="leg-right-shape" fill="url(#leg-yellow)"
+          d="M119 206 C123 222 126 238 128 254 C130 270 130 284 133 294 L155 294 C154 278 155 259 157 241 C160 224 163 210 161 196 C145 194 130 198 119 206 Z"/>
+      </g>
+    </g>
+
+    <g id="torso">
+      <path id="torso-shape" fill="url(#body-yellow)"
+        d="M94 45 C84 54 78 68 73 84 C68 101 65 120 60 137 C55 153 49 166 48 179 C47 190 54 201 61 210 C65 216 69 220 76 222 C90 227 105 224 117 217 C128 225 147 226 159 216 C166 207 170 192 170 177 C171 158 169 139 166 120 C163 98 158 78 150 62 C146 54 141 48 137 44 C124 39 106 39 94 45 Z"/>
+      <g id="front-shading">
+        <path d="M86 60 C72 94 70 130 58 161 C53 178 58 199 72 211 C64 184 72 159 77 134 C82 105 85 79 96 57 Z"
+          fill="#a88920" opacity="0.16" filter="url(#soft-shade)"/>
+        <path d="M143 60 C155 85 158 116 161 142 C165 167 162 190 153 207 C166 190 169 169 166 141 C164 105 156 75 143 60 Z"
+          fill="#f4d866" opacity="0.12" filter="url(#soft-shade)"/>
+      </g>
+      <g id="side-shading" opacity="0">
+        <path d="M137 74 C160 100 169 132 168 164 C168 196 157 220 139 235 C160 224 173 196 174 161 C174 125 158 91 137 74 Z"
+          fill="#f2d35a" opacity="0.2" filter="url(#soft-shade)"/>
+        <path d="M67 133 C55 160 59 194 77 216 C67 188 69 159 82 129 Z"
+          fill="#a98b28" opacity="0.13" filter="url(#soft-shade)"/>
+      </g>
+    </g>
+
+    <g id="arm-left">
+      <path id="arm-left-shape" fill="url(#left-arm-yellow)"
+        d="M85 65 C77 78 73 98 69 116 C65 136 57 153 51 169 C48 176 45 182 47 187 C49 191 55 192 59 187 C63 181 63 169 67 157 C73 139 78 120 80 102 C83 86 87 75 91 66 Z"/>
+    </g>
+    <g id="arm-right">
+      <path id="arm-right-shape" fill="url(#right-arm-yellow)"
+        d="M145 62 C154 74 159 94 163 116 C167 137 170 157 169 174 C169 182 168 188 164 191 C160 193 156 189 157 184 C159 173 157 160 155 147 C152 125 150 104 146 86 C144 76 141 69 139 65 Z"/>
+    </g>
+
+    <g id="belly">
+      <path id="belly-patch" fill="url(#belly-cream)" filter="url(#belly-soft)"
+        d="M111 89 C96 89 84 97 78 111 C72 124 72 142 77 156 C82 170 94 178 109 180 C125 183 141 177 149 165 C156 153 155 135 150 121 C145 105 131 92 117 90 Z"/>
+      <path id="belly-highlight" fill="#fffdf0" opacity="0.09" filter="url(#soft-shade)"
+        d="M111 89 C96 89 84 97 78 111 C72 124 72 142 77 156 C82 170 94 178 109 180 C125 183 141 177 149 165 C156 153 155 135 150 121 C145 105 131 92 117 90 Z"/>
+    </g>
+
+    <g id="hand-left">
+      <g id="hand-left-pose">
+        <path d="M0 0 C-4 2 -6 7 -8 12 C-10 17 -14 21 -17 24 C-20 26 -22 32 -20 35 C-18 35 -17 31 -16 28 C-16 32 -16 36 -14 37 C-12 36 -12 31 -12 28 C-12 33 -11 37 -9 37 C-6 36 -8 30 -7 26 C-6 30 -5 34 -3 33 C-1 31 -4 25 -3 22 C0 18 2 13 4 8 C5 4 4 1 0 0 Z"
+          fill="url(#hand-color)"/>
+        <path d="M-3 7 C-7 12 -9 19 -9 23 C-6 23 -2 18 0 11 C1 7 0 5 -3 7 Z"
+          fill="#a09b79" opacity="0.22" filter="url(#face-soft)"/>
+        <g fill="none" stroke="#363d38" stroke-width="0.55" stroke-linecap="round" opacity="0.45">
+          <path d="M-16 25 Q-17 29 -17 32"/>
+          <path d="M-12 25 Q-13 30 -12 34"/>
+          <path d="M-8 23 Q-8 28 -7 31"/>
+        </g>
+      </g>
+    </g>
+
+    <g id="hand-right">
+      <g id="hand-right-pose">
+        <path d="M0 0 C-3 4 -2 11 -2 16 C-2 20 -5 24 -4 28 C-3 30 0 26 1 23 C0 28 -2 33 0 35 C2 37 4 30 5 26 C4 32 4 37 6 38 C9 38 8 30 9 26 C9 32 9 37 11 37 C14 35 12 29 12 25 C13 29 14 32 15 30 C16 27 12 21 11 17 C10 11 10 5 7 1 C5 -1 2 -1 0 0 Z"
+          fill="url(#hand-color)"/>
+        <path d="M2 6 C0 12 1 20 4 22 C8 20 8 12 6 6 C5 3 3 3 2 6 Z"
+          fill="#9b9876" opacity="0.2" filter="url(#face-soft)"/>
+        <g fill="none" stroke="#343c37" stroke-width="0.55" stroke-linecap="round" opacity="0.48">
+          <path d="M1 22 Q1 28 0 32"/>
+          <path d="M5 22 Q5 29 5 34"/>
+          <path d="M9 22 Q10 28 10 33"/>
+        </g>
+      </g>
+    </g>
+
+    <g id="head">
+      <path id="head-shape" fill="url(#head-yellow)"
+        d="M106 16 C114 13 126 14 134 19 C141 23 144 31 143 40 C143 49 140 58 135 63 C127 69 108 68 99 62 C94 57 92 48 93 38 C94 27 98 19 106 16 Z"/>
+      <path id="head-top-light" d="M103 20 C113 15 128 17 135 23 C127 20 113 21 102 26 Z"
+        fill="#f6e993" opacity="0.18" filter="url(#soft-shade)"/>
+
+      <g id="face" filter="url(#face-soft)">
+        <g id="eye-sockets" fill="none" stroke="#aa984e" stroke-width="1.15" stroke-linecap="round" opacity="0.25">
+          <path id="socket-left" d="M101 39 Q108 36.8 116 39.5"/>
+          <path id="socket-right" d="M125 39.2 Q132 37 138 39.4"/>
+        </g>
+
+        <g id="eye-left-open">
+          <circle r="4.8" fill="#dbe09b" stroke="#aab36b" stroke-width="0.55"/>
+          <circle r="3.25" fill="#17231b"/>
+          <circle cx="-1" cy="-1.15" r="0.75" fill="#f5f6d9" opacity="0.65"/>
+        </g>
+        <g id="eye-right-open">
+          <circle r="4.8" fill="#dbe09b" stroke="#aab36b" stroke-width="0.55"/>
+          <circle r="3.25" fill="#17231b"/>
+          <circle cx="-1" cy="-1.15" r="0.75" fill="#f5f6d9" opacity="0.65"/>
+        </g>
+
+        <g id="eyes" fill="none" stroke="#706a3e" stroke-width="1.05" stroke-linecap="round">
+          <path id="eye-left" d="M104 42.2 Q109.5 43.1 114 42.1"/>
+          <path id="eye-right" d="M127 42.1 Q131.5 42.8 135.5 41.8"/>
+        </g>
+        <g id="eyelids" fill="none" stroke="#dfca69" stroke-width="1.2" stroke-linecap="round">
+          <path id="eyelid-left" d="M103 40.8 Q109 40 115 41.1"/>
+          <path id="eyelid-right" d="M126 40.9 Q132 40 136 40.8"/>
+        </g>
+
+        <g id="nose" fill="none" stroke-linecap="round">
+          <path d="M117.5 45.2 Q120.5 46.5 123.7 45.3" stroke="#aa984c" stroke-width="0.7" opacity="0.4"/>
+          <path d="M119 44.4 Q121 43.7 122.8 44.5" stroke="#f0df86" stroke-width="0.8" opacity="0.5"/>
+        </g>
+        <path id="side-nose" d="M85 56 Q82 58 86 60" fill="none" stroke="#9f8c45" stroke-width="0.75" stroke-linecap="round" opacity="0"/>
+
+        <g id="mouth" fill="none" stroke-linecap="round">
+          <path id="mouth-line"
+            d="M105.5 51.1 C110 50.2 114.2 50.5 118 51.1 C121.4 51.6 124.5 51.4 127.5 50.8 C129.5 50.5 131.2 50.4 132.5 50.7"
+            stroke="#7d7441" stroke-width="0.85" opacity="0.72"/>
+          <path id="lower-lip" d="M108 52.6 Q119 54.1 130 52.2"
+            stroke="#f0df88" stroke-width="0.8" opacity="0.35"/>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <rect id="image-grain" width="240" height="294" filter="url(#fine-grain)" opacity="0.24"/>
+</svg>
+
+<script>
+(function () {
+  "use strict";
+
+  var BODY_FRONT = "M94 45 C84 54 78 68 73 84 C68 101 65 120 60 137 C55 153 49 166 48 179 C47 190 54 201 61 210 C65 216 69 220 76 222 C90 227 105 224 117 217 C128 225 147 226 159 216 C166 207 170 192 170 177 C171 158 169 139 166 120 C163 98 158 78 150 62 C146 54 141 48 137 44 C124 39 106 39 94 45 Z";
+  var BODY_OPEN = "M96 64 C84 72 76 88 69 105 C61 124 52 144 45 163 C39 182 43 201 55 216 C63 226 72 233 84 236 C98 240 110 235 119 229 C132 238 150 236 161 225 C171 212 175 193 174 174 C174 151 169 128 165 107 C161 88 153 73 141 64 C127 58 109 58 96 64 C110 60 103 60 98 62 C97 63 96 64 96 64 Z";
+  var BODY_SIDE = "M107 65 C95 78 91 95 82 111 C73 127 60 142 57 158 C54 174 57 193 66 210 C72 222 83 231 91 240 C98 248 112 250 123 245 C136 242 149 233 157 219 C169 199 174 178 174 156 C174 133 168 111 158 91 C149 73 139 63 128 58 C122 55 117 56 113 59 C111 61 109 63 107 65 C107 65 107 65 107 65 Z";
+
+  var HEAD_FRONT = "M106 16 C114 13 126 14 134 19 C141 23 144 31 143 40 C143 49 140 58 135 63 C127 69 108 68 99 62 C94 57 92 48 93 38 C94 27 98 19 106 16 Z";
+  var HEAD_OPEN = "M103 14 C114 10 130 13 138 20 C145 27 147 39 145 51 C143 65 139 77 132 83 C122 89 103 86 95 78 C89 70 88 49 90 37 C92 26 95 18 103 14 Z";
+  var HEAD_SIDE = "M105 18 C115 17 125 22 130 31 C135 41 134 54 130 65 C126 76 118 82 108 82 C98 82 93 74 90 63 C87 55 82 48 84 39 C86 27 94 19 105 18 Z";
+
+  var BELLY_FRONT = "M111 89 C96 89 84 97 78 111 C72 124 72 142 77 156 C82 170 94 178 109 180 C125 183 141 177 149 165 C156 153 155 135 150 121 C145 105 131 92 117 90 Z";
+  var BELLY_OPEN = "M112 105 C95 103 79 112 70 127 C61 142 61 163 68 180 C75 197 92 199 108 200 C128 202 145 194 151 178 C158 160 153 138 145 123 C137 110 125 105 112 105 Z";
+  var BELLY_ZOOM = "M112 72 C94 72 78 90 68 106 C58 122 55 142 63 155 C73 168 94 173 112 171 C132 170 148 163 154 148 C160 130 154 106 145 90 C137 77 125 72 112 72 Z";
+  var BELLY_SIDE = "M90 119 C77 123 67 133 61 145 C55 157 56 171 62 181 C68 188 76 187 82 180 C86 171 88 157 90 144 C92 133 94 124 90 119 Z";
+
+  var LEG_LEFT_FRONT = "M70 195 C68 211 68 229 66 248 C64 267 67 283 71 294 L105 294 C105 279 105 265 109 250 C112 237 115 224 117 208 C103 199 84 195 70 195 Z";
+  var LEG_RIGHT_FRONT = "M119 206 C123 222 126 238 128 254 C130 270 130 284 133 294 L155 294 C154 278 155 259 157 241 C160 224 163 210 161 196 C145 194 130 198 119 206 Z";
+  var LEG_LEFT_SIDE = "M88 220 C88 238 91 258 94 274 C96 284 97 290 98 294 L124 294 C122 279 121 264 122 248 C123 236 126 226 127 216 C113 213 99 214 88 220 Z";
+  var LEG_RIGHT_SIDE = "M123 216 C129 231 132 248 133 263 C134 277 133 287 134 294 L153 294 C153 275 153 256 151 239 C150 225 147 216 143 208 C135 208 128 211 123 216 Z";
+
+  var ARM_LEFT_DOWN = "M85 65 C77 78 73 98 69 116 C65 136 57 153 51 169 C48 176 45 182 47 187 C49 191 55 192 59 187 C63 181 63 169 67 157 C73 139 78 120 80 102 C83 86 87 75 91 66 Z";
+  var ARM_RIGHT_DOWN = "M145 62 C154 74 159 94 163 116 C167 137 170 157 169 174 C169 182 168 188 164 191 C160 193 156 189 157 184 C159 173 157 160 155 147 C152 125 150 104 146 86 C144 76 141 69 139 65 Z";
+
+  var ARM_LEFT_CLASP = "M84 66 C75 76 71 92 75 105 C79 118 91 119 103 112 C113 106 119 96 126 88 C130 83 128 78 123 78 C117 79 112 89 105 94 C96 102 89 99 88 91 C86 81 88 72 91 66 Z";
+  var ARM_RIGHT_CLASP = "M141 65 C151 75 155 92 151 104 C147 116 140 118 134 109 C129 101 129 94 132 88 C135 83 140 81 143 84 C147 88 144 95 142 99 C140 103 140 98 141 91 C142 80 138 71 135 66 Z";
+
+  var ARM_LEFT_RAISED = "M84 65 C73 75 66 91 59 107 C52 122 43 139 45 150 C47 158 54 158 59 149 C64 139 62 128 65 117 C70 101 78 87 83 78 C86 72 89 68 91 66 Z";
+  var ARM_RIGHT_OUT = "M141 65 C153 75 158 91 163 108 C168 122 173 130 179 134 C184 137 188 134 184 128 C178 118 176 105 171 94 C165 80 157 70 151 66 C148 64 144 64 141 65 C141 65 141 65 141 65 Z";
+
+  var ARM_LEFT_ZOOM = "M84 65 C72 78 62 96 54 114 C49 124 45 130 45 136 C45 141 50 143 54 138 C59 132 59 122 64 111 C71 95 78 81 83 73 C85 69 88 66 91 66 C91 66 91 66 91 66 Z";
+  var ARM_RIGHT_ZOOM = "M141 65 C153 75 160 92 164 109 C167 120 169 127 168 134 C168 139 163 141 160 136 C157 130 159 118 155 106 C150 88 145 76 140 69 C138 67 137 65 135 66 C135 66 135 66 135 66 Z";
+
+  var ARM_LEFT_PALM = "M84 65 C73 76 68 91 64 107 C60 121 60 132 66 139 C71 145 78 143 80 136 C82 128 77 119 78 108 C80 94 85 82 88 75 C90 70 91 67 91 66 C91 66 91 66 91 66 Z";
+  var ARM_RIGHT_LOW = "M145 62 C154 74 159 94 164 116 C169 137 174 158 173 174 C173 182 172 188 168 191 C164 193 160 189 161 184 C163 173 161 160 158 147 C154 125 151 104 147 86 C145 76 141 69 139 65 Z";
+
+  var ARM_LEFT_SIDE_CLAP = "M112 79 C100 83 87 91 73 96 C56 102 39 103 25 103 C19 103 16 107 20 111 C27 116 43 116 58 115 C78 114 94 110 105 104 C114 98 119 89 121 82 C120 79 116 78 112 79 Z";
+  var ARM_RIGHT_SIDE_CLAP = "M123 74 C110 65 95 57 81 56 C67 55 57 59 50 65 C45 70 45 78 51 82 C58 86 66 80 73 78 C86 75 96 82 105 89 C113 95 121 92 125 85 C128 80 127 76 123 74 Z";
+  var ARM_LEFT_SIDE_DOWN = "M99 83 C90 102 84 124 82 145 C80 163 82 179 88 190 C92 196 98 193 98 186 C96 170 96 155 99 140 C103 119 110 101 114 88 C116 82 108 78 99 83 C99 83 99 83 99 83 Z";
+  var ARM_RIGHT_SIDE_DOWN = "M128 70 C141 82 148 102 151 124 C154 150 153 176 155 199 C156 207 158 213 154 216 C150 219 146 214 145 206 C142 185 139 165 134 146 C129 124 121 104 117 89 C114 79 118 72 128 70 Z";
+
+  var MOUTH_NEUTRAL = "M105.5 51.1 C110 50.2 114.2 50.5 118 51.1 C121.4 51.6 124.5 51.4 127.5 50.8 C129.5 50.5 131.2 50.4 132.5 50.7";
+  var MOUTH_SMILE = "M102 60 C108 63 113 65 119 65 C125 65 131 63 136 59 C137 58 138 57 139 56";
+  var MOUTH_SMILE_LOW = "M102 64 C108 67 113 69 119 69 C125 69 131 67 136 63 C137 62 138 61 139 60";
+  var MOUTH_FROWN = "M105 48 C110 44 114 43 119 43 C124 43 129 44 133 47 C134 48 135 48 136 49";
+  var MOUTH_SIDE = "M84 63 C88 64 92 64 96 63 C99 62 101 61 103 60 C103 60 103 60 103 60";
+
+  var p0 = {
+    root: [1, 0, 0], side: 0,
+    body: BODY_FRONT, head: HEAD_FRONT, belly: BELLY_FRONT,
+    ll: LEG_LEFT_FRONT, rl: LEG_RIGHT_FRONT,
+    al: ARM_LEFT_DOWN, ar: ARM_RIGHT_DOWN,
+    hl: [45, 176, 0, 1, 1], hr: [160, 179, 0, 1, 1],
+    eyes: [109, 42, 131, 42, 0, 1], mouth: MOUTH_NEUTRAL
+  };
+
+  var p800 = {
+    root: [0.9, -29, 15], side: 0,
+    body: BODY_OPEN, head: HEAD_OPEN, belly: BELLY_OPEN,
+    ll: LEG_LEFT_FRONT, rl: LEG_RIGHT_FRONT,
+    al: ARM_LEFT_CLASP, ar: ARM_RIGHT_CLASP,
+    hl: [126, 74, -55, 0.7, 1], hr: [137, 77, 55, 0.7, 1],
+    eyes: [103, 53, 126, 53, 1, 1], mouth: MOUTH_SMILE
+  };
+
+  var p1530 = {
+    root: [0.96, -7, 9], side: 0,
+    body: BODY_OPEN, head: HEAD_OPEN, belly: BELLY_OPEN,
+    ll: LEG_LEFT_FRONT, rl: LEG_RIGHT_FRONT,
+    al: ARM_LEFT_RAISED, ar: ARM_RIGHT_OUT,
+    hl: [67, 127, 180, 0.85, 1], hr: [178, 133, -75, 0.75, 1],
+    eyes: [107, 56, 128, 56, 1, 1], mouth: MOUTH_SMILE_LOW
+  };
+
+  var p2330 = {
+    root: [1.45, -56, -28], side: 0,
+    body: BODY_OPEN, head: HEAD_FRONT, belly: BELLY_ZOOM,
+    ll: LEG_LEFT_FRONT, rl: LEG_RIGHT_FRONT,
+    al: ARM_LEFT_ZOOM, ar: ARM_RIGHT_ZOOM,
+    hl: [45, 134, 0, 0.9, 1], hr: [168, 132, 0, 0.9, 1],
+    eyes: [105, 29, 132, 29, 1, 1], mouth: MOUTH_FROWN
+  };
+
+  var p3130 = {
+    root: [0.98, -12, 10], side: 0,
+    body: BODY_OPEN, head: HEAD_OPEN, belly: BELLY_OPEN,
+    ll: LEG_LEFT_FRONT, rl: LEG_RIGHT_FRONT,
+    al: ARM_LEFT_PALM, ar: ARM_RIGHT_LOW,
+    hl: [78, 137, 180, 0.9, 1], hr: [172, 184, 0, 0.9, 1],
+    eyes: [107, 56, 128, 56, 1, 1], mouth: MOUTH_SMILE_LOW
+  };
+
+  var p3930 = {
+    root: [1, 0, 0], side: 1,
+    body: BODY_SIDE, head: HEAD_SIDE, belly: BELLY_SIDE,
+    ll: LEG_LEFT_SIDE, rl: LEG_RIGHT_SIDE,
+    al: ARM_LEFT_SIDE_CLAP, ar: ARM_RIGHT_SIDE_CLAP,
+    hl: [25, 104, 90, 0.7, 1], hr: [52, 82, 180, 0.65, 1],
+    eyes: [89, 44, 117, 44, 1, 0], mouth: MOUTH_SIDE
+  };
+
+  var p4670 = {
+    root: [1, 0, 0], side: 1,
+    body: BODY_SIDE, head: HEAD_SIDE, belly: BELLY_SIDE,
+    ll: LEG_LEFT_SIDE, rl: LEG_RIGHT_SIDE,
+    al: ARM_LEFT_SIDE_CLAP, ar: ARM_RIGHT_SIDE_CLAP,
+    hl: [22, 102, 90, 0.7, 1], hr: [48, 79, 180, 0.65, 1],
+    eyes: [89, 44, 117, 44, 1, 0], mouth: MOUTH_SIDE
+  };
+
+  var p5470 = {
+    root: [1, 0, 0], side: 1,
+    body: BODY_SIDE, head: HEAD_SIDE, belly: BELLY_SIDE,
+    ll: LEG_LEFT_SIDE, rl: LEG_RIGHT_SIDE,
+    al: ARM_LEFT_SIDE_DOWN, ar: ARM_RIGHT_SIDE_DOWN,
+    hl: [91, 187, 0, 0.7, 0], hr: [153, 211, 0, 0.8, 1],
+    eyes: [89, 44, 117, 44, 1, 0], mouth: MOUTH_SIDE
+  };
+
+  var times = [0, 800, 1530, 2330, 3130, 3930, 4670, 5470, 5540];
+  var poses = [p0, p800, p1530, p2330, p3130, p3930, p4670, p5470, p0];
+  var NUMBER = /-?\d*\.?\d+(?:e[-+]?\d+)?/gi;
+
+  function byId(id) { return document.getElementById(id); }
+  function lerp(a, b, u) { return a + (b - a) * u; }
+  function arrayLerp(a, b, u) {
+    var out = [];
+    for (var i = 0; i < a.length; i++) out.push(lerp(a[i], b[i], u));
+    return out;
+  }
+  function mixPath(a, b, u) {
+    if (a === b) return b;
+    var av = a.match(NUMBER) || [];
+    var bv = b.match(NUMBER) || [];
+    if (av.length !== bv.length) return u < 0.5 ? a : b;
+    var i = 0;
+    return b.replace(NUMBER, function (s) {
+      var value = lerp(Number(av[i]), Number(s), u);
+      i++;
+      return value.toFixed(2);
+    });
+  }
+  function setPath(id, d) { byId(id).setAttribute("d", d); }
+  function setOpacity(id, value) { byId(id).setAttribute("opacity", value.toFixed(3)); }
+
+  function handTransform(h) {
+    return "translate(" + h[0].toFixed(2) + " " + h[1].toFixed(2) + ") rotate(" +
+      h[2].toFixed(2) + ") scale(" + h[3].toFixed(3) + ")";
+  }
+
+  function render(t) {
+    t = Number(t) || 0;
+    t = ((t % 5540) + 5540) % 5540;
+
+    var index = 0;
+    for (var i = 0; i < times.length - 1; i++) {
+      if (t >= times[i] && t <= times[i + 1]) {
+        index = i;
+        break;
+      }
+    }
+
+    var a = poses[index];
+    var b = poses[index + 1];
+    var raw = (t - times[index]) / (times[index + 1] - times[index]);
+    var u = raw * raw * (3 - 2 * raw);
+
+    var root = arrayLerp(a.root, b.root, u);
+    var side = lerp(a.side, b.side, u);
+    var eyes = arrayLerp(a.eyes, b.eyes, u);
+    var hl = arrayLerp(a.hl, b.hl, u);
+    var hr = arrayLerp(a.hr, b.hr, u);
+
+    byId("yellow-character").setAttribute(
+      "transform",
+      "translate(" + root[1].toFixed(2) + " " + root[2].toFixed(2) + ") scale(" + root[0].toFixed(4) + ")"
+    );
+
+    setPath("torso-shape", mixPath(a.body, b.body, u));
+    setPath("head-shape", mixPath(a.head, b.head, u));
+    var bellyPath = mixPath(a.belly, b.belly, u);
+    setPath("belly-patch", bellyPath);
+    setPath("belly-highlight", bellyPath);
+    setPath("leg-left-shape", mixPath(a.ll, b.ll, u));
+    setPath("leg-right-shape", mixPath(a.rl, b.rl, u));
+    setPath("arm-left-shape", mixPath(a.al, b.al, u));
+    setPath("arm-right-shape", mixPath(a.ar, b.ar, u));
+    setPath("mouth-line", mixPath(a.mouth, b.mouth, u));
+
+    byId("hand-left-pose").setAttribute("transform", handTransform(hl));
+    byId("hand-right-pose").setAttribute("transform", handTransform(hr));
+    setOpacity("hand-left", hl[4]);
+    setOpacity("hand-right", hr[4]);
+
+    setOpacity("front-shading", 1 - side);
+    setOpacity("side-shading", side);
+    setOpacity("nose", (1 - side) * 0.9);
+    setOpacity("side-nose", side * 0.4);
+    byId("nose").setAttribute(
+      "transform",
+      "translate(" + ((eyes[0] - 109) * 0.3).toFixed(2) + " " + (eyes[1] - 42).toFixed(2) + ")"
+    );
+
+    var open = eyes[4];
+    var rightVisible = eyes[5];
+    byId("eye-left-open").setAttribute(
+      "transform",
+      "translate(" + eyes[0].toFixed(2) + " " + eyes[1].toFixed(2) + ") scale(1 " + (0.45 + 0.55 * open).toFixed(3) + ")"
+    );
+    byId("eye-right-open").setAttribute(
+      "transform",
+      "translate(" + eyes[2].toFixed(2) + " " + eyes[3].toFixed(2) + ") scale(1 " + (0.45 + 0.55 * open).toFixed(3) + ")"
+    );
+    setOpacity("eye-left-open", open);
+    setOpacity("eye-right-open", open * rightVisible);
+    setOpacity("eyes", 1 - open);
+    setOpacity("eyelids", (1 - open) * 0.72);
+    setOpacity("eye-right", rightVisible);
+    setOpacity("eyelid-right", rightVisible);
+    setOpacity("socket-right", rightVisible);
+
+    setPath("eye-left",
+      "M" + (eyes[0] - 5).toFixed(2) + " " + eyes[1].toFixed(2) +
+      " Q" + eyes[0].toFixed(2) + " " + (eyes[1] + 1).toFixed(2) +
+      " " + (eyes[0] + 5).toFixed(2) + " " + (eyes[1] - 0.2).toFixed(2));
+    setPath("eye-right",
+      "M" + (eyes[2] - 5).toFixed(2) + " " + eyes[3].toFixed(2) +
+      " Q" + eyes[2].toFixed(2) + " " + (eyes[3] + 1).toFixed(2) +
+      " " + (eyes[2] + 5).toFixed(2) + " " + (eyes[3] - 0.2).toFixed(2));
+    setPath("eyelid-left",
+      "M" + (eyes[0] - 6).toFixed(2) + " " + (eyes[1] - 1.2).toFixed(2) +
+      " Q" + eyes[0].toFixed(2) + " " + (eyes[1] - 2).toFixed(2) +
+      " " + (eyes[0] + 6).toFixed(2) + " " + (eyes[1] - 0.9).toFixed(2));
+    setPath("eyelid-right",
+      "M" + (eyes[2] - 6).toFixed(2) + " " + (eyes[3] - 1.2).toFixed(2) +
+      " Q" + eyes[2].toFixed(2) + " " + (eyes[3] - 2).toFixed(2) +
+      " " + (eyes[2] + 6).toFixed(2) + " " + (eyes[3] - 0.9).toFixed(2));
+    setPath("socket-left",
+      "M" + (eyes[0] - 7).toFixed(2) + " " + (eyes[1] - 3).toFixed(2) +
+      " Q" + eyes[0].toFixed(2) + " " + (eyes[1] - 5).toFixed(2) +
+      " " + (eyes[0] + 7).toFixed(2) + " " + (eyes[1] - 2.5).toFixed(2));
+    setPath("socket-right",
+      "M" + (eyes[2] - 7).toFixed(2) + " " + (eyes[3] - 3).toFixed(2) +
+      " Q" + eyes[2].toFixed(2) + " " + (eyes[3] - 5).toFixed(2) +
+      " " + (eyes[2] + 7).toFixed(2) + " " + (eyes[3] - 2.5).toFixed(2));
+
+    var mouthCenter = (eyes[0] + eyes[2]) * 0.5;
+    setPath("lower-lip",
+      "M" + (mouthCenter - 11).toFixed(2) + " " + (eyes[1] + 12).toFixed(2) +
+      " Q" + mouthCenter.toFixed(2) + " " + (eyes[1] + 14).toFixed(2) +
+      " " + (mouthCenter + 11).toFixed(2) + " " + (eyes[1] + 11.5).toFixed(2));
+    setOpacity("lower-lip", (1 - side) * open * 0.32);
+
+    var shadow = byId("floor-shadow");
+    shadow.setAttribute("cx", (lerp(117, 121, side) * root[0] + root[1]).toFixed(2));
+    shadow.setAttribute("rx", (52 * root[0]).toFixed(2));
+    shadow.setAttribute("opacity", Math.min(0.15, 0.12 * root[0]).toFixed(3));
+  }
+
+  window.nwb = { render: render };
+  render(0);
+})();
+</script>
+</body>
+</html>

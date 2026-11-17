@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=216, initial-scale=1">
+<style>
+html,body{margin:0;width:216px;height:216px;overflow:hidden;background:#f7f7f5}
+canvas{display:block;width:216px;height:216px}
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xf7f7f5);
+
+const renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true, antialias: true });
+renderer.setPixelRatio(1);
+renderer.setSize(216, 216, false);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+document.body.appendChild(renderer.domElement);
+
+const ref = new THREE.OrthographicCamera(-2.7, 2.7, 2.7, -2.7, 0.1, 60);
+ref.name = 'reference-camera';
+ref.position.set(0, 3.25, 12);
+ref.lookAt(0, 2.7, 0);
+
+const character = new THREE.Group();
+character.name = 'character-laughing-yellow';
+character.position.x = 0.1;
+scene.add(character);
+
+const skin = new THREE.MeshStandardMaterial({
+  color: 0xd89a0b,
+  roughness: 0.76,
+  metalness: 0
+});
+const bellyMaterial = new THREE.MeshStandardMaterial({
+  color: 0xd8ae74,
+  roughness: 0.92,
+  metalness: 0
+});
+const handMaterial = new THREE.MeshStandardMaterial({
+  color: 0x454740,
+  roughness: 0.86,
+  metalness: 0
+});
+const eyeMaterial = new THREE.MeshStandardMaterial({
+  color: 0x38250e,
+  roughness: 0.9
+});
+const mouthRimMaterial = new THREE.MeshStandardMaterial({
+  color: 0x512b0d,
+  roughness: 1
+});
+const mouthMaterial = new THREE.MeshStandardMaterial({
+  color: 0x180f0b,
+  roughness: 1
+});
+const toothMaterial = new THREE.MeshStandardMaterial({
+  color: 0xfff6dc,
+  roughness: 0.72
+});
+const tongueMaterial = new THREE.MeshStandardMaterial({
+  color: 0x9e4933,
+  roughness: 0.9
+});
+
+const P = (x, y, z = 0) => new THREE.Vector3((x - 112) / 40, (216 - y) / 40, z);
+
+const profilePoints = [
+  [0.001, 5.36, 0.001],
+  [0.36, 5.32, 0.30],
+  [0.72, 5.20, 0.54],
+  [1.02, 4.98, 0.70],
+  [1.20, 4.65, 0.80],
+  [1.26, 4.30, 0.85],
+  [1.23, 3.95, 0.87],
+  [1.14, 3.55, 0.89],
+  [1.06, 3.10, 0.89],
+  [1.01, 2.65, 0.85],
+  [0.96, 2.20, 0.79],
+  [0.86, 1.80, 0.69],
+  [0.71, 1.42, 0.57],
+  [0.52, 1.12, 0.45],
+  [0.36, 0.90, 0.34],
+  [0.001, 0.78, 0.001]
+].map(p => new THREE.Vector3(p[0], p[1], p[2]));
+
+const bodyProfile = new THREE.CatmullRomCurve3(profilePoints, false, 'centripetal');
+const bodySamples = bodyProfile.getPoints(500);
+
+function frontZ(x, y) {
+  for (let i = 0; i < bodySamples.length - 1; i++) {
+    const a = bodySamples[i];
+    const b = bodySamples[i + 1];
+    if (y <= a.y && y >= b.y) {
+      const t = (a.y - y) / Math.max(0.00001, a.y - b.y);
+      const rx = THREE.MathUtils.lerp(Math.max(0.001, a.x), Math.max(0.001, b.x), t);
+      const rz = THREE.MathUtils.lerp(Math.max(0.001, a.z), Math.max(0.001, b.z), t);
+      const q = Math.min(0.995, Math.abs(x) / rx);
+      return rz * Math.sqrt(Math.max(0.005, 1 - q * q));
+    }
+  }
+  return 0.08;
+}
+
+function createBody() {
+  const rings = 170;
+  const sides = 96;
+  const positions = [];
+  const indices = [];
+
+  for (let i = 0; i <= rings; i++) {
+    const p = bodyProfile.getPoint(i / rings);
+    const rx = Math.max(0.001, p.x);
+    const rz = Math.max(0.001, p.z);
+    for (let j = 0; j < sides; j++) {
+      const a = j / sides * Math.PI * 2;
+      positions.push(rx * Math.cos(a), p.y, rz * Math.sin(a));
+    }
+  }
+
+  for (let i = 0; i < rings; i++) {
+    for (let j = 0; j < sides; j++) {
+      const n = (j + 1) % sides;
+      const a = i * sides + j;
+      const b = (i + 1) * sides + j;
+      const c = (i + 1) * sides + n;
+      const d = i * sides + n;
+      indices.push(a, d, b, b, d, c);
+    }
+  }
+
+  const top = positions.length / 3;
+  positions.push(0, profilePoints[0].y, 0);
+  const bottom = positions.length / 3;
+  positions.push(0, profilePoints[profilePoints.length - 1].y, 0);
+
+  for (let j = 0; j < sides; j++) {
+    const n = (j + 1) % sides;
+    indices.push(top, n, j);
+    const a = rings * sides + j;
+    const b = rings * sides + n;
+    indices.push(bottom, a, b);
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+
+  const mesh = new THREE.Mesh(geometry, skin);
+  mesh.name = 'continuous-head-and-torso';
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  return mesh;
+}
+
+const torso = new THREE.Group();
+torso.name = 'torso';
+torso.add(createBody());
+character.add(torso);
+
+function shapeFromCommands(commands) {
+  const shape = new THREE.Shape();
+  for (const command of commands) {
+    if (command[0] === 'M') {
+      const p = P(command[1], command[2]);
+      shape.moveTo(p.x, p.y);
+    } else if (command[0] === 'L') {
+      const p = P(command[1], command[2]);
+      shape.lineTo(p.x, p.y);
+    } else if (command[0] === 'C') {
+      const a = P(command[1], command[2]);
+      const b = P(command[3], command[4]);
+      const c = P(command[5], command[6]);
+      shape.bezierCurveTo(a.x, a.y, b.x, b.y, c.x, c.y);
+    } else if (command[0] === 'Q') {
+      const a = P(command[1], command[2]);
+      const b = P(command[3], command[4]);
+      shape.quadraticCurveTo(a.x, a.y, b.x, b.y);
+    }
+  }
+  shape.closePath();
+  return shape;
+}
+
+function makePatch(shape, material, offset, name) {
+  let boundary = shape.getPoints(18);
+  if (boundary.length > 1 && boundary[0].distanceTo(boundary[boundary.length - 1]) < 0.00001) {
+    boundary.pop();
+  }
+  boundary = boundary.filter((p, i) => i === 0 || p.distanceTo(boundary[i - 1]) > 0.00001);
+
+  let area = 0;
+  for (let i = 0; i < boundary.length; i++) {
+    const a = boundary[i];
+    const b = boundary[(i + 1) % boundary.length];
+    area += a.x * b.y - b.x * a.y;
+  }
+  if (area < 0) boundary.reverse();
+
+  const center = new THREE.Vector2();
+  for (const p of boundary) center.add(p);
+  center.multiplyScalar(1 / boundary.length);
+
+  const count = boundary.length;
+  const rings = 16;
+  const positions = [center.x, center.y, frontZ(center.x, center.y) + offset];
+  const indices = [];
+
+  for (let r = 1; r <= rings; r++) {
+    const f = r / rings;
+    for (const p of boundary) {
+      const x = THREE.MathUtils.lerp(center.x, p.x, f);
+      const y = THREE.MathUtils.lerp(center.y, p.y, f);
+      positions.push(x, y, frontZ(x, y) + offset);
+    }
+  }
+
+  for (let j = 0; j < count; j++) {
+    indices.push(0, 1 + j, 1 + (j + 1) % count);
+  }
+
+  for (let r = 1; r < rings; r++) {
+    const inner = 1 + (r - 1) * count;
+    const outer = 1 + r * count;
+    for (let j = 0; j < count; j++) {
+      const n = (j + 1) % count;
+      indices.push(inner + j, outer + j, outer + n);
+      indices.push(inner + j, outer + n, inner + n);
+    }
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.name = name;
+  mesh.receiveShadow = true;
+  return mesh;
+}
+
+const bellyGroup = new THREE.Group();
+bellyGroup.name = 'belly';
+const bellyShape = shapeFromCommands([
+  ['M', 112, 92],
+  ['C', 128, 93, 141, 106, 147, 124],
+  ['C', 153, 142, 146, 159, 132, 169],
+  ['C', 120, 176, 103, 174, 91, 165],
+  ['C', 80, 156, 76, 141, 78, 125],
+  ['C', 80, 109, 91, 96, 104, 93],
+  ['C', 107, 92, 110, 92, 112, 92]
+]);
+bellyGroup.add(makePatch(bellyShape, bellyMaterial, 0.018, 'cream-belly-patch'));
+torso.add(bellyGroup);
+
+function makeLimb(data, material, name, segments = 64, sides = 24) {
+  const centers = data.map(d => P(d[0], d[1], d[2]));
+  const radii = data.map(d => new THREE.Vector3(d[3] / 40, d[4] / 40, 0));
+  const centerCurve = new THREE.CatmullRomCurve3(centers, false, 'centripetal');
+  const radiusCurve = new THREE.CatmullRomCurve3(radii, false, 'centripetal');
+  const positions = [];
+  const indices = [];
+
+  for (let i = 0; i <= segments; i++) {
+    const t = i / segments;
+    const c = centerCurve.getPoint(t);
+    const tangent = centerCurve.getTangent(t).normalize();
+    const normal = new THREE.Vector3(tangent.y, -tangent.x, 0);
+    if (normal.lengthSq() < 0.00001) normal.set(1, 0, 0);
+    normal.normalize();
+    const depthAxis = new THREE.Vector3().crossVectors(normal, tangent).normalize();
+    if (depthAxis.z < 0) depthAxis.multiplyScalar(-1);
+    const r = radiusCurve.getPoint(t);
+
+    for (let j = 0; j < sides; j++) {
+      const a = j / sides * Math.PI * 2;
+      const p = c.clone()
+        .addScaledVector(normal, Math.cos(a) * Math.max(0.006, r.x))
+        .addScaledVector(depthAxis, Math.sin(a) * Math.max(0.006, r.y));
+      positions.push(p.x, p.y, p.z);
+    }
+  }
+
+  for (let i = 0; i < segments; i++) {
+    for (let j = 0; j < sides; j++) {
+      const n = (j + 1) % sides;
+      const a = i * sides + j;
+      const b = (i + 1) * sides + j;
+      const c = (i + 1) * sides + n;
+      const d = i * sides + n;
+      indices.push(a, b, d, b, c, d);
+    }
+  }
+
+  const startCenter = positions.length / 3;
+  const start = centerCurve.getPoint(0);
+  positions.push(start.x, start.y, start.z);
+  const endCenter = positions.length / 3;
+  const end = centerCurve.getPoint(1);
+  positions.push(end.x, end.y, end.z);
+
+  for (let j = 0; j < sides; j++) {
+    const n = (j + 1) % sides;
+    indices.push(startCenter, j, n);
+    const a = segments * sides + j;
+    const b = segments * sides + n;
+    indices.push(endCenter, b, a);
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.name = name;
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  return mesh;
+}
+
+function ellipsoid(parent, name, position, scale, material, rotationZ = 0) {
+  const mesh = new THREE.Mesh(new THREE.SphereGeometry(1, 28, 20), material);
+  mesh.name = name;
+  mesh.position.copy(position);
+  mesh.scale.set(scale[0], scale[1], scale[2]);
+  mesh.rotation.z = rotationZ;
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  parent.add(mesh);
+  return mesh;
+}
+
+const legs = new THREE.Group();
+legs.name = 'legs';
+character.add(legs);
+
+const leftLeg = new THREE.Group();
+leftLeg.name = 'leg-viewer-left';
+leftLeg.add(makeLimb([
+  [94, 169, -0.12, 12, 13],
+  [91, 186, -0.06, 11, 12],
+  [93, 202, 0.02, 10, 11],
+  [96, 213, 0.10, 9, 10]
+], skin, 'left-leg-volume', 42, 22));
+ellipsoid(leftLeg, 'left-rounded-foot', P(97, 208, 0.18), [0.27, 0.18, 0.40], skin, -0.08);
+legs.add(leftLeg);
+
+const rightLeg = new THREE.Group();
+rightLeg.name = 'leg-viewer-right';
+rightLeg.add(makeLimb([
+  [127, 170, -0.13, 12, 13],
+  [129, 187, -0.05, 11, 12],
+  [133, 204, 0.04, 10, 11],
+  [136, 215, 0.12, 9, 10]
+], skin, 'right-leg-volume', 42, 22));
+ellipsoid(rightLeg, 'right-rounded-foot', P(137, 210, 0.19), [0.29, 0.17, 0.41], skin, 0.08);
+legs.add(rightLeg);
+
+function addFinger(parent, name, data) {
+  const expanded = data.map(d => [d[0], d[1], d[2], d[3], d[3] * 0.88]);
+  parent.add(makeLimb(expanded, handMaterial, name, 28, 14));
+  const tip = data[data.length - 1];
+  const r = tip[3] / 40;
+  ellipsoid(parent, name + '-rounded-tip', P(tip[0], tip[1], tip[2]), [r, r, r * 0.88], handMaterial);
+}
+
+const arms = new THREE.Group();
+arms.name = 'arms';
+character.add(arms);
+
+const leftArm = new THREE.Group();
+leftArm.name = 'arm-viewer-left';
+leftArm.add(makeLimb([
+  [74, 48, -0.10, 15, 14],
+  [60, 68, -0.03, 15, 15],
+  [55, 93, 0.02, 15, 15],
+  [59, 120, 0.10, 16, 14],
+  [64, 143, 0.20, 12, 12],
+  [70, 158, 0.32, 9, 9],
+  [74, 166, 0.42, 7, 8]
+], skin, 'left-arm-volume'));
+arms.add(leftArm);
+
+const leftHand = new THREE.Group();
+leftHand.name = 'hand-viewer-left';
+ellipsoid(leftHand, 'left-palm', P(75, 169, 0.55), [0.18, 0.27, 0.135], handMaterial, -0.28);
+addFinger(leftHand, 'left-thumb', [
+  [71, 163, 0.53, 2.7],
+  [68, 171, 0.58, 2.4],
+  [70, 180, 0.59, 1.3]
+]);
+addFinger(leftHand, 'left-finger-one', [
+  [74, 169, 0.63, 2.6],
+  [75, 181, 0.67, 2.1],
+  [80, 189, 0.63, 1.25]
+]);
+addFinger(leftHand, 'left-finger-two', [
+  [78, 170, 0.65, 2.7],
+  [81, 184, 0.68, 2.1],
+  [88, 196, 0.60, 1.2]
+]);
+addFinger(leftHand, 'left-finger-three', [
+  [82, 168, 0.62, 2.5],
+  [86, 180, 0.66, 1.9],
+  [92, 190, 0.60, 1.15]
+]);
+leftArm.add(leftHand);
+
+const rightArm = new THREE.Group();
+rightArm.name = 'arm-viewer-right';
+rightArm.add(makeLimb([
+  [150, 50, -0.10, 14, 14],
+  [163, 69, -0.02, 16, 15],
+  [168, 94, 0.03, 15, 15],
+  [165, 121, 0.11, 16, 14],
+  [158, 145, 0.21, 13, 12],
+  [149, 159, 0.33, 10, 9],
+  [145, 166, 0.43, 7, 8]
+], skin, 'right-arm-volume'));
+arms.add(rightArm);
+
+const rightHand = new THREE.Group();
+rightHand.name = 'hand-viewer-right';
+ellipsoid(rightHand, 'right-palm', P(146, 168, 0.56), [0.19, 0.25, 0.135], handMaterial, 0.42);
+addFinger(rightHand, 'right-finger-one', [
+  [141, 169, 0.64, 2.6],
+  [133, 176, 0.69, 2.1],
+  [127, 184, 0.64, 1.25]
+]);
+addFinger(rightHand, 'right-finger-two', [
+  [145, 171, 0.68, 2.7],
+  [137, 182, 0.71, 2.1],
+  [132, 190, 0.65, 1.2]
+]);
+addFinger(rightHand, 'right-finger-three', [
+  [148, 171, 0.65, 2.5],
+  [142, 183, 0.68, 1.9],
+  [140, 188, 0.63, 1.15]
+]);
+addFinger(rightHand, 'right-thumb', [
+  [151, 164, 0.55, 2.6],
+  [153, 172, 0.60, 2.1],
+  [149, 180, 0.61, 1.25]
+]);
+rightArm.add(rightHand);
+
+const head = new THREE.Group();
+head.name = 'head';
+character.add(head);
+
+const eyes = new THREE.Group();
+eyes.name = 'eyes-closed-laughing';
+head.add(eyes);
+
+function makeEye(name, start, control, end) {
+  const curve = new THREE.QuadraticBezierCurve3(
+    P(start[0], start[1]),
+    P(control[0], control[1]),
+    P(end[0], end[1])
+  );
+  const points = curve.getPoints(28).map(p => {
+    p.z = frontZ(p.x, p.y) + 0.052;
+    return p;
+  });
+  const path = new THREE.CatmullRomCurve3(points);
+  const geometry = new THREE.TubeGeometry(path, 48, 0.037, 10, false);
+  const mesh = new THREE.Mesh(geometry, eyeMaterial);
+  mesh.name = name;
+  mesh.castShadow = true;
+  eyes.add(mesh);
+  ellipsoid(eyes, name + '-start', points[0], [0.037, 0.037, 0.037], eyeMaterial);
+  ellipsoid(eyes, name + '-end', points[points.length - 1], [0.037, 0.037, 0.037], eyeMaterial);
+}
+
+makeEye('eye-viewer-left', [75, 32], [82, 22], [90, 33]);
+makeEye('eye-viewer-right', [117, 33], [124, 22], [132, 34]);
+
+const mouth = new THREE.Group();
+mouth.name = 'mouth-wide-open-laugh';
+head.add(mouth);
+
+const outerMouth = shapeFromCommands([
+  ['M', 76, 38],
+  ['C', 85, 42, 101, 44, 119, 42],
+  ['C', 126, 41, 130, 44, 128, 52],
+  ['C', 125, 65, 120, 77, 111, 84],
+  ['C', 104, 90, 94, 91, 85, 85],
+  ['C', 76, 79, 71, 66, 69, 53],
+  ['C', 68, 45, 70, 39, 76, 38]
+]);
+mouth.add(makePatch(outerMouth, mouthRimMaterial, 0.028, 'dark-warm-mouth-rim'));
+
+const innerMouth = shapeFromCommands([
+  ['M', 78, 41],
+  ['C', 88, 45, 105, 46, 120, 44],
+  ['C', 125, 43, 127, 46, 125, 53],
+  ['C', 122, 66, 116, 78, 108, 83],
+  ['C', 101, 87, 94, 87, 87, 82],
+  ['C', 79, 76, 75, 65, 72, 53],
+  ['C', 71, 47, 73, 42, 78, 41]
+]);
+mouth.add(makePatch(innerMouth, mouthMaterial, 0.040, 'deep-open-mouth'));
+
+const tongueShape = shapeFromCommands([
+  ['M', 87, 83],
+  ['C', 94, 78, 105, 78, 112, 83],
+  ['C', 106, 87, 94, 88, 87, 83]
+]);
+mouth.add(makePatch(tongueShape, tongueMaterial, 0.051, 'tongue-low-in-mouth'));
+
+const teethShape = shapeFromCommands([
+  ['M', 78, 42],
+  ['C', 89, 45, 105, 46, 121, 43],
+  ['C', 123, 43, 124, 44, 123, 47],
+  ['L', 121, 52],
+  ['C', 108, 54, 93, 53, 82, 50],
+  ['C', 80, 47, 79, 44, 78, 42]
+]);
+mouth.add(makePatch(teethShape, toothMaterial, 0.060, 'single-curved-upper-teeth-band'));
+
+const floor = new THREE.Mesh(
+  new THREE.PlaneGeometry(30, 30),
+  new THREE.ShadowMaterial({ color: 0x4c463c, opacity: 0.13, transparent: true })
+);
+floor.name = 'soft-ground-shadow';
+floor.rotation.x = -Math.PI / 2;
+floor.position.y = -0.025;
+floor.receiveShadow = true;
+scene.add(floor);
+
+const shadowCanvas = document.createElement('canvas');
+shadowCanvas.width = 64;
+shadowCanvas.height = 64;
+const shadowContext = shadowCanvas.getContext('2d');
+const gradient = shadowContext.createRadialGradient(32, 32, 2, 32, 32, 31);
+gradient.addColorStop(0, 'rgba(45,40,32,0.48)');
+gradient.addColorStop(0.42, 'rgba(45,40,32,0.25)');
+gradient.addColorStop(1, 'rgba(45,40,32,0)');
+shadowContext.fillStyle = gradient;
+shadowContext.fillRect(0, 0, 64, 64);
+const shadowTexture = new THREE.CanvasTexture(shadowCanvas);
+shadowTexture.colorSpace = THREE.SRGBColorSpace;
+const contactShadow = new THREE.Mesh(
+  new THREE.PlaneGeometry(3.7, 3.2),
+  new THREE.MeshBasicMaterial({
+    map: shadowTexture,
+    transparent: true,
+    opacity: 0.42,
+    depthWrite: false
+  })
+);
+contactShadow.name = 'procedural-contact-shadow';
+contactShadow.rotation.x = -Math.PI / 2;
+contactShadow.position.set(0.08, -0.014, 0.05);
+scene.add(contactShadow);
+
+const hemisphere = new THREE.HemisphereLight(0xffffff, 0xbca67d, 0.80);
+scene.add(hemisphere);
+
+const ambient = new THREE.AmbientLight(0xffffff, 0.38);
+scene.add(ambient);
+
+const key = new THREE.DirectionalLight(0xfff4df, 2.10);
+key.name = 'large-warm-key';
+key.position.set(-3.5, 7.5, 7);
+key.target.position.set(0, 2.5, 0);
+key.castShadow = true;
+key.shadow.mapSize.set(1024, 1024);
+key.shadow.camera.left = -4;
+key.shadow.camera.right = 4;
+key.shadow.camera.top = 7;
+key.shadow.camera.bottom = -2;
+key.shadow.camera.near = 0.5;
+key.shadow.camera.far = 25;
+key.shadow.bias = -0.0004;
+key.shadow.normalBias = 0.018;
+key.shadow.radius = 4;
+scene.add(key, key.target);
+
+const fill = new THREE.DirectionalLight(0xeaf2ff, 0.40);
+fill.name = 'soft-front-fill';
+fill.position.set(4, 3.5, 5);
+fill.target.position.set(0, 2.4, 0);
+scene.add(fill, fill.target);
+
+const rim = new THREE.DirectionalLight(0xfff1ce, 0.75);
+rim.name = 'back-and-side-fill';
+rim.position.set(-1, 5, -5);
+rim.target.position.set(0, 2.6, 0);
+scene.add(rim, rim.target);
+
+const deformMeshes = [];
+character.updateMatrixWorld(true);
+const characterInverse = character.matrixWorld.clone().invert();
+
+character.traverse(object => {
+  if (!object.isMesh) return;
+
+  const toCharacter = new THREE.Matrix4().multiplyMatrices(characterInverse, object.matrixWorld);
+  object.geometry.applyMatrix4(toCharacter);
+  object.position.set(0, 0, 0);
+  object.rotation.set(0, 0, 0);
+  object.scale.set(1, 1, 1);
+  object.updateMatrix();
+
+  let part = 'body';
+  let ancestor = object;
+  while (ancestor && ancestor !== character) {
+    if (ancestor.name === 'arm-viewer-left') part = 'left-arm';
+    if (ancestor.name === 'arm-viewer-right') part = 'right-arm';
+    if (ancestor.name === 'eyes-closed-laughing') part = 'eyes';
+    ancestor = ancestor.parent;
+  }
+
+  const position = object.geometry.getAttribute('position');
+  position.setUsage(THREE.DynamicDrawUsage);
+  const base = new Float32Array(position.array);
+
+  if (part === 'left-arm' || part === 'right-arm') {
+    for (let i = 0; i < base.length; i += 3) base[i] *= 0.90;
+  }
+
+  deformMeshes.push({ mesh: object, base, part });
+});
+
+const keyframes = [
+  { t: 0,    q: 0,    sx: 1,    belly: 0,    lean: 0,     pitch: 0,     yaw: 0,     roll: 0,     lift: 0,    shift: 0,     headX: 1,    arms: 0    },
+  { t: 180,  q: 1.05, sx: 1.10, belly: 0.08, lean: 0,     pitch: 0,     yaw: 0,     roll: 0,     lift: 0,    shift: 0,     headX: 1.03, arms: 0.12 },
+  { t: 340,  q: 0,    sx: 0.98, belly: 0,    lean: 0,     pitch: -0.34, yaw: -0.65, roll: -0.18, lift: 0.14, shift: 0.15,  headX: 0.84, arms: 0    },
+  { t: 520,  q: 0,    sx: 1,    belly: 0,    lean: 0,     pitch: 0,     yaw: 0,     roll: 0,     lift: 0,    shift: 0,     headX: 1,    arms: 0    },
+  { t: 680,  q: 1.08, sx: 1.10, belly: 0.08, lean: -0.12, pitch: 0,     yaw: 0.10,  roll: -0.15, lift: 0,    shift: -0.08, headX: 1.02, arms: 0.12 },
+  { t: 860,  q: 0,    sx: 0.98, belly: 0,    lean: 0,     pitch: -0.34, yaw: -0.65, roll: -0.18, lift: 0.14, shift: 0.15,  headX: 0.84, arms: 0    },
+  { t: 1020, q: 0,    sx: 1,    belly: 0,    lean: 0,     pitch: 0,     yaw: 0,     roll: 0,     lift: 0,    shift: 0,     headX: 1,    arms: 0    },
+  { t: 1200, q: 0.85, sx: 1.09, belly: 0.06, lean: -0.09, pitch: 0,     yaw: 0.07,  roll: -0.12, lift: 0,    shift: -0.05, headX: 1.02, arms: 0.09 }
+];
+
+const animatedProperties = ['q', 'sx', 'belly', 'lean', 'pitch', 'yaw', 'roll', 'lift', 'shift', 'headX', 'arms'];
+const pose = {};
+
+function samplePose(t) {
+  const phase = ((t % 1220) + 1220) % 1220;
+  let index = keyframes.length - 1;
+
+  for (let i = 0; i < keyframes.length - 1; i++) {
+    if (phase >= keyframes[i].t && phase < keyframes[i + 1].t) {
+      index = i;
+      break;
+    }
+  }
+
+  const a = keyframes[index];
+  const b = keyframes[(index + 1) % keyframes.length];
+  const end = index === keyframes.length - 1 ? 1220 : b.t;
+  let u = (phase - a.t) / (end - a.t);
+  u = u * u * (3 - 2 * u);
+
+  for (const property of animatedProperties) {
+    pose[property] = THREE.MathUtils.lerp(a[property], b[property], u);
+  }
+  return pose;
+}
+
+function verticalPosition(y, q) {
+  return y - q * (
+    0.10 * y +
+    0.10 * THREE.MathUtils.smoothstep(y, 0.4, 1.4) +
+    0.285 * THREE.MathUtils.smoothstep(y, 2.0, 5.36)
+  );
+}
+
+function poseMesh(entry, p) {
+  const position = entry.mesh.geometry.getAttribute('position');
+  const output = position.array;
+  const base = entry.base;
+  const depthScale = 1 + (p.sx - 1) * 0.45 + p.q * 0.025;
+  const pivotY = verticalPosition(3.15, p.q);
+  const pivotX = p.lean * THREE.MathUtils.smoothstep(3.15, 0.8, 5.2);
+  const pivotZ = 0.75 * depthScale;
+  const armSide = entry.part === 'left-arm' ? -1 : entry.part === 'right-arm' ? 1 : 0;
+  const eyeSink = entry.part === 'eyes'
+    ? 0.80 * THREE.MathUtils.smoothstep(-p.pitch, 0.08, 0.30)
+    : 0;
+
+  for (let i = 0; i < base.length; i += 3) {
+    const x = base[i];
+    const y = base[i + 1];
+    const z = base[i + 2];
+
+    const bellyBulge = p.belly *
+      THREE.MathUtils.smoothstep(y, 0.7, 1.4) *
+      (1 - THREE.MathUtils.smoothstep(y, 2.65, 3.55));
+
+    let xx = x * (p.sx + bellyBulge);
+    let yy = verticalPosition(y, p.q);
+    let zz = z * depthScale;
+
+    xx += p.lean * THREE.MathUtils.smoothstep(y, 0.8, 5.2);
+
+    if (armSide !== 0) {
+      xx += armSide * p.arms * (1 - THREE.MathUtils.smoothstep(y, 1.8, 3.8));
+    }
+
+    const headWeight = armSide === 0
+      ? THREE.MathUtils.smoothstep(y, 2.80, 4.05)
+      : 0;
+
+    if (headWeight > 0) {
+      let hx = (xx - pivotX) * (1 + (p.headX - 1) * headWeight);
+      let hy = yy - pivotY;
+      let hz = zz;
+
+      const yaw = p.yaw * headWeight;
+      const cy = Math.cos(yaw);
+      const sy = Math.sin(yaw);
+      const relativeZ = hz - pivotZ;
+      const yawX = hx * cy + relativeZ * sy;
+      hz = pivotZ - hx * sy + relativeZ * cy;
+      hx = yawX;
+
+      const pitch = p.pitch * headWeight;
+      const cp = Math.cos(pitch);
+      const sp = Math.sin(pitch);
+      const pitchY = hy * cp - hz * sp;
+      hz = hy * sp + hz * cp;
+      hy = pitchY;
+
+      const roll = p.roll * headWeight;
+      const cr = Math.cos(roll);
+      const sr = Math.sin(roll);
+      const rollX = hx * cr - hy * sr;
+      hy = hx * sr + hy * cr;
+      hx = rollX;
+
+      xx = pivotX + hx + p.shift * headWeight;
+      yy = pivotY + hy + p.lift * headWeight;
+      zz = hz;
+    }
+
+    output[i] = xx;
+    output[i + 1] = yy;
+    output[i + 2] = zz - eyeSink;
+  }
+
+  position.needsUpdate = true;
+  entry.mesh.geometry.computeVertexNormals();
+  entry.mesh.geometry.computeBoundingBox();
+  entry.mesh.geometry.computeBoundingSphere();
+}
+
+function render(t) {
+  const p = samplePose(t);
+  for (const entry of deformMeshes) poseMesh(entry, p);
+  contactShadow.scale.set(1 + (p.sx - 1) * 1.4, 1 + (p.sx - 1) * 0.5, 1);
+  contactShadow.position.x = 0.08 + p.shift * 0.15 + p.lean * 0.20;
+  renderer.render(scene, ref);
+}
+
+window.nwb = {
+  scene,
+  renderer,
+  cameras: { ref },
+  characters: [character],
+  render,
+  ready: true
+};
+
+render(0);
+</script>
+</body>
+</html>

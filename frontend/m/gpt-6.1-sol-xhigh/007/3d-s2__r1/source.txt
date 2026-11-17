@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Golden Bird Dance</title>
+<style>
+html,body{margin:0;width:240px;height:294px;overflow:hidden;background:#f8faff}
+canvas{display:block;width:240px;height:294px}
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xf8faff);
+scene.fog = new THREE.Fog(0xf8faff,12,27);
+
+const renderer = new THREE.WebGLRenderer({preserveDrawingBuffer:true});
+renderer.setPixelRatio(1);
+renderer.setSize(240,294);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = .96;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+document.body.appendChild(renderer.domElement);
+
+const viewHeight = 4.704;
+const ref = new THREE.OrthographicCamera(
+  -viewHeight*240/294/2,viewHeight*240/294/2,
+  viewHeight/2,-viewHeight/2,.1,100
+);
+ref.name = 'reference-camera';
+ref.position.set(.30,3.40,10);
+ref.lookAt(.30,2.40,0);
+
+scene.add(new THREE.HemisphereLight(0xfffff2,0xaaa5a0,1.45));
+
+const keyLight = new THREE.DirectionalLight(0xfff6dd,2.7);
+keyLight.position.set(-3.5,7,5);
+keyLight.castShadow = true;
+keyLight.shadow.mapSize.set(1024,1024);
+Object.assign(keyLight.shadow.camera,{
+  left:-3,right:3,top:6,bottom:-1,near:.5,far:20
+});
+keyLight.shadow.normalBias = .025;
+keyLight.shadow.bias = -.0002;
+keyLight.shadow.radius = 4;
+keyLight.target.position.set(0,2,0);
+scene.add(keyLight,keyLight.target);
+
+const backLight = new THREE.DirectionalLight(0xf3f5ff,1.15);
+backLight.position.set(3,5,-5);
+scene.add(backLight);
+
+const fill = new THREE.DirectionalLight(0xffffff,.45);
+fill.position.set(4,3,5);
+scene.add(fill);
+
+const floor = new THREE.Mesh(
+  new THREE.PlaneGeometry(200,200),
+  new THREE.MeshStandardMaterial({color:0xd5d4c9,roughness:1})
+);
+floor.name = 'matte-ground';
+floor.rotation.x = -Math.PI/2;
+floor.position.y = -.23;
+floor.receiveShadow = true;
+scene.add(floor);
+
+let seed = 19387;
+function rand(){
+  seed = (Math.imul(seed,1664525)+1013904223)>>>0;
+  return seed/4294967296;
+}
+const grainData = new Uint8Array(64*64*4);
+for(let i=0;i<64*64;i++){
+  const v=110+Math.floor(rand()*115);
+  grainData[i*4]=v;
+  grainData[i*4+1]=v;
+  grainData[i*4+2]=v;
+  grainData[i*4+3]=255;
+}
+const grain = new THREE.DataTexture(grainData,64,64,THREE.RGBAFormat);
+grain.wrapS = grain.wrapT = THREE.RepeatWrapping;
+grain.repeat.set(4,4);
+grain.magFilter = grain.minFilter = THREE.LinearFilter;
+grain.needsUpdate = true;
+
+function material(color,extra={}){
+  return new THREE.MeshStandardMaterial({
+    color,roughness:.98,metalness:0,
+    bumpMap:grain,bumpScale:.004,dithering:true,...extra
+  });
+}
+const plumage = material(0xffffff,{vertexColors:true});
+const headMat = material(0xf2c222);
+const lidMat = material(0xecc027);
+const beakMat = material(0xdcc12a);
+const lowerBeakMat = material(0xc4a62b);
+const mouthMat = material(0x76672a,{bumpMap:null});
+const socketMat = material(0xa3a545,{bumpMap:null});
+const pupilMat = material(0x42442b,{bumpMap:null,roughness:.65});
+const eyeGlintMat = material(0xf3ffd7,{bumpMap:null,roughness:.4});
+const handMat = material(0x626047,{bumpScale:.003});
+const fingerMat = material(0x4e503b,{bumpScale:.002});
+const footMat = material(0xe3a619);
+
+function group(name,parent,x=0,y=0,z=0){
+  const g = new THREE.Group();
+  g.name=name;
+  g.position.set(x,y,z);
+  if(parent) parent.add(g);
+  return g;
+}
+const sphereGeometry = new THREE.SphereGeometry(1,32,24);
+function ellipsoid(name,parent,mat,x,y,z,sx,sy,sz){
+  const m=new THREE.Mesh(sphereGeometry,mat);
+  m.name=name;
+  m.position.set(x,y,z);
+  m.scale.set(sx,sy,sz);
+  m.castShadow=true;
+  m.receiveShadow=true;
+  parent.add(m);
+  return m;
+}
+
+function sample(rows,y,k){
+  let i=0;
+  while(i<rows.length-2 && y>rows[i+1][0]) i++;
+  const a=rows[i],b=rows[i+1];
+  const p=rows[Math.max(0,i-1)],n=rows[Math.min(rows.length-1,i+2)];
+  const d=b[0]-a[0],t=THREE.MathUtils.clamp((y-a[0])/d,0,1);
+  const m0=(b[k]-p[k])/(b[0]-p[0]);
+  const m1=(n[k]-a[k])/(n[0]-a[0]);
+  return (2*t*t*t-3*t*t+1)*a[k]
+    +(t*t*t-2*t*t+t)*d*m0
+    +(-2*t*t*t+3*t*t)*b[k]
+    +(t*t*t-t*t)*d*m1;
+}
+function profileMesh(name,parent,rows,mat,colorFn){
+  const heightSteps=88,sides=64;
+  const pos=[],uv=[],colors=[],indices=[];
+  const y0=rows[0][0],y1=rows[rows.length-1][0];
+  for(let i=0;i<=heightSteps;i++){
+    const y=THREE.MathUtils.lerp(y0,y1,i/heightSteps);
+    const cx=sample(rows,y,1),rx=Math.max(0,sample(rows,y,2));
+    const rz=Math.max(0,sample(rows,y,3)),cz=sample(rows,y,4);
+    for(let j=0;j<=sides;j++){
+      const a=j/sides*Math.PI*2;
+      const x=cx+rx*Math.cos(a),z=cz+rz*Math.sin(a);
+      pos.push(x,y,z);
+      uv.push(j/sides,i/heightSteps);
+      if(colorFn){
+        const c=colorFn(x,y,z,a);
+        colors.push(c.r,c.g,c.b);
+      }
+      if(i<heightSteps && j<sides){
+        const a0=i*(sides+1)+j,b=a0+sides+1;
+        indices.push(a0,b,b+1,a0,b+1,a0+1);
+      }
+    }
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+  geo.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));
+  if(colorFn) geo.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));
+  geo.setIndex(indices);
+  geo.computeVertexNormals();
+  const mesh=new THREE.Mesh(geo,mat);
+  mesh.name=name;
+  mesh.castShadow=true;
+  mesh.receiveShadow=true;
+  parent.add(mesh);
+  return mesh;
+}
+function taperedCurve(name,parent,points,r0,r1,mat){
+  const curve=new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p)));
+  const count=20,sides=9;
+  const frames=curve.computeFrenetFrames(count,false);
+  const positions=[],uvs=[],indices=[];
+  for(let i=0;i<=count;i++){
+    const t=i/count,p=curve.getPointAt(t);
+    const r=THREE.MathUtils.lerp(r0,r1,t);
+    for(let j=0;j<=sides;j++){
+      const a=j/sides*Math.PI*2;
+      const v=p.clone()
+        .addScaledVector(frames.normals[i],Math.cos(a)*r)
+        .addScaledVector(frames.binormals[i],Math.sin(a)*r);
+      positions.push(v.x,v.y,v.z);
+      uvs.push(j/sides,t);
+      if(i<count && j<sides){
+        const k=i*(sides+1)+j,l=k+sides+1;
+        indices.push(k,k+1,l+1,k,l+1,l);
+      }
+    }
+  }
+  const start=positions.length/3;
+  const p0=curve.getPointAt(0),p1=curve.getPointAt(1);
+  positions.push(p0.x,p0.y,p0.z,p1.x,p1.y,p1.z);
+  uvs.push(.5,0,.5,1);
+  for(let j=0;j<sides;j++){
+    indices.push(start,j+1,j);
+    const k=count*(sides+1)+j;
+    indices.push(start+1,k,k+1);
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
+  geo.setAttribute('uv',new THREE.Float32BufferAttribute(uvs,2));
+  geo.setIndex(indices);
+  geo.computeVertexNormals();
+  const mesh=new THREE.Mesh(geo,mat);
+  mesh.name=name;
+  mesh.castShadow=true;
+  mesh.receiveShadow=true;
+  parent.add(mesh);
+  return mesh;
+}
+
+const bird=group('golden-bird',scene);
+const torso=group('torso-sway-and-breath',bird,0,2,0);
+const body=group('body-and-neck',torso,0,-2,0);
+
+const gold=new THREE.Color(0xf2bb1e);
+const orange=new THREE.Color(0xeda91b);
+const cream=new THREE.Color(0xffdd83);
+
+profileMesh('continuous-pear-shaped-body',body,[
+  [1.035,-.025,0,0,.01],
+  [1.14,-.025,.46,.40,.015],
+  [1.34,-.025,.67,.60,.035],
+  [1.60,-.025,.83,.77,.065],
+  [1.94,-.025,.93,.92,.075],
+  [2.23,-.035,.895,.98,.065],
+  [2.53,-.04,.80,.91,.035],
+  [2.82,-.025,.69,.76,.005],
+  [3.08,0,.63,.62,-.005],
+  [3.34,.025,.54,.46,-.018],
+  [3.56,.035,.43,.36,-.015],
+  [3.78,.04,.335,.29,-.01],
+  [3.99,.04,.285,.25,-.005],
+  [4.12,.04,0,0,0]
+],plumage,(x,y,z,a)=>{
+  const front=Math.pow(Math.max(0,Math.sin(a)),1.1);
+  const belly=Math.exp(-Math.pow((x+.07)/.69,2)-Math.pow((y-2.46)/.93,2))*front;
+  const base=orange.clone().lerp(gold,THREE.MathUtils.smoothstep(y,1.3,3.4));
+  return base.lerp(cream,belly*.91);
+});
+
+function makeLeg(side){
+  const left=side<0;
+  const hipX=left?-.36:.31;
+  const ankleX=left?-.22:.32;
+  const leg=group(left?'left-leg':'right-leg',bird,hipX,1.3,0);
+  const rows=[
+    [-.36,ankleX,0,0,.02],
+    [-.20,ankleX,.185,.205,.02],
+    [.10,ankleX,.205,.235,.02],
+    [.46,left?-.27:.31,.235,.27,.015],
+    [.86,left?-.33:.31,.275,.305,0],
+    [1.18,hipX,left?.315:.285,.345,-.025],
+    [1.46,hipX,.30,.32,-.035],
+    [1.65,hipX,0,0,-.04]
+  ].map(r=>[r[0]-1.3,r[1]-hipX,r[2],r[3],r[4]]);
+  const c0=new THREE.Color(left?0xeaa51a:0xe8ac1e);
+  const c1=new THREE.Color(0xf4bb29);
+  profileMesh('tapered-leg',leg,rows,plumage,(x,y,z,a)=>
+    c0.clone().lerp(c1,.28*Math.max(0,Math.sin(a)))
+  );
+  const foot=group(left?'left-foot':'right-foot',leg,ankleX-hipX,-1.60,.095);
+  ellipsoid('rounded-foot',foot,footMat,0,-.035,.085,.235,.105,.32);
+  for(let i=0;i<3;i++){
+    const toe=group('toe-'+(i+1),foot);
+    ellipsoid('toe',toe,footMat,(i-1)*.115,-.045,.30,.065,.065,.19);
+  }
+  return leg;
+}
+const leftLeg=makeLeg(-1);
+const rightLeg=makeLeg(1);
+
+function makeHand(parent,side){
+  const hand=group(side<0?'left-hand':'right-hand',parent);
+  const palm=group('palm',hand);
+  const p=ellipsoid('olive-palm',palm,handMat,side*.025,-.105,.025,.105,.14,.068);
+  p.rotation.z=side*.10;
+  const fingers=[];
+  const lengths=[.20,.265,.28,.22];
+  for(let i=0;i<4;i++){
+    const x=(i-1.5)*.052+side*.025;
+    const dx=(i-1.5)*.025+side*.014;
+    const len=lengths[i];
+    const f=group('finger-'+(i+1),hand,x,-.16,.035);
+    taperedCurve('proximal-finger',f,[
+      [0,0,0],[dx*.18,-len*.24,.014],[dx*.4,-len*.57,.024]
+    ],.029,.023,fingerMat);
+    const tipJoint=group('finger-tip-joint',f,dx*.4,-len*.57,.024);
+    taperedCurve('distal-finger',tipJoint,[
+      [0,0,0],[dx*.32,-len*.21,.006],[dx*.6,-len*.43,-.009]
+    ],.023,.012,fingerMat);
+    ellipsoid('rounded-fingertip',tipJoint,fingerMat,
+      dx*.6,-len*.43,-.009,.013,.017,.014);
+    fingers.push({root:f,tip:tipJoint});
+  }
+  const thumb=group('thumb',hand);
+  taperedCurve('bent-thumb',thumb,[
+    [-side*.062,-.055,.045],
+    [-side*.12,-.10,.073],
+    [-side*.145,-.18,.081],
+    [-side*.13,-.25,.07]
+  ],.036,.017,handMat);
+  ellipsoid('thumb-tip',thumb,handMat,-side*.13,-.25,.07,.017,.022,.018);
+  hand.userData={fingers,thumb,side};
+  return hand;
+}
+
+const wingGold=new THREE.Color(0xeeb919);
+const wingLight=new THREE.Color(0xf7c523);
+const wristColor=new THREE.Color(0x9f9135);
+function wingColor(x,y,z,a){
+  return wingGold.clone().lerp(wingLight,Math.max(0,Math.sin(a))*.25);
+}
+function makeArm(side){
+  const left=side<0;
+  const shoulder=new THREE.Vector3(left?-.65:.62,left?3.25:3.27,left?-.045:.10);
+  const arm=group(left?'left-arm':'right-arm',torso,
+    shoulder.x,shoulder.y-2,shoulder.z);
+  const upper=group('upper-wing',arm);
+  profileMesh('rounded-upper-wing',upper,[
+    [-1.10,0,0,0,0],
+    [-1,0,.105,.105,0],
+    [-.80,0,.122,.125,0],
+    [-.35,0,.148,.156,0],
+    [0,0,.150,.155,0],
+    [.15,0,0,0,0]
+  ],plumage,wingColor);
+  const elbow=group('elbow',arm);
+  ellipsoid('rounded-elbow',elbow,headMat,0,0,0,.108,.11,.108);
+  const fore=group('fore-wing',elbow);
+  profileMesh('tapering-fore-wing',fore,[
+    [-1.10,0,0,0,0],
+    [-1,0,.054,.061,0],
+    [-.85,0,.064,.074,0],
+    [-.45,0,.083,.095,0],
+    [0,0,.105,.105,0],
+    [.12,0,0,0,0]
+  ],plumage,(x,y,z,a)=>{
+    const c=wingColor(x,y,z,a);
+    return c.lerp(wristColor,1-THREE.MathUtils.smoothstep(y,-1,-.76));
+  });
+  const hand=makeHand(arm,side);
+  return {arm,upper,elbow,fore,hand,shoulder};
+}
+const leftArm=makeArm(-1);
+const rightArm=makeArm(1);
+
+const head=group('head',torso,.04,2.08,-.015);
+ellipsoid('rounded-feathered-skull',head,headMat,0,0,0,.35,.405,.36);
+
+const crown=group('crown-feathers',head);
+for(let i=0;i<13;i++){
+  const x=(rand()-.5)*.35,z=(rand()-.5)*.22;
+  const y=.405*Math.sqrt(Math.max(0,1-x*x/(.35*.35)-z*z/(.36*.36)));
+  const f=ellipsoid('small-crown-feather-'+i,crown,headMat,
+    x,y-.012,z,.022,.035,.023);
+  f.rotation.z=(rand()-.5)*.35;
+}
+
+const eyes=group('eyes',head);
+const eyeParts=[];
+function makeEye(side){
+  const eye=group(side<0?'left-eye':'right-eye',eyes,side*.165,.105,.267);
+  eye.rotation.y=side*.22;
+  const socket=ellipsoid('muted-golden-eye',eye,socketMat,0,0,0,.064,.082,.026);
+  const pupil=ellipsoid('dark-pupil',eye,pupilMat,side*.004,-.001,.024,.045,.059,.016);
+  const glint=ellipsoid('eye-catchlight',eye,eyeGlintMat,-.012,.021,.039,.008,.010,.004);
+  const upper=group('upper-eyelid',eye);
+  const lid=ellipsoid('heavy-yellow-lid',upper,lidMat,0,.028,.014,.077,.026,.032);
+  lid.rotation.z=side*.07;
+  const lower=ellipsoid('lower-eyelid',eye,headMat,0,-.032,.009,.069,.013,.026);
+  const brow=ellipsoid('soft-brow',eye,headMat,-side*.003,.064,-.016,.085,.033,.035);
+  brow.rotation.z=-side*.10;
+  eyeParts.push({eye,socket,pupil,glint,lid,lower,brow,side});
+}
+makeEye(-1);
+makeEye(1);
+
+const mouth=group('beak-and-mouth',head,.012,-.078,.286);
+const lowerBill=ellipsoid('lower-bill',mouth,lowerBeakMat,0,-.018,.094,.169,.037,.133);
+const upperBill=ellipsoid('short-upper-bill',mouth,beakMat,0,.025,.092,.194,.063,.162);
+const mouthLine=taperedCurve('expressive-mouth-line',mouth,[
+  [-.164,-.013,.151],
+  [-.105,-.022,.219],
+  [.005,-.026,.246],
+  [.105,-.021,.222],
+  [.169,-.010,.154]
+],.007,.005,mouthMat);
+const mouthBase=mouthLine.geometry.attributes.position.array.slice();
+const nostrils=group('nostrils',mouth);
+ellipsoid('left-nostril',nostrils,lowerBeakMat,-.080,.054,.205,.012,.006,.006);
+ellipsoid('right-nostril',nostrils,lowerBeakMat,.080,.054,.205,.012,.006,.006);
+
+const keys=[];
+const base={
+  x:0,y:0,s:1,wx:1,stretch:1,pitch:0,roll:0,yaw:0,hs:1,
+  open:0,smile:0,jaw:0,
+  Le:[-.87,2.60,.03],Lw:[-1.05,1.82,.105],
+  Re:[.84,2.57,.06],Rw:[1.01,1.72,.03],
+  Lrot:[0,0,-.11],Rrot:[0,0,.12],Hrot:[0,.13,0],
+  Lcurl:.08,Rcurl:.08,Lspread:.06,Rspread:.06,Lsize:1,Rsize:1,
+  Lleg:[0,0,0],Rleg:[0,0,0]
+};
+function add(t,p){
+  keys.push({...((keys.length)?keys[keys.length-1]:base),...p,t});
+}
+add(0,{});
+add(350,{
+  x:-.16,y:-.015,yaw:.08,stretch:.94,roll:.015,open:.55,smile:.15,
+  Le:[-.91,2.63,.30],Lw:[-.64,2.65,.66],
+  Re:[.76,2.65,.35],Rw:[.49,2.73,.65],
+  Lrot:[0,.5,1.65],Rrot:[0,-.5,-1.75],
+  Lcurl:.20,Rcurl:.25,Lspread:.12,Rspread:.10,
+  Hrot:[.045,.12,-.025],Lleg:[-.025,0,-.025],Rleg:[.025,0,.015]
+});
+add(800,{
+  x:-.43,y:-.045,s:1,wx:1.02,stretch:.84,pitch:.025,roll:0,yaw:.18,hs:1.04,
+  open:1,smile:.30,jaw:.08,
+  Le:[-.75,2.77,.45],Lw:[-.12,3.40,.89],
+  Re:[.53,2.87,.55],Rw:[.35,3.43,.83],
+  Lrot:[.08,1.05,2.70],Rrot:[-.08,-.65,-2.80],
+  Hrot:[.08,.06,-.06],
+  Lcurl:.44,Rcurl:.42,Lspread:.10,Rspread:.08,Lsize:1.04,Rsize:1.04,
+  Lleg:[-.045,0,-.02],Rleg:[.045,0,.015]
+});
+add(1150,{
+  x:-.20,y:-.07,s:1.01,wx:1.01,stretch:.89,pitch:0,roll:.06,yaw:.07,hs:1.02,
+  open:1,smile:.65,jaw:.03,
+  Le:[-.91,2.59,.49],Lw:[-.56,3.04,.83],
+  Re:[.77,2.72,.42],Rw:[.94,2.98,.57],
+  Lrot:[.02,2.25,3.00],Rrot:[.05,-.55,2.05],
+  Hrot:[-.015,.07,-.035],
+  Lcurl:.12,Rcurl:.18,Lspread:.34,Rspread:.18,Lsize:1.02,Rsize:1,
+  Lleg:[-.10,0,.045],Rleg:[.065,0,-.03]
+});
+add(1530,{
+  x:0,y:-.13,s:1.025,wx:1.015,stretch:.90,pitch:-.015,roll:.09,yaw:.025,hs:1,
+  open:1,smile:.90,jaw:.025,
+  Le:[-.95,2.45,.45],Lw:[-.73,2.98,.72],
+  Re:[.79,2.62,.20],Rw:[1.10,2.73,.22],
+  Lrot:[.02,2.65,3.05],Rrot:[.03,-.45,1.48],
+  Hrot:[-.025,.03,-.04],
+  Lcurl:.10,Rcurl:.28,Lspread:.48,Rspread:.10,Lsize:1.06,Rsize:1,
+  Lleg:[-.12,0,.10],Rleg:[.08,0,-.06]
+});
+add(1900,{
+  x:.065,y:-.43,s:1.16,wx:1.035,stretch:.97,pitch:0,roll:.035,yaw:.015,hs:1.025,
+  open:1,smile:.15,jaw:0,
+  Le:[-1.04,2.55,.25],Lw:[-1.27,2.09,.27],
+  Re:[.86,2.55,.06],Rw:[.99,1.83,.01],
+  Lrot:[.02,.25,-.70],Rrot:[0,.15,.20],
+  Hrot:[-.025,.015,-.01],
+  Lcurl:.12,Rcurl:.10,Lspread:.13,Rspread:.07,Lsize:1,Rsize:1,
+  Lleg:[-.04,0,-.045],Rleg:[.025,0,.04]
+});
+add(2330,{
+  x:.16,y:-1.06,s:1.34,wx:1.06,stretch:1,pitch:-.015,roll:.015,yaw:-.025,hs:1.04,
+  open:1,smile:-.38,jaw:0,
+  Le:[-.96,2.61,.12],Lw:[-1.36,1.90,.26],
+  Re:[.80,2.47,.01],Rw:[.88,1.64,-.05],
+  Lrot:[0,.10,-.75],Rrot:[0,.20,.15],
+  Hrot:[-.055,-.03,0],
+  Lcurl:.11,Rcurl:.10,Lspread:.10,Rspread:.06,Lsize:1,Rsize:1,
+  Lleg:[.035,0,-.10],Rleg:[-.035,0,.06]
+});
+add(2720,{
+  x:.045,y:-.49,s:1.17,wx:1.025,stretch:1,pitch:0,roll:.04,yaw:.015,hs:1.045,
+  open:.95,smile:.48,jaw:0,
+  Le:[-.93,2.47,.44],Lw:[-.72,2.73,.95],
+  Re:[.85,2.43,-.01],Rw:[1.00,1.70,-.04],
+  Lrot:[.02,2.15,2.75],Rrot:[0,.22,.14],
+  Hrot:[.015,.02,-.02],
+  Lcurl:.05,Rcurl:.10,Lspread:.65,Rspread:.08,Lsize:1.18,Rsize:1,
+  Lleg:[-.03,0,-.05],Rleg:[.025,0,.07]
+});
+add(3130,{
+  x:-.015,y:-.26,s:1.065,wx:1.015,stretch:1,pitch:0,roll:.08,yaw:-.03,hs:1.08,
+  open:1,smile:.90,jaw:.015,
+  Le:[-.88,2.42,.59],Lw:[-.47,3.07,1.22],
+  Re:[.84,2.42,-.015],Rw:[1.02,1.67,-.03],
+  Lrot:[.02,Math.PI,3.05],Rrot:[0,.20,.13],
+  Hrot:[.04,-.02,-.015],
+  Lcurl:.015,Rcurl:.12,Lspread:.95,Rspread:.10,Lsize:1.28,Rsize:1,
+  Lleg:[-.045,0,-.04],Rleg:[.04,0,.08]
+});
+add(3490,{
+  x:.12,y:-.11,s:1.04,wx:1,stretch:.98,pitch:.055,roll:.025,yaw:-.63,hs:1.03,
+  open:1,smile:.55,jaw:.025,
+  Le:[-.76,2.83,.80],Lw:[-.64,3.35,1.31],
+  Re:[.78,2.95,.58],Rw:[.70,3.55,.98],
+  Lrot:[-1.25,.25,.30],Rrot:[.03,-1.15,2.90],
+  Hrot:[.02,.04,-.015],
+  Lcurl:.12,Rcurl:.53,Lspread:.22,Rspread:.10,Lsize:1.04,Rsize:1.02,
+  Lleg:[.07,0,-.02],Rleg:[-.09,0,.035]
+});
+add(3930,{
+  x:.28,y:-.03,s:1.03,wx:1,stretch:.96,pitch:.11,roll:0,yaw:-1.43,hs:1,
+  open:1,smile:.25,jaw:.035,
+  Le:[-.70,2.84,.83],Lw:[-.64,3.44,1.36],
+  Re:[.74,3.02,.67],Rw:[.74,3.96,1.05],
+  Lrot:[-1.57,0,0],Rrot:[0,-1.55,3.20],
+  Hrot:[.02,.02,-.02],
+  Lcurl:.13,Rcurl:.62,Lspread:.12,Rspread:.08,Lsize:1,Rsize:1.03,
+  Lleg:[.12,0,.025],Rleg:[-.12,0,-.025]
+});
+add(4290,{
+  x:.40,y:-.18,s:1.055,wx:1,stretch:.98,pitch:.12,roll:0,yaw:-1.48,hs:1,
+  open:1,smile:.28,jaw:.015,
+  Le:[-.70,2.87,.86],Lw:[-.64,3.53,1.40],
+  Re:[.75,2.96,.72],Rw:[.74,3.87,1.12],
+  Lrot:[-1.57,.03,-.025],Rrot:[0,-1.48,3.13],
+  Hrot:[.025,0,-.01],
+  Lcurl:.14,Rcurl:.76,Lspread:.10,Rspread:.07,Lsize:1,Rsize:1,
+  Lleg:[-.05,0,.02],Rleg:[.06,0,-.02]
+});
+add(4670,{
+  x:.50,y:-.38,s:1.08,wx:1,stretch:1,pitch:.14,roll:0,yaw:-1.49,hs:1,
+  open:1,smile:.20,jaw:0,
+  Le:[-.70,2.89,.87],Lw:[-.64,3.59,1.40],
+  Re:[.76,2.94,.76],Rw:[.74,3.78,1.16],
+  Lrot:[-1.57,.03,-.03],Rrot:[.02,-1.48,3.08],
+  Hrot:[.02,-.02,0],
+  Lcurl:.16,Rcurl:.85,Lspread:.10,Rspread:.06,Lsize:1,Rsize:1,
+  Lleg:[-.18,0,.025],Rleg:[.10,0,-.025]
+});
+add(5070,{
+  x:.53,y:-.37,s:1.08,wx:1,stretch:1,pitch:.13,roll:0,yaw:-1.50,hs:1,
+  open:1,smile:.13,jaw:0,
+  Le:[-.84,2.74,.28],Lw:[-.85,2.45,.65],
+  Re:[.89,2.78,.20],Rw:[.91,2.45,.30],
+  Lrot:[-.48,.80,-.40],Rrot:[0,1.30,.30],
+  Hrot:[.02,-.045,0],
+  Lcurl:.12,Rcurl:.18,Lspread:.12,Rspread:.12,Lsize:1,Rsize:1,
+  Lleg:[-.07,0,.01],Rleg:[.035,0,-.01]
+});
+add(5470,{
+  x:.52,y:-.36,s:1.08,wx:1,stretch:1,pitch:.12,roll:0,yaw:-1.50,hs:1,
+  open:1,smile:.10,jaw:0,
+  Le:[-.86,2.53,.02],Lw:[-.96,1.80,.02],
+  Re:[.87,2.54,-.05],Rw:[.96,1.66,-.25],
+  Lrot:[0,.85,-.12],Rrot:[0,1.57,.12],
+  Hrot:[.015,-.07,0],
+  Lcurl:.09,Rcurl:.10,Lspread:.08,Rspread:.16,Lsize:1,Rsize:1,
+  Lleg:[.02,0,0],Rleg:[-.04,0,0]
+});
+keys.push({...keys[0],t:5540});
+
+function quaternionFrom(a){
+  return new THREE.Quaternion().setFromEuler(new THREE.Euler(a[0],a[1],a[2],'ZYX'));
+}
+for(const k of keys){
+  k.qL=quaternionFrom(k.Lrot);
+  k.qR=quaternionFrom(k.Rrot);
+  k.qH=quaternionFrom(k.Hrot);
+}
+
+const down=new THREE.Vector3(0,-1,0);
+function poseArm(arm,elbow,wrist){
+  const e=new THREE.Vector3(...elbow);
+  const w=new THREE.Vector3(...wrist);
+  const upperDirection=e.clone().sub(arm.shoulder);
+  const foreDirection=w.clone().sub(e);
+  const upperLength=upperDirection.length();
+  const foreLength=foreDirection.length();
+
+  arm.upper.quaternion.setFromUnitVectors(down,upperDirection.clone().normalize());
+  arm.upper.scale.set(1,upperLength,1);
+  arm.elbow.position.copy(upperDirection);
+  arm.fore.quaternion.setFromUnitVectors(down,foreDirection.normalize());
+  arm.fore.scale.set(1,foreLength,1);
+  arm.hand.position.copy(w.sub(arm.shoulder));
+}
+function poseFingers(hand,curl,spread,size){
+  hand.scale.setScalar(size);
+  const d=hand.userData;
+  for(let i=0;i<d.fingers.length;i++){
+    const f=d.fingers[i];
+    f.root.rotation.set(curl*.25,0,(i-1.5)/1.5*spread);
+    f.tip.rotation.x=curl*1.75;
+  }
+  d.thumb.rotation.set(curl*.22,0,-d.side*spread*.24);
+}
+
+const sleepyPupilColor=new THREE.Color(0x42442b);
+const awakePupilColor=new THREE.Color(0x14251b);
+
+function render(t){
+  const time=((Number.isFinite(t)?t:0)%5540+5540)%5540;
+  let index=0;
+  while(index<keys.length-2 && time>=keys[index+1].t) index++;
+  const a=keys[index],b=keys[index+1];
+  const u=(time-a.t)/(b.t-a.t);
+  const f=u*u*(3-2*u);
+  const n=name=>THREE.MathUtils.lerp(a[name],b[name],f);
+  const v=name=>[
+    THREE.MathUtils.lerp(a[name][0],b[name][0],f),
+    THREE.MathUtils.lerp(a[name][1],b[name][1],f),
+    THREE.MathUtils.lerp(a[name][2],b[name][2],f)
+  ];
+
+  bird.position.set(n('x'),n('y'),0);
+  bird.rotation.set(0,n('yaw'),0);
+  bird.scale.setScalar(n('s'));
+
+  torso.position.set(0,2,0);
+  torso.rotation.set(n('pitch'),0,n('roll'),'XYZ');
+  torso.scale.set(n('wx'),n('stretch'),1);
+
+  head.quaternion.slerpQuaternions(a.qH,b.qH,f);
+  head.scale.setScalar(n('hs'));
+
+  poseArm(leftArm,v('Le'),v('Lw'));
+  poseArm(rightArm,v('Re'),v('Rw'));
+  leftArm.hand.quaternion.slerpQuaternions(a.qL,b.qL,f);
+  rightArm.hand.quaternion.slerpQuaternions(a.qR,b.qR,f);
+  poseFingers(leftArm.hand,n('Lcurl'),n('Lspread'),n('Lsize'));
+  poseFingers(rightArm.hand,n('Rcurl'),n('Rspread'),n('Rsize'));
+
+  const ll=v('Lleg'),rl=v('Rleg');
+  leftLeg.rotation.set(ll[0],ll[1],ll[2]);
+  rightLeg.rotation.set(rl[0],rl[1],rl[2]);
+
+  const openness=n('open');
+  pupilMat.color.copy(sleepyPupilColor).lerp(awakePupilColor,openness);
+  for(const e of eyeParts){
+    e.eye.position.set(e.side*(.165+.075*openness),.105,.267+.03*openness);
+    e.socket.scale.y=.082*(.5+.5*openness);
+    e.pupil.scale.x=.045*(.54+.46*openness);
+    e.pupil.scale.y=.059*(.39+.61*openness);
+    e.glint.scale.set(.008*openness,.010*openness,.004*openness);
+    e.lid.position.y=.028+.052*openness;
+    e.lid.scale.y=.026*(1-.35*openness);
+    e.lower.position.y=-.032-.038*openness;
+    e.brow.position.y=.064+.036*openness;
+  }
+
+  const smile=n('smile');
+  lowerBill.position.y=-.018-n('jaw')*.035;
+  upperBill.scale.y=.063*(1-.10*Math.max(0,smile));
+  const attr=mouthLine.geometry.attributes.position;
+  for(let i=0;i<attr.count;i++){
+    const j=i*3;
+    const x=mouthBase[j];
+    attr.array[j]=x;
+    attr.array[j+1]=mouthBase[j+1]+smile*.045*
+      (Math.pow(Math.min(1,Math.abs(x)/.17),1.5)-.35);
+    attr.array[j+2]=mouthBase[j+2];
+  }
+  attr.needsUpdate=true;
+  mouthLine.geometry.computeVertexNormals();
+
+  scene.updateMatrixWorld(true);
+  renderer.render(scene,ref);
+}
+
+window.nwb={
+  scene,
+  renderer,
+  cameras:{ref},
+  characters:[bird],
+  render,
+  ready:true
+};
+render(0);
+</script>
+</body>
+</html>

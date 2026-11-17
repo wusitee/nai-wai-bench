@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+html,body{margin:0;padding:0;overflow:hidden;background:#fff;width:244px;height:240px}
+canvas{display:block}
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+import { mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js';
+
+const W = 244, H = 240;
+const renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true, antialias: true });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+
+// ---------- background (procedural gradient) ----------
+const bgc = document.createElement('canvas'); bgc.width = 64; bgc.height = 64;
+const bg = bgc.getContext('2d');
+const grad = bg.createLinearGradient(0, 0, 0, 64);
+grad.addColorStop(0, '#ffffff');
+grad.addColorStop(0.7, '#fcfcfc');
+grad.addColorStop(0.86, '#ececec');
+grad.addColorStop(1, '#d6d6d6');
+bg.fillStyle = grad; bg.fillRect(0, 0, 64, 64);
+const bgTex = new THREE.CanvasTexture(bgc);
+bgTex.colorSpace = THREE.SRGBColorSpace;
+scene.background = bgTex;
+
+// ---------- camera ----------
+const D = 8;
+const cam = new THREE.PerspectiveCamera(THREE.MathUtils.radToDeg(2 * Math.atan(1.2 / D)), W / H, 0.1, 100);
+cam.name = 'ref';
+cam.position.set(0, 0, D);
+cam.lookAt(0, 0, 0);
+cam.updateProjectionMatrix();
+cam.updateMatrixWorld(true);
+
+// ---------- lights ----------
+const hemi = new THREE.HemisphereLight(0xffffff, 0xcbb994, 1.6); hemi.name = 'hemi-light'; scene.add(hemi);
+const key = new THREE.DirectionalLight(0xffffff, 1.6); key.name = 'key-light'; key.position.set(1.5, 2.5, 6); scene.add(key);
+const fill = new THREE.DirectionalLight(0xfff4e0, 0.8); fill.name = 'fill-light'; fill.position.set(-4, 1, 4); scene.add(fill);
+const back = new THREE.DirectionalLight(0xffffff, 1.2); back.name = 'back-light'; back.position.set(0, 3, -6); scene.add(back);
+const sideR = new THREE.DirectionalLight(0xffffff, 0.6); sideR.name = 'side-light'; sideR.position.set(6, 0.5, -1); scene.add(sideR);
+
+// helper: world point at depth z that projects to pixel (px,py)
+function pix(px, py, z) {
+  const v = new THREE.Vector3((px / W) * 2 - 1, -(py / H) * 2 + 1, 0.5).unproject(cam);
+  const dir = v.sub(cam.position).normalize();
+  const t = (z - cam.position.z) / dir.z;
+  return cam.position.clone().addScaledVector(dir, t);
+}
+
+// ---------- character ----------
+const CX = 0.03;
+const character = new THREE.Group();
+character.name = 'character-yellow-bird';
+character.position.set(CX, 0, 0);
+scene.add(character);
+
+const body = new THREE.Group(); body.name = 'body'; character.add(body);
+
+// body profile (r, y)
+const prof = [[0,-1.48],[0.3,-1.45],[0.55,-1.36],[0.74,-1.2],[0.84,-1.0],[0.88,-0.8],[0.885,-0.6],[0.87,-0.4],[0.84,-0.2],[0.78,0.0],[0.7,0.2],[0.62,0.4],[0.54,0.6],[0.48,0.8],[0.43,1.0],[0.40,1.08],[0.35,1.22],[0.28,1.36],[0.18,1.44],[0,1.48]];
+const curve = new THREE.SplineCurve(prof.map(p => new THREE.Vector2(p[0], p[1])));
+const pts = curve.getSpacedPoints(140).map(p => new THREE.Vector2(Math.max(0, p.x), p.y));
+pts[0].x = 0; pts[pts.length - 1].x = 0;
+
+const bodyGeo = new THREE.LatheGeometry(pts, 96, Math.PI, Math.PI * 2);
+bodyGeo.scale(1, 1, 0.9);
+const bodyMat = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 0.6, metalness: 0 });
+const bodyMesh = new THREE.Mesh(bodyGeo, bodyMat);
+bodyMesh.name = 'body-mesh';
+body.add(bodyMesh);
+
+const head = new THREE.Group(); head.name = 'head'; head.position.set(0, 0.55, 0); body.add(head);
+
+scene.updateMatrixWorld(true);
+
+// vertex colors: yellow with cream belly (defined from reference projection)
+{
+  const pos = bodyGeo.attributes.position, nor = bodyGeo.attributes.normal;
+  const colors = new Float32Array(pos.count * 3);
+  const cY = new THREE.Color(0xf4c838), cB = new THREE.Color(0xf5e0c2), cW = new THREE.Color(0xfbf3e8), tmp = new THREE.Color();
+  const v = new THREE.Vector3();
+  const mw = bodyMesh.matrixWorld;
+  const ss = THREE.MathUtils.smoothstep;
+  for (let i = 0; i < pos.count; i++) {
+    v.fromBufferAttribute(pos, i).applyMatrix4(mw).project(cam);
+    const px = (v.x + 1) * 0.5 * W, py = (1 - v.y) * 0.5 * H;
+    const nz = nor.getZ(i);
+    const d = Math.hypot((px - 134) / 51, (py - 155) / 70);
+    const facing = ss(nz, 0.12, 0.4);
+    const w = (1 - ss(d, 0.72, 1.08)) * facing;
+    const w2 = (1 - ss(d, 0.0, 0.8)) * w;
+    tmp.copy(cY).lerp(cB, w).lerp(cW, w2 * 0.75);
+    colors[i * 3] = tmp.r; colors[i * 3 + 1] = tmp.g; colors[i * 3 + 2] = tmp.b;
+  }
+  bodyGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+}
+
+// raycast onto body surface
+const ray = new THREE.Raycaster();
+const Z = new THREE.Vector3(0, 0, 1);
+function hitBody(px, py) {
+  ray.setFromCamera(new THREE.Vector2((px / W) * 2 - 1, -(py / H) * 2 + 1), cam);
+  const hits = ray.intersectObject(bodyMesh, false);
+  if (!hits.length) return { p: new THREE.Vector3((px - 122) / 100, (120 - py) / 100, 0.4), n: Z.clone() };
+  const h = hits[0];
+  const n = h.face.normal.clone().transformDirection(bodyMesh.matrixWorld).normalize();
+  return { p: h.point.clone(), n };
+}
+
+// ---------- eyes ----------
+const eyes = new THREE.Group(); eyes.name = 'eyes'; head.add(eyes);
+const eyeGeo = new THREE.SphereGeometry(1, 24, 16);
+const eyeMat = new THREE.MeshStandardMaterial({ color: 0x16110d, roughness: 0.3 });
+[['eye-left', 101, 21], ['eye-right', 135, 19]].forEach(([nm, px, py]) => {
+  const h = hitBody(px, py);
+  const g = new THREE.Group(); g.name = nm;
+  g.position.copy(head.worldToLocal(h.p.clone()));
+  g.quaternion.setFromUnitVectors(Z, h.n);
+  const m = new THREE.Mesh(eyeGeo, eyeMat); m.name = nm + '-ball';
+  m.scale.set(0.04, 0.055, 0.03);
+  g.add(m);
+  eyes.add(g);
+});
+
+// ---------- beak / mouth ----------
+let beakGeo = new THREE.SphereGeometry(1, 28, 18);
+{
+  const bp = beakGeo.attributes.position;
+  for (let i = 0; i < bp.count; i++) {
+    const x = bp.getX(i), y = bp.getY(i), z = bp.getZ(i);
+    const k = y < 0 ? 1 + 0.5 * y : 1;
+    bp.setX(i, x * k);
+    bp.setZ(i, z * (y < 0 ? 1 + 0.25 * y : 1));
+  }
+  beakGeo.deleteAttribute('normal');
+  beakGeo.deleteAttribute('uv');
+  beakGeo = mergeVertices(beakGeo);
+  beakGeo.computeVertexNormals();
+}
+const beakMat = new THREE.MeshStandardMaterial({ color: 0xe8922a, roughness: 0.5 });
+const mouth = new THREE.Group(); mouth.name = 'mouth'; head.add(mouth);
+{
+  const hb = hitBody(119, 43);
+  const bdir = hb.n.clone().add(new THREE.Vector3(0, -0.1, 0.25)).normalize();
+  const beak = new THREE.Mesh(beakGeo, beakMat); beak.name = 'beak';
+  beak.position.copy(head.worldToLocal(hb.p.clone())).addScaledVector(hb.n, 0.025);
+  beak.quaternion.setFromUnitVectors(Z, bdir);
+  beak.scale.set(0.105, 0.08, 0.075);
+  mouth.add(beak);
+}
+
+// ---------- arms & hands ----------
+const yellowMat = new THREE.MeshStandardMaterial({ color: 0xf4c838, roughness: 0.6 });
+const brownMat = new THREE.MeshStandardMaterial({ color: 0x684427, roughness: 0.5 });
+const sphGeo = new THREE.SphereGeometry(1, 28, 20);
+const UP = new THREE.Vector3(0, 1, 0);
+
+function capsule(a, b, r, name) {
+  const d = b.clone().sub(a);
+  const len = d.length();
+  const m = new THREE.Mesh(new THREE.CapsuleGeometry(r, len, 8, 20), yellowMat);
+  m.position.copy(a).add(b).multiplyScalar(0.5);
+  m.quaternion.setFromUnitVectors(UP, d.normalize());
+  m.name = name;
+  return m;
+}
+const toLocal = v => v.sub(character.position);
+
+function buildArm(side, S, E, Wr, Hc, hs, tilt, thumbOff) {
+  S = toLocal(S); E = toLocal(E); Wr = toLocal(Wr); Hc = toLocal(Hc);
+  const arm = new THREE.Group(); arm.name = 'arm-' + side; arm.position.copy(S); body.add(arm);
+  arm.add(capsule(new THREE.Vector3(), E.clone().sub(S), 0.16, 'upperarm-' + side));
+  const fore = new THREE.Group(); fore.name = 'forearm-' + side; fore.position.copy(E).sub(S); arm.add(fore);
+  fore.add(capsule(new THREE.Vector3(), Wr.clone().sub(E), 0.145, 'forearm-mesh-' + side));
+  const hand = new THREE.Group(); hand.name = 'hand-' + side; hand.position.copy(Wr).sub(E); fore.add(hand);
+  const fist = new THREE.Mesh(sphGeo, brownMat); fist.name = 'fist-' + side;
+  fist.position.copy(Hc).sub(Wr);
+  fist.scale.copy(hs);
+  fist.rotation.z = tilt;
+  hand.add(fist);
+  const thumb = new THREE.Mesh(sphGeo, brownMat); thumb.name = 'thumb-' + side;
+  thumb.position.copy(fist.position).add(thumbOff);
+  thumb.scale.set(0.065, 0.08, 0.065);
+  hand.add(thumb);
+  return arm;
+}
+
+buildArm('left',
+  pix(84, 132, 0.40), pix(57, 138, 0.50), pix(70, 108, 0.55), pix(73, 90, 0.58),
+  new THREE.Vector3(0.165, 0.2, 0.15), 0.35, new THREE.Vector3(0.11, -0.04, 0.08));
+buildArm('right',
+  pix(182, 135, 0.30), pix(209, 146, 0.32), pix(208, 106, 0.34), pix(211, 81, 0.35),
+  new THREE.Vector3(0.155, 0.2, 0.15), -0.3, new THREE.Vector3(-0.1, -0.04, 0.08));
+
+// ---------- soft ground shadow ----------
+{
+  const sc = document.createElement('canvas'); sc.width = 64; sc.height = 64;
+  const sg = sc.getContext('2d');
+  const rg = sg.createRadialGradient(32, 32, 0, 32, 32, 32);
+  rg.addColorStop(0, 'rgba(0,0,0,0.32)');
+  rg.addColorStop(0.6, 'rgba(0,0,0,0.12)');
+  rg.addColorStop(1, 'rgba(0,0,0,0)');
+  sg.fillStyle = rg; sg.fillRect(0, 0, 64, 64);
+  const st = new THREE.CanvasTexture(sc);
+  const shadow = new THREE.Mesh(new THREE.PlaneGeometry(2.8, 2.2),
+    new THREE.MeshBasicMaterial({ map: st, transparent: true, depthWrite: false }));
+  shadow.name = 'ground-shadow';
+  shadow.rotation.x = -Math.PI / 2;
+  shadow.position.set(CX, -1.475, 0);
+  scene.add(shadow);
+}
+
+scene.updateMatrixWorld(true);
+
+function render(t) {
+  scene.updateMatrixWorld(true);
+  renderer.render(scene, cam);
+}
+render(0);
+
+window.nwb = { scene, renderer, cameras: { ref: cam }, characters: [character], render, ready: true };
+</script>
+</body>
+</html>

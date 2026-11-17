@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+html,body{margin:0;padding:0;width:244px;height:240px;overflow:hidden;background:#fff;}
+canvas{display:block;width:244px;height:240px;}
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+
+const W = 244, H = 240;
+const renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true, antialias: true });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H);
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xfbfbfb);
+
+const camera = new THREE.PerspectiveCamera(30, W / H, 0.1, 100);
+camera.position.set(0, 0, 10);
+camera.lookAt(0, 0, 0);
+
+// Lights
+scene.add(new THREE.HemisphereLight(0xffffff, 0xd8d0c0, 1.6));
+const key = new THREE.DirectionalLight(0xffffff, 1.6);
+key.position.set(1, 2, 6);
+scene.add(key);
+const back = new THREE.DirectionalLight(0xffffff, 0.8);
+back.position.set(-2, 3, -5);
+scene.add(back);
+
+// Floor
+const floor = new THREE.Mesh(
+  new THREE.PlaneGeometry(40, 40),
+  new THREE.MeshStandardMaterial({ color: 0xf2f2f0, roughness: 1 })
+);
+floor.rotation.x = -Math.PI / 2;
+floor.position.y = -3.0;
+floor.name = 'floor';
+scene.add(floor);
+
+const yellow = new THREE.MeshStandardMaterial({ color: 0xf6c814, roughness: 0.55 });
+const cream = new THREE.MeshStandardMaterial({ color: 0xf6dfc6, roughness: 0.6 });
+const brown = new THREE.MeshStandardMaterial({ color: 0x5e3d1e, roughness: 0.6 });
+const orange = new THREE.MeshStandardMaterial({ color: 0xe8960f, roughness: 0.5 });
+const black = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.3 });
+
+const character = new THREE.Group();
+character.name = 'character-chick';
+character.position.set(0.07, 0, 0);
+scene.add(character);
+
+// Body (lathe)
+const prof = [
+  [0, -3.0], [0.9, -2.95], [1.35, -2.75], [1.56, -2.2], [1.62, -1.5], [1.6, -1.0],
+  [1.5, -0.3], [1.3, 0.25], [1.12, 0.9], [1.0, 1.4], [0.92, 1.8], [0.82, 2.1],
+  [0.62, 2.38], [0.35, 2.55], [0, 2.6]
+].map(p => new THREE.Vector2(p[0], p[1]));
+const bodyGroup = new THREE.Group();
+bodyGroup.name = 'body';
+character.add(bodyGroup);
+const body = new THREE.Mesh(new THREE.LatheGeometry(prof, 48), yellow);
+body.scale.z = 0.85;
+bodyGroup.add(body);
+
+// Belly
+const belly = new THREE.Mesh(new THREE.SphereGeometry(1, 40, 30), cream);
+belly.name = 'belly';
+belly.scale.set(1.1, 1.45, 0.55);
+belly.position.set(0.1, -0.7, 0.85);
+bodyGroup.add(belly);
+
+// Head (part of body top, group for features)
+const head = new THREE.Group();
+head.name = 'head';
+head.position.set(0, 1.8, 0);
+character.add(head);
+
+const eyes = new THREE.Group();
+eyes.name = 'eyes';
+head.add(eyes);
+const eyeGeo = new THREE.SphereGeometry(0.065, 16, 12);
+const eyeL = new THREE.Mesh(eyeGeo, black);
+eyeL.name = 'eye-left';
+eyeL.position.set(-0.47, 0.38, 0.5);
+eyes.add(eyeL);
+const eyeR = new THREE.Mesh(eyeGeo, black);
+eyeR.name = 'eye-right';
+eyeR.position.set(0.11, 0.43, 0.62);
+eyes.add(eyeR);
+
+const mouth = new THREE.Group();
+mouth.name = 'mouth';
+head.add(mouth);
+const beak = new THREE.Mesh(new THREE.SphereGeometry(1, 24, 16), orange);
+beak.name = 'beak';
+beak.scale.set(0.34, 0.16, 0.22);
+beak.position.set(-0.16, -0.13, 0.82);
+mouth.add(beak);
+
+// Arms
+function makeArm(name, shoulder, hand) {
+  const g = new THREE.Group();
+  g.name = name;
+  g.position.copy(shoulder);
+  character.add(g);
+  const dir = new THREE.Vector3().subVectors(hand, shoulder);
+  const len = dir.length();
+  const arm = new THREE.Mesh(new THREE.CapsuleGeometry(0.26, len, 8, 16), yellow);
+  arm.position.copy(dir.clone().multiplyScalar(0.5));
+  arm.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().normalize());
+  g.add(arm);
+  const hg = new THREE.Group();
+  hg.name = name.replace('arm', 'hand');
+  hg.position.copy(dir);
+  g.add(hg);
+  const h = new THREE.Mesh(new THREE.SphereGeometry(1, 20, 16), brown);
+  h.scale.set(0.26, 0.32, 0.24);
+  h.quaternion.copy(arm.quaternion);
+  hg.add(h);
+  return g;
+}
+makeArm('arm-left', new THREE.Vector3(-1.1, -0.25, 0.3), new THREE.Vector3(-1.28, 0.68, 0.55));
+makeArm('arm-right', new THREE.Vector3(1.35, -0.15, 0.3), new THREE.Vector3(1.9, 0.85, 0.5));
+
+const characters = [character];
+
+function render(t) {
+  renderer.render(scene, camera);
+}
+render(0);
+
+window.nwb = { scene, renderer, cameras: { ref: camera }, characters, render, ready: true };
+</script>
+</body>
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chubby Yellow Duck</title>
+<style>
+  html, body {
+    margin: 0;
+    width: 244px;
+    height: 240px;
+    overflow: hidden;
+    background: #eeeeea;
+  }
+  canvas {
+    display: block;
+    width: 244px;
+    height: 240px;
+  }
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xeeeeea);
+
+const renderer = new THREE.WebGLRenderer({
+  antialias: true,
+  preserveDrawingBuffer: true
+});
+renderer.setPixelRatio(1);
+renderer.setSize(244, 240, false);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.08;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+document.body.appendChild(renderer.domElement);
+
+const viewHeight = 4.95;
+const aspect = 244 / 240;
+const ref = new THREE.OrthographicCamera(
+  -viewHeight * aspect / 2,
+   viewHeight * aspect / 2,
+   viewHeight / 2,
+  -viewHeight / 2,
+  0.1,
+  100
+);
+ref.position.set(0, 2.78, 10);
+ref.lookAt(0, 2.38, 0);
+
+const yellow = new THREE.MeshStandardMaterial({
+  color: 0xf1ca28,
+  roughness: 0.88,
+  metalness: 0
+});
+const bellyMaterial = new THREE.MeshStandardMaterial({
+  color: 0xf1e5bc,
+  roughness: 0.96,
+  metalness: 0,
+  side: THREE.DoubleSide
+});
+const handMaterial = new THREE.MeshStandardMaterial({
+  color: 0x493f2d,
+  roughness: 0.92
+});
+const eyeMaterial = new THREE.MeshStandardMaterial({
+  color: 0x171812,
+  roughness: 0.38
+});
+const beakMaterial = new THREE.MeshStandardMaterial({
+  color: 0xe5ad32,
+  roughness: 0.82
+});
+const beakLowerMaterial = new THREE.MeshStandardMaterial({
+  color: 0xd99c29,
+  roughness: 0.86
+});
+
+function smoothProfile(controls, samples = 100) {
+  const curve = new THREE.CatmullRomCurve3(
+    controls.map(([r, y]) => new THREE.Vector3(r, y, 0)),
+    false,
+    'catmullrom',
+    0.5
+  );
+  return curve.getPoints(samples).map(p => new THREE.Vector2(
+    Math.max(0, p.x),
+    p.y
+  ));
+}
+
+function radiusAt(profile, y) {
+  for (let i = 0; i < profile.length - 1; i++) {
+    const a = profile[i];
+    const b = profile[i + 1];
+    if (y >= a.y && y <= b.y) {
+      const f = (y - a.y) / Math.max(0.00001, b.y - a.y);
+      return THREE.MathUtils.lerp(a.x, b.x, f);
+    }
+  }
+  return 0;
+}
+
+function frontZ(profile, x, y) {
+  const r = radiusAt(profile, y);
+  return Math.sqrt(Math.max(0, r * r - x * x));
+}
+
+function latheMesh(profile, material, name) {
+  const mesh = new THREE.Mesh(new THREE.LatheGeometry(profile, 96), material);
+  mesh.name = name;
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  return mesh;
+}
+
+const character = new THREE.Group();
+character.name = 'character-chubby-yellow-duck';
+character.position.x = 0.025;
+scene.add(character);
+
+const bodyGroup = new THREE.Group();
+bodyGroup.name = 'body';
+character.add(bodyGroup);
+
+const bodyProfile = smoothProfile([
+  [0.00, 0.06],
+  [0.52, 0.08],
+  [1.02, 0.22],
+  [1.43, 0.48],
+  [1.65, 0.86],
+  [1.73, 1.28],
+  [1.72, 1.70],
+  [1.62, 2.12],
+  [1.43, 2.52],
+  [1.13, 2.85],
+  [0.72, 3.08],
+  [0.00, 3.16]
+]);
+bodyGroup.add(latheMesh(bodyProfile, yellow, 'round-pear-shaped-torso'));
+
+const bellyGroup = new THREE.Group();
+bellyGroup.name = 'cream-belly';
+bodyGroup.add(bellyGroup);
+
+const bellyVertices = [];
+const bellyIndices = [];
+const bellyRows = 56;
+const bellyColumns = 40;
+for (let row = 0; row <= bellyRows; row++) {
+  const t = row / bellyRows;
+  const y = THREE.MathUtils.lerp(0.23, 2.88, t);
+  const halfWidth = 1.12 * Math.pow(Math.sin(Math.PI * t), 0.72);
+  for (let col = 0; col <= bellyColumns; col++) {
+    const u = col / bellyColumns * 2 - 1;
+    const x = halfWidth * u;
+    const lift = 0.026 + 0.025 * (1 - u * u) * Math.sin(Math.PI * t);
+    const z = frontZ(bodyProfile, x, y) + lift;
+    bellyVertices.push(x, y, z);
+  }
+}
+for (let row = 0; row < bellyRows; row++) {
+  for (let col = 0; col < bellyColumns; col++) {
+    const a = row * (bellyColumns + 1) + col;
+    const b = a + 1;
+    const c = a + bellyColumns + 1;
+    const d = c + 1;
+    bellyIndices.push(a, c, b, b, c, d);
+  }
+}
+const bellyGeometry = new THREE.BufferGeometry();
+bellyGeometry.setAttribute(
+  'position',
+  new THREE.Float32BufferAttribute(bellyVertices, 3)
+);
+bellyGeometry.setIndex(bellyIndices);
+bellyGeometry.computeVertexNormals();
+const belly = new THREE.Mesh(bellyGeometry, bellyMaterial);
+belly.name = 'curved-oval-belly-patch';
+belly.receiveShadow = true;
+bellyGroup.add(belly);
+
+const headGroup = new THREE.Group();
+headGroup.name = 'head-and-neck';
+character.add(headGroup);
+
+const headProfile = smoothProfile([
+  [0.00, 1.95],
+  [0.78, 2.02],
+  [0.87, 2.35],
+  [0.85, 2.75],
+  [0.76, 3.15],
+  [0.65, 3.58],
+  [0.58, 3.95],
+  [0.53, 4.25],
+  [0.44, 4.47],
+  [0.28, 4.60],
+  [0.00, 4.65]
+]);
+
+function headLean(y) {
+  const f = THREE.MathUtils.clamp((y - 2.1) / 2.55, 0, 1);
+  return 0.065 * f * f;
+}
+
+const head = latheMesh(headProfile, yellow, 'soft-domed-head');
+const hp = head.geometry.attributes.position;
+for (let i = 0; i < hp.count; i++) {
+  hp.setX(i, hp.getX(i) + headLean(hp.getY(i)));
+}
+hp.needsUpdate = true;
+head.geometry.computeVertexNormals();
+headGroup.add(head);
+
+const eyesGroup = new THREE.Group();
+eyesGroup.name = 'eyes';
+headGroup.add(eyesGroup);
+
+function makeEye(name, x, y) {
+  const eye = new THREE.Mesh(new THREE.SphereGeometry(0.069, 24, 16), eyeMaterial);
+  eye.name = name;
+  eye.scale.set(0.88, 1.12, 0.72);
+  eye.position.set(
+    x + headLean(y),
+    y,
+    frontZ(headProfile, x, y) + 0.032
+  );
+  eye.castShadow = true;
+  eyesGroup.add(eye);
+  return eye;
+}
+makeEye('eye-left', -0.325, 4.155);
+makeEye('eye-right', 0.325, 4.19);
+
+const mouthGroup = new THREE.Group();
+mouthGroup.name = 'mouth-and-beak';
+headGroup.add(mouthGroup);
+
+const beakY = 3.855;
+const beakX = headLean(beakY);
+const beakZ = frontZ(headProfile, 0, beakY);
+
+const upperBeak = new THREE.Mesh(
+  new THREE.SphereGeometry(1, 32, 20),
+  beakMaterial
+);
+upperBeak.name = 'small-upper-beak';
+upperBeak.scale.set(0.185, 0.088, 0.12);
+upperBeak.position.set(beakX, beakY, beakZ + 0.075);
+upperBeak.castShadow = true;
+mouthGroup.add(upperBeak);
+
+const lowerBeak = new THREE.Mesh(
+  new THREE.SphereGeometry(1, 32, 16),
+  beakLowerMaterial
+);
+lowerBeak.name = 'small-lower-beak';
+lowerBeak.scale.set(0.15, 0.047, 0.085);
+lowerBeak.position.set(beakX, beakY - 0.065, beakZ + 0.07);
+lowerBeak.castShadow = true;
+mouthGroup.add(lowerBeak);
+
+const capsuleUp = new THREE.Vector3(0, 1, 0);
+const capsuleDirection = new THREE.Vector3();
+
+function poseCapsule(mesh, start, end) {
+  capsuleDirection.subVectors(end, start);
+  const distance = capsuleDirection.length();
+  mesh.position.copy(start).add(end).multiplyScalar(0.5);
+  mesh.quaternion.setFromUnitVectors(
+    capsuleUp,
+    capsuleDirection.normalize()
+  );
+  mesh.scale.y = distance / mesh.userData.baseDistance;
+}
+
+function capsuleBetween(name, start, end, radius, material) {
+  const direction = new THREE.Vector3().subVectors(end, start);
+  const distance = direction.length();
+  const mesh = new THREE.Mesh(
+    new THREE.CapsuleGeometry(radius, Math.max(0.01, distance - 2 * radius), 10, 24),
+    material
+  );
+  mesh.name = name;
+  mesh.userData.baseDistance = distance;
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  poseCapsule(mesh, start, end);
+  return mesh;
+}
+
+function makeArm(side, shoulder, wrist, handCenter, handTilt) {
+  const arm = new THREE.Group();
+  arm.name = `arm-${side}`;
+  character.add(arm);
+
+  const yellowArm = capsuleBetween(
+    `raised-yellow-arm-${side}`,
+    shoulder,
+    wrist,
+    0.205,
+    yellow
+  );
+  arm.add(yellowArm);
+
+  const handGroup = new THREE.Group();
+  handGroup.name = `hand-${side}`;
+  handGroup.position.copy(handCenter);
+  handGroup.rotation.z = handTilt;
+  arm.add(handGroup);
+
+  const hand = new THREE.Mesh(
+    new THREE.CapsuleGeometry(0.145, 0.20, 10, 28),
+    handMaterial
+  );
+  hand.name = `dark-rounded-mitten-${side}`;
+  hand.scale.set(0.93, 1, 0.82);
+  hand.castShadow = true;
+  hand.receiveShadow = true;
+  handGroup.add(hand);
+
+  return {
+    group: arm,
+    yellowArm,
+    handGroup,
+    shoulder: shoulder.clone()
+  };
+}
+
+const leftArm = makeArm(
+  'left',
+  new THREE.Vector3(-1.17, 2.10, 0.09),
+  new THREE.Vector3(-1.43, 2.73, 0.15),
+  new THREE.Vector3(-1.48, 2.99, 0.17),
+  0.27
+);
+const rightArm = makeArm(
+  'right',
+  new THREE.Vector3(1.17, 2.15, 0.08),
+  new THREE.Vector3(1.47, 2.82, 0.14),
+  new THREE.Vector3(1.53, 3.095, 0.16),
+  -0.23
+);
+
+const ground = new THREE.Mesh(
+  new THREE.PlaneGeometry(30, 30),
+  new THREE.MeshStandardMaterial({
+    color: 0xeeeeea,
+    roughness: 1
+  })
+);
+ground.name = 'matte-background-floor';
+ground.rotation.x = -Math.PI / 2;
+ground.position.y = 0;
+ground.receiveShadow = true;
+scene.add(ground);
+
+const shadowCanvas = document.createElement('canvas');
+shadowCanvas.width = 64;
+shadowCanvas.height = 64;
+const shadowContext = shadowCanvas.getContext('2d');
+const shadowGradient = shadowContext.createRadialGradient(32, 32, 2, 32, 32, 31);
+shadowGradient.addColorStop(0, 'rgba(80,75,58,0.24)');
+shadowGradient.addColorStop(0.45, 'rgba(80,75,58,0.13)');
+shadowGradient.addColorStop(1, 'rgba(80,75,58,0)');
+shadowContext.fillStyle = shadowGradient;
+shadowContext.fillRect(0, 0, 64, 64);
+const shadowTexture = new THREE.CanvasTexture(shadowCanvas);
+shadowTexture.colorSpace = THREE.SRGBColorSpace;
+const contactShadow = new THREE.Mesh(
+  new THREE.PlaneGeometry(3.6, 1.6),
+  new THREE.MeshBasicMaterial({
+    map: shadowTexture,
+    transparent: true,
+    depthWrite: false
+  })
+);
+contactShadow.name = 'soft-contact-shadow';
+contactShadow.rotation.x = -Math.PI / 2;
+contactShadow.position.set(0, 0.008, 0.12);
+scene.add(contactShadow);
+
+const hemisphere = new THREE.HemisphereLight(0xfffdf4, 0xc8c2ac, 1.85);
+scene.add(hemisphere);
+
+const keyLight = new THREE.DirectionalLight(0xfff8e8, 2.6);
+keyLight.position.set(-3.8, 7.5, 6.5);
+keyLight.castShadow = true;
+keyLight.shadow.mapSize.set(1024, 1024);
+keyLight.shadow.camera.left = -4;
+keyLight.shadow.camera.right = 4;
+keyLight.shadow.camera.top = 6;
+keyLight.shadow.camera.bottom = -2;
+keyLight.shadow.camera.near = 0.5;
+keyLight.shadow.camera.far = 20;
+keyLight.shadow.bias = -0.0004;
+keyLight.shadow.normalBias = 0.025;
+scene.add(keyLight);
+
+const fillLight = new THREE.DirectionalLight(0xf4f6ff, 1.15);
+fillLight.position.set(4, 4, 5);
+scene.add(fillLight);
+
+const rimLight = new THREE.DirectionalLight(0xfff3cf, 1.35);
+rimLight.position.set(0, 5, -5);
+scene.add(rimLight);
+
+const animationKeys = [
+  {
+    time: 0,
+    leftWrist: [-1.43, 2.73, 0.15],
+    leftHand: [-1.48, 2.99, 0.17],
+    leftTilt: 0.27,
+    rightWrist: [1.47, 2.82, 0.14],
+    rightHand: [1.53, 3.095, 0.16],
+    rightTilt: -0.23
+  },
+  {
+    time: 160,
+    leftWrist: [-1.86, 2.75, 0.15],
+    leftHand: [-1.95, 3.01, 0.17],
+    leftTilt: 0.12,
+    rightWrist: [0.91, 2.25, 0.14],
+    rightHand: [0.84, 2.49, 0.16],
+    rightTilt: -0.55
+  },
+  {
+    time: 340,
+    leftWrist: [-1.30, 2.18, 0.15],
+    leftHand: [-1.25, 2.43, 0.17],
+    leftTilt: 0.28,
+    rightWrist: [1.53, 2.25, 0.14],
+    rightHand: [1.58, 2.50, 0.16],
+    rightTilt: -0.28
+  },
+  {
+    time: 500,
+    leftWrist: [-1.90, 2.16, 0.15],
+    leftHand: [-1.95, 2.41, 0.17],
+    leftTilt: 0.18,
+    rightWrist: [1.38, 1.96, 0.14],
+    rightHand: [1.40, 2.21, 0.16],
+    rightTilt: -0.20
+  },
+  {
+    time: 680,
+    leftWrist: [-1.91, 2.37, 0.15],
+    leftHand: [-1.96, 2.62, 0.17],
+    leftTilt: 0.35,
+    rightWrist: [1.08, 2.47, 0.14],
+    rightHand: [1.02, 2.72, 0.16],
+    rightTilt: -0.65
+  },
+  {
+    time: 840,
+    leftWrist: [-1.35, 2.49, 0.15],
+    leftHand: [-1.30, 2.74, 0.17],
+    leftTilt: 0.27,
+    rightWrist: [1.57, 2.55, 0.14],
+    rightHand: [1.62, 2.80, 0.16],
+    rightTilt: -0.23
+  },
+  {
+    time: 1020,
+    leftWrist: [-1.92, 2.55, 0.15],
+    leftHand: [-1.98, 2.80, 0.17],
+    leftTilt: 0.08,
+    rightWrist: [0.99, 2.30, 0.14],
+    rightHand: [0.93, 2.55, 0.16],
+    rightTilt: -0.55
+  },
+  {
+    time: 1180,
+    leftWrist: [-1.40, 2.25, 0.15],
+    leftHand: [-1.35, 2.50, 0.17],
+    leftTilt: 0.25,
+    rightWrist: [1.55, 2.30, 0.14],
+    rightHand: [1.60, 2.55, 0.16],
+    rightTilt: -0.25
+  }
+];
+
+const sampledWrist = new THREE.Vector3();
+const sampledHand = new THREE.Vector3();
+const keyWristA = new THREE.Vector3();
+const keyWristB = new THREE.Vector3();
+const keyHandA = new THREE.Vector3();
+const keyHandB = new THREE.Vector3();
+
+function poseArmAtKeys(arm, keysA, keysB, amount, prefix) {
+  keyWristA.fromArray(keysA[`${prefix}Wrist`]);
+  keyWristB.fromArray(keysB[`${prefix}Wrist`]);
+  keyHandA.fromArray(keysA[`${prefix}Hand`]);
+  keyHandB.fromArray(keysB[`${prefix}Hand`]);
+
+  sampledWrist.lerpVectors(keyWristA, keyWristB, amount);
+  sampledHand.lerpVectors(keyHandA, keyHandB, amount);
+
+  poseCapsule(arm.yellowArm, arm.shoulder, sampledWrist);
+  arm.handGroup.position.copy(sampledHand);
+  arm.handGroup.rotation.z = THREE.MathUtils.lerp(
+    keysA[`${prefix}Tilt`],
+    keysB[`${prefix}Tilt`],
+    amount
+  );
+}
+
+function render(t) {
+  const loopTime = ((t % 1200) + 1200) % 1200;
+  let keyIndex = animationKeys.length - 1;
+
+  for (let i = 0; i < animationKeys.length - 1; i++) {
+    if (loopTime >= animationKeys[i].time && loopTime < animationKeys[i + 1].time) {
+      keyIndex = i;
+      break;
+    }
+  }
+
+  const a = animationKeys[keyIndex];
+  const b = animationKeys[(keyIndex + 1) % animationKeys.length];
+  const endTime = keyIndex === animationKeys.length - 1 ? 1200 : b.time;
+  const linearAmount = THREE.MathUtils.clamp(
+    (loopTime - a.time) / (endTime - a.time),
+    0,
+    1
+  );
+  const amount = linearAmount * linearAmount * (3 - 2 * linearAmount);
+
+  poseArmAtKeys(leftArm, a, b, amount, 'left');
+  poseArmAtKeys(rightArm, a, b, amount, 'right');
+
+  renderer.render(scene, ref);
+}
+
+window.nwb = {
+  scene,
+  renderer,
+  cameras: { ref },
+  characters: [character],
+  render,
+  ready: true
+};
+
+render(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,1940 @@
+{
+  "usage": {
+    "total": 1190181779,
+    "calls": 3998,
+    "no_usage_calls": 558,
+    "tokens": {
+      "input": 14200197,
+      "cache_read": 10826255,
+      "cache_write": 3217150,
+      "output": 9728880
+    },
+    "agents": {
+      "source": "toktop-collector snapshot of local coding-agent logs",
+      "first_day": "2026-10-28",
+      "last_day": "2026-11-17",
+      "sessions": 168,
+      "requests": 6571,
+      "models": [
+        {
+          "model": "claude-opus-5-5",
+          "requests": 3594,
+          "tokens": {
+            "input": 7940,
+            "cache_read": 844081724,
+            "cache_write": 13923694,
+            "output": 3191380
+          }
+        },
+        {
+          "model": "gpt-6.1-sol",
+          "requests": 2083,
+          "tokens": {
+            "input": 9525370,
+            "cache_read": 182175744,
+            "cache_write": 0,
+            "output": 1077972
+          }
+        },
+        {
+          "model": "gpt-6.1-terra",
+          "requests": 338,
+          "tokens": {
+            "input": 702565,
+            "cache_read": 47612416,
+            "cache_write": 0,
+            "output": 45407
+          }
+        },
+        {
+          "model": "claude-fable-5-2",
+          "requests": 242,
+          "tokens": {
+            "input": 512,
+            "cache_read": 37924881,
+            "cache_write": 930066,
+            "output": 309445
+          }
+        },
+        {
+          "model": "codex-auto-review",
+          "requests": 298,
+          "tokens": {
+            "input": 1018340,
+            "cache_read": 9080320,
+            "cache_write": 0,
+            "output": 30957
+          }
+        },
+        {
+          "model": "gpt-6-astra",
+          "requests": 9,
+          "tokens": {
+            "input": 80526,
+            "cache_read": 425856,
+            "cache_write": 0,
+            "output": 4619
+          }
+        },
+        {
+          "model": "claude-haiku-5-5",
+          "requests": 7,
+          "tokens": {
+            "input": 14,
+            "cache_read": 12323,
+            "cache_write": 43035,
+            "output": 4191
+          }
+        }
+      ],
+      "tokens": {
+        "input": 11335267,
+        "cache_read": 1121313264,
+        "cache_write": 14896795,
+        "output": 4663971
+      }
+    },
+    "tracks": [
+      {
+        "suite": "naihub-v1",
+        "role": "understanding",
+        "calls": 2208,
+        "no_usage_calls": 288,
+        "tokens": 15599602
+      },
+      {
+        "suite": "frontend",
+        "role": "frontend",
+        "calls": 230,
+        "no_usage_calls": 1,
+        "tokens": 10330424
+      },
+      {
+        "suite": "core",
+        "role": "understanding",
+        "calls": 665,
+        "no_usage_calls": 102,
+        "tokens": 5679360
+      },
+      {
+        "suite": "core",
+        "role": "judge",
+        "calls": 820,
+        "no_usage_calls": 152,
+        "tokens": 4602365
+      },
+      {
+        "suite": "core",
+        "role": "imagegen",
+        "calls": 75,
+        "no_usage_calls": 15,
+        "tokens": 1760731
+      }
+    ],
+    "entries": [
+      {
+        "entry": "deepseek-v4.1-flash",
+        "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+        "effort": "high",
+        "calls": 175,
+        "no_usage_calls": 175,
+        "tokens": {
+          "input": 0,
+          "cache_read": 0,
+          "cache_write": 0,
+          "output": 0
+        },
+        "usd": null,
+        "roles": {
+          "understanding": {
+            "calls": 175,
+            "usage_calls": 0,
+            "output": 0
+          }
+        }
+      },
+      {
+        "entry": "deepseek-v4-pro",
+        "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+        "effort": "high",
+        "calls": 25,
+        "no_usage_calls": 25,
+        "tokens": {
+          "input": 0,
+          "cache_read": 0,
+          "cache_write": 0,
+          "output": 0
+        },
+        "usd": null,
+        "roles": {
+          "judge": {
+            "calls": 10,
+            "usage_calls": 0,
+            "output": 0
+          },
+          "understanding": {
+            "calls": 15,
+            "usage_calls": 0,
+            "output": 0
+          }
+        }
+      },
+      {
+        "entry": "fable-5.1",
+        "model": "claude-fable-5-1",
+        "effort": "high",
+        "calls": 169,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 338,
+          "cache_read": 165475,
+          "cache_write": 134525,
+          "output": 54466
+        },
+        "usd": 4.449611249999998,
+        "roles": {
+          "understanding": {
+            "calls": 169,
+            "usage_calls": 169,
+            "output": 54466
+          }
+        }
+      },
+      {
+        "entry": "fable-5.1-max",
+        "model": "claude-fable-5-1",
+        "effort": "max",
+        "calls": 169,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 342,
+          "cache_read": 138803,
+          "cache_write": 141410,
+          "output": 555146
+        },
+        "usd": 29.563045749999997,
+        "roles": {
+          "understanding": {
+            "calls": 169,
+            "usage_calls": 169,
+            "output": 555146
+          }
+        }
+      },
+      {
+        "entry": "fable-5.2-xhigh",
+        "model": "claude-fable-5-2",
+        "effort": "xhigh",
+        "calls": 139,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 6186,
+          "cache_read": 67755,
+          "cache_write": 1185556,
+          "output": 4097879
+        },
+        "usd": 175.83375900000004,
+        "roles": {
+          "understanding": {
+            "calls": 75,
+            "usage_calls": 75,
+            "output": 135831
+          },
+          "frontend": {
+            "calls": 64,
+            "usage_calls": 64,
+            "output": 3962048
+          }
+        }
+      },
+      {
+        "entry": "haiku-5.5-max",
+        "model": "claude-haiku-5-5",
+        "effort": "max",
+        "calls": 25,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 50,
+          "cache_read": 0,
+          "cache_write": 21874,
+          "output": 163264
+        },
+        "usd": 0.08437125,
+        "roles": {
+          "understanding": {
+            "calls": 25,
+            "usage_calls": 25,
+            "output": 163264
+          }
+        }
+      },
+      {
+        "entry": "opus-5.5",
+        "model": "claude-opus-5-5",
+        "effort": "high",
+        "calls": 632,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 1264,
+          "cache_read": 165203,
+          "cache_write": 1370158,
+          "output": 539947
+        },
+        "usd": 17.68782660000001,
+        "roles": {
+          "judge": {
+            "calls": 439,
+            "usage_calls": 439,
+            "output": 351078
+          },
+          "understanding": {
+            "calls": 175,
+            "usage_calls": 175,
+            "output": 59308
+          },
+          "frontend": {
+            "calls": 18,
+            "usage_calls": 18,
+            "output": 129561
+          }
+        }
+      },
+      {
+        "entry": "opus-5.5-xhigh",
+        "model": "claude-opus-5-5",
+        "effort": "xhigh",
+        "calls": 28,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 56,
+          "cache_read": 0,
+          "cache_write": 194880,
+          "output": 823246
+        },
+        "usd": 17.439543999999998,
+        "roles": {
+          "frontend": {
+            "calls": 28,
+            "usage_calls": 28,
+            "output": 823246
+          }
+        }
+      },
+      {
+        "entry": "opus-5.5-max",
+        "model": "claude-opus-5-5",
+        "effort": "max",
+        "calls": 25,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 50,
+          "cache_read": 3243,
+          "cache_write": 18012,
+          "output": 519653
+        },
+        "usd": 10.4839686,
+        "roles": {
+          "understanding": {
+            "calls": 25,
+            "usage_calls": 25,
+            "output": 519653
+          }
+        }
+      },
+      {
+        "entry": "sonnet-5.5",
+        "model": "claude-sonnet-5-5",
+        "effort": "high",
+        "calls": 175,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 350,
+          "cache_read": 169936,
+          "cache_write": 129391,
+          "output": 64095
+        },
+        "usd": 0.9821210999999999,
+        "roles": {
+          "understanding": {
+            "calls": 175,
+            "usage_calls": 175,
+            "output": 64095
+          }
+        }
+      },
+      {
+        "entry": "sonnet-5.5-max",
+        "model": "claude-sonnet-5-5",
+        "effort": "max",
+        "calls": 25,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 50,
+          "cache_read": 0,
+          "cache_write": 21344,
+          "output": 131435
+        },
+        "usd": 1.36781,
+        "roles": {
+          "understanding": {
+            "calls": 25,
+            "usage_calls": 25,
+            "output": 131435
+          }
+        }
+      },
+      {
+        "entry": "gemini-3.8-flash",
+        "model": "gemini-3.8-flash-high",
+        "effort": "high",
+        "calls": 317,
+        "no_usage_calls": 317,
+        "tokens": {
+          "input": 0,
+          "cache_read": 0,
+          "cache_write": 0,
+          "output": 0
+        },
+        "usd": null,
+        "roles": {
+          "judge": {
+            "calls": 142,
+            "usage_calls": 0,
+            "output": 0
+          },
+          "understanding": {
+            "calls": 175,
+            "usage_calls": 0,
+            "output": 0
+          }
+        }
+      },
+      {
+        "entry": "gemini-image",
+        "model": "gemini-3.8-flash-high",
+        "effort": "high",
+        "calls": 15,
+        "no_usage_calls": 15,
+        "tokens": {
+          "input": 0,
+          "cache_read": 0,
+          "cache_write": 0,
+          "output": 0
+        },
+        "usd": null,
+        "roles": {
+          "imagegen": {
+            "calls": 15,
+            "usage_calls": 0,
+            "output": 0
+          }
+        }
+      },
+      {
+        "entry": "gemini-4-argon",
+        "model": "gemini-4-argon-high",
+        "effort": "high",
+        "calls": 25,
+        "no_usage_calls": 25,
+        "tokens": {
+          "input": 0,
+          "cache_read": 0,
+          "cache_write": 0,
+          "output": 0
+        },
+        "usd": null,
+        "roles": {
+          "understanding": {
+            "calls": 25,
+            "usage_calls": 0,
+            "output": 0
+          }
+        }
+      },
+      {
+        "entry": "gpt-5.6-sol",
+        "model": "gpt-5.6-sol",
+        "effort": "high",
+        "calls": 169,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 463721,
+          "cache_read": 1048576,
+          "cache_write": 0,
+          "output": 29504
+        },
+        "usd": 2.864394399999999,
+        "roles": {
+          "understanding": {
+            "calls": 169,
+            "usage_calls": 169,
+            "output": 29504
+          }
+        }
+      },
+      {
+        "entry": "gpt-5.6-sol-xhigh",
+        "model": "gpt-5.6-sol",
+        "effort": "xhigh",
+        "calls": 169,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 498035,
+          "cache_read": 1014272,
+          "cache_write": 0,
+          "output": 46779
+        },
+        "usd": 3.333428800000001,
+        "roles": {
+          "understanding": {
+            "calls": 169,
+            "usage_calls": 169,
+            "output": 46779
+          }
+        }
+      },
+      {
+        "entry": "gpt-6-astra",
+        "model": "gpt-6-astra",
+        "effort": "high",
+        "calls": 175,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 852407,
+          "cache_read": 1297152,
+          "cache_write": 0,
+          "output": 19054
+        },
+        "usd": 10.773921999999995,
+        "roles": {
+          "understanding": {
+            "calls": 175,
+            "usage_calls": 175,
+            "output": 19054
+          }
+        }
+      },
+      {
+        "entry": "gpt-6-astra-xhigh",
+        "model": "gpt-6-astra",
+        "effort": "xhigh",
+        "calls": 28,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 303852,
+          "cache_read": 179328,
+          "cache_write": 0,
+          "output": 483172
+        },
+        "usd": 27.376448000000003,
+        "roles": {
+          "frontend": {
+            "calls": 28,
+            "usage_calls": 28,
+            "output": 483172
+          }
+        }
+      },
+      {
+        "entry": "gpt-6-astra-max",
+        "model": "gpt-6-astra",
+        "effort": "max",
+        "calls": 25,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 74702,
+          "cache_read": 161408,
+          "cache_write": 0,
+          "output": 35976
+        },
+        "usd": 2.707228,
+        "roles": {
+          "understanding": {
+            "calls": 25,
+            "usage_calls": 25,
+            "output": 35976
+          }
+        }
+      },
+      {
+        "entry": "gpt-6-luna-max",
+        "model": "gpt-6-luna",
+        "effort": "max",
+        "calls": 25,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 109830,
+          "cache_read": 110592,
+          "cache_write": 0,
+          "output": 28296
+        },
+        "usd": 0.02623692,
+        "roles": {
+          "understanding": {
+            "calls": 25,
+            "usage_calls": 25,
+            "output": 28296
+          }
+        }
+      },
+      {
+        "entry": "chatgpt-image",
+        "model": "gpt-6.1-sol",
+        "effort": "low",
+        "calls": 30,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 185576,
+          "cache_read": 758272,
+          "cache_write": 0,
+          "output": 4725
+        },
+        "usd": null,
+        "roles": {
+          "imagegen": {
+            "calls": 30,
+            "usage_calls": 30,
+            "output": 4725
+          }
+        }
+      },
+      {
+        "entry": "chatgpt-images-2.6",
+        "model": "gpt-6.1-sol",
+        "effort": "low",
+        "calls": 30,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 155872,
+          "cache_read": 651904,
+          "cache_write": 0,
+          "output": 4382
+        },
+        "usd": null,
+        "roles": {
+          "imagegen": {
+            "calls": 30,
+            "usage_calls": 30,
+            "output": 4382
+          }
+        }
+      },
+      {
+        "entry": "gpt-6.1-sol",
+        "model": "gpt-6.1-sol",
+        "effort": "high",
+        "calls": 407,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 1852771,
+          "cache_read": 3245440,
+          "cache_write": 0,
+          "output": 238879
+        },
+        "usd": 6.418876000000002,
+        "roles": {
+          "judge": {
+            "calls": 214,
+            "usage_calls": 214,
+            "output": 69492
+          },
+          "understanding": {
+            "calls": 175,
+            "usage_calls": 175,
+            "output": 27781
+          },
+          "frontend": {
+            "calls": 18,
+            "usage_calls": 18,
+            "output": 141606
+          }
+        }
+      },
+      {
+        "entry": "gpt-6.1-sol-xhigh",
+        "model": "gpt-6.1-sol",
+        "effort": "xhigh",
+        "calls": 28,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 271134,
+          "cache_read": 168704,
+          "cache_write": 0,
+          "output": 552904
+        },
+        "usd": 6.088178399999999,
+        "roles": {
+          "frontend": {
+            "calls": 28,
+            "usage_calls": 28,
+            "output": 552904
+          }
+        }
+      },
+      {
+        "entry": "gpt-6.1-sol-max",
+        "model": "gpt-6.1-sol",
+        "effort": "max",
+        "calls": 25,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 56468,
+          "cache_read": 181248,
+          "cache_write": 0,
+          "output": 39654
+        },
+        "usd": 0.5276007999999999,
+        "roles": {
+          "understanding": {
+            "calls": 25,
+            "usage_calls": 25,
+            "output": 39654
+          }
+        }
+      },
+      {
+        "entry": "gpt-6.1-terra-xhigh",
+        "model": "gpt-6.1-terra",
+        "effort": "xhigh",
+        "calls": 169,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 532163,
+          "cache_read": 1163008,
+          "cache_write": 0,
+          "output": 20087
+        },
+        "usd": 0.6907484000000002,
+        "roles": {
+          "understanding": {
+            "calls": 169,
+            "usage_calls": 169,
+            "output": 20087
+          }
+        }
+      },
+      {
+        "entry": "gpt-6.1-terra-max",
+        "model": "gpt-6.1-terra",
+        "effort": "max",
+        "calls": 25,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 100215,
+          "cache_read": 135936,
+          "cache_write": 0,
+          "output": 38678
+        },
+        "usd": 0.30040180000000005,
+        "roles": {
+          "understanding": {
+            "calls": 25,
+            "usage_calls": 25,
+            "output": 38678
+          }
+        }
+      },
+      {
+        "entry": "kimi-k3",
+        "model": "kimi-code/k3",
+        "effort": "high",
+        "calls": 175,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 3644231,
+          "cache_read": 0,
+          "cache_write": 0,
+          "output": 48211
+        },
+        "usd": 11.655857999999995,
+        "roles": {
+          "understanding": {
+            "calls": 175,
+            "usage_calls": 175,
+            "output": 48211
+          }
+        }
+      },
+      {
+        "entry": "kimi-k3.1-pro",
+        "model": "kimi-code/k3.1-pro",
+        "effort": "high",
+        "calls": 208,
+        "no_usage_calls": 1,
+        "tokens": {
+          "input": 4258297,
+          "cache_read": 0,
+          "cache_write": 0,
+          "output": 236980
+        },
+        "usd": 10.886394,
+        "roles": {
+          "judge": {
+            "calls": 15,
+            "usage_calls": 15,
+            "output": 10351
+          },
+          "understanding": {
+            "calls": 175,
+            "usage_calls": 175,
+            "output": 44737
+          },
+          "frontend": {
+            "calls": 18,
+            "usage_calls": 17,
+            "output": 181892
+          }
+        }
+      },
+      {
+        "entry": "kimi-k3.1-pro-max",
+        "model": "kimi-code/k3.1-pro",
+        "effort": "max",
+        "calls": 28,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 531777,
+          "cache_read": 0,
+          "cache_write": 0,
+          "output": 655179
+        },
+        "usd": 7.6153439999999994,
+        "roles": {
+          "frontend": {
+            "calls": 28,
+            "usage_calls": 28,
+            "output": 655179
+          }
+        }
+      },
+      {
+        "entry": "egg-alpha",
+        "model": "tokenrhythm/egg-alpha",
+        "effort": "high",
+        "calls": 169,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 143639,
+          "cache_read": 0,
+          "cache_write": 0,
+          "output": 109867
+        },
+        "usd": 0.0,
+        "roles": {
+          "understanding": {
+            "calls": 169,
+            "usage_calls": 169,
+            "output": 109867
+          }
+        }
+      },
+      {
+        "entry": "glm-5.3-flash-pi",
+        "model": "zai-coding-cn/glm-5.3-flash",
+        "effort": "high",
+        "calls": 169,
+        "no_usage_calls": 0,
+        "tokens": {
+          "input": 156821,
+          "cache_read": 0,
+          "cache_write": 0,
+          "output": 187422
+        },
+        "usd": 0.11723414999999997,
+        "roles": {
+          "understanding": {
+            "calls": 169,
+            "usage_calls": 169,
+            "output": 187422
+          }
+        }
+      }
+    ],
+    "ladders": [
+      {
+        "model": "claude-fable-5-1",
+        "role": "understanding",
+        "tasks": 73,
+        "mixed_profiles": false,
+        "steps": [
+          {
+            "effort": "high",
+            "profile": "",
+            "mean_output": 500.6027397260274
+          },
+          {
+            "effort": "max",
+            "profile": "",
+            "mean_output": 7023.780821917808
+          }
+        ]
+      },
+      {
+        "model": "claude-opus-5-5",
+        "role": "understanding",
+        "tasks": 25,
+        "mixed_profiles": false,
+        "steps": [
+          {
+            "effort": "high",
+            "profile": "",
+            "mean_output": 729.2
+          },
+          {
+            "effort": "max",
+            "profile": "",
+            "mean_output": 20786.12
+          }
+        ]
+      },
+      {
+        "model": "claude-sonnet-5-5",
+        "role": "understanding",
+        "tasks": 25,
+        "mixed_profiles": false,
+        "steps": [
+          {
+            "effort": "high",
+            "profile": "",
+            "mean_output": 893.16
+          },
+          {
+            "effort": "max",
+            "profile": "",
+            "mean_output": 5257.4
+          }
+        ]
+      },
+      {
+        "model": "gpt-5.6-sol",
+        "role": "understanding",
+        "tasks": 73,
+        "mixed_profiles": false,
+        "steps": [
+          {
+            "effort": "high",
+            "profile": "Codex isolated-v1",
+            "mean_output": 289.07762557077626
+          },
+          {
+            "effort": "xhigh",
+            "profile": "Codex isolated-v1",
+            "mean_output": 499.55707762557074
+          }
+        ]
+      },
+      {
+        "model": "gpt-6-astra",
+        "role": "understanding",
+        "tasks": 25,
+        "mixed_profiles": true,
+        "steps": [
+          {
+            "effort": "high",
+            "profile": "Codex legacy-v1",
+            "mean_output": 388.64
+          },
+          {
+            "effort": "max",
+            "profile": "Codex isolated-v1",
+            "mean_output": 1439.04
+          }
+        ]
+      },
+      {
+        "model": "gpt-6.1-sol",
+        "role": "understanding",
+        "tasks": 25,
+        "mixed_profiles": true,
+        "steps": [
+          {
+            "effort": "high",
+            "profile": "Codex legacy-v1",
+            "mean_output": 600.28
+          },
+          {
+            "effort": "max",
+            "profile": "Codex isolated-v1",
+            "mean_output": 1586.16
+          }
+        ]
+      },
+      {
+        "model": "gpt-6.1-terra",
+        "role": "understanding",
+        "tasks": 25,
+        "mixed_profiles": false,
+        "steps": [
+          {
+            "effort": "xhigh",
+            "profile": "Codex isolated-v1",
+            "mean_output": 366.64
+          },
+          {
+            "effort": "max",
+            "profile": "Codex isolated-v1",
+            "mean_output": 1547.12
+          }
+        ]
+      },
+      {
+        "model": "claude-opus-5-5",
+        "role": "frontend",
+        "tasks": 18,
+        "mixed_profiles": false,
+        "steps": [
+          {
+            "effort": "high",
+            "profile": "",
+            "mean_output": 7197.833333333333
+          },
+          {
+            "effort": "xhigh",
+            "profile": "",
+            "mean_output": 33853.77777777778
+          }
+        ]
+      },
+      {
+        "model": "gpt-6.1-sol",
+        "role": "frontend",
+        "tasks": 18,
+        "mixed_profiles": true,
+        "steps": [
+          {
+            "effort": "high",
+            "profile": "Codex legacy-v1",
+            "mean_output": 7867.0
+          },
+          {
+            "effort": "xhigh",
+            "profile": "Codex isolated-v1",
+            "mean_output": 20437.61111111111
+          }
+        ]
+      },
+      {
+        "model": "kimi-code/k3.1-pro",
+        "role": "frontend",
+        "tasks": 17,
+        "mixed_profiles": false,
+        "steps": [
+          {
+            "effort": "high",
+            "profile": "",
+            "mean_output": 10699.529411764706
+          },
+          {
+            "effort": "max",
+            "profile": "",
+            "mean_output": 22578.470588235294
+          }
+        ]
+      }
+    ]
+  },
+  "contributions": {
+    "unit": "USD at pay-as-you-go API list prices from models.toml `price`",
+    "calls": 3998,
+    "contributors": [
+      {
+        "contributor": "Siwei Wang",
+        "usd": 141.31851185,
+        "calls": 3325,
+        "runs": [
+          "core/egg-alpha-core",
+          "core/fable-5.1-core",
+          "core/fable-5.1-max",
+          "core/fable52-core",
+          "core/gemini-4-argon",
+          "core/glm-5.3-flash-pi-core",
+          "core/gpt-6-astra-max",
+          "core/gpt-6-luna-max",
+          "core/gpt-6.1-sol-max",
+          "core/gpt-6.1-terra-max",
+          "core/haiku-5.5-max",
+          "core/images-2.6-core",
+          "core/opus-5.5-max",
+          "core/rel-0.1-with-egg-alpha",
+          "core/rel-0.1-with-fable-5.1",
+          "core/rel-0.1-with-glm-5.3-flash",
+          "core/rel-0.1-with-glm-5.3-flash-and-images-2.6",
+          "core/rel-0.1-with-gpt-5.6-sol",
+          "core/rel-0.1-with-images-2.6",
+          "core/sonnet-5.5-max",
+          "frontend/fable52-frontend",
+          "frontend/frontend-pilot",
+          "naihub-v1/egg-alpha-naihub",
+          "naihub-v1/glm-5.3-flash-pi-naihub",
+          "naihub-v1/rel-0.1-naihub-with-egg-alpha",
+          "naihub-v1/rel-0.1-naihub-with-fable-5.1",
+          "naihub-v1/rel-0.1-naihub-with-glm-5.3-flash",
+          "naihub-v1/rel-0.1-naihub-with-gpt-5.6-sol"
+        ],
+        "models": [
+          {
+            "model": "gpt-6-astra-xhigh",
+            "calls": 28,
+            "priced_calls": 28,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 483180,
+              "cached_input": 179328,
+              "cache_write": 0,
+              "output": 483172
+            },
+            "usd": 27.376448000000003,
+            "price": {
+              "input": 10.0,
+              "cached_input": 1.0,
+              "cache_write": 12.5,
+              "output": 50.0,
+              "source": "https://developers.openai.com/api/docs/pricing",
+              "as_of": "2026-10-25"
+            },
+            "roles": [
+              "frontend"
+            ]
+          },
+          {
+            "model": "opus-5.5",
+            "calls": 632,
+            "priced_calls": 632,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 1536625,
+              "cached_input": 165203,
+              "cache_write": 1370158,
+              "output": 539947
+            },
+            "usd": 17.68782660000001,
+            "price": {
+              "input": 4.0,
+              "cached_input": 0.2,
+              "cache_write": 5.0,
+              "output": 20.0,
+              "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+              "as_of": "2026-10-25"
+            },
+            "roles": [
+              "frontend",
+              "judge",
+              "understanding"
+            ]
+          },
+          {
+            "model": "opus-5.5-xhigh",
+            "calls": 28,
+            "priced_calls": 28,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 194936,
+              "cached_input": 0,
+              "cache_write": 194880,
+              "output": 823246
+            },
+            "usd": 17.439543999999998,
+            "price": {
+              "input": 4.0,
+              "cached_input": 0.2,
+              "cache_write": 5.0,
+              "output": 20.0,
+              "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+              "as_of": "2026-10-25"
+            },
+            "roles": [
+              "frontend"
+            ]
+          },
+          {
+            "model": "fable-5.2-xhigh",
+            "calls": 4,
+            "priced_calls": 4,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 16425,
+              "cached_input": 0,
+              "cache_write": 16417,
+              "output": 430599
+            },
+            "usd": 17.388194,
+            "price": {
+              "input": 8.0,
+              "cached_input": 0.2,
+              "cache_write": 10.0,
+              "output": 40.0,
+              "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+              "as_of": "2026-11-10"
+            },
+            "roles": [
+              "frontend"
+            ]
+          },
+          {
+            "model": "kimi-k3",
+            "calls": 175,
+            "priced_calls": 175,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 3644231,
+              "cached_input": 0,
+              "cache_write": 0,
+              "output": 48211
+            },
+            "usd": 11.655857999999995,
+            "price": {
+              "input": 3.0,
+              "cached_input": 0.3,
+              "cache_write": 3.0,
+              "output": 15.0,
+              "source": "https://platform.kimi.ai/",
+              "as_of": "2026-10-25"
+            },
+            "roles": [
+              "understanding"
+            ]
+          },
+          {
+            "model": "kimi-k3.1-pro",
+            "calls": 208,
+            "priced_calls": 207,
+            "unpriced_calls": 0,
+            "no_usage_calls": 1,
+            "tokens": {
+              "input": 4258297,
+              "cached_input": 0,
+              "cache_write": 0,
+              "output": 236980
+            },
+            "usd": 10.886394,
+            "price": {
+              "input": 2.0,
+              "cached_input": 0.2,
+              "cache_write": 2.0,
+              "output": 10.0,
+              "source": "https://platform.kimi.ai/",
+              "as_of": "2026-10-25"
+            },
+            "roles": [
+              "frontend",
+              "judge",
+              "understanding"
+            ]
+          },
+          {
+            "model": "gpt-6-astra",
+            "calls": 175,
+            "priced_calls": 175,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 2149559,
+              "cached_input": 1297152,
+              "cache_write": 0,
+              "output": 19054
+            },
+            "usd": 10.773921999999995,
+            "price": {
+              "input": 10.0,
+              "cached_input": 1.0,
+              "cache_write": 12.5,
+              "output": 50.0,
+              "source": "https://developers.openai.com/api/docs/pricing",
+              "as_of": "2026-10-25"
+            },
+            "roles": [
+              "understanding"
+            ]
+          },
+          {
+            "model": "kimi-k3.1-pro-max",
+            "calls": 28,
+            "priced_calls": 28,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 531777,
+              "cached_input": 0,
+              "cache_write": 0,
+              "output": 655179
+            },
+            "usd": 7.6153439999999994,
+            "price": {
+              "input": 2.0,
+              "cached_input": 0.2,
+              "cache_write": 2.0,
+              "output": 10.0,
+              "source": "https://platform.kimi.ai/",
+              "as_of": "2026-10-25"
+            },
+            "roles": [
+              "frontend"
+            ]
+          },
+          {
+            "model": "gpt-6.1-sol",
+            "calls": 407,
+            "priced_calls": 407,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 5098211,
+              "cached_input": 3245440,
+              "cache_write": 0,
+              "output": 238879
+            },
+            "usd": 6.418876000000002,
+            "price": {
+              "input": 2.0,
+              "cached_input": 0.1,
+              "cache_write": 2.5,
+              "output": 10.0,
+              "source": "https://developers.openai.com/api/docs/pricing",
+              "as_of": "2026-10-25"
+            },
+            "roles": [
+              "frontend",
+              "judge",
+              "understanding"
+            ]
+          },
+          {
+            "model": "gpt-6.1-sol-xhigh",
+            "calls": 28,
+            "priced_calls": 28,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 439838,
+              "cached_input": 168704,
+              "cache_write": 0,
+              "output": 552904
+            },
+            "usd": 6.088178399999999,
+            "price": {
+              "input": 2.0,
+              "cached_input": 0.1,
+              "cache_write": 2.5,
+              "output": 10.0,
+              "source": "https://developers.openai.com/api/docs/pricing",
+              "as_of": "2026-10-25"
+            },
+            "roles": [
+              "frontend"
+            ]
+          },
+          {
+            "model": "gpt-5.6-sol-xhigh",
+            "calls": 169,
+            "priced_calls": 169,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 1512307,
+              "cached_input": 1014272,
+              "cache_write": 0,
+              "output": 46779
+            },
+            "usd": 3.333428800000001,
+            "price": {
+              "input": 4.0,
+              "cached_input": 0.4,
+              "cache_write": 5.0,
+              "output": 20.0,
+              "source": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+              "as_of": "2026-10-29"
+            },
+            "roles": [
+              "understanding"
+            ]
+          },
+          {
+            "model": "gpt-5.6-sol",
+            "calls": 169,
+            "priced_calls": 169,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 1512297,
+              "cached_input": 1048576,
+              "cache_write": 0,
+              "output": 29504
+            },
+            "usd": 2.864394399999999,
+            "price": {
+              "input": 4.0,
+              "cached_input": 0.4,
+              "cache_write": 5.0,
+              "output": 20.0,
+              "source": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+              "as_of": "2026-10-29"
+            },
+            "roles": [
+              "understanding"
+            ]
+          },
+          {
+            "model": "sonnet-5.5",
+            "calls": 175,
+            "priced_calls": 175,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 299677,
+              "cached_input": 169936,
+              "cache_write": 129391,
+              "output": 64095
+            },
+            "usd": 0.9821210999999999,
+            "price": {
+              "input": 2.0,
+              "cached_input": 0.1,
+              "cache_write": 2.5,
+              "output": 10.0,
+              "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+              "as_of": "2026-10-25"
+            },
+            "roles": [
+              "understanding"
+            ]
+          },
+          {
+            "model": "gpt-6.1-terra-xhigh",
+            "calls": 169,
+            "priced_calls": 169,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 1695171,
+              "cached_input": 1163008,
+              "cache_write": 0,
+              "output": 20087
+            },
+            "usd": 0.6907484000000002,
+            "price": {
+              "input": 1.0,
+              "cached_input": 0.05,
+              "cache_write": 1.25,
+              "output": 5.0,
+              "source": "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+              "as_of": "2026-10-29"
+            },
+            "roles": [
+              "understanding"
+            ]
+          },
+          {
+            "model": "glm-5.3-flash-pi",
+            "calls": 169,
+            "priced_calls": 169,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 156821,
+              "cached_input": 0,
+              "cache_write": 0,
+              "output": 187422
+            },
+            "usd": 0.11723414999999997,
+            "price": {
+              "input": 0.15,
+              "cached_input": 0.03,
+              "cache_write": 0.0,
+              "output": 0.5,
+              "source": "pi-ai 1.5.0 model catalog (zai-coding-cn/glm-5.3-flash)",
+              "as_of": "2026-11-06"
+            },
+            "roles": [
+              "understanding"
+            ]
+          },
+          {
+            "model": "chatgpt-image",
+            "calls": 30,
+            "priced_calls": 0,
+            "unpriced_calls": 30,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 943848,
+              "cached_input": 758272,
+              "cache_write": 0,
+              "output": 4725
+            },
+            "usd": null,
+            "price": null,
+            "roles": [
+              "imagegen"
+            ]
+          },
+          {
+            "model": "chatgpt-images-2.6",
+            "calls": 30,
+            "priced_calls": 0,
+            "unpriced_calls": 30,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 807776,
+              "cached_input": 651904,
+              "cache_write": 0,
+              "output": 4382
+            },
+            "usd": null,
+            "price": null,
+            "roles": [
+              "imagegen"
+            ]
+          },
+          {
+            "model": "deepseek-v4-pro",
+            "calls": 25,
+            "priced_calls": 0,
+            "unpriced_calls": 0,
+            "no_usage_calls": 25,
+            "tokens": {
+              "input": 0,
+              "cached_input": 0,
+              "cache_write": 0,
+              "output": 0
+            },
+            "usd": null,
+            "price": null,
+            "roles": [
+              "judge",
+              "understanding"
+            ]
+          },
+          {
+            "model": "deepseek-v4.1-flash",
+            "calls": 175,
+            "priced_calls": 0,
+            "unpriced_calls": 0,
+            "no_usage_calls": 175,
+            "tokens": {
+              "input": 0,
+              "cached_input": 0,
+              "cache_write": 0,
+              "output": 0
+            },
+            "usd": null,
+            "price": null,
+            "roles": [
+              "understanding"
+            ]
+          },
+          {
+            "model": "egg-alpha",
+            "calls": 169,
+            "priced_calls": 169,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 143639,
+              "cached_input": 0,
+              "cache_write": 0,
+              "output": 109867
+            },
+            "usd": 0.0,
+            "price": {
+              "input": 0.0,
+              "cached_input": 0.0,
+              "cache_write": 0.0,
+              "output": 0.0,
+              "source": "https://tokenrhythm.studio/v1/models (free preview, listed at 0 CNY)",
+              "as_of": "2026-11-04"
+            },
+            "roles": [
+              "understanding"
+            ]
+          },
+          {
+            "model": "gemini-3.8-flash",
+            "calls": 317,
+            "priced_calls": 0,
+            "unpriced_calls": 0,
+            "no_usage_calls": 317,
+            "tokens": {
+              "input": 0,
+              "cached_input": 0,
+              "cache_write": 0,
+              "output": 0
+            },
+            "usd": null,
+            "price": null,
+            "roles": [
+              "judge",
+              "understanding"
+            ]
+          },
+          {
+            "model": "gemini-image",
+            "calls": 15,
+            "priced_calls": 0,
+            "unpriced_calls": 0,
+            "no_usage_calls": 15,
+            "tokens": {
+              "input": 0,
+              "cached_input": 0,
+              "cache_write": 0,
+              "output": 0
+            },
+            "usd": null,
+            "price": null,
+            "roles": [
+              "imagegen"
+            ]
+          }
+        ],
+        "unpriced_calls": 60,
+        "no_usage_calls": 533,
+        "rank": 1
+      },
+      {
+        "contributor": "wolassaaa",
+        "usd": 113.78848199999995,
+        "calls": 449,
+        "runs": [
+          "core/fable-5.1-core",
+          "core/fable-5.1-max",
+          "core/fable52-core",
+          "core/rel-0.1-with-egg-alpha",
+          "core/rel-0.1-with-fable-5.1",
+          "core/rel-0.1-with-glm-5.3-flash",
+          "core/rel-0.1-with-glm-5.3-flash-and-images-2.6",
+          "core/rel-0.1-with-images-2.6",
+          "frontend/fable52-frontend",
+          "naihub-v1/fable-5.1-max-naihub",
+          "naihub-v1/fable-5.1-naihub",
+          "naihub-v1/fable52-naihub",
+          "naihub-v1/rel-0.1-naihub-with-egg-alpha",
+          "naihub-v1/rel-0.1-naihub-with-fable-5.1",
+          "naihub-v1/rel-0.1-naihub-with-glm-5.3-flash"
+        ],
+        "models": [
+          {
+            "model": "fable-5.2-xhigh",
+            "calls": 111,
+            "priced_calls": 111,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 859262,
+              "cached_input": 67755,
+              "cache_write": 785389,
+              "output": 1796486
+            },
+            "usd": 79.77582499999995,
+            "price": {
+              "input": 8.0,
+              "cached_input": 0.2,
+              "cache_write": 10.0,
+              "output": 40.0,
+              "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+              "as_of": "2026-11-10"
+            },
+            "roles": [
+              "frontend",
+              "understanding"
+            ]
+          },
+          {
+            "model": "fable-5.1-max",
+            "calls": 169,
+            "priced_calls": 169,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 280555,
+              "cached_input": 138803,
+              "cache_write": 141410,
+              "output": 555146
+            },
+            "usd": 29.563045749999997,
+            "price": {
+              "input": 10.0,
+              "cached_input": 0.25,
+              "cache_write": 12.5,
+              "output": 50.0,
+              "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+              "as_of": "2026-10-31"
+            },
+            "roles": [
+              "understanding"
+            ]
+          },
+          {
+            "model": "fable-5.1",
+            "calls": 169,
+            "priced_calls": 169,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 300338,
+              "cached_input": 165475,
+              "cache_write": 134525,
+              "output": 54466
+            },
+            "usd": 4.449611249999998,
+            "price": {
+              "input": 10.0,
+              "cached_input": 0.25,
+              "cache_write": 12.5,
+              "output": 50.0,
+              "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+              "as_of": "2026-10-31"
+            },
+            "roles": [
+              "understanding"
+            ]
+          }
+        ],
+        "unpriced_calls": 0,
+        "no_usage_calls": 0,
+        "rank": 2
+      },
+      {
+        "contributor": "aulimaru",
+        "usd": 94.16735737,
+        "calls": 224,
+        "runs": [
+          "core/gemini-4-argon",
+          "core/gpt-6-astra-max",
+          "core/gpt-6-luna-max",
+          "core/gpt-6.1-sol-max",
+          "core/gpt-6.1-terra-max",
+          "core/haiku-5.5-max",
+          "core/opus-5.5-max",
+          "core/sonnet-5.5-max",
+          "frontend/fable52-frontend"
+        ],
+        "models": [
+          {
+            "model": "fable-5.2-xhigh",
+            "calls": 24,
+            "priced_calls": 24,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 383810,
+              "cached_input": 0,
+              "cache_write": 383750,
+              "output": 1870794
+            },
+            "usd": 78.66974,
+            "price": {
+              "input": 8.0,
+              "cached_input": 0.2,
+              "cache_write": 10.0,
+              "output": 40.0,
+              "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+              "as_of": "2026-11-10"
+            },
+            "roles": [
+              "frontend"
+            ]
+          },
+          {
+            "model": "opus-5.5-max",
+            "calls": 25,
+            "priced_calls": 25,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 21305,
+              "cached_input": 3243,
+              "cache_write": 18012,
+              "output": 519653
+            },
+            "usd": 10.4839686,
+            "price": {
+              "input": 4.0,
+              "cached_input": 0.2,
+              "cache_write": 5.0,
+              "output": 20.0,
+              "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+              "as_of": "2026-10-29"
+            },
+            "roles": [
+              "understanding"
+            ]
+          },
+          {
+            "model": "gpt-6-astra-max",
+            "calls": 25,
+            "priced_calls": 25,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 236110,
+              "cached_input": 161408,
+              "cache_write": 0,
+              "output": 35976
+            },
+            "usd": 2.707228,
+            "price": {
+              "input": 10.0,
+              "cached_input": 1.0,
+              "cache_write": 12.5,
+              "output": 50.0,
+              "source": "https://developers.openai.com/api/docs/pricing",
+              "as_of": "2026-10-29"
+            },
+            "roles": [
+              "understanding"
+            ]
+          },
+          {
+            "model": "sonnet-5.5-max",
+            "calls": 25,
+            "priced_calls": 25,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 21394,
+              "cached_input": 0,
+              "cache_write": 21344,
+              "output": 131435
+            },
+            "usd": 1.36781,
+            "price": {
+              "input": 2.0,
+              "cached_input": 0.1,
+              "cache_write": 2.5,
+              "output": 10.0,
+              "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+              "as_of": "2026-10-29"
+            },
+            "roles": [
+              "understanding"
+            ]
+          },
+          {
+            "model": "gpt-6.1-sol-max",
+            "calls": 25,
+            "priced_calls": 25,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 237716,
+              "cached_input": 181248,
+              "cache_write": 0,
+              "output": 39654
+            },
+            "usd": 0.5276007999999999,
+            "price": {
+              "input": 2.0,
+              "cached_input": 0.1,
+              "cache_write": 2.5,
+              "output": 10.0,
+              "source": "https://developers.openai.com/api/docs/pricing",
+              "as_of": "2026-10-29"
+            },
+            "roles": [
+              "understanding"
+            ]
+          },
+          {
+            "model": "gpt-6.1-terra-max",
+            "calls": 25,
+            "priced_calls": 25,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 236151,
+              "cached_input": 135936,
+              "cache_write": 0,
+              "output": 38678
+            },
+            "usd": 0.30040180000000005,
+            "price": {
+              "input": 1.0,
+              "cached_input": 0.05,
+              "cache_write": 1.25,
+              "output": 5.0,
+              "source": "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+              "as_of": "2026-10-29"
+            },
+            "roles": [
+              "understanding"
+            ]
+          },
+          {
+            "model": "haiku-5.5-max",
+            "calls": 25,
+            "priced_calls": 25,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 21924,
+              "cached_input": 0,
+              "cache_write": 21874,
+              "output": 163264
+            },
+            "usd": 0.08437125,
+            "price": {
+              "input": 0.1,
+              "cached_input": 0.01,
+              "cache_write": 0.125,
+              "output": 0.5,
+              "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+              "as_of": "2026-10-29"
+            },
+            "roles": [
+              "understanding"
+            ]
+          },
+          {
+            "model": "gpt-6-luna-max",
+            "calls": 25,
+            "priced_calls": 25,
+            "unpriced_calls": 0,
+            "no_usage_calls": 0,
+            "tokens": {
+              "input": 220422,
+              "cached_input": 110592,
+              "cache_write": 0,
+              "output": 28296
+            },
+            "usd": 0.02623692,
+            "price": {
+              "input": 0.1,
+              "cached_input": 0.01,
+              "cache_write": 0.125,
+              "output": 0.5,
+              "source": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+              "as_of": "2026-10-29"
+            },
+            "roles": [
+              "understanding"
+            ]
+          },
+          {
+            "model": "gemini-4-argon",
+            "calls": 25,
+            "priced_calls": 0,
+            "unpriced_calls": 0,
+            "no_usage_calls": 25,
+            "tokens": {
+              "input": 0,
+              "cached_input": 0,
+              "cache_write": 0,
+              "output": 0
+            },
+            "usd": null,
+            "price": null,
+            "roles": [
+              "understanding"
+            ]
+          }
+        ],
+        "unpriced_calls": 0,
+        "no_usage_calls": 25,
+        "rank": 3
+      }
+    ]
+  }
+}

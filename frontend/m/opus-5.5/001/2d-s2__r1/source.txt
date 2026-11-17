@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+html,body{margin:0;padding:0;width:240px;height:242px;overflow:hidden;background:#e9e4da;}
+svg{display:block;}
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 242" width="240" height="242">
+<defs>
+  <radialGradient id="yellowL" cx="0.4" cy="0.3" r="0.8">
+    <stop offset="0" stop-color="#ffd84a"/>
+    <stop offset="0.6" stop-color="#f6bd1c"/>
+    <stop offset="1" stop-color="#d9930c"/>
+  </radialGradient>
+  <radialGradient id="yellowR" cx="0.45" cy="0.3" r="0.8">
+    <stop offset="0" stop-color="#ffda4e"/>
+    <stop offset="0.6" stop-color="#f7c022"/>
+    <stop offset="1" stop-color="#dc980f"/>
+  </radialGradient>
+  <radialGradient id="belly" cx="0.5" cy="0.4" r="0.6">
+    <stop offset="0" stop-color="#fbf0cf"/>
+    <stop offset="1" stop-color="#ead39a"/>
+  </radialGradient>
+  <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#efece6"/>
+    <stop offset="1" stop-color="#d8cfc2"/>
+  </linearGradient>
+  <linearGradient id="board" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#2c403a"/>
+    <stop offset="1" stop-color="#3b5249"/>
+  </linearGradient>
+  <linearGradient id="desk" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#c9935b"/>
+    <stop offset="1" stop-color="#9c6838"/>
+  </linearGradient>
+  <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2"/>
+  </filter>
+</defs>
+
+<g id="background">
+  <rect x="0" y="0" width="240" height="242" fill="url(#wall)"/>
+  <rect id="blackboard" x="72" y="0" width="168" height="44" fill="url(#board)"/>
+  <rect x="72" y="42" width="168" height="4" fill="#8a7258"/>
+  <rect x="0" y="95" width="60" height="60" fill="#cbbfae" opacity="0.5" filter="url(#soft)"/>
+  <rect x="190" y="100" width="50" height="30" fill="#b8865a" opacity="0.6" filter="url(#soft)"/>
+  <rect id="desk-back" x="0" y="185" width="240" height="57" fill="url(#desk)"/>
+</g>
+
+<g id="character-left">
+  <g id="left-upper">
+    <g id="left-body">
+      <path d="M10 225 C-5 180 5 130 22 105 C32 72 50 55 70 55 C95 55 108 75 110 100 C120 130 128 175 120 225 Z" fill="url(#yellowL)"/>
+      <ellipse id="left-belly" cx="78" cy="172" rx="38" ry="36" fill="url(#belly)"/>
+    </g>
+    <g id="left-head">
+      <g id="left-eyes">
+        <ellipse cx="51" cy="90" rx="7.5" ry="8.5" fill="#2a2a2e"/>
+        <ellipse cx="83" cy="89" rx="7" ry="8" fill="#2a2a2e"/>
+        <circle cx="49" cy="87" r="2" fill="#fff"/>
+        <circle cx="81" cy="86" r="2" fill="#fff"/>
+      </g>
+      <g id="left-mouth">
+        <path d="M62 106 Q68 109 74 106" stroke="#a86d10" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      </g>
+    </g>
+  </g>
+  <g id="left-arm">
+    <path d="M18 150 C8 170 12 195 25 205 C35 212 48 206 46 196 C40 185 34 170 32 150 Z" fill="url(#yellowL)"/>
+    <g id="left-hand">
+      <ellipse cx="36" cy="203" rx="12" ry="9" fill="#efb21a"/>
+      <g id="left-pencil">
+        <line x1="40" y1="210" x2="18" y2="166" stroke="#e0a43a" stroke-width="3.5" stroke-linecap="round"/>
+        <line x1="40" y1="210" x2="43" y2="215" stroke="#333" stroke-width="2" stroke-linecap="round"/>
+      </g>
+      <path d="M28 200 Q34 205 40 200" stroke="#c88b10" stroke-width="1" fill="none"/>
+    </g>
+  </g>
+</g>
+
+<g id="props-left">
+  <g id="notebook-left">
+    <path d="M0 214 L108 204 L118 238 L0 242 Z" fill="#f7f5ef"/>
+    <path d="M58 209 L64 240" stroke="#c9c3b5" stroke-width="1"/>
+    <g stroke="#cfd6e0" stroke-width="0.7">
+      <line x1="6" y1="220" x2="56" y2="215"/>
+      <line x1="6" y1="227" x2="57" y2="222"/>
+      <line x1="6" y1="234" x2="58" y2="229"/>
+      <line x1="66" y1="214" x2="108" y2="210"/>
+      <line x1="67" y1="221" x2="110" y2="217"/>
+      <line x1="68" y1="228" x2="112" y2="224"/>
+    </g>
+  </g>
+</g>
+
+<g id="character-right">
+  <g id="right-upper">
+    <g id="right-body">
+      <path d="M100 120 C95 70 110 42 145 42 C178 42 190 70 192 100 C215 120 240 140 240 170 L240 225 L135 225 C120 190 105 160 100 120 Z" fill="url(#yellowR)"/>
+      <ellipse id="right-belly" cx="205" cy="190" rx="34" ry="24" fill="url(#belly)" opacity="0.85"/>
+    </g>
+    <g id="right-head">
+      <g id="right-eyes">
+        <ellipse cx="121" cy="70" rx="6.5" ry="7.5" fill="#2a2a2e"/>
+        <ellipse cx="147" cy="71" rx="7" ry="8" fill="#2a2a2e"/>
+        <circle cx="119" cy="67" r="1.8" fill="#fff"/>
+        <circle cx="145" cy="68" r="1.9" fill="#fff"/>
+      </g>
+      <g id="right-mouth">
+        <path d="M123 87 Q131 92 139 87" stroke="#8a5a0c" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      </g>
+    </g>
+    <g id="right-arm-back">
+      <path d="M110 98 C100 104 96 118 100 128 C106 130 114 124 118 112 Z" fill="#e8a915"/>
+    </g>
+  </g>
+  <g id="right-arm-front">
+    <path d="M160 130 C140 140 115 160 100 172 C92 180 98 195 110 190 C130 178 155 165 172 150 Z" fill="url(#yellowR)"/>
+    <g id="right-hand">
+      <ellipse cx="103" cy="182" rx="13" ry="10" fill="#efb21a"/>
+      <path d="M94 186 Q99 192 106 190" stroke="#c88b10" stroke-width="1" fill="none"/>
+      <path d="M92 178 Q96 174 100 176" stroke="#c88b10" stroke-width="1" fill="none"/>
+    </g>
+  </g>
+</g>
+
+<g id="props-right">
+  <g id="notebook-right">
+    <path d="M150 200 L238 194 L240 226 L160 232 Z" fill="#f6f3ec"/>
+    <path d="M196 197 L200 229" stroke="#c9c3b5" stroke-width="1"/>
+    <g stroke="#cfd6e0" stroke-width="0.7">
+      <line x1="158" y1="207" x2="192" y2="204"/>
+      <line x1="160" y1="214" x2="193" y2="211"/>
+      <line x1="161" y1="221" x2="194" y2="218"/>
+      <line x1="204" y1="203" x2="236" y2="200"/>
+      <line x1="205" y1="210" x2="237" y2="207"/>
+    </g>
+  </g>
+  <g id="pencils">
+    <line x1="140" y1="235" x2="215" y2="230" stroke="#d9a040" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="150" y1="240" x2="230" y2="236" stroke="#c7473a" stroke-width="2" stroke-linecap="round"/>
+    <line x1="120" y1="215" x2="150" y2="212" stroke="#e0b050" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</g>
+</svg>
+<script>
+(function(){
+  var T = [0,200,400,600,800,1000,1200,1400,1500];
+  // parameter tracks (last value = loop back to start)
+  var K = {
+    lRot:  [0,0.5,2,5,8,10,11,12,0],
+    lEyeX: [0,1,3,6,8,10,10,11,0],
+    lEyeY: [0,0,-1,-2,-3,-3,-3,-3,0],
+    lHead: [0,0,1,2,3,3,4,4,0],
+    rRot:  [0,0,-1,-3,-4,-5,-5,-5.5,0],
+    rDY:   [0,0,1,3,4,5,5,6,0],
+    rDX:   [0,0,-1,-2,-3,-4,-4,-5,0],
+    rEyeX: [0,0,-1,-2,-2,-3,-3,-3,0],
+    rArm:  [0,0,-1,-2,-3,-3,-4,-4,0]
+  };
+  function val(arr, t){
+    for (var i=0;i<T.length-1;i++){
+      if (t>=T[i] && t<=T[i+1]){
+        var u=(t-T[i])/(T[i+1]-T[i]);
+        u=u*u*(3-2*u);
+        return arr[i]+(arr[i+1]-arr[i])*u;
+      }
+    }
+    return arr[0];
+  }
+  var el = function(id){return document.getElementById(id);};
+  var lUpper=el('left-upper'), lHead=el('left-head'), lEyes=el('left-eyes'),
+      rUpper=el('right-upper'), rEyes=el('right-eyes'), rArm=el('right-arm-front'),
+      lMouth=el('left-mouth');
+  function render(t){
+    t = ((t % 1500) + 1500) % 1500;
+    var lr=val(K.lRot,t), ex=val(K.lEyeX,t), ey=val(K.lEyeY,t), lh=val(K.lHead,t),
+        rr=val(K.rRot,t), rdy=val(K.rDY,t), rdx=val(K.rDX,t), rex=val(K.rEyeX,t), ra=val(K.rArm,t);
+    lUpper.setAttribute('transform','rotate('+(lr*0.35).toFixed(3)+' 65 225)');
+    lHead.setAttribute('transform','rotate('+(lr*0.65).toFixed(3)+' 67 120) translate('+(lh*0.5).toFixed(3)+' 0)');
+    lEyes.setAttribute('transform','translate('+ex.toFixed(3)+' '+ey.toFixed(3)+')');
+    lMouth.setAttribute('transform','translate('+(ex*0.8).toFixed(3)+' '+(ey*0.6).toFixed(3)+')');
+    rUpper.setAttribute('transform','translate('+rdx.toFixed(3)+' '+rdy.toFixed(3)+') rotate('+rr.toFixed(3)+' 190 225)');
+    rEyes.setAttribute('transform','translate('+rex.toFixed(3)+' 0)');
+    rArm.setAttribute('transform','rotate('+ra.toFixed(3)+' 103 182) translate('+(rdx*0.3).toFixed(3)+' '+(rdy*0.3).toFixed(3)+')');
+  }
+  window.nwb = { render: render };
+  render(0);
+})();
+</script>
+</body>
+</html>

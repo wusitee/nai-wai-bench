@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Golden little dancer</title>
+<style>
+html,body{margin:0;width:244px;height:240px;overflow:hidden;background:#fff}
+canvas{display:block;width:244px;height:240px}
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color('#ffffff');
+
+const renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true });
+renderer.setPixelRatio(1);
+renderer.setSize(244,240);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+document.body.appendChild(renderer.domElement);
+
+const ref = new THREE.OrthographicCamera(-1.825,1.825,1.795,-1.795,0.1,50);
+ref.position.set(0,0.38,9);
+ref.lookAt(0,0.12,0);
+
+scene.add(new THREE.HemisphereLight(0xffffff,0xd4bd81,2.25));
+const key = new THREE.DirectionalLight(0xfff5d8,2.8);
+key.position.set(-3.5,6,5);
+key.castShadow = true;
+key.shadow.mapSize.set(1024,1024);
+key.shadow.camera.left = -4;
+key.shadow.camera.right = 4;
+key.shadow.camera.top = 5;
+key.shadow.camera.bottom = -4;
+key.shadow.normalBias = 0.035;
+key.shadow.bias = -0.0004;
+key.shadow.radius = 4;
+scene.add(key);
+const fill = new THREE.DirectionalLight(0xffffff,0.8);
+fill.position.set(4,2,-4);
+scene.add(fill);
+
+const character = new THREE.Group();
+character.name = 'golden-dancer';
+scene.add(character);
+const characters = [character];
+
+function group(name,parent=character){
+  const g = new THREE.Group();
+  g.name = name;
+  parent.add(g);
+  return g;
+}
+function material(color,roughness=0.88){
+  return new THREE.MeshStandardMaterial({color,roughness});
+}
+const gold = material('#efb526');
+const darkBrown = material('#665020');
+const eyeMaterial = material('#201e0b',0.48);
+const eyeRimMaterial = material('#c3a527');
+const muzzleMaterial = material('#f6bf2c');
+
+function ellipsoid(name,parent,position,scale,mat){
+  const mesh = new THREE.Mesh(new THREE.SphereGeometry(1,40,28),mat);
+  mesh.name = name;
+  mesh.position.set(...position);
+  mesh.scale.set(...scale);
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  parent.add(mesh);
+  return mesh;
+}
+
+const torso = group('body');
+const profile = [
+  [0,-2.00],[0.59,-1.96],[0.97,-1.78],
+  [1.20,-1.48],[1.31,-1.06],[1.31,-0.66],
+  [1.24,-0.25],[1.09,0.17],[0.88,0.57],
+  [0.66,0.93],[0.56,1.28],[0.53,1.59],
+  [0.44,1.84],[0.27,2.01],[0,2.06]
+];
+const curve = new THREE.CatmullRomCurve3(
+  profile.map(p=>new THREE.Vector3(p[0],p[1],0)),
+  false,'centripetal'
+);
+const outline = curve.getPoints(130).map(p=>new THREE.Vector2(Math.max(0,p.x),p.y));
+const bodyGeometry = new THREE.LatheGeometry(outline,112);
+bodyGeometry.scale(1,1,0.77);
+const positions = bodyGeometry.attributes.position;
+const colors = [];
+const upperColor = new THREE.Color('#ffcd18');
+const lowerColor = new THREE.Color('#dca13d');
+const bellyColor = new THREE.Color('#f5c873');
+for(let i=0;i<positions.count;i++){
+  const x=positions.getX(i), y=positions.getY(i), z=positions.getZ(i);
+  const h=THREE.MathUtils.smoothstep(y,-1.9,1.5);
+  const c=lowerColor.clone().lerp(upperColor,h);
+  const front=THREE.MathUtils.smoothstep(z,0.04,0.62);
+  const vertical=Math.exp(-Math.pow((y+0.62)/1.21,4));
+  const horizontal=Math.exp(-Math.pow(x/0.73,4));
+  c.lerp(bellyColor,front*vertical*horizontal*0.78);
+  colors.push(c.r,c.g,c.b);
+}
+bodyGeometry.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));
+bodyGeometry.computeVertexNormals();
+const skin = new THREE.Mesh(bodyGeometry,new THREE.MeshStandardMaterial({
+  vertexColors:true,roughness:0.94
+}));
+skin.name='continuous-pear-shaped-skin';
+skin.castShadow=true;
+skin.receiveShadow=true;
+torso.add(skin);
+
+const head = group('head');
+const eyes = group('eyes',head);
+function eye(name,x,y,z){
+  const socket=group(name,eyes);
+  socket.position.set(x,y,z);
+  socket.rotation.y=x<0?-0.29:0.29;
+  ellipsoid('soft-ochre-eye-surround',socket,[0,0,-0.016],[0.104,0.143,0.040],eyeRimMaterial);
+  ellipsoid('dark-oval-eye',socket,[0,0,0.013],[0.062,0.091,0.042],eyeMaterial);
+  ellipsoid('tiny-eye-glint',socket,[-0.015,0.030,0.049],[0.012,0.017,0.007],
+    material('#b2a974',0.4));
+}
+eye('left-eye',-0.326,1.535,0.345);
+eye('right-eye',0.326,1.585,0.345);
+
+const mouth=group('small-soft-muzzle',head);
+ellipsoid('rounded-yellow-muzzle',mouth,[0.012,1.292,0.433],[0.215,0.105,0.119],muzzleMaterial);
+ellipsoid('lower-muzzle',mouth,[0.012,1.258,0.446],[0.149,0.049,0.083],material('#edb52c'));
+
+function limb(name,parent,points,radii,mat){
+  const path=new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p)));
+  const segments=48, sides=32;
+  const frames=path.computeFrenetFrames(segments,false);
+  const verts=[], normals=[], uv=[], indices=[];
+  for(let i=0;i<=segments;i++){
+    const t=i/segments;
+    const p=path.getPointAt(t);
+    const q=t*(radii.length-1);
+    const j=Math.min(radii.length-2,Math.floor(q));
+    const s=q-j;
+    const r=THREE.MathUtils.lerp(radii[j],radii[j+1],s);
+    for(let k=0;k<=sides;k++){
+      const a=k/sides*Math.PI*2;
+      const n=frames.normals[i].clone().multiplyScalar(Math.cos(a))
+        .addScaledVector(frames.binormals[i],Math.sin(a));
+      verts.push(p.x+n.x*r,p.y+n.y*r,p.z+n.z*r);
+      normals.push(n.x,n.y,n.z);
+      uv.push(k/sides,t);
+      if(i<segments && k<sides){
+        const b=i*(sides+1)+k;
+        indices.push(b,b+sides+1,b+1,b+1,b+sides+1,b+sides+2);
+      }
+    }
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(verts,3));
+  geo.setAttribute('normal',new THREE.Float32BufferAttribute(normals,3));
+  geo.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));
+  geo.setIndex(indices);
+  geo.computeVertexNormals();
+  const mesh=new THREE.Mesh(geo,mat);
+  mesh.name=name;
+  mesh.castShadow=true;
+  mesh.receiveShadow=true;
+  parent.add(mesh);
+  return mesh;
+}
+
+const leftArm=group('left-arm-raised');
+limb('rounded-bent-left-arm',leftArm,[
+  [-0.79,0.18,0.02],
+  [-1.02,-0.035,0.12],
+  [-1.12,-0.035,0.28],
+  [-1.13,0.20,0.43],
+  [-0.96,0.51,0.56]
+],[0.25,0.32,0.31,0.255,0.20],gold);
+ellipsoid('left-elbow',leftArm,[-1.08,-0.04,0.24],[0.31,0.34,0.29],gold);
+
+const rightArm=group('right-arm-raised');
+limb('rounded-bent-right-arm',rightArm,[
+  [0.77,0.28,-0.02],
+  [1.02,0.04,0.02],
+  [1.30,0.045,0.04],
+  [1.40,0.28,0.11],
+  [1.31,0.66,0.19]
+],[0.245,0.29,0.29,0.23,0.16],gold);
+ellipsoid('right-elbow',rightArm,[1.29,0.07,0.04],[0.285,0.285,0.26],gold);
+
+function mitten(name,parent,pos,scale,rotation){
+  const hand=group(name,parent);
+  hand.position.set(...pos);
+  hand.rotation.z=rotation;
+  const geo=new THREE.SphereGeometry(1,48,36);
+  const attr=geo.attributes.position;
+  const cs=[];
+  const bottom=new THREE.Color('#957027');
+  const top=new THREE.Color('#4d431d');
+  for(let i=0;i<attr.count;i++){
+    const y=attr.getY(i);
+    const c=bottom.clone().lerp(top,THREE.MathUtils.smoothstep(y,-0.7,0.7));
+    cs.push(c.r,c.g,c.b);
+  }
+  geo.setAttribute('color',new THREE.Float32BufferAttribute(cs,3));
+  const mesh=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({
+    vertexColors:true,roughness:0.96
+  }));
+  mesh.name='soft-brown-mitten';
+  mesh.scale.set(...scale);
+  mesh.castShadow=true;
+  mesh.receiveShadow=true;
+  hand.add(mesh);
+  return hand;
+}
+const leftHand=mitten('left-hand',leftArm,[-0.89,0.66,0.60],[0.215,0.277,0.205],0.37);
+ellipsoid('left-thumb',leftHand,[0.145,-0.075,0.035],[0.102,0.13,0.12],material('#8d6927'));
+const rightHand=mitten('right-hand',rightArm,[1.33,0.82,0.21],[0.167,0.278,0.17],-0.35);
+ellipsoid('right-thumb',rightHand,[-0.105,-0.095,0.025],[0.095,0.125,0.11],darkBrown);
+
+const floor=new THREE.Mesh(
+  new THREE.PlaneGeometry(200,200),
+  new THREE.MeshStandardMaterial({color:'#ffffff',roughness:1})
+);
+floor.name='white-ground';
+floor.rotation.x=-Math.PI/2;
+floor.position.y=-2.015;
+floor.receiveShadow=true;
+scene.add(floor);
+
+function render(t){
+  renderer.render(scene,ref);
+}
+window.nwb={scene,renderer,cameras:{ref},characters,render,ready:true};
+render(0);
+</script>
+</body>
+</html>

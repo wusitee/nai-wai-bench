@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=244, initial-scale=1">
+<title>Yellow bird</title>
+<style>
+html,body{margin:0;padding:0;width:244px;height:240px;overflow:hidden;background:#fff}
+svg{display:block;width:244px;height:240px}
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" width="244" height="240" viewBox="0 0 244 240" role="img" aria-label="A soft yellow bird with small black eyes and both brown-tipped wings raised">
+<defs>
+  <linearGradient id="background" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#fff"/>
+    <stop offset=".8" stop-color="#fff"/>
+    <stop offset="1" stop-color="#f1eef0"/>
+  </linearGradient>
+  <radialGradient id="body-color" cx=".49" cy=".34" r=".75">
+    <stop offset="0" stop-color="#ffdd79"/>
+    <stop offset=".35" stop-color="#f8d27a"/>
+    <stop offset=".66" stop-color="#eec260"/>
+    <stop offset=".87" stop-color="#dfb14b"/>
+    <stop offset="1" stop-color="#c9a444"/>
+  </radialGradient>
+  <linearGradient id="body-bottom" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#e9b95e" stop-opacity="0"/>
+    <stop offset=".55" stop-color="#e5b86b" stop-opacity=".15"/>
+    <stop offset="1" stop-color="#cf9f57" stop-opacity=".65"/>
+  </linearGradient>
+  <radialGradient id="belly-color" cx=".47" cy=".34" r=".68">
+    <stop offset="0" stop-color="#ffe7a8" stop-opacity=".94"/>
+    <stop offset=".43" stop-color="#f9dca0" stop-opacity=".82"/>
+    <stop offset=".76" stop-color="#f1cc91" stop-opacity=".5"/>
+    <stop offset="1" stop-color="#ebc27a" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="head-color" cx=".48" cy=".2" r=".86">
+    <stop offset="0" stop-color="#ffe826"/>
+    <stop offset=".35" stop-color="#ffdb20"/>
+    <stop offset=".64" stop-color="#ffd028"/>
+    <stop offset=".83" stop-color="#f6be2c"/>
+    <stop offset="1" stop-color="#efba43" stop-opacity=".85"/>
+  </radialGradient>
+  <radialGradient id="face-light" cx=".48" cy=".2" r=".72">
+    <stop offset="0" stop-color="#fff04b" stop-opacity=".72"/>
+    <stop offset=".6" stop-color="#ffe136" stop-opacity=".17"/>
+    <stop offset="1" stop-color="#ffd42a" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="left-wing-color" x1=".13" y1=".1" x2=".76" y2=".94">
+    <stop offset="0" stop-color="#ffe843"/>
+    <stop offset=".27" stop-color="#ffdb25"/>
+    <stop offset=".61" stop-color="#ffc322"/>
+    <stop offset="1" stop-color="#e9a31b"/>
+  </linearGradient>
+  <linearGradient id="right-wing-color" x1="0" y1=".5" x2="1" y2=".35">
+    <stop offset="0" stop-color="#df9915"/>
+    <stop offset=".36" stop-color="#f5b716"/>
+    <stop offset=".75" stop-color="#ffd12a"/>
+    <stop offset="1" stop-color="#ffd83c"/>
+  </linearGradient>
+  <radialGradient id="left-hand-color" cx=".3" cy=".2" r=".88">
+    <stop offset="0" stop-color="#a18a43"/>
+    <stop offset=".28" stop-color="#79652d"/>
+    <stop offset=".63" stop-color="#514418"/>
+    <stop offset=".85" stop-color="#66501d"/>
+    <stop offset="1" stop-color="#956519"/>
+  </radialGradient>
+  <linearGradient id="right-hand-color" x1=".72" y1="0" x2=".28" y2="1">
+    <stop offset="0" stop-color="#a08e72"/>
+    <stop offset=".2" stop-color="#8b7754"/>
+    <stop offset=".48" stop-color="#6d542c"/>
+    <stop offset=".8" stop-color="#56401b"/>
+    <stop offset="1" stop-color="#8c611a"/>
+  </linearGradient>
+  <radialGradient id="eye-halo">
+    <stop offset="0" stop-color="#5a6121" stop-opacity=".8"/>
+    <stop offset=".48" stop-color="#7b8224" stop-opacity=".53"/>
+    <stop offset="1" stop-color="#aaa735" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="beak-color" x1="0" y1="0" x2=".15" y2="1">
+    <stop offset="0" stop-color="#ffda43"/>
+    <stop offset=".46" stop-color="#fbc336"/>
+    <stop offset="1" stop-color="#eeb334"/>
+  </linearGradient>
+  <filter id="soft-edge" x="-15%" y="-15%" width="130%" height="130%">
+    <feGaussianBlur stdDeviation="1.15"/>
+  </filter>
+  <filter id="hand-softness" x="-25%" y="-25%" width="150%" height="150%">
+    <feGaussianBlur stdDeviation="1.45"/>
+  </filter>
+  <filter id="eye-softness" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation=".85"/>
+  </filter>
+  <filter id="blur-small" x="-35%" y="-35%" width="170%" height="170%">
+    <feGaussianBlur stdDeviation="2.7"/>
+  </filter>
+  <filter id="blur-medium" x="-35%" y="-35%" width="170%" height="170%">
+    <feGaussianBlur stdDeviation="5"/>
+  </filter>
+  <filter id="blur-large" x="-40%" y="-40%" width="180%" height="180%">
+    <feGaussianBlur stdDeviation="8"/>
+  </filter>
+
+  <path id="body-shape" d="M77 73 C98 64 148 64 170 75 C187 84 191 103 194 123 C197 146 207 165 212 189 C216 209 214 226 207 243 L43 243 C36 232 32 218 35 201 C36 183 40 168 43 149 C46 123 50 91 77 73Z"/>
+  <path id="head-shape" d="M82 78 C84 67 87 54 89 39 C91 23 95 8 104-3 C113-10 136-10 146-2 C156 5 159 18 160 32 C161 48 166 62 175 75 C181 83 184 91 176 99 C163 111 136 111 115 105 C99 101 85 92 82 78Z"/>
+  <path id="left-wing-shape" d="M58 94 C48 101 41 112 38 124 C35 136 40 151 46 158 C51 164 60 163 68 157 C77 150 81 139 84 127 C88 115 88 104 81 98 C75 92 65 90 58 94Z"/>
+  <path id="right-wing-shape" d="M204 88 C214 84 222 92 227 104 C231 113 234 125 230 135 C228 143 218 150 209 152 C201 154 196 147 194 137 C191 124 190 111 194 100 C196 95 199 91 204 88Z"/>
+  <path id="left-hand-shape" d="M55 84 C58 77 63 73 68 74 C75 73 80 77 82 83 C87 90 89 100 87 107 C83 112 75 110 68 108 C61 106 55 103 54 96 C52 92 53 88 55 84Z"/>
+  <path id="right-hand-shape" d="M200 87 C202 82 206 79 207 74 C207 68 209 64 213 62 C217 61 222 64 224 69 C227 75 224 81 221 86 C221 92 217 98 211 101 C207 104 201 102 198 98 C197 95 198 90 200 87Z"/>
+
+  <clipPath id="body-clip"><use href="#body-shape"/></clipPath>
+  <clipPath id="bird-clip">
+    <use href="#body-shape"/>
+    <use href="#head-shape"/>
+    <use href="#left-wing-shape"/>
+    <use href="#right-wing-shape"/>
+    <use href="#left-hand-shape"/>
+    <use href="#right-hand-shape"/>
+  </clipPath>
+
+  <pattern id="background-speckles" width="43" height="37" patternUnits="userSpaceOnUse">
+    <g fill="#e7b8ec" opacity=".52">
+      <rect x="3" y="7" width=".7" height=".7"/>
+      <rect x="5" y="9" width=".7" height=".7"/>
+      <rect x="7" y="11" width=".65" height=".65"/>
+      <rect x="25" y="29" width=".8" height=".7"/>
+      <rect x="29" y="33" width=".7" height=".7"/>
+      <rect x="35" y="17" width=".65" height=".65"/>
+      <rect x="18" y="2" width=".7" height=".7"/>
+    </g>
+    <g fill="#b6b8ed" opacity=".46">
+      <rect x="4" y="8" width=".65" height=".65"/>
+      <rect x="8" y="12" width=".7" height=".7"/>
+      <rect x="23" y="27" width=".7" height=".7"/>
+      <rect x="27" y="31" width=".65" height=".65"/>
+      <rect x="37" y="19" width=".7" height=".7"/>
+      <rect x="15" y="22" width=".6" height=".6"/>
+    </g>
+  </pattern>
+  <pattern id="plumage-dither" width="4" height="4" patternUnits="userSpaceOnUse">
+    <rect x=".2" y=".1" width=".65" height=".65" fill="#fff9d9" opacity=".75"/>
+    <rect x="2.2" y="2.1" width=".7" height=".7" fill="#fff8d5" opacity=".66"/>
+    <rect x="2.2" y=".1" width=".6" height=".6" fill="#b16f8b" opacity=".34"/>
+    <rect x=".2" y="2.1" width=".55" height=".55" fill="#c18a54" opacity=".22"/>
+  </pattern>
+  <pattern id="fine-dither" width="7" height="7" patternUnits="userSpaceOnUse">
+    <rect x="1" y="4" width=".65" height=".65" fill="#998ca5" opacity=".32"/>
+    <rect x="5" y="1" width=".6" height=".6" fill="#fffce6" opacity=".65"/>
+    <rect x="3" y="6" width=".6" height=".6" fill="#e49691" opacity=".35"/>
+  </pattern>
+</defs>
+
+<g id="background-layer">
+  <rect width="244" height="240" fill="url(#background)"/>
+  <ellipse cx="127" cy="239" rx="133" ry="12" fill="#b4a5b7" opacity=".23" filter="url(#blur-large)"/>
+  <ellipse cx="23" cy="231" rx="27" ry="8" fill="#d9c3ce" opacity=".15" filter="url(#blur-medium)"/>
+  <rect width="244" height="240" fill="url(#background-speckles)"/>
+</g>
+
+<g id="character-yellow-bird">
+  <g id="body">
+    <use href="#body-shape" fill="#eac464" opacity=".3" filter="url(#blur-small)"/>
+    <use href="#body-shape" fill="url(#body-color)" filter="url(#soft-edge)"/>
+    <g clip-path="url(#body-clip)">
+      <path d="M54 127 C48 158 45 178 43 204 C42 222 47 235 50 245 L67 245 C55 218 61 197 67 174 C73 153 76 135 72 117Z" fill="#c89d32" opacity=".29" filter="url(#blur-medium)"/>
+      <path d="M183 104 C181 129 190 152 196 176 C203 198 208 222 201 245 L218 245 L224 177 L207 116Z" fill="#dc9d35" opacity=".4" filter="url(#blur-medium)"/>
+      <g id="belly">
+        <ellipse cx="127" cy="178" rx="66" ry="88" fill="url(#belly-color)" filter="url(#blur-medium)"/>
+        <path d="M110 103 C127 96 143 104 153 121 C166 147 163 175 172 198 C177 216 180 231 178 244 L82 244 C78 228 83 211 86 195 C91 173 91 147 97 125 C100 113 104 107 110 103Z" fill="#ffe3ae" opacity=".21" filter="url(#blur-large)"/>
+        <ellipse cx="132" cy="215" rx="58" ry="36" fill="#e8bc91" opacity=".21" filter="url(#blur-large)"/>
+      </g>
+      <rect x="30" y="161" width="190" height="82" fill="url(#body-bottom)"/>
+      <path d="M38 201 C35 221 38 234 45 243 L57 243 C48 230 47 215 48 202Z" fill="#afa247" opacity=".35" filter="url(#blur-small)"/>
+    </g>
+  </g>
+
+  <g id="head">
+    <use href="#head-shape" fill="#f8d82c" opacity=".25" filter="url(#blur-small)"/>
+    <use href="#head-shape" fill="url(#head-color)" filter="url(#soft-edge)"/>
+    <ellipse cx="123" cy="26" rx="33" ry="35" fill="url(#face-light)" filter="url(#blur-small)"/>
+    <g id="neck-shading">
+      <path d="M87 52 C90 72 104 80 122 82 C141 86 158 76 165 60 C169 77 177 83 176 91 C164 103 139 105 118 99 C99 94 87 83 84 72Z" fill="#efae20" opacity=".35" filter="url(#blur-medium)"/>
+      <path d="M93 55 C100 64 113 68 128 66 C142 64 151 56 155 45" fill="none" stroke="#f4bb27" stroke-width="12" opacity=".24" filter="url(#blur-medium)"/>
+      <ellipse cx="122" cy="89" rx="27" ry="13" fill="#ffd549" opacity=".47" filter="url(#blur-medium)"/>
+    </g>
+
+    <g id="eyes">
+      <g id="eye-left">
+        <ellipse cx="103" cy="25" rx="10" ry="12" fill="url(#eye-halo)" filter="url(#eye-softness)"/>
+        <path d="M100 20 C101 18 105 18 107 21 C108 24 106 29 103 30 C100 31 98 28 99 25Z" fill="#495019" opacity=".65" filter="url(#eye-softness)"/>
+        <ellipse cx="103" cy="24.5" rx="3.25" ry="5.05" transform="rotate(13 103 24.5)" fill="#20270c" filter="url(#eye-softness)"/>
+        <ellipse cx="102.5" cy="22.4" rx=".9" ry="1.2" fill="#777742" opacity=".65" filter="url(#eye-softness)"/>
+      </g>
+      <g id="eye-right">
+        <ellipse cx="146" cy="22" rx="10.4" ry="11.8" fill="url(#eye-halo)" filter="url(#eye-softness)"/>
+        <path d="M143 17 C145 15 148 16 150 20 C152 23 150 27 147 28 C144 28 142 25 142 22Z" fill="#53571b" opacity=".76" filter="url(#eye-softness)"/>
+        <ellipse cx="146.4" cy="21.5" rx="3.1" ry="4.65" transform="rotate(-14 146.4 21.5)" fill="#1c250b" filter="url(#eye-softness)"/>
+        <ellipse cx="145.2" cy="18.5" rx=".9" ry="1.15" fill="#b8b766" opacity=".72" filter="url(#eye-softness)"/>
+      </g>
+    </g>
+
+    <g id="mouth">
+      <ellipse cx="121" cy="44" rx="16" ry="8" fill="#efb332" opacity=".43" filter="url(#blur-small)"/>
+      <path d="M107 40 C114 37 126 36 133 40 C137 42 134 46 128 48 C121 51 112 48 108 46 C105 44 104 42 107 40Z" fill="url(#beak-color)" filter="url(#soft-edge)"/>
+      <path d="M110 40 Q121 36 131 40" fill="none" stroke="#ffe36a" stroke-width="3.5" opacity=".52" filter="url(#soft-edge)"/>
+      <path d="M110 46 Q121 49 131 44" fill="none" stroke="#dca02e" stroke-width="1.4" opacity=".28" filter="url(#soft-edge)"/>
+    </g>
+  </g>
+
+  <g id="arm-right">
+    <use href="#right-wing-shape" fill="#f7c52a" opacity=".3" filter="url(#blur-small)"/>
+    <use href="#right-wing-shape" fill="url(#right-wing-color)" filter="url(#soft-edge)"/>
+    <path d="M198 101 C194 114 197 131 202 144" fill="none" stroke="#d18b13" stroke-width="6" opacity=".51" filter="url(#blur-small)"/>
+    <path d="M222 101 C228 113 229 126 223 137" fill="none" stroke="#ffde3e" stroke-width="6" opacity=".61" filter="url(#blur-small)"/>
+    <ellipse cx="214" cy="128" rx="11" ry="18" fill="#ffc222" opacity=".48" filter="url(#blur-small)"/>
+    <g id="hand-right">
+      <use href="#right-hand-shape" fill="url(#right-hand-color)" filter="url(#hand-softness)"/>
+      <path d="M211 66 C214 63 220 66 221 71" fill="none" stroke="#b3a28b" stroke-width="4" stroke-linecap="round" opacity=".55" filter="url(#soft-edge)"/>
+      <path d="M205 84 C209 83 217 84 219 80" fill="none" stroke="#443b22" stroke-width="4" stroke-linecap="round" opacity=".4" filter="url(#hand-softness)"/>
+      <ellipse cx="205" cy="94" rx="5.5" ry="6" fill="#584018" opacity=".65" filter="url(#soft-edge)"/>
+      <path d="M200 99 Q207 104 215 98" fill="none" stroke="#ad781a" stroke-width="3" opacity=".46" filter="url(#soft-edge)"/>
+    </g>
+  </g>
+
+  <g id="arm-left">
+    <use href="#left-wing-shape" fill="#f5c32a" opacity=".28" filter="url(#blur-small)"/>
+    <use href="#left-wing-shape" fill="url(#left-wing-color)" filter="url(#soft-edge)"/>
+    <ellipse cx="47" cy="116" rx="8" ry="15" transform="rotate(20 47 116)" fill="#ffed59" opacity=".6" filter="url(#blur-small)"/>
+    <path d="M45 145 C48 156 56 160 65 154 C74 148 79 132 79 119" fill="none" stroke="#e79c18" stroke-width="7" opacity=".45" filter="url(#blur-small)"/>
+    <ellipse cx="60" cy="133" rx="15" ry="21" fill="#ffc021" opacity=".34" filter="url(#blur-small)"/>
+    <g id="hand-left">
+      <use href="#left-hand-shape" fill="url(#left-hand-color)" filter="url(#hand-softness)"/>
+      <ellipse cx="63" cy="82" rx="6" ry="5" transform="rotate(-28 63 82)" fill="#b3a15e" opacity=".45" filter="url(#hand-softness)"/>
+      <path d="M59 86 C57 91 60 98 65 100" fill="none" stroke="#8e7835" stroke-width="5" stroke-linecap="round" opacity=".55" filter="url(#soft-edge)"/>
+      <path d="M72 83 C78 85 81 94 82 102" fill="none" stroke="#453b18" stroke-width="7" stroke-linecap="round" opacity=".6" filter="url(#hand-softness)"/>
+      <ellipse cx="79" cy="99" rx="6" ry="8" transform="rotate(-23 79 99)" fill="#73551c" opacity=".65" filter="url(#hand-softness)"/>
+      <path d="M64 105 Q75 111 85 108" fill="none" stroke="#a7741a" stroke-width="3" opacity=".48" filter="url(#soft-edge)"/>
+    </g>
+  </g>
+
+  <g id="surface-texture" clip-path="url(#bird-clip)">
+    <rect x="30" y="0" width="208" height="240" fill="url(#plumage-dither)" opacity=".69"/>
+    <rect x="30" y="0" width="208" height="240" fill="url(#fine-dither)" opacity=".43"/>
+  </g>
+</g>
+</svg>
+</body>
+</html>

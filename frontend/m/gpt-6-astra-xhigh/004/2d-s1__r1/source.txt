@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Yellow character</title>
+<style>
+html,body{margin:0;width:244px;height:240px;overflow:hidden;background:#fff}
+svg{display:block}
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" width="244" height="240" viewBox="0 0 244 240">
+  <defs>
+    <linearGradient id="body-gold" x1="0.2" y1="0" x2="0.7" y2="1">
+      <stop offset="0" stop-color="#ffec49"/>
+      <stop offset=".27" stop-color="#ffda22"/>
+      <stop offset=".55" stop-color="#f8cc49"/>
+      <stop offset=".78" stop-color="#eac16a"/>
+      <stop offset="1" stop-color="#dba640"/>
+    </linearGradient>
+    <radialGradient id="body-light" cx=".49" cy=".37" r=".66">
+      <stop offset="0" stop-color="#ffe88d"/>
+      <stop offset=".49" stop-color="#f9d66c"/>
+      <stop offset=".8" stop-color="#eabb42"/>
+      <stop offset="1" stop-color="#d9a339"/>
+    </radialGradient>
+    <radialGradient id="belly-cream" cx=".49" cy=".43" r=".62">
+      <stop offset="0" stop-color="#f8e3a4"/>
+      <stop offset=".47" stop-color="#f4dc94"/>
+      <stop offset=".78" stop-color="#f1d181" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#edc574" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="head-yellow" cx=".45" cy=".18" r=".83">
+      <stop offset="0" stop-color="#fff77b"/>
+      <stop offset=".32" stop-color="#ffe943"/>
+      <stop offset=".62" stop-color="#ffda1e"/>
+      <stop offset=".83" stop-color="#f7b81c"/>
+      <stop offset="1" stop-color="#e9a32a"/>
+    </radialGradient>
+    <linearGradient id="left-arm-gold" x1="0" y1=".35" x2="1" y2=".65">
+      <stop offset="0" stop-color="#ffda40"/>
+      <stop offset=".39" stop-color="#ffcc20"/>
+      <stop offset=".76" stop-color="#edaa0b"/>
+      <stop offset="1" stop-color="#d99514"/>
+    </linearGradient>
+    <linearGradient id="right-arm-gold" x1="0" y1=".5" x2="1" y2=".5">
+      <stop offset="0" stop-color="#dc9915"/>
+      <stop offset=".36" stop-color="#f3b812"/>
+      <stop offset=".7" stop-color="#ffd132"/>
+      <stop offset="1" stop-color="#efb525"/>
+    </linearGradient>
+    <radialGradient id="left-hand-brown" cx=".33" cy=".26" r=".85">
+      <stop offset="0" stop-color="#907025"/>
+      <stop offset=".31" stop-color="#73551c"/>
+      <stop offset=".68" stop-color="#574019"/>
+      <stop offset="1" stop-color="#865719"/>
+    </radialGradient>
+    <linearGradient id="right-hand-brown" x1=".15" y1=".9" x2=".7" y2=".1">
+      <stop offset="0" stop-color="#644716"/>
+      <stop offset=".39" stop-color="#654b25"/>
+      <stop offset=".7" stop-color="#4d402d"/>
+      <stop offset="1" stop-color="#82705a"/>
+    </linearGradient>
+    <radialGradient id="eye-halo">
+      <stop offset="0" stop-color="#554d0a" stop-opacity=".85"/>
+      <stop offset=".47" stop-color="#8c8215" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#ac9d21" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="eye-dark" cx=".43" cy=".35" r=".7">
+      <stop offset="0" stop-color="#10170b"/>
+      <stop offset=".54" stop-color="#20270b"/>
+      <stop offset="1" stop-color="#6e6614"/>
+    </radialGradient>
+    <radialGradient id="beak-gold" cx=".46" cy=".25" r=".8">
+      <stop offset="0" stop-color="#ffe044"/>
+      <stop offset=".52" stop-color="#ffcf22"/>
+      <stop offset="1" stop-color="#eeb22a"/>
+    </radialGradient>
+    <filter id="soft-edge" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur stdDeviation="1.25"/>
+    </filter>
+    <filter id="face-soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation=".8"/>
+    </filter>
+    <filter id="soft-shading" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+    <filter id="wide-shading" x="-45%" y="-45%" width="190%" height="190%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <filter id="ground-blur" x="-30%" y="-100%" width="160%" height="300%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+    <filter id="fine-grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".91" numOctaves="3" seed="14"/>
+      <feColorMatrix type="saturate" values=".25"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope=".16"/>
+      </feComponentTransfer>
+      <feComposite in2="SourceGraphic" operator="in"/>
+      <feBlend in2="SourceGraphic" mode="soft-light"/>
+    </filter>
+    <pattern id="background-speckles" width="13" height="13" patternUnits="userSpaceOnUse">
+      <path d="M1 2h1M9 5h1M5 11h1" stroke="#caafd5" stroke-width=".6" opacity=".34"/>
+      <path d="M5 4h1M11 10h1M2 8h1" stroke="#a8ced3" stroke-width=".55" opacity=".25"/>
+    </pattern>
+    <clipPath id="body-clip">
+      <path d="M100-8C88 7 90 29 85 48C81 64 72 77 65 94C56 116 48 139 42 161C35 183 30 205 35 224L41 244H204C215 226 218 207 214 186C211 165 206 146 199 124C194 105 184 86 174 72C164 58 164 36 160 17C157 4 151-5 146-8Z"/>
+    </clipPath>
+  </defs>
+
+  <g id="background">
+    <path fill="#fff" d="M0 0h244v240H0z"/>
+    <path fill="url(#background-speckles)" d="M0 0h244v240H0z"/>
+    <g id="floor-shadow" filter="url(#ground-blur)">
+      <ellipse cx="125" cy="239" rx="110" ry="12" fill="#c3b7c2" opacity=".32"/>
+      <ellipse cx="122" cy="238" rx="85" ry="7" fill="#a8a0a0" opacity=".24"/>
+      <ellipse cx="24" cy="228" rx="28" ry="6" fill="#dfd3e5" opacity=".36"/>
+    </g>
+  </g>
+
+  <g id="character-yellow" filter="url(#fine-grain)">
+    <g id="arm-right">
+      <g id="forearm-right" filter="url(#soft-edge)">
+        <path d="M193 94C197 88 208 86 217 91C226 100 232 111 233 123C235 135 230 145 219 150C212 154 204 153 200 146C194 134 189 110 193 94Z" fill="url(#right-arm-gold)"/>
+        <path d="M219 99C227 109 231 123 227 136C225 141 221 143 217 143C221 127 216 113 212 103Z" fill="#ffdf54" opacity=".45" filter="url(#soft-shading)"/>
+        <path d="M197 99C195 115 201 139 206 148" fill="none" stroke="#ba7f18" stroke-width="5" opacity=".43" filter="url(#soft-shading)"/>
+      </g>
+    </g>
+
+    <g id="body">
+      <path d="M100-8C88 7 90 29 85 48C81 64 72 77 65 94C56 116 48 139 42 161C35 183 30 205 35 224L41 244H204C215 226 218 207 214 186C211 165 206 146 199 124C194 105 184 86 174 72C164 58 164 36 160 17C157 4 151-5 146-8Z" fill="url(#body-gold)" filter="url(#soft-edge)"/>
+      <g clip-path="url(#body-clip)">
+        <ellipse cx="126" cy="172" rx="89" ry="99" fill="url(#body-light)"/>
+        <path d="M51 150C37 177 35 215 48 246L72 249C55 215 57 175 64 153Z" fill="#bfa451" opacity=".3" filter="url(#wide-shading)"/>
+        <path d="M184 112C200 153 212 192 199 238" fill="none" stroke="#e3a335" stroke-width="17" opacity=".44" filter="url(#wide-shading)"/>
+        <path d="M100 103C113 91 139 91 152 108C168 129 171 150 180 174C189 199 185 224 173 244H80C78 218 77 194 82 169C87 143 88 119 100 103Z" fill="url(#belly-cream)" filter="url(#soft-shading)"/>
+        <ellipse cx="127" cy="159" rx="39" ry="57" fill="#f7dda1" opacity=".4" filter="url(#wide-shading)"/>
+        <path d="M89 99C111 87 141 86 163 96" fill="none" stroke="#ffe990" stroke-width="14" opacity=".64" filter="url(#soft-shading)"/>
+        <path d="M74 220C103 233 156 237 192 224L200 248H53Z" fill="#cda444" opacity=".23" filter="url(#wide-shading)"/>
+      </g>
+    </g>
+
+    <g id="head">
+      <path d="M99-6C90 4 89 20 88 37C87 50 81 64 82 72C92 85 112 91 132 89C151 87 169 80 173 70C164 56 164 42 160 24C157 8 154-2 145-7Z" fill="url(#head-yellow)" filter="url(#soft-edge)"/>
+      <path d="M99 2C92 14 95 33 91 48" fill="none" stroke="#fff491" stroke-width="9" opacity=".56" filter="url(#soft-shading)"/>
+      <path d="M153 9C160 28 154 50 164 65" fill="none" stroke="#ffea69" stroke-width="8" opacity=".65" filter="url(#soft-shading)"/>
+      <ellipse cx="123" cy="65" rx="28" ry="16" fill="#f8ac18" opacity=".49" filter="url(#wide-shading)"/>
+      <ellipse cx="126" cy="6" rx="21" ry="14" fill="#fff774" opacity=".38" filter="url(#soft-shading)"/>
+
+      <g id="eyes">
+        <g id="eye-left">
+          <ellipse cx="104" cy="24.7" rx="8.1" ry="11.7" fill="url(#eye-halo)" filter="url(#face-soft)" transform="rotate(10 104 24.7)"/>
+          <ellipse cx="104" cy="24.7" rx="3.55" ry="5.9" fill="url(#eye-dark)" filter="url(#face-soft)" transform="rotate(10 104 24.7)"/>
+          <ellipse cx="103.7" cy="24.3" rx="1.9" ry="3.9" fill="#151c0d" opacity=".82" filter="url(#face-soft)"/>
+          <ellipse cx="102.9" cy="21.4" rx="1.1" ry=".9" fill="#e2de8a" opacity=".49" filter="url(#face-soft)"/>
+        </g>
+        <g id="eye-right">
+          <ellipse cx="146.4" cy="21.6" rx="8.2" ry="10.5" fill="url(#eye-halo)" filter="url(#face-soft)" transform="rotate(-13 146.4 21.6)"/>
+          <ellipse cx="146.6" cy="21.9" rx="3.8" ry="5.8" fill="url(#eye-dark)" filter="url(#face-soft)" transform="rotate(-13 146.6 21.9)"/>
+          <ellipse cx="146.5" cy="21.6" rx="2.3" ry="3.9" fill="#17200d" opacity=".86" filter="url(#face-soft)"/>
+          <ellipse cx="145.3" cy="18.7" rx="1.05" ry=".9" fill="#e1e0a1" opacity=".45" filter="url(#face-soft)"/>
+        </g>
+      </g>
+
+      <g id="mouth">
+        <ellipse cx="123" cy="42" rx="16" ry="9" fill="#f8c31f" opacity=".47" filter="url(#soft-shading)"/>
+        <path d="M111 38C117 35 127 35 134 38C138 40 133 45 128 48C123 50 115 46 111 43C109 41 109 39 111 38Z" fill="url(#beak-gold)" filter="url(#soft-edge)"/>
+        <path d="M114 39C119 37 127 37 132 39" stroke="#ffe85e" stroke-width="3" stroke-linecap="round" fill="none" opacity=".55" filter="url(#face-soft)"/>
+        <path d="M116 45C121 48 127 48 132 44" stroke="#dca328" stroke-width="1.7" stroke-linecap="round" fill="none" opacity=".24" filter="url(#soft-edge)"/>
+      </g>
+    </g>
+
+    <g id="arm-left">
+      <path d="M73 103C91 105 96 119 91 139C87 155 77 169 65 171C55 173 47 164 45 154" fill="none" stroke="#b58d23" stroke-width="7" opacity=".31" filter="url(#soft-shading)"/>
+      <g id="forearm-left" filter="url(#soft-edge)">
+        <path d="M55 94C47 102 39 114 37 125C35 135 39 146 46 155C53 164 61 169 70 163C80 156 84 142 88 129C91 117 85 105 78 99C69 94 62 92 55 94Z" fill="url(#left-arm-gold)"/>
+        <path d="M48 108C42 119 40 131 46 142" fill="none" stroke="#ffe264" stroke-width="10" stroke-linecap="round" opacity=".56" filter="url(#soft-shading)"/>
+        <path d="M53 151C61 160 68 157 73 147C77 139 81 126 81 116" fill="none" stroke="#e8a00a" stroke-width="8" opacity=".49" filter="url(#soft-shading)"/>
+        <path d="M52 106C61 110 71 115 83 113" fill="none" stroke="#e7ad23" stroke-width="7" opacity=".52" filter="url(#soft-shading)"/>
+      </g>
+      <g id="hand-left" filter="url(#soft-edge)">
+        <path d="M55 98C51 92 53 84 57 79C61 74 67 72 73 75C80 77 84 84 86 91C88 97 87 104 86 109C77 111 69 107 63 105C59 103 56 101 55 98Z" fill="url(#left-hand-brown)"/>
+        <path d="M57 88C58 80 65 77 70 78" fill="none" stroke="#b39243" stroke-width="4" stroke-linecap="round" opacity=".5" filter="url(#face-soft)"/>
+        <path d="M66 81C65 88 67 94 70 97M74 82C74 90 77 94 80 98" fill="none" stroke="#4d3c16" stroke-width="2.4" opacity=".25" filter="url(#face-soft)"/>
+        <path d="M59 99C65 102 76 107 83 106" fill="none" stroke="#493a18" stroke-width="3.5" opacity=".44" filter="url(#face-soft)"/>
+      </g>
+    </g>
+
+    <g id="hand-right" filter="url(#soft-edge)">
+      <path d="M200 84C203 79 205 76 206 70C207 64 211 61 215 63C221 64 223 69 222 74C226 74 228 77 226 82C224 87 219 92 215 96C210 100 206 101 202 97C198 94 198 89 200 84Z" fill="url(#right-hand-brown)"/>
+      <path d="M209 71C209 66 212 64 216 67" fill="none" stroke="#a09576" stroke-width="3.2" stroke-linecap="round" opacity=".5" filter="url(#face-soft)"/>
+      <path d="M221 78C218 85 213 87 210 90" fill="none" stroke="#3d3428" stroke-width="3.4" stroke-linecap="round" opacity=".52" filter="url(#face-soft)"/>
+      <path d="M201 87C202 91 205 94 209 95" fill="none" stroke="#97722b" stroke-width="3" opacity=".4" filter="url(#face-soft)"/>
+    </g>
+  </g>
+</svg>
+</body>
+</html>

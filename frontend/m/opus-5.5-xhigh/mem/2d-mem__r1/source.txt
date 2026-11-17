@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>大笑奶龙 - Laughing Nailong</title>
+<style>
+  html, body { margin: 0; padding: 0; width: 240px; height: 240px; overflow: hidden; background: #fff; }
+  svg { display: block; position: absolute; top: 0; left: 0; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EAF6FF"/>
+      <stop offset="1" stop-color="#FFF7E0"/>
+    </linearGradient>
+    <radialGradient id="bodyGrad" cx="0.38" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#FFF07A"/>
+      <stop offset="0.55" stop-color="#FFD83A"/>
+      <stop offset="1" stop-color="#F4B81E"/>
+    </radialGradient>
+    <radialGradient id="bellyGrad" cx="0.5" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#FFFBE0"/>
+      <stop offset="1" stop-color="#FFEFA8"/>
+    </radialGradient>
+    <radialGradient id="mouthGrad" cx="0.5" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#5A0F18"/>
+      <stop offset="1" stop-color="#8E2230"/>
+    </radialGradient>
+    <clipPath id="bodyClip">
+      <path d="M120,38 C170,38 196,80 198,130 C200,180 178,214 120,214 C62,214 40,180 42,130 C44,80 70,38 120,38 Z"/>
+    </clipPath>
+    <clipPath id="mouthClip">
+      <path d="M84,104 Q120,114 156,104 Q154,154 120,156 Q86,154 84,104 Z"/>
+    </clipPath>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5"/>
+    </filter>
+  </defs>
+
+  <g id="background">
+    <rect x="0" y="0" width="240" height="240" fill="url(#bg)"/>
+    <ellipse id="ground-shadow" cx="120" cy="222" rx="78" ry="9" fill="#C9B27A" opacity="0.45" filter="url(#soft)"/>
+  </g>
+
+  <g id="character-nailong">
+    <!-- tail behind body -->
+    <g id="tail">
+      <path d="M186,176 C204,180 218,190 224,204 C210,206 194,200 182,192 Z"
+            fill="#F7C52A" stroke="#7A5418" stroke-width="3" stroke-linejoin="round"/>
+    </g>
+
+    <!-- feet -->
+    <g id="feet">
+      <g id="foot-left">
+        <ellipse cx="92" cy="211" rx="22" ry="10" fill="#F5BE25" stroke="#7A5418" stroke-width="3"/>
+      </g>
+      <g id="foot-right">
+        <ellipse cx="148" cy="211" rx="22" ry="10" fill="#F5BE25" stroke="#7A5418" stroke-width="3"/>
+      </g>
+    </g>
+
+    <!-- body -->
+    <g id="body">
+      <path id="body-shape" d="M120,38 C170,38 196,80 198,130 C200,180 178,214 120,214 C62,214 40,180 42,130 C44,80 70,38 120,38 Z"
+            fill="url(#bodyGrad)"/>
+      <g id="belly" clip-path="url(#bodyClip)">
+        <ellipse cx="120" cy="170" rx="56" ry="50" fill="url(#bellyGrad)"/>
+      </g>
+      <path id="body-outline" d="M120,38 C170,38 196,80 198,130 C200,180 178,214 120,214 C62,214 40,180 42,130 C44,80 70,38 120,38 Z"
+            fill="none" stroke="#7A5418" stroke-width="3.2"/>
+      <!-- glossy highlight -->
+      <ellipse cx="88" cy="62" rx="16" ry="8" fill="#FFFFFF" opacity="0.45" transform="rotate(-28 88 62)"/>
+    </g>
+
+    <!-- head / face features -->
+    <g id="head">
+      <g id="cheeks">
+        <ellipse id="cheek-left" cx="68" cy="106" rx="12" ry="7.5" fill="#FF8C8C" opacity="0.6"/>
+        <ellipse id="cheek-right" cx="172" cy="106" rx="12" ry="7.5" fill="#FF8C8C" opacity="0.6"/>
+      </g>
+
+      <g id="eyes">
+        <g id="eye-left">
+          <path d="M78,92 Q93,72 108,92" fill="none" stroke="#3A2412" stroke-width="5.5" stroke-linecap="round"/>
+        </g>
+        <g id="eye-right">
+          <path d="M132,92 Q147,72 162,92" fill="none" stroke="#3A2412" stroke-width="5.5" stroke-linecap="round"/>
+        </g>
+      </g>
+
+      <g id="eyebrows">
+        <path id="brow-left" d="M82,70 Q92,64 102,68" fill="none" stroke="#B07A20" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+        <path id="brow-right" d="M138,68 Q148,64 158,70" fill="none" stroke="#B07A20" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+      </g>
+
+      <g id="mouth">
+        <path id="mouth-inner" d="M84,104 Q120,114 156,104 Q154,154 120,156 Q86,154 84,104 Z" fill="url(#mouthGrad)"/>
+        <g id="tongue" clip-path="url(#mouthClip)">
+          <ellipse cx="120" cy="152" rx="26" ry="15" fill="#FF7A8C"/>
+          <path d="M120,141 L120,154" stroke="#E0566B" stroke-width="2" stroke-linecap="round"/>
+        </g>
+        <path id="mouth-outline" d="M84,104 Q120,114 156,104 Q154,154 120,156 Q86,154 84,104 Z"
+              fill="none" stroke="#3A2412" stroke-width="3.2" stroke-linejoin="round"/>
+        <!-- mouth corner creases -->
+        <path d="M80,100 Q82,104 86,105" fill="none" stroke="#3A2412" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M160,100 Q158,104 154,105" fill="none" stroke="#3A2412" stroke-width="2.5" stroke-linecap="round"/>
+      </g>
+    </g>
+
+    <!-- arms -->
+    <g id="arms">
+      <g id="arm-left">
+        <path d="M50,140 C38,146 30,160 34,172 C38,180 50,178 56,168 C60,160 60,150 58,144 Z"
+              fill="#FFD83A" stroke="#7A5418" stroke-width="3" stroke-linejoin="round"/>
+        <g id="hand-left">
+          <path d="M37,170 Q41,176 48,175" fill="none" stroke="#7A5418" stroke-width="2" stroke-linecap="round"/>
+        </g>
+      </g>
+      <g id="arm-right">
+        <path d="M190,140 C202,146 210,160 206,172 C202,180 190,178 184,168 C180,160 180,150 182,144 Z"
+              fill="#FFD83A" stroke="#7A5418" stroke-width="3" stroke-linejoin="round"/>
+        <g id="hand-right">
+          <path d="M203,170 Q199,176 192,175" fill="none" stroke="#7A5418" stroke-width="2" stroke-linecap="round"/>
+        </g>
+      </g>
+    </g>
+
+    <!-- laugh motion marks -->
+    <g id="laugh-marks">
+      <path d="M30,70 L20,62" stroke="#E2A21A" stroke-width="3" stroke-linecap="round"/>
+      <path d="M26,86 L14,84" stroke="#E2A21A" stroke-width="3" stroke-linecap="round"/>
+      <path d="M210,70 L220,62" stroke="#E2A21A" stroke-width="3" stroke-linecap="round"/>
+      <path d="M214,86 L226,84" stroke="#E2A21A" stroke-width="3" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>
+</body>
+</html>

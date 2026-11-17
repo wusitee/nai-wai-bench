@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=244, initial-scale=1">
+<title>Yellow Character Dance</title>
+<style>
+  html, body {
+    margin: 0;
+    width: 244px;
+    height: 240px;
+    overflow: hidden;
+    background: #f7f7f7;
+  }
+  canvas {
+    display: block;
+    width: 244px;
+    height: 240px;
+  }
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xf7f7f7);
+
+const renderer = new THREE.WebGLRenderer({
+  antialias: true,
+  preserveDrawingBuffer: true
+});
+renderer.setPixelRatio(1);
+renderer.setSize(244, 240);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.08;
+document.body.appendChild(renderer.domElement);
+
+const camera = new THREE.OrthographicCamera(-1.993, 1.993, 1.96, -1.96, 0.1, 100);
+camera.position.set(0, 2.14, 10);
+camera.lookAt(0, 2.14, 0);
+
+scene.add(new THREE.HemisphereLight(0xfffdf4, 0xcfc3a5, 1.75));
+
+const keyLight = new THREE.DirectionalLight(0xfff9e9, 2.15);
+keyLight.position.set(-3.5, 6, 8);
+scene.add(keyLight);
+
+const fillLight = new THREE.DirectionalLight(0xffffff, 0.65);
+fillLight.position.set(4, 3, 5);
+scene.add(fillLight);
+
+const backLight = new THREE.DirectionalLight(0xfff7df, 1.05);
+backLight.position.set(-2, 4, -5);
+scene.add(backLight);
+
+const character = new THREE.Group();
+character.name = 'character-yellow';
+scene.add(character);
+
+const smoothstep = (a, b, x) => {
+  const v = THREE.MathUtils.clamp((x - a) / (b - a), 0, 1);
+  return v * v * (3 - 2 * v);
+};
+
+const profile = [
+  [0.00, 0.04],
+  [0.48, 0.055],
+  [0.95, 0.11],
+  [1.28, 0.28],
+  [1.48, 0.55],
+  [1.55, 0.90],
+  [1.54, 1.25],
+  [1.47, 1.62],
+  [1.35, 1.98],
+  [1.18, 2.30],
+  [1.02, 2.60],
+  [0.92, 2.86],
+  [0.86, 3.12],
+  [0.80, 3.36],
+  [0.70, 3.58],
+  [0.58, 3.78],
+  [0.42, 3.95],
+  [0.22, 4.05],
+  [0.00, 4.09]
+];
+
+const profileCurve = new THREE.CatmullRomCurve3(
+  profile.map(([r, y]) => new THREE.Vector3(r, y, 0)),
+  false,
+  'centripetal'
+);
+const profileSamples = profileCurve.getPoints(180);
+const lathePoints = profileSamples.map(
+  p => new THREE.Vector2(Math.max(0, p.x), p.y)
+);
+const bodyGeometry = new THREE.LatheGeometry(lathePoints, 112);
+
+function radiusAtY(y) {
+  if (y <= profileSamples[0].y) {
+    return Math.max(0.001, profileSamples[0].x);
+  }
+  for (let i = 1; i < profileSamples.length; i++) {
+    const b = profileSamples[i];
+    if (b.y >= y) {
+      const a = profileSamples[i - 1];
+      const f = (y - a.y) / Math.max(0.00001, b.y - a.y);
+      return Math.max(0.001, THREE.MathUtils.lerp(a.x, b.x, f));
+    }
+  }
+  return 0.001;
+}
+
+const depthScale = 0.72;
+
+function frontZ(x, y) {
+  const r = radiusAtY(y);
+  return depthScale * Math.sqrt(Math.max(0, r * r - x * x));
+}
+
+const yellowLow = new THREE.Color(0xf0cd3e);
+const yellowHigh = new THREE.Color(0xf8dc4d);
+const cream = new THREE.Color(0xf3ebc9);
+const bodyPositions = bodyGeometry.attributes.position;
+const bodyColors = [];
+const vertexColor = new THREE.Color();
+
+for (let i = 0; i < bodyPositions.count; i++) {
+  const x = bodyPositions.getX(i);
+  const y = bodyPositions.getY(i);
+  const z = bodyPositions.getZ(i);
+  const r = radiusAtY(y);
+
+  const headMix = smoothstep(1.5, 3.75, y) * 0.65;
+  const ellipseDistance = Math.sqrt(
+    Math.pow((x - 0.015) / 1.19, 2) +
+    Math.pow((y - 1.42) / 1.22, 2)
+  );
+  const bellyShape = 1 - smoothstep(0.78, 1.08, ellipseDistance);
+  const frontFacing = smoothstep(-0.12, 0.38, z / r);
+  const bellyMix = bellyShape * frontFacing;
+
+  vertexColor.copy(yellowLow).lerp(yellowHigh, headMix).lerp(cream, bellyMix);
+  bodyColors.push(vertexColor.r, vertexColor.g, vertexColor.b);
+}
+
+bodyGeometry.setAttribute(
+  'color',
+  new THREE.Float32BufferAttribute(bodyColors, 3)
+);
+
+const body = new THREE.Mesh(
+  bodyGeometry,
+  new THREE.MeshStandardMaterial({
+    vertexColors: true,
+    roughness: 0.9,
+    metalness: 0
+  })
+);
+body.name = 'body';
+body.scale.z = depthScale;
+character.add(body);
+
+const head = new THREE.Group();
+head.name = 'head';
+character.add(head);
+
+const eyeMaterial = new THREE.MeshStandardMaterial({
+  color: 0x191b13,
+  roughness: 0.72
+});
+const eyeGeometry = new THREE.SphereGeometry(1, 24, 16);
+
+function makeEye(name, x, y, scaleX, scaleY) {
+  const eyeGroup = new THREE.Group();
+  eyeGroup.name = name;
+  eyeGroup.position.set(x, y, frontZ(x, y) + 0.014);
+
+  const eye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+  eye.name = name + '-surface';
+  eye.scale.set(scaleX, scaleY, 0.047);
+  eyeGroup.add(eye);
+  head.add(eyeGroup);
+}
+
+makeEye('eye-left', -0.36, 3.60, 0.060, 0.076);
+makeEye('eye-right', 0.41, 3.63, 0.061, 0.076);
+
+const mouth = new THREE.Group();
+mouth.name = 'mouth';
+head.add(mouth);
+
+const smilePoints = [
+  [-0.155, 3.340],
+  [-0.085, 3.315],
+  [0.000, 3.305],
+  [0.080, 3.318],
+  [0.140, 3.345]
+].map(([x, y]) => new THREE.Vector3(x, y, frontZ(x, y) + 0.014));
+
+const smileCurve = new THREE.CatmullRomCurve3(
+  smilePoints,
+  false,
+  'centripetal'
+);
+const smile = new THREE.Mesh(
+  new THREE.TubeGeometry(smileCurve, 32, 0.013, 7, false),
+  new THREE.MeshStandardMaterial({
+    color: 0x806c30,
+    roughness: 0.9
+  })
+);
+smile.name = 'smile-curve';
+mouth.add(smile);
+
+const armMaterial = new THREE.MeshStandardMaterial({
+  color: 0xf2d143,
+  roughness: 0.9
+});
+const handMaterial = new THREE.MeshStandardMaterial({
+  color: 0x594029,
+  roughness: 0.95
+});
+
+const armSphereGeometry = new THREE.SphereGeometry(1, 24, 16);
+const handGeometry = new THREE.SphereGeometry(1, 28, 20);
+
+function makeArm(side) {
+  const sign = side === 'left' ? -1 : 1;
+  const group = new THREE.Group();
+  group.name = 'arm-' + side;
+  character.add(group);
+
+  const shoulder = new THREE.Vector3(sign * 0.74, 1.50, -0.05);
+  const shoulderCap = new THREE.Mesh(armSphereGeometry, armMaterial);
+  shoulderCap.name = 'arm-' + side + '-shoulder';
+  shoulderCap.position.copy(shoulder);
+  shoulderCap.scale.set(0.28, 0.29, 0.25);
+  group.add(shoulderCap);
+
+  const pointCount = 17;
+  const points = [];
+  for (let i = 0; i < pointCount; i++) {
+    points.push(new THREE.Vector3());
+  }
+
+  const surface = new THREE.Mesh(new THREE.BufferGeometry(), armMaterial);
+  surface.name = 'arm-' + side + '-surface';
+  group.add(surface);
+
+  const hand = new THREE.Group();
+  hand.name = 'hand-' + side;
+  group.add(hand);
+
+  const palm = new THREE.Mesh(handGeometry, handMaterial);
+  palm.name = 'hand-' + side + '-palm';
+  hand.add(palm);
+
+  return {
+    side,
+    sign,
+    group,
+    shoulder,
+    points,
+    surface,
+    hand,
+    palm
+  };
+}
+
+const leftArm = makeArm('left');
+const rightArm = makeArm('right');
+
+function setCurvePoint(rig, u, control, handPosition, target) {
+  const v = 1 - u;
+  const shoulder = rig.shoulder;
+
+  target.set(
+    v * v * shoulder.x + 2 * v * u * control.x + u * u * handPosition.x,
+    v * v * shoulder.y + 2 * v * u * control.y + u * u * handPosition.y,
+    v * v * shoulder.z + 2 * v * u * control.z + u * u * handPosition.z
+  );
+
+  const surface = frontZ(target.x, target.y);
+  if (u > 0 && surface > 0) {
+    target.z = Math.max(target.z, surface + 0.14);
+  }
+}
+
+const controlPoint = new THREE.Vector3();
+const handPosition = new THREE.Vector3();
+
+function updateArm(rig, x, y, angle, handStretch) {
+  const shoulder = rig.shoulder;
+  const z = frontZ(x, y) + 0.17;
+  handPosition.set(x, y, z);
+
+  controlPoint.set(
+    rig.sign < 0
+      ? Math.min(shoulder.x, x) - 0.18
+      : Math.max(shoulder.x, x) + 0.18,
+    Math.min(shoulder.y, y) - (rig.sign < 0 ? 0.60 : 0.55),
+    Math.max(0.20, (shoulder.z + z) * 0.5 + 0.08)
+  );
+
+  for (let i = 0; i < rig.points.length; i++) {
+    setCurvePoint(
+      rig,
+      i / (rig.points.length - 1),
+      controlPoint,
+      handPosition,
+      rig.points[i]
+    );
+  }
+
+  const curve = new THREE.CatmullRomCurve3(
+    rig.points,
+    false,
+    'centripetal'
+  );
+  const geometry = new THREE.TubeGeometry(curve, 40, 0.25, 16, false);
+  rig.surface.geometry.dispose();
+  rig.surface.geometry = geometry;
+
+  rig.hand.position.copy(handPosition);
+  rig.hand.rotation.set(0, 0, angle);
+
+  if (rig.sign < 0) {
+    rig.palm.scale.set(0.205, 0.295 * handStretch, 0.175);
+  } else {
+    rig.palm.scale.set(0.215, 0.305 * handStretch, 0.18);
+  }
+}
+
+const keys = [
+  {
+    t: 0,
+    lx: -1.00, ly: 2.35, la: -0.30, ls: 1.00,
+    rx: 1.27, ry: 2.45, ra: -0.35, rs: 1.00,
+    lean: 0.000, turn: 0.000, bounce: 0.000, squash: 0.000
+  },
+  {
+    t: 160,
+    lx: -1.57, ly: 2.58, la: 0.25, ls: 1.03,
+    rx: 0.60, ry: 2.20, ra: 0.35, rs: 0.98,
+    lean: 0.015, turn: -0.025, bounce: 0.015, squash: 0.012
+  },
+  {
+    t: 340,
+    lx: -1.08, ly: 2.08, la: -0.35, ls: 0.96,
+    rx: 1.21, ry: 2.20, ra: -0.30, rs: 1.02,
+    lean: -0.006, turn: 0.020, bounce: 0.000, squash: -0.004
+  },
+  {
+    t: 500,
+    lx: -1.62, ly: 2.03, la: 0.35, ls: 1.04,
+    rx: 1.18, ry: 1.97, ra: 0.25, rs: 1.00,
+    lean: 0.008, turn: -0.018, bounce: 0.010, squash: 0.008
+  },
+  {
+    t: 680,
+    lx: -1.52, ly: 2.02, la: 0.30, ls: 1.07,
+    rx: 0.86, ry: 2.03, ra: 0.35, rs: 1.04,
+    lean: 0.004, turn: 0.025, bounce: 0.025, squash: 0.015
+  },
+  {
+    t: 840,
+    lx: -1.02, ly: 2.34, la: -0.25, ls: 0.97,
+    rx: 1.31, ry: 2.35, ra: -0.30, rs: 1.00,
+    lean: -0.004, turn: 0.000, bounce: 0.000, squash: 0.000
+  },
+  {
+    t: 1020,
+    lx: -1.53, ly: 2.15, la: 0.25, ls: 1.02,
+    rx: 0.83, ry: 2.13, ra: 0.30, rs: 1.03,
+    lean: 0.012, turn: -0.022, bounce: -0.005, squash: -0.005
+  },
+  {
+    t: 1180,
+    lx: -1.29, ly: 1.99, la: 0.15, ls: 1.00,
+    rx: 1.12, ry: 2.05, ra: -0.25, rs: 0.99,
+    lean: 0.003, turn: -0.008, bounce: 0.005, squash: 0.000
+  }
+];
+
+const track = [
+  { ...keys[7], t: -20 },
+  ...keys.map(key => ({ ...key })),
+  { ...keys[0], t: 1200 },
+  { ...keys[1], t: 1360 },
+  { ...keys[2], t: 1540 }
+];
+
+const poseFields = [
+  'lx', 'ly', 'la', 'ls',
+  'rx', 'ry', 'ra', 'rs',
+  'lean', 'turn', 'bounce', 'squash'
+];
+const pose = {};
+
+function samplePose(milliseconds) {
+  const t = ((milliseconds % 1200) + 1200) % 1200;
+  let i = 1;
+
+  while (i < track.length - 2 && t > track[i + 1].t) {
+    i++;
+  }
+
+  const a = track[i - 1];
+  const b = track[i];
+  const c = track[i + 1];
+  const d = track[i + 2];
+  const dt = c.t - b.t;
+  const u = THREE.MathUtils.clamp((t - b.t) / dt, 0, 1);
+  const u2 = u * u;
+  const u3 = u2 * u;
+  const h00 = 2 * u3 - 3 * u2 + 1;
+  const h10 = u3 - 2 * u2 + u;
+  const h01 = -2 * u3 + 3 * u2;
+  const h11 = u3 - u2;
+
+  for (const field of poseFields) {
+    const p0 = a[field];
+    const p1 = b[field];
+    const p2 = c[field];
+    const p3 = d[field];
+    const m1 = (p2 - p0) / (c.t - a.t);
+    const m2 = (p3 - p1) / (d.t - b.t);
+
+    pose[field] =
+      h00 * p1 +
+      h10 * dt * m1 +
+      h01 * p2 +
+      h11 * dt * m2;
+  }
+
+  return pose;
+}
+
+function render(t) {
+  const p = samplePose(t);
+
+  character.position.set(0, p.bounce, 0);
+  character.rotation.set(0, p.turn, p.lean);
+  character.scale.set(
+    1 + p.squash * 0.45,
+    1 - p.squash,
+    1
+  );
+
+  updateArm(leftArm, p.lx, p.ly, p.la, p.ls);
+  updateArm(rightArm, p.rx, p.ry, p.ra, p.rs);
+
+  renderer.render(scene, camera);
+}
+
+window.nwb = {
+  scene,
+  renderer,
+  cameras: { ref: camera },
+  characters: [character],
+  render,
+  ready: true
+};
+
+render(0);
+</script>
+</body>
+</html>

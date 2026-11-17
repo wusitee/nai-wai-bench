@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Laughing yellow character</title>
+<style>
+html,body{margin:0;width:216px;height:216px;overflow:hidden;background:#f3f5f2}
+canvas{display:block;width:216px;height:216px}
+</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xf3f5f2);
+
+const renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true });
+renderer.setPixelRatio(1);
+renderer.setSize(216,216);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 0.98;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+document.body.appendChild(renderer.domElement);
+
+const ref = new THREE.OrthographicCamera(-2.2,2.2,2.2,-2.2,0.1,60);
+ref.position.set(-0.28,2.70,9);
+ref.lookAt(-0.28,2.28,0);
+
+scene.add(new THREE.HemisphereLight(0xfffff4,0x99865c,1.25));
+const key = new THREE.DirectionalLight(0xfff8e8,2.7);
+key.position.set(-3.6,7,5.5);
+key.target.position.set(0,2,0);
+key.castShadow = true;
+key.shadow.mapSize.set(1024,1024);
+Object.assign(key.shadow.camera,{left:-4,right:4,top:5,bottom:-3,near:0.1,far:18});
+key.shadow.normalBias = 0.025;
+key.shadow.bias = -0.00015;
+key.shadow.radius = 3;
+scene.add(key,key.target);
+const fill = new THREE.DirectionalLight(0xffffff,0.60);
+fill.position.set(4,3.7,4);
+scene.add(fill);
+const backLight = new THREE.DirectionalLight(0xffffed,0.85);
+backLight.position.set(1.5,5,-4);
+scene.add(backLight);
+
+const floor = new THREE.Mesh(
+  new THREE.PlaneGeometry(200,200),
+  new THREE.MeshStandardMaterial({color:0xf3f5f2,roughness:1})
+);
+floor.name = 'matte-ground';
+floor.rotation.x = -Math.PI/2;
+floor.position.y = -0.66;
+floor.receiveShadow = true;
+scene.add(floor);
+
+let seed = 572913;
+function random(){
+  seed ^= seed << 13; seed ^= seed >>> 17; seed ^= seed << 5;
+  return (seed >>> 0)/4294967296;
+}
+const noiseData = new Uint8Array(64*64*4);
+for(let y=0;y<64;y++) for(let x=0;x<64;x++){
+  const i=(y*64+x)*4;
+  const n=115+Math.floor(random()*48);
+  noiseData[i]=noiseData[i+1]=noiseData[i+2]=n;
+  noiseData[i+3]=255;
+}
+const grain = new THREE.DataTexture(noiseData,64,64,THREE.RGBAFormat);
+grain.wrapS = grain.wrapT = THREE.RepeatWrapping;
+grain.repeat.set(7,7);
+grain.magFilter = THREE.LinearFilter;
+grain.minFilter = THREE.LinearMipmapLinearFilter;
+grain.generateMipmaps = true;
+grain.needsUpdate = true;
+
+function skin(color,bump=0.014){
+  return new THREE.MeshStandardMaterial({
+    color,roughness:0.97,metalness:0,bumpMap:grain,bumpScale:bump
+  });
+}
+const gold = skin(0xdfae20);
+const headGold = skin(0xe5c735,0.011);
+const bellyMat = skin(0xbf975f,0.012);
+const handMat = skin(0x494836,0.007);
+const knuckleMat = skin(0x4b4936,0.006);
+const lipMat = skin(0xc4a044,0.006);
+const lowerLipMat = skin(0xdbc17a,0.004);
+const eyeMat = new THREE.MeshStandardMaterial({color:0x423019,roughness:1});
+const creaseMat = new THREE.MeshStandardMaterial({color:0xb18a28,roughness:1});
+const toothMat = new THREE.MeshStandardMaterial({color:0xffe9b6,roughness:0.84});
+const tongueMat = new THREE.MeshStandardMaterial({color:0x50331e,roughness:1});
+const furMat = new THREE.MeshStandardMaterial({
+  color:0xffffff,vertexColors:true,roughness:1,side:THREE.DoubleSide
+});
+
+const character = new THREE.Group();
+character.name = 'laughing-yellow-character';
+character.rotation.y = -0.10;
+scene.add(character);
+
+function group(name,parent,position){
+  const g = new THREE.Group();
+  g.name=name;
+  if(position) g.position.copy(position);
+  parent.add(g);
+  return g;
+}
+function mesh(geometry,material,parent,name){
+  const m = new THREE.Mesh(geometry,material);
+  m.name=name;
+  m.castShadow=true;
+  m.receiveShadow=true;
+  parent.add(m);
+  return m;
+}
+const sphereGeometry = new THREE.SphereGeometry(1,40,32);
+function ellipsoid(parent,name,position,scale,material){
+  const m=mesh(sphereGeometry,material,parent,name);
+  m.position.set(...position);
+  m.scale.set(...scale);
+  return m;
+}
+const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+function cubic(a,b,c,d,t){
+  return b+0.5*t*(c-a+t*(2*a-5*b+4*c-d+t*(3*(b-c)+d-a)));
+}
+function interpolate(values,t){
+  const u=THREE.MathUtils.clamp(t,0,1)*(values.length-1);
+  const i=Math.min(values.length-2,Math.floor(u)), f=u-i;
+  return cubic(values[Math.max(0,i-1)],values[i],values[i+1],
+    values[Math.min(values.length-1,i+2)],f);
+}
+function closeSeamNormals(geometry,rows,columns){
+  const n=geometry.attributes.normal;
+  for(let j=0;j<rows;j++){
+    const a=j*(columns+1),b=a+columns;
+    const v=V(n.getX(a)+n.getX(b),n.getY(a)+n.getY(b),n.getZ(a)+n.getZ(b)).normalize();
+    n.setXYZ(a,v.x,v.y,v.z); n.setXYZ(b,v.x,v.y,v.z);
+  }
+  n.needsUpdate=true;
+}
+
+const bodyProfile = [
+  [0.64,0.025,0.025,0.04,-0.03],
+  [0.76,0.44,0.33,0.03,-0.015],
+  [0.97,0.67,0.47,0.01,0.005],
+  [1.30,0.81,0.59,-0.015,0.02],
+  [1.70,0.87,0.64,-0.04,0.005],
+  [2.09,0.85,0.59,-0.055,-0.015],
+  [2.45,0.84,0.53,-0.06,-0.025],
+  [2.77,0.86,0.48,-0.06,-0.055],
+  [3.02,0.78,0.43,-0.04,-0.075],
+  [3.23,0.58,0.35,-0.015,-0.06],
+  [3.43,0.31,0.26,0,-0.05],
+  [3.54,0.015,0.025,0,-0.05]
+];
+function profile(y){
+  y=THREE.MathUtils.clamp(y,bodyProfile[0][0],bodyProfile.at(-1)[0]);
+  let i=0;
+  while(i<bodyProfile.length-2 && y>bodyProfile[i+1][0]) i++;
+  const t=(y-bodyProfile[i][0])/(bodyProfile[i+1][0]-bodyProfile[i][0]);
+  const out=[];
+  for(let k=1;k<5;k++){
+    out.push(cubic(
+      bodyProfile[Math.max(0,i-1)][k],bodyProfile[i][k],
+      bodyProfile[i+1][k],bodyProfile[Math.min(bodyProfile.length-1,i+2)][k],t
+    ));
+  }
+  out[0]=Math.max(0.012,out[0]);out[1]=Math.max(0.012,out[1]);
+  return out;
+}
+function bodyPoint(y,a){
+  const [rx,rz,cx,cz]=profile(y);
+  return V(cx+rx*Math.sin(a),y,cz+rz*Math.cos(a));
+}
+function bodyNormal(y,a){
+  const p=profile(y),p0=profile(y-0.002),p1=profile(y+0.002);
+  const da=V(p[0]*Math.cos(a),0,-p[1]*Math.sin(a));
+  const dy=V(
+    (p1[2]-p0[2]+(p1[0]-p0[0])*Math.sin(a))/0.004,
+    1,
+    (p1[3]-p0[3]+(p1[1]-p0[1])*Math.cos(a))/0.004
+  );
+  return da.cross(dy).normalize();
+}
+const torso=group('torso',character);
+{
+  const pos=[],uv=[],idx=[],rows=80,cols=96;
+  for(let j=0;j<=rows;j++){
+    const y=0.64+(3.54-0.64)*j/rows;
+    for(let i=0;i<=cols;i++){
+      const p=bodyPoint(y,2*Math.PI*i/cols);
+      pos.push(p.x,p.y,p.z);uv.push(i/cols,j/rows);
+      if(j<rows&&i<cols){
+        const a=j*(cols+1)+i,b=a+1,c=a+cols+1,d=c+1;
+        idx.push(a,b,c,b,d,c);
+      }
+    }
+  }
+  const bottom=pos.length/3;
+  pos.push(0.04,0.64,-0.03);uv.push(0.5,0);
+  const top=pos.length/3;
+  pos.push(0,3.54,-0.05);uv.push(0.5,1);
+  for(let i=0;i<cols;i++){
+    idx.push(bottom,i+1,i);
+    const a=rows*(cols+1)+i;
+    idx.push(top,a,a+1);
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+  geo.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));
+  geo.setIndex(idx);geo.computeVertexNormals();
+  closeSeamNormals(geo,rows+1,cols);
+  mesh(geo,gold,torso,'rounded-golden-body');
+}
+
+function patchCenter(y){return -0.10-0.09*(y-1.60)/0.71;}
+function patchContains(x,y){
+  return ((x-patchCenter(y))/0.65)**2+((y-1.60)/0.71)**2 < 1;
+}
+function frontBodyZ(x,y){
+  const [rx,rz,cx,cz]=profile(y);
+  return cz+rz*Math.sqrt(Math.max(0,1-((x-cx)/rx)**2));
+}
+const belly=group('belly',torso);
+{
+  const pos=[],uv=[],idx=[],rings=30,cols=96;
+  const centerX=patchCenter(1.60);
+  pos.push(centerX,1.60,frontBodyZ(centerX,1.60)+0.009);
+  uv.push(0.5,0.5);
+  for(let j=1;j<=rings;j++){
+    const r=j/rings;
+    for(let i=0;i<cols;i++){
+      const a=2*Math.PI*i/cols;
+      const y=1.60+0.71*r*Math.sin(a);
+      const x=patchCenter(y)+0.65*r*Math.cos(a)*(1-0.06*Math.sin(a));
+      pos.push(x,y,frontBodyZ(x,y)+0.009);
+      uv.push(0.5+(x+0.1)/1.4,0.5+(y-1.6)/1.5);
+    }
+  }
+  for(let i=0;i<cols;i++) idx.push(0,1+i,1+(i+1)%cols);
+  for(let j=0;j<rings-1;j++) for(let i=0;i<cols;i++){
+    const a=1+j*cols+i,b=1+j*cols+(i+1)%cols,c=a+cols,d=b+cols;
+    idx.push(a,c,d,a,d,b);
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+  geo.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));
+  geo.setIndex(idx);geo.computeVertexNormals();
+  mesh(geo,bellyMat,belly,'soft-tan-belly-patch');
+}
+
+function tubeFrame(curve,t){
+  const tangent=curve.getTangent(t).normalize();
+  let a=new THREE.Vector3().crossVectors(tangent,V(0,0,1));
+  if(a.lengthSq()<0.0001) a.crossVectors(tangent,V(1,0,0));
+  a.normalize();
+  const b=new THREE.Vector3().crossVectors(tangent,a).normalize();
+  return {a,b,tangent};
+}
+function tubeGeometry(curve,radii,t0,t1,origin,segments=44,sides=36,depth=1){
+  const pos=[],uv=[],idx=[];
+  for(let j=0;j<=segments;j++){
+    const t=t0+(t1-t0)*j/segments;
+    const p=curve.getPoint(t).sub(origin),r=interpolate(radii,t);
+    const f=tubeFrame(curve,t);
+    for(let i=0;i<=sides;i++){
+      const a=2*Math.PI*i/sides;
+      const q=p.clone().addScaledVector(f.a,r*Math.cos(a))
+        .addScaledVector(f.b,r*depth*Math.sin(a));
+      pos.push(q.x,q.y,q.z);uv.push(i/sides,t);
+      if(j<segments&&i<sides){
+        const k=j*(sides+1)+i;
+        idx.push(k,k+sides+1,k+1,k+1,k+sides+1,k+sides+2);
+      }
+    }
+  }
+  const cap0=pos.length/3,p0=curve.getPoint(t0).sub(origin);
+  pos.push(p0.x,p0.y,p0.z);uv.push(0.5,t0);
+  const cap1=pos.length/3,p1=curve.getPoint(t1).sub(origin);
+  pos.push(p1.x,p1.y,p1.z);uv.push(0.5,t1);
+  for(let i=0;i<sides;i++){
+    idx.push(cap0,i,i+1);
+    const a=segments*(sides+1)+i;
+    idx.push(cap1,a+1,a);
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+  geo.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));
+  geo.setIndex(idx);geo.computeVertexNormals();
+  closeSeamNormals(geo,segments+1,sides);
+  return geo;
+}
+
+function addFur(parent,name,count,sampler,baseColor){
+  const positions=[],normals=[],colors=[];
+  for(let i=0;i<count;i++){
+    const sample=sampler();
+    if(!sample) continue;
+    const p=sample.p,n=sample.n.normalize();
+    const color=(sample.color||baseColor).clone().multiplyScalar(0.92+random()*0.13);
+    let tangent=new THREE.Vector3().crossVectors(n,Math.abs(n.y)<0.9?V(0,1,0):V(1,0,0)).normalize();
+    const bitangent=new THREE.Vector3().crossVectors(n,tangent).normalize();
+    const a=random()*Math.PI*2;
+    tangent.multiplyScalar(Math.cos(a)).addScaledVector(bitangent,Math.sin(a)).normalize();
+    const cross=new THREE.Vector3().crossVectors(n,tangent).normalize();
+    const length=0.012+random()*0.016,width=0.002+random()*0.0015;
+    const base=p.clone().addScaledVector(n,-0.003);
+    const tip=p.clone().addScaledVector(n,length).addScaledVector(tangent,(random()-0.5)*0.009);
+    for(const direction of [tangent,cross]){
+      const a=base.clone().addScaledVector(direction,-width);
+      const b=base.clone().addScaledVector(direction,width);
+      for(const v of [a,b,tip]){
+        positions.push(v.x,v.y,v.z);
+        normals.push(n.x,n.y,n.z);
+        colors.push(color.r,color.g,color.b);
+      }
+    }
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
+  geo.setAttribute('normal',new THREE.Float32BufferAttribute(normals,3));
+  geo.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));
+  const m=mesh(geo,furMat,parent,name);
+  m.castShadow=false;
+}
+
+addFur(torso,'short-body-fuzz',1800,()=>{
+  const y=0.77+random()*2.68,a=random()*Math.PI*2,p=bodyPoint(y,a);
+  return {p,n:bodyNormal(y,a),color:Math.cos(a)>0&&patchContains(p.x,p.y)?bellyMat.color:gold.color};
+},gold.color);
+
+function makeLimb(name,points,radii,material,upperName,lowerName,furCount){
+  const start=points[0].clone();
+  const root=group(name,character,start);
+  const curve=new THREE.CatmullRomCurve3(points.map(p=>p.clone().sub(start)),false,'catmullrom',0.35);
+  const split=0.54,elbow=curve.getPoint(split);
+  const upper=group(upperName,root);
+  const lower=group(lowerName,root,elbow);
+  mesh(tubeGeometry(curve,radii,0,split,V(0,0,0)),material,upper,upperName+'-volume');
+  mesh(tubeGeometry(curve,radii,split,1,elbow),material,lower,lowerName+'-volume');
+  for(const part of [{parent:upper,t0:0,t1:split,origin:V(0,0,0)},{parent:lower,t0:split,t1:1,origin:elbow}]){
+    addFur(part.parent,'short-limb-fuzz',Math.floor(furCount/2),()=>{
+      const t=part.t0+(part.t1-part.t0)*random(),a=random()*Math.PI*2;
+      const f=tubeFrame(curve,t),n=f.a.clone().multiplyScalar(Math.cos(a)).addScaledVector(f.b,Math.sin(a));
+      return {p:curve.getPoint(t).sub(part.origin).addScaledVector(n,interpolate(radii,t)),n};
+    },material.color);
+  }
+  return {root,lower,end:curve.getPoint(1).sub(elbow)};
+}
+
+const leftLeg=makeLimb('leg-left',[
+  V(-0.37,1.07,-0.025),V(-0.51,0.64,-0.005),V(-0.58,0.23,0.035),V(-0.59,-0.34,0.14)
+],[0.35,0.34,0.275,0.235],gold,'thigh-left','shin-left',400);
+const rightLeg=makeLimb('leg-right',[
+  V(0.40,1.08,-0.045),V(0.55,0.60,-0.02),V(0.63,0.18,0.065),V(0.68,-0.34,0.14)
+],[0.36,0.34,0.28,0.235],gold,'thigh-right','shin-right',400);
+
+for(const [leg,side] of [[leftLeg,'left'],[rightLeg,'right']]){
+  const foot=group('foot-'+side,leg.lower,leg.end);
+  ellipsoid(foot,'rounded-foot',[0,-0.105,0.20],[0.33,0.205,0.51],gold);
+  for(let i=0;i<3;i++){
+    ellipsoid(foot,'toe-'+i,[(i-1)*0.17,-0.10,0.59-Math.abs(i-1)*0.04],[0.115,0.13,0.18],gold);
+  }
+}
+
+const leftArm=makeLimb('arm-left',[
+  V(-0.66,3.03,-0.06),V(-0.89,2.73,-0.035),V(-0.97,2.25,0.02),
+  V(-0.91,1.79,0.16),V(-0.79,1.34,0.31),V(-0.71,0.99,0.45)
+],[0.29,0.27,0.23,0.205,0.17,0.14],gold,'upper-arm-left','forearm-left',700);
+const rightArm=makeLimb('arm-right',[
+  V(0.65,3.04,-0.06),V(0.95,2.79,-0.055),V(1.18,2.40,-0.01),
+  V(1.27,1.99,0.055),V(1.19,1.57,0.20),V(0.88,0.91,0.44)
+],[0.31,0.37,0.35,0.31,0.24,0.16],gold,'upper-arm-right','forearm-right',850);
+
+function finger(parent,name,points,radii){
+  const g=group(name,parent);
+  const curve=new THREE.CatmullRomCurve3(points,false,'catmullrom',0.25);
+  mesh(tubeGeometry(curve,radii,0,1,V(0,0,0),18,12),handMat,g,name+'-volume');
+  const p=points.at(-1),r=radii.at(-1);
+  ellipsoid(g,'fingertip',[p.x,p.y,p.z],[r,r,r],handMat);
+  return g;
+}
+function makeHand(arm,side){
+  const hand=group('hand-'+side,arm.lower,arm.end);
+  hand.rotation.z=side==='left'?-0.035:0.09;
+  hand.rotation.x=-0.07;
+  const offset=side==='right'?-0.025:0;
+  ellipsoid(hand,'palm',[offset,-0.17,0.015],[0.174,0.19,0.105],handMat);
+  ellipsoid(hand,'wrist',[0,-0.015,-0.005],[0.135,0.13,0.105],handMat);
+  const xs=[-0.135,-0.045,0.05,0.135];
+  const lengths=[0.455,0.535,0.55,0.48];
+  for(let i=0;i<4;i++){
+    const x=xs[i]+offset;
+    const y0=-0.26+Math.abs(i-1.5)*0.018;
+    const xEnd=x+(i-1.5)*0.014;
+    finger(hand,'finger-'+i,[
+      V(x,y0,0.055),
+      V(x+(i-1.5)*0.009,-0.365,0.09),
+      V(xEnd,-lengths[i],0.105)
+    ],[0.047,0.041,0.031]);
+    ellipsoid(hand,'knuckle-'+i,[x,y0+0.025,0.086],[0.046,0.055,0.032],knuckleMat);
+  }
+  const s=side==='left'?1:-1;
+  finger(hand,'thumb',[
+    V(offset+s*0.13,-0.115,0.035),
+    V(offset+s*0.235,-0.245,0.10),
+    V(offset+s*0.245,-0.365,0.13)
+  ],[0.062,0.05,0.035]);
+}
+makeHand(leftArm,'left');
+makeHand(rightArm,'right');
+
+const head=group('head',character,V(0.06,3.54,0.17));
+head.rotation.set(-0.10,0,-0.22);
+const RX=0.56,RY=0.72,RZ=0.48;
+const mouthX=-0.045,mouthY=-0.18,mouthRX=0.38,mouthRY=0.415;
+
+function headZ(x,y){
+  return RZ*Math.sqrt(Math.max(0,1-(x/RX)**2-(y/RY)**2));
+}
+function mouthRim(a){
+  const c=Math.cos(a),s=Math.sin(a);
+  const x=mouthX+mouthRX*Math.sign(c)*Math.pow(Math.abs(c),0.57)*(0.88+0.12*s);
+  const y=mouthY+mouthRY*(s>=0?Math.pow(s,0.57):s);
+  return V(x,y,headZ(x,y));
+}
+function headSurface(front){
+  const positions=[],normals=[],uv=[],idx=[],rows=34,cols=128;
+  for(let j=0;j<=rows;j++){
+    const u=j/rows;
+    for(let i=0;i<=cols;i++){
+      const a=2*Math.PI*i/cols;
+      let x,y,z;
+      if(front){
+        const inner=mouthRim(a);
+        x=THREE.MathUtils.lerp(inner.x,RX*Math.cos(a),u);
+        y=THREE.MathUtils.lerp(inner.y,RY*Math.sin(a),u);
+        z=headZ(x,y);
+      }else{
+        x=RX*u*Math.cos(a); y=RY*u*Math.sin(a);
+        z=-RZ*Math.sqrt(Math.max(0,1-u*u));
+      }
+      positions.push(x,y,z);
+      const n=V(x/(RX*RX),y/(RY*RY),z/(RZ*RZ)).normalize();
+      normals.push(n.x,n.y,n.z);
+      uv.push(0.5+Math.atan2(x/RX,z/RZ)/(2*Math.PI),0.5+Math.asin(THREE.MathUtils.clamp(y/RY,-1,1))/Math.PI);
+      if(j<rows&&i<cols){
+        const a0=j*(cols+1)+i,b=a0+cols+1,c=b+1,d=a0+1;
+        if(front) idx.push(a0,b,c,a0,c,d);
+        else idx.push(a0,c,b,a0,d,c);
+      }
+    }
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
+  geo.setAttribute('normal',new THREE.Float32BufferAttribute(normals,3));
+  geo.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));
+  geo.setIndex(idx);
+  return geo;
+}
+mesh(headSurface(true),headGold,head,'face-with-open-mouth');
+mesh(headSurface(false),headGold,head,'rounded-back-of-head');
+
+const mouth=group('mouth',head);
+{
+  const positions=[],colors=[],idx=[],rings=30,cols=128;
+  const dark=new THREE.Color(0x090603),edge=new THREE.Color(0x30200e);
+  for(let j=0;j<=rings;j++){
+    const r=j/rings;
+    for(let i=0;i<=cols;i++){
+      const a=2*Math.PI*i/cols,p=mouthRim(a);
+      const x=mouthX+(p.x-mouthX)*r;
+      const y=mouthY+(p.y-mouthY)*r;
+      const z=0.065+(p.z-0.073)*Math.pow(r,1.65);
+      positions.push(x,y,z);
+      const tint=dark.clone().lerp(edge,Math.pow(r,4)*0.7);
+      colors.push(tint.r,tint.g,tint.b);
+      if(j<rings&&i<cols){
+        const q=j*(cols+1)+i,b=q+cols+1;
+        idx.push(q,b,b+1,q,b+1,q+1);
+      }
+    }
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
+  geo.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));
+  geo.setIndex(idx);geo.computeVertexNormals();
+  const m=mesh(geo,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide}),mouth,'deep-mouth-cavity');
+  m.castShadow=false;
+}
+function pathMesh(parent,name,points,radius,material,closed=false,segments=64){
+  const curve=new THREE.CatmullRomCurve3(points,closed,'catmullrom',0.35);
+  return mesh(new THREE.TubeGeometry(curve,segments,radius,8,closed),material,parent,name);
+}
+const lipPoints=[];
+for(let i=0;i<112;i++){
+  const p=mouthRim(2*Math.PI*i/112);p.z+=0.012;lipPoints.push(p);
+}
+pathMesh(mouth,'golden-mouth-rim',lipPoints,0.026,lipMat,true,112);
+
+const jaw=group('lower-jaw',mouth);
+const lowerLipPoints=[];
+for(let i=0;i<=48;i++){
+  const a=Math.PI+0.12+(Math.PI-0.24)*i/48,p=mouthRim(a);
+  p.z+=0.031;lowerLipPoints.push(p);
+}
+pathMesh(jaw,'pale-inner-lower-lip',lowerLipPoints,0.013,lowerLipMat,false,60);
+
+const upperTeeth=group('upper-teeth',mouth);
+function solidTooth(a0,a1,index){
+  const a=mouthRim(a0),b=mouthRim(a1);
+  a.z+=0.017;b.z+=0.017;
+  const h=0.067;
+  const p=[
+    a.x,a.y-0.008,a.z, b.x,b.y-0.008,b.z,
+    b.x,b.y-h,b.z+0.008, a.x,a.y-h,a.z+0.008,
+    a.x,a.y-0.008,a.z-0.045,b.x,b.y-0.008,b.z-0.045,
+    b.x,b.y-h,b.z-0.037,a.x,a.y-h,a.z-0.037
+  ];
+  const g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));
+  g.setIndex([0,1,2,0,2,3,4,6,5,4,7,6,0,4,5,0,5,1,3,2,6,3,6,7,0,3,7,0,7,4,1,5,6,1,6,2]);
+  g.computeVertexNormals();
+  mesh(g,toothMat,upperTeeth,'upper-tooth-'+index);
+}
+const teethStart=0.92,teethEnd=Math.PI-0.92;
+for(let i=0;i<7;i++){
+  const a0=teethStart+(teethEnd-teethStart)*i/7+0.006;
+  const a1=teethStart+(teethEnd-teethStart)*(i+1)/7-0.006;
+  solidTooth(a0,a1,i);
+}
+ellipsoid(mouth,'low-dark-tongue',[-0.035,-0.485,0.215],[0.145,0.055,0.052],tongueMat);
+const lowerTeeth=group('lower-teeth',jaw);
+const lowerToothPoints=[];
+for(let i=0;i<=20;i++){
+  const a=4.05+1.11*i/20,p=mouthRim(a);
+  p.y+=0.044;p.z+=0.030;lowerToothPoints.push(p);
+}
+pathMesh(lowerTeeth,'little-lower-teeth-crescent',lowerToothPoints,0.016,toothMat,false,32);
+const littleTooth=ellipsoid(lowerTeeth,'left-lower-tooth',[-0.207,-0.478,0.329],[0.025,0.055,0.024],toothMat);
+littleTooth.rotation.z=0.30;
+
+const eyes=group('eyes',head);
+function closedEye(name,cx,y0,width,arch){
+  const eye=group(name,eyes),points=[],crease=[];
+  for(let i=0;i<=16;i++){
+    const t=-1+2*i/16,x=cx+width*t,y=y0+arch*(1-t*t);
+    points.push(V(x,y,headZ(x,y)+0.016));
+    const y2=y-0.025;
+    crease.push(V(x,y2,headZ(x,y2)+0.005));
+  }
+  pathMesh(eye,'soft-lower-eyelid-fold',crease,0.007,creaseMat,false,30);
+  pathMesh(eye,'closed-laughing-eye',points,0.016,eyeMat,false,36);
+}
+closedEye('eye-left',-0.34,0.40,0.105,0.060);
+closedEye('eye-right',0.29,0.38,0.098,0.055);
+
+function insideMouth(x,y){
+  const dy=(y-mouthY)/mouthRY;
+  if(dy<=-1||dy>=1) return false;
+  const s=dy>=0?Math.pow(dy,1/0.57):dy;
+  const c=Math.sqrt(Math.max(0,1-s*s));
+  const w=mouthRX*Math.pow(c,0.57)*(0.88+0.12*s);
+  return Math.abs(x-mouthX)<w+0.025;
+}
+addFur(head,'fine-head-fuzz',850,()=>{
+  const y=-1+2*random(),a=2*Math.PI*random(),r=Math.sqrt(1-y*y);
+  const p=V(RX*r*Math.cos(a),RY*y,RZ*r*Math.sin(a));
+  if(p.z>0&&insideMouth(p.x,p.y)) return null;
+  const n=V(p.x/(RX*RX),p.y/(RY*RY),p.z/(RZ*RZ)).normalize();
+  return {p,n};
+},headGold.color);
+
+const characters=[character];
+function render(t){
+  renderer.setRenderTarget(null);
+  renderer.setViewport(0,0,216,216);
+  renderer.setScissorTest(false);
+  renderer.render(scene,ref);
+}
+window.nwb={scene,renderer,cameras:{ref},characters,render,ready:false};
+render(0);
+window.nwb.ready=true;
+</script>
+</body>
+</html>

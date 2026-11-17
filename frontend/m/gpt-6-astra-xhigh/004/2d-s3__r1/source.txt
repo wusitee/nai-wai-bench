@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dancing yellow character</title>
+<style>
+html,body{margin:0;width:244px;height:240px;overflow:hidden;background:#fff}
+svg{display:block;width:244px;height:240px}
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" width="244" height="240" viewBox="0 0 244 240" color-interpolation-filters="sRGB">
+  <defs>
+    <linearGradient id="body-gold" x1=".2" y1="0" x2=".7" y2="1">
+      <stop offset="0" stop-color="#ffe347"/>
+      <stop offset=".27" stop-color="#ffd02b"/>
+      <stop offset=".45" stop-color="#f4c344"/>
+      <stop offset=".65" stop-color="#e9b960"/>
+      <stop offset=".83" stop-color="#dcb067"/>
+      <stop offset="1" stop-color="#c09343"/>
+    </linearGradient>
+    <radialGradient id="body-light" cx=".49" cy=".37" r=".66">
+      <stop offset="0" stop-color="#f5d28f"/>
+      <stop offset=".49" stop-color="#edc577"/>
+      <stop offset=".8" stop-color="#dfb051"/>
+      <stop offset="1" stop-color="#c7993e"/>
+    </radialGradient>
+    <radialGradient id="belly-cream" cx=".49" cy=".38" r=".66">
+      <stop offset="0" stop-color="#f8dfa9"/>
+      <stop offset=".42" stop-color="#f2d49c"/>
+      <stop offset=".76" stop-color="#e9c38a" stop-opacity=".86"/>
+      <stop offset="1" stop-color="#dfb36e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body-bottom" gradientUnits="userSpaceOnUse" x1="0" y1="173" x2="0" y2="250">
+      <stop offset="0" stop-color="#855e2c" stop-opacity="0"/>
+      <stop offset=".58" stop-color="#855e2c" stop-opacity=".05"/>
+      <stop offset="1" stop-color="#805c2a" stop-opacity=".28"/>
+    </linearGradient>
+    <radialGradient id="head-yellow" cx=".45" cy=".18" r=".83">
+      <stop offset="0" stop-color="#fff174"/>
+      <stop offset=".32" stop-color="#ffe34b"/>
+      <stop offset=".62" stop-color="#ffd224"/>
+      <stop offset=".83" stop-color="#f5b428"/>
+      <stop offset="1" stop-color="#e9a338"/>
+    </radialGradient>
+    <linearGradient id="head-fade" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="100">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".57" stop-color="#fff"/>
+      <stop offset=".72" stop-color="#ddd"/>
+      <stop offset=".86" stop-color="#777"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <mask id="head-blend" maskUnits="userSpaceOnUse" x="60" y="-25" width="130" height="140">
+      <path d="M60-25H190V115H60Z" fill="url(#head-fade)"/>
+    </mask>
+    <linearGradient id="left-arm-gold" x1="0" y1=".35" x2="1" y2=".65">
+      <stop offset="0" stop-color="#ffda43"/>
+      <stop offset=".39" stop-color="#ffcc24"/>
+      <stop offset=".76" stop-color="#eaaa15"/>
+      <stop offset="1" stop-color="#d3921d"/>
+    </linearGradient>
+    <linearGradient id="right-arm-gold" x1="0" y1=".5" x2="1" y2=".5">
+      <stop offset="0" stop-color="#d49220"/>
+      <stop offset=".36" stop-color="#efb21d"/>
+      <stop offset=".7" stop-color="#ffd039"/>
+      <stop offset="1" stop-color="#edb329"/>
+    </linearGradient>
+    <radialGradient id="left-hand-brown" cx=".33" cy=".26" r=".85">
+      <stop offset="0" stop-color="#8b692a"/>
+      <stop offset=".31" stop-color="#6c4e1c"/>
+      <stop offset=".68" stop-color="#4e361b"/>
+      <stop offset="1" stop-color="#80521c"/>
+    </radialGradient>
+    <linearGradient id="right-hand-brown" x1=".15" y1=".9" x2=".7" y2=".1">
+      <stop offset="0" stop-color="#614216"/>
+      <stop offset=".39" stop-color="#5f4324"/>
+      <stop offset=".7" stop-color="#493a2b"/>
+      <stop offset="1" stop-color="#82705b"/>
+    </linearGradient>
+    <radialGradient id="eye-halo">
+      <stop offset="0" stop-color="#554d0a" stop-opacity=".85"/>
+      <stop offset=".47" stop-color="#8c8215" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#ac9d21" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="eye-dark" cx=".43" cy=".35" r=".7">
+      <stop offset="0" stop-color="#10170b"/>
+      <stop offset=".54" stop-color="#20270b"/>
+      <stop offset="1" stop-color="#6e6614"/>
+    </radialGradient>
+    <radialGradient id="beak-gold" cx=".46" cy=".25" r=".8">
+      <stop offset="0" stop-color="#ffdd40"/>
+      <stop offset=".52" stop-color="#fac928"/>
+      <stop offset="1" stop-color="#eeb12c"/>
+    </radialGradient>
+    <filter id="soft-edge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.6"/>
+    </filter>
+    <filter id="face-soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="1"/>
+    </filter>
+    <filter id="soft-shading" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+    <filter id="wide-shading" x="-45%" y="-45%" width="190%" height="190%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <filter id="ground-blur" x="-30%" y="-100%" width="160%" height="300%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+    <filter id="fine-grain" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".74" numOctaves="1" seed="14" result="noise"/>
+      <feColorMatrix in="noise" type="matrix" values="
+        2.4 0 0 0 -.7
+        0 2.4 0 0 -.7
+        0 0 2.4 0 -.7
+        0 0 0 0 .32" result="colored-grain"/>
+      <feComposite in="colored-grain" in2="SourceGraphic" operator="in" result="masked-grain"/>
+      <feBlend in="masked-grain" in2="SourceGraphic" mode="soft-light"/>
+    </filter>
+    <pattern id="background-speckles" width="12" height="12" patternUnits="userSpaceOnUse">
+      <path d="M1 1h1M7 3h1M3 7h1M9 9h1M5 11h1" stroke="#ddb0de" stroke-width=".8" opacity=".48"/>
+      <path d="M4 0h1M10 2h1M0 5h1M6 6h1M2 10h1" stroke="#b8dbdb" stroke-width=".8" opacity=".4"/>
+      <path d="M9 6h1M5 3h1M11 11h1" stroke="#c6b2cb" stroke-width=".7" opacity=".27"/>
+    </pattern>
+    <pattern id="character-speckles" width="4" height="4" patternUnits="userSpaceOnUse">
+      <path d="M0 0h1v1H0ZM2 2h1v1H2Z" fill="#fff5e5" opacity=".26"/>
+      <path d="M2 0h1v1H2ZM0 2h1v1H0Z" fill="#754653" opacity=".13"/>
+      <path d="M1 1h1v1H1Z" fill="#9fcfc2" opacity=".18"/>
+      <path d="M3 3h1v1H3Z" fill="#7796a7" opacity=".13"/>
+    </pattern>
+    <clipPath id="body-clip">
+      <path id="body-clip-shape"/>
+    </clipPath>
+    <clipPath id="head-clip">
+      <path id="head-clip-shape"/>
+    </clipPath>
+    <clipPath id="cast-shadow-clip">
+      <path id="cast-shadow-clip-shape"/>
+    </clipPath>
+    <mask id="character-texture-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="244" height="240" style="mask-type:alpha">
+      <use href="#character-painted"/>
+    </mask>
+  </defs>
+
+  <g id="background">
+    <path fill="#fff" d="M0 0h244v240H0z"/>
+    <path fill="url(#background-speckles)" d="M0 0h244v240H0z"/>
+    <g id="floor-shadow" filter="url(#ground-blur)">
+      <ellipse cx="125" cy="239" rx="110" ry="12" fill="#bdb0bf" opacity=".35"/>
+      <ellipse cx="122" cy="238" rx="85" ry="7" fill="#a8a0a0" opacity=".26"/>
+      <ellipse cx="24" cy="228" rx="28" ry="6" fill="#dfd3e5" opacity=".4"/>
+    </g>
+  </g>
+
+  <g id="character-yellow">
+    <g id="character-painted" filter="url(#fine-grain)">
+      <g id="body-and-head">
+        <g id="body">
+          <path id="body-shape" fill="url(#body-gold)" filter="url(#soft-edge)"/>
+          <g clip-path="url(#body-clip)">
+            <ellipse cx="126" cy="172" rx="89" ry="99" fill="url(#body-light)" opacity=".3"/>
+            <path d="M51 150C37 177 35 215 48 246L72 249C55 215 57 175 64 153Z" fill="#b9934b" opacity=".25" filter="url(#wide-shading)"/>
+            <path d="M184 112C200 153 212 192 199 238" fill="none" stroke="#d69c37" stroke-width="17" opacity=".35" filter="url(#wide-shading)"/>
+            <g id="belly">
+              <path d="M101 104C113 93 137 94 151 110C166 129 170 151 180 175C190 200 187 227 175 251H78C74 226 75 198 81 171C87 144 89 120 101 104Z" fill="url(#belly-cream)" filter="url(#soft-shading)"/>
+              <ellipse cx="127" cy="157" rx="39" ry="56" fill="#f6dba6" opacity=".3" filter="url(#wide-shading)"/>
+              <ellipse cx="125" cy="116" rx="26" ry="21" fill="#ffe0a1" opacity=".2" filter="url(#soft-shading)"/>
+            </g>
+            <path d="M74 220C103 233 156 237 192 224L200 248H53Z" fill="#bd964a" opacity=".15" filter="url(#wide-shading)"/>
+            <path d="M20 173H230V255H20Z" fill="url(#body-bottom)"/>
+          </g>
+        </g>
+
+        <g id="head">
+          <g id="head-color" mask="url(#head-blend)">
+            <path id="head-shape" fill="url(#head-yellow)" filter="url(#soft-edge)"/>
+            <g id="head-highlights" clip-path="url(#head-clip)">
+              <path d="M99 2C92 14 95 33 91 48" fill="none" stroke="#fff28b" stroke-width="9" opacity=".45" filter="url(#soft-shading)"/>
+              <path d="M153 9C160 28 154 50 164 65" fill="none" stroke="#ffe66a" stroke-width="8" opacity=".48" filter="url(#soft-shading)"/>
+              <ellipse cx="123" cy="65" rx="29" ry="18" fill="#eda12a" opacity=".47" filter="url(#wide-shading)"/>
+              <ellipse cx="126" cy="6" rx="21" ry="14" fill="#fff476" opacity=".28" filter="url(#soft-shading)"/>
+            </g>
+          </g>
+
+          <g id="face">
+            <g id="eyes">
+              <g id="eye-left">
+                <ellipse cx="104" cy="24.7" rx="8.1" ry="11.7" fill="url(#eye-halo)" filter="url(#face-soft)" transform="rotate(10 104 24.7)"/>
+                <ellipse cx="104" cy="24.7" rx="3.55" ry="5.9" fill="url(#eye-dark)" filter="url(#face-soft)" transform="rotate(10 104 24.7)"/>
+                <ellipse cx="103.7" cy="24.3" rx="1.9" ry="3.9" fill="#151c0d" opacity=".82" filter="url(#face-soft)"/>
+                <ellipse cx="102.9" cy="21.4" rx="1.1" ry=".9" fill="#e2de8a" opacity=".39" filter="url(#face-soft)"/>
+              </g>
+              <g id="eye-right">
+                <ellipse cx="146.4" cy="21.6" rx="8.2" ry="10.5" fill="url(#eye-halo)" filter="url(#face-soft)" transform="rotate(-13 146.4 21.6)"/>
+                <ellipse cx="146.6" cy="21.9" rx="3.8" ry="5.8" fill="url(#eye-dark)" filter="url(#face-soft)" transform="rotate(-13 146.6 21.9)"/>
+                <ellipse cx="146.5" cy="21.6" rx="2.3" ry="3.9" fill="#17200d" opacity=".86" filter="url(#face-soft)"/>
+                <ellipse cx="145.3" cy="18.7" rx="1.05" ry=".9" fill="#e1e0a1" opacity=".36" filter="url(#face-soft)"/>
+              </g>
+            </g>
+            <g id="mouth" transform="translate(123 37) scale(.74 .72) translate(-123 -42)" opacity=".62">
+              <ellipse cx="123" cy="42" rx="16" ry="9" fill="#f8c31f" opacity=".35" filter="url(#soft-shading)"/>
+              <path d="M111 38C117 35 127 35 134 38C138 40 133 45 128 48C123 50 115 46 111 43C109 41 109 39 111 38Z" fill="url(#beak-gold)" filter="url(#soft-edge)"/>
+              <path d="M114 39C119 37 127 37 132 39" stroke="#ffe85e" stroke-width="3" stroke-linecap="round" fill="none" opacity=".28" filter="url(#face-soft)"/>
+              <path d="M116 45C121 48 127 48 132 44" stroke="#dca328" stroke-width="1.7" stroke-linecap="round" fill="none" opacity=".12" filter="url(#soft-edge)"/>
+            </g>
+          </g>
+        </g>
+      </g>
+
+      <g id="arm-shadows" clip-path="url(#cast-shadow-clip)">
+        <path id="left-cast-shadow" fill="#987025" opacity=".33" transform="translate(4 4)" filter="url(#soft-shading)"/>
+        <path id="right-cast-shadow" fill="#9a7026" opacity=".32" transform="translate(-4 4)" filter="url(#soft-shading)"/>
+      </g>
+
+      <g id="arm-right">
+        <g id="forearm-right" filter="url(#soft-edge)">
+          <path id="right-arm-shape" fill="url(#right-arm-gold)"/>
+          <path id="right-arm-highlight" fill="none" stroke="#ffdf59" stroke-width="9" stroke-linecap="round" opacity=".4" filter="url(#soft-shading)"/>
+          <path id="right-arm-shade" fill="none" stroke="#af791e" stroke-width="5" opacity=".46" filter="url(#soft-shading)"/>
+        </g>
+        <g id="hand-right" filter="url(#soft-edge)">
+          <path d="M200 84C203 79 205 76 206 70C207 64 211 61 215 63C221 64 223 69 222 74C226 74 228 77 226 82C224 87 219 92 215 96C210 100 206 101 202 97C198 94 198 89 200 84Z" fill="url(#right-hand-brown)"/>
+          <path d="M209 71C209 66 212 64 216 67" fill="none" stroke="#a09576" stroke-width="3.2" stroke-linecap="round" opacity=".42" filter="url(#face-soft)"/>
+          <path d="M221 78C218 85 213 87 210 90" fill="none" stroke="#3d3025" stroke-width="3.4" stroke-linecap="round" opacity=".52" filter="url(#face-soft)"/>
+          <path d="M201 87C202 91 205 94 209 95" fill="none" stroke="#97722b" stroke-width="3" opacity=".34" filter="url(#face-soft)"/>
+        </g>
+      </g>
+
+      <g id="arm-left">
+        <g id="forearm-left" filter="url(#soft-edge)">
+          <path id="left-arm-shape" fill="url(#left-arm-gold)"/>
+          <path id="left-arm-highlight" fill="none" stroke="#ffe268" stroke-width="10" stroke-linecap="round" opacity=".48" filter="url(#soft-shading)"/>
+          <path id="left-arm-shade" fill="none" stroke="#dc9616" stroke-width="8" opacity=".5" filter="url(#soft-shading)"/>
+        </g>
+        <g id="hand-left">
+          <path d="M52 106C61 110 71 115 83 113" fill="none" stroke="#dba12b" stroke-width="7" opacity=".52" filter="url(#soft-shading)"/>
+          <g id="left-hand-details" filter="url(#soft-edge)">
+            <path d="M55 98C51 92 53 84 57 79C61 74 67 72 73 75C80 77 84 84 86 91C88 97 87 104 86 109C77 111 69 107 63 105C59 103 56 101 55 98Z" fill="url(#left-hand-brown)"/>
+            <path d="M57 88C58 80 65 77 70 78" fill="none" stroke="#b39243" stroke-width="4" stroke-linecap="round" opacity=".43" filter="url(#face-soft)"/>
+            <path d="M66 81C65 88 67 94 70 97M74 82C74 90 77 94 80 98" fill="none" stroke="#493517" stroke-width="2.4" opacity=".29" filter="url(#face-soft)"/>
+            <path d="M59 99C65 102 76 107 83 106" fill="none" stroke="#493319" stroke-width="3.5" opacity=".44" filter="url(#face-soft)"/>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g id="character-dither" mask="url(#character-texture-mask)">
+      <path d="M0 0H244V240H0Z" fill="url(#character-speckles)"/>
+    </g>
+  </g>
+</svg>
+<script>
+(function(){
+  "use strict";
+
+  const poses = [
+    {
+      t:0,
+      core:[0,0,2,0,1],
+      lh:[70,93,1,1,0],
+      rh:[212,84,1,1,0],
+      l:[55,94,47,102,39,114,37,125,35,135,39,146,46,155,53,164,61,169,70,163,80,156,84,142,88,129,91,117,85,105,78,99,69,94,62,92,55,94],
+      r:[193,94,197,88,208,86,217,91,226,100,232,111,233,123,235,135,230,145,219,150,212,154,204,153,200,146,194,134,189,110,193,94],
+      hl:[48,108,42,119,40,131,46,142],
+      sl:[53,151,61,160,68,157,73,147,77,139,81,126,81,116],
+      hr:[219,99,227,109,231,123,227,136,225,141,221,143,217,143],
+      sr:[197,99,195,115,201,139,206,148]
+    },
+    {
+      t:160,
+      core:[.5,0,3,3,1],
+      lh:[17,76,.73,1.03,12],
+      rh:[157,99,1.3,1.04,-22],
+      l:[8,87,5,99,7,118,12,129,16,141,26,144,38,137,49,131,57,117,65,106,72,96,77,87,72,82,60,82,46,95,35,99,27,101,28,82,8,87],
+      r:[145,111,154,104,171,89,181,89,196,92,208,108,212,124,216,143,207,158,194,166,180,174,164,164,156,151,148,138,141,120,145,111],
+      hl:[13,101,12,113,15,128,24,132],
+      sl:[22,135,31,141,43,127,49,119,54,111,61,99,67,93],
+      hr:[190,103,202,111,209,129,202,144,199,152,194,156,188,157],
+      sr:[148,119,149,136,159,153,173,161]
+    },
+    {
+      t:340,
+      core:[-.5,4,10,3,1],
+      lh:[55,105,1.05,1.02,-9],
+      rh:[210,95,1.04,1.04,2],
+      l:[43,113,37,123,32,137,35,149,38,161,44,173,54,176,65,179,75,166,81,151,87,137,85,122,77,115,68,109,60,112,55,115,49,116,46,112,43,113],
+      r:[195,108,201,102,214,101,222,109,229,118,233,131,232,143,232,155,226,165,216,169,207,173,200,169,196,161,191,147,188,122,195,108],
+      hl:[43,127,37,139,39,151,46,161],
+      sl:[45,162,54,174,63,168,69,156,75,145,78,130,76,122],
+      hr:[221,116,228,127,229,142,223,154,221,159,217,161,212,162],
+      sr:[197,115,193,133,199,157,206,165]
+    },
+    {
+      t:500,
+      core:[0,10,12,5,1.005],
+      lh:[21,112,.75,1.02,-5],
+      rh:[188,126,1.28,1.02,-16],
+      l:[12,124,11,137,12,150,18,161,23,171,32,172,41,165,51,156,57,140,65,126,72,114,78,105,74,101,61,100,47,114,35,128,29,134,28,117,12,124],
+      r:[172,139,179,126,189,112,199,115,211,118,218,131,218,147,218,163,208,177,196,184,183,193,168,181,163,168,159,156,164,145,172,139],
+      hl:[18,136,17,147,19,157,27,162],
+      sl:[25,165,34,173,44,156,49,146,55,133,64,116,70,110],
+      hr:[204,130,212,141,211,154,202,166,199,171,194,174,189,175],
+      sr:[172,144,166,156,174,175,185,182]
+    },
+    {
+      t:680,
+      core:[.5,5,10,4,1.01],
+      lh:[22,106,.74,1.02,-6],
+      rh:[177,108,1.3,1.02,-17],
+      l:[12,118,11,130,13,147,20,157,26,167,35,168,43,158,53,148,58,135,65,120,71,109,77,97,72,94,61,92,47,105,36,116,29,122,28,111,12,118],
+      r:[161,120,172,112,188,98,198,103,212,109,220,121,221,136,220,153,211,167,199,174,185,182,170,173,163,160,157,147,155,131,161,120],
+      hl:[18,129,17,141,20,151,28,158],
+      sl:[27,161,36,168,44,151,50,141,55,129,63,111,69,103],
+      hr:[204,116,214,128,215,141,207,154,203,161,198,166,193,167],
+      sr:[163,130,161,145,169,165,182,172]
+    },
+    {
+      t:840,
+      core:[-.5,.5,2,2,1],
+      lh:[63,97,1.03,1,-5],
+      rh:[213,97,1,1.04,-5],
+      l:[44,109,36,119,31,132,35,145,39,157,47,169,58,173,68,174,76,162,81,147,87,134,87,119,78,112,69,107,59,107,53,110,49,112,46,108,44,109],
+      r:[196,110,202,103,214,103,222,112,229,121,232,134,231,145,230,156,223,163,214,167,206,171,198,166,196,157,192,144,190,123,196,110],
+      hl:[43,123,36,135,39,148,48,159],
+      sl:[48,162,57,172,66,165,71,153,77,140,79,128,78,119],
+      hr:[221,119,228,131,228,144,222,154,218,159,215,161,211,161],
+      sr:[197,117,193,135,198,157,206,164]
+    },
+    {
+      t:1020,
+      core:[0,6,9,5,1.005],
+      lh:[20,92,.74,1.04,7],
+      rh:[172,111,1.32,1,-16],
+      l:[10,105,8,118,8,135,14,146,20,156,30,161,40,152,50,143,57,129,64,116,72,105,77,95,73,91,61,91,46,103,35,112,27,117,28,99,10,105],
+      r:[157,126,169,116,184,104,195,107,207,112,215,125,216,140,217,155,207,169,193,176,180,181,165,172,159,158,153,146,151,136,157,126],
+      hl:[16,117,13,129,17,142,25,148],
+      sl:[23,151,33,159,43,141,49,132,54,121,63,105,69,101],
+      hr:[201,120,211,132,211,145,203,158,199,165,194,169,188,169],
+      sr:[158,136,158,151,169,167,180,173]
+    },
+    {
+      t:1180,
+      core:[-.5,9,11,3,1],
+      lh:[44,118,1.01,1,-5],
+      rh:[208,113,1.06,1.03,8],
+      l:[31,131,27,141,27,154,32,165,36,175,45,184,55,179,66,173,74,157,79,145,84,134,80,125,72,122,63,121,52,128,46,132,40,135,36,128,31,131],
+      r:[193,125,199,119,214,119,222,127,230,136,232,145,230,156,228,167,220,177,210,180,201,183,192,175,190,164,187,151,188,135,193,125],
+      hl:[36,144,32,154,36,168,44,173],
+      sl:[42,173,50,183,61,170,67,158,73,147,75,136,71,130],
+      hr:[221,135,227,144,227,155,220,165,216,170,213,173,207,173],
+      sr:[194,132,189,147,195,168,203,175]
+    }
+  ];
+
+  poses.push(Object.assign({},poses[0],{t:1200}));
+
+  const ids = [
+    "body-and-head","body-shape","body-clip-shape",
+    "head-shape","head-clip-shape","cast-shadow-clip-shape","face",
+    "left-arm-shape","right-arm-shape",
+    "left-cast-shadow","right-cast-shadow",
+    "left-arm-highlight","left-arm-shade",
+    "right-arm-highlight","right-arm-shade",
+    "hand-left","hand-right"
+  ];
+  const el = {};
+  ids.forEach(function(id){el[id]=document.getElementById(id);});
+
+  function curve(a,closed){
+    let d="M"+a[0]+" "+a[1];
+    for(let i=2;i<a.length;i+=6){
+      d+="C"+a.slice(i,i+6).join(" ");
+    }
+    return d+(closed?"Z":"");
+  }
+
+  function handTransform(a,cx,cy){
+    return "translate("+a[0]+" "+a[1]+") rotate("+a[4]+") scale("+
+      a[2]+" "+a[3]+") translate("+(-cx)+" "+(-cy)+")";
+  }
+
+  function render(time){
+    let t=Number(time);
+    if(!Number.isFinite(t)) t=0;
+    t=((t%1200)+1200)%1200;
+
+    let i=0;
+    while(i<poses.length-2 && t>=poses[i+1].t) i++;
+
+    const a=poses[i], b=poses[i+1];
+    const u=(t-a.t)/(b.t-a.t);
+    const w=u*u*(3-2*u);
+
+    function mix(key){
+      return a[key].map(function(v,j){return v+(b[key][j]-v)*w;});
+    }
+
+    const core=mix("core");
+    const c=core[2];
+    const transform="translate("+core[0]+" "+core[1]+") translate(124 0) scale("+core[4]+" 1) translate(-124 0)";
+
+    const crownStart="M99 "+(-6+c)+
+      "C90 "+(4+c*.75)+" 89 "+(20+c*.3)+" 88 37";
+    const crownEnd="C157 "+(8+c*.55)+" 154 "+(-2+c)+" 145 "+(-7+c)+
+      "C132 "+(-12+c)+" 111 "+(-13+c)+" 99 "+(-6+c)+"Z";
+
+    const body=crownStart+
+      "C87 50 78 71 65 94"+
+      "C56 116 48 139 42 161"+
+      "C36 183 32 205 36 224L42 244H211"+
+      "C218 226 219 207 215 186"+
+      "C212 165 206 146 199 124"+
+      "C194 105 184 86 174 72"+
+      "C164 58 164 42 160 24"+crownEnd;
+
+    const head=crownStart+
+      "C87 50 80 64 78 76"+
+      "C86 91 108 104 133 101"+
+      "C155 99 175 86 178 76"+
+      "C164 56 164 42 160 24"+crownEnd;
+
+    el["body-and-head"].setAttribute("transform",transform);
+    el["body-shape"].setAttribute("d",body);
+    el["body-clip-shape"].setAttribute("d",body);
+    el["cast-shadow-clip-shape"].setAttribute("d",body);
+    el["cast-shadow-clip-shape"].setAttribute("transform",transform);
+    el["head-shape"].setAttribute("d",head);
+    el["head-clip-shape"].setAttribute("d",head);
+    el.face.setAttribute("transform","translate(-.7 0) rotate("+core[3]+" 124 25)");
+
+    const left=curve(mix("l"),true);
+    const right=curve(mix("r"),true);
+
+    el["left-arm-shape"].setAttribute("d",left);
+    el["left-cast-shadow"].setAttribute("d",left);
+    el["right-arm-shape"].setAttribute("d",right);
+    el["right-cast-shadow"].setAttribute("d",right);
+
+    el["left-arm-highlight"].setAttribute("d",curve(mix("hl"),false));
+    el["left-arm-shade"].setAttribute("d",curve(mix("sl"),false));
+    el["right-arm-highlight"].setAttribute("d",curve(mix("hr"),false));
+    el["right-arm-shade"].setAttribute("d",curve(mix("sr"),false));
+    el["hand-left"].setAttribute("transform",handTransform(mix("lh"),70,93));
+    el["hand-right"].setAttribute("transform",handTransform(mix("rh"),212,84));
+  }
+
+  window.nwb={render:render};
+  render(0);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; padding: 0; width: 240px; height: 294px; overflow: hidden; background: #fbf6d8; }
+  svg { display: block; }
+</style>
+<script>
+(function(){
+  var PERIOD = 5540, SWITCH = 3530;
+
+  /* arm arrays: [shoulderX, shoulderY, elbowX, elbowY, wristX, wristY, width, handAngle, handScale, visibility] */
+  var FK = [
+    [0, {
+      o:[[105,-18],[131,12],[137,60],[150,98],[166,188],[150,248],[105,262],[60,248],[43,188],[60,98],[73,60],[79,12]],
+      b:[106,174,53,80],
+      lL:[[68,238],[104,250],[101,300],[76,300]],
+      lR:[[106,250],[142,238],[132,300],[108,300]],
+      aL:[64,98,48,150,37,199,14,10,1.1,1],
+      aR:[146,98,160,150,161,203,14,-8,1.1,1],
+      eL:[90,40], eR:[117,39], er:4.5, op:0,
+      m:[104,52], sm:0,
+      cL:[86,54], cR:[124,53], ck:1,
+      hl:[93,14],
+      fi:[97,78,-5,1.05,0]
+    }],
+    [800, {
+      o:[[80,42],[102,51],[116,80],[120,108],[129,185],[115,240],[66,258],[24,240],[12,182],[24,110],[43,80],[58,51]],
+      b:[101,152,25,47],
+      lL:[[30,234],[63,246],[60,300],[38,300]],
+      lR:[[66,246],[100,234],[92,300],[68,300]],
+      aL:[40,110,50,150,80,95,13,210,1.0,1],
+      aR:[114,105,124,140,112,94,13,160,1.0,1],
+      eL:[65,61], eR:[94,59], er:4.5, op:1,
+      m:[82,72], sm:0,
+      cL:[58,72], cR:[101,70], ck:0.6,
+      hl:[70,52],
+      fi:[97,78,-5,1.05,1]
+    }],
+    [1530, {
+      o:[[88,26],[111,35],[123,70],[140,102],[160,182],[146,242],[98,257],[50,242],[31,178],[45,105],[57,70],[65,35]],
+      b:[109,158,43,52],
+      lL:[[54,238],[93,250],[88,300],[60,300]],
+      lR:[[96,250],[134,238],[126,300],[99,300]],
+      aL:[62,102,50,148,56,116,13,160,1.1,1],
+      aR:[138,102,158,120,172,128,13,-62,1.1,1],
+      eL:[72,52], eR:[101,52], er:4.5, op:1,
+      m:[87,62], sm:1,
+      cL:[64,62], cR:[109,62], ck:0.7,
+      hl:[78,38],
+      fi:[97,78,-5,1.05,0]
+    }],
+    [2330, {
+      o:[[92,-70],[140,-35],[150,25],[168,80],[210,200],[200,300],[110,330],[22,300],[8,200],[30,80],[44,25],[54,-35]],
+      b:[118,205,82,110],
+      lL:[[60,320],[108,330],[104,400],[66,400]],
+      lR:[[110,330],[160,320],[152,400],[114,400]],
+      aL:[34,95,14,160,4,232,20,12,1.5,1],
+      aR:[166,95,192,160,204,232,20,-8,1.5,0],
+      eL:[63,10], eR:[118,9], er:7, op:1,
+      m:[90,28], sm:0,
+      cL:[50,26], cR:[130,24], ck:1.3,
+      hl:[74,-22],
+      fi:[97,78,-5,1.05,0]
+    }],
+    [3130, {
+      o:[[85,18],[108,26],[122,60],[140,96],[168,185],[152,246],[100,261],[46,246],[29,180],[42,100],[54,60],[63,26]],
+      b:[122,172,45,70],
+      lL:[[50,240],[93,252],[88,300],[58,300]],
+      lR:[[96,252],[136,240],[128,300],[100,300]],
+      aL:[56,100,84,152,95,122,13,165,1.1,1],
+      aR:[140,96,157,155,164,210,13,-6,1.1,1],
+      eL:[72,37], eR:[102,37], er:4.5, op:1,
+      m:[87,48], sm:1,
+      cL:[64,48], cR:[110,48], ck:0.7,
+      hl:[75,30],
+      fi:[97,78,-5,1.05,0]
+    }]
+  ];
+
+  var SK = [
+    [3930, {
+      o:[[133,-22],[170,8],[178,92],[172,178],[158,238],[115,258],[62,234],[40,176],[60,120],[92,66],[86,14],[100,-14]],
+      b:[66,185,32,60], bo:0.9,
+      lF:[[84,240],[120,250],[114,300],[88,300]],
+      lB:[[118,244],[158,232],[152,300],[122,300]],
+      aN:[118,98,70,96,24,86,14,92,1.1,1],
+      aF:[108,90,80,108,50,100,13,150,1.0,1],
+      e:[94,9], er:5,
+      c:[104,26],
+      hl:[128,8]
+    }],
+    [4670, {
+      o:[[118,-25],[150,8],[170,90],[186,190],[178,242],[120,262],[62,246],[42,186],[56,122],[86,64],[84,12],[98,-18]],
+      b:[66,190,30,62], bo:0.4,
+      lF:[[78,248],[116,256],[110,300],[82,300]],
+      lB:[[118,252],[166,240],[158,300],[122,300]],
+      aN:[112,102,80,128,44,146,14,80,1.1,1],
+      aF:[104,96,95,130,92,165,13,10,1.0,1],
+      e:[90,10], er:5,
+      c:[100,28],
+      hl:[112,6]
+    }],
+    [5470, {
+      o:[[100,-28],[132,4],[164,88],[182,168],[173,234],[130,258],[70,242],[50,176],[57,112],[66,60],[68,10],[80,-20]],
+      b:[72,172,28,70], bo:0.95,
+      lF:[[95,244],[132,254],[128,300],[100,300]],
+      lB:[[132,250],[172,236],[166,300],[136,300]],
+      aN:[136,92,152,160,152,228,14,-4,1.1,1],
+      aF:[120,92,124,150,124,200,13,0,1.0,1],
+      e:[76,10], er:5,
+      c:[86,26],
+      hl:[94,4]
+    }]
+  ];
+
+  function lerp(a,b,u){ return a+(b-a)*u; }
+  function mix(A,B,u){
+    if (typeof A === 'number') return lerp(A,B,u);
+    if (Array.isArray(A)) { var r=[]; for (var i=0;i<A.length;i++) r.push(mix(A[i],B[i],u)); return r; }
+    var o={}; for (var k in A) o[k]=mix(A[k],B[k],u); return o;
+  }
+  function sample(keys,t){
+    if (t <= keys[0][0]) return keys[0][1];
+    for (var i=0;i<keys.length-1;i++){
+      if (t < keys[i+1][0]){
+        var u=(t-keys[i][0])/(keys[i+1][0]-keys[i][0]);
+        u=u*u*(3-2*u);
+        return mix(keys[i][1],keys[i+1][1],u);
+      }
+    }
+    return keys[keys.length-1][1];
+  }
+  function n(v){ return Math.round(v*100)/100; }
+  function crPath(p){
+    var L=p.length, s='M'+n(p[0][0])+' '+n(p[0][1]);
+    for (var i=0;i<L;i++){
+      var p0=p[(i+L-1)%L], p1=p[i], p2=p[(i+1)%L], p3=p[(i+2)%L];
+      s+=' C'+n(p1[0]+(p2[0]-p0[0])/6)+' '+n(p1[1]+(p2[1]-p0[1])/6)+' '+
+            n(p2[0]-(p3[0]-p1[0])/6)+' '+n(p2[1]-(p3[1]-p1[1])/6)+' '+
+            n(p2[0])+' '+n(p2[1]);
+    }
+    return s+' Z';
+  }
+  function poly(p){
+    var s='M'+n(p[0][0])+' '+n(p[0][1]);
+    for (var i=1;i<p.length;i++) s+=' L'+n(p[i][0])+' '+n(p[i][1]);
+    return s+' Z';
+  }
+  function A(id, attrs){
+    var e=document.getElementById(id);
+    if (!e) return;
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+  }
+  function setArm(prefix, handId, a, mir){
+    var sx=a[0],sy=a[1],ex=a[2],ey=a[3],wx=a[4],wy=a[5];
+    var cx=2*ex-(sx+wx)/2, cy=2*ey-(sy+wy)/2;
+    var d='M'+n(sx)+' '+n(sy)+' Q'+n(cx)+' '+n(cy)+' '+n(wx)+' '+n(wy);
+    A(prefix+'-outer',{d:d,'stroke-width':n(a[6])});
+    A(prefix+'-inner',{d:d,'stroke-width':n(a[6]*0.55)});
+    A(handId,{transform:'translate('+n(wx)+' '+n(wy)+') rotate('+n(a[7])+') scale('+n(mir*a[8])+' '+n(a[8])+')'});
+    A(prefix,{opacity:n(Math.max(0,Math.min(1,a[9])))});
+  }
+  function setEye(id, pos, k, op){
+    A(id,{transform:'translate('+n(pos[0])+' '+n(pos[1])+') scale('+n(k)+')'});
+    A(id+'-open',{transform:'scale(1 '+n(Math.max(0.06,op))+')', opacity:n(op<0.2?op/0.2:1)});
+    A(id+'-closed',{opacity:n(Math.max(0,1-Math.min(1,op*1.6)))});
+  }
+
+  function renderFront(p){
+    var d=crPath(p.o);
+    A('f-body',{d:d}); A('f-body-edge',{d:d}); A('f-clip',{d:d});
+    var b=p.b;
+    A('f-belly',{cx:n(b[0]),cy:n(b[1]),rx:n(b[2]),ry:n(b[3])});
+    A('f-belly-shade',{cx:n(b[0]),cy:n(b[1]),rx:n(b[2]),ry:n(b[3])});
+    A('f-leg-left',{d:poly(p.lL)}); A('f-leg-right',{d:poly(p.lR)});
+    var k=p.er/4.5;
+    A('f-head-hl',{cx:n(p.hl[0]),cy:n(p.hl[1]),rx:n(9*k),ry:n(11*k)});
+    A('cheek-left',{cx:n(p.cL[0]),cy:n(p.cL[1]),rx:n(9*p.ck),ry:n(6*p.ck)});
+    A('cheek-right',{cx:n(p.cR[0]),cy:n(p.cR[1]),rx:n(8.5*p.ck),ry:n(6*p.ck)});
+    setEye('eye-left', p.eL, k, p.op);
+    setEye('eye-right', p.eR, k, p.op);
+    A('mouth',{transform:'translate('+n(p.m[0])+' '+n(p.m[1])+') scale('+n(k)+')', opacity:n(p.sm)});
+    var fi=p.fi;
+    A('held-fish',{transform:'translate('+n(fi[0])+' '+n(fi[1])+') rotate('+n(fi[2])+') scale('+n(fi[3])+')', opacity:n(Math.max(0,Math.min(1,fi[4])))});
+    setArm('arm-left','hand-left',p.aL,-1);
+    setArm('arm-right','hand-right',p.aR,1);
+  }
+
+  function renderSide(p){
+    var d=crPath(p.o);
+    A('s-body',{d:d}); A('s-body-edge',{d:d}); A('s-clip',{d:d});
+    var b=p.b;
+    A('s-belly',{cx:n(b[0]),cy:n(b[1]),rx:n(b[2]),ry:n(b[3]),opacity:n(p.bo)});
+    A('s-leg-front',{d:poly(p.lF)}); A('s-leg-back',{d:poly(p.lB)});
+    A('s-head-hl',{cx:n(p.hl[0]),cy:n(p.hl[1])});
+    A('s-cheek',{cx:n(p.c[0]),cy:n(p.c[1])});
+    A('side-eye',{transform:'translate('+n(p.e[0])+' '+n(p.e[1])+') scale('+n(p.er/4.5)+')'});
+    setArm('side-arm-far','side-hand-far',p.aF,1);
+    setArm('side-arm-near','side-hand-near',p.aN,1);
+  }
+
+  function render(t){
+    t = Number(t);
+    if (!isFinite(t)) t = 0;
+    t = ((t % PERIOD) + PERIOD) % PERIOD;
+    var front = t < SWITCH;
+    A('front-view',{display: front ? 'inline' : 'none'});
+    A('side-view',{display: front ? 'none' : 'inline'});
+    if (front) renderFront(sample(FK,t));
+    else renderSide(sample(SK,t));
+  }
+
+  window.nwb = { render: render };
+  document.addEventListener('DOMContentLoaded', function(){ render(0); });
+})();
+</script>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 294" width="240" height="294">
+  <defs>
+    <linearGradient id="bgBase" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3eba6"/>
+      <stop offset="0.45" stop-color="#fbf7dc"/>
+      <stop offset="1" stop-color="#ece39a"/>
+    </linearGradient>
+    <radialGradient id="bgGlow" cx="0.62" cy="0.5" r="0.6">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="0.5" stop-color="#fffef4" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#fffef4" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bgLeft" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#eadf85" stop-opacity="0.8"/>
+      <stop offset="0.35" stop-color="#eadf85" stop-opacity="0"/>
+    </linearGradient>
+
+    <radialGradient id="bodyGrad" cx="0.42" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#f6e27a"/>
+      <stop offset="0.55" stop-color="#ecd04c"/>
+      <stop offset="1" stop-color="#d6ae2e"/>
+    </radialGradient>
+    <radialGradient id="bodyGradSide" cx="0.35" cy="0.35" r="0.75">
+      <stop offset="0" stop-color="#f7e47e"/>
+      <stop offset="0.55" stop-color="#eed24e"/>
+      <stop offset="1" stop-color="#d8ae2e"/>
+    </radialGradient>
+    <linearGradient id="bodyEdge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c99a24" stop-opacity="0.55"/>
+      <stop offset="0.18" stop-color="#c99a24" stop-opacity="0"/>
+      <stop offset="0.82" stop-color="#d9a22c" stop-opacity="0"/>
+      <stop offset="1" stop-color="#d9a22c" stop-opacity="0.45"/>
+    </linearGradient>
+    <linearGradient id="bodyEdgeSide" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e0a050" stop-opacity="0.25"/>
+      <stop offset="0.2" stop-color="#e0a050" stop-opacity="0"/>
+      <stop offset="0.72" stop-color="#d39a2a" stop-opacity="0"/>
+      <stop offset="1" stop-color="#d39a2a" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="bellyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eeaa92"/>
+      <stop offset="0.22" stop-color="#f4b8b0"/>
+      <stop offset="0.36" stop-color="#f8d6d2"/>
+      <stop offset="0.45" stop-color="#fdf8f2"/>
+      <stop offset="0.55" stop-color="#fbeee8"/>
+      <stop offset="0.75" stop-color="#f6d2c6"/>
+      <stop offset="1" stop-color="#eeb68e"/>
+    </linearGradient>
+    <radialGradient id="bellyShade" cx="0.5" cy="0.45" r="0.55">
+      <stop offset="0.7" stop-color="#e8c060" stop-opacity="0"/>
+      <stop offset="1" stop-color="#e8c060" stop-opacity="0.55"/>
+    </radialGradient>
+    <linearGradient id="legGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d9b236"/>
+      <stop offset="0.45" stop-color="#f0d55a"/>
+      <stop offset="1" stop-color="#d4a830"/>
+    </linearGradient>
+    <linearGradient id="legGradDark" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c99f2a"/>
+      <stop offset="0.45" stop-color="#e2c247"/>
+      <stop offset="1" stop-color="#c49a28"/>
+    </linearGradient>
+    <radialGradient id="blush" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#f09a7a" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#f09a7a" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frontClip"><path id="f-clip" d="M0 0 Z"/></clipPath>
+    <clipPath id="sideClip"><path id="s-clip" d="M0 0 Z"/></clipPath>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.2"/>
+    </filter>
+    <filter id="softer" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <filter id="bellyBlur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5"/>
+    </filter>
+  </defs>
+
+  <g id="background">
+    <rect x="0" y="0" width="240" height="294" fill="url(#bgBase)"/>
+    <rect x="0" y="0" width="240" height="294" fill="url(#bgLeft)"/>
+    <rect x="0" y="0" width="240" height="294" fill="url(#bgGlow)"/>
+  </g>
+
+  <g id="character-yellow-bird">
+    <g id="front-view">
+      <g id="legs">
+        <path id="f-leg-left" d="M0 0 Z" fill="url(#legGrad)"/>
+        <path id="f-leg-right" d="M0 0 Z" fill="url(#legGrad)"/>
+      </g>
+      <g id="body">
+        <path id="f-body" d="M0 0 Z" fill="url(#bodyGrad)"/>
+        <path id="f-body-edge" d="M0 0 Z" fill="url(#bodyEdge)"/>
+      </g>
+      <g id="belly" clip-path="url(#frontClip)">
+        <ellipse id="f-belly" cx="107" cy="176" rx="55" ry="79" fill="url(#bellyGrad)" filter="url(#bellyBlur)"/>
+        <ellipse id="f-belly-shade" cx="107" cy="176" rx="55" ry="79" fill="url(#bellyShade)"/>
+      </g>
+      <g id="head">
+        <ellipse id="f-head-hl" cx="93" cy="14" rx="9" ry="11" fill="#fbef9c" opacity="0.5" filter="url(#softer)"/>
+        <g id="cheeks">
+          <ellipse id="cheek-left" cx="86" cy="54" rx="9" ry="6" fill="url(#blush)"/>
+          <ellipse id="cheek-right" cx="124" cy="53" rx="8.5" ry="6" fill="url(#blush)"/>
+        </g>
+        <g id="eyes">
+          <g id="eye-left">
+            <path id="eye-left-closed" d="M-7 0 C-3 3 3 3 7 0" stroke="#5a4320" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <g id="eye-left-open">
+              <circle cx="0" cy="0" r="4.5" fill="#8ea544"/>
+              <circle cx="0" cy="0" r="3.3" fill="#15140f"/>
+              <circle cx="-1.1" cy="-1.2" r="0.9" fill="#ffffff" opacity="0.8"/>
+            </g>
+          </g>
+          <g id="eye-right">
+            <path id="eye-right-closed" d="M-6.5 0.5 C-2.5 3 2.5 3 6.5 -1" stroke="#5a4320" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <g id="eye-right-open">
+              <circle cx="0" cy="0" r="4.5" fill="#8ea544"/>
+              <circle cx="0" cy="0" r="3.3" fill="#15140f"/>
+              <circle cx="-1.1" cy="-1.2" r="0.9" fill="#ffffff" opacity="0.8"/>
+            </g>
+          </g>
+        </g>
+        <g id="mouth" opacity="0">
+          <path d="M-4.5 -0.5 Q0 3.5 4.5 -0.5" stroke="#3d2f1a" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        </g>
+      </g>
+      <g id="held-fish" opacity="0">
+        <path d="M-21 2 C-20 -6 -10 -9 0 -8 C10 -9 19 -6 21 0 C22 6 12 10 0 9 C-11 10 -21 8 -21 2 Z" fill="#8c8b80"/>
+        <path d="M-15 -3 C-8 -6 6 -6 14 -3" stroke="#a9a89d" stroke-width="2" fill="none" opacity="0.7"/>
+        <ellipse cx="-12" cy="3" rx="3" ry="2" fill="#6d6c62"/>
+        <ellipse cx="6" cy="4" rx="4" ry="2" fill="#6d6c62"/>
+      </g>
+      <g id="arm-left">
+        <path id="arm-left-outer" d="M0 0" stroke="#d3a832" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <path id="arm-left-inner" d="M0 0" stroke="#ebcf55" stroke-width="7" stroke-linecap="round" fill="none"/>
+        <g id="hand-left">
+          <g stroke="#5c5b50" stroke-width="3" stroke-linecap="round" fill="none">
+            <path d="M-3.5 6 Q-6 13 -7.5 19"/>
+            <path d="M-1.2 7 Q-2 15 -2.5 22"/>
+            <path d="M1.5 7 Q2.2 15 2.8 21.5"/>
+            <path d="M4 5.5 Q6.5 12 8 17.5"/>
+            <path d="M5 0.5 Q9.5 3 11.5 8.5"/>
+          </g>
+          <ellipse cx="0" cy="3" rx="5.8" ry="6" fill="#5c5b50"/>
+        </g>
+      </g>
+      <g id="arm-right">
+        <path id="arm-right-outer" d="M0 0" stroke="#d3a832" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <path id="arm-right-inner" d="M0 0" stroke="#ebcf55" stroke-width="7" stroke-linecap="round" fill="none"/>
+        <g id="hand-right">
+          <g stroke="#5c5b50" stroke-width="3" stroke-linecap="round" fill="none">
+            <path d="M-3.5 6 Q-6 13 -7.5 19"/>
+            <path d="M-1.2 7 Q-2 15 -2.5 22"/>
+            <path d="M1.5 7 Q2.2 15 2.8 21.5"/>
+            <path d="M4 5.5 Q6.5 12 8 17.5"/>
+            <path d="M5 0.5 Q9.5 3 11.5 8.5"/>
+          </g>
+          <ellipse cx="0" cy="3" rx="5.8" ry="6" fill="#5c5b50"/>
+        </g>
+      </g>
+    </g>
+
+    <g id="side-view" display="none">
+      <g id="side-legs">
+        <path id="s-leg-back" d="M0 0 Z" fill="url(#legGradDark)"/>
+        <path id="s-leg-front" d="M0 0 Z" fill="url(#legGrad)"/>
+      </g>
+      <g id="side-arm-far">
+        <path id="side-arm-far-outer" d="M0 0" stroke="#cfa22e" stroke-width="13" stroke-linecap="round" fill="none"/>
+        <path id="side-arm-far-inner" d="M0 0" stroke="#e6c74e" stroke-width="7" stroke-linecap="round" fill="none"/>
+        <g id="side-hand-far">
+          <g stroke="#5c5b50" stroke-width="3" stroke-linecap="round" fill="none">
+            <path d="M-3.5 6 Q-6 13 -7.5 19"/>
+            <path d="M-1.2 7 Q-2 15 -2.5 22"/>
+            <path d="M1.5 7 Q2.2 15 2.8 21.5"/>
+            <path d="M4 5.5 Q6.5 12 8 17.5"/>
+            <path d="M5 0.5 Q9.5 3 11.5 8.5"/>
+          </g>
+          <ellipse cx="0" cy="3" rx="5.8" ry="6" fill="#5c5b50"/>
+        </g>
+      </g>
+      <g id="side-body">
+        <path id="s-body" d="M0 0 Z" fill="url(#bodyGradSide)"/>
+        <path id="s-body-edge" d="M0 0 Z" fill="url(#bodyEdgeSide)"/>
+      </g>
+      <g id="side-belly" clip-path="url(#sideClip)">
+        <ellipse id="s-belly" cx="66" cy="185" rx="32" ry="60" fill="url(#bellyGrad)" filter="url(#bellyBlur)" opacity="0.95"/>
+      </g>
+      <g id="side-head">
+        <ellipse id="s-head-hl" cx="128" cy="8" rx="10" ry="12" fill="#fbef9c" opacity="0.5" filter="url(#softer)"/>
+        <ellipse id="s-cheek" cx="105" cy="26" rx="8" ry="6" fill="url(#blush)"/>
+        <g id="side-eye">
+          <circle cx="0" cy="0" r="4.5" fill="#8ea544"/>
+          <circle cx="0" cy="0" r="3.3" fill="#15140f"/>
+          <circle cx="-1.1" cy="-1.2" r="0.9" fill="#ffffff" opacity="0.8"/>
+        </g>
+      </g>
+      <g id="side-arm-near">
+        <path id="side-arm-near-outer" d="M0 0" stroke="#d3a832" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <path id="side-arm-near-inner" d="M0 0" stroke="#ebcf55" stroke-width="7" stroke-linecap="round" fill="none"/>
+        <g id="side-hand-near">
+          <g stroke="#5c5b50" stroke-width="3" stroke-linecap="round" fill="none">
+            <path d="M-3.5 6 Q-6 13 -7.5 19"/>
+            <path d="M-1.2 7 Q-2 15 -2.5 22"/>
+            <path d="M1.5 7 Q2.2 15 2.8 21.5"/>
+            <path d="M4 5.5 Q6.5 12 8 17.5"/>
+            <path d="M5 0.5 Q9.5 3 11.5 8.5"/>
+          </g>
+          <ellipse cx="0" cy="3" rx="5.8" ry="6" fill="#5c5b50"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
+</body>
+</html>

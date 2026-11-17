@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+html,body{margin:0;padding:0;width:240px;height:294px;overflow:hidden;background:#fff}
+svg{display:block}
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 294" width="240" height="294">
+<defs>
+<radialGradient id="bgGrad" cx="0.55" cy="0.5" r="0.8">
+<stop offset="0" stop-color="#ffffff"/>
+<stop offset="0.45" stop-color="#fdfbea"/>
+<stop offset="0.75" stop-color="#f5eeb0"/>
+<stop offset="1" stop-color="#e2d070"/>
+</radialGradient>
+<linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0" stop-color="#d9b21c"/>
+<stop offset="0.25" stop-color="#efcf3a"/>
+<stop offset="0.55" stop-color="#f6dc55"/>
+<stop offset="0.85" stop-color="#e9c632"/>
+<stop offset="1" stop-color="#f3e27a"/>
+</linearGradient>
+<linearGradient id="headGrad" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0" stop-color="#cdad1a"/>
+<stop offset="0.4" stop-color="#e8cc3a"/>
+<stop offset="0.8" stop-color="#e2c434"/>
+<stop offset="1" stop-color="#cfae20"/>
+</linearGradient>
+<linearGradient id="sideGrad" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0" stop-color="#f0dc70"/>
+<stop offset="0.35" stop-color="#ecd040"/>
+<stop offset="0.75" stop-color="#e2be28"/>
+<stop offset="1" stop-color="#f1dc6a"/>
+</linearGradient>
+<radialGradient id="bellyGrad" cx="0.45" cy="0.45" r="0.6">
+<stop offset="0" stop-color="#fbeee8"/>
+<stop offset="0.35" stop-color="#f4d3cf"/>
+<stop offset="0.6" stop-color="#e6dcdc"/>
+<stop offset="0.8" stop-color="#f0e2b0"/>
+<stop offset="1" stop-color="#f2d860" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="bellyBand" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#f6c6c4" stop-opacity="0.6"/>
+<stop offset="0.45" stop-color="#ffffff" stop-opacity="0.5"/>
+<stop offset="0.6" stop-color="#cfd8e6" stop-opacity="0.55"/>
+<stop offset="1" stop-color="#e8d070" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="blush" cx="0.5" cy="0.5" r="0.5">
+<stop offset="0" stop-color="#f08a8a" stop-opacity="0.7"/>
+<stop offset="1" stop-color="#f08a8a" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="handGrad" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#8a8a3a"/>
+<stop offset="1" stop-color="#4a4a28"/>
+</linearGradient>
+<filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+<feGaussianBlur stdDeviation="2"/>
+</filter>
+<filter id="soft4" x="-30%" y="-30%" width="160%" height="160%">
+<feGaussianBlur stdDeviation="4"/>
+</filter>
+<filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+<feGaussianBlur stdDeviation="6"/>
+</filter>
+</defs>
+
+<g id="background">
+<rect x="0" y="0" width="240" height="294" fill="url(#bgGrad)"/>
+<ellipse cx="200" cy="170" rx="40" ry="90" fill="#ffffff" opacity="0.7" filter="url(#glow)"/>
+</g>
+
+<g id="character-bird">
+<g id="character-front">
+<g id="legs">
+<path id="leg-left" d="M72 238 C70 260 72 280 74 300 L94 300 C95 278 97 258 98 240 Z" fill="#e4c22e"/>
+<path id="leg-right" d="M102 240 C103 258 104 278 105 300 L124 300 C126 278 128 258 128 236 Z" fill="#ead03e"/>
+<path d="M98 242 L101 300" stroke="#c9a51e" stroke-width="2" fill="none" opacity="0.6"/>
+</g>
+
+<g id="body">
+<path d="M72 50 C60 70 52 95 52 130 C50 170 55 215 70 242 C85 252 115 252 130 242 C150 220 158 175 156 130 C154 95 146 70 132 50 Z" fill="url(#bodyGrad)"/>
+<g id="belly">
+<ellipse cx="105" cy="170" rx="50" ry="72" fill="url(#bellyGrad)"/>
+<ellipse cx="105" cy="165" rx="46" ry="62" fill="url(#bellyBand)" filter="url(#soft)"/>
+<ellipse cx="102" cy="125" rx="30" ry="14" fill="#f7c2c0" opacity="0.45" filter="url(#soft)"/>
+<ellipse cx="108" cy="185" rx="40" ry="10" fill="#c9d4e4" opacity="0.4" filter="url(#soft)"/>
+</g>
+</g>
+
+<g id="head">
+<path d="M78 0 C74 20 70 40 70 60 C80 70 125 70 134 58 C134 40 130 18 126 0 Z" fill="url(#headGrad)"/>
+<path d="M78 2 C80 -10 124 -10 126 2 Z" fill="#e2c434"/>
+<ellipse cx="108" cy="12" rx="10" ry="12" fill="#f2dc66" opacity="0.5" filter="url(#soft)"/>
+<g id="cheeks">
+<ellipse cx="82" cy="56" rx="9" ry="6" fill="url(#blush)"/>
+<ellipse cx="126" cy="54" rx="8" ry="6" fill="url(#blush)"/>
+</g>
+<g id="eyes">
+<g id="eyes-closed">
+<path id="eye-left-closed" d="M85 40 Q91 44 97 41" stroke="#7a6418" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+<path id="eye-right-closed" d="M110 40 Q116 44 122 40" stroke="#7a6418" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+</g>
+<g id="eyes-open" opacity="0">
+<g id="eye-left-open">
+<circle cx="88" cy="42" r="5.5" fill="#5d8a3a"/>
+<circle cx="88" cy="42" r="3.8" fill="#141a10"/>
+<circle cx="86.8" cy="40.6" r="1" fill="#ffffff" opacity="0.8"/>
+</g>
+<g id="eye-right-open">
+<circle cx="120" cy="42" r="5.5" fill="#5d8a3a"/>
+<circle cx="120" cy="42" r="3.8" fill="#141a10"/>
+<circle cx="118.8" cy="40.6" r="1" fill="#ffffff" opacity="0.8"/>
+</g>
+</g>
+</g>
+<g id="beak">
+<path d="M101 47 Q104 50 107 47" stroke="#b8961a" stroke-width="1" fill="none" opacity="0.7"/>
+</g>
+<g id="mouth" opacity="0">
+<path d="M95 52 Q104 59 113 52" stroke="#3a2a10" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+</g>
+</g>
+
+<g id="arm-left">
+<path d="M66 85 L50 140" stroke="#dcba28" stroke-width="15" stroke-linecap="round" fill="none"/>
+<g id="forearm-left">
+<path d="M50 140 L42 186" stroke="#e2c232" stroke-width="12" stroke-linecap="round" fill="none"/>
+<g id="hand-left">
+<path d="M37 186 C32 194 27 203 26 212 C28 213 30 210 32 205 C31 211 31 216 33 217 C35 216 35 210 37 206 C37 212 38 217 40 216 C42 214 41 208 42 204 C43 209 45 212 47 210 C48 204 48 196 48 188 Z" fill="url(#handGrad)"/>
+</g>
+</g>
+</g>
+
+<g id="arm-right">
+<path d="M140 85 L155 140" stroke="#e4c636" stroke-width="15" stroke-linecap="round" fill="none"/>
+<g id="forearm-right">
+<path d="M155 140 L158 186" stroke="#e8cc3c" stroke-width="12" stroke-linecap="round" fill="none"/>
+<g id="hand-right">
+<path d="M152 186 C150 196 150 204 152 210 C154 212 155 208 156 204 C157 209 158 215 160 216 C162 216 162 210 161 205 C163 210 166 216 168 215 C169 213 167 206 165 202 C168 205 171 210 173 209 C173 202 168 194 163 186 Z" fill="url(#handGrad)"/>
+</g>
+</g>
+</g>
+
+<g id="held-object" opacity="0">
+<ellipse cx="104" cy="66" rx="20" ry="10" fill="#8c8c80"/>
+<ellipse cx="100" cy="63" rx="10" ry="4" fill="#b0b0a6" opacity="0.7"/>
+</g>
+</g>
+
+<g id="character-side" opacity="0">
+<g id="side-arm-far">
+<path d="M112 90 L128 178" stroke="#d8b624" stroke-width="13" stroke-linecap="round" fill="none"/>
+<path d="M122 175 C120 186 122 196 126 200 C129 198 128 193 129 190 C131 196 134 200 137 198 C137 192 135 185 134 176 Z" fill="url(#handGrad)"/>
+</g>
+<g id="side-body">
+<path d="M95 8 C80 10 75 40 72 70 C62 110 52 160 56 200 C60 240 80 260 95 262 L92 300 L132 300 L130 270 C160 268 182 240 182 200 C182 150 172 100 160 60 C150 25 125 5 95 8 Z" fill="url(#sideGrad)"/>
+<ellipse id="side-belly" cx="84" cy="190" rx="26" ry="58" fill="#f6eecc" opacity="0.75" filter="url(#soft4)"/>
+<ellipse cx="80" cy="60" rx="8" ry="5" fill="url(#blush)"/>
+<g id="side-eye">
+<circle cx="82" cy="27" r="5" fill="#5d8a3a"/>
+<circle cx="81" cy="27" r="3.4" fill="#141a10"/>
+</g>
+</g>
+<g id="side-arm-near">
+<path d="M118 95 L136 186" stroke="#e8cc3a" stroke-width="15" stroke-linecap="round" fill="none"/>
+<path d="M130 184 C128 195 130 205 134 210 C137 208 136 202 137 199 C139 205 142 210 145 208 C145 202 143 195 142 186 Z" fill="url(#handGrad)"/>
+</g>
+</g>
+</g>
+</svg>
+<script>
+(function(){
+  var P=5540;
+  function $(id){return document.getElementById(id);}
+  function ease(u){return u*u*(3-2*u);}
+  function clone(o,t){var r={};for(var k in o)r[k]=o[k];r.t=t;return r;}
+  var F0={t:0,s:1,tx:0,ty:0,lu:0,lf:0,ru:0,rf:0,eye:0,smile:0,obj:0};
+  var F1={t:800,s:0.97,tx:-16,ty:21,lu:-45,lf:-146,ru:45,rf:146,eye:1,smile:0,obj:1};
+  var F2={t:1530,s:1.05,tx:-14,ty:8,lu:30,lf:-175,ru:-10,rf:-130,eye:1,smile:1,obj:0};
+  var F3={t:2330,s:1.3,tx:-15,ty:-42,lu:0,lf:0,ru:0,rf:0,eye:1,smile:0,obj:0};
+  var F4={t:3130,s:1.15,tx:-25,ty:-13,lu:-20,lf:-143,ru:0,rf:0,eye:1,smile:1,obj:0};
+  var FK=[F0,F1,F2,F3,F4,clone(F4,4300),clone(F0,4301),clone(F0,5540)];
+  var S6={dx:0,dy:0,a1:107,a2:117};
+  var S7={dx:-3,dy:3,a1:95,a2:99};
+  var S8={dx:-5,dy:-3,a1:-5,a2:-5};
+  var SK=[clone(S6,0),clone(S6,3930),clone(S7,4670),clone(S8,5470),clone(S8,5540)];
+  function interp(keys,t){
+    for(var i=0;i<keys.length-1;i++){
+      var a=keys[i],b=keys[i+1];
+      if(t>=a.t&&t<=b.t){
+        var u=b.t>a.t?ease((t-a.t)/(b.t-a.t)):0,r={};
+        for(var k in a){if(k!=='t')r[k]=a[k]+(b[k]-a[k])*u;}
+        return r;
+      }
+    }
+    return keys[keys.length-1];
+  }
+  function frontW(t){
+    if(t<3480)return 1;
+    if(t<3580)return 1-(t-3480)/100;
+    if(t<5480)return 0;
+    if(t<5530)return (t-5480)/50;
+    return 1;
+  }
+  function render(t){
+    t=((t%P)+P)%P;
+    var f=interp(FK,t),s=interp(SK,t),w=frontW(t);
+    $('character-front').setAttribute('transform','translate('+f.tx+' '+f.ty+') scale('+f.s+')');
+    $('character-front').setAttribute('opacity',w);
+    $('arm-left').setAttribute('transform','rotate('+f.lu+' 66 85)');
+    $('forearm-left').setAttribute('transform','rotate('+f.lf+' 50 140)');
+    $('arm-right').setAttribute('transform','rotate('+f.ru+' 140 85)');
+    $('forearm-right').setAttribute('transform','rotate('+f.rf+' 155 140)');
+    $('eyes-open').setAttribute('opacity',f.eye);
+    $('eyes-closed').setAttribute('opacity',1-f.eye);
+    $('mouth').setAttribute('opacity',f.smile);
+    $('held-object').setAttribute('opacity',f.obj);
+    $('character-side').setAttribute('opacity',1-w);
+    $('character-side').setAttribute('transform','translate('+s.dx+' '+s.dy+')');
+    $('side-arm-near').setAttribute('transform','rotate('+s.a1+' 118 95)');
+    $('side-arm-far').setAttribute('transform','rotate('+s.a2+' 112 90)');
+  }
+  window.nwb={render:render};
+  render(0);
+})();
+</script>
+</body>
+</html>
