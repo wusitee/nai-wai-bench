@@ -334,8 +334,9 @@ can = ["text", "vision"]
 
 # Undisclosed preview model on the TokenRhythm router (Chat Completions). The `tokenrhythm` provider is
 # declared in the dedicated pi directory's models.json (see docs/backends.md); its key stays there.
+# The label names the likely family from tokenizer evidence (docs/backends.md); the vendor stays undisclosed.
 [models."egg-alpha"]
-label = "egg-alpha (pi, TokenRhythm)"
+label = "egg-alpha · likely Qwen 4 (pi, TokenRhythm)"
 backend = "pi"
 vendor = "undisclosed"
 model = "tokenrhythm/egg-alpha"

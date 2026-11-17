@@ -264,6 +264,12 @@ With `thinkingFormat = "openai"`, pi sends its thinking level as `reasoning_effo
 applies. The router rate-limits bursts with HTTP 429 (`MODEL_CALL_FAILED`, with `retryAfterSeconds`), so
 collect with `--jobs 1`.
 
+The label "likely Qwen 4" comes from token counts, not from the router. On the same pi prompts, egg-alpha's
+input token counts differ from Qwen4-Max's and qwen4-max-preview's by 1–2 tokens on average. Qwen 3.8 and 3.7
+models differ by about 10 tokens, and GLM-5.3-Flash by about 21. On the 24 Nai-hub images, 23 of egg-alpha's
+counts are within two tokens of Qwen4-Max's. This points to the Qwen 4 tokenizer and image encoder, but not
+to a specific checkpoint, so `vendor` stays `undisclosed`.
+
 ### Zhipu GLM (`glm-5.3-flash-pi`)
 
 `glm-5.3-flash-pi` runs GLM-5.3-Flash through pi's built-in `zai-coding-cn` provider (the open.bigmodel.cn
