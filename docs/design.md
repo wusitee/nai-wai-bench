@@ -287,6 +287,7 @@ site and its raw bundles. The manifest is required; there are no implicit run na
 overview goes at the root, Meme ID at `meme-id/`, and Visual detail at `visual-detail/`, with page tabs and
 `.nojekyll`; `naihub-v1/` redirects to `visual-detail/`. It requires `uv`, Git,
 configured Git author identity, and push access, and leaves the checked-out branch unchanged.
+CI runs it after each push to `main` ([publish](releases.md#publish)).
 See the [release workflow](releases.md) for input validation and local review before publishing.
 Working runs and site files stay git-ignored; portable copies under `results/` sync with the source branch.
 

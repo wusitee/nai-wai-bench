@@ -204,7 +204,7 @@ C2PA 對 OpenAI 僅標註 `ChatGPT · gpt-image`，對 Google 僅標註「Create
 產生的網站取代 `origin` 上的 `gh-pages` 分支。根目錄是奶蛙指數總覽，識梗在 `meme-id/`，看圖在
 `visual-detail/`；`naihub-v1/` 跳轉到 `visual-detail/`。
 需要 `uv`、Git、已設定的 Git 作者身分和推送權限，不會改變目前簽出的
-分支。工作執行和網站檔案仍被 git 忽略；`results/` 中的可攜副本隨原始碼分支儲存。
+分支。CI 在每次推送到 `main` 後執行它（見[發佈](releases.md#publish)）。工作執行和網站檔案仍被 git 忽略；`results/` 中的可攜副本隨原始碼分支儲存。
 
 首次啟用 GitHub Pages：`gh api -X POST repos/OWNER/REPO/pages -f 'source[branch]=gh-pages' -f 'source[path]=/'`；
 若已啟用則改用 `-X PUT`。用 `gh api repos/OWNER/REPO/pages/builds/latest` 檢查建置狀態，用

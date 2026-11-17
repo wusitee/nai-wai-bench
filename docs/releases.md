@@ -243,7 +243,12 @@ Claude Code login and 127 an API key, with the same recorded settings.
 
 ## Publish
 
-After reviewing and authorizing the generated release:
+CI (`.github/workflows/ci.yml`) runs the tests and `nwb release` on every pull request and push. After
+they pass on `main`, it publishes the manifest named by the workflow's `RELEASE_MANIFEST`, so merging to
+`main` updates the site. Change that variable when a new manifest becomes the published release.
+Run the workflow manually (`gh workflow run CI --ref main`) to republish without a new commit.
+
+To publish from a local checkout instead:
 
 ```sh
 scripts/publish_site.sh releases/0.1.0.toml

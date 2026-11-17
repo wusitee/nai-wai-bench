@@ -29,7 +29,7 @@ flowchart TD
     R --> L
     L --> P
     L --> Z["downloadable raw ZIP bundles"]
-    P --> H["publish_site.sh: explicit gh-pages push"]
+    P --> H["publish_site.sh: gh-pages push (CI on main)"]
     Z --> H
 ```
 
@@ -103,5 +103,5 @@ selection, and rejects stale judgments before producing both suite pages, the Na
 bundles. It also verifies the pinned saved frontend run and builds its pages (`frontend_site.py`), which
 show recorded renders and never run model code; see the [frontend track](frontend.md#publishing). The
 token bill page (`bill_site.py`) covers every saved call rather than the selected runs. Publishing
-is a separate explicit invocation of `scripts/publish_site.sh`, which builds into a fresh directory
-and replaces `gh-pages`. See [release operations](releases.md) and [scoring details](design.md).
+runs `scripts/publish_site.sh`, which builds into a fresh directory and replaces `gh-pages`; CI runs it
+after each push to `main`. See [release operations](releases.md) and [scoring details](design.md).

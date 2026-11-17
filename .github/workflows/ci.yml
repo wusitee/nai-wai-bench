@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  # The release published from main. Update it together with a new releases/*.toml.
+  RELEASE_MANIFEST: releases/0.1.0.toml
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@v6
+      # --frozen installs from the lockfile's recorded URLs without re-resolving.
+      - run: uv sync --frozen --extra data
+      - run: uv run --no-sync pytest -q
+      # Validates the manifest's input digests and judgments against results/.
+      - run: uv run --no-sync nwb release --manifest "$RELEASE_MANIFEST" --out "$RUNNER_TEMP/site"
+
+  publish:
+    needs: check
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: publish-site
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --frozen --extra data
+      - name: Configure Git push identity
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global url."https://x-access-token:${GH_TOKEN}@github.com/".insteadOf "https://github.com/"
+      - run: scripts/publish_site.sh "$RELEASE_MANIFEST"
