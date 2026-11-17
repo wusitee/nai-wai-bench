@@ -77,6 +77,7 @@ def test_release_builds_both_suites_offline_and_bundles_keep_their_pinned_identi
     assert "NaiWai Index" in (out / "index.html").read_text()
     assert "url=../visual-detail/" in (out / "naihub-v1/index.html").read_text()
     assert "Frontend rebuild" in (out / "frontend/index.html").read_text()
+    assert "bill/" in (out / "index.html").read_text() and "Token bill" in (out / "bill/index.html").read_text()
     for suite, spec in suites.items():
         page = out / site.PAGES[suite]
         assert (page / "index.html").exists()

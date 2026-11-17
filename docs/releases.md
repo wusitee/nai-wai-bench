@@ -136,6 +136,7 @@ The output contains:
 | `meme-id/` | Meme ID (`core`) page, assets, and scores |
 | `visual-detail/` | Visual detail (`naihub-v1`) page, assets, and scores |
 | `frontend/` | Experimental frontend track (复刻 Rebuild): gate table and one page per task, with WebP renders |
+| `bill/` | Token bill: total tokens, usage by model and reasoning effort, contributor credits, and `bill.json` |
 | `naihub-v1/` | Redirect to `visual-detail/` for earlier links |
 | `bundles/` | Portable raw bundles linked from each suite's page |
 | `release.json` | Selected manifest, its hash, and build revision |
@@ -144,6 +145,28 @@ The output contains:
 Review the pages, contributing judges, coverage, settings, and raw bundle contents locally. The builder
 updates these generated outputs without removing unrelated files from an existing output directory.
 The publisher always builds into a fresh temporary directory.
+
+### Token bill
+
+The bill page and the overview's summary are not limited to the manifest's runs. Running usage counts
+every unique saved call under `results/`, the same calls and credit rules as
+[`nwb contributions`](contributing-results.md#contribution-credit); calls whose client reported no usage
+are listed without tokens. The reasoning-effort comparison takes each model that was run at more than one
+effort and averages output tokens per task over the tasks every one of those efforts answered.
+
+Building usage, the coding-agent tokens spent writing and reviewing the benchmark, comes from
+`results/agent-usage.json`. It is a self-reported snapshot that cannot be rebuilt from the repository;
+without the file the bill shows running usage only. Refresh and commit it before publishing:
+
+```sh
+scripts/agent_usage.py
+```
+
+The script reads [`toktop-collector --snapshot`](https://github.com/wusitee/toktop) and keeps agent
+sessions whose project directory is this checkout, a sibling clone named after it, or a worktree below a
+directory with its name. It writes per-model totals and the covered dates only, with no session titles
+or paths. Benchmark calls run in their own temporary directories and are not included, so the two
+figures do not overlap. Logs the machine no longer has are missing from the snapshot.
 
 ## Collecting and extending a comparison
 

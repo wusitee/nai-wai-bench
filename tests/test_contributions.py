@@ -5,8 +5,9 @@ import subprocess
 
 import pytest
 
+from nwb import bill
 from nwb.config import ModelSpec
-from nwb.contributions import UNCOMMITTED, leaderboard
+from nwb.contributions import UNCOMMITTED, credited_calls, leaderboard
 
 PRICE = {"input": 2.0, "cached_input": 0.5, "cache_write": 3.0, "output": 10.0}
 
@@ -99,3 +100,28 @@ def test_retired_entries_use_agreeing_rates_but_image_relays_stay_unpriced(tmp_p
     board = leaderboard(tmp_path, models, authors={}, credits={"runs": {}, "aliases": {}})
     usd = {m["model"]: m["usd"] for m in board["contributors"][0]["models"]}
     assert usd == {"retired": pytest.approx(2.0), "split": None, "relay": None}
+
+
+def test_bill_sums_disjoint_buckets_and_compares_efforts_on_shared_tasks(tmp_path):
+    run = tmp_path / "results/core/run"
+    (run / "snapshot.json").parent.mkdir(parents=True)
+    (run / "snapshot.json").write_text("{}")
+    high, top = {"model": "m-1", "effort": "high"}, {"model": "m-1", "effort": "max"}
+    usage = lambda output: {"input": 100, "cached_input": 60, "cache_write": 10, "output": output}
+    # Both efforts answered item a (max twice); only high answered b, which must not enter the comparison.
+    _record(run / "understanding/hi/a__r1.json", "hi", usage(10), "t1", item="a", settings=high)
+    _record(run / "understanding/hi/b__r1.json", "hi", usage(1000), "t2", item="b", settings=high)
+    _record(run / "understanding/top/a__r1.json", "top", usage(40), "t3", item="a", settings=top)
+    _record(run / "understanding/top/a__r2.json", "top", usage(60), "t4", item="a", settings=top)
+    _record(run / "understanding/top/c__r1.json", "top", {"input": None, "output": None}, "t5", item="c", settings=top)
+    (tmp_path / "results" / bill.AGENT_USAGE).write_text(json.dumps({"sessions": 2, "models": [
+        {"model": "agent", "tokens": {"input": 1, "cache_read": 2, "cache_write": 3, "output": 4}}]}))
+
+    calls = credited_calls(tmp_path, {}, authors={}, credits={"runs": {}, "aliases": {}})
+    summary = bill.summary(tmp_path, {}, calls)
+    assert summary["tokens"] == {"input": 120, "cache_read": 240, "cache_write": 40, "output": 1110}
+    assert summary["total"] == 1510 + 10 and summary["no_usage_calls"] == 1
+    assert [(r["entry"], r["effort"], r["calls"]) for r in summary["entries"]] == [("hi", "high", 2), ("top", "max", 3)]
+    [ladder] = summary["ladders"]
+    assert ladder["tasks"] == 1
+    assert [(s["effort"], s["mean_output"]) for s in ladder["steps"]] == [("high", 10), ("max", 50)]

@@ -1,0 +1,79 @@
+{
+  "source": "toktop-collector snapshot of local coding-agent logs",
+  "first_day": "2026-10-28",
+  "last_day": "2026-11-16",
+  "sessions": 167,
+  "requests": 6439,
+  "models": [
+    {
+      "model": "claude-opus-5-5",
+      "requests": 3516,
+      "tokens": {
+        "input": 7756,
+        "cache_read": 812616563,
+        "cache_write": 13082714,
+        "output": 3132174
+      }
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "requests": 2064,
+      "tokens": {
+        "input": 9429513,
+        "cache_read": 180962944,
+        "cache_write": 0,
+        "output": 1065285
+      }
+    },
+    {
+      "model": "gpt-6.1-terra",
+      "requests": 338,
+      "tokens": {
+        "input": 702565,
+        "cache_read": 47612416,
+        "cache_write": 0,
+        "output": 45407
+      }
+    },
+    {
+      "model": "claude-fable-5-2",
+      "requests": 207,
+      "tokens": {
+        "input": 440,
+        "cache_read": 32780687,
+        "cache_write": 769181,
+        "output": 257258
+      }
+    },
+    {
+      "model": "codex-auto-review",
+      "requests": 298,
+      "tokens": {
+        "input": 1018340,
+        "cache_read": 9080320,
+        "cache_write": 0,
+        "output": 30957
+      }
+    },
+    {
+      "model": "gpt-6-astra",
+      "requests": 9,
+      "tokens": {
+        "input": 80526,
+        "cache_read": 425856,
+        "cache_write": 0,
+        "output": 4619
+      }
+    },
+    {
+      "model": "claude-haiku-5-5",
+      "requests": 7,
+      "tokens": {
+        "input": 14,
+        "cache_read": 12323,
+        "cache_write": 43035,
+        "output": 4191
+      }
+    }
+  ]
+}

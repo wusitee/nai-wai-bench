@@ -43,9 +43,10 @@ SUITE_TEXT = {
 }
 INDEX_NAME = ("奶蛙指数", "NaiWai Index")
 FRONTEND_NAME = ("复刻", "Rebuild")
-# Published release layout: the index at the site root, every suite and the experimental frontend track in
-# a subdirectory named after it.
-PAGES = {"index": "", "core": "meme-id", "naihub-v1": "visual-detail", "frontend": "frontend"}
+BILL_NAME = ("账单", "Bill")
+# Published release layout: the index at the site root; every suite, the experimental frontend track, and
+# the token bill in a subdirectory named after it.
+PAGES = {"index": "", "core": "meme-id", "naihub-v1": "visual-detail", "frontend": "frontend", "bill": "bill"}
 # Earlier published suite paths, kept as redirects to the current pages.
 REDIRECTS = {"naihub-v1": "naihub-v1"}
 CATEGORY = {"anchors": ("经典锚点", "Anchors"), "pose_action": ("姿势动作", "Pose and action"),
@@ -236,7 +237,8 @@ def _head(title: str) -> str:
 
 def _header(here: str, links: str, tabs: bool, up: str = "") -> str:
     """Page header; `up` prefixes the tab links of pages below a section's directory."""
-    names = {"index": INDEX_NAME, "frontend": FRONTEND_NAME, **{s: SUITE_TEXT[s]["name"] for s in SUITES}}
+    names = {"index": INDEX_NAME, "frontend": FRONTEND_NAME, "bill": BILL_NAME,
+             **{s: SUITE_TEXT[s]["name"] for s in SUITES}}
     tab_html = ("<div class=tabs>" + "".join(
         f"<a href='{up}{_suite_href(here, page)}'{' aria-current=page' if page == here else ''}>"
         f"{e(names[page][0])} {e(names[page][1])}</a>" for page in PAGES) + "</div>" if tabs else "")
@@ -791,8 +793,12 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
 
 
 def build_index(suites: dict[str, tuple[Bench, dict]], index: dict, models: dict[str, ModelSpec], out: Path,
-                repo_url: str | None = None) -> Path:
-    """Release overview page: the NaiWai Index, then each component ranking linking to its suite page."""
+                repo_url: str | None = None, bill: tuple[dict, dict] | None = None) -> Path:
+    """Release overview page: the NaiWai Index, then each component ranking linking to its suite page.
+
+    `bill` is the token bill summary and contribution ranking; with it the page shows the total and
+    links to the bill page."""
+    from nwb import bill_site  # imported here: bill_site builds on this module's page chrome
     (out / "images").mkdir(parents=True, exist_ok=True)
     root = next(iter(suites.values()))[0].root
     reference = suites["core"][0].reference_image
@@ -806,8 +812,10 @@ def build_index(suites: dict[str, tuple[Bench, dict]], index: dict, models: dict
     annotators = {bench.annotator for bench, _ in suites.values() if bench.annotator}
 
     links = "<a href='#index'>指数 Index</a><a href='#components'>组成排名 Components</a>"
+    links += f"<a href='#bill'>{e(BILL_NAME[0])} Bill</a>" if bill else ""
     links += f"<a href='{e(blob, quote=True)}/docs/methodology.md#naiwai-index'>方法 Methodology</a>" if blob else ""
-    html = [_head(f"{INDEX_NAME[0]} · {INDEX_NAME[1]} · 奶蛙bench"), _header("index", links, True)]
+    html = [_head(f"{INDEX_NAME[0]} · {INDEX_NAME[1]} · 奶蛙bench") + (f"<style>{bill_site.CSS}</style>" if bill else ""),
+            _header("index", links, True)]
     weights_zh = "、".join(f"{SUITE_TEXT[s]['name'][0]} {w}/{total}" for s, w in index["weights"].items())
     weights_en = ", ".join(f"{SUITE_TEXT[s]['name'][1]} {w}/{total}" for s, w in index["weights"].items())
     html.append(
@@ -819,7 +827,8 @@ def build_index(suites: dict[str, tuple[Bench, dict]], index: dict, models: dict
         "also called 奶蛙)? The NaiWai Index combines two independent visual rankings: Meme ID (recognize the meme "
         "and its variants, name its aliases, tell it from official Nailong) and Visual detail (read subject count, "
         "posture, expression, gesture, and tears field by field).</span></p>"
-        f"<span class=badge>{e(__version__)} 首个版本 · First release</span> <span class=stamp>index v{index['version']}"
+        f"<span class=badge>{e(__version__)} 首个版本 · First release</span> "
+        + (bill_site.chip(bill[0], "#bill") + " " if bill else "") + f"<span class=stamp>index v{index['version']}"
         f" · {datetime.date.today().isoformat()}" + (f" · revision <code>{e(revision)}</code>" if revision else "")
         + "</span></div></div>")
 
@@ -883,6 +892,8 @@ def build_index(suites: dict[str, tuple[Bench, dict]], index: dict, models: dict
         + f"<p class=muted>前端复刻（用 SVG 和 three.js 手写网页复刻奶蛙动图）也是实验项目，不计入指数，见<a href='{_suite_href('index', 'frontend')}'>"
         "复刻页</a>。<span class=en> The frontend rebuild track (hand-written SVG and three.js pages that recreate "
         "奶蛙 GIFs) is experimental and outside the index too.</span></p>")
+    if bill:
+        html.append(bill_site.index_section(*bill))
     html.append(_footer(repo_url, blob))
     page = out / "index.html"
     page.write_text("\n".join(html), encoding="utf-8")
