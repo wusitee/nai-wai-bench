@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A pull request's newer run cancels its older one. Runs on main never cancel each other (a re-run of an old
+# commit must not cancel the current one); the deploy job orders them instead.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.run_id }}
+  cancel-in-progress: true
+
+env:
+  # The release published from main. Update it together with a new releases/*.toml.
+  RELEASE_MANIFEST: releases/0.1.0.toml
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@v6
+      # uv.lock pins the TUNA mirror, which GitHub's runners cannot always reach. PyPI serves the same files
+      # at the same paths, and uv still checks each file against the hash recorded in the lockfile.
+      - name: Install from PyPI
+        run: >-
+          sed -i -e 's#https://pypi.tuna.tsinghua.edu.cn/packages/#https://files.pythonhosted.org/packages/#g'
+          -e 's#https://pypi.tuna.tsinghua.edu.cn/simple#https://pypi.org/simple#g' uv.lock
+      # --frozen installs the lockfile's recorded versions without re-resolving.
+      - run: uv sync --frozen --extra data
+      - run: uv run --no-sync pytest -q
+      # Validates the manifest's input digests and judgments against results/, then builds the site.
+      - run: uv run --no-sync nwb release --manifest "$RELEASE_MANIFEST" --out "$RUNNER_TEMP/site"
+      - if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/site
+
+  deploy:
+    needs: check
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    # One deployment at a time, in arrival order (up to 100 waiting); each checks that its commit is still the
+    # head of main.
+    concurrency:
+      group: pages-deploy
+      cancel-in-progress: false
+      queue: max
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # A re-run of an older run must not replace the site built from a newer main.
+      - name: Skip superseded commits
+        id: current
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          head=$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq .sha)
+          if [ "$head" = "$GITHUB_SHA" ]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::main is now at $head; not deploying $GITHUB_SHA"
+          fi
+      - if: steps.current.outputs.deploy == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4

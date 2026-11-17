@@ -116,7 +116,7 @@ uv run nwb site --suite naihub-v1 --run naihub-v1 --out site/naihub-v1
 ```
 
 The site page shows its ranking, then a casebook of all 24 images with each model's wrong fields, and
-flags the answer-key annotator in the ranking. `scripts/publish_site.sh` publishes it as Visual detail
+flags the answer-key annotator in the ranking. The release site publishes it as Visual detail
 under `visual-detail/`, with `naihub-v1/` redirecting there; see
 [Results site](design.md#results-site-nwb-site).
 

@@ -281,16 +281,14 @@ C2PA names only `ChatGPT · gpt-image` for OpenAI and “Created by Google Gener
 
 ### Publishing
 
-`scripts/publish_site.sh RELEASE_MANIFEST.toml` uses `nwb release` to build the selected comparison
-into a fresh temporary directory, then replaces the `gh-pages` branch on `origin` with that generated
-site and its raw bundles. The manifest is required; there are no implicit run names. The NaiWai Index
-overview goes at the root, Meme ID at `meme-id/`, and Visual detail at `visual-detail/`, with page tabs and
-`.nojekyll`; `naihub-v1/` redirects to `visual-detail/`. It requires `uv`, Git,
-configured Git author identity, and push access, and leaves the checked-out branch unchanged.
+CI builds the published release manifest with `nwb release` and deploys the output to GitHub Pages after
+each push to `main` ([publish](releases.md#publish)). The manifest is required; there are no implicit run
+names. The NaiWai Index overview goes at the root, Meme ID at `meme-id/`, and Visual detail at
+`visual-detail/`, with page tabs; `naihub-v1/` redirects to `visual-detail/`.
 See the [release workflow](releases.md) for input validation and local review before publishing.
 Working runs and site files stay git-ignored; portable copies under `results/` sync with the source branch.
 
-Enable GitHub Pages once with `gh api -X POST repos/OWNER/REPO/pages -f 'source[branch]=gh-pages' -f 'source[path]=/'`; if Pages is already enabled, use `-X PUT` instead. Inspect `gh api repos/OWNER/REPO/pages/builds/latest` for build status and `gh api repos/OWNER/REPO/pages --jq .html_url` for the URL. **The Pages site is public even when the source repository is private.** Publish only results intended for public access.
+Enable GitHub Pages once with GitHub Actions as its source: `gh api -X POST repos/OWNER/REPO/pages -f build_type=workflow`; if Pages is already enabled, use `-X PUT` instead. The `github-pages` environment must allow deployments from `main`; when it limits deployment branches, add one with `gh api -X POST repos/OWNER/REPO/environments/github-pages/deployment-branch-policies -f name=main`. Inspect the CI run's `deploy` job for deployment status and `gh api repos/OWNER/REPO/pages --jq .html_url` for the URL. **The Pages site is public even when the source repository is private.** Publish only results intended for public access.
 
 ## Run layout
 
