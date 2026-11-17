@@ -9,6 +9,11 @@ on:
 permissions:
   contents: read
 
+# A newer run on the same ref cancels an older one, so an older main commit never deploys over a newer one.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   # The release published from main. Update it together with a new releases/*.toml.
   RELEASE_MANIFEST: releases/0.1.0.toml
@@ -24,29 +29,37 @@ jobs:
       # --frozen installs from the lockfile's recorded URLs without re-resolving.
       - run: uv sync --frozen --extra data
       - run: uv run --no-sync pytest -q
-      # Validates the manifest's input digests and judgments against results/.
+      # Validates the manifest's input digests and judgments against results/, then builds the site.
       - run: uv run --no-sync nwb release --manifest "$RELEASE_MANIFEST" --out "$RUNNER_TEMP/site"
+      - if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/site
 
-  publish:
+  deploy:
     needs: check
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-    concurrency:
-      group: publish-site
-      cancel-in-progress: true
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v5
-        with:
-          persist-credentials: false
-      - uses: astral-sh/setup-uv@v6
-      - run: uv sync --frozen --extra data
-      - name: Configure Git push identity
+      # A re-run of an older run must not replace the site built from a newer main.
+      - name: Skip superseded commits
+        id: current
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --global url."https://x-access-token:${GH_TOKEN}@github.com/".insteadOf "https://github.com/"
-      - run: scripts/publish_site.sh "$RELEASE_MANIFEST"
+          head=$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq .sha)
+          if [ "$head" = "$GITHUB_SHA" ]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::main is now at $head; not deploying $GITHUB_SHA"
+          fi
+      - if: steps.current.outputs.deploy == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4

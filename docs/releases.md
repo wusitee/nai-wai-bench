@@ -144,7 +144,7 @@ The output contains:
 
 Review the pages, contributing judges, coverage, settings, and raw bundle contents locally. The builder
 updates these generated outputs without removing unrelated files from an existing output directory.
-The publisher always builds into a fresh temporary directory.
+CI builds into a fresh directory on every run.
 
 ### Token bill
 
@@ -243,17 +243,16 @@ Claude Code login and 127 an API key, with the same recorded settings.
 
 ## Publish
 
-CI (`.github/workflows/ci.yml`) runs the tests and `nwb release` on every pull request and push. After
-they pass on `main`, it publishes the manifest named by the workflow's `RELEASE_MANIFEST`, so merging to
-`main` updates the site. Change that variable when a new manifest becomes the published release.
-Run the workflow manually (`gh workflow run CI --ref main`) to republish without a new commit.
+CI (`.github/workflows/ci.yml`) runs the tests and builds the manifest named by the workflow's
+`RELEASE_MANIFEST` on every pull request and every push to `main`. On `main`, it then deploys that build,
+pages and sanitized raw bundles, to GitHub Pages, so merging to `main` updates the site. Change the
+variable when a new manifest becomes the published release.
 
-To publish from a local checkout instead:
+To republish without a new commit, for example after a failed deployment:
 
 ```sh
-scripts/publish_site.sh releases/0.1.0.toml
+gh workflow run CI --ref main
 ```
 
-The script rebuilds the same manifest and force-updates only `gh-pages` on `origin`, without switching
-the source checkout. It publishes the pages and sanitized raw bundles. Git author identity and push
-access must be configured. See [results-site hosting](design.md#publishing) for GitHub Pages setup.
+A newer run on `main` cancels an older one, and a run whose commit is no longer the head of `main`
+skips deployment. See [results-site hosting](design.md#publishing) for GitHub Pages setup.

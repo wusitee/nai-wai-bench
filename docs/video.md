@@ -110,7 +110,7 @@ results site, uploading, later edits to title, description, cover, or visibility
 tagging, or releasing.
 
 - The results site must show the subject before the video goes out, because the description links
-  to it. `scripts/publish_site.sh` replaces the `gh-pages` branch.
+  to it. CI deploys the site after each merge to `main` ([publish](releases.md#publish)).
 - Send the MP4, cover, and `bilibili.md` to the maintainer for approval.
 - Upload as public directly (`--is-only-self 0`). Never upload privately and switch to public later:
   that skips Bilibili's first recommendation push. To publish at a chosen time, upload public with

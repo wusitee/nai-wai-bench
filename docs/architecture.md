@@ -29,7 +29,7 @@ flowchart TD
     R --> L
     L --> P
     L --> Z["downloadable raw ZIP bundles"]
-    P --> H["publish_site.sh: gh-pages push (CI on main)"]
+    P --> H["CI on main: GitHub Pages deployment"]
     Z --> H
 ```
 
@@ -102,6 +102,5 @@ the normal Git workflow. The benchmark does not issue Git commits or pushes duri
 selection, and rejects stale judgments before producing both suite pages, the NaiWai Index overview, and raw
 bundles. It also verifies the pinned saved frontend run and builds its pages (`frontend_site.py`), which
 show recorded renders and never run model code; see the [frontend track](frontend.md#publishing). The
-token bill page (`bill_site.py`) covers every saved call rather than the selected runs. Publishing
-runs `scripts/publish_site.sh`, which builds into a fresh directory and replaces `gh-pages`; CI runs it
-after each push to `main`. See [release operations](releases.md) and [scoring details](design.md).
+token bill page (`bill_site.py`) covers every saved call rather than the selected runs. After each
+push to `main`, CI builds the published manifest and deploys it to GitHub Pages. See [release operations](releases.md) and [scoring details](design.md).
