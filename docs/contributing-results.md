@@ -78,7 +78,8 @@ judgments, and frontend pages) without model calls and prices each one from its 
 rather than verified vendor rates. Plain input, cache reads (`cached_input`), cache writes
 (`cache_write`), and output are billed at their own rates. Subscription CLIs are not billed per token,
 so the total is a value estimate, not a bill. `--brief` omits the per-model breakdown; `--json` prints the
-full ranking.
+full ranking. Release sites show the same ranking under Contributors on the
+[token bill](releases.md#token-bill) page and thank contributors by name on the overview.
 
 - A call is counted once, even when merged runs repeat it.
 - A call is credited to the Git author of the commit that first added its record content under

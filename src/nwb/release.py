@@ -5,7 +5,8 @@ import re
 import tomllib
 from pathlib import Path
 
-from nwb import __version__, bundle, frontend_results, frontend_site, results, scoring, site
+from nwb import (__version__, bill, bill_site, bundle, contributions, frontend_results, frontend_site, results, scoring,
+                 site)
 from nwb.config import SUITES, load_bench, load_models, validate_run_suite
 from nwb.util import write_json
 
@@ -73,10 +74,15 @@ def build(root: Path, manifest_path: Path, out: Path) -> Path:
                    suite_tabs=True, bundle_url=f"../bundles/{archive.name}")
         write_json(page_dir / "scores.json", scores)
     index = scoring.naiwai_index({suite: (bench, scores) for suite, bench, _, scores, _ in prepared})
+    # The token bill covers every saved call under results/, not only the runs this manifest selects.
+    calls = contributions.credited_calls(root, models)
+    usage, board = bill.summary(root, models, calls), contributions.leaderboard(root, models, calls=calls)
     site.build_index({suite: (bench, scores) for suite, bench, _, scores, _ in prepared}, index, models, out,
-                     repo_url=manifest.get("repo_url"))
+                     repo_url=manifest.get("repo_url"), bill=(usage, board))
     revision = site._revision(root)
     blob = f"{manifest['repo_url']}/blob/{revision.split()[0]}" if manifest.get("repo_url") and revision else None
+    bill_site.build(usage, board, models, out, repo_url=manifest.get("repo_url"), blob=blob)
+    write_json(out / "bill" / "bill.json", {"usage": usage, "contributions": board})
     frontend_site.build(*frontend, out, repo_url=manifest.get("repo_url"), blob=blob)
     site.write_redirects(out)
     write_json(out / "index.json", index)

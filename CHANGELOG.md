@@ -5,6 +5,11 @@ Software releases use semantic versions; suite ids version the evaluation panels
 
 ## Unreleased
 
+- Add a token bill to release sites (`bill/`, summarized on the overview): total tokens for running the
+  benchmark, summed from every unique saved call under `results/`, and for building it, from the
+  coding-agent usage snapshot `results/agent-usage.json` (`scripts/agent_usage.py`). The page breaks usage
+  down by track and by model and reasoning effort, compares output tokens per task across efforts on
+  shared tasks, and credits contributors with the `nwb contributions` ranking.
 - Add run-time summaries to reports and suite pages: retained-call totals and per-track, per-model,
   and judge breakdowns, timing coverage, median/slowest tasks, and collection spans that distinguish
   resumed-session gaps and parallel calls from cumulative client time.

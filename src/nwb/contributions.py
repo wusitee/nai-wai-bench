@@ -122,8 +122,9 @@ def _usage(record: dict) -> dict | None:
     return {k: tokens.get(k) or 0 for k in TOKEN_FIELDS}
 
 
-def leaderboard(root: Path, models: dict[str, ModelSpec], *, authors: dict | None = None,
-                credits: dict | None = None) -> dict:
+def credited_calls(root: Path, models: dict[str, ModelSpec], *, authors: dict | None = None,
+                   credits: dict | None = None) -> list[dict]:
+    """Every unique saved call with its contributor, registry entry, role, usage, and list price."""
     authors = git_authors(root) if authors is None else authors
     credits = load_credits(root) if credits is None else credits
     calls: dict[str, dict] = {}
@@ -132,24 +133,34 @@ def leaderboard(root: Path, models: dict[str, ModelSpec], *, authors: dict | Non
         call["runs"].append(run_key)
         call["blobs"].add(blob)
 
-    people: dict[str, dict] = defaultdict(lambda: {"calls": 0, "runs": set(), "models": {}})
+    out = []
     for call in calls.values():
-        record = call["record"]
+        record, judged = call["record"], call["judged"]
         override = next((credits["runs"][r] for r in call["runs"] if r in credits["runs"]), None)
         introduced = min((authors[b] for b in call["blobs"] if b in authors), default=None)
-        name = (override if override and not call["judged"]
+        name = (override if override and not judged
                 else introduced[1] if introduced else UNCOMMITTED)
-        name = credits["aliases"].get(name, name)
-        entry = record["judge"] if call["judged"] else record.get("model", "?")
-        person = people[name]
+        entry = record["judge"] if judged else record.get("model", "?")
+        out.append({"contributor": credits["aliases"].get(name, name), "entry": entry, "record": record,
+                    "runs": call["runs"], "role": "judge" if judged else record.get("track", "subject"),
+                    "usage": _usage(record), "price": _price(entry, record, models)})
+    return out
+
+
+def leaderboard(root: Path, models: dict[str, ModelSpec], *, authors: dict | None = None,
+                credits: dict | None = None, calls: list[dict] | None = None) -> dict:
+    calls = credited_calls(root, models, authors=authors, credits=credits) if calls is None else calls
+    people: dict[str, dict] = defaultdict(lambda: {"calls": 0, "runs": set(), "models": {}})
+    for call in calls:
+        entry, usage, price = call["entry"], call["usage"], call["price"]
+        person = people[call["contributor"]]
         person["calls"] += 1
         person["runs"].update(call["runs"])
         row = person["models"].setdefault(entry, {
             "model": entry, "calls": 0, "priced_calls": 0, "unpriced_calls": 0, "no_usage_calls": 0,
             "tokens": dict.fromkeys(TOKEN_FIELDS, 0), "usd": 0.0, "price": None, "roles": set()})
         row["calls"] += 1
-        row["roles"].add("judge" if call["judged"] else record.get("track", "subject"))
-        usage, price = _usage(record), _price(entry, record, models)
+        row["roles"].add(call["role"])
         if usage is None:
             row["no_usage_calls"] += 1
             continue
