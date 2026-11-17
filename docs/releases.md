@@ -254,5 +254,5 @@ To republish without a new commit, for example after a failed deployment:
 gh workflow run CI --ref main
 ```
 
-A newer run on `main` cancels an older one, and a run whose commit is no longer the head of `main`
-skips deployment. See [results-site hosting](design.md#publishing) for GitHub Pages setup.
+Deployments run one at a time, and a run whose commit is no longer the head of `main` skips
+deployment, so an older commit never replaces a newer site. See [results-site hosting](design.md#publishing) for GitHub Pages setup.

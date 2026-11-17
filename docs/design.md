@@ -288,7 +288,7 @@ names. The NaiWai Index overview goes at the root, Meme ID at `meme-id/`, and Vi
 See the [release workflow](releases.md) for input validation and local review before publishing.
 Working runs and site files stay git-ignored; portable copies under `results/` sync with the source branch.
 
-Enable GitHub Pages once with GitHub Actions as its source: `gh api -X POST repos/OWNER/REPO/pages -f build_type=workflow`; if Pages is already enabled, use `-X PUT` instead. Inspect the CI run's `deploy` job for deployment status and `gh api repos/OWNER/REPO/pages --jq .html_url` for the URL. **The Pages site is public even when the source repository is private.** Publish only results intended for public access.
+Enable GitHub Pages once with GitHub Actions as its source: `gh api -X POST repos/OWNER/REPO/pages -f build_type=workflow`; if Pages is already enabled, use `-X PUT` instead. The `github-pages` environment must allow deployments from `main`; when it limits deployment branches, add one with `gh api -X POST repos/OWNER/REPO/environments/github-pages/deployment-branch-policies -f name=main`. Inspect the CI run's `deploy` job for deployment status and `gh api repos/OWNER/REPO/pages --jq .html_url` for the URL. **The Pages site is public even when the source repository is private.** Publish only results intended for public access.
 
 ## Run layout
 

@@ -9,9 +9,10 @@ on:
 permissions:
   contents: read
 
-# A newer run on the same ref cancels an older one, so an older main commit never deploys over a newer one.
+# A pull request's newer run cancels its older one. Runs on main never cancel each other (a re-run of an old
+# commit must not cancel the current one); the deploy job orders them instead.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.run_id }}
   cancel-in-progress: true
 
 env:
@@ -44,6 +45,10 @@ jobs:
       contents: read
       pages: write
       id-token: write
+    # One deployment at a time, in arrival order; each checks that its commit is still the head of main.
+    concurrency:
+      group: pages-deploy
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

@@ -204,7 +204,8 @@ C2PA 對 OpenAI 僅標註 `ChatGPT · gpt-image`，對 Google 僅標註「Create
 根目錄是奶蛙指數總覽，識梗在 `meme-id/`，看圖在 `visual-detail/`；`naihub-v1/` 跳轉到 `visual-detail/`。工作執行和網站檔案仍被 git 忽略；`results/` 中的可攜副本隨原始碼分支儲存。
 
 首次啟用 GitHub Pages，並以 GitHub Actions 為來源：`gh api -X POST repos/OWNER/REPO/pages -f build_type=workflow`；
-若已啟用則改用 `-X PUT`。在 CI 執行的 `deploy` 工作中查看部署狀態，用
+若已啟用則改用 `-X PUT`。`github-pages` 環境必須允許從 `main` 部署；若它限制了部署分支，用
+`gh api -X POST repos/OWNER/REPO/environments/github-pages/deployment-branch-policies -f name=main` 新增。在 CI 執行的 `deploy` 工作中查看部署狀態，用
 `gh api repos/OWNER/REPO/pages --jq .html_url` 取得網址。**即使原始碼儲存庫是私有的，Pages 網站仍然公開。**
 只發佈打算公開的結果。
 
