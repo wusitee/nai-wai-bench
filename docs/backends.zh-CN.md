@@ -136,8 +136,8 @@ pi 配置的等级；实际等级记录在 `meta.session_config`。如需干净�
 
 标签里的“likely Qwen 4”来自 token 计数，而不是路由给出的信息。在相同的 pi 提示词上，egg-alpha 的输入
 token 数与 Qwen4-Max 和 qwen4-max-preview 平均只差 1–2 个；Qwen 3.8、3.7 系列差约 10 个，GLM-5.3-Flash
-差约 21 个。在 24 张 Nai-hub 图片上，有 23 张与 Qwen4-Max 相差不超过 2 个 token。这说明它使用 Qwen 4 的
-分词器和图像编码器，但无法确定具体是哪个检查点，所以 `vendor` 仍为 `undisclosed`。
+差约 21 个。在 24 张 Nai-hub 图片上（各取三次重复中最小的计数），有 23 张与 Qwen4-Max 相差不超过 2 个
+token。计数一致说明分词器和图片预处理相同，但不能证明是同一个模型或检查点，所以 `vendor` 仍为 `undisclosed`。
 
 ### 智谱 GLM（`glm-5.3-flash-pi`）
 
