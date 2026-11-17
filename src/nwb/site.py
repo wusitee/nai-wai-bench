@@ -740,8 +740,10 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
             for item in free:
                 shown = "".join(f"<img src='{e(asset(p))}' style='max-width:140px;border-radius:8px' alt=''>"
                                 for p in item.images)
-                part.append(f"<details><summary>{e(item.id)} · {e(item.prompt[:60])}</summary>{shown}"
-                            f"<p class=muted>{e(item.prompt)}</p><table>")
+                # Prompts keep their own language whichever page language is chosen.
+                lang = "zh-CN" if item.lang == "zh" else "en"
+                part.append(f"<details><summary>{e(item.id)} · <span lang={lang}>{e(item.prompt[:60])}</span></summary>"
+                            f"{shown}<p class=muted lang={lang}>{e(item.prompt)}</p><table>")
                 for s in sorted(by_item[item.id], key=lambda s: (-(s["score"] or 0), s["model"])):
                     bad = "".join(f"<div class=tag>✗ {e(h)}</div>" for h in s["hallucinations"][:3])
                     part.append(f"<tr><td style='width:150px'><b>{e(label(s['model']))}</b><br><span class=score>"
