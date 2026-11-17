@@ -27,7 +27,13 @@ jobs:
         with:
           persist-credentials: false
       - uses: astral-sh/setup-uv@v6
-      # --frozen installs from the lockfile's recorded URLs without re-resolving.
+      # uv.lock pins the TUNA mirror, which GitHub's runners cannot always reach. PyPI serves the same files
+      # at the same paths, and uv still checks each file against the hash recorded in the lockfile.
+      - name: Install from PyPI
+        run: >-
+          sed -i -e 's#https://pypi.tuna.tsinghua.edu.cn/packages/#https://files.pythonhosted.org/packages/#g'
+          -e 's#https://pypi.tuna.tsinghua.edu.cn/simple#https://pypi.org/simple#g' uv.lock
+      # --frozen installs the lockfile's recorded versions without re-resolving.
       - run: uv sync --frozen --extra data
       - run: uv run --no-sync pytest -q
       # Validates the manifest's input digests and judgments against results/, then builds the site.
@@ -45,10 +51,12 @@ jobs:
       contents: read
       pages: write
       id-token: write
-    # One deployment at a time, in arrival order; each checks that its commit is still the head of main.
+    # One deployment at a time, in arrival order (up to 100 waiting); each checks that its commit is still the
+    # head of main.
     concurrency:
       group: pages-deploy
       cancel-in-progress: false
+      queue: max
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
