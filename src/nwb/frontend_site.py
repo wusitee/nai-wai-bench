@@ -12,6 +12,7 @@ from html import escape as e
 from pathlib import Path
 
 from nwb.frontend import KINDS, MEMORY, REVISIONS, SOURCE, VIEWS
+from nwb.lang import bi, bie
 from nwb.report import model_html
 from nwb.site import FRONTEND_NAME, _footer, _head, _header
 
@@ -50,7 +51,8 @@ STAGES = {"gif": (("s1", "静态", "Still"), ("s2", "动画", "Animated"), ("s3"
           "mem": (("mem", "初稿", "First page"), ("mem2", "修订", "Revision"))}
 DIMENSIONS = (("2d", "svg", "2D · SVG", "手写内联 SVG", "hand-written inline SVG"),
               ("3d", "threejs", "3D · three.js", "代码生成几何体的 three.js 场景", "three.js scenes built in code"))
-VIEW_TEXT = {"side": "侧面 side", "back": "背面 back", "three_quarter": "四分之三 three-quarter", "top": "顶视 top"}
+VIEW_TEXT = {"side": ("侧面", "side"), "back": ("背面", "back"), "three_quarter": ("四分之三", "three-quarter"),
+             "top": ("顶视", "top")}
 
 
 def _img(src: str, width: int, height: int, alt: str, still: str | None = None) -> str:
@@ -93,16 +95,15 @@ def build(files: dict[str, bytes], summary: dict, out: Path, repo_url: str | Non
         """Publish one verified image and return its link from a page `depth` levels below frontend/."""
         return depth + write(stem, name, files[f"{stem}/{name}"]) if name else None
 
-    docs = f"<a href='{e(blob, quote=True)}/docs/frontend.md'>方法 Method</a>" if blob else ""
-    title = f"{FRONTEND_NAME[0]} · {FRONTEND_NAME[1]} · 奶蛙bench"
-    head = _head(title) + f"<style>{CSS}</style>"
-    intro = ("<p class=lede>模型只看 GIF 的关键帧，手写网页把奶蛙动图复刻出来：2D 用内联 SVG，3D 用 three.js 在代码里搭几何体。"
-             "不能用任何图片，渲染在沙箱里离线进行。<br><span class=en>Models rebuild animated 奶蛙 GIFs as hand-written "
+    docs = f"<a href='{e(blob, quote=True)}/docs/frontend.md'>{bi('方法', 'Method')}</a>" if blob else ""
+    head = _head(*FRONTEND_NAME) + f"<style>{CSS}</style>"
+    intro = ("<p class=lede><span class=zh>模型只看 GIF 的关键帧，手写网页把奶蛙动图复刻出来：2D 用内联 SVG，3D 用 three.js 在代码里搭几何体。"
+             "不能用任何图片，渲染在沙箱里离线进行。</span><span class=en><br>Models rebuild animated 奶蛙 GIFs as hand-written "
              "web pages from their keyframes: inline SVG in 2D, three.js geometry built in code in 3D. No raster "
              "images are allowed, and pages render offline in a sandbox.</span></p>")
-    note = ("<div class=note>实验项目，不计入奶蛙指数，也没有分数或名次：脚本只检查硬性规则（离线、无图片、确定性、循环周期、3D 的立体感等），"
+    note = ("<div class=note><span class=zh>实验项目，不计入奶蛙指数，也没有分数或名次：脚本只检查硬性规则（离线、无图片、确定性、循环周期、3D 的立体感等），"
             "像不像由人来看。LLM 评审试过，会给布局对但画得粗糙的作品满分，所以没有采用。每个模型每题一次采样；"
-            "“修订”是模型看过自己的渲染和检查结果后的一次修改，默认只修订未通过检查的作品，也可以让每个作品都修订。<br><span class=en>Experimental and outside the NaiWai Index, "
+            "“修订”是模型看过自己的渲染和检查结果后的一次修改，默认只修订未通过检查的作品，也可以让每个作品都修订。</span><span class=en><br>Experimental and outside the NaiWai Index, "
             "with no score or rank. Scripted gates check only hard rules (offline, no raster images, determinism, "
             "loop period, 3D depth, ...); likeness is for people to judge. LLM checklist judging was tried and "
             "dropped because it gave rough drawings with the right layout full marks. One sample per model and task; "
@@ -116,7 +117,7 @@ def build(files: dict[str, bytes], summary: dict, out: Path, repo_url: str | Non
         row["samples"] += 1
         row["passed"] += entry["status"] == "passed"
     kinds = [k for k in KINDS if any(kind == k for _, kind in rows)]
-    table = ["<div class='scroll card-table'><table class=fe-table><tr><th>模型 Model</th>"
+    table = [f"<div class='scroll card-table'><table class=fe-table><tr><th>{bi('模型', 'Model')}</th>"
              + "".join(f"<th class=n>{e(k)}</th>" for k in kinds) + "</tr>"]
     for model in models:
         cells = []
@@ -137,19 +138,20 @@ def build(files: dict[str, bytes], summary: dict, out: Path, repo_url: str | Non
                          task["title"])
             name = task_id
         else:
-            thumb, name = "<span class=fe-mem>?</span>", "凭记忆 From memory"
-        cards.append(f"<a class=fe-task href='{e(task_id, quote=True)}/'>{thumb}<div><b>{e(name)}</b>{e(task['title'])}"
-                     f"<br><span class=muted>{count} 个样本 samples</span></div></a>")
-    page = [head, _header("frontend", "<a href='#tasks'>题目 Tasks</a><a href='#gates'>检查 Gates</a>" + docs, True),
+            thumb, name = "<span class=fe-mem>?</span>", bi("凭记忆", "From memory")
+        cards.append(f"<a class=fe-task href='{e(task_id, quote=True)}/'>{thumb}<div><b>{name}</b>{e(task['title'])}"
+                     f"<br><span class=muted>{bi(f'{count} 个样本', f'{count} samples')}</span></div></a>")
+    page = [head, _header("frontend", f"<a href='#tasks'>{bi('题目', 'Tasks')}</a><a href='#gates'>{bi('检查', 'Gates')}</a>"
+                          + docs, True),
             "<div class='hero solo'><div>"
-            f"<h1>前端复刻 <span class=en>Frontend rebuild</span></h1>{intro}"
-            f"<span class=badge>实验 Experimental</span> <span class=stamp>run <code>{e(summary['run'])}</code> · "
+            f"<h1>{bi('前端复刻', 'Frontend rebuild')}</h1>{intro}"
+            f"<span class=badge>{bi('实验', 'Experimental')}</span> <span class=stamp>run <code>{e(summary['run'])}</code> · "
             f"corpus <code>{e(summary['corpus'])}</code> · harness <code>{e(summary['harness'])}</code></span>"
             f"</div></div>{note}",
-            f"<h2 id=tasks>题目 <span class=en>Tasks</span></h2><div class=fe-tasks>{''.join(cards)}</div>",
-            "<h2 id=gates>脚本检查 <span class=en>Scripted gates</span></h2>"
-            "<p class=muted>通过数 / 样本数；s1 静态、s2 动画、s3 与 mem2 为修订。<span class=en> Passed / samples. s1 is "
-            "the still page, s2 the animation, s3 and mem2 the revisions.</span></p>" + "".join(table),
+            f"<h2 id=tasks>{bi('题目', 'Tasks')}</h2><div class=fe-tasks>{''.join(cards)}</div>",
+            f"<h2 id=gates>{bi('脚本检查', 'Scripted gates')}</h2>"
+            "<p class=muted>" + bi("通过数 / 样本数；s1 静态、s2 动画、s3 与 mem2 为修订。", "Passed / samples. s1 is "
+            "the still page, s2 the animation, s3 and mem2 the revisions.") + "</p>" + "".join(table),
             _footer(repo_url, blob)]
     base.mkdir(parents=True, exist_ok=True)
     (base / "index.html").write_text("\n".join(page), encoding="utf-8")
@@ -163,13 +165,13 @@ def build(files: dict[str, bytes], summary: dict, out: Path, repo_url: str | Non
 
         def sample_figure(model: str, kind: str, rep: int, caption: tuple[str, str]) -> tuple[str, str]:
             """A card cell and the detail section for one sample."""
-            label = f"{caption[0]} <span class=en>{caption[1]}</span>"
+            label = bie(caption)
             path = by_key.get((model, task_id, kind, rep))
             if path is None:
                 # A page that passed its gates usually has no revision; only failed pages are revised by default.
                 source = by_key.get((model, task_id, SOURCE[kind], rep)) if kind in REVISIONS else None
-                text = ("已通过，未修订<br>passed, not revised" if source and status[source]["status"] == "passed"
-                        else "未采集<br>not collected")
+                text = (bi("已通过，未修订", "passed, not revised", True) if source and status[source]["status"] == "passed"
+                        else bi("未采集", "not collected", True))
                 return (f"<figure class=fe-cell><div class=fe-none style='aspect-ratio:{width}/{height}'>{text}</div>"
                         f"<figcaption>{label}</figcaption></figure>"), ""
             stem = path.removesuffix(".json")
@@ -191,13 +193,13 @@ def build(files: dict[str, bytes], summary: dict, out: Path, repo_url: str | Non
             elif render and render.get("failed_screenshot"):
                 main = _img(media(render["failed_screenshot"], stem, "../"), width, height, "page at failure")
             else:
-                text = "未通过 gates failed" if entry["status"] == "gate failed" else "未渲染 not rendered"
+                text = bi("未通过", "gates failed") if entry["status"] == "gate failed" else bi("未渲染", "not rendered")
                 main = f"<div class='fe-none bad' style='aspect-ratio:{width}/{height}'>{text}</div>"
             cell = (f"<figure class=fe-cell>{main}<figcaption>{mark} {label}<br>"
                     + " · ".join(e(f) for f in facts if f) + "</figcaption></figure>")
             page_source = record.get("html") if isinstance(record.get("html"), str) else ""
             source = write(stem, "source.txt", page_source.encode())
-            detail = [f"<h4>{e(kind)} · {e(caption[1])} · <a href='../{e(source, quote=True)}'>源码 source</a></h4>"]
+            detail = [f"<h4>{e(kind)} · {bie(caption)} · <a href='../{e(source, quote=True)}'>{bi('源码', 'source')}</a></h4>"]
             if entry["gates"]:
                 detail.append("<p class=fe-gates>" + "<br>".join(e(g) for g in entry["gates"]) + "</p>")
             # Keyframes pair the reference (left) with the render; renders without a reference and the 3D
@@ -217,7 +219,7 @@ def build(files: dict[str, bytes], summary: dict, out: Path, repo_url: str | Non
             for view in (render or {}).get("views", []):
                 if view["file"] and view["view"] in VIEWS:
                     singles.append(f"<figure class=fe-pair>{_img(media(view['file'], stem, '../'), width, height, view['view'])}"
-                                   f"<figcaption>{e(VIEW_TEXT[view['view']])}</figcaption></figure>")
+                                   f"<figcaption>{bie(VIEW_TEXT[view['view']])}</figcaption></figure>")
             if pairs:
                 detail.append(f"<div class=fe-pairs>{''.join(pairs)}</div>")
             if singles:
@@ -236,26 +238,26 @@ def build(files: dict[str, bytes], summary: dict, out: Path, repo_url: str | Non
                     name = model_html(labels[model]) + (f" <span class=muted>r{rep}</span>" if len(reps) > 1 else "")
                     dim_cards.append(
                         f"<div class=fe-card><h3>{name}</h3><div class=fe-row style='--cols:{len(stages)}'>{''.join(cells)}</div>"
-                        + (f"<details><summary>关键帧、视角与源码 <span class=en>Keyframes, views, source</span></summary>"
-                           "<p class=muted>关键帧左为参考、右为渲染。<span class=en> Keyframes: reference left, render right.</span></p>"
+                        + (f"<details><summary>{bi('关键帧、视角与源码', 'Keyframes, views, source')}</summary>"
+                           f"<p class=muted>{bi('关键帧左为参考、右为渲染。', 'Keyframes: reference left, render right.')}</p>"
                            f"{''.join(details)}</details>" if any(details) else "") + "</div>")
             if dim_cards:
-                sections.append(f"<h2 id={anchor}>{e(heading)}</h2><p class=muted>{e(zh)}<span class=en> · {e(en)}</span></p>"
+                sections.append(f"<h2 id={anchor}>{e(heading)}</h2><p class=muted>{bie((zh, en))}</p>"
                                 f"<div class=fe-cards>{''.join(dim_cards)}</div>")
         if memory:
-            reference = ("<p class=muted>没有参考图：只给一句“凭记忆画出大笑奶龙”。<span class=en> No reference image: the "
-                         "prompt only asks to draw 大笑奶龙 from memory.</span></p>")
+            reference = ("<p class=muted>" + bi("没有参考图：只给一句“凭记忆画出大笑奶龙”。", "No reference image: the "
+                         "prompt only asks to draw 大笑奶龙 from memory.") + "</p>")
         else:
             strip = "".join(f"<figure>{_img(media(f['file'], f'reference/{task_id}', '../'), width, height, 'keyframe')}"
                             f"<figcaption>{int(f['t'])} ms</figcaption></figure>" for f in ref_frames)
             gif = media(task["gif"], f"reference/{task_id}", "../")
             reference = (f"<div class=fe-ref><figure>{_img(gif, width, height, task['title'], still=media(ref_frames[0]['file'], f'reference/{task_id}', '../'))}"
-                         f"<figcaption>参考 GIF reference · {task['duration_ms']} ms · {width} × {height}</figcaption></figure>"
+                         f"<figcaption>{bi('参考 GIF', 'reference GIF')} · {task['duration_ms']} ms · {width} × {height}</figcaption></figure>"
                          f"<div class=fe-strip>{strip}</div></div>")
         links = "".join(f"<a href='#{a}'>{e(h.split(' ')[0])}</a>" for _, a, h, _, _ in DIMENSIONS) + docs
         page = [head, _header("frontend", links, True, up="../"),
-                f"<p class=muted><a href='../'>← 前端复刻 Frontend rebuild</a></p>"
-                f"<h1>{e('凭记忆' if memory else task_id)} <span class=en>{e(task['title'])}</span></h1>{reference}",
+                f"<p class=muted><a href='../'>← {bi('前端复刻', 'Frontend rebuild')}</a></p>"
+                f"<h1>{bi('凭记忆', 'From memory') if memory else e(task_id)} <span class=muted>{e(task['title'])}</span></h1>{reference}",
                 *sections, _footer(repo_url, blob)]
         write(task_id, "index.html", "\n".join(page).encode())
     return base / "index.html"

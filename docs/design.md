@@ -242,7 +242,9 @@ cases before comparing subject scores.
 ## Results site (`nwb site`)
 
 `uv run nwb site --run RUN` builds a bilingual Chinese/English site with a single dark theme in `site/`,
-separate from the local report. Each page covers one suite and run, titled with the suite's public name. It
+separate from the local report. A switch in the page header shows one language at a time; the first visit
+follows the browser language and the choice is remembered per browser. Without JavaScript both languages
+show side by side. Generators mark Chinese text `class=zh` and English text `class=en` (`nwb.lang`). Each page covers one suite and run, titled with the suite's public name. It
 opens with that suite's visual-understanding ranking, with coverage and repetitions per cell; the top three
 ranks are colored and the rest gray. The remaining sections appear when the run has data for them, with the
 experimental generation tracks after the understanding results:
