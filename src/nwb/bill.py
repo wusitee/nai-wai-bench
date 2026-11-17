@@ -12,6 +12,7 @@ from pathlib import Path
 from statistics import fmean
 
 from nwb.config import ModelSpec
+from nwb.provenance import collection_profile
 from nwb.scoring import token_cost
 
 AGENT_USAGE = "agent-usage.json"
@@ -53,27 +54,32 @@ def load_agent_usage(root: Path) -> dict | None:
 
 
 def _ladders(tasks: dict) -> list[dict]:
-    """Mean output tokens per task for each effort of a model, on the tasks all its efforts answered."""
+    """Mean output tokens per task for each effort of a model, on the tasks all its efforts answered.
+
+    Calls are pooled by effort and collection profile, whichever registry entry made them. Efforts
+    collected under different profiles stay separate steps and mark the ladder as mixed: its gaps are
+    then not the effect of effort alone.
+    """
     out = []
-    for (model, role), entries in tasks.items():
-        if len({effort for _, effort in entries}) < 2:
+    for (model, _backend, role), steps in tasks.items():
+        if len({effort for effort, _ in steps}) < 2:
             continue
-        shared = set.intersection(*(set(by_task) for by_task in entries.values()))
+        shared = set.intersection(*(set(by_task) for by_task in steps.values()))
         if not shared:
             continue
-        steps = [{"entry": entry, "effort": effort,
-                  "mean_output": fmean(fmean(by_task[task]) for task in shared)}
-                 for (entry, effort), by_task in entries.items()]
-        steps.sort(key=lambda s: (effort_rank(s["effort"]), s["entry"]))
-        out.append({"model": model, "role": role, "tasks": len(shared), "steps": steps})
+        rows = [{"effort": effort, "profile": profile, "mean_output": fmean(fmean(by_task[task]) for task in shared)}
+                for (effort, profile), by_task in steps.items()]
+        rows.sort(key=lambda s: (effort_rank(s["effort"]), s["profile"]))
+        out.append({"model": model, "role": role, "tasks": len(shared),
+                    "mixed_profiles": len({profile for _, profile in steps}) > 1, "steps": rows})
     return sorted(out, key=lambda ladder: (ladder["role"] != "understanding", ladder["model"]))
 
 
 def summary(root: Path, models: dict[str, ModelSpec], calls: list[dict]) -> dict:
-    """Totals by track, by registry entry with its reasoning effort, and effort comparisons."""
+    """Totals by track, by registry entry with its recorded model and effort, and effort comparisons."""
     tokens = dict.fromkeys(BUCKETS, 0)
     tracks: dict[tuple, dict] = {}
-    entries: dict[str, dict] = {}
+    entries: dict[tuple, dict] = {}
     tasks: dict[tuple, dict] = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
     for call in calls:
         record, role, usage = call["record"], call["role"], call["usage"]
@@ -84,7 +90,8 @@ def summary(root: Path, models: dict[str, ModelSpec], calls: list[dict]) -> dict
         effort = settings.get("effort") or (spec.options.get("effort", "default") if spec else "default")
         track = tracks.setdefault((suite, role), {"suite": suite, "role": role, "calls": 0, "no_usage_calls": 0,
                                                   "tokens": 0})
-        entry = entries.setdefault(call["entry"], {
+        # An entry whose settings changed between runs gets one row per recorded configuration.
+        entry = entries.setdefault((call["entry"], model, effort), {
             "entry": call["entry"], "model": model, "effort": effort, "calls": 0, "no_usage_calls": 0,
             "tokens": dict.fromkeys(BUCKETS, 0), "usd": None, "roles": {}})
         role_row = entry["roles"].setdefault(role, {"calls": 0, "usage_calls": 0, "output": 0})
@@ -102,9 +109,10 @@ def summary(root: Path, models: dict[str, ModelSpec], calls: list[dict]) -> dict
         role_row["output"] += used["output"]
         if call["price"] is not None:
             entry["usd"] = (entry["usd"] or 0.0) + token_cost(usage, call["price"])
-        if role in TASKS:
+        if role in TASKS and effort in EFFORTS:  # an unranked effort has no place on a ladder
             task = (suite, *(record.get(k) for k in TASKS[role]))
-            tasks[model, role][call["entry"], effort][task].append(used["output"])
+            backend = settings.get("backend") or (spec.backend if spec else "")
+            tasks[model, backend, role][effort, collection_profile(record)][task].append(used["output"])
 
     agents = load_agent_usage(root)
     total = sum(tokens.values()) + (sum(agents["tokens"].values()) if agents else 0)

@@ -30,7 +30,7 @@ border:1px solid var(--line);background:var(--card);border-radius:4px;padding:3p
 .bill-rows .fill{background:#8b8b94;box-shadow:none}.bill-rows.run .fill{background:var(--yellow)}
 .ladders{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:14px;margin:14px 0}
 .ladders .panel{padding:14px 18px}.ladders td{padding:6px 4px;vertical-align:middle;border:0}
-.ladders td:first-child{width:1%;padding-left:0}.ladders .track{display:block;min-width:60px}
+.ladders td:first-child{width:1%;padding-left:0;white-space:nowrap}.ladders .track{display:block;min-width:60px}
 .ladders .fill{background:var(--blue);box-shadow:none}.ladders td.n:last-child{color:var(--muted);width:1%}
 .usage td.n{white-space:nowrap}.usage td:first-child{min-width:170px}
 .credits td{vertical-align:middle}.credits .names{color:var(--muted);font-size:12.5px;line-height:1.5}
@@ -150,15 +150,19 @@ def _ladders(summary: dict, agent_label) -> str:
         base = ladder["steps"][0]["mean_output"]
         top = max(s["mean_output"] for s in ladder["steps"])
         unit = UNIT[ladder["role"]]
+        mixed = ladder["mixed_profiles"]
+        profile = lambda s: f"<div class=row-meta>{e(s['profile'] or '—')}</div>" if mixed else ""
         rows = "".join(
-            f"<tr><td>{_effort(s['effort'])}</td><td>{_meter(s['mean_output'], top)}</td>"
+            f"<tr><td>{_effort(s['effort'])}{profile(s)}</td><td>{_meter(s['mean_output'], top)}</td>"
             f"<td class=n>{s['mean_output']:,.0f}</td>"
             f"<td class=n>{'×' + format(s['mean_output'] / base, '.1f') if base else ''}</td></tr>"
             for s in ladder["steps"])
         role = ROLE[ladder["role"]]
+        caveat = ("<p class=muted>各档的采集配置不同，差距里混有采集器的影响。<span class=en> These efforts were collected "
+                  "under different profiles, so the gap mixes effort with the collector.</span></p>" if mixed else "")
         cards.append(f"<div class=panel><h3>{e(agent_label(ladder['model']))} <span class=en>· {role[0]} {role[1]}"
                      f"</span></h3><p class=muted>输出 token/{unit[0]} · {ladder['tasks']} 道共同题目<span class=en> · output "
-                     f"tokens per {unit[1]} · {ladder['tasks']} shared tasks</span></p><table>{rows}</table></div>")
+                     f"tokens per {unit[1]} · {ladder['tasks']} shared tasks</span></p><table>{rows}</table>{caveat}</div>")
     return "<div class=ladders>" + "".join(cards) + "</div>"
 
 

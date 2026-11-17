@@ -151,8 +151,15 @@ The publisher always builds into a fresh temporary directory.
 The bill page and the overview's summary are not limited to the manifest's runs. Running usage counts
 every unique saved call under `results/`, the same calls and credit rules as
 [`nwb contributions`](contributing-results.md#contribution-credit); calls whose client reported no usage
-are listed without tokens. The reasoning-effort comparison takes each model that was run at more than one
-effort and averages output tokens per task over the tasks every one of those efforts answered.
+are listed without tokens. Usage rows are per registry entry and recorded model and effort, so an entry
+whose settings changed between runs gets one row per configuration.
+
+The reasoning-effort comparison takes each provider model that one backend ran at more than one effort and
+averages output tokens per task over the tasks every one of those efforts answered. Calls are pooled by
+recorded effort, whichever registry entry made them; efforts outside the known scale, such as an unset
+default, are left out. When the compared efforts were collected under different
+[Codex tool profiles](backends.md), the card names each profile and says that its gap mixes effort with
+the collector.
 
 Building usage, the coding-agent tokens spent writing and reviewing the benchmark, comes from
 `results/agent-usage.json`. It is a self-reported snapshot that cannot be rebuilt from the repository;
@@ -162,11 +169,16 @@ without the file the bill shows running usage only. Refresh and commit it before
 scripts/agent_usage.py
 ```
 
-The script reads [`toktop-collector --snapshot`](https://github.com/wusitee/toktop) and keeps agent
-sessions whose project directory is this checkout, a sibling clone named after it, or a worktree below a
-directory with its name. It writes per-model totals and the covered dates only, with no session titles
-or paths. Benchmark calls run in their own temporary directories and are not included, so the two
-figures do not overlap. Logs the machine no longer has are missing from the snapshot.
+The script reads [`toktop-collector --snapshot`](https://github.com/wusitee/toktop) and writes per-model
+totals and the covered dates only, with no session titles or paths. A response that appears in several log
+files, as after a resumed or forked session, is counted once. Logs the machine no longer has are missing
+from the snapshot.
+
+A session counts when its project directory is at or below this checkout or one of its current Git
+worktrees, or below any directory named like the main checkout. The name rule catches worktrees that have
+since been removed, and would also catch an unrelated directory of the same name. Pass `--include DIR`
+for a separate clone elsewhere. Benchmark calls run in temporary `nwb-*` directories; sessions with such a
+path component are always left out, so the two figures do not overlap.
 
 ## Collecting and extending a comparison
 

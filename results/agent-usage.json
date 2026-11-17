@@ -1,28 +1,28 @@
 {
   "source": "toktop-collector snapshot of local coding-agent logs",
   "first_day": "2026-10-28",
-  "last_day": "2026-11-16",
-  "sessions": 167,
-  "requests": 6439,
+  "last_day": "2026-11-17",
+  "sessions": 168,
+  "requests": 6571,
   "models": [
     {
       "model": "claude-opus-5-5",
-      "requests": 3516,
+      "requests": 3594,
       "tokens": {
-        "input": 7756,
-        "cache_read": 812616563,
-        "cache_write": 13082714,
-        "output": 3132174
+        "input": 7940,
+        "cache_read": 844081724,
+        "cache_write": 13923694,
+        "output": 3191380
       }
     },
     {
       "model": "gpt-6.1-sol",
-      "requests": 2064,
+      "requests": 2083,
       "tokens": {
-        "input": 9429513,
-        "cache_read": 180962944,
+        "input": 9525370,
+        "cache_read": 182175744,
         "cache_write": 0,
-        "output": 1065285
+        "output": 1077972
       }
     },
     {
@@ -37,12 +37,12 @@
     },
     {
       "model": "claude-fable-5-2",
-      "requests": 207,
+      "requests": 242,
       "tokens": {
-        "input": 440,
-        "cache_read": 32780687,
-        "cache_write": 769181,
-        "output": 257258
+        "input": 512,
+        "cache_read": 37924881,
+        "cache_write": 930066,
+        "output": 309445
       }
     },
     {

@@ -2,6 +2,8 @@ import json
 import os
 import shutil
 import subprocess
+import sys
+from pathlib import Path
 
 import pytest
 
@@ -108,20 +110,48 @@ def test_bill_sums_disjoint_buckets_and_compares_efforts_on_shared_tasks(tmp_pat
     (run / "snapshot.json").write_text("{}")
     high, top = {"model": "m-1", "effort": "high"}, {"model": "m-1", "effort": "max"}
     usage = lambda output: {"input": 100, "cached_input": 60, "cache_write": 10, "output": output}
-    # Both efforts answered item a (max twice); only high answered b, which must not enter the comparison.
-    _record(run / "understanding/hi/a__r1.json", "hi", usage(10), "t1", item="a", settings=high)
-    _record(run / "understanding/hi/b__r1.json", "hi", usage(1000), "t2", item="b", settings=high)
-    _record(run / "understanding/top/a__r1.json", "top", usage(40), "t3", item="a", settings=top)
-    _record(run / "understanding/top/a__r2.json", "top", usage(60), "t4", item="a", settings=top)
+    answer = lambda entry, item, output, settings, rep=1: _record(
+        run / f"understanding/{entry}/{item}__r{rep}.json", entry, usage(output), f"{entry}{item}{rep}", item=item,
+        settings=settings)
+    # High is split over two entries (a, b and d); max answered a twice and d. Only a and d are shared.
+    answer("hi", "a", 10, high), answer("hi", "b", 1000, high), answer("hi2", "d", 30, high)
+    answer("top", "a", 40, top), answer("top", "a", 60, top, rep=2), answer("top", "d", 90, top)
     _record(run / "understanding/top/c__r1.json", "top", {"input": None, "output": None}, "t5", item="c", settings=top)
+    answer("hi", "e", 7, top)  # the entry's settings changed between runs
+    answer("odd", "a", 5, {"model": "m-1", "effort": "default"})  # unranked effort: no ladder step
+    # Efforts collected under different Codex profiles are still compared, but flagged.
+    answer("c-hi", "a", 3, {"model": "m-2", "effort": "high", "backend": "codex"})
+    answer("c-top", "a", 4, {"model": "m-2", "effort": "max", "backend": "codex", "command": ["codex", "--disable", "x"]})
     (tmp_path / "results" / bill.AGENT_USAGE).write_text(json.dumps({"sessions": 2, "models": [
         {"model": "agent", "tokens": {"input": 1, "cache_read": 2, "cache_write": 3, "output": 4}}]}))
 
     calls = credited_calls(tmp_path, {}, authors={}, credits={"runs": {}, "aliases": {}})
     summary = bill.summary(tmp_path, {}, calls)
-    assert summary["tokens"] == {"input": 120, "cache_read": 240, "cache_write": 40, "output": 1110}
-    assert summary["total"] == 1510 + 10 and summary["no_usage_calls"] == 1
-    assert [(r["entry"], r["effort"], r["calls"]) for r in summary["entries"]] == [("hi", "high", 2), ("top", "max", 3)]
-    [ladder] = summary["ladders"]
-    assert ladder["tasks"] == 1
-    assert [(s["effort"], s["mean_output"]) for s in ladder["steps"]] == [("high", 10), ("max", 50)]
+    assert summary["tokens"] == {"input": 300, "cache_read": 600, "cache_write": 100, "output": 1249}
+    assert summary["total"] == 2249 + 10 and summary["no_usage_calls"] == 1
+    assert [(r["entry"], r["effort"], r["calls"]) for r in summary["entries"]] == [
+        ("odd", "default", 1), ("hi", "high", 2), ("hi2", "high", 1), ("hi", "max", 1), ("top", "max", 4),
+        ("c-hi", "high", 1), ("c-top", "max", 1)]
+    pooled, mixed = summary["ladders"]
+    assert pooled["tasks"] == 2 and not pooled["mixed_profiles"]
+    assert [(s["effort"], s["mean_output"]) for s in pooled["steps"]] == [("high", 20), ("max", 70)]
+    assert mixed["mixed_profiles"] and [s["profile"] for s in mixed["steps"]] == ["", "Codex custom"]
+
+
+def test_agent_usage_counts_a_copied_response_once_and_only_project_sessions(tmp_path):
+    event = lambda key, **tokens: {"ts": 1_700_000_000_000, "model": 0, "key": key, "tokens": tokens}
+    session = lambda sid, project, *events: ["Codex", {"id": sid, "project": project, "models": ["m"],
+                                                       "events": list(events)}]
+    (tmp_path / "snap.json").write_text(json.dumps({"version": 1, "sessions": [
+        session("s1", "/w/proj", event("k1", input=10, output=5, reasoning=2)),
+        # A resumed copy of k1 with more complete counts, in a since-removed worktree below the project name.
+        session("s2", "/w/trees/proj/fork", event("k1", input=10, output=9, reasoning=2), event("k2", cache_read=100)),
+        session("s3", "/w/proj-website", event("k3", input=1000)),  # another project
+        session("s4", "/w/proj/.scratch/tmp/nwb-codex-abc", event("k4", input=1000)),  # a benchmark call
+    ]}))
+    script = Path(__file__).resolve().parent.parent / "scripts/agent_usage.py"
+    subprocess.run([sys.executable, str(script), "--name", "proj", "--snapshot", str(tmp_path / "snap.json"),
+                    "--out", str(tmp_path / "out.json")], check=True, capture_output=True)
+    data = json.loads((tmp_path / "out.json").read_text())
+    assert (data["sessions"], data["requests"]) == (2, 2)
+    assert data["models"][0]["tokens"] == {"input": 10, "cache_read": 100, "cache_write": 0, "output": 11}
