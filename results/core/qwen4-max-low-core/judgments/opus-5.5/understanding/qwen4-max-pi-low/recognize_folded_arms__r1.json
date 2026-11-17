@@ -1,0 +1,110 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi-low/recognize_folded_arms__r1.json",
+  "target_sha256": "4170da8dac209cd8fbd40c44a14b3e36f5501c5798f1a40c28643fbd25c21533",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "5821c1bd67173d3f",
+  "judge_images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "track": "understanding",
+  "model": "qwen4-max-pi-low",
+  "scores": {
+    "base_character": 2,
+    "identifies_meme": 1
+  },
+  "hallucinations": [
+    "Treats the mutated pear-shaped figure in the image as the official 奶龙 character, claiming that arms-crossed with a confident smile is its signature pose (标志性动作). This presents a fan mutation as official character design."
+  ],
+  "rationale": "The answer correctly describes 奶龙 as a yellow, chubby dragon from a Chinese animation. However, it only names the generic 奶龙 meme and never identifies the image as part of the 大笑奶龙 / 变异奶龙 / 奶蛙 mutation family; it treats the variant as canonical, with only a brief hedge at the end.",
+  "raw": "{\"scores\": {\"base_character\": 2, \"identifies_meme\": 1}, \"hallucinations\": [\"Treats the mutated pear-shaped figure in the image as the official 奶龙 character, claiming that arms-crossed with a confident smile is its signature pose (标志性动作). This presents a fan mutation as official character design.\"], \"rationale\": \"The answer correctly describes 奶龙 as a yellow, chubby dragon from a Chinese animation. However, it only names the generic 奶龙 meme and never identifies the image as part of the 大笑奶龙 / 变异奶龙 / 奶蛙 mutation family; it treats the variant as canonical, with only a brief hedge at the end.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 12.3,
+    "turns": 1,
+    "tokens": {
+      "input": 2294,
+      "cached_input": 0,
+      "cache_write": 2292,
+      "output": 735,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.033044000000000004,
+    "tools_used": [],
+    "cost_usd": 0.033044000000000004,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2292,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 735,
+      "output_tokens_details": {
+        "thinking_tokens": 502
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2292,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 735,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2292,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2292
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:46:09Z",
+    "finished_at": "2026-11-16T16:46:21Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

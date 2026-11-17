@@ -1,0 +1,118 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "imagegen/chatgpt-images-2.6/name_en/giraffe__r1.json",
+  "target_sha256": "bdb0754fcde52c0a4a30eab0edc1089120bc9cbb2d80c5ec2aea96a9760e7619",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "32da82641658e870",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/chatgpt-images-2.6/name_en/giraffe__r1/exec-0c813db5-c86a-4769-93f5-9282610d806e.png"
+  ],
+  "track": "imagegen",
+  "model": "chatgpt-images-2.6",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 0,
+    "vibe": 0
+  },
+  "identity": 2,
+  "failure_modes": [
+    "generic_cute"
+  ],
+  "rationale": "A clearly recognizable chubby giraffe with closed-arc eyes and a pale belly, but it leans back instead of doubling over, sits in an indoor scene, and reads as a cute plush character rather than the unhinged laughing meme.",
+  "raw": "**pose:** The giraffe is upright with its head tilted back, the opposite of doubled over. Only the upper body is visible, so no bent knees are shown. → absent\n**hands_on_belly:** One paw rests against the upper side of the belly and the other is raised loosely near the chest. Neither clutches the belly. → partial\n**eyes:** Both eyes are squeezed shut into thin curved arcs. → match\n**mouth:** The mouth is wide open with a big pink tongue, but the interior is light rather than dark, no teeth show, and it doesn't dominate the face as much as the reference. It reads as joyful rather than hysterical. → partial\n**body:** The body is chubby and bean-like, the thick neck merges into the torso, and the limbs are short and stubby. → match\n**belly_patch:** A pale cream belly clearly contrasts with the yellow body. → match\n**render:** It is a 3D CG render, but in a fuzzy, plush, Pixar-like style with warm cinematic lighting. It lacks the reference's glossy, cheap studio-render look. → partial\n**background:** The background is a blurred indoor room with furniture, a picture frame and a plant, not plain white or grey. → absent\n**vibe:** The image is sweet and kawaii, with none of the absurd, unhinged 抽象 energy. → absent\n**identity:** Ossicones, giraffe ears, a giraffe snout and brown patch markings on the head, neck and arms are all present. → clearly\n\n{\"traits\": {\"pose\": \"absent\", \"hands_on_belly\": \"partial\", \"eyes\": \"match\", \"mouth\": \"partial\", \"body\": \"match\", \"belly_patch\": \"match\", \"render\": \"partial\", \"background\": \"absent\", \"vibe\": \"absent\"}, \"identity\": \"clearly\", \"failure_modes\": [\"generic_cute\"], \"rationale\": \"A clearly recognizable chubby giraffe with closed-arc eyes and a pale belly, but it leans back instead of doubling over, sits in an indoor scene, and reads as a cute plush character rather than the unhinged laughing meme.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 13.4,
+    "tokens": {
+      "input": 4432,
+      "cached_input": 0,
+      "cache_write": 4430,
+      "output": 1114,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0580754,
+    "tools_used": [],
+    "cost_usd": 0.0580754,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 4430,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1114,
+      "output_tokens_details": {
+        "thinking_tokens": 424
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 4430,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1114,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 4430,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 4430
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-05T04:00:01Z",
+    "finished_at": "2026-11-05T04:00:14Z",
+    "revision": "aa69823+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

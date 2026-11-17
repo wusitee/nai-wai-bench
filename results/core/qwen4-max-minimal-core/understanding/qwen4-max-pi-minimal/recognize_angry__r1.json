@@ -1,0 +1,84 @@
+{
+  "settings_id": "1f8854885f90fc43",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-minimal",
+  "vendor": "alibaba",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "仅凭这张图我不能十分确定，只能说说我的判断：\n\n**形象**：一个红色、圆滚滚的 3D 小怪物，浅粉色肚皮、绿色眼睛、皱眉瞪眼、双手背在身后。这种“红色针鼹”式的造型很像《索尼克》里的**纳克鲁斯（Knuckles）** 的变形版本，也就是 2018 年在 VRChat 火起来的 **“乌干达纳克鲁斯”（Ugandan Knuckles，\"Do you know da wae\"）** 那一类恶搞模型。不过原梗的纳克鲁斯通常有明显的口鼻部和拳刺，这张图里没有，所以也可能只是同风格的国产二创角色（比如各种“红温”小怪兽表情包），我无法确认。\n\n**表情包格式**：底部“切换愤怒模式😡”属于中文社交平台常见的 **“切换 XX 模式”系列表情包**——同一角色配上不同颜色和表情，做成“切换开心模式 / 摆烂模式 / 愤怒模式”等一组，用来在聊天里表示自己的状态。这类梗常和“红温了”（生气到脸红发烫）的说法一起用。\n\n如果你知道这个角色的出处，可以告诉我，我上面关于角色身份的部分只是推测。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 36.0,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 149,
+      "output": 1243,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 979,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 149,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1243,
+      "reasoning": 979
+    },
+    "session_config": {
+      "thinkingLevel": "minimal"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "minimal",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "minimal"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:16:24Z",
+    "finished_at": "2026-11-16T16:17:00Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi-minimal/write_prompt_zh.giraffe__r1.json",
+  "target_sha256": "a05fc795640833f40efdbebcb0c8a0fa4391dca54f54b25fd88ff6fc71a977f6",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "692a9ee297d232c3",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "qwen4-max-pi-minimal",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 2,
+    "vibe": 1,
+    "identity": 2
+  },
+  "hallucinations": [],
+  "rationale": "The prompt nails the squeezed arc eyes, huge dark mouth with teeth and tongue, glossy 3D render, plain white background and giraffe identity (patches, ossicones). But it has the character leaning back in a bust crop instead of hunched forward and standing, puts the hooves near the chest rather than on the belly, omits the pale belly patch, and leans cute and kawaii rather than absurd.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 2, \"body\": 1, \"belly_patch\": 0, \"render\": 2, \"background\": 2, \"vibe\": 1, \"identity\": 2}, \"hallucinations\": [], \"rationale\": \"The prompt nails the squeezed arc eyes, huge dark mouth with teeth and tongue, glossy 3D render, plain white background and giraffe identity (patches, ossicones). But it has the character leaning back in a bust crop instead of hunched forward and standing, puts the hooves near the chest rather than on the belly, omits the pale belly patch, and leans cute and kawaii rather than absurd.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 10.5,
+    "turns": 1,
+    "tokens": {
+      "input": 1977,
+      "cached_input": 0,
+      "cache_write": 1975,
+      "output": 754,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.030888,
+    "tools_used": [],
+    "cost_usd": 0.030888,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1975,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 754,
+      "output_tokens_details": {
+        "thinking_tokens": 518
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1975,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 754,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1975,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1975
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:34:52Z",
+    "finished_at": "2026-11-16T16:35:02Z",
+    "revision": "ecb40b1+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

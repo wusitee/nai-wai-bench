@@ -1,0 +1,84 @@
+{
+  "settings_id": "1f8854885f90fc43",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-minimal",
+  "vendor": "alibaba",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "抱歉，这个我没法给你确定的答案。\n\n我能看到的只是：一个 3D 渲染风格、光滑的黄色团状生物，侧脸朝左，嘴很小、略呈喙状，两只外凸的大眼睛（绿色虹膜、黑色瞳孔），配上「惊鸿一瞥」四个字——典型的中文聊天表情包排版。\n\n但仅凭这些特征，我无法可靠地把它对应到某个具体角色或某个具体的梗上。它有点像我印象里一些黄色团子/小鸟类的表情包形象，可我说不出确切出处，硬猜一个名字（比如某某游戏或某某动画里的角色）很可能是编的，反而误导你。\n\n如果你能补充一点线索——比如它有没有身体/四肢、动起来是什么样、你在哪个平台或哪个视频里看到的——我可以再帮你判断。或者用以图搜图会更准。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 63.3,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 150,
+      "output": 2199,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 2023,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 150,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2199,
+      "reasoning": 2023
+    },
+    "session_config": {
+      "thinkingLevel": "minimal"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "minimal",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "minimal"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:16:10Z",
+    "finished_at": "2026-11-16T16:17:13Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

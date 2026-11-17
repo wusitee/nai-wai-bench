@@ -1,0 +1,108 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi-low/recognize_official__r1.json",
+  "target_sha256": "2fe999f34082c272bb8185219e8ddb102b8a629504aa344f19861c4a46a1d290",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "3085bf61a5a5801d",
+  "judge_images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "track": "understanding",
+  "model": "qwen4-max-pi-low",
+  "scores": {
+    "base_character": 2,
+    "official_art": 1
+  },
+  "hallucinations": [],
+  "rationale": "The answer correctly identifies the image as 奶龙, a yellow, chubby dinosaur from a Chinese animation, and treats it as the official character rather than a meme mutation. It never explicitly distinguishes it from the unofficial 大笑奶龙 / 奶蛙 variant, so that item earns only partial credit.",
+  "raw": "{\"scores\": {\"base_character\": 2, \"official_art\": 1}, \"hallucinations\": [], \"rationale\": \"The answer correctly identifies the image as 奶龙, a yellow, chubby dinosaur from a Chinese animation, and treats it as the official character rather than a meme mutation. It never explicitly distinguishes it from the unofficial 大笑奶龙 / 奶蛙 variant, so that item earns only partial credit.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 11.4,
+    "turns": 1,
+    "tokens": {
+      "input": 2330,
+      "cached_input": 0,
+      "cache_write": 2328,
+      "output": 594,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.030512,
+    "tools_used": [],
+    "cost_usd": 0.030512,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2328,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 594,
+      "output_tokens_details": {
+        "thinking_tokens": 446
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2328,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 594,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2328,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2328
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:46:20Z",
+    "finished_at": "2026-11-16T16:46:31Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

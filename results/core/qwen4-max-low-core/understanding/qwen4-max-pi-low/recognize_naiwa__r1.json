@@ -1,0 +1,84 @@
+{
+  "settings_id": "22124b548d3b109d",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-low",
+  "vendor": "alibaba",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "我不能确定它的具体出处，只能说说我看到的和大致印象，不敢给你一个编造的名字。\n\n图里是一只 3D 渲染风格的黄色小鸟：身体光滑无羽毛细节、圆脑袋、短喙、一只夸张的大眼睛（绿色虹膜）侧目斜视，配字「惊鸿一瞥」。这类图属于中文社交平台上常见的「反应表情包／眼神系列」——用一张呆滞或诡异的侧目凝视配上文言味的四字词（惊鸿一瞥、死亡凝视、回眸一笑、含情脉脉等）来制造反差笑点，常用在群聊里表示「我瞟到你了」「暗中观察」。\n\n至于这只鸟本身的角色名和最初来源（是某个短片、游戏模型还是网友自建的表情包系列），我没有可靠的记忆，无法确认。如果你想知道准确出处，建议用图片反向搜索一下；我不想凭猜测给你一个听起来合理但可能是错的答案。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 40.7,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 149,
+      "output": 1500,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1307,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 149,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1500,
+      "reasoning": 1307
+    },
+    "session_config": {
+      "thinkingLevel": "low"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "low",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "low"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:42:59Z",
+    "finished_at": "2026-11-16T16:43:40Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

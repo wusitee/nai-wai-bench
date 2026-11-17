@@ -1,0 +1,84 @@
+{
+  "settings_id": "cd8372f0bb6ac1cb",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-off",
+  "vendor": "alibaba",
+  "item": "recognize_smug",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "answer": "这是**奶龙**。\n\n它出自国产 3D 动画《奶龙》，是一只黄色、圆滚滚的小龙角色，脸颊有红晕，表情常常很呆萌。\n\n在网络上，它属于**“奶龙表情包 / 奶龙梗”**这一类二创梗：网友经常截取它这种半眯眼、似笑非笑、有点无语又有点得意的表情，用来表达：\n\n- “我就静静看着你”\n- “无语但礼貌微笑”\n- “憋笑”\n- “看破不说破”\n- “有点屑但又很可爱”\n\n所以这张图一般会被当作**奶龙式无语/憋笑/看戏表情包**来用。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 7.2,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 344,
+      "output": 148,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 0,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 344,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 148,
+      "reasoning": 0
+    },
+    "session_config": {
+      "thinkingLevel": "off"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "off",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "off"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:05:26Z",
+    "finished_at": "2026-11-16T16:05:33Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

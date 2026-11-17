@@ -1,0 +1,90 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gemini-3.8-flash/recognize_en__r1.json",
+  "target_sha256": "f3862217a8e61fb02452ecb4f3434ec4770394c56f07342e063760135db56f64",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "68de8d4384dfd955",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "Misidentifies the character as KuGo from ZellyGo; it is a mutated Nailong (奶龙).",
+    "Claims the image originates from an animated clip of KuGo laughing; it is an unofficial AI-generated Nailong variant."
+  ],
+  "rationale": "The answer identifies the wrong character and meme, missing all five checklist items. It provides neither the supported aliases 大笑奶龙、变异奶龙、奶蛙 nor their relationship to the original Nailong character.",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"ai_variant\":0,\"aliases\":0,\"naiwa\":0},\"hallucinations\":[\"Misidentifies the character as KuGo from ZellyGo; it is a mutated Nailong (奶龙).\",\"Claims the image originates from an animated clip of KuGo laughing; it is an unofficial AI-generated Nailong variant.\"],\"rationale\":\"The answer identifies the wrong character and meme, missing all five checklist items. It provides neither the supported aliases 大笑奶龙、变异奶龙、奶蛙 nor their relationship to the original Nailong character.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719d-af01-7c21-858e-83e44d1b9672",
+    "seconds": 10.1,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13054,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 215,
+      "reasoning_output_tokens": 80
+    },
+    "tokens": {
+      "input": 13054,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 215,
+      "reasoning": 80
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:52:01Z",
+    "finished_at": "2026-10-25T05:52:11Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

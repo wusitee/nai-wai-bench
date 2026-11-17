@@ -1,0 +1,84 @@
+{
+  "settings_id": "a4ba33964638df40",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi",
+  "vendor": "alibaba",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "这是**奶龙**（Nailong），国产 3D 动画短片《奶龙》系列里的主角——一只黄色圆滚滚的小胖龙，标志性特征是奶白色的大肚皮、 spaced 得很开的大眼睛和憨憨的表情，动画里它和小男孩\"小七\"搭档。你这张抱臂微笑的渲染图是它流传很广的表情包之一，常用来表达\"自信、得意、胸有成竹（包的）\"的语气。\n\n它属于 2023–2024 年起在 B 站、抖音等平台爆火的**\"奶龙\"抽象梗/烂梗文化**：因为原作面向低龄观众、形象和配音比较魔性，被网友大量二创玩梗，比如\"我是奶龙\"\"奶龙大帝／奶龙王朝\"\"奶龙小曲\"，以及与贝利亚奥特曼乱炖的 AI 整活视频等。奶龙因此成了\"小学生抽象烂梗\"的代表符号，这张图也多半是在这种调侃、整活的语境下被使用的。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 474.9,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 341,
+      "output": 21600,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 21384,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 341,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 21600,
+      "reasoning": 21384
+    },
+    "session_config": {
+      "thinkingLevel": "max"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "max"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T10:03:36Z",
+    "finished_at": "2026-11-16T10:11:31Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

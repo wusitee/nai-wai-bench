@@ -1,0 +1,419 @@
+{
+  "corpus": "frontend-v1",
+  "experimental": true,
+  "index_included": false,
+  "review": "human",
+  "rows": [
+    {
+      "model": "qwen4-max-pi",
+      "kind": "2d-s1",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "qwen4-max-pi",
+      "kind": "2d-s2",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "qwen4-max-pi",
+      "kind": "3d-s1",
+      "samples": 4,
+      "passed": 3,
+      "unrendered": 0
+    },
+    {
+      "model": "qwen4-max-pi",
+      "kind": "3d-s2",
+      "samples": 4,
+      "passed": 3,
+      "unrendered": 0
+    },
+    {
+      "model": "qwen4-max-pi",
+      "kind": "3d-s3",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "qwen4-max-pi",
+      "kind": "2d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "qwen4-max-pi",
+      "kind": "3d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    }
+  ],
+  "samples": [
+    {
+      "sample": "frontend/qwen4-max-pi/001/2d-s1__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "001",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/qwen4-max-pi/001/2d-s2__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "001",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/qwen4-max-pi/001/3d-s1__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "001",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "window.nwb.ready never became true",
+        "page errors: uncaught: Cannot read properties of undefined (reading 'rotation')"
+      ]
+    },
+    {
+      "sample": "frontend/qwen4-max-pi/001/3d-s2__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "001",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "window.nwb.ready never became true",
+        "page errors: uncaught: Cannot read properties of undefined (reading 'rotation')"
+      ]
+    },
+    {
+      "sample": "frontend/qwen4-max-pi/001/3d-s3__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "001",
+      "kind": "3d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/qwen4-max-pi/004/2d-s1__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "004",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/qwen4-max-pi/004/2d-s2__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "004",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/qwen4-max-pi/004/3d-s1__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "004",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/qwen4-max-pi/004/3d-s2__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "004",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/qwen4-max-pi/007/2d-s1__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "007",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/qwen4-max-pi/007/2d-s2__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "007",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/qwen4-max-pi/007/3d-s1__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "007",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/qwen4-max-pi/007/3d-s2__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "007",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/qwen4-max-pi/008/2d-s1__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "008",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/qwen4-max-pi/008/2d-s2__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "008",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/qwen4-max-pi/008/3d-s1__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "008",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/qwen4-max-pi/008/3d-s2__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "008",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/qwen4-max-pi/mem/2d-mem__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "mem",
+      "kind": "2d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/qwen4-max-pi/mem/3d-mem__r1.json",
+      "model": "qwen4-max-pi",
+      "task": "mem",
+      "kind": "3d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    }
+  ],
+  "run": "qwen4-max-frontend",
+  "harness": "fee9bd636b661bc1",
+  "labels": {
+    "qwen4-max-pi": "Qwen4-Max (pi, Token Plan) (max)"
+  },
+  "tasks": {
+    "001": {
+      "title": "Two characters at a school desk, one rubbing the other's belly",
+      "width": 240,
+      "height": 242,
+      "duration_ms": 1500,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.webp"
+        },
+        {
+          "t": 200,
+          "file": "frame_01.webp"
+        },
+        {
+          "t": 400,
+          "file": "frame_02.webp"
+        },
+        {
+          "t": 600,
+          "file": "frame_03.webp"
+        },
+        {
+          "t": 800,
+          "file": "frame_04.webp"
+        },
+        {
+          "t": 1000,
+          "file": "frame_05.webp"
+        },
+        {
+          "t": 1200,
+          "file": "frame_06.webp"
+        },
+        {
+          "t": 1400,
+          "file": "frame_07.webp"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "004": {
+      "title": "Front-facing character pumping both fists",
+      "width": 244,
+      "height": 240,
+      "duration_ms": 1200,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.webp"
+        },
+        {
+          "t": 160,
+          "file": "frame_01.webp"
+        },
+        {
+          "t": 340,
+          "file": "frame_02.webp"
+        },
+        {
+          "t": 500,
+          "file": "frame_03.webp"
+        },
+        {
+          "t": 680,
+          "file": "frame_04.webp"
+        },
+        {
+          "t": 840,
+          "file": "frame_05.webp"
+        },
+        {
+          "t": 1020,
+          "file": "frame_06.webp"
+        },
+        {
+          "t": 1180,
+          "file": "frame_07.webp"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "007": {
+      "title": "Full-body character dancing and turning sideways",
+      "width": 240,
+      "height": 294,
+      "duration_ms": 5540,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.png"
+        },
+        {
+          "t": 800,
+          "file": "frame_01.png"
+        },
+        {
+          "t": 1530,
+          "file": "frame_02.png"
+        },
+        {
+          "t": 2330,
+          "file": "frame_03.png"
+        },
+        {
+          "t": 3130,
+          "file": "frame_04.png"
+        },
+        {
+          "t": 3930,
+          "file": "frame_05.png"
+        },
+        {
+          "t": 4670,
+          "file": "frame_06.png"
+        },
+        {
+          "t": 5470,
+          "file": "frame_07.png"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "008": {
+      "title": "Full-body character laughing and bouncing between a crouch and standing",
+      "width": 216,
+      "height": 216,
+      "duration_ms": 1220,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.webp"
+        },
+        {
+          "t": 180,
+          "file": "frame_01.webp"
+        },
+        {
+          "t": 340,
+          "file": "frame_02.webp"
+        },
+        {
+          "t": 520,
+          "file": "frame_03.webp"
+        },
+        {
+          "t": 680,
+          "file": "frame_04.webp"
+        },
+        {
+          "t": 860,
+          "file": "frame_05.webp"
+        },
+        {
+          "t": 1020,
+          "file": "frame_06.webp"
+        },
+        {
+          "t": 1200,
+          "file": "frame_07.webp"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "mem": {
+      "title": "大笑奶龙 from memory",
+      "width": 240,
+      "height": 240,
+      "duration_ms": 0,
+      "eligibility": "memory",
+      "frames": []
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "write_prompt_zh.giraffe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出长颈鹿版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "```\nA cute chubby cartoon giraffe character in kawaii sticker style, laughing hysterically with pure joy. Round plump body like a chubby baby dinosaur, but with giraffe features: a long neck, small ossicone horns with round tips on its head, and soft yellow-cream fur covered in irregular brown-orange giraffe spots. Its eyes are squeezed shut into happy crescent slits, mouth wide open in a huge toothless grin showing the inside of its mouth, tiny round cheeks flushed pink. Small stubby arms raised up in delight, short little legs, big round belly. Slightly tilted head, as if doubling over with laughter, with small motion lines and teardrops of joy around it. Flat pastel colors, thick clean outlines, simple white background, chibi proportions, adorable emoji-sticker aesthetic, high quality digital illustration.\n```",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 15.3,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20007,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 364,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20371 / 1048576 tokens (2%)\nSession total: 20007 input, 364 output",
+      "usage": {
+        "inputTokens": 20007,
+        "outputTokens": 364
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:42:57Z",
+    "finished_at": "2026-10-25T00:43:13Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

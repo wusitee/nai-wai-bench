@@ -1,0 +1,84 @@
+{
+  "settings_id": "cd8372f0bb6ac1cb",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-off",
+  "vendor": "alibaba",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "这个角色是**奶龙**。\n\n它出自国产3D动画短视频系列《奶龙》，是一只黄色的、胖乎乎的卡通恐龙形象，有着圆滚滚的肚子和呆萌的大眼睛。\n\n在网络梗文化中，奶龙因其憨态可掬又略带\"贱萌\"的表情和动作，被广泛制作成表情包，常用于表达**得意、自信、无语、摆烂、\"我就这样你能咋地\"**等情绪。图中这个双手交叉抱胸的姿势，就是典型的\"傲娇/不服/你奈我何\"式表情，属于奶龙表情包系列中非常经典的一张。\n\n奶龙表情包在抖音、微信、B站等平台传播极广，是近年来中文互联网上非常流行的 meme 形象之一。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 8.9,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 341,
+      "output": 151,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 0,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 341,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 151,
+      "reasoning": 0
+    },
+    "session_config": {
+      "thinkingLevel": "off"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "off",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "off"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:05:27Z",
+    "finished_at": "2026-11-16T16:05:35Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

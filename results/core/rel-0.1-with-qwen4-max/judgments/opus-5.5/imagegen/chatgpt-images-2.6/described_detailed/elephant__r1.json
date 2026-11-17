@@ -1,0 +1,116 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "imagegen/chatgpt-images-2.6/described_detailed/elephant__r1.json",
+  "target_sha256": "50dd89a05dbdb7b629f65a75076af0171ca85da16f15df9af254c888720955fb",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "3c9838da9b160a86",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/chatgpt-images-2.6/described_detailed/elephant__r1/exec-49c5fe1f-aad4-44af-8e7e-7694015a0a2e.png"
+  ],
+  "track": "imagegen",
+  "model": "chatgpt-images-2.6",
+  "traits": {
+    "pose": 1,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 2,
+    "vibe": 1
+  },
+  "identity": 2,
+  "failure_modes": [],
+  "rationale": "A clearly recognizable elephant that reproduces the meme's belly-clutching, arc-eyed, gaping-mouth laugh in a smooth CG style on a plain background. However, the head tilts back rather than doubling over, and the overall feel is cuter and less absurd than the reference.",
+  "raw": "- **pose:** The elephant stands with knees bent in a wide stance and leans slightly forward, but its head tilts up and back rather than being fully doubled over. **partial**\n- **hands_on_belly:** Both hands press on the round belly. **match**\n- **eyes:** The eyes are squeezed shut into thin curved arcs. **match**\n- **mouth:** The enormous gaping mouth dominates the face, with a dark interior, a row of small teeth and a pink tongue. **match**\n- **body:** The body is bulky and pear-shaped, with no neck (the head merges into the torso) and short thick limbs. **match**\n- **belly_patch:** A pale grey oval belly patch contrasts with the blue-grey body. **match**\n- **render:** It is a smooth matte-plastic 3D CG render with soft diffuse lighting and slight blur, like a video screenshot. **match**\n- **background:** The background is plain white to light grey and empty. **match**\n- **vibe:** It reads as hearty laughter, but the polished, friendly look leans cute rather than unhinged or 抽象. **partial**\n- **identity:** It is clearly an elephant, with a trunk, large pink-lined ears, blue-grey coloring and toenails. **clearly**\n\n{\"traits\": {\"pose\": \"partial\", \"hands_on_belly\": \"match\", \"eyes\": \"match\", \"mouth\": \"match\", \"body\": \"match\", \"belly_patch\": \"match\", \"render\": \"match\", \"background\": \"match\", \"vibe\": \"partial\"}, \"identity\": \"clearly\", \"failure_modes\": [], \"rationale\": \"A clearly recognizable elephant that reproduces the meme's belly-clutching, arc-eyed, gaping-mouth laugh in a smooth CG style on a plain background. However, the head tilts back rather than doubling over, and the overall feel is cuter and less absurd than the reference.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 11.7,
+    "tokens": {
+      "input": 4820,
+      "cached_input": 0,
+      "cache_write": 4818,
+      "output": 1032,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0595764,
+    "tools_used": [],
+    "cost_usd": 0.0595764,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 4818,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1032,
+      "output_tokens_details": {
+        "thinking_tokens": 412
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 4818,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1032,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 4818,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 4818
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-05T03:59:24Z",
+    "finished_at": "2026-11-05T03:59:36Z",
+    "revision": "aa69823+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

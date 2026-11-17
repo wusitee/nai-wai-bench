@@ -1,0 +1,116 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi-xhigh/describe__r1.json",
+  "target_sha256": "7e7e9ae92e287edd098651f5530b18a93ab2c2bc0c70141f2678bff95376fac7",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "dc28f8b38786f72e",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "qwen4-max-pi-xhigh",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 1,
+    "vibe": 1
+  },
+  "hallucinations": [
+    "Describes the surface as matte (哑光), stated with reasonable confidence, which contradicts the glossy 3D render",
+    "Describes an oversized round head sitting on a smaller body (1–1.5 head-heights, head as big as or bigger than body), marked 较有把握; the notes say the head merges into a bulky bean/pear torso",
+    "States without hedging that the head is tilted back with the chin raised (头略后仰、下巴抬起); the reference pose is hunched forward"
+  ],
+  "rationale": "The answer gets the gaping mouth, the pale belly patch, and its preferred squinted-arc eyes right. But it puts the body leaning backward instead of hunched forward, offers 捧腹 only as a low-confidence candidate, calls the render matte rather than glossy, and treats the 抽象 meme energy as a separate 2D variant rather than this image's own feel.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 2, \"mouth\": 2, \"body\": 1, \"belly_patch\": 2, \"render\": 1, \"background\": 1, \"vibe\": 1}, \"hallucinations\": [\"Describes the surface as matte (哑光), stated with reasonable confidence, which contradicts the glossy 3D render\", \"Describes an oversized round head sitting on a smaller body (1–1.5 head-heights, head as big as or bigger than body), marked 较有把握; the notes say the head merges into a bulky bean/pear torso\", \"States without hedging that the head is tilted back with the chin raised (头略后仰、下巴抬起); the reference pose is hunched forward\"], \"rationale\": \"The answer gets the gaping mouth, the pale belly patch, and its preferred squinted-arc eyes right. But it puts the body leaning backward instead of hunched forward, offers 捧腹 only as a low-confidence candidate, calls the render matte rather than glossy, and treats the 抽象 meme energy as a separate 2D variant rather than this image's own feel.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 15.8,
+    "turns": 1,
+    "tokens": {
+      "input": 3623,
+      "cached_input": 0,
+      "cache_write": 3621,
+      "output": 1171,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.052396,
+    "tools_used": [],
+    "cost_usd": 0.052396,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3621,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1171,
+      "output_tokens_details": {
+        "thinking_tokens": 796
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3621,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1171,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3621,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3621
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:44:58Z",
+    "finished_at": "2026-11-16T17:45:14Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

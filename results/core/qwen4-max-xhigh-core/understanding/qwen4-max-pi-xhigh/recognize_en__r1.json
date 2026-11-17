@@ -1,0 +1,84 @@
+{
+  "settings_id": "a5e02c034d814b84",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-xhigh",
+  "vendor": "alibaba",
+  "item": "recognize_en",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Who is this character, and which internet meme is this image from? Does the meme have other names?",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "That's **Nailong** (奶龙, roughly \"Milk Dragon\"), the chubby yellow dragon from a Chinese 3D-animated short series. In the show he's a gluttonous, mischievous dragon who lives with a boy named Xiao Qi (小七), and the shorts became hugely popular on Douyin and Bilibili before spreading worldwide.\n\n**The meme:** This frame is from the \"Nailong laughing\" meme — a clip of him doubled over, clutching his belly and laughing hysterically. It blew up on TikTok, Twitter/X and YouTube around 2024 as a reaction image/video, typically captioned things like \"me laughing at my own mid joke\" or \"bro after saying something unfunny,\" often paired with wheezing or \"goofy ahh\" laugh sound effects (sometimes the Clash Royale king's \"HEHEHEHA\").\n\n**Other names it goes by:**\n- Milk Dragon / Milky Dragon laughing\n- Nai Long / Nailong belly laugh\n- \"Laughing yellow dragon\" or \"fat yellow dragon\" meme\n- \"Goofy ahh dragon\" / simply \"the yellow guy laughing\"\n\nOne note: people sometimes lump it in with the singing chicken nugget (\"gedagedigedagedago\") meme since both are round yellow 3D characters circulating in the same absurdist meme space — but they're unrelated characters.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 92.3,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 675,
+      "output": 4147,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 3856,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 675,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 4147,
+      "reasoning": 3856
+    },
+    "session_config": {
+      "thinkingLevel": "xhigh"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "xhigh"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:34:13Z",
+    "finished_at": "2026-11-16T17:35:45Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

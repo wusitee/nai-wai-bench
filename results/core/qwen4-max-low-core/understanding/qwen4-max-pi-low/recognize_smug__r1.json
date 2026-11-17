@@ -1,0 +1,84 @@
+{
+  "settings_id": "22124b548d3b109d",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-low",
+  "vendor": "alibaba",
+  "item": "recognize_smug",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "answer": "这张图里的黄色胖家伙是**奶龙**——国产3D动画短片《奶龙》里的主角，一只圆滚滚、脸颊带腮红的小黄龙。\n\n它对应的网络梗就是俗称的「**龙图**」：网友截取动画里奶龙各种挤眉弄眼、半眯着眼、嘴角一撇的\"得意/贱笑\"表情，做成表情包大量传播。这类图最早在贴吧（抗压背锅吧一类）和抽象文化圈子里流行，常配合\"典\"\"急了\"\"孝\"\"怎么你了\"之类的阴阳怪气用语使用，后来扩散到微博、QQ群、B站等各大平台，成了通用的\"嘲讽/看戏\"表情。\n\n顺带一提，因为奶龙本身是子供向动画角色，被拿来做这种抽象表情包的落差感也是这个梗的笑点之一，还衍生出\"奶龙怎么你了\"\"保护奶龙\"之类的二次玩梗。\n\n（说明：以上仅凭我自己的记忆判断，没有查证；如果你手上的版本是别的黄胖角色，也有可能是同类表情包的变体。）",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 28.9,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 340,
+      "output": 1073,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 846,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 340,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1073,
+      "reasoning": 846
+    },
+    "session_config": {
+      "thinkingLevel": "low"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "low",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "low"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:43:40Z",
+    "finished_at": "2026-11-16T16:44:09Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

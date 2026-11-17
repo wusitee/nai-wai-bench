@@ -1,0 +1,81 @@
+{
+  "settings_id": "cd8372f0bb6ac1cb",
+  "track": "understanding",
+  "model": "qwen4-max-pi-off",
+  "vendor": "alibaba",
+  "item": "write_prompt.cat",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a cat version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A chubby, cartoonish orange tabby cat sitting upright on a plain pastel-yellow background, drawn in the glossy 3D-rendered style of a cheap mobile-game mascot: oversized round head about as big as its pear-shaped body, tiny stubby arms and legs, smooth soft-plastic-looking fur with no individual hairs, huge white bulging eyes with small black pupils rolled slightly upward in gleeful madness, thick raised eyebrows, and an enormous wide-open laughing mouth stretched almost ear to ear — dark pink cavern inside, two tiny white fangs on top, a fat curled pink tongue, cheeks puffed into round balls. The cat is throwing its head back mid-cackle, one stubby paw slapping its own round belly, the other pointing forward accusingly, tail curled up behind it, a single big cartoon tear flying off one eye and small yellow sparkle marks around its head. Squashed-squat proportions, exaggerated smug-deranged joy, saturated candy colors, soft studio lighting, clean vector-smooth shading, centered full-body composition, sticker-like cutout look.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 10.9,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 127,
+      "output": 218,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 0,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 127,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 218,
+      "reasoning": 0
+    },
+    "session_config": {
+      "thinkingLevel": "off"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "off",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "off"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:04:26Z",
+    "finished_at": "2026-11-16T16:04:37Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

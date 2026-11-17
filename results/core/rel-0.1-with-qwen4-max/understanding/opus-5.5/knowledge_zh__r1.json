@@ -1,0 +1,100 @@
+{
+  "settings_id": "1e77488ebc8a6fba",
+  "track": "understanding",
+  "model": "opus-5.5",
+  "vendor": "anthropic",
+  "item": "knowledge_zh",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "「大笑奶龙」（也叫「奶蛙」）是什么？请介绍它的来源、外观以及相关的梗和二创。不确定的地方请直接说明，不要编造。",
+  "images": [],
+  "answer": "# 关于「大笑奶龙」/「奶蛙」\n\n我对「奶龙」这个形象本身有一些了解，但对「大笑奶龙」和「奶蛙」这两个具体叫法**没有可靠的知识**。下面分开说明。\n\n## 我比较确定的：「奶龙」本身\n\n- **来源**：奶龙是国内的原创动画/卡通 IP，主角是一只黄色的小龙，相关短视频和儿歌（如「我是奶龙」）在网上流传很广。具体出品公司我记不准，就不写了。\n- **外观**：通体黄色，身体圆滚滚，嘴很大，四肢短小，表情夸张，整体呆萌。\n- **走红**：大约在 2024 年前后，奶龙从儿童向内容变成网络梗。它魔性的语气和表情被大量做成表情包和鬼畜视频，常被用来表达「无厘头」「傻乐」「抽象」的情绪。我印象中它在国外（例如韩国网络社区）也有一定传播，但具体程度不确定。\n\n## 我不确定的：「大笑奶龙」和「奶蛙」\n\n- **「大笑奶龙」**：从字面推测，可能指奶龙张大嘴狂笑的某张表情包或某个片段，也可能是二创中的固定形象。但我没有关于它具体出处、首次出现时间或代表作品的可靠信息。\n- **「奶蛙」**：我不清楚这个叫法的来历。字面上可能和「蛙」有关，比如觉得奶龙大笑时像青蛙，或者是和某个青蛙形象（如 Pepe）融合的二创。这只是基于字面的猜测，没有依据。我也无法确认「奶蛙」和「大笑奶龙」是否真的指同一个东西。\n\n## 建议\n\n如果想了解准确的来源和相关梗，可以：\n- 在 B站、抖音、小红书搜索这两个关键词，看最早的相关视频或帖子；\n- 查萌娘百科、小鸡词典等网络梗百科，它们通常会记录梗的起源时间和演变。\n\n如果你能提供一张图或一段描述，我可以试着结合我对奶龙的了解帮你分析，但关于具体出处，我仍然只能说明哪些是推测。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 19.3,
+    "tokens": {
+      "input": 658,
+      "cached_input": 0,
+      "cache_write": 656,
+      "output": 1159,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.028661100000000002,
+    "tools_used": [],
+    "cost_usd": 0.028661100000000002,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 656,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1159,
+      "output_tokens_details": {
+        "thinking_tokens": 374
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 656,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1159,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 656,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 656
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:41:46Z",
+    "finished_at": "2026-10-25T00:42:05Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

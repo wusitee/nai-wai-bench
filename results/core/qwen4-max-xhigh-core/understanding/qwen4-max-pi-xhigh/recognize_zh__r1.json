@@ -1,0 +1,84 @@
+{
+  "settings_id": "a5e02c034d814b84",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-xhigh",
+  "vendor": "alibaba",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "图中的角色是**奶龙**——国产3D动画短片《奶龙》里的主角，一只黄色、圆滚滚的贪吃小胖龙，在动画里和人类男孩小七搭档。\n\n这张\"奶龙捂着肚子狂笑\"的截图是流传很广的表情包，对应的梗是**\"绷不住了 / 难绷\"**，用来表示笑到无法自控、彻底破防。这个梗最有名的别名是谐音梗**\"蚌埠住了\"**（借安徽城市\"蚌埠\"谐音\"绷不\"），类似的说法还有\"笑不活了\"\"xswl（笑死我了）\"等。\n\n另外补充一点：奶龙本身也是抽象文化的玩梗对象。因为它憨傻呆萌的表情，被网友戏称为**\"唐龙\"**（与\"唐/唐氏\"这个调侃梗挂钩），还有\"奶龙大帝\"\"幽默奶龙\"等外号。这张大笑图也常被用来做\"难绷\"\"你太幽默了\"式的嘲讽回复。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 146.9,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 666,
+      "output": 7186,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 6978,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 666,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 7186,
+      "reasoning": 6978
+    },
+    "session_config": {
+      "thinkingLevel": "xhigh"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "xhigh"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:33:51Z",
+    "finished_at": "2026-11-16T17:36:18Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

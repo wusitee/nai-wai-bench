@@ -1,0 +1,84 @@
+{
+  "settings_id": "cd8372f0bb6ac1cb",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-off",
+  "vendor": "alibaba",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "这张表情包里的角色是**红色的\"奶龙\"**。\n\n- **角色出处**：奶龙出自国产3D动画《奶龙》，是一只圆滚滚、大肚子的卡通小龙，正常形态是黄色的，性格呆萌贪吃。\n- **所属网络梗**：它属于围绕\"奶龙\"衍生出的抽象/整活二创梗。网友把这只子供向动画角色拿来做各种魔改——换配色（红、蓝、黑等）、换表情（愤怒、阴险、鄙视），再配上\"切换××模式\"之类的文字，做成\"奶龙模式切换\"系列表情包。你这张就是其中的\"愤怒模式\"版本：红色身体＋皱眉怒目＋😡emoji，配文\"切换愤怒模式\"，模仿游戏/机器人切换状态的感觉，用来表达\"我要生气了/别惹我\"的情绪。\n\n这类梗的笑点在于反差：一个本来低幼、憨态可掬的形象被配上严肃、中二的\"模式切换\"设定，加上粗糙又魔性的3D质感，因而被广泛用于聊天斗图和抽象玩梗。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 12.3,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 150,
+      "output": 230,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 0,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 150,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 230,
+      "reasoning": 0
+    },
+    "session_config": {
+      "thinkingLevel": "off"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "off",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "off"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:05:13Z",
+    "finished_at": "2026-11-16T16:05:26Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "settings_id": "22124b548d3b109d",
+  "track": "understanding",
+  "model": "qwen4-max-pi-low",
+  "vendor": "alibaba",
+  "item": "describe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "不看任何图片，仅凭你的记忆，详细描述最经典的那张「大笑奶龙」（奶蛙）图片的画面：姿势、表情、身体造型、配色、渲染风格和背景，让从没见过它的画师能照着画出来。不确定的地方请说明。",
+  "images": [],
+  "answer": "我必须先说清楚一件事：**这张具体的图，我没有可靠的记忆。**\n\n「大笑奶龙／奶蛙」这个说法我听着耳熟，但我无法在记忆里定位到一张确定的、被公认「最经典」的图片。如果我照着你的要求，把姿势、表情、配色、背景一条条写出来，那基本上是在现场编造一个听起来合理的描述——画师照着画出来的东西，很可能跟原图毫无关系。这比直接说「我不知道」更糟。所以下面我把**有把握的**和**没把握的**分开讲。\n\n## 一、关于「奶龙」这个角色本身（中等把握）\n\n奶龙是中国大陆近几年（大约 2022 年之后）在抖音、快手等平台走红的 3D 动画短片角色，常和一个人类小男孩搭档出演搞笑日常。角色大致特征：\n\n- **物种/体型**：一只幼态的小恐龙／小龙，圆滚滚的蛋形或梨形身材，头身比夸张，头几乎和身体一样宽，四肢短小。\n- **主色**：明亮的暖黄色，腹部通常是更浅的奶黄／米白色。\n- **五官**：大而圆的黑眼睛带高光，嘴大、表情幅度夸张，偶尔露出小尖牙。\n- **渲染**：三维 CGI，表面偏光滑的塑料／软胶质感，柔和打光，不是二维手绘。\n\n**低把握、请勿当真的部分**：头顶是否有小角、背上有没有小翅膀或背鳍、尾巴形状、有没有腮红——这些我记不准，不排除是我把别的黄色卡通形象的特征混进来了。出品方是谁我也说不准，不敢报公司名。\n\n## 二、关于「大笑奶龙」这张图（几乎没有把握）\n\n以下这些我**都答不上来**，也不会替它猜：\n\n- 是仰头大笑、前仰后合，还是正对镜头咧嘴？手是举起来、拍肚子还是垂着？\n- 眼睛是眯成缝、笑出眼泪，还是瞪圆？嘴里有没有舌头、牙齿、口水？\n- 「奶蛙」这个别名是因为它笑起来的脸型像青蛙，还是本来就是另一只绿色的蛙形角色？这一点我完全不确定，而它直接决定了配色是黄还是绿。\n- 是动画截图、官方表情包、还是网友二创／改图？背景是动画场景、纯色底还是抠图透明底？\n- 有没有配字、有没有边框、是不是低分辨率压缩过的「电子包浆」版本？\n\n## 三、建议\n\n如果目标是让画师复刻，最省事的做法是你把那张图直接发给我或发给画师；有了图我可以帮你拆解成可执行的绘画说明（构图、色号倾向、光影、笔触）。\n\n如果你只是想确认「我记不记得这个梗」——诚实的答案是：我对奶龙这个 IP 有印象，但对这张具体的「大笑」图没有可信赖的视觉记忆，不能凭它给出可供临摹的描述。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 39.3,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 125,
+      "output": 1726,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1088,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 125,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1726,
+      "reasoning": 1088
+    },
+    "session_config": {
+      "thinkingLevel": "low"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "low",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "low"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:39:33Z",
+    "finished_at": "2026-11-16T16:40:13Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

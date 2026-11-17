@@ -1,0 +1,108 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi-medium/recognize_folded_arms__r1.json",
+  "target_sha256": "4e77294dc45d1f7e54022b16d50b17873b8f80b125664318bb006fa7e3a872ca",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "05066afded97df82",
+  "judge_images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "track": "understanding",
+  "model": "qwen4-max-pi-medium",
+  "scores": {
+    "base_character": 1,
+    "identifies_meme": 0
+  },
+  "hallucinations": [],
+  "rationale": "The model mentions 奶龙 only in passing as a similar 'yellow chubby character' without saying it is a dragon/dinosaur from a children's animation. It explicitly declines to identify the image as part of the 大笑奶龙/变异奶龙/奶蛙 meme family, only placing it vaguely in the same meme 'ecosystem'. Its visual descriptions are accurate and its uncertain claims are hedged.",
+  "raw": "{\"scores\": {\"base_character\": 1, \"identifies_meme\": 0}, \"hallucinations\": [], \"rationale\": \"The model mentions 奶龙 only in passing as a similar 'yellow chubby character' without saying it is a dragon/dinosaur from a children's animation. It explicitly declines to identify the image as part of the 大笑奶龙/变异奶龙/奶蛙 meme family, only placing it vaguely in the same meme 'ecosystem'. Its visual descriptions are accurate and its uncertain claims are hedged.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 8.1,
+    "turns": 1,
+    "tokens": {
+      "input": 2299,
+      "cached_input": 0,
+      "cache_write": 2297,
+      "output": 575,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.029884,
+    "tools_used": [],
+    "cost_usd": 0.029884,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2297,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 575,
+      "output_tokens_details": {
+        "thinking_tokens": 391
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2297,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 575,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2297,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2297
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:16:19Z",
+    "finished_at": "2026-11-16T17:16:27Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

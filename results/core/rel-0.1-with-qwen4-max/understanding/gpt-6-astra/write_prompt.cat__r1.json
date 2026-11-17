@@ -1,0 +1,77 @@
+{
+  "settings_id": "eed12e0ea2261aed",
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "vendor": "openai",
+  "item": "write_prompt.cat",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a cat version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "Create a square reaction-meme image of a ridiculously chubby golden-yellow cartoon cat laughing uncontrollably. Use a soft, rounded 3D animated style: smooth plush-looking fur, a huge round head merging into a pear-shaped body, almost no neck, an enormous belly, tiny stubby limbs, small triangular cat ears, subtle whiskers, and a short curved tail. The face dominates: head tipped backward slightly, eyes squeezed into tight upside-down U-shaped slits, cheeks pushed upward, and a gigantic open mouth stretching across the lower face. Show a broad white upper tooth band, a dark mouth interior, and a pink tongue. Its expression is helpless, shameless, full-body belly laughter—goofy and slightly absurd, with the belly thrust forward and little paws tucked near it as though shaking with laughter. Keep the silhouette inflated and squishy, with unmistakable feline features. Close framing, simple softly blurred background, warm lighting, slightly low-resolution screenshot aesthetic. No text, captions, logos, or watermarks.",
+  "contaminated": false,
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6-astra",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17085-79ff-7ac0-88de-f6ea8a8f7e78",
+    "seconds": 24.5,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 11332,
+      "cached_input_tokens": 4864,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 371,
+      "reasoning_output_tokens": 158
+    },
+    "tokens": {
+      "input": 11332,
+      "cached_input": 4864,
+      "cache_write": 0,
+      "output": 371,
+      "reasoning": 158
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6-astra",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:45:57Z",
+    "finished_at": "2026-10-25T00:46:21Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

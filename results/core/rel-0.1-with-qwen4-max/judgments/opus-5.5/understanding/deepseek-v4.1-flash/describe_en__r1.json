@@ -1,0 +1,113 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/deepseek-v4.1-flash/describe_en__r1.json",
+  "target_sha256": "dd582aaa524a4b5731a4c4a6ca43e745ba4d5a96ba9f0eadc894a12e7ad5fe60",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "72e21cc999f018f5",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 2,
+    "vibe": 1
+  },
+  "hallucinations": [
+    "Describes the pose it 'recalls most strongly' as leaning back with the belly pushed forward and the head tipped up. The reference shows the torso hunched forward, doubled over with laughter."
+  ],
+  "rationale": "The answer gets the arc-shaped closed eyes, huge dark mouth, pale belly patch, 3D render and plain white background right. It reverses the posture (leaning back instead of hunched forward), hedges on hands-on-belly, denies prominent teeth, calls the surface matte rather than glossy, and frames the vibe as cute and delighted rather than absurd and unhinged.",
+  "raw": "```json\n{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 2, \"mouth\": 1, \"body\": 1, \"belly_patch\": 2, \"render\": 1, \"background\": 2, \"vibe\": 1}, \"hallucinations\": [\"Describes the pose it 'recalls most strongly' as leaning back with the belly pushed forward and the head tipped up. The reference shows the torso hunched forward, doubled over with laughter.\"], \"rationale\": \"The answer gets the arc-shaped closed eyes, huge dark mouth, pale belly patch, 3D render and plain white background right. It reverses the posture (leaning back instead of hunched forward), hedges on hands-on-belly, denies prominent teeth, calls the surface matte rather than glossy, and frames the vibe as cute and delighted rather than absurd and unhinged.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 15.1,
+    "tokens": {
+      "input": 3281,
+      "cached_input": 0,
+      "cache_write": 3279,
+      "output": 1261,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0518593,
+    "tools_used": [],
+    "cost_usd": 0.0518593,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3279,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1261,
+      "output_tokens_details": {
+        "thinking_tokens": 971
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3279,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1261,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3279,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3279
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:54:57Z",
+    "finished_at": "2026-10-25T01:55:12Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "settings_id": "c7835e1c7781edc5",
+  "track": "understanding",
+  "model": "qwen4-max-pi-medium",
+  "vendor": "alibaba",
+  "item": "write_prompt_zh.giraffe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出长颈鹿版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "一只Q版胖乎乎的长颈鹿卡通角色，正面朝向观众、居中构图的正方形表情包贴纸：整体是圆滚滚的短手短脚小怪物造型，脑袋特别大几乎占身体一半，脖子只比身体略长一点（保持矮胖比例，不要真实长颈鹿的长脖子）；皮肤是奶黄色底色，上面散布不规则的橙棕色长颈鹿斑块；头顶两只很短、顶端带小圆球的长颈鹿角，两侧各有一只向外横伸的叶子形小耳朵，口鼻部是稍浅的奶油色圆润凸起；表情是极度夸张的放声大笑——嘴巴张成一个巨大的横向半月形，宽度几乎横跨整张脸、嘴角上扬到眼睛的高度，口腔内部深红粉色，下方露出一小截圆润的粉舌头，没有尖牙（最多两颗圆钝小牙）；双眼笑成两条向上弯的细黑弧线（^ ^ 形），完全看不见眼珠；脸颊两团圆形粉腮红，眼角挂着两滴笑出来的小泪珠，头微微向后仰，两只小短手举在身体两侧或捧着圆肚子，身后可见一条末端带毛簇的细尾巴；风格为极简扁平2D矢量卡通、粗细均匀的黑色描边、纯色平涂填充、几乎无阴影无渐变，可爱又略显廉价沙雕的聊天软件表情包/贴纸质感；纯白色干净背景，角色占画面约70%，画面中不要任何文字、水印、边框；不要写实动物、不要3D渲染、不要毛发细节、不要复杂背景。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 39.9,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 117,
+      "output": 1434,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1106,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 117,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1434,
+      "reasoning": 1106
+    },
+    "session_config": {
+      "thinkingLevel": "medium"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "medium",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "medium"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:00:12Z",
+    "finished_at": "2026-11-16T17:00:52Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

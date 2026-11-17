@@ -1,0 +1,73 @@
+{
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "vendor": "moonshot",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "图中角色一般被认作 **Oro（奥罗）**，出自 Dingo Pictures 的低成本动画《Dinosaur Adventure》（《恐龙冒险》）。国内也常笼统地叫它“黄色小恐龙”或“斜眼小恐龙”。\n\n它与著名的 **“Yee”梗**同源：真正说出“Yee”的是另一只恐龙 **Peek**，并非图中的 Oro。这张写着“惊鸿一瞥”的图片属于该梗衍生的侧目、偷看类中文表情包。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 37.6,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20082,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 1645,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 21727 / 1048576 tokens (2%)\nSession total: 20082 input, 1645 output",
+      "usage": {
+        "inputTokens": 20082,
+        "outputTokens": 1645
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:46:45Z",
+    "finished_at": "2026-10-25T00:47:23Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi-off/write_prompt.cat__r1.json",
+  "target_sha256": "03595cbcb1cb0fc816e1bac5fa927cbe7dadef591ba1a214076446ea51dc6650",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "3e728f7fd86cf1f2",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "qwen4-max-pi-off",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 0,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 1,
+    "vibe": 2,
+    "identity": 2
+  },
+  "hallucinations": [
+    "Huge white bulging eyes with small black pupils rolled upward and thick raised eyebrows. The meme has eyes squeezed shut into thin arcs.",
+    "Sitting upright with head thrown back. The meme stands hunched forward, doubled over with laughter.",
+    "One paw pointing forward accusingly. The meme has both hands clutching the belly.",
+    "A cartoon tear and yellow sparkle marks around the head, which are not features of the meme."
+  ],
+  "rationale": "The prompt gets the gaping laughing mouth, glossy 3D render, unhinged vibe and recognizable orange tabby identity right. However, it wrongly specifies open bulging eyes, a sitting head-back pose and only one paw on the belly, and it omits the pale belly patch and the no-neck bean body. Its background is pastel yellow rather than white or grey.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 0, \"mouth\": 2, \"body\": 1, \"belly_patch\": 0, \"render\": 2, \"background\": 1, \"vibe\": 2, \"identity\": 2}, \"hallucinations\": [\"Huge white bulging eyes with small black pupils rolled upward and thick raised eyebrows. The meme has eyes squeezed shut into thin arcs.\", \"Sitting upright with head thrown back. The meme stands hunched forward, doubled over with laughter.\", \"One paw pointing forward accusingly. The meme has both hands clutching the belly.\", \"A cartoon tear and yellow sparkle marks around the head, which are not features of the meme.\"], \"rationale\": \"The prompt gets the gaping laughing mouth, glossy 3D render, unhinged vibe and recognizable orange tabby identity right. However, it wrongly specifies open bulging eyes, a sitting head-back pose and only one paw on the belly, and it omits the pale belly patch and the no-neck bean body. Its background is pastel yellow rather than white or grey.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 11.3,
+    "turns": 1,
+    "tokens": {
+      "input": 1872,
+      "cached_input": 0,
+      "cache_write": 1870,
+      "output": 859,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.032148,
+    "tools_used": [],
+    "cost_usd": 0.032148,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1870,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 859,
+      "output_tokens_details": {
+        "thinking_tokens": 485
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1870,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 859,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1870,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1870
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:06:58Z",
+    "finished_at": "2026-11-16T16:07:09Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/deepseek-v4-pro/knowledge_zh__r1.json",
+  "target_sha256": "f3836a9f89f035a9f0c460b1b9b022284b37fa12b741e6a28f66f5e5a0c7cf1a",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "9c9dcb75500ee249",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 1,
+    "xingye_origin": 0,
+    "aliases": 1,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [
+    "将“大笑奶龙”描述为原角色的大笑表情或截图，并断言“奶蛙”得名于嘴巴夸大、脸型变形后像青蛙；参考 notes 中它源于 AI 生成的变异形象，蛙化版本的特征是圆凸眼和绿色眼白。"
+  ],
+  "rationale": "回答正确介绍了奶龙的基本形象，部分涉及衍生形象、别称和张嘴大笑，但没有准确说明其 AI 变异来源及标志性的捧腹姿势。星野起源、军体拳混剪、官方回复定型文、人物特征变体和稀有奶龙标题梗均未覆盖。",
+  "raw": "{\"scores\":{\"base_character\":2,\"ai_variant\":1,\"xingye_origin\":0,\"aliases\":1,\"naiwa\":1,\"laugh_pose\":1,\"junti_quan\":0,\"official_reply\":0,\"trait_variants\":0,\"rarity_titles\":0},\"hallucinations\":[\"将“大笑奶龙”描述为原角色的大笑表情或截图，并断言“奶蛙”得名于嘴巴夸大、脸型变形后像青蛙；参考 notes 中它源于 AI 生成的变异形象，蛙化版本的特征是圆凸眼和绿色眼白。\"],\"rationale\":\"回答正确介绍了奶龙的基本形象，部分涉及衍生形象、别称和张嘴大笑，但没有准确说明其 AI 变异来源及标志性的捧腹姿势。星野起源、军体拳混剪、官方回复定型文、人物特征变体和稀有奶龙标题梗均未覆盖。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719b-632b-7ec3-8fc1-25b38433c57e",
+    "seconds": 28.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13604,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 567,
+      "reasoning_output_tokens": 339
+    },
+    "tokens": {
+      "input": 13604,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 567,
+      "reasoning": 339
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:49:31Z",
+    "finished_at": "2026-10-25T05:49:59Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

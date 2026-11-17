@@ -1,0 +1,119 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi-off/write_prompt_zh.cat__r1.json",
+  "target_sha256": "24d29d8af73e65c7a22702aa3ad6a28b0580ccc2bc0aa445170fa3c4566ea56c",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "81d98a35ab7c3219",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "qwen4-max-pi-off",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 0,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 0,
+    "background": 2,
+    "vibe": 1,
+    "identity": 0
+  },
+  "hallucinations": [
+    "Head tilted back in laughter, contradicting the reference's hunched-forward, doubled-over pose",
+    "Big glossy black oval eyes with white highlights, contradicting eyes squeezed shut into thin arcs",
+    "Oversized egg-shaped head much bigger than a tiny torso, contradicting the bulky bean-shaped body with no distinct neck",
+    "Flat cel-shaded 2D sticker with thick black outlines, contradicting the glossy 3D CG render",
+    "One hand pointing forward as if mocking, contradicting both hands clutching the belly"
+  ],
+  "rationale": "The prompt describes a generic yellow kawaii baby dragon with no cat features, so the target animal is missing entirely. It also contradicts the reference on pose, eyes, rendering style and body shape; only the plain white background and a partial laughing mouth and belly-slap match.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 0, \"mouth\": 1, \"body\": 1, \"belly_patch\": 0, \"render\": 0, \"background\": 2, \"vibe\": 1, \"identity\": 0}, \"hallucinations\": [\"Head tilted back in laughter, contradicting the reference's hunched-forward, doubled-over pose\", \"Big glossy black oval eyes with white highlights, contradicting eyes squeezed shut into thin arcs\", \"Oversized egg-shaped head much bigger than a tiny torso, contradicting the bulky bean-shaped body with no distinct neck\", \"Flat cel-shaded 2D sticker with thick black outlines, contradicting the glossy 3D CG render\", \"One hand pointing forward as if mocking, contradicting both hands clutching the belly\"], \"rationale\": \"The prompt describes a generic yellow kawaii baby dragon with no cat features, so the target animal is missing entirely. It also contradicts the reference on pose, eyes, rendering style and body shape; only the plain white background and a partial laughing mouth and belly-slap match.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 11.5,
+    "turns": 1,
+    "tokens": {
+      "input": 1772,
+      "cached_input": 0,
+      "cache_write": 1770,
+      "output": 792,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.030008,
+    "tools_used": [],
+    "cost_usd": 0.030008,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1770,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 792,
+      "output_tokens_details": {
+        "thinking_tokens": 412
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1770,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 792,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1770,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1770
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:07:09Z",
+    "finished_at": "2026-11-16T16:07:21Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "settings_id": "c5b99b49261f87dd",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "vendor": "google",
+  "item": "recognize_en",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Who is this character, and which internet meme is this image from? Does the meme have other names?",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "This is **KuGo** from the 3D animated series ***ZellyGo*** (created by the South Korean animation studio Dream Factory Studio). \n\nHere are the details regarding the meme:\n\n### 1. The Meme\nThe image comes from a viral reaction video/meme clip commonly referred to as the **\"KuGo Laughing\"** or **\"Yellow Guy Laughing\"** meme. In the original clip, KuGo bursts into uncontrollable, hysterical laughter while clutching his belly and bending over. \n\nOn platforms like TikTok, Instagram Reels, and YouTube Shorts, this video clip is widely used as a reaction template to signify wheezing, uncontrollable laughter, often paired with various contagious laughing audio tracks or wheezing voice-overs.\n\n---\n\n### 2. Other Common Names for the Meme\nBecause many viewers recognize the character from social media clips rather than the original show, the meme goes by several alternative names:\n* **\"Laughing Yellow Guy\"** / **\"Yellow Guy Laughing\"**\n* **\"ZellyGo Laughing Meme\"** (or simply **\"ZellyGo Laugh\"**)\n* **\"Fat Yellow Guy Laughing\"** / **\"Yellow Blob Laughing\"**\n* **\"Yellow Alien / Monster Laughing\"**\n* **\"Belly Laugh Reaction\"**",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 27.6,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 16327,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:44:01Z",
+    "finished_at": "2026-10-25T00:44:29Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

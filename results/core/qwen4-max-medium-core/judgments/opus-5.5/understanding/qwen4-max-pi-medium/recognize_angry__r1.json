@@ -1,0 +1,109 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi-medium/recognize_angry__r1.json",
+  "target_sha256": "67815df9073fe0cd8e3cad026836e35c53e50bc232b67874b4bcbf50c8051bf2",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "0a5bb6752b94c419",
+  "judge_images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "track": "understanding",
+  "model": "qwen4-max-pi-medium",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0
+  },
+  "hallucinations": [],
+  "rationale": "The model describes the image accurately and explains the '红温/切换愤怒模式' usage, but it says the figure does not match 奶龙. It never identifies the 大笑奶龙/变异奶龙/奶蛙 meme family, its yellow-dragon base character, or its AI-generated nature. It labels its character identification as uncertain, so this counts as missing content rather than a hallucination.",
+  "raw": "{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"ai_variant\": 0}, \"hallucinations\": [], \"rationale\": \"The model describes the image accurately and explains the '红温/切换愤怒模式' usage, but it says the figure does not match 奶龙. It never identifies the 大笑奶龙/变异奶龙/奶蛙 meme family, its yellow-dragon base character, or its AI-generated nature. It labels its character identification as uncertain, so this counts as missing content rather than a hallucination.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 8.5,
+    "turns": 1,
+    "tokens": {
+      "input": 2144,
+      "cached_input": 0,
+      "cache_write": 2142,
+      "output": 446,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.026063999999999997,
+    "tools_used": [],
+    "cost_usd": 0.026063999999999997,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2142,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 446,
+      "output_tokens_details": {
+        "thinking_tokens": 265
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2142,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 446,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2142,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2142
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:16:06Z",
+    "finished_at": "2026-11-16T17:16:14Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

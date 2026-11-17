@@ -1,0 +1,81 @@
+{
+  "settings_id": "7e9b52a50fc5ff45",
+  "track": "understanding",
+  "model": "egg-alpha",
+  "vendor": "undisclosed",
+  "item": "write_prompt_zh.giraffe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出长颈鹿版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "方形中文表情包贴纸风格，纯白背景，粗黑描边，扁平明亮配色，Q版可爱搞笑。画面中央是一只“长颈鹿版黄色圆润小龙”混合角色：全身奶黄色，身体矮胖圆滚，脖子弹性地拉长成长颈鹿的长脖子，脖子上有浅棕色不规则长颈鹿斑点，头顶两只小长颈鹿角和圆耳朵，保留小恐龙般的短手短脚、小尾巴和圆肚皮。角色正在夸张大笑，头微微后仰，眼睛眯成两条弯月线，脸颊鼓起，嘴巴张得巨大像青蛙一样横向咧开，露出粉色口腔、舌头和几颗小白牙，表情极其魔性、憨憨、爆笑；两只小手举在脸旁或捂着肚子，姿态像在笑到停不下来。整体像高质量网络表情包/聊天贴纸，居中构图，干净轮廓，轻微阴影，可爱、滑稽、传染性强；不要写实，不要复杂背景，不要文字，不要水印。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "client": "pi 1.5.0",
+    "seconds": 25.7,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 118,
+      "output": 1154,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 948,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 118,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1154,
+      "reasoning": 948
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "tokenrhythm/egg-alpha",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "tokenrhythm/egg-alpha",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-04T04:40:18Z",
+    "finished_at": "2026-11-04T04:40:44Z",
+    "revision": "44479d0",
+    "nwb_version": "0.1.0"
+  }
+}

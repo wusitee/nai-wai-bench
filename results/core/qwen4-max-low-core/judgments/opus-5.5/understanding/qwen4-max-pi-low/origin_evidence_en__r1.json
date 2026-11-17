@@ -1,0 +1,109 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi-low/origin_evidence_en__r1.json",
+  "target_sha256": "7eb45c2ef70c528a9c804cf51a39c40343fa2f5e4e6183740725d96ea2f12224",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "64caab11c1ca2354",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "qwen4-max-pi-low",
+  "scores": {
+    "origin_xingye_evidence": 0,
+    "origin_followup": 0,
+    "origin_chronology": 0,
+    "origin_prompt_limits": 0,
+    "origin_visual_distinction": 0,
+    "origin_lost_media_scope": 0
+  },
+  "hallucinations": [],
+  "rationale": "The model declined to answer and said it had no knowledge of 奶蛙. It named no platform, creator, research revision, chronology, visual distinction or source-specific evidential limits, and its generic remarks on lost media, Elsagate and prompt provenance are not tied to the case. It also invented no specifics, and its hedged mention of 奶龙 does not contradict the reference notes.",
+  "raw": "{\"scores\": {\"origin_xingye_evidence\": 0, \"origin_followup\": 0, \"origin_chronology\": 0, \"origin_prompt_limits\": 0, \"origin_visual_distinction\": 0, \"origin_lost_media_scope\": 0}, \"hallucinations\": [], \"rationale\": \"The model declined to answer and said it had no knowledge of 奶蛙. It named no platform, creator, research revision, chronology, visual distinction or source-specific evidential limits, and its generic remarks on lost media, Elsagate and prompt provenance are not tied to the case. It also invented no specifics, and its hedged mention of 奶龙 does not contradict the reference notes.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 8.0,
+    "turns": 1,
+    "tokens": {
+      "input": 4527,
+      "cached_input": 0,
+      "cache_write": 4525,
+      "output": 431,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.04482800000000001,
+    "tools_used": [],
+    "cost_usd": 0.04482800000000001,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 4525,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 431,
+      "output_tokens_details": {
+        "thinking_tokens": 204
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 4525,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 431,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 4525,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 4525
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:45:41Z",
+    "finished_at": "2026-11-16T16:45:49Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

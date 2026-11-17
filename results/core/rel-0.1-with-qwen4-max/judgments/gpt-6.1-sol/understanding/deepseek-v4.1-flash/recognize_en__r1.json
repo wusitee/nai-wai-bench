@@ -1,0 +1,90 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/deepseek-v4.1-flash/recognize_en__r1.json",
+  "target_sha256": "8370806c34124d404da31fbd0dfac46eb833a5c5059455b418be92b32c91a845",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "ae139857fe4878e6",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "The pictured character is Hariyama, the Pokémon.",
+    "The image belongs to a meme called “Hariyama Laughing,” also known as “Laughing Hariyama” or “Sumo Laughing.”"
+  ],
+  "rationale": "The answer misidentifies the character and meme, covering none of the checklist items. The image depicts the unofficial AI-generated 大笑奶龙 variant of 奶龙, also called 变异奶龙 or 奶蛙.",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"ai_variant\":0,\"aliases\":0,\"naiwa\":0},\"hallucinations\":[\"The pictured character is Hariyama, the Pokémon.\",\"The image belongs to a meme called “Hariyama Laughing,” also known as “Laughing Hariyama” or “Sumo Laughing.”\"],\"rationale\":\"The answer misidentifies the character and meme, covering none of the checklist items. The image depicts the unofficial AI-generated 大笑奶龙 variant of 奶龙, also called 变异奶龙 or 奶蛙.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719c-43f1-7d82-a504-cacace6ea6b2",
+    "seconds": 9.5,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13381,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 162,
+      "reasoning_output_tokens": 28
+    },
+    "tokens": {
+      "input": 13381,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 162,
+      "reasoning": 28
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:50:28Z",
+    "finished_at": "2026-10-25T05:50:38Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

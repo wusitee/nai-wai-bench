@@ -1,0 +1,84 @@
+{
+  "settings_id": "c7835e1c7781edc5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-medium",
+  "vendor": "alibaba",
+  "item": "recognize_variant",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。",
+  "images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "answer": "**我的判断：它模仿的是中文网络里最常见的「熊猫头」表情包中的“捧腹大笑／笑到肚子疼”那一类（也就是配文“哈哈哈哈哈哈”“2333”“笑死我了”“笑出猪叫”的那种狂笑表情），姿态上同时也对应 😂／🤣 这两个“笑哭／笑到打滚”的 emoji。**\n\n判断依据主要有三点：\n\n1. **形象载体是“拟人化熊猫”**。中文互联网最有辨识度的表情包体系就是“熊猫头”——用黑白熊猫的身体/头部轮廓承载夸张的人类表情。这张图虽然是 3D 渲染而非经典的黑白线稿，但“熊猫＋人脸式夸张表情”的组合本身就是熊猫头系列的标志性套路。\n\n2. **表情细节高度对应“狂笑”模板**：双眼笑成两条缝完全闭合、嘴巴张到极大、上下牙齿和舌头都露出来、头往后仰。这正是熊猫头里套用金馆长式咧嘴大笑那张脸的核心特征，而不是微笑、坏笑或冷笑（那些通常是嘴角单侧上扬、眼睛半睁）。\n\n3. **肢体动作是“捧腹”的定格**：双手交叠按在圆鼓鼓的肚子上、身体前倾弯腰、两腿微屈。这是“笑到肚子疼／笑到直不起腰”的专属动作语言，普通“开心”表情不会带这个手势；它和 🤣（ROFL）想表达的“笑得站不住”是同一套身体符号。\n\n**需要说明的不确定性**：这张图是萌系 3D 风格、没有任何配文，而熊猫头梗的“梗味”很大程度来自黑白粗糙画风＋上方黑体大字。所以我更倾向于说它是**对“熊猫头捧腹大笑”这一梗的 3D 化再演绎／致敬**，而不是某张具体原表情包的直接复刻；如果你手上有原始出处或配文，判断可能会更精确（比如它也可能是某个“笑到打滚”系列的商业表情包形象）。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 26.8,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 714,
+      "output": 909,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 475,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 714,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 909,
+      "reasoning": 475
+    },
+    "session_config": {
+      "thinkingLevel": "medium"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "medium",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "medium"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:02:28Z",
+    "finished_at": "2026-11-16T17:02:55Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

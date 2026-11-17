@@ -1,0 +1,111 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi/recognize_variant__r1.json",
+  "target_sha256": "c764c1a6995a0fc83db1ad6e02e8181ce3c442e307101be934e8ad76bc8a17a1",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "7e3d801113f8747d",
+  "judge_images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "track": "understanding",
+  "model": "qwen4-max-pi",
+  "scores": {
+    "identifies_meme": 0,
+    "laugh_pose": 1,
+    "base_character": 0
+  },
+  "hallucinations": [
+    "Confidently claims the image parodies the 熊猫头 (panda-head) sticker meme's belly-clutching laugh variant, when it actually parodies the 大笑奶龙 / 奶蛙 meme."
+  ],
+  "rationale": "The model misidentifies the meme as 熊猫头 and never mentions 大笑奶龙, 奶蛙 or the yellow Nailong character. It does accurately describe the hunched, belly-clutching, eyes-shut, mouth-agape laughing pose but does not link it to 大笑奶龙, so laugh_pose gets partial credit.",
+  "raw": "{\"scores\": {\"identifies_meme\": 0, \"laugh_pose\": 1, \"base_character\": 0}, \"hallucinations\": [\"Confidently claims the image parodies the 熊猫头 (panda-head) sticker meme's belly-clutching laugh variant, when it actually parodies the 大笑奶龙 / 奶蛙 meme.\"], \"rationale\": \"The model misidentifies the meme as 熊猫头 and never mentions 大笑奶龙, 奶蛙 or the yellow Nailong character. It does accurately describe the hunched, belly-clutching, eyes-shut, mouth-agape laughing pose but does not link it to 大笑奶龙, so laugh_pose gets partial credit.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 14.7,
+    "turns": 1,
+    "tokens": {
+      "input": 3120,
+      "cached_input": 0,
+      "cache_write": 3118,
+      "output": 700,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.038952,
+    "tools_used": [],
+    "cost_usd": 0.038952,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3118,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 700,
+      "output_tokens_details": {
+        "thinking_tokens": 457
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3118,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 700,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3118,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3118
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T10:14:04Z",
+    "finished_at": "2026-11-16T10:14:19Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

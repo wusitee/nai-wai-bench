@@ -1,0 +1,81 @@
+{
+  "settings_id": "1f8854885f90fc43",
+  "track": "understanding",
+  "model": "qwen4-max-pi-minimal",
+  "vendor": "alibaba",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "一张正方形构图的 2D 扁平卡通表情包贴纸，纯白色背景，主体居中、全身入镜、正面视角。\n\n角色：一只被极度夸张化、圆滚滚的黄色小猫，整体像一颗上宽下窄的鸡蛋／梨形软糖——脑袋巨大，占全身高度约六成，头与身体直接相连、没有脖子；身体小而胖，四肢是短短的小圆柱状肉爪，没有明显关节；身后一条细长猫尾向上弯成问号形。头顶两只圆角三角形猫耳，耳内是粉色；脸两侧各三根细直胡须；鼻子是很小的粉色倒三角。全身光滑无毛发笔触，主色为温暖的奶油黄／浅蛋黄，肚子有一块更浅的米黄色椭圆斑，脸颊两侧各一枚椭圆形粉红腮红。\n\n表情与动作：正在毫无形象地爆笑，笑得停不下来。头向后仰约 20 度，嘴巴张到极限，占脸部下半部分的一大半，呈夸张的大圆弧状开口，口腔内是深粉色，可见一条圆润的粉色舌头，只露出两颗小小的白色门牙；双眼笑成两条向上弯的黑色细弧线（弯弯眼、完全闭合），眼角挤出两颗晶亮的泪珠并向外飞溅；一只前爪高高举起挥舞，另一只前爪捂在肚子上，两只后脚微微离地，像是笑到跳起来。\n\n风格：粗而均匀的深棕色描边，色块平涂加少量简单硬边阴影，无渐变、无写实光影、无材质纹理；造型憨傻、贱萌、无厘头，喜剧张力拉满。头部周围点缀几滴汗珠、放射状笑震短线和两三个小星形符号，强调“笑到失控”的动感。\n\n画面干净，无边框、无水印、无任何文字或字母。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 34.2,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 115,
+      "output": 1144,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 757,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 115,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1144,
+      "reasoning": 757
+    },
+    "session_config": {
+      "thinkingLevel": "minimal"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "minimal",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "minimal"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:14:20Z",
+    "finished_at": "2026-11-16T16:14:54Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

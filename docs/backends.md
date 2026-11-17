@@ -264,6 +264,13 @@ With `thinkingFormat = "openai"`, pi sends its thinking level as `reasoning_effo
 applies. The router rate-limits bursts with HTTP 429 (`MODEL_CALL_FAILED`, with `retryAfterSeconds`), so
 collect with `--jobs 1`.
 
+The label "likely Qwen 4" comes from token counts, not from the router. On the same pi prompts, egg-alpha's
+input token counts differ from Qwen4-Max's and qwen4-max-preview's by 1–2 tokens on average. Qwen 3.8 and 3.7
+models differ by about 10 tokens, and GLM-5.3-Flash by about 21. On the 24 Nai-hub images, comparing each
+model's smallest count over three repetitions, 23 of egg-alpha's counts are within two tokens of Qwen4-Max's.
+Matching counts suggest the same tokenizer and image preprocessing, not the same model or checkpoint, so
+`vendor` stays `undisclosed`.
+
 ### Zhipu GLM (`glm-5.3-flash-pi`)
 
 `glm-5.3-flash-pi` runs GLM-5.3-Flash through pi's built-in `zai-coding-cn` provider (the open.bigmodel.cn
@@ -273,6 +280,44 @@ provider's catalog GLM-5.3-Flash is the only GLM-5.3 model with image input; pi 
 finish; the entry allows 900 seconds per call, and timed-out samples are retried on the next run.
 The entry's token prices are estimates from pi-ai 1.5.0's model catalog, rather than independently
 verified official rates; Coding Plan subscriptions are not billed per token.
+
+### Qwen Token Plan (`qwen4-max-pi`)
+
+`qwen4-max-pi` runs Qwen4-Max through the Qwen Token Plan individual edition. pi 1.5.0's built-in
+`qwen-token-plan-individual` provider does not list `qwen4-max` and points at the international endpoint,
+which rejects keys issued in mainland China, so `~/.pi-nwb/models.json` declares a provider for the
+CN endpoint:
+
+```json
+{
+  "providers": {
+    "qwen-token-plan-cn-individual": {
+      "baseUrl": "https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
+      "api": "openai-completions",
+      "apiKey": "$QWEN_TOKEN_PLAN_API_KEY",
+      "compat": { "thinkingFormat": "qwen", "supportsReasoningEffort": true, "supportsStrictMode": true,
+                  "supportsDeveloperRole": false, "supportsStore": false },
+      "models": [{ "id": "qwen4-max", "reasoning": true, "input": ["text", "image"],
+                   "contextWindow": 1000000, "maxTokens": 131072,
+                   "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+                   "thinkingLevelMap": { "off": "none", "minimal": "minimal", "low": "low", "medium": "medium",
+                                         "high": "high", "xhigh": "xhigh", "max": "max" } }]
+    }
+  }
+}
+```
+
+The endpoint accepts `reasoning_effort` values `none`, `off`, `minimal`, `low`, `medium`, `high`, `xhigh`, and
+`max`, but `qwen4-max` has three thinking levels, `low`, `high`, and `xhigh`; Qwen's [model
+notes](https://docs.qwencloud.com/developer-guides/getting-started/latest-model) map `minimal` to `low`,
+`medium` to `high`, and `max` to `xhigh`, and `none`/`off` turn thinking off. `qwen4-max-pi` records pi's
+requested `max`, which runs at `xhigh`; `qwen4-max-pi-high` is the same model at the standard `high`. The
+`qwen4-max-pi-{off,minimal,low,medium,xhigh}` entries cover the remaining efforts; their saved runs
+(`qwen4-max-<effort>-core`, `qwen4-max-<effort>-naihub`) are archived outside the release, and the alias pairs
+serve as repeat runs of one setting. Token Plan usage is billed in subscription Credits, not per token; the
+entry's `price` is Alibaba Cloud's pay-as-you-go list price for `qwen4-max` in the China (Beijing) region, the
+same for thinking and non-thinking modes. The plan limits concurrent agents by tier (1–2 on Lite, 2–3 on
+Essential), so collect with `--jobs 2` or fewer.
 
 ## ACP agents (`backend = "acp"`)
 

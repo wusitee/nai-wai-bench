@@ -1,0 +1,84 @@
+{
+  "settings_id": "cbf7db799b4cb698",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-high",
+  "vendor": "alibaba",
+  "item": "recognize_facepalm",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "answer": "我不能有把握地认出它，所以先说清楚我确定的和不确定的部分：\n\n**画面本身**：一个 3D 渲染的黄色、没有明显脖子和五官轮廓的\"软团子\"生物，绿色虹膜的大圆眼、一条细线似的笑嘴、腹部有一块浅色斑，一只手（颜色偏灰褐，和身体不太一致，可能是拼接/修图或 AI 生成的痕迹）抬到额头旁，做出\"挠头 / 扶额 / 敬礼 / 无语思考\"的动作。这类图通常被当作\"尴尬、无语、我裂开了、让我想想\"的反应表情包使用。\n\n**关于角色和梗**：我没法把它确定地对应到某个具体 IP。我脑子里最接近的候选是《The Amazing Digital Circus》(神奇数字马戏团) 第二集里的软糖鳄鱼 **Gummigoo**——同样是黄色软糖质感 + 绿眼睛，网上有大量他的\"存在主义危机 / 迷茫\"表情二创；但这张图没有鳄鱼的长吻，所以我不敢下结论。它也很可能只是网络上流传的通用 3D 黄色团子（或 AI 生成图），并不属于某个特定的梗。\n\n如果你能补充一点线索（比如是在哪个平台/什么语境下看到的、有没有配套文字、是否见过同一角色的其他图），我可以帮你更靠谱地判断，而不是硬猜一个名字给你。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 67.5,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 326,
+      "output": 2371,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 2074,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 326,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2371,
+      "reasoning": 2074
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T15:01:50Z",
+    "finished_at": "2026-11-16T15:02:57Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}
