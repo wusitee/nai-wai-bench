@@ -1,0 +1,76 @@
+{
+  "html_sha256": "d633f6b0c7a0e76cd310b0c669f3609424d0d37c5036c43c27d34da46fb541a3",
+  "harness": "fee9bd636b661bc1",
+  "kind": "3d-s1",
+  "gates": [],
+  "errors": [],
+  "blocked": [],
+  "forbidden": [],
+  "elements": [],
+  "timing": {
+    "declarative": false,
+    "scripted": false
+  },
+  "frames": [
+    {
+      "file": "frame_00.webp",
+      "t": 0
+    }
+  ],
+  "views": [
+    {
+      "file": "view_side.webp",
+      "view": "side",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_back.webp",
+      "view": "back",
+      "t": 0,
+      "hidden": [
+        "painted-plaster",
+        "wooden-backing",
+        "slate-green-writing-surface"
+      ]
+    },
+    {
+      "file": "view_three_quarter.webp",
+      "view": "three_quarter",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_top.webp",
+      "view": "top",
+      "t": 0,
+      "hidden": []
+    }
+  ],
+  "scene": {
+    "characters": [
+      {
+        "name": "character-left-writing",
+        "meshes": 33,
+        "width": 141.03830833435057,
+        "height": 163.57523363150818,
+        "depth": 176.34443285549366,
+        "ratio": 1.2503300340035637
+      },
+      {
+        "name": "character-right-reaching",
+        "meshes": 27,
+        "width": 162.1319522099357,
+        "height": 160.37115714424047,
+        "depth": 141.28304462084486,
+        "ratio": 0.8714077804842889
+      }
+    ],
+    "textures": 4
+  },
+  "mode": "render(t)",
+  "checks": {
+    "determinism_diff": 0.0
+  },
+  "seconds": 1.9
+}

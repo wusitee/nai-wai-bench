@@ -1,0 +1,97 @@
+{
+  "html_sha256": "e7fbfd19969605736dba0c415a08f1da0084dc98486ab011bccaeab327913a7f",
+  "harness": "fee9bd636b661bc1",
+  "kind": "3d-s2",
+  "gates": [],
+  "errors": [],
+  "blocked": [],
+  "forbidden": [],
+  "elements": [],
+  "timing": {
+    "declarative": false,
+    "scripted": false
+  },
+  "frames": [
+    {
+      "file": "frame_00.webp",
+      "t": 0
+    },
+    {
+      "file": "frame_01.webp",
+      "t": 800
+    },
+    {
+      "file": "frame_02.webp",
+      "t": 1530
+    },
+    {
+      "file": "frame_03.webp",
+      "t": 2330
+    },
+    {
+      "file": "frame_04.webp",
+      "t": 3130
+    },
+    {
+      "file": "frame_05.webp",
+      "t": 3930
+    },
+    {
+      "file": "frame_06.webp",
+      "t": 4670
+    },
+    {
+      "file": "frame_07.webp",
+      "t": 5470
+    }
+  ],
+  "views": [
+    {
+      "file": "view_side.webp",
+      "view": "side",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_back.webp",
+      "view": "back",
+      "t": 0,
+      "hidden": [
+        "studio backdrop"
+      ]
+    },
+    {
+      "file": "view_three_quarter.webp",
+      "view": "three_quarter",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_top.webp",
+      "view": "top",
+      "t": 0,
+      "hidden": []
+    }
+  ],
+  "scene": {
+    "characters": [
+      {
+        "name": "golden-pear-character",
+        "meshes": 24,
+        "width": 146.46795270371328,
+        "height": 300,
+        "depth": 94.34400177001953,
+        "ratio": 0.6441272648964097
+      }
+    ],
+    "textures": 0
+  },
+  "mode": "render(t)",
+  "preview": "preview.webp",
+  "checks": {
+    "determinism_diff": 0.0,
+    "loop_diff": 0.0,
+    "motion_diff": 0.5237528344671202
+  },
+  "seconds": 6.3
+}
