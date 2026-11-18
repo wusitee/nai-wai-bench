@@ -1,0 +1,74 @@
+{
+  "html_sha256": "7d090c19a7c01fc3c50ee10cb0c08cf1bc65b381fdd590b0992a41a2fb355b3f",
+  "harness": "fee9bd636b661bc1",
+  "kind": "3d-s1",
+  "gates": [],
+  "errors": [],
+  "blocked": [],
+  "forbidden": [],
+  "elements": [],
+  "timing": {
+    "declarative": false,
+    "scripted": false
+  },
+  "frames": [
+    {
+      "file": "frame_00.webp",
+      "t": 0
+    }
+  ],
+  "views": [
+    {
+      "file": "view_side.webp",
+      "view": "side",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_back.webp",
+      "view": "back",
+      "t": 0,
+      "hidden": [
+        "plaster wall and chalkboard"
+      ]
+    },
+    {
+      "file": "view_three_quarter.webp",
+      "view": "three_quarter",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_top.webp",
+      "view": "top",
+      "t": 0,
+      "hidden": []
+    }
+  ],
+  "scene": {
+    "characters": [
+      {
+        "name": "character-left-writing",
+        "meshes": 32,
+        "width": 126.14856281677409,
+        "height": 163.62740166026038,
+        "depth": 134.4422216512097,
+        "ratio": 1.0657451710050938
+      },
+      {
+        "name": "character-right-leaning",
+        "meshes": 26,
+        "width": 161.38350296020508,
+        "height": 159.78251140142504,
+        "depth": 122.53005976328814,
+        "ratio": 0.759247739178783
+      }
+    ],
+    "textures": 1
+  },
+  "mode": "render(t)",
+  "checks": {
+    "determinism_diff": 0.0
+  },
+  "seconds": 2.0
+}

@@ -1,0 +1,1020 @@
+{
+  "corpus": "frontend-v1",
+  "experimental": true,
+  "index_included": false,
+  "review": "human",
+  "rows": [
+    {
+      "model": "gpt-6.2-sol",
+      "kind": "2d-s1",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol",
+      "kind": "2d-s2",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol",
+      "kind": "3d-s1",
+      "samples": 4,
+      "passed": 3,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol",
+      "kind": "3d-s2",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol",
+      "kind": "2d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol",
+      "kind": "3d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol-low",
+      "kind": "2d-s1",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol-low",
+      "kind": "2d-s2",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol-low",
+      "kind": "3d-s1",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol-low",
+      "kind": "3d-s2",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol-low",
+      "kind": "2d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol-low",
+      "kind": "3d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol-medium",
+      "kind": "2d-s1",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol-medium",
+      "kind": "2d-s2",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol-medium",
+      "kind": "3d-s1",
+      "samples": 4,
+      "passed": 2,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol-medium",
+      "kind": "3d-s2",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol-medium",
+      "kind": "2d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol-medium",
+      "kind": "3d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol-xhigh",
+      "kind": "2d-s1",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol-xhigh",
+      "kind": "2d-s2",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol-xhigh",
+      "kind": "3d-s1",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol-xhigh",
+      "kind": "3d-s2",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol-xhigh",
+      "kind": "2d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-sol-xhigh",
+      "kind": "3d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    }
+  ],
+  "samples": [
+    {
+      "sample": "frontend/gpt-6.2-sol/001/2d-s1__r1.json",
+      "model": "gpt-6.2-sol",
+      "task": "001",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol/001/2d-s2__r1.json",
+      "model": "gpt-6.2-sol",
+      "task": "001",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol/001/3d-s1__r1.json",
+      "model": "gpt-6.2-sol",
+      "task": "001",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol/001/3d-s2__r1.json",
+      "model": "gpt-6.2-sol",
+      "task": "001",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol/004/2d-s1__r1.json",
+      "model": "gpt-6.2-sol",
+      "task": "004",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol/004/2d-s2__r1.json",
+      "model": "gpt-6.2-sol",
+      "task": "004",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol/004/3d-s1__r1.json",
+      "model": "gpt-6.2-sol",
+      "task": "004",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol/004/3d-s2__r1.json",
+      "model": "gpt-6.2-sol",
+      "task": "004",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol/007/2d-s1__r1.json",
+      "model": "gpt-6.2-sol",
+      "task": "007",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol/007/2d-s2__r1.json",
+      "model": "gpt-6.2-sol",
+      "task": "007",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol/007/3d-s1__r1.json",
+      "model": "gpt-6.2-sol",
+      "task": "007",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol/007/3d-s2__r1.json",
+      "model": "gpt-6.2-sol",
+      "task": "007",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol/008/2d-s1__r1.json",
+      "model": "gpt-6.2-sol",
+      "task": "008",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol/008/2d-s2__r1.json",
+      "model": "gpt-6.2-sol",
+      "task": "008",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol/008/3d-s1__r1.json",
+      "model": "gpt-6.2-sol",
+      "task": "008",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "window.nwb.ready never became true",
+        "page errors: uncaught: Unary operator used immediately before exponentiation expression. Parenthesis must be used to disambiguate operator precedence"
+      ]
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol/008/3d-s2__r1.json",
+      "model": "gpt-6.2-sol",
+      "task": "008",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol/mem/2d-mem__r1.json",
+      "model": "gpt-6.2-sol",
+      "task": "mem",
+      "kind": "2d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol/mem/3d-mem__r1.json",
+      "model": "gpt-6.2-sol",
+      "task": "mem",
+      "kind": "3d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-low/001/2d-s1__r1.json",
+      "model": "gpt-6.2-sol-low",
+      "task": "001",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-low/001/2d-s2__r1.json",
+      "model": "gpt-6.2-sol-low",
+      "task": "001",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-low/001/3d-s1__r1.json",
+      "model": "gpt-6.2-sol-low",
+      "task": "001",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-low/001/3d-s2__r1.json",
+      "model": "gpt-6.2-sol-low",
+      "task": "001",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-low/004/2d-s1__r1.json",
+      "model": "gpt-6.2-sol-low",
+      "task": "004",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-low/004/2d-s2__r1.json",
+      "model": "gpt-6.2-sol-low",
+      "task": "004",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-low/004/3d-s1__r1.json",
+      "model": "gpt-6.2-sol-low",
+      "task": "004",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-low/004/3d-s2__r1.json",
+      "model": "gpt-6.2-sol-low",
+      "task": "004",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-low/007/2d-s1__r1.json",
+      "model": "gpt-6.2-sol-low",
+      "task": "007",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-low/007/2d-s2__r1.json",
+      "model": "gpt-6.2-sol-low",
+      "task": "007",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-low/007/3d-s1__r1.json",
+      "model": "gpt-6.2-sol-low",
+      "task": "007",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-low/007/3d-s2__r1.json",
+      "model": "gpt-6.2-sol-low",
+      "task": "007",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-low/008/2d-s1__r1.json",
+      "model": "gpt-6.2-sol-low",
+      "task": "008",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-low/008/2d-s2__r1.json",
+      "model": "gpt-6.2-sol-low",
+      "task": "008",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-low/008/3d-s1__r1.json",
+      "model": "gpt-6.2-sol-low",
+      "task": "008",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-low/008/3d-s2__r1.json",
+      "model": "gpt-6.2-sol-low",
+      "task": "008",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-low/mem/2d-mem__r1.json",
+      "model": "gpt-6.2-sol-low",
+      "task": "mem",
+      "kind": "2d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-low/mem/3d-mem__r1.json",
+      "model": "gpt-6.2-sol-low",
+      "task": "mem",
+      "kind": "3d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-medium/001/2d-s1__r1.json",
+      "model": "gpt-6.2-sol-medium",
+      "task": "001",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-medium/001/2d-s2__r1.json",
+      "model": "gpt-6.2-sol-medium",
+      "task": "001",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-medium/001/3d-s1__r1.json",
+      "model": "gpt-6.2-sol-medium",
+      "task": "001",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "page errors: console.error: THREE.BufferGeometry.computeBoundingSphere(): Computed radius is NaN. The \"position\" attribute is likely to have NaN values. BufferGeometry"
+      ]
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-medium/001/3d-s2__r1.json",
+      "model": "gpt-6.2-sol-medium",
+      "task": "001",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-medium/004/2d-s1__r1.json",
+      "model": "gpt-6.2-sol-medium",
+      "task": "004",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-medium/004/2d-s2__r1.json",
+      "model": "gpt-6.2-sol-medium",
+      "task": "004",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-medium/004/3d-s1__r1.json",
+      "model": "gpt-6.2-sol-medium",
+      "task": "004",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-medium/004/3d-s2__r1.json",
+      "model": "gpt-6.2-sol-medium",
+      "task": "004",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-medium/007/2d-s1__r1.json",
+      "model": "gpt-6.2-sol-medium",
+      "task": "007",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-medium/007/2d-s2__r1.json",
+      "model": "gpt-6.2-sol-medium",
+      "task": "007",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-medium/007/3d-s1__r1.json",
+      "model": "gpt-6.2-sol-medium",
+      "task": "007",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-medium/007/3d-s2__r1.json",
+      "model": "gpt-6.2-sol-medium",
+      "task": "007",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-medium/008/2d-s1__r1.json",
+      "model": "gpt-6.2-sol-medium",
+      "task": "008",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-medium/008/2d-s2__r1.json",
+      "model": "gpt-6.2-sol-medium",
+      "task": "008",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-medium/008/3d-s1__r1.json",
+      "model": "gpt-6.2-sol-medium",
+      "task": "008",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "window.nwb.ready never became true",
+        "page errors: uncaught: Unary operator used immediately before exponentiation expression. Parenthesis must be used to disambiguate operator precedence"
+      ]
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-medium/008/3d-s2__r1.json",
+      "model": "gpt-6.2-sol-medium",
+      "task": "008",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-medium/mem/2d-mem__r1.json",
+      "model": "gpt-6.2-sol-medium",
+      "task": "mem",
+      "kind": "2d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-medium/mem/3d-mem__r1.json",
+      "model": "gpt-6.2-sol-medium",
+      "task": "mem",
+      "kind": "3d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-xhigh/001/2d-s1__r1.json",
+      "model": "gpt-6.2-sol-xhigh",
+      "task": "001",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-xhigh/001/2d-s2__r1.json",
+      "model": "gpt-6.2-sol-xhigh",
+      "task": "001",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-xhigh/001/3d-s1__r1.json",
+      "model": "gpt-6.2-sol-xhigh",
+      "task": "001",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-xhigh/001/3d-s2__r1.json",
+      "model": "gpt-6.2-sol-xhigh",
+      "task": "001",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-xhigh/004/2d-s1__r1.json",
+      "model": "gpt-6.2-sol-xhigh",
+      "task": "004",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-xhigh/004/2d-s2__r1.json",
+      "model": "gpt-6.2-sol-xhigh",
+      "task": "004",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-xhigh/004/3d-s1__r1.json",
+      "model": "gpt-6.2-sol-xhigh",
+      "task": "004",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-xhigh/004/3d-s2__r1.json",
+      "model": "gpt-6.2-sol-xhigh",
+      "task": "004",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-xhigh/007/2d-s1__r1.json",
+      "model": "gpt-6.2-sol-xhigh",
+      "task": "007",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-xhigh/007/2d-s2__r1.json",
+      "model": "gpt-6.2-sol-xhigh",
+      "task": "007",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-xhigh/007/3d-s1__r1.json",
+      "model": "gpt-6.2-sol-xhigh",
+      "task": "007",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-xhigh/007/3d-s2__r1.json",
+      "model": "gpt-6.2-sol-xhigh",
+      "task": "007",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-xhigh/008/2d-s1__r1.json",
+      "model": "gpt-6.2-sol-xhigh",
+      "task": "008",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-xhigh/008/2d-s2__r1.json",
+      "model": "gpt-6.2-sol-xhigh",
+      "task": "008",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-xhigh/008/3d-s1__r1.json",
+      "model": "gpt-6.2-sol-xhigh",
+      "task": "008",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-xhigh/008/3d-s2__r1.json",
+      "model": "gpt-6.2-sol-xhigh",
+      "task": "008",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-xhigh/mem/2d-mem__r1.json",
+      "model": "gpt-6.2-sol-xhigh",
+      "task": "mem",
+      "kind": "2d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-sol-xhigh/mem/3d-mem__r1.json",
+      "model": "gpt-6.2-sol-xhigh",
+      "task": "mem",
+      "kind": "3d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    }
+  ],
+  "run": "gpt-6.2-sol-frontend",
+  "harness": "fee9bd636b661bc1",
+  "labels": {
+    "gpt-6.2-sol": "GPT-6.2-Sol (Codex) (high)",
+    "gpt-6.2-sol-low": "GPT-6.2-Sol (Codex) (low)",
+    "gpt-6.2-sol-medium": "GPT-6.2-Sol (Codex) (medium)",
+    "gpt-6.2-sol-xhigh": "GPT-6.2-Sol (Codex) (xhigh)"
+  },
+  "tasks": {
+    "001": {
+      "title": "Two characters at a school desk, one rubbing the other's belly",
+      "width": 240,
+      "height": 242,
+      "duration_ms": 1500,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.webp"
+        },
+        {
+          "t": 200,
+          "file": "frame_01.webp"
+        },
+        {
+          "t": 400,
+          "file": "frame_02.webp"
+        },
+        {
+          "t": 600,
+          "file": "frame_03.webp"
+        },
+        {
+          "t": 800,
+          "file": "frame_04.webp"
+        },
+        {
+          "t": 1000,
+          "file": "frame_05.webp"
+        },
+        {
+          "t": 1200,
+          "file": "frame_06.webp"
+        },
+        {
+          "t": 1400,
+          "file": "frame_07.webp"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "004": {
+      "title": "Front-facing character pumping both fists",
+      "width": 244,
+      "height": 240,
+      "duration_ms": 1200,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.webp"
+        },
+        {
+          "t": 160,
+          "file": "frame_01.webp"
+        },
+        {
+          "t": 340,
+          "file": "frame_02.webp"
+        },
+        {
+          "t": 500,
+          "file": "frame_03.webp"
+        },
+        {
+          "t": 680,
+          "file": "frame_04.webp"
+        },
+        {
+          "t": 840,
+          "file": "frame_05.webp"
+        },
+        {
+          "t": 1020,
+          "file": "frame_06.webp"
+        },
+        {
+          "t": 1180,
+          "file": "frame_07.webp"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "007": {
+      "title": "Full-body character dancing and turning sideways",
+      "width": 240,
+      "height": 294,
+      "duration_ms": 5540,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.png"
+        },
+        {
+          "t": 800,
+          "file": "frame_01.png"
+        },
+        {
+          "t": 1530,
+          "file": "frame_02.png"
+        },
+        {
+          "t": 2330,
+          "file": "frame_03.png"
+        },
+        {
+          "t": 3130,
+          "file": "frame_04.png"
+        },
+        {
+          "t": 3930,
+          "file": "frame_05.png"
+        },
+        {
+          "t": 4670,
+          "file": "frame_06.png"
+        },
+        {
+          "t": 5470,
+          "file": "frame_07.png"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "008": {
+      "title": "Full-body character laughing and bouncing between a crouch and standing",
+      "width": 216,
+      "height": 216,
+      "duration_ms": 1220,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.webp"
+        },
+        {
+          "t": 180,
+          "file": "frame_01.webp"
+        },
+        {
+          "t": 340,
+          "file": "frame_02.webp"
+        },
+        {
+          "t": 520,
+          "file": "frame_03.webp"
+        },
+        {
+          "t": 680,
+          "file": "frame_04.webp"
+        },
+        {
+          "t": 860,
+          "file": "frame_05.webp"
+        },
+        {
+          "t": 1020,
+          "file": "frame_06.webp"
+        },
+        {
+          "t": 1200,
+          "file": "frame_07.webp"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "mem": {
+      "title": "大笑奶龙 from memory",
+      "width": 240,
+      "height": 240,
+      "duration_ms": 0,
+      "eligibility": "memory",
+      "frames": []
+    }
+  }
+}

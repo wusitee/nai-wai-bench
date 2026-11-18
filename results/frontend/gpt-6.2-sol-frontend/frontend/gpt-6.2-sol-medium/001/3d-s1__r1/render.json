@@ -1,0 +1,81 @@
+{
+  "html_sha256": "db9501fb02fcdd36ae03034b53d4654d08ab21974fa2c0b12d45c3e3f4809cd3",
+  "harness": "fee9bd636b661bc1",
+  "kind": "3d-s1",
+  "gates": [
+    "page errors: console.error: THREE.BufferGeometry.computeBoundingSphere(): Computed radius is NaN. The \"position\" attribute is likely to have NaN values. BufferGeometry"
+  ],
+  "errors": [
+    "console.error: THREE.BufferGeometry.computeBoundingSphere(): Computed radius is NaN. The \"position\" attribute is likely to have NaN values. BufferGeometry",
+    "console.error: THREE.BufferGeometry.computeBoundingSphere(): Computed radius is NaN. The \"position\" attribute is likely to have NaN values. BufferGeometry"
+  ],
+  "blocked": [],
+  "forbidden": [],
+  "elements": [],
+  "timing": {
+    "declarative": false,
+    "scripted": false
+  },
+  "frames": [
+    {
+      "file": "frame_00.webp",
+      "t": 0
+    }
+  ],
+  "views": [
+    {
+      "file": "view_side.webp",
+      "view": "side",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_back.webp",
+      "view": "back",
+      "t": 0,
+      "hidden": [
+        "plaster-wall",
+        "chalkboard-frame",
+        "dark-chalkboard"
+      ]
+    },
+    {
+      "file": "view_three_quarter.webp",
+      "view": "three_quarter",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_top.webp",
+      "view": "top",
+      "t": 0,
+      "hidden": []
+    }
+  ],
+  "scene": {
+    "characters": [
+      {
+        "name": "character-left",
+        "meshes": 29,
+        "width": 4.125384201622009,
+        "height": 3.558306825655505,
+        "depth": 2.988596090089329,
+        "ratio": 0.7244406688022608
+      },
+      {
+        "name": "character-right",
+        "meshes": 23,
+        "width": 3.3507243019627735,
+        "height": 3.7390542992334543,
+        "depth": 3.4097856591098505,
+        "ratio": 1.0176264448592445
+      }
+    ],
+    "textures": 3
+  },
+  "mode": "render(t)",
+  "checks": {
+    "determinism_diff": 0.0
+  },
+  "seconds": 1.8
+}
