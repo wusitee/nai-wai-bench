@@ -1,0 +1,113 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/opus-5.5/describe_en__r1.json",
+  "target_sha256": "dc38ad2eafad1d5ba33c44f596633ba0c6d7f904fb87e3fadaf17ab4ab06211a",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "91147770701a9893",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "opus-5.5",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 2,
+    "vibe": 2
+  },
+  "hallucinations": [
+    "The artist brief says without hedging to 'Raise the arms in glee,' but the reference has both hands clutching the belly."
+  ],
+  "rationale": "The answer gets the body shape, belly patch, squeezed-shut eyes, glossy 3D render, plain white background and unhinged laughing vibe right. It misses the hunched, doubled-over pose, treats hands-on-belly only as an unsure alternative to raised arms, and hedges that teeth are minimal or absent.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 2, \"mouth\": 1, \"body\": 2, \"belly_patch\": 2, \"render\": 2, \"background\": 2, \"vibe\": 2}, \"hallucinations\": [\"The artist brief says without hedging to 'Raise the arms in glee,' but the reference has both hands clutching the belly.\"], \"rationale\": \"The answer gets the body shape, belly patch, squeezed-shut eyes, glossy 3D render, plain white background and unhinged laughing vibe right. It misses the hunched, doubled-over pose, treats hands-on-belly only as an unsure alternative to raised arms, and hedges that teeth are minimal or absent.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 11.9,
+    "tokens": {
+      "input": 2873,
+      "cached_input": 0,
+      "cache_write": 2871,
+      "output": 892,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.041172400000000005,
+    "tools_used": [],
+    "cost_usd": 0.041172400000000005,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2871,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 892,
+      "output_tokens_details": {
+        "thinking_tokens": 649
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2871,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 892,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2871,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2871
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:03:54Z",
+    "finished_at": "2026-10-25T02:04:06Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

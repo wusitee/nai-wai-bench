@@ -1,0 +1,77 @@
+{
+  "settings_id": "3dd3bd14bb05cc84",
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "vendor": "openai",
+  "item": "write_prompt.giraffe",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a giraffe version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "Create a square, slightly blurry 3D cartoon reaction image of a giraffe laughing uncontrollably. Its design is absurdly plump and soft: saturated golden-yellow skin, scattered chestnut-brown giraffe patches, a thick elongated neck, an oversized rounded head, two short knobbed horns, and small ears sticking sideways. The head and upper body fill almost the entire frame. Capture the peak of a loud, ridiculous belly laugh: head thrown back slightly, eyes squeezed into tiny curved slits, cheeks pushed upward, and an enormous open mouth dominating the lower face. Inside the mouth, show a deep burgundy cavity, a simple white strip of upper teeth, and a broad pink tongue at the bottom. Keep the muzzle short and rounded so the exaggerated expression stays readable. Tiny bent forelegs hover beside its swollen belly as its shoulders hunch with laughter. The mood is gleeful, smug, and hilariously uninhibited. Use simple rounded animation shapes, soft lighting, a plain blurred green background, and the compressed appearance of a paused cartoon meme. No text, captions, borders, or watermark.",
+  "contaminated": false,
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17082-725d-7051-a65f-8d827b3647ee",
+    "seconds": 29.6,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 11391,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 612,
+      "reasoning_output_tokens": 382
+    },
+    "tokens": {
+      "input": 11391,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 612,
+      "reasoning": 382
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:42:39Z",
+    "finished_at": "2026-10-25T00:43:08Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

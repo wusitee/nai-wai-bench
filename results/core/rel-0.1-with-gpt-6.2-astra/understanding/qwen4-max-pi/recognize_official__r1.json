@@ -1,0 +1,84 @@
+{
+  "settings_id": "a4ba33964638df40",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi",
+  "vendor": "alibaba",
+  "item": "recognize_official",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "这是**奶龙（Nailong）**——国产 3D 动画短片《奶龙》（也常叫《小七和奶龙》）里的主角：一只黄色、圆滚滚的小龙，标志性特征是绿色大眼睛、奶白色肚皮、小短手和小爪子，设定里特别贪吃，和人类小男孩\"小七\"搭档出演日常搞笑剧情。\n\n它属于中文互联网的\"**奶龙表情包梗**\"：\n\n- **出处**：动画《奶龙》系列短视频，在抖音、快手等平台连载，出品方是深圳第七印象文化传媒。\n- **走红方式**：2023–2024 年前后，它呆萌夸张的表情和动作被大量截图做成表情包，在微信、QQ、B站、抖音上疯传。你这张就是典型的一张：双手举起、嘴巴张成\"O\"形，一般用来表达\"哇！\"\"惊讶\"\"欢呼/投降\"之类的情绪。\n- **二次玩梗**：后来奶龙还被抽象、鬼畜圈子拿去做反讽素材（比如各种\"奶龙笑\"、配音二创），所以现在它同时存在\"真·可爱表情包\"和\"抽象反讽梗\"两种用法，看到时得结合语境判断对方是卖萌还是玩梗。\n\n简单说：角色是奶龙，梗就是围绕它形成的\"奶龙表情包/奶龙抽象梗\"这一整套网络文化。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 57.0,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 341,
+      "output": 2250,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1953,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 341,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2250,
+      "reasoning": 1953
+    },
+    "session_config": {
+      "thinkingLevel": "max"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "max"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T10:03:45Z",
+    "finished_at": "2026-11-16T10:04:42Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

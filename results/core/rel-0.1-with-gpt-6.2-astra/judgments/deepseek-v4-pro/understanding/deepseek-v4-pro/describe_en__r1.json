@@ -1,0 +1,86 @@
+{
+  "judge": "deepseek-v4-pro",
+  "judge_vendor": "deepseek",
+  "target": "understanding/deepseek-v4-pro/describe_en__r1.json",
+  "target_sha256": "baf994b5e57b95f0e037b6a317c15c1c47ec2a151d1a78d9a13c1e08f4663765",
+  "settings_id": "cefccff5b65c93e5",
+  "judge_prompt": "56ad541ff1faacc2",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 1,
+    "render": 2,
+    "background": 1,
+    "vibe": 0
+  },
+  "hallucinations": [
+    "The model confidently says the character is 'leaning back a little with its head tilted upward,' which contradicts the reference pose of standing hunched/bent forward with knees bent as if doubled over with laughter."
+  ],
+  "rationale": "The face, mouth, body shape, and 3D render style are captured well, but the pose is wrong, the belly-hands and background are vague/hedged, and the absurd/unhinged meme vibe is not described.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 2, \"mouth\": 2, \"body\": 2, \"belly_patch\": 1, \"render\": 2, \"background\": 1, \"vibe\": 0}, \"hallucinations\": [\"The model confidently says the character is 'leaning back a little with its head tilted upward,' which contradicts the reference pose of standing hunched/bent forward with knees bent as if doubled over with laughter.\"], \"rationale\": \"The face, mouth, body shape, and 3D render style are captured well, but the pose is wrong, the belly-hands and background are vague/hedged, and the absurd/unhinged meme vibe is not described.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "stop_reason": "end_turn",
+    "client": "deepseek-harness-acp 0.0.1",
+    "seconds": 62.5,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+      "reasoning_effort": "high"
+    },
+    "resolved_model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 7067,
+        "size": 1000000
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:54:00Z",
+    "finished_at": "2026-10-25T01:55:03Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

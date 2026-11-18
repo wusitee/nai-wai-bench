@@ -1,0 +1,87 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6-astra/recognize_en__r1.json",
+  "target_sha256": "17d9b26475a0b19bfd0b17d1f78fd5c3d85e4f234c6c90855a43135406dd5790",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "af1a8c8f91afc18f",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "scores": {
+    "base_character": 2,
+    "identifies_meme": 2,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer correctly identifies 奶龙 and names the meme as “Laughing Nailong,” corresponding to 大笑奶龙. It omits the unofficial AI-generated mutation origin, the aliases 变异奶龙 and 奶蛙, and the explanation of 奶蛙.",
+  "raw": "{\"scores\":{\"base_character\":2,\"identifies_meme\":2,\"ai_variant\":0,\"aliases\":0,\"naiwa\":0},\"hallucinations\":[],\"rationale\":\"The answer correctly identifies 奶龙 and names the meme as “Laughing Nailong,” corresponding to 大笑奶龙. It omits the unofficial AI-generated mutation origin, the aliases 变异奶龙 and 奶蛙, and the explanation of 奶蛙.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719f-2582-7583-a410-fdd87ba7f4e4",
+    "seconds": 13.6,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12869,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 256,
+      "reasoning_output_tokens": 155
+    },
+    "tokens": {
+      "input": 12869,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 256,
+      "reasoning": 155
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:53:37Z",
+    "finished_at": "2026-10-25T05:53:51Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

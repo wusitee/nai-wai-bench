@@ -1,0 +1,1029 @@
+{
+  "nwb_version": "0.1.0",
+  "stale_judgments": {
+    "total": 0,
+    "reasons": {}
+  },
+  "suite": "core",
+  "judges": [
+    "opus-5.5"
+  ],
+  "judge_health": {
+    "opus-5.5": {
+      "understanding": {
+        "n": 19,
+        "spread": 24.172675726319074,
+        "deviation": null
+      }
+    }
+  },
+  "understanding": {
+    "gpt-6.2-astra-low": {
+      "fields": {
+        "pose": 100.0,
+        "eyes": 100.0
+      },
+      "field_items": {
+        "pose": 4,
+        "eyes": 4
+      },
+      "family_classes": {},
+      "family_macro": null,
+      "joint": 100.0,
+      "visual_joint": 100.0,
+      "repetition_consistency": null,
+      "repetition_consistency_images": 0,
+      "categories": {},
+      "overall": 38.97435897435898,
+      "text": 37.27777777777778,
+      "vision": 38.97435897435898,
+      "languages": {
+        "zh": 33.66666666666667,
+        "en": 40.88888888888889
+      },
+      "grounding": 100.0,
+      "blind": 0.0,
+      "visual_gain": 100.0,
+      "hallucinations_per_answer": 0.5263157894736842,
+      "items": {
+        "describe": 50.0,
+        "describe_en": 34.44444444444444,
+        "grounding.facepalm": 100.0,
+        "grounding.folded": 100.0,
+        "grounding.laugh": 100.0,
+        "grounding.official": 100.0,
+        "knowledge_en": 15.0,
+        "knowledge_zh": 10.0,
+        "origin_evidence_en": 25.0,
+        "origin_evidence_zh": 33.333333333333336,
+        "recognize_angry": 0.0,
+        "recognize_en": 0.0,
+        "recognize_facepalm": 0.0,
+        "recognize_folded_arms": 0.0,
+        "recognize_naiwa": 0.0,
+        "recognize_official": 75.0,
+        "recognize_smug": 15.0,
+        "recognize_variant": 16.666666666666668,
+        "recognize_zh": 0.0,
+        "write_prompt.cat": 70.0,
+        "write_prompt.giraffe": 60.0,
+        "write_prompt_zh.cat": 35.0,
+        "write_prompt_zh.giraffe": 40.0
+      },
+      "per_judge": {
+        "opus-5.5": 25.23391812865497
+      },
+      "contaminated": 0
+    }
+  },
+  "state_understanding": {},
+  "imagegen": {},
+  "samples": {
+    "understanding": [
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "describe",
+        "modality": "text",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/describe__r1.json",
+        "answer": "我记得比较清楚的是奶龙笑起来时的轮廓和嘴形。至于哪一帧是你说的那张“最经典的”，我没把握。下面按我记忆里的样子描述，姿势和背景的还原把握较低。\n\n- **姿势和身体造型**　先画一个直立的、下半截略宽的圆梨形。脸颊直接连到身子，脖子几乎看不出来，胸腹也是一整块鼓起来的弧面。两只胳膊短而粗，手端圆钝。我的印象是它笑得略微仰起脸，下巴往里收，两颊的肉往上挤。手臂的确切位置，以及原图有没有把脚拍进去，我记不清。\n- **表情**　嘴是整张脸最抢眼的地方。先定两个向上提的嘴角，再把下唇的轮廓向下拉成圆弧，画出一张既宽又有深度的笑口。两边要留足厚脸颊。眼睛被脸颊顶得眯起来，相对那张大嘴显得很小。我印象里口腔深处偏暗红，靠下能见到较亮的粉红舌面。眼睛究竟闭得多紧、笑时露了多少牙，我都不能确认。\n- **配色和渲染**　全身以暖黄为主。受光的脸颊和肚皮可以用偏奶油色的亮黄，转到下巴和胳膊根部时逐渐加深成金黄。记忆中的质感接近三维动画里的软胶玩偶，表面平滑，亮部柔和。用宽而缓的明暗过渡撑起体积，嘴巴内部则压暗一些，这样一眼就能读出张嘴大笑的表情。\n- **构图和背景**　我记得的视觉重心几乎全在黄脸和笑口上，对原图的背景颜色、场景和裁切没有可靠印象。画师若要按这份描述起稿，可以先用素色底，把脸和上身画大，等构图定下来再处理背景。这是补全画面的建议，原图背景仍属未知。",
+        "score": 50.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 50.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The answer gets the body (pear shape, no neck, short thick limbs), the huge dark-interior mouth with tongue, and the glossy 3D vinyl-toy render right, and squinted eyes and a suggested plain background earn partial credit. It misses the hunched-forward 捧腹 pose and hands on belly (its hedged impression of a slightly raised face points the other way), gives only a lighter-belly gradient instead of a distinct pale patch, and does not mention the absurd 抽象 meme vibe."
+        }
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "describe_en",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/describe_en__r1.json",
+        "answer": "My best recollection is of a squat yellow cartoon dinosaur caught mid-belly-laugh. I’m more confident about Nailong’s shape and coloring than about the exact meme frame. I may be blending the usual 3-D character with the frog-like 奶蛙 variant.\n\nFor a sketch, start with a pear-shaped body, broad through the belly, and set a wide, blunt head directly on it with almost no visible neck. Give it short legs, little rounded feet, and stubby arms. I picture it upright, leaning back slightly with its chin tipped up, as if the laugh has pushed its whole body backward. The cheeks bunch upward until the eyes are two short, squeezed-shut curves. The open mouth does most of the expressive work. Draw it as a broad, dark opening across the lower face, with a pinkish tongue low inside. Keep the snout soft and round.\n\nI remember warm golden-yellow skin and soft 3-D shading, with a highlight over the forehead and a shadow beneath the chin that helps distinguish the head from the belly. The surface looks smooth, like an animated toy. I’m unsure of the arm positions, whether teeth show, and how much of the lower body the familiar crop includes. I don’t recall the background reliably enough to name a color or setting. For a reconstruction, I’d use a plain backdrop and let the upturned face carry the image.",
+        "score": 34.44444444444444,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 34.44444444444444
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Pose described as leaning back with chin tipped up and an upturned face, contradicting the reference's torso hunched forward as if doubled over with laughter"
+        ],
+        "rationales": {
+          "opus-5.5": "The answer correctly gets the squeezed-shut arc eyes, the neckless pear-shaped body and the soft 3D toy-like render. It reverses the pose (leaning back instead of doubled over), is unsure about the hands on the belly, never mentions the pale belly patch or the absurd meme vibe, and describes the mouth and background only vaguely."
+        }
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "grounding.facepalm.blind",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/grounding.facepalm.blind__r1.json",
+        "answer": "{\"pose\":\"unknown\",\"eyes\":\"unknown\"}",
+        "score": 0.0,
+        "joint": 0.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 0.0,
+          "eyes": 0.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "grounding.facepalm",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "grounding.facepalm",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/grounding.facepalm__r1.json",
+        "answer": "{\"pose\":\"facepalm\",\"eyes\":\"open\"}",
+        "score": 100.0,
+        "joint": 100.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 100.0,
+          "eyes": 100.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "grounding.folded.blind",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/grounding.folded.blind__r1.json",
+        "answer": "{\"pose\":\"unknown\",\"eyes\":\"unknown\"}",
+        "score": 0.0,
+        "joint": 0.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 0.0,
+          "eyes": 0.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "grounding.folded",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "grounding.folded",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/grounding.folded__r1.json",
+        "answer": "{\"pose\":\"folded_arms\",\"eyes\":\"open\"}",
+        "score": 100.0,
+        "joint": 100.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 100.0,
+          "eyes": 100.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "grounding.laugh.blind",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/grounding.laugh.blind__r1.json",
+        "answer": "{\"pose\":\"unknown\",\"eyes\":\"unknown\"}",
+        "score": 0.0,
+        "joint": 0.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 0.0,
+          "eyes": 0.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "grounding.laugh",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "grounding.laugh",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/grounding.laugh__r1.json",
+        "answer": "{\"pose\":\"belly_clutch\",\"eyes\":\"closed\"}",
+        "score": 100.0,
+        "joint": 100.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 100.0,
+          "eyes": 100.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "grounding.official.blind",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/grounding.official.blind__r1.json",
+        "answer": "{\"pose\":\"unknown\",\"eyes\":\"unknown\"}",
+        "score": 0.0,
+        "joint": 0.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 0.0,
+          "eyes": 0.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "grounding.official",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "grounding.official",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/grounding.official__r1.json",
+        "answer": "{\"pose\":\"raised_hands\",\"eyes\":\"open\"}",
+        "score": 100.0,
+        "joint": 100.0,
+        "per_judge": {},
+        "objective": true,
+        "fields": {
+          "pose": 100.0,
+          "eyes": 100.0
+        },
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {}
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "knowledge_en",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/knowledge_en__r1.json",
+        "answer": "“**大笑奶龙**” is a Chinese reaction meme featuring 奶龙 (Nailong), the round yellow dinosaur from the Chinese animated shorts of the same name. The character comes from 深圳市第七印象文化传媒有限公司, which began releasing Nailong shorts in 2020. That dates the character. I don’t know which clip or post first circulated as “大笑奶龙,” or who first called it “奶蛙.”\n\nThe recognizable feature is the face. Nailong normally has a plump body, tiny limbs and a rounded snout. In the laughing image, its eyes narrow and its mouth opens into an exaggerated grin. The face looks broad and frog-like, which is the visual joke in **“奶蛙”** (“Nai-frog”), a pun that swaps 龙 (“dragon”) for 蛙 (“frog”).\n\nAs a reaction image or looping GIF, the grin can read as delighted laughter or as laughing *at* somebody. Cropping in on the face, freezing the grin, or looping and dubbing the laugh can make the same expression look increasingly absurd. A related Nailong joke is **“我是奶龙”** (“I’m Nailong”), with the comeback **“我才是奶龙”** (“*I’m* the real Nailong”). That exchange gets quoted and redubbed in its own right. I’m unsure whether it has a direct connection to the original laughing image.",
+        "score": 15.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 15.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Claims the laughing image itself looks frog-like and that this is the joke behind 奶蛙; the notes give the frog-like look (round bulging eyes, green sclera) to a separate, later mutated variant, not to the 捧腹大笑 image."
+        ],
+        "rationales": {
+          "opus-5.5": "The answer describes the base Nailong character correctly. It openly says it doesn't know the origin, gives only a partial face description of the laugh, and links 奶蛙 to Nailong but misattributes the frog look. It misses that the image is AI-generated and unofficial, as well as the Xingye origin, the 变异奶龙 alias, the 军体拳 remix, the official-reply copypasta, the trait variants and the rarity titles."
+        }
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "knowledge_zh",
+        "modality": "text",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/knowledge_zh__r1.json",
+        "answer": "我能确定的是「奶龙」这个国产动画角色。「大笑奶龙」和「奶蛙」具体指哪张图、哪段视频，我没有把握，也无法确认这两个名字是不是普遍通用。\n\n奶龙由深圳第七印象团队创作，早期通过网络动画短片走红。它是一只黄色的小恐龙，身子圆滚滚的，四肢短，肚子很突出。它有一句很有辨识度的台词：“我是奶龙。”网友把这句话做成对口型、换配音和鬼畜剪辑，也会截取它张嘴笑的画面当表情包。\n\n这些是原版奶龙和围绕它的常见二创。至于你说的「奶蛙」，我不清楚它的具体外观、首发出处，也不确定「蛙」字的由来。仅凭“大笑”两个字，我无法判断它就是原动画里某个笑的镜头。",
+        "score": 10.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 10.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The model correctly describes the base 奶龙 character as a yellow, chubby dinosaur from a Chinese animation, but says it doesn't know what 大笑奶龙 or 奶蛙 are. It covers none of the variant-specific items, and it makes no confident false claims or misconception assertions."
+        }
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "origin_evidence_en",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/origin_evidence_en__r1.json",
+        "answer": "I can distinguish the two images, but I don’t know the documented provenance of 奶蛙 well enough to name a platform or creator, trace its early circulation, or describe who revised the initial account by November 5, 2026. With sources excluded, those parts remain unresolved in my answer.\n\n- **Inspectable material.** The early image in question shows 奶蛙 standing with its eyes open. The later variant shows it clutching its belly and laughing. That distinction matters for attribution. A surviving post of the laughing variant can establish that the variant circulated on that platform by the date of the post. Even if the uploader made that variant, the post alone would not establish who generated the standing image.\n- **Researchers’ inferences.** An earlier surviving copy can move the documented circulation date back. Whether its uploader created the image requires separate evidence. I don’t know which posts the later researchers located or which part of the initial account they revised. I also don’t know of an authenticated recovery of the **original generation prompt**. A reconstruction that produces a close visual match would not authenticate the wording.\n- **Lost-media and Elsagate claims.** I can’t reliably identify the specific missing item people recalled or the alleged video linking it to 奶蛙. “Elsagate” generally refers to disturbing or inappropriate videos packaged as children’s entertainment. A recollection of seeing the character in such a video is a lead. A surviving video or archived frame could establish an appearance, and a reliable date could place it in the circulation history. Neither the recollection nor the label establishes that the character originated there.",
+        "score": 25.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 25.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The model mostly declines: it omits the Xingye agent, the creator credit, the October 2024 date, 看仙碎's follow-up correction and the circulation stages, and it misframes the lost-media and Elsagate claims as a recollection of a video. It does state the general limits that circulation is not authorship, that no authenticated prompt has been recovered, and that the laughing variant's evidence differs from the standing image's, and it makes no confident false claims."
+        }
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "origin_evidence_zh",
+        "modality": "text",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/origin_evidence_zh__r1.json",
+        "answer": "仅凭我已有的知识，我无法可靠确认截至 2026 年 11 月 5 日，「奶蛙」最早出现在哪个平台、由哪个账号发布，也无法准确复述后续考据把哪一项归属从谁修正为谁。我能区分的是，这个问题涉及两种图像，它们的出处需要分别举证。\n\n- **早期站立、睁眼的奶蛙**是要追溯的较早形象。要认定首发平台和创作者，需要能定位到具体图像的原帖、存档或创作记录。带时间的搬运帖可以证明这张图最迟在当时已经流传。即使搬运帖保留了水印，也还需要确认水印对应的是作者还是上一个转载者。\n- **后来的捧腹大笑版**有独立的归属问题。即使能找到这个版本的制作者，或者找到让它走红的账号，也只能据此说明该账号在笑版制作或传播中的作用。若后续考据找到了更早的站立版，它可以修正「笑版发布者创造了最初形象」这一说法，但单凭更早的图，仍无法确定站立版的作者，也无法证明笑版是从哪一张底图改出来的。我无法确认实际考据找到的是原帖、转载还是截图，因此不能把这种可能的修正写成已经查实的经过。\n\n**原始生图提示词是否已经找到？** 我不知道截至该日是否已有可核验的原始提示词。看图反推的描述、能生成相似图像的提示词，都属于复现尝试。能把提示词与原图联系起来的生成记录，或有材料佐证的创作者披露，才足以支持「找到了原词」的说法。\n\n**「失传媒体」**在这里首先有一个指代问题。现存图片的首发帖失联、生成过程没有保存，以及有人声称曾有一段如今找不到的原视频，是三种不同的主张。尤其是最后一种，还需要当时的链接、引用或存档等材料证明视频确曾存在。我无法确认奶蛙讨论中被称为「失传」的具体对象。\n\n**「儿童邪典」**通常指借用儿童熟悉的形象或面向儿童的包装，呈现惊吓、暴力等不适宜内容。用这个词形容某段奶蛙二创的观感，是一种评价。声称最初的奶蛙出自这类视频，则是需要原片、可核验片段或同期发布记录支持的来源主张。我没有可靠材料能确认这一出处，也不能据此推断原作者的意图。",
+        "score": 33.333333333333336,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 33.333333333333336
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The answer openly declines to give specifics. It omits the Xingye agent, the creator credit, 看仙碎's investigation and follow-up correction, and all dates, but invents nothing. It earns partial credit for general method: separating circulation from authorship, treating the standing and laughing versions as separate attribution questions, labeling reproduction prompts as reconstructions, and not inferring intent from 儿童邪典/lost-media claims."
+        }
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "recognize_angry",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/recognize_angry__r1.json",
+        "answer": "图里是个挺着肚子、皱眉瞪眼的红色胖怪。它属于“切换愤怒模式😠”这类情绪反应梗，通常用来半开玩笑地表示“这下我真生气了”。我认得这个用法，但没把握确认角色的正式名字或原作。",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The model accurately describes the red, frowning, pot-bellied creature and the caption, but it never identifies it as a mutated 奶龙 or links it to the 大笑奶龙 / 变异奶龙 / 奶蛙 meme family. It explicitly says it is unsure of the character's origin, so it makes no false confident claims."
+        }
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "recognize_en",
+        "modality": "vision",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/recognize_en__r1.json",
+        "answer": "I don’t recognize the character with confidence. I’d describe the image as the “yellow belly laugh” reaction image, but that’s a description. I don’t know its original meme title or any established aliases.",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The model said it didn't recognize the character and didn't identify Nailong, the 大笑奶龙 meme, its AI-generated nature, or any aliases. Its only claim was an explicitly hedged description, and that description matches the image, so nothing counts as a hallucination."
+        }
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "recognize_facepalm",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/recognize_facepalm__r1.json",
+        "answer": "这是 **Bunchie**，中文网友常叫它“**黄色恐龙**”或“**哲学黄恐龙**”。图里它用两根手指抵着额头，是常见的“黄恐龙思考”表情，常用来表示“让我想想”，也带一点故作深沉的调侃。",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Confidently identifies the character as 'Bunchie' rather than a Nailong (奶龙) variant",
+          "Claims the character is commonly called '黄色恐龙' / '哲学黄恐龙' by Chinese netizens and that the meme is the '黄恐龙思考' expression, rather than the 大笑奶龙 / 变异奶龙 / 奶蛙 meme family"
+        ],
+        "rationales": {
+          "opus-5.5": "The answer never mentions 奶龙 or the 大笑奶龙/变异奶龙/奶蛙 meme family. It confidently misidentifies the image as a different character and meme."
+        }
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "recognize_folded_arms",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/recognize_folded_arms__r1.json",
+        "answer": "我没认出它的确切出处。图里是一个黄皮肤、绿眼圈、双臂交叉的 3D 角色，神情像是在说“我就静静看着你”。这能描述表情包的用法，但仅凭我的记忆，我无法可靠地说出角色名或对应的网络梗。",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The model explicitly declined to identify the character or the meme, so it does not mention 奶龙 or the 大笑奶龙/变异奶龙/奶蛙 meme family. Its visual description (yellow 3D character, green-ringed eyes, folded arms) matches the image and makes no false claims."
+        }
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "recognize_naiwa",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/recognize_naiwa__r1.json",
+        "answer": "我认得它是那只常被叫作“小黄鸟”的呆脸表情包角色，但仅凭这张图，我没把握确认它的正式名字或最早出处。\n\n这张图玩的是“惊鸿一瞥”的反差梗：这个词通常形容短短一眼就令人惊艳，配图里的小黄鸟却只是面无表情地瞥了一眼。",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Confidently says the character is the expression-pack character commonly called '小黄鸟' (little yellow bird). It is actually the 奶蛙 / mutated 奶龙 variant, not a known 'little yellow bird' character."
+        ],
+        "rationales": {
+          "opus-5.5": "The answer never mentions 奶龙, the 大笑奶龙/变异奶龙 meme family, or 奶蛙. It only gives a generic reading of the 「惊鸿一瞥」 caption and misidentifies the character as a 'little yellow bird'."
+        }
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "recognize_official",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/recognize_official__r1.json",
+        "answer": "这是**奶龙**，一只国产动画里的黄色小恐龙。这张图属于奶龙表情包系列，和“我是奶龙”“我才是奶龙”的梗有关。图里它举着双手、张着小嘴，常用来表示惊讶。",
+        "score": 75.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 75.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The answer correctly identifies 奶龙 as a yellow dinosaur from a Chinese animation and does not claim the image is the 大笑奶龙/奶蛙 mutation. However, it never says this is official character artwork; it frames the image as part of a meme sticker series instead."
+        }
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "recognize_smug",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/recognize_smug__r1.json",
+        "answer": "这是国产动画《奶龙》里的主角**奶龙**。这张眯眼、抿嘴的图属于网上的“奶龙表情包”，常用来表示无语，或者一副“我就静静看着你”的神情。",
+        "score": 15.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 15.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Presents the mutated variant image as simply the official protagonist 奶龙 from the 《奶龙》 animation, implicitly treating unofficial 变异奶龙/奶蛙 art as the official character."
+        ],
+        "rationales": {
+          "opus-5.5": "The answer correctly names 奶龙 as the protagonist of a Chinese animation but does not describe it as a yellow, chubby dragon/dinosaur. It labels the image only as a generic '奶龙表情包' and misses the 大笑奶龙/变异奶龙/奶蛙 mutation meme family; its visual description (narrowed eyes, pursed mouth) is accurate."
+        }
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "recognize_variant",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/recognize_variant__r1.json",
+        "answer": "这张图最像“笑不活了家人们”或“笑得肚子疼”一类的熊猫捧腹大笑表情包。熊猫双手捂着肚子，身子前倾，眼睛笑得眯成了缝，嘴巴张得很大，把“捧腹大笑”这个词直接演了出来。\n\n图里没有配字，也没有经典黑白“熊猫头”表情包里常见的真人脸，所以能看出它在表达“笑到肚子疼”，但很难确定它具体模仿的是哪一张原图。",
+        "score": 16.666666666666668,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 16.666666666666668
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The model accurately describes the hunched, belly-clutching, eyes-shut, open-mouthed laughing pose in the image, but never connects it to 大笑奶龙/奶蛙. It offers only generic 'laughing so hard my stomach hurts' framing and never mentions Nailong."
+        }
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "recognize_zh",
+        "modality": "vision",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/recognize_zh__r1.json",
+        "answer": "我认不准这个角色。图里是一个黄色的 3D 生物，弯着腰、双手捧腹大笑。“捧腹大笑”能描述这个表情，但仅凭我自己的知识，我没把握说出角色名、对应的网络梗或它的别名。",
+        "score": 0.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 0.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The model explicitly declined to identify the character, the meme, or its aliases, so no checklist item is covered. Its only claim, a yellow 3D creature bent over clutching its belly and laughing, matches the image and contains no false assertions."
+        }
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "write_prompt.cat",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/write_prompt.cat__r1.json",
+        "answer": "Create a square reaction sticker showing a kitten laughing so hard its whole body shakes. Give it the shape of a plump golden-yellow baby dinosaur, with a pear-shaped body, a soft cream belly, a head that flows straight into its shoulders, and tiny paws. Make it unmistakably feline with little triangular ears, a button nose, and three short whiskers on each puffy cheek. Show it close up in a slight three-quarter view, leaning back with its chin in the air. Squash its eyes into two tight upward arches and stretch its mouth into an enormous open grin that takes up the lower half of its face. Show a dark mouth, a broad pink tongue, and two tiny kitten fangs. Let its forepaws curl helplessly against its jiggling belly. Render it as a softly lit, slightly squishy 3D cartoon with the goofy immediacy of a frame caught at the peak of a belly laugh. Keep the background plain and pale, with no lettering or watermark.",
+        "score": 70.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 70.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Describes the character 'leaning back with its chin in the air', which contradicts the meme's hunched-forward, doubled-over laughing pose."
+        ],
+        "rationales": {
+          "opus-5.5": "Face, paws-on-belly, body shape, belly patch, 3D render and plain background are well covered, but the pose is reversed (leaning back instead of doubled over) and the vibe reads as goofy-cute rather than unhinged. The cat identity is only token cues (ears, nose, whiskers) pasted onto a golden-yellow dinosaur body."
+        }
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "write_prompt.giraffe",
+        "modality": "text",
+        "lang": "en",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/write_prompt.giraffe__r1.json",
+        "answer": "Draw a giraffe version of the Chinese “大笑奶龙” laughing meme as a square reaction sticker. Make it a plump, butter-yellow baby giraffe with the soft, rounded shape of a squeeze toy. Give it two short brown-tipped horns, floppy ears, and a few big caramel patches down a thick, gently curved neck. The joke is in the enormous belly laugh. Tip its head back just enough that we can still see its face, squeeze its tiny eyes shut into upside-down U’s, bunch its cheeks high, and stretch its mouth open into a huge, goofy grin. Let the dark mouth take up most of the lower face, with a round pink tongue visible at the bottom. Pull its little front hooves up against its potbelly as if it can barely breathe from laughing. Frame it close in a three-quarter view, with the head filling most of the upper half and the horns fully visible. Use simple smooth 3D cartoon forms, soft lighting, and a plain pale background so the expression reads instantly at thumbnail size. No lettering or watermark.",
+        "score": 60.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 60.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [],
+        "rationales": {
+          "opus-5.5": "The prompt covers the hooves on the belly, the shut arc eyes, the plain background and recognizable giraffe features well. However, it tips the head back instead of a doubled-over hunch, omits the pale belly patch and teeth, and gives a distinct thick neck. It also frames the result as a cute 'goofy grin' squeeze toy rather than glossy CG with unhinged meme energy."
+        }
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "write_prompt_zh.cat",
+        "modality": "text",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/write_prompt_zh.cat__r1.json",
+        "answer": "画一张正方形、无字的「大笑奶龙」猫版表情包。主角是一只像芒果布丁一样圆滚滚的奶黄色小猫，头和肚子连成一团，几乎看不见脖子，头顶两只小三角猫耳，脸颊两侧各支出三根短胡须。用正面近景定格它笑得仰起脸的一瞬间：脸颊高高鼓起，把两只眼睛挤成弯弯的细缝；两侧嘴角一直咧到脸颊边，蛙嘴般宽扁的大嘴张成横向的半月形，深红的口腔里露出一截粉红舌头。两只短短的猫爪蜷在圆肚皮前，肩膀耸起，整只猫憨得意又笑得忘形。采用柔软光滑的低多边形感 3D 卡通造型，暖光，素净浅色背景，让那张夸张的大笑脸占满画面，缩成聊天缩略图也能一眼认出。",
+        "score": 35.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 35.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Describes the character laughing with its face tilted upward and shoulders shrugged ('笑得仰起脸', '肩膀耸起'), which contradicts the reference's torso hunched forward as if doubled over",
+          "Specifies a 'low-poly' (低多边形感) 3D style, which contradicts the reference's smooth, glossy CG render"
+        ],
+        "rationales": {
+          "opus-5.5": "The prompt covers the squinting arc eyes, the neckless round body and the plain light background. It misses the hunched pose and the pale belly patch, and gives only weak versions of the paws on the belly, the teeth in the mouth and the unhinged meme energy. The cat identity rests on token cues: triangle ears and whiskers on a cream-yellow Nailong body."
+        }
+      },
+      {
+        "model": "gpt-6.2-astra-low",
+        "item": "write_prompt_zh.giraffe",
+        "modality": "text",
+        "lang": "zh",
+        "rep": 1,
+        "target": "understanding/gpt-6.2-astra-low/write_prompt_zh.giraffe__r1.json",
+        "answer": "画一张正方形的无字聊天表情包，主角是一只笑到仰头的黄色小长颈鹿。采用圆润柔软的 3D 卡通造型，身子像一颗胖梨，肩膀窄，肚皮鼓鼓的，两只小短手蜷在肚子前。细长的脖子从胖身子上伸出来，略向后弯，顶着一颗圆头，头上有一对短短的绒角，两耳向两边支开，金黄色皮肤上散着几块焦糖色长颈鹿斑纹。镜头从正面略微仰拍，定格它笑得最夸张的一瞬间：脸颊向上挤，两眼眯成弯缝，宽宽的短吻翘起，嘴角几乎咧到耳根，大张的嘴里露出深红色口腔和一小截粉舌头。神情憨得有点傻，仿佛下一秒还要再笑一声。头、长脖子和圆肚子占满画面，背景干净柔和，缩成聊天缩略图也能一眼看清那张大笑的脸。",
+        "score": 40.0,
+        "joint": null,
+        "per_judge": {
+          "opus-5.5": 40.0
+        },
+        "objective": false,
+        "fields": {},
+        "family": "",
+        "category": "",
+        "control_for": "",
+        "state": "",
+        "hallucinations": [
+          "Pose described as head thrown back laughing (笑到仰头, 略向后弯), which contradicts the reference's hunched-forward, doubled-over pose"
+        ],
+        "rationales": {
+          "opus-5.5": "The prompt nails the squinting arc eyes and makes a clearly recognizable giraffe (ossicones, caramel patches, long neck), but it reverses the pose, has the hands merely curled rather than clutching the belly, adds a distinct long neck, omits the pale belly patch and the teeth, and is vague on the glossy CG render, white background and unhinged meme vibe."
+        }
+      }
+    ],
+    "imagegen": []
+  },
+  "leaderboards": {
+    "visual_understanding": [
+      {
+        "model": "gpt-6.2-astra-low",
+        "rank": 1,
+        "score": 38.97435897435898,
+        "diagnostic_score": 38.97435897435898,
+        "conditions": [],
+        "settings_status": "recorded",
+        "settings_ids": [
+          "9de614fbff7582f6"
+        ],
+        "collection_profiles": [
+          "Codex isolated-v1"
+        ],
+        "judges": {
+          "opus-5.5": 9
+        },
+        "score_interval": [
+          19.814814814814817,
+          56.11111111111111
+        ],
+        "rank_range": [
+          1,
+          1
+        ],
+        "completed": 13,
+        "required": 13,
+        "repetitions": 1,
+        "status": "complete",
+        "bootstrap": {
+          "resamples": 2000,
+          "seed": 6643,
+          "clusters": 8,
+          "cluster": "source image"
+        },
+        "label": "GPT-6.2-Astra (Codex) (low)"
+      }
+    ],
+    "imagegen": []
+  },
+  "collection": {
+    "started_at": "2026-11-17T22:20:15Z",
+    "finished_at": "2026-11-17T22:26:16Z",
+    "revisions": [
+      "fd4ab338+dirty"
+    ],
+    "dirty": true,
+    "recorded": 46,
+    "tasks": 46,
+    "subject_profiles": {
+      "gpt-6.2-astra-low": [
+        "Codex isolated-v1"
+      ]
+    },
+    "judge_profiles": {}
+  },
+  "labels": {
+    "gpt-6.2-astra-low": "GPT-6.2-Astra (Codex) (low)"
+  },
+  "efficiency": {
+    "suite": "core",
+    "visual_understanding": {
+      "gpt-6.2-astra-low": {
+        "tasks": 13,
+        "failures": 0,
+        "timed_tasks": 13,
+        "total_seconds": 215.3,
+        "median_seconds": 12.1,
+        "max_seconds": 32.7,
+        "slowest_task": "gpt-6.2-astra-low: understanding/recognize_zh · r1",
+        "timestamp_tasks": 13,
+        "wall_seconds": 140.0,
+        "token_tasks": 13,
+        "token_totals": {
+          "input": 143943,
+          "output": 1550,
+          "reasoning": 740,
+          "cached_input": 77056,
+          "cache_write": 0
+        },
+        "token_counts": {
+          "input": 13,
+          "output": 13,
+          "reasoning": 13,
+          "cached_input": 13,
+          "cache_write": 13
+        },
+        "mean_input_tokens": 11072.538461538461,
+        "mean_output_tokens": 119.23076923076923,
+        "mean_reasoning_tokens": 56.92307692307692,
+        "cost_tasks": 13,
+        "mean_cost_usd": 0.04830141538461538,
+        "estimated_cost_usd": 0.6279184,
+        "known_cost_usd": 0.6279184,
+        "reported_cost_usd": null,
+        "price": {
+          "input": 8.0,
+          "cached_input": 0.4,
+          "cache_write": 10.0,
+          "output": 40.0,
+          "unit": "USD/1M tokens",
+          "source": "https://developers.openai.com/api/docs/pricing (gpt-6.2-astra, short context)",
+          "as_of": "2026-11-18"
+        }
+      }
+    },
+    "timing": {
+      "overall": {
+        "tasks": 46,
+        "failures": 0,
+        "timed_tasks": 46,
+        "total_seconds": 713.2,
+        "median_seconds": 11.85,
+        "max_seconds": 42.6,
+        "slowest_task": "gpt-6.2-astra-low: understanding/describe · r1",
+        "timestamp_tasks": 46,
+        "wall_seconds": 361.0
+      },
+      "tracks": {
+        "understanding": {
+          "tasks": 27,
+          "failures": 0,
+          "timed_tasks": 27,
+          "total_seconds": 529.6,
+          "median_seconds": 19.4,
+          "max_seconds": 42.6,
+          "slowest_task": "gpt-6.2-astra-low: understanding/describe · r1",
+          "timestamp_tasks": 27,
+          "wall_seconds": 265.0
+        },
+        "imagegen": {
+          "tasks": 0,
+          "failures": 0,
+          "timed_tasks": 0,
+          "total_seconds": null,
+          "median_seconds": null,
+          "max_seconds": null,
+          "slowest_task": null,
+          "timestamp_tasks": 0,
+          "wall_seconds": null
+        },
+        "judgments": {
+          "tasks": 19,
+          "failures": 0,
+          "timed_tasks": 19,
+          "total_seconds": 183.6,
+          "median_seconds": 9.4,
+          "max_seconds": 14.1,
+          "slowest_task": "opus-5.5: understanding/gpt-6.2-astra-low/write_prompt.giraffe__r1.json",
+          "timestamp_tasks": 19,
+          "wall_seconds": 96.0
+        }
+      }
+    },
+    "imagegen": {
+      "gpt-6.2-astra-low": {
+        "tasks": 0,
+        "failures": 0,
+        "timed_tasks": 0,
+        "total_seconds": null,
+        "median_seconds": null,
+        "max_seconds": null,
+        "slowest_task": null,
+        "timestamp_tasks": 0,
+        "wall_seconds": null,
+        "images": 0
+      }
+    },
+    "whole_run": {
+      "gpt-6.2-astra-low": {
+        "total": {
+          "tasks": 27,
+          "failures": 0,
+          "timed_tasks": 27,
+          "total_seconds": 529.6,
+          "median_seconds": 19.4,
+          "max_seconds": 42.6,
+          "slowest_task": "gpt-6.2-astra-low: understanding/describe · r1",
+          "timestamp_tasks": 27,
+          "wall_seconds": 265.0
+        },
+        "understanding": {
+          "tasks": 27,
+          "failures": 0,
+          "timed_tasks": 27,
+          "total_seconds": 529.6,
+          "median_seconds": 19.4,
+          "max_seconds": 42.6,
+          "slowest_task": "gpt-6.2-astra-low: understanding/describe · r1",
+          "timestamp_tasks": 27,
+          "wall_seconds": 265.0,
+          "token_tasks": 27,
+          "token_totals": {
+            "input": 293387,
+            "output": 4941,
+            "reasoning": 782,
+            "cached_input": 153216,
+            "cache_write": 0
+          },
+          "token_counts": {
+            "input": 27,
+            "output": 27,
+            "reasoning": 27,
+            "cached_input": 27,
+            "cache_write": 27
+          },
+          "mean_input_tokens": 10866.185185185184,
+          "mean_output_tokens": 183.0,
+          "mean_reasoning_tokens": 28.962962962962962,
+          "cost_tasks": 27,
+          "mean_cost_usd": 0.05112201481481481,
+          "estimated_cost_usd": 1.3802944,
+          "known_cost_usd": 1.3802944,
+          "reported_cost_usd": null,
+          "price": {
+            "input": 8.0,
+            "cached_input": 0.4,
+            "cache_write": 10.0,
+            "output": 40.0,
+            "unit": "USD/1M tokens",
+            "source": "https://developers.openai.com/api/docs/pricing (gpt-6.2-astra, short context)",
+            "as_of": "2026-11-18"
+          }
+        },
+        "imagegen": {
+          "tasks": 0,
+          "failures": 0,
+          "timed_tasks": 0,
+          "total_seconds": null,
+          "median_seconds": null,
+          "max_seconds": null,
+          "slowest_task": null,
+          "timestamp_tasks": 0,
+          "wall_seconds": null,
+          "images": 0
+        }
+      }
+    },
+    "judges": {
+      "opus-5.5": {
+        "tasks": 19,
+        "failures": 0,
+        "timed_tasks": 19,
+        "total_seconds": 183.6,
+        "median_seconds": 9.4,
+        "max_seconds": 14.1,
+        "slowest_task": "opus-5.5: understanding/gpt-6.2-astra-low/write_prompt.giraffe__r1.json",
+        "timestamp_tasks": 19,
+        "wall_seconds": 96.0,
+        "token_tasks": 19,
+        "token_totals": {
+          "input": 47457,
+          "output": 12271,
+          "reasoning": null,
+          "cached_input": 0,
+          "cache_write": 47419
+        },
+        "token_counts": {
+          "input": 19,
+          "output": 19,
+          "reasoning": 0,
+          "cached_input": 19,
+          "cache_write": 19
+        },
+        "mean_input_tokens": 2497.7368421052633,
+        "mean_output_tokens": 645.8421052631579,
+        "mean_reasoning_tokens": null,
+        "cost_tasks": 19,
+        "mean_cost_usd": 0.025403526315789474,
+        "estimated_cost_usd": 0.482667,
+        "known_cost_usd": 0.482667,
+        "reported_cost_usd": 0.6302213,
+        "price": {
+          "input": 4.0,
+          "cached_input": 0.2,
+          "cache_write": 5.0,
+          "output": 20.0,
+          "unit": "USD/1M tokens",
+          "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "as_of": "2026-10-25"
+        }
+      }
+    }
+  }
+}

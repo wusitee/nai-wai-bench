@@ -1,0 +1,97 @@
+{
+  "html_sha256": "1447c441cc435094f724f5c5dd2d6831548f157831ec01815281cd6677089c79",
+  "harness": "fee9bd636b661bc1",
+  "kind": "3d-s2",
+  "gates": [],
+  "errors": [],
+  "blocked": [],
+  "forbidden": [],
+  "elements": [],
+  "timing": {
+    "declarative": false,
+    "scripted": false
+  },
+  "frames": [
+    {
+      "file": "frame_00.webp",
+      "t": 0
+    },
+    {
+      "file": "frame_01.webp",
+      "t": 800
+    },
+    {
+      "file": "frame_02.webp",
+      "t": 1530
+    },
+    {
+      "file": "frame_03.webp",
+      "t": 2330
+    },
+    {
+      "file": "frame_04.webp",
+      "t": 3130
+    },
+    {
+      "file": "frame_05.webp",
+      "t": 3930
+    },
+    {
+      "file": "frame_06.webp",
+      "t": 4670
+    },
+    {
+      "file": "frame_07.webp",
+      "t": 5470
+    }
+  ],
+  "views": [
+    {
+      "file": "view_side.webp",
+      "view": "side",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_back.webp",
+      "view": "back",
+      "t": 0,
+      "hidden": [
+        "pale studio background"
+      ]
+    },
+    {
+      "file": "view_three_quarter.webp",
+      "view": "three_quarter",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_top.webp",
+      "view": "top",
+      "t": 0,
+      "hidden": []
+    }
+  ],
+  "scene": {
+    "characters": [
+      {
+        "name": "character-golden-figure",
+        "meshes": 27,
+        "width": 148.8243307384382,
+        "height": 304.00804995903246,
+        "depth": 120.39124643833759,
+        "ratio": 0.8089486835988375
+      }
+    ],
+    "textures": 0
+  },
+  "mode": "render(t)",
+  "preview": "preview.webp",
+  "checks": {
+    "determinism_diff": 0.0,
+    "loop_diff": 0.0,
+    "motion_diff": 0.5002125850340136
+  },
+  "seconds": 7.1
+}

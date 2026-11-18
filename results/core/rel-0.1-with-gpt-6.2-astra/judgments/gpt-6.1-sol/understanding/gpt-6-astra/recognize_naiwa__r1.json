@@ -1,0 +1,85 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6-astra/recognize_naiwa__r1.json",
+  "target_sha256": "1a8a28b913b780b79c62a74791470b6d8e0abface5444c90775ef59eb29d8ff1",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "092c35a7d379f8df",
+  "judge_images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [],
+  "rationale": "回答未识别出奶龙，也未指出图片属于大笑奶龙／变异奶龙梗，更未说明奶蛙是奶龙的蛙状变异版本。回答明确表示无法确认身份和出处，没有作出与参考资料矛盾的确定性断言。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"naiwa\":0},\"hallucinations\":[],\"rationale\":\"回答未识别出奶龙，也未指出图片属于大笑奶龙／变异奶龙梗，更未说明奶蛙是奶龙的蛙状变异版本。回答明确表示无法确认身份和出处，没有作出与参考资料矛盾的确定性断言。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719f-5c0a-7812-896d-d759427b3e1e",
+    "seconds": 9.0,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12131,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 123,
+      "reasoning_output_tokens": 25
+    },
+    "tokens": {
+      "input": 12131,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 123,
+      "reasoning": 25
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:53:51Z",
+    "finished_at": "2026-10-25T05:54:00Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

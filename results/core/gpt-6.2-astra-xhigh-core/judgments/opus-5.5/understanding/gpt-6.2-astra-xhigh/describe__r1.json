@@ -1,0 +1,114 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-astra-xhigh/describe__r1.json",
+  "target_sha256": "974ee0f77d836db8de4a94ab9294bac89e7e68da8449e18072267aa0b8abebf9",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "7448b0b6ddf00f89",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.2-astra-xhigh",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 1,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 0,
+    "render": 1,
+    "background": 1,
+    "vibe": 0
+  },
+  "hallucinations": [
+    "上身挺起来，肚子朝前，脑袋微微后仰 (upright torso, belly thrust forward, head tilted back): this contradicts the reference's hunched, doubled-over pose. It is only lightly hedged with 我的印象是 and is not marked as uncertain."
+  ],
+  "rationale": "The body shape is described well: bottom-heavy egg form, no neck, short round limbs. Eyes, mouth, render and background are only partly covered. The pose contradicts the reference, and the hands on belly, pale belly patch and unhinged meme vibe are missing or wrong.",
+  "raw": "```json\n{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 1, \"mouth\": 1, \"body\": 2, \"belly_patch\": 0, \"render\": 1, \"background\": 1, \"vibe\": 0}, \"hallucinations\": [\"上身挺起来，肚子朝前，脑袋微微后仰 (upright torso, belly thrust forward, head tilted back): this contradicts the reference's hunched, doubled-over pose. It is only lightly hedged with 我的印象是 and is not marked as uncertain.\"], \"rationale\": \"The body shape is described well: bottom-heavy egg form, no neck, short round limbs. Eyes, mouth, render and background are only partly covered. The pose contradicts the reference, and the hands on belly, pale belly patch and unhinged meme vibe are missing or wrong.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 14.2,
+    "turns": 1,
+    "tokens": {
+      "input": 2447,
+      "cached_input": 0,
+      "cache_write": 2445,
+      "output": 1019,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.040232899999999995,
+    "tools_used": [],
+    "cost_usd": 0.040232899999999995,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2445,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1019,
+      "output_tokens_details": {
+        "thinking_tokens": 733
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2445,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1019,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2445,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2445
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-18T01:16:05Z",
+    "finished_at": "2026-11-18T01:16:20Z",
+    "revision": "fd4ab338+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

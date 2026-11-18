@@ -1,0 +1,118 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "imagegen/chatgpt-image/name_en/giraffe__r1.json",
+  "target_sha256": "7760aef9a820fc115619abbd3c984671b065bbd9b0bf3a851ad9c9880bc6c53a",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "32da82641658e870",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/chatgpt-image/name_en/giraffe__r1/exec-b5311eb5-23f4-4deb-ab46-0fd38b39feb9.png"
+  ],
+  "track": "imagegen",
+  "model": "chatgpt-image",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 1,
+    "render": 1,
+    "background": 0,
+    "vibe": 0
+  },
+  "identity": 2,
+  "failure_modes": [
+    "generic_cute"
+  ],
+  "rationale": "A clearly identifiable, cute Pixar-style giraffe laughing with closed-arc eyes, but it lacks the hunched pose, belly-clutching hands, dark toothy gape, plain background, and absurd meme energy of Laughing Nailong.",
+  "raw": "**Trait observations**\n\n- **pose:** Stands upright with the head tilted back and the torso leaning slightly backward. It is not hunched or doubled over. → **absent**\n- **hands_on_belly:** The front hooves are raised in front of the chest and do not clutch or press the belly. → **absent**\n- **eyes:** The eyes are squeezed shut into thin curved arcs. → **match**\n- **mouth:** The mouth is wide open and laughing, but the interior is pink with a tongue and no visible teeth. It does not dominate the face the way the reference's dark, toothy gape does. → **partial**\n- **body:** The lower torso is chubby and pear-ish with short legs, but there is a long, distinct neck, so the head does not merge into the body. → **partial**\n- **belly_patch:** The belly is a lighter cream area with fewer spots. It is not a clearly defined oval patch. → **partial**\n- **render:** This is a 3D CG render, but it is a polished, Pixar-like plush look with natural outdoor lighting. It lacks the glossy, cheap studio-render feel. → **partial**\n- **background:** The background is a detailed zoo scene with a fence, rocks, trees and sky. → **absent**\n- **vibe:** Wholesome and cute, with no absurd or unhinged meme energy. → **absent**\n- **identity:** The giraffe is clearly recognizable from its ossicones, spotted coat, long neck, hooves and tufted tail. → **clearly**\n\n```json\n{\"traits\": {\"pose\": \"absent\", \"hands_on_belly\": \"absent\", \"eyes\": \"match\", \"mouth\": \"partial\", \"body\": \"partial\", \"belly_patch\": \"partial\", \"render\": \"partial\", \"background\": \"absent\", \"vibe\": \"absent\"}, \"identity\": \"clearly\", \"failure_modes\": [\"generic_cute\"], \"rationale\": \"A clearly identifiable, cute Pixar-style giraffe laughing with closed-arc eyes, but it lacks the hunched pose, belly-clutching hands, dark toothy gape, plain background, and absurd meme energy of Laughing Nailong.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 13.5,
+    "tokens": {
+      "input": 4436,
+      "cached_input": 0,
+      "cache_write": 4434,
+      "output": 1075,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.057356899999999995,
+    "tools_used": [],
+    "cost_usd": 0.057356899999999995,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 4434,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1075,
+      "output_tokens_details": {
+        "thinking_tokens": 366
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 4434,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1075,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 4434,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 4434
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-05T04:03:05Z",
+    "finished_at": "2026-11-05T04:03:19Z",
+    "revision": "aa69823+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

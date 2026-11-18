@@ -1,0 +1,81 @@
+{
+  "settings_id": "cbf7db799b4cb698",
+  "track": "understanding",
+  "model": "qwen4-max-pi-high",
+  "vendor": "alibaba",
+  "item": "describe_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Without looking at any images, describe the most iconic image of Laughing Nailong (大笑奶龙 / 奶蛙) from memory: its pose, expression, body shape, colors, rendering style, and background, in enough detail for an artist who has never seen it to draw it. Say where you are unsure.",
+  "images": [],
+  "answer": "**Up front: I can't reliably picture a single canonical \"laughing Nailong\" image.** I know the character 奶龙 (Nailong) in a general way from Chinese short-form animation and reaction memes, but I don't have a trustworthy memory of one specific \"大笑奶龙\" still. So I'll separate what I'm reasonably confident about from what I'd be inventing, because for an artist that distinction matters more than a fluent-sounding description.\n\n**What I'm fairly confident about (the character in general):**\n\n- **Species/concept:** a cartoon \"milk dragon\" — a baby-dragon mascot character, not a realistic dragon. No wings in most depictions I recall, or only vestigial ones.\n- **Color:** predominantly warm yellow, fairly saturated, with a paler cream/lighter-yellow belly and muzzle area. I don't recall strong secondary colors; possibly small darker accents (horn tips, mouth interior pink/red).\n- **Body shape:** very chubby and rounded — a big head that flows almost directly into a pear/egg-shaped torso with little or no neck. Short stubby arms and legs, oversized belly, small tail. Proportions are toddler-like: head roughly a third to a half of total height.\n- **Face:** large, simple dark eyes set wide apart; a very wide mouth capable of opening enormously. Small rounded horns or nubs on top of the head. Cheeks are full.\n- **Rendering:** my impression is 3D CGI with a soft, matte-to-slightly-glossy toy/vinyl look, simple diffuse lighting, minimal texture — the \"cute mascot\" style used in Chinese short video animation. I'm only moderately confident it's 3D rather than 2D vector-style; the franchise has both official animation and lots of fan/sticker art.\n\n**What I genuinely don't know and won't guess at:**\n\n- The **specific pose** of the famous laughing image (leaning back? head thrown back? hands on belly? mouth-open vs. squinting closed-mouth grin?). Any of these would be me constructing a plausible image, not recalling one.\n- The **exact expression details** — whether teeth/tongue show, whether the eyes are squeezed shut into arcs or wide open, whether there are tear drops or motion lines.\n- The **background** — I have no memory of it. It could be a plain flat color, a scene from an episode, or a cropped/white-background sticker. Cropped meme versions often have no background at all.\n- Whether the iconic version is an **official animation frame** or a **fan redraw / sticker edit**, which would change the rendering style completely.\n\n**One more caution:** you wrote 奶蛙 (\"milk frog\") alongside 奶龙. I don't have solid knowledge of 奶蛙 as the same character or as an established alias. It may be a separate frog mascot, a fan variant, or a nickname I'm simply not aware of. If the image you mean is actually the frog one, then essentially everything above about the yellow dragon's horns, tail, and body plan could be wrong for your target.\n\n**Practical suggestion:** if you can tell me even two or three concrete facts about the image (is it 3D or flat 2D? mouth open or closed? any background color?), I can build a much more useful artist brief around them. As it stands, a description detailed enough to draw from would require me to fabricate the pose, expression, and background, and I'd rather not hand an artist confident-sounding invented specifics.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 30.6,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 138,
+      "output": 1359,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 608,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 138,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1359,
+      "reasoning": 608
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T14:53:45Z",
+    "finished_at": "2026-11-16T14:54:16Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "html_sha256": "02f449579d374aa40405a883fe1e4661f24aefa76632265ba33091ef6a42f6d1",
+  "harness": "fee9bd636b661bc1",
+  "kind": "3d-s2",
+  "gates": [],
+  "errors": [],
+  "blocked": [],
+  "forbidden": [],
+  "elements": [],
+  "timing": {
+    "declarative": false,
+    "scripted": false
+  },
+  "frames": [
+    {
+      "file": "frame_00.webp",
+      "t": 0
+    },
+    {
+      "file": "frame_01.webp",
+      "t": 200
+    },
+    {
+      "file": "frame_02.webp",
+      "t": 400
+    },
+    {
+      "file": "frame_03.webp",
+      "t": 600
+    },
+    {
+      "file": "frame_04.webp",
+      "t": 800
+    },
+    {
+      "file": "frame_05.webp",
+      "t": 1000
+    },
+    {
+      "file": "frame_06.webp",
+      "t": 1200
+    },
+    {
+      "file": "frame_07.webp",
+      "t": 1400
+    }
+  ],
+  "views": [
+    {
+      "file": "view_side.webp",
+      "view": "side",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_back.webp",
+      "view": "back",
+      "t": 0,
+      "hidden": [
+        "painted-plaster",
+        "wooden-backing",
+        "slate-green-writing-surface"
+      ]
+    },
+    {
+      "file": "view_three_quarter.webp",
+      "view": "three_quarter",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_top.webp",
+      "view": "top",
+      "t": 0,
+      "hidden": []
+    }
+  ],
+  "scene": {
+    "characters": [
+      {
+        "name": "character-left-writing",
+        "meshes": 33,
+        "width": 141.03830833435057,
+        "height": 163.57364999966023,
+        "depth": 176.33355609309183,
+        "ratio": 1.250252914797227
+      },
+      {
+        "name": "character-right-reaching",
+        "meshes": 27,
+        "width": 162.1318186955314,
+        "height": 160.3733244334797,
+        "depth": 141.27680820829448,
+        "ratio": 0.8713700330075203
+      }
+    ],
+    "textures": 4
+  },
+  "mode": "render(t)",
+  "preview": "preview.webp",
+  "checks": {
+    "determinism_diff": 0.0,
+    "loop_diff": 0.0,
+    "motion_diff": 0.32260674931129474
+  },
+  "seconds": 5.3
+}

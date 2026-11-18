@@ -1,0 +1,81 @@
+{
+  "settings_id": "7e9b52a50fc5ff45",
+  "track": "understanding",
+  "model": "egg-alpha",
+  "vendor": "undisclosed",
+  "item": "describe_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Without looking at any images, describe the most iconic image of Laughing Nailong (大笑奶龙 / 奶蛙) from memory: its pose, expression, body shape, colors, rendering style, and background, in enough detail for an artist who has never seen it to draw it. Say where you are unsure.",
+  "images": [],
+  "answer": "## Caveat first\n\nI know 奶龙 (Nailong) as the chubby yellow baby‑dragon mascot of a Chinese 3D‑animated web series that blew up on Douyin/Bilibili, and I know that a **laughing** frame of it became a hugely popular reaction sticker (\"大笑奶龙\"). What I *can't* claim is that there is one single canonical \"most iconic\" file — the circulating image exists in many crops, re‑renders and fan‑edited versions. Below is the version I remember most strongly, with confidence flags at the end. I'm also not familiar with **奶蛙** as an established alias; it may be a fan nickname (the wide mouth reads frog‑like) or a different thing entirely, so I can't describe a separate \"milk frog\" design.\n\n## Overall silhouette and proportions\n\nChibi, roughly 2 to 2.5 heads tall. The head is enormous — close to half the total height — and rounded like a slightly squashed ball with a short, blunt, wide muzzle. The body is a pear/egg shape with a big protruding belly, tapering to short stubby legs. Arms are short and thick with simple rounded three‑ or four‑fingered hands (no claws to speak of). A short, fat tail tapers behind it, usually with a rounded leaf/spade‑shaped tip. Two small nub horns or ear‑like bumps sit on top of the head. I believe there is a low row of small rounded spikes or plates running down the back onto the tail — medium confidence.\n\n## Pose\n\nFront‑facing or slight three‑quarter view, standing. The upper body and head tip **backward** with the belly pushed forward — the classic \"doubled over backwards\" laugh. Head tilted up so the chin lifts and the underside of the muzzle shows a bit. Arms are lifted away from the body: my memory is one or both hands raised near chest/face height, or one hand slapping the belly. Legs slightly apart, feet flat, tail acting as a counterweight behind. Overall the pose is loose and off‑balance, not stiff.\n\n## Expression (the important part)\n\n- **Mouth:** enormously wide open, taking up most of the lower face — a big upward‑curving grin‑shaped opening, corners pulled far back and up. Dark pink/red interior, a rounded pink tongue visible at the bottom. Possibly a couple of small blunt white teeth at the lower front — low confidence.\n- **Eyes:** squeezed shut into two thick upward crescents (^ ^ / inverted‑U arcs), pure black, no visible whites. Cheeks bunched up beneath them.\n- Optional in some edits: a tear drop or sweat drop at the outer eye corner, and blush ovals on the cheeks.\n- The comic effect comes from the mouth being *too* big for the face — many meme versions exaggerate it further until it looks slightly uncanny.\n\n## Colors\n\n- Body: saturated warm yellow, roughly a golden/egg yolk yellow.\n- Belly, muzzle underside, inner ears, palms: paler cream / light butter yellow.\n- Horns and back spikes: slightly darker, more orange‑yellow.\n- Mouth: dark maroon‑red cavity, salmon‑pink tongue.\n- Eyes/linework: near‑black. No black outlines around the body — it's shape‑against‑shape.\n\n## Rendering style\n\nClean, glossy **3D CGI**, not 2D. Think vinyl designer toy: smooth matte‑to‑satin plastic surface, soft broad specular highlights on the forehead, cheeks and belly, gentle ambient occlusion in the creases, a soft key light from the upper front and a faint rim/edge light separating it from the background. Soft contact shadow under the feet. Saturated, bright, kid‑animation lighting; no texture, no fur, no scales, no heavy shading. Anti‑aliased clean edges, no hand‑drawn line art.\n\n## Background and framing\n\nFor the sticker/meme form I remember it as **isolated on plain white or transparent**, centered, square crop, either full body or waist‑up. In‑show screenshots have simple cartoon environments behind it, but those aren't the iconic version. Some fan variants add radiating speed lines, floating 哈哈哈 text, or a stretched/warped face.\n\n## Where I'm unsure\n\n1. **Hands/arms** — I can't reliably say whether it's hands on belly, both arms up, or one hand pointing. This is my weakest point.\n2. **Teeth** — whether any are shown, and how many.\n3. **Tears/blush** — may be from fan edits rather than the original.\n4. **Wings** — I don't think it has wings, but I'm not fully certain.\n5. **Exact hue and the back‑spike row** — approximate.\n6. Whether the truly \"most iconic\" file is an official show frame, an official emoji pack render, or a fan‑warped edit. My description leans toward the clean official‑looking render.\n7. **奶蛙** — as noted, I can't confirm this name refers to the same character.\n\nIf you need fidelity, treat the above as a strong stylistic brief rather than a tracing reference, and verify the arm pose against an actual image.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "client": "pi 1.5.0",
+    "seconds": 46.5,
+    "stop_reason": "stop",
+    "rate_limit_retries": 1,
+    "tools_used": [],
+    "usage": {
+      "input": 139,
+      "output": 2682,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1552,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 139,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2682,
+      "reasoning": 1552
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "tokenrhythm/egg-alpha",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "tokenrhythm/egg-alpha",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-04T04:32:32Z",
+    "finished_at": "2026-11-04T04:33:48Z",
+    "revision": "44479d0",
+    "nwb_version": "0.1.0"
+  }
+}

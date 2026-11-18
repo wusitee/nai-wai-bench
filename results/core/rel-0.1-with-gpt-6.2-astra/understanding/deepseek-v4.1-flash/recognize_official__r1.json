@@ -1,0 +1,79 @@
+{
+  "settings_id": "f54f604c4f61c57e",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "vendor": "deepseek",
+  "item": "recognize_official",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "这是**奶龙**，国产动画《奶龙》里的黄色小胖龙角色。\n\n它对应的网络梗通常就叫**“奶龙”梗/“奶龙表情包”**，在短视频里更出圈的具体玩法是**“奶龙摇”**——模仿它举手、扭动的魔性舞蹈，也常配合“我是奶龙”等二创台词传播。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+    "stop_reason": "end_turn",
+    "client": "deepseek-harness-acp 0.0.1",
+    "seconds": 32.8,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+      "reasoning_effort": "high"
+    },
+    "resolved_model": "[\"deepseek-official\",\"deepseek-flash\"]",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 4160,
+        "size": 1000000
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-flash\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-flash-default.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53",
+      "config/dsh-flash-default.patch.yml": "e681660b1857478d"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:48:07Z",
+    "finished_at": "2026-10-25T00:48:40Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

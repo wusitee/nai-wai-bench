@@ -1,0 +1,87 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gemini-3.8-flash/recognize_facepalm__r1.json",
+  "target_sha256": "8f8f488e19242877d51ba3d9699d1a9f579fa201671b7cedc947842f461c0159",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "95e43044813d840d",
+  "judge_images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0
+  },
+  "hallucinations": [
+    "将图中角色认定为《小P优优》（Pocoyo）中的外星人；它实际是奶龙的变异形象。",
+    "声称创作者提取了《小P优优》的外星人3D模型来复刻Roll Safe姿势，虚构了该图的制作来源与过程。"
+  ],
+  "rationale": "回答未识别出奶龙，也未指出大笑奶龙／变异奶龙／奶蛙梗家族，两项均为0分。手靠额头的姿势可能让人联想到Roll Safe，但这种联想不能替代正确的角色及梗家族识别。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0},\"hallucinations\":[\"将图中角色认定为《小P优优》（Pocoyo）中的外星人；它实际是奶龙的变异形象。\",\"声称创作者提取了《小P优优》的外星人3D模型来复刻Roll Safe姿势，虚构了该图的制作来源与过程。\"],\"rationale\":\"回答未识别出奶龙，也未指出大笑奶龙／变异奶龙／奶蛙梗家族，两项均为0分。手靠额头的姿势可能让人联想到Roll Safe，但这种联想不能替代正确的角色及梗家族识别。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719d-d679-73e2-897e-4b20244cc9d9",
+    "seconds": 13.1,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13233,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 265,
+      "reasoning_output_tokens": 96
+    },
+    "tokens": {
+      "input": 13233,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 265,
+      "reasoning": 96
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:52:11Z",
+    "finished_at": "2026-10-25T05:52:24Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

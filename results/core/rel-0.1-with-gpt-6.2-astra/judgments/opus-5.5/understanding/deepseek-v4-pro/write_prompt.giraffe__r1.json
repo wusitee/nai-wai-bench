@@ -1,0 +1,112 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/deepseek-v4-pro/write_prompt.giraffe__r1.json",
+  "target_sha256": "49dfa5214e28866c843fd63c8446c9b09ee69ce7b4decea73e4b76fc7be2588c",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "d823fdd2ddbfb405",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 0,
+    "background": 2,
+    "vibe": 1,
+    "identity": 2
+  },
+  "hallucinations": [],
+  "rationale": "The prompt covers the squeezed-shut eyes, the white belly patch, the plain white background and clear giraffe identity, but it omits the hunched pose and the hands on the belly. It asks for a long neck and a flat 2D sticker style, which contradict the neckless body and glossy 3D render in the notes, and its 'cute baby animal' framing undercuts the unhinged meme vibe.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 1, \"body\": 1, \"belly_patch\": 2, \"render\": 0, \"background\": 2, \"vibe\": 1, \"identity\": 2}, \"hallucinations\": [], \"rationale\": \"The prompt covers the squeezed-shut eyes, the white belly patch, the plain white background and clear giraffe identity, but it omits the hunched pose and the hands on the belly. It asks for a long neck and a flat 2D sticker style, which contradict the neckless body and glossy 3D render in the notes, and its 'cute baby animal' framing undercuts the unhinged meme vibe.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 13.1,
+    "tokens": {
+      "input": 1658,
+      "cached_input": 0,
+      "cache_write": 1656,
+      "output": 986,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.033302899999999996,
+    "tools_used": [],
+    "cost_usd": 0.033302899999999996,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1656,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 986,
+      "output_tokens_details": {
+        "thinking_tokens": 754
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1656,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 986,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1656,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1656
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:54:31Z",
+    "finished_at": "2026-10-25T01:54:44Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

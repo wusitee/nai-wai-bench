@@ -1,0 +1,84 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6.1-sol/recognize_smug__r1.json",
+  "target_sha256": "bb430d88ca806136f093d282459b31618126c9126ce4f8305d87833b27ca7b95",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "8e0ef2f0b98ab830",
+  "judge_images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "scores": {
+    "base_character": 2,
+    "identifies_meme": 1
+  },
+  "hallucinations": [],
+  "rationale": "正确认出角色是国产动画《奶龙》中的黄色小恐龙，但仅笼统称为“奶龙梗／奶龙表情包”，未明确识别为大笑奶龙／变异奶龙／奶蛙梗家族。对眯眼、抿嘴的描述符合图片，没有明确的幻觉。",
+  "raw": "{\"scores\":{\"base_character\":2,\"identifies_meme\":1},\"hallucinations\":[],\"rationale\":\"正确认出角色是国产动画《奶龙》中的黄色小恐龙，但仅笼统称为“奶龙梗／奶龙表情包”，未明确识别为大笑奶龙／变异奶龙／奶蛙梗家族。对眯眼、抿嘴的描述符合图片，没有明确的幻觉。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a171a0-cb86-7cf1-bb2e-b1f5f596662b",
+    "seconds": 11.2,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12333,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 159,
+      "reasoning_output_tokens": 53
+    },
+    "tokens": {
+      "input": 12333,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 159,
+      "reasoning": 53
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:55:25Z",
+    "finished_at": "2026-10-25T05:55:36Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

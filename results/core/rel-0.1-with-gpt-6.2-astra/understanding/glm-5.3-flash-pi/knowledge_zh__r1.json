@@ -1,0 +1,81 @@
+{
+  "settings_id": "680aa2edad69d268",
+  "track": "understanding",
+  "model": "glm-5.3-flash-pi",
+  "vendor": "zhipu",
+  "item": "knowledge_zh",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "「大笑奶龙」（也叫「奶蛙」）是什么？请介绍它的来源、外观以及相关的梗和二创。不确定的地方请直接说明，不要编造。",
+  "images": [],
+  "answer": "# 「大笑奶龙」介绍\n\n## 先说结论\n「大笑奶龙」指的是动画角色**奶龙**的一张“张嘴大笑”的经典表情包形象。以下内容中，我对奶龙本身的信息比较有把握，但对一些细节（尤其是“奶蛙”这个称呼）**无法确认**，会在最后明确列出。\n\n## 奶龙是什么（比较有把握的部分）\n- **来源**：奶龙是中国国产动画IP，主要在抖音等短视频平台以系列短动画的形式传播，大约在2020—2021年前后开始更新，2023—2024年间爆火。具体创作者/工作室的名字我记不准确，不敢乱写。\n- **角色设定**：奶龙是一条黄色的、圆滚滚的小龙，形象简单可爱，走低幼搞笑路线。动画里它经常和人类小伙伴“小七”以及“对手”暴暴龙等角色互动（对配角的具体设定细节我不完全确定）。\n- **受众**：最初面向儿童，后来表情包出圈，在年轻网民、学生群体中广泛传播，一度成为“小学生文化”的代名词之一，也因此招来一些“幼稚”“低龄”的嘲讽，衍生出反讽向的用法。\n\n## 大笑奶龙（表情包）指什么（中等把握）\n- 这是奶龙表情包中流传最广的一张/一组形象：奶龙**闭眼、仰头、嘴巴张得很大**，呈现出一种夸张、有点“癫”的大笑。\n- 用途：聊天中代替“哈哈哈哈”表达大笑；但由于笑得太夸张，也常被用来表达**尴尬笑、阴阳怪气、嘲讽式大笑**，属于很典型的“抽象”风格表情包。\n\n## 相关梗与二创（部分有把握，部分存疑）\n- **表情包文化**：大笑奶龙、侧躺奶龙等形象在微信/QQ群聊中大量传播。\n- **谷子/周边**：奶龙的徽章、玩偶等周边在低龄群体中很流行（具体官方联名情况我不确定）。\n- **鬼畜、remix、AI翻唱**：B站等平台上有以奶龙主题曲为素材的二次创作（歌词原文我记不清，不引用）。\n- **反讽二创**：因为部分人觉得奶龙“幼稚”，出现了恶搞、拉踩类的二创。\n- **与其他IP的混搭二创**（如换成其他角色画风等）比较常见，但具体案例我无法一一确认。\n\n## 我不确定的地方（请勿当作事实）\n1. **“奶蛙”这个称呼**：我没有可靠依据说“大笑奶龙也叫奶蛙”是广泛流传的说法。它可能是某个小圈子/社区的昵称，也可能是把奶龙和另一个经典梗“**笑蛙**”（一只被P上人牙大笑的青蛙表情包）弄混了，或者是把奶龙P成蛙形的衍生图。这一点我**无法确认**。\n2. 奶龙的**确切创作者、工作室名称和首播时间**，我记不准，无法给出。\n3. “大笑奶龙”这张图究竟是**官方表情包还是网友二创**，我也无法确定。\n\n如果你对“奶蛙”这个说法有具体出处（比如某个截图或群聊），我可以帮你分析它更可能属于哪种情况。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "zai-coding-cn/glm-5.3-flash",
+    "client": "pi 1.5.0",
+    "seconds": 115.2,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 91,
+      "output": 3638,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 2852,
+      "cost": 0.00183265
+    },
+    "tokens": {
+      "input": 91,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 3638,
+      "reasoning": 2852
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "zai-coding-cn/glm-5.3-flash",
+    "cost_usd_reported": 0.00183265
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "zai-coding-cn/glm-5.3-flash",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "zai-coding-cn/glm-5.3-flash",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-06T07:10:38Z",
+    "finished_at": "2026-11-06T07:12:33Z",
+    "revision": "ef8832f+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

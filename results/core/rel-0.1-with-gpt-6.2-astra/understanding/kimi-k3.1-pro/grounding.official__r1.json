@@ -1,0 +1,73 @@
+{
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "vendor": "moonshot",
+  "item": "grounding.official",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Look only at the attached image. Return a JSON object with two keys: pose (one of belly_clutch, raised_hands, facepalm, folded_arms) and eyes (open or closed). Use unknown for a field you cannot determine. Do not infer the answer from a meme's name or typical appearance.",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "{\"pose\":\"raised_hands\",\"eyes\":\"open\"}",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 9.9,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20363,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 63,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20426 / 1048576 tokens (2%)\nSession total: 20363 input, 63 output",
+      "usage": {
+        "inputTokens": 20363,
+        "outputTokens": 63
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:47:51Z",
+    "finished_at": "2026-10-25T00:48:01Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

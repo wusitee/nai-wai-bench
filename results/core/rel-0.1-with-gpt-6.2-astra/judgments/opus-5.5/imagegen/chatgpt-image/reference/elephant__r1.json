@@ -1,0 +1,116 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "imagegen/chatgpt-image/reference/elephant__r1.json",
+  "target_sha256": "7675ccfdf2ada8fbac59619eb10e937a81e20f8ce58f059f820f296dce6d3228",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "d317650676eacee7",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/chatgpt-image/reference/elephant__r1/exec-647b7dca-cddf-40bf-a660-18d2845c9975.png"
+  ],
+  "track": "imagegen",
+  "model": "chatgpt-image",
+  "traits": {
+    "pose": 2,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 2,
+    "vibe": 1
+  },
+  "identity": 2,
+  "failure_modes": [],
+  "rationale": "A faithful elephant adaptation that reproduces the pose, belly-clutching, shut eyes, gaping mouth, body shape, belly patch, render and background, with clear elephant features. The only shortfall is a slightly too wholesome, polished feel compared with the meme's unhinged energy.",
+  "raw": "**Pose:** The elephant stands with knees slightly bent and its torso and head leaning forward in a doubled-over laugh, much like the reference. **match**\n**Hands_on_belly:** Both front paws press on the belly, fingers almost meeting in the middle, in a clear 捧腹 gesture. **match**\n**Eyes:** The eyes are squeezed shut into thin dark curved arcs. **match**\n**Mouth:** The mouth is wide open with a dark interior, a pink tongue and a visible row of teeth. It is very large but a bit less face-dominating than the reference. **match**\n**Body:** The body is a bulky bean/pear shape. The head merges into the torso with no neck, and the limbs are short and thick. **match**\n**Belly_patch:** A pale cream oval belly patch contrasts with the grey body. **match**\n**Render:** It is a smooth 3D CG render with soft studio lighting. It is slightly more polished than the reference but in the same style. **match**\n**Background:** The background is plain white to light grey with a soft floor gradient and no props. **match**\n**Vibe:** The laugh reads as hearty and cheerful, closer to a friendly mascot than the slightly unhinged 抽象 energy of the reference. **partial**\n**Identity:** The elephant is clearly recognizable from its grey skin, trunk, tusks, large pink-lined ears, toenails and tufted tail. **clearly**\n\n```json\n{\"traits\": {\"pose\": \"match\", \"hands_on_belly\": \"match\", \"eyes\": \"match\", \"mouth\": \"match\", \"body\": \"match\", \"belly_patch\": \"match\", \"render\": \"match\", \"background\": \"match\", \"vibe\": \"partial\"}, \"identity\": \"clearly\", \"failure_modes\": [], \"rationale\": \"A faithful elephant adaptation that reproduces the pose, belly-clutching, shut eyes, gaping mouth, body shape, belly patch, render and background, with clear elephant features. The only shortfall is a slightly too wholesome, polished feel compared with the meme's unhinged energy.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 13.5,
+    "tokens": {
+      "input": 4466,
+      "cached_input": 0,
+      "cache_write": 4464,
+      "output": 1108,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0583009,
+    "tools_used": [],
+    "cost_usd": 0.0583009,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 4464,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1108,
+      "output_tokens_details": {
+        "thinking_tokens": 422
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 4464,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1108,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 4464,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 4464
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-05T04:03:51Z",
+    "finished_at": "2026-11-05T04:04:04Z",
+    "revision": "aa69823+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

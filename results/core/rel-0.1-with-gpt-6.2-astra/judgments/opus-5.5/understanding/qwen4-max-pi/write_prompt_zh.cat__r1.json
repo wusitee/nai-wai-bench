@@ -1,0 +1,116 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi/write_prompt_zh.cat__r1.json",
+  "target_sha256": "43179ad643a21039e36bd182378065e59a2dadaf8e8a7aa0f2fe480149d6f404",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "242767d92506798b",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "qwen4-max-pi",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 0,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 2,
+    "vibe": 1,
+    "identity": 1
+  },
+  "hallucinations": [
+    "Frames the meme as an extreme face close-up with the head filling the frame and tilted upward, contradicting the standing, doubled-over full-body pose",
+    "Places the paws raised at the sides of the chest rather than clutching the belly"
+  ],
+  "rationale": "The prompt covers the arc eyes, the huge dark mouth, the glossy 3D render and the white background well. It misses the hunched belly-clutching pose, the bean-shaped body and the belly patch, and the cat is only a cream-yellow Nailong with token ears and whiskers.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 2, \"body\": 0, \"belly_patch\": 0, \"render\": 2, \"background\": 2, \"vibe\": 1, \"identity\": 1}, \"hallucinations\": [\"Frames the meme as an extreme face close-up with the head filling the frame and tilted upward, contradicting the standing, doubled-over full-body pose\", \"Places the paws raised at the sides of the chest rather than clutching the belly\"], \"rationale\": \"The prompt covers the arc eyes, the huge dark mouth, the glossy 3D render and the white background well. It misses the hunched belly-clutching pose, the bean-shaped body and the belly patch, and the cat is only a cream-yellow Nailong with token ears and whiskers.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 12.7,
+    "turns": 1,
+    "tokens": {
+      "input": 2025,
+      "cached_input": 0,
+      "cache_write": 2023,
+      "output": 826,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.032712000000000005,
+    "tools_used": [],
+    "cost_usd": 0.032712000000000005,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2023,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 826,
+      "output_tokens_details": {
+        "thinking_tokens": 553
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2023,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 826,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2023,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2023
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T10:14:41Z",
+    "finished_at": "2026-11-16T10:14:54Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

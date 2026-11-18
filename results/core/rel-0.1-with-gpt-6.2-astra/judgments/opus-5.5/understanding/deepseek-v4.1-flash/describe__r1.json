@@ -1,0 +1,115 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/deepseek-v4.1-flash/describe__r1.json",
+  "target_sha256": "d48ad48379db79b2bb6b5b801d8ea45392362283b74a0651b1b49d4d381e06c1",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "d1890ec95152d978",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 2,
+    "vibe": 0
+  },
+  "hallucinations": [
+    "States confidently that the character is sitting on the ground with its legs spread forward in a wide V; the reference shows it standing (it even says the sitting pose stays the same in other versions)",
+    "States confidently that the upper body leans back 15–25 degrees with the head thrown back and chin raised ('仰天大笑'); the reference shows the torso hunched forward, doubled over with laughter",
+    "Describes a big-head-small-body build with the head wider than the body (head-to-body ratio about 1.5:1), which conflicts with the bulky pear-shaped body whose head merges into the torso"
+  ],
+  "rationale": "The answer gets the face (arc-shaped closed eyes, huge dark mouth with teeth and tongue), the pale belly patch and the plain white background right, but it inverts the pose into sitting and leaning back, hedges on the hands-on-belly detail, calls the render matte rather than glossy, and never conveys the absurd 抽象 meme energy.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 2, \"mouth\": 2, \"body\": 1, \"belly_patch\": 2, \"render\": 1, \"background\": 2, \"vibe\": 0}, \"hallucinations\": [\"States confidently that the character is sitting on the ground with its legs spread forward in a wide V; the reference shows it standing (it even says the sitting pose stays the same in other versions)\", \"States confidently that the upper body leans back 15–25 degrees with the head thrown back and chin raised ('仰天大笑'); the reference shows the torso hunched forward, doubled over with laughter\", \"Describes a big-head-small-body build with the head wider than the body (head-to-body ratio about 1.5:1), which conflicts with the bulky pear-shaped body whose head merges into the torso\"], \"rationale\": \"The answer gets the face (arc-shaped closed eyes, huge dark mouth with teeth and tongue), the pale belly patch and the plain white background right, but it inverts the pose into sitting and leaning back, hedges on the hands-on-belly detail, calls the render matte rather than glossy, and never conveys the absurd 抽象 meme energy.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 16.3,
+    "tokens": {
+      "input": 3010,
+      "cached_input": 0,
+      "cache_write": 3008,
+      "output": 1287,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.050306699999999996,
+    "tools_used": [],
+    "cost_usd": 0.050306699999999996,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3008,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1287,
+      "output_tokens_details": {
+        "thinking_tokens": 886
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3008,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1287,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3008,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3008
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:54:52Z",
+    "finished_at": "2026-10-25T01:55:08Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

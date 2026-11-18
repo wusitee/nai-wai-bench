@@ -1,0 +1,70 @@
+{
+  "settings_id": "7c81ed50f365cb3c",
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "vendor": "moonshot",
+  "item": "knowledge_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "What is the Chinese internet meme \"大笑奶龙\" (Laughing Nailong, also called \"奶蛙\")? Explain its origin, what it looks like, and the related jokes and remixes. Say so plainly where you are unsure instead of guessing.",
+  "images": [],
+  "answer": "“**大笑奶龙**”不是奶龙官方设定里的新角色，而是围绕国产卡通形象**奶龙**形成的一张夸张表情图及其二创体系。\n\n奶龙本身是国产动画短视频中的黄色卡通角色，外形更像圆滚滚的小恐龙：身体矮胖、肚子很大，原本走可爱、搞笑路线，经常和角色“小七”一起出现。\n\n大笑奶龙的图片则把奶龙的脸处理得极不自然：脸部被拉宽、压扁，眼睛眯起，嘴巴形成特别夸张的大笑弧度。于是它从普通可爱变成了既滑稽又有点诡异的“抽象”表情。因为某些版本看起来很像一只咧嘴怪笑的青蛙，所以也被称为“**奶蛙**”；不过不同网友使用这两个名字时未必有严格区分。\n\n它常见的用法包括：\n\n- **当大笑反应图**：表达“笑死我了”“难绷”，有时是真觉得好笑，有时是阴阳怪气或嘲笑。\n- **评论区刷图**：图片本身没有固定台词，笑点主要来自它突兀、滑稽而略显瘆人的脸。\n- **变形和动画二创**：继续拉伸、镜像、旋转、翻转，或者做成跳动、旋转、跳舞、贴近屏幕的视频。\n- **声音和鬼畜 remix**：配上夸张的笑声、歌曲、变速音效，与其他“抽象”角色或梗混剪。\n- **融入奶龙的其他梗**：例如“我是奶龙／我才是奶龙”、奶龙舞等经常被一起使用，但这些属于更广的奶龙梗，并不是大笑奶龙这张图的明确出处。\n\n网上也会看到“唐龙”之类称呼；这类用法有时带有拿疾病或残障骂人的意味，并不是理解这个梗所必需的背景。\n\n**我不确定的部分**是它最初的精确来源：我不能可靠指出第一张图由谁、在哪一天发布，也不应断言它一定来自某一集官方动画、某个特定玩具或 AI 生成。比较稳妥的说法是：它是奶龙形象在表情包和短视频传播中被夸张化、怪诞化后形成的二创梗，而不是一个有明确官方剧情出身的角色。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 53.4,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20018,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 2502,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 22520 / 1048576 tokens (2%)\nSession total: 20018 input, 2502 output",
+      "usage": {
+        "inputTokens": 20018,
+        "outputTokens": 2502
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:44:51Z",
+    "finished_at": "2026-10-25T00:45:44Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

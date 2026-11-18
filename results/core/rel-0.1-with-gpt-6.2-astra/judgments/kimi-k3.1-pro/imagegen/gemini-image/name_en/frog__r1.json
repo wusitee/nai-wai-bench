@@ -1,0 +1,90 @@
+{
+  "judge": "kimi-k3.1-pro",
+  "judge_vendor": "moonshot",
+  "target": "imagegen/gemini-image/name_en/frog__r1.json",
+  "target_sha256": "f2cee290d0e54b5969352782ac23a4d71ea47f4845b7efc770a527ad21f12049",
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "judge_prompt": "d4361b55524231c8",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/gemini-image/name_en/frog__r1/inline-0.jpg"
+  ],
+  "track": "imagegen",
+  "model": "gemini-image",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 0,
+    "background": 0,
+    "vibe": 0
+  },
+  "identity": 2,
+  "failure_modes": [
+    "generic_cute",
+    "text_or_watermark",
+    "multiple_subjects"
+  ],
+  "rationale": "The frog identity and belly-clutching laughter are clear, but the seated pose, 2D kawaii rendering, and busy captioned scene depart substantially from the reference meme.",
+  "raw": "pose: Seated with splayed legs rather than standing and doubled forward — absent  \nhands_on_belly: Both forefeet press against the belly — match  \neyes: Eyes squeezed shut into thin curved arcs, with laughing tears — match  \nmouth: Huge dark open mouth with a visible tongue, but no clear teeth on the frog — partial  \nbody: Bulky, neckless body with short, thick limbs, adapted to a frog — match  \nbelly_patch: Large pale yellow oval belly contrasting with the green body — match  \nrender: Flat 2D cartoon illustration with thick outlines, not glossy 3D CG — absent  \nbackground: Busy beige scene with captions, emojis, decorations, and a wooden floor — absent  \nvibe: Cheerful kawaii laughter rather than absurd, slightly unhinged meme energy — absent  \nidentity: Clearly a green frog with frog-like eyes, limbs, body, and coloring, despite the dragon hood — clearly  \n\n{\"traits\": {\"pose\": \"absent\", \"hands_on_belly\": \"match\", \"eyes\": \"match\", \"mouth\": \"partial\", \"body\": \"match\", \"belly_patch\": \"match\", \"render\": \"absent\", \"background\": \"absent\", \"vibe\": \"absent\"}, \"identity\": \"clearly\", \"failure_modes\": [\"generic_cute\", \"text_or_watermark\", \"multiple_subjects\"], \"rationale\": \"The frog identity and belly-clutching laughter are clear, but the seated pose, 2D kawaii rendering, and busy captioned scene depart substantially from the reference meme.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 26.5,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 22815,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 755,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 23570 / 1048576 tokens (2%)\nSession total: 22815 input, 755 output",
+      "usage": {
+        "inputTokens": 22815,
+        "outputTokens": 755
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:54:54Z",
+    "finished_at": "2026-10-25T01:55:20Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

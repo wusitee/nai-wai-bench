@@ -1,0 +1,91 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6.1-sol/write_prompt_zh.cat__r1.json",
+  "target_sha256": "cb016ab3f7f5945e40369519abe56ab44b7e77b3a08908355da635fa6f94494d",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "247a2f434814aa68",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 2,
+    "vibe": 2,
+    "identity": 2
+  },
+  "hallucinations": [
+    "双爪缩在胸前，与参考中双爪按住或抱住肚子的姿势相矛盾。"
+  ],
+  "rationale": "提示词清楚覆盖了笑眼、巨大笑口、廉价三维质感、浅色背景和失控搞怪的气质，猫耳、胡须与自然的奶黄色也支持猫的辨识度。但未呈现站立前屈、微弯膝盖和捧腹姿势，缺少浅色椭圆腹斑，体型仅部分符合。",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":0,\"eyes\":2,\"mouth\":2,\"body\":1,\"belly_patch\":0,\"render\":2,\"background\":2,\"vibe\":2,\"identity\":2},\"hallucinations\":[\"双爪缩在胸前，与参考中双爪按住或抱住肚子的姿势相矛盾。\"],\"rationale\":\"提示词清楚覆盖了笑眼、巨大笑口、廉价三维质感、浅色背景和失控搞怪的气质，猫耳、胡须与自然的奶黄色也支持猫的辨识度。但未呈现站立前屈、微弯膝盖和捧腹姿势，缺少浅色椭圆腹斑，体型仅部分符合。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a171a1-2d4e-7090-81ca-bdaf3897cfdc",
+    "seconds": 27.2,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12240,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 634,
+      "reasoning_output_tokens": 452
+    },
+    "tokens": {
+      "input": 12240,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 634,
+      "reasoning": 452
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:55:50Z",
+    "finished_at": "2026-10-25T05:56:17Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/deepseek-v4.1-flash/recognize_angry__r1.json",
+  "target_sha256": "7710514cb483f3d0b7b95bc737c8deff9775793bc6b0e0ffc3d673be8bea2e70",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "5859f3308e562398",
+  "judge_images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 1
+  },
+  "hallucinations": [
+    "将图中角色认定为“红温兽”“红温宝宝”，并将其来源解释为网友对“红温”状态的具象化，误认了实际的奶龙变异形象。"
+  ],
+  "rationale": "回答没有识别出原型奶龙，也没有指出它属于大笑奶龙／变异奶龙／奶蛙梗。仅提到形象并非官方角色，部分覆盖非官方性质，但缺少AI生成及由奶龙变异而来的关键信息。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"ai_variant\":1},\"hallucinations\":[\"将图中角色认定为“红温兽”“红温宝宝”，并将其来源解释为网友对“红温”状态的具象化，误认了实际的奶龙变异形象。\"],\"rationale\":\"回答没有识别出原型奶龙，也没有指出它属于大笑奶龙／变异奶龙／奶蛙梗。仅提到形象并非官方角色，部分覆盖非官方性质，但缺少AI生成及由奶龙变异而来的关键信息。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719c-2f86-73e1-8d71-5bd2e2b514be",
+    "seconds": 22.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12172,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 485,
+      "reasoning_output_tokens": 340
+    },
+    "tokens": {
+      "input": 12172,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 485,
+      "reasoning": 340
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:50:23Z",
+    "finished_at": "2026-10-25T05:50:45Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

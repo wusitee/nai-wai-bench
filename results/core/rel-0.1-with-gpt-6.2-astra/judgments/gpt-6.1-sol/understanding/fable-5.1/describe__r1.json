@@ -1,0 +1,90 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1/describe__r1.json",
+  "target_sha256": "a471c3a2d2c9ab45096be6b5bcc0f4915a8a23fabaa143e292138e13dcbed1b1",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "1fa9191a66f3cf5b",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "fable-5.1",
+  "scores": {
+    "pose": 1,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 1,
+    "render": 2,
+    "background": 1,
+    "vibe": 1
+  },
+  "hallucinations": [
+    "将口腔内部明确描述为粉红色或玫红色，与参考中的深暗口腔内部不符。"
+  ],
+  "rationale": "准确覆盖了闭眼弧线、无明显脖子的圆胖身体、短粗四肢及有光泽的柔和3D渲染。站姿仅部分吻合，缺少弯腰屈膝和双手捧腹的关键特征；浅色椭圆肚皮、纯白或浅灰背景及抽象失控感描述不足。",
+  "raw": "{\"scores\":{\"pose\":1,\"hands_on_belly\":0,\"eyes\":2,\"mouth\":1,\"body\":2,\"belly_patch\":1,\"render\":2,\"background\":1,\"vibe\":1},\"hallucinations\":[\"将口腔内部明确描述为粉红色或玫红色，与参考中的深暗口腔内部不符。\"],\"rationale\":\"准确覆盖了闭眼弧线、无明显脖子的圆胖身体、短粗四肢及有光泽的柔和3D渲染。站姿仅部分吻合，缺少弯腰屈膝和双手捧腹的关键特征；浅色椭圆肚皮、纯白或浅灰背景及抽象失控感描述不足。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a19117-8868-7a01-bb49-20cc52e97695",
+    "seconds": 18.7,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13021,
+      "cached_input_tokens": 3968,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 381,
+      "reasoning_output_tokens": 205
+    },
+    "tokens": {
+      "input": 13021,
+      "cached_input": 3968,
+      "cache_write": 0,
+      "output": 381,
+      "reasoning": 205
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T08:33:20Z",
+    "finished_at": "2026-10-31T08:33:39Z",
+    "revision": "bd3cba6",
+    "nwb_version": "0.1.0"
+  }
+}
