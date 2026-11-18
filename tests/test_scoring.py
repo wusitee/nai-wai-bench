@@ -9,6 +9,7 @@ import pytest
 
 from nwb import report
 from nwb.config import find_root, load_bench
+from nwb.lang import bi
 from nwb.scoring import aggregate, grounding_score, image_scores, naiwai_index, understanding_score
 from nwb.util import write_json
 
@@ -354,7 +355,7 @@ def test_efficiency_prices_cache_subsets_missing_usage_and_separate_judges():
     assert "https://example.com/prices" in rendered and "as of 2026-10-25" in rendered
     table = rendered.split("</table>", 1)[0]
     assert table.index("&lt;larger&gt;") < table.index("&lt;m&gt;")
-    assert ">1,000</td>" in table and "无用量数据 No usage data: &lt;missing&gt;" in rendered
+    assert ">1,000</td>" in table and bi("无用量数据", "No usage data") + ": &lt;missing&gt;" in rendered
 
 
 def test_run_timing_separates_parallel_client_time_resumed_span_and_judges():

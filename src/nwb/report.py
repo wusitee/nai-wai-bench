@@ -7,6 +7,7 @@ from html import escape
 
 from nwb import CANARY, __version__
 from nwb.config import Bench
+from nwb.lang import bi
 
 CSS = """
 body{font:14px/1.5 system-ui,sans-serif;margin:2rem auto;max-width:1200px;padding:0 1rem;color:#1f2328;background:#fff}
@@ -157,7 +158,7 @@ def timing_section(efficiency: dict, label=lambda m: m) -> str:
     subjects = [(f"Subject · {track}", model, row)
                 for model, tracks in efficiency.get("whole_run", {}).items() for track, row in tracks.items()]
     judges = [("Judge", model, row) for model, row in efficiency.get("judges", {}).items()]
-    return ("<h3>运行用时 <span class=en>Run time</span></h3>"
+    return (f"<h3>{bi('运行用时', 'Run time')}</h3>"
             "<p>Total client time sums reported per-task seconds; timed-task coverage shows missing timings. "
             "Collection span runs from the earliest recorded start to the latest finish among tasks with valid "
             "timestamp pairs; it includes pauses between resumed sessions, while parallel calls overlap. "
@@ -170,18 +171,20 @@ def efficiency_section(scores: dict, label=lambda m: m) -> str:
     efficiency = scores.get("efficiency", {})
     rows = efficiency.get("visual_understanding", {})
     board = scores.get("leaderboards", {}).get("visual_understanding", [])
-    out = ["<h2 id=efficiency>效率 <span class=en>Efficiency</span></h2>"
-           '<p>每个模型在排名题组上平均每题用多少 token，以及按官方 API 标价估算的费用。输出 token（含推理）最适合横向比较；'
+    out = [f"<h2 id=efficiency>{bi('效率', 'Efficiency')}</h2>"
+           '<p><span class=zh>每个模型在排名题组上平均每题用多少 token，以及按官方 API 标价估算的费用。输出 token（含推理）最适合横向比较；'
            '输入 token 包含各客户端自带的系统提示，所以输入量和费用反映的是"通过该客户端运行"的成本。'
-           '订阅制 CLI 并不按 token 计费；没有报告用量的客户端显示为"—"。<br><span class=en>'
+           '订阅制 CLI 并不按 token 计费；没有报告用量的客户端显示为"—"。</span><span class=en><br>'
            "Average tokens per ranked task, and an estimate at each vendor's list API price. Output tokens "
            "(including reasoning) are the most comparable figure; input tokens include each client's own system "
            "prompt, so input and cost describe running the task through that client. Subscription CLIs are not "
            'billed per token; clients that do not report usage show "—".</span></p>'
-           "<div class=scroll><table class=efficiency><tr><th>模型 Model</th><th class=n>得分 Score</th>"
-           "<th class=n>输出 token/题<br>Output tokens/task</th><th class=n>输入 token/题<br>Input tokens/task</th>"
-           "<th class=n>估算费用/题<br>Est. cost/task</th><th class=n>整组估算<br>Est. panel cost</th>"
-           "<th class=n>客户端用时/题<br>Client time/task</th><th class=n>用量覆盖<br>Usage coverage</th></tr>"]
+           f"<div class=scroll><table class=efficiency><tr><th>{bi('模型', 'Model')}</th><th class=n>{bi('得分', 'Score')}</th>"
+           f"<th class=n>{bi('输出 token/题', 'Output tokens/task', True)}</th>"
+           f"<th class=n>{bi('输入 token/题', 'Input tokens/task', True)}</th>"
+           f"<th class=n>{bi('估算费用/题', 'Est. cost/task', True)}</th><th class=n>{bi('整组估算', 'Est. panel cost', True)}</th>"
+           f"<th class=n>{bi('客户端用时/题', 'Client time/task', True)}</th>"
+           f"<th class=n>{bi('用量覆盖', 'Usage coverage', True)}</th></tr>"]
     for ranked in board:
         model = ranked["model"]
         r = rows.get(model, {})
@@ -257,14 +260,15 @@ def efficiency_section(scores: dict, label=lambda m: m) -> str:
             out.append(f"<circle cx='{xx:.1f}' cy='{yy:.1f}' r=5 fill='var(--bar,#c98500)'><title>"
                        f"{escape(label(m))}: {x:,.0f} tokens, {y:.1f} score</title></circle>"
                        f"<text x='{tx:.1f}' y='{ty:.1f}' text-anchor='{anchor}' font-size=13 fill=currentColor>{escape(short)}</text>")
+        log_zh, log_en = (" · 对数刻度", " · log scale") if logarithmic else ("", "")
         out.append(f"<text x={(left + right) // 2} y={bottom + 52} text-anchor=middle fill=currentColor font-size=13>"
-                   "每题输出 token Output tokens per task" + (" · 对数刻度 log scale" if logarithmic else "") + "</text>"
+                   f"<tspan class=zh>每题输出 token{log_zh}</tspan><tspan class=en> Output tokens per task{log_en}</tspan></text>"
                    f"<text x=16 y={(top + bottom) // 2} transform='rotate(-90 16 {(top + bottom) // 2})' text-anchor=middle "
-                   "fill=currentColor font-size=13>得分 Score</text></svg></div>")
+                   "fill=currentColor font-size=13><tspan class=zh>得分</tspan><tspan class=en> Score</tspan></text></svg></div>")
     else:
         out.append("<p class=muted>No ranked models have output-token telemetry for this panel.</p>")
     if missing:
-        out.append("<p class=muted>无用量数据 No usage data: " + " · ".join(escape(label(m)) for m in missing) + "</p>")
+        out.append(f"<p class=muted>{bi('无用量数据', 'No usage data')}: " + " · ".join(escape(label(m)) for m in missing) + "</p>")
     images = efficiency.get("imagegen", {})
     if any(r["tasks"] for r in images.values()):
         out.append("<h3>Image generation</h3><table><tr><th>Model</th><th>Images</th><th>Median client seconds/task</th></tr>")

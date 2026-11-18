@@ -6,6 +6,7 @@ import pytest
 
 from nwb import CANARY, cli, report, scoring, site
 from nwb.config import find_root, load_bench, load_models
+from nwb.lang import bi
 from nwb.provenance import c2pa_summary
 from nwb.util import write_json
 
@@ -87,7 +88,8 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
     assert "https://example.com/results.zip" in html and "Download raw results" in html
     assert "Efficiency" in html and "Stale judgments ignored" not in html  # shown only when some were ignored
     assert "Run time" in html and "Total client time" in html and "25.0 s" in html
-    assert "0.1.0 首个版本 · First release" in html and "Release 0.1.0 results:" in html
+    assert "0.1.0 " + bi("首个版本", "First release") in html and "Release 0.1.0 results:" in html
+    assert "<div class=lang" in html and f"data-titleen='{site.SUITE_TEXT[suite]['name'][1]} · 奶蛙bench'" in html
     assert "models whose intervals largely overlap are not clearly ordered" in html
     assert model.label in html and "codex-cli test" in html and "recorded-model" in html
     assert "ChatGPT gpt-image" in html and "Prompt changed" in html
@@ -103,7 +105,7 @@ def test_site_builds_portable_assets_and_shows_recorded_provenance(tmp_path, mon
         # Answer-keyed images appear as casebook cards; the annotator is flagged; tabs follow the published layout.
         assert "all seven fields" in html and "Family macro" in html and f"id='case-{item.id.split('.')[1]}'" in html
         ranking = html.split("<table class=ranking>", 1)[1].split("</table>", 1)[0]
-        assert "评审 Judges:" not in ranking
+        assert bi("评审", "Judges") not in ranking
         assert "Answer keys are GPT-6-Astra annotations not yet checked by a person" in html
         assert "Key annotator" in html and "href='../meme-id/'" in html and "blind-only reply" in html
         assert f"id='case-{unseen.id.split('.')[1]}'" in html
@@ -191,7 +193,7 @@ def test_ranking_discloses_intervals_conditions_and_display_judges():
     assert "87.5 [70.8–100.0]" in html and ">1–5</td>" in html
     assert "class=interval style='left:70.800%;width:29.200%'" in html
     assert "Model<span class=muted> (high)</span>" in html
-    assert "评审 Judges: Judge Label ×17" in html and "judge-id" not in html
+    assert bi("评审", "Judges") + ": Judge Label ×17" in html and "judge-id" not in html
     assert "<span class=status>settings unrecorded</span>" in html
     mixed = {**row, "rank": None, "score": None, "status": "mixed conditions", "diagnostic_score": 87.5,
              "conditions": ["effort: high, low", "alternate route: <API>"]}

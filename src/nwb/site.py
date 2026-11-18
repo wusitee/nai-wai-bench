@@ -1,5 +1,6 @@
 """Static, bilingual (中文 / English) results site: one index.html per suite plus resized images, and for
-releases a NaiWai Index overview page, ready to publish with GitHub Pages."""
+releases a NaiWai Index overview page, ready to publish with GitHub Pages. Readers switch the language
+(see `nwb.lang`)."""
 
 import datetime
 import shutil
@@ -10,6 +11,7 @@ from pathlib import Path
 
 from nwb import CANARY, __version__
 from nwb.config import SUITES, Bench, ModelSpec, UnderstandingItem
+from nwb.lang import CSS as LANG_CSS, SCRIPT as LANG_SCRIPT, SWITCH as LANG_SWITCH, bi, bie
 from nwb.report import (UNCERTAINTY_NOTE, collection_profiles_text, collection_text, efficiency_section, stale_text, fmt, judge_text,
                         model_html, rank_range, score_text)
 from nwb.scoring import INDEX_WEIGHTS
@@ -18,7 +20,7 @@ from nwb.util import extract_json, read_json
 FAILURE_ZH = {"generic_cute": "泛泛的可爱风", "realistic_animal": "写实动物", "plain_nailong": "只是奶龙本体",
               "text_or_watermark": "带文字或水印", "multiple_subjects": "多主体或场景杂乱"}
 ACCESS = {"codex": "Codex CLI", "claude": "Claude Code", "acp": "ACP agent", "openai": "API"}
-CONDITION = {"described": ("文字描述", "description"), "reference": ("参考图", "reference image")}
+CONDITION = {"described": ("文字描述", "Description"), "reference": ("参考图", "Reference image")}
 IMAGE_WIDTH = 768
 
 # Per suite: public name (zh, en), introduction (zh, en), and whether the hero shows a mosaic of the
@@ -230,9 +232,13 @@ def _suite_href(here: str, target: str) -> str:
     return (("../" if PAGES[here] else "") + (f"{PAGES[target]}/" if PAGES[target] else "")) or "./"
 
 
-def _head(title: str) -> str:
-    return (f"<!doctype html><!-- {CANARY} --><html lang=zh><meta charset=utf-8><meta name=viewport "
-            f"content='width=device-width,initial-scale=1'><title>{e(title)}</title><style>{CSS}</style>")
+def _head(zh: str, en: str) -> str:
+    """Document head for a page named `zh` / `en`; the title follows the chosen language."""
+    titles = {lang: e(f"{name} · 奶蛙bench", quote=True) for lang, name in (("zh", zh), ("en", en))}
+    return (f"<!doctype html><!-- {CANARY} --><html lang=zh-CN data-titlezh='{titles['zh']}' "
+            f"data-titleen='{titles['en']}'><meta charset=utf-8><meta name=viewport "
+            f"content='width=device-width,initial-scale=1'><title>{e(zh)} · {e(en)} · 奶蛙bench</title>"
+            f"<style>{CSS}{LANG_CSS}</style>{LANG_SCRIPT}")
 
 
 def _header(here: str, links: str, tabs: bool, up: str = "") -> str:
@@ -241,19 +247,19 @@ def _header(here: str, links: str, tabs: bool, up: str = "") -> str:
              **{s: SUITE_TEXT[s]["name"] for s in SUITES}}
     tab_html = ("<div class=tabs>" + "".join(
         f"<a href='{up}{_suite_href(here, page)}'{' aria-current=page' if page == here else ''}>"
-        f"{e(names[page][0])} {e(names[page][1])}</a>" for page in PAGES) + "</div>" if tabs else "")
+        f"{bie(names[page])}</a>" for page in PAGES) + "</div>" if tabs else "")
     home = up + _suite_href(here, "index") if tabs else "#"
     return (f"<header class=top><div><a class=brand href='{home}'>奶蛙<span>BENCH</span></a>{tab_html}"
-            f"<nav class=sections>{links}</nav></div></header><main>")
+            f"<nav class=sections>{links}</nav>{LANG_SWITCH}</div></header><main>")
 
 
 def _footer(repo_url: str | None, blob: str | None) -> str:
-    repo = f" · <a href='{e(repo_url, quote=True)}'>源代码 Source</a>" if repo_url else ""
+    repo = f" · <a href='{e(repo_url, quote=True)}'>{bi('源代码', 'Source')}</a>" if repo_url else ""
     sources = (f"<a href='{e(blob, quote=True)}/bench/reference/SOURCE.md'>SOURCE.md</a>" if blob
                else "bench/reference/SOURCE.md")
-    return (f"<footer>奶蛙bench · nai-wai-bench{repo} · 参考图、表情包、二创与官方形象图的出处见 {sources}，"
-            "仅供非商业研究使用。<span class=en> Sources of the reference image, stickers, remixes, and official "
-            "artwork are listed in SOURCE.md. For non-commercial research use.</span></footer></main></html>")
+    return (f"<footer>奶蛙bench · nai-wai-bench{repo} · <span class=zh>参考图、表情包、二创与官方形象图的出处见 "
+            f"{sources}，仅供非商业研究使用。</span><span class=en> Sources of the reference image, stickers, remixes, "
+            f"and official artwork are listed in {sources}. For non-commercial research use.</span></footer></main></html>")
 
 
 def _rank_cells(row: dict) -> tuple[str, str]:
@@ -267,10 +273,10 @@ def _rank_cells(row: dict) -> tuple[str, str]:
 
 def _ranking(rows: list[dict], label, flags: dict[str, str], judge_label, judged: bool = True) -> str:
     if not rows:
-        return "<p class=muted>本次运行没有这一题组的结果。<span class=en> No results for this panel in this run.</span></p>"
-    out = ["<div class=scroll><table class=ranking><tr><th>名次<br>Rank</th><th>模型 Model</th>"
-           "<th>得分 Score<br><span class=en>95% 区间 interval</span></th>"
-           "<th>名次范围<br>Rank range</th><th class=n>已计分<br>Scored</th></tr>"]
+        return f"<p class=muted>{bi('本次运行没有这一题组的结果。', 'No results for this panel in this run.')}</p>"
+    out = [f"<div class=scroll><table class=ranking><tr><th>{bi('名次', 'Rank', True)}</th><th>{bi('模型', 'Model')}</th>"
+           f"<th>{bi('得分', 'Score')}<br>{bi('95% 区间', '95% interval')}</th>"
+           f"<th>{bi('名次范围', 'Rank range', True)}</th><th class=n>{bi('已计分', 'Scored', True)}</th></tr>"]
     for row in rows:
         tier, rank = _rank_cells(row)
         interval = ""
@@ -291,10 +297,10 @@ def _ranking(rows: list[dict], label, flags: dict[str, str], judge_label, judged
         chips.extend(f"<span class=status>{e(p)}</span>" for p in row.get("collection_profiles", []))
         meta = f"<div class=row-meta>{' '.join(chips)}</div>" if chips else ""
         if judged:
-            meta += f"<div class=row-meta>评审 Judges: {e(judge_text(row, judge_label))}</div>"
+            meta += f"<div class=row-meta>{bi('评审', 'Judges')}: {e(judge_text(row, judge_label))}</div>"
         out.append(f"<tr{tier}>{rank}<td><b>{model_html(label(row['model']))}</b>{flags.get(row['model'], '')}{meta}</td>"
                    f"<td>{meter}</td><td>{rank_range(row)}</td><td class=n>{row['completed']}/{row['required']} "
-                   f"<span class=muted title='每格重复 repetitions per cell'>×{row['repetitions']}</span></td></tr>")
+                   f"<span class=muted title='每格重复次数 · repetitions per cell'>×{row['repetitions']}</span></td></tr>")
     return "\n".join(out) + "</table></div>"
 
 
@@ -307,7 +313,7 @@ def _heat(value: float | None, note: str = "") -> str:
     return f"<td class='heat{' hi' if miss >= 75 else ''}' style='{style}'>{fmt(value)}{note}</td>"
 
 
-HEAT_NOTE = "颜色越浓，分数越低。<span class=en> Stronger color marks lower scores.</span>"
+HEAT_NOTE = bi("颜色越浓，分数越低。", "Stronger color marks lower scores.")
 
 
 def _image_cell(s: dict | None, image: str | None, alt: str, scored: bool = True, meta: dict | None = None) -> str:
@@ -315,15 +321,18 @@ def _image_cell(s: dict | None, image: str | None, alt: str, scored: bool = True
     a label when the record notes another route than the model's usual client (meta.fill_note)."""
     if not s:
         return "<td>–</td>"
-    audit = {True: "原样传递 · Verbatim", False: "提示词有改动 · Prompt changed", None: "未核实 · Unverified"}[s["verbatim"]]
+    audit = {True: bi("原样传递", "Verbatim"), False: bi("提示词有改动", "Prompt changed"),
+             None: bi("未核实", "Unverified")}[s["verbatim"]]
     score = f"<span class=score>{fmt(s['overall'])}</span>" if scored else ""
     if not image:
-        return f"<td><div class=refused>服务商拒绝生成<br>Refused by provider</div>{score}<div class=muted>{audit}</div></td>"
+        return (f"<td><div class=refused>{bi('服务商拒绝生成', 'Refused by provider', True)}</div>{score}"
+                f"<div class=muted>{audit}</div></td>")
     why = " | ".join(f"{j}: {r}" for j, r in s["rationales"].items())
-    tags = "".join(f"<div class=tag>{e(FAILURE_ZH.get(f, f))}</div>" for f in s["failure_modes"])
+    tags = "".join(f"<div class=tag>{bi(e(FAILURE_ZH[f]), e(f.replace('_', ' ')))}</div>" if f in FAILURE_ZH
+                   else f"<div class=tag>{e(f)}</div>" for f in s["failure_modes"])
     if (meta or {}).get("fill_note"):
         tags += (f"<div class=muted title='{e(meta['fill_note'], quote=True)} · {e(meta.get('model', ''), quote=True)}'>"
-                 f"补图 · via {e(meta.get('client', '?'))}</div>")
+                 f"{bi('补图', 'Filled')} · via {e(meta.get('client', '?'))}</div>")
     return (f"<td title='{e(why, quote=True)}'><a href='{e(image)}'><img loading=lazy src='{e(image)}' alt='{e(alt)}'></a>"
             f"{score}{tags}<div class=muted>{audit}</div></td>")
 
@@ -331,26 +340,26 @@ def _image_cell(s: dict | None, image: str | None, alt: str, scored: bool = True
 def _summary_table(usum: dict, label) -> str:
     """Understanding diagnostics per model; columns without any value in this run are left out."""
     optional = [
-        ("文字 Text", lambda s: s.get("text"), 0),
-        ("中文 Text ZH", lambda s: s.get("languages", {}).get("zh"), 0),
-        ("英文 Text EN", lambda s: s.get("languages", {}).get("en"), 0),
-        ("视觉核对 Grounding", lambda s: s.get("grounding"), 0), ("无图 No image", lambda s: s.get("blind"), 0),
-        ("视觉增益 Visual gain", lambda s: s.get("visual_gain"), 0),
-        ("每答幻觉 Halluc./answer", lambda s: s.get("hallucinations_per_answer"), 1),
+        (("文字", "Text"), lambda s: s.get("text"), 0),
+        (("中文", "Text ZH"), lambda s: s.get("languages", {}).get("zh"), 0),
+        (("英文", "Text EN"), lambda s: s.get("languages", {}).get("en"), 0),
+        (("视觉核对", "Grounding"), lambda s: s.get("grounding"), 0), (("无图", "No image"), lambda s: s.get("blind"), 0),
+        (("视觉增益", "Visual gain"), lambda s: s.get("visual_gain"), 0),
+        (("每答幻觉", "Halluc./answer"), lambda s: s.get("hallucinations_per_answer"), 1),
     ]
     # Grounding repeats the vision mean when every image item is answer-keyed.
     if all(s.get("grounding") == s.get("vision") for s in usum.values()):
-        optional = [c for c in optional if not c[0].startswith("视觉核对")]
-    shown = ([("看图 Vision", lambda s: s.get("vision"), 0)]
+        optional = [c for c in optional if c[0][1] != "Grounding"]
+    shown = ([(("看图", "Vision"), lambda s: s.get("vision"), 0)]
              + [c for c in optional if any(c[1](s) is not None for s in usum.values())])
-    out = ["<div class='scroll card-table'><table><tr><th>模型 Model</th>"
-           + "".join(f"<th class=n>{h.replace(' ', '<br>', 1)}</th>" for h, _, _ in shown)
-           + "<th class=n>用了工具<br>Used tools</th></tr>"]
+    out = [f"<div class='scroll card-table'><table><tr><th>{bi('模型', 'Model')}</th>"
+           + "".join(f"<th class=n>{bie(h, True)}</th>" for h, _, _ in shown)
+           + f"<th class=n>{bi('用了工具', 'Used tools', True)}</th></tr>"]
     for m, s in sorted(usum.items(), key=lambda kv: (-(kv[1].get("vision") or 0), kv[0])):
         out.append(f"<tr><td>{e(label(m))}</td>" + "".join(f"<td class=n>{fmt(f(s), d)}</td>" for _, f, d in shown)
                    + f"<td class=n>{s['contaminated']}</td></tr>")
-    out.append("</table></div><p class=muted>视觉增益 = 有图得分 − 无图得分（按题目和重复配对，单位为百分点）。"
-               "用了工具：违反要求调用了工具的回答，不计分。<span class=en> Visual gain is the matched with-image minus "
+    out.append("</table></div><p class=muted><span class=zh>视觉增益 = 有图得分 − 无图得分（按题目和重复配对，单位为百分点）。"
+               "用了工具：违反要求调用了工具的回答，不计分。</span><span class=en> Visual gain is the matched with-image minus "
                "no-image score, in percentage points. Used tools: answers that called a tool despite instructions; "
                "they are excluded.</span></p>")
     return "\n".join(out)
@@ -365,10 +374,11 @@ def _field_heatmap(usum: dict, label) -> str:
     full = max(n for s in rows.values() for n in s["field_items"].values())
     labels = max(len(s["family_classes"]) for s in rows.values())
     order = sorted(rows, key=lambda m: (-(rows[m]["joint"] or 0), m))
-    out = ["<h3>逐项诊断 <span class=en>Answer-key diagnostics</span></h3><div class='scroll card-table'><table>"
-           "<tr><th>模型 Model</th><th class=n>全对<br>Joint</th><th class=n>视觉全对<br>Visual joint</th>"
-           "<th class=n>类别宏平均<br>Family macro</th><th>Repetition consistency<br>(images)</th>"
-           + "".join(f"<th class=n>{e(FIELD_ZH.get(f, f))}<br>{e(f)}</th>" for f in fields) + "</tr>"]
+    out = [f"<h3>{bi('逐项诊断', 'Answer-key diagnostics')}</h3><div class='scroll card-table'><table>"
+           f"<tr><th>{bi('模型', 'Model')}</th><th class=n>{bi('全对', 'Joint', True)}</th>"
+           f"<th class=n>{bi('视觉全对', 'Visual joint', True)}</th><th class=n>{bi('类别宏平均', 'Family macro', True)}</th>"
+           f"<th>{bi('重复一致性', 'Repetition consistency')}<br>{bi('（图片数）', '(images)')}</th>"
+           + "".join(f"<th class=n>{bi(e(FIELD_ZH.get(f, f)), e(f), True)}</th>" for f in fields) + "</tr>"]
     for m in order:
         s = rows[m]
         classes = f" <small>({len(s['family_classes'])})</small>" if len(s["family_classes"]) < labels else ""
@@ -377,21 +387,20 @@ def _field_heatmap(usum: dict, label) -> str:
                    f"<td>{fmt(s.get('repetition_consistency'), 1)} ({s.get('repetition_consistency_images', 0)})</td>"
                    + "".join(_heat(s["fields"].get(f), note=f" <small>({s['field_items'][f]})</small>"
                                    if s["field_items"].get(f, 0) < full else "") for f in fields) + "</tr>")
-    out.append(f"</table></div><p class=muted>0–100，每张图权重相同。全对：七项全部正确；视觉全对：除类别外全部正确；"
-               f"类别宏平均：各类别召回率的等权平均；括号内为不足 {full} 张图或 {labels} 个类别时的实际覆盖。{HEAT_NOTE}"
+    out.append(f"</table></div><p class=muted><span class=zh>0–100，每张图权重相同。全对：七项全部正确；视觉全对：除类别外全部正确；"
+               f"类别宏平均：各类别召回率的等权平均；括号内为不足 {full} 张图或 {labels} 个类别时的实际覆盖。</span>"
                "<span class=en> 0–100, equal weight per image. Joint: every field correct; visual joint: every field "
                "except family; family macro: equal-weight recall over the expected family labels. Parentheses show "
-               f"item or label coverage when below {full} items or {labels} labels.</span></p>")
+               f"item or label coverage when below {full} items or {labels} labels.</span> {HEAT_NOTE}</p>")
     categories = sorted({c for s in rows.values() for c in s.get("categories", {})}, key=_category_order)
     if categories:
-        out.append("<div class='scroll card-table'><table><tr><th>模型 Model</th>"
-                   + "".join(f"<th class=n>{e(CATEGORY.get(c, (c, c))[0])}<br>{e(CATEGORY.get(c, (c, c))[1])}</th>"
-                             for c in categories) + "</tr>")
+        out.append(f"<div class='scroll card-table'><table><tr><th>{bi('模型', 'Model')}</th>"
+                   + "".join(f"<th class=n>{bie(CATEGORY.get(c, (c, c)), True)}</th>" for c in categories) + "</tr>")
         for m in order:
             out.append(f"<tr><td>{e(label(m))}</td>"
                        + "".join(_heat(rows[m]["categories"].get(c)) for c in categories) + "</tr>")
-        out.append("</table></div><p class=muted>按图片类别的部分得分均值（每项字段等分）。<span class=en> Partial-credit "
-                   "means by slice (equal credit per field).</span></p>")
+        out.append("</table></div><p class=muted>" + bi("按图片类别的部分得分均值（每项字段等分）。",
+                                                         "Partial-credit means by slice (equal credit per field).") + "</p>")
     return "\n".join(out)
 
 
@@ -417,9 +426,9 @@ def _casebook(items: list[UnderstandingItem], samples: list[dict], order: list[s
         groups[item.category].append(item)
     out = []
     for group in sorted(groups, key=_category_order):
-        zh, en = CATEGORY.get(group, (group, group))
-        out.append((f"<div class=group><h3>{e(zh)} <span class=en>{e(en)}</span></h3>"
-                    f"<span class=muted>{len(groups[group])} 张 images</span></div>" if group else "")
+        n = len(groups[group])
+        out.append((f"<div class=group><h3>{bie(CATEGORY.get(group, (group, group)))}</h3>"
+                    f"<span class=muted>{bi(f'{n} 张图', f'{n} images')}</span></div>" if group else "")
                    + "<div class=cases>" + "".join(_case(item, first, rank, label, asset) for item in groups[group])
                    + "</div>")
     return "\n".join(out)
@@ -431,7 +440,7 @@ def _case(item: UnderstandingItem, first: dict, rank: dict, label, asset) -> str
     image = asset(item.images[0])
     case = item.id.split(".", 1)[1]
     title = item.title or case
-    chips = "".join(f"<span class=chip title='{e(FIELD_ZH.get(f, f))}'><small>{e(f)}</small>{e(v)}</span>"
+    chips = "".join(f"<span class=chip><small>{bi(e(FIELD_ZH.get(f, f)), e(f))}</small>{e(v)}</span>"
                     for f, v in item.answers.items())
     segs, who, raw, n_ok = [], [], [], 0
     for m in models:
@@ -444,7 +453,7 @@ def _case(item: UnderstandingItem, first: dict, rank: dict, label, asset) -> str
         if ok:
             misses = ""
         elif not reply:
-            misses = "<span class=miss>无法解析 unparseable</span>"
+            misses = f"<span class=miss>{bi('无法解析', 'unparseable')}</span>"
         else:
             misses = "".join(f"<span class=miss>{e(f)} <code>{e(str(reply.get(f, '–')))}</code></span>"
                              for f, v in s["fields"].items() if v != 100)
@@ -452,22 +461,22 @@ def _case(item: UnderstandingItem, first: dict, rank: dict, label, asset) -> str
         who.append(f"<li>{mark} <b>{e(label(m))}</b> <span class=muted>{right}/{len(s['fields'])}</span><br>{misses}</li>")
         blind = first.get((f"{item.id}.blind", m))
         raw.append(f"<b>{e(label(m))}</b><div class=raw>{e(s['answer'])}</div>"
-                   + (f"<span class=muted>无图对照 No image</span><div class=raw>{e(blind['answer'])}</div>"
+                   + (f"<span class=muted>{bi('无图对照', 'No image')}</span><div class=raw>{e(blind['answer'])}</div>"
                       if blind else ""))
     # Models that only answered the no-image control (text-only models, failed visual cells) get no verdict,
     # but their replies still count toward the No image score, so show them.
     for m in sorted({m for (i, m) in first if i == f"{item.id}.blind"} - set(models),
                     key=lambda m: (rank.get(m, len(rank)), m)):
-        raw.append(f"<b>{e(label(m))}</b> <span class=muted>无图对照 No image</span>"
+        raw.append(f"<b>{e(label(m))}</b> <span class=muted>{bi('无图对照', 'No image')}</span>"
                    f"<div class=raw>{e(first[(f'{item.id}.blind', m)]['answer'])}</div>")
     note = f"<p class=muted>{e(item.image_note)}</p>" if item.image_note else ""
     return (
         f"<article class=case id='case-{e(case)}'><a href='{e(image)}'><img loading=lazy src='{e(image)}' "
         f"alt='{e(title)}'></a><div><div class=case-title>{e(title)} <span>{e(case)}</span></div>"
         f"<div class=chips>{chips}</div><div class=verdict><span class=segs>{''.join(segs)}</span>"
-        f"<b>{n_ok}/{len(models)}</b><span class=muted>全对 all correct</span></div>"
-        f"<details><summary>逐模型 Per model</summary>{note}<ul class=who>{''.join(who)}</ul>"
-        f"<details><summary>原始回答 Raw replies</summary>{''.join(raw)}</details></details></div></article>")
+        f"<b>{n_ok}/{len(models)}</b><span class=muted>{bi('全对', 'all correct')}</span></div>"
+        f"<details><summary>{bi('逐模型', 'Per model')}</summary>{note}<ul class=who>{''.join(who)}</ul>"
+        f"<details><summary>{bi('原始回答', 'Raw replies')}</summary>{''.join(raw)}</details></details></div></article>")
 
 
 def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dict, out: Path,
@@ -508,18 +517,18 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
     sections = ["rankings", "casebook", "understanding", "efficiency", "gallery", "states", "models", "judges"]
     present = {"rankings": True, "casebook": bool(keyed), "gallery": bool(core_tiers), "states": bool(state_samples),
                "understanding": bool(und_samples), "efficiency": True, "models": True, "judges": bool(scores.get("judge_health"))}
-    nav_text = {"rankings": "排名 Ranking", "casebook": "图鉴 Casebook", "gallery": "图像生成 Image gen",
-                "states": "姿势迁移 Transfer", "understanding": "理解 Understanding", "models": "模型 Models",
-                "judges": "评审 Judges", "efficiency": "效率 Efficiency"}
+    nav_text = {"rankings": ("排名", "Ranking"), "casebook": ("图鉴", "Casebook"), "gallery": ("图像生成", "Image gen"),
+                "states": ("姿势迁移", "Transfer"), "understanding": ("理解", "Understanding"), "models": ("模型", "Models"),
+                "judges": ("评审", "Judges"), "efficiency": ("效率", "Efficiency")}
 
     revision = _revision(bench.root)
     # Link the documentation of the exact commit the results were built from.
     blob = f"{repo_url}/blob/{revision.split()[0]}" if repo_url and revision else None
-    html = [_head(f"{text['name'][0]} · {text['name'][1]} · 奶蛙bench")]
-    links = "".join(f"<a href='#{s}'>{nav_text[s]}</a>" for s in sections if present[s])
-    links += f"<a href='{e(blob, quote=True)}/docs/methodology.md'>方法 Methodology</a>" if blob else ""
+    html = [_head(*text["name"])]
+    links = "".join(f"<a href='#{s}'>{bie(nav_text[s])}</a>" for s in sections if present[s])
+    links += f"<a href='{e(blob, quote=True)}/docs/methodology.md'>{bi('方法', 'Methodology')}</a>" if blob else ""
     if bundle_url:
-        links += f"<a href='{e(bundle_url, quote=True)}'>Download raw results</a>"
+        links += f"<a href='{e(bundle_url, quote=True)}'>{bi('下载原始结果', 'Download raw results')}</a>"
     html.append(_header(bench.suite, links, suite_tabs))
 
     # --- hero ---
@@ -529,9 +538,8 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
     mosaic = bool(keyed) and text["mosaic"]
     portrait = "" if mosaic else f"<img src='{e(asset(bench.reference_image))}' alt='大笑奶龙'>"
     html.append(f"<div class='hero{' solo' if mosaic else ''}'>{portrait}<div>"
-                f"<h1>{e(text['name'][0])} <span class=en>{e(text['name'][1])}</span></h1>"
-                f"<p class=lede>{e(text['intro'][0])}<br><span class=en>{e(text['intro'][1])}</span></p>"
-                f"<span class=badge>{e(__version__)} 首个版本 · First release</span> <span class=stamp>{stamp}</span></div></div>")
+                f"<h1>{bie(text['name'])}</h1><p class=lede>{bie(text['intro'], True)}</p>"
+                f"<span class=badge>{e(__version__)} {bi('首个版本', 'First release')}</span> <span class=stamp>{stamp}</span></div></div>")
     if mosaic:
         html.append("<div class=mosaic>" + "".join(
             f"<a href='#case-{e(i.id.split('.', 1)[1])}' title='{e(i.title)}'>"
@@ -545,10 +553,10 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
     counts_en = (f"{len(img_samples)} generation samples and {len(und_samples)} answers. " if img_samples
                  else f"{len(und_samples)} answers. ")
     html.append(
-        f"<div class=note>0.1.0 版结果：{counts}"
+        f"<div class=note><span class=zh>0.1.0 版结果：{counts}"
         "自由回答与标准图像生成优先采用其他厂商的 LLM 评审；没有独立评审时使用现有评审。看图核对题按答案键本地计分。"
         f"{annotated}方括号是 95% 自助法区间，名次范围表示重抽样时名次的波动；区间大幅重叠的模型不宜硬分高下。"
-        "只有在同一设置下完整跑完固定题组的模型才有名次。<br><span class=en>"
+        "只有在同一设置下完整跑完固定题组的模型才有名次。</span><span class=en><br>"
         f"Release 0.1.0 results: {counts_en}"
         "Free-form answers and standard generation prefer LLM judges from other vendors, falling back to available judges; "
         f"answer-keyed checks are scored locally. {annotated_en}"
@@ -564,24 +572,25 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
     panel_animals = bench.select_animals("default")
     vision_items = [i for i in bench.items if i.modality == "vision"]
     grounding = sum(1 for i in vision_items if i.answers)
-    flags = ({bench.annotator: "<br><span class=flag>答案键标注者 Key annotator</span>"}
+    flags = ({bench.annotator: f"<br><span class=flag>{bi('答案键标注者', 'Key annotator')}</span>"}
              if bench.annotator else {})
-    joint = ("七项全部答对才得分。<span class=en> All seven fields must be correct for a sample to score.</span>"
+    joint = (bi("七项全部答对才得分。", "All seven fields must be correct for a sample to score.")
              if bench.suite == "naihub-v1" else "")
     judge_label = lambda m: models[m].label if m in models else m
-    weight = (f"计入奶蛙指数，权重 {INDEX_WEIGHTS[bench.suite]}/{sum(INDEX_WEIGHTS.values())}。"
-              f"<span class=en> Weight {INDEX_WEIGHTS[bench.suite]}/{sum(INDEX_WEIGHTS.values())} in the "
-              f"<a href='{_suite_href(bench.suite, 'index')}'>NaiWai Index</a>.</span> " if suite_tabs else "")
+    total = sum(INDEX_WEIGHTS.values())
+    weight = (f"<span class=zh>计入奶蛙指数，权重 {INDEX_WEIGHTS[bench.suite]}/{total}。</span>"
+              f"<span class=en>Weight {INDEX_WEIGHTS[bench.suite]}/{total} in the "
+              f"<a href='{_suite_href(bench.suite, 'index')}'>NaiWai Index</a>. </span>" if suite_tabs else "")
     body["rankings"] = (
-        f"<h2 id=rankings>{e(text['name'][0])}排名 <span class=en>{e(text['name'][1])} ranking</span></h2>"
+        f"<h2 id=rankings>{bi(e(text['name'][0]) + '排名', e(text['name'][1]) + ' ranking')}</h2>"
         "<div class=panel>"
-        f"<p class=muted>固定题组：{len(vision_items)} 道看图题（{len(vision_items) - grounding} 道自由回答识别、"
-        f"{grounding} 道按答案键计分的视觉核对）。文字知识与无图对照只作诊断。{joint}<br><span class=en>Fixed panel: "
+        f"<p class=muted><span class=zh>固定题组：{len(vision_items)} 道看图题（{len(vision_items) - grounding} 道自由回答识别、"
+        f"{grounding} 道按答案键计分的视觉核对）。文字知识与无图对照只作诊断。</span>{joint}<span class=en><br>Fixed panel: "
         f"{len(vision_items)} image-input tasks ({len(vision_items) - grounding} free-form recognition, {grounding} "
         "answer-keyed grounding checks). Text knowledge and no-image controls are diagnostics.</span></p>"
         + _ranking(boards.get("visual_understanding", []), label, flags, judge_label, len(vision_items) > grounding)
-        + f"</div><p class=muted>{weight}有缺失、失败、未评分或不合格格子的模型不参与排名；×N 为每格重复次数。"
-        "<span class=en> Missing, failed, unjudged, or ineligible cells leave a model unranked; ×N is "
+        + f"</div><p class=muted>{weight}<span class=zh>有缺失、失败、未评分或不合格格子的模型不参与排名；×N 为每格重复次数。</span>"
+        "<span class=en>Missing, failed, unjudged, or ineligible cells leave a model unranked; ×N is "
         "repetitions per cell.</span></p>"
         + f"<p class=muted>{UNCERTAINTY_NOTE}</p>"
         + f"<p class=muted>{e(stale_text(scores))}Collection revisions: "
@@ -590,10 +599,10 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
     # --- casebook ---
     if keyed:
         body["casebook"] = (
-            "<h2 id=casebook>图鉴 <span class=en>Casebook</span></h2>"
-            "<p>每张图都问同一个问题，要求按固定标签返回 JSON，再在本地与答案键逐项比对。色条每格代表一个模型"
-            "（按视觉理解排名排序）：绿色为全部答对，红色为至少错一项。展开卡片可看每个模型错在哪里，以及原始回答。"
-            "<br><span class=en>Every image gets the same question, answered as JSON with fixed labels and compared "
+            f"<h2 id=casebook>{bi('图鉴', 'Casebook')}</h2>"
+            "<p><span class=zh>每张图都问同一个问题，要求按固定标签返回 JSON，再在本地与答案键逐项比对。色条每格代表一个模型"
+            "（按视觉理解排名排序）：绿色为全部答对，红色为至少错一项。展开卡片可看每个模型错在哪里，以及原始回答。</span>"
+            "<span class=en><br>Every image gets the same question, answered as JSON with fixed labels and compared "
             "field by field with a local key. Each strip segment is one model, in visual-ranking order: green means "
             "every field is right, red means at least one miss. Open a card for each model's misses and raw "
             "replies.</span></p>" + _casebook(keyed, und_samples, vision_order, label, asset))
@@ -603,31 +612,31 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
     by_cell = {(s["model"], s["animal"], s["tier"]): s for s in sorted(img_samples, key=lambda s: -s["rep"])}
     img_models = sorted({s["model"] for s in img_samples}, key=lambda m: (-(summary.get(m, {}).get("overall") or 0), m))
     if core_tiers:
-        part = ["<h2 id=gallery>图像生成（实验）<span class=en>Experimental · image generation</span></h2>"
-                "<p>让模型画“⟨动物⟩版的大笑奶龙”，提示词分五档。评审对照原图，按 9 项加权视觉特征打分，"
-                "再乘以能否认出目标动物（0–100）。这是实验项目，不计入奶蛙指数。<br><span class=en>Models draw an "
+        part = [f"<h2 id=gallery>{bi('图像生成（实验）', 'Experimental · image generation')}</h2>"
+                "<p><span class=zh>让模型画“⟨动物⟩版的大笑奶龙”，提示词分五档。评审对照原图，按 9 项加权视觉特征打分，"
+                "再乘以能否认出目标动物（0–100）。这是实验项目，不计入奶蛙指数。</span><span class=en><br>Models draw an "
                 "animal version of the meme from five prompt tiers. Judges compare each image with the reference on "
                 "nine weighted visual traits, scaled by whether the target animal is recognizable (0–100). This "
                 "experimental track does not enter the NaiWai Index.</span></p>",
-                "<h3>图像生成排名 <span class=en>Image generation ranking</span></h3>"
-                f"<p class=muted>固定题组：{len(panel_animals)} 种动物 × {len(bench.tiers)} 档提示词；"
-                "只计入核实为原样传递的提示词，服务商拒绝生成记 0 分。<br><span class=en>Fixed panel: "
+                f"<h3>{bi('图像生成排名', 'Image generation ranking')}</h3>"
+                f"<p class=muted><span class=zh>固定题组：{len(panel_animals)} 种动物 × {len(bench.tiers)} 档提示词；"
+                "只计入核实为原样传递的提示词，服务商拒绝生成记 0 分。</span><span class=en><br>Fixed panel: "
                 f"{len(panel_animals)} animals × {len(bench.tiers)} prompt tiers; verified verbatim prompts only. "
                 "Provider refusals score 0.</span></p>"
                 + _ranking(boards.get("imagegen", []), label, {}, judge_label),
-                "<details><summary>提示词 · Prompts</summary><table><tr><th>档位 Tier</th><th>提示词（以猫为例）"
-                " Prompt (cat)</th></tr>"]
+                f"<details><summary>{bi('提示词', 'Prompts')}</summary><table><tr><th>{bi('档位', 'Tier')}</th>"
+                f"<th>{bi('提示词（以猫为例）', 'Prompt (cat)')}</th></tr>"]
         cat = bench.animals.get("cat") or next(iter(bench.animals.values()))
         for t in core_tiers:
-            extra = "（附原图 + reference image）" if t.reference else ""
-            part.append(f"<tr><td><b>{e(t.title_zh)}</b><br><span class=muted>{e(t.title_en)} · {e(t.id)}</span></td>"
+            extra = bi("（附原图）", "(+ reference image)") if t.reference else ""
+            part.append(f"<tr><td><b>{bi(e(t.title_zh), e(t.title_en))}</b><br><span class=muted>{e(t.id)}</span></td>"
                         f"<td class=ans>{e(t.render(cat))}{extra}</td></tr>")
         part.append("</table></details>")
         for a in [a for a in bench.animals if any(s["animal"] == a and not s["state"] for s in img_samples)]:
             animal = bench.animals[a]
-            part.append(f"<h3>{e(animal.zh)} <span class=en>{e(animal.en)}</span></h3><div class='scroll card-table'>"
+            part.append(f"<h3>{bi(e(animal.zh), e(animal.en))}</h3><div class='scroll card-table'>"
                         "<table class=gallery><tr><th style='width:150px'></th>"
-                        + "".join(f"<th>{e(t.title_zh)}<br><span class=en>{e(t.title_en)}</span></th>" for t in core_tiers)
+                        + "".join(f"<th>{bi(e(t.title_zh), e(t.title_en), True)}</th>" for t in core_tiers)
                         + "</tr>")
             for m in img_models:
                 cells = []
@@ -637,10 +646,10 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
                                              meta=s and meta_of[s["target"]]))
                 part.append(f"<tr><td><b>{e(label(m))}</b></td>{''.join(cells)}</tr>")
             part.append("</table></div>")
-        part.append("<h3>诊断汇总 <span class=en>Diagnostics</span></h3><div class='scroll card-table'><table><tr><th>模型 Model</th>"
-                    "<th class=n>已有格子均分<br>Available-cell mean</th>"
-                    + "".join(f"<th class=n>{e(t.title_zh)}</th>" for t in core_tiers)
-                    + "<th class=n>知识比率<br>Knowledge ratio</th></tr>")
+        part.append(f"<h3>{bi('诊断汇总', 'Diagnostics')}</h3><div class='scroll card-table'><table><tr><th>{bi('模型', 'Model')}</th>"
+                    f"<th class=n>{bi('已有格子均分', 'Available-cell mean', True)}</th>"
+                    + "".join(f"<th class=n>{bi(e(t.title_zh), e(t.title_en))}</th>" for t in core_tiers)
+                    + f"<th class=n>{bi('知识比率', 'Knowledge ratio', True)}</th></tr>")
         for m in img_models:
             if m not in summary:
                 continue
@@ -648,8 +657,8 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
             part.append(f"<tr><td>{e(label(m))}</td>{_heat(s['overall'])}"
                         + "".join(_heat(s["tiers"].get(t.id, {}).get("overall")) for t in core_tiers)
                         + f"<td class=n>{fmt(s['knowledge_ratio'], 2)}</td></tr>")
-        part.append("</table></div><p class=muted>知识比率 = 两个“只给梗名”档的均分 ÷ “详细描述”档的均分，只比较三档都有结果的相同动物；"
-                    "它反映对提示词详细程度的敏感度，不是“认识这个梗”的概率。诊断均分可能与固定排名题组不同。"
+        part.append("</table></div><p class=muted><span class=zh>知识比率 = 两个“只给梗名”档的均分 ÷ “详细描述”档的均分，只比较三档都有结果的相同动物；"
+                    "它反映对提示词详细程度的敏感度，不是“认识这个梗”的概率。诊断均分可能与固定排名题组不同。</span>"
                     "<span class=en> Knowledge ratio = mean of both name tiers ÷ detailed-description tier, on "
                     "matched animals only. It is prompt sensitivity, not a calibrated probability of knowledge. "
                     "Diagnostic means may differ from the fixed ranking panel.</span> " + HEAT_NOTE + "</p>")
@@ -657,10 +666,10 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
 
     # --- optional state transfer ---
     if state_samples:
-        part = ["<h2 id=states>姿势迁移（可选，不计分）<span class=en>Optional state transfer · unscored</span></h2>"
-                "<p>把奶蛙源图的可见表情、动作和姿势迁移到别的动物身上。每张源图有两种条件："
+        part = [f"<h2 id=states>{bi('姿势迁移（可选，不计分）', 'Optional state transfer · unscored')}</h2>"
+                "<p><span class=zh>把奶蛙源图的可见表情、动作和姿势迁移到别的动物身上。每张源图有两种条件："
                 "只给固定的文字描述，或附上源图。这部分不由 LLM 评分，也不计入排名，请对照源图分别查看表情、动作、"
-                "动物辨识度和渲染风格。<br><span class=en>Visible expressions, gestures, and postures from 奶蛙 source "
+                "动物辨识度和渲染风格。</span><span class=en><br>Visible expressions, gestures, and postures from 奶蛙 source "
                 "images are transferred to other animals, either from a fixed text description or from the attached "
                 "source image. These images receive no LLM grades and do not enter either ranking; compare expression, "
                 "gesture, animal identity, and render style with the source by eye.</span></p>"]
@@ -684,25 +693,25 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
                     cells.append(_image_cell(s, s and generated(s), f"{label(m)} {t.id} {a}", scored=False,
                                              meta=s and meta_of[s["target"]]))
                 rows.append(f"<tr><td><b>{e(label(m))}</b></td>{''.join(cells)}</tr>")
-            prompts = "".join(f"<tr><td style='width:120px'><b>{CONDITION[c][0]}</b><br><span class=muted>"
-                              f"{CONDITION[c][1]}</span></td><td class=ans>{e(t.render(cat))}</td></tr>"
+            prompts = "".join(f"<tr><td style='width:120px'><b>{bie(CONDITION[c])}</b></td>"
+                              f"<td class=ans>{e(t.render(cat))}</td></tr>"
                               for c, t in conditions.items())
             part.append(
                 f"<div class=state id='state-{e(state)}'><figure><a href='{e(source)}'><img src='{e(source)}' "
-                f"alt='Source: {e(state)}'></a><figcaption>{e(title_zh)} <span class=en>{e(title_en)}</span>"
-                f"</figcaption><span class=muted>源图 Source</span></figure><div style='min-width:0'>"
+                f"alt='Source: {e(state)}'></a><figcaption>{bi(e(title_zh), e(title_en))}"
+                f"</figcaption><span class=muted>{bi('源图', 'Source')}</span></figure><div style='min-width:0'>"
                 "<div class=scroll><table class=gallery><tr><th style='width:130px'></th>"
-                + "".join(f"<th>{e(bench.animals[a].zh)} · {CONDITION[c][0]}<br><span class=en>"
-                          f"{e(bench.animals[a].en)} · {CONDITION[c][1]}</span></th>" for a, c, _ in columns)
-                + f"</tr>{''.join(rows)}</table></div><details><summary>提示词 · Prompts</summary><table>{prompts}"
+                + "".join(f"<th>{bi(f'{e(bench.animals[a].zh)} · {CONDITION[c][0]}', f'{e(bench.animals[a].en)} · {CONDITION[c][1]}', True)}</th>"
+                          for a, c, _ in columns)
+                + f"</tr>{''.join(rows)}</table></div><details><summary>{bi('提示词', 'Prompts')}</summary><table>{prompts}"
                 "</table></details></div></div>")
         body["states"] = "\n".join(part)
 
     # --- understanding ---
     if und_samples:
-        part = ["<h2 id=understanding>理解诊断 <span class=en>Understanding diagnostics</span></h2>"
-                "<p>不允许联网或使用工具。自由回答的识别题和文字题对照有出处的事实，由评审团打分，每条言之凿凿的幻觉扣 10 分；"
-                "视觉核对题按答案键在本地计分。<br><span class=en>No web or tools. Recognition and text answers are "
+        part = [f"<h2 id=understanding>{bi('理解诊断', 'Understanding diagnostics')}</h2>"
+                "<p><span class=zh>不允许联网或使用工具。自由回答的识别题和文字题对照有出处的事实，由评审团打分，每条言之凿凿的幻觉扣 10 分；"
+                "视觉核对题按答案键在本地计分。</span><span class=en><br>No web or tools. Recognition and text answers are "
                 "scored by the judge panel against sourced facts, with 10 points off per confident hallucination; "
                 "structured checks use local answer keys.</span></p>"]
         for states in (False, True):
@@ -711,9 +720,9 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
                 continue
             usum = scores.get("state_understanding" if states else "understanding", {})
             if states:
-                part.append("<h3>表情状态提取（可选，按答案键计分）<span class=en>Optional state extraction · answer-keyed"
-                            "</span></h3><p class=muted>同一提问分别在有图和无图时作答，按所选题组的类别与可见特征答案键计分；"
-                            "不影响任何排名。<span class=en> The same question with and without the source image, "
+                part.append(f"<h3>{bi('表情状态提取（可选，按答案键计分）', 'Optional state extraction · answer-keyed')}"
+                            "</h3><p class=muted><span class=zh>同一提问分别在有图和无图时作答，按所选题组的类别与可见特征答案键计分；"
+                            "不影响任何排名。</span><span class=en> The same question with and without the source image, "
                             "scored against the selected suite's answer keys. Not part of either "
                             "ranking.</span></p>")
             part.append(_summary_table(usum, label))
@@ -727,12 +736,14 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
                 by_item[s["item"]].append(s)
             free = [i for i in bench.items if i.id in by_item and not i.answers]
             if free:
-                part.append("<h3>自由回答 <span class=en>Free-form answers</span></h3>")
+                part.append(f"<h3>{bi('自由回答', 'Free-form answers')}</h3>")
             for item in free:
                 shown = "".join(f"<img src='{e(asset(p))}' style='max-width:140px;border-radius:8px' alt=''>"
                                 for p in item.images)
-                part.append(f"<details><summary>{e(item.id)} · {e(item.prompt[:60])}</summary>{shown}"
-                            f"<p class=muted>{e(item.prompt)}</p><table>")
+                # Prompts keep their own language whichever page language is chosen.
+                lang = "zh-CN" if item.lang == "zh" else "en"
+                part.append(f"<details><summary>{e(item.id)} · <span lang={lang}>{e(item.prompt[:60])}</span></summary>"
+                            f"{shown}<p class=muted lang={lang}>{e(item.prompt)}</p><table>")
                 for s in sorted(by_item[item.id], key=lambda s: (-(s["score"] or 0), s["model"])):
                     bad = "".join(f"<div class=tag>✗ {e(h)}</div>" for h in s["hallucinations"][:3])
                     part.append(f"<tr><td style='width:150px'><b>{e(label(s['model']))}</b><br><span class=score>"
@@ -743,27 +754,27 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
     # --- models ---
     roles = defaultdict(set)
     for s in img_samples:
-        roles[s["model"]].add("图像生成 Image generation")
+        roles[s["model"]].add(("图像生成", "Image generation"))
     for s in und_samples:
-        roles[s["model"]].add("理解 Understanding")
+        roles[s["model"]].add(("理解", "Understanding"))
     for j in scores["judges"]:
-        roles[j].add("评审 Judge")
+        roles[j].add(("评审", "Judge"))
     if bench.annotator:
-        roles[bench.annotator].add("答案键标注 Key annotator")
+        roles[bench.annotator].add(("答案键标注", "Key annotator"))
     first_meta = {}
     for s in img_samples + und_samples:
         first_meta.setdefault(s["model"], meta_of[s["target"]])
-    part = ["<h2 id=models>参测模型 <span class=en>Models</span></h2><div class='scroll card-table'><table><tr><th>模型 Model</th>"
-            "<th>角色 Role</th><th>调用方式 Access</th><th>图像来源凭证 C2PA provenance</th></tr>"]
+    part = [f"<h2 id=models>{bi('参测模型', 'Models')}</h2><div class='scroll card-table'><table><tr><th>{bi('模型', 'Model')}</th>"
+            f"<th>{bi('角色', 'Role')}</th><th>{bi('调用方式', 'Access')}</th><th>{bi('图像来源凭证', 'C2PA provenance')}</th></tr>"]
     for m in sorted(roles, key=lambda m: (min(roles[m]), m)):
         meta = first_meta.get(m, {})
-        c2pa = _c2pa(meta) if any("Image" in r for r in roles[m]) else "–"
+        c2pa = _c2pa(meta) if any(r[1] == "Image generation" for r in roles[m]) else "–"
         part.append(f"<tr><td><b>{e(label(m))}</b><br><span class=muted>{e(m)}</span></td>"
-                    f"<td>{'<br>'.join(sorted(roles[m]))}</td><td>{_access(models.get(m), meta)}</td><td>{c2pa}</td></tr>")
-    part.append("</table></div><p class=muted>图片内嵌的 C2PA 内容凭证声明的生成器：OpenAI 标注为 "
+                    f"<td>{'<br>'.join(bie(r) for r in sorted(roles[m]))}</td><td>{_access(models.get(m), meta)}</td><td>{c2pa}</td></tr>")
+    part.append("</table></div><p class=muted><span class=zh>图片内嵌的 C2PA 内容凭证声明的生成器：OpenAI 标注为 "
                 "<code>ChatGPT · gpt-image</code>，Google 只标注“由 Google 生成式 AI 创建”并加有 SynthID 水印，"
                 "两家都未公开更细的版本号。图像生成由 Agent 中转：上表“调用方式”中的模型负责把提示词原样交给图像工具，"
-                "内容凭证仅供参考，未验证签名；逐字核对的结果列于图片下方。<br><span class=en>Vendor-declared generators are read from each image's C2PA "
+                "内容凭证仅供参考，未验证签名；逐字核对的结果列于图片下方。</span><span class=en><br>Vendor-declared generators are read from each image's C2PA "
                 "content credentials, which name only “ChatGPT · gpt-image” (OpenAI) and “Created by Google Generative AI” "
                 "(Google); neither exposes a more specific image model version. Signatures are not verified. "
                 "The listed relay model forwards prompts to the image tool; audit results appear under each image.</span></p>")
@@ -771,13 +782,13 @@ def build(bench: Bench, models: dict[str, ModelSpec], run_dir: Path, scores: dic
 
     # --- judges ---
     if present["judges"]:
-        part = ["<h2 id=judges>评审 <span class=en>Judges</span></h2><p>每个样本由其他厂商的评审打分后取平均；没有独立评审时使用现有评审。"
-                "下表是评审的健康度：分数离散度太低说明评审分不出好坏，与其他评审差距太大说明意见不一致。<br>"
-                "<span class=en>Each sample is averaged over judges from other vendors, falling back to the available "
+        part = [f"<h2 id=judges>{bi('评审', 'Judges')}</h2><p><span class=zh>每个样本由其他厂商的评审打分后取平均；没有独立评审时使用现有评审。"
+                "下表是评审的健康度：分数离散度太低说明评审分不出好坏，与其他评审差距太大说明意见不一致。</span>"
+                "<span class=en><br>Each sample is averaged over judges from other vendors, falling back to the available "
                 "panel when none are independent. Spread: how much a judge's scores vary; distance: how far it sits "
                 "from the other judges.</span></p><div class='scroll card-table'><table>"
-                "<tr><th>评审 Judge</th><th>部分 Track</th><th class=n>样本 Samples</th><th class=n>离散度 Spread</th>"
-                "<th class=n>与其他评审差距 Distance</th></tr>"]
+                f"<tr><th>{bi('评审', 'Judge')}</th><th>{bi('部分', 'Track')}</th><th class=n>{bi('样本', 'Samples')}</th>"
+                f"<th class=n>{bi('离散度', 'Spread')}</th><th class=n>{bi('与其他评审差距', 'Distance')}</th></tr>"]
         for j, tracks in scores["judge_health"].items():
             for track, h in tracks.items():
                 part.append(f"<tr><td>{e(label(j))}</td><td>{e(track)}</td><td class=n>{h['n']}</td>"
@@ -811,31 +822,31 @@ def build_index(suites: dict[str, tuple[Bench, dict]], index: dict, models: dict
     total = sum(index["weights"].values())
     annotators = {bench.annotator for bench, _ in suites.values() if bench.annotator}
 
-    links = "<a href='#index'>指数 Index</a><a href='#components'>组成排名 Components</a>"
-    links += f"<a href='#bill'>{e(BILL_NAME[0])} Bill</a>" if bill else ""
-    links += f"<a href='{e(blob, quote=True)}/docs/methodology.md#naiwai-index'>方法 Methodology</a>" if blob else ""
-    html = [_head(f"{INDEX_NAME[0]} · {INDEX_NAME[1]} · 奶蛙bench") + (f"<style>{bill_site.CSS}</style>" if bill else ""),
+    links = f"<a href='#index'>{bi('指数', 'Index')}</a><a href='#components'>{bi('组成排名', 'Components')}</a>"
+    links += f"<a href='#bill'>{bie(BILL_NAME)}</a>" if bill else ""
+    links += f"<a href='{e(blob, quote=True)}/docs/methodology.md#naiwai-index'>{bi('方法', 'Methodology')}</a>" if blob else ""
+    html = [_head(*INDEX_NAME) + (f"<style>{bill_site.CSS}</style>" if bill else ""),
             _header("index", links, True)]
     weights_zh = "、".join(f"{SUITE_TEXT[s]['name'][0]} {w}/{total}" for s, w in index["weights"].items())
     weights_en = ", ".join(f"{SUITE_TEXT[s]['name'][1]} {w}/{total}" for s, w in index["weights"].items())
     html.append(
         f"<div class=hero><img src='{e(portrait)}' alt='大笑奶龙'><div>"
-        f"<h1>{e(INDEX_NAME[0])} <span class=en>{e(INDEX_NAME[1])}</span></h1>"
-        "<p class=lede>AI 模型对中文网络梗“大笑奶龙”（又称“奶蛙”）看得有多懂？奶蛙指数合并两个独立的看图排名："
-        "识梗（认出梗和变体、说出别名、分清官方奶龙）与看图（逐项看清数量、姿态、表情、手势和眼泪）。"
-        "<br><span class=en>How well do AI models understand images of the Chinese meme 大笑奶龙 (Laughing Nailong, "
+        f"<h1>{bie(INDEX_NAME)}</h1>"
+        "<p class=lede><span class=zh>AI 模型对中文网络梗“大笑奶龙”（又称“奶蛙”）看得有多懂？奶蛙指数合并两个独立的看图排名："
+        "识梗（认出梗和变体、说出别名、分清官方奶龙）与看图（逐项看清数量、姿态、表情、手势和眼泪）。</span>"
+        "<span class=en><br>How well do AI models understand images of the Chinese meme 大笑奶龙 (Laughing Nailong, "
         "also called 奶蛙)? The NaiWai Index combines two independent visual rankings: Meme ID (recognize the meme "
         "and its variants, name its aliases, tell it from official Nailong) and Visual detail (read subject count, "
         "posture, expression, gesture, and tears field by field).</span></p>"
-        f"<span class=badge>{e(__version__)} 首个版本 · First release</span> "
+        f"<span class=badge>{e(__version__)} {bi('首个版本', 'First release')}</span> "
         + (bill_site.chip(bill[0], "#bill") + " " if bill else "") + f"<span class=stamp>index v{index['version']}"
         f" · {datetime.date.today().isoformat()}" + (f" · revision <code>{e(revision)}</code>" if revision else "")
         + "</span></div></div>")
 
-    out_rows = ["<div class=scroll><table class=ranking><tr><th>名次<br>Rank</th><th>模型 Model</th>"
-                "<th>指数 Index<br><span class=en>95% 区间 interval</span></th><th>名次范围<br>Rank range</th>"
-                + "".join(f"<th class=n><a href='{_suite_href('index', s)}'>{e(SUITE_TEXT[s]['name'][0])}</a><br>"
-                          f"{e(SUITE_TEXT[s]['name'][1])} ×{w}</th>" for s, w in index["weights"].items())
+    out_rows = [f"<div class=scroll><table class=ranking><tr><th>{bi('名次', 'Rank', True)}</th><th>{bi('模型', 'Model')}</th>"
+                f"<th>{bi('指数', 'Index')}<br>{bi('95% 区间', '95% interval')}</th><th>{bi('名次范围', 'Rank range', True)}</th>"
+                + "".join(f"<th class=n><a href='{_suite_href('index', s)}'>{bie(SUITE_TEXT[s]['name'], True)}</a>"
+                          f" ×{w}</th>" for s, w in index["weights"].items())
                 + "</tr>"]
     for row in index["rows"]:
         tier, rank = _rank_cells(row)
@@ -846,26 +857,26 @@ def build_index(suites: dict[str, tuple[Bench, dict]], index: dict, models: dict
         meter = (f"<div class=meter><span class=track><span class=fill style='width:{row['score']:.1f}%'></span>"
                  f"{interval}</span><b>{score_text(row)}</b></div>" if row["score"] is not None else "–")
         meta = ("<div class=row-meta><span class=status>partial</span></div>" if row["status"] != "complete" else "")
-        flag = "<br><span class=flag>答案键标注者 Key annotator</span>" if row["model"] in annotators else ""
+        flag = f"<br><span class=flag>{bi('答案键标注者', 'Key annotator')}</span>" if row["model"] in annotators else ""
         parts = "".join(f"<td class=n>{fmt(c['score'], 1)}"
                         + (f" <span class=muted>#{c['rank']}</span>" if c["rank"] is not None else "") + "</td>"
                         for c in row["components"].values())
         out_rows.append(f"<tr{tier}>{rank}<td><b>{model_html(label(row['model']))}</b>{flag}{meta}</td>"
                         f"<td>{meter}</td><td>{rank_range(row)}</td>{parts}</tr>")
     html.append(
-        f"<h2 id=index>{e(INDEX_NAME[0])} <span class=en>{e(INDEX_NAME[1])}</span></h2>"
+        f"<h2 id=index>{bie(INDEX_NAME)}</h2>"
         "<div class=panel>" + "\n".join(out_rows) + "</table></div></div>"
-        f"<p class=muted>指数 = 两个排名得分的加权平均（{weights_zh}）。看图是答案键本地计分的较大题组，权重加倍；"
+        f"<p class=muted><span class=zh>指数 = 两个排名得分的加权平均（{weights_zh}）。看图是答案键本地计分的较大题组，权重加倍；"
         "识梗包含 LLM 评审的自由回答。两项都完整排名的模型才有指数名次。两个分数的尺度不同：识梗是逐项部分得分，"
-        "看图要求七项全对，所以指数只用于排序，不是正确率。<span class=en> Index = weighted mean of the two ranking "
+        "看图要求七项全对，所以指数只用于排序，不是正确率。</span><span class=en> Index = weighted mean of the two ranking "
         f"scores ({weights_en}). Visual detail is the larger panel, scored locally against answer keys, and counts "
         "double; Meme ID includes LLM-judged free-form answers. Only models ranked in both components receive an "
         "index rank. The scales differ (Meme ID awards partial credit; Visual detail requires all seven fields), so "
         "the index orders models and is not an accuracy.</span></p>"
-        "<p class=muted>区间与名次范围来自两个题组各自独立的 2,000 次聚类自助重抽样，按序号配对后加权。"
+        "<p class=muted><span class=zh>区间与名次范围来自两个题组各自独立的 2,000 次聚类自助重抽样，按序号配对后加权。</span>"
         "<span class=en> Intervals and rank ranges pair each component's independent 2,000 cluster-bootstrap draws "
         "by draw number before weighting.</span> " + UNCERTAINTY_NOTE + "</p>"
-        + ("<p class=muted>看图的答案键由 GPT-6-Astra 标注、尚未经人工校验，Astra 的看图得分只反映与自己标注的一致程度。"
+        + ("<p class=muted><span class=zh>看图的答案键由 GPT-6-Astra 标注、尚未经人工校验，Astra 的看图得分只反映与自己标注的一致程度。</span>"
            "<span class=en> Visual detail answer keys are GPT-6-Astra annotations not yet checked by a person, so "
            "Astra's Visual detail score measures agreement with its own labels.</span></p>" if annotators else ""))
 
@@ -874,24 +885,26 @@ def build_index(suites: dict[str, tuple[Bench, dict]], index: dict, models: dict
         bench, scores = suites[suite]
         name = SUITE_TEXT[suite]["name"]
         vision_items = [i for i in bench.items if i.modality == "vision"]
-        flags = ({bench.annotator: "<br><span class=flag>答案键标注者 Key annotator</span>"} if bench.annotator else {})
+        flags = ({bench.annotator: f"<br><span class=flag>{bi('答案键标注者', 'Key annotator')}</span>"} if bench.annotator else {})
         panels.append(
-            f"<div class=panel><h3><a href='{_suite_href('index', suite)}'>{e(name[0])}</a> "
-            f"<span class=en>{e(name[1])} ranking</span></h3>"
-            f"<p class=muted>{len(vision_items)} 道看图题 · suite <code>{e(suite)}</code><span class=en> · "
-            f"{len(vision_items)} image tasks</span></p>"
+            f"<div class=panel><h3><a href='{_suite_href('index', suite)}'>"
+            f"{bi(e(name[0]) + '排名', e(name[1]) + ' ranking')}</a></h3>"
+            f"<p class=muted>{bi(f'{len(vision_items)} 道看图题', f'{len(vision_items)} image tasks')} · suite "
+            f"<code>{e(suite)}</code></p>"
             + _ranking(scores["leaderboards"].get("visual_understanding", []), label, flags, judge_label,
                        any(not i.answers for i in vision_items)) + "</div>")
     imagegen = bool(suites["core"][1]["samples"]["imagegen"])
     html.append(
-        "<h2 id=components>组成排名 <span class=en>Component rankings</span></h2><div class=panels>"
+        f"<h2 id=components>{bi('组成排名', 'Component rankings')}</h2><div class=panels>"
         + "".join(panels) + "</div>"
-        + ("<p class=muted>图像生成是实验项目，不计入指数，见"
-           f"<a href='{_suite_href('index', 'core')}#gallery'>识梗页的图像生成部分</a>。<span class=en> Image "
-           "generation is an experimental track outside the index; see the Meme ID page.</span></p>" if imagegen else "")
-        + f"<p class=muted>前端复刻（用 SVG 和 three.js 手写网页复刻奶蛙动图）也是实验项目，不计入指数，见<a href='{_suite_href('index', 'frontend')}'>"
-        "复刻页</a>。<span class=en> The frontend rebuild track (hand-written SVG and three.js pages that recreate "
-        "奶蛙 GIFs) is experimental and outside the index too.</span></p>")
+        + ("<p class=muted><span class=zh>图像生成是实验项目，不计入指数，见"
+           f"<a href='{_suite_href('index', 'core')}#gallery'>识梗页的图像生成部分</a>。</span><span class=en> Image "
+           f"generation is an experimental track outside the index; see the <a href='{_suite_href('index', 'core')}#gallery'>"
+           "Meme ID page</a>.</span></p>" if imagegen else "")
+        + "<p class=muted><span class=zh>前端复刻（用 SVG 和 three.js 手写网页复刻奶蛙动图）也是实验项目，不计入指数，见"
+        f"<a href='{_suite_href('index', 'frontend')}'>复刻页</a>。</span><span class=en> The "
+        f"<a href='{_suite_href('index', 'frontend')}'>frontend rebuild track</a> (hand-written SVG and three.js pages "
+        "that recreate 奶蛙 GIFs) is experimental and outside the index too.</span></p>")
     if bill:
         html.append(bill_site.index_section(*bill))
     html.append(_footer(repo_url, blob))

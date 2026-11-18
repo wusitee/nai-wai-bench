@@ -8,6 +8,7 @@ from pathlib import Path
 from nwb.bill import BUCKETS
 from nwb.config import ModelSpec
 from nwb.contributions import UNCOMMITTED
+from nwb.lang import bi, bie
 from nwb.site import BILL_NAME, FRONTEND_NAME, SUITE_TEXT, _footer, _head, _header, _suite_href
 
 CSS = """
@@ -41,7 +42,7 @@ ROLE = {"understanding": ("回答", "answers"), "judge": ("评审", "judging"), 
 BUCKET = {"input": ("输入", "Input"), "cache_read": ("缓存读取", "Cache read"),
           "cache_write": ("缓存写入", "Cache write"), "output": ("输出", "Output")}
 UNIT = {"understanding": ("回答", "answer"), "frontend": ("页面", "page")}
-TITLE = f"Token {BILL_NAME[0]} <span class=en>Token bill</span>"
+TITLE = bi(f"Token {BILL_NAME[0]}", "Token bill")
 
 
 def tok(n: float | None) -> str:
@@ -78,7 +79,7 @@ def _labels(models: dict[str, ModelSpec]):
 
 
 def chip(summary: dict, href: str) -> str:
-    return (f"<a class=bill-chip href='{e(href, quote=True)}'><b>{tok(summary['total'])}</b> tokens 烧掉了 · burned</a>")
+    return (f"<a class=bill-chip href='{e(href, quote=True)}'><b>{tok(summary['total'])}</b> tokens {bi('烧掉了', 'burned')}</a>")
 
 
 def headline(summary: dict) -> str:
@@ -87,9 +88,9 @@ def headline(summary: dict) -> str:
     run = sum(summary["tokens"].values())
     build = sum(agents["tokens"].values()) if agents else 0
     total = summary["total"]
-    counts = f"{summary['calls']:,} 次模型调用 model calls"
+    counts = bi(f"{summary['calls']:,} 次模型调用", f"{summary['calls']:,} model calls")
     if agents:
-        counts += f" · {agents['sessions']:,} 个 agent 会话 agent sessions"
+        counts += " · " + bi(f"{agents['sessions']:,} 个 agent 会话", f"{agents['sessions']:,} agent sessions")
     out = [f"<div class=panel><div class=bill-big><strong>{tok(total)}</strong><span>tokens · {counts}</span></div>"]
     if agents and total:
         share = lambda n: f"{100 * n / total:.1f}%"
@@ -98,15 +99,15 @@ def headline(summary: dict) -> str:
             f"<i class=b-build style='flex:{build}' title='Building it: {build:,} tokens'></i>"
             f"<i class=b-run style='flex:{run}' title='Running it: {run:,} tokens'></i></div>"
             "<div class=bill-split-labels>"
-            f"<span><span class='sw b-build'></span> 造 bench Building it <b>{tok(build)}</b> · {share(build)}</span>"
-            f"<span><b>{tok(run)}</b> · {share(run)} 跑 bench Running it <span class='sw b-run'></span></span></div>")
+            f"<span><span class='sw b-build'></span> {bi('造 bench', 'Building it')} <b>{tok(build)}</b> · {share(build)}</span>"
+            f"<span><b>{tok(run)}</b> · {share(run)} {bi('跑 bench', 'Running it')} <span class='sw b-run'></span></span></div>")
     types = {k: summary["tokens"][k] + (agents["tokens"][k] if agents else 0) for k in BUCKETS}
     if total:
         out.append("<div class=bill-types role=img aria-label='Token types'>" + "".join(
             f"<i class=b-{k} style='flex:{types[k]}' title='{BUCKET[k][1]}: {types[k]:,} tokens'></i>"
             for k in BUCKETS if types[k]) + "</div>")
     out.append("<div class=bill-legend>" + "".join(
-        f"<div><span class='sw b-{k}'></span>{BUCKET[k][0]} {BUCKET[k][1]}<b>{tok(types[k])}</b></div>"
+        f"<div><span class='sw b-{k}'></span>{bie(BUCKET[k])}<b>{tok(types[k])}</b></div>"
         for k in BUCKETS) + "</div></div>")
     return "".join(out)
 
@@ -121,13 +122,14 @@ def _running(summary: dict) -> str:
     rows = []
     for t in summary["tracks"]:
         suite, role = names.get(t["suite"], (t["suite"], t["suite"])), ROLE.get(t["role"], (t["role"], t["role"]))
-        missing = f" · {t['no_usage_calls']:,} 次无用量 without usage" if t["no_usage_calls"] else ""
-        rows.append(f"<tr><td>{e(suite[0])} {e(suite[1])} · {e(role[0])} <span class=en>{e(role[1])}</span>"
-                    f"<div class=row-meta>{t['calls']:,} 次调用 calls{missing}</div></td>"
+        n, calls = t["no_usage_calls"], t["calls"]
+        missing = " · " + bi(f"{n:,} 次无用量", f"{n:,} without usage") if n else ""
+        rows.append(f"<tr><td>{bi(f'{e(suite[0])} · {e(role[0])}', f'{e(suite[1])} · {e(role[1])}')}"
+                    f"<div class=row-meta>{bi(f'{calls:,} 次调用', f'{calls:,} calls')}{missing}</div></td>"
                     f"<td class=m>{_meter(t['tokens'], top)}</td><td class=n>{tok(t['tokens'])}</td></tr>")
-    return ("<div class=panel><h3>跑 bench <span class=en>Running it</span></h3>"
-            f"<p class=muted>{tok(sum(summary['tokens'].values()))} · 所有已保存的回答、评审、生图与页面调用"
-            "<span class=en> · every saved answer, judgment, image, and page call</span></p>"
+    return (f"<div class=panel><h3>{bi('跑 bench', 'Running it')}</h3>"
+            f"<p class=muted>{tok(sum(summary['tokens'].values()))} · "
+            f"{bi('所有已保存的回答、评审、生图与页面调用', 'every saved answer, judgment, image, and page call')}</p>"
             "<table class='bill-rows run'>" + "".join(rows) + "</table></div>")
 
 
@@ -135,12 +137,14 @@ def _building(agents: dict, agent_label) -> str:
     total = lambda row: sum(row["tokens"][k] for k in BUCKETS)
     top = max((total(r) for r in agents["models"]), default=0)
     rows = "".join(
-        f"<tr><td>{e(agent_label(r['model']))}<div class=row-meta>{r.get('requests', 0):,} 次请求 requests</div></td>"
+        f"<tr><td>{e(agent_label(r['model']))}<div class=row-meta>"
+        f"{bi(format(r.get('requests', 0), ',') + ' 次请求', format(r.get('requests', 0), ',') + ' requests')}</div></td>"
         f"<td class=m>{_meter(total(r), top)}</td><td class=n>{tok(total(r))}</td></tr>" for r in agents["models"])
-    return ("<div class=panel><h3>造 bench <span class=en>Building it</span></h3>"
-            f"<p class=muted>{tok(sum(agents['tokens'].values()))} · 写代码、审代码的 AI 编程助手，"
-            f"{e(agents['first_day'])} 至 {e(agents['last_day'])}<span class=en> · coding agents that wrote and "
-            f"reviewed the bench, {e(agents['first_day'])} to {e(agents['last_day'])}</span></p>"
+    first, last = e(agents["first_day"]), e(agents["last_day"])
+    return (f"<div class=panel><h3>{bi('造 bench', 'Building it')}</h3>"
+            f"<p class=muted>{tok(sum(agents['tokens'].values()))} · "
+            + bi(f"写代码、审代码的 AI 编程助手，{first} 至 {last}",
+                 f"coding agents that wrote and reviewed the bench, {first} to {last}") + "</p>"
             "<table class=bill-rows>" + rows + "</table></div>")
 
 
@@ -158,11 +162,12 @@ def _ladders(summary: dict, agent_label) -> str:
             f"<td class=n>{'×' + format(s['mean_output'] / base, '.1f') if base else ''}</td></tr>"
             for s in ladder["steps"])
         role = ROLE[ladder["role"]]
-        caveat = ("<p class=muted>各档的采集配置不同，差距里混有采集器的影响。<span class=en> These efforts were collected "
-                  "under different profiles, so the gap mixes effort with the collector.</span></p>" if mixed else "")
-        cards.append(f"<div class=panel><h3>{e(agent_label(ladder['model']))} <span class=en>· {role[0]} {role[1]}"
-                     f"</span></h3><p class=muted>输出 token/{unit[0]} · {ladder['tasks']} 道共同题目<span class=en> · output "
-                     f"tokens per {unit[1]} · {ladder['tasks']} shared tasks</span></p><table>{rows}</table>{caveat}</div>")
+        caveat = ("<p class=muted>" + bi("各档的采集配置不同，差距里混有采集器的影响。", "These efforts were collected "
+                  "under different profiles, so the gap mixes effort with the collector.") + "</p>" if mixed else "")
+        cards.append(f"<div class=panel><h3>{e(agent_label(ladder['model']))} <span class=muted>· {bie(role)}</span></h3>"
+                     "<p class=muted>" + bi(f"输出 token/{unit[0]} · {ladder['tasks']} 道共同题目",
+                                            f"output tokens per {unit[1]} · {ladder['tasks']} shared tasks")
+                     + f"</p><table>{rows}</table>{caveat}</div>")
     return "<div class=ladders>" + "".join(cards) + "</div>"
 
 
@@ -170,20 +175,21 @@ def _usage(summary: dict, entry_label) -> str:
     groups: dict[str, int] = {}
     for row in summary["entries"]:
         groups[row["model"]] = groups.get(row["model"], 0) + sum(row["tokens"].values())
-    out = ["<div class='scroll card-table'><table class=usage><tr><th>模型 Model</th><th>强度<br>Effort</th>"
-           "<th class=n>调用<br>Calls</th><th class=n>合计<br>Total</th>"
-           + "".join(f"<th class=n>{BUCKET[k][0]}<br>{BUCKET[k][1]}</th>" for k in BUCKETS)
-           + "<th class=n>输出/回答<br>Output/answer</th><th class=n>输出/页面<br>Output/page</th>"
-           "<th class=n>标价估值<br>List-price value</th></tr>"]
+    out = [f"<div class='scroll card-table'><table class=usage><tr><th>{bi('模型', 'Model')}</th><th>{bi('强度', 'Effort', True)}</th>"
+           f"<th class=n>{bi('调用', 'Calls', True)}</th><th class=n>{bi('合计', 'Total', True)}</th>"
+           + "".join(f"<th class=n>{bie(BUCKET[k], True)}</th>" for k in BUCKETS)
+           + f"<th class=n>{bi('输出/回答', 'Output/answer', True)}</th><th class=n>{bi('输出/页面', 'Output/page', True)}</th>"
+           f"<th class=n>{bi('标价估值', 'List-price value', True)}</th></tr>"]
     for row in sorted(summary["entries"], key=lambda r: -groups[r["model"]]):  # stable: efforts stay ordered
         known = row["no_usage_calls"] < row["calls"]
         per = lambda role: (f"{row['roles'][role]['output'] / row['roles'][role]['usage_calls']:,.0f}"
                             if row["roles"].get(role, {}).get("usage_calls") else "—")
-        roles = " · ".join(ROLE.get(r, (r, r))[1] for r in row["roles"])
-        missing = f" · {row['no_usage_calls']} without usage" if row["no_usage_calls"] and known else ""
+        roles = bi(*(" · ".join(e(ROLE.get(r, (r, r))[i]) for r in row["roles"]) for i in (0, 1)))
+        n = row["no_usage_calls"]
+        missing = " · " + bi(f"{n} 次无用量", f"{n} without usage") if n and known else ""
         out.append(
             f"<tr><td><b>{e(entry_label(row['entry']))}</b><div class=row-meta><code>{e(row['entry'])}</code> · "
-            f"{e(roles)}{missing}</div></td><td>{_effort(row['effort'])}</td><td class=n>{row['calls']:,}</td>"
+            f"{roles}{missing}</div></td><td>{_effort(row['effort'])}</td><td class=n>{row['calls']:,}</td>"
             f"<td class=n>{tok(sum(row['tokens'].values())) if known else '—'}</td>"
             + "".join(f"<td class=n>{tok(row['tokens'][k]) if known else '—'}</td>" for k in BUCKETS)
             + f"<td class=n>{per('understanding')}</td><td class=n>{per('frontend')}</td>"
@@ -193,9 +199,9 @@ def _usage(summary: dict, entry_label) -> str:
 
 def _credits(board: dict, entry_label) -> str:
     top = max((row["usd"] or 0 for row in board["contributors"]), default=0)
-    out = ["<div class='scroll card-table'><table class=credits><tr><th>#</th><th>贡献者 Contributor</th>"
-           "<th>标价估值<br>List-price value</th><th class=n>调用<br>Calls</th><th class=n>Token</th>"
-           "<th>模型 Models</th></tr>"]
+    out = [f"<div class='scroll card-table'><table class=credits><tr><th>#</th><th>{bi('贡献者', 'Contributor')}</th>"
+           f"<th>{bi('标价估值', 'List-price value', True)}</th><th class=n>{bi('调用', 'Calls', True)}</th><th class=n>Token</th>"
+           f"<th>{bi('模型', 'Models')}</th></tr>"]
     for row in board["contributors"]:
         tokens = sum(m["tokens"]["input"] + m["tokens"]["output"] for m in row["models"])
         names = " · ".join(dict.fromkeys(entry_label(m["model"]) for m in row["models"]))
@@ -211,58 +217,59 @@ def build(summary: dict, board: dict, models: dict[str, ModelSpec], out: Path, r
           blob: str | None = None) -> Path:
     entry_label, agent_label = _labels(models)
     agents = summary["agents"]
-    links = ("<a href='#where'>去向 Breakdown</a><a href='#effort'>强度 Effort</a><a href='#models'>模型 Models</a>"
-             "<a href='#credits'>贡献者 Credits</a>")
-    docs = (f"<a href='{e(blob, quote=True)}/docs/contributing-results.md'>贡献结果 Contributing results</a>"
-            if blob else "docs/contributing-results.md")
+    links = (f"<a href='#where'>{bi('去向', 'Breakdown')}</a><a href='#effort'>{bi('强度', 'Effort')}</a>"
+             f"<a href='#models'>{bi('模型', 'Models')}</a><a href='#credits'>{bi('贡献者', 'Credits')}</a>")
+    docs = ((f"<a href='{e(blob, quote=True)}/docs/contributing-results.md'>贡献结果</a>",
+             f"<a href='{e(blob, quote=True)}/docs/contributing-results.md'>Contributing results</a>")
+            if blob else ("docs/contributing-results.md",) * 2)
     page = [
-        _head(f"Token {BILL_NAME[0]} · Token bill · 奶蛙bench") + f"<style>{CSS}</style>",
+        _head(f"Token {BILL_NAME[0]}", "Token bill") + f"<style>{CSS}</style>",
         _header("bill", links, True),
         f"<div class='hero solo'><div><h1>{TITLE}</h1>"
-        "<p class=lede>这个 bench 一共烧掉了多少 token：跑分本身"
-        + ("，加上写代码、审代码的 AI 编程助手" if agents else "") + "。<br><span class=en>Every token that went "
+        "<p class=lede><span class=zh>这个 bench 一共烧掉了多少 token：跑分本身"
+        + ("，加上写代码、审代码的 AI 编程助手" if agents else "") + "。</span><span class=en><br>Every token that went "
         "into this bench: running it" + (", plus the coding agents that built and reviewed it" if agents else "")
         + ".</span></p></div></div>",
         headline(summary),
-        "<p class=muted>跑分用量来自仓库里每一次已保存调用的记录，合并运行中重复的调用只算一次；没有报告用量的客户端"
+        "<p class=muted><span class=zh>跑分用量来自仓库里每一次已保存调用的记录，合并运行中重复的调用只算一次；没有报告用量的客户端"
         f"（{summary['no_usage_calls']:,} 次调用）不计入。"
         + ("开发用量是维护者本机 AI 编程助手日志的快照，无法从仓库重算。" if agents else "")
-        + "缓存读取是重复送入的上下文，按次计入。<span class=en> Running usage is read from every saved call in the "
+        + "缓存读取是重复送入的上下文，按次计入。</span><span class=en> Running usage is read from every saved call in the "
         "repository, counting a call repeated across merged runs once; clients that report no usage "
         f"({summary['no_usage_calls']:,} calls) are left out. "
         + ("Building usage is a snapshot of the maintainer's local coding-agent logs and cannot be rebuilt from "
            "the repository. " if agents else "")
         + "Cache reads are context sent again and count every time.</span></p>",
-        "<h2 id=where>去向 <span class=en>Where it went</span></h2><div class=panels>" + _running(summary)
+        f"<h2 id=where>{bi('去向', 'Where it went')}</h2><div class=panels>" + _running(summary)
         + (_building(agents, agent_label) if agents else "") + "</div>"
-        "<p class=muted>条形在各栏内按最大值缩放；生图调用的 token 只是图像工具外层的对话，不是生成图像的成本。"
+        "<p class=muted><span class=zh>条形在各栏内按最大值缩放；生图调用的 token 只是图像工具外层的对话，不是生成图像的成本。</span>"
         "<span class=en> Bars are scaled within each panel. Image-generation tokens cover the relay around the "
         "image tool, not image generation itself.</span></p>",
     ]
     if summary["ladders"]:
         page.append(
-            "<h2 id=effort>推理强度 <span class=en>Reasoning effort</span></h2>"
-            "<p>同一个模型换一档推理强度，每道题多用多少输出 token？只比较各档都答过的题目，每题先对重复取平均；"
-            "倍数相对最低一档。<br><span class=en>How many more output tokens does a model spend per task at a "
+            f"<h2 id=effort>{bi('推理强度', 'Reasoning effort')}</h2>"
+            "<p><span class=zh>同一个模型换一档推理强度，每道题多用多少输出 token？只比较各档都答过的题目，每题先对重复取平均；"
+            "倍数相对最低一档。</span><span class=en><br>How many more output tokens does a model spend per task at a "
             "higher reasoning effort? Only tasks answered at every listed effort are compared, averaging "
             "repetitions within a task first; multipliers are relative to the lowest effort.</span></p>"
             + _ladders(summary, agent_label))
     page += [
-        "<h2 id=models>各模型用量 <span class=en>Usage by model and effort</span></h2>"
-        "<p class=muted>每个模型配置（模型 × 推理强度）在所有已保存调用中的合计，包括作为评审的调用。输出含推理 token；"
+        f"<h2 id=models>{bi('各模型用量', 'Usage by model and effort')}</h2>"
+        "<p class=muted><span class=zh>每个模型配置（模型 × 推理强度）在所有已保存调用中的合计，包括作为评审的调用。输出含推理 token；"
         "输入含各客户端自带的系统提示。每题输出是该配置全部题目的平均，题目范围不同的行不能直接比较。估值按 "
-        "<code>models.toml</code> 的 API 标价计算，订阅制 CLI 并不按 token 计费。<span class=en> Totals per model "
+        "<code>models.toml</code> 的 API 标价计算，订阅制 CLI 并不按 token 计费。</span><span class=en> Totals per model "
         "configuration (model × reasoning effort) over every saved call, including calls made as a judge. Output "
         "includes reasoning tokens; input includes each client's own system prompt. Output per task averages all "
         "of a configuration's tasks, so rows covering different tasks are not directly comparable. Values use the "
         "API list prices in <code>models.toml</code>; subscription CLIs are not billed per token.</span></p>"
         + _usage(summary, entry_label),
-        "<h2 id=credits>贡献者 <span class=en>Contributors</span></h2>"
-        "<p>感谢每一位贡献跑分结果的人。每次已保存的调用记在首次提交该记录的 Git 作者名下，按 API 标价估值排名。"
-        "<br><span class=en>Thanks to everyone who contributed results. Each saved call is credited to the Git "
+        f"<h2 id=credits>{bi('贡献者', 'Contributors')}</h2>"
+        "<p><span class=zh>感谢每一位贡献跑分结果的人。每次已保存的调用记在首次提交该记录的 Git 作者名下，按 API 标价估值排名。</span>"
+        "<span class=en><br>Thanks to everyone who contributed results. Each saved call is credited to the Git "
         "author who first committed its record, ranked by its value at API list prices.</span></p>"
         + _credits(board, entry_label)
-        + f"<p class=muted>想加入？见{docs}。<span class=en> Want to add a model? See Contributing results. "
+        + f"<p class=muted><span class=zh>想加入？见{docs[0]}。</span><span class=en> Want to add a model? See {docs[1]}. "
         "The value is an estimate at pay-as-you-go prices, not what anyone paid.</span></p>",
         _footer(repo_url, blob),
     ]
@@ -277,7 +284,7 @@ def index_section(summary: dict, board: dict) -> str:
     """Summary for the overview page, linking to the full bill."""
     href = _suite_href("index", "bill")
     names = credit_names(board)
-    thanks = (f"感谢贡献结果的 {' · '.join(e(n) for n in names)}。<span class=en> Thanks to "
-              f"{', '.join(e(n) for n in names)} for contributing results.</span> " if names else "")
+    thanks = (bi(f"感谢贡献结果的 {' · '.join(e(n) for n in names)}。",
+                 f"Thanks to {', '.join(e(n) for n in names)} for contributing results.") + " " if names else "")
     return (f"<h2 id=bill>{TITLE}</h2>" + headline(summary)
-            + f"<p class=muted>{thanks}<a href='{href}'>完整账单与贡献者 Full bill and credits →</a></p>")
+            + f"<p class=muted>{thanks}<a href='{href}'>{bi('完整账单与贡献者', 'Full bill and credits')} →</a></p>")
