@@ -1,0 +1,81 @@
+{
+  "settings_id": "a4ba33964638df40",
+  "track": "understanding",
+  "model": "qwen4-max-pi",
+  "vendor": "alibaba",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "一张搞笑聊天表情包贴纸：画面正中是一只奶黄色（奶油浅黄、明亮饱和）的圆胖卡通小猫的超大面部特写，脑袋几乎占满整个画面。它的头又大又圆、略扁，脸颊鼓鼓地垂成两团肉，头顶两只小小的三角形猫耳，几根细白胡须，短短的黄色小爪子举在胸口两侧。它正仰着头毫无形象地放声狂笑：两只眼睛笑成两条向上弯的黑色细弧线（像 ^ ^），位置偏高、间距很宽，几乎贴到头顶；嘴巴夸张地咧成一个横跨整张脸的巨大弧形笑口，嘴角一直拉到脸的两侧边缘，露出深色口腔、粉红色舌头和几颗小小的白色尖牙；眼角挤出两滴笑出来的泪珠。脸的下半部几乎全被大嘴占满，上半部只剩两条眯眯眼，整张脸看上去像一只咧嘴傻笑的黄色小青蛙，神情憨傻、贱萌、笑到失控。风格：光滑柔软的3D卡通渲染，儿童动画电影般的塑胶绒毛质感，造型简洁夸张，柔和均匀的正面打光，轻微高光和柔和阴影；纯白干净背景，正方形构图，主体居中的贴纸式排版，色彩明快高饱和；画面中不要出现任何文字、字幕、水印或边框。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 54.8,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 115,
+      "output": 2450,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 2178,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 115,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2450,
+      "reasoning": 2178
+    },
+    "session_config": {
+      "thinkingLevel": "max"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "max"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T09:44:10Z",
+    "finished_at": "2026-11-16T09:45:05Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

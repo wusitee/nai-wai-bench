@@ -1,0 +1,93 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gemini-3.8-flash/describe__r1.json",
+  "target_sha256": "013ecc3809b507a5076b316e1824d468ea8bb76047096c5a6f9c35481e0feb13",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "4c2982e282d0dcfc",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 0,
+    "render": 1,
+    "background": 0,
+    "vibe": 1
+  },
+  "hallucinations": [
+    "Describes a backward-tilted, upward-facing laughing posture instead of a torso hunched forward.",
+    "Confidently describes the hands as dangling or floating apart, unable to come together, instead of clutching the belly.",
+    "Claims the mouth is usually toothless or shows only gums, contradicting the visible teeth.",
+    "Presents grass and blue sky under sunlight as the original background, contradicting the plain white or light-grey background."
+  ],
+  "rationale": "The answer correctly describes the closed curved eyes and bulky, neckless body, but reverses the defining posture and background and omits the pale belly patch. Belly contact appears only as an uncertain alternative; the mouth, rendering, and absurd mood receive partial coverage.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":1,\"body\":2,\"belly_patch\":0,\"render\":1,\"background\":0,\"vibe\":1},\"hallucinations\":[\"Describes a backward-tilted, upward-facing laughing posture instead of a torso hunched forward.\",\"Confidently describes the hands as dangling or floating apart, unable to come together, instead of clutching the belly.\",\"Claims the mouth is usually toothless or shows only gums, contradicting the visible teeth.\",\"Presents grass and blue sky under sunlight as the original background, contradicting the plain white or light-grey background.\"],\"rationale\":\"The answer correctly describes the closed curved eyes and bulky, neckless body, but reverses the defining posture and background and omits the pale belly patch. Belly contact appears only as an uncertain alternative; the mouth, rendering, and absurd mood receive partial coverage.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719d-3ea5-76c1-8109-e21a4b60e7b8",
+    "seconds": 23.0,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13426,
+      "cached_input_tokens": 4864,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 428,
+      "reasoning_output_tokens": 231
+    },
+    "tokens": {
+      "input": 13426,
+      "cached_input": 4864,
+      "cache_write": 0,
+      "output": 428,
+      "reasoning": 231
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:51:32Z",
+    "finished_at": "2026-10-25T05:51:55Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

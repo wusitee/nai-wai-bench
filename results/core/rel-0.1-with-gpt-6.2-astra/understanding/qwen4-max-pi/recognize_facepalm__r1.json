@@ -1,0 +1,84 @@
+{
+  "settings_id": "a4ba33964638df40",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi",
+  "vendor": "alibaba",
+  "item": "recognize_facepalm",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "answer": "这个角色是 **Glaggle（格拉格）**——出自网络共创梗 **Glaggleland（格拉格乐园）**。图中这种黄色身体、绿色圆眼的形象，一般被认为是乐园吉祥物 **Enphoso**（或 Giggler 一类的黄色 Glaggle）。\n\n关于这个梗：\n\n- **起源**：约 2022 年从 Tumblr 兴起，后来扩散到 Reddit、TikTok 等平台，是一种网友集体虚构的\"伪 Creepypasta\"式世界观。\n- **设定**：Glaggleland 是一座表面上欢乐可爱、实则暗藏恐怖背景故事的主题公园（比如\"Giggler 大屠杀\"、永不停止的游乐设施之类的黑暗传说）。园里的生物就是这些色彩鲜艳、笑容略显诡异的团子状 Glaggle，不同颜色对应不同\"物种\"（黄色的 Giggler、蓝色的 Sobber 等）。\n- **这张图的用法**：手扶脑袋、面带微妙微笑的 3D 渲染图，常被当作\"思考中 / 困惑 / 呃……\"系的反应表情包使用，可爱外形和诡异设定之间的反差正是这个梗的笑点所在。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 119.1,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 325,
+      "output": 5354,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 5107,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 325,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 5354,
+      "reasoning": 5107
+    },
+    "session_config": {
+      "thinkingLevel": "max"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "max"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T09:48:51Z",
+    "finished_at": "2026-11-16T09:50:50Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

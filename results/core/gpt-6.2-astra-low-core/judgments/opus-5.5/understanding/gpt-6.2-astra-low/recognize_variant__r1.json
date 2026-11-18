@@ -1,0 +1,109 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-astra-low/recognize_variant__r1.json",
+  "target_sha256": "38a8b9324a982c2d0c8f7f052558afa7cd106421d034b32717347cdcb715fc01",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "b127a2e46140b396",
+  "judge_images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "track": "understanding",
+  "model": "gpt-6.2-astra-low",
+  "scores": {
+    "identifies_meme": 0,
+    "laugh_pose": 1,
+    "base_character": 0
+  },
+  "hallucinations": [],
+  "rationale": "The model accurately describes the hunched, belly-clutching, eyes-shut, open-mouthed laughing pose in the image, but never connects it to 大笑奶龙/奶蛙. It offers only generic 'laughing so hard my stomach hurts' framing and never mentions Nailong.",
+  "raw": "{\"scores\": {\"identifies_meme\": 0, \"laugh_pose\": 1, \"base_character\": 0}, \"hallucinations\": [], \"rationale\": \"The model accurately describes the hunched, belly-clutching, eyes-shut, open-mouthed laughing pose in the image, but never connects it to 大笑奶龙/奶蛙. It offers only generic 'laughing so hard my stomach hurts' framing and never mentions Nailong.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 6.8,
+    "turns": 1,
+    "tokens": {
+      "input": 2899,
+      "cached_input": 0,
+      "cache_write": 2897,
+      "output": 359,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.030612399999999998,
+    "tools_used": [],
+    "cost_usd": 0.030612399999999998,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2897,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 359,
+      "output_tokens_details": {
+        "thinking_tokens": 208
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2897,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 359,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2897,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2897
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-17T22:25:37Z",
+    "finished_at": "2026-11-17T22:25:44Z",
+    "revision": "fd4ab338+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

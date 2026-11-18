@@ -110,6 +110,48 @@ tool_profile = "isolated-v1"
 price = { input = 0.1, cached_input = 0.01, cache_write = 0.125, output = 0.5, unit = "USD/1M tokens", source = "https://developers.openai.com/api/docs/models/gpt-6-luna", as_of = "2026-10-29" }
 can = ["text", "vision"]
 
+# GPT-6.2-Astra at low through xhigh; each effort is its own row. The unsuffixed entry is the standard `high`.
+# Codex also lists max and ultra (automatic task delegation); neither is benched yet.
+[models."gpt-6.2-astra"]
+label = "GPT-6.2-Astra (Codex)"
+backend = "codex"
+vendor = "openai"
+model = "gpt-6.2-astra"
+effort = "high"
+tool_profile = "isolated-v1"
+price = { input = 8.0, cached_input = 0.4, cache_write = 10.0, output = 40.0, unit = "USD/1M tokens", source = "https://developers.openai.com/api/docs/pricing (gpt-6.2-astra, short context)", as_of = "2026-11-18" }
+can = ["text", "vision"]
+
+[models."gpt-6.2-astra-low"]
+label = "GPT-6.2-Astra (Codex)"
+backend = "codex"
+vendor = "openai"
+model = "gpt-6.2-astra"
+effort = "low"
+tool_profile = "isolated-v1"
+price = { input = 8.0, cached_input = 0.4, cache_write = 10.0, output = 40.0, unit = "USD/1M tokens", source = "https://developers.openai.com/api/docs/pricing (gpt-6.2-astra, short context)", as_of = "2026-11-18" }
+can = ["text", "vision"]
+
+[models."gpt-6.2-astra-medium"]
+label = "GPT-6.2-Astra (Codex)"
+backend = "codex"
+vendor = "openai"
+model = "gpt-6.2-astra"
+effort = "medium"
+tool_profile = "isolated-v1"
+price = { input = 8.0, cached_input = 0.4, cache_write = 10.0, output = 40.0, unit = "USD/1M tokens", source = "https://developers.openai.com/api/docs/pricing (gpt-6.2-astra, short context)", as_of = "2026-11-18" }
+can = ["text", "vision"]
+
+[models."gpt-6.2-astra-xhigh"]
+label = "GPT-6.2-Astra (Codex)"
+backend = "codex"
+vendor = "openai"
+model = "gpt-6.2-astra"
+effort = "xhigh"
+tool_profile = "isolated-v1"
+price = { input = 8.0, cached_input = 0.4, cache_write = 10.0, output = 40.0, unit = "USD/1M tokens", source = "https://developers.openai.com/api/docs/pricing (gpt-6.2-astra, short context)", as_of = "2026-11-18" }
+can = ["text", "vision"]
+
 # Frontend-track subject configurations; effort variants remain separate rows.
 [models."gpt-6-astra-xhigh"]
 label = "GPT-6-Astra"

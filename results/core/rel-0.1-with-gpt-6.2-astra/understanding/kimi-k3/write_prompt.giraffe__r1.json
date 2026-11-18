@@ -1,0 +1,77 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "write_prompt.giraffe",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a giraffe version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A chubby, cute cartoon giraffe drawn in a simple, soft kawaii sticker style: bright yellow rounded body with a huge oversized head, a tiny short neck (much shorter than a real giraffe's), small stubby arms and legs, small orange ossicones on top of the head, and soft brown spots scattered over its round belly. It is laughing uncontrollably with pure joy — eyes squeezed shut into happy crescent slits, huge wide-open mouth showing a big pink tongue, small cartoon tears of laughter flying from its eyes, chubby arms held up near its chest, belly jiggling. Clean white background, thick smooth outlines, flat cel-shaded colors, cheerful children's-sticker aesthetic, full body, centered, square composition, high-quality digital illustration.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 12.2,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20022,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 266,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20288 / 1048576 tokens (2%)\nSession total: 20022 input, 266 output",
+      "usage": {
+        "inputTokens": 20022,
+        "outputTokens": 266
+      }
+    },
+    "tokens_source": "usage-command",
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 20288,
+        "size": 1048576
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:42:31Z",
+    "finished_at": "2026-10-25T00:42:43Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

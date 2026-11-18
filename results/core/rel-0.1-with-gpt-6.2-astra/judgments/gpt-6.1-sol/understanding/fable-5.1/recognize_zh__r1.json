@@ -1,0 +1,90 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1/recognize_zh__r1.json",
+  "target_sha256": "33072a9f82d2d792627e384b10fe87106cc36c42c248359168b72796ec232073",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "2364e842ed08823b",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "fable-5.1",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "将图中角色认作“鸡块（Chicken Nugget / Nugget）”，并否认其与动画主角的关系；图中实际是奶龙的变异梗图。",
+    "将该图归为“Gegagedigedagedago”鸡块梗的主角，错误关联了另一个网络梗。"
+  ],
+  "rationale": "回答误认了角色和相关网络梗，未指出这是奶龙的非官方 AI 变异版本，也未给出“大笑奶龙”“变异奶龙”“奶蛙”等名称或解释奶蛙与奶龙的关系。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"ai_variant\":0,\"aliases\":0,\"naiwa\":0},\"hallucinations\":[\"将图中角色认作“鸡块（Chicken Nugget / Nugget）”，并否认其与动画主角的关系；图中实际是奶龙的变异梗图。\",\"将该图归为“Gegagedigedagedago”鸡块梗的主角，错误关联了另一个网络梗。\"],\"rationale\":\"回答误认了角色和相关网络梗，未指出这是奶龙的非官方 AI 变异版本，也未给出“大笑奶龙”“变异奶龙”“奶蛙”等名称或解释奶蛙与奶龙的关系。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a19118-80c1-7fe3-8979-a8e1076a927a",
+    "seconds": 15.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12550,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 316,
+      "reasoning_output_tokens": 143
+    },
+    "tokens": {
+      "input": 12550,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 316,
+      "reasoning": 143
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T08:34:24Z",
+    "finished_at": "2026-10-31T08:34:39Z",
+    "revision": "bd3cba6",
+    "nwb_version": "0.1.0"
+  }
+}

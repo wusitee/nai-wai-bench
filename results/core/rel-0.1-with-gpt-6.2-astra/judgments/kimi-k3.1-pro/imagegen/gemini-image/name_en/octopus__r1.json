@@ -1,0 +1,90 @@
+{
+  "judge": "kimi-k3.1-pro",
+  "judge_vendor": "moonshot",
+  "target": "imagegen/gemini-image/name_en/octopus__r1.json",
+  "target_sha256": "95524dcbe3ebda62c86761d6fefde4969472a9fa3026dc55f5f2a46bc000a28b",
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "judge_prompt": "3a56bf0729f4ad2d",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/gemini-image/name_en/octopus__r1/inline-0.jpg"
+  ],
+  "track": "imagegen",
+  "model": "gemini-image",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 0,
+    "background": 0,
+    "vibe": 0
+  },
+  "identity": 2,
+  "failure_modes": [
+    "generic_cute",
+    "text_or_watermark",
+    "multiple_subjects"
+  ],
+  "rationale": "The image is recognizably a laughing octopus and captures the shut eyes and huge mouth, but it is a cute 2D underwater illustration that misses the reference’s pose, belly-clutching, body design, rendering, background, and absurd meme energy.",
+  "raw": "- pose: Upright, front-facing octopus with spread tentacles; no hunched, doubled-over stance — **absent**\n- hands_on_belly: No tentacles clutch or press the belly — **absent**\n- eyes: Both eyes are squeezed shut into thin curved arcs — **match**\n- mouth: Huge dark mouth with visible teeth and tongue conveys loud laughter — **match**\n- body: Rounded head/body with thick tentacles, but not the reference’s bulky pear/bean silhouette — **partial**\n- belly_patch: No contrasting pale oval belly patch — **absent**\n- render: Polished 2D cartoon illustration rather than glossy 3D CG — **absent**\n- background: Busy underwater scene with coral, bubbles, and fish — **absent**\n- vibe: Cheerful and cute rather than absurd or unhinged meme energy — **absent**\n- identity: Clearly an octopus, with numerous curling tentacles and visible suction cups — **clearly**\n\n{\"traits\": {\"pose\": \"absent\", \"hands_on_belly\": \"absent\", \"eyes\": \"match\", \"mouth\": \"match\", \"body\": \"partial\", \"belly_patch\": \"absent\", \"render\": \"absent\", \"background\": \"absent\", \"vibe\": \"absent\"}, \"identity\": \"clearly\", \"failure_modes\": [\"generic_cute\", \"text_or_watermark\", \"multiple_subjects\"], \"rationale\": \"The image is recognizably a laughing octopus and captures the shut eyes and huge mouth, but it is a cute 2D underwater illustration that misses the reference’s pose, belly-clutching, body design, rendering, background, and absurd meme energy.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 20.0,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 22820,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 664,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 23484 / 1048576 tokens (2%)\nSession total: 22820 input, 664 output",
+      "usage": {
+        "inputTokens": 22820,
+        "outputTokens": 664
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:55:20Z",
+    "finished_at": "2026-10-25T01:55:40Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "settings_id": "45fd827f1214ed0a",
+  "track": "imagegen",
+  "model": "chatgpt-images-2.6",
+  "vendor": "openai",
+  "tier": "described_brief",
+  "animal": "elephant",
+  "rep": 1,
+  "prompt": "A 3D cartoon elephant doubled over with laughter, clutching its belly, on a plain white background.",
+  "reference": false,
+  "images": [
+    "imagegen/chatgpt-images-2.6/described_brief/elephant__r1/exec-ac318c32-7e69-47bb-b21f-39339ca7d585.png"
+  ],
+  "text": "DONE",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.166.0",
+    "thread_id": "01a1a9d9-2e53-7542-8936-6c369947c64a",
+    "seconds": 32.5,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 24821,
+      "cached_input_tokens": 20864,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 155,
+      "reasoning_output_tokens": 66
+    },
+    "tokens": {
+      "input": 24821,
+      "cached_input": 20864,
+      "cache_write": 0,
+      "output": 155,
+      "reasoning": 66
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null,
+    "audit": {
+      "rollout": "~/.codex/sessions/2026/11/05/rollout-2026-11-05T11-55-45-01a1a9d9-2e53-7542-8936-6c369947c64a.jsonl",
+      "image_gen_calls": 1,
+      "verbatim": true,
+      "sent": [
+        "A 3D cartoon elephant doubled over with laughter, clutching its belly, on a plain white background."
+      ],
+      "calls": [
+        "// @exec: {\"yield_time_ms\": 120000}\nconst result = await tools.image_gen__imagegen({prompt:\"A 3D cartoon elephant doubled over with laughter, clutching its belly, on a plain white background.\"});\ngeneratedImage(result);\n"
+      ],
+      "refused": false
+    },
+    "c2pa": {
+      "generators": [
+        "ChatGPT gpt-image"
+      ],
+      "actions": []
+    }
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "low",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "-c",
+      "model_reasoning_effort=\"low\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-05T03:55:44Z",
+    "finished_at": "2026-11-05T03:56:17Z",
+    "revision": "aa69823+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

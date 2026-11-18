@@ -1,0 +1,103 @@
+{
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "opus-5.5",
+  "vendor": "anthropic",
+  "item": "recognize_en",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Who is this character, and which internet meme is this image from? Does the meme have other names?",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "I can't identify this character with confidence, and I'd rather not guess a name or meme origin that might be wrong.\n\n**What I can see:** It's a 3D-rendered, chubby yellow creature with a cream-colored belly patch and dark gray hands. It's laughing hysterically, eyes squeezed shut and mouth wide open, while clutching its stomach and bending forward. The pose is the classic \"dying of laughter\" reaction.\n\n**How images like this are usually used:** Clips like this circulate as reaction memes on TikTok, Reels, and Shorts. People post them in response to something absurdly funny or to mock someone, often with an exaggerated laugh sound effect. Characters like this often come from children's CGI series, mobile game ads, or animation studio shorts, and lose their original context once they spread.\n\n**To find the source:**\n- A reverse image search (Google Lens, Yandex, or TinEye) is the fastest way to trace it.\n- Searching phrases like \"yellow creature laughing meme\" or \"yellow monster holding belly laughing\" on Know Your Meme or TikTok may turn up the clip and its common names.\n\nIf you know where you saw it or have the audio, I can help you narrow it down.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 13.6,
+    "tokens": {
+      "input": 1398,
+      "cached_input": 0,
+      "cache_write": 1396,
+      "output": 853,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0284667,
+    "tools_used": [],
+    "cost_usd": 0.0284667,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1396,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 853,
+      "output_tokens_details": {
+        "thinking_tokens": 459
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1396,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 853,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1396,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1396
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:42:41Z",
+    "finished_at": "2026-10-25T00:42:55Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "imagegen/chatgpt-image/reference/cat__r1.json",
+  "target_sha256": "555e6010ab46020d9c73203ceb0285ab4f21ce874de8f2439ca24f755c5241a1",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "b3a081e529f797dd",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/chatgpt-image/reference/cat__r1/exec-ef986352-09db-4c89-ba57-87b8b05ca0f8.png"
+  ],
+  "track": "imagegen",
+  "model": "chatgpt-image",
+  "traits": {
+    "pose": 1,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 2,
+    "vibe": 1
+  },
+  "identity": 2,
+  "failure_modes": [],
+  "rationale": "A clearly recognizable chubby orange tabby reproduces the belly-clutching, shut-eyed, gaping-mouth laugh on a plain background. However, the pose leans back instead of hunching forward, and the polished furry render feels cuter and less unhinged than the reference.",
+  "raw": "- **pose**: The cat stands with knees slightly bent, but its torso is fairly upright and its head is thrown back. The reference is doubled over forward. → partial\n- **hands_on_belly**: Both front paws press and clutch the center of the belly. → match\n- **eyes**: The eyes are squeezed shut into thin black curved arcs. → match\n- **mouth**: The mouth is very wide open, with a dark red interior, fangs, visible teeth and a tongue. It reads as hysterical laughter. → match\n- **body**: The body is a bulky pear shape. The head merges into the torso with no neck, and the limbs are short and thick. → match\n- **belly_patch**: A pale cream oval belly contrasts clearly with the orange body. → match\n- **render**: It is a 3D CG render with soft studio lighting. However, the fur is detailed and polished in a Pixar-like way rather than glossy and slightly cheap like the reference. → partial\n- **background**: The background is plain white to light grey with no props. → match\n- **vibe**: The cat is laughing heartily and keeps the meme gesture. It reads as more cute and polished than unhinged or 抽象. → partial\n- **identity**: It is clearly an orange tabby cat, with stripes on the body, limbs and tail, plus pointed ears, whiskers and a pink nose. → clearly\n\n{\"traits\": {\"pose\": \"partial\", \"hands_on_belly\": \"match\", \"eyes\": \"match\", \"mouth\": \"match\", \"body\": \"match\", \"belly_patch\": \"match\", \"render\": \"partial\", \"background\": \"match\", \"vibe\": \"partial\"}, \"identity\": \"clearly\", \"failure_modes\": [], \"rationale\": \"A clearly recognizable chubby orange tabby reproduces the belly-clutching, shut-eyed, gaping-mouth laugh on a plain background. However, the pose leans back instead of hunching forward, and the polished furry render feels cuter and less unhinged than the reference.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 13.3,
+    "tokens": {
+      "input": 4462,
+      "cached_input": 0,
+      "cache_write": 4460,
+      "output": 1148,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0588827,
+    "tools_used": [],
+    "cost_usd": 0.0588827,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 4460,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1148,
+      "output_tokens_details": {
+        "thinking_tokens": 499
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 4460,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1148,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 4460,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 4460
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-05T04:03:47Z",
+    "finished_at": "2026-11-05T04:04:01Z",
+    "revision": "aa69823+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

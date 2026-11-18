@@ -1,0 +1,91 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/kimi-k3/describe_en__r1.json",
+  "target_sha256": "a87bc98c1ccd285e5561c2e288a085626821534d83ee8b12ce08eb751ae991d3",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "5336a4436ef48f59",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "kimi-k3",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 1,
+    "render": 2,
+    "background": 2,
+    "vibe": 1
+  },
+  "hallucinations": [
+    "Describes an enormous head perched on a small torso, contradicting the reference’s unified, bulky pear/bean-shaped body.",
+    "Describes the mouth as essentially toothless or showing only tiny hints of teeth, contradicting the conspicuous visible teeth."
+  ],
+  "rationale": "The answer captures the squeezed-shut eyes, enormous laughing mouth, soft 3D rendering, and plain background. It misses the bent-forward standing pose, gives only tentative belly-clutching hands, omits the belly patch’s oval shape, and emphasizes cute baby proportions over the reference’s absurd, unhinged appearance.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":1,\"body\":1,\"belly_patch\":1,\"render\":2,\"background\":2,\"vibe\":1},\"hallucinations\":[\"Describes an enormous head perched on a small torso, contradicting the reference’s unified, bulky pear/bean-shaped body.\",\"Describes the mouth as essentially toothless or showing only tiny hints of teeth, contradicting the conspicuous visible teeth.\"],\"rationale\":\"The answer captures the squeezed-shut eyes, enormous laughing mouth, soft 3D rendering, and plain background. It misses the bent-forward standing pose, gives only tentative belly-clutching hands, omits the belly patch’s oval shape, and emphasizes cute baby proportions over the reference’s absurd, unhinged appearance.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a171a1-890c-7593-bec6-0e055aefd1fa",
+    "seconds": 18.6,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12731,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 443,
+      "reasoning_output_tokens": 269
+    },
+    "tokens": {
+      "input": 12731,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 443,
+      "reasoning": 269
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:56:13Z",
+    "finished_at": "2026-10-25T05:56:32Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

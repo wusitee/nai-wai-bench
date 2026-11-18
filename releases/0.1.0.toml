@@ -9,17 +9,17 @@ archive_sha256 = "fb2d8a524452a6d15b9090848ff3c5dc753975173dba45cdffae5384e0a35c
 [collection_conditions]
 comparison = "historical mixed Codex tool profiles; effects of model and collector are confounded"
 legacy_v1_subjects = ["gpt-6.1-sol", "gpt-6-astra"]
-isolated_v1_subjects = ["gpt-6.1-terra-xhigh", "gpt-5.6-sol", "gpt-5.6-sol-xhigh"]
+isolated_v1_subjects = ["gpt-6.1-terra-xhigh", "gpt-5.6-sol", "gpt-5.6-sol-xhigh", "gpt-6.2-astra"]
 gpt_6_1_sol_judge_profiles = ["legacy-v1", "isolated-v1"]
 
 [suites.core]
-run = "rel-0.1-with-qwen4-max"
-sha256 = "354d02802908366ad149267c4ce08a07e9d1ab38d9567a0cd8e622753455c784"
+run = "rel-0.1-with-gpt-6.2-astra"
+sha256 = "b01d0f61e3780a3894d64ce0af35251df48570087add3b8e16fdc0c3ce34c7eb"
 judges = ["opus-5.5"]
 
 [suites.naihub-v1]
-run = "rel-0.1-naihub-with-qwen4-max"
-sha256 = "119e07d4b5e8db3256190bcb1685385c2ea70da85f2a88cc8fa6e1d2ae424eb5"
+run = "rel-0.1-naihub-with-gpt-6.2-astra"
+sha256 = "3179e5b0834e79c63b4f037cda4b90c1a02204522d3f5e8edf38a2d7f2681224"
 judges = []
 
 # Experimental frontend track: saved results under results/frontend/<run>/ (nwb frontend sync), outside the index.

@@ -1,0 +1,111 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-astra-low/recognize_facepalm__r1.json",
+  "target_sha256": "312fff97decabf06b120b2a0f0c9ce3a7055fc0c654251cd570a5c4b65bbc7e5",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "6e409bf049c423fa",
+  "judge_images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "track": "understanding",
+  "model": "gpt-6.2-astra-low",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0
+  },
+  "hallucinations": [
+    "Confidently identifies the character as 'Bunchie' rather than a Nailong (奶龙) variant",
+    "Claims the character is commonly called '黄色恐龙' / '哲学黄恐龙' by Chinese netizens and that the meme is the '黄恐龙思考' expression, rather than the 大笑奶龙 / 变异奶龙 / 奶蛙 meme family"
+  ],
+  "rationale": "The answer never mentions 奶龙 or the 大笑奶龙/变异奶龙/奶蛙 meme family. It confidently misidentifies the image as a different character and meme.",
+  "raw": "{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0}, \"hallucinations\": [\"Confidently identifies the character as 'Bunchie' rather than a Nailong (奶龙) variant\", \"Claims the character is commonly called '黄色恐龙' / '哲学黄恐龙' by Chinese netizens and that the meme is the '黄恐龙思考' expression, rather than the 大笑奶龙 / 变异奶龙 / 奶蛙 meme family\"], \"rationale\": \"The answer never mentions 奶龙 or the 大笑奶龙/变异奶龙/奶蛙 meme family. It confidently misidentifies the image as a different character and meme.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 9.2,
+    "turns": 1,
+    "tokens": {
+      "input": 2209,
+      "cached_input": 0,
+      "cache_write": 2207,
+      "output": 593,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.029755,
+    "tools_used": [],
+    "cost_usd": 0.029755,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2207,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 593,
+      "output_tokens_details": {
+        "thinking_tokens": 359
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2207,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 593,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2207,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2207
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-17T22:25:18Z",
+    "finished_at": "2026-11-17T22:25:27Z",
+    "revision": "fd4ab338+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

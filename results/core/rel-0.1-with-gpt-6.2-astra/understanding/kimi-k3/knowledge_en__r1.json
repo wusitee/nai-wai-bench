@@ -1,0 +1,70 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "knowledge_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "What is the Chinese internet meme \"大笑奶龙\" (Laughing Nailong, also called \"奶蛙\")? Explain its origin, what it looks like, and the related jokes and remixes. Say so plainly where you are unsure instead of guessing.",
+  "images": [],
+  "answer": "Here's what I know about this, with uncertainty flagged where it exists.\n\n**What it is**\n\n奶龙 (Nailong, \"milk dragon\") is a chubby cartoon dragon character from a Chinese animated short series (《奶龙与小七》, \"Nailong and Xiaoqi\"), which circulated heavily on Douyin starting around 2021–2022. \"大笑奶龙\" refers to one specific, hugely popular reaction image/sticker (表情包) of Nailong laughing — mouth wide open, eyes squeezed shut, an exaggeratedly gleeful and slightly smug grin. Stickers of Nailong in general became so ubiquitous in WeChat/QQ group chats that people started calling them 龙图 (\"dragon pics\"), by analogy with the older 熊猫头 (panda head) meme format.\n\n**Appearance**\n\nNailong is a small, extremely round, cream-yellow dragon: big head, big belly, stubby limbs, tiny wings, small horns, and simple dot-like or closed-curved eyes. The laughing version shows it doubled over or leaning back with a huge open-mouthed grin. The design is deliberately \"milky\" (奶) — soft, babyish, plush-toy-like.\n\n**The jokes and usage**\n\n- The laughing sticker is used to mock, gloat, or express \"I'm dying of laughter\" — often spammed in reply to someone's misfortune or a bad take, which gives it a taunting edge.\n- Mass-spamming 龙图 in group chats became a phenomenon in itself; people joke about \"龙图攻击\" (dragon-pic bombardment).\n- There was notable backlash: many found the constant Nailong spam grating, and derogatory nicknames for the character and its fans circulated. I'm fairly confident a backlash existed, but I don't remember the exact slang terms reliably enough to quote them.\n- Remixes include redrawn/edited versions of the laughing face, other characters drawn in Nailong style, dance videos of the mascot suit (a viral \"Nailong dance\" clip existed), and brand collaborations — the IP was heavily commercialized with toys, merch, and offline mascot appearances.\n\n**Where I'm unsure**\n\n- **\"奶蛙\"**: I don't recognize this as a common alias for Nailong. It may be a niche nickname, a regional/community-specific term, or a conflation with something else — I can't confirm it rather than guess.\n- The exact studio/creator behind the animation and precise dates: I remember it as a Douyin-native short animation IP that blew up around 2022, but I'm not certain of the production company's name or exact timeline.\n- Details of specific viral remixes (exact songs, specific events): I know the general categories above, but can't vouch for particulars.\n\nIn short: it's a laughing-sticker meme built on a cute chubby dragon IP, famous both for how much people spam it and for the annoyance that spam causes.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 71.7,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20019,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 1391,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 21410 / 1048576 tokens (2%)\nSession total: 20019 input, 1391 output",
+      "usage": {
+        "inputTokens": 20019,
+        "outputTokens": 1391
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:41:46Z",
+    "finished_at": "2026-10-25T00:42:57Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "settings_id": "45fd827f1214ed0a",
+  "input_names": "neutral",
+  "track": "imagegen",
+  "model": "chatgpt-image",
+  "vendor": "openai",
+  "tier": "reference",
+  "animal": "octopus",
+  "rep": 1,
+  "prompt": "参考这张图，画一个同样风格的章鱼版本。",
+  "reference": true,
+  "reference_image": "bench/reference/nailong_laugh.png",
+  "images": [
+    "imagegen/chatgpt-image/reference/octopus__r1/exec-762b21b1-0d77-4cc4-81fb-ce127a7a3b72.png"
+  ],
+  "text": "DONE",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719a-8f4b-7ae1-a2aa-f0bff5ad216c",
+    "seconds": 33.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 27558,
+      "cached_input_tokens": 22272,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 88,
+      "reasoning_output_tokens": 0
+    },
+    "tokens": {
+      "input": 27558,
+      "cached_input": 22272,
+      "cache_write": 0,
+      "output": 88,
+      "reasoning": 0
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null,
+    "audit": {
+      "rollout": "~/.codex/sessions/2026/10/25/rollout-2026-10-25T13-48-37-01a1719a-8f4b-7ae1-a2aa-f0bff5ad216c.jsonl",
+      "image_gen_calls": 1,
+      "verbatim": true,
+      "sent": [
+        "参考这张图，画一个同样风格的章鱼版本。"
+      ],
+      "calls": [
+        "const result = await tools.image_gen__imagegen({prompt:\"参考这张图，画一个同样风格的章鱼版本。\", referenced_image_paths:[\"/tmp/nwb-input-d6keccic/image-1.png\"]}); generatedImage(result);\n"
+      ],
+      "refused": false
+    },
+    "c2pa": {
+      "generators": [
+        "ChatGPT gpt-image"
+      ],
+      "actions": []
+    }
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "low",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "-c",
+      "model_reasoning_effort=\"low\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:48:36Z",
+    "finished_at": "2026-10-25T05:49:10Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-astra-low/recognize_angry__r1.json",
+  "target_sha256": "3cea83c086467398a69f4a6c132a0f0be7d38ae469c012c324160c26042b6f77",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "b1cf25d1b50f142a",
+  "judge_images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6.2-astra-low",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0
+  },
+  "hallucinations": [],
+  "rationale": "The model accurately describes the red, frowning, pot-bellied creature and the caption, but it never identifies it as a mutated 奶龙 or links it to the 大笑奶龙 / 变异奶龙 / 奶蛙 meme family. It explicitly says it is unsure of the character's origin, so it makes no false confident claims.",
+  "raw": "{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"ai_variant\": 0}, \"hallucinations\": [], \"rationale\": \"The model accurately describes the red, frowning, pot-bellied creature and the caption, but it never identifies it as a mutated 奶龙 or links it to the 大笑奶龙 / 变异奶龙 / 奶蛙 meme family. It explicitly says it is unsure of the character's origin, so it makes no false confident claims.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 6.1,
+    "turns": 1,
+    "tokens": {
+      "input": 2026,
+      "cached_input": 0,
+      "cache_write": 2024,
+      "output": 280,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0220336,
+    "tools_used": [],
+    "cost_usd": 0.0220336,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2024,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 280,
+      "output_tokens_details": {
+        "thinking_tokens": 117
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2024,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 280,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2024,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2024
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-17T22:25:12Z",
+    "finished_at": "2026-11-17T22:25:18Z",
+    "revision": "fd4ab338+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

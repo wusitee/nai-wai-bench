@@ -1,0 +1,131 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-5.6-sol-xhigh/describe__r1.json",
+  "target_sha256": "a37f2c94bc15b48bcd8c8d53d1f55d8c98302809b7554d47496b2d24c9c6646c",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "49d0583a5be6735b",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-5.6-sol-xhigh",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 1,
+    "vibe": 1
+  },
+  "hallucinations": [
+    "Confidently describes a low frog-like deep squat with buttocks near the ground, legs splayed wide and knees turned outward; the reference pose is standing, hunched forward with knees only slightly bent.",
+    "Claims the body leans backward with the belly thrust forward and the head tilted back; the reference has the torso bent forward, doubled over with laughter.",
+    "Asserts the nickname 奶蛙 comes from the frog-like squatting pose and outline, an explanation built on the wrong pose."
+  ],
+  "rationale": "The face, body shape, belly patch and glossy 3D render are well described, but the core pose is confidently wrong (frog squat leaning back instead of doubled over forward). Hands on belly is offered only as an uncertain alternative, the background is hedged, and the absurd 抽象 meme energy is only implied.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 2, \"mouth\": 2, \"body\": 2, \"belly_patch\": 2, \"render\": 2, \"background\": 1, \"vibe\": 1}, \"hallucinations\": [\"Confidently describes a low frog-like deep squat with buttocks near the ground, legs splayed wide and knees turned outward; the reference pose is standing, hunched forward with knees only slightly bent.\", \"Claims the body leans backward with the belly thrust forward and the head tilted back; the reference has the torso bent forward, doubled over with laughter.\", \"Asserts the nickname 奶蛙 comes from the frog-like squatting pose and outline, an explanation built on the wrong pose.\"], \"rationale\": \"The face, body shape, belly patch and glossy 3D render are well described, but the core pose is confidently wrong (frog squat leaning back instead of doubled over forward). Hands on belly is offered only as an uncertain alternative, the background is hedged, and the absurd 抽象 meme energy is only implied.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.308",
+    "seconds": 12.1,
+    "tokens": {
+      "input": 3261,
+      "cached_input": 0,
+      "cache_write": 3259,
+      "output": 987,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.046310699999999996,
+    "tools_used": [],
+    "cost_usd": 0.046310699999999996,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3259,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 987,
+      "output_tokens_details": {
+        "thinking_tokens": 629
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3259,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 987,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3259,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3259
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T02:46:50Z",
+    "finished_at": "2026-10-29T02:47:02Z",
+    "revision": "07d52c9+archive",
+    "nwb_version": "0.1.0",
+    "source_commit": "07d52c9418172b2b7b01e6ed0abc2ca504c64a76",
+    "source_archive_sha256": "fb2d8a524452a6d15b9090848ff3c5dc753975173dba45cdffae5384e0a35c07",
+    "collector_wrapper_sha256": "43804988d112d60f028efd345efd0e4a4a6b07a72cdf28bea2ce5ec45fa23ca3",
+    "tool_disable_features": [
+      "shell_tool",
+      "unified_exec",
+      "multi_agent",
+      "multi_agent_v2",
+      "plugins",
+      "skill_search",
+      "goals",
+      "sleep_tool",
+      "view_image",
+      "collaboration_modes",
+      "default_mode_request_user_input"
+    ]
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "settings_id": "45fd827f1214ed0a",
+  "input_names": "neutral",
+  "track": "imagegen",
+  "model": "chatgpt-images-2.6",
+  "vendor": "openai",
+  "tier": "reference",
+  "animal": "panda",
+  "rep": 1,
+  "prompt": "参考这张图，画一个同样风格的熊猫版本。",
+  "reference": true,
+  "reference_image": "bench/reference/nailong_laugh.png",
+  "images": [],
+  "refused": "image provider refused (thread 01a1a9da-ba0f-7860-893b-0f9c37e19721): moderation_blocked",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.166.0",
+    "thread_id": "01a1a9da-ba0f-7860-893b-0f9c37e19721",
+    "seconds": 29.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 25543,
+      "cached_input_tokens": 22144,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 103,
+      "reasoning_output_tokens": 0
+    },
+    "tokens": {
+      "input": 25543,
+      "cached_input": 22144,
+      "cache_write": 0,
+      "output": 103,
+      "reasoning": 0
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null,
+    "audit": {
+      "rollout": "~/.codex/sessions/2026/11/05/rollout-2026-11-05T11-57-26-01a1a9da-ba0f-7860-893b-0f9c37e19721.jsonl",
+      "image_gen_calls": 1,
+      "verbatim": true,
+      "sent": [
+        "参考这张图，画一个同样风格的熊猫版本。"
+      ],
+      "calls": [
+        "// @exec: {\"yield_time_ms\": 120000}\nconst result = await tools.image_gen__imagegen({prompt:\"参考这张图，画一个同样风格的熊猫版本。\",referenced_image_paths:[\"/tmp/nwb-input-d77gz59n/image-1.png\"]}); generatedImage(result);\n"
+      ],
+      "refused": true
+    }
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "low",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "-c",
+      "model_reasoning_effort=\"low\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-05T03:57:26Z",
+    "finished_at": "2026-11-05T03:57:55Z",
+    "revision": "aa69823+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

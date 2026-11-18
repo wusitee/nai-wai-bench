@@ -36,6 +36,11 @@ Software releases use semantic versions; suite ids version the evaluation panels
   earlier observations and verdicts are unchanged. Save the max row's frontend-track run as
   `qwen4-max-frontend` (not selected in the release). Save archived core and Nai-hub runs of the same model
   at the other efforts (`qwen4-max-pi-{off,minimal,low,medium,xhigh}`), outside the release.
+- Add GPT-6.2-Astra through Codex (isolated-v1) at the standard high effort (`gpt-6.2-astra`) and select it
+  in the 0.1.0 comparison through `rel-0.1-with-gpt-6.2-astra` and `rel-0.1-naihub-with-gpt-6.2-astra`;
+  earlier observations and verdicts are unchanged. Save archived core and Nai-hub runs of the same model at
+  low, medium, and xhigh (`gpt-6.2-astra-{low,medium,xhigh}`), outside the release, and the four efforts'
+  frontend-track run as `gpt-6.2-astra-frontend` (not selected in the release).
 - Label egg-alpha as "egg-alpha · likely Qwen 4": its input token counts match Qwen4-Max's within about
   two tokens on identical prompts and images. Its vendor remains undisclosed.
 - Add GLM-5.3-Flash, the GLM Coding Plan's GLM-5.3 model with image input, run through pi's built-in

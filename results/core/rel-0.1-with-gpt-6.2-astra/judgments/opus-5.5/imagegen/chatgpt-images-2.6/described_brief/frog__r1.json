@@ -1,0 +1,116 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "imagegen/chatgpt-images-2.6/described_brief/frog__r1.json",
+  "target_sha256": "dfc290a94c44bdced3ff7bf6f092737215fd6e3bb13f299d135edc93f5f6262f",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "af63bae5415cd221",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/chatgpt-images-2.6/described_brief/frog__r1/exec-0e446a05-3610-49b2-bc6e-92b01caa4ecc.png"
+  ],
+  "track": "imagegen",
+  "model": "chatgpt-images-2.6",
+  "traits": {
+    "pose": 1,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 2,
+    "vibe": 1
+  },
+  "identity": 2,
+  "failure_modes": [],
+  "rationale": "A clearly recognizable 3D frog clutching its belly with squeezed-shut eyes and a huge laughing mouth on white, but the forward hunch is mild, the mouth lacks the dark interior and teeth, the slender frog limbs lose the bulky bean shape, and the tone is cute rather than unhinged.",
+  "raw": "**pose:** The frog stands in a wide crouch with bent knees and leans forward slightly. The forward bend is milder than the reference's doubled-over hunch. → partial\n**hands_on_belly:** Both webbed hands press on the belly. → match\n**eyes:** The eyes are squeezed shut into thin curved arcs under heavy lids. → match\n**mouth:** The mouth is enormous and gaping and dominates the face, with a big pink tongue. The interior is red rather than dark, and no teeth are visible. → partial\n**body:** The head merges into the torso with no neck, and the belly is rounded. The long, slender frog legs and less bulky build depart from the reference's short, thick limbs and pear/bean shape. → partial\n**belly_patch:** A pale yellow belly and throat contrast clearly with the green body. → match\n**render:** It is a glossy 3D CG render with soft studio lighting, neither 2D nor photoreal. It is more polished than the reference. → match\n**background:** The background is plain white. The only extras are small tear-drop marks, which are not props or scenery. → match\n**vibe:** The character is jolly and Pixar-cute, with the tear drops adding cartoon charm. It lacks the reference's absurd, unhinged 抽象 energy. → partial\n**identity:** The green skin, dark spots, bulging eye ridges, webbed toe pads and frog legs make it unmistakably a frog. → clearly\n\n{\"traits\": {\"pose\": \"partial\", \"hands_on_belly\": \"match\", \"eyes\": \"match\", \"mouth\": \"partial\", \"body\": \"partial\", \"belly_patch\": \"match\", \"render\": \"match\", \"background\": \"match\", \"vibe\": \"partial\"}, \"identity\": \"clearly\", \"failure_modes\": [], \"rationale\": \"A clearly recognizable 3D frog clutching its belly with squeezed-shut eyes and a huge laughing mouth on white, but the forward hunch is mild, the mouth lacks the dark interior and teeth, the slender frog limbs lose the bulky bean shape, and the tone is cute rather than unhinged.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 15.5,
+    "tokens": {
+      "input": 4431,
+      "cached_input": 0,
+      "cache_write": 4429,
+      "output": 1303,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0618771,
+    "tools_used": [],
+    "cost_usd": 0.0618771,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 4429,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1303,
+      "output_tokens_details": {
+        "thinking_tokens": 608
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 4429,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1303,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 4429,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 4429
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-05T03:58:54Z",
+    "finished_at": "2026-11-05T03:59:09Z",
+    "revision": "aa69823+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

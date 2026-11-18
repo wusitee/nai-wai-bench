@@ -1,0 +1,78 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/sonnet-5.5/describe_en__r1.json",
+  "target_sha256": "4031f988ff3a8bbdef9738d4a56fe02dc0fd6f9bc7bb3b42814b6a0b3b13a223",
+  "settings_id": "c5b99b49261f87dd",
+  "judge_prompt": "6156e19d192ec129",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 1,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 0,
+    "background": 2,
+    "vibe": 0
+  },
+  "hallucinations": [
+    "Confident claim that the rendering style is a flat 2D digital cartoon with uniform dark outlines and little shading, when it is actually a 3D CG render without 2D line art."
+  ],
+  "rationale": "The model accurately identified the pear-like neckless body shape, pale belly patch, plain white background, and large mouth, but failed on the doubled-over laughing pose (捧腹), squeezed shut eyes, 3D CG medium, and absurd meme energy.",
+  "raw": "```json\n{\n  \"scores\": {\n    \"pose\": 0,\n    \"hands_on_belly\": 0,\n    \"eyes\": 1,\n    \"mouth\": 1,\n    \"body\": 2,\n    \"belly_patch\": 2,\n    \"render\": 0,\n    \"background\": 2,\n    \"vibe\": 0\n  },\n  \"hallucinations\": [\n    \"Confident claim that the rendering style is a flat 2D digital cartoon with uniform dark outlines and little shading, when it is actually a 3D CG render without 2D line art.\"\n  ],\n  \"rationale\": \"The model accurately identified the pear-like neckless body shape, pale belly patch, plain white background, and large mouth, but failed on the doubled-over laughing pose (捧腹), squeezed shut eyes, 3D CG medium, and absurd meme energy.\"\n}\n```",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 35.7,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 18550,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:23:43Z",
+    "finished_at": "2026-10-25T02:24:19Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-5.6-sol/recognize_official__r1.json",
+  "target_sha256": "bacc23f7e3f0e43bc0c3cb62daa1e4ba35ba38ee6c8c93716825c934edb36412",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "9e337b26015dc1fb",
+  "judge_images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-5.6-sol",
+  "scores": {
+    "base_character": 1,
+    "official_art": 0
+  },
+  "hallucinations": [
+    "States the image is '并非动画原画' (not official artwork), implying it is a fan remix or meme version, when it is official 奶龙 character artwork from the creator's website"
+  ],
+  "rationale": "The model correctly names the character as 奶龙 from the animation IP and mentions 小七, but never describes it as a yellow chubby dragon/dinosaur from a children's cartoon, so that item gets partial credit. It also fails to recognize the image as official art and asserts the opposite, while never addressing the 大笑奶龙/奶蛙 meme the question targets.",
+  "raw": "{\"scores\": {\"base_character\": 1, \"official_art\": 0}, \"hallucinations\": [\"States the image is '并非动画原画' (not official artwork), implying it is a fan remix or meme version, when it is official 奶龙 character artwork from the creator's website\"], \"rationale\": \"The model correctly names the character as 奶龙 from the animation IP and mentions 小七, but never describes it as a yellow chubby dragon/dinosaur from a children's cartoon, so that item gets partial credit. It also fails to recognize the image as official art and asserts the opposite, while never addressing the 大笑奶龙/奶蛙 meme the question targets.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.308",
+    "seconds": 9.7,
+    "tokens": {
+      "input": 1871,
+      "cached_input": 0,
+      "cache_write": 1869,
+      "output": 727,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0297276,
+    "tools_used": [],
+    "cost_usd": 0.0297276,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1869,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 727,
+      "output_tokens_details": {
+        "thinking_tokens": 511
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1869,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 727,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1869,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1869
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-29T02:46:10Z",
+    "finished_at": "2026-10-29T02:46:20Z",
+    "revision": "07d52c9+archive",
+    "nwb_version": "0.1.0",
+    "source_commit": "07d52c9418172b2b7b01e6ed0abc2ca504c64a76",
+    "source_archive_sha256": "fb2d8a524452a6d15b9090848ff3c5dc753975173dba45cdffae5384e0a35c07",
+    "collector_wrapper_sha256": "43804988d112d60f028efd345efd0e4a4a6b07a72cdf28bea2ce5ec45fa23ca3",
+    "tool_disable_features": [
+      "shell_tool",
+      "unified_exec",
+      "multi_agent",
+      "multi_agent_v2",
+      "plugins",
+      "skill_search",
+      "goals",
+      "sleep_tool",
+      "view_image",
+      "collaboration_modes",
+      "default_mode_request_user_input"
+    ]
+  }
+}
