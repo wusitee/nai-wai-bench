@@ -1,0 +1,111 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/glm-5.3-flash-pi/recognize_angry__r1.json",
+  "target_sha256": "70513c9cdaadaac3f64a53aa623b561eba10ebe632f5c8a40665be3b979074f9",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "ee616d241570e0a2",
+  "judge_images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "track": "understanding",
+  "model": "glm-5.3-flash-pi",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0
+  },
+  "hallucinations": [
+    "Confidently identifies the sticker as belonging to a generic '切换XX模式' meme series of round 3D creatures (with 切换可爱模式, 切换战斗模式, 切换摆烂模式 variants) rather than the 大笑奶龙/变异奶龙/奶蛙 meme family",
+    "States that Knuckles from Sonic the Hedgehog has green eyes; Knuckles' eyes are typically violet/purple"
+  ],
+  "rationale": "The model never mentions 奶龙 or its mutated 大笑奶龙/奶蛙 variants. It treats the image as a generic red angry blob, possibly inspired by Angry Birds' Red or Knuckles. It notes such stickers are often AI-generated, but never as a mutation of 奶龙, so no checklist item is met.",
+  "raw": "```json\n{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"ai_variant\": 0}, \"hallucinations\": [\"Confidently identifies the sticker as belonging to a generic '切换XX模式' meme series of round 3D creatures (with 切换可爱模式, 切换战斗模式, 切换摆烂模式 variants) rather than the 大笑奶龙/变异奶龙/奶蛙 meme family\", \"States that Knuckles from Sonic the Hedgehog has green eyes; Knuckles' eyes are typically violet/purple\"], \"rationale\": \"The model never mentions 奶龙 or its mutated 大笑奶龙/奶蛙 variants. It treats the image as a generic red angry blob, possibly inspired by Angry Birds' Red or Knuckles. It notes such stickers are often AI-generated, but never as a mutation of 奶龙, so no checklist item is met.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 13.8,
+    "tokens": {
+      "input": 2490,
+      "cached_input": 0,
+      "cache_write": 2488,
+      "output": 1098,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.04216110000000001,
+    "tools_used": [],
+    "cost_usd": 0.04216110000000001,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2488,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1098,
+      "output_tokens_details": {
+        "thinking_tokens": 782
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2488,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1098,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2488,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2488
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-06T09:08:01Z",
+    "finished_at": "2026-11-06T09:08:15Z",
+    "revision": "ef8832f+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

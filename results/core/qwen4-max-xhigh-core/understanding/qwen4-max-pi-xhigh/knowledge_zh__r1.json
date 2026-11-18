@@ -1,0 +1,81 @@
+{
+  "settings_id": "a5e02c034d814b84",
+  "track": "understanding",
+  "model": "qwen4-max-pi-xhigh",
+  "vendor": "alibaba",
+  "item": "knowledge_zh",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "「大笑奶龙」（也叫「奶蛙」）是什么？请介绍它的来源、外观以及相关的梗和二创。不确定的地方请直接说明，不要编造。",
+  "images": [],
+  "answer": "## 先说结论：这个具体的梗我没有可靠的了解\n\n「大笑奶龙」／「奶蛙」这个特定叫法，我在自己的知识里找不到能确认的记忆。我不能告诉你它出自哪个视频、哪张图、什么时候火的、有哪些代表二创——那些细节我如果写出来，基本都是编的。所以下面我只讲我确实有把握的背景，并明确标出哪些是推测。\n\n## 我有把握的部分：奶龙本体\n\n- **奶龙**是一个国产低龄向动画 IP 里的主角，形象是一只黄色、圆滚滚的小龙：大头、短手短脚、大眼睛、表情夸张，整体走「蠢萌」路线。动画是短剧集形式，主要在短视频平台和少儿频道传播，剧情里通常搭配一个人类小男孩（名字我印象里是「小七」，但不敢确定）。出品公司我记不准，就不瞎说了。\n- 它大约在 2023—2024 年前后热度暴涨，衍生品、表情包、玩具铺得很开，在幼儿园到小学低年级人群里几乎是「顶流」，也因此成了所谓「小孩哥／小孩姐」文化的一个标志物。\n- 正因为「过度低龄化 + 无处不在」，它在 B 站、贴吧、抖音的抽象／鬼畜圈里被大量反向玩梗：把奶龙 P 进各种不该出现的场景、做鬼畜音 MAD、和别的 IP 拉郎配、做扭曲或崩坏的表情包，用「奶龙」来阴阳「审美幼稚」或者纯粹当无意义抽象符号使用。这一整套二创生态是确实存在的。\n\n## 属于推测、请勿当事实的部分\n\n- 「大笑奶龙」听起来像是上述二创生态里的**某一张具体表情包**：奶龙咧嘴大笑、五官被拉变形的那种。抽象圈确实很流行把可爱角色的脸 P 成夸张大笑／诡异写实风，但这只是我根据命名习惯做的合理猜测，不是我见过的东西。\n- 「奶蛙」这个别名，字面上暗示那张脸像青蛙（大嘴、鼓眼），或者是奶龙与蛙类形象的缝合。同样只是从名字反推，我无法确认。\n- 也要留个可能性：「奶蛙」也许根本和奶龙无关，是另一个蛙系表情包（类似悲伤蛙那一脉）的变体，只是被网友和奶龙混着叫。\n\n## 建议\n\n这类梗更新极快、又高度依赖具体图片，正好是我知识里最容易缺失或记串的一块。你要是能贴一张图，或者描述一下你在哪看到的（B 站视频标题、QQ 表情包名字、评论区语境），我可以帮你分析它属于哪一类二创、笑点结构是什么——但「它最初是谁做的、哪天火的」这种考据，我给不了可信答案。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 60.5,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 108,
+      "output": 2650,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 2057,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 108,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2650,
+      "reasoning": 2057
+    },
+    "session_config": {
+      "thinkingLevel": "xhigh"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "xhigh"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:43:57Z",
+    "finished_at": "2026-11-16T17:44:58Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

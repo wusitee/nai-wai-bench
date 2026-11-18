@@ -1,0 +1,81 @@
+{
+  "settings_id": "22124b548d3b109d",
+  "track": "understanding",
+  "model": "qwen4-max-pi-low",
+  "vendor": "alibaba",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "一只极度圆胖的奶油黄色卡通小猫，全身像一颗软乎乎的奶油团子：脑袋巨大、占画面主体，身体小而圆，四肢短粗如小香肠，头顶两只小小的圆三角猫耳向后压平，脸颊两侧几根细胡须，身后一条短短的细尾巴，肚皮颜色更浅近奶白。它正在夸张地放声大笑：嘴巴张到最大，宽度几乎横跨整张脸，嘴角向两侧咧开、下缘垂成一个大圆弧，口腔内是深暗的红黑色，露出粉嫩的小舌头和最多两颗 tiny 小尖牙；双眼笑成两条又粗又黑的向上弯弧线（^^ 形），位置偏高、间距很宽，几乎贴在头顶，配合咧嘴形成一种青蛙般滑稽的“蛙脸”轮廓；脑袋略微向后仰，两只前爪高高举起挥动，脸颊有淡淡粉色腮红，眼角挂着笑出来的小泪珠，整体透出“笑到停不下来”的爆笑气质。风格：简笔扁平矢量卡通、粗细均匀的干净黑色描边、纯色平涂无渐变无写实光影、造型极简可爱、比例极度Q版夸张；纯白背景，角色居中，正方形表情包构图，画面中不出现任何文字、水印或边框。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 37.4,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 115,
+      "output": 1430,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1166,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 115,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1430,
+      "reasoning": 1166
+    },
+    "session_config": {
+      "thinkingLevel": "low"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "low",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "low"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:40:42Z",
+    "finished_at": "2026-11-16T16:41:20Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

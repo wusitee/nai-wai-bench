@@ -1,0 +1,84 @@
+{
+  "settings_id": "c7835e1c7781edc5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-medium",
+  "vendor": "alibaba",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "我只能凭记忆判断，说说我有把握和没把握的部分：\n\n**画面内容**：一个 3D 渲染的红色胖乎乎的卡通形象，梨形身材、浅色肚皮、双手背在身后、皱着眉瞪着绿眼睛，下方红底白字写着\"切换愤怒模式😡\"。\n\n**梗的用法**（这部分我比较有把握）：这是中文互联网常见的\"红温 / 破防 / 急了\"类表情包。\"红温\"源自电竞圈（形容选手气得脸发红、状态失控），后来泛化成\"我要生气了\"的自嘲式调侃。\"切换XX模式\"是这类贴纸的常见句式，用角色变红、变凶来夸张地宣告\"我现在进入愤怒状态\"，多半是半开玩笑而非真的发火。\n\n**角色出处**（这部分我没把握）：恕我直言，我没法可靠地认出这个具体形象出自哪部动画/游戏或哪个 IP。它不符合我记忆中可以确信的任何角色（比如奶龙、爆笑虫子的小红、Ugandan Knuckles 等，细节都对不上）。它也可能是表情包作者自建或改色的通用 3D 小人，本身并没有确定的\"角色身份\"。\n\n我不想为了给出答案而编一个出处。如果你知道它的来源，或者能补充这张图的流传语境（哪个平台、常和什么话一起用），我可以帮你进一步分析。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 592.3,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 149,
+      "output": 28646,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 28356,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 149,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 28646,
+      "reasoning": 28356
+    },
+    "session_config": {
+      "thinkingLevel": "medium"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "medium",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "medium"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:05:38Z",
+    "finished_at": "2026-11-16T17:15:30Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1/write_prompt.cat__r1.json",
+  "target_sha256": "7b57460946d34428d7785e6e7a389341653c6226eb0dac79547b4d166f7e08f5",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "2971fc323d16c18b",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "fable-5.1",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 1,
+    "render": 0,
+    "background": 2,
+    "vibe": 1,
+    "identity": 1
+  },
+  "hallucinations": [
+    "The head tilts back and the body leans backward, contradicting the forward-hunched laughing pose.",
+    "One arm is raised near the face, contradicting the required two hands clutching the belly.",
+    "The flat, outlined, vector-like cartoon style contradicts the required glossy 3D CG rendering."
+  ],
+  "rationale": "The answer captures the closed laughing eyes, enormous detailed mouth, merged bulky silhouette, and plain background. Belly contact and the pale patch are partial, while the pose and rendering are wrong; the cute framing weakens the absurd energy, and banana-yellow coloring with token cat features only partly establishes feline identity.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":2,\"body\":2,\"belly_patch\":1,\"render\":0,\"background\":2,\"vibe\":1,\"identity\":1},\"hallucinations\":[\"The head tilts back and the body leans backward, contradicting the forward-hunched laughing pose.\",\"One arm is raised near the face, contradicting the required two hands clutching the belly.\",\"The flat, outlined, vector-like cartoon style contradicts the required glossy 3D CG rendering.\"],\"rationale\":\"The answer captures the closed laughing eyes, enormous detailed mouth, merged bulky silhouette, and plain background. Belly contact and the pale patch are partial, while the pose and rendering are wrong; the cute framing weakens the absurd energy, and banana-yellow coloring with token cat features only partly establishes feline identity.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a19118-83e2-7873-8613-aa791e0182ab",
+    "seconds": 19.7,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 11612,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 428,
+      "reasoning_output_tokens": 244
+    },
+    "tokens": {
+      "input": 11612,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 428,
+      "reasoning": 244
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T08:34:25Z",
+    "finished_at": "2026-10-31T08:34:44Z",
+    "revision": "bd3cba6",
+    "nwb_version": "0.1.0"
+  }
+}

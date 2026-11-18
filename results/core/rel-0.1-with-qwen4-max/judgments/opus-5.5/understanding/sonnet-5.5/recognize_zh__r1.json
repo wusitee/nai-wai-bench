@@ -1,0 +1,110 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/sonnet-5.5/recognize_zh__r1.json",
+  "target_sha256": "c40872cb7a35e5e2903f88e6461f567510b7db517dc4dae08eff510ee1df5c3d",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "c5412f827e3940d4",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [],
+  "rationale": "The model accurately described the image (yellow body, cream belly, gray hands, belly-clutching laugh) but declined to identify it as 奶龙 or the 大笑奶龙 / 变异奶龙 / 奶蛙 meme, so it covers none of the checklist items. It avoided hallucination by explicitly stating its uncertainty.",
+  "raw": "{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"ai_variant\": 0, \"aliases\": 0, \"naiwa\": 0}, \"hallucinations\": [], \"rationale\": \"The model accurately described the image (yellow body, cream belly, gray hands, belly-clutching laugh) but declined to identify it as 奶龙 or the 大笑奶龙 / 变异奶龙 / 奶蛙 meme, so it covers none of the checklist items. It avoided hallucination by explicitly stating its uncertainty.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 5.8,
+    "tokens": {
+      "input": 2945,
+      "cached_input": 0,
+      "cache_write": 2943,
+      "output": 274,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.029428799999999998,
+    "tools_used": [],
+    "cost_usd": 0.029428799999999998,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2943,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 274,
+      "output_tokens_details": {
+        "thinking_tokens": 90
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2943,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 274,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2943,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2943
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:05:55Z",
+    "finished_at": "2026-10-25T02:06:01Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1/write_prompt.giraffe__r1.json",
+  "target_sha256": "2367f243290c61364da2a17685c1a17297551b0a42ab232b3ef2d1c7329075c5",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "0a44c34f7304ca33",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "fable-5.1",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 0,
+    "background": 2,
+    "vibe": 1,
+    "identity": 2
+  },
+  "hallucinations": [
+    "The requested flat 2D sticker style contradicts the glossy 3D CG reference.",
+    "A long, distinct neck contradicts the reference’s merged head and torso with no distinct neck.",
+    "The raised arm gesture contradicts the reference’s two hands clutching the belly.",
+    "The glossy pink mouth interior contradicts the reference’s dark mouth interior."
+  ],
+  "rationale": "The prompt clearly covers the closed eyes, plain background, and recognizable giraffe features, but misses the hunched pose, belly-clutching hands, and pale belly patch. The mouth, body shape, and hysterical mood receive partial credit, while the explicitly flat 2D style contradicts the required rendering.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":0,\"eyes\":2,\"mouth\":1,\"body\":1,\"belly_patch\":0,\"render\":0,\"background\":2,\"vibe\":1,\"identity\":2},\"hallucinations\":[\"The requested flat 2D sticker style contradicts the glossy 3D CG reference.\",\"A long, distinct neck contradicts the reference’s merged head and torso with no distinct neck.\",\"The raised arm gesture contradicts the reference’s two hands clutching the belly.\",\"The glossy pink mouth interior contradicts the reference’s dark mouth interior.\"],\"rationale\":\"The prompt clearly covers the closed eyes, plain background, and recognizable giraffe features, but misses the hunched pose, belly-clutching hands, and pale belly patch. The mouth, body shape, and hysterical mood receive partial credit, while the explicitly flat 2D style contradicts the required rendering.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a19118-98c7-7fe2-b18d-34d13761958f",
+    "seconds": 18.8,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 11679,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 362,
+      "reasoning_output_tokens": 168
+    },
+    "tokens": {
+      "input": 11679,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 362,
+      "reasoning": 168
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T08:34:30Z",
+    "finished_at": "2026-10-31T08:34:49Z",
+    "revision": "bd3cba6",
+    "nwb_version": "0.1.0"
+  }
+}

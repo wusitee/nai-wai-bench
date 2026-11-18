@@ -1,0 +1,90 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/deepseek-v4.1-flash/recognize_zh__r1.json",
+  "target_sha256": "f730ab1be0b660e21829b4f29feef1bcc9fdda8d244f751ddface15b658480ef",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "e989a14edb23cca6",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "将图中角色认定为弥勒佛（笑佛、Hotei／Budai），实际是大笑奶龙变体。",
+    "将该图对应的网络梗认定为“笑佛／Laughing Buddha”，并将“大笑佛、弥勒笑、大肚弥勒、Hotei、Budai”等列为其别名。"
+  ],
+  "rationale": "回答错误识别了角色和网络梗，未覆盖奶龙、大笑奶龙的非官方AI变异性质及“变异奶龙”“奶蛙”等别名。也未说明奶蛙属于变异奶龙，因此所有检查项均为0分。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0,\"ai_variant\":0,\"aliases\":0,\"naiwa\":0},\"hallucinations\":[\"将图中角色认定为弥勒佛（笑佛、Hotei／Budai），实际是大笑奶龙变体。\",\"将该图对应的网络梗认定为“笑佛／Laughing Buddha”，并将“大笑佛、弥勒笑、大肚弥勒、Hotei、Budai”等列为其别名。\"],\"rationale\":\"回答错误识别了角色和网络梗，未覆盖奶龙、大笑奶龙的非官方AI变异性质及“变异奶龙”“奶蛙”等别名。也未说明奶蛙属于变异奶龙，因此所有检查项均为0分。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719c-ca5a-7240-ac51-8a2b5ed2cead",
+    "seconds": 10.5,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12931,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 224,
+      "reasoning_output_tokens": 39
+    },
+    "tokens": {
+      "input": 12931,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 224,
+      "reasoning": 39
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:51:02Z",
+    "finished_at": "2026-10-25T05:51:13Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

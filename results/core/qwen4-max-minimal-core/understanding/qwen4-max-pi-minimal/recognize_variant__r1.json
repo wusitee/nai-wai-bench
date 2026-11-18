@@ -1,0 +1,84 @@
+{
+  "settings_id": "1f8854885f90fc43",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-minimal",
+  "vendor": "alibaba",
+  "item": "recognize_variant",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。",
+  "images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "answer": "**判断：它模仿的是中文互联网上的「熊猫头」表情包，具体是其中那张“捧腹大笑 / 笑到肚子疼（2333、笑死我了）”的变体。**\n\n判断依据：\n\n1. **形象模板高度吻合「熊猫头」**\n   熊猫头系列的核心特征就是：一只黑白分明、身形圆胖、拟人化站立的大熊猫，被安上极其夸张的人类表情。图中熊猫直立、双手像人手一样按在肚子上、五官比例完全人化（明显的牙齿、舌头、笑弯的眼），这正是熊猫头“动物身体 + 人类表情”的经典套路，而不是写实熊猫或普通卡通熊猫。\n\n2. **表情是典型的“梗式大笑”而非普通微笑**\n   眼睛眯成两条向下的弯月缝、嘴巴张到极限露出上下牙和舌头、头向后仰——这种“五官全部挤在一起”的爆笑画法，与熊猫头里常用的几张大笑素材（金馆长崔成国的笑、姚明笑等暴走漫画式笑脸）是同一套夸张语法：靠极端变形传递“笑不活了”的情绪，而不是靠可爱。\n\n3. **肢体动作锁定了具体语义**\n   双手捂住圆鼓鼓的肚子、身体前倾弓背、腿微微岔开，是标准的“捧腹大笑 / 笑到肚子痛 / 笑到扶不住”的姿势。中文聊天语境里这个动作几乎固定对应「2333」「哈哈哈哈笑死」「笑出猪叫」这类回复，所以它不是泛泛的“开心熊猫”，而是专门用来刷屏表达爆笑的那一款。\n\n4. **渲染风格也符合表情包生态**\n   纯白/浅灰渐变背景、无场景、单体居中、3D 毛绒质感——这是近几年把老黑白熊猫头“高清重制/3D 化”的常见做法：保留原梗的表情与动作，换成软萌立体渲染，做成微信表情商店里的动图或贴纸。\n\n**需要说明的不确定性**：仅凭这张图，我无法百分百确定它对应的是哪一张具体的原始素材（金馆长笑、姚明笑、还是纯原创的爆笑熊猫头），因为 3D 重绘会抹掉原照片的五官细节。但“熊猫头 + 捧腹大笑 = 2333/笑死我了”这一梗的归属，从形象模板、表情语法和肢体动作三方面看是可以确定的。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 34.2,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 715,
+      "output": 1254,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 735,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 715,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1254,
+      "reasoning": 735
+    },
+    "session_config": {
+      "thinkingLevel": "minimal"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "minimal",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "minimal"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:15:50Z",
+    "finished_at": "2026-11-16T16:16:24Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

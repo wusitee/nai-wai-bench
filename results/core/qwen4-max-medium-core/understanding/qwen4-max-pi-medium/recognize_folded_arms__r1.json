@@ -1,0 +1,84 @@
+{
+  "settings_id": "c7835e1c7781edc5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-medium",
+  "vendor": "alibaba",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "仅凭这张图，我没法有把握地认出它的具体出处，所以先说清楚我不确定的部分。\n\n图里我能看到的：一个 3D 渲染的黄色梨形／水滴形胖生物，没有明显的脖子和四肢分化，两条小短手抱在胸前，手是灰褐色的；眼睛是两颗黑豆眼配浅绿色眼圈，嘴是一条淡定的微笑线，肚子偏白。整体姿态就是那种\"抱臂、微笑、稳如老狗\"的得意／淡定表情。\n\n这种造型和姿态符合近两年短视频里常见的一类\"3D 软体吉祥物\"表情包（常被拿来做\"淡定\"\"社会我大哥\"\" sigma / chill\"式的配图），风格上和意大利 brainrot 系列、以及国内一些黄色胖角色（比如奶龙那类）的表情包属于同一个生态，但我无法确认它究竟是哪一个具体角色——它没有角、尾巴、耳朵之类能锁定身份的特征，我也没有可靠的记忆把它对应到某个确定名字上。\n\n如果你能补充一点线索（比如是在哪个平台看到的、有没有配套的名字或音效、有没有同系列的其他角色），我可以帮你判断得更准；否则我不想随便给它编一个名字。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 49.1,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 343,
+      "output": 1632,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1384,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 343,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1632,
+      "reasoning": 1384
+    },
+    "session_config": {
+      "thinkingLevel": "medium"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "medium",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "medium"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:13:31Z",
+    "finished_at": "2026-11-16T17:14:20Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

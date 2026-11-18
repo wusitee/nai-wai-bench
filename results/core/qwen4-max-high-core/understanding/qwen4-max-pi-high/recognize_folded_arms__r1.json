@@ -1,0 +1,84 @@
+{
+  "settings_id": "cbf7db799b4cb698",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-high",
+  "vendor": "alibaba",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "这个角色是 **Gwimbly（格温布利）**——一个黄色的胖团子状生物，米白色的肚皮、深灰色的手、小眼睛配青绿色虹膜，标志性动作就是像图里这样抱着胳膊、微微得意地站着。\n\n**出处：** Adult Swim 的动画《Smiling Friends》（微笑朋友）第二季第一集，标题恶搞成《Gwimbly: Definitive Remastered Enhanced Extended Edition DX 4K (Anniversary Director's Cut)》。剧里它被设定成一个 90 年代 3D 平台跳跃游戏的过气吉祥物，如今落魄到住在垃圾箱里，昔日的搭档是「Mr. Millipede」（千足虫先生）。它本身是对 Banjo-Kazooie、Bubsy、Gex 那一代游戏吉祥物的戏仿。\n\n**属于哪个梗：** 就是 2024 年火起来的 **“Gwimbly” / Gwimblyposting** 系列抽象梗（brainrot 一类）。玩法主要是：\n\n- **假装怀旧**：一大堆人煞有介事地回忆「我小时候超爱玩 Gwimbly」「Gwimbly 是我的童年」，明明它只是动画里虚构的角色，形成一种集体假记忆式的玩梗；\n- **无脑吹捧 / GOAT 化**：「Gwimbly 永远的神」「Gwimbly sweep」，配 phonk 音乐做各种夸张剪辑；\n- **表情包**：这个抱臂微笑的站姿被大量当作「得意」「就这？」「我早就说了」的反应图使用，也常和 Chill Guy 之类同期抽象角色一起出现。\n\n（细节如具体集数、配音等我凭记忆给出，可能略有偏差，但角色身份和梗的方向是确定的。）",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 143.0,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 341,
+      "output": 5887,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 5504,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 341,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 5887,
+      "reasoning": 5504
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T14:58:40Z",
+    "finished_at": "2026-11-16T15:01:03Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

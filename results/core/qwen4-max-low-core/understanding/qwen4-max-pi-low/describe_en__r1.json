@@ -1,0 +1,81 @@
+{
+  "settings_id": "22124b548d3b109d",
+  "track": "understanding",
+  "model": "qwen4-max-pi-low",
+  "vendor": "alibaba",
+  "item": "describe_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Without looking at any images, describe the most iconic image of Laughing Nailong (大笑奶龙 / 奶蛙) from memory: its pose, expression, body shape, colors, rendering style, and background, in enough detail for an artist who has never seen it to draw it. Say where you are unsure.",
+  "images": [],
+  "answer": "## Up front: how much I actually trust this\n\nI know the character **奶龙 (Nailong)** in a general way — a Chinese 3D-animated shorts / sticker IP that blew up on Douyin and Bilibili around 2023–2024, a chubby yellow baby dragon usually paired with a human boy (I recall the name 小七, but I'm not confident). What I **cannot** reliably recall is one single canonical \"大笑奶龙\" image. There are dozens of laughing stickers and screen-grabs circulating, and I have no confident memory of a specific one being *the* iconic one. So what follows is (a) the character design as I remember it, which I'm moderately confident about, and (b) a laughing pose that is partly reconstruction from generic cute-mascot conventions — please treat that part as a plausible drawing brief, not a documented reference.\n\nI'm also unsure what **奶蛙** refers to here. It may be a green frog companion character in the same shorts, a fan/knockoff variant, or a nickname I'm not placing. I won't invent a design for it.\n\n---\n\n## Body and proportions\n\n- Very chibi: roughly **2 to 2.5 heads tall**. The head is a big rounded ball, nearly as wide as the whole torso, sitting almost directly on the body with no visible neck.\n- Torso is a **soft pear / egg shape**, belly-heavy, wider at the bottom. No waist, no shoulders to speak of.\n- Arms and legs are **short stubby cylinders with rounded, mitten-like ends** — I don't recall clearly defined fingers; possibly three simple bumps or a plain rounded paw. Legs are short enough that it reads as sitting/standing on little pads.\n- A **short thick tail**, tapering, about as long as an arm. I'm unsure whether the tip is plain rounded or has a small spade/leaf shape.\n- Overall silhouette: think \"yellow rubber bath toy,\" soft and squeezable, no sharp angles anywhere.\n\n## Head and face\n\n- Rounded skull, slightly flattened on top, with **two small horns or nub-ears** on top — small, blunt, symmetric. I'm genuinely unsure whether they're horns, ears, or a small tuft; I lean toward two little pointed horns.\n- **Eyes: large, round, glossy black**, set wide apart and fairly low on the face, with a single bright white specular highlight in each. Sclera reads as minimal or absent in the neutral expression — big dark beads.\n- Muzzle area is a slightly lighter, softer zone; a small snout, possibly two tiny nostril dots. Cheeks are full and round.\n- Mouth is wide and flexible — the character's whole appeal is a huge mouth relative to the head.\n\n## Colors\n\n- Body: **warm, saturated butter/egg-yolk yellow** — not neon, not mustard; a friendly mid-yellow.\n- Belly, muzzle, inner ears, sometimes the underside of the tail: **pale cream / off-white-yellow**.\n- Mouth interior: **pink to warm red**, with a slightly darker pink tongue. Teeth: I don't reliably recall teeth; if present, one or two tiny white nubs at most.\n- Eyes: near-black with white highlights.\n- I do **not** confidently recall back spikes, wings, or any accessory. Default to none.\n\n## The laughing pose (lower confidence — treat as a brief)\n\nThe version I'd draw, consistent with how these stickers generally look:\n\n- **Head tipped back and slightly to one side**, chin up, so the open mouth faces the viewer/upward.\n- **Mouth wide open in a big rounded shape** — a broad \"D\" rotated, or a huge upward-crescent grin — occupying maybe a third of the face, pink interior, tongue visible at the bottom.\n- **Eyes squeezed shut into upward arcs (^^)**, or reduced to thin curved crescents; optionally a small tear drop at one corner. This is the standard \"laughing so hard the bead-eyes collapse\" move.\n- Body **leaning back**, belly pushed forward, one or both stubby arms **raised up** or one pressed against the belly. Feet possibly lifted off the ground / kicked forward if it's a rolling-on-the-floor laugh.\n- Cheeks pushed up into rounder puffs by the grin.\n\nI'm reasonably confident the *expression* is \"eyes squeezed shut + enormous open mouth\"; I'm much less confident about the specific arm position, whether it's standing, sitting, or falling over, and whether there are motion lines, sweat drops, or \"哈哈哈\" text.\n\n## Rendering style\n\n- The source animation is **3D CGI with a soft, matte, vinyl-toy look**: smooth subdivision surfaces, diffuse lighting, gentle ambient occlusion in the creases (armpits, under the chin, where the head meets the body), broad soft specular on the crown of the head, glossy sharp highlights only in the eyes. No fur, no texture, no visible line art.\n- The **sticker/meme versions are usually flat 2D vector-ish redraws**: uniform fill colors, a clean dark or darker-yellow outline of even weight, minimal or cel-style shading (one soft shadow tone), no gradient meshes.\n- If you want the meme feel rather than the show feel, go flat 2D with a bold outline.\n\n## Background\n\n- Sticker cuts are almost always on **transparent or plain white**, sometimes inside a rounded white speech-bubble/square with a drop shadow.\n- If it's a screen-grab from the shorts, expect a **simple, brightly lit, low-detail environment** — flat grass/sky or a plain domestic interior — heavily simplified so the character dominates.\n- Many meme re-uploads are just the character cropped tight on white, or pasted onto a chat screenshot. I'd default to **plain white, character centered, cropped from mid-thigh up**.\n\n---\n\n## Explicit list of things I'm unsure about\n\n1. Whether a single canonical \"大笑奶龙\" image exists at all, versus my description being an average of many.\n2. Horns vs. ears vs. tuft on the head; exact count and shape.\n3. Presence of teeth, tail tip shape, back spikes, wings, fingers.\n4. Exact hue/saturation of the yellow and whether the belly patch is cream or a paler yellow.\n5. The specific pose of the arms and legs in the laughing image.\n6. Anything about 奶蛙 — I'd be guessing.\n7. The studio/IP owner and the boy's name.\n\nIf accuracy matters, get one actual reference frame; my description will get you a recognizable \"chubby yellow CGI dragon laughing,\" but not a faithful copy of a particular picture.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 59.3,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 141,
+      "output": 2531,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1082,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 141,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2531,
+      "reasoning": 1082
+    },
+    "session_config": {
+      "thinkingLevel": "low"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "low",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "low"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:40:30Z",
+    "finished_at": "2026-11-16T16:41:30Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

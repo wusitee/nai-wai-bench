@@ -1,0 +1,89 @@
+{
+  "judge": "kimi-k3.1-pro",
+  "judge_vendor": "moonshot",
+  "target": "imagegen/gemini-image/described_brief/cat__r1.json",
+  "target_sha256": "e7394298772b3a83ce9ca7f13da5a655d13734371cabb315099d6be7d5ce8084",
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "judge_prompt": "8ee17fc2bdd539d3",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/gemini-image/described_brief/cat__r1/inline-0.jpg"
+  ],
+  "track": "imagegen",
+  "model": "gemini-image",
+  "traits": {
+    "pose": 1,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 2,
+    "vibe": 1
+  },
+  "identity": 2,
+  "failure_modes": [
+    "generic_cute",
+    "text_or_watermark"
+  ],
+  "rationale": "The cat adapts several reference traits well, especially its belly-clutching pose, shut eyes, rounded body, and pale belly. However, its expression and stance are less extreme than the meme, the overall energy is mostly cute, and the added laughter captions violate the requested image style.",
+  "raw": "pose: Standing with a slight forward hunch and bent legs, but not strongly doubled over — partial  \nhands_on_belly: Both paws press against the belly — match  \neyes: Eyes squeezed shut into thin upward-curving arcs — match  \nmouth: Open laughing mouth with dark interior, teeth, and tongue, but it does not dominate the face — partial  \nbody: Bulky rounded body with short thick limbs and little distinct neck, adapted to a cat — match  \nbelly_patch: Large pale belly patch contrasting with the orange fur — match  \nrender: Soft-lit, glossy 3D CG rendering, though more polished and furry than the reference — match  \nbackground: Plain white background without scenery or props, aside from captions — match  \nvibe: Energetic laughter, but primarily cute and polished rather than absurd or unhinged — partial  \nidentity: Clearly an orange tabby cat, with feline facial features, ears, paws, tail, and natural markings throughout — clearly  \n\n{\"traits\":{\"pose\":\"partial\",\"hands_on_belly\":\"match\",\"eyes\":\"match\",\"mouth\":\"partial\",\"body\":\"match\",\"belly_patch\":\"match\",\"render\":\"match\",\"background\":\"match\",\"vibe\":\"partial\"},\"identity\":\"clearly\",\"failure_modes\":[\"generic_cute\",\"text_or_watermark\"],\"rationale\":\"The cat adapts several reference traits well, especially its belly-clutching pose, shut eyes, rounded body, and pale belly. However, its expression and stance are less extreme than the meme, the overall energy is mostly cute, and the added laughter captions violate the requested image style.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 28.9,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 22820,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 568,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 23388 / 1048576 tokens (2%)\nSession total: 22820 input, 568 output",
+      "usage": {
+        "inputTokens": 22820,
+        "outputTokens": 568
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:54:00Z",
+    "finished_at": "2026-10-25T01:54:29Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

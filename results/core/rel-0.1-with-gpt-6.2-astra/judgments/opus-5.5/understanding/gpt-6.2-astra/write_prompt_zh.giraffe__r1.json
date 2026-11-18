@@ -1,0 +1,113 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-astra/write_prompt_zh.giraffe__r1.json",
+  "target_sha256": "8c3bdcebafe8b957dd48beda1e048bbee76acad639d693280fd70ecbcdf3108f",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "183f05178d50afe0",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.2-astra",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 2,
+    "vibe": 1,
+    "identity": 1
+  },
+  "hallucinations": [],
+  "rationale": "The prompt covers the arc-shaped eyes, glossy 3D render and plain light background well. But it puts the head tilted back with hands at the chest instead of hunched over clutching the belly, and it omits the teeth and the pale belly patch. It also adds a distinct long neck, and giraffe identity is only partial: the body stays Nailong yellow, with spots only on the neck.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 1, \"body\": 1, \"belly_patch\": 0, \"render\": 2, \"background\": 2, \"vibe\": 1, \"identity\": 1}, \"hallucinations\": [], \"rationale\": \"The prompt covers the arc-shaped eyes, glossy 3D render and plain light background well. But it puts the head tilted back with hands at the chest instead of hunched over clutching the belly, and it omits the teeth and the pale belly patch. It also adds a distinct long neck, and giraffe identity is only partial: the body stays Nailong yellow, with spots only on the neck.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 12.8,
+    "turns": 1,
+    "tokens": {
+      "input": 2142,
+      "cached_input": 0,
+      "cache_write": 2140,
+      "output": 934,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.036065700000000006,
+    "tools_used": [],
+    "cost_usd": 0.036065700000000006,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2140,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 934,
+      "output_tokens_details": {
+        "thinking_tokens": 707
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2140,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 934,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2140,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2140
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-17T19:54:44Z",
+    "finished_at": "2026-11-17T19:54:57Z",
+    "revision": "fd4ab338+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

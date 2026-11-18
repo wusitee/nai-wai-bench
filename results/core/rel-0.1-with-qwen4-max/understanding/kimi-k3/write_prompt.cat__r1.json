@@ -1,0 +1,77 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "write_prompt.cat",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a cat version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "Square meme sticker illustration on a plain off-white background: a chubby baby cat with a huge round head, tiny body, cream-yellow fur, thick black outline, flat pastel vector colors. It is laughing uncontrollably — head thrown back, eyes squeezed into crescent slits, mouth opened impossibly wide with pink tongue and one tiny fang, tears flying, cheeks flushed, little paws clutching its belly, tail curled, body shaking with motion lines and sweat drops. Exaggerated gleeful slightly-unhinged viral reaction-sticker energy, cute but ridiculous, centered composition, clean shapes, high contrast, no text, no watermark, no realistic fur, no extra objects.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 21.5,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20019,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 794,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20813 / 1048576 tokens (2%)\nSession total: 20019 input, 794 output",
+      "usage": {
+        "inputTokens": 20019,
+        "outputTokens": 794
+      }
+    },
+    "tokens_source": "usage-command",
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 20813,
+        "size": 1048576
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:42:22Z",
+    "finished_at": "2026-10-25T00:42:44Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "settings_id": "a5e02c034d814b84",
+  "track": "understanding",
+  "model": "qwen4-max-pi-xhigh",
+  "vendor": "alibaba",
+  "item": "write_prompt.cat",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a cat version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A crudely cute cartoon cat rendered like a cheap, glossy preschool CGI animation: an extremely fat, egg-shaped kitten whose huge round head is bigger than its body, with tiny stubby arms and legs, small triangular ears, a little pink nose, short whiskers, and bright saturated pale-yellow fur with a cream belly. Extreme close-up, straight-on front view, slightly low angle, the face filling almost the entire square frame. The cat is laughing hysterically in an absurd, almost unhinged way: its mouth is stretched wide open into a colossal grin spanning the full width of the face and occupying the lower two-thirds of it, the corners curled far upward past the eyes, revealing a dark red mouth cavity, a big floppy pink tongue, and neat rows of small white teeth along the top and bottom; its eyes are squeezed shut into two thin upward-curving black crescents with crinkled laugh lines, eyebrows shot up high, cheeks puffed into round bulges, head tipped slightly back, a single tiny glistening tear of laughter at the outer corner of one eye, one stubby paw lifted near its cheek. Thick uniform black outlines, flat cel shading, oversaturated colors, slightly squashed-and-stretched rubbery proportions, plain flat pale background with no scenery. Low-resolution compressed internet-screenshot aesthetic: soft blur, mild JPEG artifacts, cheap plastic sheen. Mood: gleeful, mocking, deranged, ridiculous. No text, no letters, no watermark.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 37.9,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 125,
+      "output": 1650,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1349,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 125,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1650,
+      "reasoning": 1349
+    },
+    "session_config": {
+      "thinkingLevel": "xhigh"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "xhigh"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:31:22Z",
+    "finished_at": "2026-11-16T17:32:00Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

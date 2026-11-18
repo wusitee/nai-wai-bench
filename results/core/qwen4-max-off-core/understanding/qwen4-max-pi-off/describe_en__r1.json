@@ -1,0 +1,81 @@
+{
+  "settings_id": "cd8372f0bb6ac1cb",
+  "track": "understanding",
+  "model": "qwen4-max-pi-off",
+  "vendor": "alibaba",
+  "item": "describe_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Without looking at any images, describe the most iconic image of Laughing Nailong (大笑奶龙 / 奶蛙) from memory: its pose, expression, body shape, colors, rendering style, and background, in enough detail for an artist who has never seen it to draw it. Say where you are unsure.",
+  "images": [],
+  "answer": "I'm not confident enough in my knowledge of this specific meme to give you a reliable description. Here's what I can piece together, with honest uncertainty flags:\n\n**What I believe I know:**\n- \"奶龙\" (Nailong / Milk Dragon) is a Chinese cartoon character — a small, round, chubby dragon-like creature, likely yellow or cream-colored, with a soft, simplified design aimed at young children.\n- The \"大笑\" (big laugh) version became a widely circulated meme/sticker, presumably showing the character with an exaggerated open-mouth laughing expression.\n\n**Where I'm genuinely unsure:**\n- I cannot confidently recall the *specific* iconic image's pose (arms up? leaning back? hands on belly?).\n- I'm not certain of the exact color palette (yellow body? white belly? what color eyes/mouth interior?).\n- I don't reliably remember whether it's 2D flat illustration, 3D-rendered, or a particular animation screenshot.\n- I'm unsure about the background (solid color? transparent? scene from the show?).\n- The parenthetical \"奶蛙\" (milk frog) in your question makes me wonder if I'm conflating characters or if there's a frog variant I'm less familiar with.\n\n**Bottom line:** I'd be fabricating details if I gave you a full artist-ready description. I'd rather flag that gap than confidently hallucinate specifics. If you can share the image or point me to a reference, I can describe it accurately — but from memory alone, I don't trust my recall enough to guide an artist's drawing.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 11.3,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 140,
+      "output": 335,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 0,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 140,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 335,
+      "reasoning": 0
+    },
+    "session_config": {
+      "thinkingLevel": "off"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "off",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "off"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:04:37Z",
+    "finished_at": "2026-11-16T16:04:48Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

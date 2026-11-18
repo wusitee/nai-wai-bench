@@ -1,0 +1,91 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1/knowledge_zh__r1.json",
+  "target_sha256": "bc8abbb05e2738948126e0a434f96eaa23c626131517ecad752ec3e0fac64c05",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "3000a9e985675dac",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "fable-5.1",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 1,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 1,
+    "rarity_titles": 0
+  },
+  "hallucinations": [
+    "将奶龙的出品方说成「寒木春华」动画团队；背景资料确认其由谢承恩创作、深圳第七印象文化传媒有限公司设计。"
+  ],
+  "rationale": "回答正确介绍了奶龙的基本身份，对别称、蛙化形象、大笑表情和角色魔改有部分涉及，但未说明AI变异属性、星野起源及主要传播梗。明确标为不确定的出处、姿态和别称解释不列为幻觉。",
+  "raw": "{\"scores\":{\"base_character\":2,\"ai_variant\":0,\"xingye_origin\":0,\"aliases\":1,\"naiwa\":1,\"laugh_pose\":1,\"junti_quan\":0,\"official_reply\":0,\"trait_variants\":1,\"rarity_titles\":0},\"hallucinations\":[\"将奶龙的出品方说成「寒木春华」动画团队；背景资料确认其由谢承恩创作、深圳第七印象文化传媒有限公司设计。\"],\"rationale\":\"回答正确介绍了奶龙的基本身份，对别称、蛙化形象、大笑表情和角色魔改有部分涉及，但未说明AI变异属性、星野起源及主要传播梗。明确标为不确定的出处、姿态和别称解释不列为幻觉。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a19117-d1b4-7bf3-804a-d9ba640fc55b",
+    "seconds": 20.1,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12833,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 424,
+      "reasoning_output_tokens": 245
+    },
+    "tokens": {
+      "input": 12833,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 424,
+      "reasoning": 245
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T08:33:39Z",
+    "finished_at": "2026-10-31T08:33:59Z",
+    "revision": "bd3cba6",
+    "nwb_version": "0.1.0"
+  }
+}

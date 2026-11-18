@@ -1,0 +1,81 @@
+{
+  "settings_id": "22124b548d3b109d",
+  "track": "understanding",
+  "model": "qwen4-max-pi-low",
+  "vendor": "alibaba",
+  "item": "write_prompt.giraffe",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a giraffe version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A single centered, front-facing cartoon character illustration in a flat 2D children's-animation style: a chubby baby giraffe drawn as a round-headed mascot, head almost as large as its pear-shaped body, butter-yellow fur with soft rounded tan-brown patches, two tiny knob-like horns and small rounded ears on top, a short blunt muzzle with two dot nostrils, stubby little arms and short thick legs, a small tufted tail. Its face is locked in an enormous, hysterical belly-laugh: the mouth is stretched into an absurdly wide grin that spans nearly the entire width of the face, far wider than the muzzle should allow, hanging open to show a dark mouth cavity, a small pink tongue and a single row of blunt white upper teeth; the cheeks are shoved up into fat rounded bulges and the eyes are squeezed shut into two thin upward-curving black crescents, eyebrows raised high, head tipped slightly back and to one side as if howling with mocking, unhinged delight, tiny arms flung up. The exaggerated frog-like wideness of the smile should read as slightly uncanny and off-model, comedic rather than cute. Thick uniform dark-brown outlines, flat solid color fills, almost no shading or texture, plain pale off-white background, waist-up framing, square composition, no text, no letters, no watermark.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 28.1,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 127,
+      "output": 1068,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 791,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 127,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1068,
+      "reasoning": 791
+    },
+    "session_config": {
+      "thinkingLevel": "low"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "low",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "low"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:40:14Z",
+    "finished_at": "2026-11-16T16:40:42Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

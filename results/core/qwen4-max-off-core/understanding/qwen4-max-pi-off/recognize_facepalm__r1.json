@@ -1,0 +1,84 @@
+{
+  "settings_id": "cd8372f0bb6ac1cb",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-off",
+  "vendor": "alibaba",
+  "item": "recognize_facepalm",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "answer": "这个表情包里的角色通常被称为**“奶龙”**（Nailong）。\n\n它属于国内互联网上非常流行的**“奶龙”系列网络梗**。\n\n**背景与梗的含义：**\n1. **角色来源**：奶龙最初出自国产3D儿童动画《奶龙》，设定是一只黄色、胖乎乎、贪吃的外星小恐龙。\n2. **网络解构**：在网络上，网友们将原版动画中呆萌的奶龙进行了二次创作和解构，制作了大量带有“清澈的愚蠢”、“睿智”、“无语”或“嘲讽”意味的表情包。\n3. **图片动作**：你发的这张图中，奶龙做出了一个类似“扶额”、“擦汗”或“敬礼”的动作，配合它那标志性呆滞又略带微笑的眼神，通常在聊天中被用来表达**“无语”、“流汗黄豆”、“没眼看”、“大脑宕机”**或者一种**带有滑稽感的无奈与嘲讽**。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 8.5,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 326,
+      "output": 201,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 0,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 326,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 201,
+      "reasoning": 0
+    },
+    "session_config": {
+      "thinkingLevel": "off"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "off",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "off"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:05:18Z",
+    "finished_at": "2026-11-16T16:05:27Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

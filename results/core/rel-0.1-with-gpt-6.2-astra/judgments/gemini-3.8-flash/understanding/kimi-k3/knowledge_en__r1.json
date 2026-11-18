@@ -1,0 +1,80 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/kimi-k3/knowledge_en__r1.json",
+  "target_sha256": "8da41d238acc06ee63b0ad535ead9cb56a807aa0a89f98afcb074585476c57fe",
+  "settings_id": "c5b99b49261f87dd",
+  "judge_prompt": "abf1daad6e54533a",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "kimi-k3",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 0,
+    "naiwa": 0,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 1,
+    "rarity_titles": 0
+  },
+  "hallucinations": [
+    "Claiming that Nailong stickers are called '龙图' (Long Tu) and associated with '龙图攻击' by analogy with panda head memes (conflating Nailong with the unrelated Chinese internet meme centered on 龙女士).",
+    "Presenting '大笑奶龙' as a standard/official animated character reaction image rather than an unofficial, AI-generated mutated variant."
+  ],
+  "rationale": "The model correctly identifies the base cartoon character 奶龙 and partially describes the laughing facial expression and doubled-over posture. However, it completely misses that the meme is an unofficial AI-generated mutation originated on Xingye, fails to explain 奶蛙 or key remixes, and hallucinates a connection to the unrelated '龙图' meme.",
+  "raw": "```json\n{\n  \"scores\": {\n    \"base_character\": 2,\n    \"ai_variant\": 0,\n    \"xingye_origin\": 0,\n    \"aliases\": 0,\n    \"naiwa\": 0,\n    \"laugh_pose\": 1,\n    \"junti_quan\": 0,\n    \"official_reply\": 0,\n    \"trait_variants\": 1,\n    \"rarity_titles\": 0\n  },\n  \"hallucinations\": [\n    \"Claiming that Nailong stickers are called '龙图' (Long Tu) and associated with '龙图攻击' by analogy with panda head memes (conflating Nailong with the unrelated Chinese internet meme centered on 龙女士).\",\n    \"Presenting '大笑奶龙' as a standard/official animated character reaction image rather than an unofficial, AI-generated mutated variant.\"\n  ],\n  \"rationale\": \"The model correctly identifies the base cartoon character 奶龙 and partially describes the laughing facial expression and doubled-over posture. However, it completely misses that the meme is an unofficial AI-generated mutation originated on Xingye, fails to explain 奶蛙 or key remixes, and hallucinates a connection to the unrelated '龙图' meme.\"\n}\n```",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 37.7,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 19140,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:12:49Z",
+    "finished_at": "2026-10-25T02:13:26Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

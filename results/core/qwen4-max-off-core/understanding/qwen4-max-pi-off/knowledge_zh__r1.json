@@ -1,0 +1,81 @@
+{
+  "settings_id": "cd8372f0bb6ac1cb",
+  "track": "understanding",
+  "model": "qwen4-max-pi-off",
+  "vendor": "alibaba",
+  "item": "knowledge_zh",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "「大笑奶龙」（也叫「奶蛙」）是什么？请介绍它的来源、外观以及相关的梗和二创。不确定的地方请直接说明，不要编造。",
+  "images": [],
+  "answer": "## 关于「大笑奶龙」/「奶蛙」\n\n坦白说，我对这个具体梗的了解**不够充分和确定**，以下是我能提供的有限信息，不确定的部分我会明确标注。\n\n### 我有一定把握的部分\n\n- **「奶龙」** 本身是一个中国原创的卡通IP形象，是一只黄色的小恐龙（幼龙），造型圆润可爱，在短视频平台（抖音等）上有一定的传播度，也有相关的动画短片和表情包。\n- 「奶龙」的形象因其呆萌、夸张的表情，被网友广泛用于表情包和二次创作。\n\n### 我不确定的部分\n\n- **「大笑奶龙」** 是否指某一特定的表情截图或变体形象（比如奶龙张嘴大笑的某个画面被截取后广泛传播），我无法确认具体细节。\n- **「奶蛙」** 这个别称的由来——是因为大笑时的嘴型像青蛙，还是与其他形象（如 Pepe 蛙等）进行了融合二创——我**不确定**，不想妄加猜测。\n- 该梗的具体起源时间、传播路径、代表性的二创作品等，我没有足够可靠的信息来介绍。\n\n---\n\n**总结：** 我知道「奶龙」这个IP的大致背景，但对「大笑奶龙」/「奶蛙」作为一个特定网络梗的详细来源、外观特征和二创生态，我的知识不足以给出准确完整的介绍。建议查阅相关的中文社区（如B站、抖音、小红书等）获取更准确的信息。抱歉不能提供更详尽的回答。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 11.2,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 108,
+      "output": 310,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 0,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 108,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 310,
+      "reasoning": 0
+    },
+    "session_config": {
+      "thinkingLevel": "off"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "off",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "off"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:03:54Z",
+    "finished_at": "2026-11-16T16:04:05Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

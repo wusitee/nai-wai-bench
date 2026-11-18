@@ -1,0 +1,81 @@
+{
+  "settings_id": "cd8372f0bb6ac1cb",
+  "track": "understanding",
+  "model": "qwen4-max-pi-off",
+  "vendor": "alibaba",
+  "item": "describe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "不看任何图片，仅凭你的记忆，详细描述最经典的那张「大笑奶龙」（奶蛙）图片的画面：姿势、表情、身体造型、配色、渲染风格和背景，让从没见过它的画师能照着画出来。不确定的地方请说明。",
+  "images": [],
+  "answer": "我需要诚实地说明：我对这个具体梗图没有足够可靠的记忆来提供准确的详细描述。\n\n**我大致知道的：**\n- \"奶龙\"是中国网络上的一个3D卡通角色IP，形象是一只黄色的小恐龙/小龙，体型圆润可爱。\n- 它在短视频平台（抖音等）上广泛传播，有大量表情包和二创。\n\n**我不确定的：**\n- \"大笑奶龙\"与\"奶蛙\"是否是同一个形象，还是两个不同的变体/梗，我无法确认。\n- 那张**最经典的**具体是哪一张图、什么姿势、什么表情细节、什么背景，我没有把握准确还原。\n- 渲染风格的具体细节（是否有特定的光影、材质质感等），我也无法确信地描述。\n\n如果我强行编造细节（比如\"双手叉腰、嘴巴张到最大、背景是纯白色\"之类），很可能是在胡编，会误导画师画出错误的东西。这违背了你问题的初衷——你想要的是**准确的、可供临摹的描述**。\n\n**建议：** 如果你需要精确的画面描述用于绘画参考，最好还是找到原图后再让我帮你分析描述，那样我能给出真正有用的信息。仅凭记忆，我在这个问题上帮不了你太多，抱歉。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 10.2,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 127,
+      "output": 255,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 0,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 127,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 255,
+      "reasoning": 0
+    },
+    "session_config": {
+      "thinkingLevel": "off"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "off",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "off"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:04:22Z",
+    "finished_at": "2026-11-16T16:04:33Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "imagegen/chatgpt-images-2.6/name_zh/frog__r1.json",
+  "target_sha256": "baa3ea7d910924b72322dfd5c8f619d268de1134a1c3024ae559dc1db90194fd",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "01abc67c5ae7ef4a",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/chatgpt-images-2.6/name_zh/frog__r1/exec-0e6babaa-57bb-41b3-9571-efbef154fa31.png"
+  ],
+  "track": "imagegen",
+  "model": "chatgpt-images-2.6",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 1,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 0,
+    "vibe": 0
+  },
+  "identity": 2,
+  "failure_modes": [
+    "generic_cute",
+    "text_or_watermark"
+  ],
+  "rationale": "The image is a clearly identifiable, chubby green frog with a pale belly, but it is a cute Pixar-style cheer in an outdoor scene. It lacks the hunched, belly-clutching, eyes-shut hysterical laugh and the absurd meme vibe of 大笑奶龙.",
+  "raw": "- **pose:** The frog stands upright and leans slightly back with its head tilted up. It is not hunched or doubled over. **absent**\n- **hands_on_belly:** Both paws rest on the upper belly and chest area rather than clutching the belly. **partial**\n- **eyes:** The big round frog eyes are open with highlights. Curved arc lines below them suggest a squint, but the eyes are not squeezed shut. **partial**\n- **mouth:** The mouth is large and open with a pink interior and tongue, but it has no teeth and no dark interior. It reads as a happy cheer, not hysterical laughter. **partial**\n- **body:** The chubby bean-shaped body has no distinct neck, and the head merges into the torso with short thick limbs. **match**\n- **belly_patch:** A pale cream oval belly contrasts with the green body. **match**\n- **render:** The 3D CG render has soft lighting, but it is a polished Pixar-like style rather than the reference's cheap glossy render. **partial**\n- **background:** The background is an outdoor town scene with buildings, a tree and blue sky. **absent**\n- **vibe:** The image is wholesome and kawaii, with no absurd or unhinged meme energy. **absent**\n- **identity:** The frog is clearly recognizable from its top-mounted bulging eyes, green coloring and darker green spots. **clearly**\n- **failure modes:** It is a generic cute character. Faint watermark-like marks appear in the bottom-right corner.\n\n{\"traits\": {\"pose\": \"absent\", \"hands_on_belly\": \"partial\", \"eyes\": \"partial\", \"mouth\": \"partial\", \"body\": \"match\", \"belly_patch\": \"match\", \"render\": \"partial\", \"background\": \"absent\", \"vibe\": \"absent\"}, \"identity\": \"clearly\", \"failure_modes\": [\"generic_cute\", \"text_or_watermark\"], \"rationale\": \"The image is a clearly identifiable, chubby green frog with a pale belly, but it is a cute Pixar-style cheer in an outdoor scene. It lacks the hunched, belly-clutching, eyes-shut hysterical laugh and the absurd meme vibe of 大笑奶龙.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 13.6,
+    "tokens": {
+      "input": 4426,
+      "cached_input": 0,
+      "cache_write": 4424,
+      "output": 1139,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0584166,
+    "tools_used": [],
+    "cost_usd": 0.0584166,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 4424,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1139,
+      "output_tokens_details": {
+        "thinking_tokens": 412
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 4424,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1139,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 4424,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 4424
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-05T04:00:19Z",
+    "finished_at": "2026-11-05T04:00:32Z",
+    "revision": "aa69823+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

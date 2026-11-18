@@ -1,0 +1,108 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi-high/recognize_official__r1.json",
+  "target_sha256": "cb78a39a60203ba43dc6aa0d573afffdd1b083bd6625f7a932af8a7744adb5e5",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "e99f733cb86dc651",
+  "judge_images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "track": "understanding",
+  "model": "qwen4-max-pi-high",
+  "scores": {
+    "base_character": 2,
+    "official_art": 1
+  },
+  "hallucinations": [],
+  "rationale": "The model correctly identifies the character as the yellow, chubby cartoon dinosaur 奶龙, and its visual description matches the image. It does not misclassify the image as 大笑奶龙/奶蛙, but it never mentions that mutation or explicitly distinguishes the official artwork from it, so the second item gets only partial credit.",
+  "raw": "```json\n{\"scores\": {\"base_character\": 2, \"official_art\": 1}, \"hallucinations\": [], \"rationale\": \"The model correctly identifies the character as the yellow, chubby cartoon dinosaur 奶龙, and its visual description matches the image. It does not misclassify the image as 大笑奶龙/奶蛙, but it never mentions that mutation or explicitly distinguishes the official artwork from it, so the second item gets only partial credit.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 9.0,
+    "turns": 1,
+    "tokens": {
+      "input": 2343,
+      "cached_input": 0,
+      "cache_write": 2341,
+      "output": 534,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.029415999999999998,
+    "tools_used": [],
+    "cost_usd": 0.029415999999999998,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2341,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 534,
+      "output_tokens_details": {
+        "thinking_tokens": 379
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2341,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 534,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2341,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2341
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T15:04:11Z",
+    "finished_at": "2026-11-16T15:04:20Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

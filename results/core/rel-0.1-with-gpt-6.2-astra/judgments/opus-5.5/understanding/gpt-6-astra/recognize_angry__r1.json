@@ -1,0 +1,110 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6-astra/recognize_angry__r1.json",
+  "target_sha256": "9984feabe266da5d4fcf2d0624571926dd12623b95d19e962f3b74f06f65530f",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "1b1475466e462c10",
+  "judge_images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "scores": {
+    "base_character": 1,
+    "identifies_meme": 0,
+    "ai_variant": 0
+  },
+  "hallucinations": [
+    "Claims the red figure is an official character ('暴暴龙') from the 《奶龙》 animation, rather than an unofficial mutated 奶龙 meme image. This matches the known misconception that the variant is official artwork."
+  ],
+  "rationale": "The answer links the image to 《奶龙》 and calls it '红温奶龙', but never describes the yellow chubby dragon. It does not place the sticker in the 大笑奶龙/变异奶龙/奶蛙 meme family and instead presents it as an official animation character, which contradicts the AI-generated, unofficial nature of the variant.",
+  "raw": "```json\n{\"scores\": {\"base_character\": 1, \"identifies_meme\": 0, \"ai_variant\": 0}, \"hallucinations\": [\"Claims the red figure is an official character ('暴暴龙') from the 《奶龙》 animation, rather than an unofficial mutated 奶龙 meme image. This matches the known misconception that the variant is official artwork.\"], \"rationale\": \"The answer links the image to 《奶龙》 and calls it '红温奶龙', but never describes the yellow chubby dragon. It does not place the sticker in the 大笑奶龙/变异奶龙/奶蛙 meme family and instead presents it as an official animation character, which contradicts the AI-generated, unofficial nature of the variant.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 8.7,
+    "tokens": {
+      "input": 1740,
+      "cached_input": 0,
+      "cache_write": 1738,
+      "output": 641,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0269684,
+    "tools_used": [],
+    "cost_usd": 0.0269684,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1738,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 641,
+      "output_tokens_details": {
+        "thinking_tokens": 396
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1738,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 641,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1738,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1738
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:58:13Z",
+    "finished_at": "2026-10-25T01:58:22Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

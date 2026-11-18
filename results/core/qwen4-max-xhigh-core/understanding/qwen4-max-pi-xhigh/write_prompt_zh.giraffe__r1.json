@@ -1,0 +1,81 @@
+{
+  "settings_id": "a5e02c034d814b84",
+  "track": "understanding",
+  "model": "qwen4-max-pi-xhigh",
+  "vendor": "alibaba",
+  "item": "write_prompt_zh.giraffe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出长颈鹿版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "一只Q版卡通小长颈鹿的爆笑表情包贴纸，扁平二维矢量插画风格：圆滚滚的婴幼儿比例，脑袋巨大、身子短小、四肢粗短像小香肠；奶油黄皮毛上散布不规则的棕褐色斑块，头顶两只末端带绒球的短角，两侧一对小圆耳朵向外支棱，脖子细长但依旧软萌短粗，颈背一排短短的棕色鬃毛，身后一条细尾巴末端带毛球，四只小圆柱蹄子。表情是夸张到失控的捧腹大笑：头向后仰、下巴几乎朝天，嘴巴张成占据半张脸的巨大D形半圆，口腔内是深红粉色，露出下排两颗小方牙和一条粉色小舌头；双眼笑成两条向上弯的黑色弧线（眯成缝的 ^ ^），眉毛高高挑起，两颊各一团淡粉腮红，眼角挤出一两滴夸张的蓝色笑泪；两只小短手举在胸前捧着圆肚子，整个身体因狂笑向后倾，透出幸灾乐祸、贱兮兮的欢乐感。上色为粗细均匀的深棕色描边加简单两段式明暗、高饱和明亮配色，无写实毛发、无渐变噪点；四分之三正面略仰视构图，角色居中占满画面，纯白背景，轮廓外一圈白色贴纸描边，正方形画幅；画面中不要出现任何文字、字母、水印或边框。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 37.1,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 117,
+      "output": 1703,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1403,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 117,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1703,
+      "reasoning": 1403
+    },
+    "session_config": {
+      "thinkingLevel": "xhigh"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "xhigh"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:33:36Z",
+    "finished_at": "2026-11-16T17:34:13Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "settings_id": "a4ba33964638df40",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi",
+  "vendor": "alibaba",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "这是**“曼波”（Manbo）**——一条黄色的、长得像翻车鱼（日语“マンボウ”即翻车鱼）的呆萌小鱼，标志性特征就是侧面那颗又大又圆、眼神呆滞的眼睛。\n\n它属于近年在B站、抖音上流行的**“哈基米／曼波”系抽象梗**。这个梗家族里还有“哈基米”（小猫）、“欧润吉”（橘子猫）、“叮咚鸡”等角色，常被配上各种意义不明的音效和文字做成表情包，“曼波”通常代表这种傻愣愣的黄色鱼形象。\n\n这张图的笑点在于文字与画面的反差：**“惊鸿一瞥”**本是形容美人回眸一瞬、令人惊艳的优雅成语，结果配图却是这条鱼呆滞地斜眼一瞟——用极雅的词配极呆的脸，形成典型的抽象幽默。这个“惊鸿一瞥”配呆鱼侧目的格式本身也成了一个常用的表情包模板。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 78.7,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 151,
+      "output": 3071,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 2863,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 151,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 3071,
+      "reasoning": 2863
+    },
+    "session_config": {
+      "thinkingLevel": "max"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "max"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T10:11:31Z",
+    "finished_at": "2026-11-16T10:12:50Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

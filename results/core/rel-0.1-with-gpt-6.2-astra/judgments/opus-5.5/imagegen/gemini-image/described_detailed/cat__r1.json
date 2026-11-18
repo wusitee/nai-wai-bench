@@ -1,0 +1,116 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "imagegen/gemini-image/described_detailed/cat__r1.json",
+  "target_sha256": "6b825c83201857b825b8f03d4072c55b4f924b69c6d406b3f1183e7cb3e5e59d",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "278f8140f61f0bad",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/gemini-image/described_detailed/cat__r1/inline-0.jpg"
+  ],
+  "track": "imagegen",
+  "model": "gemini-image",
+  "traits": {
+    "pose": 1,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 2,
+    "vibe": 1
+  },
+  "identity": 2,
+  "failure_modes": [],
+  "rationale": "A calico cat faithfully carries the meme's closed-arc eyes, huge laughing mouth, belly-clutching paws, neckless pear body and plain CG render. It loses some points because the torso is upright with the head tilted back rather than hunched forward, which makes it feel cuter than the reference's unhinged energy.",
+  "raw": "**pose:** The cat stands on slightly bent legs, but its torso is mostly upright with the head thrown back instead of doubled forward. **partial**\n**hands_on_belly:** Both small pale paws press on the round belly. **match**\n**eyes:** The eyes are squeezed shut into thin curved arcs. **match**\n**mouth:** An enormous gaping mouth dominates the face, with a dark interior, rows of small teeth and a pink tongue. **match**\n**body:** The body is bulky and pear-shaped, the head merges into the torso with no neck, and the limbs are short and thick. **match**\n**belly_patch:** A pale cream oval belly patch contrasts with the orange body, though the pale area extends up the chest to the muzzle. **match**\n**render:** It is a smooth, matte-plastic 3D CG render with soft studio lighting and no fur strands. **match**\n**background:** The background is plain light grey and empty. **match**\n**vibe:** The hysterical laugh carries some meme energy, but the upright pose and polished, rounded design read more cute than unhinged. **partial**\n**identity:** Calico orange, brown and white patches, folded cat ears with pink insides, a pink triangular nose and a white muzzle blaze make it read as a cat, though the silhouette is a little hamster-like. **clearly**\n\n{\"traits\": {\"pose\": \"partial\", \"hands_on_belly\": \"match\", \"eyes\": \"match\", \"mouth\": \"match\", \"body\": \"match\", \"belly_patch\": \"match\", \"render\": \"match\", \"background\": \"match\", \"vibe\": \"partial\"}, \"identity\": \"clearly\", \"failure_modes\": [], \"rationale\": \"A calico cat faithfully carries the meme's closed-arc eyes, huge laughing mouth, belly-clutching paws, neckless pear body and plain CG render. It loses some points because the torso is upright with the head tilted back rather than hunched forward, which makes it feel cuter than the reference's unhinged energy.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 15.8,
+    "tokens": {
+      "input": 4139,
+      "cached_input": 0,
+      "cache_write": 4137,
+      "output": 1371,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0608819,
+    "tools_used": [],
+    "cost_usd": 0.0608819,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 4137,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1371,
+      "output_tokens_details": {
+        "thinking_tokens": 716
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 4137,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1371,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 4137,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 4137
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:06:41Z",
+    "finished_at": "2026-10-25T02:06:57Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

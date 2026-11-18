@@ -135,6 +135,11 @@ pi 設定的等級；實際等級記錄在 `meta.session_config`。如需乾淨�
 生效。該路由對突發請求限流，回傳 HTTP 429（`MODEL_CALL_FAILED`，附 `retryAfterSeconds`），所以請用
 `--jobs 1` 採集。
 
+標籤裡的「likely Qwen 4」來自 token 計數，而不是路由提供的資訊。在相同的 pi 提示詞上，egg-alpha 的輸入
+token 數與 Qwen4-Max 和 qwen4-max-preview 平均只差 1–2 個；Qwen 3.8、3.7 系列差約 10 個，GLM-5.3-Flash
+差約 21 個。在 24 張 Nai-hub 圖片上（各取三次重複中最小的計數），有 23 張與 Qwen4-Max 相差不超過 2 個
+token。計數一致表示分詞器和圖片預處理相同，但不能證明是同一個模型或檢查點，所以 `vendor` 仍為 `undisclosed`。
+
 ### 智譜 GLM（`glm-5.3-flash-pi`）
 
 `glm-5.3-flash-pi` 透過 pi 內建的 `zai-coding-cn` 供應商（open.bigmodel.cn 的 GLM Coding Plan 介面，金鑰

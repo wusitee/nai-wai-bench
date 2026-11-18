@@ -1,0 +1,90 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/deepseek-v4-pro/describe_en__r1.json",
+  "target_sha256": "baf994b5e57b95f0e037b6a317c15c1c47ec2a151d1a78d9a13c1e08f4663765",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "56ad541ff1faacc2",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 1,
+    "render": 2,
+    "background": 1,
+    "vibe": 0
+  },
+  "hallucinations": [
+    "The character leans backward with its head tilted upward; the reference pose is hunched forward as if doubled over with laughter."
+  ],
+  "rationale": "The answer clearly covers the shut eyes, enormous open mouth, and glossy studio-lit CGI, but reverses the defining pose and only vaguely places the hands near the belly. Body proportions, the oval belly patch, and the plain background are partly covered; the absurd, unhinged meme quality is missing.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":2,\"body\":1,\"belly_patch\":1,\"render\":2,\"background\":1,\"vibe\":0},\"hallucinations\":[\"The character leans backward with its head tilted upward; the reference pose is hunched forward as if doubled over with laughter.\"],\"rationale\":\"The answer clearly covers the shut eyes, enormous open mouth, and glossy studio-lit CGI, but reverses the defining pose and only vaguely places the hands near the belly. Body proportions, the oval belly patch, and the plain background are partly covered; the absurd, unhinged meme quality is missing.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719b-1f78-7170-bf3e-41e68571f7d3",
+    "seconds": 20.5,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12959,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 348,
+      "reasoning_output_tokens": 202
+    },
+    "tokens": {
+      "input": 12959,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 348,
+      "reasoning": 202
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:49:13Z",
+    "finished_at": "2026-10-25T05:49:34Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

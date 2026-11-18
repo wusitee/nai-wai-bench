@@ -1,0 +1,70 @@
+{
+  "settings_id": "7c81ed50f365cb3c",
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "vendor": "moonshot",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "一张正方形中文网络表情包风格的插画，纯白背景，画面中央是一只圆滚滚、矮胖的明黄色小猫恐龙：保留明显的猫耳、猫胡须和毛茸茸的弯尾巴，头顶与背上有几片圆润的小恐龙棘刺，奶白色肚皮，四肢短小，身体像一团软乎乎的年糕。它正仰头肆无忌惮地爆笑，整个头向后仰，双眼笑成两条紧闭的上弯弧线，眼角挤出泪珠，脸颊泛红；嘴巴夸张地张到几乎占半张脸，呈又宽又深的弧形黑洞，口腔深红、舌头粉红，露出两颗小虎牙，双爪抬起，肚子随大笑挺起。神态要极具感染力和喜感，像笑到失控、幸灾乐祸又憨态可掬，而不是普通微笑。粗而干净的深棕色描边，简洁平涂，明亮饱和的黄色，少量柔和阴影，可爱低幼的二维卡通贴纸质感，主体占满画面，高清，无文字，无对白框，无水印，无其他角色。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 25.3,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20006,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 898,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20904 / 1048576 tokens (2%)\nSession total: 20006 input, 898 output",
+      "usage": {
+        "inputTokens": 20006,
+        "outputTokens": 898
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:45:52Z",
+    "finished_at": "2026-10-25T00:46:17Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

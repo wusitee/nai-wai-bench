@@ -1,0 +1,111 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-astra-low/recognize_naiwa__r1.json",
+  "target_sha256": "5a17283f345435efd25c833788c46a32f84f9b41b2b075c1d55748c8cb4ddcfe",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "31a5fcd77039baad",
+  "judge_images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6.2-astra-low",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "Confidently says the character is the expression-pack character commonly called '小黄鸟' (little yellow bird). It is actually the 奶蛙 / mutated 奶龙 variant, not a known 'little yellow bird' character."
+  ],
+  "rationale": "The answer never mentions 奶龙, the 大笑奶龙/变异奶龙 meme family, or 奶蛙. It only gives a generic reading of the 「惊鸿一瞥」 caption and misidentifies the character as a 'little yellow bird'.",
+  "raw": "{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"naiwa\": 0}, \"hallucinations\": [\"Confidently says the character is the expression-pack character commonly called '小黄鸟' (little yellow bird). It is actually the 奶蛙 / mutated 奶龙 variant, not a known 'little yellow bird' character.\"], \"rationale\": \"The answer never mentions 奶龙, the 大笑奶龙/变异奶龙 meme family, or 奶蛙. It only gives a generic reading of the 「惊鸿一瞥」 caption and misidentifies the character as a 'little yellow bird'.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 7.9,
+    "turns": 1,
+    "tokens": {
+      "input": 2079,
+      "cached_input": 0,
+      "cache_write": 2077,
+      "output": 447,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.025803099999999995,
+    "tools_used": [],
+    "cost_usd": 0.025803099999999995,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2077,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 447,
+      "output_tokens_details": {
+        "thinking_tokens": 231
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2077,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 447,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2077,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2077
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-17T22:25:25Z",
+    "finished_at": "2026-11-17T22:25:33Z",
+    "revision": "fd4ab338+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

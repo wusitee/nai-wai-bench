@@ -1,0 +1,73 @@
+{
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "vendor": "moonshot",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "图里是国产动画角色 **奶龙**，不过这张图经过了夸张、抽象化处理，常被叫作 **“捧腹奶龙”或“笑死奶龙”** 表情包。\n\n它相关的知名网络梗是 **“我是奶龙／我才是奶龙”**：通常配合“今夜星光闪闪，我爱你的心满满……”这段音乐和舞蹈出现。这个梗也叫 **“奶龙舞”“奶龙摇”**，那段配乐则常被称作 **“奶龙的小曲”或《今夜星光闪闪》**。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 33.7,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20770,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 1193,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 21963 / 1048576 tokens (2%)\nSession total: 20770 input, 1193 output",
+      "usage": {
+        "inputTokens": 20770,
+        "outputTokens": 1193
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:46:11Z",
+    "finished_at": "2026-10-25T00:46:45Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

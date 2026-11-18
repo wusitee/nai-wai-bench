@@ -1,0 +1,84 @@
+{
+  "settings_id": "c7835e1c7781edc5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-medium",
+  "vendor": "alibaba",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "**角色**：图里这个黄澄澄、圆滚滚、捂着肚子狂笑的 3D 小家伙，看上去是 **「奶龙」（Nailong）**——国产 3D 动画《奶龙》里的主角，一条没有角、挺着奶白色肚皮的小胖黄龙。这类\"张嘴大笑、笑到弯腰捂肚子\"的截图/渲染图是它最常被拿来做表情包的姿势之一。\n\n**相关的梗**：就是 2024 年前后在抖音、B站、贴吧爆火的 **「抽象奶龙」**（奶龙表情包 / 奶龙鬼畜）。它本来是给低龄小朋友看的动画角色，因为造型憨、表情夸张、台词\"低幼\"，被网友大量二创：配上抽象话、鬼畜剪辑、故意做崩的 3D 建模，用来表达\"笑不活了\"\"绷不住了\"\"乐\"，或者反讽式地阴阳怪气（\"奶龙你怎么这么坏\"之类）。后来还随短视频出海，成了外国网友眼里的\"中国 brainrot\"代表之一。\n\n**别名/叫法**：\n- 英文圈：**Nailong / Milk Dragon**（直译\"牛奶龙\"）\n- 中文圈：**小黄龙、抽象奶龙、答辩龙**（\"答辩\"是\"大便\"的谐音，抽象话里用来吐槽这类低质内容）\n- 相关的表情梗本身也常被叫作 **\"笑不活了 / 蚌埠住了（绷不住了）\"**\n\n一点说明：我是凭记忆判断的，这张图属于粉丝二创风格的渲染（牙齿、手部颜色都和官方模型有出入），所以不能百分百排除它是别的同类\"黄色大笑生物\"表情包。如果你知道它的出处，可以告诉我，我再帮你对一下。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 562.8,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 666,
+      "output": 26286,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 25913,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 666,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 26286,
+      "reasoning": 25913
+    },
+    "session_config": {
+      "thinkingLevel": "medium"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "medium",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "medium"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:00:30Z",
+    "finished_at": "2026-11-16T17:09:52Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "opus-5.5",
+  "vendor": "anthropic",
+  "item": "recognize_variant",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。",
+  "images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "answer": "# 最可能的对应：熊猫头表情包里的“笑死/捧腹大笑”\n\n我最倾向于认为，这张图是在模仿中文网络上的**“熊猫头”表情包**，具体是其中“笑到肚子疼”“笑死我了”“哈哈哈哈哈”一类的捧腹大笑图。\n\n## 判断依据\n\n1. **形象是熊猫**\n   熊猫头是中文互联网最经典的表情包体系之一，一般是简笔画熊猫脸配上夸张表情和文字。把它做成3D、做成动画，是近几年很常见的二次创作方向，尤其在AI视频生成流行之后。\n\n2. **表情高度夸张**\n   眼睛笑成两条弯缝，嘴张到最大，露出整排牙齿和舌头。这正是熊猫头“狂笑”系列最典型的神态。\n\n3. **动作是“捧腹大笑”**\n   双手捂着圆肚子，身体前倾弯腰，像笑得站不稳，很直观地表达了“笑到肚子疼”“笑喷了”的意思。中文里常用“笑死”“笑不活了”“捧腹”来回应好笑的内容，这张图正好可以当这类反应图用。\n\n4. **构图像表情包素材**\n   背景是干净的浅色，角色居中、动作清楚，没有复杂场景。这很符合表情包或反应图的制作习惯。\n\n## 需要说明的不确定性\n\n- 图上**没有文字**。熊猫头表情包通常靠配字表达具体意思，所以我无法确定它对应的是哪一张原版图，只能判断它属于“狂笑”这一类。\n- 角色体型、毛发质感有点像《功夫熊猫》的阿宝，但它没穿阿宝标志性的短裤，眼睛和脸部设计也不同，所以更像一个通用的3D熊猫形象，不像是直接取自电影。\n\n如果你还记得这张图配的文字或出处，我可以帮你进一步判断。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 15.8,
+    "tokens": {
+      "input": 1473,
+      "cached_input": 0,
+      "cache_write": 1471,
+      "output": 950,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.030909700000000002,
+    "tools_used": [],
+    "cost_usd": 0.030909700000000002,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1471,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 950,
+      "output_tokens_details": {
+        "thinking_tokens": 262
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1471,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 950,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1471,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1471
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:42:42Z",
+    "finished_at": "2026-10-25T00:42:58Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

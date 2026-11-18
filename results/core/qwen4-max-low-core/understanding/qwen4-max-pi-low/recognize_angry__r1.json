@@ -1,0 +1,84 @@
+{
+  "settings_id": "22124b548d3b109d",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-low",
+  "vendor": "alibaba",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "**角色：纳克鲁斯（Knuckles the Echidna，针鼹纳克鲁斯）**——世嘉《刺猬索尼克》系列里那只红色的针鼹，不过图里是它被\"崩坏化\"的圆胖版本：红身子、浅色肚皮、短小手臂、皱眉瞪眼。\n\n**所属梗：乌干达纳克鲁斯（Ugandan Knuckles）**\n\n- 这个矮胖变形的造型最早出自 YouTube 动画作者 Gregzilla 的索尼克恶搞动画，后来被 **VRChat** 玩家做成avatar大量使用（2017 年底—2018 年初爆火）。\n- 玩家们成群结队地顶着这个模型，用夸张的非洲/乌干达口音喊 **\"Do you know the way?\"（你知道路吗？）**，还有\"click click\"的弹舌声、朝人吐口水、把喜欢的人称作\"my queen\"等，成了当年最出圈也最有争议（涉及种族刻板印象）的网络梗之一。\n- 中文圈常见叫法是\"乌干达纳克鲁斯\"\"你知道路吗\"表情包。\n\n图中下方的\"切换愤怒模式😡\"是后期加的表情包配文，属于常见的\"切换XX模式\"系列文案，跟原梗本身没有直接关系，只是借用了这张凶巴巴的脸。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 17.6,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 150,
+      "output": 600,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 316,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 150,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 600,
+      "reasoning": 316
+    },
+    "session_config": {
+      "thinkingLevel": "low"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "low",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "low"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:43:04Z",
+    "finished_at": "2026-11-16T16:43:22Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

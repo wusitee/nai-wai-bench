@@ -1,0 +1,89 @@
+{
+  "judge": "kimi-k3.1-pro",
+  "judge_vendor": "moonshot",
+  "target": "imagegen/gemini-image/name_zh/cat__r1.json",
+  "target_sha256": "cc758d0a5a0f4cfdf03de12e7f15ef883932eead7a6ad8fb420672435c6778eb",
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "judge_prompt": "32fc83186ee779b5",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/gemini-image/name_zh/cat__r1/inline-0.jpg"
+  ],
+  "track": "imagegen",
+  "model": "gemini-image",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 0,
+    "vibe": 0
+  },
+  "identity": 2,
+  "failure_modes": [
+    "generic_cute",
+    "multiple_subjects"
+  ],
+  "rationale": "The image clearly depicts an orange tabby cat and captures the closed eyes and pale belly, but replaces the meme’s doubled-over belly-clutching pose and unhinged laughter with a polished, cute scene full of props.",
+  "raw": "pose: Sitting upright rather than standing and doubled forward — absent  \nhands_on_belly: Paws clasped near the chest, not clutching the belly — absent  \neyes: Eyes squeezed shut into thin upward-curving arcs — match  \nmouth: Open laughing mouth with dark interior, teeth, and tongue, but not face-dominating or hysterical — partial  \nbody: Rounded, bulky body and short limbs, but with a distinct large cat head rather than a pear/bean silhouette — partial  \nbelly_patch: White belly and chest contrasting with the orange tabby fur — match  \nrender: Polished, detailed 3D CG with soft lighting, but more cinematic and furry than the reference’s cheap glossy look — partial  \nbackground: Busy cozy room with shelves, plants, lights, toys, and a knitted blanket — absent  \nvibe: Cute and cheerful rather than absurd or unhinged — absent  \nidentity: Clearly an orange tabby cat, with natural markings and cat anatomy throughout — clearly  \n\n{\"traits\":{\"pose\":\"absent\",\"hands_on_belly\":\"absent\",\"eyes\":\"match\",\"mouth\":\"partial\",\"body\":\"partial\",\"belly_patch\":\"match\",\"render\":\"partial\",\"background\":\"absent\",\"vibe\":\"absent\"},\"identity\":\"clearly\",\"failure_modes\":[\"generic_cute\",\"multiple_subjects\"],\"rationale\":\"The image clearly depicts an orange tabby cat and captures the closed eyes and pale belly, but replaces the meme’s doubled-over belly-clutching pose and unhinged laughter with a polished, cute scene full of props.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 23.1,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 22811,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 641,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 23452 / 1048576 tokens (2%)\nSession total: 22811 input, 641 output",
+      "usage": {
+        "inputTokens": 22811,
+        "outputTokens": 641
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:55:40Z",
+    "finished_at": "2026-10-25T01:56:03Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

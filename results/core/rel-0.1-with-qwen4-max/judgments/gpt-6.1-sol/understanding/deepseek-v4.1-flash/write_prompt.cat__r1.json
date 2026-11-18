@@ -1,0 +1,94 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/deepseek-v4.1-flash/write_prompt.cat__r1.json",
+  "target_sha256": "33856d17bbe2cbcff05b8bfd5a6bc15c475bb2dadd7cbdef965baddab0817259",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "acf50f7082ffca63",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 0,
+    "background": 2,
+    "vibe": 1,
+    "identity": 1
+  },
+  "hallucinations": [
+    "The head-thrown-back pose replaces the reference's forward-hunched laughing posture.",
+    "One paw is lifted, contradicting the reference's two paws clutching the belly.",
+    "An oversized head and tiny body contradict the bulky, merged head-and-torso proportions.",
+    "Thick black outlines, flat colors, and cel shading contradict the glossy 3D CG rendering."
+  ],
+  "rationale": "The prompt captures the closed laughing eyes, enormous mouth, and plain pale background, but misses the defining posture, belly patch, body proportions, and rendering style. Belly-clutching is only partial, the tone emphasizes cuteness, and cat identity relies mainly on added ears, whiskers, and a tail.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":1,\"eyes\":2,\"mouth\":2,\"body\":1,\"belly_patch\":0,\"render\":0,\"background\":2,\"vibe\":1,\"identity\":1},\"hallucinations\":[\"The head-thrown-back pose replaces the reference's forward-hunched laughing posture.\",\"One paw is lifted, contradicting the reference's two paws clutching the belly.\",\"An oversized head and tiny body contradict the bulky, merged head-and-torso proportions.\",\"Thick black outlines, flat colors, and cel shading contradict the glossy 3D CG rendering.\"],\"rationale\":\"The prompt captures the closed laughing eyes, enormous mouth, and plain pale background, but misses the defining posture, belly patch, body proportions, and rendering style. Belly-clutching is only partial, the tone emphasizes cuteness, and cat identity relies mainly on added ears, whiskers, and a tail.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719c-cd97-7993-a443-87876241598b",
+    "seconds": 23.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12085,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 607,
+      "reasoning_output_tokens": 411
+    },
+    "tokens": {
+      "input": 12085,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 607,
+      "reasoning": 411
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:51:03Z",
+    "finished_at": "2026-10-25T05:51:27Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

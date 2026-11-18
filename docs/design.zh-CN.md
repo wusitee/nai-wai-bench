@@ -200,14 +200,12 @@ C2PA 对 OpenAI 仅标注 `ChatGPT · gpt-image`，对 Google 仅标注“Create
 
 ### 发布
 
-`scripts/publish_site.sh RELEASE_MANIFEST.toml` 用 `nwb release` 在新的临时目录中构建选定的对比，并仅用
-生成的网站替换 `origin` 上的 `gh-pages` 分支。根目录是奶蛙指数总览，识梗在 `meme-id/`，看图在
-`visual-detail/`；`naihub-v1/` 跳转到 `visual-detail/`。
-需要 `uv`、Git、已配置的 Git 作者身份和推送权限，不会改变当前检出的
-分支。工作运行和网站文件仍被 git 忽略；`results/` 中的可移植副本随源码分支保存。
+每次推送到 `main` 后，CI 用 `nwb release` 构建当前发布清单，并把结果部署到 GitHub Pages（见[发布](releases.md#publish)）。
+根目录是奶蛙指数总览，识梗在 `meme-id/`，看图在 `visual-detail/`；`naihub-v1/` 跳转到 `visual-detail/`。工作运行和网站文件仍被 git 忽略；`results/` 中的可移植副本随源码分支保存。
 
-首次启用 GitHub Pages：`gh api -X POST repos/OWNER/REPO/pages -f 'source[branch]=gh-pages' -f 'source[path]=/'`；
-若已启用则改用 `-X PUT`。用 `gh api repos/OWNER/REPO/pages/builds/latest` 检查构建状态，用
+首次启用 GitHub Pages，并以 GitHub Actions 为来源：`gh api -X POST repos/OWNER/REPO/pages -f build_type=workflow`；
+若已启用则改用 `-X PUT`。`github-pages` 环境必须允许从 `main` 部署；若它限制了部署分支，用
+`gh api -X POST repos/OWNER/REPO/environments/github-pages/deployment-branch-policies -f name=main` 添加。在 CI 运行的 `deploy` 任务中查看部署状态，用
 `gh api repos/OWNER/REPO/pages --jq .html_url` 获取网址。**即使源码仓库是私有的，Pages 网站仍然公开。**
 只发布打算公开的结果。
 

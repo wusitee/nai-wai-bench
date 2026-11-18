@@ -1,0 +1,84 @@
+{
+  "settings_id": "c7835e1c7781edc5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-medium",
+  "vendor": "alibaba",
+  "item": "recognize_en",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Who is this character, and which internet meme is this image from? Does the meme have other names?",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "This looks like **Bittergiggle**, the grinning yellow monster from the indie horror game series *Garten of Banban* (by Euphoric Brothers) — he's the jester‑like \"always laughing\" character, usually shown with his eyes squeezed shut, mouth wide open and grey hands clutching his pale belly, exactly as here.\n\nThe image circulates as the **\"Bittergiggle laughing\" meme** — a reaction clip/still used to mean \"I'm dying laughing\" or to mock something, often paired with hysterical laughter audio. It gets reposted under a few other labels, most commonly descriptive ones like the **\"yellow laughing guy/blob,\" \"laughing Banban guy,\" or \"haha belly‑laugh blob,\"** and the character's name itself is often written as two words (\"Bitter Giggle\") or shortened to \"Giggle.\"\n\nOne caveat: I'm going on memory of the character design rather than a verified source, and blobby yellow laugh‑guy renders are common in shitpost circles, so if this particular render comes from a fan animation rather than the game's own model, the naming above may be slightly off.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 96.6,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 672,
+      "output": 3943,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 3694,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 672,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 3943,
+      "reasoning": 3694
+    },
+    "session_config": {
+      "thinkingLevel": "medium"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "medium",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "medium"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:00:52Z",
+    "finished_at": "2026-11-16T17:02:28Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

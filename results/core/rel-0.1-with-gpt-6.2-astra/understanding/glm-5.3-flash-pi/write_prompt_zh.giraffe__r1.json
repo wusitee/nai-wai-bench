@@ -1,0 +1,81 @@
+{
+  "settings_id": "680aa2edad69d268",
+  "track": "understanding",
+  "model": "glm-5.3-flash-pi",
+  "vendor": "zhipu",
+  "item": "write_prompt_zh.giraffe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出长颈鹿版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "可爱卡通表情包风格插画，主体是一只“长颈鹿版黄色小龙”玩偶：Q版圆润造型，头特别大，身体胖乎乎的，呈明亮奶黄色，皮肤光滑；长着长颈鹿特有的长脖子向上弯曲，脖子和身上布满橙棕色不规则长颈鹿斑纹，头顶有两只小小的长颈鹿角（ossicone）和小圆耳朵，四肢短小圆润，短尾巴末端有一撮深棕色毛。它正在放声狂笑：双眼完全笑成两条弯弯的缝，嘴巴张到极大，露出粉红舌头和上排两颗小牙，脸颊鼓起，几滴大笑的眼泪从眼角向外飞出，身体向后仰、微微发抖，头顶和身侧有多条抖动线条与“哈哈哈”笑声符号。粗黑色干净描边，扁平明亮的卡通风配色，柔和简单阴影，纯浅米色背景，角色全身居中构图，表情夸张搞笑，微信表情包贴纸质感，简洁高清插画。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "zai-coding-cn/glm-5.3-flash",
+    "client": "pi 1.5.0",
+    "seconds": 38.9,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 103,
+      "output": 1308,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1087,
+      "cost": 0.0006694499999999999
+    },
+    "tokens": {
+      "input": 103,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1308,
+      "reasoning": 1087
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "zai-coding-cn/glm-5.3-flash",
+    "cost_usd_reported": 0.0006694499999999999
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "zai-coding-cn/glm-5.3-flash",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "zai-coding-cn/glm-5.3-flash",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-06T07:12:58Z",
+    "finished_at": "2026-11-06T07:13:37Z",
+    "revision": "ef8832f+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

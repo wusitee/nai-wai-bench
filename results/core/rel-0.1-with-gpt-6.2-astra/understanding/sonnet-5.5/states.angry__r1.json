@@ -1,0 +1,103 @@
+{
+  "settings_id": "8bc2f526580c51a3",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "vendor": "anthropic",
+  "item": "states.angry",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Look only at the attached character. Report its visible expression and gesture, not an imagined inner feeling. Return JSON with four keys: state (angry, facepalm, smug, laughing, or other), eyes (open, closed, or narrowed), mouth (open or closed), and gesture (behind_back, forehead, belly_clutch, folded_arms, or out_of_frame). Use unknown when a field cannot be determined. Do not assume the character must be laughing or invent gestures outside the frame.",
+  "images": [
+    "bench/states/01.png"
+  ],
+  "answer": "```json\n{\n  \"state\": \"angry\",\n  \"eyes\": \"narrowed\",\n  \"mouth\": \"closed\",\n  \"gesture\": \"behind_back\"\n}\n```\n\n- **state:** The brows are furrowed and pulled down, and the mouth is a flat, frowning line. That reads as angry.\n- **eyes:** The green eyes are visible, but the heavy brows press down on them, so they look narrowed.\n- **mouth:** A small frown line is visible and there is no opening, so it is closed.\n- **gesture:** The arm angles back behind the body, which suggests the hands are clasped behind the back. The hands themselves are not visible.",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 6.4,
+    "tokens": {
+      "input": 837,
+      "cached_input": 0,
+      "cache_write": 835,
+      "output": 436,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0079411,
+    "tools_used": [],
+    "cost_usd": 0.0079411,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 835,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 436,
+      "output_tokens_details": {
+        "thinking_tokens": 226
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 835,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 436,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 835,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 835
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-sonnet-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:45:30Z",
+    "finished_at": "2026-10-25T00:45:37Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

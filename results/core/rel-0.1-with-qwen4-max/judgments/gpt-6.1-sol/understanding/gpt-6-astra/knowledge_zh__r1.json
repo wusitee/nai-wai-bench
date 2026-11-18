@@ -1,0 +1,89 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6-astra/knowledge_zh__r1.json",
+  "target_sha256": "36d99f24a436d7085a9ade496195b1c41cf241b776a27e85f6d86faa04ffe08c",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "05bfc831e837d7f9",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 1,
+    "naiwa": 0,
+    "laugh_pose": 0,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [],
+  "rationale": "回答正确介绍了原版奶龙的黄色、圆胖、国产动画恐龙形象，并将“大笑奶龙／奶蛙”并列称呼，但未提及“变异奶龙”别名，其余变体来源、外观及专属梗均未覆盖。回答明确标注了不确定性，没有可判定的自信编造或矛盾断言。",
+  "raw": "{\"scores\":{\"base_character\":2,\"ai_variant\":0,\"xingye_origin\":0,\"aliases\":1,\"naiwa\":0,\"laugh_pose\":0,\"junti_quan\":0,\"official_reply\":0,\"trait_variants\":0,\"rarity_titles\":0},\"hallucinations\":[],\"rationale\":\"回答正确介绍了原版奶龙的黄色、圆胖、国产动画恐龙形象，并将“大笑奶龙／奶蛙”并列称呼，但未提及“变异奶龙”别名，其余变体来源、外观及专属梗均未覆盖。回答明确标注了不确定性，没有可判定的自信编造或矛盾断言。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719e-ff95-7751-bba3-129ab191bbf1",
+    "seconds": 11.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 13242,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 232,
+      "reasoning_output_tokens": 72
+    },
+    "tokens": {
+      "input": 13242,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 232,
+      "reasoning": 72
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:53:27Z",
+    "finished_at": "2026-10-25T05:53:39Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "settings_id": "c7835e1c7781edc5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-medium",
+  "vendor": "alibaba",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "我只能凭记忆判断，坦白说对这个具体角色我没有把握，下面把确定的部分和猜测分开讲：\n\n**画面本身**：一个黄色、圆头、表面光滑的 3D 卡通形象，瞪着两只夸张的大眼睛向旁边斜视，嘴是一条细缝，配上\"惊鸿一瞥\"四个字。笑点就在于\"惊鸿一瞥\"这种形容绝色美人回眸的典雅成语，配上一张呆滞、斜眼、毫不好看的抽象脸，形成强烈反差。\n\n**梗的类型**（这部分我比较确定）：这属于中文互联网的\"抽象表情包 / 四字成语表情包\"玩法——用一张呆傻或扭曲的卡通脸配\"惊鸿一瞥\"\"沉鱼落雁\"\"回眸一笑\"\"国色天香\"之类的词，靠反差制造幽默；表情动作上对应英文圈的 \"bombastic side eye\"（夸张斜眼）梗。\n\n**角色身份**（这部分是猜测，不确定）：我最先想到的是国产动画《奶龙》里的**奶龙**——黄色胖乎乎的形象，2023—2024 年在\"抽象奶龙\"表情包里被大量二创、变形并配成语，风格与这张图很接近。但图中眼睛带绿色虹膜、头部完全没有角/嘴部细节，和奶龙的标准形象对不太上，所以也可能是别的黄色团子/小鸟类角色（比如某些游戏或短视频里的原创形象）。\n\n如果你能告诉我它的出处或补充特征，我可以帮你判断得更准；单凭这张图我不想给你一个假装确定的答案。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 162.4,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 150,
+      "output": 6315,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 5985,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 150,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 6315,
+      "reasoning": 5985
+    },
+    "session_config": {
+      "thinkingLevel": "medium"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "medium",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "medium"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:02:55Z",
+    "finished_at": "2026-11-16T17:05:38Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

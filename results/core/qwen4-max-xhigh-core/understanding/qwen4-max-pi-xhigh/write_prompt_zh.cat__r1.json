@@ -1,0 +1,81 @@
+{
+  "settings_id": "a5e02c034d814b84",
+  "track": "understanding",
+  "model": "qwen4-max-pi-xhigh",
+  "vendor": "alibaba",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "一张正方形、低分辨率、像被反复转发压缩过的聊天表情包：3D卡通渲染的一只圆滚滚奶黄色小胖龙，正面大头特写，脑袋几乎撑满整个画面。它皮肤光滑无鳞、像奶油色软胶玩具，头大身小，梨形身材，圆鼓鼓的浅奶白肚皮，短短的小手小脚和一截小圆尾巴，头顶两只小小的圆钝短角；两只又圆又大的黑眼睛间距很宽、长得偏头顶，各带一点白色高光，此刻瞪得滚圆、直勾勾盯着镜头。它正在放声狂笑：嘴巴横向咧到几乎贯穿整张脸、快咧到耳根，张成一个巨大夸张的方形笑口，露出上排整齐得略显写实的白色方牙、粉红舌头和深红口腔，嘴角高高上扬，脸颊挤出笑纹，头微微后仰，眼角挂着一小滴笑出来的眼泪。宽嘴配凸眼让整张脸看起来像只青蛙，笑容用力过猛、既滑稽又有点诡异瘆人。平淡的正面打光、轻微过曝、高饱和黄色，边缘有锯齿和JPEG压缩噪点，纯白背景，贴纸式白色描边，画面中没有任何文字。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 65.4,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 114,
+      "output": 2717,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 2452,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 114,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2717,
+      "reasoning": 2452
+    },
+    "session_config": {
+      "thinkingLevel": "xhigh"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "xhigh",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "xhigh"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:32:46Z",
+    "finished_at": "2026-11-16T17:33:51Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

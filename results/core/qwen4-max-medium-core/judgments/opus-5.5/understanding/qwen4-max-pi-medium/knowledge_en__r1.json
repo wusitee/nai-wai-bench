@@ -1,0 +1,116 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi-medium/knowledge_en__r1.json",
+  "target_sha256": "8e3a3df59251fbacd9ec2063a2c03a7589f03fbddd393c450d040fe604687940",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "721ef1bdde495ce1",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "qwen4-max-pi-medium",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 0,
+    "naiwa": 0,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [
+    "Describes 大笑奶龙 confidently as a laughing screenshot/frame from the Chinese kids' cartoon, implying official artwork, when it is an unofficial AI-generated variant",
+    "Describes the pose as head thrown back with mouth stretched wide, which contradicts the actual hunched-forward, belly-clutching, eyes-squeezed-shut pose"
+  ],
+  "rationale": "",
+  "raw": "```json\n{\"scores\": {\"base_character\": 2, \"ai_variant\": 0, \"xingye_origin\": 0, \"aliases\": 0, \"naiwa\": 0, \"laugh_pose\": 1, \"junti_quan\": 0, \"official_reply\": 0, \"trait_variants\": 0, \"rarity_titles\": 0}, \"hallucinations\": [\"Describes 大笑奶龙 confidently as a laughing screenshot/frame from the Chinese kids' cartoon, implying official artwork, when it is an unofficial AI-generated variant\", \"Describes the pose as head thrown back with mouth stretched wide, which contradicts the actual hunched-forward, belly-clutching, eyes-squeezed-shut pose\"]}\n```\n\nThe model correctly describes the base 奶龙 character and partly captures the laughing expression. It misses the AI or 星野 origin, the aliases, the 军体拳 remix, the official-reply copypasta and the rarity-title genre. It also frames the image as an official cartoon frame.",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 13.5,
+    "turns": 1,
+    "tokens": {
+      "input": 3278,
+      "cached_input": 0,
+      "cache_write": 3276,
+      "output": 1051,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.047236,
+    "tools_used": [],
+    "cost_usd": 0.047236,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3276,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1051,
+      "output_tokens_details": {
+        "thinking_tokens": 713
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3276,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1051,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3276,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3276
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:15:43Z",
+    "finished_at": "2026-11-16T17:15:57Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

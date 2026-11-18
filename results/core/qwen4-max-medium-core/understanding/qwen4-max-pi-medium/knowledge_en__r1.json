@@ -1,0 +1,81 @@
+{
+  "settings_id": "c7835e1c7781edc5",
+  "track": "understanding",
+  "model": "qwen4-max-pi-medium",
+  "vendor": "alibaba",
+  "item": "knowledge_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "What is the Chinese internet meme \"大笑奶龙\" (Laughing Nailong, also called \"奶蛙\")? Explain its origin, what it looks like, and the related jokes and remixes. Say so plainly where you are unsure instead of guessing.",
+  "images": [],
+  "answer": "## What I'm reasonably confident about\n\n**奶龙 (Nailong)** is a Chinese 3D-animated short-video character: a chubby, pale-yellow/cream baby dragon with a huge mouth, tiny limbs and a big belly. He appears in short slapstick clips alongside a human boy, usually called 小七 (Xiao Qi). The shorts blew up on Douyin/Kuaishou and Bilibili around 2021–2023 and became hugely popular with young children, plus a big plush-toy and merchandising business.\n\nThe meme status comes from the **gap between the target audience and the people mocking it**. Older teens and young adults on Bilibili, Tieba and QQ groups adopted 奶龙 ironically as a symbol of \"小学生审美\" / low-effort kiddie content — it gets lumped in with 蛋仔派对, 马桶人 (Skibidi Toilet) and other \"brainrot\" touchstones. In 抽象 (abstract shitposting) circles it's also frequently tagged with the slang \"唐\" — an ableist insult I'd rather not unpack further, but it's a real part of how the character gets talked about.\n\n**大笑奶龙** is the reaction-image end of this: a frame/sticker of Nailong with his head back and mouth stretched enormously wide, laughing. It's used like a deep-fried \"笑死\" / \"乐\" emoji — often cropped extremely close, saturated, distorted, or given laser eyes, and posted with no caption at all. The joke is largely anti-humor: the face is so exaggerated and so associated with children's content that using it sincerely *or* ironically is funny either way.\n\n## Where I'm genuinely unsure\n\n- **\"奶蛙\" as an alias**: I can't confirm this from memory. It's *plausible* it comes from the wide-mouth laughing frame looking frog-like (and possibly from association with 悲伤蛙/Pepe), but I'd be guessing at the actual coinage, and I don't want to invent an etymology.\n- **The exact source frame** — which episode or sticker pack the laughing image comes from, and when it took off. I don't know.\n- **The studio/rights holder** behind 奶龙. I have a vague sense of a Guangdong-based animation company but nothing I'd state as fact.\n- **Specific remixes.** I know the general shape of the genre: Bilibili 鬼畜 (MAD-style pitch-shifted looping of his laugh and voice lines), phonk/hardstyle edits, \"laughing Nailong\" layered over unrelated audio, and mashups with other brainrot characters. But I can't name a single specific canonical 大笑奶龙 remix, view count, or upload date, and naming one would risk fabrication.\n- Whether 大笑奶龙 has a distinct origin story separate from the general 奶龙 meme wave, or is just one popular frame within it. My instinct is the latter, but that's an instinct, not knowledge.\n\n## Short version\n\nIt's a wide-mouthed laughing screenshot of a Chinese kids' cartoon dragon, recycled by older internet users as an ironic/deep-fried reaction image, part of the broader \"mocking children's media as brainrot\" trend. Beyond that core, treat my details — especially the 奶蛙 nickname and any specific remix — as unverified.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 54.9,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 126,
+      "output": 2103,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1393,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 126,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2103,
+      "reasoning": 1393
+    },
+    "session_config": {
+      "thinkingLevel": "medium"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "medium",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "medium"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:56:47Z",
+    "finished_at": "2026-11-16T16:57:41Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

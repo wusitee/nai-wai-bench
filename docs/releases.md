@@ -8,13 +8,13 @@ independent of this workflow.
 
 [`releases/0.1.0.toml`](../releases/0.1.0.toml) selects the expanded comparison including GPT-6.1 Terra,
 the high/xhigh GPT-5.6-Sol configurations, Claude Fable 5.1 (high), egg-alpha (high, pi through the TokenRhythm
-router), GLM-5.3-Flash (high, pi through Zhipu's GLM Coding Plan endpoint), and ChatGPT Images 2.6
-(Codex built-in image generation):
+router), GLM-5.3-Flash (high, pi through Zhipu's GLM Coding Plan endpoint), Qwen4-Max (max and high, pi through the
+Qwen Token Plan CN endpoint), GPT-6.2-Astra (high, Codex), and ChatGPT Images 2.6 (Codex built-in image generation):
 
 | Suite | Raw run | Judge policy |
 |---|---|---|
-| `core` | `rel-0.1-with-glm-5.3-flash-and-images-2.6` | Opus 5.5 only, including its judgments of Opus and other Anthropic subjects |
-| `naihub-v1` | `rel-0.1-naihub-with-glm-5.3-flash` | Local answer-key scoring, without judges |
+| `core` | `rel-0.1-with-gpt-6.2-astra` | Opus 5.5 only, including its judgments of Opus and other Anthropic subjects |
+| `naihub-v1` | `rel-0.1-naihub-with-gpt-6.2-astra` | Local answer-key scoring, without judges |
 
 Each selected run is a chain of `nwb merge`s; every source remains saved. The earlier comparison runs
 (`rel-0.1-with-gpt-5.6-sol`, `rel-0.1-naihub-with-gpt-5.6-sol`) were merged with the Fable runs
@@ -22,11 +22,17 @@ Each selected run is a chain of `nwb merge`s; every source remains saved. The ea
 those with the egg-alpha runs (`egg-alpha-core`, `egg-alpha-naihub`) into `rel-0.1-with-egg-alpha` and
 `rel-0.1-naihub-with-egg-alpha`. The core result was merged with `images-2.6-core` into
 `rel-0.1-with-images-2.6`, then with `glm-5.3-flash-pi-core` into
-`rel-0.1-with-glm-5.3-flash-and-images-2.6`. The Nai-hub result was merged with
-`glm-5.3-flash-pi-naihub` into `rel-0.1-naihub-with-glm-5.3-flash`. The earlier
-`rel-0.1-with-glm-5.3-flash` core comparison remains archived without the Images 2.6 additions.
-The Fable, egg-alpha, and GLM-5.3-Flash Nai-hub rows have three repetitions per image, averaged within
-each image. egg-alpha's vendor is undisclosed, so judge independence from Opus 5.5 cannot be confirmed.
+`rel-0.1-with-glm-5.3-flash-and-images-2.6`, then with `qwen4-max-core` and `qwen4-max-high-core` into
+`rel-0.1-with-qwen4-max`, and then with `gpt-6.2-astra-high-core` into `rel-0.1-with-gpt-6.2-astra`.
+The Nai-hub result was merged with `glm-5.3-flash-pi-naihub` into `rel-0.1-naihub-with-glm-5.3-flash`, then
+with `qwen4-max-naihub` and `qwen4-max-high-naihub` into `rel-0.1-naihub-with-qwen4-max`, and then with
+`gpt-6.2-astra-high-naihub` into `rel-0.1-naihub-with-gpt-6.2-astra`. The earlier `rel-0.1-with-glm-5.3-flash` core
+comparison remains archived without the Images 2.6 additions.
+The Fable, egg-alpha, GLM-5.3-Flash, both Qwen4-Max, and GPT-6.2-Astra Nai-hub rows have three repetitions per image, averaged
+within each image. egg-alpha's vendor is undisclosed, so judge independence from Opus 5.5 cannot be confirmed; its label says
+"likely Qwen 4" from the tokenizer evidence in [backends](backends.md#tokenrhythm-egg-alpha).
+Qwen4-Max appears at max effort (which the endpoint runs as its highest thinking level, xhigh) and at the
+standard high effort; most rows use high.
 
 `chatgpt-images-2.6` repeats the `chatgpt-image` configuration after OpenAI's Images 2.6 launch on
 2026-11-04. Codex names no image model in its output or C2PA credentials, so the row relies on OpenAI's
@@ -76,7 +82,7 @@ for selected runs. Restoration verifies checksums and suite membership before wr
 working run takes precedence. Explicit restoration requires a fresh working directory:
 
 ```sh
-uv run nwb restore --suite core --run rel-0.1-with-glm-5.3-flash-and-images-2.6
+uv run nwb restore --suite core --run rel-0.1-with-gpt-6.2-astra
 ```
 
 Raw ZIP bundles are still available for separate downloads. Extract them into fresh run directories;
@@ -144,7 +150,7 @@ The output contains:
 
 Review the pages, contributing judges, coverage, settings, and raw bundle contents locally. The builder
 updates these generated outputs without removing unrelated files from an existing output directory.
-The publisher always builds into a fresh temporary directory.
+CI builds into a fresh directory on every run.
 
 ### Token bill
 
@@ -243,12 +249,16 @@ Claude Code login and 127 an API key, with the same recorded settings.
 
 ## Publish
 
-After reviewing and authorizing the generated release:
+CI (`.github/workflows/ci.yml`) runs the tests and builds the manifest named by the workflow's
+`RELEASE_MANIFEST` on every pull request and every push to `main`. On `main`, it then deploys that build,
+pages and sanitized raw bundles, to GitHub Pages, so merging to `main` updates the site. Change the
+variable when a new manifest becomes the published release.
+
+To republish without a new commit, for example after a failed deployment:
 
 ```sh
-scripts/publish_site.sh releases/0.1.0.toml
+gh workflow run CI --ref main
 ```
 
-The script rebuilds the same manifest and force-updates only `gh-pages` on `origin`, without switching
-the source checkout. It publishes the pages and sanitized raw bundles. Git author identity and push
-access must be configured. See [results-site hosting](design.md#publishing) for GitHub Pages setup.
+Deployments run one at a time, and a run whose commit is no longer the head of `main` skips
+deployment, so an older commit never replaces a newer site. See [results-site hosting](design.md#publishing) for GitHub Pages setup.

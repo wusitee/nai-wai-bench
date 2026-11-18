@@ -1,0 +1,84 @@
+{
+  "settings_id": "22124b548d3b109d",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-low",
+  "vendor": "alibaba",
+  "item": "recognize_variant",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。",
+  "images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "answer": "**判断：它模仿的是中文网络上经典的「熊猫头」表情包，尤其是其中“狂笑／笑到肚子疼”的那一类（即源自姚明笑脸、金馆长笑脸的“2333／笑死我了”系列）。**\n\n依据如下：\n\n1. **物种与配色本身就是梗的载体。** 中文互联网最主流的表情包模板之一就是“熊猫头”——黑白熊猫脸配上夸张的人类表情。这张图直接选用熊猫作为主角，且把黑眼圈处理成两道弯弯的“笑眯眼”，正是熊猫头表情包的标志性画法（用黑眼圈当眼睛，省掉真实眼球）。\n\n2. **表情是典型的“暴笑”符号。** 眼睛眯成两条下弯的弧线、嘴巴张到极限露出整排牙齿和舌头、头向后仰——这套组合与姚明笑脸、金馆长笑脸如出一辙，是中文语境里表达“2333”“笑cry”“笑不活了”的标准脸。\n\n3. **肢体动作补全了梗的语义。** 双手捂住圆鼓鼓的肚子、身体前倾弯腿，对应中文常说的“笑到肚子疼”“笑到扶墙／捂肚狂笑”。普通可爱熊猫插画不会刻意摆出这种“人类式失态大笑”的姿势，这种拟人化的夸张肢体正是表情包的特征。\n\n4. **构图风格符合表情包用法。** 纯白／浅灰干净背景、单一主体、无场景叙事，便于直接抠图配字（如“哈哈哈哈哈哈”“笑死”），这是表情包素材而非普通动物插画的典型呈现方式。\n\n综上，这张 3D 渲染熊猫实际上是把“熊猫头＋姚明／金馆长式狂笑＋捂肚子”这一中文网络梗立体化、萌化后的再创作。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 22.0,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 714,
+      "output": 799,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 423,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 714,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 799,
+      "reasoning": 423
+    },
+    "session_config": {
+      "thinkingLevel": "low"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "low",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "low"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:42:37Z",
+    "finished_at": "2026-11-16T16:42:59Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

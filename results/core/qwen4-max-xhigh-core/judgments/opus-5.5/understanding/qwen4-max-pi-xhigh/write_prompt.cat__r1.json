@@ -1,0 +1,118 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi-xhigh/write_prompt.cat__r1.json",
+  "target_sha256": "47637807e2d5597f28cd22dde343a360876dc59340b6a7ea6519a896dda9b209",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "bb2db1b61a033aab",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "qwen4-max-pi-xhigh",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 1,
+    "render": 1,
+    "background": 2,
+    "vibe": 2,
+    "identity": 1
+  },
+  "hallucinations": [
+    "Extreme close-up with the face filling the frame and the head tipped back, instead of a full standing, hunched-forward pose",
+    "One paw lifted near the cheek instead of both hands clutching the belly",
+    "Huge round head bigger than the body, which contradicts the merged head-torso bean shape",
+    "Thick black outlines and flat cel shading, which contradict the glossy 3D CG render"
+  ],
+  "rationale": "The prompt gets the squeezed crescent eyes, the giant gaping mouth, the plain background and the unhinged vibe right. It misses the doubled-over pose and the hands on the belly, mixes 2D cel-shading with the 3D render, and keeps Nailong's pale-yellow coloring with only token cat cues.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 2, \"body\": 1, \"belly_patch\": 1, \"render\": 1, \"background\": 2, \"vibe\": 2, \"identity\": 1}, \"hallucinations\": [\"Extreme close-up with the face filling the frame and the head tipped back, instead of a full standing, hunched-forward pose\", \"One paw lifted near the cheek instead of both hands clutching the belly\", \"Huge round head bigger than the body, which contradicts the merged head-torso bean shape\", \"Thick black outlines and flat cel shading, which contradict the glossy 3D CG render\"], \"rationale\": \"The prompt gets the squeezed crescent eyes, the giant gaping mouth, the plain background and the unhinged vibe right. It misses the doubled-over pose and the hands on the belly, mixes 2D cel-shading with the 3D render, and keeps Nailong's pale-yellow coloring with only token cat cues.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 11.2,
+    "turns": 1,
+    "tokens": {
+      "input": 2017,
+      "cached_input": 0,
+      "cache_write": 2015,
+      "output": 740,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.030927999999999997,
+    "tools_used": [],
+    "cost_usd": 0.030927999999999997,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2015,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 740,
+      "output_tokens_details": {
+        "thinking_tokens": 403
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2015,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 740,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2015,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2015
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T17:46:27Z",
+    "finished_at": "2026-11-16T17:46:38Z",
+    "revision": "41c431e+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

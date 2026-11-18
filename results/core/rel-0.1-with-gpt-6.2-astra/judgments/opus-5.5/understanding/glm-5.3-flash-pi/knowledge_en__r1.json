@@ -1,0 +1,112 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/glm-5.3-flash-pi/knowledge_en__r1.json",
+  "target_sha256": "e27b0be8ae16a5b172289746bc25e0eb8a2c9409d7dc8a9f2c3f45f7c2d68c5e",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "38ff47a9f9aec4a9",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "glm-5.3-flash-pi",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 1,
+    "xingye_origin": 0,
+    "aliases": 0,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer describes the base 奶龙 character correctly and gestures vaguely at an edited laughing variant and a possible frog-styled 奶蛙 remix, all heavily hedged. It misses the AI origin on 星野, the 变异奶龙 alias, the belly-clutching pose, the 军体拳 remix, the official-reply copypasta, trait variants and the rarity-title genre, but it makes no confident false claims.",
+  "raw": "{\"scores\": {\"base_character\": 2, \"ai_variant\": 1, \"xingye_origin\": 0, \"aliases\": 0, \"naiwa\": 1, \"laugh_pose\": 1, \"junti_quan\": 0, \"official_reply\": 0, \"trait_variants\": 0, \"rarity_titles\": 0}, \"hallucinations\": [], \"rationale\": \"The answer describes the base 奶龙 character correctly and gestures vaguely at an edited laughing variant and a possible frog-styled 奶蛙 remix, all heavily hedged. It misses the AI origin on 星野, the 变异奶龙 alias, the belly-clutching pose, the 军体拳 remix, the official-reply copypasta, trait variants and the rarity-title genre, but it makes no confident false claims.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 12.6,
+    "tokens": {
+      "input": 3458,
+      "cached_input": 0,
+      "cache_write": 3456,
+      "output": 1045,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0489497,
+    "tools_used": [],
+    "cost_usd": 0.0489497,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3456,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1045,
+      "output_tokens_details": {
+        "thinking_tokens": 782
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3456,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1045,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3456,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3456
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-06T09:07:49Z",
+    "finished_at": "2026-11-06T09:08:01Z",
+    "revision": "ef8832f+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

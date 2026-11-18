@@ -1,0 +1,84 @@
+{
+  "settings_id": "cd8372f0bb6ac1cb",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-off",
+  "vendor": "alibaba",
+  "item": "recognize_en",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Who is this character, and which internet meme is this image from? Does the meme have other names?",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "This character is **Glep**, a small, yellow, blob-like creature from the Adult Swim animated series ***Smiling Friends*** (created by Zach Hadel and Michael Cusack). In the show, Glep is one of the employees at the titular charity organization and is known for speaking in rapid, mostly unintelligible gibberish.\n\nThe image comes from a popular internet meme commonly known as the **\"Glep laughing\" meme** (or simply the **\"laughing yellow guy/creature\" meme**). It depicts Glep doubled over, clutching his belly, and laughing hysterically with his mouth wide open. The clip/image is widely used as a reaction to express uncontrollable laughter or to mock something found absurdly funny.\n\n**Other names** the meme goes by include:\n- \"Laughing Glep\"\n- \"Yellow guy laughing\" / \"yellow creature laughing\"\n- \"Belly laugh meme\"\n- \"Smiling Friends laughing meme\"\n\nIt's worth noting that many people who share the meme don't actually know the character's name or origin, so it frequently circulates simply as the \"laughing yellow blob/guy,\" with the *Smiling Friends* / Glep attribution added later by fans of the show.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 11.4,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 672,
+      "output": 260,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 0,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 672,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 260,
+      "reasoning": 0
+    },
+    "session_config": {
+      "thinkingLevel": "off"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "off",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "off"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:04:57Z",
+    "finished_at": "2026-11-16T16:05:08Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

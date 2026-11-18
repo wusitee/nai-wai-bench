@@ -1,0 +1,80 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "这张图中的角色是**奶龙**（英文名 Nailoong），出自国产原创动画 IP《奶龙》（第七印象文化出品，最早在抖音等平台以短视频形式走红）。它的设定是一只圆滚滚的黄色小外星生物/小龙，特点是胖乎乎的梨形身材、大眼睛和淡定又有点贱萌的表情。\n\n关于这个梗：\n\n- **出处与走红**：奶龙约从 2023–2024 年起在抖音、B站、快手等平台爆火，凭借呆萌外形和\"蜜汁自信\"的表情被大量截成表情包。\n- **这张图的经典姿势**：图中它**双臂抱胸、面带微笑**的造型是最出圈的表情之一，通常用来表达\"得意\"\"自信\"\"看戏\"\"阴阳怪气\"的情绪，类似\"我就静静看着你\"\"稳了\"的含义。\n- **衍生梗文化**：奶龙后来还衍生出一些戏谑性称呼，比如被调侃为\"小唐人\"，融入\"唐\"字梗文化；还有\"奶龙文学\"、奶龙跳舞二创等。它也和同期的\"小粉龙小七\"等角色一起成为国产短视频动画表情包的顶流之一。\n\n简单说：这是一个靠\"贱萌+迷之自信\"气质走红的国产短视频动画角色，这张抱臂图就是它最具代表性的\"得意脸\"表情包。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 16.5,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20306,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 595,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20901 / 1048576 tokens (2%)\nSession total: 20306 input, 595 output",
+      "usage": {
+        "inputTokens": 20306,
+        "outputTokens": 595
+      }
+    },
+    "tokens_source": "usage-command",
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 20901,
+        "size": 1048576
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:44:16Z",
+    "finished_at": "2026-10-25T00:44:33Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi-off/knowledge_en__r1.json",
+  "target_sha256": "8979523905413e8fb20d8e7b590611514bd101a0cbd71f9dea783e402b3e33a9",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "9d27f0077b1b0a5f",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "qwen4-max-pi-off",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 0,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [
+    "Confidently describes 大笑奶龙 as 'a particular expression or frame of Nailong', implying it comes from the official animation, when it is actually an AI-generated unofficial variant."
+  ],
+  "rationale": "The answer correctly describes the base character and loosely gestures at the laughing face and a possible frog-like variant (hedged), but it misses the AI and 星野 origin, the 变异奶龙 alias, the 军体拳 remix, the official-reply copypasta, and the rarity-title genre. It also frames the image as an official frame of the cartoon.",
+  "raw": "{\"scores\": {\"base_character\": 2, \"ai_variant\": 0, \"xingye_origin\": 0, \"aliases\": 0, \"naiwa\": 1, \"laugh_pose\": 1, \"junti_quan\": 0, \"official_reply\": 0, \"trait_variants\": 0, \"rarity_titles\": 0}, \"hallucinations\": [\"Confidently describes 大笑奶龙 as 'a particular expression or frame of Nailong', implying it comes from the official animation, when it is actually an AI-generated unofficial variant.\"], \"rationale\": \"The answer correctly describes the base character and loosely gestures at the laughing face and a possible frog-like variant (hedged), but it misses the AI and 星野 origin, the 变异奶龙 alias, the 军体拳 remix, the official-reply copypasta, and the rarity-title genre. It also frames the image as an official frame of the cartoon.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 11.1,
+    "turns": 1,
+    "tokens": {
+      "input": 2976,
+      "cached_input": 0,
+      "cache_write": 2974,
+      "output": 868,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.04116,
+    "tools_used": [],
+    "cost_usd": 0.04116,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2974,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 868,
+      "output_tokens_details": {
+        "thinking_tokens": 570
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2974,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 868,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2974,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2974
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:06:06Z",
+    "finished_at": "2026-11-16T16:06:17Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "vendor": "openai",
+  "item": "recognize_variant",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。",
+  "images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "answer": "这张图最像在模仿中文网络里的 **“熊猫头捧腹大笑”** 表情，表达“笑死我了”“笑不活了”。\n\n判断依据是：熊猫双眼笑到眯起、嘴巴大张，双手捂着肚子，身体也笑得歪斜，整体就是把“捧腹大笑”做成了立体卡通形象。\n\n不过，**仅凭这张图，无法确定它对应哪一张具体的原版表情包**。它没有经典“金馆长熊猫头”那种明显的人脸拼贴特征，因此更适合判断为熊猫大笑表情的同类演绎。",
+  "contaminated": false,
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17083-4f70-77b2-b0ca-62e39c01b6d7",
+    "seconds": 19.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12140,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 408,
+      "reasoning_output_tokens": 242
+    },
+    "tokens": {
+      "input": 12140,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 408,
+      "reasoning": 242
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:43:35Z",
+    "finished_at": "2026-10-25T00:43:54Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

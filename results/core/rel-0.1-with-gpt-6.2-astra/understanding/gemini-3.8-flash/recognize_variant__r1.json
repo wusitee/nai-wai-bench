@@ -1,0 +1,68 @@
+{
+  "settings_id": "c5b99b49261f87dd",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "vendor": "google",
+  "item": "recognize_variant",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。",
+  "images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "answer": "这张图模仿的是中文互联网最经典的顶流表情包——**“熊猫头 / 熊猫人”系列中的“捧腹大笑（笑死我了 / 笑得肚子疼）”**，属于近年来网络上流行的**“3D高清重制版熊猫头表情包”**。\n\n其面部神态与动作的核心判断依据如下：\n\n### 1. 标志性动作：双手捂肚（捧腹）\n* 画面中的熊猫身体微微前倾、含胸，两只黑色的熊掌紧紧按在圆滚滚的白肚子两侧。\n* 这一姿态完美复刻了中文成语“捧腹大笑”以及对应 2D 熊猫头表情包中经典的**“笑得直不起腰”、“笑得肚子疼”**动作。\n\n### 2. 标志性神态：金馆长魔性大笑\n* **眼睛**：双眼紧闭眯成两道向下的月牙弯弧，充满喜感与嘲讽/开怀感；\n* **嘴型与牙齿**：嘴巴夸张地大张，清晰露出整齐的上排牙齿与舌头，嘴角大幅上扬；\n* 该五官神态直接脱胎于熊猫头表情包的灵魂来源——韩国电影《金馆长对金馆长对金馆长》中演员崔成国（金馆长）的经典魔性大笑（也有部分版本融合了姚明笑脸的神韵，但牙齿与眯眼弧度更贴近金馆长模版）。\n\n### 3. 视觉风格与文化语境\n* 原版表情包是由手绘黑白熊猫身体与真人黑白五官拼贴而成的 2D 梗图；\n* 本图则是中文互联网（如B站、抖音、小红书等）创作者将经典 2D 熊猫人表情包，用皮克斯/梦工厂风格进行**“3D影视级重塑”**的产物。常在网络聊天中配文“哈哈哈哈哈”、“笑死我了”、“头都给我笑掉了”。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 46.4,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 18932,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:44:29Z",
+    "finished_at": "2026-10-25T00:45:15Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

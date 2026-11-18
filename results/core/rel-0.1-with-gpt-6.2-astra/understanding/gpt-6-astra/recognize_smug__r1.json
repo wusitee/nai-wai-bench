@@ -1,0 +1,80 @@
+{
+  "settings_id": "eed12e0ea2261aed",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "vendor": "openai",
+  "item": "recognize_smug",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "answer": "这是 **奶龙**，国产原创动画《奶龙》里的黄色小龙。\n\n它属于网络上的 **“奶龙梗”／奶龙表情包**，与“我是奶龙！”等台词梗是同一角色。这张眯眼、抿嘴的表情常被用来表达“不屑”“无语”或“暗自得意”；仅凭图片，无法确定它是否有更具体的固定梗名。",
+  "contaminated": false,
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6-astra",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17087-368b-7dd0-9e57-01da41eb2172",
+    "seconds": 14.2,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 11623,
+      "cached_input_tokens": 8960,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 243,
+      "reasoning_output_tokens": 137
+    },
+    "tokens": {
+      "input": 11623,
+      "cached_input": 8960,
+      "cache_write": 0,
+      "output": 243,
+      "reasoning": 137
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6-astra",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:47:51Z",
+    "finished_at": "2026-10-25T00:48:05Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

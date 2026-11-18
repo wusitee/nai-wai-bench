@@ -1,0 +1,81 @@
+{
+  "settings_id": "cbf7db799b4cb698",
+  "track": "understanding",
+  "model": "qwen4-max-pi-high",
+  "vendor": "alibaba",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "一只圆滚滚的 Q 版卡通小猫表情包贴纸，极简平涂插画风格：通体奶油淡黄色短毛（肚皮和嘴周更浅近白），头身比约 1:1，超大圆脑袋、豆子般短小的四肢、圆钝的三角猫耳、几根细胡须、身后一条上翘的短尾巴，整体造型软萌像一团子。表情是极度夸张的爆笑：嘴巴张到占据大半张脸，呈一个巨大的向上弧形／倒梯形黑洞，内部是粉红口腔和小舌头，露出两颗 tiny 白色小尖牙；双眼笑到完全挤成两条向上弯的细月牙缝（∩ ∩），眼角挤出喜悦的小泪花，眉毛细细高高挑起，两颊各一团粉色圆腮红；头微微向后仰、身体后倾，两只前爪举到脸侧或捧着肚子，一副笑到喘不上气、快瘫倒的样子。粗黑均匀描边、色块干净无渐变、略微低分辨率的压缩贴图质感，纯白背景，主体外圈一道白色贴纸描边，居中构图，画面中不要任何文字或字母。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 24.6,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 116,
+      "output": 948,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 705,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 116,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 948,
+      "reasoning": 705
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T14:54:05Z",
+    "finished_at": "2026-11-16T14:54:30Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

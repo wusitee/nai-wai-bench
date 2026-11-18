@@ -1,0 +1,77 @@
+{
+  "settings_id": "eed12e0ea2261aed",
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "vendor": "openai",
+  "item": "write_prompt_zh.giraffe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出长颈鹿版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "一张正方形、无文字的搞笑表情包：主角是一只长颈鹿，却有奶黄色胖团子般的身体、圆滚滚的大肚子和短粗四肢，整体像柔软光滑的黄色橡皮玩具，采用低成本三维动画截图质感。保留长颈鹿鲜明的细长脖子、两根顶端圆圆的小角、两侧椭圆耳朵和稀疏的浅棕色斑块；脖子因狂笑微微前弯，圆润的大脑袋探向镜头。表情是毫无顾忌、笑到失控的傻乐：头略向后仰，双眼挤成两条弯弯的细缝，脸颊鼓起，嘴巴夸张地张成宽大的黑色笑口，露出粉红色舌头，下巴与脖子挤出软乎乎的褶皱。两只短小前蹄收在胸腹前，胖肚子挺起，身体微微后倾，像正发出停不下来的“哈哈哈哈”。重点突出圆胖、呆萌又欠揍的喜剧气质，让人一眼感到它笑得非常放肆。镜头正面略带侧角，角色占满画面，头、长脖子和肚子均清晰可见；背景是虚化的绿色草地，明亮柔和的日光，饱和暖黄色，略带压缩和低清截图感，不要写实动物质感，不加字幕、水印或边框。",
+  "contaminated": false,
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6-astra",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17085-f5f4-7421-af7a-c2b62868889e",
+    "seconds": 26.1,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 11336,
+      "cached_input_tokens": 4864,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 501,
+      "reasoning_output_tokens": 119
+    },
+    "tokens": {
+      "input": 11336,
+      "cached_input": 4864,
+      "cache_write": 0,
+      "output": 501,
+      "reasoning": 119
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6-astra",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:46:29Z",
+    "finished_at": "2026-10-25T00:46:55Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

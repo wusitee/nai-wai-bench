@@ -7,7 +7,10 @@ publishing.
 
 ## Format
 
-- Chinese on-screen text, no voice-over; synthesized background music and sound effects.
+- Chinese on-screen text, no voice-over; synthesized sound effects. Background music is either synthesized or a
+  human-composed track whose license allows reuse with credit (for example CC BY 4.0); a licensed track is
+  credited in the outro and the description, and its source URL, license, and file hash are recorded in the
+  episode's sources file.
 - About 1:50–2:00, 1920×1080 at 30 fps.
 - Scenes, in this order:
 
@@ -65,7 +68,7 @@ in this repository. The folder holds:
 | `make_data.py` | Writes `page/data.js` and `data.json` from the run data; holds all data assertions |
 | `page/index.html` | Scenes as JavaScript; `window.init()` returns `{duration, sfx, scenes}` and `window.render(t)` draws time `t` |
 | `render.mjs` | `node render.mjs stills T…` writes preview PNGs; `node render.mjs video [WORKERS]` renders 300-frame chunks in parallel, writes `timeline.json`, and reuses finished chunks |
-| `mix.py` | Synthesizes the sound effects at the timeline cues and an electric-piano bed at 104 BPM, 48 kHz |
+| `mix.py` | Synthesizes the sound effects at the timeline cues and mixes them with the music bed (synthesized, or a licensed track decoded to 48 kHz) |
 | `build.sh` | Data → frames → mix → mux into `out/<slug>-naiwa-bench.mp4` |
 | `page/cover.html`, `cover.mjs` | Cover → `out/cover.png` (1920×1080) |
 | `meta.py` | Title, tags, and description → `out/bilibili.md` and `out/desc.txt` |
@@ -98,7 +101,8 @@ Workflow:
   无配音演示视频; one bullet per result; the verdict; the caveats (repetitions, LLM judges, excluded
   judges, client and effort, no tool use); the results-site and repository links; 上一期 with the
   previous episode's BV; chapter times from `timeline.json`; and the closing line
-  素材仅用于非商业研究。背景音乐和音效为程序合成。 `biliup show` displays only the first 250 characters;
+  素材仅用于非商业研究。背景音乐和音效为程序合成。 With a licensed track, the line instead reads
+  素材仅用于非商业研究。音效为程序合成。背景音乐： followed by the license's attribution text. `biliup show` displays only the first 250 characters;
   the stored text is not truncated.
 - Tags: 大笑奶龙, 奶蛙, 奶龙, the vendor's names in Chinese and English, 大模型, AI评测, benchmark, 多模态, AI.
 - Category `tid` 231, copyright 1 (自制), monetization (充电) off.
@@ -110,7 +114,7 @@ results site, uploading, later edits to title, description, cover, or visibility
 tagging, or releasing.
 
 - The results site must show the subject before the video goes out, because the description links
-  to it. `scripts/publish_site.sh` replaces the `gh-pages` branch.
+  to it. CI deploys the site after each merge to `main` ([publish](releases.md#publish)).
 - Send the MP4, cover, and `bilibili.md` to the maintainer for approval.
 - Upload as public directly (`--is-only-self 0`). Never upload privately and switch to public later:
   that skips Bilibili's first recommendation push. To publish at a chosen time, upload public with

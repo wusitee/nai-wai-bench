@@ -1,0 +1,110 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/qwen4-max-pi-off/recognize_smug__r1.json",
+  "target_sha256": "994db80162ffcf0652fb59f1f4685933483c4f0b19aaeba3a70faf1538e828c1",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "56145e46d6f91e2a",
+  "judge_images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "track": "understanding",
+  "model": "qwen4-max-pi-off",
+  "scores": {
+    "base_character": 2,
+    "identifies_meme": 1
+  },
+  "hallucinations": [
+    "Implies the image is an expression captured ('截取') from the official Nailong animation, when it is an unofficial mutated Nailong (变异奶龙/奶蛙) fan creation"
+  ],
+  "rationale": "The answer correctly describes 奶龙 as a yellow, chubby dragon from a Chinese animation. It only names a generic '奶龙表情包/奶龙梗' rather than the 大笑奶龙/变异奶龙/奶蛙 mutation family, and it wrongly treats the image as a screenshot from the official show.",
+  "raw": "{\"scores\": {\"base_character\": 2, \"identifies_meme\": 1}, \"hallucinations\": [\"Implies the image is an expression captured ('截取') from the official Nailong animation, when it is an unofficial mutated Nailong (变异奶龙/奶蛙) fan creation\"], \"rationale\": \"The answer correctly describes 奶龙 as a yellow, chubby dragon from a Chinese animation. It only names a generic '奶龙表情包/奶龙梗' rather than the 大笑奶龙/变异奶龙/奶蛙 mutation family, and it wrongly treats the image as a screenshot from the official show.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 9.2,
+    "turns": 1,
+    "tokens": {
+      "input": 2073,
+      "cached_input": 0,
+      "cache_write": 2071,
+      "output": 696,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.030496,
+    "tools_used": [],
+    "cost_usd": 0.030496,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2071,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 696,
+      "output_tokens_details": {
+        "thinking_tokens": 482
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2071,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 696,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2071,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2071
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:06:48Z",
+    "finished_at": "2026-11-16T16:06:57Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

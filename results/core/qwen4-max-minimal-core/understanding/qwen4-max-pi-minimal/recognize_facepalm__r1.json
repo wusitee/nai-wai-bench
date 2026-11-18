@@ -1,0 +1,84 @@
+{
+  "settings_id": "1f8854885f90fc43",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-minimal",
+  "vendor": "alibaba",
+  "item": "recognize_facepalm",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "answer": "仅凭这张图，我没法很有把握地给出确定答案，所以先说清楚我的判断程度：\n\n**画面特征**：一个 3D 渲染的黄色团状生物，头和身体几乎连成一体，没有明显的鼻子和耳朵，绿色虹膜＋大黑瞳的眼睛，一条细线微笑，腹部有一块浅色（奶白）区域，一只手抬到额侧，做出\"扶额／思考／无语\"的姿势。\n\n**可能的归属**（都属于猜测，不是确认）：\n- 它很像中文互联网上流行的那一类\"抽象黄色胖生物\"表情包，比如**奶龙**风格的二创 3D 渲染图（黄色身体＋浅色肚皮＋大眼，常被做成\"疑惑/无语/挠头\"表情）。\n- 也可能是欧美那边的 3D 抽象小生物梗（\"cursed 3D emoji / yellow blob\"一类），这类角色常被配文表示\"我不理解\"\"思考中\"。\n\n我不愿意在没把握的情况下硬报一个名字，因为这类黄色团子角色长得都很像，容易张冠李戴。如果你能补充一点线索——比如表情包上常配的文字、你是在哪个平台/哪个梗视频里看到的——我可以更有针对性地判断。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 64.3,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 325,
+      "output": 2429,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 2165,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 325,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2429,
+      "reasoning": 2165
+    },
+    "session_config": {
+      "thinkingLevel": "minimal"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "minimal",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "minimal"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:17:00Z",
+    "finished_at": "2026-11-16T16:18:04Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/fable-5.1/recognize_folded_arms__r1.json",
+  "target_sha256": "640d39c78bbb7815e71f7529914825f29b911a5867d9a36929fb6edf7ab9b91a",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "b223dee8ada32675",
+  "judge_images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "track": "understanding",
+  "model": "fable-5.1",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0
+  },
+  "hallucinations": [],
+  "rationale": "回答未识别出原型是黄色胖龙角色奶龙，也未指出其属于大笑奶龙／变异奶龙／奶蛙梗，而是猜测为黄逗菌。由于回答明确将这一身份判断标为不确定，不将该错误猜测列为幻觉。",
+  "raw": "{\"scores\":{\"base_character\":0,\"identifies_meme\":0},\"hallucinations\":[],\"rationale\":\"回答未识别出原型是黄色胖龙角色奶龙，也未指出其属于大笑奶龙／变异奶龙／奶蛙梗，而是猜测为黄逗菌。由于回答明确将这一身份判断标为不确定，不将该错误猜测列为幻觉。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a19118-2057-7e10-a7d1-6348bfafb931",
+    "seconds": 18.5,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12562,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 382,
+      "reasoning_output_tokens": 286
+    },
+    "tokens": {
+      "input": 12562,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 382,
+      "reasoning": 286
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T08:33:59Z",
+    "finished_at": "2026-10-31T08:34:18Z",
+    "revision": "bd3cba6",
+    "nwb_version": "0.1.0"
+  }
+}

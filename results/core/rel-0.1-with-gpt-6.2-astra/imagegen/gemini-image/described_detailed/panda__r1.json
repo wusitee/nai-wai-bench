@@ -1,0 +1,32 @@
+{
+  "settings_id": "c5b99b49261f87dd",
+  "track": "imagegen",
+  "model": "gemini-image",
+  "vendor": "google",
+  "tier": "described_detailed",
+  "animal": "panda",
+  "rep": 1,
+  "prompt": "A 3D-rendered cartoon giant panda character that looks like a still from a cheap, smooth CG animation. Pose: standing with the torso hunched forward and knees slightly bent, doubled over with laughter, both hands pressed on its round belly. Face: eyes squeezed shut into thin curved arcs; an enormous gaping mouth that takes up most of the face, showing a dark throat, a row of small teeth, and a tongue. Body: bulky pear-shaped body with no neck, the small head merging straight into the torso; short thick arms and legs, small simple hands, and a pale oval belly patch. Rendering: smooth, seamless, slightly glossy matte-plastic skin with no fur strands or fine texture, so the giant panda's fur, markings, and colors appear only as smooth color patches on the sculpted surface; soft diffuse studio lighting with gentle shadows; simple shading like a low-budget AI-generated 3D model; slightly soft focus like a compressed video screenshot. Background: plain white to light grey and empty. Keep the giant panda clearly recognizable from its head shape, ears, snout, and coloring.",
+  "reference": false,
+  "error": "BackendError: agent produced no image: The image generation tool was called with the exact prompt specified, but execution was blocked by an API quota error:\n\n- **Error encountered:**\n  > `GenerateContent failed: Error 429, Message: You have exhausted your capacity on this model. Your quota will reset after 24m36s., Status: RESOURCE_EXHA",
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:53:05Z",
+    "finished_at": "2026-10-25T05:53:31Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

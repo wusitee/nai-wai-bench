@@ -1,0 +1,89 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/gpt-6-astra/recognize_zh__r1.json",
+  "target_sha256": "e74fc48b2073168c07d57fff4d57755826c30a58b6e404d3e202f79139f10356",
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "judge_prompt": "6412762b30d0f5fd",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "scores": {
+    "base_character": 1,
+    "identifies_meme": 1,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "将“Laughing Yellow Dragon（大笑黄龙）”和“Laughing Lizard（大笑蜥蜴）”称为该梗的别名，属于编造的别名。"
+  ],
+  "rationale": "回答认出了奶龙及其夸张大笑形态，但未清楚识别大笑奶龙／变异奶龙／奶蛙这一梗，也未说明其为非官方AI变异版本。缺少正确别名及奶蛙与变异奶龙的关系；“Gigglesaurus”的判断带有“凭印象”的不确定限定，不列为幻觉。",
+  "raw": "{\"scores\":{\"base_character\":1,\"identifies_meme\":1,\"ai_variant\":0,\"aliases\":0,\"naiwa\":0},\"hallucinations\":[\"将“Laughing Yellow Dragon（大笑黄龙）”和“Laughing Lizard（大笑蜥蜴）”称为该梗的别名，属于编造的别名。\"],\"rationale\":\"回答认出了奶龙及其夸张大笑形态，但未清楚识别大笑奶龙／变异奶龙／奶蛙这一梗，也未说明其为非官方AI变异版本。缺少正确别名及奶蛙与变异奶龙的关系；“Gigglesaurus”的判断带有“凭印象”的不确定限定，不列为幻觉。\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719f-9c0f-79b2-b34b-3033a19d9aa0",
+    "seconds": 16.9,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12891,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 427,
+      "reasoning_output_tokens": 251
+    },
+    "tokens": {
+      "input": 12891,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 427,
+      "reasoning": 251
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:54:07Z",
+    "finished_at": "2026-10-25T05:54:24Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

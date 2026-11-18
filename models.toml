@@ -110,6 +110,48 @@ tool_profile = "isolated-v1"
 price = { input = 0.1, cached_input = 0.01, cache_write = 0.125, output = 0.5, unit = "USD/1M tokens", source = "https://developers.openai.com/api/docs/models/gpt-6-luna", as_of = "2026-10-29" }
 can = ["text", "vision"]
 
+# GPT-6.2-Astra at low through xhigh; each effort is its own row. The unsuffixed entry is the standard `high`.
+# Codex also lists max and ultra (automatic task delegation); neither is benched yet.
+[models."gpt-6.2-astra"]
+label = "GPT-6.2-Astra (Codex)"
+backend = "codex"
+vendor = "openai"
+model = "gpt-6.2-astra"
+effort = "high"
+tool_profile = "isolated-v1"
+price = { input = 8.0, cached_input = 0.4, cache_write = 10.0, output = 40.0, unit = "USD/1M tokens", source = "https://developers.openai.com/api/docs/pricing (gpt-6.2-astra, short context)", as_of = "2026-11-18" }
+can = ["text", "vision"]
+
+[models."gpt-6.2-astra-low"]
+label = "GPT-6.2-Astra (Codex)"
+backend = "codex"
+vendor = "openai"
+model = "gpt-6.2-astra"
+effort = "low"
+tool_profile = "isolated-v1"
+price = { input = 8.0, cached_input = 0.4, cache_write = 10.0, output = 40.0, unit = "USD/1M tokens", source = "https://developers.openai.com/api/docs/pricing (gpt-6.2-astra, short context)", as_of = "2026-11-18" }
+can = ["text", "vision"]
+
+[models."gpt-6.2-astra-medium"]
+label = "GPT-6.2-Astra (Codex)"
+backend = "codex"
+vendor = "openai"
+model = "gpt-6.2-astra"
+effort = "medium"
+tool_profile = "isolated-v1"
+price = { input = 8.0, cached_input = 0.4, cache_write = 10.0, output = 40.0, unit = "USD/1M tokens", source = "https://developers.openai.com/api/docs/pricing (gpt-6.2-astra, short context)", as_of = "2026-11-18" }
+can = ["text", "vision"]
+
+[models."gpt-6.2-astra-xhigh"]
+label = "GPT-6.2-Astra (Codex)"
+backend = "codex"
+vendor = "openai"
+model = "gpt-6.2-astra"
+effort = "xhigh"
+tool_profile = "isolated-v1"
+price = { input = 8.0, cached_input = 0.4, cache_write = 10.0, output = 40.0, unit = "USD/1M tokens", source = "https://developers.openai.com/api/docs/pricing (gpt-6.2-astra, short context)", as_of = "2026-11-18" }
+can = ["text", "vision"]
+
 # Frontend-track subject configurations; effort variants remain separate rows.
 [models."gpt-6-astra-xhigh"]
 label = "GPT-6-Astra"
@@ -334,8 +376,9 @@ can = ["text", "vision"]
 
 # Undisclosed preview model on the TokenRhythm router (Chat Completions). The `tokenrhythm` provider is
 # declared in the dedicated pi directory's models.json (see docs/backends.md); its key stays there.
+# The label names the likely family from tokenizer evidence (docs/backends.md); the vendor stays undisclosed.
 [models."egg-alpha"]
-label = "egg-alpha (pi, TokenRhythm)"
+label = "egg-alpha · likely Qwen 4 (pi, TokenRhythm)"
 backend = "pi"
 vendor = "undisclosed"
 model = "tokenrhythm/egg-alpha"
@@ -356,6 +399,88 @@ model = "zai-coding-cn/glm-5.3-flash"
 effort = "high"
 env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
 price = { input = 0.15, cached_input = 0.03, cache_write = 0.0, output = 0.5, unit = "USD/1M tokens", source = "pi-ai 1.5.0 model catalog (zai-coding-cn/glm-5.3-flash)", as_of = "2026-11-06" }
+can = ["text", "vision"]
+
+# Qwen4-Max through the Qwen Token Plan individual edition's CN endpoint. pi 1.5.0 does not list the model,
+# so `qwen-token-plan-cn-individual` is a custom provider in pi's models.json (see docs/backends.md).
+[models."qwen4-max-pi"]
+timeout = 1800
+label = "Qwen4-Max (pi, Token Plan)"
+backend = "pi"
+vendor = "alibaba"
+model = "qwen-token-plan-cn-individual/qwen4-max"
+effort = "max"
+env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
+price = { input = 1.413, cached_input = 0.071, cache_write = 1.767, output = 4.24, unit = "USD/1M tokens", source = "https://www.alibabacloud.com/help/en/model-studio/model-pricing (qwen4-max, China (Beijing))", as_of = "2026-11-16" }
+can = ["text", "vision"]
+
+# The same model at every other reasoning effort the endpoint accepts, saved as archived runs outside the release
+# (qwen4-max-{off,minimal,low,medium,xhigh}-{core,naihub}). Per Qwen's model notes minimal runs as low and medium as high.
+[models."qwen4-max-pi-off"]
+timeout = 1800
+label = "Qwen4-Max (pi, Token Plan)"
+backend = "pi"
+vendor = "alibaba"
+model = "qwen-token-plan-cn-individual/qwen4-max"
+effort = "off"
+env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
+price = { input = 1.413, cached_input = 0.071, cache_write = 1.767, output = 4.24, unit = "USD/1M tokens", source = "https://www.alibabacloud.com/help/en/model-studio/model-pricing (qwen4-max, China (Beijing))", as_of = "2026-11-16" }
+can = ["text", "vision"]
+
+[models."qwen4-max-pi-minimal"]
+timeout = 1800
+label = "Qwen4-Max (pi, Token Plan)"
+backend = "pi"
+vendor = "alibaba"
+model = "qwen-token-plan-cn-individual/qwen4-max"
+effort = "minimal"
+env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
+price = { input = 1.413, cached_input = 0.071, cache_write = 1.767, output = 4.24, unit = "USD/1M tokens", source = "https://www.alibabacloud.com/help/en/model-studio/model-pricing (qwen4-max, China (Beijing))", as_of = "2026-11-16" }
+can = ["text", "vision"]
+
+[models."qwen4-max-pi-low"]
+timeout = 1800
+label = "Qwen4-Max (pi, Token Plan)"
+backend = "pi"
+vendor = "alibaba"
+model = "qwen-token-plan-cn-individual/qwen4-max"
+effort = "low"
+env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
+price = { input = 1.413, cached_input = 0.071, cache_write = 1.767, output = 4.24, unit = "USD/1M tokens", source = "https://www.alibabacloud.com/help/en/model-studio/model-pricing (qwen4-max, China (Beijing))", as_of = "2026-11-16" }
+can = ["text", "vision"]
+
+[models."qwen4-max-pi-medium"]
+timeout = 1800
+label = "Qwen4-Max (pi, Token Plan)"
+backend = "pi"
+vendor = "alibaba"
+model = "qwen-token-plan-cn-individual/qwen4-max"
+effort = "medium"
+env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
+price = { input = 1.413, cached_input = 0.071, cache_write = 1.767, output = 4.24, unit = "USD/1M tokens", source = "https://www.alibabacloud.com/help/en/model-studio/model-pricing (qwen4-max, China (Beijing))", as_of = "2026-11-16" }
+can = ["text", "vision"]
+
+[models."qwen4-max-pi-xhigh"]
+timeout = 1800
+label = "Qwen4-Max (pi, Token Plan)"
+backend = "pi"
+vendor = "alibaba"
+model = "qwen-token-plan-cn-individual/qwen4-max"
+effort = "xhigh"
+env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
+price = { input = 1.413, cached_input = 0.071, cache_write = 1.767, output = 4.24, unit = "USD/1M tokens", source = "https://www.alibabacloud.com/help/en/model-studio/model-pricing (qwen4-max, China (Beijing))", as_of = "2026-11-16" }
+can = ["text", "vision"]
+
+# The same model at the benchmark's standard effort, for comparison with the max row and with egg-alpha.
+[models."qwen4-max-pi-high"]
+timeout = 1800
+label = "Qwen4-Max (pi, Token Plan)"
+backend = "pi"
+vendor = "alibaba"
+model = "qwen-token-plan-cn-individual/qwen4-max"
+effort = "high"
+env = { PI_CODING_AGENT_DIR = "~/.pi-nwb" }
+price = { input = 1.413, cached_input = 0.071, cache_write = 1.767, output = 4.24, unit = "USD/1M tokens", source = "https://www.alibabacloud.com/help/en/model-studio/model-pricing (qwen4-max, China (Beijing))", as_of = "2026-11-16" }
 can = ["text", "vision"]
 
 # --- OpenAI-compatible APIs ---

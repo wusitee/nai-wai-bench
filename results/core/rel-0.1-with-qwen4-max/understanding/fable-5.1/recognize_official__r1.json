@@ -1,0 +1,103 @@
+{
+  "settings_id": "548ef2024561e924",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "fable-5.1",
+  "vendor": "anthropic",
+  "item": "recognize_official",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "仅凭图片本身，我没法百分之百确定它的出处，所以先如实说明：这个形象我没有把握准确认出，下面是基于画面特征的判断，请把它当作推测而不是定论。\n\n**画面特征：**\n- 一只 3D 渲染、软胶玩具质感的橙黄色小恐龙/小蜥蜴，身体圆润，肚皮是浅奶黄色。\n- 绿色大眼睛、小圆嘴（一副\"哦？\"的惊讶表情），两只手举起来，脸颊带一点腮红，没有尾巴火焰之类的明显标志物。\n\n**可能的方向：**\n1. **\"小火龙式\"二创/仿制形象**：整体轮廓很像宝可梦的小火龙（Charmander），但没有尾巴火焰、眼睛是绿色，更像是网络上常见的\"换皮\"或盲盒/手办风格的原创小恐龙，而不是官方角色。\n2. **国内短视频/表情包里的 3D 小动物梗图**：这几年流行一类用 C4D/Blender 做的圆滚滚小动物（举手、惊讶、摆烂等姿势），配文字做成表情包，比如\"我举手了但我不会\"\"啊？\"\"怎么会是呢\"之类。这张举双手、瞪眼、嘴巴张成 O 形的姿势，很符合这类\"震惊/投降/求饶\"用途的表情包模板。\n3. 不太像 Loopy、Chiikawa、蛋仔、黄油小熊这些有明确辨识度的热门 IP，所以它更可能是某个小众或原创 3D 形象。\n\n**结论：** 它看起来像是一只原创的 3D 软胶风小黄恐龙，常用于\"震惊/举手投降\"类表情包，但具体的角色名和梗的确切出处我无法确认。如果你知道它配的文字或出现在哪个视频/评论区，告诉我，我可以帮你进一步缩小范围。",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "client": "claude-code 2.1.310",
+    "seconds": 30.8,
+    "tokens": {
+      "input": 985,
+      "cached_input": 0,
+      "cache_write": 983,
+      "output": 1386,
+      "reasoning": null
+    },
+    "resolved_model": "claude-fable-5-1",
+    "cost_usd_reported": 0.08898,
+    "tools_used": [],
+    "cost_usd": 0.08898,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 983,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1386,
+      "output_tokens_details": {
+        "thinking_tokens": 711
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 983,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1386,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 983,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 983
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-fable-5-1",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-fable-5-1",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-31T03:50:57Z",
+    "finished_at": "2026-10-31T03:51:28Z",
+    "revision": "592016c",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "imagegen/chatgpt-images-2.6/name_en/frog__r1.json",
+  "target_sha256": "db4714529ab7e796af08cb501a9786bf1768bb5d51fc71a744353aa3e569cbea",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "d4361b55524231c8",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/chatgpt-images-2.6/name_en/frog__r1/exec-10aa6d94-972a-452a-b3e2-1799ea8bd331.png"
+  ],
+  "track": "imagegen",
+  "model": "chatgpt-images-2.6",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 0,
+    "vibe": 1
+  },
+  "identity": 2,
+  "failure_modes": [
+    "generic_cute"
+  ],
+  "rationale": "A clearly recognizable chubby frog with arc eyes and a pale belly, but it leans back pointing instead of hunching over clutching its belly with both hands. It sits in a blurred indoor scene with a polished, cute animated-film look rather than the meme's unhinged studio-render style.",
+  "raw": "- **pose**: Upright with the head thrown back and one arm pointing. There is no forward hunch or doubled-over posture, and the legs are cropped out. → absent\n- **hands_on_belly**: Only one paw rests on the belly; the other points off to the side. → partial\n- **eyes**: Eyes are squeezed shut into thin curved arcs. → match\n- **mouth**: The mouth is wide open and laughing, but the interior is pink with a tongue, not dark, and no teeth show. It is big, but less hysterical than the reference. → partial\n- **body**: A chubby bean-shaped body with no distinct neck, where the head merges into the torso, and short thick limbs. → match\n- **belly_patch**: A pale cream belly area clearly contrasts with the green body. → match\n- **render**: It is a 3D CG render, but with a soft fuzzy, velvety texture and cinematic scene lighting. It looks polished like an animated film, not the glossy, slightly cheap studio-render look. → partial\n- **background**: A blurred indoor room with furniture and props, not plain white or grey. → absent\n- **vibe**: Pointing and laughing gives a little mocking energy, but overall it reads as cute or kawaii rather than unhinged 抽象. → partial\n- **identity**: Clearly a frog, with green coloring, eye bumps on top of the head, small nostrils and a frog-like face. → clearly\n\n{\"traits\": {\"pose\": \"absent\", \"hands_on_belly\": \"partial\", \"eyes\": \"match\", \"mouth\": \"partial\", \"body\": \"match\", \"belly_patch\": \"match\", \"render\": \"partial\", \"background\": \"absent\", \"vibe\": \"partial\"}, \"identity\": \"clearly\", \"failure_modes\": [\"generic_cute\"], \"rationale\": \"A clearly recognizable chubby frog with arc eyes and a pale belly, but it leans back pointing instead of hunching over clutching its belly with both hands. It sits in a blurred indoor scene with a polished, cute animated-film look rather than the meme's unhinged studio-render style.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.311",
+    "seconds": 15.5,
+    "tokens": {
+      "input": 4428,
+      "cached_input": 0,
+      "cache_write": 4426,
+      "output": 1223,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0601133,
+    "tools_used": [],
+    "cost_usd": 0.0601133,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 4426,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1223,
+      "output_tokens_details": {
+        "thinking_tokens": 539
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 4426,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1223,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 4426,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 4426
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-05T03:59:50Z",
+    "finished_at": "2026-11-05T04:00:05Z",
+    "revision": "aa69823+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

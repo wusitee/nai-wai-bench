@@ -30,6 +30,19 @@ Software releases use semantic versions; suite ids version the evaluation panels
   Release sites open with the index and write `index.json`; suite pages move to `meme-id/` and
   `visual-detail/`, and `naihub-v1/` redirects. Image generation moves to an experimental section outside
   the index.
+- Add Qwen4-Max through the Qwen Token Plan's CN endpoint as a pi custom provider at max effort
+  (`qwen4-max-pi`, run by the endpoint as xhigh) and at the standard high effort (`qwen4-max-pi-high`), and
+  select both in the 0.1.0 comparison through `rel-0.1-with-qwen4-max` and `rel-0.1-naihub-with-qwen4-max`;
+  earlier observations and verdicts are unchanged. Save the max row's frontend-track run as
+  `qwen4-max-frontend` (not selected in the release). Save archived core and Nai-hub runs of the same model
+  at the other efforts (`qwen4-max-pi-{off,minimal,low,medium,xhigh}`), outside the release.
+- Add GPT-6.2-Astra through Codex (isolated-v1) at the standard high effort (`gpt-6.2-astra`) and select it
+  in the 0.1.0 comparison through `rel-0.1-with-gpt-6.2-astra` and `rel-0.1-naihub-with-gpt-6.2-astra`;
+  earlier observations and verdicts are unchanged. Save archived core and Nai-hub runs of the same model at
+  low, medium, and xhigh (`gpt-6.2-astra-{low,medium,xhigh}`), outside the release, and the four efforts'
+  frontend-track run as `gpt-6.2-astra-frontend` (not selected in the release).
+- Label egg-alpha as "egg-alpha · likely Qwen 4": its input token counts match Qwen4-Max's within about
+  two tokens on identical prompts and images. Its vendor remains undisclosed.
 - Add GLM-5.3-Flash, the GLM Coding Plan's GLM-5.3 model with image input, run through pi's built-in
   `zai-coding-cn` provider at high effort (`glm-5.3-flash-pi`), and select it in the 0.1.0 comparison through
   `rel-0.1-with-glm-5.3-flash-and-images-2.6` and `rel-0.1-naihub-with-glm-5.3-flash`, retaining the

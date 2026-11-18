@@ -1,0 +1,81 @@
+{
+  "settings_id": "cd8372f0bb6ac1cb",
+  "track": "understanding",
+  "model": "qwen4-max-pi-off",
+  "vendor": "alibaba",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "A cute chubby cartoon baby dragon meme sticker, bright pastel yellow smooth round body, oversized egg-shaped head much bigger than its tiny torso, very short stubby arms and legs, small rounded belly, two tiny nub horns on top of the head, big glossy black oval eyes with white highlights, wide open laughing mouth showing a pink tongue and two tiny white teeth, cheeks puffed up and slightly blushed, head tilted back in an exaggerated uncontrollable laugh, one tiny hand slapping its own belly, the other pointing forward as if mocking someone, joyful smug teasing expression, simple thick clean black outlines, flat cel-shaded colors with soft gradients, kawaii Chinese social-media emoji sticker style, plain pure white background, full body centered, square composition, high resolution, no text, no watermark.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 6.7,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 116,
+      "output": 161,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 0,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 116,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 161,
+      "reasoning": 0
+    },
+    "session_config": {
+      "thinkingLevel": "off"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "off",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "off"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T16:04:43Z",
+    "finished_at": "2026-11-16T16:04:50Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/deepseek-v4.1-flash/knowledge_en__r1.json",
+  "target_sha256": "a5495f919a33623d78c740412303dedb37529b73ad46fab2d51b337b86b8addf",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "0dfaf852e9ba3cb4",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 1,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer correctly identifies base Nailong and partly covers the alternate name, frog-like association, and laughing facial expression. It omits the AI mutation, documented origin, distinctive belly-clutching pose, and specific remix traditions; its explicitly uncertain guesses are not counted as hallucinations.",
+  "raw": "{\"scores\":{\"base_character\":2,\"ai_variant\":0,\"xingye_origin\":0,\"aliases\":1,\"naiwa\":1,\"laugh_pose\":1,\"junti_quan\":0,\"official_reply\":0,\"trait_variants\":0,\"rarity_titles\":0},\"hallucinations\":[],\"rationale\":\"The answer correctly identifies base Nailong and partly covers the alternate name, frog-like association, and laughing facial expression. It omits the AI mutation, documented origin, distinctive belly-clutching pose, and specific remix traditions; its explicitly uncertain guesses are not counted as hallucinations.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719c-14c4-7042-965e-c09a3b6ed5cb",
+    "seconds": 12.3,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12803,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 226,
+      "reasoning_output_tokens": 98
+    },
+    "tokens": {
+      "input": 12803,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 226,
+      "reasoning": 98
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:50:16Z",
+    "finished_at": "2026-10-25T05:50:28Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

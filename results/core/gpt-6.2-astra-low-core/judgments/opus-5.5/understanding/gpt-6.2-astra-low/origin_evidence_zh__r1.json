@@ -1,0 +1,109 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-astra-low/origin_evidence_zh__r1.json",
+  "target_sha256": "6693cc680e563b6383428fd26d9a60992ef9339f08e717d3a4bc1705aefa5ab0",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "57c23f8df409b846",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.2-astra-low",
+  "scores": {
+    "origin_xingye_evidence": 0,
+    "origin_followup": 0,
+    "origin_chronology": 1,
+    "origin_prompt_limits": 1,
+    "origin_visual_distinction": 1,
+    "origin_lost_media_scope": 1
+  },
+  "hallucinations": [],
+  "rationale": "The answer openly declines to give specifics. It omits the Xingye agent, the creator credit, 看仙碎's investigation and follow-up correction, and all dates, but invents nothing. It earns partial credit for general method: separating circulation from authorship, treating the standing and laughing versions as separate attribution questions, labeling reproduction prompts as reconstructions, and not inferring intent from 儿童邪典/lost-media claims.",
+  "raw": "{\"scores\": {\"origin_xingye_evidence\": 0, \"origin_followup\": 0, \"origin_chronology\": 1, \"origin_prompt_limits\": 1, \"origin_visual_distinction\": 1, \"origin_lost_media_scope\": 1}, \"hallucinations\": [], \"rationale\": \"The answer openly declines to give specifics. It omits the Xingye agent, the creator credit, 看仙碎's investigation and follow-up correction, and all dates, but invents nothing. It earns partial credit for general method: separating circulation from authorship, treating the standing and laughing versions as separate attribution questions, labeling reproduction prompts as reconstructions, and not inferring intent from 儿童邪典/lost-media claims.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 9.4,
+    "turns": 1,
+    "tokens": {
+      "input": 3803,
+      "cached_input": 0,
+      "cache_write": 3801,
+      "output": 684,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0445161,
+    "tools_used": [],
+    "cost_usd": 0.0445161,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3801,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 684,
+      "output_tokens_details": {
+        "thinking_tokens": 439
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3801,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 684,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3801,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3801
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-17T22:25:03Z",
+    "finished_at": "2026-11-17T22:25:12Z",
+    "revision": "fd4ab338+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

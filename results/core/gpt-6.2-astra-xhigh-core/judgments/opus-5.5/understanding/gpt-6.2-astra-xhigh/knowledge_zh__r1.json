@@ -1,0 +1,115 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-astra-xhigh/knowledge_zh__r1.json",
+  "target_sha256": "ddb599ee6ba4eb3fc17b367277cede6c20022cc3a63b123646d0748abdc024fc",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "73d4a640171b3d4c",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.2-astra-xhigh",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 1,
+    "xingye_origin": 0,
+    "aliases": 1,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [
+    "Attributes 奶蛙's frog-like look mainly to a wide, horizontally stretched grinning mouth; per the notes, the frog-like features are round bulging eyes with green sclera."
+  ],
+  "rationale": "The answer correctly describes the base 奶龙 character and treats 大笑奶龙/奶蛙 as a Nailong variant rather than an unrelated frog. It is vague on the variant being unofficial and on the laughing pose, never says it is AI-generated, and misses the 星野 origin, the 军体拳 remix, the official-reply copypasta, the trait-variant genre and the rarity-title posts, while honestly flagging what it is unsure about.",
+  "raw": "```json\n{\"scores\": {\"base_character\": 2, \"ai_variant\": 1, \"xingye_origin\": 0, \"aliases\": 1, \"naiwa\": 1, \"laugh_pose\": 1, \"junti_quan\": 0, \"official_reply\": 0, \"trait_variants\": 0, \"rarity_titles\": 0}, \"hallucinations\": [\"Attributes 奶蛙's frog-like look mainly to a wide, horizontally stretched grinning mouth; per the notes, the frog-like features are round bulging eyes with green sclera.\"], \"rationale\": \"The answer correctly describes the base 奶龙 character and treats 大笑奶龙/奶蛙 as a Nailong variant rather than an unrelated frog. It is vague on the variant being unofficial and on the laughing pose, never says it is AI-generated, and misses the 星野 origin, the 军体拳 remix, the official-reply copypasta, the trait-variant genre and the rarity-title posts, while honestly flagging what it is unsure about.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 16.1,
+    "turns": 1,
+    "tokens": {
+      "input": 2883,
+      "cached_input": 0,
+      "cache_write": 2881,
+      "output": 1163,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.046646999999999994,
+    "tools_used": [],
+    "cost_usd": 0.046646999999999994,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2881,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1163,
+      "output_tokens_details": {
+        "thinking_tokens": 822
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2881,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1163,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2881,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2881
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-18T01:16:20Z",
+    "finished_at": "2026-11-18T01:16:36Z",
+    "revision": "fd4ab338+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

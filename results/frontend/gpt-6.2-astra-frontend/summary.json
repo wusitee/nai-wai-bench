@@ -1,0 +1,1097 @@
+{
+  "corpus": "frontend-v1",
+  "experimental": true,
+  "index_included": false,
+  "review": "human",
+  "rows": [
+    {
+      "model": "gpt-6.2-astra",
+      "kind": "2d-s1",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "kind": "2d-s2",
+      "samples": 4,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "kind": "2d-s3",
+      "samples": 3,
+      "passed": 3,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "kind": "3d-s1",
+      "samples": 4,
+      "passed": 3,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "kind": "3d-s2",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "kind": "2d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "kind": "3d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-low",
+      "kind": "2d-s1",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-low",
+      "kind": "2d-s2",
+      "samples": 4,
+      "passed": 3,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-low",
+      "kind": "2d-s3",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-low",
+      "kind": "3d-s1",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-low",
+      "kind": "3d-s2",
+      "samples": 4,
+      "passed": 3,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-low",
+      "kind": "3d-s3",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-low",
+      "kind": "2d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-low",
+      "kind": "3d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-medium",
+      "kind": "2d-s1",
+      "samples": 4,
+      "passed": 3,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-medium",
+      "kind": "2d-s2",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-medium",
+      "kind": "3d-s1",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-medium",
+      "kind": "3d-s2",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-medium",
+      "kind": "2d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-medium",
+      "kind": "3d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-xhigh",
+      "kind": "2d-s1",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-xhigh",
+      "kind": "2d-s2",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-xhigh",
+      "kind": "3d-s1",
+      "samples": 4,
+      "passed": 3,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-xhigh",
+      "kind": "3d-s2",
+      "samples": 4,
+      "passed": 4,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-xhigh",
+      "kind": "2d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    },
+    {
+      "model": "gpt-6.2-astra-xhigh",
+      "kind": "3d-mem",
+      "samples": 1,
+      "passed": 1,
+      "unrendered": 0
+    }
+  ],
+  "samples": [
+    {
+      "sample": "frontend/gpt-6.2-astra/001/2d-s1__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "001",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/001/2d-s2__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "001",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/001/3d-s1__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "001",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/001/3d-s2__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "001",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/004/2d-s1__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "004",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/004/2d-s2__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "004",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "no animation: neither declarative animation nor window.nwb.render"
+      ]
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/004/2d-s3__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "004",
+      "kind": "2d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/004/3d-s1__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "004",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/004/3d-s2__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "004",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/007/2d-s1__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "007",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/007/2d-s2__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "007",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "no animation: neither declarative animation nor window.nwb.render"
+      ]
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/007/2d-s3__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "007",
+      "kind": "2d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/007/3d-s1__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "007",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "window.nwb.ready never became true",
+        "page errors: uncaught: Unary operator used immediately before exponentiation expression. Parenthesis must be used to disambiguate operator precedence"
+      ]
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/007/3d-s2__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "007",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/008/2d-s1__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "008",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/008/2d-s2__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "008",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "no animation: neither declarative animation nor window.nwb.render"
+      ]
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/008/2d-s3__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "008",
+      "kind": "2d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/008/3d-s1__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "008",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/008/3d-s2__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "008",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/mem/2d-mem__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "mem",
+      "kind": "2d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra/mem/3d-mem__r1.json",
+      "model": "gpt-6.2-astra",
+      "task": "mem",
+      "kind": "3d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/001/2d-s1__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "001",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/001/2d-s2__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "001",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/001/3d-s1__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "001",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/001/3d-s2__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "001",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/004/2d-s1__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "004",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/004/2d-s2__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "004",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/004/3d-s1__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "004",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/004/3d-s2__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "004",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "window.nwb.ready never became true",
+        "page errors: uncaught: Unexpected token '.'"
+      ]
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/004/3d-s3__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "004",
+      "kind": "3d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/007/2d-s1__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "007",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/007/2d-s2__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "007",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "no animation: neither declarative animation nor window.nwb.render"
+      ]
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/007/2d-s3__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "007",
+      "kind": "2d-s3",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/007/3d-s1__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "007",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/007/3d-s2__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "007",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/008/2d-s1__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "008",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/008/2d-s2__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "008",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/008/3d-s1__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "008",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/008/3d-s2__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "008",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/mem/2d-mem__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "mem",
+      "kind": "2d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-low/mem/3d-mem__r1.json",
+      "model": "gpt-6.2-astra-low",
+      "task": "mem",
+      "kind": "3d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-medium/001/2d-s1__r1.json",
+      "model": "gpt-6.2-astra-medium",
+      "task": "001",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-medium/001/2d-s2__r1.json",
+      "model": "gpt-6.2-astra-medium",
+      "task": "001",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-medium/001/3d-s1__r1.json",
+      "model": "gpt-6.2-astra-medium",
+      "task": "001",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-medium/001/3d-s2__r1.json",
+      "model": "gpt-6.2-astra-medium",
+      "task": "001",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-medium/004/2d-s1__r1.json",
+      "model": "gpt-6.2-astra-medium",
+      "task": "004",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-medium/004/2d-s2__r1.json",
+      "model": "gpt-6.2-astra-medium",
+      "task": "004",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-medium/004/3d-s1__r1.json",
+      "model": "gpt-6.2-astra-medium",
+      "task": "004",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-medium/004/3d-s2__r1.json",
+      "model": "gpt-6.2-astra-medium",
+      "task": "004",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-medium/007/2d-s1__r1.json",
+      "model": "gpt-6.2-astra-medium",
+      "task": "007",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "page errors: console.error: Error: <path> attribute d: Expected number, \"M119 57 C۱۳۰ 68 137 87 14…\"."
+      ]
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-medium/007/2d-s2__r1.json",
+      "model": "gpt-6.2-astra-medium",
+      "task": "007",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-medium/007/3d-s1__r1.json",
+      "model": "gpt-6.2-astra-medium",
+      "task": "007",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-medium/007/3d-s2__r1.json",
+      "model": "gpt-6.2-astra-medium",
+      "task": "007",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-medium/008/2d-s1__r1.json",
+      "model": "gpt-6.2-astra-medium",
+      "task": "008",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-medium/008/2d-s2__r1.json",
+      "model": "gpt-6.2-astra-medium",
+      "task": "008",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-medium/008/3d-s1__r1.json",
+      "model": "gpt-6.2-astra-medium",
+      "task": "008",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-medium/008/3d-s2__r1.json",
+      "model": "gpt-6.2-astra-medium",
+      "task": "008",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-medium/mem/2d-mem__r1.json",
+      "model": "gpt-6.2-astra-medium",
+      "task": "mem",
+      "kind": "2d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-medium/mem/3d-mem__r1.json",
+      "model": "gpt-6.2-astra-medium",
+      "task": "mem",
+      "kind": "3d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-xhigh/001/2d-s1__r1.json",
+      "model": "gpt-6.2-astra-xhigh",
+      "task": "001",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-xhigh/001/2d-s2__r1.json",
+      "model": "gpt-6.2-astra-xhigh",
+      "task": "001",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-xhigh/001/3d-s1__r1.json",
+      "model": "gpt-6.2-astra-xhigh",
+      "task": "001",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-xhigh/001/3d-s2__r1.json",
+      "model": "gpt-6.2-astra-xhigh",
+      "task": "001",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-xhigh/004/2d-s1__r1.json",
+      "model": "gpt-6.2-astra-xhigh",
+      "task": "004",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-xhigh/004/2d-s2__r1.json",
+      "model": "gpt-6.2-astra-xhigh",
+      "task": "004",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-xhigh/004/3d-s1__r1.json",
+      "model": "gpt-6.2-astra-xhigh",
+      "task": "004",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-xhigh/004/3d-s2__r1.json",
+      "model": "gpt-6.2-astra-xhigh",
+      "task": "004",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-xhigh/007/2d-s1__r1.json",
+      "model": "gpt-6.2-astra-xhigh",
+      "task": "007",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-xhigh/007/2d-s2__r1.json",
+      "model": "gpt-6.2-astra-xhigh",
+      "task": "007",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-xhigh/007/3d-s1__r1.json",
+      "model": "gpt-6.2-astra-xhigh",
+      "task": "007",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "gate failed",
+      "gates": [
+        "window.nwb.ready never became true",
+        "page errors: uncaught: Unary operator used immediately before exponentiation expression. Parenthesis must be used to disambiguate operator precedence"
+      ]
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-xhigh/007/3d-s2__r1.json",
+      "model": "gpt-6.2-astra-xhigh",
+      "task": "007",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-xhigh/008/2d-s1__r1.json",
+      "model": "gpt-6.2-astra-xhigh",
+      "task": "008",
+      "kind": "2d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-xhigh/008/2d-s2__r1.json",
+      "model": "gpt-6.2-astra-xhigh",
+      "task": "008",
+      "kind": "2d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-xhigh/008/3d-s1__r1.json",
+      "model": "gpt-6.2-astra-xhigh",
+      "task": "008",
+      "kind": "3d-s1",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-xhigh/008/3d-s2__r1.json",
+      "model": "gpt-6.2-astra-xhigh",
+      "task": "008",
+      "kind": "3d-s2",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-xhigh/mem/2d-mem__r1.json",
+      "model": "gpt-6.2-astra-xhigh",
+      "task": "mem",
+      "kind": "2d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    },
+    {
+      "sample": "frontend/gpt-6.2-astra-xhigh/mem/3d-mem__r1.json",
+      "model": "gpt-6.2-astra-xhigh",
+      "task": "mem",
+      "kind": "3d-mem",
+      "rep": 1,
+      "status": "passed",
+      "gates": []
+    }
+  ],
+  "run": "gpt-6.2-astra-frontend",
+  "harness": "fee9bd636b661bc1",
+  "labels": {
+    "gpt-6.2-astra": "GPT-6.2-Astra (Codex) (high)",
+    "gpt-6.2-astra-low": "GPT-6.2-Astra (Codex) (low)",
+    "gpt-6.2-astra-medium": "GPT-6.2-Astra (Codex) (medium)",
+    "gpt-6.2-astra-xhigh": "GPT-6.2-Astra (Codex) (xhigh)"
+  },
+  "tasks": {
+    "001": {
+      "title": "Two characters at a school desk, one rubbing the other's belly",
+      "width": 240,
+      "height": 242,
+      "duration_ms": 1500,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.webp"
+        },
+        {
+          "t": 200,
+          "file": "frame_01.webp"
+        },
+        {
+          "t": 400,
+          "file": "frame_02.webp"
+        },
+        {
+          "t": 600,
+          "file": "frame_03.webp"
+        },
+        {
+          "t": 800,
+          "file": "frame_04.webp"
+        },
+        {
+          "t": 1000,
+          "file": "frame_05.webp"
+        },
+        {
+          "t": 1200,
+          "file": "frame_06.webp"
+        },
+        {
+          "t": 1400,
+          "file": "frame_07.webp"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "004": {
+      "title": "Front-facing character pumping both fists",
+      "width": 244,
+      "height": 240,
+      "duration_ms": 1200,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.webp"
+        },
+        {
+          "t": 160,
+          "file": "frame_01.webp"
+        },
+        {
+          "t": 340,
+          "file": "frame_02.webp"
+        },
+        {
+          "t": 500,
+          "file": "frame_03.webp"
+        },
+        {
+          "t": 680,
+          "file": "frame_04.webp"
+        },
+        {
+          "t": 840,
+          "file": "frame_05.webp"
+        },
+        {
+          "t": 1020,
+          "file": "frame_06.webp"
+        },
+        {
+          "t": 1180,
+          "file": "frame_07.webp"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "007": {
+      "title": "Full-body character dancing and turning sideways",
+      "width": 240,
+      "height": 294,
+      "duration_ms": 5540,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.png"
+        },
+        {
+          "t": 800,
+          "file": "frame_01.png"
+        },
+        {
+          "t": 1530,
+          "file": "frame_02.png"
+        },
+        {
+          "t": 2330,
+          "file": "frame_03.png"
+        },
+        {
+          "t": 3130,
+          "file": "frame_04.png"
+        },
+        {
+          "t": 3930,
+          "file": "frame_05.png"
+        },
+        {
+          "t": 4670,
+          "file": "frame_06.png"
+        },
+        {
+          "t": 5470,
+          "file": "frame_07.png"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "008": {
+      "title": "Full-body character laughing and bouncing between a crouch and standing",
+      "width": 216,
+      "height": 216,
+      "duration_ms": 1220,
+      "eligibility": "panel",
+      "frames": [
+        {
+          "t": 0,
+          "file": "frame_00.webp"
+        },
+        {
+          "t": 180,
+          "file": "frame_01.webp"
+        },
+        {
+          "t": 340,
+          "file": "frame_02.webp"
+        },
+        {
+          "t": 520,
+          "file": "frame_03.webp"
+        },
+        {
+          "t": 680,
+          "file": "frame_04.webp"
+        },
+        {
+          "t": 860,
+          "file": "frame_05.webp"
+        },
+        {
+          "t": 1020,
+          "file": "frame_06.webp"
+        },
+        {
+          "t": 1200,
+          "file": "frame_07.webp"
+        }
+      ],
+      "gif": "reference.webp"
+    },
+    "mem": {
+      "title": "大笑奶龙 from memory",
+      "width": 240,
+      "height": 240,
+      "duration_ms": 0,
+      "eligibility": "memory",
+      "frames": []
+    }
+  }
+}
