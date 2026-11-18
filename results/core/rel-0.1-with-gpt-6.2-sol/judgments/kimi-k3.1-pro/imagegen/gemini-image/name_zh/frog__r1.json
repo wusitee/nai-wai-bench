@@ -1,0 +1,89 @@
+{
+  "judge": "kimi-k3.1-pro",
+  "judge_vendor": "moonshot",
+  "target": "imagegen/gemini-image/name_zh/frog__r1.json",
+  "target_sha256": "b8e00619f6b5149ec4a60f621498a8d81cb2cce3174e8cd33b80555dac0159c5",
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "judge_prompt": "01abc67c5ae7ef4a",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/gemini-image/name_zh/frog__r1/inline-0.jpg"
+  ],
+  "track": "imagegen",
+  "model": "gemini-image",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 1,
+    "background": 0,
+    "vibe": 0
+  },
+  "identity": 1,
+  "failure_modes": [
+    "generic_cute",
+    "multiple_subjects"
+  ],
+  "rationale": "The image captures the shut eyes, huge laughing mouth, and belly-clutching gesture, but replaces the meme’s doubled-over stance, blank background, and unhinged energy with a cute pond scene. Its horns, spikes, and tail also make the frog identity ambiguous.",
+  "raw": "pose: Sitting upright on a log, not standing or doubled forward with bent knees — **absent**.\nhands_on_belly: Both forepaws press against the belly — **match**.\neyes: Both eyes are squeezed shut into thin curved arcs — **match**.\nmouth: A huge dark, gaping mouth with visible teeth and tongue conveys hysterical laughter — **match**.\nbody: Bulky pear-shaped body, merged head and torso, and short thick limbs — **match**.\nbelly_patch: A large pale belly patch contrasts with the green body — **match**.\nrender: Glossy 3D CG with soft lighting, but polished and cinematic rather than cheap studio-style — **partial**.\nbackground: A detailed pond with water, plants, flowers, and a mossy log — **absent**.\nvibe: Predominantly adorable and whimsical rather than absurd or unhinged — **absent**.\nidentity: Green and broadly frog-like, but horns, dorsal spikes, and a long tail make it strongly dragon-like — **partly**.\n\n{\"traits\":{\"pose\":\"absent\",\"hands_on_belly\":\"match\",\"eyes\":\"match\",\"mouth\":\"match\",\"body\":\"match\",\"belly_patch\":\"match\",\"render\":\"partial\",\"background\":\"absent\",\"vibe\":\"absent\"},\"identity\":\"partly\",\"failure_modes\":[\"generic_cute\",\"multiple_subjects\"],\"rationale\":\"The image captures the shut eyes, huge laughing mouth, and belly-clutching gesture, but replaces the meme’s doubled-over stance, blank background, and unhinged energy with a cute pond scene. Its horns, spikes, and tail also make the frog identity ambiguous.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 27.7,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 22811,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 741,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 23552 / 1048576 tokens (2%)\nSession total: 22811 input, 741 output",
+      "usage": {
+        "inputTokens": 22811,
+        "outputTokens": 741
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:56:03Z",
+    "finished_at": "2026-10-25T01:56:31Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

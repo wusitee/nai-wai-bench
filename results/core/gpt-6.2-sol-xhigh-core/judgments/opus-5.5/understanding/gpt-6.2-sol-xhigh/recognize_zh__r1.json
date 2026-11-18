@@ -1,0 +1,114 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-sol-xhigh/recognize_zh__r1.json",
+  "target_sha256": "07a0a0c829c1415e00aa3c517b2d2c34bec7e3c42ef74319b627347584323415",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "0685627239d46fb0",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6.2-sol-xhigh",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "Identifies the character as 'Laughing Yellow Guy', an invented name, instead of a mutated 奶龙 (Nailong)",
+    "Claims the meme's aliases are 'Yellow Guy Laughing' and 'Laughing Yellow Emoji'; these are made-up alternatives to the real aliases 大笑奶龙, 变异奶龙 and 奶蛙"
+  ],
+  "rationale": "The answer never mentions 奶龙, the 大笑奶龙/变异奶龙/奶蛙 meme family, or its AI-generated unofficial nature. Instead it invents an English character name and aliases, so every checklist item scores 0.",
+  "raw": "{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"ai_variant\": 0, \"aliases\": 0, \"naiwa\": 0}, \"hallucinations\": [\"Identifies the character as 'Laughing Yellow Guy', an invented name, instead of a mutated 奶龙 (Nailong)\", \"Claims the meme's aliases are 'Yellow Guy Laughing' and 'Laughing Yellow Emoji'; these are made-up alternatives to the real aliases 大笑奶龙, 变异奶龙 and 奶蛙\"], \"rationale\": \"The answer never mentions 奶龙, the 大笑奶龙/变异奶龙/奶蛙 meme family, or its AI-generated unofficial nature. Instead it invents an English character name and aliases, so every checklist item scores 0.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 8.6,
+    "turns": 1,
+    "tokens": {
+      "input": 2847,
+      "cached_input": 0,
+      "cache_write": 2845,
+      "output": 451,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0321522,
+    "tools_used": [],
+    "cost_usd": 0.0321522,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2845,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 451,
+      "output_tokens_details": {
+        "thinking_tokens": 170
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2845,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 451,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2845,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2845
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-18T17:24:16Z",
+    "finished_at": "2026-11-18T17:24:25Z",
+    "revision": "7221fe5d+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

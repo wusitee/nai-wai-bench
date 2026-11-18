@@ -1,0 +1,113 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-sol-medium/recognize_en__r1.json",
+  "target_sha256": "d5a821f19533a99fec60f1190fbf2221f03378d1ee410a3d32b97ba119353570",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "0071fb0753d01f8e",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6.2-sol-medium",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [
+    "Confidently names the character/meme 'Laughing Yellow Guy' and claims it also circulates as 'Laughing Yellow Creature', 'Laughing Yellow Monster', and 'Yellow Guy Laughing'. These appear to be made-up descriptive labels presented as established meme names, in place of the actual names 大笑奶龙 / 变异奶龙 / 奶蛙."
+  ],
+  "rationale": "The answer describes the image accurately (yellow creature doubling over, clutching its belly) but never identifies 奶龙 or the 大笑奶龙 meme. It omits the AI-generated mutated-variant context and the real aliases (变异奶龙, 奶蛙), and offers invented generic English names instead.",
+  "raw": "```json\n{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"ai_variant\": 0, \"aliases\": 0, \"naiwa\": 0}, \"hallucinations\": [\"Confidently names the character/meme 'Laughing Yellow Guy' and claims it also circulates as 'Laughing Yellow Creature', 'Laughing Yellow Monster', and 'Yellow Guy Laughing'. These appear to be made-up descriptive labels presented as established meme names, in place of the actual names 大笑奶龙 / 变异奶龙 / 奶蛙.\"], \"rationale\": \"The answer describes the image accurately (yellow creature doubling over, clutching its belly) but never identifies 奶龙 or the 大笑奶龙 meme. It omits the AI-generated mutated-variant context and the real aliases (变异奶龙, 奶蛙), and offers invented generic English names instead.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 11.6,
+    "turns": 1,
+    "tokens": {
+      "input": 2841,
+      "cached_input": 0,
+      "cache_write": 2839,
+      "output": 478,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0326556,
+    "tools_used": [],
+    "cost_usd": 0.0326556,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2839,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 478,
+      "output_tokens_details": {
+        "thinking_tokens": 167
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2839,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 478,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2839,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2839
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-18T17:28:15Z",
+    "finished_at": "2026-11-18T17:28:27Z",
+    "revision": "7221fe5d+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

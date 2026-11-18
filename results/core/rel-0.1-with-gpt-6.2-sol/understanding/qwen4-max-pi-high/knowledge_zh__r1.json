@@ -1,0 +1,81 @@
+{
+  "settings_id": "cbf7db799b4cb698",
+  "track": "understanding",
+  "model": "qwen4-max-pi-high",
+  "vendor": "alibaba",
+  "item": "knowledge_zh",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "「大笑奶龙」（也叫「奶蛙」）是什么？请介绍它的来源、外观以及相关的梗和二创。不确定的地方请直接说明，不要编造。",
+  "images": [],
+  "answer": "## 先说我有把握的部分：奶龙本体\n\n**奶龙**是国产 3D 动画短片《奶龙》里的主角，大约 2021 年前后开始在抖音、快手、B站等平台流行。形象是一只**黄色、圆滚滚的小恐龙/小龙**：身体像个球，四肢短小，大眼睛，头顶有小角，表情夸张。剧情基本是它和一个叫**小七**的小男孩之间的日常搞笑短剧，单集很短，走的是低龄向、无厘头的路子。\n\n它后来成了现象级儿童 IP（表情包、盲盒、各种联名周边），也正因为\"小孩特别喜欢、大人觉得吵\"，在青少年和成人网络社区里催生出一整套**反讽式的二创生态**：B站鬼畜、\"反奶龙\"贴吧、把奶龙塑造成\"大帝\"\"邪神\"的抽象创作、各种\"奶龙笑话\"等等。这部分我比较确定。\n\n（制作公司我印象中是广东一家做短视频动画的公司，但具体名字我不敢打包票，就不写了。）\n\n## 关于「大笑奶龙」\n\n这里我必须坦白：**我对这个具体的梗没有可靠、完整的记忆**，只能给出我理解的大致脉络，其中不少是推测。\n\n我理解它属于上面说的\"抽象化二创\"那一支：把奶龙的脸做成**咧嘴大笑、 mouth 张得很大、带点诡异或人类牙齿感**的形象，当作反应表情使用，气质上从\"可爱\"翻转成\"抽象/邪典\"。\n\n一个我觉得很可能成立的关联是：抽象圈本来就有个经典的大笑人脸表情叫 **\"龙图\"**，而奶龙正好是\"龙\"，所以奶龙的各种表情图被顺理成章地叫成\"龙图\"，\"大笑奶龙\"又刚好对应原版龙图的大笑姿态——这层双关是这个梗能传播的关键。但**这个说法是我基于两边文化特征的推断，不是我确切记得的出处**。\n\n具体是哪张图最早火起来、谁做的、什么时候、原始素材是动画截图还是网友建模/改图——**这些我不知道，也不打算编**。\n\n## 关于「奶蛙」这个别名\n\n**我不确定。** 最直觉的解释是：大笑状态下嘴部横向拉宽、眼睛突出，整张脸看起来像青蛙，所以被叫\"奶蛙\"；也有可能是和\"悲伤蛙(Pepe)\"之类的蛙系表情做了融合或类比。但这两种都只是**望文生义的猜测**，我没有实际见过相关讨论的记忆来支撑。\n\n如果你是在某个具体社区（贴吧、QQ群、B站评论区）看到这个词，它也很可能是小圈子里的黑话，覆盖面窄、演化快，本来就未必进入过我的知识范围。\n\n## 二创生态里我比较确定的几类\n\n- **鬼畜/音MAD**：把奶龙的叫声、动画片段做成素材。\n- **人设反转**：把低龄角色改写成暴君、克苏鲁式存在、社会人，靠反差制造笑点。\n- **\"反奶龙\"社群**：本质是对短视频平台低质儿童内容泛滥的情绪出口，玩梗成分大于真的讨厌。\n- **表情包抽象化**：加噪点、加真人五官、扭曲变形，往\"邪典\"方向改。\n\n\"大笑奶龙\"在我的理解里属于最后一类，但**具体形态和传播路径请以你看到的实物为准**。\n\n## 小结\n\n奶龙本体和它的抽象二创生态我能讲清楚；**\"大笑奶龙\"的确切起源、\"奶蛙\"这个别名的由来，我确实不知道**，上面凡是涉及这两点的具体解释都请当作待验证的猜测。这类梗迭代很快，直接去 B站/贴吧搜关键词看最早的帖子，比问我靠谱得多。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 72.6,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 105,
+      "output": 3091,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 2286,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 105,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 3091,
+      "reasoning": 2286
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T14:50:41Z",
+    "finished_at": "2026-11-16T14:51:54Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

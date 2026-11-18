@@ -1,0 +1,128 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.1-terra-xhigh/knowledge_zh__r1.json",
+  "target_sha256": "6ab38d22183e7a1f6317bdca1031b62a68f936e997edc3189f66f71c8867a5d7",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "d311dcffb8904c40",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.1-terra-xhigh",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 0,
+    "naiwa": 0,
+    "laugh_pose": 0,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [],
+  "rationale": "The model correctly describes the base 奶龙 as a yellow, round-bellied Chinese animated dragon but declines to cover the meme's origin, look, aliases, or remixes. Its Amazon milk frog suggestion for 「奶蛙」 is explicitly marked as uncertain, so it is not counted as a hallucination.",
+  "raw": "{\"scores\": {\"base_character\": 2, \"ai_variant\": 0, \"xingye_origin\": 0, \"aliases\": 0, \"naiwa\": 0, \"laugh_pose\": 0, \"junti_quan\": 0, \"official_reply\": 0, \"trait_variants\": 0, \"rarity_titles\": 0}, \"hallucinations\": [], \"rationale\": \"The model correctly describes the base 奶龙 as a yellow, round-bellied Chinese animated dragon but declines to cover the meme's origin, look, aliases, or remixes. Its Amazon milk frog suggestion for 「奶蛙」 is explicitly marked as uncertain, so it is not counted as a hallucination.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.308",
+    "seconds": 6.4,
+    "tokens": {
+      "input": 2421,
+      "cached_input": 0,
+      "cache_write": 2419,
+      "output": 385,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0273766,
+    "tools_used": [],
+    "cost_usd": 0.0273766,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2419,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 385,
+      "output_tokens_details": {
+        "thinking_tokens": 154
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2419,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 385,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2419,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2419
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-28T16:34:51Z",
+    "finished_at": "2026-10-28T16:34:57Z",
+    "revision": "07d52c9+archive",
+    "nwb_version": "0.1.0",
+    "source_commit": "07d52c9418172b2b7b01e6ed0abc2ca504c64a76",
+    "source_archive_sha256": "fb2d8a524452a6d15b9090848ff3c5dc753975173dba45cdffae5384e0a35c07",
+    "collector_wrapper_sha256": "43804988d112d60f028efd345efd0e4a4a6b07a72cdf28bea2ce5ec45fa23ca3",
+    "tool_disable_features": [
+      "shell_tool",
+      "unified_exec",
+      "multi_agent",
+      "multi_agent_v2",
+      "plugins",
+      "skill_search",
+      "goals",
+      "sleep_tool",
+      "view_image",
+      "collaboration_modes",
+      "default_mode_request_user_input"
+    ]
+  }
+}

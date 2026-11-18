@@ -1,0 +1,111 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-sol/recognize_zh__r1.json",
+  "target_sha256": "e005a05cce0ccd528e64c4946e81e9cc45de05970fd353679d83e7d4252c7cee",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "98881c80dfa7b19a",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6.2-sol",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0,
+    "aliases": 0,
+    "naiwa": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer never identifies the character as 奶龙 or the meme as 大笑奶龙/变异奶龙/奶蛙. It calls it a generic 3D yellow figure tied to 'Goofy Ahh Laugh', which covers none of the checklist items. Its English nicknames ('Laughing Yellow Guy', '3D Laughing Emoji') are unsupported but not clearly false, and the model hedged that it couldn't name the character, so no confident hallucinations are listed.",
+  "raw": "```json\n{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"ai_variant\": 0, \"aliases\": 0, \"naiwa\": 0}, \"hallucinations\": [], \"rationale\": \"The answer never identifies the character as 奶龙 or the meme as 大笑奶龙/变异奶龙/奶蛙. It calls it a generic 3D yellow figure tied to 'Goofy Ahh Laugh', which covers none of the checklist items. Its English nicknames ('Laughing Yellow Guy', '3D Laughing Emoji') are unsupported but not clearly false, and the model hedged that it couldn't name the character, so no confident hallucinations are listed.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 11.6,
+    "turns": 1,
+    "tokens": {
+      "input": 2877,
+      "cached_input": 0,
+      "cache_write": 2875,
+      "output": 751,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.038417599999999996,
+    "tools_used": [],
+    "cost_usd": 0.038417599999999996,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2875,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 751,
+      "output_tokens_details": {
+        "thinking_tokens": 514
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2875,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 751,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2875,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2875
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-18T09:51:21Z",
+    "finished_at": "2026-11-18T09:51:32Z",
+    "revision": "02b04a3b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

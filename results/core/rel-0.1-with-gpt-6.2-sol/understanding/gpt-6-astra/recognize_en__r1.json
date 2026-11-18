@@ -1,0 +1,80 @@
+{
+  "settings_id": "eed12e0ea2261aed",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "vendor": "openai",
+  "item": "recognize_en",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Who is this character, and which internet meme is this image from? Does the meme have other names?",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "This is **Nailong (奶龙)**, a chubby yellow dragon from the Chinese animated series *Nailong*.\n\nThe image is commonly associated with the **“Gigglesaurus”** meme, also called the **“Laughing Yellow Dinosaur,” “Laughing Yellow Dragon,”** or simply **“Laughing Nailong.”** It’s used as a reaction image or GIF for uncontrollable laughter.",
+  "contaminated": false,
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6-astra",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17086-3df5-77c2-ba72-1609ede04dfd",
+    "seconds": 31.6,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12612,
+      "cached_input_tokens": 8960,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 483,
+      "reasoning_output_tokens": 393
+    },
+    "tokens": {
+      "input": 12612,
+      "cached_input": 8960,
+      "cache_write": 0,
+      "output": 483,
+      "reasoning": 393
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6-astra",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:46:47Z",
+    "finished_at": "2026-10-25T00:47:19Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

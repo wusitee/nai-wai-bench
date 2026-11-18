@@ -1,0 +1,75 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/kimi-k3/recognize_folded_arms__r1.json",
+  "target_sha256": "35aea7ff6a9a545f230f7c03af94c6b11ebcd38aa566bbc9d38e148dd06b5582",
+  "settings_id": "c5b99b49261f87dd",
+  "input_names": "neutral",
+  "judge_prompt": "adfc9940a0ae6254",
+  "judge_images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "track": "understanding",
+  "model": "kimi-k3",
+  "scores": {
+    "base_character": 1,
+    "identifies_meme": 1
+  },
+  "hallucinations": [
+    "Treats the fan-made mutant image as an official animation pose",
+    "Refers to companion Xiao Qi as a pink dragon"
+  ],
+  "rationale": "The response identifies the base IP character but overlooks the specific mutant meme family, mistaking the variant for official material.",
+  "raw": "{\n  \"scores\": {\n    \"base_character\": 1,\n    \"identifies_meme\": 1\n  },\n  \"hallucinations\": [\n    \"Treats the fan-made mutant image as an official animation pose\",\n    \"Refers to companion Xiao Qi as a pink dragon\"\n  ],\n  \"rationale\": \"The response identifies the base IP character but overlooks the specific mutant meme family, mistaking the variant for official material.\"\n}",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 25.7,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 17258,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:13:58Z",
+    "finished_at": "2026-10-25T02:14:23Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

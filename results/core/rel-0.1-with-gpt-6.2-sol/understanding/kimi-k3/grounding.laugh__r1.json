@@ -1,0 +1,73 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "grounding.laugh",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Look only at the attached image. Return a JSON object with two keys: pose (one of belly_clutch, raised_hands, facepalm, folded_arms) and eyes (open or closed). Use unknown for a field you cannot determine. Do not infer the answer from a meme's name or typical appearance.",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "{\"pose\": \"belly_clutch\", \"eyes\": \"closed\"}",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 8.6,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20823,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 66,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 20889 / 1048576 tokens (2%)\nSession total: 20823 input, 66 output",
+      "usage": {
+        "inputTokens": 20823,
+        "outputTokens": 66
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:44:22Z",
+    "finished_at": "2026-10-25T00:44:31Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

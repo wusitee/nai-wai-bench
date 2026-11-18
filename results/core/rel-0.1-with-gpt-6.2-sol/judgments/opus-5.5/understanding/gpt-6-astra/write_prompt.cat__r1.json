@@ -1,0 +1,114 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6-astra/write_prompt.cat__r1.json",
+  "target_sha256": "7323690d99d99e18cf0ddf50a8379ae641cdb833dc650577f43d0fcba702f835",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "f03d8a3b0254797b",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6-astra",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 0,
+    "render": 1,
+    "background": 1,
+    "vibe": 2,
+    "identity": 1
+  },
+  "hallucinations": [
+    "Head tipped backward with belly thrust forward, which contradicts the reference's hunched-forward, doubled-over pose"
+  ],
+  "rationale": "The answer covers the eyes, mouth, body shape and absurd vibe well. It gets the pose backwards, only places the paws near the belly instead of clutching it, omits the pale belly patch, gives a blurred rather than plain white background, and makes the cat Nailong-yellow with only token feline cues like ears, whiskers and tail.",
+  "raw": "```json\n{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 2, \"mouth\": 2, \"body\": 2, \"belly_patch\": 0, \"render\": 1, \"background\": 1, \"vibe\": 2, \"identity\": 1}, \"hallucinations\": [\"Head tipped backward with belly thrust forward, which contradicts the reference's hunched-forward, doubled-over pose\"], \"rationale\": \"The answer covers the eyes, mouth, body shape and absurd vibe well. It gets the pose backwards, only places the paws near the belly instead of clutching it, omits the pale belly patch, gives a blurred rather than plain white background, and makes the cat Nailong-yellow with only token feline cues like ears, whiskers and tail.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 12.8,
+    "tokens": {
+      "input": 1851,
+      "cached_input": 0,
+      "cache_write": 1849,
+      "output": 880,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0326554,
+    "tools_used": [],
+    "cost_usd": 0.0326554,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 1849,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 880,
+      "output_tokens_details": {
+        "thinking_tokens": 621
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 1849,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 880,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 1849,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 1849
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:58:50Z",
+    "finished_at": "2026-10-25T01:59:03Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

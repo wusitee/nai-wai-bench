@@ -1,0 +1,80 @@
+{
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "vendor": "openai",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "我不能可靠确认这个形象的具体角色名，也没有把握把它认作《愤怒的小鸟》中的角色。\n\n从配文和造型看，它用的是“红温／切换愤怒模式”梗：通过通红、膨胀、怒视的形象，表示被惹怒、气到变形。但这只是梗的用法判断，不能据此确定角色原始出处。",
+  "contaminated": false,
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17083-99e9-7c02-940b-056fc31a8e8b",
+    "seconds": 40.2,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 11479,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1083,
+      "reasoning_output_tokens": 980
+    },
+    "tokens": {
+      "input": 11479,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 1083,
+      "reasoning": 980
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:43:54Z",
+    "finished_at": "2026-10-25T00:44:35Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

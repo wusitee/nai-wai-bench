@@ -1,0 +1,73 @@
+{
+  "settings_id": "cefccff5b65c93e5",
+  "track": "understanding",
+  "model": "deepseek-v4-pro",
+  "vendor": "deepseek",
+  "item": "write_prompt.giraffe",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a giraffe version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "Create a cartoon giraffe meme character that looks like a chubby, cute baby animal laughing hysterically. It has an oversized round head, a long giraffe neck, a plump yellow body with brown giraffe patches, small stubby legs, and two little ossicones on its head. Its face is pure joy: eyes squeezed shut, huge open mouth in a giant laugh, visible tongue, and a soft white belly patch. Use thick clean outlines, bright simple colors, and a flat sticker-style look on a plain white background.",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "stop_reason": "end_turn",
+    "client": "deepseek-harness-acp 0.0.1",
+    "seconds": 15.9,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+      "reasoning_effort": "high"
+    },
+    "resolved_model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "sessionUpdate": "usage_update",
+        "used": 777,
+        "size": 1000000
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "[\"deepseek-official\",\"deepseek-v4-pro\"]",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "reasoning_effort": "high"
+    },
+    "command": [
+      "dsh",
+      "--profile",
+      "acp",
+      "--patch",
+      "${NWB_ROOT}/config/dsh-no-tools.patch.yml"
+    ],
+    "files": {
+      "config/dsh-no-tools.patch.yml": "05a57299db351d53"
+    },
+    "env_keys": [
+      "NWB_ROOT"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:51:44Z",
+    "finished_at": "2026-10-25T00:52:00Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

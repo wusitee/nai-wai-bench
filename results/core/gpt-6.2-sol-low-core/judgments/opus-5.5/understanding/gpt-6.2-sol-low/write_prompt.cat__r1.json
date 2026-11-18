@@ -1,0 +1,115 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-sol-low/write_prompt.cat__r1.json",
+  "target_sha256": "15aa35db9648fc740a2ca23f66eea90132f1b6785ac6fce61707363a9c237f36",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "90201d486ccaf3a1",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.2-sol-low",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 1,
+    "render": 1,
+    "background": 2,
+    "vibe": 1,
+    "identity": 1
+  },
+  "hallucinations": [
+    "Pose described as 'leaning back slightly' and front-on, contradicting the hunched-forward, doubled-over laughing pose"
+  ],
+  "rationale": "The answer covers the hands on the belly, the crescent eyes, the dominant open mouth and the plain white background well. However, it reverses the pose (leaning back instead of hunched forward), gives a distinct 'huge round head' rather than a neckless bean body, omits the glossy studio-lit render and the unhinged vibe, and makes the cat only a token edit (custard-yellow with tiny ears and tail) rather than a recognizably cat-colored animal.",
+  "raw": "```json\n{\"scores\": {\"pose\": 0, \"hands_on_belly\": 2, \"eyes\": 2, \"mouth\": 2, \"body\": 1, \"belly_patch\": 1, \"render\": 1, \"background\": 2, \"vibe\": 1, \"identity\": 1}, \"hallucinations\": [\"Pose described as 'leaning back slightly' and front-on, contradicting the hunched-forward, doubled-over laughing pose\"], \"rationale\": \"The answer covers the hands on the belly, the crescent eyes, the dominant open mouth and the plain white background well. However, it reverses the pose (leaning back instead of hunched forward), gives a distinct 'huge round head' rather than a neckless bean body, omits the glossy studio-lit render and the unhinged vibe, and makes the cat only a token edit (custard-yellow with tiny ears and tail) rather than a recognizably cat-colored animal.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 17.9,
+    "turns": 1,
+    "tokens": {
+      "input": 2057,
+      "cached_input": 0,
+      "cache_write": 2055,
+      "output": 947,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.035634400000000004,
+    "tools_used": [],
+    "cost_usd": 0.035634400000000004,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2055,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 947,
+      "output_tokens_details": {
+        "thinking_tokens": 645
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2055,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 947,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2055,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2055
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-18T11:52:09Z",
+    "finished_at": "2026-11-18T11:52:27Z",
+    "revision": "02b04a3b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

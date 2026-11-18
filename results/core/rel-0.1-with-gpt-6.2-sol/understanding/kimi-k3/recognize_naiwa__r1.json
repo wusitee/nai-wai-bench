@@ -1,0 +1,73 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "凭我的知识来回答：\n\n这张图里的角色是一个**黄色的布偶/手偶角色**，扁嘴、瞪着一只又大又圆的绿眼睛，表情呆滞地侧头看人。它常被国内网友叫作\"小黄偶\"之类的昵称，在短视频和表情包里流传很广。\n\n它所属的梗就是图里写的**\"惊鸿一瞥\"**：这个布偶猛地侧过脸、用那种毫无感情的眼神瞟过来，配上\"惊鸿一瞥\"四个字形成强烈反差——本来这个词是形容美人匆匆一眼令人惊艳，用在这张呆脸上就变成了\"瞥了一眼，看傻了/被这一幕震住了\"的嘲讽或无语效果。常见用法是表达\"我就静静看着\"\"这一眼给我整不会了\"之类的情绪。\n\n需要坦白的是：我对这个布偶的具体出处（比如它最早出自哪档节目或哪个视频）没有把握，不同的说法可能是某个儿童节目或网络短片的偶形象被截取二创后走红。由于你要求只用我自己的知识、不查资料，这部分我无法确认，就不想凭空编一个来源了。如果你想确认准确出处，我可以帮你联网查一下。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 33.3,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20083,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 1160,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 21243 / 1048576 tokens (2%)\nSession total: 20083 input, 1160 output",
+      "usage": {
+        "inputTokens": 20083,
+        "outputTokens": 1160
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:43:36Z",
+    "finished_at": "2026-10-25T00:44:10Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

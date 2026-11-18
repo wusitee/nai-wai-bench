@@ -1,0 +1,113 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-sol/knowledge_zh__r1.json",
+  "target_sha256": "30071f5b57d7eaf2ebb29b8d84ff1c3016ade34eeb49b2522040925b9f9150b2",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "ac217244314f27de",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.2-sol",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 0,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [],
+  "rationale": "The answer correctly describes 奶龙 as a yellow, chubby cartoon dragon and only vaguely touches on the gaping laugh and a frog-like reading of 奶蛙. It omits the AI/unofficial nature, the 星野 origin, the 变异奶龙 alias, the 军体拳 remix, the official-reply copypasta and the rarity-title genre, but it marks its uncertainty honestly and makes no confident false claims.",
+  "raw": "{\"scores\": {\"base_character\": 2, \"ai_variant\": 0, \"xingye_origin\": 0, \"aliases\": 0, \"naiwa\": 1, \"laugh_pose\": 1, \"junti_quan\": 0, \"official_reply\": 0, \"trait_variants\": 0, \"rarity_titles\": 0}, \"hallucinations\": [], \"rationale\": \"The answer correctly describes 奶龙 as a yellow, chubby cartoon dragon and only vaguely touches on the gaping laugh and a frog-like reading of 奶蛙. It omits the AI/unofficial nature, the 星野 origin, the 变异奶龙 alias, the 军体拳 remix, the official-reply copypasta and the rarity-title genre, but it marks its uncertainty honestly and makes no confident false claims.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 11.7,
+    "turns": 1,
+    "tokens": {
+      "input": 2851,
+      "cached_input": 0,
+      "cache_write": 2849,
+      "output": 953,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0421874,
+    "tools_used": [],
+    "cost_usd": 0.0421874,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2849,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 953,
+      "output_tokens_details": {
+        "thinking_tokens": 683
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2849,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 953,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2849,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2849
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-18T09:50:19Z",
+    "finished_at": "2026-11-18T09:50:30Z",
+    "revision": "02b04a3b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

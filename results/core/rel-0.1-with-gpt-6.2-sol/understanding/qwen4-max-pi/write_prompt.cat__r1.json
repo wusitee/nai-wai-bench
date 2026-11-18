@@ -1,0 +1,81 @@
+{
+  "settings_id": "a4ba33964638df40",
+  "track": "understanding",
+  "model": "qwen4-max-pi",
+  "vendor": "alibaba",
+  "item": "write_prompt.cat",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a cat version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A deliberately crude, amateur MS-Paint-style cartoon doodle of a fat, stubby cream-yellow cat caught mid-explosion of hysterical, mocking laughter. The cat is chubby and pear-shaped with an oversized round head, tiny triangular ears with pink inner triangles, a pale banana-custard coat, a lighter cream muzzle and belly patch, a small pink triangle nose, six stiff straight black whiskers, and short sausage-like limbs with no visible fingers. Its head is thrown back about twenty degrees, body leaning backward and squashed, one stubby paw slapping its round belly, the other flung up in the air. The face is dominated by an enormous gaping grin that stretches almost the full width of the head, corners pulled up higher than the eyes, mouth wide open in a big black cavern with a single row of chunky flat white block teeth along the top and a broad flat pink tongue below; the smile is so oversized and unhinged that it reads as deranged, taunting, \"I'm dying laughing at you\" rather than cute. Both eyes are squeezed completely shut into two thick upward-curving black crescent arcs, with fat pink blush ovals on the cheeks and one tiny cartoon teardrop flicking off the outer corner of one eye. Rendering: flat unshaded solid color fills, no gradients, no lighting, wobbly hand-drawn black outlines of uneven thickness that don't quite meet the color fills, slightly asymmetric off-model proportions, garish saturated palette (custard yellow, hot pink, pure black, pure white), plain flat white background, centered full-body square sticker composition, low resolution with visible pixelation and JPEG compression artifacts, ugly-cute shitpost energy.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 37.1,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 125,
+      "output": 1456,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1107,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 125,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1456,
+      "reasoning": 1107
+    },
+    "session_config": {
+      "thinkingLevel": "max"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "max"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T09:42:27Z",
+    "finished_at": "2026-11-16T09:43:04Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

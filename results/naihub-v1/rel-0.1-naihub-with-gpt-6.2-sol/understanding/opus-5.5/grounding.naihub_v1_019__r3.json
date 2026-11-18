@@ -1,0 +1,104 @@
+{
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "opus-5.5",
+  "vendor": "anthropic",
+  "suite": "naihub-v1",
+  "item": "grounding.naihub_v1_019",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 3,
+  "prompt": "Look only at the attached image. Return one JSON object with family, subjects, posture, eyes, mouth, tears, and gesture. Classify family as the unofficial mutated Nailong/Naiwa meme family, official Nailong artwork, or an unrelated character. Count the main characters, not background decorations. For multiple characters, use mixed for eyes, mouth, or gesture only when their visible states differ. Upright means a biped whose visible hips sit above downward-extending thighs; leaning or hunching the torso alone does not make it crouched. Feet and knees may be cropped if both hips and upper thighs visibly establish this arrangement. Crouched requires visibly bent knees and hips lowered toward knee level; prone means lying belly-down. Use out_of_frame for posture if the crop or occlusion hides the hips and thighs, including a torso-only crop even when its upper body is vertical. Narrowed eyes have visibly reduced eyelid openings; closed eyes have no visible pupil aperture. Use phone_hold whenever a phone is held, even if the other hand rests on the belly. Use hands_on_head for two hands at the head, forehead for a hand on the front of the forehead, and hand_at_head for another head touch. Use chin_rest for hands touching/supporting the chin, fighting_pose for the wide bent-knee open-palm-and-fist stance. Use behind_back when the visible arm gesture is behind the torso without a hanging front hand. Use raised_arms for one or both arms lifted or extended away from the torso when no more specific gesture applies. Use covered for eyes or mouth hidden by an object; use out_of_frame for hands outside the image. Use unknown for any field you cannot determine, including when no image is attached. For tears, report present only for visible tear drops or streams, otherwise absent. Do not infer an emotion, motion sequence, or hidden gesture.\nAllowed labels: {\"family\": [\"mutated_nailong\", \"official_nailong\", \"other\"], \"subjects\": [\"one\", \"two\", \"four\", \"five\"], \"posture\": [\"upright\", \"crouched\", \"prone\", \"seated\", \"quadruped\", \"out_of_frame\"], \"eyes\": [\"open\", \"closed\", \"narrowed\", \"covered\", \"mixed\"], \"mouth\": [\"open\", \"closed\", \"covered\", \"mixed\"], \"tears\": [\"present\", \"absent\"], \"gesture\": [\"belly_clutch\", \"behind_back\", \"forehead\", \"chin_rest\", \"forearms_on_ground\", \"phone_hold\", \"folded_arms\", \"holding_hands\", \"mixed\", \"hand_at_head\", \"hands_on_head\", \"thumb_up\", \"pointing\", \"fighting_pose\", \"raised_arms\", \"none\", \"out_of_frame\"]}",
+  "images": [
+    "bench/naihub-v1/images/019.jpg"
+  ],
+  "answer": "```json\n{\"family\": \"other\", \"subjects\": \"one\", \"posture\": \"out_of_frame\", \"eyes\": \"open\", \"mouth\": \"closed\", \"tears\": \"absent\", \"gesture\": \"pointing\"}\n```",
+  "contaminated": false,
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 13.8,
+    "tokens": {
+      "input": 1649,
+      "cached_input": 1313,
+      "cache_write": 334,
+      "output": 660,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.0164523,
+    "tools_used": [],
+    "cost_usd": 0.0164523,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 334,
+      "cache_read_input_tokens": 1313,
+      "output_tokens": 660,
+      "output_tokens_details": {
+        "thinking_tokens": 590
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 334,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 660,
+          "cache_read_input_tokens": 1313,
+          "cache_creation_input_tokens": 334,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 334
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:50:15Z",
+    "finished_at": "2026-10-25T00:50:29Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

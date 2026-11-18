@@ -1,0 +1,115 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-sol/describe__r1.json",
+  "target_sha256": "b0f4ca4bbe30f38674fe1426b1a6dab051be9c2c65e7e0bc162d86527dc604bc",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "113e9fc85cf2bd86",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.2-sol",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 1,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 1,
+    "vibe": 0
+  },
+  "hallucinations": [
+    "Head tilted back with belly thrust forward ('笑得仰起脸', '头微微后仰，肚子挺在前面'), stated within the overall impression the model said it was confident about; this contradicts the hunched, doubled-over pose.",
+    "Head described as wider than the torso, which conflicts with the bulky pear/bean body where the head merges into the torso."
+  ],
+  "rationale": "The answer covers the huge dark mouth with tongue, the pale belly patch and the soft 3D toy-like render well, but it gets the pose backwards (leaning back instead of doubled over), puts the arms at the sides rather than clutching the belly, softens the eyes to a slight squint, and misses the absurd meme energy. It only hedges on the background.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 1, \"mouth\": 2, \"body\": 1, \"belly_patch\": 2, \"render\": 2, \"background\": 1, \"vibe\": 0}, \"hallucinations\": [\"Head tilted back with belly thrust forward ('笑得仰起脸', '头微微后仰，肚子挺在前面'), stated within the overall impression the model said it was confident about; this contradicts the hunched, doubled-over pose.\", \"Head described as wider than the torso, which conflicts with the bulky pear/bean body where the head merges into the torso.\"], \"rationale\": \"The answer covers the huge dark mouth with tongue, the pale belly patch and the soft 3D toy-like render well, but it gets the pose backwards (leaning back instead of doubled over), puts the arms at the sides rather than clutching the belly, softens the eyes to a slight squint, and misses the absurd meme energy. It only hedges on the background.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 16.4,
+    "turns": 1,
+    "tokens": {
+      "input": 2533,
+      "cached_input": 0,
+      "cache_write": 2531,
+      "output": 1256,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0456695,
+    "tools_used": [],
+    "cost_usd": 0.0456695,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2531,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1256,
+      "output_tokens_details": {
+        "thinking_tokens": 927
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2531,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1256,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2531,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2531
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-18T09:50:02Z",
+    "finished_at": "2026-11-18T09:50:19Z",
+    "revision": "02b04a3b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

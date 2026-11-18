@@ -1,0 +1,89 @@
+{
+  "judge": "kimi-k3.1-pro",
+  "judge_vendor": "moonshot",
+  "target": "imagegen/gemini-image/name_zh/elephant__r1.json",
+  "target_sha256": "c34e7413e9998ded358a3afb78518ca72672d6917692eeb5322bb7afb9db9578",
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "judge_prompt": "b2a6cf21b4ab17b4",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/gemini-image/name_zh/elephant__r1/inline-0.jpg"
+  ],
+  "track": "imagegen",
+  "model": "gemini-image",
+  "traits": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 0,
+    "vibe": 0
+  },
+  "identity": 2,
+  "failure_modes": [
+    "generic_cute",
+    "multiple_subjects"
+  ],
+  "rationale": "The elephant identity and several physical features carry over, but the seated pose, jungle scene, and cute storybook mood largely replace the reference’s doubled-over, unhinged laughter.",
+  "raw": "pose: Sitting upright on a rock rather than standing and doubled forward with laughter — **absent**.\nhands_on_belly: Both front paws are clasped together against the upper belly, but not clearly clutching it — **partial**.\neyes: Both eyes are squeezed shut into thin curved arcs — **match**.\nmouth: Large open mouth with a dark interior and tongue, but less overwhelmingly huge and hysterical than the reference — **partial**.\nbody: Bulky rounded body, short thick limbs, and little neck separation — **match**.\nbelly_patch: A contrasting pale oval patch covers the belly — **match**.\nrender: Glossy, softly lit 3D CG rendering — **match**.\nbackground: A detailed jungle scene with plants, animals, and a mossy rock — **absent**.\nvibe: Cheerful, polished cuteness rather than absurd, unhinged meme energy — **absent**.\nidentity: Immediately recognizable as an elephant through its trunk, large ears, and tusks, despite green dragon-like additions — **clearly**.\n\n{\"traits\":{\"pose\":\"absent\",\"hands_on_belly\":\"partial\",\"eyes\":\"match\",\"mouth\":\"partial\",\"body\":\"match\",\"belly_patch\":\"match\",\"render\":\"match\",\"background\":\"absent\",\"vibe\":\"absent\"},\"identity\":\"clearly\",\"failure_modes\":[\"generic_cute\",\"multiple_subjects\"],\"rationale\":\"The elephant identity and several physical features carry over, but the seated pose, jungle scene, and cute storybook mood largely replace the reference’s doubled-over, unhinged laughter.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 24.9,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 22811,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 786,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 23597 / 1048576 tokens (2%)\nSession total: 22811 input, 786 output",
+      "usage": {
+        "inputTokens": 22811,
+        "outputTokens": 786
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:55:58Z",
+    "finished_at": "2026-10-25T01:56:23Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

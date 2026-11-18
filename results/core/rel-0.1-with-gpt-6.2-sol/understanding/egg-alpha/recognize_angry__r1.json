@@ -1,0 +1,83 @@
+{
+  "settings_id": "7e9b52a50fc5ff45",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "egg-alpha",
+  "vendor": "undisclosed",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "这张表情包里的角色是 **Ugandan Knuckles（乌干达纳克鲁斯）**。\n\n**角色来源：**\n它的原型是世嘉《索尼克》系列中的角色 **纳克鲁斯（Knuckles the Echidna，针鼠纳克鲁斯）**——一只红色的针鼹。表情包中这个圆滚滚、矮胖变形的版本，最早出自 YouTube 动画师 Gregzilla 的恶搞动画。\n\n**所属网络梗：**\n这是 2017 年底至 2018 年初爆火的 **\"Ugandan Knuckles\" 梗**，主要在 **VRChat** 中流行。玩家们使用这个矮胖版纳克鲁斯的模型，成群结队地用夸张的非洲口音骚扰其他玩家，经典台词包括：\n\n- **\"Do you know da way?\"**（你知道\"路\"吗？）\n- **\"You must follow da way\"**（你必须追随这条路）\n- 还会发出\"啧啧啧\"的弹舌声，并朝人\"吐口水\"\n\n这个梗因为病毒式传播而成为 2018 年最具代表性的网络迷因之一（也因口音模仿引发过一些争议）。\n\n你这张图是国内网友二次创作的表情包，配上了\"切换愤怒模式😡\"的文字，用它瞪眼皱眉的表情来表达\"我要生气了\"的意思。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "client": "pi 1.5.0",
+    "seconds": 13.9,
+    "stop_reason": "stop",
+    "tools_used": [],
+    "usage": {
+      "input": 152,
+      "output": 540,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 260,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 152,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 540,
+      "reasoning": 260
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "tokenrhythm/egg-alpha",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "tokenrhythm/egg-alpha",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-04T04:28:18Z",
+    "finished_at": "2026-11-04T04:28:32Z",
+    "revision": "acefac8",
+    "nwb_version": "0.1.0"
+  }
+}

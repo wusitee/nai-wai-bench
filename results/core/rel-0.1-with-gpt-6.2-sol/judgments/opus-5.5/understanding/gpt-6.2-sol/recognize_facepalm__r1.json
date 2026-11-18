@@ -1,0 +1,112 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-sol/recognize_facepalm__r1.json",
+  "target_sha256": "eafe5ad198778a7e839b7cb02f340c9ce96c5af14208104710efacbc280d6123",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "aa0b151ad2c0ae09",
+  "judge_images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "track": "understanding",
+  "model": "gpt-6.2-sol",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0
+  },
+  "hallucinations": [
+    "Confidently identifies the character as Graggle/Gumbly Simpson, a fan-invented Simpsons character, when the reference says the image is a mutated Nailong variant from a 邪恶变异奶龙 collection",
+    "Assigns the image to the fake-Mandela-effect meme instead of the 大笑奶龙/变异奶龙/奶蛙 family",
+    "Says the character is pointing a finger at its temple in imitation of Roll Safe; the image shows a whole hand resting on its forehead"
+  ],
+  "rationale": "The answer never mentions Nailong or the 大笑奶龙/变异奶龙/奶蛙 meme. It confidently misidentifies the image as Graggle Simpson and attributes it to an unrelated meme, so both checklist items score 0.",
+  "raw": "```json\n{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0}, \"hallucinations\": [\"Confidently identifies the character as Graggle/Gumbly Simpson, a fan-invented Simpsons character, when the reference says the image is a mutated Nailong variant from a 邪恶变异奶龙 collection\", \"Assigns the image to the fake-Mandela-effect meme instead of the 大笑奶龙/变异奶龙/奶蛙 family\", \"Says the character is pointing a finger at its temple in imitation of Roll Safe; the image shows a whole hand resting on its forehead\"], \"rationale\": \"The answer never mentions Nailong or the 大笑奶龙/变异奶龙/奶蛙 meme. It confidently misidentifies the image as Graggle Simpson and attributes it to an unrelated meme, so both checklist items score 0.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 12.4,
+    "turns": 1,
+    "tokens": {
+      "input": 2264,
+      "cached_input": 0,
+      "cache_write": 2262,
+      "output": 668,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0317004,
+    "tools_used": [],
+    "cost_usd": 0.0317004,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2262,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 668,
+      "output_tokens_details": {
+        "thinking_tokens": 369
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2262,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 668,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2262,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2262
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-18T09:50:46Z",
+    "finished_at": "2026-11-18T09:50:58Z",
+    "revision": "02b04a3b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

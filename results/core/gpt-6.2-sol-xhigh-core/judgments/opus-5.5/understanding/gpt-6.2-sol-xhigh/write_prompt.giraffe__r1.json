@@ -1,0 +1,113 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-sol-xhigh/write_prompt.giraffe__r1.json",
+  "target_sha256": "0ffa2188fa9c0e088dd5705bb7e844efb46087c07c0218a5f2010208572dd71c",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "cd5409b2823627b9",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.2-sol-xhigh",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 1,
+    "mouth": 2,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 1,
+    "background": 2,
+    "vibe": 1,
+    "identity": 2
+  },
+  "hallucinations": [],
+  "rationale": "The mouth, white background and giraffe identity (coat with patches, ossicones, ears) are well covered. However, the pose is a belly-up crop with the head thrown back rather than standing hunched forward, the hooves sit beside the belly instead of clutching it, there is a distinct neck and no pale belly patch, and the render lacks the glossy studio-lit look.",
+  "raw": "```json\n{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 1, \"mouth\": 2, \"body\": 1, \"belly_patch\": 0, \"render\": 1, \"background\": 2, \"vibe\": 1, \"identity\": 2}, \"hallucinations\": [], \"rationale\": \"The mouth, white background and giraffe identity (coat with patches, ossicones, ears) are well covered. However, the pose is a belly-up crop with the head thrown back rather than standing hunched forward, the hooves sit beside the belly instead of clutching it, there is a distinct neck and no pale belly patch, and the render lacks the glossy studio-lit look.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 10.5,
+    "turns": 1,
+    "tokens": {
+      "input": 2068,
+      "cached_input": 0,
+      "cache_write": 2066,
+      "output": 711,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0310059,
+    "tools_used": [],
+    "cost_usd": 0.0310059,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2066,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 711,
+      "output_tokens_details": {
+        "thinking_tokens": 485
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2066,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 711,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2066,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2066
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-18T17:24:35Z",
+    "finished_at": "2026-11-18T17:24:46Z",
+    "revision": "7221fe5d+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

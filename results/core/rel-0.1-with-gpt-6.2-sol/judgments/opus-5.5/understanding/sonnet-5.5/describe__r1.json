@@ -1,0 +1,114 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/sonnet-5.5/describe__r1.json",
+  "target_sha256": "99cdf9ecaad352e7a833f965064da04baf3728699ea255ac9b89d489f7fd5a2b",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "ca0debff1dbff2f0",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "scores": {
+    "pose": 1,
+    "hands_on_belly": 0,
+    "eyes": 1,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 0,
+    "background": 2,
+    "vibe": 1
+  },
+  "hallucinations": [
+    "States with confidence that the image is a flat 2D cartoon sticker with thick black or dark-brown outlines and flat color fills, explicitly 'not 3D'. The reference is a glossy 3D CG render with soft studio lighting.",
+    "States with confidence that the mouth interior is red or pink. The reference describes a dark mouth interior."
+  ],
+  "rationale": "The answer gets the body shape, no neck, short limbs, pale belly, plain white background and huge laughing mouth right. It confidently gets the render style wrong (2D instead of glossy 3D), leans toward a backward lean rather than the hunched-forward pose, and lists belly-clutching only as one uncertain option; the eyes and unhinged vibe are only partly captured.",
+  "raw": "{\"scores\": {\"pose\": 1, \"hands_on_belly\": 0, \"eyes\": 1, \"mouth\": 1, \"body\": 2, \"belly_patch\": 2, \"render\": 0, \"background\": 2, \"vibe\": 1}, \"hallucinations\": [\"States with confidence that the image is a flat 2D cartoon sticker with thick black or dark-brown outlines and flat color fills, explicitly 'not 3D'. The reference is a glossy 3D CG render with soft studio lighting.\", \"States with confidence that the mouth interior is red or pink. The reference describes a dark mouth interior.\"], \"rationale\": \"The answer gets the body shape, no neck, short limbs, pale belly, plain white background and huge laughing mouth right. It confidently gets the render style wrong (2D instead of glossy 3D), leans toward a backward lean rather than the hunched-forward pose, and lists belly-clutching only as one uncertain option; the eyes and unhinged vibe are only partly captured.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 14.3,
+    "tokens": {
+      "input": 2559,
+      "cached_input": 0,
+      "cache_write": 2557,
+      "output": 1156,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.043911,
+    "tools_used": [],
+    "cost_usd": 0.043911,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2557,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1156,
+      "output_tokens_details": {
+        "thinking_tokens": 825
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2557,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1156,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2557,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2557
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:05:01Z",
+    "finished_at": "2026-10-25T02:05:16Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}
