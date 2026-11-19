@@ -1,0 +1,84 @@
+{
+  "settings_id": "680aa2edad69d268",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "glm-5.3-flash-pi",
+  "vendor": "zhipu",
+  "item": "recognize_facepalm",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "answer": "这张图我能描述和“感觉”出来，但说实话——**我无法百分之百确定它的具体出处**，凭记忆硬给一个名字大概率会编错，所以先跟你说实话：\n\n**我看到的：**\n- 一个 3D 渲染的黄色“团子/果冻”形小人，浅色肚皮、大而圆的绿眼睛\n- 姿势是经典的“捂脸/扶额”，通常用来表达“无语、无奈、揉太阳穴”的情绪\n- 白底、类似 Blender 渲染的软萌贴图风格\n\n**它大概属于哪类：**\n这种形象是近几年很流行的“3D 软萌团子”类表情包素材，风格上接近《蛋仔派对》《元梦之星》、Party Animals、Fall Guys 那类圆滚滚角色，或者是专门做的“emoji/贴图式”反应图（类似 🤦 的立体版），常见于微信、QQ、Telegram 贴纸和评论区。\n\n但具体是哪个 IP 或哪个梗的官方角色，我不想瞎编一个名字误导你。如果你能告诉我这张图是从哪里看到的（抖音/B 站/贴吧/群聊贴纸包等），我可以帮你进一步分析它的用法和梗的含义。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "zai-coding-cn/glm-5.3-flash",
+    "client": "pi 1.5.0",
+    "seconds": 850.8,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 376,
+      "output": 31144,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 30842,
+      "cost": 0.0156284
+    },
+    "tokens": {
+      "input": 376,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 31144,
+      "reasoning": 30842
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "zai-coding-cn/glm-5.3-flash",
+    "cost_usd_reported": 0.0156284
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "zai-coding-cn/glm-5.3-flash",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "zai-coding-cn/glm-5.3-flash",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-06T07:19:57Z",
+    "finished_at": "2026-11-06T07:34:07Z",
+    "revision": "ef8832f+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

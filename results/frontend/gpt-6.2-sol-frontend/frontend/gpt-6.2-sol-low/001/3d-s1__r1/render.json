@@ -1,0 +1,76 @@
+{
+  "html_sha256": "24a1cd8f6287afcd668a4c4c5bc736f8e81c65ee8031e2ba90ef689c3910a35f",
+  "harness": "fee9bd636b661bc1",
+  "kind": "3d-s1",
+  "gates": [],
+  "errors": [],
+  "blocked": [],
+  "forbidden": [],
+  "elements": [],
+  "timing": {
+    "declarative": false,
+    "scripted": false
+  },
+  "frames": [
+    {
+      "file": "frame_00.webp",
+      "t": 0
+    }
+  ],
+  "views": [
+    {
+      "file": "view_side.webp",
+      "view": "side",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_back.webp",
+      "view": "back",
+      "t": 0,
+      "hidden": [
+        "plaster back wall",
+        "chalkboard wooden frame",
+        "chalkboard slate"
+      ]
+    },
+    {
+      "file": "view_three_quarter.webp",
+      "view": "three_quarter",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_top.webp",
+      "view": "top",
+      "t": 0,
+      "hidden": []
+    }
+  ],
+  "scene": {
+    "characters": [
+      {
+        "name": "character-left-writing",
+        "meshes": 24,
+        "width": 131.5452423095703,
+        "height": 164.00000553375241,
+        "depth": 114.40882005648211,
+        "ratio": 0.8697298210697699
+      },
+      {
+        "name": "character-right-reaching",
+        "meshes": 21,
+        "width": 165.04970169067383,
+        "height": 163.0000054684499,
+        "depth": 149.38345450490323,
+        "ratio": 0.905081638892439
+      }
+    ],
+    "textures": 0
+  },
+  "mode": "render(t)",
+  "checks": {
+    "determinism_diff": 0.0
+  },
+  "seconds": 1.8
+}

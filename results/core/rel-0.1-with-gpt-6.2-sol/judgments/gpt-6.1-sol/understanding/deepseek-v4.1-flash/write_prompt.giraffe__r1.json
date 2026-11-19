@@ -1,0 +1,95 @@
+{
+  "judge": "gpt-6.1-sol",
+  "judge_vendor": "openai",
+  "target": "understanding/deepseek-v4.1-flash/write_prompt.giraffe__r1.json",
+  "target_sha256": "7369a22ea3aee8e882a7d52ad3ff46f62dfba8e6401825a69706d7ad8812ff90",
+  "settings_id": "3dd3bd14bb05cc84",
+  "judge_prompt": "5f119a3c04dc18fc",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 1,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 1,
+    "render": 0,
+    "background": 2,
+    "vibe": 0,
+    "identity": 2
+  },
+  "hallucinations": [
+    "Flat 2D vector rendering contradicts the glossy 3D CG reference.",
+    "A long neck and distinct large head contradict the neckless, merged head-and-torso silhouette.",
+    "The backward-leaning, head-thrown-back pose with one foot raised contradicts the forward-hunched standing pose.",
+    "Arms lifted toward the chest contradict both hands clutching the belly.",
+    "The wholesome, adorable generic mascot framing contradicts the absurd, slightly unhinged meme character."
+  ],
+  "rationale": "The prompt clearly establishes giraffe identity and a plain white background, but reverses the defining pose, hand placement, rendering style, and mood. Closed curved eyes, an enormous mouth with teeth and tongue, a chubby body, and a pale belly provide partial coverage, with specified details missing or conflicting.",
+  "raw": "{\"scores\":{\"pose\":0,\"hands_on_belly\":0,\"eyes\":1,\"mouth\":1,\"body\":1,\"belly_patch\":1,\"render\":0,\"background\":2,\"vibe\":0,\"identity\":2},\"hallucinations\":[\"Flat 2D vector rendering contradicts the glossy 3D CG reference.\",\"A long neck and distinct large head contradict the neckless, merged head-and-torso silhouette.\",\"The backward-leaning, head-thrown-back pose with one foot raised contradicts the forward-hunched standing pose.\",\"Arms lifted toward the chest contradict both hands clutching the belly.\",\"The wholesome, adorable generic mascot framing contradicts the absurd, slightly unhinged meme character.\"],\"rationale\":\"The prompt clearly establishes giraffe identity and a plain white background, but reverses the defining pose, hand placement, rendering style, and mood. Closed curved eyes, an enormous mouth with teeth and tongue, a chubby body, and a pale belly provide partial coverage, with specified details missing or conflicting.\"}",
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a1719c-e0be-7401-9c9d-a3710e22181b",
+    "seconds": 24.0,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12694,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 478,
+      "reasoning_output_tokens": 261
+    },
+    "tokens": {
+      "input": 12694,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 478,
+      "reasoning": 261
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:51:08Z",
+    "finished_at": "2026-10-25T05:51:32Z",
+    "revision": "07d52c9",
+    "nwb_version": "0.1.0"
+  }
+}

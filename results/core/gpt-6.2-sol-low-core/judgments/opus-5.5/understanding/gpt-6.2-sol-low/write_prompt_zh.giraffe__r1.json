@@ -1,0 +1,117 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-sol-low/write_prompt_zh.giraffe__r1.json",
+  "target_sha256": "0d8ee24393320e3956b3d1aa43b4589762d4c7735d9fd6d17db50da6818bed26",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "6c4d0cc8992e57b5",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.2-sol-low",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 0,
+    "belly_patch": 0,
+    "render": 1,
+    "background": 1,
+    "vibe": 1,
+    "identity": 2
+  },
+  "hallucinations": [
+    "Head thrown back and neck arched backward ('笑到仰头', '脖子笑得往后弯'), which contradicts the hunched-forward, doubled-over pose",
+    "A distinctly elongated neck ('一截明显拉长的脖子'), which contradicts the neckless pear/bean body where the head merges into the torso",
+    "A thick white sticker outline ('粗白描边'), which conflicts with the glossy 3D CG render look"
+  ],
+  "rationale": "The prompt gets the belly-clutching hooves, slit eyes, huge toothy mouth, and a recognizable giraffe (ossicones, caramel spots) right. However, it reverses the pose to a backward lean, gives the character a long distinct neck instead of the neckless bean body, omits the belly patch, and only vaguely covers the glossy CG render, white/grey background, and unhinged meme vibe.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 2, \"eyes\": 2, \"mouth\": 2, \"body\": 0, \"belly_patch\": 0, \"render\": 1, \"background\": 1, \"vibe\": 1, \"identity\": 2}, \"hallucinations\": [\"Head thrown back and neck arched backward ('笑到仰头', '脖子笑得往后弯'), which contradicts the hunched-forward, doubled-over pose\", \"A distinctly elongated neck ('一截明显拉长的脖子'), which contradicts the neckless pear/bean body where the head merges into the torso\", \"A thick white sticker outline ('粗白描边'), which conflicts with the glossy 3D CG render look\"], \"rationale\": \"The prompt gets the belly-clutching hooves, slit eyes, huge toothy mouth, and a recognizable giraffe (ossicones, caramel spots) right. However, it reverses the pose to a backward lean, gives the character a long distinct neck instead of the neckless bean body, omits the belly patch, and only vaguely covers the glossy CG render, white/grey background, and unhinged meme vibe.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 15.0,
+    "turns": 1,
+    "tokens": {
+      "input": 2107,
+      "cached_input": 0,
+      "cache_write": 2105,
+      "output": 1291,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.04292100000000001,
+    "tools_used": [],
+    "cost_usd": 0.04292100000000001,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2105,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1291,
+      "output_tokens_details": {
+        "thinking_tokens": 908
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2105,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1291,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2105,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2105
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-18T11:52:27Z",
+    "finished_at": "2026-11-18T11:52:42Z",
+    "revision": "02b04a3b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

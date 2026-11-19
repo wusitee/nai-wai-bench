@@ -1,0 +1,84 @@
+{
+  "settings_id": "cbf7db799b4cb698",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-high",
+  "vendor": "alibaba",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "这张图里的角色看起来是**奶龙**（国产动画《奶龙》里那只圆滚滚、大肚子、小短手的龙）的**红色改色版本**——正常的奶龙是黄色的，被网友调成红色后就用来表示\"气到脸红发热\"。\n\n它对应的梗主要是 **\"红温\"**：这个词源自电竞圈（形容选手被打崩后情绪上头、脸涨得通红），后来泛指任何人生气、破防、急眼的状态。配合下面那行\"切换愤怒模式 😡\"，就属于典型的\"红温奶龙 / 愤怒模式\"表情包系列——同一套图通常还有黄色（正常模式）、红色（愤怒模式）等不同配色，用来在聊天里调侃自己或对方\"要炸了\"。\n\n需要说明的是，我只凭图像特征和已有印象判断，奶龙的各种二创改色版本很多，如果你看到的出处标注了别的名字，也有可能是同类的衍生形象。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 27.3,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 150,
+      "output": 866,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 663,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 150,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 866,
+      "reasoning": 663
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T14:57:53Z",
+    "finished_at": "2026-11-16T14:58:20Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

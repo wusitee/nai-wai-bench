@@ -1,0 +1,72 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/sonnet-5.5/recognize_folded_arms__r1.json",
+  "target_sha256": "6f9e44daaa8e961ad77251d0060be44682a8d186bb135b06c8a38a00755eb1aa",
+  "settings_id": "c5b99b49261f87dd",
+  "input_names": "neutral",
+  "judge_prompt": "15c585464a050437",
+  "judge_images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "track": "understanding",
+  "model": "sonnet-5.5",
+  "scores": {
+    "base_character": 1,
+    "identifies_meme": 1
+  },
+  "hallucinations": [],
+  "rationale": "The model explicitly refrained from naming the character or meme family due to stated uncertainty, providing only descriptive visual features and general reaction-image usage.",
+  "raw": "{\n  \"scores\": {\n    \"base_character\": 1,\n    \"identifies_meme\": 1\n  },\n  \"hallucinations\": [],\n  \"rationale\": \"The model explicitly refrained from naming the character or meme family due to stated uncertainty, providing only descriptive visual features and general reaction-image usage.\"\n}",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 26.0,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 16653,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T05:21:26Z",
+    "finished_at": "2026-10-25T05:21:52Z",
+    "revision": "9f7aef8",
+    "nwb_version": "0.1.0"
+  }
+}

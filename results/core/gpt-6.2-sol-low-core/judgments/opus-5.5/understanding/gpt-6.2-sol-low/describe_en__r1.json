@@ -1,0 +1,114 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-sol-low/describe_en__r1.json",
+  "target_sha256": "08a48be3ac4e86945d7071dfccc71f58b3bfeee792d34b4f0078303315f294fb",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "a24f0f3b909b9e5c",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.2-sol-low",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 1,
+    "vibe": 0
+  },
+  "hallucinations": [
+    "Confidently describes the head tipped back and the face tilted upward in an upright stance, which contradicts the reference's hunched-forward, doubled-over pose"
+  ],
+  "rationale": "The answer covers the crescent eyes, pear-shaped neckless body, paler belly and smooth 3D vinyl render well, but gets the pose wrong (upright and head-back instead of hunched forward), puts the arms out rather than clutching the belly, is unsure about teeth and background, and doesn't capture the absurd, unhinged meme vibe.",
+  "raw": "```json\n{\"scores\": {\"pose\": 0, \"hands_on_belly\": 0, \"eyes\": 2, \"mouth\": 1, \"body\": 2, \"belly_patch\": 2, \"render\": 2, \"background\": 1, \"vibe\": 0}, \"hallucinations\": [\"Confidently describes the head tipped back and the face tilted upward in an upright stance, which contradicts the reference's hunched-forward, doubled-over pose\"], \"rationale\": \"The answer covers the crescent eyes, pear-shaped neckless body, paler belly and smooth 3D vinyl render well, but gets the pose wrong (upright and head-back instead of hunched forward), puts the arms out rather than clutching the belly, is unsure about teeth and background, and doesn't capture the absurd, unhinged meme vibe.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 12.6,
+    "turns": 1,
+    "tokens": {
+      "input": 2213,
+      "cached_input": 0,
+      "cache_write": 2211,
+      "output": 1085,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0396577,
+    "tools_used": [],
+    "cost_usd": 0.0396577,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2211,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1085,
+      "output_tokens_details": {
+        "thinking_tokens": 816
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2211,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1085,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2211,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2211
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-18T11:50:58Z",
+    "finished_at": "2026-11-18T11:51:10Z",
+    "revision": "02b04a3b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

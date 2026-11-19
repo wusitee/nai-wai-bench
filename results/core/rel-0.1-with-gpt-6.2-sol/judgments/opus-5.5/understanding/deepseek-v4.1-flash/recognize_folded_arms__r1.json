@@ -1,0 +1,111 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/deepseek-v4.1-flash/recognize_folded_arms__r1.json",
+  "target_sha256": "29530186cdc387d23eea6aabdb461937c89135eeec5bedd939aa760129393ab3",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "56af61bd29156d8d",
+  "judge_images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "track": "understanding",
+  "model": "deepseek-v4.1-flash",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0
+  },
+  "hallucinations": [
+    "Confidently identifies the character as a yellow fan remix of Pou from the mobile game 《Pou》, when the image is a mutated 奶龙 (Nailong) from the 邪恶变异奶龙 / 奶蛙 meme family",
+    "Claims the image belongs to the 'Pou 梗' / Pou meme family rather than the 大笑奶龙 / 变异奶龙 / 奶蛙 meme",
+    "Asserts that fans 'changed it to a yellow skin and added arms', inventing a Pou-based origin for the image"
+  ],
+  "rationale": "The model misidentified the character as a Pou remix and never mentions 奶龙 or the 大笑奶龙/奶蛙 meme, so both checklist items are missing. The confident Pou attribution and its invented remix backstory are hallucinations.",
+  "raw": "{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0}, \"hallucinations\": [\"Confidently identifies the character as a yellow fan remix of Pou from the mobile game 《Pou》, when the image is a mutated 奶龙 (Nailong) from the 邪恶变异奶龙 / 奶蛙 meme family\", \"Claims the image belongs to the 'Pou 梗' / Pou meme family rather than the 大笑奶龙 / 变异奶龙 / 奶蛙 meme\", \"Asserts that fans 'changed it to a yellow skin and added arms', inventing a Pou-based origin for the image\"], \"rationale\": \"The model misidentified the character as a Pou remix and never mentions 奶龙 or the 大笑奶龙/奶蛙 meme, so both checklist items are missing. The confident Pou attribution and its invented remix backstory are hallucinations.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 9.0,
+    "tokens": {
+      "input": 2075,
+      "cached_input": 0,
+      "cache_write": 2073,
+      "output": 434,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.025518000000000002,
+    "tools_used": [],
+    "cost_usd": 0.025518000000000002,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2073,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 434,
+      "output_tokens_details": {
+        "thinking_tokens": 127
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2073,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 434,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2073,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2073
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:55:29Z",
+    "finished_at": "2026-10-25T01:55:38Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

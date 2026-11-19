@@ -1,0 +1,115 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-sol-xhigh/knowledge_en__r1.json",
+  "target_sha256": "807637c7e473ec4f481d687d961182ebec6344d359dd9ed9902add2364350de5",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "ee79182bf92ae153",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.2-sol-xhigh",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 1,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 1,
+    "rarity_titles": 0
+  },
+  "hallucinations": [
+    "Claims the laughing image's own broad face is the frog-like look that gave rise to 奶蛙. Per the notes, the round green-eyed frog-like look belongs to a later, separate mutated variant, not the iconic laughing image."
+  ],
+  "rationale": "The answer correctly identifies the base character, gives a partial description of the laugh and a vague account of 奶蛙, and mentions remixes onto other characters. It misses that the image is AI-generated and omits the 星野 origin, the 军体拳 remix, the official-reply copypasta, the 变异奶龙 alias and the rarity-title genre. It properly hedges on the origin instead of calling it official.",
+  "raw": "{\"scores\": {\"base_character\": 2, \"ai_variant\": 0, \"xingye_origin\": 0, \"aliases\": 1, \"naiwa\": 1, \"laugh_pose\": 1, \"junti_quan\": 0, \"official_reply\": 0, \"trait_variants\": 1, \"rarity_titles\": 0}, \"hallucinations\": [\"Claims the laughing image's own broad face is the frog-like look that gave rise to 奶蛙. Per the notes, the round green-eyed frog-like look belongs to a later, separate mutated variant, not the iconic laughing image.\"], \"rationale\": \"The answer correctly identifies the base character, gives a partial description of the laugh and a vague account of 奶蛙, and mentions remixes onto other characters. It misses that the image is AI-generated and omits the 星野 origin, the 军体拳 remix, the official-reply copypasta, the 变异奶龙 alias and the rarity-title genre. It properly hedges on the origin instead of calling it official.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 16.2,
+    "turns": 1,
+    "tokens": {
+      "input": 2822,
+      "cached_input": 0,
+      "cache_write": 2820,
+      "output": 1238,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.04765269999999999,
+    "tools_used": [],
+    "cost_usd": 0.04765269999999999,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2820,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1238,
+      "output_tokens_details": {
+        "thinking_tokens": 907
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2820,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1238,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2820,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2820
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-18T17:22:39Z",
+    "finished_at": "2026-11-18T17:22:55Z",
+    "revision": "7221fe5d+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

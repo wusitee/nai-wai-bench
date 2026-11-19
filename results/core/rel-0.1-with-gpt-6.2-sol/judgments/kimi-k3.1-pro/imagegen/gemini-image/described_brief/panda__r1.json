@@ -1,0 +1,86 @@
+{
+  "judge": "kimi-k3.1-pro",
+  "judge_vendor": "moonshot",
+  "target": "imagegen/gemini-image/described_brief/panda__r1.json",
+  "target_sha256": "fa045ab388c082d29ef753d4b3b9167c3b4f78243f1f48a6a596a9fe231f25c9",
+  "settings_id": "7c81ed50f365cb3c",
+  "input_names": "neutral",
+  "judge_prompt": "8372a5c68c261fc0",
+  "judge_images": [
+    "bench/reference/nailong_laugh.png",
+    "imagegen/gemini-image/described_brief/panda__r1/inline-0.jpg"
+  ],
+  "track": "imagegen",
+  "model": "gemini-image",
+  "traits": {
+    "pose": 2,
+    "hands_on_belly": 2,
+    "eyes": 2,
+    "mouth": 2,
+    "body": 2,
+    "belly_patch": 2,
+    "render": 2,
+    "background": 2,
+    "vibe": 2
+  },
+  "identity": 2,
+  "failure_modes": [],
+  "rationale": "The generated panda closely reproduces the reference’s doubled-over, belly-clutching hysterical laughter and bulky 3D proportions while remaining unmistakably a giant panda.",
+  "raw": "pose: Standing and hunched forward with bent legs, clearly doubled over laughing — match  \nhands_on_belly: Both paws press against the belly — match  \neyes: Eyes squeezed shut into thin curved arcs — match  \nmouth: Huge gaping mouth with dark interior, teeth, and tongue — match  \nbody: Bulky bean-shaped body, merged head and torso, short thick limbs — match  \nbelly_patch: Large pale belly patch contrasts with the black-and-white body — match  \nrender: Stylized glossy 3D CG with soft studio lighting; furry but not photorealistic — match  \nbackground: Plain white with only a subtle floor shadow — match  \nvibe: Exaggerated, hysterical laughter and absurd proportions convey meme energy — match  \nidentity: Immediately recognizable as a giant panda with natural markings and coloring — clearly  \n\n{\"traits\":{\"pose\":\"match\",\"hands_on_belly\":\"match\",\"eyes\":\"match\",\"mouth\":\"match\",\"body\":\"match\",\"belly_patch\":\"match\",\"render\":\"match\",\"background\":\"match\",\"vibe\":\"match\"},\"identity\":\"clearly\",\"failure_modes\":[],\"rationale\":\"The generated panda closely reproduces the reference’s doubled-over, belly-clutching hysterical laughter and bulky 3D proportions while remaining unmistakably a giant panda.\"}",
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 25.7,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 22827,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 452,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3.1-pro",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3.1-pro",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 23279 / 1048576 tokens (2%)\nSession total: 22827 input, 452 output",
+      "usage": {
+        "inputTokens": 22827,
+        "outputTokens": 452
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3.1-pro",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T01:54:00Z",
+    "finished_at": "2026-10-25T01:54:26Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

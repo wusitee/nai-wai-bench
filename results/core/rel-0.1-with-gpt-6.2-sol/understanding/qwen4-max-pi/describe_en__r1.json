@@ -1,0 +1,81 @@
+{
+  "settings_id": "a4ba33964638df40",
+  "track": "understanding",
+  "model": "qwen4-max-pi",
+  "vendor": "alibaba",
+  "item": "describe_en",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Without looking at any images, describe the most iconic image of Laughing Nailong (大笑奶龙 / 奶蛙) from memory: its pose, expression, body shape, colors, rendering style, and background, in enough detail for an artist who has never seen it to draw it. Say where you are unsure.",
+  "images": [],
+  "answer": "**Short answer: I can't give you a trustworthy \"draw it from this\" description, because I don't have a reliable memory of a specific canonical \"laughing Nailong\" image.** If I wrote out pose, mouth shape, eye squint, and background color in the detail you're asking for, I'd be generating a plausible-looking cartoon rather than recalling a real reference — and an artist would then draw my invention thinking it was the meme. So let me separate what I actually recall from what I'd be making up.\n\n**What I think I know (moderate confidence):**\n- 奶龙 (\"Nailong,\" roughly \"milk dragon\") is a Chinese cartoon IP — a small, chubby yellow dragon-like creature — that spread widely as short animations and reaction stickers/memes on Chinese platforms in roughly the 2023–2024 window. I believe it appears alongside a human boy character in the source shorts.\n- The general design impression I have is: very large rounded head relative to a squat, soft body; short stubby limbs; simple dot/oval eyes; bright saturated yellow overall; a soft, glossy 3D-CGI \"toy\" look rather than flat 2D linework.\n\n**What I'm genuinely unsure about (low confidence — do not draw from these):**\n- Whether it has horns, ears, a snout versus a flat face, a tail, a contrasting cream belly, teeth, or a visible tongue.\n- The exact expression in any \"laughing\" frame: open-mouth guffaw versus closed-eye grin, head tilt, whether arms are raised, whether it's leaning back or doubled over.\n- Any background at all — white/transparent sticker cutout, solid color, or a scene from the animation. Also whether the iconic version carries Chinese text.\n- Which single image is \"the most iconic.\" I have no basis for ranking one frame as canonical.\n\n**A naming problem worth flagging:** 奶龙 = \"milk dragon,\" but 奶蛙 = \"milk frog.\" I can't confirm these are the same character. That could be a fan nickname I'm unaware of, a separate sticker character, or a mix-up with another meme frog (e.g. 悲伤蛙 / Pepe). Since dragon and frog imply quite different silhouettes, this ambiguity alone would change the drawing substantially.\n\n**How to get what you want:**\n1. Tell me which one you mean and describe the image loosely (frog or dragon? sticker cutout or animation frame? mouth open or closed?) — I can then help an artist organize *your* observations into a clean spec, without me supplying fake details.\n2. Or, if you actually just want a cute laughing yellow blob-dragon character design, I can write that brief happily — but labeled as an original design, not a reproduction of the meme.",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 47.4,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 139,
+      "output": 2031,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1432,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 139,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2031,
+      "reasoning": 1432
+    },
+    "session_config": {
+      "thinkingLevel": "max"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "max"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T09:43:49Z",
+    "finished_at": "2026-11-16T09:44:36Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

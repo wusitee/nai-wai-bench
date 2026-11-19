@@ -1,0 +1,76 @@
+{
+  "judge": "gemini-3.8-flash",
+  "judge_vendor": "google",
+  "target": "understanding/gemini-3.8-flash/recognize_naiwa__r1.json",
+  "target_sha256": "47406755c8e554e4bb6a9ccaaed81d8538c0427e0cd8883de8a898ed5bd1851a",
+  "settings_id": "c5b99b49261f87dd",
+  "input_names": "neutral",
+  "judge_prompt": "fedbe757b881b565",
+  "judge_images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "track": "understanding",
+  "model": "gemini-3.8-flash",
+  "scores": {
+    "base_character": 1,
+    "identifies_meme": 1,
+    "naiwa": 1
+  },
+  "hallucinations": [
+    "Claims the character is a 3D yellow bird/chick with a beak rather than a mutated Nailong.",
+    "Identifies the meme as '惊鸿一瞥梗' or '小鸟回眸' rather than part of the Nailong/Naiwa meme family."
+  ],
+  "rationale": "The model misidentifies the mutated Nailong image as a yellow bird meme, failing to reference the base character or its actual meme origin.",
+  "raw": "{\n  \"scores\": {\n    \"base_character\": 1,\n    \"identifies_meme\": 1,\n    \"naiwa\": 1\n  },\n  \"hallucinations\": [\n    \"Claims the character is a 3D yellow bird/chick with a beak rather than a mutated Nailong.\",\n    \"Identifies the meme as '惊鸿一瞥梗' or '小鸟回眸' rather than part of the Nailong/Naiwa meme family.\"\n  ],\n  \"rationale\": \"The model misidentifies the mutated Nailong image as a yellow bird meme, failing to reference the base character or its actual meme origin.\"\n}",
+  "meta": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "stop_reason": "end_turn",
+    "client": "antigravity-acp 1.3.0",
+    "seconds": 23.6,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": null,
+      "cached_input": null,
+      "cache_write": null,
+      "output": null,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "gemini-3.8-flash-high",
+      "mode": "default"
+    },
+    "resolved_model": "gemini-3.8-flash-high",
+    "cost_usd_reported": null,
+    "usage_updates": [
+      {
+        "used": 16975,
+        "size": 1048576,
+        "sessionUpdate": "usage_update"
+      }
+    ]
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "effort_source": "model-id",
+    "config": {},
+    "command": [
+      "~/.t3/tools/antigravity-acp/linux-x64/versions/9fb60956af0a9d76220a4db91ca9ac88e2a2372ad68f985ab5fceace6b825b96/agy_acp_server.par"
+    ],
+    "files": {},
+    "env_keys": [
+      "GEMINI_HOME"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:02:47Z",
+    "finished_at": "2026-10-25T02:03:10Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

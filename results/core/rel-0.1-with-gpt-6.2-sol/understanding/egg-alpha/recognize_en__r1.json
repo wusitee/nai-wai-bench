@@ -1,0 +1,84 @@
+{
+  "settings_id": "7e9b52a50fc5ff45",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "egg-alpha",
+  "vendor": "undisclosed",
+  "item": "recognize_en",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Who is this character, and which internet meme is this image from? Does the meme have other names?",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "The character is a 3D‑rendered, overweight yellow blob‑like creature (with a pale belly and dark grey hands) clutching its stomach and laughing hysterically. It isn't from a film or game — it's a standalone 3D animation made for reaction memes.\n\nThe meme is most commonly known as the **\"Laughing Yellow Guy / Laughing Yellow Blob\"** (a.k.a. the **\"Haha Guy\"** or **\"The Giggler\"**), used as a reaction image/video for \"me laughing at my own joke,\" \"when the joke is so bad it's good,\" or uncontrollable laughter.\n\nOther names you'll see for it include:\n- **Laughing Fat Yellow Guy / Fat Yellow Blob**\n- **Yellow Creature laughing / Yellow Thing**\n- **ROFL Guy / Giggling Blob**\n- Sometimes just tagged **\"me when I laugh\"** or paired with the \"goofy ahh / cartoon wheeze laugh\" audio.\n\nSo in short: it's the laughing yellow blob reaction meme, aka the \"Laughing Yellow Guy / Haha Guy / Giggler.\"",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "client": "pi 1.5.0",
+    "seconds": 26.8,
+    "stop_reason": "stop",
+    "rate_limit_retries": 1,
+    "tools_used": [],
+    "usage": {
+      "input": 672,
+      "output": 1493,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 1260,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 672,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 1493,
+      "reasoning": 1260
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "tokenrhythm/egg-alpha",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "tokenrhythm/egg-alpha",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "tokenrhythm/egg-alpha",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-04T04:41:42Z",
+    "finished_at": "2026-11-04T04:42:28Z",
+    "revision": "44479d0",
+    "nwb_version": "0.1.0"
+  }
+}

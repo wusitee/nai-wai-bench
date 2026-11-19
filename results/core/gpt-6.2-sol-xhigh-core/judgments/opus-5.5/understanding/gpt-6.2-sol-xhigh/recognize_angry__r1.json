@@ -1,0 +1,109 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-sol-xhigh/recognize_angry__r1.json",
+  "target_sha256": "342f235bfa5f2f279917722f566432984c7aadda81ab620bfa157860873dbcbb",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "8cc8608afabbe1de",
+  "judge_images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "track": "understanding",
+  "model": "gpt-6.2-sol-xhigh",
+  "scores": {
+    "base_character": 0,
+    "identifies_meme": 0,
+    "ai_variant": 0
+  },
+  "hallucinations": [],
+  "rationale": "The model describes the visible features accurately (a red creature with a pinkish belly) and explains the 「切换愤怒模式」 caption correctly. However, it says it cannot identify the character, so it never mentions 奶龙, the 大笑奶龙/奶蛙 meme family, or the AI-generated mutated-variant origin.",
+  "raw": "```json\n{\"scores\": {\"base_character\": 0, \"identifies_meme\": 0, \"ai_variant\": 0}, \"hallucinations\": [], \"rationale\": \"The model describes the visible features accurately (a red creature with a pinkish belly) and explains the 「切换愤怒模式」 caption correctly. However, it says it cannot identify the character, so it never mentions 奶龙, the 大笑奶龙/奶蛙 meme family, or the AI-generated mutated-variant origin.\"}\n```",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 8.9,
+    "turns": 1,
+    "tokens": {
+      "input": 2010,
+      "cached_input": 0,
+      "cache_write": 2008,
+      "output": 318,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0226637,
+    "tools_used": [],
+    "cost_usd": 0.0226637,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2008,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 318,
+      "output_tokens_details": {
+        "thinking_tokens": 151
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2008,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 318,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2008,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2008
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-18T17:23:07Z",
+    "finished_at": "2026-11-18T17:23:16Z",
+    "revision": "7221fe5d+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

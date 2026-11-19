@@ -1,0 +1,115 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gpt-6.2-sol/knowledge_en__r1.json",
+  "target_sha256": "5515a45ccd889a36def1fc396b899799e97125a9b0f951ff5bea6db28e545640",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "52e51ba1c2f03291",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gpt-6.2-sol",
+  "scores": {
+    "base_character": 2,
+    "ai_variant": 0,
+    "xingye_origin": 0,
+    "aliases": 1,
+    "naiwa": 1,
+    "laugh_pose": 1,
+    "junti_quan": 0,
+    "official_reply": 0,
+    "trait_variants": 0,
+    "rarity_titles": 0
+  },
+  "hallucinations": [
+    "Confidently states the 奶蛙 nickname comes from the huge laughing mouth making the face look frog-like. Per the notes, 奶蛙 refers to a frog-like mutated version with round bulging eyes and green sclera, not the laughing mouth."
+  ],
+  "rationale": "The answer correctly identifies 奶龙 as a yellow cartoon dragon and the image as a laughing Nailong-like figure called 奶蛙. It misses the AI-generated origin (it leaves open that the image could be an official frame), the 星野 origin, the 变异奶龙 alias, the full belly-clutching pose, the 军体拳 remix, the official-reply copypasta, and the trait and rarity post genres.",
+  "raw": "{\"scores\": {\"base_character\": 2, \"ai_variant\": 0, \"xingye_origin\": 0, \"aliases\": 1, \"naiwa\": 1, \"laugh_pose\": 1, \"junti_quan\": 0, \"official_reply\": 0, \"trait_variants\": 0, \"rarity_titles\": 0}, \"hallucinations\": [\"Confidently states the 奶蛙 nickname comes from the huge laughing mouth making the face look frog-like. Per the notes, 奶蛙 refers to a frog-like mutated version with round bulging eyes and green sclera, not the laughing mouth.\"], \"rationale\": \"The answer correctly identifies 奶龙 as a yellow cartoon dragon and the image as a laughing Nailong-like figure called 奶蛙. It misses the AI-generated origin (it leaves open that the image could be an official frame), the 星野 origin, the 变异奶龙 alias, the full belly-clutching pose, the 军体拳 remix, the official-reply copypasta, and the trait and rarity post genres.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 13.4,
+    "turns": 1,
+    "tokens": {
+      "input": 2851,
+      "cached_input": 0,
+      "cache_write": 2849,
+      "output": 1126,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0456473,
+    "tools_used": [],
+    "cost_usd": 0.0456473,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2849,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1126,
+      "output_tokens_details": {
+        "thinking_tokens": 777
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2849,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1126,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2849,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2849
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-18T09:50:15Z",
+    "finished_at": "2026-11-18T09:50:29Z",
+    "revision": "02b04a3b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

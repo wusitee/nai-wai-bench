@@ -1,0 +1,84 @@
+{
+  "settings_id": "cbf7db799b4cb698",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "qwen4-max-pi-high",
+  "vendor": "alibaba",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "仅凭这张图，我没法有把握地认出这个角色的确切出处，所以先说明我的不确定，避免瞎编。\n\n我能比较确定的部分：\n\n- **画面内容**：一个 3D 渲染的黄色、光溜溜的生物（像是小鸟／小龙／小鱼那种造型），瞪着一只很大的绿色眼睛斜眼看人，配上\"惊鸿一瞥\"四个字。笑点在于用\"惊鸿一瞥\"这种形容绝色佳人回眸的雅致成语，去配一个呆滞、抽象、甚至有点猥琐的斜眼表情，形成强烈的反差。\n- **梗的类型**：这属于中文互联网上很流行的一类 **\"成语／文雅词 + 抽象丑萌角色\"表情包**。同一套图通常还有\"回眸一笑\"\"不屑一顾\"\"明眸善睐\"\"含情脉脉\"之类的配套版本，靠\"词很雅、图很蠢\"的反差搞笑，常见于 QQ 群、贴吧、小红书的斗图。\n\n我不确定的部分：这个黄色生物具体是哪部动画／哪个 3D 素材里的角色。它看起来有点像近几年被大量做成抽象表情包的国产黄色小恐龙类形象（比如\"奶龙\"那一类），但五官细节对不上，我不敢认定；也可能是某个 Blender 练习／短视频里的原创丑萌模型，后来被拿来做成语表情包。\n\n如果你知道它出现的视频或表情包合集名字，可以告诉我，我再帮你判断；但只凭这张图，我不想给你一个编出来的角色名。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 82.0,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 149,
+      "output": 3168,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 2854,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 149,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 3168,
+      "reasoning": 2854
+    },
+    "session_config": {
+      "thinkingLevel": "high"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "high"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T14:56:31Z",
+    "finished_at": "2026-11-16T14:57:53Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

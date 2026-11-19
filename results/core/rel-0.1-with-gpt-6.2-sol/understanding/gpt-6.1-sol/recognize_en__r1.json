@@ -1,0 +1,80 @@
+{
+  "settings_id": "3dd3bd14bb05cc84",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gpt-6.1-sol",
+  "vendor": "openai",
+  "item": "recognize_en",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Who is this character, and which internet meme is this image from? Does the meme have other names?",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "This is the **Laughing Yellow Lizard** reaction meme, also circulated as **Laughing Lizard**, **Laughing Dinosaur**, or **Yellow Dinosaur Laughing**.\n\nI recognize the meme, but I’m not confident about the character’s official name or original animation, so I wouldn’t want to invent an attribution.",
+  "contaminated": false,
+  "meta": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "client": "codex-cli 0.164.0",
+    "thread_id": "01a17083-21d8-7ae1-81ef-5d9d85bec862",
+    "seconds": 58.0,
+    "tools_used": [],
+    "usage": {
+      "input_tokens": 12135,
+      "cached_input_tokens": 9088,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1308,
+      "reasoning_output_tokens": 1237
+    },
+    "tokens": {
+      "input": 12135,
+      "cached_input": 9088,
+      "cache_write": 0,
+      "output": 1308,
+      "reasoning": 1237
+    },
+    "resolved_model": null,
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "codex",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "codex",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--ignore-user-config",
+      "--sandbox",
+      "read-only",
+      "-c",
+      "web_search=\"disabled\"",
+      "--model",
+      "gpt-6.1-sol",
+      "--disable",
+      "apps",
+      "--disable",
+      "browser_use",
+      "--disable",
+      "browser_use_external",
+      "--disable",
+      "computer_use",
+      "--disable",
+      "image_generation",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:43:23Z",
+    "finished_at": "2026-10-25T00:44:21Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

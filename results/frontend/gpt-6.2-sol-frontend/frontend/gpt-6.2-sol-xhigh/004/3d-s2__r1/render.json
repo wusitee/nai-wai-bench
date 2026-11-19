@@ -1,0 +1,97 @@
+{
+  "html_sha256": "861f9af8e64d1e95882e99b3da21298df85c9cf324cd60d0147cb17764ff9d0b",
+  "harness": "fee9bd636b661bc1",
+  "kind": "3d-s2",
+  "gates": [],
+  "errors": [],
+  "blocked": [],
+  "forbidden": [],
+  "elements": [],
+  "timing": {
+    "declarative": false,
+    "scripted": false
+  },
+  "frames": [
+    {
+      "file": "frame_00.webp",
+      "t": 0
+    },
+    {
+      "file": "frame_01.webp",
+      "t": 160
+    },
+    {
+      "file": "frame_02.webp",
+      "t": 340
+    },
+    {
+      "file": "frame_03.webp",
+      "t": 500
+    },
+    {
+      "file": "frame_04.webp",
+      "t": 680
+    },
+    {
+      "file": "frame_05.webp",
+      "t": 840
+    },
+    {
+      "file": "frame_06.webp",
+      "t": 1020
+    },
+    {
+      "file": "frame_07.webp",
+      "t": 1180
+    }
+  ],
+  "views": [
+    {
+      "file": "view_side.webp",
+      "view": "side",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_back.webp",
+      "view": "back",
+      "t": 0,
+      "hidden": [
+        "white-backdrop-and-floor-haze"
+      ]
+    },
+    {
+      "file": "view_three_quarter.webp",
+      "view": "three_quarter",
+      "t": 0,
+      "hidden": []
+    },
+    {
+      "file": "view_top.webp",
+      "view": "top",
+      "t": 0,
+      "hidden": []
+    }
+  ],
+  "scene": {
+    "characters": [
+      {
+        "name": "yellow-chick",
+        "meshes": 19,
+        "width": 197.42903327941895,
+        "height": 276.2,
+        "depth": 180.36071395874023,
+        "ratio": 0.9135470653066404
+      }
+    ],
+    "textures": 0
+  },
+  "mode": "render(t)",
+  "preview": "preview.webp",
+  "checks": {
+    "determinism_diff": 0.0,
+    "loop_diff": 0.0,
+    "motion_diff": 0.3029030054644809
+  },
+  "seconds": 4.2
+}

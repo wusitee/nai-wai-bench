@@ -1,0 +1,81 @@
+{
+  "settings_id": "a4ba33964638df40",
+  "track": "understanding",
+  "model": "qwen4-max-pi",
+  "vendor": "alibaba",
+  "item": "knowledge_zh",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "「大笑奶龙」（也叫「奶蛙」）是什么？请介绍它的来源、外观以及相关的梗和二创。不确定的地方请直接说明，不要编造。",
+  "images": [],
+  "answer": "## 先说结论：我能确定的和不能确定的\n\n我对 **「奶龙」这个动画 IP 本身**有比较可靠的印象；但对你问的 **「大笑奶龙／奶蛙」这个具体表情包**的准确出处（哪一集、谁先做的、什么时候火的），我没有把握。下面把两部分分开讲，不确定的地方我会标出来。\n\n---\n\n## 一、奶龙本体（这部分我比较有把握）\n\n- **来源**：国产 3D 动画短片《奶龙》的主角，主要在抖音、快手等短视频平台以及各视频网站传播，形式是几分钟一集的短动画。大约在 2023 年前后热度暴涨，在小学生群体里极其流行。\n- **外观**：一只黄色的小龙，圆脑袋、大眼睛、身形短胖，有小小的角和尾巴，整体是低龄向的萌系设计。\n- **设定**：性格憨、贪吃、爱闯祸，搭档是一个小男孩（我记得叫「小七」，这个名字我有八成把握）。\n- **制作方**：我记不清具体是哪家动画公司，**不敢乱说**。\n\n## 二、为什么会变成梗（大方向有把握，细节未必）\n\n奶龙的爆火路径很典型：**先在低龄群体里火 → 被年龄更大的网民视为「小学生审美」的代表符号 → 进入抽象文化／贴吧／B站的反向玩梗视野**。\n\n于是出现了几类玩法：\n- 把「奶龙」当成嘲讽用语，用来形容幼稚、低智、审美土；\n- 大量阴阳怪气、鬼畜、黑化／恐怖化的二创；\n- 把它和其他儿童向热门 IP（比如蛋仔派对、奥特曼卡片之类）并列，调侃「小学生标配」。\n\n这种「本体越可爱、二创越阴间」的反差，是奶龙梗的核心机制。\n\n## 三、关于「大笑奶龙／奶蛙」（**这部分我把握不大**）\n\n我印象里流传的是一张**奶龙张大嘴大笑**的表情图（或其魔改版本）：因为嘴张得极大、眼睛突出、脸部轮廓被压扁，看起来更像青蛙而不是龙，所以被网友叫成「奶蛙」。用法通常是**幸灾乐祸、嘲讽、阴阳怪气**，属于抽象表情包生态的一员。\n\n但我必须明确说明以下几点**我无法确认**：\n\n1. 它到底是动画原片里的某一帧截图，还是网友做的魔改／3D 重渲染，甚至是和别的青蛙形象融合的产物——**我不确定**；\n2. 最早出现的平台、时间、作者——**我不知道**；\n3. 「奶蛙」这个叫法是谁起的、是否有更早的其他来源——**我不知道**；\n4. 我也不能排除「奶蛙」其实是另一个独立形象，只是被误认成奶龙——这种可能性存在。\n\n## 四、二创的常见方向（属于类型层面的描述，不是具体作品）\n\n表情包魔改（扭曲、加噪点／滤镜、换脸、恐怖化）、与其他 meme 缝合、鬼畜剪辑、AI 生成图、以及「阴间奶龙」类的短视频。**具体有哪些知名二创作品、哪些 UP 主做的，我举不出可靠例子，就不编了。**\n\n---\n\n**建议**：如果你想要准确的出处考据，去 B站／知乎搜「大笑奶龙 出处」「奶蛙 表情包」，或者在贴吧的抽象相关板块问，会比我这里的记忆可靠得多。我上面关于第三节的描述，请当作「一个大致的印象」而不是定论。",
+  "contaminated": false,
+  "meta": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "client": "pi 1.5.0",
+    "seconds": 71.5,
+    "stop_reason": "stop",
+    "rate_limit_retries": 0,
+    "tools_used": [],
+    "usage": {
+      "input": 107,
+      "output": 2955,
+      "cacheRead": 0,
+      "cacheWrite": 0,
+      "reasoning": 2194,
+      "cost": 0
+    },
+    "tokens": {
+      "input": 107,
+      "cached_input": 0,
+      "cache_write": 0,
+      "output": 2955,
+      "reasoning": 2194
+    },
+    "session_config": {
+      "thinkingLevel": "max"
+    },
+    "resolved_model": "qwen-token-plan-cn-individual/qwen4-max",
+    "cost_usd_reported": 0
+  },
+  "settings": {
+    "backend": "pi",
+    "model": "qwen-token-plan-cn-individual/qwen4-max",
+    "effort": "max",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "pi",
+      "--mode",
+      "rpc",
+      "--no-session",
+      "--offline",
+      "--no-tools",
+      "--no-extensions",
+      "--no-skills",
+      "--no-prompt-templates",
+      "--no-themes",
+      "--no-context-files",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--append-system-prompt",
+      "",
+      "--model",
+      "qwen-token-plan-cn-individual/qwen4-max",
+      "--thinking",
+      "max"
+    ],
+    "files": {},
+    "env_keys": [
+      "PI_CODING_AGENT_DIR"
+    ]
+  },
+  "collected": {
+    "started_at": "2026-11-16T10:02:17Z",
+    "finished_at": "2026-11-16T10:03:29Z",
+    "revision": "e78429b+dirty",
+    "nwb_version": "0.1.0"
+  }
+}

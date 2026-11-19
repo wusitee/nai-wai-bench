@@ -1,0 +1,110 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/kimi-k3.1-pro/recognize_variant__r1.json",
+  "target_sha256": "db16cca5e9c42723288920f24dc0b93dc1544c132e24f2029e50e4c9a73faa81",
+  "settings_id": "1e77488ebc8a6fba",
+  "input_names": "neutral",
+  "judge_prompt": "4ccf4057522c3037",
+  "judge_images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "track": "understanding",
+  "model": "kimi-k3.1-pro",
+  "scores": {
+    "identifies_meme": 0,
+    "laugh_pose": 1,
+    "base_character": 0
+  },
+  "hallucinations": [
+    "Claims the panda's body leans back (身体后仰), but the image shows it hunched forward."
+  ],
+  "rationale": "The model misidentifies the image as a generic '捧腹大笑熊猫' meme and never mentions 大笑奶龙, 奶蛙 or Nailong. It partly describes the laugh pose (belly-clutching, eyes shut, mouth agape) but gets the posture wrong and never ties it to the meme.",
+  "raw": "{\"scores\": {\"identifies_meme\": 0, \"laugh_pose\": 1, \"base_character\": 0}, \"hallucinations\": [\"Claims the panda's body leans back (身体后仰), but the image shows it hunched forward.\"], \"rationale\": \"The model misidentifies the image as a generic '捧腹大笑熊猫' meme and never mentions 大笑奶龙, 奶蛙 or Nailong. It partly describes the laugh pose (belly-clutching, eyes shut, mouth agape) but gets the posture wrong and never ties it to the meme.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.310",
+    "seconds": 6.2,
+    "tokens": {
+      "input": 2699,
+      "cached_input": 0,
+      "cache_write": 2697,
+      "output": 420,
+      "reasoning": null
+    },
+    "resolved_model": "claude-haiku-5-5",
+    "cost_usd_reported": 0.030240400000000004,
+    "tools_used": [],
+    "cost_usd": 0.030240400000000004,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2697,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 420,
+      "output_tokens_details": {
+        "thinking_tokens": 229
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2697,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 420,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2697,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2697
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-10-25T02:03:14Z",
+    "finished_at": "2026-10-25T02:03:20Z",
+    "revision": "a0c015e",
+    "nwb_version": "0.1.0"
+  }
+}

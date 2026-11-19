@@ -1,0 +1,73 @@
+{
+  "settings_id": "59732430074e0a9b",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "kimi-k3",
+  "vendor": "moonshot",
+  "item": "recognize_facepalm",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "answer": "我判断这是国产短视频/低幼动画 IP 里的黄色小胖龙 **“奶龙”**。  \n\n这张图属于常见的 **“奶龙敬礼 / 奶龙收到”** 类表情包：那只偏写实的手像是后期 P 上去的，做出敬礼、扶额或“收到”的姿势。用法多是装乖、阴阳怪气地表示“明白/遵命/respect”，或者摆烂式服从、卖萌敷衍。它不是某个西方动画角色，而是中文互联网表情包语境里很常见的奶龙二创。",
+  "contaminated": false,
+  "meta": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "stop_reason": "end_turn",
+    "client": "Kimi Code CLI 2.3.1",
+    "seconds": 25.9,
+    "tools_used": [],
+    "tool_calls": [],
+    "permissions": [],
+    "usage": null,
+    "tokens": {
+      "input": 20287,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 797,
+      "reasoning": null
+    },
+    "session_config": {
+      "model": "kimi-code/k3",
+      "thinking": "high",
+      "mode": "default"
+    },
+    "resolved_model": "kimi-code/k3",
+    "cost_usd_reported": null,
+    "usage_command": {
+      "command": "/usage",
+      "text": "Context: 21084 / 1048576 tokens (2%)\nSession total: 20287 input, 797 output",
+      "usage": {
+        "inputTokens": 20287,
+        "outputTokens": 797
+      }
+    },
+    "tokens_source": "usage-command"
+  },
+  "settings": {
+    "backend": "acp",
+    "model": "kimi-code/k3",
+    "effort": "high",
+    "effort_source": "session-config",
+    "config": {
+      "mode": "default",
+      "thinking": "high"
+    },
+    "command": [
+      "kimi",
+      "acp"
+    ],
+    "files": {},
+    "usage_command": "/usage"
+  },
+  "collected": {
+    "started_at": "2026-10-25T00:43:50Z",
+    "finished_at": "2026-10-25T00:44:16Z",
+    "revision": "4d2c0b2",
+    "nwb_version": "0.1.0"
+  }
+}

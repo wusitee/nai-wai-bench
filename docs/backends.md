@@ -150,7 +150,7 @@ The flags follow the effort argument and precede neutral image attachments, matc
 isolated collection commands. Generation relays retain their image-tool configuration in either profile.
 
 The profile is reflected in the command fingerprint. The retained Sol/Astra baseline uses `legacy-v1`;
-Terra, GPT-5.6-Sol, and GPT-6.2-Astra rows use `isolated-v1`. Reports identify these conditions per row and in collection
+Terra, GPT-5.6-Sol, GPT-6.2-Astra, and GPT-6.2-Sol rows use `isolated-v1`. Reports identify these conditions per row and in collection
 metadata. These historical rows do not constitute a uniform collection protocol; see
 [the selected comparison](releases.md#selected-comparison). To collect a controlled comparison, select
 the same profile for its subject configurations and use a new run name. Individual legacy executable
