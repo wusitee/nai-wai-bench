@@ -8,6 +8,7 @@ when it exceeds its time budget, which also fails the sample.
 """
 
 import argparse
+import errno
 import hashlib
 import io
 import json
@@ -34,6 +35,48 @@ MIN_DEPTH_RATIO = 0.3  # character depth / width along the reference camera, to 
 MAX_TEXTURE = 64
 VIEW_FOV = 35
 VENDOR = Path(__file__).resolve().parents[2] / "bench" / "frontend-v1" / "vendor" / "three"
+
+if os.name == "nt":
+    import msvcrt
+
+    # The renderer runs in its own process group so a console Ctrl+C does not reach it directly.
+    _SUBPROCESS_OPTIONS = {"creationflags": subprocess.CREATE_NEW_PROCESS_GROUP}
+
+    def _lock(file) -> None:
+        """Block until this process holds the lock file's first byte."""
+        file.seek(0)
+        while True:
+            try:
+                msvcrt.locking(file.fileno(), msvcrt.LK_NBLCK, 1)
+                return
+            except OSError as e:
+                if e.errno not in (errno.EACCES, errno.EDEADLK):
+                    raise
+                time.sleep(0.5)
+
+    def _unlock(file) -> None:
+        file.seek(0)
+        msvcrt.locking(file.fileno(), msvcrt.LK_UNLCK, 1)
+
+    def _kill_tree(proc: subprocess.Popen) -> None:
+        """Kill the renderer and its browser processes."""
+        subprocess.run(["taskkill", "/T", "/F", "/PID", str(proc.pid)],
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        proc.kill()  # in case taskkill is unavailable or failed
+else:
+    import fcntl
+
+    _SUBPROCESS_OPTIONS = {"start_new_session": True}
+
+    def _lock(file) -> None:
+        fcntl.flock(file, fcntl.LOCK_EX)
+
+    def _unlock(file) -> None:
+        fcntl.flock(file, fcntl.LOCK_UN)
+
+    def _kill_tree(proc: subprocess.Popen) -> None:
+        """Kill the renderer's session, which includes its browser processes."""
+        os.killpg(proc.pid, signal.SIGKILL)
 
 # Runs before any page script, in every frame. Calls to forbidden APIs and texture uploads larger than
 # the limit are reported through a console.debug captured here, so a page cannot erase the evidence.
@@ -260,7 +303,8 @@ def _image_modules():
 
 def harness_id() -> str:
     """Identifies the harness code and vendored three.js; changing either re-renders every sample."""
-    digest = hashlib.sha256(Path(__file__).read_bytes())
+    # Hash LF line endings so a CRLF checkout (Git's autocrlf on Windows) gets the same ID.
+    digest = hashlib.sha256(Path(__file__).read_bytes().replace(b"\r\n", b"\n"))
     digest.update((VENDOR / "manifest.json").read_bytes())
     return digest.hexdigest()[:16]
 
@@ -358,7 +402,14 @@ def render_page(html: str, kind: str, width: int, height: int, duration_ms: int,
                 timing["scripted"] |= info["scripted"]
 
         def shot() -> bytes:
-            return page.screenshot(type="png", animations="allow", caret="initial")
+            try:
+                return page.screenshot(type="png", animations="allow", caret="initial")
+            except PlaywrightError as e:
+                # Chromium on Windows occasionally fails the first capture after load; capturing has no
+                # side effects on the paused page, so one retry cannot change the result.
+                if "Unable to capture screenshot" not in str(e):
+                    raise
+                return page.screenshot(type="png", animations="allow", caret="initial")
 
         def render_at(t: int) -> bytes:
             draw(t)
@@ -492,12 +543,14 @@ def render_sample(record: dict, timestamps: list[int], render_dir: Path) -> dict
         job = render_dir / "job.json"
         write_json(job, {"html": record["html"], "kind": record["kind"], "width": record["width"],
                          "height": record["height"], "duration_ms": record["duration_ms"], "timestamps": timestamps})
-        proc = subprocess.Popen([sys.executable, "-m", "nwb.frontend_render", str(job)], start_new_session=True,
-                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        # UTF-8 both ways, so gates quoting page content survive non-UTF-8 locale code pages.
+        proc = subprocess.Popen([sys.executable, "-m", "nwb.frontend_render", str(job)],
+                                env={**os.environ, "PYTHONIOENCODING": "utf-8"}, stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE, encoding="utf-8", errors="replace", **_SUBPROCESS_OPTIONS)
         try:
             stdout, stderr = proc.communicate(timeout=RENDER_TIMEOUT)
         except subprocess.TimeoutExpired:
-            os.killpg(proc.pid, signal.SIGKILL)
+            _kill_tree(proc)
             proc.communicate()
             result = {"gates": [f"render timed out after {RENDER_TIMEOUT}s"]}
         else:
@@ -517,8 +570,6 @@ def render_sample(record: dict, timestamps: list[int], render_dir: Path) -> dict
 def render_all(corpus, run_dir: Path, force: bool = False, only: set[Path] | None = None) -> tuple[int, int]:
     """Render samples without a current render (all, or those in `only`). Renders are serialized across
     processes by a lock in the run directory, and each sample is checked again under the lock."""
-    import fcntl
-
     from nwb.frontend import is_animated, samples
 
     todo = [(p, r) for p, r in samples(run_dir) if (only is None or p in only)
@@ -529,7 +580,7 @@ def render_all(corpus, run_dir: Path, force: bool = False, only: set[Path] | Non
     lock_path.parent.mkdir(parents=True, exist_ok=True)
     with open(lock_path, "w") as lock:
         for n, (path, record) in enumerate(todo, 1):
-            fcntl.flock(lock, fcntl.LOCK_EX)
+            _lock(lock)
             try:
                 if not force and render_current(record, path.with_suffix("")) is not None:
                     status = "rendered by another process"
@@ -543,7 +594,7 @@ def render_all(corpus, run_dir: Path, force: bool = False, only: set[Path] | Non
                         failed += 1
                         status = f"ERROR {e}"[:300]
             finally:
-                fcntl.flock(lock, fcntl.LOCK_UN)
+                _unlock(lock)
             print(f"[{n}/{len(todo)}] render {path.relative_to(run_dir).with_suffix('')} {status}", file=sys.stderr)
     return len(todo) - failed, failed
 

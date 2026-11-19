@@ -1,2 +1,4 @@
 # Exported result hashes must survive checkout without line-ending conversion.
 results/** -text
+# Checksummed frontend dataset files (vendored three.js, source index) must keep their exact bytes.
+bench/frontend-v1/** -text
