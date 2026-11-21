@@ -1,0 +1,54 @@
+{
+  "settings_id": "eb5ceba3c7ffcc98",
+  "track": "understanding",
+  "model": "gemini-4-neon-a6api",
+  "vendor": "google",
+  "item": "write_prompt_zh.giraffe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出长颈鹿版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "2D flat vector meme sticker, chubby round-headed cartoon baby giraffe with a long slender neck and two tiny ossicones, bright lemon-yellow and warm cream-colored body with soft pale orange patches, oversized stubby belly and short stubby limbs, exaggeratingly wide open-mouth laughing expression with a huge joyful grin, squinted happy curved eyes, rosy cheeks, and tiny expressive hands raised or clapping in pure goofy glee, playful silly internet meme reaction vibe, bold dark brown ink outlines, flat cel-shaded colors, minimal soft drop shadow, isolated on a clean solid white background, high resolution sticker art.",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "client": "api.a6api.vip",
+    "seconds": 6.1,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 99,
+      "completion_tokens": 156,
+      "total_tokens": 255
+    },
+    "tokens": {
+      "input": 99,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 156,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-neon",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_A6API_NEON_KEY"
+    ],
+    "endpoint": "api.a6api.vip"
+  },
+  "collected": {
+    "started_at": "2026-11-21T09:19:34Z",
+    "finished_at": "2026-11-21T09:19:40Z",
+    "revision": "71964cf",
+    "nwb_version": "0.1.0"
+  }
+}

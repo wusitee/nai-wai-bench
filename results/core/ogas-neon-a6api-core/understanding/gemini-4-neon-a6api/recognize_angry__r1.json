@@ -1,0 +1,57 @@
+{
+  "settings_id": "eb5ceba3c7ffcc98",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-a6api",
+  "vendor": "google",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "这张表情包里的角色是**《爆笑虫子》（Larva）**中的**小红（Red）**。\n\n它属于典型的**“切换模式 / 假装生气 / 战力拉满”类反差搞笑表情包梗**。在《爆笑虫子》里，小红本身是个贪吃、爱耍小聪明、甚至有点怂萌的红色虫子，但当它皱起眉头、鼓起肚子、摆出严肃或生气姿态时，与它平时滑稽搞笑的形象形成强烈反差；再加上底部配上**“切换愤怒模式😠”**这类一本正经的中二或夸张字幕，常被网友用来表达“我生气了（其实没多少威慑力）”、“准备较真/开杠”或“认真起来了”的幽默情绪。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "client": "api.a6api.vip",
+    "seconds": 17.1,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 59,
+      "completion_tokens": 194,
+      "total_tokens": 253
+    },
+    "tokens": {
+      "input": 59,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 194,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-neon",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_A6API_NEON_KEY"
+    ],
+    "endpoint": "api.a6api.vip"
+  },
+  "collected": {
+    "started_at": "2026-11-21T09:20:34Z",
+    "finished_at": "2026-11-21T09:20:51Z",
+    "revision": "71964cf",
+    "nwb_version": "0.1.0"
+  }
+}

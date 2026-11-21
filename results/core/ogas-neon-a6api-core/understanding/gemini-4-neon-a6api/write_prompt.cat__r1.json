@@ -1,0 +1,54 @@
+{
+  "settings_id": "eb5ceba3c7ffcc98",
+  "track": "understanding",
+  "model": "gemini-4-neon-a6api",
+  "vendor": "google",
+  "item": "write_prompt.cat",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a cat version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A glossy 3D CGI cartoon render of an absurdly chubby, pear-shaped buttery-yellow cat with a huge, protruding cream-colored round belly, short stubby limbs, small pointed cat ears, a stubby tail, and minimal cartoon whiskers, laughing hysterically and mockingly. The plump cat features smooth, matte-satin stylized 3D mascot shading rather than realistic fur. It is hunched slightly forward in an exaggerated, obnoxious fit of laughter, clutching its massive round stomach with one chubby paw while pointing its other stubby paw directly toward the viewer. Its head is tilted slightly back, eyes squeezed tightly shut into thick, mischievous curved arcs, round cheeks puffed high, and its mouth stretched comically wide open in a massive, uproarious frog-like laugh revealing a big pink tongue and small cartoon teeth. Captured with a slight wide-angle perspective that emphasizes its huge open mouth, protruding belly, and pointing paw, bright even studio lighting, vibrant saturated colors, soft ambient shadows, centered full-body reaction-sticker composition isolated on a plain solid white background.",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "client": "api.a6api.vip",
+    "seconds": 29.2,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 117,
+      "completion_tokens": 2459,
+      "total_tokens": 2576
+    },
+    "tokens": {
+      "input": 117,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 2459,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-neon",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_A6API_NEON_KEY"
+    ],
+    "endpoint": "api.a6api.vip"
+  },
+  "collected": {
+    "started_at": "2026-11-21T09:17:14Z",
+    "finished_at": "2026-11-21T09:17:43Z",
+    "revision": "71964cf",
+    "nwb_version": "0.1.0"
+  }
+}

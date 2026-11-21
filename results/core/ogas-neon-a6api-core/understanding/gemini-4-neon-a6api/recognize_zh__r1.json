@@ -1,0 +1,57 @@
+{
+  "settings_id": "eb5ceba3c7ffcc98",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-a6api",
+  "vendor": "google",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "图中角色是**阿布**（Abby），出自泰国一则经典的**胃酸倒流／胃灼热广告**（Gaviscon / 嘉胃斯康等同类抗酸药广告中常见的小黄怪形象）。\n\n### 关联的网络梗\n这个画面与**“笑死我了” / 嘲讽大笑**的表情包梗高度相关。\n* 广告里原本是小黄怪因胃酸过多、胃部不适而痛苦难耐的动作和表情，但被网友截取、魔改后，配合它捂着肚子、张大嘴咧笑的画面，摇身一变成了网络聊天和评论区里用来**狂笑、捧腹大笑、阴阳怪气或嘲讽他人**的经典表情包。\n\n### 这个梗的常见别名\n在中文互联网语境下，这个梗或该形象常被称为：\n* **阿布笑 / 阿布狂笑**\n* **胃酸怪笑 / 烧心怪笑**\n* **捂肚大笑 / 笑到胃痛**\n* **小黄怪嘲笑**",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "client": "api.a6api.vip",
+    "seconds": 13.4,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 65,
+      "completion_tokens": 249,
+      "total_tokens": 314
+    },
+    "tokens": {
+      "input": 65,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 249,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-neon",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_A6API_NEON_KEY"
+    ],
+    "endpoint": "api.a6api.vip"
+  },
+  "collected": {
+    "started_at": "2026-11-21T09:19:40Z",
+    "finished_at": "2026-11-21T09:19:54Z",
+    "revision": "71964cf",
+    "nwb_version": "0.1.0"
+  }
+}

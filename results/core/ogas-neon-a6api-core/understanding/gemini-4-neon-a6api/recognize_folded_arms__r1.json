@@ -1,0 +1,57 @@
+{
+  "settings_id": "eb5ceba3c7ffcc98",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-a6api",
+  "vendor": "google",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "这张图里的角色出自日本定格动画**《DOMO》**（或类似定格动画/黏土动画风格角色，不过更广为人知的是它作为表情包传播时的形象，常被网友戏称为“黄胖子”“抱胸哥”或“微笑抱胸”）。\n\n它对应的网络梗主要是**“抱胸微笑”／“看戏”／“静静看着你装”**一类情绪表达：\n\n* **视觉反差感**：圆滚滚、敦实的黄色身躯搭配双手抱胸的姿势，看似胸有成竹、稳如泰山，但眼神空洞又带着一丝诡异礼貌的微笑，形成一种“表面淡定、内心吃瓜/无语”的喜剧效果。\n* **常见使用场景**：\n  * 别人开始吹牛、立 Flag 或整活时，发出来表示“我抱胸看着你表演”。\n  * 讨论争议话题或热闹事件时，用作“安静吃瓜、坐等后续”。\n  * 面对离谱操作或尴尬场面时，用来表达一种“礼貌而不失尴尬／懒得拆穿”的微妙态度。\n\n如果你是在找某个特定二次元作品或独立动画里的确切角色名，这个形象在中文互联网表情包里大多是以**情绪动作和神态**出圈的，实际聊天时直接当“吃瓜看戏／淡定围观”表情用就非常贴切。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "client": "api.a6api.vip",
+    "seconds": 16.0,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 59,
+      "completion_tokens": 360,
+      "total_tokens": 419
+    },
+    "tokens": {
+      "input": 59,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 360,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-neon",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_A6API_NEON_KEY"
+    ],
+    "endpoint": "api.a6api.vip"
+  },
+  "collected": {
+    "started_at": "2026-11-21T09:20:59Z",
+    "finished_at": "2026-11-21T09:21:15Z",
+    "revision": "71964cf",
+    "nwb_version": "0.1.0"
+  }
+}

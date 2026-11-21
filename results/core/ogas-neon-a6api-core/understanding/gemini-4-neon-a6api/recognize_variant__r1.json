@@ -1,0 +1,57 @@
+{
+  "settings_id": "eb5ceba3c7ffcc98",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-a6api",
+  "vendor": "google",
+  "item": "recognize_variant",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。",
+  "images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "answer": "这张3D渲染的熊猫图模仿的是中文互联网中非常经典的**“笑死 / 笑出猪叫 / 笑到捂肚子”**类表情包，尤其是广为流传的**“熊猫头狂笑捂肚”**或**“笑到肚子疼”**系列表情包（常配文“笑死我了”“哈哈哈笑到抽搐”等）。\n\n### 判断依据\n\n1. **标志性肢体动作（双手捧腹/捂肚子）**：\n   画面中熊猫身体微微前倾，双手放在圆滚滚的腹部位置。这是中文表情包中表达“笑得前俯后仰、肚子发痛”最具辨识度的经典动作之一，在传统“熊猫头”手绘表情包及各类搞笑表情包中极为常见。\n2. **夸张的面部表情**：\n   熊猫眯成一条缝的笑眼、张大且露出上下排牙齿的狂笑嘴型，配合略微歪斜的头部姿态，强化了“忍不住大笑、失控狂笑”的喜剧张力，与网络聊天中“哈哈哈哈笑死”的情绪高度契合。\n3. **3D角色重制与梗图二创风格**：\n   原梗多为扁平简笔画或传统“熊猫头”拼贴表情，而这张图将其转化为了具有细腻毛发质感、柔和光影与纯色浅灰背景的3D动画风格角色形象。这种“把经典网络热梗/表情包用高精3D渲染重新演绎”的做法，是近年来中文社交平台和短视频/表情包二创中非常典型的表现形式。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "client": "api.a6api.vip",
+    "seconds": 10.6,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 67,
+      "completion_tokens": 406,
+      "total_tokens": 473
+    },
+    "tokens": {
+      "input": 67,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 406,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-neon",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_A6API_NEON_KEY"
+    ],
+    "endpoint": "api.a6api.vip"
+  },
+  "collected": {
+    "started_at": "2026-11-21T09:20:14Z",
+    "finished_at": "2026-11-21T09:20:24Z",
+    "revision": "71964cf",
+    "nwb_version": "0.1.0"
+  }
+}

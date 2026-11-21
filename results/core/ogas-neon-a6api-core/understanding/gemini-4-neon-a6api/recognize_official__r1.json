@@ -1,0 +1,57 @@
+{
+  "settings_id": "eb5ceba3c7ffcc98",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-a6api",
+  "vendor": "google",
+  "item": "recognize_official",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "这张表情包里的角色是**黄油小熊**（Butter Bear / หมีเนย，也常被称为“黄油小恐龙/小怪物”样式的Q版角色，不过更准确地说，这是泰国网红甜品店 Butterbear 的吉祥物** Butter Bear（黄油小熊）** 的萌系/改图或类似 Q 版黄油形象——等等，仔细看它的特征：通体明黄、绿色大眼睛、圆嘟嘟的肚子、爪子上有粉色肉垫和棕色小爪尖、张着小嘴“O”型惊讶表情）。\n\n---\n\n### 角色与常见网络梗关联\n\n* **角色特征**：明黄色身体、浅色圆肚皮、绿色圆眼珠、双手举起作“惊讶/委屈/投降/求抱抱”状，嘴巴张成圆形（类似“O”嘴）。这类呆萌、无辜、略带夸张的反应姿态，在中文互联网表情包中非常百搭。\n* **常见网络梗/语境**：\n  1. **“啊？！”/ 震惊无辜脸**：常用来表达“突然被cue”“听不懂但大受震撼”“我什么也不知道”的懵圈状态。\n  2. **“举手投降 / 乖巧认错”**：双手高举配合无辜眼神，常配文“我错了”“这就去”“别打我”等调侃语气。\n  3. **“求投喂 / 委屈巴巴”**：圆润可爱的体型加上张嘴表情，也常用于撒娇、喊饿或表达“想要/羡慕”的情绪。\n\n---\n\n*注：网络表情包在传播过程中经常会被二次裁剪、调色或套用不同文案，具体“属于哪个梗”往往取决于配字和聊天语境。如果你手头有带文字的版本或特定的出处线索，也可以补充告诉我，我再帮你进一步对号入座！*",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "client": "api.a6api.vip",
+    "seconds": 10.5,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 59,
+      "completion_tokens": 455,
+      "total_tokens": 514
+    },
+    "tokens": {
+      "input": 59,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 455,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-neon",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_A6API_NEON_KEY"
+    ],
+    "endpoint": "api.a6api.vip"
+  },
+  "collected": {
+    "started_at": "2026-11-21T09:21:00Z",
+    "finished_at": "2026-11-21T09:21:10Z",
+    "revision": "71964cf",
+    "nwb_version": "0.1.0"
+  }
+}

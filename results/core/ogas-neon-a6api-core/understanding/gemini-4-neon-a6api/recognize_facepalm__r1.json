@@ -1,0 +1,57 @@
+{
+  "settings_id": "eb5ceba3c7ffcc98",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-a6api",
+  "vendor": "google",
+  "item": "recognize_facepalm",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "answer": "这张表情包里的角色是**小黄**（或称**黄豆**、**黄怪**，英文常被称为 **Yellow Monster** 或 **The Yellow Creature**），出自动画短片《**A Town Called Panic**》（中文常译为《**恐慌小镇**》或《**马齿苋小镇**》/相关定格或 CG 动画系列及衍生作品，具体为比利时导演 Vincent Patar 和 Stéphane Aubier 创作的系列作品中的角色）。\n\n### 所属网络梗与常见用法\n* **“你在想什么？” / “思考人生” / “迷惑/审视”梗**：图中角色一手托腮/扶额、眼神略带斜视与微笑，在中文互联网和海外社交平台上常被用来表达**“你在想屁吃呢？”、“我寻思这也……”、“一脸疑惑/沉思”、“无语又带点看透一切的微笑”**。\n* **常搭配的文字**：\n  * “你在想什么？”\n  * “我寻思这也没毛病啊？”\n  * “先别急，让我想想……”\n  * “笑死，根本没在听”\n\n在聊天斗图中，它通常作为一种**情绪缓冲或阴阳怪气/调侃**的表情，用来回应离谱发言、抽象观点或让人摸不着头脑的对话。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "client": "api.a6api.vip",
+    "seconds": 11.4,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 59,
+      "completion_tokens": 317,
+      "total_tokens": 376
+    },
+    "tokens": {
+      "input": 59,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 317,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-neon",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_A6API_NEON_KEY"
+    ],
+    "endpoint": "api.a6api.vip"
+  },
+  "collected": {
+    "started_at": "2026-11-21T09:20:48Z",
+    "finished_at": "2026-11-21T09:20:59Z",
+    "revision": "71964cf",
+    "nwb_version": "0.1.0"
+  }
+}

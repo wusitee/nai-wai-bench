@@ -1,0 +1,57 @@
+{
+  "settings_id": "eb5ceba3c7ffcc98",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-a6api",
+  "vendor": "google",
+  "item": "recognize_en",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Who is this character, and which internet meme is this image from? Does the meme have other names?",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "The character is **Nailoong** (also spelled **Nailong** or written in Chinese as **奶龙**, *Nǎilóng*).\n\n### Character & Meme Background\n* **Origin:** Nailoong is a chubby, yellow dragon character created by the Chinese animation studio Seventh Impression, first debuting on short-video platforms in 2020. In the series, he is portrayed as a food-loving, silly, fire-breathing hatchling who ends up on Earth and teams up with a young inventor named Xiao Qi.\n* **The Meme:** Clips, reaction images, and edited videos of Nailoong—including this laughing shot, tongue-out edits, dancing clips, and humorous voiceovers/remixes—gained massive traction across social media platforms like TikTok, YouTube, and Instagram, particularly surging in international meme culture around 2025 and 2026.\n\n### Other Names & Nicknames\nDepending on the region or context, both the character and the meme go by several names:\n* **Nailong / Nailoong / Naloong** (various Romanized spellings of 奶龙)\n* **Milk Dragon** (a literal English translation of *Nǎilóng*)\n* **Dino Kuning** or **Yellow Dino** (popular nicknames in Indonesia and Malaysia, meaning \"yellow dinosaur,\" since viewers often mistake him for a dinosaur rather than a dragon)\n* **Yellow Charmander** or **\"Chopped Charmander\"** (slang/joking nicknames among English-speaking viewers comparing him to the Pokémon Charmander)\n\n![image](https://www.gstatic.com/images/branding/productlogos/googleg_gradient/v1/web-96dp/logo_googleg_gradient_color_2x_web_96dp.png)",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "client": "api.a6api.vip",
+    "seconds": 20.3,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 56,
+      "completion_tokens": 344,
+      "total_tokens": 400
+    },
+    "tokens": {
+      "input": 56,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 344,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-neon",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_A6API_NEON_KEY"
+    ],
+    "endpoint": "api.a6api.vip"
+  },
+  "collected": {
+    "started_at": "2026-11-21T09:19:54Z",
+    "finished_at": "2026-11-21T09:20:14Z",
+    "revision": "71964cf",
+    "nwb_version": "0.1.0"
+  }
+}

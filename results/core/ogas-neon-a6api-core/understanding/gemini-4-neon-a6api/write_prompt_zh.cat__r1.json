@@ -1,0 +1,54 @@
+{
+  "settings_id": "eb5ceba3c7ffcc98",
+  "track": "understanding",
+  "model": "gemini-4-neon-a6api",
+  "vendor": "google",
+  "item": "write_prompt_zh.cat",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出猫版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "A cute chubby bright-yellow round cat inspired by the chubby yellow dragon character Nailong, bursting into an exaggerated wide-open laugh meme expression, eyes squeezed tightly shut into curved laughing crescents with tiny tear lines, huge open mouth showing a cheerful pink tongue and little teeth, round plump belly and stubby paws playfully raised or slapping the ground, expressive 3D vinyl toy and 2D internet reaction meme aesthetic, simple clean white or pastel solid background, bold expressive comic lines, playful exaggerated proportions, high contrast, crisp sticker-style outline, no text, no watermarks.",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "client": "api.a6api.vip",
+    "seconds": 5.9,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 97,
+      "completion_tokens": 155,
+      "total_tokens": 252
+    },
+    "tokens": {
+      "input": 97,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 155,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-neon",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_A6API_NEON_KEY"
+    ],
+    "endpoint": "api.a6api.vip"
+  },
+  "collected": {
+    "started_at": "2026-11-21T09:19:28Z",
+    "finished_at": "2026-11-21T09:19:34Z",
+    "revision": "71964cf",
+    "nwb_version": "0.1.0"
+  }
+}

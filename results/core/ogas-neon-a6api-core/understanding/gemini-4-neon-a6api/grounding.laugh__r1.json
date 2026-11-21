@@ -1,0 +1,57 @@
+{
+  "settings_id": "eb5ceba3c7ffcc98",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-a6api",
+  "vendor": "google",
+  "item": "grounding.laugh",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Look only at the attached image. Return a JSON object with two keys: pose (one of belly_clutch, raised_hands, facepalm, folded_arms) and eyes (open or closed). Use unknown for a field you cannot determine. Do not infer the answer from a meme's name or typical appearance.",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "```json\n{\n  \"pose\": \"belly_clutch\",\n  \"eyes\": \"closed\"\n}\n```",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "client": "api.a6api.vip",
+    "seconds": 11.0,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 99,
+      "completion_tokens": 15,
+      "total_tokens": 114
+    },
+    "tokens": {
+      "input": 99,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 15,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-neon",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_A6API_NEON_KEY"
+    ],
+    "endpoint": "api.a6api.vip"
+  },
+  "collected": {
+    "started_at": "2026-11-21T09:21:10Z",
+    "finished_at": "2026-11-21T09:21:21Z",
+    "revision": "71964cf",
+    "nwb_version": "0.1.0"
+  }
+}

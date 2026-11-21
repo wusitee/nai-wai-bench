@@ -1,0 +1,54 @@
+{
+  "settings_id": "eb5ceba3c7ffcc98",
+  "track": "understanding",
+  "model": "gemini-4-neon-a6api",
+  "vendor": "google",
+  "item": "write_prompt.giraffe",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a giraffe version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A 3D animated plush toy character with a bright yellow, chunky cylindrical body and a chubby, smiling dinosaur face with tiny round horns, rendered in a cheerful, exaggerated chibi style with bright soft studio lighting and a clean white background.",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "client": "api.a6api.vip",
+    "seconds": 4.8,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 87,
+      "completion_tokens": 63,
+      "total_tokens": 150
+    },
+    "tokens": {
+      "input": 87,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 63,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-neon",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_A6API_NEON_KEY"
+    ],
+    "endpoint": "api.a6api.vip"
+  },
+  "collected": {
+    "started_at": "2026-11-21T09:34:45Z",
+    "finished_at": "2026-11-21T09:34:50Z",
+    "revision": "71964cf",
+    "nwb_version": "0.1.0"
+  }
+}

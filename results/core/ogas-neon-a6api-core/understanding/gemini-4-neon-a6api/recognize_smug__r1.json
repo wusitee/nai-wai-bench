@@ -1,0 +1,57 @@
+{
+  "settings_id": "eb5ceba3c7ffcc98",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-a6api",
+  "vendor": "google",
+  "item": "recognize_smug",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "answer": "这张表情包里的角色是动画电影《罗小黑战记》及其衍生番剧中的**谛听**（常被粉丝亲切地称为“小黄”或“谛听小黄”）。\n\n它最常关联的网络梗和用法主要包括：\n\n* **“忍住不笑” / 憋笑梗**：角色圆滚滚的黄色体型、泛着红晕的脸颊，搭配半眯着眼、嘴角微微抿紧的微妙表情，非常适合用来表达“强忍笑意”“憋不住了”或“表面淡定、内心狂笑”的状态。\n* **“坏笑 / 偷感 / 暗中观察”**：有时也会被网友拿来调侃“心里有鬼”“看破不说破”或“吃瓜看戏”的场景，属于《罗小黑战记》角色衍生表情包中传播度很高的一类。\n\n你平时是在聊“憋笑”还是“吃瓜”的时候看到这张图的？",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "client": "api.a6api.vip",
+    "seconds": 8.6,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 59,
+      "completion_tokens": 229,
+      "total_tokens": 288
+    },
+    "tokens": {
+      "input": 59,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 229,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-neon",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_A6API_NEON_KEY"
+    ],
+    "endpoint": "api.a6api.vip"
+  },
+  "collected": {
+    "started_at": "2026-11-21T09:20:51Z",
+    "finished_at": "2026-11-21T09:21:00Z",
+    "revision": "71964cf",
+    "nwb_version": "0.1.0"
+  }
+}

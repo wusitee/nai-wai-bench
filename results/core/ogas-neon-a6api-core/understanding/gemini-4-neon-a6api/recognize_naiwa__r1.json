@@ -1,0 +1,57 @@
+{
+  "settings_id": "eb5ceba3c7ffcc98",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-a6api",
+  "vendor": "google",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "这张表情包里的角色是**“黄豆”**（或被称为**“滑稽/无辜/呆萌黄鸟”**，具体为网络表情包中常见的黄绿色大眼小鸟/生物形象，并非特定影视或动漫中的正式角色）。\n\n### 所属网络梗与含义\n* **核心词汇**：“**惊鸿一瞥**”（图片底部配文）。\n* **原本含义**：指看到惊艳、美好或令人难忘的事物时匆匆看一眼，常带有文艺、赞叹的色彩。\n* **表情包玩梗含义**：这里属于**反差萌/戏谑玩梗**。画面中这只黄色的生物顶着一对略显呆滞、无辜甚至有点“沙雕”的大眼睛侧目看着前方，配合“惊鸿一瞥”四个字，用来调侃：\n  1. 只是**随便扫了一眼**、**无意间瞥见**某个好笑/离谱/尴尬的场面，却莫名其妙被戳中或震惊到；\n  2. 用极其一本正经甚至呆萌的表情，去套用“惊鸿一瞥”这种偏文雅的词，制造**严肃词汇与搞笑画面之间的反差感**，常用于聊天斗图时的无厘头回应。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "client": "api.a6api.vip",
+    "seconds": 9.3,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 59,
+      "completion_tokens": 309,
+      "total_tokens": 368
+    },
+    "tokens": {
+      "input": 59,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 309,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-neon",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_A6API_NEON_KEY"
+    ],
+    "endpoint": "api.a6api.vip"
+  },
+  "collected": {
+    "started_at": "2026-11-21T09:20:24Z",
+    "finished_at": "2026-11-21T09:20:34Z",
+    "revision": "71964cf",
+    "nwb_version": "0.1.0"
+  }
+}
