@@ -1,12 +1,13 @@
 import argparse
 import json
 import os
+import random
 import sys
 from pathlib import Path
 
 from nwb import __version__, bundle, judge, release, report, results, scoring, site, tracks
 from nwb.config import SUITES, find_root, load_bench, load_models, select_models, validate_run_suite
-from nwb.util import write_json
+from nwb.util import read_json, write_json
 
 
 def _items(bench, spec: str | None):
@@ -170,7 +171,9 @@ def cmd_frontend(args, root, models, defaults) -> int:
         raise FileNotFoundError(f"run not found: {run_dir}")
     if args.action == "collect":
         selected = select_models(models, args.models, "vision")
-        task_ids = (list(corpus.default_tasks) if args.tasks == "default" else list(corpus.tasks) if args.tasks == "all"
+        task_ids = (_frontend_sample(args, corpus, run_dir) if args.sample is not None
+                    else list(corpus.default_tasks) if args.tasks == "default"
+                    else list(corpus.tasks) if args.tasks == "all"
                     else [t.strip() for t in args.tasks.split(",") if t.strip()])
         if unknown := [t for t in task_ids if t not in corpus.tasks]:
             raise ValueError(f"unknown frontend task(s) {unknown}; choose from: {', '.join(corpus.tasks)}")
@@ -205,6 +208,33 @@ def cmd_frontend(args, root, models, defaults) -> int:
               + (f" ({row['unrendered']} unrendered)" if row["unrendered"] else ""))
     print(f"wrote {frontend_report.gallery(corpus, run_dir, result)}")
     return 0
+
+
+def _frontend_sample(args, corpus, run_dir) -> list[str]:
+    """Draw the run's tasks, or reuse the draw recorded in the run so every model gets the same tasks."""
+    from nwb import frontend
+
+    if args.tasks != "default":
+        raise ValueError("--sample replaces --tasks; pass only one of them")
+    split = lambda spec: sorted({v.strip() for v in spec.split(",") if v.strip()}) if spec else []
+    focuses, difficulties = split(args.focus), split(args.difficulty)
+    if unknown := [f for f in focuses if f not in corpus.focuses]:
+        raise ValueError(f"unknown focus {unknown}; choose from: {', '.join(corpus.focuses)}")
+    path = run_dir / "frontend" / "selection.json"
+    recorded = read_json(path) if path.exists() else None
+    criteria = {"size": args.sample, "focus": focuses, "difficulty": difficulties}
+    if recorded is not None:
+        if ({k: recorded[k] for k in criteria} != criteria
+                or (args.seed is not None and args.seed != recorded["seed"])):
+            raise ValueError(f"{path} already records a different draw (seed {recorded['seed']}, "
+                             f"{recorded['tasks']}); use another run or the same options")
+        print(f"reusing the run's sampled tasks (seed {recorded['seed']}): {', '.join(recorded['tasks'])}")
+        return recorded["tasks"]
+    seed = args.seed if args.seed is not None else random.SystemRandom().randrange(1 << 31)
+    tasks = frontend.sample_tasks(corpus, args.sample, seed, focuses, difficulties)
+    write_json(path, {"seed": seed, **criteria, "tasks": tasks})
+    print(f"sampled tasks (seed {seed}): {', '.join(tasks)}")
+    return tasks
 
 
 def select_names(models, spec: str) -> list[str]:
@@ -291,6 +321,13 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--models", help="collect: comma-separated subject models")
     sp.add_argument("--tasks", default="default",
                     help="collect: 'default' (the manifest's default_tasks), 'all', or comma-separated task ids")
+    sp.add_argument("--sample", type=int, metavar="N",
+                    help="collect: draw N panel tasks spread across focuses and difficulties instead of --tasks; "
+                         "the draw is recorded in the run and reused for every model")
+    sp.add_argument("--seed", type=int, help="collect --sample: random seed (default: a new random seed)")
+    sp.add_argument("--focus", help="collect --sample: comma-separated focuses to draw from "
+                                    "(expression, motion, scene; default: all)")
+    sp.add_argument("--difficulty", help="collect --sample: comma-separated difficulties (easy, medium; default: all)")
     sp.add_argument("--kinds", default="all",
                     help="collect: 'all' or comma-separated of 2d-s1, 2d-s2, 2d-s3, 3d-s1, 3d-s2, 3d-s3, "
                          "2d-mem, 2d-mem2, 3d-mem, 3d-mem2")

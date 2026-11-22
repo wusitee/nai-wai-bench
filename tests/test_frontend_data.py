@@ -34,7 +34,7 @@ def _manifest(tmp_path):
     _gif(gif_path)
     task = {"id": "001", "source_url": "https://cdn.jsdelivr.net/gh/owner/NaiLoong@" + "a" * 40 + "/a.gif",
             "source_revision": "a" * 40, "gif": "assets/001/reference.gif", "eligibility": "panel",
-            **extract_keyframes(gif_path, assets)}
+            "focus": "motion", **extract_keyframes(gif_path, assets)}
     for frame in task["keyframes"]:
         frame["file"] = "assets/001/" + frame["file"]
         frame["questions"] = ["Is the colored marker visible?"]
@@ -44,7 +44,7 @@ def _manifest(tmp_path):
     index.write_text(json.dumps([{"url": "owner/" + "a" * 40 + "/a.gif"}]) + "\n")
     dataset = {"id": "frontend-test", "source_index": index.name,
                "source_index_sha256": hashlib.sha256(index.read_bytes()).hexdigest(), "keyframes_per_gif": 8,
-               "default_tasks": ["001"]}
+               "default_tasks": ["001"], "focuses": ["motion"]}
     manifest = tmp_path / "tasks.toml"
 
     def inline(value):
@@ -108,6 +108,8 @@ def test_manifest_checks_integrity_and_can_restore_exact_frames(tmp_path):
     (lambda task: task["keyframes"][1].update(source_frame=1), "canonical eight-frame"),
     (lambda task: task["keyframes"][1].update(file="assets/001/laugh.png"), "neutral"),
     (lambda task: task.update(eligibility="showcase"), "default_tasks"),
+    (lambda task: task.update(focus="scene"), "focus"),
+    (lambda task: task.update(id="002"), "default_tasks"),
 ])
 def test_manifest_rejects_changed_provenance_or_selection(tmp_path, change, message):
     manifest, task, write = _manifest(tmp_path)

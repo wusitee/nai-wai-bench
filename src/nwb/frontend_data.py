@@ -169,6 +169,11 @@ def check_manifest(manifest: Path, *, prepare: bool = False) -> int:
     defaults = dataset["default_tasks"]
     if not defaults or len(set(defaults)) != len(defaults) or not set(defaults) <= panel:
         raise ValueError("default_tasks must list distinct panel task ids")
+    focuses = dataset["focuses"]
+    if len(set(focuses)) != len(focuses) or {t.get("focus") for t in tasks if t["eligibility"] == "panel"} != set(focuses):
+        raise ValueError("every panel task needs a focus from focuses, and every focus needs a panel task")
+    if sorted(t.get("focus") for t in tasks if t["id"] in defaults) != sorted(focuses):
+        raise ValueError("default_tasks must hold exactly one task per focus")
     generated = []
     for task in tasks:
         task_id = task["id"]
