@@ -1,0 +1,57 @@
+{
+  "settings_id": "ff2f943142f65ea8",
+  "track": "understanding",
+  "model": "gemini-4-neon-vertex",
+  "vendor": "google",
+  "item": "write_prompt_zh.giraffe",
+  "modality": "text",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "为一个从未听说过中文网络梗的文生图模型，写一条独立完整的提示词，让它画出长颈鹿版的「大笑奶龙」（Laughing Nailong / 奶蛙）表情包。只输出提示词。",
+  "images": [],
+  "answer": "A 3D cartoon render of an extremely chubby, round, goofy baby giraffe laughing hysterically, styled like a cute modern 3D animated movie character. The giraffe has a plump, pear-shaped bright yellow body with soft brown spots, a big cream-colored round belly, short stubby legs, two tiny brown-tipped horns on top of its head, small ears, and a thick, cute neck. Its head is tilted slightly back in a silly, exaggerated burst of laughter: its mouth is stretched wide open showing a big pink tongue, its chubby cheeks are puffed up, and its eyes are squeezed tightly shut into happy curved arcs. Its stubby front hooves are raised slightly near its round belly as if laughing uncontrollably. Smooth matte vinyl toy-like texture, bright and soft studio lighting, vibrant colors, centered medium close-up shot, clean solid white background, humorous and adorable reaction sticker aesthetic.",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 12.9,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 111,
+      "completion_tokens": 1260,
+      "total_tokens": 1371,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1070
+      }
+    },
+    "tokens": {
+      "input": 111,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 1260,
+      "reasoning": 1070
+    },
+    "resolved_model": "gemini-4-neon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:33:54Z",
+    "finished_at": "2026-11-22T06:34:07Z",
+    "revision": "a7a7bdf",
+    "nwb_version": "0.1.0"
+  }
+}

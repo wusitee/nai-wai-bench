@@ -1,0 +1,60 @@
+{
+  "settings_id": "ff2f943142f65ea8",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-vertex",
+  "vendor": "google",
+  "item": "recognize_en",
+  "modality": "vision",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Who is this character, and which internet meme is this image from? Does the meme have other names?",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "I cannot reliably identify this specific character or the exact name of the internet meme from my own knowledge, so I don't want to guess or make up a name.",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 12.9,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 1173,
+      "completion_tokens": 837,
+      "total_tokens": 2010,
+      "completion_tokens_details": {
+        "reasoning_tokens": 799
+      }
+    },
+    "tokens": {
+      "input": 1173,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 837,
+      "reasoning": 799
+    },
+    "resolved_model": "gemini-4-neon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:33:59Z",
+    "finished_at": "2026-11-22T06:34:12Z",
+    "revision": "a7a7bdf",
+    "nwb_version": "0.1.0"
+  }
+}

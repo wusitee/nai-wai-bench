@@ -1,0 +1,60 @@
+{
+  "settings_id": "ff2f943142f65ea8",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-vertex",
+  "vendor": "google",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "抱歉，仅凭我目前的知识，我无法准确识别出图中的这个角色，也不确定它具体对应的网络梗及其别名。为了不向你提供错误或编造的信息，我无法回答这个问题。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 17.3,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 1170,
+      "completion_tokens": 1266,
+      "total_tokens": 2436,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1218
+      }
+    },
+    "tokens": {
+      "input": 1170,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 1266,
+      "reasoning": 1218
+    },
+    "resolved_model": "gemini-4-neon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:30:41Z",
+    "finished_at": "2026-11-22T06:30:58Z",
+    "revision": "a7a7bdf",
+    "nwb_version": "0.1.0"
+  }
+}

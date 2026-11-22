@@ -1,0 +1,109 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gemini-4-neon-vertex/origin_evidence_en__r1.json",
+  "target_sha256": "629f2d6f763971cc5680fa3295aa15b048c9ed6803cc52eab3de04487b9bcecc",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "7542bc7b73ed3759",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gemini-4-neon-vertex",
+  "scores": {
+    "origin_xingye_evidence": 0,
+    "origin_followup": 0,
+    "origin_chronology": 0,
+    "origin_prompt_limits": 0,
+    "origin_visual_distinction": 0,
+    "origin_lost_media_scope": 0
+  },
+  "hallucinations": [],
+  "rationale": "The model declined to answer and gave no substantive content on any checklist item, so every item scores 0. It made no confident false claims, so there are no hallucinations.",
+  "raw": "{\"scores\": {\"origin_xingye_evidence\": 0, \"origin_followup\": 0, \"origin_chronology\": 0, \"origin_prompt_limits\": 0, \"origin_visual_distinction\": 0, \"origin_lost_media_scope\": 0}, \"hallucinations\": [], \"rationale\": \"The model declined to answer and gave no substantive content on any checklist item, so every item scores 0. It made no confident false claims, so there are no hallucinations.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 6.9,
+    "turns": 1,
+    "tokens": {
+      "input": 3289,
+      "cached_input": 0,
+      "cache_write": 3287,
+      "output": 153,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0297338,
+    "tools_used": [],
+    "cost_usd": 0.0297338,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3287,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 153,
+      "output_tokens_details": {
+        "thinking_tokens": 0
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3287,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 153,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3287,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3287
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-22T16:25:16Z",
+    "finished_at": "2026-11-22T16:25:23Z",
+    "revision": "71964cf3",
+    "nwb_version": "0.1.0"
+  }
+}

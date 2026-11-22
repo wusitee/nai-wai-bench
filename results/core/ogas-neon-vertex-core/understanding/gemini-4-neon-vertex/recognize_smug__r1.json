@@ -1,0 +1,60 @@
+{
+  "settings_id": "ff2f943142f65ea8",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-vertex",
+  "vendor": "google",
+  "item": "recognize_smug",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "answer": "这张表情包里的角色是**奶龙**，它是国产原创3D动漫IP《奶龙》中的主角，是一只胖嘟嘟、有着圆滚滚大肚子的黄色小恐龙。\n\n它最著名的网络梗包括：\n\n1. **“我才是奶龙” / 魔性洗脑BGM**：奶龙在短视频平台上最出圈的梗，源自一段极具魔性的配音和舞蹈视频（经典台词如“我是奶龙！”“我才是奶龙！”以及搭配的洗脑BGM《今夜星光闪闪》），由此衍生出了大量的鬼畜、二创和模仿热潮。\n2. **表情包/抽象文化**：因为奶龙在动画中的表情非常丰富且夸张（比如图中这种经典的“眯眼、无语、嫌弃、看淡一切”的表情），它被网友广泛制作成各种聊天表情包，用来表达无语、敷衍、暗中观察或阴阳怪气的情绪，也经常被融入各种互联网“抽象梗”和鬼畜二创中。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 11.9,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 1166,
+      "completion_tokens": 654,
+      "total_tokens": 1820,
+      "completion_tokens_details": {
+        "reasoning_tokens": 427
+      }
+    },
+    "tokens": {
+      "input": 1166,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 654,
+      "reasoning": 427
+    },
+    "resolved_model": "gemini-4-neon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:34:35Z",
+    "finished_at": "2026-11-22T06:34:47Z",
+    "revision": "a7a7bdf",
+    "nwb_version": "0.1.0"
+  }
+}

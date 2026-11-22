@@ -1,0 +1,57 @@
+{
+  "settings_id": "ff2f943142f65ea8",
+  "track": "understanding",
+  "model": "gemini-4-neon-vertex",
+  "vendor": "google",
+  "item": "write_prompt.giraffe",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a giraffe version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A cute, chubby, squishy 3D cartoon baby giraffe laughing hysterically, in the style of a bright 3D animated mascot. The giraffe has a round, plump body, a big protruding belly, short stubby legs with tiny hooves, a short thick neck, a disproportionately large round head, two small fuzzy giraffe horns on top, and bright yellow skin covered in soft orange-brown spots. It is caught mid-laugh in a goofy, exaggerated pose: its head is tilted slightly back, its mouth is stretched wide open in a huge, unhinged, joyful belly laugh showing its pink tongue, its eyes are squeezed tightly shut into happy curved arcs, and its chubby cheeks are puffed up. One stubby front leg clutches its round belly while the other points playfully forward toward the viewer. Smooth, soft-vinyl 3D CGI render with vibrant colors, soft studio lighting, and a clean, plain white background, framed like a funny reaction sticker.",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 12.3,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 118,
+      "completion_tokens": 1117,
+      "total_tokens": 1235,
+      "completion_tokens_details": {
+        "reasoning_tokens": 917
+      }
+    },
+    "tokens": {
+      "input": 118,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 1117,
+      "reasoning": 917
+    },
+    "resolved_model": "gemini-4-neon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:33:28Z",
+    "finished_at": "2026-11-22T06:33:40Z",
+    "revision": "a7a7bdf",
+    "nwb_version": "0.1.0"
+  }
+}
