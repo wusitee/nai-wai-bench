@@ -1,0 +1,60 @@
+{
+  "settings_id": "ff2f943142f65ea8",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-vertex",
+  "vendor": "google",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "这张表情包里的角色是**奶龙**（Nailong），它是中国原创的3D动画IP形象（由第七印象文化传媒创作）。\n\n在网络文化中，它属于非常火的**“奶龙梗”**（或称“奶龙抽象文化”），具体常见的相关热梗包括：\n\n1. **“我是奶龙！我才是奶龙！”**：出自原版动画中真假奶龙对峙的片段。因为台词极具洗脑感，被网友大量二创、鬼畜，衍生出各种“夺舍”、“精神污染”类的抽象梗。\n2. **“审视/高冷奶龙”表情包**：你发的这张双手抱胸、眼神呆滞又略带一丝“审视”意味的图，经常被网友配上“就这？”、“你小子”、“我才是奶龙”、“冷静”等文字，用来表达一种莫名其妙的自信、无语或高冷装酷的感觉。\n3. **“今夜星光闪闪”**：指奶龙魔性跳舞的片段，常被用来玩“精神污染”或搞笑整活的梗。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 13.5,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 1166,
+      "completion_tokens": 512,
+      "total_tokens": 1678,
+      "completion_tokens_details": {
+        "reasoning_tokens": 266
+      }
+    },
+    "tokens": {
+      "input": 1166,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 512,
+      "reasoning": 266
+    },
+    "resolved_model": "gemini-4-neon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:34:47Z",
+    "finished_at": "2026-11-22T06:35:01Z",
+    "revision": "a7a7bdf",
+    "nwb_version": "0.1.0"
+  }
+}

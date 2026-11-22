@@ -1,0 +1,60 @@
+{
+  "settings_id": "ff2f943142f65ea8",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-vertex",
+  "vendor": "google",
+  "item": "recognize_variant",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张熊猫图模仿了哪个中文网络梗或表情包？请说明你的判断依据。",
+  "images": [
+    "bench/stimuli/laughing_panda.jpg"
+  ],
+  "answer": "这张图模仿的是中文网络表情包中非常经典的**“捧腹大笑”表情包**（常配文“哈哈哈哈哈”、“笑死我了”、“笑得肚子疼”等），同时融合了中文斗图文化中最具代表性的**“熊猫头/熊猫人”**元素，属于将平面表情包进行3D高清化重绘的二创风格。\n\n具体的判断依据如下：\n\n1. **标志性的“捧腹”动作**：图中熊猫微微弯腰前倾、双手紧紧捂住圆滚滚的肚子，这是成语“捧腹大笑”最直观的肢体表达，也是各类大笑表情包（如简笔画小人、熊猫头全身图等）中用来表示“笑得直不起腰/笑得肚子疼”的经典姿势。\n2. **夸张的爆笑神态**：熊猫双眼眯成弯月状，嘴巴极度张大并露出上下排牙齿，面部肌肉呈现出毫无保留的狂笑状态，这种高度夸张的情绪渲染非常符合中文网络聊天中用来表达“笑死我了”的斗图特征。\n3. **“熊猫”载体的选用**：在中文互联网的梗文化里，熊猫（尤其是“熊猫头”）是表情包界最核心、最高频的形象载体之一。用圆滚滚的3D熊猫来演绎这一经典大笑动作，具有很强的网络表情包二创既视感。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 16.0,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 1170,
+      "completion_tokens": 1412,
+      "total_tokens": 2582,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1106
+      }
+    },
+    "tokens": {
+      "input": 1170,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 1412,
+      "reasoning": 1106
+    },
+    "resolved_model": "gemini-4-neon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:34:07Z",
+    "finished_at": "2026-11-22T06:34:23Z",
+    "revision": "a7a7bdf",
+    "nwb_version": "0.1.0"
+  }
+}

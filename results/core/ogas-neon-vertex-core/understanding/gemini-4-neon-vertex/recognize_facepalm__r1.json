@@ -1,0 +1,60 @@
+{
+  "settings_id": "ff2f943142f65ea8",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-vertex",
+  "vendor": "google",
+  "item": "recognize_facepalm",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_facepalm.jpg"
+  ],
+  "answer": "抱歉，我无法认出这张图片里的具体角色，也不清楚它属于哪个网络梗。它看起来像是一个黄色的3D卡通形象，但我对它的出处没有确切的印象，因此无法为你准确解答。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 28.8,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 1165,
+      "completion_tokens": 1035,
+      "total_tokens": 2200,
+      "completion_tokens_details": {
+        "reasoning_tokens": 985
+      }
+    },
+    "tokens": {
+      "input": 1165,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 1035,
+      "reasoning": 985
+    },
+    "resolved_model": "gemini-4-neon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:34:31Z",
+    "finished_at": "2026-11-22T06:35:00Z",
+    "revision": "a7a7bdf",
+    "nwb_version": "0.1.0"
+  }
+}

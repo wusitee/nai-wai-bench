@@ -1,0 +1,60 @@
+{
+  "settings_id": "ff2f943142f65ea8",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-vertex",
+  "vendor": "google",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "抱歉，我无法确切认出这张表情包中角色的具体名称及其所属的特定网络梗。\n\n从画面来看，这是一个3D风格的红色圆润卡通形象，有着浅粉色的肚子和绿色的眼睛，正背着手、皱眉摆出一副生气的表情，配文“切换愤怒模式😡”通常用于在聊天中幽默地表达自己即将发火或“红温”的状态。但关于它具体的角色出处或原作IP，我目前没有确切的信息，无法为你准确解答。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 12.5,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 1165,
+      "completion_tokens": 853,
+      "total_tokens": 2018,
+      "completion_tokens_details": {
+        "reasoning_tokens": 741
+      }
+    },
+    "tokens": {
+      "input": 1165,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 853,
+      "reasoning": 741
+    },
+    "resolved_model": "gemini-4-neon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:34:23Z",
+    "finished_at": "2026-11-22T06:34:35Z",
+    "revision": "a7a7bdf",
+    "nwb_version": "0.1.0"
+  }
+}

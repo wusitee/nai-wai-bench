@@ -1,0 +1,60 @@
+{
+  "settings_id": "ff2f943142f65ea8",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-vertex",
+  "vendor": "google",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "这张表情包属于中文互联网上流行的**“惊鸿一鳖”谐音梗**（以及衍生的“鳖”系列表情包梗）。\n\n* **所属网络梗**：“惊鸿一鳖”化用自成语“惊鸿一瞥”，利用“瞥”与“鳖”的谐音，配合图片中这个生物呆滞、滑稽的“回眸”神态，制造出强烈的反差喜感。网友常常用它来调侃、自嘲，或者在看到离谱、好笑的事情时表达一种滑稽的震惊与无语。\n* **关于角色**：这个黄色、绿色大眼睛、神情呆滞的3D卡通形象在表情包圈子里常被网友直接戏称为“小黄鳖”或“大鳖”。不过仅凭我目前的记忆，我无法确切说出这个3D模型最初出自哪部具体作品或哪位原作者之手。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 19.1,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 1166,
+      "completion_tokens": 1095,
+      "total_tokens": 2261,
+      "completion_tokens_details": {
+        "reasoning_tokens": 896
+      }
+    },
+    "tokens": {
+      "input": 1166,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 1095,
+      "reasoning": 896
+    },
+    "resolved_model": "gemini-4-neon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:34:12Z",
+    "finished_at": "2026-11-22T06:34:31Z",
+    "revision": "a7a7bdf",
+    "nwb_version": "0.1.0"
+  }
+}

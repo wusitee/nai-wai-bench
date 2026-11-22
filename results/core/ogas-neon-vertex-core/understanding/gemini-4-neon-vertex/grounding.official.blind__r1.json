@@ -1,0 +1,57 @@
+{
+  "settings_id": "ff2f943142f65ea8",
+  "track": "understanding",
+  "model": "gemini-4-neon-vertex",
+  "vendor": "google",
+  "item": "grounding.official.blind",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Look only at the attached image. Return a JSON object with two keys: pose (one of belly_clutch, raised_hands, facepalm, folded_arms) and eyes (open or closed). Use unknown for a field you cannot determine. Do not infer the answer from a meme's name or typical appearance.",
+  "images": [],
+  "answer": "```json\n{\n  \"pose\": \"unknown\",\n  \"eyes\": \"unknown\"\n}\n```",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 4.5,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 127,
+      "completion_tokens": 228,
+      "total_tokens": 355,
+      "completion_tokens_details": {
+        "reasoning_tokens": 200
+      }
+    },
+    "tokens": {
+      "input": 127,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 228,
+      "reasoning": 200
+    },
+    "resolved_model": "gemini-4-neon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:35:11Z",
+    "finished_at": "2026-11-22T06:35:16Z",
+    "revision": "a7a7bdf",
+    "nwb_version": "0.1.0"
+  }
+}

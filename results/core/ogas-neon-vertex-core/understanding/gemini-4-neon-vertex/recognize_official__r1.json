@@ -1,0 +1,60 @@
+{
+  "settings_id": "ff2f943142f65ea8",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-neon-vertex",
+  "vendor": "google",
+  "item": "recognize_official",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "这张表情包里的角色是**奶龙**，是中国动画公司“第七印象”原创的3D动漫形象，设定是一只来自异星球的黄色胖墩墩小恐龙。\n\n它相关的热门网络梗主要有：\n\n1. **“我是奶龙！我才是奶龙！”**：在短视频平台上，网友经常用奶龙魔性的声音进行鬼畜和二创，其中“我是奶龙，我才是奶龙”的洗脑台词和各种真假奶龙对峙的梗非常出圈。\n2. **魔性BGM与抽象二创**：奶龙常伴随着“今夜星光闪闪，我爱你的心满满”等魔性音乐跳舞。由于它在短视频平台上刷屏频率极高、形象和声音都自带“欠揍”的喜剧效果，引发了大量网友的恶搞（例如各种抽象配文表情包、P图等），成为了中文互联网上极具代表性的抽象/恶搞系表情包常客。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 8.0,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 1166,
+      "completion_tokens": 486,
+      "total_tokens": 1652,
+      "completion_tokens_details": {
+        "reasoning_tokens": 274
+      }
+    },
+    "tokens": {
+      "input": 1166,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 486,
+      "reasoning": 274
+    },
+    "resolved_model": "gemini-4-neon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-neon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:35:00Z",
+    "finished_at": "2026-11-22T06:35:08Z",
+    "revision": "a7a7bdf",
+    "nwb_version": "0.1.0"
+  }
+}
