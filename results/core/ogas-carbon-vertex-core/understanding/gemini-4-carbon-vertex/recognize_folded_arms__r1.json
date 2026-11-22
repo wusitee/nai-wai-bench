@@ -1,0 +1,57 @@
+{
+  "settings_id": "682798a6e556f5c5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-carbon-vertex",
+  "vendor": "google",
+  "item": "recognize_folded_arms",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_folded_arms.jpg"
+  ],
+  "answer": "这张图片里的角色叫**奶龙**吗？不是奶龙（奶龙是恐龙形状，有鼻子角）。这是韩国动画《逗逗虫》或者《海豹看看》？也不是。\n仔细看这个特征：黄色梨形身体、绿色眼圈、黑色渐变的手、双手抱胸微笑。\n\n我无法仅凭现有记忆完全确定这个具体角色的确切官方名称以及它所对应的特定网络梗。\n\n从外观特征来看，它是一个黄色圆润、双手呈灰黑色渐变、眼睛周围有一圈浅绿色的3D卡通形象，做出了双手抱胸、面带微笑的经典表情包动作（在中文互联网表情包中，这种抱胸微笑的姿态常用于表达“看戏”、“我就静静地看着你”、“泰然自若”或略带阴阳怪气的语境，类似于“请开始你的表演”之类，但针对这只特定角色的专属新梗我不确定）。\n\n为了避免编造不准确的信息（比如误认成“奶龙”或其他黄色卡通角色），我必须坦诚：我目前无法准确叫出这个角色的名字和它所属的具体网络梗。如果你能提供一点提示，或者允许使用搜索工具，我可以帮你查证。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-carbon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 25.7,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 1166,
+      "completion_tokens": 262,
+      "total_tokens": 1428
+    },
+    "tokens": {
+      "input": 1166,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 262,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-carbon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-carbon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:49:29Z",
+    "finished_at": "2026-11-22T06:49:54Z",
+    "revision": "47be482",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "settings_id": "682798a6e556f5c5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-carbon-vertex",
+  "vendor": "google",
+  "item": "recognize_smug",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_smug.jpg"
+  ],
+  "answer": "这张表情包里的角色是**“奶龙”**。\n\n以下是关于这个角色及网络梗的详细介绍：\n\n1. **角色出处**：\n   奶龙是中国原创3D动画短片《奶龙》（以及《小七与奶龙》）中的主角。它是一只来自异星球、身高一米八、体重两吨、全身鹅黄色、圆滚滚且自带腮红的“呆萌吃货”小恐龙，它的好朋友是地球少年天才发明家“小七”。\n\n2. **所属网络梗**：\n   * **“我是奶龙” / “我才是奶龙”**：这是近期在短视频平台（如抖音、B站）非常火爆的一个抽象洗脑梗。最初源于一些劣质或搞笑的儿童向二创视频、AI配音视频，里面用非常魔性、死板的语气不断重复“我是奶龙”、“我才是奶龙”（比如真假奶龙争辩的桥段，或者混入其他动漫角色说自己才是奶龙）。因为过于降智且洗脑，被年轻网友大量玩梗和鬼畜二创，演变成了一种网络抽象文化。\n   * **日常表情包（蔑视/怀疑眼神）**：单看你发的这张图，这是奶龙非常经典的一个表情截图。它半眯着眼、撇着嘴，流露出一种**“无语”、“审视”、“嫌弃”、“看透一切”或者“你看我信吗”**的神态，在微信和社交平台上作为日常吐槽表情包非常流行。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-carbon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 21.7,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 1166,
+      "completion_tokens": 331,
+      "total_tokens": 1497
+    },
+    "tokens": {
+      "input": 1166,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 331,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-carbon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-carbon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:59:59Z",
+    "finished_at": "2026-11-22T07:00:21Z",
+    "revision": "47be482",
+    "nwb_version": "0.1.0"
+  }
+}
