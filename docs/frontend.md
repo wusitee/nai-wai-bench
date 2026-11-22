@@ -12,9 +12,10 @@ The [task manifest](../bench/frontend-v1/tasks.toml) contains nine panel GIFs an
 Task `001` is the first 2D and 3D pilot. Each GIF has eight timestamped keyframes with neutral filenames,
 six yes/no questions per frame, and separate side, back, three-quarter, and top checklists.
 
-`collect` runs the manifest's `default_tasks` (`001`, `004`, `007`, `008`) and the memory task unless
-`--tasks` or `--sample` selects others. A page costs tens of thousands of output tokens, so the default set
-keeps a model's run affordable; the other tasks are collected on request.
+`collect` runs the manifest's `default_tasks` (`001`, `007`, `009`, one per focus below) and the memory task
+unless `--tasks` or `--sample` selects others. A page costs tens of thousands of output tokens, so the default
+set keeps a model's run affordable; the other tasks are collected on request. Validation requires the
+default set to hold exactly one task per focus.
 
 Each panel task has a difficulty and a focus, the property it mainly tests: `expression` (face and eye
 states with little body motion), `motion` (limb or full-body movement on a plain background), or `scene`

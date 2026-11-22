@@ -109,6 +109,7 @@ def test_manifest_checks_integrity_and_can_restore_exact_frames(tmp_path):
     (lambda task: task["keyframes"][1].update(file="assets/001/laugh.png"), "neutral"),
     (lambda task: task.update(eligibility="showcase"), "default_tasks"),
     (lambda task: task.update(focus="scene"), "focus"),
+    (lambda task: task.update(id="002"), "default_tasks"),
 ])
 def test_manifest_rejects_changed_provenance_or_selection(tmp_path, change, message):
     manifest, task, write = _manifest(tmp_path)

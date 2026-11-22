@@ -10,7 +10,8 @@ experimental = true
 index_included = false
 three_d_ranked = false
 keyframes_per_gif = 8
-default_tasks = ["001", "004", "007", "008"]
+# One task per focus: scene, motion, expression.
+default_tasks = ["001", "007", "009"]
 # What a panel task mainly tests; `collect --sample` draws across these and across difficulty.
 focuses = ["expression", "motion", "scene"]
 checked_at = "2026-11-05"
