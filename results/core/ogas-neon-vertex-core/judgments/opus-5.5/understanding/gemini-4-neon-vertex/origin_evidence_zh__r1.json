@@ -1,0 +1,111 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gemini-4-neon-vertex/origin_evidence_zh__r1.json",
+  "target_sha256": "bcdaed7b779e6cb8b81dca489a8cad08d3baf277ee90736633f1817421215ca2",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "c6b64e527fee52e4",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gemini-4-neon-vertex",
+  "scores": {
+    "origin_xingye_evidence": 0,
+    "origin_followup": 0,
+    "origin_chronology": 0,
+    "origin_prompt_limits": 0,
+    "origin_visual_distinction": 0,
+    "origin_lost_media_scope": 0
+  },
+  "hallucinations": [
+    "Presents as known background that 「奶蛙」 is a widely circulated abstract/quirky cartoon frog image (卡通青蛙形象) with only a visual association to 奶龙, rather than a mutated Nailong. This matches the known misconception that 奶蛙 is an unrelated frog character."
+  ],
+  "rationale": "The answer declines to give any origin evidence. It omits the Xingye agent, the 看仙碎 follow-up and its correction, the chronology, the prompt limits, the visual distinction, and the specific scope of the lost-media and 儿童邪典 claims, offering only generic definitions. It also confidently describes 奶蛙 as a cartoon frog.",
+  "raw": "{\"scores\": {\"origin_xingye_evidence\": 0, \"origin_followup\": 0, \"origin_chronology\": 0, \"origin_prompt_limits\": 0, \"origin_visual_distinction\": 0, \"origin_lost_media_scope\": 0}, \"hallucinations\": [\"Presents as known background that 「奶蛙」 is a widely circulated abstract/quirky cartoon frog image (卡通青蛙形象) with only a visual association to 奶龙, rather than a mutated Nailong. This matches the known misconception that 奶蛙 is an unrelated frog character.\"], \"rationale\": \"The answer declines to give any origin evidence. It omits the Xingye agent, the 看仙碎 follow-up and its correction, the chronology, the prompt limits, the visual distinction, and the specific scope of the lost-media and 儿童邪典 claims, offering only generic definitions. It also confidently describes 奶蛙 as a cartoon frog.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 8.3,
+    "turns": 1,
+    "tokens": {
+      "input": 3871,
+      "cached_input": 0,
+      "cache_write": 3869,
+      "output": 589,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0431671,
+    "tools_used": [],
+    "cost_usd": 0.0431671,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 3869,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 589,
+      "output_tokens_details": {
+        "thinking_tokens": 268
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 3869,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 589,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 3869,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3869
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-22T16:25:19Z",
+    "finished_at": "2026-11-22T16:25:27Z",
+    "revision": "71964cf3",
+    "nwb_version": "0.1.0"
+  }
+}

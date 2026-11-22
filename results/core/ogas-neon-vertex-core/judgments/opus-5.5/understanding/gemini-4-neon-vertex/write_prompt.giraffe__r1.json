@@ -1,0 +1,116 @@
+{
+  "judge": "opus-5.5",
+  "judge_vendor": "anthropic",
+  "target": "understanding/gemini-4-neon-vertex/write_prompt.giraffe__r1.json",
+  "target_sha256": "35b46b1e4803341cdeee45467265de357b81e6cff6883b9627bfeeb469df6315",
+  "settings_id": "1e77488ebc8a6fba",
+  "judge_prompt": "de9528743c104a9c",
+  "judge_images": [],
+  "track": "understanding",
+  "model": "gemini-4-neon-vertex",
+  "scores": {
+    "pose": 0,
+    "hands_on_belly": 1,
+    "eyes": 2,
+    "mouth": 1,
+    "body": 1,
+    "belly_patch": 0,
+    "render": 2,
+    "background": 2,
+    "vibe": 1,
+    "identity": 1
+  },
+  "hallucinations": [
+    "Head tilted slightly back (the meme pose is hunched or doubled forward)",
+    "Only one limb clutches the belly while the other points at the viewer (the meme has both hands on the belly)"
+  ],
+  "rationale": "The answer covers the squeezed-shut eyes, the glossy 3D render with studio lighting and the plain white background well. However, the pose is wrong (leaning back instead of doubled over), only one limb is on the belly, the mouth lacks teeth and a dark interior, and there is no pale belly patch. The cute, kawaii framing dilutes the unhinged vibe, and the bright yellow skin with a short neck makes the giraffe identity only partly convincing despite the spots and horns.",
+  "raw": "{\"scores\": {\"pose\": 0, \"hands_on_belly\": 1, \"eyes\": 2, \"mouth\": 1, \"body\": 1, \"belly_patch\": 0, \"render\": 2, \"background\": 2, \"vibe\": 1, \"identity\": 1}, \"hallucinations\": [\"Head tilted slightly back (the meme pose is hunched or doubled forward)\", \"Only one limb clutches the belly while the other points at the viewer (the meme has both hands on the belly)\"], \"rationale\": \"The answer covers the squeezed-shut eyes, the glossy 3D render with studio lighting and the plain white background well. However, the pose is wrong (leaning back instead of doubled over), only one limb is on the belly, the mouth lacks teeth and a dark interior, and there is no pale belly patch. The cute, kawaii framing dilutes the unhinged vibe, and the bright yellow skin with a short neck makes the giraffe identity only partly convincing despite the spots and horns.\"}",
+  "meta": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "client": "claude-code 2.1.325",
+    "seconds": 14.4,
+    "turns": 1,
+    "tokens": {
+      "input": 2124,
+      "cached_input": 0,
+      "cache_write": 2122,
+      "output": 1094,
+      "reasoning": null
+    },
+    "resolved_model": "claude-opus-5-5",
+    "cost_usd_reported": 0.0391177,
+    "tools_used": [],
+    "cost_usd": 0.0391177,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 2122,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 1094,
+      "output_tokens_details": {
+        "thinking_tokens": 768
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 2122,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 1094,
+          "cache_read_input_tokens": 0,
+          "cache_creation_input_tokens": 2122,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 2122
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    }
+  },
+  "settings": {
+    "backend": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "effort_source": "cli-flag",
+    "config": {},
+    "command": [
+      "claude",
+      "-p",
+      "--model",
+      "claude-opus-5-5",
+      "--tools",
+      "",
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--no-session-persistence",
+      "--system-prompt",
+      "You are a helpful assistant.",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--effort",
+      "high"
+    ],
+    "files": {}
+  },
+  "collected": {
+    "started_at": "2026-11-22T16:25:59Z",
+    "finished_at": "2026-11-22T16:26:13Z",
+    "revision": "71964cf3",
+    "nwb_version": "0.1.0"
+  }
+}
