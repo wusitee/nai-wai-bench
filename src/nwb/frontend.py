@@ -7,6 +7,7 @@ Every stage resumes like the other tracks.
 """
 
 import hashlib
+import random
 import re
 import shutil
 import sys
@@ -55,6 +56,8 @@ class Task:
     frames: tuple[Frame, ...]
     views: dict[str, tuple[str, ...]]
     gif: Path | None = None
+    difficulty: str = ""
+    focus: str = ""  # what a panel task mainly tests, one of the manifest's `focuses`
 
 
 @dataclass
@@ -64,6 +67,7 @@ class Corpus:
     memory: Task
     prompts: dict
     default_tasks: tuple[str, ...]  # the tasks `collect` runs unless told otherwise
+    focuses: tuple[str, ...] = ()
 
     def task(self, task_id: str) -> Task:
         return self.memory if task_id == MEMORY else self.tasks[task_id]
@@ -80,11 +84,42 @@ def load_corpus(root: Path) -> Corpus:
         frames = tuple(Frame(directory / k["file"], k["timestamp_ms"], tuple(k["questions"])) for k in t["keyframes"])
         tasks[t["id"]] = Task(t["id"], t["title"], t["width"], t["height"], t["duration_ms"], t["eligibility"],
                               frames, {v["view"]: tuple(v["questions"]) for v in t["novel_views"]},
-                              directory / t["gif"])
+                              directory / t["gif"], t["difficulty"], t.get("focus", ""))
     m = data["memory"]
     memory = Task(MEMORY, "大笑奶龙 from memory", m["width"], m["height"], 0, "memory",
                   (Frame(None, 0, tuple(m["questions"])),), {v["view"]: tuple(v["questions"]) for v in m["novel_views"]})
-    return Corpus(directory, tasks, memory, prompts, tuple(data["dataset"]["default_tasks"]))
+    return Corpus(directory, tasks, memory, prompts, tuple(data["dataset"]["default_tasks"]),
+                  tuple(data["dataset"]["focuses"]))
+
+
+def sample_tasks(corpus: Corpus, size: int, seed: int, focuses: list[str] | None = None,
+                 difficulties: list[str] | None = None) -> list[str]:
+    """Draw `size` panel tasks, spread as evenly as possible across focuses and difficulties.
+
+    Focuses take turns in a seeded order; each turn picks the focus's task whose difficulty is least
+    represented so far, ties broken by a seeded shuffle. The same arguments give the same tasks, so every
+    model in a comparison can be run on one draw.
+    """
+    pool = [t for t in corpus.tasks.values() if t.eligibility == "panel"
+            and (not focuses or t.focus in focuses) and (not difficulties or t.difficulty in difficulties)]
+    if not 1 <= size <= len(pool):
+        raise ValueError(f"cannot sample {size} of the {len(pool)} panel tasks that match")
+    rng = random.Random(seed)
+    groups = {f: sorted((t for t in pool if t.focus == f), key=lambda t: t.id) for f in corpus.focuses}
+    for tasks in groups.values():
+        rng.shuffle(tasks)
+    order = [f for f in corpus.focuses if groups[f]]
+    rng.shuffle(order)
+    picked: list[Task] = []
+    while len(picked) < size:
+        for f in order:
+            if len(picked) == size or not groups[f]:
+                continue
+            counts = {d: sum(t.difficulty == d for t in picked) for d in {t.difficulty for t in groups[f]}}
+            task = min(groups[f], key=lambda t: counts[t.difficulty])  # min keeps the shuffled order on ties
+            groups[f].remove(task)
+            picked.append(task)
+    return sorted(t.id for t in picked)
 
 
 def dimension(kind: str) -> str:

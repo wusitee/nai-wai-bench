@@ -135,6 +135,34 @@ def test_revision_jobs_show_reference_render_and_views(tmp_path, monkeypatch):
     assert frontend_render.render_current(json.loads(stem.with_suffix(".json").read_text()), stem) is None
 
 
+def test_sampled_tasks_spread_across_focuses_and_are_pinned_to_the_run(tmp_path, monkeypatch):
+    from nwb import cli
+
+    corpus = frontend.load_corpus(ROOT)
+    for seed in range(20):
+        picked = [corpus.tasks[t] for t in frontend.sample_tasks(corpus, 3, seed)]
+        assert {t.focus for t in picked} == set(corpus.focuses)
+        assert {t.difficulty for t in picked} == {"easy", "medium"}
+        assert frontend.sample_tasks(corpus, 3, seed) == [t.id for t in picked]
+    assert all(corpus.tasks[t].focus == "motion" and corpus.tasks[t].difficulty == "medium"
+               for t in frontend.sample_tasks(corpus, 2, 0, ["motion"], ["medium"]))
+    with pytest.raises(ValueError, match="cannot sample"):
+        frontend.sample_tasks(corpus, 4, 0, ["scene"])
+
+    runs = []
+    monkeypatch.setattr(frontend, "collect_jobs", lambda c, m, task_ids, *a, **k: runs.append(task_ids) or ([], 0))
+    monkeypatch.setattr(cli, "select_models", lambda *a: [])
+    collect = lambda *extra: cli.cmd_frontend(cli.build_parser().parse_args(
+        ["frontend", "collect", "--run", str(tmp_path), "--kinds", "2d-s1", *extra]), ROOT, {}, {})
+    collect("--sample", "3")
+    collect("--sample", "3")  # a later model in the same run gets the recorded draw, whatever the new seed
+    assert runs[0] == runs[1] and len(runs[0]) == 3
+    with pytest.raises(ValueError, match="different draw"):
+        collect("--sample", "2")
+    with pytest.raises(ValueError, match="replaces --tasks"):
+        collect("--sample", "3", "--tasks", "001")
+
+
 def test_extract_html_uses_last_block():
     reply = "draft:\n```html\n<p>old</p>\n```\nfinal:\n```HTML\n<p>new</p>\n```\n"
     assert frontend.extract_html(reply) == "<p>new</p>"

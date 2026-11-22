@@ -13,20 +13,30 @@ Task `001` is the first 2D and 3D pilot. Each GIF has eight timestamped keyframe
 six yes/no questions per frame, and separate side, back, three-quarter, and top checklists.
 
 `collect` runs the manifest's `default_tasks` (`001`, `004`, `007`, `008`) and the memory task unless
-`--tasks` selects others. A page costs tens of thousands of output tokens, so the default set keeps a
-model's run affordable; the other tasks are collected on request.
+`--tasks` or `--sample` selects others. A page costs tens of thousands of output tokens, so the default set
+keeps a model's run affordable; the other tasks are collected on request.
 
-| Task | Upstream asset | Viewport | Duration (s) | Eligibility / difficulty | Reference GIF |
+Each panel task has a difficulty and a focus, the property it mainly tests: `expression` (face and eye
+states with little body motion), `motion` (limb or full-body movement on a plain background), or `scene`
+(a background setting, a second character, or both). Each focus has three tasks with both
+difficulties. `collect --sample N` draws N panel tasks instead of `--tasks`: focuses take turns in a seeded
+order, and each turn takes that focus's task whose difficulty is least represented so far, so three tasks
+cover every focus and both difficulties. `--focus` and `--difficulty` restrict the pool, and `--seed`
+fixes the draw (by default a new seed is chosen and printed). The draw is recorded in
+`runs/<run>/frontend/selection.json`, and later `--sample` calls in that run reuse it, so models added to
+the run later are given the same tasks. Different sampling options in the same run are refused.
+
+| Task | Upstream asset | Viewport | Duration (s) | Eligibility / difficulty / focus | Reference GIF |
 |---|---|---|---:|---|---|
-| 001 | naiwa_0001 | 240 × 242 | 1.5 | panel / easy | [Two characters at a school desk, one rubbing the other's belly](../bench/frontend-v1/assets/001/reference.gif) |
-| 002 | naiwa_0002 | 240 × 240 | 5.99 | panel / medium | [Character crossing a sunlit living room in a thinking pose, then saluting](../bench/frontend-v1/assets/002/reference.gif) |
-| 003 | naiwa_0019 | 304 × 300 | 0.74 | panel / easy | [Front-facing character standing still and jiggling](../bench/frontend-v1/assets/003/reference.gif) |
-| 004 | naiwa_0045 | 244 × 240 | 1.2 | panel / easy | [Front-facing character pumping both fists](../bench/frontend-v1/assets/004/reference.gif) |
-| 005 | naiwa_0012 | 240 × 240 | 3.67 | panel / easy | [Close-up character swaying with shy smiles](../bench/frontend-v1/assets/005/reference.gif) |
-| 006 | naiwa_0034 | 240 × 246 | 3.2 | panel / medium | [Green character rubbing the belly of a pink character lying on a bed](../bench/frontend-v1/assets/006/reference.gif) |
-| 007 | naiwa_0026 | 240 × 294 | 5.54 | panel / medium | [Full-body character dancing and turning sideways](../bench/frontend-v1/assets/007/reference.gif) |
-| 008 | naiwa_0048 | 216 × 216 | 1.22 | panel / medium | [Full-body character laughing and bouncing between a crouch and standing](../bench/frontend-v1/assets/008/reference.gif) |
-| 009 | naiwa_0096 | 240 × 240 | 4.39 | panel / medium | [Character in a tank top holding in laughter, then laughing](../bench/frontend-v1/assets/009/reference.gif) |
+| 001 | naiwa_0001 | 240 × 242 | 1.5 | panel / easy / scene | [Two characters at a school desk, one rubbing the other's belly](../bench/frontend-v1/assets/001/reference.gif) |
+| 002 | naiwa_0002 | 240 × 240 | 5.99 | panel / medium / scene | [Character crossing a sunlit living room in a thinking pose, then saluting](../bench/frontend-v1/assets/002/reference.gif) |
+| 003 | naiwa_0019 | 304 × 300 | 0.74 | panel / easy / expression | [Front-facing character standing still and jiggling](../bench/frontend-v1/assets/003/reference.gif) |
+| 004 | naiwa_0045 | 244 × 240 | 1.2 | panel / easy / motion | [Front-facing character pumping both fists](../bench/frontend-v1/assets/004/reference.gif) |
+| 005 | naiwa_0012 | 240 × 240 | 3.67 | panel / easy / expression | [Close-up character swaying with shy smiles](../bench/frontend-v1/assets/005/reference.gif) |
+| 006 | naiwa_0034 | 240 × 246 | 3.2 | panel / medium / scene | [Green character rubbing the belly of a pink character lying on a bed](../bench/frontend-v1/assets/006/reference.gif) |
+| 007 | naiwa_0026 | 240 × 294 | 5.54 | panel / medium / motion | [Full-body character dancing and turning sideways](../bench/frontend-v1/assets/007/reference.gif) |
+| 008 | naiwa_0048 | 216 × 216 | 1.22 | panel / medium / motion | [Full-body character laughing and bouncing between a crouch and standing](../bench/frontend-v1/assets/008/reference.gif) |
+| 009 | naiwa_0096 | 240 × 240 | 4.39 | panel / medium / expression | [Character in a tank top holding in laughter, then laughing](../bench/frontend-v1/assets/009/reference.gif) |
 | 010 | naiwa_0017 | 300 × 300 | 5 | showcase / showcase | [Laughing characters falling through the sky over mountains](../bench/frontend-v1/assets/010/reference.gif) |
 
 The panel has one or two main characters per GIF, fixed or simple camera motion, and durations at most
@@ -233,7 +243,8 @@ uv run --extra frontend nwb frontend render --run pilot
 uv run --extra frontend nwb frontend report --run pilot
 ```
 
-`collect` defaults to the default tasks, all kinds, and one rep; `--tasks all` selects every task. It
+`collect` defaults to the default tasks, all kinds, and one rep; `--tasks all` selects every task, and
+`--sample 3 --seed 7` draws three tasks as described under [Corpus](#corpus). It
 runs in three stages: step 1 and memory samples, then step 2, then the revision kinds, after rendering
 the selected revisions' source samples. Renders are serialized across processes by a lock in the run
 directory. A sample that cannot be collected because its source sample or source render is missing counts

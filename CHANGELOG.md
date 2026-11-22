@@ -5,6 +5,10 @@ Software releases use semantic versions; suite ids version the evaluation panels
 
 ## Unreleased
 
+- Tag frontend panel tasks with a focus (`expression`, `motion`, `scene`) next to their difficulty, and add
+  `nwb frontend collect --sample N [--seed S] [--focus ...] [--difficulty ...]`, which draws N tasks spread
+  across focuses and difficulties instead of running a fixed list. The draw is recorded in the run, so
+  every model collected into it is given the same tasks.
 - Add a token bill to release sites (`bill/`, summarized on the overview): total tokens for running the
   benchmark, summed from every unique saved call under `results/`, and for building it, from the
   coding-agent usage snapshot `results/agent-usage.json` (`scripts/agent_usage.py`). The page breaks usage
