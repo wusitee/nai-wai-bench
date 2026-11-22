@@ -1,0 +1,54 @@
+{
+  "settings_id": "682798a6e556f5c5",
+  "track": "understanding",
+  "model": "gemini-4-carbon-vertex",
+  "vendor": "google",
+  "item": "write_prompt.giraffe",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a giraffe version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A funny, meme-style 3D CGI render of an adorable, chubby, pear-shaped baby giraffe hysterically laughing. The giraffe has smooth, toy-like bright yellow skin with soft brown giraffe spots, stubby brown ossicones, and a plump, squishy cream-colored belly. Its head is tilted slightly back with an exaggerated, cavernous wide-open mouth, revealing a pink tongue and two tiny, stubby white buckteeth on the upper jaw, with no other teeth. Its eyes are squeezed tightly shut into happy, squinting crescent shapes from laughing so hard. Its short, stubby arms are resting on its round belly as it chuckles. Soft studio lighting, smooth matte plastic and Pixar-like cartoon texture, expressive comedic facial distortion, simple out-of-focus warm background, front-facing medium shot.",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-carbon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 12.8,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 118,
+      "completion_tokens": 172,
+      "total_tokens": 290
+    },
+    "tokens": {
+      "input": 118,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 172,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-carbon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-carbon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:47:43Z",
+    "finished_at": "2026-11-22T06:47:56Z",
+    "revision": "47be482",
+    "nwb_version": "0.1.0"
+  }
+}

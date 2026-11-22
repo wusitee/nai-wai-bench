@@ -1,0 +1,57 @@
+{
+  "settings_id": "682798a6e556f5c5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-carbon-vertex",
+  "vendor": "google",
+  "item": "recognize_official",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/nailong_official.png"
+  ],
+  "answer": "这张图片里的角色是**奶龙**（小恐龙奶龙）。\n\n**角色介绍：**\n奶龙是中国原创3D动画IP《奶龙》（及《小七与奶龙》）中的主角，是一只来自外星球、呆萌可爱、大肚子的黄色小恐龙（会喷火，是个吃货），它的好朋友是天才少年“小七”。\n\n**所属的网络梗：**\n在中文互联网上，与奶龙最火、最出圈的网络梗主要有以下几个：\n\n1. **“我是奶龙！”（奶龙抽象梗）**\n   * **来源：** 最初源于抖音博主“鞭鞭于白水”等人的搞笑配音或模仿视频，后来发展成全网模仿的抽象梗。常见台词是极其魔性、夹子音或者粗犷声音喊出的**“我是奶龙！我才是奶龙！”**，后面往往还会接一句“今夜星光闪闪，我爱你的心满满……”。\n   * **延伸玩法（精神污染/幻视）：** 因为奶龙原本是面向低龄儿童的动画形象，部分成年网友觉得它无处不在、有点“低幼”或“唐”（抽象），于是开始故意玩梗反串，到处刷“我是奶龙”，或者看到任何黄色的、圆滚滚的东西都强行幻视成奶龙（类似之前“小黄人”或“Among Us”的精神污染梗）。\n\n2. **“奶龙肚肚打雷啦”**\n   * 这是奶龙早期走红的一个洗脑神曲梗，原台词是“我肚子打雷啦，肚肚打雷啦”，常被用作搞笑视频或吃播的背景音乐。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-carbon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 11.8,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 1166,
+      "completion_tokens": 370,
+      "total_tokens": 1536
+    },
+    "tokens": {
+      "input": 1166,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 370,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-carbon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-carbon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:49:54Z",
+    "finished_at": "2026-11-22T06:50:06Z",
+    "revision": "47be482",
+    "nwb_version": "0.1.0"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "settings_id": "682798a6e556f5c5",
+  "track": "understanding",
+  "model": "gemini-4-carbon-vertex",
+  "vendor": "google",
+  "item": "write_prompt.cat",
+  "modality": "text",
+  "lang": "en",
+  "rep": 1,
+  "prompt": "Write a single, self-contained prompt for a text-to-image model that has never heard of Chinese memes, so that it draws a cat version of the \"大笑奶龙\" (Laughing Nailong / 奶蛙) meme. Output only the prompt.",
+  "images": [],
+  "answer": "A funny, meme-style 3D glossy CGI render of a chubby, round, stylized cartoon cat bursting into hysterical, uncontrollable laughter. The cat has a plump, pear-shaped, squishy body with very short stubby legs, soft bright yellow-orange fur, small triangular cat ears, and cute whiskers, sitting down with its round belly sticking out. Its head is thrown slightly back with an exaggeratedly massive, wide-open mouth taking up half its face, exposing a pink tongue, gums, and tiny stubby teeth in an obnoxious, booming belly laugh. Its eyes are tightly squeezed shut into happy downward crescents with single comical joy-tears glistening at the corners, and one short paw is slapping its own round belly in amusement. Smooth plasticine-like 3D animation texture similar to modern toddler cartoons, bright playful studio lighting, vibrant colors, centered composition on a plain soft pastel background, expressive slapstick comedy vibe.",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-carbon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 8.4,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 118,
+      "completion_tokens": 194,
+      "total_tokens": 312
+    },
+    "tokens": {
+      "input": 118,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 194,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-carbon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-carbon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:47:34Z",
+    "finished_at": "2026-11-22T06:47:43Z",
+    "revision": "47be482",
+    "nwb_version": "0.1.0"
+  }
+}

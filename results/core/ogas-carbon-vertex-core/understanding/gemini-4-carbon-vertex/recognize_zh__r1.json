@@ -1,0 +1,57 @@
+{
+  "settings_id": "682798a6e556f5c5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-carbon-vertex",
+  "vendor": "google",
+  "item": "recognize_zh",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "图里的是什么角色？它和哪个网络梗有关？这个梗还有什么别名？",
+  "images": [
+    "bench/reference/nailong_laugh.png"
+  ],
+  "answer": "1. **图中的角色**：\n这个角色名叫**奈龙**（也有音译为“纳龙”），英文名是 **Nalong**（韩语：나롱이）。它是韩国早期的一部3D动画片《飞天小松鼠》（韩语原名直译为《奈龙飞向天空》或《快快乐乐奈龙》）中的主角，其形象设定其实是一只黄色的**飞鼠（鼯鼠）**。不过图中这个捧腹大笑的片段，通常出自它早期的Flash宣传短片或衍生恶搞动画中。\n\n2. **相关的网络梗**：\n它与中文互联网（尤其是B站、抖音等平台）非常火爆的**“韩国抽象笑”**（或称**“黄皮耗子笑”**、**“魔性狂笑”**）这个梗有关。\n在原版动画片段中，奈龙发出了极其魔性、夸张且带有破音效果的狂笑声。这段视频被网友挖掘出来后，因其过于抽象和滑稽的表情动作，迅速成为了热门的鬼畜素材和表情包，常被网友用来表达“极致嘲笑”、“蚌埠住了（忍不住笑出声）”或者阴阳怪气地看乐子。\n\n3. **这个梗/角色的别名**：\n由于很多中国网友并不清楚它的真实出处和飞鼠设定，根据它的外貌和魔性程度，给这个梗及角色起了很多别名，常见的有：\n* **奶龙老祖 / 韩国奶龙 / 邪恶奶龙**：因为它通体黄色、肚子圆滚滚的，和中国近年来很火的3D动画形象“奶龙”非常撞脸，但它的画风更老旧且表情略显惊悚魔性，而诞生时间又比国产奶龙早得多，所以网友戏称它为“奶龙老祖”或“邪恶版奶龙”。\n* **黄皮耗子 / 小黄鼠大笑**：不认识它的人根据外形直接起的俗称。\n* **这下真绷不住了 / 哄堂大孝**（常作为配字表情包出现时的代称）。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-carbon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 16.8,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 1170,
+      "completion_tokens": 462,
+      "total_tokens": 1632
+    },
+    "tokens": {
+      "input": 1170,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 462,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-carbon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-carbon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:46:20Z",
+    "finished_at": "2026-11-22T06:46:37Z",
+    "revision": "47be482",
+    "nwb_version": "0.1.0"
+  }
+}

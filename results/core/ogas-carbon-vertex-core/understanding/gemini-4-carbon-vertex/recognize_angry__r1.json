@@ -1,0 +1,57 @@
+{
+  "settings_id": "682798a6e556f5c5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-carbon-vertex",
+  "vendor": "google",
+  "item": "recognize_angry",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/angry_variant.png"
+  ],
+  "answer": "这张表情包里的角色是**“奶龙”**的变体——通常被网友称为**“红温奶龙”**或**“愤怒奶龙”**。\n\n关于它的角色背景和所属的网络梗如下：\n\n1. **原角色（奶龙）**：\n   奶龙是中国原创3D动画《奶龙》中的主角，原本是一只来自异星球的**黄色**小胖龙，肚子圆鼓鼓的，性格呆萌贪吃。\n\n2. **所属网络梗**：\n   这张图结合了近期中文互联网上非常火的两个梗：\n   * **“奶龙梗”（抽象奶龙）**：奶龙原本是深受儿童和部分年轻女性喜爱的萌系IP，但后来在贴吧、抖音、B站等平台被大量网友进行“抽象化”二次创作和恶搞（如“我是奶龙”、“唐氏奶龙”等），演变成了一种带点无厘头和反差感的流行迷因（Meme）。\n   * **“红温”梗**：源自游戏圈（最早指《英雄联盟》角色兰博温度过高变红，后来用来形容主播或玩家因破防、生气而脸红脖子粗的状态）。网友将原本黄色的奶龙P成通体通红、眉头紧锁的样子，用来形象地表达“红温破防”，并配文“切换愤怒模式”，以一种滑稽可爱的方式表达生气的情绪。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-carbon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 15.8,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 1165,
+      "completion_tokens": 309,
+      "total_tokens": 1474
+    },
+    "tokens": {
+      "input": 1165,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 309,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-carbon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-carbon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:49:00Z",
+    "finished_at": "2026-11-22T06:49:16Z",
+    "revision": "47be482",
+    "nwb_version": "0.1.0"
+  }
+}

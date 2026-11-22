@@ -1,0 +1,57 @@
+{
+  "settings_id": "682798a6e556f5c5",
+  "input_names": "neutral",
+  "track": "understanding",
+  "model": "gemini-4-carbon-vertex",
+  "vendor": "google",
+  "item": "recognize_naiwa",
+  "modality": "vision",
+  "lang": "zh",
+  "rep": 1,
+  "prompt": "这张表情包里的是什么角色？它属于哪个网络梗？",
+  "images": [
+    "bench/stimuli/naiwa_glance.png"
+  ],
+  "answer": "这张表情包里的角色是一只黄色、瞪着绿色大眼睛的呆萌生物，但在我目前的知识储备中，我无法确切回忆起这个特定角色的官方名称、具体出处以及它所对应的最新网络梗（可能是较近期流行的短视频、独立动画角色或特定圈层的迷因）。\n\n为了避免提供错误或猜测的信息，我无法回答它的确切身份和所属梗。但我可以从画面本身来解读它的搞笑效果：这张图利用了角色呆滞、略带震惊或审视的滑稽眼神，与“惊鸿一瞥”这个原本唯美、浪漫的成语形成了强烈的反差感，通常在聊天中用来幽默地表达“无意间看到某些离谱/震惊内容时的瞳孔地震”或“暗中观察”。",
+  "contaminated": false,
+  "meta": {
+    "backend": "openai",
+    "model": "gemini-4-carbon-无兜底",
+    "client": "xgf2.nainongchihaya.xyz",
+    "seconds": 8.6,
+    "tools_used": [],
+    "usage": {
+      "prompt_tokens": 1166,
+      "completion_tokens": 168,
+      "total_tokens": 1334
+    },
+    "tokens": {
+      "input": 1166,
+      "cached_input": null,
+      "cache_write": null,
+      "output": 168,
+      "reasoning": null
+    },
+    "resolved_model": "gemini-4-carbon-无兜底",
+    "cost_usd_reported": null
+  },
+  "settings": {
+    "backend": "openai",
+    "model": "gemini-4-carbon-无兜底",
+    "effort": "default",
+    "effort_source": "none",
+    "config": {},
+    "command": [],
+    "files": {},
+    "env_keys": [
+      "NWB_VERTEX_NEON_TOKEN"
+    ],
+    "endpoint": "xgf2.nainongchihaya.xyz"
+  },
+  "collected": {
+    "started_at": "2026-11-22T06:48:58Z",
+    "finished_at": "2026-11-22T06:49:06Z",
+    "revision": "47be482",
+    "nwb_version": "0.1.0"
+  }
+}
